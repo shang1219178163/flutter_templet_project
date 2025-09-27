@@ -141,7 +141,7 @@ class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
         ),
         child: Center(
           child: Text(
-            '28 book summariesa month',
+            '28 book summaries month',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -186,7 +186,7 @@ class PriceTagPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
+    var paint = Paint()
       ..color = Colors.lightBlue // Light blue color for the border
       ..style = PaintingStyle.stroke // Only draw the border (no fill)
       ..strokeWidth = 2; // Set the thickness of the border
@@ -195,7 +195,7 @@ class PriceTagPainter extends CustomPainter {
     }
 
     // Create a Path for the irregular border
-    Path path = Path();
+    var path = Path();
 
     // Start drawing the irregular shape
     path.moveTo(30, 0); // Move to top-left corner
@@ -235,30 +235,30 @@ class CameraClosePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
+    final paint = Paint()
       ..color = Colors.blue // Color for the hexagon
       ..style = PaintingStyle.fill; // Fill the hexagon
 
     // Calculate the center and radius of the hexagon
-    double centerX = size.width / 2;
-    double centerY = size.height / 2;
-    double radius = size.width / 2;
-    double cornerRadius = 10; // The radius of the circular arc at each vertex
+    var centerX = size.width / 2.0;
+    var centerY = size.height / 2.0;
+    var radius = size.width / 2.0;
+    var cornerRadius = 10.0; // The radius of the circular arc at each vertex
 
     // Define the number of sides (6 for hexagon)
-    int sides = 6;
-    double angle = 2 * pi / sides;
+    var sides = 6;
+    var angle = 2 * pi / sides;
 
     // Create a Path for the hexagon
-    Path path = Path();
+    var path = Path();
 
     // Loop through each side of the hexagon
-    for (int i = 0; i < sides; i++) {
+    for (var i = 0; i < sides; i++) {
       // Calculate the start and end points of the hexagon sides
-      double startX = centerX + radius * cos(i * angle);
-      double startY = centerY + radius * sin(i * angle);
-      double endX = centerX + radius * cos((i + 1) * angle);
-      double endY = centerY + radius * sin((i + 1) * angle);
+      var startX = centerX + radius * cos(i * angle);
+      var startY = centerY + radius * sin(i * angle);
+      var endX = centerX + radius * cos((i + 1) * angle);
+      var endY = centerY + radius * sin((i + 1) * angle);
 
       // Move to the first vertex of the hexagon
       if (i == 0) {
@@ -293,11 +293,11 @@ class RightArrowPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
+    var paint = Paint()
       ..color = Colors.lightBlue
       ..style = PaintingStyle.fill;
 
-    Path path = Path()
+    var path = Path()
       ..moveTo(0, 0)
       ..lineTo(size.width - size.width * 0.3, 0) // Top horizontal line
       ..lineTo(size.width, size.height / 2) // Right diagonal
@@ -323,18 +323,18 @@ class Hexagon extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     debugPrint([runtimeType, size].asMap().toString());
-    final double centerX = size.width / 2;
-    final double centerY = size.height / 2;
-    final double radius = size.width / 2 * 0.7; // 六边形半径（控制大小）
-    final double cornerRadius = 20; // 圆角半径（控制圆角幅度）
+    final centerX = size.width / 2.0;
+    final centerY = size.height / 2.0;
+    final radius = size.width / 2 * 0.7; // 六边形半径（控制大小）
+    final cornerRadius = 20.0; // 圆角半径（控制圆角幅度）
 
     // 1. 计算六边形的六个顶点坐标
-    final List<Offset> vertices = _calculateHexagonVertices(centerX, centerY, radius);
+    final vertices = _calculateHexagonVertices(centerX, centerY, radius);
 
     // 2. 构建圆角路径
-    final Path path = _buildRoundedHexagonPath(vertices, cornerRadius);
+    final path = _buildRoundedHexagonPath(vertices, cornerRadius);
 
-    Paint paint = Paint()
+    var paint = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
@@ -347,12 +347,12 @@ class Hexagon extends CustomPainter {
 
   // 计算六边形顶点坐标（带角度调整）
   List<Offset> _calculateHexagonVertices(double centerX, double centerY, double radius) {
-    final List<Offset> vertices = [];
-    for (int i = 0; i < 6; i++) {
+    final vertices = <Offset>[];
+    for (var i = 0; i < 6; i++) {
       // 调整起始角度使六边形垂直（-π/6 用于对齐）
-      final double angle = 2 * pi * i / 6 - pi / 6;
-      final double x = centerX + radius * cos(angle);
-      final double y = centerY + radius * sin(angle);
+      final angle = 2 * pi * i / 6 - pi / 6;
+      final x = centerX + radius * cos(angle);
+      final y = centerY + radius * sin(angle);
       vertices.add(Offset(x, y));
     }
     return vertices;
@@ -360,17 +360,17 @@ class Hexagon extends CustomPainter {
 
   // 构建圆角六边形路径
   Path _buildRoundedHexagonPath(List<Offset> vertices, double cornerRadius) {
-    final Path path = Path();
-    for (int i = 0; i < vertices.length; i++) {
-      final Offset currentVertex = vertices[i];
-      final Offset nextVertex = vertices[(i + 1) % 6];
+    final path = Path();
+    for (var i = 0; i < vertices.length; i++) {
+      final currentVertex = vertices[i];
+      final nextVertex = vertices[(i + 1) % 6];
 
       // 计算边的方向向量（单位向量）
-      final Offset edgeDirection = (nextVertex - currentVertex).normalized;
+      final edgeDirection = (nextVertex - currentVertex).normalized;
 
       // 计算圆弧的起点和终点
-      final Offset arcStart = currentVertex + edgeDirection * cornerRadius;
-      final Offset arcEnd = nextVertex - edgeDirection * cornerRadius;
+      final arcStart = currentVertex + edgeDirection * cornerRadius;
+      final arcEnd = nextVertex - edgeDirection * cornerRadius;
 
       if (i == 0) {
         // 移动到第一个边的起点（略微偏移以闭合路径）
@@ -400,7 +400,7 @@ class Hexagon extends CustomPainter {
 // 扩展方法：向量归一化
 extension _OffsetExtensions on Offset {
   Offset get normalized {
-    final double length = distance;
+    final length = distance;
     return length == 0 ? this : this / length;
   }
 }
@@ -433,28 +433,28 @@ class ArcPainter extends CustomPainter {
     // 你也可以使用 drawPaint 绘制背景色
     // canvas.drawPaint(paint);
 
-    final Paint paint = Paint()
+    final paint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;
 
     // 计算等边三角形的三个顶点
-    double centerX = size.width / 2;
-    double centerY = size.height / 2;
-    double sideLength = min(size.width, size.height) * 0.8; // 等边三角形的边长，取画布的80%
+    var centerX = size.width / 2;
+    var centerY = size.height / 2;
+    var sideLength = min(size.width, size.height) * 0.8; // 等边三角形的边长，取画布的80%
 
     // 计算三角形的三个顶点坐标
-    double height = (sqrt(3) / 2) * sideLength; // 高度公式：h = (sqrt(3) / 2) * a
-    Offset p1 = Offset(centerX, centerY - height / 2); // 顶点
-    Offset p2 = Offset(centerX - sideLength / 2, centerY + height / 2); // 左下角
-    Offset p3 = Offset(centerX + sideLength / 2, centerY + height / 2); // 右下角
+    var height = (sqrt(3) / 2) * sideLength; // 高度公式：h = (sqrt(3) / 2) * a
+    var p1 = Offset(centerX, centerY - height / 2); // 顶点
+    var p2 = Offset(centerX - sideLength / 2, centerY + height / 2); // 左下角
+    var p3 = Offset(centerX + sideLength / 2, centerY + height / 2); // 右下角
 
     // 创建路径并绘制三角形
-    Path path = Path()..addPolygon([p1, p2, p3], true);
+    var path = Path()..addPolygon([p1, p2, p3], true);
     canvas.drawPath(path, paint);
 
     // 创建圆弧的矩形区域
     // 图案
-    final Paint paintOne = Paint()
+    final paintOne = Paint()
       ..color = Colors.red
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
@@ -462,21 +462,21 @@ class ArcPainter extends CustomPainter {
     final c = radius / sin(pi / 6);
     final b = radius / tan(pi / 6);
 
-    Offset p1One = Offset(p1.dx, p1.dy + c);
-    Offset p2One = Offset(p2.dx + b, p2.dy - radius);
-    Offset p3One = Offset(p3.dx - b, p3.dy - radius);
-    Path pathOne = Path()..addPolygon([p1One, p2One, p3One], true);
+    var p1One = Offset(p1.dx, p1.dy + c);
+    var p2One = Offset(p2.dx + b, p2.dy - radius);
+    var p3One = Offset(p3.dx - b, p3.dy - radius);
+    // var pathOne = Path()..addPolygon([p1One, p2One, p3One], true);
     // canvas.drawPath(pathOne, paintOne);
 
     // 顶部弧形区域
     final radians = pi / 180;
-    Rect rect1 = Rect.fromCircle(center: p1One, radius: radius);
+    var rect1 = Rect.fromCircle(center: p1One, radius: radius);
     canvas.drawArc(rect1, -radians * 135, radians * 90, true, paintOne);
     // 左下角弧形区域
-    Rect rect2 = Rect.fromCircle(center: p2One, radius: radius);
+    var rect2 = Rect.fromCircle(center: p2One, radius: radius);
     canvas.drawArc(rect2, radians * 105, radians * 90, true, paintOne);
     // 右下角弧形区域
-    Rect rect3 = Rect.fromCircle(center: p3One, radius: radius);
+    var rect3 = Rect.fromCircle(center: p3One, radius: radius);
     canvas.drawArc(rect3, -radians * 15, radians * 90, true, paintOne);
   }
 

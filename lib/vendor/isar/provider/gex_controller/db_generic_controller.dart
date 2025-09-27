@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/db_mixin.dart';
-import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 

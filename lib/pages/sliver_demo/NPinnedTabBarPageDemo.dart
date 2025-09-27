@@ -1,7 +1,5 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pinned_tab_bar_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';

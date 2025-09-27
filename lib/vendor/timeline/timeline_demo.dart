@@ -7,9 +7,8 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
-
 import 'package:flutter_templet_project/vendor/timeline/common/colors.dart';
+import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
 
 class TimelineDemo extends StatefulWidget {
   final String? title;
@@ -23,8 +22,6 @@ class TimelineDemo extends StatefulWidget {
 class _TimelineDemoState extends State<TimelineDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -58,8 +55,7 @@ class _TimelineDemoState extends State<TimelineDemo> {
       'id': "3",
       'day': '07-08',
       'time': '13:20',
-      'description':
-          "备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合",
+      'description': "备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合",
       // 'subtitle': '何神(主播)',
       'title': "新建工单"
     },
@@ -67,18 +63,10 @@ class _TimelineDemoState extends State<TimelineDemo> {
       'id': "4",
       'day': '07-08',
       'time': '13:20',
-      'description':
-          "备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合",
+      'description': "备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑，辛苦再撮合",
       'subtitle': '何神(主播)',
       'title': "新建工单"
     },
-    {
-      'id': "5",
-      'day': '07-08',
-      'time': '13:20',
-      'description': "备注：降价1000客户可考虑",
-      'subtitle': '何神(主播)',
-      'title': "新建工单"
-    }
+    {'id': "5", 'day': '07-08', 'time': '13:20', 'description': "备注：降价1000客户可考虑", 'subtitle': '何神(主播)', 'title': "新建工单"}
   ];
 }

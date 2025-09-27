@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet
 
 const Duration _bottomSheetEnterDuration = Duration(milliseconds: 250);
 const Duration _bottomSheetExitDuration = Duration(milliseconds: 200);
-const Curve _modalBottomSheetCurve = decelerateEasing;
+const Curve _modalBottomSheetCurve = Easing.legacyDecelerate;
 const double _minFlingVelocity = 700.0;
 const double _closeProgressThreshold = 0.5;
 
@@ -71,8 +71,7 @@ class _ModalBottomSheetNew<T> extends StatefulWidget {
     this.constraints,
     this.isScrollControlled = false,
     this.enableDrag = true,
-  })  : assert(isScrollControlled != null),
-        assert(enableDrag != null);
+  });
 
   final ModalBottomSheetRouteNew<T> route;
   final bool isScrollControlled;
@@ -120,10 +119,10 @@ class _ModalBottomSheetNewState<T> extends State<_ModalBottomSheetNew<T>> {
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     assert(debugCheckHasMaterialLocalizations(context));
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
-    final MaterialLocalizations localizations =
+    final mediaQuery = MediaQuery.of(context);
+    final localizations =
         MaterialLocalizations.of(context);
-    final String routeLabel = _getRouteLabel(localizations);
+    final routeLabel = _getRouteLabel(localizations);
 
     return AnimatedBuilder(
       animation: widget.route.animation!,
@@ -147,7 +146,7 @@ class _ModalBottomSheetNewState<T> extends State<_ModalBottomSheetNew<T>> {
       builder: (BuildContext context, Widget? child) {
         // Disable the initial animation when accessible navigation is on so
         // that the semantics are added to the tree at the correct time.
-        final double animationValue = animationCurve.transform(
+        final animationValue = animationCurve.transform(
           mediaQuery.accessibleNavigation ? 1.0 : widget.route.animation!.value,
         );
         return Semantics(
@@ -244,9 +243,7 @@ class ModalBottomSheetRouteNew<T> extends PopupRoute<T> {
     this.anchorPoint,
     this.right,
     this.useSafeArea = false,
-  })  : assert(isScrollControlled != null),
-        assert(isDismissible != null),
-        assert(enableDrag != null);
+  });
 
   /// A builder for the contents of the sheet.
   ///
@@ -400,9 +397,9 @@ class ModalBottomSheetRouteNew<T> extends PopupRoute<T> {
       right: right,
       child: Builder(
         builder: (BuildContext context) {
-          final BottomSheetThemeData sheetTheme =
+          final sheetTheme =
               Theme.of(context).bottomSheetTheme;
-          final BottomSheetThemeData defaults = Theme.of(context).useMaterial3
+          final defaults = Theme.of(context).useMaterial3
               ? _BottomSheetDefaultsM3(context)
               : const BottomSheetThemeData();
           return _ModalBottomSheetNew<T>(
@@ -428,7 +425,7 @@ class ModalBottomSheetRouteNew<T> extends PopupRoute<T> {
     // If useSafeArea is true, a SafeArea is inserted.
     // If useSafeArea is false, the bottom sheet is aligned to the bottom of the page
     // and isn't exposed to the top padding of the MediaQuery.
-    final Widget bottomSheet = useSafeArea
+    final bottomSheet = useSafeArea
         ? SafeArea(child: content)
         : MediaQuery.removePadding(
             context: context,
@@ -463,8 +460,7 @@ class _BottomSheetSuspendedCurve extends ParametricCurve<double> {
   const _BottomSheetSuspendedCurve(
     this.startingPoint, {
     this.curve = Curves.easeOutCubic,
-  })  : assert(startingPoint != null),
-        assert(curve != null);
+  });
 
   /// The progress value at which [curve] should begin.
   ///
@@ -487,8 +483,8 @@ class _BottomSheetSuspendedCurve extends ParametricCurve<double> {
       return t;
     }
 
-    final double curveProgress = (t - startingPoint) / (1 - startingPoint);
-    final double transformed = curve.transform(curveProgress);
+    final curveProgress = (t - startingPoint) / (1 - startingPoint);
+    final transformed = curve.transform(curveProgress);
     return lerpDouble(startingPoint, 1, transformed)!;
   }
 
@@ -563,16 +559,10 @@ Future<T?> showModalBottomSheetNew<T>({
   Offset? anchorPoint,
   double? right = 0,
 }) {
-  assert(context != null);
-  assert(builder != null);
-  assert(isScrollControlled != null);
-  assert(useRootNavigator != null);
-  assert(isDismissible != null);
-  assert(enableDrag != null);
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
 
-  final NavigatorState navigator =
+  final navigator =
       Navigator.of(context, rootNavigator: useRootNavigator);
   return navigator.push(ModalBottomSheetRouteNew<T>(
     builder: builder,

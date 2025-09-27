@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 
@@ -6,7 +5,6 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 // import 'package:tuple/tuple.dart';
 
 // typedef HomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);

@@ -20,8 +20,6 @@ class MergeableMaterialDemo extends StatefulWidget {
 class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -111,9 +109,7 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
               width: 20.0,
               color: Colors.red,
             ),
-            crossFadeState: currIndex
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
+            crossFadeState: currIndex ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             firstCurve: const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
             secondCurve: const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
             sizeCurve: Curves.fastOutSlowIn,

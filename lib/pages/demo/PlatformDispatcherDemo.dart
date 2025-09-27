@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/media_query_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:get/get.dart';
@@ -126,7 +126,11 @@ final mediaQueryData = MediaQueryData.fromView(keyView);
   void onPrint() {
     final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
     final mediaQueryData = MediaQueryData.fromView(keyView);
-    double dpr = View.of(context).devicePixelRatio;
+    var dpr = View.of(context).devicePixelRatio;
+    var physicalSize = View.of(context).physicalSize;
+
+    var dpr1 = keyView.devicePixelRatio;
+    var physicalSize1 = keyView.physicalSize;
 
     DLog.d([
       WidgetsBinding.instance.platformDispatcher.views,

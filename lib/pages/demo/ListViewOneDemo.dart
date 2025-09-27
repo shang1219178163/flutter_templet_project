@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
-
 import 'package:tuple/tuple.dart';
 
 class ListViewOneDemo extends StatefulWidget {
@@ -181,7 +179,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
 
                 final width = this.context.screenSize.width;
 
-                GlobalKey itemKey = GlobalKey(debugLabel: e.item1);
+                var itemKey = GlobalKey(debugLabel: e.item1);
                 return InkWell(
                   key: itemKey,
                   onTap: () {

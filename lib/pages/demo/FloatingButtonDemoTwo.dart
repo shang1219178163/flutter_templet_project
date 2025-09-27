@@ -6,7 +6,6 @@
 //  Copyright © 2024/11/21 shang. All rights reserved.
 //
 
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';

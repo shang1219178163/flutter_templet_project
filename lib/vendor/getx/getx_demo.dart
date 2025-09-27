@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/pages/demo/TestFunction.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tuple/tuple.dart';
@@ -37,11 +36,11 @@ class _GetxDemoState extends State<GetxDemo> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),

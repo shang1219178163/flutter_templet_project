@@ -53,7 +53,7 @@ class MapUtil {
   static Future<bool> jumpAMap(longitude, latitude) async {
     var url = '${Platform.isAndroid ? 'android' : 'ios'}'
         'amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2';
-    bool canLaunchUrl = await canLaunch(url);
+    var canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
       ToastUtil.show('未检测到高德地图~');
       return false;
@@ -66,7 +66,7 @@ class MapUtil {
   static Future<bool> jumpTencentMap(longitude, latitude) async {
     var url =
         'qqmap://map/routeplan?type=drive&fromcoord=CurrentLocation&tocoord=$latitude,$longitude&referer=IXHBZ-QIZE4-ZQ6UP-DJYEO-HC2K2-EZBXJ';
-    bool canLaunchUrl = await canLaunch(url);
+    var canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
       ToastUtil.show('未检测到腾讯地图~');
       return false;
@@ -79,7 +79,7 @@ class MapUtil {
   static Future<bool> jumpBaiduMap(longitude, latitude) async {
     var url =
         'baidumap://map/direction?destination=$latitude,$longitude&coord_type=bd09ll&mode=driving';
-    bool canLaunchUrl = await canLaunch(url);
+    var canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
       ToastUtil.show('未检测到百度地图~');
       return false;
@@ -91,7 +91,7 @@ class MapUtil {
   /// 苹果地图
   static Future<bool> jumpAppleMap(longitude, latitude) async {
     var url = 'http://maps.apple.com/?&daddr=$latitude,$longitude';
-    bool canLaunchUrl = await canLaunch(url);
+    var canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
       ToastUtil.show('打开失败~');
       return false;

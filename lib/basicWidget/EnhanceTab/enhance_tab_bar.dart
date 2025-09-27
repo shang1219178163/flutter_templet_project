@@ -776,10 +776,10 @@ class EnhanceTabBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// Defines the ink response focus, hover, and splash colors.
   ///
-  /// If non-null, it is resolved against one of [MaterialState.focused],
-  /// [MaterialState.hovered], and [MaterialState.pressed].
+  /// If non-null, it is resolved against one of [WidgetState.focused],
+  /// [WidgetState.hovered], and [WidgetState.pressed].
   ///
-  /// [MaterialState.pressed] triggers a ripple (an ink splash), per
+  /// [WidgetState.pressed] triggers a ripple (an ink splash), per
   /// the current Material Design spec. The [overlayColor] doesn't map
   /// a state to [InkResponse.highlightColor] because a separate highlight
   /// is not used by the current design guidelines. See
@@ -788,7 +788,7 @@ class EnhanceTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// If the overlay color is null or resolves to null, then the default values
   /// for [InkResponse.focusColor], [InkResponse.hoverColor], [InkResponse.splashColor]
   /// will be used instead.
-  final MaterialStateProperty<Color?>? overlayColor;
+  final WidgetStateProperty<Color?>? overlayColor;
 
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
@@ -901,7 +901,7 @@ class _EnhanceTabBarState extends State<EnhanceTabBar> {
     // TODO(xu-baolin): Remove automatic adjustment to white color indicator
     // with a better long-term solution.
     // https://github.com/flutter/flutter/pull/68171#pullrequestreview-517753917
-    if (widget.automaticIndicatorColorAdjustment && color.value == Material.of(context)?.color?.value) {
+    if (widget.automaticIndicatorColorAdjustment && color.value == Material.of(context).color?.value) {
       color = Colors.white;
     }
 
@@ -921,15 +921,6 @@ class _EnhanceTabBarState extends State<EnhanceTabBar> {
   void _updateTabController() {
     final newController = widget.controller ?? DefaultTabController.of(context);
     assert(() {
-      if (newController == null) {
-        throw FlutterError(
-          'No TabController for ${widget.runtimeType}.\n'
-          'When creating a ${widget.runtimeType}, you must either provide an explicit '
-          'TabController using the "controller" property, or you must ensure that there '
-          'is a DefaultTabController above the ${widget.runtimeType}.\n'
-          'In this case, there was neither an explicit controller nor a default controller.',
-        );
-      }
       return true;
     }());
 

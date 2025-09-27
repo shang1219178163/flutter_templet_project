@@ -60,7 +60,7 @@ class VideoService {
 
       return compressVideoMediaInfo?.file ?? file;
     } catch (e) {
-      debugPrint("e: ${e},");
+      debugPrint("e: $e,");
     }
     return file;
   }

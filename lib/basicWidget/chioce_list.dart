@@ -1,35 +1,33 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 ///多选列表
 class ChioceList extends StatefulWidget {
   ChioceList({
-    Key? key,
+    super.key,
     this.isMutiple = false,
     required this.children,
-    required this.indexs,
-    required this.canScroll,
+    this.indexs = const [],
+    this.canScroll = false,
     required this.callback,
     this.backgroudColor,
     this.rowHeight = 65,
-  }) : super(key: key);
+  });
 
-  List<int> indexs = <int>[];
+  final List<int> indexs;
 
-  var children = <ChioceDataModel>[];
+  final List<ChioceDataModel> children;
 
-  void Function(List<int> indexs) callback;
+  final void Function(List<int> indexs) callback;
 
   final Color? backgroudColor;
 
-  bool canScroll = false;
+  final bool canScroll;
 
-  bool isMutiple;
+  final bool isMutiple;
 
-  double rowHeight;
+  final double rowHeight;
 
   @override
   _ChioceListState createState() => _ChioceListState();
@@ -69,9 +67,7 @@ class _ChioceListState extends State<ChioceList> {
                     leading: e.secondary,
                     title: e.title,
                     subtitle: e.subtitle,
-                    trailing: widget.indexs.contains(index)
-                        ? Icon(Icons.check)
-                        : null,
+                    trailing: widget.indexs.contains(index) ? Icon(Icons.check) : null,
                     selected: widget.indexs.contains(index),
                     onTap: () {
                       _changeValue(widget.children.indexOf(e));

@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class NavgationBarDemo extends StatefulWidget {
   final String? title;
@@ -21,7 +21,6 @@ class NavgationBarDemo extends StatefulWidget {
 class _NavgationBarDemoState extends State<NavgationBarDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: Colors.blue,

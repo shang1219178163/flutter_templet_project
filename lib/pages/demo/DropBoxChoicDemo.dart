@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
@@ -69,7 +69,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       .map((e) => OrderModel(
             id: e,
             name: "订单_$e",
-            pirce: IntExt.random(max: 1000, min: 100).toDouble(),
+            price: IntExt.random(max: 1000, min: 100).toDouble(),
           ))
       .toList();
   List<OrderModel> selectedOrders = [];
@@ -88,7 +88,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
   @override
   Widget build(BuildContext context) {
-    bool isSingle = false; //单选多选
+    var isSingle = false; //单选多选
 
     return Scaffold(
       appBar: AppBar(

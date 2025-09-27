@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
-import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/basicWidget/x_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:tuple/tuple.dart';
 

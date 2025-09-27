@@ -1,11 +1,8 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';

@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
-import 'package:flutter_templet_project/extension/rich_text_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
-
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 class AutocompleteDemo extends StatefulWidget {
   AutocompleteDemo({
@@ -56,9 +50,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
     _tuples = tuples
         .map((e) => OptionModel(
               name: e.item1,
-              children: e.item2
-                  .map((e) => OptionModel(name: e.item1, desc: e.item2))
-                  .toList(),
+              children: e.item2.map((e) => OptionModel(name: e.item1, desc: e.item2)).toList(),
             ))
         .toList();
   }
@@ -76,8 +68,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
             ...buildHeader(),
             Autocomplete<OptionModel>(
               displayStringForOption: (option) => option.name,
-              fieldViewBuilder:
-                  _params[0].isOpen ? buildFieldView : buildFieldViewDefault,
+              fieldViewBuilder: _params[0].isOpen ? buildFieldView : buildFieldViewDefault,
               onSelected: onSelected,
               optionsBuilder: _buildOptions,
               // optionsViewBuilder: _buildOptionsView,
@@ -145,9 +136,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
     }
 
     final items = _tuples.expand((e) => e.children).toList();
-    final result = items
-        .where((e) => e.name.toLowerCase().contains(text.toLowerCase()))
-        .toList();
+    final result = items.where((e) => e.name.toLowerCase().contains(text.toLowerCase())).toList();
     return result;
   }
 
@@ -230,8 +219,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
       },
       onEditingComplete: () {
         debugPrint("onEditingComplete: ${textEditingController.text}");
-        final filters = Get.routeTree.routes
-            .where((e) => e.name == textEditingController.text);
+        final filters = Get.routeTree.routes.where((e) => e.name == textEditingController.text);
         if (filters.isNotEmpty) {
           onSelected(OptionModel(name: textEditingController.text));
         }
@@ -281,8 +269,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
             ? null
             : OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide:
-                    const BorderSide(width: 1.5, color: Colors.lightBlue),
+                borderSide: const BorderSide(width: 1.5, color: Colors.lightBlue),
               ));
 
     return InputDecoration(
@@ -436,8 +423,7 @@ class OptionModel {
     return OptionModel(
       name: json['name'],
       desc: json['desc'],
-      children: List<OptionModel>.from(
-          (json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
+      children: List<OptionModel>.from((json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
     );
   }
 
@@ -445,7 +431,7 @@ class OptionModel {
     final data = <String, dynamic>{};
     data['name'] = name;
     data['desc'] = desc;
-    data['children'] = children?.map((v) => v.toJson()).toList();
+    data['children'] = children.map((v) => v.toJson()).toList();
     return data;
   }
 

@@ -6,16 +6,10 @@
 //  Copyright © 6/13/21 shang. All rights reserved.
 //
 
-// ignore: must_be_immutable
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:get/get.dart';
-
 import 'package:flutter_templet_project/basicWidget/TextInputFormatter/int_clamp_text_input_formatter.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 ///自定义数值增减 Stepper
 class NumberStepper extends StatefulWidget {
@@ -84,7 +78,7 @@ class _NumberStepperState extends State<NumberStepper> {
 
   set current(val) {
     _current = val;
-    _textController.text = "${_current}";
+    _textController.text = "$_current";
   }
 
   int get current {
@@ -97,7 +91,7 @@ class _NumberStepperState extends State<NumberStepper> {
   void initState() {
     // TODO: implement initState
 
-    _textController.text = "${current}";
+    _textController.text = "$current";
     super.initState();
   }
 

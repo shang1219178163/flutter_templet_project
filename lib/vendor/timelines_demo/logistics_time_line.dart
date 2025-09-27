@@ -10,7 +10,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:timelines/timelines.dart';
 
 class LogisticsTimeLine extends StatefulWidget {
@@ -373,9 +373,6 @@ class PlainDataModel {
 
   // ignore: sort_constructors_first
   PlainDataModel.fromJson(Map<String, dynamic> json) {
-    if (json is! Map) {
-      return;
-    }
     id = json['id'] ?? "-";
     title = json['title'] ?? "-";
     description = json['description'] ?? "-";

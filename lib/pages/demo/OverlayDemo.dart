@@ -1,15 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:get/get.dart';
@@ -36,11 +31,11 @@ class _OverlayDemoState extends State<OverlayDemo> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/yaml_ext.dart';
 import 'package:path/path.dart' as path;
 import 'package:pubspec_parse/pubspec_parse.dart';
@@ -92,24 +92,24 @@ class _YamlParsePageState extends State<YamlParsePage> {
 
   onPath() async {
     // 获取当前文件的 URI
-    Uri currentScript = Platform.script;
+    var currentScript = Platform.script;
     // 将 URI 转换为文件系统路径
-    String currentPath = currentScript.toFilePath();
+    var currentPath = currentScript.toFilePath();
     DLog.d('当前文件路径: $currentPath');
 
-    String yamlPath1 = path.dirname(currentPath);
+    var yamlPath1 = path.dirname(currentPath);
     DLog.d("yamlPath1: ${"目录${Directory(yamlPath1).existsSync() ? "" : "不"}存在"} $yamlPath1");
 
-    String yamlPath3 = path.join(yamlPath1, '../pubspec.yaml');
+    var yamlPath3 = path.join(yamlPath1, '../pubspec.yaml');
     DLog.d("yamlPath3: ${"文件${File(yamlPath3).existsSync() ? "" : "不"}存在"} $yamlPath3");
 
-    String yamlPath4 = Uri.file(yamlPath3).path;
+    var yamlPath4 = Uri.file(yamlPath3).path;
     DLog.d("yamlPath4: ${"文件${File(yamlPath4).existsSync() ? "" : "不"}存在"} $yamlPath4");
 
-    String yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
+    var yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
     DLog.d("yamlPath: $yamlPath");
 
-    File file = File(yamlPath);
+    var file = File(yamlPath);
     if (!file.existsSync()) {
       contentVN.value = "文件不存在";
       return;
@@ -118,7 +118,7 @@ class _YamlParsePageState extends State<YamlParsePage> {
   }
 
   onParse() async {
-    String content = await rootBundle.loadString("pubspec.yaml");
+    var content = await rootBundle.loadString("pubspec.yaml");
     final yamlMap = await YamlMapExt.fromString(content: content);
     final encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
     contentVN.value = encoder.convert(yamlMap);

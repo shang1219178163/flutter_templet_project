@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class WillPopScopeDemo extends StatefulWidget {
   final String? title;
@@ -41,7 +41,7 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
 
   Future<void> showAlert() async {
     // 弹出确认对话框
-    bool shouldPop = await showDialog(
+    var shouldPop = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text("确认"),

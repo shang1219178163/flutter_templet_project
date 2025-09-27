@@ -118,7 +118,7 @@ class AudioSessionManager {
 
   // 通知所有监听器
   Future<void> notifyListeners(Future<void> Function(AudioSessionSoundPlayerModel e) action) async {
-    for (var ltr in _listeners) {
+    for (final ltr in _listeners) {
       await action(ltr);
     }
   }

@@ -1,9 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_item.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
 
 class ListenerHeaderPage extends StatefulWidget {

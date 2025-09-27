@@ -9,12 +9,10 @@ class PageLifecycleObserverDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _PageLifecycleObserverDemoState createState() =>
-      _PageLifecycleObserverDemoState();
+  _PageLifecycleObserverDemoState createState() => _PageLifecycleObserverDemoState();
 }
 
-class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo>
-    with WidgetsBindingObserver {
+class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> with WidgetsBindingObserver {
   @override
   void dispose() {
     super.dispose();
@@ -37,8 +35,8 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo>
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     debugPrint("$widget build");
+    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
         appBar: AppBar(
@@ -114,7 +112,9 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo>
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
-    var size = WidgetsBinding.instance.window.physicalSize;
+    
+    final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+    var size = keyView.physicalSize;
     debugPrint("$widget didChangeMetrics  ：宽：${size.width} 高：${size.height}");
   }
 
@@ -139,14 +139,14 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo>
   //文字大小改变时候的监听
   @override
   void didChangeTextScaleFactor() {
-    debugPrint(
-        "$widget didChangeTextScaleFactor：${WidgetsBinding.instance.window.textScaleFactor}");
+    final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+    debugPrint("$widget didChangeTextScaleFactor: ${keyView.platformDispatcher.textScaleFactor}");
   }
 
   @override
   void didChangePlatformBrightness() {
-    final window = WidgetsBinding.instance.window;
-    final brightness = window.platformBrightness;
+    final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+    final brightness = keyView.platformDispatcher.platformBrightness;
     // Brightness.light 亮色
     // Brightness.dark 暗色
     debugPrint('$widget didChangePlatformBrightness$brightness');

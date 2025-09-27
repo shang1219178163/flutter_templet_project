@@ -11,21 +11,19 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_type_writer_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/future_ext.dart';
 import 'package:flutter_templet_project/extension/generic_comparable_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/extension/service_protocol_info_ext.dart';
-import 'package:flutter_templet_project/extension/type_util.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/extension/service_protocol_info_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/mixin/app_lifecycle_state_mixin.dart';
 import 'package:flutter_templet_project/model/NPerson.dart';
 import 'package:flutter_templet_project/util/Codable.dart';
@@ -183,7 +181,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     var map = <(int, int), String>{};
     map[(1, 2)] = "1,2";
     map[(3, 4)] = "3,4";
-    debugPrint("map: ${map}");
+    debugPrint("map: $map");
 
     final list1 = ["aaa"];
     final list2 = ["aaa"];
@@ -205,10 +203,10 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     debugPrint("user: ${user.toJson() == user1.toJson()}");
 
     final sameUser = user == user1;
-    debugPrint("sameUser: ${sameUser}");
+    debugPrint("sameUser: $sameUser");
 
     final result = identical(user, user1); //检查两个对象引用是否指向同一对象。
-    debugPrint("result: ${result}");
+    debugPrint("result: $result");
 
     final bob = NPerson(name: "Bob", age: 40);
     final bob1 = NPerson(name: "Bob", age: 40);
@@ -279,10 +277,10 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     showSnackBar(SnackBar(content: Text(d2)));
 
-    int j = 0; //第n次匹配
+    var j = 0; //第n次匹配
     String pigLatin(String words) => words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false), (Match m) {
           for (var i = 0; i < m.groupCount; i++) {
-            DLog.d("${j}_m[${i}]/${m.groupCount - 1}: ${m[i]}");
+            DLog.d("${j}_m[$i]/${m.groupCount - 1}: ${m[i]}");
             j++;
           }
 
@@ -324,8 +322,8 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     DLog.d(listA);
 
     // 使用正则表达式删除左边的所有0
-    String strZero = "000123450";
-    String resultZero = strZero.replaceFirst(RegExp(r'^0+'), '');
+    var strZero = "000123450";
+    var resultZero = strZero.replaceFirst(RegExp(r'^0+'), '');
     debugPrint('resultZero: $resultZero');
 
     final serviceInfo = await Service.getInfo();
@@ -335,7 +333,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   void onDate() {
     final now = DateTime.now();
     final dateStr = "$now".substring(0, 10);
-    debugPrint("dateStr: ${dateStr}");
+    debugPrint("dateStr: $dateStr");
   }
 
   void onList() {
@@ -393,7 +391,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     final flag = (maxline?.isNotEmpty == true);
     debugPrint('flag: $flag');
     maxline = "1";
-    final flag1 = (maxline?.isNotEmpty == true);
+    final flag1 = (maxline.isNotEmpty == true);
     debugPrint('flag1: $flag1');
 
     final randomItems = List.generate(9, (index) {
@@ -411,7 +409,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
         return items.getRange(start, end);
       },
     );
-    DLog.d("strides: ${strides}");
+    DLog.d("strides: $strides");
   }
 
   void onSet() {}
@@ -433,13 +431,13 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     await CacheService().set("info", info.data);
     final result = CacheService().get("info");
-    DLog.d("info:${result}");
+    DLog.d("info:$result");
 
     Map? a1;
     DLog.d("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
 
     // 示例动态 Map
-    Map<String, dynamic> params = {
+    var params = <String, dynamic>{
       'name': 'John Doe',
       'age': 25,
       'isStudent': true,
@@ -447,7 +445,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     };
 
     // 转换为查询字符串
-    String queryString = params.toQueryString();
+    var queryString = params.toQueryString();
     DLog.d('Query String: $queryString');
     return;
 
@@ -455,7 +453,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   }
 
   void mapSorted() {
-    Map<String, int> unsortedMap = {
+    var unsortedMap = <String, int>{
       'pinch': 3,
       'banana': 5,
       'apple': 3,
@@ -468,7 +466,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       MapEntry<K, V> b, {
       bool isAsc = true,
     }) {
-      int result = isAsc ? a.value.compareTo(b.value) : b.value.compareTo(a.value);
+      var result = isAsc ? a.value.compareTo(b.value) : b.value.compareTo(a.value);
       if (result != 0) {
         return result;
       }
@@ -495,7 +493,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     // return;
 
     // 模型属性排序
-    Map<String, MapItem> data2 = {
+    var data2 = <String, MapItem>{
       "2022-11-01": MapItem(count: 12, name: "book"),
       "2022-11-12": MapItem(count: 2, name: "pencil"),
       "2022-11-05": MapItem(count: 18, name: "keyboard"),
@@ -527,14 +525,14 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   void onBool() {}
 
   Future<void> onRecord() async {
-    (List<String> a, Map<String, dynamic> b) re = ([], {});
-    debugPrint("re:${re}");
+    var re = ([], {});
+    debugPrint("re:$re");
 
     re.$1.add("a");
     re.$2["a"] = "aa";
-    debugPrint("re1:${re}");
+    debugPrint("re1:$re");
 
-    ({int a, int b}) recordAB = (a: 1, b: 2);
+    var recordAB = (a: 1, b: 2);
 
     (double lat, double lon) geoLocation(String name) => (231.23, 36.8219);
 
@@ -551,17 +549,17 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   }
 
   removeSame() {
-    List list = [
+    var list = [
       {'id': 1, 'name': '小明'},
       {'id': 1, 'name': '小红'},
       {'id': 2, 'name': '小明'}
     ];
 
     final ids = list.map((e) => e['id']).toSet();
-    debugPrint('ids: ${ids}');
+    debugPrint('ids: $ids');
 
     list.retainWhere((e) => ids.remove(e['id']));
-    debugPrint('list: ${list}');
+    debugPrint('list: $list');
   }
 
   void printFormat() {
@@ -607,7 +605,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     const String? b = null;
     DLog.d([a.orElse(() => "456"), b.or("333"), a.convert((v) => Text("$a")), b.convert((v) => Text("$b"))].asMap());
 
-    final Text? z = a.convert((v) => Text("$a"));
+    final z = a.convert((v) => Text("$a"));
 
     final nums = List<int>.generate(10, (i) => i);
     final val = nums.reduce((v, e) => v + e);
@@ -629,10 +627,10 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     DLog.d(array.orElse(() => array1));
 
     // 定义一个数组
-    List<int> numbers = [3, 7, 2, 9, 5, 1];
+    var numbers = <int>[3, 7, 2, 9, 5, 1];
     // 找到数组的最大值
-    int maxValue = numbers.reduce((a, b) => a > b ? a : b);
-    int maxValue1 = numbers.reduce((a, b) {
+    var maxValue = numbers.reduce((a, b) => a > b ? a : b);
+    var maxValue1 = numbers.reduce((a, b) {
       final result = a > b ? a : b;
       DLog.d("result: $a, $b, $result");
       return result;
@@ -654,11 +652,11 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     DLog.d("__${version1.compareVersion(version2)}"); // 输出 -1
 
     // 将版本号字符串分割成整数列表
-    List<int> v1 = version1.split('.').map(int.parse).toList();
-    List<int> v2 = version2.split('.').map(int.parse).toList();
+    var v1 = version1.split('.').map(int.parse).toList();
+    var v2 = version2.split('.').map(int.parse).toList();
 
     // 获取最大长度
-    int maxLength = v1.length > v2.length ? v1.length : v2.length;
+    var maxLength = v1.length > v2.length ? v1.length : v2.length;
 
     // 补全较短的版本号列表
     for (var i = v1.length; i < maxLength; i++) {

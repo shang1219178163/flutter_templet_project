@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 /// (不良)患者信息卡片
@@ -47,14 +46,14 @@ class AePatientCard extends StatelessWidget {
           remark,
           section,
           status,
-        ].where((e) => e?.isNotEmpty == true).isNotEmpty !=
+        ].where((e) => e.isNotEmpty == true).isNotEmpty !=
         true;
     if (isEmpty) {
       return const SizedBox();
     }
 
     final hasOne =
-        [section, status].where((e) => e?.isNotEmpty == true).isNotEmpty;
+        [section, status].where((e) => e.isNotEmpty == true).isNotEmpty;
 
     return Container(
       decoration: BoxDecoration(

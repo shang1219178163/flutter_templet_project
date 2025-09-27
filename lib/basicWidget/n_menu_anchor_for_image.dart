@@ -48,17 +48,17 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
       data: ThemeData(
           menuTheme: MenuThemeData(
               style: MenuStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.transparent),
-            shadowColor: MaterialStateProperty.all(Colors.transparent),
+            backgroundColor: WidgetStateProperty.all(Colors.transparent),
+            shadowColor: WidgetStateProperty.all(Colors.transparent),
             // surfaceTintColor: MaterialStateProperty.all(Colors.red),
-            shape: MaterialStateProperty.all<OutlinedBorder?>(
+            shape: WidgetStateProperty.all<OutlinedBorder?>(
                 const RoundedRectangleBorder()),
-            elevation: MaterialStateProperty.all<double?>(0.0),
+            elevation: WidgetStateProperty.all<double?>(0.0),
           )),
           menuButtonTheme: MenuButtonThemeData(
               style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.transparent),
-            shadowColor: MaterialStateProperty.all(Colors.transparent),
+            backgroundColor: WidgetStateProperty.all(Colors.transparent),
+            shadowColor: WidgetStateProperty.all(Colors.transparent),
           ))),
       child: MenuAnchor(
         controller: menuController,

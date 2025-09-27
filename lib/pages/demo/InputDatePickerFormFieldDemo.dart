@@ -6,16 +6,13 @@ class InputDatePickerFormFieldDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _InputDatePickerFormFieldDemoState createState() =>
-      _InputDatePickerFormFieldDemoState();
+  _InputDatePickerFormFieldDemoState createState() => _InputDatePickerFormFieldDemoState();
 }
 
-class _InputDatePickerFormFieldDemoState
-    extends State<InputDatePickerFormFieldDemo> {
+class _InputDatePickerFormFieldDemoState extends State<InputDatePickerFormFieldDemo> {
   DateTime firstDate = DateTime(2019);
   DateTime lastDate = DateTime(2030, 12, 12);
-  DateTime selectedDate =
-      DateTime.now().add(Duration(hours: 0, minutes: 0, seconds: 0));
+  DateTime selectedDate = DateTime.now().add(Duration(hours: 0, minutes: 0, seconds: 0));
 
   @override
   initState() {
@@ -24,8 +21,6 @@ class _InputDatePickerFormFieldDemoState
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),

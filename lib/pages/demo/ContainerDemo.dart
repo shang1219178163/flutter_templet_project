@@ -1,19 +1,13 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter/animation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_flex_separated.dart';
 import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class ContainerDemo extends StatefulWidget {

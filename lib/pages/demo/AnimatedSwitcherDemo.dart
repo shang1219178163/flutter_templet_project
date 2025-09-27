@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class AnimatedSwitcherDemo extends StatefulWidget {
   final String? title;

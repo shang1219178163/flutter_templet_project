@@ -19,8 +19,6 @@ class LocalImagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(title ?? "$this"),
@@ -45,11 +43,9 @@ class LocalImagePage extends StatelessWidget {
                     child: Center(
                       child: FittedBox(fit: BoxFit.fitWidth, child: Text(e)),
                     )),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(image: e.toAssetImage(), fit: BoxFit.contain),
-                    ]),
+                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Image(image: e.toAssetImage(), fit: BoxFit.contain),
+                ]),
               ))
           .toList(),
     );

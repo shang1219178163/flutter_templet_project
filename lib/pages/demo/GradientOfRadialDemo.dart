@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:tuple/tuple.dart';
 
@@ -104,7 +103,6 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     required String text,
     required Decoration decoration,
     double height = 100,
-    double? width,
   }) {
     return LayoutBuilder(builder: (context, constraints) {
       maxWidth = constraints.maxWidth;

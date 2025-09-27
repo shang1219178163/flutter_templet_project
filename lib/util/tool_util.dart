@@ -11,13 +11,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/vendor/file_preview/file_preview_page.dart';
 import 'package:flutter_templet_project/vendor/file_preview/webview_file_preview_page.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ToolUtil {
@@ -36,7 +34,7 @@ class ToolUtil {
 
   // 访问外部链接
   static Future<void> openLaunchUrl(String url) async {
-    final Uri launchUri = Uri.parse(url);
+    final launchUri = Uri.parse(url);
     await launchUrl(
       launchUri,
       mode: LaunchMode.externalApplication,

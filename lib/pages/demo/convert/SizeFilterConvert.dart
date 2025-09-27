@@ -6,13 +6,9 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
-import 'dart:io';
 
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
 typedef LineRecord = ({String line, double num, String? comment});
@@ -455,7 +451,7 @@ class SizeFilterConvert extends ConvertProtocol {
       //   DLog.d("${lines.indexOf(content)}:$e");
       // }
 
-      List<String> parts = e.split(RegExp(r'[\[\]]'));
+      var parts = e.split(RegExp(r'[\[\]]'));
       final size = parts[1];
       if (!size.contains("K")) {
         return false;
@@ -472,7 +468,7 @@ class SizeFilterConvert extends ConvertProtocol {
       var parts = e.split(RegExp(r'[\[\]]'));
       final sizeStr = parts[1];
       final numStr = sizeStr.replaceFirst("K", "").trim();
-      final double num = double.tryParse(numStr) ?? 0;
+      final num = double.tryParse(numStr) ?? 0;
       final result = (line: e, num: num, comment: "");
       return result;
     }).toList();

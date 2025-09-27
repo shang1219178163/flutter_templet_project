@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -45,6 +44,10 @@ class MergeImagesWidget extends StatefulWidget {
 
 class MergeImagesWidgetState extends State<MergeImagesWidget> {
   final minCodeGlobalKey = GlobalKey();
+
+  final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+  late final devicePixelRatio = keyView.devicePixelRatio;
+
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +174,9 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   FutureOr<ui.Image?> _capturePic(GlobalKey key) async {
     var boundary =
         key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
-    var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
+
+    final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+    var image = await boundary?.toImage(pixelRatio: keyView.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
@@ -305,8 +310,8 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
         final w = totalWidth * 0.3;
         final h = w;
 
-        final dx = totalWidth - right * ui.window.devicePixelRatio - w;
-        final dy = totalHeight - bottom * ui.window.devicePixelRatio - h;
+        final dx = totalWidth - right * devicePixelRatio - w;
+        final dy = totalHeight - bottom * devicePixelRatio - h;
 
         canvas.drawImageRect(
           miniCodeImage,

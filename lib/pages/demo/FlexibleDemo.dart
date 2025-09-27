@@ -12,8 +12,6 @@ class FlexibleDemo extends StatefulWidget {
 class _FlexibleDemoState extends State<FlexibleDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -23,28 +21,28 @@ class _FlexibleDemoState extends State<FlexibleDemo> {
     );
   }
 
-  _buildSection() {
-    return Column(
-      children: [
-        Flexible(
-          fit: FlexFit.tight,
-          child: Container(
-            color: Colors.pink,
-            child: Text('Flexible'),
-          ),
-        ),
-        Container(
-          height: 50,
-          color: Colors.orange,
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.purple,
-          ),
-        ),
-      ],
-    );
-  }
+  // _buildSection() {
+  //   return Column(
+  //     children: [
+  //       Flexible(
+  //         fit: FlexFit.tight,
+  //         child: Container(
+  //           color: Colors.pink,
+  //           child: Text('Flexible'),
+  //         ),
+  //       ),
+  //       Container(
+  //         height: 50,
+  //         color: Colors.orange,
+  //       ),
+  //       Expanded(
+  //         child: Container(
+  //           color: Colors.purple,
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   _buildSection1() {
     return Column(

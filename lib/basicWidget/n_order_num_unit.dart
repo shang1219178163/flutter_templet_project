@@ -105,7 +105,7 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(right: contentPadding.left ?? 0),
+                  padding: EdgeInsets.only(right: contentPadding.left),
                   child: Text(
                     "| ${widget.unit}",
                     textAlign: TextAlign.center,

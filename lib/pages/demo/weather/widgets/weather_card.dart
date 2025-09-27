@@ -82,7 +82,7 @@ class WeatherCard extends StatelessWidget {
 
   Widget _buildWeatherEffect() {
     // 为不同类型的天气效果提供不同的默认速度
-    double speed = animationSpeed;
+    var speed = animationSpeed;
 
     // 雾和雪需要更慢的默认速度
     if (weatherType == WeatherType.foggy || weatherType == WeatherType.snowy) {

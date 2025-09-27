@@ -6,9 +6,8 @@
 //  Copyright © 2023/9/19 shang. All rights reserved.
 //
 
-import 'package:flutter/material.dart';
-
 import 'package:chewie/chewie.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:get/get.dart';

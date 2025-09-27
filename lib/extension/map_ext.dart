@@ -9,12 +9,18 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:flutter/foundation.dart';
 
 extension MapExt on Map<String, dynamic> {
   Map get reversed => {
         for (final e in entries) e.value: e.key,
       };
+
+  /// 相等判断
+  bool equal(Map<String, dynamic> other) {
+    return mapEquals(this, other);
+  }
+
   // 拼接键值成字符串
   String toQueryString() {
     if (isEmpty) {
@@ -22,7 +28,7 @@ extension MapExt on Map<String, dynamic> {
     }
 
     // 转换 Map 的值为字符串
-    Map<String, String> stringParams = map((key, value) {
+    var stringParams = map((key, value) {
       if (value is List) {
         return MapEntry(key, value.join(',')); // 将 List 转为逗号分隔的字符串
       }
@@ -30,7 +36,7 @@ extension MapExt on Map<String, dynamic> {
     });
 
     // 转换为查询字符串
-    String queryString = Uri(queryParameters: stringParams).query;
+    var queryString = Uri(queryParameters: stringParams).query;
     return queryString;
   }
 
@@ -79,8 +85,8 @@ extension MapExt on Map<String, dynamic> {
     if (response.isEmpty) {
       return (isSuccess: false, message: "", result: defaultValue); //断网
     }
-    bool isSuccess = response['code'] == "OK";
-    String message = response["message"] as String? ?? "";
+    var isSuccess = response['code'] == "OK";
+    var message = response["message"] as String? ?? "";
     final resultNew = onResult?.call(response) ?? response["result"] as T? ?? defaultValue;
     return (isSuccess: isSuccess, message: message, result: resultNew);
   }

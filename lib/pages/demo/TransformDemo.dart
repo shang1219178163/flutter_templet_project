@@ -1,10 +1,8 @@
+import 'dart:math' as math;
 import 'dart:math';
 
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'dart:math' as math;
-
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 class TransformDemo extends StatefulWidget {
@@ -19,8 +17,6 @@ class TransformDemo extends StatefulWidget {
 class _TransformDemoState extends State<TransformDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

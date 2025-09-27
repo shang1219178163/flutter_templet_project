@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// 苹果登录 mixin
@@ -10,9 +9,6 @@ mixin AppleSiginMixin {
         AppleIDAuthorizationScopes.email,
         AppleIDAuthorizationScopes.fullName,
       ],
-      // // TODO: Remove these if you have no need for them
-      // nonce: 'example-nonce',
-      // state: 'example-state',
     );
 
     // ignore: avoid_print

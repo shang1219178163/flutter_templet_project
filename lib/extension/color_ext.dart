@@ -7,7 +7,6 @@
 //
 
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -98,8 +97,7 @@ extension ColorExt on Color {
   }
 
   ///转渐进色
-  Gradient? toGradient() =>
-      LinearGradient(colors: [this, this], stops: const [0.0, 1]);
+  Gradient? toGradient() => LinearGradient(colors: [this, this], stops: const [0.0, 1]);
 
   Color randomOpacity() {
     return withOpacity(Random().nextInt(100) / 100);
@@ -118,4 +116,12 @@ extension ColorExt on Color {
   //   final result = "#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
   //   return result;
   // }
+
+  String toHex({String prefix = '#'}) {
+    return '$prefix'
+        '${alpha.toRadixString(16).padLeft(2, '0')}'
+        '${red.toRadixString(16).padLeft(2, '0')}'
+        '${green.toRadixString(16).padLeft(2, '0')}'
+        '${blue.toRadixString(16).padLeft(2, '0')}';
+  }
 }

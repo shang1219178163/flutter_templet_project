@@ -20,8 +20,6 @@ class ColoredBoxDemo extends StatefulWidget {
 class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -41,17 +39,11 @@ class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
           ),
         ),
         Divider(),
-        Image.network(
-            'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-            width: 150,
-            height: 150),
+        Image.network('https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg', width: 150, height: 150),
         Divider(),
         ColoredBox(
           color: Colors.yellow,
-          child: Image.network(
-              'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-              width: 150,
-              height: 150),
+          child: Image.network('https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg', width: 150, height: 150),
         ),
         Divider(),
         Center(

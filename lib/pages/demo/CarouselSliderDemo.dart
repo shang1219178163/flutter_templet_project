@@ -7,8 +7,9 @@
 //
 
 // import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class CarouselSliderDemo extends StatelessWidget {
   const CarouselSliderDemo({Key? key}) : super(key: key);
@@ -19,22 +20,22 @@ class CarouselSliderDemo extends StatelessWidget {
       appBar: AppBar(title: Text('CarouselSliderDemo')),
       body: Column(
         children: <Widget>[
-          // carousel_slider.CarouselSlider(
-          //   options: carousel_slider.CarouselOptions(
-          //     autoPlay: true,
-          //     aspectRatio: 2.0,
-          //     enlargeCenterPage: true,
-          //     enlargeStrategy: carousel_slider.CenterPageEnlargeStrategy.height,
-          //   ),
-          //   items: imageSliders(),
-          // ),
+          CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              aspectRatio: 1.20,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+            ),
+            items: imageSliders(),
+          ),
         ],
       ),
     );
   }
 
   List<Widget> imageSliders() {
-    final List<String> imgList = [
+    final imgList = <String>[
       'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
       'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
       'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
@@ -59,7 +60,7 @@ class CarouselSliderDemo extends StatelessWidget {
                     FadeInImage(
                       image: NetworkImage(item),
                       placeholder: AssetImage('assets/images/img_placeholder.png'),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                     Positioned(
                       bottom: 0.0,

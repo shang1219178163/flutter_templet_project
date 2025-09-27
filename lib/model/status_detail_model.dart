@@ -104,7 +104,7 @@ class StatusDetailModel with SelectableMixin {
     name = (json['itemValue'] as String?);
     orderNum = (json['orderNum'] as int?);
     lockStatus = (json['lockStatus'] as String?);
-    remark = (json['remark'] as Null?);
+    remark = (json['remark'] as Null);
     scope = (json['scope'] as String?);
     isSelected = (json['isSelected']) as bool? ?? false;
   }

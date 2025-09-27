@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tween_transition.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:get/get.dart';
 
 class NTweenTransitionDemo extends StatefulWidget {
@@ -77,7 +77,7 @@ class _NTweenTransitionDemoState extends State<NTweenTransitionDemo> {
             return Container(
               width: 200,
               height: 200,
-              child: Text("${animation.value.toStringAsFixed(2)}"),
+              child: Text(animation.value.toStringAsFixed(2)),
             );
           },
         );

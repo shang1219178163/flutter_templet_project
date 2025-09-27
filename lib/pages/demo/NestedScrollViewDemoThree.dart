@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_colored_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:get/get.dart';
 
 class NestedScrollViewDemoThree extends StatefulWidget {
   const NestedScrollViewDemoThree({super.key});
@@ -61,7 +60,7 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             Color backgroudColor = Colors.blue;
-            Color labelColor = Colors.white;
+            var labelColor = Colors.white;
 
             backgroudColor = Colors.white;
             labelColor = Colors.blue;

@@ -95,9 +95,9 @@ abstract class ChemotherapyRegimenTreatmentStrategy {
     required double bsa,
   }) {
     final result = drugs.map((drug) {
-      double recommendedDosage = drug.dosagePerBSA * bsa;
+      var recommendedDosage = drug.dosagePerBSA * bsa;
       final recommendedDosageNew = double.parse(recommendedDosage.toStringAsFixed(3)); // 3位小数
-      int quantity = (recommendedDosageNew / drug.specification).ceil();
+      var quantity = (recommendedDosageNew / drug.specification).ceil();
       return drug.copyWith(
         recommendedDosage: recommendedDosageNew,
         recommendedQuantity: quantity,
@@ -134,9 +134,9 @@ class FLOFIRINOXStrategy extends ChemotherapyRegimenTreatmentStrategy {
     required double bsa,
   }) {
     final result = drugs.map((drug) {
-      double recommendedDosage = drug.dosagePerBSA * bsa;
+      var recommendedDosage = drug.dosagePerBSA * bsa;
       final recommendedDosageNew = double.parse(recommendedDosage.toStringAsFixed(3)); // 3位小数
-      int quantity = (recommendedDosageNew / drug.specification).ceil();
+      var quantity = (recommendedDosageNew / drug.specification).ceil();
       return drug.copyWith(
         recommendedDosage: recommendedDosageNew,
         recommendedQuantity: quantity,
@@ -163,9 +163,9 @@ class MFLOFIRINOXStrategy extends ChemotherapyRegimenTreatmentStrategy {
     required double bsa,
   }) {
     final result = drugs.map((drug) {
-      double recommendedDosage = drug.dosagePerBSA * bsa;
+      var recommendedDosage = drug.dosagePerBSA * bsa;
       final recommendedDosageNew = double.parse(recommendedDosage.toStringAsFixed(3)); // 3位小数
-      int quantity = (recommendedDosageNew / drug.specification).ceil();
+      var quantity = (recommendedDosageNew / drug.specification).ceil();
       return drug.copyWith(
         recommendedDosage: recommendedDosageNew,
         recommendedQuantity: quantity,

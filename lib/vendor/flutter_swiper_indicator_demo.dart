@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class FlutterSwiperIndicatorDemo extends StatefulWidget {
   const FlutterSwiperIndicatorDemo({Key? key, this.title}) : super(key: key);
@@ -10,12 +10,10 @@ class FlutterSwiperIndicatorDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _FlutterSwiperIndicatorDemoState createState() =>
-      _FlutterSwiperIndicatorDemoState();
+  _FlutterSwiperIndicatorDemoState createState() => _FlutterSwiperIndicatorDemoState();
 }
 
-class _FlutterSwiperIndicatorDemoState
-    extends State<FlutterSwiperIndicatorDemo> {
+class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo> {
   ValueNotifier<int> currentIndex = ValueNotifier(0);
 
   BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
@@ -24,8 +22,6 @@ class _FlutterSwiperIndicatorDemoState
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -84,12 +80,11 @@ class _FlutterSwiperIndicatorDemoState
                     currentIndex.value = index;
                   }),
               // if (this.items.length > 1) buildPageIndicator(),
-              if (this.items.isNotEmpty)
+              if (items.isNotEmpty)
                 PageIndicatorWidget(
                   currentPage: currentIndex,
                   itemCount: items.length,
-                  itemSize:
-                      Size(context.screenSize.width / 4 / items.length, 2),
+                  itemSize: Size(context.screenSize.width / 4 / items.length, 2),
                   // itemBuilder: (isSelected, itemSize) {
                   //   return Container(
                   //     width: itemSize.width,

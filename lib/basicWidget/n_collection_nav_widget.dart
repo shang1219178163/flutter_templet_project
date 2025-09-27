@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -36,54 +35,54 @@ class NCollectionNavWidget extends StatefulWidget {
     this.isDebug = false,
   }) : super(key: key);
 
-  String? title;
+  final String? title;
 
   /// 当前页面数据
-  List<AttrNavItem> items;
+  final List<AttrNavItem> items;
 
-  void Function(AttrNavItem e) onItem;
+  final void Function(AttrNavItem e) onItem;
 
   /// 滚动方式
-  PageViewScrollType scrollType;
+  final PageViewScrollType scrollType;
 
   ///金刚区每页行数
-  int pageRowNum;
+  final int pageRowNum;
 
   ///金刚区每页列数
-  int pageColumnNum;
+  final int pageColumnNum;
 
   /// 图标默认高度
-  double iconSize;
+  final double iconSize;
 
   /// 子项标题高度
-  double textHeight;
+  final double textHeight;
 
   /// 文字间距
-  double textGap;
+  final double textGap;
 
   /// 垂直间距
-  double columnSpacing;
+  final double columnSpacing;
 
   /// 水平间距
-  double rowSpacing;
+  final double rowSpacing;
 
   /// 是否自适应高度
-  bool autoAdjustHeight;
+  final bool autoAdjustHeight;
 
   /// 指示器高度
-  double indicatorItemHeight;
+  final double indicatorItemHeight;
 
   /// 指示器子项宽度
-  double indicatorItemWidth;
+  final double indicatorItemWidth;
 
   /// 指示器与最后一样的标题间距
-  double indicatorGap;
+  final double indicatorGap;
 
   /// 阴影
-  List<BoxShadow>? boxShadows;
+  final List<BoxShadow>? boxShadows;
 
   /// 提示模式会展示颜色
-  bool isDebug;
+  final bool isDebug;
 
   @override
   _NCollectionNavWidgetState createState() => _NCollectionNavWidgetState();

@@ -9,9 +9,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/seed_color_box.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 
@@ -110,6 +109,71 @@ class APPThemeService {
         backgroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
+    textTheme: ThemeData.dark().textTheme.apply(
+          bodyColor: Colors.black, // 普通文字颜色
+          displayColor: Colors.black, // 标题文字颜色
+        ),
+    // textTheme: const TextTheme(
+    //   displayLarge: TextStyle(color: Colors.black, fontSize: 96.0, fontWeight: FontWeight.w300),
+    //   displayMedium: TextStyle(color: Colors.black, fontSize: 60.0, fontWeight: FontWeight.w300),
+    //   displaySmall: TextStyle(color: Colors.black, fontSize: 48.0, fontWeight: FontWeight.w400),
+    //   headlineMedium: TextStyle(color: Colors.black, fontSize: 34.0, fontWeight: FontWeight.w400),
+    //   headlineSmall: TextStyle(color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.w400),
+    //   titleLarge: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w500),
+    //   titleMedium: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
+    //   titleSmall: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
+    //   bodyLarge: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
+    //   bodyMedium: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w400),
+    //   bodySmall: TextStyle(color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w400),
+    //   labelLarge: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
+    //   labelSmall: TextStyle(color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.w400),
+    // ),
+    dialogBackgroundColor: Colors.white,
+    dialogTheme: DialogTheme(
+      backgroundColor: Colors.white,
+      // shadowColor: AppColors.color_242434,
+      // elevation: 8,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      alignment: Alignment.center,
+      titleTextStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF313135),
+      ),
+      contentTextStyle: const TextStyle(
+        fontSize: 14,
+        color: Color(0xFF313135),
+      ),
+      iconColor: Color(0xFF313135),
+      actionsPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Color(0xFFE3F2FD),
+      elevation: 8,
+      modalBackgroundColor: Colors.white,
+      modalElevation: 12,
+      shadowColor: Colors.black.withOpacity(0.2),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      showDragHandle: true,
+      dragHandleColor: Colors.blue,
+      dragHandleSize: const Size(40, 6),
+      clipBehavior: Clip.antiAlias,
+      constraints: const BoxConstraints(
+        minHeight: 100,
+        maxHeight: 400,
+        minWidth: double.infinity,
+      ),
+    ),
+    sliderTheme: const SliderThemeData(
+      activeTrackColor: Colors.blue,
+      thumbColor: Colors.blue,
+      overlayColor: Colors.grey,
+    ),
     extensions: appThemeDataExtensions(),
   );
 
@@ -160,6 +224,46 @@ class APPThemeService {
     chipTheme: ChipThemeData(
       pressElevation: 0, //不明原因未生效
       showCheckmark: false,
+    ),
+    dialogBackgroundColor: Color(0xFF242434),
+    dialogTheme: DialogTheme(
+      backgroundColor: Color(0xFF242434),
+      // elevation: 8,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      alignment: Alignment.center,
+      titleTextStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+      contentTextStyle: const TextStyle(
+        fontSize: 14,
+        color: Colors.white,
+      ),
+      iconColor: Colors.white,
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Color(0xFF212121),
+      surfaceTintColor: Color(0xFF424242),
+      modalBackgroundColor: Color(0xFF212121),
+      shadowColor: Colors.black.withOpacity(0.7),
+      elevation: 8,
+      modalElevation: 12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      showDragHandle: true,
+      dragHandleColor: Colors.tealAccent,
+      dragHandleSize: const Size(40, 6),
+      clipBehavior: Clip.antiAlias,
+      constraints: const BoxConstraints(
+        minHeight: 100,
+        maxHeight: 400,
+        minWidth: double.infinity,
+      ),
     ),
   );
 
@@ -213,8 +317,8 @@ class APPThemeService {
 
   /// 自定义行为
   ButtonStyle buildButtonStyle() {
-    return ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
-      if (states.contains(MaterialState.pressed)) {
+    return ButtonStyle(elevation: WidgetStateProperty.resolveWith<double>((states) {
+      if (states.contains(WidgetState.pressed)) {
         return 0; // 点击时阴影隐藏
       }
       return 0; // 正常时阴影隐藏
@@ -223,64 +327,65 @@ class APPThemeService {
 
   late ScrollController? actionScrollController = ScrollController();
 
-  void showThemePicker({
+  /// 选择主题
+  void showSeedColorPicker({
     required BuildContext context,
-    required void Function() cb,
+    ValueChanged<Color>? onColorChanged,
+    ValueChanged<Brightness>? onBrightnessChanged,
+    bool dismiss = true,
   }) {
-    showCupertinoModalPopup(
+    final colors = [
+      Colors.blue,
+      Colors.red,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.pink,
+      Colors.teal,
+      Colors.indigo,
+      Colors.cyan,
+      Colors.deepPurple,
+      Colors.lime,
+      Colors.amber,
+    ];
+    showModalBottomSheet(
       context: context,
-      builder: (context) => CupertinoActionSheet(
-        actionScrollController: actionScrollController,
-        title: const Text("请选择主题色"),
-        // message: Text(message),
-        actions: _buildActions(context: context, cb: cb),
-        cancelButton: CupertinoActionSheetAction(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('取消'),
-        ),
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        minHeight: 200,
+        maxHeight: 500,
       ),
-    );
-  }
-
-  _buildActions({
-    required BuildContext context,
-    required void Function() cb,
-  }) {
-    return colors.map((e) {
-      final text = e
-          .toString()
-          .replaceAll('MaterialColor(primary value:', '')
-          .replaceAll('MaterialAccentColor(primary value:', '')
-          .replaceAll('))', ')');
-
-      return Container(
-        color: e,
-        child: Column(
-          children: [
-            const SizedBox(height: 18),
-            GestureDetector(
-              onTap: () {
-                changeThemeLight(e);
-                Navigator.pop(context);
-                cb();
-              },
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  backgroundColor: e,
-                  decoration: TextDecoration.none,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Column(
+              children: [
+                SeedColorBox(
+                  colorOptions: colors,
+                  onColorChanged: (v) {
+                    if (dismiss) {
+                      Navigator.of(context).pop();
+                    }
+                    onColorChanged?.call(v);
+                    changeThemeLight(v);
+                  },
+                  brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
+                  onBrightnessChanged: (v) {
+                    if (dismiss) {
+                      Navigator.of(context).pop();
+                    }
+                    onBrightnessChanged?.call(v);
+                    changeTheme();
+                  },
                 ),
-              ),
+                SizedBox(height: 20),
+              ],
             ),
-            const SizedBox(height: 18),
-          ],
-        ),
-      );
-    }).toList();
+          ),
+        );
+      },
+    );
   }
 
   void changeTheme() {
@@ -307,24 +412,24 @@ class APPThemeService {
           ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(e),
+          foregroundColor: WidgetStateProperty.all(e),
           // textStyle: MaterialStateProperty.all(TextStyle(color: Colors.red)),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(e),
+          backgroundColor: WidgetStateProperty.all(e),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(e),
+          foregroundColor: WidgetStateProperty.all(e),
           // textStyle: MaterialStateProperty.all(TextStyle(color: e)),
         ),
       ),
       switchTheme: ThemeData.light().switchTheme.copyWith(
             // thumbColor: e,
-            trackColor: MaterialStateProperty.all(e),
+            trackColor: WidgetStateProperty.all(e),
           ),
       bottomNavigationBarTheme: ThemeData.light().bottomNavigationBarTheme.copyWith(
             type: BottomNavigationBarType.fixed,
@@ -344,11 +449,6 @@ class APPThemeService {
     );
     Get.changeTheme(themeData);
   }
-
-  final List<Color> colors = [
-    ...Colors.primaries,
-    ...Colors.accents,
-  ];
 
   buildMaterial3Theme() {
     final color = Colors.blue;
@@ -394,6 +494,82 @@ class APPThemeService {
       ),
     );
   }
+
+  final inputDecorationThemeDark = InputDecorationTheme(
+    isCollapsed: true,
+    contentPadding: const EdgeInsets.symmetric(vertical: 11),
+    filled: true,
+    fillColor: Colors.white.withOpacity(0.05),
+    hintStyle: TextStyle(
+      fontSize: 14,
+      color: Colors.white.withOpacity(0.4),
+      fontWeight: FontWeight.w400,
+    ),
+    labelStyle: TextStyle(
+      fontSize: 14,
+      color: Colors.red.withOpacity(0.9),
+      fontWeight: FontWeight.w400,
+    ),
+    prefixIconColor: Color(0xFF7C7C85),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: const Color(0xFFA79AF8).withOpacity(0.1),
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: const Color(0xFFA79AF8).withOpacity(0.1),
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: const Color(0xFFA79AF8).withOpacity(0.1),
+      ),
+    ),
+  );
+
+  final inputDecorationThemeLight = InputDecorationTheme(
+    isCollapsed: true,
+    contentPadding: const EdgeInsets.symmetric(vertical: 11),
+    filled: true,
+    fillColor: Colors.white,
+    hintStyle: const TextStyle(
+      fontSize: 14,
+      color: Color(0xFFA7A7AE),
+      fontWeight: FontWeight.w400,
+    ),
+    labelStyle: const TextStyle(
+      fontSize: 14,
+      color: Colors.red,
+      fontWeight: FontWeight.w400,
+    ),
+    floatingLabelStyle: TextStyle(color: Colors.red, fontSize: 12),
+    prefixIconColor: Color(0xFF7C7C85),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: Colors.white,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(width: 1, color: Colors.white),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: Colors.white,
+      ),
+    ),
+  );
 }
 
 /// App 自定义主题
@@ -480,20 +656,20 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
 
   @override
   ThemeExtension<NAppTheme> lerp(
-    covariant NAppTheme other,
+    covariant NAppTheme? other,
     double t,
   ) =>
       NAppTheme(
-        primary: Color.lerp(primary, other.primary, t) ?? primary,
-        primary2: Color.lerp(primary2, other.primary2, t) ?? primary2,
-        bgColor: Color.lerp(bgColor, other.bgColor, t) ?? bgColor,
-        fontColor: Color.lerp(fontColor, other.fontColor, t) ?? fontColor,
-        titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t) ?? titleStyle,
-        textStyle: TextStyle.lerp(textStyle, other.textStyle, t) ?? textStyle,
-        cancelColor: Color.lerp(cancelColor, other.cancelColor, t) ?? cancelColor,
-        lineColor: Color.lerp(lineColor, other.lineColor, t) ?? lineColor,
-        borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
-        disabledColor: Color.lerp(disabledColor, other.disabledColor, t) ?? disabledColor,
+        primary: Color.lerp(primary, other?.primary, t) ?? primary,
+        primary2: Color.lerp(primary2, other?.primary2, t) ?? primary2,
+        bgColor: Color.lerp(bgColor, other?.bgColor, t) ?? bgColor,
+        fontColor: Color.lerp(fontColor, other?.fontColor, t) ?? fontColor,
+        titleStyle: TextStyle.lerp(titleStyle, other?.titleStyle, t) ?? titleStyle,
+        textStyle: TextStyle.lerp(textStyle, other?.textStyle, t) ?? textStyle,
+        cancelColor: Color.lerp(cancelColor, other?.cancelColor, t) ?? cancelColor,
+        lineColor: Color.lerp(lineColor, other?.lineColor, t) ?? lineColor,
+        borderColor: Color.lerp(borderColor, other?.borderColor, t) ?? borderColor,
+        disabledColor: Color.lerp(disabledColor, other?.disabledColor, t) ?? disabledColor,
       );
 }
 

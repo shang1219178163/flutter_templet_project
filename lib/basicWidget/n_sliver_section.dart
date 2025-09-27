@@ -6,7 +6,6 @@
 //  Copyright © 2024/7/8 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 

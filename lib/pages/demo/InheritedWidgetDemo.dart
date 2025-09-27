@@ -6,7 +6,6 @@
 //  Copyright © 12/15/22 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShareDataWidget extends InheritedWidget {

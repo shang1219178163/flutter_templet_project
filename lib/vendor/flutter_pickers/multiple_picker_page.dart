@@ -160,7 +160,7 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
   }
 
   void _onClickItem() {
-    double menuHeight = 36.0;
+    var menuHeight = 36.0;
     Widget _headMenuView = Container(
         color: Colors.grey[50],
         height: menuHeight,
@@ -186,7 +186,7 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
   }
 
   void _onClickItem2() {
-    double menuHeight = 36.0;
+    var menuHeight = 36.0;
     Widget _headMenuView = Container(
         color: Colors.grey[50],
         height: menuHeight,
@@ -226,7 +226,7 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
   }
 
   void _onClickItem4() {
-    double menuHeight = 36.0;
+    var menuHeight = 36.0;
     Widget _headMenuView = Container(
         color: Colors.grey[700],
         height: menuHeight,

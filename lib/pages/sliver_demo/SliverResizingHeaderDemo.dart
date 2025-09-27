@@ -48,8 +48,8 @@ class ResizingHeaderDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     // 根据 shrinkOffset 动态调整标题内容大小
-    double sizeFactor = 1 - (shrinkOffset / (maxExtent - minExtent));
-    double titleSize = 30 * sizeFactor; // 标题文字的动态大小
+    var sizeFactor = 1 - (shrinkOffset / (maxExtent - minExtent));
+    var titleSize = 30 * sizeFactor; // 标题文字的动态大小
 
     return Stack(
       fit: StackFit.expand,

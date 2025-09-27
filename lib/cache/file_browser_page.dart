@@ -49,7 +49,7 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
   }
 
   Future<void> _loadInitialDirectory() async {
-    Directory directory = widget.directory ?? await getApplicationDocumentsDirectory();
+    var directory = widget.directory ?? await getApplicationDocumentsDirectory();
     currentDirectory = directory;
     files = currentDirectory!.listSync();
     setState(() {});
@@ -96,7 +96,7 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
       child: ListView.separated(
         itemCount: files.length,
         itemBuilder: (context, index) {
-          FileSystemEntity entity = files[index];
+          var entity = files[index];
           final isDir = entity is Directory;
 
           final statSync = entity.statSync();

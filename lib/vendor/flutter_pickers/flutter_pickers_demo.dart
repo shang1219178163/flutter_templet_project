@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pickers/pickers.dart';
-import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/vendor/flutter_pickers/address_picker_page.dart';

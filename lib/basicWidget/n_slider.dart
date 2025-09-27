@@ -34,40 +34,40 @@ class NSlider extends StatefulWidget {
     this.autofocus = false,
   }) : super(key: key);
 
-  String? title;
-  Widget? leading;
+  final String? title;
+  final Widget? leading;
 
-  ValueWidgetBuilder<double>? trailingBuilder;
+  final ValueWidgetBuilder<double>? trailingBuilder;
 
-  ValueChanged<double>? onChanged;
+  final ValueChanged<double>? onChanged;
 
-  ValueChanged<double>? onChangeStart;
+  final ValueChanged<double>? onChangeStart;
 
-  ValueChanged<double>? onChangeEnd;
+  final ValueChanged<double>? onChangeEnd;
 
-  double? value;
+  final double? value;
 
-  double min;
+  final double min;
 
-  double max;
+  final double max;
 
-  int? divisions;
+  final int? divisions;
 
-  String? label;
+  final String? label;
 
-  Color? activeColor;
+  final Color? activeColor;
 
-  Color? inactiveColor;
+  final Color? inactiveColor;
 
-  Color? thumbColor;
+  final Color? thumbColor;
 
-  MouseCursor? mouseCursor;
+  final MouseCursor? mouseCursor;
 
-  SemanticFormatterCallback? semanticFormatterCallback;
+  final SemanticFormatterCallback? semanticFormatterCallback;
 
-  FocusNode? focusNode;
+  final FocusNode? focusNode;
 
-  bool autofocus;
+  final bool autofocus;
 
   @override
   _NSliderState createState() => _NSliderState();
@@ -81,6 +81,14 @@ class _NSliderState extends State<NSlider> {
     // TODO: implement initState
     sliderVN.value = widget.value ?? 0;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant NSlider oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    sliderVN.value = widget.value ?? 0;
+    setState(() {});
   }
 
   @override
@@ -120,9 +128,7 @@ class _NSliderState extends State<NSlider> {
         ValueListenableBuilder<double>(
             valueListenable: sliderVN,
             builder: (context, value, child) {
-              final result = widget.max > 1
-                  ? value.toStringAsFixed(0)
-                  : value.toStringAsFixed(2);
+              final result = widget.max > 1 ? value.toStringAsFixed(0) : value.toStringAsFixed(2);
               return widget.trailingBuilder?.call(context, value) ??
                   TextButton(
                     onPressed: () {

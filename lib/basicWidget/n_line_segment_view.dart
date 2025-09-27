@@ -6,12 +6,9 @@
 //  Copyright © 6/14/21 shang. All rights reserved.
 //
 
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 
 enum NLineSegmentStyle {
   top,

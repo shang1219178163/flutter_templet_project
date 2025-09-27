@@ -6,7 +6,6 @@
 //  Copyright © 6/3/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class APPForgetPwdPage extends StatefulWidget {
@@ -24,9 +23,10 @@ class _APPForgetPwdPageState extends State<APPForgetPwdPage> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 }

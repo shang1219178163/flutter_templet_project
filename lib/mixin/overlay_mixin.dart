@@ -88,7 +88,7 @@ mixin OverlayMixin<T extends StatefulWidget> on State<T> {
       content = Stack(
         children: [
           Material(
-            color: barrierColor ?? Colors.black.withOpacity(0.1),
+            color: barrierColor,
             child: InkWell(
               onTap: onBarrier,
               child: Container(

@@ -65,10 +65,10 @@ class NTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final content = NPair(
-      child: text,
       icon: icon,
       direction: direction,
       isReverse: isReverse,
+      child: text,
     );
 
     return InkWell(

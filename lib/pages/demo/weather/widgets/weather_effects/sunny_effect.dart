@@ -59,7 +59,7 @@ class SunPainter extends CustomPainter {
     final radius = size.width * 0.2;
 
     // 绘制太阳光晕
-    for (int i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       final glowRadius = radius + (i * radius * 0.5);
       final paint = Paint()
         ..color = Colors.yellow.withOpacity(0.3 - (i * 0.1))
@@ -85,7 +85,7 @@ class SunPainter extends CustomPainter {
     final rayCount = 12;
     final angle = 2 * pi / rayCount;
 
-    for (int i = 0; i < rayCount; i++) {
+    for (var i = 0; i < rayCount; i++) {
       final rotation = angle * i + (animationValue * pi);
       final rayLength =
           radius * 0.7 * (0.8 + 0.2 * sin(animationValue * 2 * pi + i));

@@ -151,7 +151,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
 
   void updateIndicatorLongPress(LongPressMoveUpdateDetails details) {
     indicatorOffset = details.localPosition;
-    _overlayEntry?.markNeedsBuild();
+    _overlayEntry.markNeedsBuild();
   }
 
   OverlayEntry _createOverlayEntry(

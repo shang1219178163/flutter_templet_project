@@ -23,7 +23,7 @@ class ValidateInterceptor extends QueuedInterceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final requestURI = options.path;
     if (options.path.endsWith("/") || requestURI.endsWith("undefined")) {
-      debugPrint("❌ 无效请求: ${requestURI}");
+      debugPrint("❌ 无效请求: $requestURI");
       handler.resolve(Response(
         requestOptions: options,
         data: {

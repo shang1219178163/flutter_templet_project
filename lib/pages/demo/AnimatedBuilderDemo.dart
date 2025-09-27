@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/tween_animated_widget.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class AnimatedBuilderDemo extends StatefulWidget {

@@ -34,7 +34,7 @@ class PermissionUtil {
       return true;
     }
 
-    Map<Permission, PermissionStatus> statusMap = await [
+    var statusMap = await [
       permission,
     ].request();
 

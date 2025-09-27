@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
@@ -92,11 +92,11 @@ static const String patientGroupPage = '/patientGroupPage';
               ]
                   .map(
                     (e) => TextButton(
+                      onPressed: onCreate,
                       child: Text(
                         e,
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: onCreate,
                     ),
                   )
                   .toList(),
@@ -146,7 +146,7 @@ static const String patientGroupPage = '/patientGroupPage';
       final name = list[1].trim();
       // DLog.d("name: $name");
       final result = "GetPage(name: APPRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
-      DLog.d("$result");
+      DLog.d(result);
       return result;
     }).toList();
     // DLog.d("list: \n$list");

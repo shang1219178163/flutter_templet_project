@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/editable_text_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
 
 /// 封装输入框组件
 class NTextView extends StatefulWidget {

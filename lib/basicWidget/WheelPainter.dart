@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ///绘制自定义view，其中画笔 paint ，画布 canvas，而 CustomPainter 负责具体的绘制逻辑处理

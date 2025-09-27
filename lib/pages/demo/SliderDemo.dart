@@ -6,10 +6,8 @@
 //  Copyright © 6/5/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/provider/notifier_demo.dart';
 
 /// This is the main application widget.
 class SliderDemo extends StatefulWidget {

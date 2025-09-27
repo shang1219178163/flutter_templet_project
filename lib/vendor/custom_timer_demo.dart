@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:custom_timer/custom_timer.dart';
+import 'package:flutter/material.dart';
 
 class CustomTimerDemo extends StatefulWidget {
   final String? title;
@@ -42,7 +42,7 @@ class _CustomTimerDemoState extends State<CustomTimerDemo>
                   // Build the widget you want!
                   return Column(
                     children: [
-                      Text("${state.name}", style: TextStyle(fontSize: 24.0)),
+                      Text(state.name, style: TextStyle(fontSize: 24.0)),
                       Text(
                           "${remaining.hours}:${remaining.minutes}:${remaining.seconds}.${remaining.milliseconds}",
                           style: TextStyle(fontSize: 24.0))
@@ -136,7 +136,6 @@ class RoundedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(text, style: TextStyle(color: Colors.white)),
       style: TextButton.styleFrom(
         backgroundColor: color,
         padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -144,6 +143,7 @@ class RoundedButton extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       ),
       onPressed: onPressed,
+      child: Text(text, style: TextStyle(color: Colors.white)),
     );
   }
 }

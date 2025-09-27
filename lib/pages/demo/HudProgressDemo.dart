@@ -7,9 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/basicWidget/hud/ToastDialog.dart';
 import 'package:flutter_templet_project/basicWidget/hud/CirclePulseLoadingWidget.dart';
+import 'package:flutter_templet_project/basicWidget/hud/ToastDialog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class HudProgressDemo extends StatelessWidget {
   var titles = List.generate(10, (index) => "item$index");
@@ -23,8 +23,6 @@ class HudProgressDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(title ?? "$this"),

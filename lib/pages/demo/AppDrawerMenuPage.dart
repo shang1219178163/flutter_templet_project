@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/route_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/cell_model.dart';
@@ -12,7 +10,6 @@ import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
 class AppDrawerMenuPage extends StatefulWidget {
   const AppDrawerMenuPage({Key? key, this.title}) : super(key: key);
@@ -183,30 +180,23 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(
-                  Icons.change_circle_outlined,
-                ),
-                SizedBox(
-                  width: 3,
-                ),
-                Text(
-                  themeTitle,
-                ),
+                Icon(Icons.change_circle_outlined),
+                SizedBox(width: 3),
+                Text(themeTitle),
               ],
             ),
           ),
           TextButton.icon(
-              onPressed: () {
-                APPThemeService().showThemePicker(
-                    context: context,
-                    cb: () {
-                      Navigator.of(context).pop();
-                    });
-              },
-              icon: Icon(Icons.color_lens),
-              label: Text(
-                "Light主题切换",
-              )),
+            onPressed: () {
+              APPThemeService().showSeedColorPicker(
+                context: context,
+              );
+            },
+            icon: Icon(Icons.color_lens),
+            label: Text(
+              "Light主题切换",
+            ),
+          ),
         ],
       ),
     ];

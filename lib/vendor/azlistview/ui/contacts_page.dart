@@ -1,7 +1,7 @@
 import 'package:azlistview/azlistview.dart';
-import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({Key? key}) : super(key: key);
@@ -52,10 +52,12 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 
   void _handleList(List<ContactInfo> list) {
-    if (list.isEmpty) return;
-    for (int i = 0, length = list.length; i < length; i++) {
-      String pinyin = PinyinHelper.getPinyinE(list[i].name);
-      String tag = pinyin.substring(0, 1).toUpperCase();
+    if (list.isEmpty) {
+      return;
+    }
+    for (var i = 0, length = list.length; i < length; i++) {
+      var pinyin = PinyinHelper.getPinyinE(list[i].name);
+      var tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;
       if (RegExp("[A-Z]").hasMatch(tag)) {
         list[i].tagIndex = tag;
@@ -90,7 +92,7 @@ class _ContactsPageState extends State<ContactsPage> {
         data: contactList,
         itemCount: contactList.length,
         itemBuilder: (BuildContext context, int index) {
-          ContactInfo model = contactList[index];
+          var model = contactList[index];
           return Utils.getWeChatListItem(
             context,
             model,
@@ -99,7 +101,7 @@ class _ContactsPageState extends State<ContactsPage> {
         },
         physics: BouncingScrollPhysics(),
         susItemBuilder: (BuildContext context, int index) {
-          ContactInfo model = contactList[index];
+          var model = contactList[index];
           if ('↑' == model.getSuspensionTag()) {
             return Container();
           }

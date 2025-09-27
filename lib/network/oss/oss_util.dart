@@ -10,10 +10,9 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/network/oss/oss_auth_api.dart';
 import 'package:flutter_templet_project/network/oss/oss_auth_model.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
@@ -51,10 +50,10 @@ class OssUtil {
     /// 阿里云oss路径
     final url = 'https://${ossModel.bucket}.oss-cn-beijing.aliyuncs.com';
 
-    File file = File(filePath);
+    var file = File(filePath);
 
     /// 用 package:path/path.dart 库获取图片名称
-    String fileName = basename(file.path);
+    var fileName = basename(file.path);
 
     /// 让阿里云创建一个flutter的文件夹
     fileName = '${ossModel.basePath}/$fileName';
@@ -79,7 +78,7 @@ class OssUtil {
     });
 
     try {
-      Dio dio = Dio();
+      var dio = Dio();
       dio.options.responseType = ResponseType.plain;
 
       ///通过FormData上传文件
@@ -113,10 +112,10 @@ class OssUtil {
     final policyUtf8 = utf8.encode(policy);
 
     //通过hmac,使用sha1进行加密
-    List<int> signaturePre = Hmac(sha1, secretUtf8).convert(policyUtf8).bytes;
+    var signaturePre = Hmac(sha1, secretUtf8).convert(policyUtf8).bytes;
 
     //最后一步，将上述所得进行base64 编码
-    String signature = base64.encode(signaturePre);
+    var signature = base64.encode(signaturePre);
 
     return signature;
   }

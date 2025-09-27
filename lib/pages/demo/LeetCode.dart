@@ -13,23 +13,23 @@ class _LeetCodeState extends State<LeetCode> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    onPressed: () => debugPrint(e.toString()),
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ))
-              .toList(),
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e.toString()),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 
   /// 寻找数组的中心索引

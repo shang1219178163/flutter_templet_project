@@ -1,19 +1,14 @@
 import 'dart:async';
 import 'dart:ffi';
-import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_button.dart';
-import 'package:flutter_templet_project/basicWidget/upload/asset_upload_config.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
-import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
@@ -186,7 +181,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
                           // debugPrint("isAllFinsied: ${isAllFinsied}");
                           if (isAllFinished) {
                             final urls = items.map((e) => e.url).toList();
-                            debugPrint("isAllFinsied urls: ${urls}");
+                            debugPrint("isAllFinsied urls: $urls");
                             widget.onChanged(items);
                             isAllUploadFinished.value = true;
                           }
@@ -245,7 +240,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     // required Function(int length, String result) cb,
   }) async {
     try {
-      bool isGranted = await PermissionUtil.checkPhotoAlbum();
+      var isGranted = await PermissionUtil.checkPhotoAlbum();
       if (!isGranted) {
         debugPrint("授权失败");
         return;
@@ -395,7 +390,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
         imageFile.path,
         title: 'image_${DateTime.now().millisecond}',
       );
-      if (imageEntity != null && !selectedEntities.contains(imageEntity)) {
+      if (!selectedEntities.contains(imageEntity)) {
         selectedModels.add(AssetUploadModel(entity: imageEntity));
       }
       setState(() {});

@@ -1,11 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class TestPageOne extends StatefulWidget {
   const TestPageOne({Key? key, this.title}) : super(key: key);
@@ -19,7 +16,6 @@ class TestPageOne extends StatefulWidget {
 class _TestPageOneState extends State<TestPageOne> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     debugPrint("$this, build");
 
     return Scaffold(
@@ -105,7 +101,7 @@ class _TestPageOneState extends State<TestPageOne> {
 
     final has = tmpNew.startsWith('\\');
     DLog.d("tmp: $tmp");
-    DLog.d("tmp1: ${tmpNew},${has}");
+    DLog.d("tmp1: $tmpNew,$has");
   }
 
   int searchInsert(List<int> nums, int target) {
@@ -144,21 +140,22 @@ class BState extends State {
     debugPrint("$this, build");
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("$this"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    onPressed: () => debugPrint("$e"),
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ))
-              .toList(),
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text("$this"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 
   /// AState调用[AState.reload]后，[AState.didUpdateWidget]不会调用, [BState.didUpdateWidget]会调用

@@ -6,7 +6,8 @@
 //  Copyright © 2024/6/30 shang. All rights reserved.
 //
 
-import 'dart:io';
+
+// ignore_for_file: use_setters_to_change_properties
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_button.dart';
@@ -223,7 +224,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
     int maxMB = 28,
   }) async {
     try {
-      List<File> files = await onPickerFiles(maxMB: maxMB);
+      var files = await onPickerFiles(maxMB: maxMB);
       // for (final file in files) {
       //   if (file.lengthSync() >= maxMB * 1024 * 1024) {
       //     ToastUtil.show("单个文件大小不得超出${maxMB}M");

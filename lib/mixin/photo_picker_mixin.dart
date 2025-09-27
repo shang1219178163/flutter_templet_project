@@ -11,7 +11,9 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
 mixin PhotoPickerMixin<T extends StatefulWidget> on State<T> {
+  /// 选择图片
   Future<List<AssetEntity>?> onPicker({
+    RequestType requestType = RequestType.image,
     int maxCount = 1,
     List<AssetEntity> selectedEntitys = const [],
     bool canTakePhoto = true,
@@ -20,8 +22,8 @@ mixin PhotoPickerMixin<T extends StatefulWidget> on State<T> {
       final result = await AssetPicker.pickAssets(
         context,
         pickerConfig: AssetPickerConfig(
-          requestType: RequestType.image,
-          specialPickerType: SpecialPickerType.noPreview,
+          requestType: requestType,
+          // specialPickerType: SpecialPickerType.noPreview,
           selectedAssets: selectedEntitys,
           maxAssets: maxCount,
           // specialItemPosition: SpecialItemPosition.prepend,

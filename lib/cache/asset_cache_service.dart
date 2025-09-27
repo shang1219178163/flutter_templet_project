@@ -42,8 +42,8 @@ class AssetCacheService {
     }
 
     if (file is Directory && file.existsSync()) {
-      final List<FileSystemEntity> children = file.listSync();
-      for (final FileSystemEntity child in children) {
+      final children = file.listSync();
+      for (final child in children) {
         await deleteDirectory(child);
       }
     }
@@ -85,7 +85,7 @@ class AssetCacheService {
 
     // 从网络或资源加载图片
     final uri = Uri.parse(url);
-    final ByteData data = await NetworkAssetBundle(uri).load(fileName);
+    final data = await NetworkAssetBundle(uri).load(fileName);
     final bytes = data.buffer.asUint8List();
 
     Directory? assetDir = await AssetCacheService().getDir();

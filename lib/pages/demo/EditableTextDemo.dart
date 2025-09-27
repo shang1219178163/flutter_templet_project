@@ -31,6 +31,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                   ))
               .toList(),
         ),
-        body: Text(arguments.toString()));
+        body: Text(arguments.toString()),
+      );
   }
 }

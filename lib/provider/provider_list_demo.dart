@@ -7,12 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
-
 import 'package:flutter_templet_project/model/order_model.dart';
-import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 
 class ProviderListDemo extends StatefulWidget {
@@ -256,7 +253,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
       case "changeNotifierOrderModels":
         {
-          final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
+          final e = OrderModel(name: '商品', id: 99, price: 1.00);
           if (value > 0) {
             cartModel.add(e);
           } else {
@@ -270,7 +267,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
       case "cartModelNew":
         {
-          final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
+          final e = OrderModel(name: '商品', id: 99, price: 1.00);
           if (value > 0) {
             cartModelNew.add(e);
           } else {
@@ -285,7 +282,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
         break;
       case "valueNotifierOrderModels":
         {
-          final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
+          final e = OrderModel(name: '商品', id: 99, price: 1.00);
           if (value > 0) {
             orderModels.add(e);
           } else {
@@ -298,7 +295,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
         break;
       case "valueNotifierList":
         {
-          final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
+          final e = OrderModel(name: '商品', id: 99, price: 1.00);
           if (value > 0) {
             valueNotifierList.add(e);
           } else {
@@ -321,7 +318,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
       case "valueNotifierListOrigin":
         {
-          final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
+          final e = OrderModel(name: '商品', id: 99, price: 1.00);
           if (value > 0) {
             valueNotifierListOrigin.value.add(e);
           } else {
@@ -342,7 +339,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
   }
 
   void updateChangeNotifier({required CartModel model, required int value}) {
-    final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
+    final e = OrderModel(name: '商品', id: 99, price: 1.00);
     if (value > 0) {
       model.add(e);
     } else {

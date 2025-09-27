@@ -1,25 +1,10 @@
 import 'dart:io';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:json_to_dart/model_generator.dart';
-
-import 'package:path_provider/path_provider.dart';
-
-import 'package:get/get.dart';
-
-import 'dart:io';
-import 'package:json_to_dart/model_generator.dart';
-import "package:path/path.dart" show dirname, join, normalize;
 
 class APIConvertPage extends StatefulWidget {
   APIConvertPage({Key? key, this.title}) : super(key: key);
@@ -451,7 +436,7 @@ class TagGetApi extends BaseRequestAPI{
       content += "\n}";
       // debugPrint("str: \n$content");
 
-      var contentNew = "$content";
+      var contentNew = content;
 
       final originNew = r'EasyToast.*';
       final regNew = RegExp(originNew, multiLine: true).allMatches(text);
@@ -494,7 +479,7 @@ class TagGetApi extends BaseRequestAPI{
         bool get useNewValidateParams => true;
         /// 参数校验
         @override
-        ${contentNew}
+        $contentNew
       """;
       await Clipboard.setData(ClipboardData(text: outVN.value));
     } catch (e) {

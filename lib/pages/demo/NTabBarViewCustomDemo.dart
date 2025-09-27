@@ -7,11 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_page_custom.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class NTabBarViewCustomDemo extends StatefulWidget {
   NTabBarViewCustomDemo({super.key, this.title});

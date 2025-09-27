@@ -110,8 +110,8 @@ class _NScanPhotoState extends State<NScanPhoto>
     //创建AnimationController
     _controller = AnimationController(
       vsync: this,
-      duration: widget.duration ?? const Duration(seconds: 3),
-      reverseDuration: widget.duration ?? const Duration(seconds: 3),
+      duration: widget.duration,
+      reverseDuration: widget.duration,
     );
 
     //Tween

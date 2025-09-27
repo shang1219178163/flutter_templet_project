@@ -10,8 +10,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 /// Ocr 识别

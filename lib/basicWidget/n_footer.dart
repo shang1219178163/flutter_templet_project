@@ -68,7 +68,7 @@ class NFooter extends StatelessWidget {
             elevation: btnElevation,
             onPressed: onPressed ??
                 () {
-                  debugPrint("$title");
+                  debugPrint(title);
                 },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(radius)),

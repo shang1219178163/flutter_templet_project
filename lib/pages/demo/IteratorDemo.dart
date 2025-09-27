@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:get/get.dart';
 
 /// 生成器测试
@@ -36,10 +36,10 @@ class _IteratorDemoState extends State<IteratorDemo> {
 
   final message = """
 1. yield 和 yield* 就像 return，但它们不会结束函数；
-2.yield 和 yield* 只能在 async* 或 sync* 生成器函数中使用；
-3. yield 和 yield* 在 async* 中使用时，返回Stream；
-4.yield 和 yield* 在 sync* 中使用时，返回 Iterable；
-5.yield 用于生成值，而 yield* 用于把当前生成器函数的流程委托给另一个生成器函数。
+2. yield 和 yield* 只能在 async* 或 sync* 生成器函数中使用；
+3. yield 和 yield* 在 async* 中使用时，返回 Stream；
+4. yield 和 yield* 在 sync* 中使用时，返回 Iterable；
+5. yield 用于生成值，而 yield* 用于把当前生成器函数的流程委托给另一个生成器函数。
   """;
 
   @override
@@ -91,13 +91,13 @@ class _IteratorDemoState extends State<IteratorDemo> {
   }
 
   Stream<String> fetchEmojis(int count) async* {
-    for (int i = 0; i < count; i++) {
+    for (var i = 0; i < count; i++) {
       yield await fetchEmoji(i);
     }
   }
 
   Future<String> fetchEmoji(int count) async {
-    Runes first = Runes('\u{1f47f}');
+    var first = Runes('\u{1f47f}');
     DLog.d('加载开始--${DateTime.now().toIso8601String()}');
     await Future.delayed(Duration(milliseconds: 500)); //模拟耗时
     DLog.d('加载结束--${DateTime.now().toIso8601String()}');
@@ -105,8 +105,8 @@ class _IteratorDemoState extends State<IteratorDemo> {
   }
 
   Iterable<String> fetchEmojisNew(int count) sync* {
-    Runes first = Runes('\u{1f47f}');
-    for (int i = 0; i < count; i++) {
+    var first = Runes('\u{1f47f}');
+    for (var i = 0; i < count; i++) {
       yield String.fromCharCodes(first.map((e) => e + i));
     }
   }

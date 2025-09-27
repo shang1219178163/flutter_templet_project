@@ -43,7 +43,7 @@ class _FoggyEffectState extends State<FoggyEffect>
 
   void _createLayeredFogClouds(
       int count, double minOpacity, double maxOpacity, double maxSpeed) {
-    for (int i = 0; i < count; i++) {
+    for (var i = 0; i < count; i++) {
       final size = 150.0 + random.nextDouble() * 300;
 
       _fogClouds.add(
@@ -77,7 +77,7 @@ class _FoggyEffectState extends State<FoggyEffect>
         final animationValue = _controller.value;
 
         // 更新雾气位置 - 使用正弦曲线使移动更加平滑自然
-        for (var cloud in _fogClouds) {
+        for (final cloud in _fogClouds) {
           // 水平移动
           cloud.x += cloud.speed * widget.animationSpeed;
 
@@ -162,7 +162,7 @@ class NewFogPainter extends CustomPainter {
     // 绘制各种云团 - 按不透明度排序（从后到前）
     fogClouds.sort((a, b) => a.opacity.compareTo(b.opacity));
 
-    for (var cloud in fogClouds) {
+    for (final cloud in fogClouds) {
       final fogPaint = Paint()
         ..color = Colors.white.withOpacity(cloud.opacity)
         ..maskFilter = MaskFilter.blur(
@@ -216,16 +216,16 @@ class NewFogPainter extends CustomPainter {
     final silhouetteRandom = Random(42);
 
     // 远处的山脉或建筑轮廓
-    for (int i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       final silhouettePath = Path();
       final baseY = size.height - (i * 50 + 100);
 
       silhouettePath.moveTo(0, size.height);
       silhouettePath.lineTo(0, baseY);
 
-      double x = 0;
+      var x = 0.0;
       while (x < size.width) {
-        final segmentWidth = 40 + silhouetteRandom.nextDouble() * 80;
+        final segmentWidth = 40.0 + silhouetteRandom.nextDouble() * 80.0;
         final height = 10 + silhouetteRandom.nextDouble() * 30;
 
         x += segmentWidth;

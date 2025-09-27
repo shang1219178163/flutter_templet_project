@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/IrregularClipperDemo.dart';
+import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
 import 'package:flutter_templet_project/pages/app_not_found_page.dart';
 import 'package:flutter_templet_project/pages/app_settings_page.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
@@ -30,10 +31,12 @@ import 'package:flutter_templet_project/pages/demo/AnimatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedToggleSwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreatePage.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
@@ -41,7 +44,6 @@ import 'package:flutter_templet_project/pages/demo/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppLifecycleStateObserverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemoOne.dart';
-import 'package:flutter_templet_project/pages/demo/AppSandboxFileDirectory.dart';
 import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
@@ -49,6 +51,7 @@ import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutofillGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BackdropFilterDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BackgroundTaskDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BadgeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BlurViewDemo.dart';
@@ -61,20 +64,23 @@ import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CarouselSliderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CarouselViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCaculator.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ClickNotificationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ColorFilterDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ConcurrentExecutorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
-import 'package:flutter_templet_project/pages/demo/CurvedNavigationBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
-import 'package:flutter_templet_project/pages/demo/CustomPainterPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomScrollBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
@@ -86,10 +92,12 @@ import 'package:flutter_templet_project/pages/demo/DecoratedBoxTransitionDemo.da
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
+import 'package:flutter_templet_project/pages/demo/DeviceBrightnessAndVolumeControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DirectoryTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DividerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.dart';
@@ -102,12 +110,10 @@ import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/ExpressionsCalulatorDemo.dart';
-import 'package:flutter_templet_project/pages/demo/FaceDetectionPage.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
-import 'package:flutter_templet_project/pages/demo/FlexbleListViewPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleSpaceDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingActionButtonDemo.dart';
@@ -120,6 +126,8 @@ import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FractionallySizedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GameMathPage.dart';
+import 'package:flutter_templet_project/pages/demo/GameMathPageNew.dart';
 import 'package:flutter_templet_project/pages/demo/GestureDetectorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxRouteCreatePage.dart';
@@ -136,10 +144,9 @@ import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HudProgressDemo.dart';
+import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
-import 'package:flutter_templet_project/pages/demo/ImChatPage.dart';
-import 'package:flutter_templet_project/pages/demo/ImConversationPage.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IndexedStackDemo.dart';
@@ -159,13 +166,12 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
-import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
+import 'package:flutter_templet_project/pages/demo/LocalAuthDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
-import 'package:flutter_templet_project/pages/demo/MarkdownBodyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
@@ -176,16 +182,18 @@ import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MergeableMaterialDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MetaDataDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MouseRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NAppBarColorChangerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NBoxWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NFingerViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
@@ -202,7 +210,6 @@ import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedNavigatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoFour.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoThree.dart';
@@ -223,15 +230,12 @@ import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
-import 'package:flutter_templet_project/pages/demo/PageRouteAnimationDemo.dart';
-import 'package:flutter_templet_project/pages/demo/PageRouteDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PageTopBackgroudImageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
-import 'package:flutter_templet_project/pages/demo/PageViewVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
-import 'package:flutter_templet_project/pages/demo/PlatformDispatcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PreferredSizeDemo.dart';
@@ -252,6 +256,7 @@ import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldBottomSheet.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScanAnimationDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ScanBarcodeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
@@ -298,6 +303,7 @@ import 'package:flutter_templet_project/pages/demo/TranslationTextPage.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UrlLauncherDemo.dart';
+import 'package:flutter_templet_project/pages/demo/UserDetailPage.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VideoPlayerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
@@ -305,12 +311,11 @@ import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/ae_report_page.dart';
-import 'package:flutter_templet_project/pages/demo/audio_visualizer_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
+import 'package:flutter_templet_project/pages/demo/custom_tabbar_page.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
-import 'package:flutter_templet_project/pages/demo/email_sender_demo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/file_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
@@ -327,14 +332,11 @@ import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart'
 import 'package:flutter_templet_project/pages/demo/secure_keyboard_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
-import 'package:flutter_templet_project/pages/demo/swiper_card_demo.dart';
 import 'package:flutter_templet_project/pages/demo/system_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
-import 'package:flutter_templet_project/pages/demo/tab_container_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
-import 'package:flutter_templet_project/pages/demo/weather/screens/weather_home.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/first_page.dart';
@@ -391,9 +393,6 @@ class APPRouter {
 
   static const String appLifecycleObserverDemo = '/appLifecycleObserverDemo';
   static const String themeColorDemo = '/themeColorDemo';
-  static const String appSandboxFileDirectory = '/AppSandboxFileDirectory';
-
-  static const String jPushInfoPage = '/JPushInfoPage';
 
   static const String launchPage = '/APPLaunchPage';
   static const String emojiPage = '/emojiPage';
@@ -485,6 +484,7 @@ class APPRouter {
   static const String draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
   static const String indicatorDemo = '/IndicatorDemo';
   static const String appWebViewDemo = '/AppWebViewDemo';
+  static const String carouselViewDemo = '/carouselViewDemo';
   static const String carouselSliderDemo = '/carouselSliderDemo';
   static const String sliverAppBarDemo = '/SliverAppBarDemo';
   static const String sliverFamilyDemo = '/SliverFamilyDemo';
@@ -544,7 +544,6 @@ class APPRouter {
   static const String responsiveColumnDemo = '/responsiveColumnDemo';
   static const String testPage = '/testPage';
   static const String testPageOne = '/testPageOne';
-  static const String customPainterPageDemo = '/customPainterPageDemo';
   static const String offstageDemo = '/OffstageDemo';
   static const String bottomAppBarDemo = '/bottomAppBarDemo';
   static const String calendarDatePickerDemo = '/CalendarDatePickerDemo';
@@ -614,6 +613,7 @@ class APPRouter {
   static const String stackDemoTwo = '/stackDemoTwo';
 
   static const String badgeDemo = '/badgeDemo';
+  static const String badgesDemo = '/badgesDemo';
   static const String flutterSwiperDemo = '/flutterSwiperDemo';
   static const String flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
   static const String homeSrollDemo = '/synHomeSrollDemo';
@@ -696,8 +696,6 @@ class APPRouter {
   static const String dropBoxChoicDemoNew = '/dropBoxChoicDemoNew';
   static const String dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
   static const String slidableDemoOne = '/slidableDemoOne';
-
-  static const String imConversationPage = '/imConversationPage';
   static const String imChatPage = '/imChatPage';
   static const String soundPlayDemo = '/soundPlayDemo';
   static const String wPopupMenuDemo = '/wPopupMenuDemo';
@@ -744,7 +742,7 @@ class APPRouter {
   static const String choiceBoxOneDemo = '/choiceBoxOneDemo';
   static const String apiConvertPage = '/apiConvertPage';
   static const String selectListPage = '/selectListPage';
-  static const String avatarGroupDemo = '/AvatarGroupDemo';
+  static const String avatarGroupDemo = '/avatarGroupDemo';
   static const String overlayPortalDemo = '/overlayPortalDemo';
   static const String appBarColorChangerDemo = '/appBarColorChangerDemo';
   static const String footerButtonBarDemo = '/footerButtonBarDemo';
@@ -813,21 +811,27 @@ class APPRouter {
   static const String iteratorDemo = '/iteratorDemo';
   static const String chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
   static const String expressionsCalulatorDemo = '/expressionsCalulatorDemo';
-  static const String flexbleListViewDemo = '/flexbleListViewDemo';
-  static const String pageViewVerticalDemo = '/PageViewVerticalDemo';
-  static const String markdownBodyDemo = '/markdownBodyDemo';
-  static const String tabContainerDemo = '/tabContainerDemo';
-  static const String curvedNavigationBarDemo = '/CurvedNavigationBarDemo';
-  static const String swiperCardDemo = '/swiperCardDemo';
-  static const String pageRouteDemo = '/pageRouteDemo';
-  static const String pageRouteAnimationDemo = '/pageRouteAnimationDemo';
-  static const String emailSenderDemo = '/emailSenderDemo';
-  static const String faceDetectionPage = '/faceDetectionPage';
-  static const String nestedScrollViewDemoFour = '/nestedScrollViewDemoFour';
-  static const String weatherHome = '/weatherHome';
-  static const String audioVisualizerDemo = '/audioVisualizerDemo';
-  static const String listenableDemo = '/listenableDemo';
-  static const String platformDispatcherDemo = '/PlatformDispatcherDemo';
+  static const String jPushInfoPage = '/jPushInfoPage';
+  static const String scanBarcodeDemo = '/scanBarcodeDemo';
+  static const String animatedModalBarrierDemo = '/animatedModalBarrierDemo';
+  static const String metaDataDemo = '/metaDataDemo';
+  static const String appLocaleChangePage = '/appLocaleChangePage';
+  static const String backgroundTaskDemo = '/backgroundTaskDemo';
+  static const String colorSchemeDemo = '/colorSchemeDemo';
+  static const String concurrentExecutorDemo = '/concurrentExecutorDemo';
+  static const String gameMathPage = '/gameMathPage';
+  static const String gameMathPageNew = '/gameMathPageNew';
+  static const String localAuthDemo = '/localAuthDemo';
+  static const String deviceBrightnessAndVolumeControllerDemo = '/deviceBrightnessAndVolumeControllerDemo';
+  static const String clickNotificationDemo = '/clickNotificationDemo';
+
+  static const String colorFilterDemo = '/colorFilterDemo';
+  static const String pageTopBackgroudImageDemo = '/pageTopBackgroudImageDemo';
+  static const String fingerViewDemo = '/fingerViewDemo';
+  static const String dividerDemo = '/dividerDemo';
+  static const String userDetailPage = '/userDetailPage';
+  static const String animatedToggleSwitchDemo = '/animatedToggleSwitchDemo';
+  static const String customTabbarPage = '/customTabbarPage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -856,8 +860,8 @@ class APPRouter {
 }
 
 class AppPage {
-  static const INITIAL = APPRouter.appTabPage;
-  // static const INITIAL = APPRouter.developToolList;
+  static const String INITIAL = APPRouter.appTabPage;
+  // static const String INITIAL = APPRouter.developToolList;
 
   static final unknownRoute = GetPage(
     name: APPRouter.notFound,
@@ -874,14 +878,6 @@ class AppPage {
     GetPage(
       name: APPRouter.themeColorDemo,
       page: () => ThemeColorDemo(),
-    ),
-    GetPage(
-      name: APPRouter.appSandboxFileDirectory,
-      page: () => AppSandboxFileDirectory(),
-    ),
-    GetPage(
-      name: APPRouter.jPushInfoPage,
-      page: () => JPushInfoPage(),
     ),
     GetPage(
       name: APPRouter.emojiPage,
@@ -936,10 +932,6 @@ class AppPage {
     GetPage(
       name: APPRouter.testPageOne,
       page: () => TestPageOne(),
-    ),
-    GetPage(
-      name: APPRouter.customPainterPageDemo,
-      page: () => CustomPainterPageDemo(),
     ),
     GetPage(
       name: APPRouter.loginPage, page: () => LoginPage(),
@@ -1148,6 +1140,10 @@ class AppPage {
     GetPage(
       name: APPRouter.appWebViewDemo,
       page: () => AppWebViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.carouselViewDemo,
+      page: () => CarouselViewDemo(),
     ),
     GetPage(
       name: APPRouter.carouselSliderDemo,
@@ -1943,10 +1939,6 @@ class AppPage {
       page: () => SlidableDemoOne(),
     ),
     GetPage(
-      name: APPRouter.imConversationPage,
-      page: () => ImConversationPage(),
-    ),
-    GetPage(
       name: APPRouter.imChatPage,
       page: () => ImChatPage(),
     ),
@@ -2399,67 +2391,90 @@ class AppPage {
       page: () => ExpressionsCalulatorDemo(),
     ),
     GetPage(
-      name: APPRouter.flexbleListViewDemo,
-      page: () => FlexbleListViewDemo(),
+      name: APPRouter.jPushInfoPage,
+      page: () => JPushInfoPage(),
     ),
     GetPage(
-      name: APPRouter.pageViewVerticalDemo,
-      page: () => PageViewVerticalDemo(),
+      name: APPRouter.scanBarcodeDemo,
+      page: () => ScanBarcodeDemo(),
     ),
     GetPage(
-      name: APPRouter.markdownBodyDemo,
-      page: () => MarkdownBodyDemo(),
+      name: APPRouter.animatedModalBarrierDemo,
+      page: () => AnimatedModalBarrierDemo(),
     ),
     GetPage(
-      name: APPRouter.tabContainerDemo,
-      page: () => TabContainerDemo(),
+      name: APPRouter.metaDataDemo,
+      page: () => MetaDataDemo(),
     ),
     GetPage(
-      name: APPRouter.curvedNavigationBarDemo,
-      page: () => CurvedNavigationBarDemo(),
+      name: APPRouter.appLocaleChangePage,
+      page: () => AppLocaleChangePage(),
     ),
     GetPage(
-      name: APPRouter.swiperCardDemo,
-      page: () => SwiperCardDemo(),
+      name: APPRouter.backgroundTaskDemo,
+      page: () => BackgroundTaskDemo(),
     ),
     GetPage(
-      name: APPRouter.pageRouteDemo,
-      page: () => PageRouteDemo(),
+      name: APPRouter.colorSchemeDemo,
+      page: () => ColorSchemeDemo(),
     ),
     GetPage(
-      name: APPRouter.pageRouteAnimationDemo,
-      page: () => PageRouteAnimationDemo(),
+      name: APPRouter.concurrentExecutorDemo,
+      page: () => ConcurrentExecutorDemo(),
     ),
     GetPage(
-      name: APPRouter.emailSenderDemo,
-      page: () => EmailSenderDemo(),
+      name: APPRouter.gameMathPage,
+      page: () => GameMathPage(),
     ),
     GetPage(
-      name: APPRouter.faceDetectionPage,
-      page: () => FaceDetectionPage(),
-    ),
-
-    GetPage(
-      name: APPRouter.nestedScrollViewDemoFour,
-      page: () => NestedScrollViewDemoFour(),
-    ),
-    GetPage(
-      name: APPRouter.weatherHome,
-      page: () => WeatherHome(),
+      name: APPRouter.gameMathPageNew,
+      page: () => GameMathPageNew(),
     ),
 
     GetPage(
-      name: APPRouter.audioVisualizerDemo,
-      page: () => AudioVisualizerDemo(),
+      name: APPRouter.localAuthDemo,
+      page: () => LocalAuthDemo(),
+    ),
+    GetPage(
+      name: APPRouter.deviceBrightnessAndVolumeControllerDemo,
+      page: () => DeviceBrightnessAndVolumeControllerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.clickNotificationDemo,
+      page: () => ClickNotificationDemo(),
+    ),
+    GetPage(
+      name: APPRouter.colorFilterDemo,
+      page: () => ColorFilterDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageTopBackgroudImageDemo,
+      page: () => PageTopBackgroudImageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.fingerViewDemo,
+      page: () => NFingerViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dividerDemo,
+      page: () => DividerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.userDetailPage,
+      page: () => UserDetailPage(),
+    ),
+    GetPage(
+      name: APPRouter.animatedToggleSwitchDemo,
+      page: () => AnimatedToggleSwitchDemo(),
     ),
 
     GetPage(
-      name: APPRouter.listenableDemo,
-      page: () => ListenableDemo(),
-    ),
-    GetPage(
-      name: APPRouter.platformDispatcherDemo,
-      page: () => PlatformDispatcherDemo(),
+      name: APPRouter.customTabbarPage,
+      page: () => CustomTabbarPage(),
     ),
   ];
 }
+
+// class AppGetPage<T> extends GetPage<T> {
+//   AppGetPage({required super.name, required super.page});
+// }

@@ -6,14 +6,11 @@
 //  Copyright © 5/19/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-
-import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 final GlobalKey _globalKey = GlobalKey();
@@ -39,8 +36,6 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       key: _globalKey,
       appBar: AppBar(
@@ -90,7 +85,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
 
   List<Widget> initListWidget(List<String> list) {
     var lists = <Widget>[];
-    for (var e in list) {
+    for (final e in list) {
       lists.add(
         InkWell(
           onTap: () {
@@ -106,7 +101,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "$e",
+                  e,
                   style: TextStyle(fontSize: 12),
                 ),
               ],

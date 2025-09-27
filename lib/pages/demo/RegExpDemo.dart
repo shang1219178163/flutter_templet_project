@@ -73,11 +73,11 @@ class _RegExpDemoState extends State<RegExpDemo> {
 extension MatchExt on Match {
   String get description {
     return """
-      start ${start}
-      end ${end}
-      input ${input}
-      pattern ${pattern}
-      groupCount ${groupCount}
+      start $start
+      end $end
+      input $input
+      pattern $pattern
+      groupCount $groupCount
       """;
   }
 }

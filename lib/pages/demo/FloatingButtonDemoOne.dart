@@ -1,9 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_floating_button.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class FloatingButtonDemoOne extends StatefulWidget {
   FloatingButtonDemoOne({Key? key, this.title}) : super(key: key);
@@ -17,8 +13,6 @@ class FloatingButtonDemoOne extends StatefulWidget {
 class _FloatingButtonDemoOneState extends State<FloatingButtonDemoOne> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return WillPopScope(
       onWillPop: () async {
         return true;

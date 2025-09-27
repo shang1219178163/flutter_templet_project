@@ -1,7 +1,7 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 class RefreshListView extends StatefulWidget {
@@ -31,7 +31,7 @@ class _RefreshListViewState extends State<RefreshListView> {
     final result = List<String>.generate(5, (i) => 'Item_$i');
     items.value = result;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _easyRefreshController?.callRefresh();
+      _easyRefreshController.callRefresh();
     });
   }
 
@@ -49,7 +49,7 @@ class _RefreshListViewState extends State<RefreshListView> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    _easyRefreshController?.callRefresh();
+                    _easyRefreshController.callRefresh();
                   },
                 ))
             .toList(),
@@ -76,7 +76,7 @@ class _RefreshListViewState extends State<RefreshListView> {
                 final e = list[index];
                 return ListTile(
                   leading: Icon(Icons.ac_unit),
-                  title: Text("$e"),
+                  title: Text(e),
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
@@ -129,7 +129,7 @@ class _RefreshListViewState extends State<RefreshListView> {
                 B 端业务主要指的是我们公司内部使用的各类后台管理系统。这些页面以大量的表单和表格为特征，信息密度极高，内容丰富。随着公司业务的增长，人力资源变得紧张，大量的需求积压。因此，我们开展这项代码生成工作的首要目标是提升前端开发效率。""";
               return Column(
                 children: [
-                  ListTile(leading: Icon(Icons.ac_unit), title: Text("$e")),
+                  ListTile(leading: Icon(Icons.ac_unit), title: Text(e)),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     child: NTextField(

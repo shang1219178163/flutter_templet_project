@@ -35,6 +35,23 @@ extension DeviceInfoPluginExt on DeviceInfoPlugin {
     return deviceInfo.isPhysicalDevice;
   }
 
+  /// 获取设备Id
+  static FutureOr<String> getDeviceId() async {
+    final supports = [Platform.isIOS, Platform.isAndroid];
+    if (!supports.contains(true)) {
+      return "";
+    }
+
+    final deviceInfoPlugin = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      final deviceInfo = await deviceInfoPlugin.iosInfo;
+      return deviceInfo.identifierForVendor ?? "";
+    }
+
+    final deviceInfo = await deviceInfoPlugin.androidInfo;
+    return deviceInfo.display;
+  }
+
   /// 是pad
   static FutureOr<bool> isPad() async {
     final supports = [Platform.isIOS, Platform.isAndroid];

@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/PickerUtil.dart';
+import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/n_pick_users_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_list_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
-
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 
@@ -107,7 +106,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
             side: BorderSide(width: 1.0, color: Colors.blue),
             padding: EdgeInsets.all(0),
           ),
-          child: Text('${e.name}_${i}',
+          child: Text('${e.name}_$i',
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.black87,
@@ -129,7 +128,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         Navigator.of(context).pop();
       },
       onDateTimeChanged: (DateTime val) {
-        debugPrint("${val}");
+        debugPrint("$val");
       },
     );
   }
@@ -138,7 +137,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     presentCupertinoDatePicker(
       context: context,
       onDateTimeConfirm: (DateTime val) {
-        debugPrint("${val}");
+        debugPrint("$val");
         Navigator.of(context).pop();
       },
     );
@@ -150,7 +149,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     presentBottomSheet(
       context: context,
       onConfirm: () {
-        debugPrint("${DateTime.now()} ${_selectedValue}");
+        debugPrint("${DateTime.now()} $_selectedValue");
         Navigator.of(context).pop();
       },
       child: CupertinoPicker(

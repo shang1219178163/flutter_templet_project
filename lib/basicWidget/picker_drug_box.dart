@@ -6,7 +6,6 @@
 //  Copyright © 2024/9/3 shang. All rights reserved.
 //
 
-import 'dart:convert';
 
 import 'package:flutter_templet_project/basicWidget/n_pick_request_list_box.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
@@ -32,7 +31,7 @@ class PickerDrugBox extends NPickRequestListBox {
               onModel: (e) => TagDetailModel.fromJson(e),
             );
 
-            final list = tuple.result ?? <TagDetailModel>[];
+            final list = tuple.result;
             // YLog.d("$widget requestList: ${list.length}");
             return list;
           },
@@ -40,8 +39,8 @@ class PickerDrugBox extends NPickRequestListBox {
           selected: (items, b) {
             return false;
 
-            final result = items.map((e) => e.id).contains(b?.id);
-            return result;
+            // final result = items.map((e) => e.id).contains(b?.id);
+            // return result;
           },
         );
 }

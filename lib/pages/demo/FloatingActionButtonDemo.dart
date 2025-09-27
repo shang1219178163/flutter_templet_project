@@ -209,7 +209,7 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
   /// FloatingActionButton 位置自定义
   Widget buildFloatingActionButton() {
     // return SizedBox();
-    Widget child = buildTopButtonBarToFloatingActionButton();
+    var child = buildTopButtonBarToFloatingActionButton();
 
     // child = FloatingActionButton(
     //   onPressed: () {},
@@ -253,9 +253,9 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
                 // backgroundColor: ColorExt.random,
               ),
               onPressed: () {
-                debugPrint("$e");
+                debugPrint(e);
               },
-              child: Text("$e"));
+              child: Text(e));
         }).toList(),
       ),
     );

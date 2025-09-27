@@ -7,10 +7,6 @@
 //
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
-import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:get/get.dart';
 
 // await AudioPlayerManager().playWaitCallingMp3();
 //
@@ -42,17 +38,17 @@ class AudioPlayerManager {
 
   /// 停止播放音频
   Future<void> stop() async {
-    return await player.stop();
+    return player.stop();
   }
 
   /// 暂停播放音频
   Future<void> pause() async {
-    return await player.pause();
+    return player.pause();
   }
 
   /// 继续播放音频
   Future<void> resume() async {
-    return await player.resume();
+    return player.resume();
   }
 
   // 播放循环音频呼叫铃声

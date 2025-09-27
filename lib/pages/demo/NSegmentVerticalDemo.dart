@@ -10,8 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -147,7 +146,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
     Widget? child,
   }) {
     final model = list[index];
-    bool isSelected = model.selectableId == selectedModel?.selectableId;
+    var isSelected = model.selectableId == selectedModel?.selectableId;
     var bgColor = isSelected ? white : bgColorF9F9F9;
     // bgColor = isSelected ? white : Colors.green;
 

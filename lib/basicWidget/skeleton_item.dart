@@ -13,7 +13,7 @@ class SkeletonItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    final backgroundColor = themeData.colorScheme.background;
+    final backgroundColor = themeData.colorScheme.surface;
     final foregroundColor = themeData.colorScheme.surface;
     if (direction == Axis.vertical) {
       return Card(

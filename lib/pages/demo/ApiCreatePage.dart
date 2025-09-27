@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreateTemplet.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:json_to_dart/model_generator.dart';
 
 class ApiCreatePage extends StatefulWidget {
   ApiCreatePage({

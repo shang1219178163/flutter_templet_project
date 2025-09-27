@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -71,7 +73,7 @@ class CacheService {
   SharedPreferences? _prefs;
   SharedPreferences get prefs => _prefs!;
 
-  init() async {
+  Future<void> init() async {
     _prefs ??= await SharedPreferences.getInstance();
     // debugPrint("init prefs: $prefs");
   }
@@ -190,7 +192,7 @@ class CacheService {
     if (value.isNotEmpty != true) {
       return Future.value(false);
     }
-    List<String> list = value.map((e) {
+    var list = value.map((e) {
       final result = jsonEncode(mapCb(e));
       return result;
     }).toList();
@@ -293,7 +295,7 @@ class CacheService {
     required Map<String, dynamic> Function(Map<String, dynamic> v) onUpdate,
   }) async {
     final map = CacheService().getMap(key) ?? <String, dynamic>{};
-    final mapNew = onUpdate(map ?? {});
+    final mapNew = onUpdate(map);
     await CacheService().setMap(key, mapNew);
     final mapAfter = CacheService().getMap(key) ?? {};
     return mapAfter;
@@ -321,8 +323,8 @@ class CacheService {
   /// 更新本地操作日志
   Future<Map<String, String>> updateLogs({required String value, bool isClear = false}) async {
     final cacheKey = CacheKey.localOperateLog.name;
-    final Map<String, dynamic> cache = getMap(cacheKey) ?? {};
-    final Map<String, String> map = Map<String, String>.from(cache);
+    final cache = getMap(cacheKey) ?? {};
+    final map = Map<String, String>.from(cache);
     if (value.isEmpty) {
       return map;
     }

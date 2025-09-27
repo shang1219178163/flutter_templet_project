@@ -63,7 +63,7 @@ class _SinglePickerPageState extends State<SinglePickerPage> {
   Widget _demo() {
     return TextButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.white)),
+            backgroundColor: WidgetStateProperty.all(Colors.white)),
         onPressed: () {
           Pickers.showSinglePicker(
             context,
@@ -160,7 +160,7 @@ class _SinglePickerPageState extends State<SinglePickerPage> {
   }
 
   void _onClickItem2() {
-    double menuHeight = 36.0;
+    var menuHeight = 36.0;
     Widget _headMenuView = Container(
         color: Colors.grey[700],
         height: menuHeight,

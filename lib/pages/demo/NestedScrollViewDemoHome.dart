@@ -7,30 +7,25 @@
 //
 
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_app_bar/en_app_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/future_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 /// 嵌套滚动
@@ -38,12 +33,10 @@ class NestedScrollViewDemoHome extends StatefulWidget {
   const NestedScrollViewDemoHome({super.key});
 
   @override
-  NestedScrollViewDemoHomeState createState() =>
-      NestedScrollViewDemoHomeState();
+  NestedScrollViewDemoHomeState createState() => NestedScrollViewDemoHomeState();
 }
 
-class NestedScrollViewDemoHomeState
-    extends AppTabBarState<NestedScrollViewDemoHome> {
+class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoHome> {
   final _homeController = Get.put(HomeController(), permanent: true);
 
   /// 嵌套滚动
@@ -60,13 +53,20 @@ class NestedScrollViewDemoHomeState
   }
 
   @override
-  void initState() {
-    scrollControllerNew.addListener(() {
-      scrollY.value = scrollControllerNew.offset;
-      scrollProgress.value = scrollControllerNew.position.progress;
-    });
+  void dispose() {
+    scrollControllerNew.removeListener(onScrollerLtr);
+    super.dispose();
+  }
 
+  @override
+  void initState() {
+    scrollControllerNew.addListener(onScrollerLtr);
     super.initState();
+  }
+
+  onScrollerLtr() {
+    scrollY.value = scrollControllerNew.offset;
+    scrollProgress.value = scrollControllerNew.position.progress;
   }
 
   refresh() {
@@ -123,17 +123,14 @@ class NestedScrollViewDemoHomeState
               snap: false,
               primary: true,
               backgroundColor: () {
-                final color = scrollProgress.value > 0.65
-                    ? collapsedBackgroundColor
-                    : bgColor;
+                final color = scrollProgress.value > 0.65 ? collapsedBackgroundColor : bgColor;
                 return color;
               },
               title: ValueListenableBuilder(
                 valueListenable: scrollY,
                 builder: (context, value, child) {
                   try {
-                    final opacity =
-                        scrollControllerNew.position.progress > 0.9 ? 1.0 : 0.0;
+                    final opacity = scrollControllerNew.position.progress > 0.9 ? 1.0 : 0.0;
                     return AnimatedOpacity(
                       opacity: opacity,
                       duration: const Duration(milliseconds: 100),
@@ -341,8 +338,7 @@ class NestedScrollViewDemoHomeState
                         Container(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Image(
-                            image:
-                                'assets/images/icon_switch.png'.toAssetImage(),
+                            image: 'assets/images/icon_switch.png'.toAssetImage(),
                             width: 14,
                             height: 14,
                           ),
@@ -496,7 +492,7 @@ class NestedScrollViewDemoHomeState
             Row(
               children: [
                 NText(
-                  '${DateTime.now().toString().split(" ").first}',
+                  DateTime.now().toString().split(" ").first,
                   fontSize: 14,
                   color: fontColor737373,
                 ),
@@ -588,14 +584,11 @@ class NestedScrollViewDemoHomeState
                                 orElse: () => const Text('0'),
                                 loading: () => Align(
                                   alignment: Alignment.centerLeft,
-                                  child: CupertinoActivityIndicator(
-                                      radius: 8, color: color),
+                                  child: CupertinoActivityIndicator(radius: 8, color: color),
                                 ),
                                 data: (number) => number > 99
                                     ? const Text.rich(
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                                         TextSpan(
                                           text: '99',
                                           children: [
@@ -606,16 +599,12 @@ class NestedScrollViewDemoHomeState
                                         ),
                                       )
                                     : Text('$number',
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600)),
+                                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                               )
                             : count != null
                                 ? count > 99
                                     ? const Text.rich(
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                                         TextSpan(
                                           text: '99',
                                           children: [
@@ -625,10 +614,7 @@ class NestedScrollViewDemoHomeState
                                           ],
                                         ),
                                       )
-                                    : Text('$count',
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600))
+                                    : Text('$count', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
                                 : const SizedBox(),
                         const SizedBox(width: 2),
                         NText(

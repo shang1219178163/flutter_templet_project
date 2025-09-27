@@ -14,23 +14,23 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => debugPrint(e),
-                  ))
-              .toList(),
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 
   buildCardItem({
@@ -41,8 +41,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   }) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: ExtendedImage.network(url,
-          width: width, height: height, fit: fit, cache: true,
+      child: ExtendedImage.network(url, width: width, height: height, fit: fit, cache: true,
           // border: Border.all(color: Colors.red, width: 1.0),
           // borderRadius: BorderRadius.all(Radius.circular(30.0)),
           //cancelToken: cancellationToken,
@@ -62,8 +61,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
           fit: BoxFit.fill,
           // soucreRect: Rect.fromLTWH((state.extendedImageInfo?.image?.width-200)/2,(state.extendedImageInfo?.image?.height-200)/2, 200, 200),
         );
-        debugPrint(
-            "Source Rect width ${widget.width} height : ${widget.height}");
+        debugPrint("Source Rect width ${widget.width} height : ${widget.height}");
         return widget;
       }),
     );

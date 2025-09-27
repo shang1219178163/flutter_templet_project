@@ -51,7 +51,7 @@ class FluwxUtil {
   }) {
     fluwx.addSubscriber((response) {
       if (response is WeChatAuthResponse) {
-        int? errCode = response.errCode;
+        var errCode = response.errCode;
         if (errCode == 0) {
           _debounce(() {
             callback(response);

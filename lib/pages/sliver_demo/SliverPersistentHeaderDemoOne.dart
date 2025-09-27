@@ -6,11 +6,8 @@
 //  Copyright © 10/13/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 class SliverPersistentHeaderDemoOne extends StatelessWidget {
   SliverPersistentHeaderDemoOne({Key? key}) : super(key: key);

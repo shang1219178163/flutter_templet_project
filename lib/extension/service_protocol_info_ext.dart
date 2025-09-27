@@ -39,7 +39,7 @@ extension ServiceProtocolInfoExt on ServiceProtocolInfo {
       return;
     }
 
-    String url = isarUrl ?? "";
+    var url = isarUrl ?? "";
     final maxLength = url.length;
     final lines = [
       ''.filledLine(maxLength: maxLength, fill: "═"),

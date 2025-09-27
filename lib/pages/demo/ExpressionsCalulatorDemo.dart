@@ -12,8 +12,7 @@ import 'package:expressions/expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/mixin/expression_formula_mxin.dart';
 import 'package:get/get.dart';
 
@@ -68,17 +67,6 @@ class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
           ? null
           : AppBar(
               title: Text("$widget"),
-              actions: [
-                'done',
-              ]
-                  .map((e) => TextButton(
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () => debugPrint(e),
-                      ))
-                  .toList(),
             ),
       body: buildBody(),
     );
@@ -115,7 +103,7 @@ class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   divider: SizedBox(),
                   child: NText(
-                    e.params?.toString() ?? "",
+                    e.params.toString() ?? "",
                     fontSize: 12,
                   ),
                 ),

@@ -7,20 +7,17 @@
 //
 
 import 'dart:async';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:mime/mime.dart';
-
-import 'package:dio/dio.dart';
-
 ///这里用来进行Base64编码，UTF-8编码的
 import 'dart:convert';
-
-///这里用来获取文件file的文件名称的
-import 'package:path/path.dart';
+import 'dart:io';
 
 ///HMAC-SHA1加密用的（这个是第三方库需要依赖）
 import 'package:crypto/crypto.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:mime/mime.dart';
+///这里用来获取文件file的文件名称的
+import 'package:path/path.dart';
 
 ///阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
 const String OSSAccessKeyId = '<yourAccessKeyId>';
@@ -100,7 +97,7 @@ class UploadSevice {
 
   printLog(Object? object) {
     if (kDebugMode) {
-      print("${this}: $object");
+      print("$this: $object");
     }
   }
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/enum/ActivityType.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/enum_ext.dart';
-import 'package:flutter_templet_project/extension/text_style_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class EnumDemo extends StatefulWidget {
   EnumDemo({Key? key, this.title}) : super(key: key);
@@ -39,10 +37,10 @@ class _EnumDemoState extends State<EnumDemo> {
   }
 
   onDone() {
-    String? name = "${ActivityTypeNew.hiking.name}";
+    String? name = ActivityTypeNew.hiking.name;
     name = null;
     final v = ActivityTypeNew.values.byNullableName(name);
-    final v1 = ActivityTypeNew.skiing.name?.enumOf(ActivityTypeNew.values);
+    final v1 = ActivityTypeNew.skiing.name.enumOf(ActivityTypeNew.values);
     final v2 = ActivityTypeNew.values.by((e) => e.name == "cycling");
     final v3 = ActivityTypeNew.values.by((e) => e.index == 2);
 

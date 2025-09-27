@@ -23,9 +23,9 @@ class MediaPlayerController {
       ToastUtil.show("播放链接异常");
       return;
     }
-    final videoTitle = (videoUrl ?? "").split("/").last;
+    final videoTitle = (videoUrl).split("/").last;
     Get.toNamed(APPRouter.chewiePlayerPage, arguments: {
-      "videoUrl": videoUrl ?? "",
+      "videoUrl": videoUrl,
       "videoTitle": videoTitle,
       "videoThumbUrl": videoThumbUrl,
       "hideDownload": hideDownload,

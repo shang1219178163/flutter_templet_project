@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
+import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/network/controller/tag_gex_controller.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +19,7 @@ class GetxControllerDemo extends StatefulWidget {
 }
 
 class _GetxControllerDemoState extends State<GetxControllerDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -26,6 +29,10 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
   late final id = arguments["id"];
 
   final tagController = Get.put(TagGetxController());
+
+  late final items = <ActionRecord>[
+    (e: "onTest", action: onTest),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +63,12 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
       child: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("$widget"),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: buildSectionBox(items: items),
+            ),
             Row(
               children: [
                 OutlinedButton(
@@ -97,5 +108,37 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
         ),
       ),
     );
+  }
+
+  Widget buildSectionBox({
+    required List<ActionRecord> items,
+  }) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: items.map((e) {
+        return InkWell(
+          onTap: e.action,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
+            child: NText(
+              e.e,
+              color: context.primaryColor,
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  void onTest() {
+    final tagController = Get.put(TagGetxController());
+    final tagController1 = Get.put(TagGetxController());
+    DLog.d([tagController, tagController1, tagController == tagController1].asMap());
   }
 }

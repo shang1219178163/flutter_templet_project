@@ -7,7 +7,6 @@
 //
 
 import 'package:dio/dio.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/api/token_refersh_api.dart';
 
@@ -25,13 +24,13 @@ class TokenInterceptor extends QueuedInterceptor {
       try {
         final api = TokenRefreshApi();
         final res = await api.fetchResult<String>(defaultValue: "");
-        String newAccessToken = res.result;
+        var newAccessToken = res.result;
         if (newAccessToken.isEmpty) {
           super.onError(err, handler);
         }
         CacheService().token = newAccessToken;
 
-        RequestOptions requestOptions = err.requestOptions;
+        var requestOptions = err.requestOptions;
         requestOptions.headers["token"] = CacheService().token;
         final opts = Options(method: requestOptions.method);
 

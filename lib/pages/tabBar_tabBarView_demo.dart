@@ -7,36 +7,21 @@
 //
 
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_icons.dart';
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_layout.dart';
-import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_section.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_section_list.dart';
-import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
+import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/divider_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-
-import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
+import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
-
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
-
-import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 
 class TabBarTabBarViewDemo extends StatefulWidget {
   const TabBarTabBarViewDemo({Key? key}) : super(key: key);
@@ -150,8 +135,8 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       child: FloatingActionButton(
         onPressed: () {},
         tooltip: 'Increment',
-        child: Icon(Icons.add),
         elevation: 2.0,
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -546,10 +531,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.urlLauncherDemo, "urlLauncherDemo"),
   Tuple2(APPRouter.iteratorDemo, "iteratorDemo"),
   Tuple2(APPRouter.chemotherapyRegimenDrugCaculator, "chemotherapyRegimenDrugCaculator"),
-  Tuple2(APPRouter.weatherHome, "weatherHome"),
-  Tuple2(APPRouter.audioVisualizerDemo, "audioVisualizerDemo"),
-  Tuple2(APPRouter.listenableDemo, "listenableDemo"),
-  Tuple2(APPRouter.platformDispatcherDemo, "platformDispatcherDemo"),
+  Tuple2(APPRouter.carouselViewDemo, "carouselViewDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
@@ -564,7 +546,6 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.yamlParsePage, "yaml解析"),
   Tuple2(APPRouter.appLifecycleObserverDemo, "appLifecycleObserverDemo"),
   Tuple2(APPRouter.themeColorDemo, "themeColor"),
-  Tuple2(APPRouter.appSandboxFileDirectory, "appSandboxFileDirectory"),
   Tuple2(APPRouter.emojiPage, "emoji"),
   Tuple2(APPRouter.operatorDemo, "特殊操作符"),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery"),
@@ -621,12 +602,8 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.dataTypeDemo, "testDataTyeDemo"),
   Tuple2(APPRouter.audioPlayPageDemo, "audioPlayPage"),
   Tuple2(APPRouter.expressionsCalulatorDemo, "简单表达式计算"),
-  Tuple2(APPRouter.flexbleListViewDemo, "简单表达式计算"),
-  Tuple2(APPRouter.pageViewVerticalDemo, "垂直滚动"),
-  Tuple2(APPRouter.markdownBodyDemo, "stream markdown"),
-  Tuple2(APPRouter.tabContainerDemo, "第三方 tabContainer"),
-  Tuple2(APPRouter.curvedNavigationBarDemo, "第三方 curvedNavigationBar"),
-  Tuple2(APPRouter.swiperCardDemo, "第三方 swiperCardDemo"),
+  Tuple2(APPRouter.localAuthDemo, "生物识别技术（例如指纹或面部识别）"),
+  Tuple2(APPRouter.deviceBrightnessAndVolumeControllerDemo, "deviceBrightnessAndVolumeControllerDemo"),
 ];
 
 var animateds = <Tuple2<String, String>>[
@@ -666,7 +643,6 @@ var customs = [
   Tuple2(APPRouter.nSkeletonDemo, "骨架图"),
   Tuple2(APPRouter.nTreeDemo, "树形组件"),
   Tuple2(APPRouter.dialogChoiceChipDemo, "选择弹窗"),
-  Tuple2(APPRouter.imConversationPage, "会话列表"),
   Tuple2(APPRouter.imChatPage, "聊天列表"),
   Tuple2(APPRouter.expandTextDemo, "可折叠文字"),
   Tuple2(APPRouter.uploadFileDemo, "上传demo"),
@@ -684,11 +660,6 @@ var customs = [
   Tuple2(APPRouter.nwebViewDemo, "nwebViewDemo"),
   Tuple2(APPRouter.iconConvertPage, "iconConvertPage"),
   Tuple2(APPRouter.alignmentDrawDemo, "alignmentDrawDemo"),
-  Tuple2(APPRouter.pageRouteDemo, "pageRouteDemo"),
-  Tuple2(APPRouter.pageRouteAnimationDemo, "pageRouteAnimationDemo"),
-  Tuple2(APPRouter.emailSenderDemo, "emailSenderDemo"),
-  Tuple2(APPRouter.faceDetectionPage, "faceDetectionPage"),
-  Tuple2(APPRouter.nestedScrollViewDemoFour, "nestedScrollViewDemoFour"),
 ];
 
 var vendors = <Tuple2<String, String>>[
@@ -705,6 +676,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.ratingBarDemo, "星评"),
   Tuple2(APPRouter.dragAndDropDemo, "文件拖拽"),
   Tuple2(APPRouter.popoverDemo, "popoverDemo"),
+  Tuple2(APPRouter.badgesDemo, "badgesDemo"),
   Tuple2(APPRouter.flutterSwiperDemo, "flutterSwiperDemo"),
   Tuple2(APPRouter.flutterSwiperIndicatorDemo, "flutterSwiperIndicatorDemo"),
   Tuple2(APPRouter.visibilityDetectorDemo, "visibilityDetector 曝光检测"),
@@ -723,6 +695,23 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.keyboardAttachDemo, "keyboardAttachableDemo"),
   Tuple2(APPRouter.getxDemo, "getxDemo"),
   Tuple2(APPRouter.flutterPickersDemo, "flutterPickersDemo"),
+  Tuple2(APPRouter.scanBarcodeDemo, "scanBarcodeDemo"),
+  Tuple2(APPRouter.animatedModalBarrierDemo, "animatedModalBarrierDemo"),
+  Tuple2(APPRouter.metaDataDemo, "metaDataDemo"),
+  Tuple2(APPRouter.appLocaleChangePage, "appLocaleChangePage"),
+  Tuple2(APPRouter.backgroundTaskDemo, "backgroundTaskDemo"),
+  Tuple2(APPRouter.colorSchemeDemo, "colorSchemeDemo"),
+  Tuple2(APPRouter.concurrentExecutorDemo, "concurrentExecutorDemo"),
+  Tuple2(APPRouter.gameMathPage, "gameMathPage"),
+  Tuple2(APPRouter.gameMathPageNew, "GameMathPageNew"),
+  Tuple2(APPRouter.clickNotificationDemo, "clickNotificationDemo"),
+  Tuple2(APPRouter.colorFilterDemo, "colorFilterDemo"),
+  Tuple2(APPRouter.pageTopBackgroudImageDemo, "pageTopBackgroudImageDemo"),
+  Tuple2(APPRouter.fingerViewDemo, "fingerViewDemo"),
+  Tuple2(APPRouter.dividerDemo, "dividerDemo"),
+  Tuple2(APPRouter.userDetailPage, "userDetailPage"),
+  Tuple2(APPRouter.animatedToggleSwitchDemo, "animatedToggleSwitchDemo"),
+  Tuple2(APPRouter.customTabbarPage, "customTabbarPage"),
 ];
 
 var others = <Tuple2<String, String>>[
@@ -737,7 +726,6 @@ var others = <Tuple2<String, String>>[
   Tuple2(APPRouter.richTextDemo, "richTextDemo"),
   Tuple2(APPRouter.testPage, "testPage"),
   Tuple2(APPRouter.testPageOne, "testPageOne"),
-  Tuple2(APPRouter.customPainterPageDemo, "customPainterPageDemo"),
   Tuple2(APPRouter.decorationDemo, "decorationDemo"),
   Tuple2(APPRouter.homeSrollDemo, "HomeSrollDemo"),
   Tuple2(APPRouter.homeNavDemo, "HomeNavDemo"),

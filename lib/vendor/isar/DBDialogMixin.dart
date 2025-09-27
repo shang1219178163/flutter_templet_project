@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 mixin DBDialogMxin<T extends StatefulWidget> on State<T> {

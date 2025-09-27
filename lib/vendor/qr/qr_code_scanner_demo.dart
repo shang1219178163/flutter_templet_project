@@ -1,7 +1,6 @@
 // import 'dart:html';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -51,7 +50,7 @@ class _QrCodeScannerDemoState extends State<QrCodeScannerDemo> {
             child: Center(
               child: (result != null)
                   ? Text(
-                      'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+                      'Barcode Type: ${result!.format.name}   Data: ${result!.code}')
                   : Text('Scan a code'),
             ),
           )

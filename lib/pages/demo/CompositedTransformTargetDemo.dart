@@ -108,8 +108,8 @@ class _CompositedTransformTargetDemoState
     var items =
         AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
 
-    final List<double> rotations = [-180, -135, -90, -45, 0, 45, 90, 135, 180];
-    final double height = 24 * 3 + 8 + 3;
+    final rotations = <double>[-180, -135, -90, -45, 0, 45, 90, 135, 180];
+    final height = 24 * 3.0 + 8 + 3;
     return PreferredSize(
       preferredSize: Size.fromHeight(height),
       child: Container(
@@ -158,14 +158,14 @@ class _CompositedTransformTargetDemoState
     );
   }
 
-  void _toggleOverlay() {
-    if (!show) {
-      _showOverlay();
-    } else {
-      _hideOverlay();
-    }
-    show = !show;
-  }
+  // void _toggleOverlay() {
+  //   if (!show) {
+  //     _showOverlay();
+  //   } else {
+  //     _hideOverlay();
+  //   }
+  //   show = !show;
+  // }
 
   void _showOverlay() {
     _overlayEntry = _createOverlayEntry(indicatorOffset);
@@ -183,7 +183,7 @@ class _CompositedTransformTargetDemoState
 
   void updateIndicatorLongPress(LongPressMoveUpdateDetails details) {
     indicatorOffset = details.localPosition;
-    _overlayEntry?.markNeedsBuild();
+    _overlayEntry.markNeedsBuild();
   }
 
   OverlayEntry _createOverlayEntry(Offset localPosition) {
@@ -299,7 +299,7 @@ class _CustomSlideDemoState extends State {
         );
       },
     );
-    Overlay.of(context)?.insert(_overlayEntry!);
+    Overlay.of(context).insert(_overlayEntry!);
   }
 
   void updateIndicator(DragUpdateDetails details) {

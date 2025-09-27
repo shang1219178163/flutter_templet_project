@@ -6,11 +6,9 @@
 //  Copyright © 6/22/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 

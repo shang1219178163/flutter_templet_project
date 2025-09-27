@@ -13,8 +13,6 @@ class FlutterIsolateDemo extends StatefulWidget {
 class _FlutterIsolateDemoState extends State<FlutterIsolateDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -58,7 +56,7 @@ class _FlutterIsolateDemoState extends State<FlutterIsolateDemo> {
 
   @pragma('vm:entry-point')
   Future<int> expensiveWork(int arg) async {
-    int result = arg + 100;
+    var result = arg + 100;
     return result;
   }
 }

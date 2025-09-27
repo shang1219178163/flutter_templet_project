@@ -6,6 +6,8 @@
 //  Copyright © 2024/8/27 shang. All rights reserved.
 //
 
+// ignore_for_file: use_setters_to_change_properties
+
 import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
@@ -16,7 +18,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_Item.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_handle.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
@@ -274,7 +276,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
     }
 
     try {
-      FilePickerResult? pickerResult = await FilePicker.platform.pickFiles(
+      var pickerResult = await FilePicker.platform.pickFiles(
         type: type,
         allowMultiple: allowMultiple,
         allowedExtensions: allowedExtensions,

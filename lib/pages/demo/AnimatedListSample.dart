@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 
 class AnimatedListSample extends StatefulWidget {
@@ -110,8 +108,7 @@ class ListModel<E> {
     required this.listKey,
     required this.removedItemBuilder,
     Iterable<E>? initialItems,
-  })  : assert(listKey != null),
-        assert(removedItemBuilder != null),
+  })  : assert(removedItemBuilder != null),
         _items = List<E>.from(initialItems ?? <E>[]);
 
   ///
@@ -154,9 +151,7 @@ class ListModel<E> {
 
 class CardItem extends StatelessWidget {
   const CardItem({Key? key, required this.animation, this.onTap, required this.item, this.selected = false})
-      : assert(animation != null),
-        assert(item != null && item >= 0),
-        assert(selected != null),
+      : assert(item >= 0),
         super(key: key);
 
   ///

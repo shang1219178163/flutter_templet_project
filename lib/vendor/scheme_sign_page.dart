@@ -1,13 +1,13 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button_confirm.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
-import 'package:get/get.dart';
 
 /// 签名
 class SchemeSignPage extends StatefulWidget {
@@ -32,7 +32,7 @@ class SchemeSignPageState extends State<SchemeSignPage> {
 
     // 监听画板
     signatureController.addListener(() {
-      bool tmpIsEmpty = signatureController.value.isEmpty;
+      var tmpIsEmpty = signatureController.value.isEmpty;
       if (isEmpty != tmpIsEmpty) {
         if (mounted) {
           isEmpty = tmpIsEmpty;
@@ -133,7 +133,7 @@ class SchemeSignPageState extends State<SchemeSignPage> {
     // 获取文件夹
     Directory? tempDir = await getTemporaryDirectory();
     String? storagePath = '${tempDir.path}/signature.png';
-    File file = File(storagePath);
+    var file = File(storagePath);
     if (!file.existsSync()) {
       file.createSync();
     }

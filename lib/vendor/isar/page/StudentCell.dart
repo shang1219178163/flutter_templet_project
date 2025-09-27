@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
-import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 
 class StudentCell extends StatelessWidget {
   const StudentCell({

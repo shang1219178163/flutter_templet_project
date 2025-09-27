@@ -9,7 +9,7 @@
 import 'dart:convert';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
 import 'package:flutter_templet_project/vendor/isar/db_mixin.dart';
@@ -196,7 +196,7 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['conversationID'] = conversationID;
     data['type'] = type;
     data['userID'] = userID;

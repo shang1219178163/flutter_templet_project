@@ -70,8 +70,8 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
     var overlayEntry = OverlayEntry(builder: (context) {
       //外层使用Positioned进行定位，控制在Overlay中的位置
       // 控制不可拖出屏幕外
-      double dx = 110.0;
-      double dy = 110.0;
+      var dx = 110.0;
+      var dy = 110.0;
 
       if ((offset.dx > 0) && ((offset.dx + overlayWidth) < ScreenUtil().screenWidth)) {
         dx = offset.dx;

@@ -7,11 +7,8 @@
 //
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
 
 class CalendarDatePickerDemo extends StatefulWidget {
   final String? title;
@@ -103,7 +100,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+    final picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(2015, 8),

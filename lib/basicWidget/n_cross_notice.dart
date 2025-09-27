@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_cross_fade.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 /// 提示信息
 class NCrossNotice extends StatelessWidget {

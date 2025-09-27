@@ -13,7 +13,7 @@ class DioProxy {
 
   // 初始化
   static initHttp() async {
-    HttpProxy httpProxy = await HttpProxy.createHttpProxy();
+    var httpProxy = await HttpProxy.createHttpProxy();
     HttpOverrides.global = httpProxy;
   }
 
@@ -26,6 +26,7 @@ class DioProxy {
     if (proxy?.host != null) {
       isProxy = true;
     }
+    // ignore: deprecated_member_use
     (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.idleTimeout = const Duration(seconds: 5);

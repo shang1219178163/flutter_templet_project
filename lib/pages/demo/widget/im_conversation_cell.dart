@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
-import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/network/dio_upload_service.dart';
@@ -106,7 +105,7 @@ class IMConversationCell extends StatelessWidget {
 
     //根据关键字拆分text
     List<String> keywordSegmentationString(String text, String keyword) {
-      List<String> textList = [];
+      var textList = <String>[];
       List texts = text.split(keyword);
       texts.asMap().forEach((key, value) {
         if (key != 0 && key != texts.length) {

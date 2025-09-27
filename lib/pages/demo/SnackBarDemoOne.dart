@@ -1,12 +1,5 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-
-import 'package:tuple/tuple.dart';
 
 const kUpdateContent = """
 1、支持立体声蓝牙耳机，同时改善配对性能;

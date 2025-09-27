@@ -173,11 +173,11 @@ class _AudioVisualizerDemoState extends State<AudioVisualizerDemo> {
                 listenable: audioPlayer,
                 builder: (context, child) {
                   final value = audioPlayer.value;
-                  final positionStr = "${value.position}".split(".").first ?? "";
-                  final durationStr = "${value.duration}".split(".").first ?? "";
+                  final positionStr = "${value.position}".split(".").firstOrNull ?? "";
+                  final durationStr = "${value.duration}".split(".").firstOrNull ?? "";
 
                   return Text(
-                    "${value.status} (${positionStr}/${durationStr})",
+                    "${value.status} ($positionStr/$durationStr)",
                     textAlign: TextAlign.center,
                   );
                 },

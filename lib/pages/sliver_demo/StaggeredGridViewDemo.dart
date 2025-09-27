@@ -6,12 +6,8 @@
 //  Copyright © 11/29/21 shang. All rights reserved.
 //
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 
 class StaggeredGridViewDemo extends StatefulWidget {
   final String? title;
@@ -27,22 +23,20 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
           TextButton(
-              onPressed: () {
-                setState(() {
-                  _type = _type == true ? false : true;
-                });
-              },
-              child: Icon(
-                Icons.change_circle_outlined,
-                color: Colors.white,
-              )),
+            onPressed: () {
+              _type = !_type;
+              setState(() {});
+            },
+            child: Icon(
+              Icons.change_circle_outlined,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
       body: _type == true ? buildBody() : _buildCustomScrollView(),

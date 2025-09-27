@@ -8,13 +8,7 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:yaml/yaml.dart';
 
 /// 浮动拖拽按钮配置类
 class FloatingButtonConfig {
@@ -135,7 +129,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
 
     var button = floatingButtonConfig.button;
     var expandedButton = floatingButtonConfig.expandedButton ?? button;
-    Widget currButton = (_isExpanded ? expandedButton(_rebuild) : button(_rebuild));
+    var currButton = (_isExpanded ? expandedButton(_rebuild) : button(_rebuild));
 
     var buttonSize = floatingButtonConfig.buttonSize;
     var expandedButtonSize = floatingButtonConfig.expandedButtonSize ?? buttonSize;

@@ -12,19 +12,19 @@ class OrderModel with SelectableMixin {
   OrderModel({
     required this.id,
     required this.name,
-    required this.pirce,
+    required this.price,
   });
 
   int id = 0;
   String name = '';
-  double pirce = 0;
+  double price = 0;
 
   OrderModel.fromJson(Map json) {
     if (json.isEmpty) {
       return;
     }
     id = json["id"];
-    pirce = json["pirce"];
+    price = json["price"];
     name = json["name"];
   }
 
@@ -33,7 +33,7 @@ class OrderModel with SelectableMixin {
     var json = Map<String, dynamic>();
     json["name"] = name;
     json["id"] = id;
-    json["pirce"] = pirce;
+    json["price"] = price;
     return json;
   }
 

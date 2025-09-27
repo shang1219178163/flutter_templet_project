@@ -78,7 +78,7 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo>
       itemCount: 20,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text("${prefix}_${index}"),
+          title: Text("${prefix}_$index"),
         );
       },
       separatorBuilder: (BuildContext context, int index) {
@@ -164,7 +164,7 @@ class _NTabBarPageState extends State<NTabBarPage>
       itemCount: 20,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text("${prefix}_${index}"),
+          title: Text("${prefix}_$index"),
         );
       },
       separatorBuilder: (BuildContext context, int index) {

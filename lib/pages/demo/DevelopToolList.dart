@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';

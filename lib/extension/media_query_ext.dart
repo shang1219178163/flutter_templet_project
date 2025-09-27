@@ -6,6 +6,8 @@
 //  Copyright © 2025/3/13 shang. All rights reserved.
 //
 
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
@@ -19,7 +21,7 @@ extension MediaQueryDataExt on MediaQueryData {
     return {
       "size": size.toJson(),
       "devicePixelRatio": devicePixelRatio,
-      "textScaleFactor": textScaleFactor,
+      "textScaleFactor": textScaler.toString(),
       "platformBrightness": platformBrightness.name,
       "padding": padding.toJson(),
       "viewInsets": viewInsets.toJson(),
@@ -48,7 +50,7 @@ extension MediaQueryDataExt on MediaQueryData {
     return MediaQueryData(
       size: SizeExt.fromJson(json["size"] ?? {}),
       devicePixelRatio: json["devicePixelRatio"],
-      textScaleFactor: json["textScaleFactor"],
+      textScaler: TextScaler.linear(json["textScaleFactor"]),
       platformBrightness: json["platformBrightness"] == "Brightness.dark" ? Brightness.dark : Brightness.light,
       padding: EdgeInsetsExt.fromJson(json["padding"] ?? {}),
       viewInsets: EdgeInsetsExt.fromJson(json["viewInsets"] ?? {}),
@@ -129,10 +131,10 @@ extension DisplayFeatureExt on DisplayFeature {
         orElse: () => DisplayFeatureType.unknown,
       ),
       bounds: Rect.fromLTWH(
-        json['bounds']['left'],
-        json['bounds']['top'],
-        json['bounds']['right'] - json['bounds']['left'],
-        json['bounds']['bottom'] - json['bounds']['top'],
+        json['bounds']['left'] ?? 0.0,
+        json['bounds']['top'] ?? 0.0,
+        json['bounds']['right'] ?? 0.0 - json['bounds']['left'] ?? 0.0,
+        json['bounds']['bottom'] ?? 0.0 - json['bounds']['top'] ?? 0.0,
       ),
       state: DisplayFeatureState.values.firstWhere(
         (e) => e.name == json['type'],

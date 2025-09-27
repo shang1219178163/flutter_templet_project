@@ -8,9 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/TicketUI.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/basicWidget/n_ticket_divider_painter.dart';
 
@@ -180,7 +177,6 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
 
   _buildBodyRow1({
     String leftTitle = "May 30, 2022",
-    String midTitle = "",
     String rightTitle = "May 30, 2022",
   }) {
     return Row(

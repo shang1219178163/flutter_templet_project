@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/text_painter_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 // Header.h4(title: "字符串超过一行时(折叠)"),
 // Container(
@@ -25,19 +24,19 @@ class NExpandText extends StatefulWidget {
   }) : super(key: key);
 
   /// 字符串
-  String text;
+  final String text;
 
   /// 字符串样式
-  TextStyle? textStyle;
+  final TextStyle? textStyle;
 
   /// 超过一行初始展开状态
-  bool initiallyExpanded;
+  final bool initiallyExpanded;
 
   /// 展开状态最大行
-  int expandMaxLine;
+  final int expandMaxLine;
 
   /// 展开按钮文字样式
-  TextStyle? expandTitleStyle;
+  final TextStyle? expandTitleStyle;
 
   @override
   _NExpandTextState createState() => _NExpandTextState();

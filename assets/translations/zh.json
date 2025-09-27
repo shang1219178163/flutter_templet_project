@@ -1,0 +1,11 @@
+{
+  "language": "中文",
+  "hello": "你好",
+  "world": "世界！",
+  "title": "我的应用",
+  "money": {
+    "zero": "{name} 没钱",
+    "0": "{name} 没钱",
+    "other": "{name} 有 {money} 元"
+  }
+}

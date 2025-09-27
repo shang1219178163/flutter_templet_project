@@ -116,7 +116,7 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
           ValueListenableBuilder(
             valueListenable: indexVN,
             builder: (context, value, child) {
-              return Text("${value}/${urls.length}");
+              return Text("$value/${urls.length}");
             },
           ),
           Expanded(

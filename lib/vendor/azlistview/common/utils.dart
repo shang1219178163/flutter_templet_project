@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class Utils {
@@ -31,7 +30,7 @@ class Utils {
       color: color,
       alignment: Alignment.centerLeft,
       child: Text(
-        '$tag',
+        tag,
         softWrap: false,
         style: TextStyle(
           fontSize: 14.0,

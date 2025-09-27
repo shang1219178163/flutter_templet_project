@@ -167,11 +167,11 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
       ),
       Tuple2(
         "background",
-        colorScheme.background,
+        colorScheme.surface,
       ),
       Tuple2(
         "onBackground",
-        colorScheme.onBackground,
+        colorScheme.onSurface,
       ),
       Tuple2(
         "surface",
@@ -183,7 +183,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
       ),
       Tuple2(
         "surfaceVariant",
-        colorScheme.surfaceVariant,
+        colorScheme.surfaceContainerHighest,
       ),
       Tuple2(
         "onSurfaceVariant",
@@ -303,7 +303,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
             padding: EdgeInsets.all(8),
             color: e.item2,
             child: Text(
-              "${e.item1}\n(${name})",
+              "${e.item1}\n($name)",
               style: TextStyle(color: Colors.green, fontSize: 14),
             ),
           );

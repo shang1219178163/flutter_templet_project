@@ -70,6 +70,8 @@ PODS:
     - Flutter
   - flutter_native_splash (2.4.3):
     - Flutter
+  - flutter_screen_wake (0.0.1):
+    - Flutter
   - flutter_sound (9.6.0):
     - Flutter
     - flutter_sound_core (= 9.6.0)
@@ -174,6 +176,9 @@ PODS:
   - libwebp/sharpyuv (1.5.0)
   - libwebp/webp (1.5.0):
     - libwebp/sharpyuv
+  - local_auth_darwin (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - Mantle (2.2.0):
     - Mantle/extobjc (= 2.2.0)
   - Mantle/extobjc (2.2.0)
@@ -242,6 +247,8 @@ PODS:
   - photo_manager (2.0.0):
     - Flutter
     - FlutterMacOS
+  - pip (0.0.1):
+    - Flutter
   - PromisesObjC (2.4.0)
   - qr_code_scanner (0.2.0):
     - Flutter
@@ -266,7 +273,7 @@ PODS:
     - FlutterMacOS
   - sign_in_with_apple (0.0.1):
     - Flutter
-  - sqflite (0.0.3):
+  - sqflite_darwin (0.0.4):
     - Flutter
     - FlutterMacOS
   - SSZipArchive (2.6.0)
@@ -282,11 +289,16 @@ PODS:
   - video_player_avfoundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - volume_controller (0.0.1):
+    - Flutter
   - wakelock_plus (0.0.1):
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
+    - FlutterMacOS
   - WechatOpenSDK-XCFramework (2.0.4)
+  - workmanager (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
@@ -304,6 +316,7 @@ DEPENDENCIES:
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_isolate (from `.symlinks/plugins/flutter_isolate/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - flutter_screen_wake (from `.symlinks/plugins/flutter_screen_wake/ios`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - flutter_tts (from `.symlinks/plugins/flutter_tts/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
@@ -321,11 +334,13 @@ DEPENDENCIES:
   - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - isar_flutter_libs (from `.symlinks/plugins/isar_flutter_libs/ios`)
+  - local_auth_darwin (from `.symlinks/plugins/local_auth_darwin/darwin`)
   - open_file_ios (from `.symlinks/plugins/open_file_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
+  - pip (from `.symlinks/plugins/pip/ios`)
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - record_darwin (from `.symlinks/plugins/record_darwin/ios`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
@@ -333,13 +348,15 @@ DEPENDENCIES:
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
-  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - vibration (from `.symlinks/plugins/vibration/ios`)
   - video_compress (from `.symlinks/plugins/video_compress/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
+  - volume_controller (from `.symlinks/plugins/volume_controller/ios`)
   - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
-  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
+  - workmanager (from `.symlinks/plugins/workmanager/ios`)
 
 SPEC REPOS:
   trunk:
@@ -409,6 +426,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_isolate/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
+  flutter_screen_wake:
+    :path: ".symlinks/plugins/flutter_screen_wake/ios"
   flutter_sound:
     :path: ".symlinks/plugins/flutter_sound/ios"
   flutter_tts:
@@ -439,6 +458,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   isar_flutter_libs:
     :path: ".symlinks/plugins/isar_flutter_libs/ios"
+  local_auth_darwin:
+    :path: ".symlinks/plugins/local_auth_darwin/darwin"
   open_file_ios:
     :path: ".symlinks/plugins/open_file_ios/ios"
   package_info_plus:
@@ -449,6 +470,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   photo_manager:
     :path: ".symlinks/plugins/photo_manager/ios"
+  pip:
+    :path: ".symlinks/plugins/pip/ios"
   qr_code_scanner:
     :path: ".symlinks/plugins/qr_code_scanner/ios"
   record_darwin:
@@ -463,8 +486,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
-  sqflite:
-    :path: ".symlinks/plugins/sqflite/darwin"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   vibration:
@@ -473,13 +496,17 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/video_compress/ios"
   video_player_avfoundation:
     :path: ".symlinks/plugins/video_player_avfoundation/darwin"
+  volume_controller:
+    :path: ".symlinks/plugins/volume_controller/ios"
   wakelock_plus:
     :path: ".symlinks/plugins/wakelock_plus/ios"
   webview_flutter_wkwebview:
-    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
+  workmanager:
+    :path: ".symlinks/plugins/workmanager/ios"
 
 SPEC CHECKSUMS:
-  audio_session: 088d2483ebd1dc43f51d253d4a1c517d9a2e7207
+  audio_session: 19e9480dbdd4e5f6c4543826b2e8b0e4ab6145fe
   audio_visualizer: f10a8d5043e0ab0f5134303caf5326f4dcd0457f
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
   camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
@@ -496,6 +523,7 @@ SPEC CHECKSUMS:
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_isolate: 0edf5081826d071adf21759d1eb10ff5c24503b5
   flutter_native_splash: f71420956eb811e6d310720fee915f1d42852e7a
+  flutter_screen_wake: 4d3c2b43943ea81bd5e591fd4e639ea537f4ca5e
   flutter_sound: dde9a913063b65a27ba8fdc2039036b99b136c79
   flutter_sound_core: 0c6eb9d5268adc70ff159b3d65fd3d98a82d3a27
   flutter_tts: 0f492aab6accf87059b72354fcb4ba934304771d
@@ -518,6 +546,7 @@ SPEC CHECKSUMS:
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   isar_flutter_libs: b69f437aeab9c521821c3f376198c4371fa21073
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
+  local_auth_darwin: 66e40372f1c29f383a314c738c7446e2f7fdadc3
   Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
   MLImage: 0ad1c5f50edd027672d8b26b0fee78a8b4a0fc56
   MLKitBarcodeScanning: 0a3064da0a7f49ac24ceb3cb46a5bc67496facd2
@@ -539,18 +568,19 @@ SPEC CHECKSUMS:
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   photo_manager: ff695c7a1dd5bc379974953a2b5c0a293f7c4c8a
+  pip: 5101b81f04fb1b418bcdf6f15cb5cd0d08092cd7
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   record_darwin: 3b1a8e7d5c0cbf45ad6165b4d83a6ca643d929c3
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
-  sensors_plus: 18a9b346c43e157da17d2c8e99def703f9efb9d8
+  sensors_plus: 7229095999f30740798f0eeef5cd120357a8f4f2
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
   share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
-  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
+  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
   SSZipArchive: 8a6ee5677c8e304bebc109e39cf0da91ccef22ea
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
@@ -559,10 +589,12 @@ SPEC CHECKSUMS:
   vibration: 7d883d141656a1c1a6d8d238616b2042a51a1241
   video_compress: fce97e4fb1dfd88175aa07d2ffc8a2f297f87fbe
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
+  volume_controller: 531ddf792994285c9b17f9d8a7e4dcdd29b3eae9
   wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
-  webview_flutter_wkwebview: 2a23822e9039b7b1bc52e5add778e5d89ad488d1
+  webview_flutter_wkwebview: a4af96a051138e28e29f60101d094683b9f82188
   WechatOpenSDK-XCFramework: 36fb2bea0754266c17184adf4963d7e6ff98b69f
+  workmanager: 0afdcf5628bbde6924c21af7836fed07b42e30e6
 
 PODFILE CHECKSUM: 8341310eb7a3a443d1862d61ccc8089d0c4cf6e2
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.13.0

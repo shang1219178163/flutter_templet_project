@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 四角有图标
 class NFourCorner extends StatelessWidget {

@@ -8,8 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -210,8 +209,8 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
       "maybeOrientationOf: ${MediaQuery.maybeOrientationOf(context)}",
       "devicePixelRatioOf: ${MediaQuery.devicePixelRatioOf(context)}",
       "maybeDevicePixelRatioOf: ${MediaQuery.maybeDevicePixelRatioOf(context)}",
-      "textScaleFactorOf: ${MediaQuery.textScaleFactorOf(context)}",
-      "maybeTextScaleFactorOf: ${MediaQuery.maybeTextScaleFactorOf(context)}",
+      "textScaleFactorOf: ${MediaQuery.textScalerOf(context)}",
+      "maybeTextScaleFactorOf: ${MediaQuery.maybeTextScalerOf(context)}",
       "textScalerOf: ${MediaQuery.textScalerOf(context)}",
       "maybeTextScalerOf: ${MediaQuery.maybeTextScalerOf(context)}",
       "platformBrightnessOf: ${MediaQuery.platformBrightnessOf(context)}",
@@ -267,7 +266,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     // /// BottomNavigationBar 高度
     // const double kBottomNavigationBarHeight = 56.0;
 
-    MediaQueryData mq = MediaQuery.of(context);
+    var mq = MediaQuery.of(context);
     // 屏幕密度
     final pixelRatio = mq.devicePixelRatio;
     // 屏幕宽(注意是dp, 转换px 需要 screenWidth * pixelRatio)

@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
-
 import 'package:flutter_templet_project/basicWidget/marquee_widget.dart';
+import 'package:tuple/tuple.dart';
 
 // typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 

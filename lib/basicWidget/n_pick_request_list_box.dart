@@ -160,14 +160,14 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
       controller: refreshViewController,
       pageSize: 30,
       onRequest: (bool isRefresh, int page, int pageSize, last) async {
-        return await widget.requestList(isRefresh, page, pageSize, search);
+        return widget.requestList(isRefresh, page, pageSize, search);
       },
       itemBuilder: (BuildContext context, int index, model) {
         final isSelected = widget.selected(widget.items, model);
         final textColor = isSelected ? primary : fontColor;
         final color = isSelected ? primary : Colors.transparent;
 
-        final name = widget.cbName(model) ?? "--";
+        final name = widget.cbName(model);
 
         void onTapItem() {
           // YLog.d("${jsonEncode(model.toJson())}");
@@ -192,7 +192,7 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
               onTap: onTapItem,
               title: widget.nameWidget?.call(index, model) ??
                   NText(
-                    name ?? "",
+                    name,
                     fontSize: 16,
                     color: textColor,
                   ),

@@ -10,17 +10,12 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
-import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/OcrPhotoDemo.dart';
-import 'package:flutter_templet_project/service/ocr_text_recognition_manager.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:get/get.dart';
 
@@ -215,7 +210,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
 
   // Animates the card back and forth to teach the user that it is swipable.
   Future<void> _shakeCard() async {
-    const double distance = 30;
+    const distance = 30.0;
     // We can animate back and forth by chaining different animations.
     await controller.animateTo(
       const Offset(-distance, 0),
@@ -246,15 +241,15 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
       listenable: controller,
       child: child,
       builder: (context, child) {
-        final SwiperPosition? position = controller.position;
-        final SwiperActivity? activity = controller.swipeActivity;
+        final position = controller.position;
+        final activity = controller.swipeActivity;
         final direction = isLeft ? -1 : 1;
-        final double progress = (activity is Swipe || activity == null) &&
+        final progress = (activity is Swipe || activity == null) &&
                 position != null &&
                 position.offset.toAxisDirection().isHorizontal
-            ? direction * position.progressRelativeToThreshold.clamp(-1, 1)
-            : 0;
-        final Color color = Color.lerp(
+            ? direction * position.progressRelativeToThreshold.clamp(-1.0, 1.0)
+            : 0.0;
+        final color = Color.lerp(
           bgColor,
           CupertinoColors.systemGrey2,
           (-1 * progress).clamp(0, 1),
@@ -322,7 +317,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
             ValueListenableBuilder(
               valueListenable: indexVN,
               builder: (context, value, child) {
-                return Text("${value}/${urls.length}");
+                return Text("$value/${urls.length}");
               },
             ),
             Expanded(
@@ -357,7 +352,6 @@ class _CandidateModel with EqualIdenticalMixin {
     this.name,
     this.job,
     this.city,
-    this.color,
   });
 
   String? avatar;

@@ -14,15 +14,12 @@ class ListWheelScrollViewDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _ListWheelScrollViewDemoState createState() =>
-      _ListWheelScrollViewDemoState();
+  _ListWheelScrollViewDemoState createState() => _ListWheelScrollViewDemoState();
 }
 
 class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

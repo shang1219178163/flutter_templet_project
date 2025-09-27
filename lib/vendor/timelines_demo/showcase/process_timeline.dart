@@ -1,11 +1,9 @@
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timelines/timelines.dart';
-
-import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
 
 const kTileHeight = 50.0;
 

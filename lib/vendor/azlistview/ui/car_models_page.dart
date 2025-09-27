@@ -1,9 +1,6 @@
-import 'dart:developer';
+import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:azlistview/azlistview.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
@@ -40,8 +37,8 @@ class _CarModelsPageState extends State<CarModelsPage> {
   void _handleList(List<ContactInfo> list) {
     if (list.isEmpty) return;
     for (int i = 0, length = list.length; i < length; i++) {
-      String pinyin = PinyinHelper.getPinyinE(list[i].name);
-      String tag = pinyin.substring(0, 1).toUpperCase();
+      var pinyin = PinyinHelper.getPinyinE(list[i].name);
+      var tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;
       if (RegExp("[A-Z]").hasMatch(tag)) {
         list[i].tagIndex = tag;
@@ -95,13 +92,13 @@ class _CarModelsPageState extends State<CarModelsPage> {
         itemCount: contactList.length,
         itemBuilder: (BuildContext context, int index) {
           // if (index == 0) return customHeader();
-          ContactInfo model = contactList[index];
+          var model = contactList[index];
           return Utils.getWeChatListItem(context, model,
               susHeight: susItemHeight);
         },
         susItemHeight: susItemHeight,
         susItemBuilder: (BuildContext context, int index) {
-          ContactInfo model = contactList[index];
+          var model = contactList[index];
           if ('选' == model.getSuspensionTag()) {
             return Container();
           }

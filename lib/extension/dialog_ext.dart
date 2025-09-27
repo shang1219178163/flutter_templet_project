@@ -8,9 +8,6 @@
 
 // Platform.operatingSystem
 
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 extension AlertDialogExt on AlertDialog {}

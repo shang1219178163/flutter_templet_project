@@ -6,9 +6,7 @@
 //  Copyright © 7/1/21 shang. All rights reserved.
 //
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 
 extension OutlinedButtonExt on OutlinedButton {
   /// 自定义方法
@@ -22,7 +20,7 @@ extension OutlinedButtonExt on OutlinedButton {
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
-    MaterialStatesController? statesController,
+    WidgetStatesController? statesController,
     Widget? child,
   }) {
     return OutlinedButton(
@@ -53,7 +51,7 @@ extension TextButtonExt on TextButton {
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
-    MaterialStatesController? statesController,
+    WidgetStatesController? statesController,
     Widget? child,
   }) {
     return TextButton(
@@ -84,7 +82,7 @@ extension ElevatedButtonExt on ElevatedButton {
     FocusNode? focusNode,
     bool? autofocus,
     Clip? clipBehavior,
-    MaterialStatesController? statesController,
+    WidgetStatesController? statesController,
     Widget? child,
   }) {
     return ElevatedButton(

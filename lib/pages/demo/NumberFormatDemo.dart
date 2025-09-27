@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import "package:intl/intl.dart";
 
 class NumberFormatDemo extends StatefulWidget {
@@ -22,22 +22,22 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  handleNumber();
-                },
-                child: Text(
-                  "done",
-                  style: TextStyle(color: Colors.white),
-                )),
-          ],
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(
+              onPressed: () {
+                handleNumber();
+              },
+              child: Text(
+                "done",
+                style: TextStyle(color: Colors.white),
+              )),
+        ],
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 
   void handleNumber() {

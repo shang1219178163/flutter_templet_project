@@ -39,7 +39,7 @@ class _GlowingOverscrollIndicatorDemoState
   }
 
   Widget buildPage1() {
-    double top = MediaQuery.of(context).padding.top;
+    var top = MediaQuery.of(context).padding.top;
     final leadingPaintOffset = top + AppBar().preferredSize.height;
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (OverscrollIndicatorNotification notification) {

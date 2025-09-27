@@ -8,7 +8,6 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
-import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
@@ -47,7 +46,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
     final model = OrderModel(
       id: i,
       name: "订单$i",
-      pirce: IntExt.random(max: 99999, min: 100).toDouble(),
+      price: IntExt.random(max: 99999, min: 100).toDouble(),
     );
     model.isSelected = true;
     return model;
@@ -77,7 +76,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
   }
 
   buildBody() {
-    bool isSingle = false;
+    var isSingle = false;
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -112,9 +111,9 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
               child: buildChoiceBox(
                 models: orders,
                 isSingle: isSingle,
-                idCb: (e) => e.id.toString() ?? "",
-                titleCb: (e) => e.name ?? "",
-                selectedCb: (e) => selectedOrders.map((e) => e.id).contains(e.id ?? ""),
+                idCb: (e) => e.id.toString(),
+                titleCb: (e) => e.name,
+                selectedCb: (e) => selectedOrders.map((e) => e.id).contains(e.id),
                 onChanged: (list) {
                   // DLog.d(list.map((e) => "${e.name}_${e.isSelected}"));
                   selectedOrders = list;
@@ -125,7 +124,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                   return buildItem(
                     e: e,
                     isSelected: isSelected,
-                    titleCb: (e) => e.name ?? "",
+                    titleCb: (e) => e.name,
                   );
                 },
               ),

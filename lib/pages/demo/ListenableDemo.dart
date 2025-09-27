@@ -6,13 +6,9 @@
 //  Copyright © 2025/3/13 shang. All rights reserved.
 //
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/platform_ext.dart';
-import 'package:flutter_templet_project/extension/route_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:get/get.dart';
 
 class ListenableDemo extends StatefulWidget {

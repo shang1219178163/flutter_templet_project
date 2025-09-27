@@ -11,20 +11,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
-import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/main.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/navigator_ext.dart';
-import 'package:flutter_templet_project/extension/dialog_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
-
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/pages/demo/APPDrawerMenuPage.dart';
 import 'package:tuple/tuple.dart';
 
 class APPUserCenterPage extends StatefulWidget {
@@ -250,7 +241,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>
                         title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
                         trailing: Icon(Icons.chevron_right),
                         onTap: () {
-                          debugPrint("${e.item1}");
+                          debugPrint(e.item1);
                         },
                       ),
                       if (e != items.last)

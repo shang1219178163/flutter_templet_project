@@ -36,11 +36,11 @@ class NBadge extends StatelessWidget {
       return child;
     }
 
-    int badge = value;
+    var badge = value;
     var badgeStr = badge > 99 ? "99+" : "$badge";
     ShapeBorder shape =
         badge > 99 ? const StadiumBorder() : const CircleBorder();
-    double right = -8 - (badgeStr.length - 1) * letterStep;
+    var right = -8 - (badgeStr.length - 1) * letterStep;
 
     final badgeChild = buildBadge(badgeStr: badgeStr, shape: shape);
     if (badgeStr.isEmpty || badgeStr == "0") {

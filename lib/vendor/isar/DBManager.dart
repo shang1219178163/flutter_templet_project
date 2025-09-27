@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
@@ -56,7 +56,7 @@ class DBManager {
 
   // 通知所有监听器
   void notifyListeners() {
-    for (var ltr in _listeners) {
+    for (final ltr in _listeners) {
       ltr();
     }
   }

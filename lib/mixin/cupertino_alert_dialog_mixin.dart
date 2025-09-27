@@ -6,7 +6,6 @@
 //  Copyright © 2023/10/5 shang. All rights reserved.
 //
 
-import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
@@ -88,7 +87,7 @@ mixin CupertinoAlertDialogMixin<T extends StatefulWidget> on State<T> {
       cancelButton: CupertinoActionSheetAction(
         isDestructiveAction: true,
         onPressed: onCancel != null
-            ? onCancel?.call(context)
+            ? onCancel.call(context)
             : () {
                 Navigator.pop(context);
               },

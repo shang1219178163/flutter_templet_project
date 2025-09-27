@@ -13,8 +13,6 @@ class StackDemo extends StatefulWidget {
 class _StackDemoState extends State<StackDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -80,11 +78,11 @@ class _StackDemoState extends State<StackDemo> {
           left: 0,
           bottom: 0,
           child: FloatingActionButton(
-            child: Icon(Icons.add),
             onPressed: () {
               debugPrint('FAB tapped!');
             },
             backgroundColor: Colors.blueGrey,
+            child: Icon(Icons.add),
           ),
         ),
       ],

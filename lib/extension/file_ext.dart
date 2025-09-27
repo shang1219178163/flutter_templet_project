@@ -103,7 +103,7 @@ extension FileExt on File {
 extension FileIntExt on int {
   /// length 转为 MB 描述
   String get fileSizeDesc {
-    int length = this;
+    var length = this;
 
     final kb = length / 1024;
     final mb = kb / 1024;
@@ -114,7 +114,7 @@ extension FileIntExt on int {
 
   /// 压缩质量
   int get compressQuality {
-    int length = this;
+    var length = this;
     // var quality = 100;
     const mb = 1024 * 1024;
     if (length > 10 * mb) {

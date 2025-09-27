@@ -6,7 +6,6 @@
 //  Copyright © 6/2/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DraggableDemo extends StatefulWidget {
@@ -23,7 +22,6 @@ class _DraggableDemoState extends State<DraggableDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -84,13 +82,14 @@ class _DraggableDemoState extends State<DraggableDemo> {
           //     acceptedData += data;
           //   });
           // },
-          onAccept: handleOnAccept,
+          onAcceptWithDetails: handleOnAccept,
         ),
       ],
     );
   }
 
-  handleOnAccept(int data) {
+  void handleOnAccept(DragTargetDetails details) {
+    final int data = details.data;
     setState(() {
       acceptedData += data;
     });

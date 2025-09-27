@@ -22,8 +22,6 @@ class ReflectDemo extends StatefulWidget {
 class _ReflectDemoState extends State<ReflectDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -56,8 +54,7 @@ class _ReflectDemoState extends State<ReflectDemo> {
                 padding: EdgeInsets.all(8),
                 child: Wrap(
                   children: [
-                    ElevatedButton(
-                        onPressed: onPressed, child: Text("Iterable")),
+                    ElevatedButton(onPressed: onPressed, child: Text("Iterable")),
                   ],
                 ),
               )
@@ -81,8 +78,7 @@ class _ReflectDemoState extends State<ReflectDemo> {
         appVersion: "版本 7.6.0",
         isShowAll: false);
 
-    debugPrint(
-        "appName before: ${model["appName"]}"); //flutter: appName before: QQ音乐 - 让生活充满音乐
+    debugPrint("appName before: ${model["appName"]}"); //flutter: appName before: QQ音乐 - 让生活充满音乐
     model["appName"] = "哈哈哈哈";
     debugPrint("appName after: ${model["appName"]}"); //flutter: appName1: 哈哈哈哈
   }

@@ -6,22 +6,12 @@
 //  Copyright © 8/14/21 shang. All rights reserved.
 //
 
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/basicWidget/TextInputFormatter/fraction_digits_text_input_formatter.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_textfield.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:tuple/tuple.dart';
-
-import 'package:flutter/material.dart';
 
 class TextFieldDemoTwo extends StatefulWidget {
   TextFieldDemoTwo({

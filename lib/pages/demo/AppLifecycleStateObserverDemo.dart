@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/duration_ext.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 
@@ -121,8 +121,8 @@ class _AppLifecycleStateObserverDemoState
   timeUpdate() {
     timeReset();
     _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      DateTime now = DateTime.now();
-      Duration duration = now.difference(_startTime);
+      var now = DateTime.now();
+      var duration = now.difference(_startTime);
       durationVN.value = duration;
 
       // countVN.value++;
@@ -130,7 +130,7 @@ class _AppLifecycleStateObserverDemoState
     });
   }
 
-  /*************** AppLifecycleObserverMixin ***************/
+  /// ************* AppLifecycleObserverMixin **************
   @override
   void onAppLifecycleStateChanged(AppLifecycleState state) {
     DLog.d("$widget ${state.name}");

@@ -98,7 +98,7 @@ class _UrlLauncherDemoState extends State<UrlLauncherDemo> {
   }
 
   Future<void> onOpenUrl(String url, {LaunchMode? mode}) async {
-    Uri uri = Uri.parse(url);
+    var uri = Uri.parse(url);
     if (!await canLaunchUrl(uri)) {
       throw Exception('Could not launch $url');
     }
@@ -115,7 +115,7 @@ class _UrlLauncherDemoState extends State<UrlLauncherDemo> {
   }
 
   Future<void> onSendMail(String to, String subject, String body) async {
-    final Uri uri = Uri(
+    final uri = Uri(
       scheme: 'mailto',
       path: to,
       query: encodeQueryParameters(<String, String>{
@@ -132,7 +132,7 @@ class _UrlLauncherDemoState extends State<UrlLauncherDemo> {
   }
 
   Future<void> onSendSMS(String phone, String body) async {
-    final Uri uri = Uri(
+    final uri = Uri(
       scheme: 'sms',
       path: phone,
       queryParameters: <String, String>{

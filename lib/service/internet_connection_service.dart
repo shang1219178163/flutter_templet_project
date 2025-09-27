@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -9,7 +8,7 @@ class InternetConnectionService {
   InternetConnectionService._() {
     try {
       _createChecker().onStatusChange.listen((event) {
-        bool connected = switch (event) {
+        var connected = switch (event) {
           InternetConnectionStatus.connected => true,
           InternetConnectionStatus.disconnected => false,
         };

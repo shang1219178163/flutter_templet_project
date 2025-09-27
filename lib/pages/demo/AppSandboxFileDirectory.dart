@@ -9,7 +9,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:image/image.dart' as img;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,6 @@ import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/cache/cache_controller.dart';
@@ -26,7 +24,7 @@ import 'package:flutter_templet_project/cache/file_browser_page.dart';
 import 'package:flutter_templet_project/enum/path_provider_enum.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
@@ -39,6 +37,7 @@ import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
+import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
 /// 沙盒文件目录
@@ -131,7 +130,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                     final bytes = await file.readAsBytes();
 
                     // 使用 image 库加载图片
-                    img.Image? image = img.decodeImage(Uint8List.fromList(bytes));
+                    var image = img.decodeImage(Uint8List.fromList(bytes));
                     if (image == null) {
                       return;
                     }
@@ -331,7 +330,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
   /// 显示沙盒文件缓存内容
   onDebugSheet() {
     final mapNew = cacheUserMapVN.value
-        .map((k, v) => MapEntry(k, (v as List).map((e) => [e["id"], e["name"]].join("_")).toList()));
+        .map((k, v) => MapEntry(k, (v as List<Map>).map((e) => [e["id"], e["name"]].join("_")).toList()));
     final mapNewJsonStr = mapNew.formatedString();
 
     onDebugBottomSheet(
@@ -396,7 +395,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
     final cacheKey = _cacheFileName;
     final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
     cacheMap[section] ??= [];
-    final index = (cacheMap[section] as List).indexWhere((e) => e["id"] == model.id);
+    final index = (cacheMap[section] as List<Map>).indexWhere((e) => e["id"] == model.id);
     if (index == -1) {
       (cacheMap[section] as List).insert(0, model.toJson());
     } else {
@@ -438,13 +437,17 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
     final cacheKey = _cacheFileName;
     final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
     cacheMap[section] ??= [];
-    final index = (cacheMap[section] as List).indexWhere((e) => e["id"] == model.id);
+    final index = (cacheMap[section] as List<Map>).indexWhere((e) => e["id"] == model.id);
     if (index == -1) {
       return false;
     } else {
-      if (isLog) DLog.d("$runtimeType cacheUserDelete List ${(cacheMap[section] as List).length}");
+      if (isLog) {
+        DLog.d("$runtimeType cacheUserDelete List ${(cacheMap[section] as List).length}");
+      }
       (cacheMap[section] as List).removeAt(index);
-      if (isLog) DLog.d("$runtimeType cacheUserDeleteAfter List ${(cacheMap[section] as List).length}");
+      if (isLog) {
+        DLog.d("$runtimeType cacheUserDeleteAfter List ${(cacheMap[section] as List).length}");
+      }
     }
 
     try {

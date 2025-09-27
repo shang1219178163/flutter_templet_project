@@ -36,7 +36,7 @@ class _ThunderstormEffectState extends State<ThunderstormEffect> with SingleTick
     _lastLightningTime = DateTime.now();
 
     // 创建雨滴
-    for (int i = 0; i < 120; i++) {
+    for (var i = 0; i < 120; i++) {
       raindrops.add(RainDrop(
         x: random.nextDouble() * 500,
         y: random.nextDouble() * 800 - 800,
@@ -47,7 +47,7 @@ class _ThunderstormEffectState extends State<ThunderstormEffect> with SingleTick
     }
 
     // 创建雷电
-    for (int i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       lightnings.add(Lightning(
         startX: random.nextDouble() * 300 + 50,
         startY: 20,
@@ -58,7 +58,7 @@ class _ThunderstormEffectState extends State<ThunderstormEffect> with SingleTick
     }
 
     // 创建风暴云
-    for (int i = 0; i < 6; i++) {
+    for (var i = 0; i < 6; i++) {
       stormClouds.add(Cloud(
         x: random.nextDouble() * 400 - 100,
         y: random.nextDouble() * 150,
@@ -81,7 +81,7 @@ class _ThunderstormEffectState extends State<ThunderstormEffect> with SingleTick
       animation: _controller,
       builder: (context, child) {
         // 更新雨滴
-        for (var drop in raindrops) {
+        for (final drop in raindrops) {
           // 使用动画速度参数调整雨滴下落速度
           drop.y += drop.speed * widget.animationSpeed;
           if (drop.y > 800) {
@@ -98,7 +98,7 @@ class _ThunderstormEffectState extends State<ThunderstormEffect> with SingleTick
           _lastLightningTime = now;
 
           // 重新生成闪电路径
-          for (var lightning in lightnings) {
+          for (final lightning in lightnings) {
             lightning.regenerate(random);
             lightning.opacity = _lightningOpacity * (random.nextDouble() * 0.5 + 0.5);
           }
@@ -166,10 +166,10 @@ class Lightning {
     path.clear();
     path.add(Offset(startX, startY));
 
-    double currentX = startX;
-    double currentY = startY;
+    var currentX = startX;
+    var currentY = startY;
 
-    for (int i = 0; i < segments; i++) {
+    for (var i = 0; i < segments; i++) {
       currentX += random.nextDouble() * 40 - 20;
       currentY += random.nextDouble() * 80 + 40;
       path.add(Offset(currentX, currentY));
@@ -209,7 +209,7 @@ class ThunderstormPainter extends CustomPainter {
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), backgroundPaint);
 
     // 绘制云层
-    for (var cloud in clouds) {
+    for (final cloud in clouds) {
       final cloudPaint = Paint()
         ..color = Colors.grey.shade800.withOpacity(cloud.opacity)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15);
@@ -259,7 +259,7 @@ class ThunderstormPainter extends CustomPainter {
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round;
 
-    for (var drop in raindrops) {
+    for (final drop in raindrops) {
       // 雨滴主体
       canvas.drawLine(
         Offset(drop.x, drop.y),
@@ -281,7 +281,7 @@ class ThunderstormPainter extends CustomPainter {
       canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), flashPaint);
 
       // 绘制闪电
-      for (var lightning in lightnings) {
+      for (final lightning in lightnings) {
         if (lightning.opacity > 0) {
           final lightningPaint = Paint()
             ..color = Colors.white.withOpacity(lightning.opacity)
@@ -295,7 +295,7 @@ class ThunderstormPainter extends CustomPainter {
             final path = Path();
             path.moveTo(lightning.path.first.dx, lightning.path.first.dy);
 
-            for (int i = 1; i < lightning.path.length; i++) {
+            for (var i = 1; i < lightning.path.length; i++) {
               path.lineTo(lightning.path[i].dx, lightning.path[i].dy);
             }
 
@@ -325,7 +325,7 @@ class ThunderstormPainter extends CustomPainter {
               var currentPoint = branchStart;
               final branchSegments = random.nextInt(3) + 1;
 
-              for (int i = 0; i < branchSegments; i++) {
+              for (var i = 0; i < branchSegments; i++) {
                 final newPoint = Offset(
                   currentPoint.dx + random.nextDouble() * 30 - 15,
                   currentPoint.dy + random.nextDouble() * 30 + 10,
@@ -357,7 +357,7 @@ class ThunderstormPainter extends CustomPainter {
     canvas.drawRect(reflectionRect, reflectionPaint);
 
     // 绘制雨滴溅落效果
-    for (var drop in raindrops) {
+    for (final drop in raindrops) {
       if (drop.y + drop.length >= size.height * 0.85) {
         final splashOpacity = drop.opacity * 0.5;
         final splashRadius = random.nextDouble() * 2 + 1.5;

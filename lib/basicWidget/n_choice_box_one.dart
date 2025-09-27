@@ -9,8 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 typedef ChoiceSelectedType<T> = void Function(T e, bool selected);
 
@@ -152,9 +151,9 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
               innerColor: Colors.transparent,
             ));
 
-    String itemTitle = widget.itemNameCb(e);
+    var itemTitle = widget.itemNameCb(e);
 
-    TextStyle textStyle = isSelected
+    var textStyle = isSelected
         ? widget.styleSelected ??
             TextStyle(
               color: widget.primaryColor,
@@ -208,7 +207,7 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
       return;
     }
 
-    bool selected = !isSelected;
+    var selected = !isSelected;
     // debugPrint("e: $selected,  $e");
     final canChange =
         widget.canChanged?.call(e, onSelect as ChoiceSelectedType) ?? true;

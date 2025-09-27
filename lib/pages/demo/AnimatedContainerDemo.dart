@@ -12,7 +12,6 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 class AnimatedContainerDemo extends StatefulWidget {

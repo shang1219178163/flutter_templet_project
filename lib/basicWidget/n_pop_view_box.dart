@@ -23,22 +23,22 @@ class NPopViewBox extends StatefulWidget {
     this.contentChildBuilder,
   }) : super(key: key);
 
-  Widget? title;
-  Widget? content;
-  Widget? header;
-  Widget? footer;
-  Color divderColor = const Color(0xffF3F3F3);
-  EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 38);
-  Radius radius = const Radius.circular(8);
-  Alignment alignment = Alignment.center;
-  VoidCallback? onCancell;
-  VoidCallback? onConfirm;
-  double contentMaxHeight = 500;
-  double contentMinHeight = 150;
-  double buttonBarHeight = 48;
-  EdgeInsets contentPadding = const EdgeInsets.all(20);
-  StatefulWidgetBuilder? contentChildBuilder;
-  ScrollController? scrollController;
+  final Widget? title;
+  final Widget? content;
+  final Widget? header;
+  final Widget? footer;
+  final Color divderColor;
+  final EdgeInsets margin;
+  final Radius radius;
+  final Alignment alignment;
+  final VoidCallback? onCancell;
+  final VoidCallback? onConfirm;
+  final double contentMaxHeight;
+  final double contentMinHeight;
+  final double buttonBarHeight;
+  final EdgeInsets contentPadding;
+  final StatefulWidgetBuilder? contentChildBuilder;
+  final ScrollController? scrollController;
 
   @override
   _NPopViewBoxState createState() => _NPopViewBoxState();

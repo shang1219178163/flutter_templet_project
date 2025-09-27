@@ -4,7 +4,6 @@
 
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart' show clampDouble;
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet/en_routes.dart';
 
@@ -256,14 +255,10 @@ Future<T?> showDialogNew<T>({
   Offset? anchorPoint,
   double? right = 0,
 }) {
-  assert(builder != null);
-  assert(barrierDismissible != null);
-  assert(useSafeArea != null);
-  assert(useRootNavigator != null);
   assert(_debugIsActive(context));
   assert(debugCheckHasMaterialLocalizations(context));
 
-  final CapturedThemes themes = InheritedTheme.capture(
+  final themes = InheritedTheme.capture(
     from: context,
     to: Navigator.of(
       context,
@@ -360,12 +355,11 @@ class DialogRouteNew<T> extends RawDialogRouteNew<T> {
     super.settings,
     super.anchorPoint,
     super.right,
-  })  : assert(barrierDismissible != null),
-        super(
+  })  : super(
           pageBuilder: (BuildContext buildContext, Animation<double> animation,
               Animation<double> secondaryAnimation) {
             final Widget pageChild = Builder(builder: builder);
-            Widget dialog = themes?.wrap(pageChild) ?? pageChild;
+            var dialog = themes?.wrap(pageChild) ?? pageChild;
             if (useSafeArea) {
               dialog = SafeArea(child: dialog);
             }
@@ -379,7 +373,7 @@ class DialogRouteNew<T> extends RawDialogRouteNew<T> {
 }
 
 double _paddingScaleFactor(double textScaleFactor) {
-  final double clampedTextScaleFactor = clampDouble(textScaleFactor, 1.0, 2.0);
+  final clampedTextScaleFactor = clampDouble(textScaleFactor, 1.0, 2.0);
   // The final padding scale factor is clamped between 1/3 and 1. For example,
   // a non-scaled padding of 24 will produce a padding between 24 and 8.
   return lerpDouble(1.0, 1.0 / 3.0, clampedTextScaleFactor - 1.0)!;

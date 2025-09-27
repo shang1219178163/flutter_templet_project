@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class MouseRegionDemo extends StatefulWidget {
   String? title;
@@ -117,24 +117,26 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
   }
 
   Widget buildBody1() {
-    return MouseRegion(
-      onEnter: _incrementEnter,
-      onHover: _updateLocation,
-      onExit: _incrementExit,
-      child: Container(
-        color: Colors.lightBlueAccent,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('You have entered or exited this box this many times:'),
-            Text(
-              '$_enterCounter Entries\n$_exitCounter Exits',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              'The cursor is here: (${x.toStringAsFixed(2)}, ${y.toStringAsFixed(2)})',
-            ),
-          ],
+    return Container(
+      child: MouseRegion(
+        onEnter: _incrementEnter,
+        onHover: _updateLocation,
+        onExit: _incrementExit,
+        child: Container(
+          color: Colors.lightBlueAccent,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('You have entered or exited this box this many times:'),
+              Text(
+                '$_enterCounter Entries\n$_exitCounter Exits',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              Text(
+                'The cursor is here: (${x.toStringAsFixed(2)}, ${y.toStringAsFixed(2)})',
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,13 +6,12 @@
 //  Copyright © 2025/2/5 shang. All rights reserved.
 //
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -30,7 +29,7 @@ mixin AssetPickerMixin<T extends StatefulWidget> on State<T> {
     VoidCallback? onCancel,
   }) async {
     try {
-      bool isGranted = await PermissionUtil.checkPhotoAlbum();
+      var isGranted = await PermissionUtil.checkPhotoAlbum();
       if (!isGranted) {
         debugPrint("授权失败");
         return;

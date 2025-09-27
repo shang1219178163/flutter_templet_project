@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/enum/ActivityType.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class SearchDemo extends StatefulWidget {
@@ -49,7 +48,7 @@ class _SearchDemoState extends State<SearchDemo> {
         final isSelected = ValueNotifier(true);
         return SearchBar(
           controller: controller,
-          padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+          padding: const WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
           onTap: () {
             controller.openView();
           },

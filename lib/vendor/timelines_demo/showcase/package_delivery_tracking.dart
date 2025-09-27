@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:timelines/timelines.dart';
-
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
+import 'package:timelines/timelines.dart';
 
 const kTileHeight = 50.0;
 
@@ -158,7 +157,9 @@ class _DeliveryProcesses extends StatelessWidget {
             connectionDirection: ConnectionDirection.before,
             itemCount: processes.length,
             contentsBuilder: (_, index) {
-              if (processes[index].isCompleted) return null;
+              if (processes[index].isCompleted) {
+                return null;
+              }
 
               return Padding(
                 padding: EdgeInsets.only(left: 8.0),
@@ -254,7 +255,7 @@ _OrderInfo _data(int id) => _OrderInfo(
       id: id,
       date: DateTime.now(),
       driverInfo: _DriverInfo(
-        name: 'Philipe',
+        name: 'Philip',
         thumbnailUrl:
             'https://i.pinimg.com/originals/08/45/81/084581e3155d339376bf1d0e17979dc6.jpg',
       ),
@@ -270,7 +271,7 @@ _OrderInfo _data(int id) => _OrderInfo(
           'In Transit',
           messages: [
             _DeliveryMessage('13:00pm', 'Driver arrived at destination'),
-            _DeliveryMessage('11:35am', 'Package delivered by m.vassiliades'),
+            _DeliveryMessage('11:35am', 'Package delivered by m.vas'),
           ],
         ),
         _DeliveryProcess.complete(),

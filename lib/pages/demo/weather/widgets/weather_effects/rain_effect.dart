@@ -28,7 +28,7 @@ class _RainEffectState extends State<RainEffect>
     )..repeat();
 
     // 创建雨滴
-    for (int i = 0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) {
       raindrops.add(RainDrop(
         x: random.nextDouble() * 500,
         y: random.nextDouble() * 800 - 800, // 开始在屏幕上方
@@ -51,7 +51,7 @@ class _RainEffectState extends State<RainEffect>
       animation: _controller,
       builder: (context, child) {
         // 更新雨滴位置
-        for (var drop in raindrops) {
+        for (final drop in raindrops) {
           // 使用动画速度参数调整雨滴下落速度
           drop.y += drop.speed * widget.animationSpeed;
           if (drop.y > 800) {
@@ -105,7 +105,7 @@ class RainPainter extends CustomPainter {
     canvas.drawRect(reflectionRect, reflectionPaint);
 
     // 绘制雨滴
-    for (var drop in raindrops) {
+    for (final drop in raindrops) {
       final paint = Paint()
         ..color = Colors.white.withOpacity(drop.opacity)
         ..strokeWidth = 1.5

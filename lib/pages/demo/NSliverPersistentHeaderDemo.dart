@@ -56,7 +56,7 @@ class _NSliverPersistentHeaderDemoState
                 height: 200,
                 alignment: Alignment.center,
                 color: Colors.green,
-                child: Text("${widget}"))
+                child: Text("$widget"))
             .toSliverToBoxAdapter(),
         NSliverPersistentHeaderBuilder(
           // pinned: true,

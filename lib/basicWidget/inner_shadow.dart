@@ -1,6 +1,7 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'dart:ui' as ui;
 
 class InnerShadow extends SingleChildRenderObjectWidget {
   const InnerShadow({

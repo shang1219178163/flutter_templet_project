@@ -216,8 +216,6 @@ Future<T?> showGeneralDialogNew<T extends Object?>({
   Offset? anchorPoint,
   double? right,
 }) {
-  assert(pageBuilder != null);
-  assert(useRootNavigator != null);
   assert(!barrierDismissible || barrierLabel != null);
   return Navigator.of(context, rootNavigator: useRootNavigator)
       .push<T>(RawDialogRouteNew<T>(

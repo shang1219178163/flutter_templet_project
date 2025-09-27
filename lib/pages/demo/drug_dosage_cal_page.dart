@@ -14,13 +14,12 @@ import 'package:flutter_templet_project/basicWidget/n_cupertino_picker_list_view
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_unit.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/pages/medication_calculator.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:get/get.dart';
 
 /// 药品计量推荐
 class DrugDosageCalPage extends StatefulWidget {

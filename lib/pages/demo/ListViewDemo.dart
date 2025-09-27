@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
@@ -137,7 +135,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
             valueListenable: offsetY,
             builder: (context, value, child) {
               return Container(
-                child: Text("${value.toStringAsFixed(1)}"),
+                child: Text(value.toStringAsFixed(1)),
               );
             }),
       ),
@@ -311,11 +309,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
     );
   }
 
-  _buildListViewSeparatedTwo({
-    IndexedWidgetBuilder? itemBuilder,
-    EdgeInsets padding = const EdgeInsets.all(0),
-    double gap = 8,
-  }) {
+  _buildListViewSeparatedTwo() {
     return ListView.separated(
       cacheExtent: 180,
       itemCount: kAliPayList.length,
@@ -432,7 +426,7 @@ class ScrollWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           final e = items[index];
           return InkWell(
-            onTap: () => debugPrint("$e"),
+            onTap: () => debugPrint(e),
             child: Container(
               color: Colors.green,
               width: 200,

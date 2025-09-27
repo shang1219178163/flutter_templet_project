@@ -15,12 +15,9 @@ import 'package:flutter_templet_project/basicWidget/n_image_indicator.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:get/get.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:photo_view/photo_view.dart';
@@ -80,16 +77,16 @@ class _NImagePreviewState extends State<NImagePreview> {
   Map<String, dynamic>? get currImageMap {
     return urlMaps[currentIndex.value];
 
-    final extraInfoMap = currExtraModel?.extraInfoMap;
-    if (extraInfoMap?.isNotEmpty != true) {
-      return null;
-    }
-    final uploadType = extraInfoMap?["uploadType"] == "TAKE_PIC" ? "拍照" : "本地相册";
-    return {
-      "上  传 人": extraInfoMap?["uploadUser"] ?? "-",
-      "上传时间": extraInfoMap?["uploadTime"] ?? "-",
-      "上传方式": uploadType,
-    };
+    // final extraInfoMap = currExtraModel?.extraInfoMap;
+    // if (extraInfoMap?.isNotEmpty != true) {
+    //   return null;
+    // }
+    // final uploadType = extraInfoMap?["uploadType"] == "TAKE_PIC" ? "拍照" : "本地相册";
+    // return {
+    //   "上  传 人": extraInfoMap?["uploadUser"] ?? "-",
+    //   "上传时间": extraInfoMap?["uploadTime"] ?? "-",
+    //   "上传方式": uploadType,
+    // };
   }
 
   bool showImageInfo = false;
@@ -176,7 +173,7 @@ class _NImagePreviewState extends State<NImagePreview> {
                         return;
                       }
                       urlMaps[index]["path"] = p;
-                      final List<Barcode> barcodes = await barcodeScanner.processImage(InputImage.fromFilePath(p));
+                      final barcodes = await barcodeScanner.processImage(InputImage.fromFilePath(p));
                       urlMaps[index]["qr"] = barcodes.map((e) => e.rawValue).toList().formatedString();
                     });
                   }
@@ -408,25 +405,5 @@ class _NImagePreviewState extends State<NImagePreview> {
       final message = result["isSuccess"] ? "图片已保存到相册" : "操作失败";
       showToast(message, barrierDismissible: false);
     }
-  }
-}
-
-extension BarcodeExt on Barcode {
-  Map<String, dynamic> toJson() {
-    final data = Map<String, dynamic>();
-    data['type'] = type.index;
-    data['format'] = format.index;
-    data['displayValue'] = displayValue;
-    data['rawValue'] = rawValue;
-    data['rawBytes'] = rawBytes;
-    data['boundingBox'] = {
-      'left': boundingBox.left,
-      'top': boundingBox.top,
-      'right': boundingBox.right,
-      'bottom': boundingBox.bottom,
-    };
-    data['points'] = cornerPoints.map((e) => {"x": e.x, "y": e.y});
-    data['value'] = value;
-    return data;
   }
 }

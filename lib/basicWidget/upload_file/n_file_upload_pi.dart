@@ -42,8 +42,8 @@ class NFileUploadPI extends NFileUploadHandle {
           ValueNotifier<double> percentVN) {
         final validUrl = model.url?.startsWith("http") == true;
 
-        String name = model.fileName ?? "--";
-        String? fileDesc = model.fileDesc;
+        var name = model.fileName ?? "--";
+        var fileDesc = model.fileDesc;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -8,12 +8,11 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_templet_project/basicWidget/n_refresh_view.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
@@ -127,7 +126,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
               fit: BoxFit.fill,
             ),
             title: e.showName ?? "-",
-            subtitle: assetFileModels.firstOrNull?.content?.split("\n")?.randomOne ?? "",
+            subtitle: assetFileModels.firstOrNull?.content?.split("\n").randomOne ?? "",
             time: dateStr,
           ),
         );

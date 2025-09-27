@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/Pages/app_user_center_page.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/bottom_navigation_bar/n_bottom_navigation_bar.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/pages/demo/AppDrawerMenuPage.dart';
@@ -114,7 +114,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
     // });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AppRouteObserver.resetRoute();
+      // AppRouteObserver.resetRoute();
     });
   }
 
@@ -139,8 +139,8 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
         child: NBottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
-          selectedFontSize: 10.sp, // 选中字体大小
-          unselectedFontSize: 10.sp, // 未选中字体大小
+          selectedFontSize: 11, // 选中字体大小
+          unselectedFontSize: 11, // 未选中字体大小
           selectedItemColor: context.primaryColor,
           onTap: (index) => onTapBar(index),
           items: items

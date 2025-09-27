@@ -116,7 +116,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
                         "Transfer to Acidney D.",
                         "55.00 \$",
                         Icon(
-                          FontAwesomeIcons.exchangeAlt,
+                          FontAwesomeIcons.rightLeft,
                           color: Color(0xFF4D70A6),
                         )),
                   ],

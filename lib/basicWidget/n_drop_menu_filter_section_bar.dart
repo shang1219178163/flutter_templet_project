@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_drop_menu_filter_bar.dart';
-import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/model/section_detail_model.dart';
 
 /// 搜索框加分组选择

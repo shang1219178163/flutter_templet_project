@@ -1,7 +1,7 @@
 import 'package:azlistview/azlistview.dart';
-import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class CityListCustomHeaderPage extends StatefulWidget {
   const CityListCustomHeaderPage({Key? key}) : super(key: key);
@@ -38,10 +38,12 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
   }
 
   void _handleList(List<CityModel> list) {
-    if (list.isEmpty) return;
-    for (int i = 0, length = list.length; i < length; i++) {
-      String pinyin = PinyinHelper.getPinyinE(list[i].name);
-      String tag = pinyin.substring(0, 1).toUpperCase();
+    if (list.isEmpty) {
+      return;
+    }
+    for (var i = 0, length = list.length; i < length; i++) {
+      var pinyin = PinyinHelper.getPinyinE(list[i].name);
+      var tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;
       if (RegExp('[A-Z]').hasMatch(tag)) {
         list[i].tagIndex = tag;
@@ -66,7 +68,7 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
   }
 
   Widget _buildHeader() {
-    List<CityModel> hotCityList = [];
+    var hotCityList = <CityModel>[];
     hotCityList.addAll([
       CityModel(name: "北京市"),
       CityModel(name: "广州市"),
@@ -124,15 +126,17 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
             data: cityList,
             itemCount: cityList.length,
             itemBuilder: (BuildContext context, int index) {
-              if (index == 0) return _buildHeader();
-              CityModel model = cityList[index];
+              if (index == 0) {
+                return _buildHeader();
+              }
+              var model = cityList[index];
               return Utils.getListItem(context, model,
                   susHeight: susItemHeight);
             },
             susItemHeight: susItemHeight,
             susItemBuilder: (BuildContext context, int index) {
-              CityModel model = cityList[index];
-              String tag = model.getSuspensionTag();
+              var model = cityList[index];
+              var tag = model.getSuspensionTag();
               if (imgFavorite == tag) {
                 return Container();
               }

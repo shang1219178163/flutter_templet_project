@@ -7,19 +7,11 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_alignment_drawer.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/button_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/navigator_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:get/get.dart';
@@ -192,22 +184,22 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         NPair<int>(
-          child: Text("CALL"),
           icon: Icon(Icons.call),
           direction: Axis.vertical,
           data: 0,
+          child: Text("CALL"),
         ),
         NPair<int>(
-          child: Text("SHARE"),
           icon: Icon(Icons.open_in_new),
           direction: Axis.vertical,
           data: 1,
+          child: Text("SHARE"),
         ),
         NPair<int>(
-          child: Text("SAVE"),
           icon: Icon(Icons.playlist_add),
           direction: Axis.vertical,
           data: 2,
+          child: Text("SAVE"),
         ),
       ].map((e) {
         return TextButton(

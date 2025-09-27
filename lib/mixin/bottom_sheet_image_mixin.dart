@@ -12,12 +12,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
+import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:tuple/tuple.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 /// 头像更换(回调返回单张图片的路径)
@@ -108,7 +107,7 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
     required ValueChanged<File> onChanged,
   }) async {
     try {
-      bool isGranted = await PermissionUtil.checkCamera();
+      var isGranted = await PermissionUtil.checkCamera();
       if (!isGranted) {
         return null;
       }
@@ -202,11 +201,11 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
   /// limit 图片大小限制(MB)
   chooseImagesByWechatPicker({
     bool needCropp = false,
-    maxCount = 9,
-    limit = 5,
+    int maxCount = 9,
+    int limit = 5,
     required ValueChanged<File> onChanged,
   }) async {
-    bool isGranted = await PermissionUtil.checkPhotoAlbum();
+    var isGranted = await PermissionUtil.checkPhotoAlbum();
     if (!isGranted) {
       return;
     }

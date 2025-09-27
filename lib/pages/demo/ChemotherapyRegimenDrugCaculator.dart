@@ -8,18 +8,16 @@
 
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/pages/demo/drug_dosage_cal_page.dart';
 import 'package:flutter_templet_project/pages/medication_calculator.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 /// 化疗药品计算
 class ChemotherapyRegimenDrugCaculator extends StatefulWidget {
@@ -92,8 +90,8 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              NText("身高: ${height}"),
-              NText("体重: ${weight}"),
+              NText("身高: $height"),
+              NText("体重: $weight"),
               NText("体表面积: $bsa"),
               FractionallySizedBox(
                 widthFactor: 0.40,
@@ -230,8 +228,8 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
   // }
 
   void onPicker() {
-    double heightTmp = 170.0; // 身高 (cm)
-    double weightTmp = 65.0; // 体重 (kg)
+    var heightTmp = 170.0; // 身高 (cm)
+    var weightTmp = 65.0; // 体重 (kg)
 
     GetBottomSheet.showCustom(
       enableDrag: false,

@@ -8,7 +8,6 @@
 
 import 'dart:io';
 
-import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -220,7 +219,7 @@ class NConvertViewState extends State<NConvertView> {
   }) {
     double? maxWidth = isVertical ? double.maxFinite : width;
 
-    Widget child = widget.start ??
+    var child = widget.start ??
         buildTextfield(
           controller: _textEditingController,
           focusNode: _focusNode,

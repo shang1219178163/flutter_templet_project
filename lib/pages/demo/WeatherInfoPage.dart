@@ -28,8 +28,6 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -37,11 +35,11 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),
@@ -71,8 +69,7 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
   }
 
   requestWeather() async {
-    var url =
-        "https://api.openweathermap.org/data/2.5/weather?id=1790630&appid=$openWeatherApiKey";
+    var url = "https://api.openweathermap.org/data/2.5/weather?id=1790630&appid=$openWeatherApiKey";
 
     // url = "https://openweathermap.org/data/2.5/onecall?lat=34.2583&lon=108.9286&units=metric&appid=$openWeatherApiKey";
 
@@ -95,8 +92,7 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
   }
 
   requestWeather2() async {
-    var url =
-        "https://api.openweathermap.org/data/2.5/forecast?id=1790630&appid=$openWeatherApiKey";
+    var url = "https://api.openweathermap.org/data/2.5/forecast?id=1790630&appid=$openWeatherApiKey";
 
     try {
       debugPrint("url: $url");

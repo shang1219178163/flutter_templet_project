@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/app_webView_page.dart';
-import 'package:get/get.dart';
 
 class WebviewDemo extends StatefulWidget {
   const WebviewDemo({

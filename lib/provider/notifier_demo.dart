@@ -11,9 +11,7 @@
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 /// ChangeNotifier(不推荐使用,麻烦)
 class CartModel extends ChangeNotifier {
@@ -21,15 +19,12 @@ class CartModel extends ChangeNotifier {
   // 只读的购物车内容(getter)
   UnmodifiableListView<OrderModel> get items => UnmodifiableListView(_items);
 
-  // double get totalPrice => _items.map((e) => e.pirce).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
+  // double get totalPrice => _items.map((e) => e.price).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
   double get totalPrice {
     if (_items.isEmpty) {
       return 0;
     }
-    return _items
-        .map((e) => e.pirce)
-        .reduce((value, e) => value + e)
-        .roundToDouble();
+    return _items.map((e) => e.price).reduce((value, e) => value + e).roundToDouble();
   }
 
   /// 加入物品到购物车
@@ -64,7 +59,7 @@ class CartModel extends ChangeNotifier {
 
   @override
   String toString() {
-    return "${runtimeType} 共 ${_items.length} 件商品,总价: ¥${totalPrice.toString()}";
+    return "$runtimeType 共 ${_items.length} 件商品,总价: ¥${totalPrice.toString()}";
   }
 }
 
@@ -72,15 +67,12 @@ class CartModel extends ChangeNotifier {
 class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
   ValueNotifierOrderModels() : super(<OrderModel>[]); // 构造函数要提供value的初始值
 
-  // double get totalPrice => value.map((e) => e.pirce).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
+  // double get totalPrice => value.map((e) => e.price).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
   double get totalPrice {
     if (value.isEmpty) {
       return 0;
     }
-    return value
-        .map((e) => e.pirce)
-        .reduce((value, element) => value + element)
-        .roundToDouble();
+    return value.map((e) => e.price).reduce((value, element) => value + element).roundToDouble();
   }
 
   void add(OrderModel item) {
@@ -118,7 +110,7 @@ class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
 
   @override
   String toString() {
-    return "${runtimeType} 共 ${value.length} 件商品,总价: ¥${totalPrice.toString()}";
+    return "$runtimeType 共 ${value.length} 件商品,总价: ¥${totalPrice.toString()}";
   }
 }
 
@@ -161,7 +153,7 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
 
   @override
   String toString() {
-    return "${runtimeType} total: ${value.length} count}";
+    return "$runtimeType total: ${value.length} count}";
   }
 }
 
@@ -169,12 +161,7 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
 
 /// ValueNotifier<int>
 class ValueNotifierNum extends ValueNotifier<num> {
-  ValueNotifierNum(
-      {this.initValue = 0,
-      this.minValue = 0,
-      this.maxValue = 100000,
-      this.block})
-      : super(initValue);
+  ValueNotifierNum({this.initValue = 0, this.minValue = 0, this.maxValue = 100000, this.block}) : super(initValue);
 
   num initValue;
 
@@ -199,7 +186,7 @@ class ValueNotifierNum extends ValueNotifier<num> {
 
   @override
   String toString() {
-    return "${runtimeType} 当前值 ${value.toString()}";
+    return "$runtimeType 当前值 ${value.toString()}";
   }
 }
 
@@ -216,9 +203,6 @@ class CartModelNew extends ValueNotifierList<OrderModel> {
     if (value.isEmpty) {
       return 0;
     }
-    return value
-        .map((e) => e.pirce)
-        .reduce((value, element) => value + element)
-        .roundToDouble();
+    return value.map((e) => e.price).reduce((value, element) => value + element).roundToDouble();
   }
 }

@@ -45,11 +45,11 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
               ]
                   .map(
                     (e) => TextButton(
+                      onPressed: onCreate,
                       child: Text(
                         e,
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: onCreate,
                     ),
                   )
                   .toList(),
@@ -179,7 +179,7 @@ class $className extends ConsumerStatefulWidget {
     ),
   );
 
-  const ${className}({
+  const $className({
     super.key,
   });
 
@@ -187,7 +187,7 @@ class $className extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _${className}State();
 }
 
-class _${className}State extends ConsumerState<${className}>
+class _${className}State extends ConsumerState<$className>
     with AutomaticKeepAliveClientMixin, _PageBuilder {
   @override
   _${className}State get state => this;

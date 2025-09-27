@@ -6,20 +6,13 @@
 //  Copyright © 2024/11/16 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/basicWidget/n_future_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
-import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/clipboard_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/device_info_plugin_ext.dart';
 import 'package:google_mlkit_language_id/google_mlkit_language_id.dart';
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
-import 'package:quiver/time.dart';
 
 class TranslationTextPage extends StatefulWidget {
   const TranslationTextPage({super.key});

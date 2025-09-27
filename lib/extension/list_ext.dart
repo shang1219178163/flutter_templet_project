@@ -8,10 +8,7 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:get/get.dart';
+import 'package:flutter/foundation.dart';
 
 extension IterableExt<E> on Iterable<E> {
   /// 获取随机元素
@@ -135,6 +132,11 @@ extension ListExt<T, E> on List<E> {
   List<E> operator *(int value) {
     var result = List<E>.generate(value, (index) => this as E);
     return result;
+  }
+
+  /// 相等判断
+  bool equal(List<E> other) {
+    return listEquals(this, other);
   }
 
   /// 用多个元素取代数组中满足条件的第一个元素

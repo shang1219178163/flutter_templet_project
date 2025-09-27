@@ -44,7 +44,7 @@ class WBColors {
 
   static const Color color_4aff552e = Color(0x4aFF552E);
   static const Color color_2aff552e = Color(0x2aFF552E);
-  static const Color color_f9f8fa = Color(0xF9F8FA);
+  static const Color color_f9f8fa = Color(0x00f9f8fa);
   static const Color color_f2f2f2 = Color(0xFFF2F2F2);
   static const Color color_f7f7f7 = Color(0xFFF7F7F7);
   static const Color color_2a5ccd = Color(0xFF2A5CCD);

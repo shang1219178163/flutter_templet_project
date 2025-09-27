@@ -324,7 +324,7 @@ class DashedDecoration extends Decoration {
     switch (shape) {
       case BoxShape.rectangle:
         if (borderRadius != null) {
-          final RRect bounds =
+          final bounds =
               borderRadius!.resolve(textDirection).toRRect(Offset.zero & size);
           return bounds.contains(position);
         }
@@ -363,7 +363,7 @@ class _BoxDecorationPainter extends BoxPainter {
     if (_cachedBackgroundPaint == null ||
         (_decoration.gradient != null &&
             _rectForCachedBackgroundPaint != rect)) {
-      final Paint paint = Paint();
+      final paint = Paint();
       if (_decoration.backgroundBlendMode != null) {
         paint.blendMode = _decoration.backgroundBlendMode!;
       }
@@ -461,8 +461,8 @@ class _BoxDecorationPainter extends BoxPainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     assert(configuration.size != null);
-    final Rect rect = offset & configuration.size!;
-    final TextDirection textDirection = configuration.textDirection!;
+    final rect = offset & configuration.size!;
+    final textDirection = configuration.textDirection!;
     _paintShadows(canvas, rect, textDirection);
     _paintBackgroundColor(canvas, rect, textDirection);
     _paintBackgroundImage(canvas, rect, configuration);
@@ -476,30 +476,30 @@ class _BoxDecorationPainter extends BoxPainter {
       );
       return;
     }
-    final Paint dashedPaint = Paint()
+    final dashedPaint = Paint()
       ..color = _decoration.dashedColor!
       ..strokeWidth = _decoration.strokeHeight
       ..style = PaintingStyle.stroke;
 
-    final Path _topPath = getDashedPath(
+    final _topPath = getDashedPath(
       a: math.Point<double>(rect.topLeft.dx, rect.topLeft.dy),
       b: math.Point<double>(rect.topRight.dx, rect.topRight.dy),
       gap: _decoration.gap,
     );
 
-    final Path _rightPath = getDashedPath(
+    final _rightPath = getDashedPath(
       a: math.Point<double>(rect.topRight.dx, rect.topRight.dy),
       b: math.Point<double>(rect.bottomRight.dx, rect.bottomRight.dy),
       gap: _decoration.gap,
     );
 
-    final Path _bottomPath = getDashedPath(
+    final _bottomPath = getDashedPath(
       a: math.Point<double>(rect.bottomLeft.dx, rect.bottomLeft.dy),
       b: math.Point<double>(rect.bottomRight.dx, rect.bottomRight.dy),
       gap: _decoration.gap,
     );
 
-    final Path _leftPath = getDashedPath(
+    final _leftPath = getDashedPath(
       a: math.Point<double>(rect.topLeft.dx, rect.topLeft.dy),
       b: math.Point<double>(rect.bottomLeft.dx, rect.bottomLeft.dy),
       gap: _decoration.gap,
@@ -517,10 +517,10 @@ class _BoxDecorationPainter extends BoxPainter {
     required math.Point<double> b,
     required num gap,
   }) {
-    final Size size = Size(b.x - a.x, b.y - a.y);
-    final Path path = Path();
+    final size = Size(b.x - a.x, b.y - a.y);
+    final path = Path();
     path.moveTo(a.x, a.y);
-    bool shouldDraw = true;
+    var shouldDraw = true;
     var currentPoint = math.Point<double>(a.x, a.y);
 
     final num radians = math.atan(size.height / size.width);

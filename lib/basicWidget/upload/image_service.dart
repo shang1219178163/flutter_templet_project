@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
@@ -160,7 +159,7 @@ class ImageService {
     }
 
     var cacheDir = await AssetCacheService().getDir();
-    String savePath = "${cacheDir.path}/$name";
+    var savePath = "${cacheDir.path}/$name";
     await Dio().download(url, savePath, onReceiveProgress: (received, total) {
       if (total != -1) {
         final percent = (received / total);
@@ -173,7 +172,7 @@ class ImageService {
     ToastUtil.hideLoading();
 
     final result = await ImageGallerySaver.saveFile(savePath);
-    debugPrint("saveFile: ${result} $url");
+    debugPrint("saveFile: $result $url");
     final isSuccess = result["isSuccess"];
     final message = isSuccess ? "已保存到相册" : "操作失败";
     if (isSuccess && showToast) {

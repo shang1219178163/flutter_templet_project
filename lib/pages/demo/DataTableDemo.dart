@@ -6,20 +6,15 @@
 //  Copyright © 6/4/21 shang. All rights reserved.
 //
 
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:tuple/tuple.dart';
 
 final titles = [
   (title: "姓名", key: "name"),
@@ -135,7 +130,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                         DataCell(Text('${e.age ?? ""}')),
                         DataCell(Text(e.sex ?? "")),
                         DataCell(Text('${e.birthYear ?? ""}')),
-                        DataCell(Text('${e.desc ?? ""}')),
+                        DataCell(Text(e.desc ?? "")),
                       ],
                       selected: e.isSelected,
                       onSelectChanged: (bool? value) {
@@ -305,7 +300,7 @@ extension _ListExtObject<E extends Object> on List<E> {
     if (a == null || b == null) {
       return -1;
     }
-    final result = (a ?? "").compareContainInt(b ?? "");
+    final result = a.compareContainInt(b);
     return result;
   }
 }

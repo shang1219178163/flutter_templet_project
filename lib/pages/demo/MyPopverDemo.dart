@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:svgaplayer_flutter/proto/svga.pb.dart';
 
 class MyPopverDemo extends StatefulWidget {
   const MyPopverDemo({Key? key, this.title}) : super(key: key);

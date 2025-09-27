@@ -9,7 +9,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -130,7 +130,7 @@ class TTSManager {
   /// 播报中时,再次点击同一条停止;非同一条重新播放
   Future<dynamic> speak({String text = ""}) async {
     assert(text.isNotEmpty == true, "❌ $this text?.isNotEmpty == true");
-    final RegExp emojiRegex = RegExp(
+    final emojiRegex = RegExp(
       "[^\\u0020-\\u007E\\u00A0-\\u00BE\\u2E80-\\uA4CF\\uF900-\\uFAFF\\uFE30-\\uFE4F\\uFF00-\\uFFEF\\u0080-\\u009F\\u2000-\\u201f\r\n]",
       unicode: true,
     );
@@ -145,7 +145,7 @@ class TTSManager {
     final isSameText = _current == text;
     if (playerState == TTSManagerPlayerState.playing && isSameText) {
       DLog.d("✅ $runtimeType flutterTts.stop: $_current");
-      return await stop();
+      return stop();
     }
 
     if (playerState == TTSManagerPlayerState.playing) {
@@ -158,7 +158,7 @@ class TTSManager {
       final segmentLength = await flutterTts.getMaxSpeechInputLength ?? 4000;
       DLog.d("✅ $runtimeType flutterTts getMaxSpeechInputLength: $segmentLength");
 
-      final readContents = (text ?? "").splitStride(by: segmentLength);
+      final readContents = text.splitStride(by: segmentLength);
       // DLog.d("✅ $this speak: ${readContents.join("><")}");
       for (final content in readContents) {
         DLog.d("✅ $runtimeType flutterTts speak: $content");
@@ -168,19 +168,19 @@ class TTSManager {
       return;
     }
     DLog.d("✅ $runtimeType flutterTts speak: $_current");
-    return await flutterTts.speak(_current ?? "");
+    return flutterTts.speak(_current ?? "");
   }
 
   Future<dynamic> pause({String? text}) async {
     playerState = TTSManagerPlayerState.paused;
     onStateChanged(playerState);
-    return await flutterTts.pause();
+    return flutterTts.pause();
   }
 
   Future<dynamic> stop({String? text}) async {
     // playerState = TTSManagerPlayerState.completed;
     // onStateChanged(playerState);
-    return await flutterTts.stop();
+    return flutterTts.stop();
   }
 
 // /// 播放停止

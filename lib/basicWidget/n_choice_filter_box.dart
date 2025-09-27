@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_date_start_end.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
@@ -250,8 +250,8 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
           title: choice.title,
           items: choice.models,
           isSingle: choice.isSingle,
-          idCb: (e) => e.selectableId ?? "",
-          titleCb: (e) => e.selectableName ?? "",
+          idCb: (e) => e.selectableId,
+          titleCb: (e) => e.selectableName,
           selectedCb: (e) => choice.selectedModels.map((e) => e.selectableId).contains(e.selectableId),
           onChanged: (list) {
             // DLog.d(
@@ -318,7 +318,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
     required bool isSelected,
     required String Function(T e) titleCb,
   }) {
-    Color primaryColor = context.primaryColor;
+    var primaryColor = context.primaryColor;
 
     final textColor = isSelected ? primaryColor : const Color(0xff737373);
     final borderColor = isSelected ? primaryColor : Colors.transparent;

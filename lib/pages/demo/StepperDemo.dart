@@ -9,11 +9,8 @@
 import 'package:enhance_stepper/enhance_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 ///步骤一二三
@@ -107,7 +104,6 @@ class _StepperDemoState extends State<StepperDemo> {
                 },
                 groupValue: groupValue,
                 onValueChanged: (value) {
-                  // TODO: - fix it
                   DLog.d(value.toString());
                   setState(() {
                     groupValue = int.parse("$value");
@@ -178,7 +174,7 @@ class _StepperDemoState extends State<StepperDemo> {
               if (_index != tuples.length - 1)
                 ElevatedButton(
                   onPressed: details.onStepContinue,
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).primaryColor)),
                   child: Text("Continue"),
                 ),
               SizedBox(
@@ -187,7 +183,7 @@ class _StepperDemoState extends State<StepperDemo> {
               if (_index != 0)
                 ElevatedButton(
                   onPressed: details.onStepCancel,
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).primaryColor)),
                   child: Text("Cancel"),
                 ),
             ],
@@ -246,7 +242,7 @@ class _StepperDemoState extends State<StepperDemo> {
               ),
               ElevatedButton(
                 onPressed: details.onStepContinue,
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+                style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).primaryColor)),
                 child: Text("Next"),
               ),
               SizedBox(
@@ -254,7 +250,7 @@ class _StepperDemoState extends State<StepperDemo> {
               ),
               TextButton(
                 onPressed: details.onStepCancel,
-                style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+                style: ButtonStyle(foregroundColor: WidgetStateProperty.all(Theme.of(context).primaryColor)),
                 child: Text("Back"),
               ),
             ],

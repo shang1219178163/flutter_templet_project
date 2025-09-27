@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
@@ -239,12 +237,12 @@ class ProgressBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint backgroundPaint = Paint()
+    final backgroundPaint = Paint()
       ..color = backgroudColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
 
-    final Paint foregroundPaint = Paint()
+    final foregroundPaint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
@@ -257,7 +255,7 @@ class ProgressBarPainter extends CustomPainter {
     canvas.drawCircle(center, radius, backgroundPaint);
 
     // 计算进度的角度
-    double sweepAngle = 2 * pi * progress;
+    var sweepAngle = 2 * pi * progress;
 
     // 绘制前景弧（表示进度）
     canvas.drawArc(

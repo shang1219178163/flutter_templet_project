@@ -9,12 +9,8 @@
 // mac不支持
 
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/network/dio_upload_service.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class DraggableScrollableSheetDemo extends StatefulWidget {

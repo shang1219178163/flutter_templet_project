@@ -5,7 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -21,6 +21,9 @@ class MergeNetworkImagesDemo extends StatefulWidget {
 }
 
 class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
+  final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+  late final devicePixelRatio = keyView.devicePixelRatio;
+
   final _globalKey = GlobalKey<MergeImagesWidgetState>();
 
   Widget? imageMerged;
@@ -78,9 +81,9 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                   quality: 100,
                 );
               }).then((result) {
-                DLog.d("result:${result}");
+                DLog.d("result:$result");
               }).catchError((e) {
-                debugPrint("error:${e}");
+                debugPrint("error:$e");
               });
             },
             child: Text(
@@ -287,7 +290,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     //根据 GlobalKey 获取 Image 数组
     var imgs = await Future.wait(keys.map((key) async {
       var boundary = key?.currentContext?.findRenderObject() as RenderRepaintBoundary?;
-      var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
+      var image = await boundary?.toImage(pixelRatio: devicePixelRatio);
       return image;
     }).toList());
 
