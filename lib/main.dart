@@ -27,6 +27,7 @@ import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/screen_manager.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
@@ -82,6 +83,7 @@ Future<void> main() async {
     initDebugInfo(),
   ]);
 
+  ScreenManager();
   setCustomErrorPage();
 
   // AppInit.catchException(() => runApp(MyApp()));
