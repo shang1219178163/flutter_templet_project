@@ -66,8 +66,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
     );
   }
 
-  buildHorizontalScrollWidget(
-      {double showCount = 1.0, bool isSwiper = false, Color? color}) {
+  buildHorizontalScrollWidget({double showCount = 1.0, bool isSwiper = false, Color? color}) {
     var paddingRight = showCount == 2.5 ? 0.0 : 12.0;
     var paddingLeft = isSwiper ? 12.0 : 0.0;
 
@@ -113,7 +112,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       // margin: const EdgeInsets.all(50),
       padding: const EdgeInsets.all(10),
       borderRadius: BorderRadius.all(Radius.circular(15)),
-      bgUrl: R.image.urls[0],
+      bgUrl: Resource.image.urls[0],
       // bgChild: FadeInImage.assetNetwork(
       //   placeholder: 'assets/images/img_placeholder.png',
       //   image: R.image.urls[0],

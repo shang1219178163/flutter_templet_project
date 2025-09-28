@@ -12,7 +12,7 @@ class CustomSwipperDemo extends StatefulWidget {
 }
 
 class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
-  final List<String> images = R.image.urls;
+  final List<String> images = Resource.image.urls;
 
   @override
   Widget build(BuildContext context) {

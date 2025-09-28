@@ -28,7 +28,7 @@ class _QrcodePageState extends State<QrcodePage> {
   late final name = "标题";
 
   /// 二维码链接
-  late final qrUrl = R.image.urls[1];
+  late final qrUrl = Resource.image.urls[1];
 
   /// 分享 shareItems
   List<Tuple3<String, String, VoidCallback>> get shareItems {
@@ -138,8 +138,7 @@ class _QrcodePageState extends State<QrcodePage> {
                 children: [
                   NFourCorner(
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
                       child: NNetworkImage(
                         url: qrUrl,
                         height: 300,
@@ -197,8 +196,7 @@ class _QrcodePageState extends State<QrcodePage> {
   onShareWechat() async {
     debugPrint("onShareWechat");
     final image = await _shareKey.currentContext?.toImage(pixelRatio: 2);
-    final imageWidget =
-        await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
+    final imageWidget = await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
 
     debugPrint("image: $image");
     if (image == null) {

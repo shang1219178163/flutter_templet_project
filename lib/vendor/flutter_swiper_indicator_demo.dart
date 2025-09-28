@@ -18,7 +18,7 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
 
   BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
 
-  final items = R.image.urls;
+  final items = Resource.image.urls;
 
   @override
   Widget build(BuildContext context) {

@@ -174,7 +174,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
                 color: Colors.green,
                 image: DecorationImage(
                   image: ExtendedNetworkImageProvider(
-                    R.image.urls[6],
+                    Resource.image.urls[6],
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -234,7 +234,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
         color: Colors.green,
         image: DecorationImage(
           image: ExtendedNetworkImageProvider(
-            R.image.urls[6],
+            Resource.image.urls[6],
           ),
           fit: BoxFit.cover,
         ),

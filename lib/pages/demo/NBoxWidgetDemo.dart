@@ -35,8 +35,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
         offset: Offset(0, 0)),
   ];
 
-  var border =
-      Border.all(color: Colors.red, width: 3.3, style: BorderStyle.solid);
+  var border = Border.all(color: Colors.red, width: 3.3, style: BorderStyle.solid);
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +56,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
           offset: Offset(3, 3)),
     ];
 
-    border =
-        Border.all(color: Colors.red, width: 3.3, style: BorderStyle.solid);
+    border = Border.all(color: Colors.red, width: 3.3, style: BorderStyle.solid);
 
     return Scaffold(
       appBar: AppBar(
@@ -117,7 +115,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
       // border: border,
       bgColor: Colors.transparent,
       bgGradient: bgGradient,
-      bgUrl: R.image.urls[5],
+      bgUrl: Resource.image.urls[5],
       imageFit: BoxFit.cover,
       boxShadows: boxShadows,
       child: Image(

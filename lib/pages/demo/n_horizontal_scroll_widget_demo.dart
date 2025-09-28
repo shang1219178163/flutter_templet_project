@@ -12,7 +12,7 @@ class NHorizontalScrollWidgetDemo extends StatefulWidget {
 }
 
 class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDemo> {
-  List<String> imgUrls = R.image.urls;
+  List<String> imgUrls = Resource.image.urls;
 
   var _items = <AttrCarouseItem>[];
 

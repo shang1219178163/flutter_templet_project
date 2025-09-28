@@ -79,9 +79,9 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     //   width: constraints?.maxWidth,
     //   height: 100,
     // );
-    final index = Random().nextInt(R.image.urls.length);
+    final index = Random().nextInt(Resource.image.urls.length);
     return Image(
-      image: NetworkImage(R.image.urls[index]),
+      image: NetworkImage(Resource.image.urls[index]),
       fit: BoxFit.fill,
       width: constraints?.maxWidth,
       height: 100,

@@ -83,7 +83,7 @@ class _SearchDemoState extends State<SearchDemo> {
           (int i) {
             final item = 'item $i';
             return buildItem(
-                url: R.image.urls[i],
+                url: Resource.image.urls[i],
                 title: item,
                 onTap: () {
                   controller.closeView(item);

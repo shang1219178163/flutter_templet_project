@@ -64,7 +64,7 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
               ),
               Row(
                 children: [
-                  buildGroupAvatar(urls: R.image.urls.sublist(0, 4)),
+                  buildGroupAvatar(urls: Resource.image.urls.sublist(0, 4)),
                   SizedBox(width: 16),
                   buildGroupAvatar(urls: []),
                 ],
@@ -87,7 +87,7 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
   }
 
   Widget buildAvatarGroup({int Function(int length)? countCb}) {
-    var urls = R.image.urls;
+    var urls = Resource.image.urls;
     if (countCb != null) {
       urls = urls.sublist(0, countCb(urls.length));
     }

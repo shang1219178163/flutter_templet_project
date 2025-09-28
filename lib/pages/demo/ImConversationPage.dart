@@ -165,7 +165,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
     // final rootModel = DepartmentPageRootModel.fromJson(response ?? {});
     // var list = rootModel.result?.content ?? [];
 
-    final urls = R.image.urls;
+    final urls = Resource.image.urls;
 
     if (refreshViewController.items.length >= urls.length) {
       return [];

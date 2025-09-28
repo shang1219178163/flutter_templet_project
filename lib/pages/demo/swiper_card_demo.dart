@@ -43,8 +43,8 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
 
   final AppinioSwiperController controller = AppinioSwiperController();
 
-  late List<_CandidateModel> candidates = R.image.urls.map((e) {
-    final i = R.image.urls.indexOf(e);
+  late List<_CandidateModel> candidates = Resource.image.urls.map((e) {
+    final i = Resource.image.urls.indexOf(e);
     return _CandidateModel(
       avatar: e,
       name: '用户 $i',

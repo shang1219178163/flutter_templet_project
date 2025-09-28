@@ -45,8 +45,7 @@ class ResizingHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => maxHeight;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     // 根据 shrinkOffset 动态调整标题内容大小
     var sizeFactor = 1 - (shrinkOffset / (maxExtent - minExtent));
     var titleSize = 30 * sizeFactor; // 标题文字的动态大小
@@ -56,7 +55,7 @@ class ResizingHeaderDelegate extends SliverPersistentHeaderDelegate {
       children: [
         // 背景图片
         Image.network(
-          R.image.urls[5],
+          Resource.image.urls[5],
           fit: BoxFit.cover,
         ),
         // 带有渐变的遮罩层
@@ -82,7 +81,6 @@ class ResizingHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant ResizingHeaderDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight;
+    return maxHeight != oldDelegate.maxHeight || minHeight != oldDelegate.minHeight;
   }
 }

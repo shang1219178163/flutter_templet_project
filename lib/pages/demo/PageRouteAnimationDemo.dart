@@ -56,7 +56,7 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
   }
 
   Widget buildBody() {
-    final list = R.image.urls;
+    final list = Resource.image.urls;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

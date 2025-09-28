@@ -672,7 +672,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
         },
         child: ListView.separated(
           itemBuilder: (_, index) {
-            final random = IntExt.random(max: R.image.urls.length);
+            final random = IntExt.random(max: Resource.image.urls.length);
             return Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -683,7 +683,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                 leading: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.8),
                   child: NNetworkImage(
-                    url: R.image.urls[random],
+                    url: Resource.image.urls[random],
                     width: 48,
                     fit: BoxFit.fitHeight,
                   ),

@@ -88,7 +88,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
           children: [
             // 背景图片
             Image.network(
-              R.image.urls[5],
+              Resource.image.urls[5],
               fit: BoxFit.cover,
             ),
             // 带有渐变的遮罩层

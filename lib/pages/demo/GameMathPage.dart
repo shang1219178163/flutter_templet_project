@@ -123,7 +123,7 @@ class TournamentView extends StatelessWidget {
             border: Border.all(color: Colors.blue),
           ),
           child: NetworkImageWithText(
-            imageUrl: R.image.urls.first,
+            imageUrl: Resource.image.urls.first,
             text: "韩国男篮",
           ),
         ),

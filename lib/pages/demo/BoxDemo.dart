@@ -284,7 +284,7 @@ class _BoxDemoState extends State<BoxDemo> {
         borderRadius: BorderRadius.all(Radius.circular(8)),
         image: DecorationImage(
           image: ExtendedNetworkImageProvider(
-            R.image.urls[7],
+            Resource.image.urls[7],
             cache: true,
           ),
           fit: BoxFit.fill,
@@ -340,7 +340,7 @@ class _BoxDemoState extends State<BoxDemo> {
         setState(() {});
       },
       child: NAvatarBadge(
-        url: R.image.urls[7],
+        url: Resource.image.urls[7],
         badgeStr: badgeStr,
       ),
     );

@@ -76,7 +76,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(R.image.urls[5]),
+          image: NetworkImage(Resource.image.urls[5]),
           fit: BoxFit.cover,
         ),
       ),

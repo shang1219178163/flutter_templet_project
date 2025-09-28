@@ -31,7 +31,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
             id: e.toString(),
             name: "用户名称${IntExt.random(max: 10000, min: 1000)}",
             nickName: 4.generateChars(),
-            avatar: R.image.urls[IntExt.random(max: R.image.urls.length)],
+            avatar: Resource.image.urls[IntExt.random(max: Resource.image.urls.length)],
           ))
       .toList();
 

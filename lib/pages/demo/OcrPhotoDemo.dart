@@ -56,7 +56,7 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
 
   final pageController = PageController();
 
-  List<String> urls = R.image.urls;
+  List<String> urls = Resource.image.urls;
 
   @override
   void dispose() {
@@ -102,7 +102,7 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
   }
 
   Widget buildPageView({int index = 0}) {
-    final urls = R.image.urls;
+    final urls = Resource.image.urls;
     final pageController = PageController(initialPage: index);
     final indexVN = ValueNotifier(index);
 

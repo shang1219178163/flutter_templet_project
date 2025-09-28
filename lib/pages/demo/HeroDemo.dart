@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/util/R.dart';
@@ -57,20 +56,17 @@ class _HeroDemoState extends State<HeroDemo> {
       alignment: Alignment.topCenter,
       child: Column(
         children: <Widget>[
-          LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
+          LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
             var spacing = 8.0;
             var runSpacing = 8.0;
 
             final rowCount = 4;
-            final itemWidth =
-                ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
-                    .truncateToDouble();
+            final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
 
             return Wrap(
               spacing: spacing,
               runSpacing: runSpacing,
-              children: R.image.urls.map((e) {
+              children: Resource.image.urls.map((e) {
                 final child = NNetworkImage(
                   url: e,
                 );

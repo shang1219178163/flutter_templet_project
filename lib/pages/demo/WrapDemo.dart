@@ -93,7 +93,7 @@ class _WrapDemoState extends State<WrapDemo> {
                 NNetworkImage(
                   width: 50,
                   height: 60,
-                  url: R.image.urls[IntExt.random(max: R.image.urls.length)],
+                  url: Resource.image.urls[IntExt.random(max: Resource.image.urls.length)],
                 ),
                 Text("选项_$index"),
               ],

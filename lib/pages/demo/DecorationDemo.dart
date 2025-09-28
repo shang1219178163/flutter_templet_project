@@ -47,7 +47,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(30),
       borderRadius: BorderRadius.all(Radius.circular(15)),
-      bgUrl: R.image.urls[0],
+      bgUrl: Resource.image.urls[0],
       // bgChild: FadeInImage(
       //   placeholder: 'img_placeholder.png'.toAssetImage(),
       //   image: NetworkImage(R.image.urls[0]),
@@ -102,7 +102,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
             ),
           ],
           image: DecorationImage(
-            image: NetworkImage(R.image.urls.first),
+            image: NetworkImage(Resource.image.urls.first),
             fit: BoxFit.cover,
           ),
         ),
@@ -125,7 +125,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
     double width = 200,
     double height = 200,
   }) {
-    var url = R.image.urls.first;
+    var url = Resource.image.urls.first;
     return FadeInImage.assetNetwork(
       placeholder: 'assets/images/img_placeholder.png',
       image: url,

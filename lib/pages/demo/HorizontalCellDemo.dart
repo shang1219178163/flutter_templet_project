@@ -90,7 +90,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         // useIntrinsicHeight: false,
         left: FadeInImage(
           height: 60,
-          image: NetworkImage(R.image.urls[4]),
+          image: NetworkImage(Resource.image.urls[4]),
           placeholder: "img_placeholder.png".toAssetImage(),
         ),
         // mid: Container(

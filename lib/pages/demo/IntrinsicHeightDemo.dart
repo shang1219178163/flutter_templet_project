@@ -68,7 +68,7 @@ class _IntrinsicHeightDemoState extends State<IntrinsicHeightDemo> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.blue),
               image: DecorationImage(
-                image: NetworkImage(R.image.urls[0]),
+                image: NetworkImage(Resource.image.urls[0]),
                 fit: BoxFit.cover,
               ),
             ),

@@ -120,7 +120,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
               ),
             ],
             image: DecorationImage(
-              image: NetworkImage(R.image.urls[0]),
+              image: NetworkImage(Resource.image.urls[0]),
               fit: BoxFit.cover,
             ),
           ),

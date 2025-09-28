@@ -18,15 +18,12 @@ class NestedScrollViewDemoOne extends StatefulWidget {
   final String? title;
 
   @override
-  _NestedScrollViewDemoOneState createState() =>
-      _NestedScrollViewDemoOneState();
+  _NestedScrollViewDemoOneState createState() => _NestedScrollViewDemoOneState();
 }
 
-class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne>
-    with SingleTickerProviderStateMixin {
+class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with SingleTickerProviderStateMixin {
   TabController? _tabController;
-  final ScrollController? _scrollController =
-      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController? _scrollController = ScrollController(initialScrollOffset: 0.0);
 
   List<String> items = List.generate(9, (index) => 'item_$index').toList();
 
@@ -105,8 +102,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne>
   buildSliverPersistentHeader() {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: NSliverPersistentHeaderDelegate(
-          builder: (ctx, offset, overlapsContent) {
+      delegate: NSliverPersistentHeaderDelegate(builder: (ctx, offset, overlapsContent) {
         return ColoredBox(
           color: Colors.yellow,
           child: Align(
@@ -187,8 +183,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne>
                         return Tab(text: e);
                       }
 
-                      final url =
-                          (value == index) ? R.image.urls[1] : R.image.urls[0];
+                      final url = (value == index) ? Resource.image.urls[1] : Resource.image.urls[0];
                       return Tab(
                         child: FadeInImage(
                           image: NetworkImage(url),

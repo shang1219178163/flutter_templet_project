@@ -87,9 +87,9 @@ class ScoreBoard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildTeam(R.image.urls.first, "韩国男篮"),
+              _buildTeam(Resource.image.urls.first, "韩国男篮"),
               const SizedBox(width: 60),
-              _buildTeam(R.image.urls.last, "关岛男篮"),
+              _buildTeam(Resource.image.urls.last, "关岛男篮"),
             ],
           ),
           const SizedBox(height: 8),

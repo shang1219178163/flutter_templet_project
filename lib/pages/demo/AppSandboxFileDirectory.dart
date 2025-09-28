@@ -126,7 +126,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   title: "网络图像缓存",
                   onPressed: () async {
-                    final file = await AssetCacheService().saveNetworkImage(url: R.image.urls.randomOne!);
+                    final file = await AssetCacheService().saveNetworkImage(url: Resource.image.urls.randomOne!);
                     final bytes = await file.readAsBytes();
 
                     // 使用 image 库加载图片

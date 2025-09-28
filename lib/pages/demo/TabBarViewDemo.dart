@@ -14,8 +14,7 @@ class TabBarViewDemo extends StatefulWidget {
   State<TabBarViewDemo> createState() => _TabBarViewDemoState();
 }
 
-class _TabBarViewDemoState extends State<TabBarViewDemo>
-    with SingleTickerProviderStateMixin {
+class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProviderStateMixin {
   /// 当前索引
   int currentIndex = 0;
 
@@ -79,8 +78,7 @@ class _TabBarViewDemoState extends State<TabBarViewDemo>
                 .map((e) => Tab(
                       child: ValueListenableBuilder<int>(
                           valueListenable: tabIndex,
-                          builder:
-                              (BuildContext context, int value, Widget? child) {
+                          builder: (BuildContext context, int value, Widget? child) {
                             final index = titles.indexOf(e);
                             if (index != 1) {
                               if (index == 2) {
@@ -92,16 +90,13 @@ class _TabBarViewDemoState extends State<TabBarViewDemo>
                               }
                               if (index == 3) {
                                 return Tab(
-                                  child: Text(e + e,
-                                      style: TextStyle(fontSize: 20)),
+                                  child: Text(e + e, style: TextStyle(fontSize: 20)),
                                 );
                               }
                               return Tab(text: e);
                             }
 
-                            final url = (value == index)
-                                ? R.image.urls[1]
-                                : R.image.urls[0];
+                            final url = (value == index) ? Resource.image.urls[1] : Resource.image.urls[0];
                             return Tab(
                               child: FadeInImage(
                                 image: NetworkImage(url),

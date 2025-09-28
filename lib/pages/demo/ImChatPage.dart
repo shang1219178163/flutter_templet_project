@@ -865,7 +865,7 @@ class _ImChatPageState extends State<ImChatPage>
         sequence: sequence,
         isOwner: isOwner,
         restructureMsgBody: text,
-        avatar: isOwner ? R.image.urls.first : R.image.urls.sublist(1).randomOne,
+        avatar: isOwner ? Resource.image.urls.first : Resource.image.urls.sublist(1).randomOne,
         nickName: isOwner ? "我" : name,
         time: DateTime.now().secondsSinceEpoch,
       );
@@ -880,7 +880,7 @@ class _ImChatPageState extends State<ImChatPage>
       sequence: sequence,
       isOwner: true,
       restructureMsgBody: content,
-      avatar: R.image.urls.first,
+      avatar: Resource.image.urls.first,
       nickName: "我",
       time: DateTime.now().secondsSinceEpoch,
     );

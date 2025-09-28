@@ -18,12 +18,10 @@ class NestedScrollViewDemoTwo extends StatefulWidget {
   final String? title;
 
   @override
-  _NestedScrollViewDemoTwoState createState() =>
-      _NestedScrollViewDemoTwoState();
+  _NestedScrollViewDemoTwoState createState() => _NestedScrollViewDemoTwoState();
 }
 
-class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo>
-    with SingleTickerProviderStateMixin {
+class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with SingleTickerProviderStateMixin {
   TabController? _tabController;
   ScrollController? _scrollController;
 
@@ -81,16 +79,10 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo>
   buildBody() {
     if (flagVN.value) {
       return _buildBody2(
-          scrollController: _scrollController,
-          tabController: _tabController,
-          indexVN: indexVN,
-          items: items);
+          scrollController: _scrollController, tabController: _tabController, indexVN: indexVN, items: items);
     }
     return _buildBody1(
-        scrollController: _scrollController,
-        tabController: _tabController,
-        indexVN: indexVN,
-        items: items);
+        scrollController: _scrollController, tabController: _tabController, indexVN: indexVN, items: items);
   }
 
   _buildBody1({
@@ -240,8 +232,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo>
                         return Tab(text: e);
                       }
 
-                      final url =
-                          (value == index) ? R.image.urls[1] : R.image.urls[0];
+                      final url = (value == index) ? Resource.image.urls[1] : Resource.image.urls[0];
                       return Tab(
                         child: FadeInImage(
                           image: NetworkImage(url),
@@ -286,18 +277,14 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo>
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text('SliverFillRemaining'),
-              Text('向上滑动时自动充满视图的剩余空间')
-            ],
+            children: <Widget>[Text('SliverFillRemaining'), Text('向上滑动时自动充满视图的剩余空间')],
           ),
         ),
       ),
     );
   }
 
-  SliverPersistentHeader buildSliverHeader(
-      {required Text text, bool pinned = true}) {
+  SliverPersistentHeader buildSliverHeader({required Text text, bool pinned = true}) {
     return SliverPersistentHeader(
       pinned: pinned,
       delegate: NSliverPersistentHeaderDelegate(

@@ -213,7 +213,7 @@ class _BadgeDemoState extends State<BadgeDemo> {
           borderRadius: BorderRadius.all(Radius.circular(8)),
           image: DecorationImage(
             image: ExtendedNetworkImageProvider(
-              R.image.urls[7],
+              Resource.image.urls[7],
               cache: true,
             ),
             fit: BoxFit.fill,

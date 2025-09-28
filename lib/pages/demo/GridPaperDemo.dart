@@ -24,9 +24,7 @@ class GridPaperDemo extends StatelessWidget {
   }
 
   Widget _contentWidget() {
-    final items = R.image.urls
-        .map((e) => NNetworkImage(url: e, fit: BoxFit.cover))
-        .toList();
+    final items = Resource.image.urls.map((e) => NNetworkImage(url: e, fit: BoxFit.cover)).toList();
 
     final style = const TextStyle(
       color: Colors.black,
@@ -70,7 +68,7 @@ class GridPaperDemo extends StatelessWidget {
               ),
             ),
             child: NNetworkImage(
-              url: R.image.urls[3],
+              url: Resource.image.urls[3],
               fit: BoxFit.cover,
             ),
           ),
@@ -81,7 +79,7 @@ class GridPaperDemo extends StatelessWidget {
             subdivisions: 3, //测网格分割数,包含自身
             // color: Colors.transparent,
             child: NNetworkImage(
-              url: R.image.urls[0],
+              url: Resource.image.urls[0],
               fit: BoxFit.cover,
             ),
           ),

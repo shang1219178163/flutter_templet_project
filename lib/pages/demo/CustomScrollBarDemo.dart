@@ -27,7 +27,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   ///滚动中监听
   ValueNotifier<bool> isScrolling = ValueNotifier(false);
 
-  final items = R.image.urls;
+  final items = Resource.image.urls;
 
   double screenWidth = 0;
 

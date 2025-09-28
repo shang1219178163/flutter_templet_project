@@ -32,8 +32,7 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
         percentVN.value = visibilityInfo.visibleFraction;
 
         var visiblePercentage = visibilityInfo.visibleFraction * 100;
-        debugPrint(
-            'Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
+        debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
       },
       child: _buildPage1(),
     );
@@ -59,8 +58,7 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
                 key: Key(key),
                 onVisibilityChanged: (visibilityInfo) {
                   var visiblePercentage = visibilityInfo.visibleFraction * 100;
-                  debugPrint(
-                      'Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
+                  debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
                 },
                 child: Center(
                   child: Text(key, style: TextStyle(fontSize: 18.0)),
@@ -74,7 +72,7 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
   }
 
   Widget _buildPage1() {
-    final imgUrls = R.image.urls;
+    final imgUrls = Resource.image.urls;
     return ListView.builder(
         itemCount: imgUrls.length,
         itemBuilder: (context, i) {
@@ -95,16 +93,11 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
               key: Key(key),
               onVisibilityChanged: (visibilityInfo) {
                 var visiblePercentage = visibilityInfo.visibleFraction * 100;
-                debugPrint(
-                    'Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
+                debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
               },
               child: Container(
                 alignment: Alignment.center,
-                child: Text(key,
-                    style: TextStyle(
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.red)),
+                child: Text(key, style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w600, color: Colors.red)),
               ),
             ),
           );

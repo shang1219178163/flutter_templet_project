@@ -18,12 +18,11 @@ class NCollectionNavWidgetDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _NCollectionNavWidgetDemoState createState() =>
-      _NCollectionNavWidgetDemoState();
+  _NCollectionNavWidgetDemoState createState() => _NCollectionNavWidgetDemoState();
 }
 
 class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
-  List<String> imgUrls = R.image.urls;
+  List<String> imgUrls = Resource.image.urls;
 
   var _items = <AttrNavItem>[];
 
@@ -108,9 +107,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     debugPrint("枚举值字符串: ${PageViewScrollType.drag.toString()}");
     debugPrint("枚举值集合: ${PageViewScrollType.values}");
     debugPrint("int 转枚举: ${0.toPageViewScrollType()}");
-    final result = [1, 7, 3, 6, 5, 6]
-        .sublist(1)
-        .reduce((value, element) => value + element);
+    final result = [1, 7, 3, 6, 5, 6].sublist(1).reduce((value, element) => value + element);
     debugPrint("result: $result");
 
     debugPrint("result: ${[1, 7, 3, 6, 5, 6].sublist(0, 1)}");
@@ -181,8 +178,7 @@ class NNCollectionNavNotify extends ChangeNotifier {
   ///金刚区每页列数
   int scrollTypeIndex = 0;
 
-  PageViewScrollType get scrollType =>
-      PageViewScrollType.values[scrollTypeIndex];
+  PageViewScrollType get scrollType => PageViewScrollType.values[scrollTypeIndex];
 
   void changePageRowNum(int value) {
     pageRowNum = value;

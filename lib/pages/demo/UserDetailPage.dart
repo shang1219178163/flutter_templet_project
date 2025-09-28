@@ -62,7 +62,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
     }
   }
 
-  final avatar = R.image.urls[3];
+  final avatar = Resource.image.urls[3];
 
   Widget? buildHeader;
 
