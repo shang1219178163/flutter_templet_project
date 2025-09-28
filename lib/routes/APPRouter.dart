@@ -382,7 +382,7 @@ import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
 import 'package:flutter_templet_project/vendor/table_calendar/table_calender_main.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart';
-import 'package:flutter_templet_project/vendor/video_player/video_player_by_chewie_page.dart.dart';
+import 'package:flutter_templet_project/vendor/video_player/video_player_by_chewie_page.dart';
 import 'package:flutter_templet_project/vendor/wechat_assets_picker_demo.dart';
 import 'package:get/get.dart';
 
