@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class DecorationDemo extends StatefulWidget {
   const DecorationDemo({Key? key, this.title}) : super(key: key);

@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class WrapDemo extends StatefulWidget {
   final String? title;

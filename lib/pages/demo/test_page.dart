@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/duration_ext.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:http/http.dart' as http;
 // import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';

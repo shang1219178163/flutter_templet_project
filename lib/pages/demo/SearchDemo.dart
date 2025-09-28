@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class SearchDemo extends StatefulWidget {
   SearchDemo({Key? key, this.title}) : super(key: key);

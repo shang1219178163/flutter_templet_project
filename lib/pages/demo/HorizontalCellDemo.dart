@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/horizontal_cell.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class HorizontalCellDemo extends StatefulWidget {
   const HorizontalCellDemo({Key? key, this.title}) : super(key: key);

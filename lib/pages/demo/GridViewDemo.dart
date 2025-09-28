@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 class GridViewDemo extends StatefulWidget {

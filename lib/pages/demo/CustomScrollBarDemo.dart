@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 /// 自定义 ScrollBar
 class CustomScrollBarDemo extends StatefulWidget {
@@ -99,8 +99,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   buildBody({isCustomScrollView = false}) {
     final child = ListView(children: [
       NSectionBox(
-        title:
-            "${isCustomScrollView ? "CustomScrollView" : "ListView"}(自定义滚动条/ScrollerBar)",
+        title: "${isCustomScrollView ? "CustomScrollView" : "ListView"}(自定义滚动条/ScrollerBar)",
         child: Container(
           height: 100,
           padding: padding,
@@ -119,8 +118,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        var itemWidth =
-            (constraints.maxWidth - gap * (showCount.ceil() - 1)) / showCount;
+        var itemWidth = (constraints.maxWidth - gap * (showCount.ceil() - 1)) / showCount;
 
         return Stack(
           children: [
@@ -141,10 +139,8 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                   padding: EdgeInsets.all(0),
                   itemCount: items.length,
                   // cacheExtent: 10,
-                  itemBuilder: itemBuilder ??
-                      (context, index) => _buildItem(context, index, itemWidth),
-                  separatorBuilder: (context, index) =>
-                      _buildSeparator(context, index),
+                  itemBuilder: itemBuilder ?? (context, index) => _buildItem(context, index, itemWidth),
+                  separatorBuilder: (context, index) => _buildSeparator(context, index),
                 ),
               ),
             ),
@@ -188,8 +184,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
           debugPrint("$index");
           offset = position.maxScrollExtent;
         }
-        _scrollController.animateTo(offset,
-            duration: Duration(milliseconds: 300), curve: Curves.linear);
+        _scrollController.animateTo(offset, duration: Duration(milliseconds: 300), curve: Curves.linear);
       },
       child: Container(
         // color: Colors.green,

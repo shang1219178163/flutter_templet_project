@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class SliverResizingHeaderDemo extends StatelessWidget {
   const SliverResizingHeaderDemo({super.key});

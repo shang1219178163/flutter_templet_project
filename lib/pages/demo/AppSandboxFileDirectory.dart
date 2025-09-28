@@ -33,7 +33,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_picker_mixin.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';

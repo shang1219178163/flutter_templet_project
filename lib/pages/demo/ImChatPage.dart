@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/model/im_msg_list_root_model.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';

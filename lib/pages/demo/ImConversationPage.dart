@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/model/im_conversation_detail_model.dart';
 import 'package:flutter_templet_project/pages/demo/widget/im_conversation_cell.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 

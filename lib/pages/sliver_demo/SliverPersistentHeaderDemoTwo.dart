@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_d
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:get/get.dart';
 
 class SliverPersistentHeaderDemoTwo extends StatefulWidget {

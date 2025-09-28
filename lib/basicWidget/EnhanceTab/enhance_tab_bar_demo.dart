@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.d
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {
   const EnhanceTabBarDemo({Key? key, this.title}) : super(key: key);

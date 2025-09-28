@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_horizontal_scroll_widget.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class NHorizontalScrollWidgetDemo extends StatefulWidget {
   const NHorizontalScrollWidgetDemo({Key? key, this.title}) : super(key: key);

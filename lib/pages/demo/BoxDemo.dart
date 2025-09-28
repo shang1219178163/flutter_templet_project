@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class BoxDemo extends StatefulWidget {
   final String? title;

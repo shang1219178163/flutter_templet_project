@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:visibility_detector/visibility_detector.dart';

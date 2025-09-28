@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_badge.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
 
 class BadgeDemo extends StatefulWidget {

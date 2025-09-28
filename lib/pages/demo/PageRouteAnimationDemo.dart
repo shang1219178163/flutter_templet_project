@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:get/get.dart';
 
 class PageRouteAnimationDemo extends StatefulWidget {

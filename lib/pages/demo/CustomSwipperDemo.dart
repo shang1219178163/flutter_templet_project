@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/custom_swiper.dart';
-import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class CustomSwipperDemo extends StatefulWidget {
   final String? title;
