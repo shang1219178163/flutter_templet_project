@@ -356,8 +356,17 @@ class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
               customIconBuilder: (context, local, global) {
                 final text = const ['not', 'only', 'icons'][local.index];
                 return Center(
-                    child: Text(text,
-                        style: TextStyle(color: Color.lerp(Colors.black, Colors.white, local.animationValue))));
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      color: Color.lerp(
+                        Colors.black,
+                        Colors.white,
+                        local.animationValue,
+                      ),
+                    ),
+                  ),
+                );
               },
               borderWidth: 0.0,
               onChanged: (i) => setState(() => value = i),
