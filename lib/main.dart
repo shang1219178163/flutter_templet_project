@@ -26,8 +26,9 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/localizations/AppLocalizations.dart';
 import 'package:flutter_templet_project/util/screen_manager.dart';
+import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
@@ -179,6 +180,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: [
+        // AppLocalizations.delegate,//
         // AppCupertinoLocalizations.delegate,
         // ZhCupertinoLocalizations.delegate,
         ...context.localizationDelegates,
