@@ -230,6 +230,7 @@ import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
+import 'package:flutter_templet_project/pages/demo/PageRouteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageTopBackgroudImageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
@@ -832,6 +833,7 @@ class APPRouter {
   static const String userDetailPage = '/userDetailPage';
   static const String animatedToggleSwitchDemo = '/animatedToggleSwitchDemo';
   static const String customTabbarPage = '/customTabbarPage';
+  static const String pageRouteDemo = '/pageRouteDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2471,6 +2473,10 @@ class AppPage {
     GetPage(
       name: APPRouter.customTabbarPage,
       page: () => CustomTabbarPage(),
+    ),
+    GetPage(
+      name: APPRouter.pageRouteDemo,
+      page: () => PageRouteDemo(),
     ),
   ];
 }

@@ -24,8 +24,7 @@ class PageRouteDemo extends StatefulWidget {
 }
 
 class _PageRouteDemoState extends State<PageRouteDemo> {
-  bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 
@@ -58,7 +57,62 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
         controller: _scrollController,
         child: Column(
           children: [
-            Text("$widget"),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+              ),
+              child: Wrap(
+                runSpacing: 8,
+                spacing: 8,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                    ),
+                    onPressed: () {
+                      pushPage(page: buildPage());
+                    },
+                    child: Text("FadeTransition"),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                    ),
+                    onPressed: () {
+                      pushPageOne(page: buildPage());
+                    },
+                    child: Text("NFadePageRoute"),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                    ),
+                    onPressed: () {
+                      pushPageTwo(page: buildPage());
+                    },
+                    child: Text("向上"),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                    ),
+                    onPressed: () {
+                      pushPageThree(page: buildPage());
+                    },
+                    child: Text("右进"),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -67,7 +121,23 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
     HapticFeedback.heavyImpact();
   }
 
-  pushPage({
+  Widget buildPage() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("AppBar"),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.green,
+          border: Border.all(color: Colors.blue),
+          borderRadius: BorderRadius.all(Radius.circular(0)),
+        ),
+        child: Text("测试页面"),
+      ),
+    );
+  }
+
+  void pushPage({
     required Widget page,
   }) {
     Navigator.push(
@@ -80,7 +150,7 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
     );
   }
 
-  pushPageOne({
+  void pushPageOne({
     required Widget page,
   }) {
     Navigator.push(
@@ -88,6 +158,48 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
       NFadePageRoute(
         builder: (BuildContext context) {
           return page;
+        },
+      ),
+    );
+  }
+
+  void pushPageTwo({required Widget page}) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 350),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return page;
+        },
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0, 1), // 从底部
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
+  void pushPageThree({required Widget page}) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 350),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return page;
+        },
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0), // 从底部
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
         },
       ),
     );
