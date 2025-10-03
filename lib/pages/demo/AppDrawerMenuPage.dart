@@ -174,7 +174,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
         children: [
           TextButton(
             onPressed: () {
-              AppThemeService().changeTheme();
+              AppThemeService().toggleTheme();
               setState(() {});
             },
             child: Row(

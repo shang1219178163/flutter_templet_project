@@ -33,9 +33,16 @@ class AppThemeService {
     final cacheBrightness = CacheService().getString(CacheKey.brightness.name);
     if (cacheBrightness != null) {
       brightness = cacheBrightness.contains("light") == true ? Brightness.light : Brightness.dark;
-      // themeMode = brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
+      themeMode = brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
     }
     DLog.d([this, cacheColorStr, seedColor, brightness, themeMode].asMap());
+  }
+
+  Future<void> _cacheTheme({required ThemeData result}) async {
+    themeMode = result.brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
+    await CacheService().setString(CacheKey.seedColor.name, result.colorScheme.primary.toHex());
+    await CacheService().setString(CacheKey.brightness.name, result.colorScheme.brightness.toString());
+    _init();
   }
 
   var themeMode = ThemeMode.system;
@@ -50,8 +57,17 @@ class AppThemeService {
         brightness: brightness,
       );
 
-  void changeTheme() {
-    Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
+  void changeTheme(ThemeData theme) {
+    // Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
+    DLog.d("changeTheme $theme");
+    Get.changeTheme(theme);
+    _cacheTheme(result: theme);
+  }
+
+  void toggleTheme() {
+    final result = Get.isDarkMode ? lightTheme : darkTheme;
+    Get.changeTheme(result);
+    _cacheTheme(result: result);
   }
 
   ThemeData get lightTheme => ThemeData(
@@ -424,7 +440,7 @@ class AppThemeService {
                     }
                     onColorChanged?.call(v);
                     seedColor = v;
-                    Get.changeTheme(lightTheme);
+                    changeTheme(lightTheme);
                   },
                   brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
                   onBrightnessChanged: (v) {
@@ -432,7 +448,7 @@ class AppThemeService {
                       Navigator.of(context).pop();
                     }
                     onBrightnessChanged?.call(v);
-                    changeTheme();
+                    toggleTheme();
                   },
                 ),
                 SizedBox(height: 20),

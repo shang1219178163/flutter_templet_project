@@ -232,7 +232,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
             .map((e) => IconButton(
                   icon: e,
                   onPressed: () {
-                    AppThemeService().changeTheme();
+                    AppThemeService().toggleTheme();
                   },
                 ))
             .toList(),

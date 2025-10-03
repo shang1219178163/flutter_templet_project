@@ -114,7 +114,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         actions: [
           TextButton(
               onPressed: () {
-                AppThemeService().changeTheme();
+                AppThemeService().toggleTheme();
               },
               child: Icon(
                 Icons.extension,

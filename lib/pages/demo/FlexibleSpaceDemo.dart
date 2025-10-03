@@ -103,10 +103,11 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
               IconButton(onPressed: () {}, icon: Icon(Icons.search)),
               IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
               IconButton(
-                  onPressed: () {
-                    AppThemeService().changeTheme();
-                  },
-                  icon: Icon(Icons.change_circle_outlined)),
+                onPressed: () {
+                  AppThemeService().toggleTheme();
+                },
+                icon: Icon(Icons.change_circle_outlined),
+              ),
             ],
           ),
           SliverList.separated(
