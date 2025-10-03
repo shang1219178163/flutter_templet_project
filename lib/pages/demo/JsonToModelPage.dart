@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
@@ -29,6 +30,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
   var classSuffix = "Model";
 
   var hasCopyWithFunc = false;
+  var hasTypeConversion = false;
 
   late final _nameController = TextEditingController(text: rootClassNameStr);
   late final _prefixController = TextEditingController(text: classPrefix);
@@ -71,11 +73,10 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       child: LayoutBuilder(builder: (context, constraints) {
-        final direction =
-            constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
+        final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
         if (direction == Axis.horizontal) {
           return buildBodyHorizontal(constraints: constraints);
         }
@@ -84,8 +85,10 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     );
   }
 
-  buildBodyVertical(
-      {double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyVertical({
+    double spacing = 10,
+    required BoxConstraints constraints,
+  }) {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -113,8 +116,10 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     );
   }
 
-  buildBodyHorizontal(
-      {double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyHorizontal({
+    double spacing = 10,
+    required BoxConstraints constraints,
+  }) {
     return Container(
       padding: EdgeInsets.all(spacing * 3),
       child: Column(
@@ -185,7 +190,6 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
         contentPadding: EdgeInsets.all(12),
         hintText: hintText,
         hintStyle: TextStyle(
-          color: const Color(0xff999999),
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
@@ -276,23 +280,43 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: [
-                Text(
-                  "显示 CopyWith 函数",
-                  style: TextStyle(fontSize: 14),
+                NPair(
+                  icon: const Text(
+                    "CopyWith",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  child: NResize(
+                    width: 40,
+                    height: 25,
+                    child: CupertinoSwitch(
+                      value: hasCopyWithFunc,
+                      onChanged: (bool val) {
+                        hasCopyWithFunc = val;
+                        setState(() {});
+                        onGenerate();
+                      },
+                    ),
+                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 6,
                 ),
-                NResize(
-                  width: 40,
-                  height: 25,
-                  child: CupertinoSwitch(
-                    value: hasCopyWithFunc,
-                    onChanged: (bool val) {
-                      hasCopyWithFunc = val;
-                      setState(() {});
-                      onGenerate();
-                    },
+                NPair(
+                  icon: const Text(
+                    "as #Type#",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  child: NResize(
+                    width: 40,
+                    height: 25,
+                    child: CupertinoSwitch(
+                      value: hasTypeConversion,
+                      onChanged: (bool val) {
+                        hasTypeConversion = val;
+                        setState(() {});
+                        onGenerate();
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -383,17 +407,19 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
   }
 
   /// 转模型
-  String convertModel(
-      {required String rawJson,
-      String rootClassName = "RootModel",
-      String classPrefix = "YY",
-      String classSuffix = "Model"}) {
+  String convertModel({
+    required String rawJson,
+    String rootClassName = "RootModel",
+    String classPrefix = "YY",
+    String classSuffix = "Model",
+  }) {
     final classGenerator = ModelGenerator(rootClassName);
     var dartCode = classGenerator.generateDartClasses(
       rawJson: rawJson,
       classPrefix: classPrefix,
       classSuffix: classSuffix,
       hasCopyWithFunc: hasCopyWithFunc,
+      hasTypeConversion: true,
     );
     // debugPrint("dartCode.code:${dartCode.code}");
     return dartCode.code;
@@ -416,8 +442,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
       // debugPrint("fileName: $fileName");
 
       /// 生成本地文件
-      final file = await FileManager()
-          .createFile(fileName: fileName, content: outVN.value);
+      final file = await FileManager().createFile(fileName: fileName, content: outVN.value);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(
