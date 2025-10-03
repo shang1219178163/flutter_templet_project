@@ -42,7 +42,7 @@ class AppThemeService {
     themeMode = result.brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
     await CacheService().setString(CacheKey.seedColor.name, result.colorScheme.primary.toHex());
     await CacheService().setString(CacheKey.brightness.name, result.colorScheme.brightness.toString());
-    _init();
+    // _init();
   }
 
   var themeMode = ThemeMode.system;

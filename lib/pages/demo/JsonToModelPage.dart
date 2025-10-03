@@ -193,8 +193,6 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: bgColor,
-        filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,
         ),
@@ -419,7 +417,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
       classPrefix: classPrefix,
       classSuffix: classSuffix,
       hasCopyWithFunc: hasCopyWithFunc,
-      hasTypeConversion: true,
+      hasTypeConversion: hasTypeConversion,
     );
     // debugPrint("dartCode.code:${dartCode.code}");
     return dartCode.code;
