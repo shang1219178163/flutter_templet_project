@@ -10,6 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// CacheService 阎村key
 enum CacheKey {
+  seedColor(needLogin: false, desc: "主题色"),
+  brightness(needLogin: false, desc: "亮度"),
+
   localOperateLog(needLogin: false, desc: "本地操作日志缓存"),
   requestEnv(needLogin: false, desc: "请求环境"),
   requestEnvDevOrigin(needLogin: false, desc: "请求环境(dev)"),

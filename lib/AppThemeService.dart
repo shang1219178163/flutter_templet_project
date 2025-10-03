@@ -6,22 +6,40 @@
 //  Copyright © 7/14/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_seed_color_box.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 
 class AppThemeService {
   static final AppThemeService _instance = AppThemeService._();
-
-  AppThemeService._();
-
   factory AppThemeService() => _instance;
 
+  AppThemeService._() {
+    _init();
+  }
+
+  _init() {
+    final cacheColorStr = CacheService().getString(CacheKey.seedColor.name);
+    if (cacheColorStr != null) {
+      seedColor = ColorExt.fromHex(cacheColorStr) ?? Colors.blue;
+    }
+
+    final cacheBrightness = CacheService().getString(CacheKey.brightness.name);
+    if (cacheBrightness != null) {
+      brightness = cacheBrightness.contains("light") == true ? Brightness.light : Brightness.dark;
+      // themeMode = brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
+    }
+    DLog.d([this, cacheColorStr, seedColor, brightness, themeMode].asMap());
+  }
+
   var themeMode = ThemeMode.system;
+  // ThemeMode get themeMode => brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
 
   Color seedColor = Colors.blue;
   Brightness brightness = Brightness.light;
@@ -31,6 +49,10 @@ class AppThemeService {
         seedColor: seedColor,
         brightness: brightness,
       );
+
+  void changeTheme() {
+    Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
+  }
 
   ThemeData get lightTheme => ThemeData(
         useMaterial3: false,
@@ -361,7 +383,7 @@ class AppThemeService {
   late ScrollController? actionScrollController = ScrollController();
 
   /// 选择主题
-  void showSeedColorPicker({
+  Future showSeedColorPicker({
     required BuildContext context,
     ValueChanged<Color>? onColorChanged,
     ValueChanged<Brightness>? onBrightnessChanged,
@@ -381,7 +403,7 @@ class AppThemeService {
       Colors.lime,
       Colors.amber,
     ];
-    showModalBottomSheet(
+    return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       constraints: BoxConstraints(
@@ -420,10 +442,6 @@ class AppThemeService {
         );
       },
     );
-  }
-
-  void changeTheme() {
-    Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
   }
 
   buildMaterial3Theme() {

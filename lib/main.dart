@@ -188,6 +188,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
+      themeMode: AppThemeService().themeMode,
       theme: AppThemeService().lightTheme,
       darkTheme: AppThemeService().darkTheme,
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
