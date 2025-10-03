@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SeedColorBox extends StatefulWidget {
-  const SeedColorBox({
+class NSeedColorBox extends StatefulWidget {
+  const NSeedColorBox({
     super.key,
     required this.colorOptions,
     this.index,
@@ -18,17 +18,17 @@ class SeedColorBox extends StatefulWidget {
   final ValueChanged<Brightness>? onBrightnessChanged;
 
   @override
-  State<SeedColorBox> createState() => _SeedColorBoxState();
+  State<NSeedColorBox> createState() => _NSeedColorBoxState();
 }
 
-class _SeedColorBoxState extends State<SeedColorBox> {
+class _NSeedColorBoxState extends State<NSeedColorBox> {
   late List<Color> colorOptions = widget.colorOptions;
   late int index = widget.index ?? 0;
   late Color seedColor = widget.colorOptions[index];
   late Brightness brightness = widget.brightness;
 
   @override
-  void didUpdateWidget(covariant SeedColorBox oldWidget) {
+  void didUpdateWidget(covariant NSeedColorBox oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
@@ -132,7 +132,7 @@ mixin SeedColorMixin<T extends StatefulWidget> on State<T> {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Column(
               children: [
-                SeedColorBox(
+                NSeedColorBox(
                   colorOptions: [
                     ...Colors.primaries,
                     ...Colors.accents,
