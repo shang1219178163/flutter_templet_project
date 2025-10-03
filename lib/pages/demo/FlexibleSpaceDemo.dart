@@ -104,7 +104,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
               IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
               IconButton(
                   onPressed: () {
-                    APPThemeService().changeTheme();
+                    AppThemeService().changeTheme();
                   },
                   icon: Icon(Icons.change_circle_outlined)),
             ],

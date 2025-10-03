@@ -44,7 +44,7 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
         actions: [
           TextButton(
               onPressed: () {
-                APPThemeService().showSeedColorPicker(
+                AppThemeService().showSeedColorPicker(
                   context: context,
                 );
               },

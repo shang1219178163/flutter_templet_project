@@ -9,263 +9,296 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/seed_color_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_seed_color_box.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 
-class APPThemeService {
-  static final APPThemeService _instance = APPThemeService._();
+class AppThemeService {
+  static final AppThemeService _instance = AppThemeService._();
 
-  APPThemeService._();
+  AppThemeService._();
 
-  factory APPThemeService() => _instance;
+  factory AppThemeService() => _instance;
 
-  // static APPThemeSettings get instance => _instance;
+  var themeMode = ThemeMode.system;
 
-  late ThemeData themeData = ThemeData.light(useMaterial3: false).copyWith(
-    platform: TargetPlatform.iOS,
-    splashFactory: NoSplash.splashFactory,
-    splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
-    highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
-    // primaryColor: Colors.blue, //主色调为青色
-    // indicatorColor: Colors.white,
-    // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
-    // textTheme: ThemeData.light().textTheme.copyWith(
-    //     button: TextStyle(color: Colors.red)
-    // ),//设置文本颜色为红色
-    scaffoldBackgroundColor: bgColor,
-    appBarTheme: const AppBarTheme(
-      elevation: 0,
-      scrolledUnderElevation: 0,
-      titleTextStyle: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-      ),
-      toolbarTextStyle: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-      ),
-      actionsIconTheme: IconThemeData(
-        color: Colors.white, // 图标颜色
-        size: 24.0, // 图标大小
-        opacity: 0.8, // 图标透明度
-      ),
-    ),
-    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    dividerTheme: const DividerThemeData(
-      color: Color(0xFFE4E4E4),
-      space: 0.5,
-      thickness: 1,
-    ),
-    badgeTheme: const BadgeThemeData(
-      offset: Offset(-1, -4),
-      largeSize: 20,
-      smallSize: 20,
-      textColor: Colors.white,
-      textStyle: TextStyle(
-        fontWeight: FontWeight.w500,
-        color: Colors.white,
-        fontSize: 11,
-      ),
-    ),
-    bottomAppBarTheme: const BottomAppBarTheme(
-      surfaceTintColor: Color(0xFFFFFFFF),
-      color: Color(0xFFFFFFFF),
-    ),
-    chipTheme: ChipThemeData(
-      pressElevation: 0,
-      elevation: 0,
-      showCheckmark: false,
-      side: BorderSide.none,
-    ),
-    buttonTheme: ButtonThemeData(
-      splashColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      buttonColor: Colors.blue,
-      focusColor: Colors.transparent,
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        foregroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        foregroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        backgroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-    filledButtonTheme: FilledButtonThemeData(
-      style: FilledButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        backgroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-    textTheme: ThemeData.dark().textTheme.apply(
-          bodyColor: Colors.black, // 普通文字颜色
-          displayColor: Colors.black, // 标题文字颜色
+  Color seedColor = Colors.blue;
+  Brightness brightness = Brightness.light;
+
+  // 基于种子颜色和亮度生成配色方案
+  ColorScheme get colorScheme => ColorScheme.fromSeed(
+        seedColor: seedColor,
+        brightness: brightness,
+      );
+
+  ThemeData get lightTheme => ThemeData(
+        useMaterial3: false,
+        brightness: Brightness.light,
+        colorScheme: ColorScheme.light(
+          primary: seedColor, // 主色
+          // onPrimary: Colors.black, // 主色上的文字
+          // secondary: Color(0xFF03DAC6), // 辅助色
+          // onSecondary: Colors.black,
+          // error: Color(0xFFCF6679), // 错误色
+          // onError: Colors.black,
+          // surface: Color(0xFF1E1E1E), // 卡片/底部区域
+          // onSurface: Colors.white,
         ),
-    // textTheme: const TextTheme(
-    //   displayLarge: TextStyle(color: Colors.black, fontSize: 96.0, fontWeight: FontWeight.w300),
-    //   displayMedium: TextStyle(color: Colors.black, fontSize: 60.0, fontWeight: FontWeight.w300),
-    //   displaySmall: TextStyle(color: Colors.black, fontSize: 48.0, fontWeight: FontWeight.w400),
-    //   headlineMedium: TextStyle(color: Colors.black, fontSize: 34.0, fontWeight: FontWeight.w400),
-    //   headlineSmall: TextStyle(color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.w400),
-    //   titleLarge: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w500),
-    //   titleMedium: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
-    //   titleSmall: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
-    //   bodyLarge: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
-    //   bodyMedium: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w400),
-    //   bodySmall: TextStyle(color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w400),
-    //   labelLarge: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
-    //   labelSmall: TextStyle(color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.w400),
-    // ),
-    dialogBackgroundColor: Colors.white,
-    dialogTheme: DialogTheme(
-      backgroundColor: Colors.white,
-      // shadowColor: AppColors.color_242434,
-      // elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      alignment: Alignment.center,
-      titleTextStyle: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF313135),
-      ),
-      contentTextStyle: const TextStyle(
-        fontSize: 14,
-        color: Color(0xFF313135),
-      ),
-      iconColor: Color(0xFF313135),
-      actionsPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    ),
-    bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: Colors.white,
-      surfaceTintColor: Color(0xFFE3F2FD),
-      elevation: 8,
-      modalBackgroundColor: Colors.white,
-      modalElevation: 12,
-      shadowColor: Colors.black.withOpacity(0.2),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      showDragHandle: true,
-      dragHandleColor: Colors.blue,
-      dragHandleSize: const Size(40, 6),
-      clipBehavior: Clip.antiAlias,
-      constraints: const BoxConstraints(
-        minHeight: 100,
-        maxHeight: 400,
-        minWidth: double.infinity,
-      ),
-    ),
-    sliderTheme: const SliderThemeData(
-      activeTrackColor: Colors.blue,
-      thumbColor: Colors.blue,
-      overlayColor: Colors.grey,
-    ),
-    extensions: appThemeDataExtensions(),
-  );
+        platform: TargetPlatform.iOS,
+        splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+        highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
+        // primaryColor: seedColor, //主色调为青色
+        // indicatorColor: Colors.white,
+        // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
+        // textTheme: ThemeData.light().textTheme.copyWith(
+        //     button: TextStyle(color: Colors.red)
+        // ),//设置文本颜色为红色
+        scaffoldBackgroundColor: bgColor,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          titleTextStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+          toolbarTextStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+          actionsIconTheme: IconThemeData(
+            color: Colors.white, // 图标颜色
+            size: 24.0, // 图标大小
+            opacity: 0.8, // 图标透明度
+          ),
+        ),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        dividerTheme: const DividerThemeData(
+          color: Color(0xFFE4E4E4),
+          space: 0.5,
+          thickness: 1,
+        ),
+        badgeTheme: const BadgeThemeData(
+          offset: Offset(-1, -4),
+          largeSize: 20,
+          smallSize: 20,
+          textColor: Colors.white,
+          textStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+            fontSize: 11,
+          ),
+        ),
+        bottomAppBarTheme: const BottomAppBarTheme(
+          surfaceTintColor: Color(0xFFFFFFFF),
+          color: Color(0xFFFFFFFF),
+        ),
+        chipTheme: ChipThemeData(
+          pressElevation: 0,
+          elevation: 0,
+          showCheckmark: false,
+          side: BorderSide.none,
+        ),
+        buttonTheme: ButtonThemeData(
+          splashColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          buttonColor: seedColor,
+          focusColor: Colors.transparent,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            splashFactory: NoSplash.splashFactory,
+            foregroundColor: seedColor,
+          ).merge(buildButtonStyle()),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            splashFactory: NoSplash.splashFactory,
+            foregroundColor: seedColor,
+          ).merge(buildButtonStyle()),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            splashFactory: NoSplash.splashFactory,
+            backgroundColor: seedColor,
+          ).merge(buildButtonStyle()),
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            splashFactory: NoSplash.splashFactory,
+            backgroundColor: seedColor,
+          ).merge(buildButtonStyle()),
+        ),
+        textTheme: ThemeData.dark().textTheme.apply(
+              bodyColor: Colors.black, // 普通文字颜色
+              displayColor: Colors.black, // 标题文字颜色
+            ),
+        // textTheme: const TextTheme(
+        //   displayLarge: TextStyle(color: Colors.black, fontSize: 96.0, fontWeight: FontWeight.w300),
+        //   displayMedium: TextStyle(color: Colors.black, fontSize: 60.0, fontWeight: FontWeight.w300),
+        //   displaySmall: TextStyle(color: Colors.black, fontSize: 48.0, fontWeight: FontWeight.w400),
+        //   headlineMedium: TextStyle(color: Colors.black, fontSize: 34.0, fontWeight: FontWeight.w400),
+        //   headlineSmall: TextStyle(color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.w400),
+        //   titleLarge: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w500),
+        //   titleMedium: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
+        //   titleSmall: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
+        //   bodyLarge: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
+        //   bodyMedium: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w400),
+        //   bodySmall: TextStyle(color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w400),
+        //   labelLarge: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
+        //   labelSmall: TextStyle(color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.w400),
+        // ),
+        dialogBackgroundColor: Colors.white,
+        dialogTheme: DialogTheme(
+          backgroundColor: Colors.white,
+          // shadowColor: AppColors.color_242434,
+          // elevation: 8,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          alignment: Alignment.center,
+          titleTextStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF313135),
+          ),
+          contentTextStyle: const TextStyle(
+            fontSize: 14,
+            color: Color(0xFF313135),
+          ),
+          iconColor: Color(0xFF313135),
+          actionsPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Color(0xFFE3F2FD),
+          elevation: 8,
+          modalBackgroundColor: Colors.white,
+          modalElevation: 12,
+          shadowColor: Colors.black.withOpacity(0.2),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          showDragHandle: true,
+          dragHandleColor: seedColor,
+          dragHandleSize: const Size(40, 6),
+          clipBehavior: Clip.antiAlias,
+          constraints: const BoxConstraints(
+            minHeight: 100,
+            maxHeight: 400,
+            minWidth: double.infinity,
+          ),
+        ),
+        sliderTheme: SliderThemeData(
+          activeTrackColor: seedColor,
+          thumbColor: seedColor,
+          overlayColor: Colors.grey,
+        ),
+        extensions: appThemeDataExtensions(),
+      );
 
   // ThemeData? darkThemeData;
-  ThemeData darkThemeData = ThemeData.dark(useMaterial3: false).copyWith(
-    platform: TargetPlatform.iOS,
-    splashFactory: NoSplash.splashFactory,
-    splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
-    highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
-    // primaryColor: Colors.greenAccent, //主色调为青色
-    // indicatorColor: Colors.white,
-    // accentColor: Colors.tealAccent[200]!,
-    // brightness: Brightness.dark,//设置明暗模式为暗色
-    // accentColor: Colors.grey[900]!,//(按钮）Widget前景色为黑色
-    // primaryColor: Colors.white,//主色调为青色
-    // splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
-    // highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
-    // iconTheme: IconThemeData(color: Colors.white54),//设置icon主题色为黄色
-    // // textTheme: TextTheme(body1: TextStyle(color: Colors.red))//设置文本颜色为红色
-    // buttonColor: Colors.tealAccent[200]!,
-    // buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
-    // appBarTheme: ThemeData.dark().appBarTheme.copyWith(
-    //   color: Colors.black54,
-    // ),
-    // indicatorColor: Colors.white,
-    appBarTheme: const AppBarTheme(
-      elevation: 0,
-    ),
-    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    dividerTheme: const DividerThemeData(
-      space: 0.5,
-      thickness: 1,
-    ),
-    badgeTheme: const BadgeThemeData(
-      offset: Offset(-1, -4),
-      largeSize: 20,
-      smallSize: 20,
-      textColor: Colors.white,
-      textStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-        fontSize: 11,
-      ),
-    ),
-    bottomAppBarTheme: const BottomAppBarTheme(
-      height: 60,
-    ),
-    chipTheme: ChipThemeData(
-      pressElevation: 0, //不明原因未生效
-      showCheckmark: false,
-    ),
-    dialogBackgroundColor: Color(0xFF242434),
-    dialogTheme: DialogTheme(
-      backgroundColor: Color(0xFF242434),
-      // elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      alignment: Alignment.center,
-      titleTextStyle: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ),
-      contentTextStyle: const TextStyle(
-        fontSize: 14,
-        color: Colors.white,
-      ),
-      iconColor: Colors.white,
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    ),
-    bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: Color(0xFF212121),
-      surfaceTintColor: Color(0xFF424242),
-      modalBackgroundColor: Color(0xFF212121),
-      shadowColor: Colors.black.withOpacity(0.7),
-      elevation: 8,
-      modalElevation: 12,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      showDragHandle: true,
-      dragHandleColor: Colors.tealAccent,
-      dragHandleSize: const Size(40, 6),
-      clipBehavior: Clip.antiAlias,
-      constraints: const BoxConstraints(
-        minHeight: 100,
-        maxHeight: 400,
-        minWidth: double.infinity,
-      ),
-    ),
-  );
+  ThemeData get darkTheme => ThemeData(
+        useMaterial3: false,
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.dark(
+          primary: seedColor, // 主色
+          // onPrimary: Colors.black,      // 主色上的文字
+          // secondary: Color(0xFF03DAC6), // 辅助色
+          // onSecondary: Colors.black,
+          // error: Color(0xFFCF6679),     // 错误色
+          // onError: Colors.black,
+          // surface: Color(0xFF1E1E1E),   // 卡片/底部区域
+          // onSurface: Colors.white,
+        ),
+        platform: TargetPlatform.iOS,
+        splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+        highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
+        // primaryColor: Colors.greenAccent, //主色调为青色
+        // indicatorColor: Colors.white,
+        // accentColor: Colors.tealAccent[200]!,
+        // brightness: Brightness.dark,//设置明暗模式为暗色
+        // accentColor: Colors.grey[900]!,//(按钮）Widget前景色为黑色
+        // primaryColor: Colors.white,//主色调为青色
+        // splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+        // highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
+        // iconTheme: IconThemeData(color: Colors.white54),//设置icon主题色为黄色
+        // // textTheme: TextTheme(body1: TextStyle(color: Colors.red))//设置文本颜色为红色
+        // buttonColor: Colors.tealAccent[200]!,
+        // buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
+        // appBarTheme: ThemeData.dark().appBarTheme.copyWith(
+        //   color: Colors.black54,
+        // ),
+        // indicatorColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+        ),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        dividerTheme: const DividerThemeData(
+          space: 0.5,
+          thickness: 1,
+        ),
+        badgeTheme: const BadgeThemeData(
+          offset: Offset(-1, -4),
+          largeSize: 20,
+          smallSize: 20,
+          textColor: Colors.white,
+          textStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 11,
+          ),
+        ),
+        bottomAppBarTheme: const BottomAppBarTheme(
+          height: 60,
+        ),
+        chipTheme: ChipThemeData(
+          pressElevation: 0, //不明原因未生效
+          showCheckmark: false,
+        ),
+        dialogBackgroundColor: Color(0xFF242434),
+        dialogTheme: DialogTheme(
+          backgroundColor: Color(0xFF242434),
+          // elevation: 8,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          alignment: Alignment.center,
+          titleTextStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          contentTextStyle: const TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+          ),
+          iconColor: Colors.white,
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Color(0xFF212121),
+          surfaceTintColor: Color(0xFF424242),
+          modalBackgroundColor: Color(0xFF212121),
+          shadowColor: Colors.black.withOpacity(0.7),
+          elevation: 8,
+          modalElevation: 12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          showDragHandle: true,
+          dragHandleColor: Colors.tealAccent,
+          dragHandleSize: const Size(40, 6),
+          clipBehavior: Clip.antiAlias,
+          constraints: const BoxConstraints(
+            minHeight: 100,
+            maxHeight: 400,
+            minWidth: double.infinity,
+          ),
+        ),
+      );
 
   /// 初始化配置
   Iterable<ThemeExtension<dynamic>>? appThemeDataExtensions() {
@@ -361,14 +394,15 @@ class APPThemeService {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Column(
               children: [
-                SeedColorBox(
+                NSeedColorBox(
                   colorOptions: colors,
                   onColorChanged: (v) {
                     if (dismiss) {
                       Navigator.of(context).pop();
                     }
                     onColorChanged?.call(v);
-                    changeThemeLight(v);
+                    seedColor = v;
+                    Get.changeTheme(lightTheme);
                   },
                   brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
                   onBrightnessChanged: (v) {
@@ -389,72 +423,14 @@ class APPThemeService {
   }
 
   void changeTheme() {
-    // Get.changeTheme(Get.isDarkMode? ThemeData.light() : ThemeData.dark());
-    Get.changeTheme(Get.isDarkMode ? themeData : darkThemeData);
-  }
-
-  void changeThemeLight(Color e) {
-    themeData = ThemeData.light().copyWith(
-      primaryColor: e,
-      splashColor: Colors.transparent,
-      // 点击时的高亮效果设置为透明
-      highlightColor: Colors.transparent,
-      // scaffoldBackgroundColor: e,
-      appBarTheme: ThemeData.light().appBarTheme.copyWith(color: e),
-      indicatorColor: Colors.white,
-      iconTheme: ThemeData.light().iconTheme.copyWith(
-            color: e,
-          ),
-      textTheme: ThemeData.light().textTheme.apply(
-            // bodyColor: Colors.pink,
-            // displayColor: Colors.pink,
-            decoration: TextDecoration.none,
-          ),
-      textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(
-          foregroundColor: WidgetStateProperty.all(e),
-          // textStyle: MaterialStateProperty.all(TextStyle(color: Colors.red)),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(e),
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: ButtonStyle(
-          foregroundColor: WidgetStateProperty.all(e),
-          // textStyle: MaterialStateProperty.all(TextStyle(color: e)),
-        ),
-      ),
-      switchTheme: ThemeData.light().switchTheme.copyWith(
-            // thumbColor: e,
-            trackColor: WidgetStateProperty.all(e),
-          ),
-      bottomNavigationBarTheme: ThemeData.light().bottomNavigationBarTheme.copyWith(
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: e,
-            selectedIconTheme: IconThemeData(color: e),
-            selectedLabelStyle: const TextStyle(fontSize: 12),
-            unselectedLabelStyle: const TextStyle(fontSize: 12),
-          ),
-      cupertinoOverrideTheme: CupertinoThemeData(
-        primaryColor: e,
-        // textTheme:
-        // primaryContrastingColor: Colors.red,
-        // barBackgroundColor: Colors.red,
-        // scaffoldBackgroundColor: Colors.red,
-      ),
-      colorScheme: ThemeData.light().colorScheme.copyWith(secondary: e),
-    );
-    Get.changeTheme(themeData);
+    Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
   }
 
   buildMaterial3Theme() {
-    final color = Colors.blue;
+    final color = seedColor;
     return ThemeData(
       ///用来适配 Theme.of(context).primaryColorLight 和 primaryColorDark 的颜色变化，不设置可能会是默认蓝色
-      primarySwatch: color,
+      // primarySwatch: color,
 
       /// Card 在 M3 下，会有 apply Overlay
       colorScheme: ColorScheme.fromSeed(

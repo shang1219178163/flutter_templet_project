@@ -84,7 +84,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   }
 
   onThemeChange() {
-    APPThemeService().changeTheme();
+    AppThemeService().changeTheme();
   }
 
   onPosition() {

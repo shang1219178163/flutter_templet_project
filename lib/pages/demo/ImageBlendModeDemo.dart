@@ -31,7 +31,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
       body: buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          APPThemeService().changeTheme();
+          AppThemeService().changeTheme();
         },
         child: Icon(Icons.change_circle_outlined),
       ),
