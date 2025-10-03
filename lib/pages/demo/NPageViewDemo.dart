@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/AppThemeService.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
@@ -184,8 +184,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
         itemList: tuples
             .map((e) => e.item2)
             .toList()
-            .map((e) => e.sorted((a, b) =>
-                a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
+            .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
             .toList(),
         headerBuilder: (e) {
           return Container(

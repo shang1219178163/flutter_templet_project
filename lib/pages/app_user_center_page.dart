@@ -9,7 +9,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/AppThemeService.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
@@ -25,8 +25,7 @@ class APPUserCenterPage extends StatefulWidget {
   _APPUserCenterPageState createState() => _APPUserCenterPageState();
 }
 
-class _APPUserCenterPageState extends State<APPUserCenterPage>
-    with BottomSheetImageMixin {
+class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetImageMixin {
   // 我的 列表菜单
   final services = <Tuple2<String, IconData>>[
     Tuple2('京豆', Icons.adjust),
@@ -164,8 +163,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>
                   // Get.toNamed(APPRouter.loginPage, arguments: "login");
                   Get.toNamed(APPRouter.loginPageOne, arguments: "login");
                 },
-                child: Text('登录',
-                    style: TextStyle(fontSize: 16.0, color: Colors.white)),
+                child: Text('登录', style: TextStyle(fontSize: 16.0, color: Colors.white)),
               ),
               Text('/', style: TextStyle(fontSize: 20.0, color: Colors.white)),
               TextButton(
@@ -173,8 +171,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>
                   // APPRouter.push(context, 'register');
                   Get.toNamed(APPRouter.signinPage, arguments: "signin");
                 },
-                child: Text('注册',
-                    style: TextStyle(fontSize: 16.0, color: Colors.white)),
+                child: Text('注册', style: TextStyle(fontSize: 16.0, color: Colors.white)),
               )
             ],
           )

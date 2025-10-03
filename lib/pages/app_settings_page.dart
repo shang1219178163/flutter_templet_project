@@ -8,7 +8,7 @@
 
 // 设置
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/AppThemeService.dart';
 import 'package:flutter_templet_project/basicWidget/NSystemThemeTab.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/provider/theme_provider.dart';

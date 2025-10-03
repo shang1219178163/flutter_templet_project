@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/AppThemeService.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:tuple/tuple.dart';
 
@@ -284,9 +284,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
     double runSpacing = 8,
   }) {
     return LayoutBuilder(builder: (context, constraints) {
-      final itemWidth =
-          ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
-              .truncateToDouble();
+      final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
 
       return Wrap(
         spacing: spacing,

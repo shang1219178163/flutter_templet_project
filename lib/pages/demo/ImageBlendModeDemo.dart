@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/AppThemeService.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class ImageBlendModeDemo extends StatefulWidget {
@@ -50,9 +50,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
       // color: Colors.black,
       padding: EdgeInsets.all(8),
       child: LayoutBuilder(builder: (context, constraints) {
-        final itemWidth =
-            ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
-                .truncateToDouble();
+        final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
 
         return ListView(
           children: [
