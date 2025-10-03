@@ -178,7 +178,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
   }
 
   void presentSearcgPage() {
-    Get.toNamed(APPRouter.showSearchDemo, arguments: []);
+    Get.toNamed(AppRouter.showSearchDemo, arguments: []);
   }
 
   void onPresentCupertinoActionSheet() {

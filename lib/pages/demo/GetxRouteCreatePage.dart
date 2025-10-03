@@ -145,7 +145,7 @@ static const String patientGroupPage = '/patientGroupPage';
       final list = line.splitSet(chars.toSet());
       final name = list[1].trim();
       // DLog.d("name: $name");
-      final result = "GetPage(name: APPRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
+      final result = "GetPage(name: AppRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
       DLog.d(result);
       return result;
     }).toList();
@@ -188,7 +188,7 @@ static const String patientGroupPage = '/patientGroupPage';
   }
 
   String ceatePage({required String className, String content = ""}) {
-    // GetPage(name: APPRouter.appSplashPage, page: () => const AppSplashPage()),
+    // GetPage(name: AppRouter.appSplashPage, page: () => const AppSplashPage()),
     return '''
 class AppPages {
   static final List<GetPage> pages = [

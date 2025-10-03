@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/route_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/cell_model.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -25,10 +25,10 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
     CellModel(icon: Icons.person, title: "我的"),
     CellModel(icon: Icons.open_in_new, title: "退出"),
     CellModel(icon: Icons.color_lens_outlined, title: "主题色", arguments: {
-      "name": APPRouter.themeColorDemo,
+      "name": AppRouter.themeColorDemo,
     }),
     CellModel(icon: Icons.terminal, title: "本地日志", arguments: {
-      "name": APPRouter.jPushInfoPage,
+      "name": AppRouter.jPushInfoPage,
     }),
     CellModel(
       icon: Icons.recycling,

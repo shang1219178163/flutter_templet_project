@@ -28,8 +28,8 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
   var titles = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 
   var list = [
-    APPRouter.toastNoContext,
-    APPRouter.toastContext,
+    AppRouter.toastNoContext,
+    AppRouter.toastContext,
   ];
 
   bool isFlag = false;

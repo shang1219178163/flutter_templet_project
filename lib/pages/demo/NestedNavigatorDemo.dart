@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoTabScaffoldDemo.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
 class NestedNavigatorDemo extends StatefulWidget {
@@ -272,7 +272,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
             ),
           ),
           child: Navigator(
-            initialRoute: APPRouter.appTabPage,
+            initialRoute: AppRouter.appTabPage,
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 builder: (_) => CupertinoTabScaffoldDemo(),

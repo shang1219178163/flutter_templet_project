@@ -22,12 +22,12 @@ class StateManagerDemo extends StatefulWidget {
 
 class _StateManagerDemoState extends State<StateManagerDemo> {
   final _tuples = [
-    Tuple2("ValueNotifier<T>", APPRouter.providerListDemo),
-    Tuple2("RxDart+Provider", APPRouter.rxDartProviderDemo),
-    Tuple2("getx", APPRouter.getxStateDemo),
-    Tuple2("getxStateDemoNew", APPRouter.getxStateDemoNew),
-    Tuple2("proxyProviderDemo", APPRouter.proxyProviderDemo),
-    Tuple2("providerDemo", APPRouter.providerDemo),
+    Tuple2("ValueNotifier<T>", AppRouter.providerListDemo),
+    Tuple2("RxDart+Provider", AppRouter.rxDartProviderDemo),
+    Tuple2("getx", AppRouter.getxStateDemo),
+    Tuple2("getxStateDemoNew", AppRouter.getxStateDemoNew),
+    Tuple2("proxyProviderDemo", AppRouter.proxyProviderDemo),
+    Tuple2("providerDemo", AppRouter.providerDemo),
   ];
 
   @override

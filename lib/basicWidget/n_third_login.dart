@@ -199,7 +199,7 @@ mixin LoginMixin<T extends StatefulWidget> on State<T> {
     //   if (rootModel.result?.isApproved != true) {
     //     EasyToast.showToast('当前账号审核中，请联系管理员', cb: (){
     //       CacheService().remove('TOKEN');
-    //       Get.offNamed(APPRouter.loginPage);
+    //       Get.offNamed(AppRouter.loginPage);
     //     });
     //     return false;
     //   }
@@ -207,7 +207,7 @@ mixin LoginMixin<T extends StatefulWidget> on State<T> {
     //   if (rootModel.result?.lockStatus == 'Y') {
     //     EasyToast.showToast('当前账号已被禁用，请联系管理员', cb: (){
     //       CacheService().remove('TOKEN');
-    //       Get.offNamed(APPRouter.loginPage);
+    //       Get.offNamed(AppRouter.loginPage);
     //     });
     //     return false;
     //   }

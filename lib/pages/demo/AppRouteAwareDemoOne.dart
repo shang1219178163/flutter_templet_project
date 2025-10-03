@@ -13,8 +13,7 @@ class AppRouteAwareDemoOne extends StatefulWidget {
   _AppRouteAwareDemoOneState createState() => _AppRouteAwareDemoOneState();
 }
 
-class _AppRouteAwareDemoOneState extends State<AppRouteAwareDemoOne>
-    with RouteAware, RouteAwareMixin {
+class _AppRouteAwareDemoOneState extends State<AppRouteAwareDemoOne> with RouteAware, RouteAwareMixin {
   @override
   void dispose() {
     debugPrint("------> $widget dispose");
@@ -73,7 +72,7 @@ class _AppRouteAwareDemoOneState extends State<AppRouteAwareDemoOne>
           children: [
             ElevatedButton(
               onPressed: () {
-                Get.toNamed(APPRouter.alertSheetDemo);
+                Get.toNamed(AppRouter.alertSheetDemo);
               },
               child: Text("next"),
             ),

@@ -11,7 +11,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/vendor/file_preview/file_preview_page.dart';
 import 'package:flutter_templet_project/vendor/file_preview/webview_file_preview_page.dart';
@@ -90,8 +90,8 @@ class ToolUtil {
 
   /// 返回登录页
   static toLoginPage() {
-    if (Get.currentRoute != APPRouter.loginPage) {
-      Get.offAllNamed(APPRouter.loginPage);
+    if (Get.currentRoute != AppRouter.loginPage) {
+      Get.offAllNamed(AppRouter.loginPage);
     }
   }
 

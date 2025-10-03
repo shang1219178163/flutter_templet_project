@@ -30,7 +30,7 @@ class _AppLaunchPageState extends State<AppLaunchPage> {
 
     timer?.cancel();
     timer ??= Timer(const Duration(milliseconds: 300), () {
-      Get.offAndToNamed(APPRouter.appTabPage);
+      Get.offAndToNamed(AppRouter.appTabPage);
     });
     super.initState();
   }

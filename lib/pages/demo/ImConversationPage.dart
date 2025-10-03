@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/model/im_conversation_detail_model.dart';
 import 'package:flutter_templet_project/pages/demo/widget/im_conversation_cell.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/Resource.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
@@ -116,7 +116,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
         final content = InkWell(
           onTap: () {
             // DLog.d("${e.toJson()}");
-            Get.toNamed(APPRouter.imChatPage);
+            Get.toNamed(AppRouter.imChatPage);
           },
           child: IMConversationCell(
             imgUrl: e.faceUrl ?? "",

@@ -17,7 +17,7 @@ class AuthMiddleware extends GetMiddleware {
   //   if (!isLogin) {
   //     // 如果未登录，重定向到登录页面
   //     return RouteSettings(
-  //         name: APPRouter.aeReportPage, arguments: Get.arguments);
+  //         name: AppRouter.aeReportPage, arguments: Get.arguments);
   //   }
   //   return null; // 继续访问原始路由
   // }

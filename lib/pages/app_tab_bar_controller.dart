@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -48,7 +48,7 @@ class AppTabBarController extends GetxController {
 
   /// 返回 appTabPage
   void backTabPage() {
-    Get.until((route) => route.settings.name == APPRouter.appTabPage);
+    Get.until((route) => route.settings.name == AppRouter.appTabPage);
   }
 
   PackageInfo? _packageInfo;

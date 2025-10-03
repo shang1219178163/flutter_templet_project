@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_It
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
@@ -53,7 +53,7 @@ class NFileUploadHandle {
           }
         case NFileType.video:
           {
-            Get.toNamed(APPRouter.chewiePlayerPage, arguments: {
+            Get.toNamed(AppRouter.chewiePlayerPage, arguments: {
               "videoUrl": model.url,
               "videoTitle": fileName,
             });
@@ -61,7 +61,7 @@ class NFileUploadHandle {
           break;
         case NFileType.audio:
           {
-            Get.toNamed(APPRouter.audioPlayPage, arguments: {
+            Get.toNamed(AppRouter.audioPlayPage, arguments: {
               "url": model.url,
               "desc": fileName,
               "title": fileName,

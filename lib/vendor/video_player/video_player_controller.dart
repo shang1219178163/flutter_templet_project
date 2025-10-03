@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +24,7 @@ class MediaPlayerController {
       return;
     }
     final videoTitle = (videoUrl).split("/").last;
-    Get.toNamed(APPRouter.chewiePlayerPage, arguments: {
+    Get.toNamed(AppRouter.chewiePlayerPage, arguments: {
       "videoUrl": videoUrl,
       "videoTitle": videoTitle,
       "videoThumbUrl": videoThumbUrl,
@@ -46,7 +46,7 @@ class MediaPlayerController {
       ToastUtil.show("播放链接异常");
       return;
     }
-    Get.toNamed(APPRouter.audioPlayPage, arguments: {
+    Get.toNamed(AppRouter.audioPlayPage, arguments: {
       "url": url,
       "desc": desc,
       "timeLong": timeLong ?? 0,

@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/service_protocol_info_ext.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/tts_manager.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:get/get.dart';
@@ -147,7 +147,7 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
   }
 
   void onLoginPage() {
-    Get.toNamed(APPRouter.loginPage);
+    Get.toNamed(AppRouter.loginPage);
   }
 
   onUnbindPhone() async {

@@ -27,7 +27,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 //         }
 //       },
 //       onAdd: () {
-//         NavigatorUtil.jump(context, APPRouter.phrasesPage);
+//         NavigatorUtil.jump(context, AppRouter.phrasesPage);
 //       },
 //   );
 // }

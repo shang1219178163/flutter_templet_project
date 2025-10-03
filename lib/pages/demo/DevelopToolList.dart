@@ -18,10 +18,10 @@ class _DevelopToolListState extends State<DevelopToolList> {
   final _scrollController = ScrollController();
 
   final items = <Tuple2<String, String>>[
-    Tuple2("系统图标", APPRouter.systemIconsPage),
-    Tuple2("系统颜色", APPRouter.systemColorPage),
-    Tuple2("字符串转换", APPRouter.stringTransformPage),
-    Tuple2("json转model", APPRouter.jsonToDartPage),
+    Tuple2("系统图标", AppRouter.systemIconsPage),
+    Tuple2("系统颜色", AppRouter.systemColorPage),
+    Tuple2("字符串转换", AppRouter.stringTransformPage),
+    Tuple2("json转model", AppRouter.jsonToDartPage),
   ];
 
   @override

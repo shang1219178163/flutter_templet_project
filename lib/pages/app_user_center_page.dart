@@ -75,8 +75,8 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
             icon: Icon(Icons.settings),
             color: Colors.white,
             onPressed: () {
-              // APPRouter.push(context, APPRouter.settingsPage, args: "setting",);
-              Get.toNamed(APPRouter.settingsPage, arguments: "setting");
+              // AppRouter.push(context, AppRouter.settingsPage, args: "setting",);
+              Get.toNamed(AppRouter.settingsPage, arguments: "setting");
             },
           ),
         ],
@@ -159,17 +159,17 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
             children: <Widget>[
               TextButton(
                 onPressed: () {
-                  // APPRouter.push(context, 'login');
-                  // Get.toNamed(APPRouter.loginPage, arguments: "login");
-                  Get.toNamed(APPRouter.loginPageOne, arguments: "login");
+                  // AppRouter.push(context, 'login');
+                  // Get.toNamed(AppRouter.loginPage, arguments: "login");
+                  Get.toNamed(AppRouter.loginPageOne, arguments: "login");
                 },
                 child: Text('登录', style: TextStyle(fontSize: 16.0, color: Colors.white)),
               ),
               Text('/', style: TextStyle(fontSize: 20.0, color: Colors.white)),
               TextButton(
                 onPressed: () {
-                  // APPRouter.push(context, 'register');
-                  Get.toNamed(APPRouter.signinPage, arguments: "signin");
+                  // AppRouter.push(context, 'register');
+                  Get.toNamed(AppRouter.signinPage, arguments: "signin");
                 },
                 child: Text('注册', style: TextStyle(fontSize: 16.0, color: Colors.white)),
               )

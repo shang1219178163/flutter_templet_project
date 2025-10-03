@@ -129,7 +129,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
           TextButton(
             onPressed: () {
               // Navigator.pushNamed(context, 'forget');
-              Get.toNamed(APPRouter.forgetPasswordPage, arguments: "forget");
+              Get.toNamed(AppRouter.forgetPasswordPage, arguments: "forget");
             },
             child: Text('忘记密码?', style: TextStyle(color: Colors.black54, fontSize: 15.0)),
           ),
@@ -249,7 +249,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
     await Future.delayed(Duration(milliseconds: 300), () {});
     ToastUtil.hideLoading();
 
-    // Get.toNamed(APPRouter.appTabPage)
+    // Get.toNamed(AppRouter.appTabPage)
 
     accountSheetController.addAccount(
       account: accountController.text.trim(),

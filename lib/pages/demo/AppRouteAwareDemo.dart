@@ -27,9 +27,7 @@ class _AppRouteAwareDemoState extends State<AppRouteAwareDemo> with RouteAware {
 
   @override
   void didChangeDependencies() {
-    AppRouteObserver()
-        .routeObserver
-        .subscribe(this, ModalRoute.of(context)!); //订阅
+    AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
     super.didChangeDependencies();
   }
 
@@ -79,7 +77,7 @@ class _AppRouteAwareDemoState extends State<AppRouteAwareDemo> with RouteAware {
           children: [
             ElevatedButton(
               onPressed: () {
-                Get.toNamed(APPRouter.alertSheetDemo);
+                Get.toNamed(AppRouter.alertSheetDemo);
               },
               child: Text("next"),
             ),
