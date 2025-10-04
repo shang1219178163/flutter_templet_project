@@ -21,7 +21,7 @@ class _DevelopToolListState extends State<DevelopToolList> {
     Tuple2("系统图标", AppRouter.systemIconsPage),
     Tuple2("系统颜色", AppRouter.systemColorPage),
     Tuple2("字符串转换", AppRouter.stringTransformPage),
-    Tuple2("json转model", AppRouter.jsonToDartPage),
+    Tuple2("json转model", AppRouter.jsonToModel),
   ];
 
   @override

@@ -12,16 +12,16 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
 
-class JsonToDartPage extends StatefulWidget {
-  JsonToDartPage({Key? key, this.title}) : super(key: key);
+class JsonToModel extends StatefulWidget {
+  JsonToModel({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _JsonToDartPageState createState() => _JsonToDartPageState();
+  _JsonToModelState createState() => _JsonToModelState();
 }
 
-class _JsonToDartPageState extends State<JsonToDartPage> {
+class _JsonToModelState extends State<JsonToModel> {
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();
 

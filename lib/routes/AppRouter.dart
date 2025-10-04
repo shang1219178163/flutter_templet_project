@@ -156,7 +156,8 @@ import 'package:flutter_templet_project/pages/demo/InputDatePickerFormFieldDemo.
 import 'package:flutter_templet_project/pages/demo/InteractiveViewerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IteratorDemo.dart';
-import 'package:flutter_templet_project/pages/demo/JsonToModelPage.dart';
+import 'package:flutter_templet_project/pages/demo/JsonToModel.dart';
+import 'package:flutter_templet_project/pages/demo/JsonToModel.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LayoutBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListBodyDemo.dart';
@@ -714,7 +715,7 @@ class AppRouter {
   static const String getxDemo = '/getxDemo';
   static const String globalIsolateDemo = '/globalIsolateDemo';
   static const String longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
-  static const String jsonToDartPage = '/jsonToDartPage';
+  static const String jsonToModel = '/jsonToModel';
   static const String assetUploadBoxDemo = '/assetUploadBoxDemo';
   static const String keyboardAttachDemo = '/keyboardAttachDemo';
   static const String dashLineDemo = '/dashLineDemo';
@@ -2017,8 +2018,8 @@ class AppPage {
       page: () => LongCaptureWidgetDemo(),
     ),
     GetPage(
-      name: AppRouter.jsonToDartPage,
-      page: () => JsonToDartPage(),
+      name: AppRouter.jsonToModel,
+      page: () => JsonToModel(),
     ),
     GetPage(
       name: AppRouter.assetUploadBoxDemo,

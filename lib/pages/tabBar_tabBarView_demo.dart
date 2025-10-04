@@ -647,7 +647,7 @@ var customs = [
   Tuple2(AppRouter.expandTextDemo, "可折叠文字"),
   Tuple2(AppRouter.uploadFileDemo, "上传demo"),
   Tuple2(AppRouter.fileUploadBoxDemo, "上传文件demo"),
-  Tuple2(AppRouter.jsonToDartPage, "json转模型"),
+  Tuple2(AppRouter.jsonToModel, "json转模型"),
   Tuple2(AppRouter.assetUploadBoxDemo, "assetUploadBoxDemo"),
   Tuple2(AppRouter.dashLineDemo, "dashLineDemo"),
   Tuple2(AppRouter.choiceBoxOneDemo, "choiceBoxOneDemo"),
