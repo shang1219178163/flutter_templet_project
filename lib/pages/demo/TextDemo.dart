@@ -98,7 +98,10 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
               ),
             ),
             buildTextTransform(),
-            buildFont(),
+            NSectionBox(
+              title: "fontFamilyFallback",
+              child: buildFont(),
+            ),
           ],
         ),
       ),
@@ -169,11 +172,6 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
 
   Widget buildFont() {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.all(Radius.circular(0)),
-      ),
       child: DefaultTextStyle(
         style: TextStyle(
           color: Colors.black,

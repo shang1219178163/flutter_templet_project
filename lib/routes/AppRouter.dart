@@ -123,6 +123,7 @@ import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoThree.dart'
 import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FontFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FractionallySizedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
@@ -834,6 +835,7 @@ class AppRouter {
   static const String animatedToggleSwitchDemo = '/animatedToggleSwitchDemo';
   static const String customTabbarPage = '/customTabbarPage';
   static const String pageRouteDemo = '/pageRouteDemo';
+  static const String fontFeatureDemo = '/fontFeatureDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2477,6 +2479,10 @@ class AppPage {
     GetPage(
       name: AppRouter.pageRouteDemo,
       page: () => PageRouteDemo(),
+    ),
+    GetPage(
+      name: AppRouter.fontFeatureDemo,
+      page: () => FontFeatureDemo(),
     ),
   ];
 }
