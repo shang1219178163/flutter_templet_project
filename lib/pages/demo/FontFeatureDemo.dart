@@ -16,10 +16,6 @@ class FontFeatureDemo extends StatefulWidget {
 class _FontFeatureDemoState extends State<FontFeatureDemo> {
   final scrollController = ScrollController();
 
-  bool _useLigatures = true;
-  bool _useOldstyleNumbers = false;
-  bool _useSmallCaps = false;
-
   @override
   void didUpdateWidget(covariant FontFeatureDemo oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -45,74 +41,11 @@ class _FontFeatureDemoState extends State<FontFeatureDemo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              buildText(),
               buildFontFeature(),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget buildText() {
-    List<FontFeature> features = [];
-
-    if (_useLigatures) {
-      features.add(FontFeature.enable('liga'));
-    }
-
-    if (_useOldstyleNumbers) {
-      features.add(FontFeature.oldstyleFigures());
-    }
-
-    if (_useSmallCaps) {
-      features.add(FontFeature.enable('smcp'));
-    }
-
-    return Column(
-      children: [
-        // 控制开关
-        Column(
-          children: [
-            SwitchListTile(
-              dense: true,
-              title: const Text('启用连字'),
-              value: _useLigatures,
-              onChanged: (value) => setState(() => _useLigatures = value),
-            ),
-            SwitchListTile(
-              dense: true,
-              title: const Text('使用旧式数字'),
-              value: _useOldstyleNumbers,
-              onChanged: (value) => setState(() => _useOldstyleNumbers = value),
-            ),
-            SwitchListTile(
-              dense: true,
-              title: const Text('小型大写字母'),
-              value: _useSmallCaps,
-              onChanged: (value) => setState(() => _useSmallCaps = value),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: 20),
-
-        // 预览文本
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            '示例文本: office offer 123456 HELLO world',
-            style: TextStyle(
-              fontSize: 18,
-              fontFeatures: features,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
