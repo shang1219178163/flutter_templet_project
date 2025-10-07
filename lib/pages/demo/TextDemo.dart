@@ -47,8 +47,7 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
   }
 
   buildBody() {
-    final text =
-        "刚开始进行搜索，发现很多都是让在每段开始的时候采用空格进行填充，但是采用这种形式之后，不知道为何首行直接溢出了，最后采用下面方法进行实现"
+    final text = "刚开始进行搜索，发现很多都是让在每段开始的时候采用空格进行填充，但是采用这种形式之后，不知道为何首行直接溢出了，最后采用下面方法进行实现"
         "的。";
 
     return Scrollbar(
@@ -99,6 +98,7 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
               ),
             ),
             buildTextTransform(),
+            buildFont(),
           ],
         ),
       ),
@@ -166,6 +166,74 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
       ),
     );
   }
+
+  Widget buildFont() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      child: DefaultTextStyle(
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16.0,
+          height: 2,
+          fontFamily: 'PingFang SC',
+          fontFamilyFallback: [
+            "PingFang SC",
+            "Heiti SC",
+            "Roboto",
+            'NotoSansSC', // 思源黑体
+            'Microsoft YaHei', // 微软雅黑 (Windows)
+            'Arial', // 通用英文字体
+            'Helvetica', // 备选英文字体
+            'sans-serif', // 通用字体族
+          ],
+        ),
+        child: Column(
+          children: [
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w100',
+              style: TextStyle(fontWeight: FontWeight.w100),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w200',
+              style: TextStyle(fontWeight: FontWeight.w200),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w300',
+              style: TextStyle(fontWeight: FontWeight.w300),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w400',
+              style: TextStyle(fontWeight: FontWeight.w400),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w500',
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w600',
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w700',
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w800',
+              style: TextStyle(fontWeight: FontWeight.w800),
+            ),
+            Text(
+              'AaBbCcDd 我是中文 123456 -- w900',
+              style: TextStyle(fontWeight: FontWeight.w900),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class MyTextPainter extends CustomPainter {
@@ -203,8 +271,7 @@ class MyTextPainter extends CustomPainter {
     }
     paragraphBuilder.addText(text.data ?? "");
 
-    var paragraph = paragraphBuilder.build()
-      ..layout(ui.ParagraphConstraints(width: size.width));
+    var paragraph = paragraphBuilder.build()..layout(ui.ParagraphConstraints(width: size.width));
 
     canvas.drawParagraph(paragraph, Offset(0, 0));
   }
