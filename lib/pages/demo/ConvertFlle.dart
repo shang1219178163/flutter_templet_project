@@ -138,6 +138,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                   onChanged: (e) async {
                     debugPrint(e.name);
                     current = e;
+                    onClear();
                     await onDragChanged();
                   },
                 ),
