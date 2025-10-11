@@ -69,6 +69,7 @@ import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCacula
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClickNotificationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ColorAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorFilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
@@ -253,6 +254,7 @@ import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemoOne.dart'
 import 'package:flutter_templet_project/pages/demo/RefreshListView.dart';
 import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReorderableListViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RestorationMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RichTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
 import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
@@ -836,6 +838,8 @@ class AppRouter {
   static const String customTabbarPage = '/customTabbarPage';
   static const String pageRouteDemo = '/pageRouteDemo';
   static const String fontFeatureDemo = '/fontFeatureDemo';
+  static const String colorAnimationDemo = '/colorAnimationDemo';
+  static const String restorationMixinDemo = '/restorationMixinDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2483,6 +2487,14 @@ class AppPage {
     GetPage(
       name: AppRouter.fontFeatureDemo,
       page: () => FontFeatureDemo(),
+    ),
+    GetPage(
+      name: AppRouter.colorAnimationDemo,
+      page: () => ColorAnimationDemo(),
+    ),
+    GetPage(
+      name: AppRouter.restorationMixinDemo,
+      page: () => RestorationMixinDemo(),
     ),
   ];
 }
