@@ -284,7 +284,7 @@ class AppThemeService {
           smallSize: 20,
           textColor: Colors.white,
           textStyle: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             color: Colors.white,
             fontSize: 11,
           ),

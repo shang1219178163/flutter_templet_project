@@ -64,13 +64,10 @@ class UserModel with SelectableMixin {
 
     jobTitle = json['jobTitle'];
     email = json['email'];
-    address = json['address'] != null
-        ? AddressDetailModel.fromJson(json['address'])
-        : null;
+    address = json['address'] != null ? AddressDetailModel.fromJson(json['address']) : null;
     phone = json['phone'];
     website = json['website'];
-    company =
-        json['company'] != null ? Company.fromJson(json['company']) : null;
+    company = json['company'] != null ? Company.fromJson(json['company']) : null;
     tag = json['tag'];
 
     isSelected = json['isSelected'] ?? false;
@@ -99,6 +96,14 @@ class UserModel with SelectableMixin {
     data['isSelected'] = isSelected;
     return data;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserModel && runtimeType == other.runtimeType && name == other.name && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
 
 class AddressDetailModel {
@@ -108,8 +113,7 @@ class AddressDetailModel {
   String? zipcode;
   Coordinate? geo;
 
-  AddressDetailModel(
-      {this.street, this.suite, this.city, this.zipcode, this.geo});
+  AddressDetailModel({this.street, this.suite, this.city, this.zipcode, this.geo});
 
   AddressDetailModel.fromJson(Map<String, dynamic> json) {
     street = json['street'];

@@ -6,7 +6,6 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
@@ -457,7 +456,7 @@ class SizeFilterConvert extends ConvertProtocol {
         return false;
       }
       final num = double.tryParse(size.replaceFirst("K", "").trim()) ?? 0;
-      final result = num > 20.0;
+      final result = num > 20.0; //大于 20 kb都显示
       // if (result) {
       //   DLog.d("${lines.indexOf(content)}:$e, $num, $result");
       // }
