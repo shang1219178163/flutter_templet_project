@@ -223,7 +223,7 @@ class CacheService {
     if (value == null) {
       return false;
     }
-    final result = prefs.setString(key, value);
+    final result = await prefs.setString(key, value);
     return result;
   }
 

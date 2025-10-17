@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
+import 'package:quiver/cache.dart';
 
 class AppThemeService {
   static final AppThemeService _instance = AppThemeService._();
@@ -527,7 +528,7 @@ class AppThemeService {
               children: [
                 NSeedColorBox(
                   colorOptions: colors,
-                  onColorChanged: (v) {
+                  onColorChanged: (v) async {
                     if (dismiss) {
                       Navigator.of(context).pop();
                     }
@@ -536,7 +537,7 @@ class AppThemeService {
                     changeTheme(lightTheme);
                   },
                   brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
-                  onBrightnessChanged: (v) {
+                  onBrightnessChanged: (v) async {
                     if (dismiss) {
                       Navigator.of(context).pop();
                     }

@@ -187,10 +187,11 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
             ),
           ),
           TextButton.icon(
-            onPressed: () {
-              AppThemeService().showSeedColorPicker(
+            onPressed: () async {
+              await AppThemeService().showSeedColorPicker(
                 context: context,
               );
+              setState(() {});
             },
             icon: Icon(Icons.color_lens),
             label: Text(

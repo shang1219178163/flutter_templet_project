@@ -69,6 +69,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
       child: SingleChildScrollView(
         controller: scrollController,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildCustomTabbar(
               onChanged: (i) {
@@ -86,7 +87,12 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                 DLog.d(v);
               },
             ),
-          ],
+          ].map((e) {
+            return Container(
+              padding: EdgeInsets.only(left: 16, right: 16, bottom: 10),
+              child: e,
+            );
+          }).toList(),
         ),
       ),
     );
@@ -223,7 +229,7 @@ class _OutlineTabbarState extends State<OutlineTabbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height ?? 24,
+      height: widget.height ?? 30,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
@@ -237,7 +243,9 @@ class _OutlineTabbarState extends State<OutlineTabbar> {
 
           return GestureDetector(
             onTap: () {
-              if (current == e.value) return;
+              if (current == e.value) {
+                return;
+              }
               current = e.value;
               setState(() {});
               widget.onChanged(e);
