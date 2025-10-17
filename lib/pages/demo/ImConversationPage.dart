@@ -20,7 +20,7 @@ import 'package:flutter_templet_project/model/im_conversation_detail_model.dart'
 import 'package:flutter_templet_project/pages/demo/widget/im_conversation_cell.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/Resource.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 /// 会话列表

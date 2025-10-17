@@ -93,6 +93,8 @@ class ThemeProvider extends ChangeNotifier {
     } else {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     }
+
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); //home Indicator一直显示
   }
 
   /// 背景色

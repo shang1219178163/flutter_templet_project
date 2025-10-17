@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart' as html_parser;

@@ -15,7 +15,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:http_proxy/http_proxy.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/AppThemeService.dart';
+import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';

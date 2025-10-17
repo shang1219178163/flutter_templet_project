@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/basicWidget/scroll/NCustomScrollBehavior
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 电商首页
 class NestedScrollViewDemoFour extends StatefulWidget {

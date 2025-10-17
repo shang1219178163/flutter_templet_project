@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/AppThemeService.dart';
+import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:tuple/tuple.dart';
 

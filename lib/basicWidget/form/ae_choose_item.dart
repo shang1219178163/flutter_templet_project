@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 

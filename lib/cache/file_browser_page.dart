@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 

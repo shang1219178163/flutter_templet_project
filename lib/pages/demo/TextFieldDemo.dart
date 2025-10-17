@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
@@ -606,7 +606,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   InputBorder buildFocusedBorder({
     double radus = 4,
     double borderWidth = 1,
-    AppColor.lineColor color = lineColor,
+    color = AppColor.lineColor,
   }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角

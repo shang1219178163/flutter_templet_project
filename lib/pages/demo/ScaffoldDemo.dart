@@ -9,7 +9,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class ScaffoldDemo extends StatefulWidget {
   const ScaffoldDemo({

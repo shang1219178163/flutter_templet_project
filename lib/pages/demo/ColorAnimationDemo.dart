@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_blinking_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_color_Animation.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class ColorAnimationDemo extends StatefulWidget {

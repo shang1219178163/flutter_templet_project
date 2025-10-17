@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_transition_builder.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 发语音: 声音录制页面
 class IMSoundRecordingPage extends StatelessWidget {

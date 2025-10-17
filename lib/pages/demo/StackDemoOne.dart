@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class StackDemoOne extends StatefulWidget {

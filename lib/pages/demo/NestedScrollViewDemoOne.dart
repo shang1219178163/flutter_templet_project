@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_d
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/Resource.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 class NestedScrollViewDemoOne extends StatefulWidget {

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// AE 输入框组件
 class AeUploadDocumentItem extends StatelessWidget {

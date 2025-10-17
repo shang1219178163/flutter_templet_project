@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class NChoiceBoxOneDemo extends StatefulWidget {

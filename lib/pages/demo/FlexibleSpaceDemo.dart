@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/AppThemeService.dart';
+import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/basicWidget/n_flexible_space_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 

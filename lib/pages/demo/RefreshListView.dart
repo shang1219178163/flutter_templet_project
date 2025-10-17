@@ -2,7 +2,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class RefreshListView extends StatefulWidget {
   RefreshListView({Key? key, this.title}) : super(key: key);

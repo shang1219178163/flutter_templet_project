@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/sound_state_mixin.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class GestureDetectorDemo extends StatefulWidget {

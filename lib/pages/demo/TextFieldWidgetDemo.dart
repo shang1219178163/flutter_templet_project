@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_text_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class TextFieldWidgetDemo extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/clipboard_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreateTemplet.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class ApiCreatePage extends StatefulWidget {

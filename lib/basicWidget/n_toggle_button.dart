@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/provider/theme_provider.dart';
+import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class ToggleButton<T> extends StatefulWidget {

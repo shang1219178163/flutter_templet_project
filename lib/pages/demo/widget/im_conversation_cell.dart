@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/network/dio_upload_service.dart';
-import 'package:flutter_templet_project/util/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 会话列表 cell
 class IMConversationCell extends StatelessWidget {
