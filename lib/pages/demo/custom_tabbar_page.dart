@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_slidable_tabbar.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:get/get.dart';
 
@@ -78,6 +79,12 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
               models: sportTypes,
               initialModel: sportTypes.first,
               onChanged: (v) {},
+            ),
+            NSlidableTabbar(
+              items: List.generate(3, (i) => "选项$i"),
+              onChanged: (int v) {
+                DLog.d(v);
+              },
             ),
           ],
         ),
@@ -241,6 +248,7 @@ class _OutlineTabbarState extends State<OutlineTabbar> {
                 border: Border.all(color: textColor, width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 4.0)),
               ),
+              alignment: Alignment.center,
               child: Text(
                 e.label,
                 style: textStyle ?? TextStyle(color: textColorDefault),

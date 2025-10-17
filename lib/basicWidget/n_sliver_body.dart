@@ -1,101 +1,108 @@
 import 'dart:io';
 
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:social_fe_app/pages/matches/basketball/basketball_matcher_details/widget/basketball_no_live.dart';
-import 'package:social_fe_app/pages/matches/football/live_details/widget/no_live_view.dart';
-import 'package:social_fe_app/widget/sliver_app_bar_delegate.dart';
+import 'package:flutter_templet_project/basicWidget/n_empty.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
-class SliverDetailsView extends StatefulWidget {
-  const SliverDetailsView({
+class NSliverBody extends StatefulWidget {
+  const NSliverBody({
     super.key,
+    this.scrollController,
+    this.collapsedHeight = kToolbarHeight,
+    this.expandedHeight = 300.0,
+    this.tabBarHeight = kToolbarHeight,
+    required this.title,
     required this.header,
-    required this.bottomWidget,
-    required this.tab,
-    required this.sportType,
+    required this.body,
+    required this.tabBuilder,
   });
 
+  final ScrollController? scrollController;
+  final double collapsedHeight;
+  final double expandedHeight;
+  final double tabBarHeight;
+
+  final Widget title;
+
   final Widget header;
-  final Widget tab;
-  final Widget bottomWidget;
-  final String sportType;
+  final Widget Function(BuildContext context, TabBar tab)? tabBuilder;
+  final Widget body;
 
   @override
-  State<SliverDetailsView> createState() => _SliverDetailsViewState();
+  State<NSliverBody> createState() => _NSliverBodyState();
 }
 
-class _SliverDetailsViewState extends State<SliverDetailsView> {
-  num? height;
+class _NSliverBodyState extends State<NSliverBody> with SingleTickerProviderStateMixin {
+  late final scrollController = widget.scrollController ?? ScrollController();
 
-  final ValueNotifier<double> _opacity = ValueNotifier(0);
+  List<String> items = List.generate(9, (index) => 'item_$index').toList();
+  late final tabController = TabController(length: items.length, vsync: this);
+
+  final opacity = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData queryData = MediaQuery.of(context);
-    var size = Size(double.infinity, queryData.size.height * 267 / 844);
-    height ??= size.height - 98;
-    return Stack(
-      children: [
-        NestedScrollView(
-          floatHeaderSlivers: false,
-          headerSliverBuilder: (_, __) {
-            return [
-              // SliverAppBar(
-              //   expandedHeight: size.height,
-              //   pinned: false, // 允许继续滑动
-              //   automaticallyImplyLeading: false,
-              //   flexibleSpace: FlexibleSpaceBar(
-              //     background: header,
-              //   ),
-              // ),
-              // 固定 Header（在高度不足 76 时固定）
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: SliverAppBarDelegate(
-                    minHeight: Platform.isIOS ? 108 : 100,
-                    maxHeight: size.height,
-                    child: widget.header,
-                    onHeightChanged: (double value) {
-                      Future.microtask(() {
-                        if (mounted) {
-                          if (height != null) {
-                            double opacity = value / height!;
+    final collapsedHeight = widget.collapsedHeight ?? kToolbarHeight;
+    final expandedHeight = widget.expandedHeight ?? 300.0;
+    final tabBarHeight = widget.tabBarHeight ?? kToolbarHeight;
 
-                            _opacity.value = opacity > 1
-                                ? 1
-                                : opacity < 0
-                                    ? 0
-                                    : opacity;
-                          }
-                        }
-                      });
-                    }),
+    final tabDefault = TabBar(
+      controller: tabController,
+      tabs: items.map((e) => Tab(text: e)).toList(),
+    );
+
+    return NestedScrollView(
+      controller: scrollController,
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          SliverOverlapAbsorber(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+            sliver: SliverAppBar(
+              title: widget.title,
+              pinned: true,
+              collapsedHeight: collapsedHeight,
+              expandedHeight: expandedHeight,
+              flexibleSpace: Padding(
+                padding: EdgeInsets.only(top: 0, bottom: tabBarHeight),
+                child: widget.header,
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: SliverAppBarDelegate(
-                  minHeight: 36,
-                  maxHeight: 36,
-                  child: widget.tab,
-                ),
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(tabBarHeight),
+                child: widget.tabBuilder?.call(context, tabDefault) ?? tabDefault,
               ),
-            ];
-          },
-          body: widget.bottomWidget,
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: EdgeInsets.only(top: queryData.padding.top - (Platform.isIOS ? 6 : 0)),
-            child: widget.sportType == 'football'
-                ? NoLiveHeaderView(
-                    scrollOffset: _opacity,
-                  )
-                : BasketballNoLiveAppBar(
-                    scrollOffset: _opacity,
-                  ),
+            ),
           ),
-        ),
-      ],
+        ];
+      },
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          ...items.map((e) {
+            return Builder(
+              builder: (context) {
+                return CustomScrollView(
+                  key: PageStorageKey<String>(e),
+                  slivers: [
+                    // ✅ 每个 tab 内必须是 CustomScrollView 并带 Injector
+                    SliverOverlapInjector(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => ListTile(title: Text('${e} Row #$index')),
+                        childCount: 30,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          }),
+        ],
+      ),
     );
   }
 }

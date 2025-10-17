@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/CircleSectorProgressIndicator.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class ProgressClipperDemo extends StatefulWidget {
   ProgressClipperDemo({Key? key, this.title}) : super(key: key);
@@ -85,6 +86,7 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
                     ),
                   ),
                   RotatingCircularProgress(),
+                  buildPrentProgressIndicator(percent: 0.77),
                 ],
               ),
             ),
@@ -142,6 +144,46 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
           ],
         );
       },
+    );
+  }
+
+  Widget buildPrentProgressIndicator({
+    required double percent,
+    double size = 50,
+    double strokeWidth = 4,
+    Color color = AppColor.cancelColor,
+    Color backgroundColor = AppColor.bgColor,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Transform(
+            transform: Matrix4.rotationY(pi),
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: size,
+              height: size,
+              child: CircularProgressIndicator(
+                color: color,
+                value: percent,
+                strokeWidth: strokeWidth,
+                backgroundColor: backgroundColor,
+                strokeCap: StrokeCap.square,
+              ),
+            ),
+          ),
+          Text(
+            "${(percent * 100).toStringAsFixed(0)}%",
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
