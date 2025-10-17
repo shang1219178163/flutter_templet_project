@@ -11,7 +11,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 字符串转文件
 class NConvertView extends StatefulWidget {
@@ -78,8 +78,7 @@ class NConvertViewState extends State<NConvertView> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final direction =
-          constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
+      final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
       if (direction == Axis.horizontal) {
         return buildBodyHorizontal(constraints: constraints);
       }
@@ -186,9 +185,9 @@ class NConvertViewState extends State<NConvertView> {
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: bgColorEDEDED,
+        fillColor: AppColor.bgColorEDEDED,
         filled: true,
-        hoverColor: bgColorEDEDED,
+        hoverColor: AppColor.bgColorEDEDED,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,
         ),

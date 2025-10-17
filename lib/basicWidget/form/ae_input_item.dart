@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// AE 输入框组件
 class AeInputItem extends StatelessWidget {
@@ -120,9 +120,8 @@ class AeInputItem extends StatelessWidget {
         offset: Offset(0, 5),
       )
     ];
-    final textColor =
-        enable ? fontColor : (disableTextColor ?? fontColorB3B3B3);
-    final bgColor = enable ? white : disableBgColor ?? bgColorEDEDED;
+    final textColor = enable ? AppColor.fontColor : (disableTextColor ?? AppColor.fontColorB3B3B3);
+    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgColorEDEDED;
 
     final style = TextStyle(
       color: textColor,
@@ -203,8 +202,7 @@ class AeInputItem extends StatelessWidget {
           ),
           inputFormatters: inputFormatters ??
               [
-                if (maxLength != null)
-                  LengthLimitingTextInputFormatter(maxLength),
+                if (maxLength != null) LengthLimitingTextInputFormatter(maxLength),
               ],
         ),
         if (showCounter && isCounterInner)

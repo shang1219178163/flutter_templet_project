@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 
 class SegmentVerticalDemo extends StatefulWidget {
@@ -109,7 +109,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
   }) {
     return Container(
       width: 98,
-      color: bgColor,
+      color: AppColor.bgColor,
       child: MediaQuery.removePadding(
         removeTop: true,
         context: context,
@@ -147,13 +147,13 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
   }) {
     final model = list[index];
     var isSelected = model.selectableId == selectedModel?.selectableId;
-    var bgColor = isSelected ? white : bgColorF9F9F9;
+    var bgColor = isSelected ? AppColor.white : AppColor.bgColorF9F9F9;
     // bgColor = isSelected ? white : Colors.green;
 
     var name = model.selectableName ?? "";
 
     return ColoredBox(
-      color: white,
+      color: AppColor.white,
       child: Container(
         width: double.infinity,
         height: 59,
@@ -177,7 +177,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                       name,
                       style: TextStyle(
                         fontSize: 14,
-                        color: isSelected ? context.primaryColor : fontColor737373,
+                        color: isSelected ? context.primaryColor : AppColor.fontColor737373,
                         fontWeight: FontWeight.w500,
                       ),
                       maxLines: 1,
@@ -189,7 +189,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                   color: (!isSelected &&
                           !((selectedIndex - 1) >= 0 && index == selectedIndex - 1) &&
                           index != list.length - 1)
-                      ? lineColor
+                      ? AppColor.lineColor
                       : Colors.transparent,
                 ),
               ],

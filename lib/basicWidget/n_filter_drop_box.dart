@@ -10,7 +10,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class NFilterDropBox extends StatefulWidget {
   NFilterDropBox({
@@ -178,11 +178,9 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
                           color: Colors.white,
                           child: Column(
                             children: [
-                              widget.header?.call(context) ??
-                                  const Divider(height: 1, color: lineColor),
+                              widget.header?.call(context) ?? const Divider(height: 1, color: AppColor.lineColor),
                               ...widget.sections,
-                              widget.footer?.call(context) ??
-                                  const Divider(height: 1, color: lineColor),
+                              widget.footer?.call(context) ?? const Divider(height: 1, color: AppColor.lineColor),
                             ],
                           ),
                         ),

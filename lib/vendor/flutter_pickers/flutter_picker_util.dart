@@ -6,7 +6,7 @@ import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 
 // 地址选择器模型
@@ -223,14 +223,14 @@ class FlutterPickerUtil {
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
-        color: white,
+        color: AppColor.white,
       ),
       itemOverlay: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Divider(height: 0.5, color: lineColor),
+          const Divider(height: 0.5, color: AppColor.lineColor),
           Expanded(child: Container()),
-          const Divider(height: 0.5, color: lineColor),
+          const Divider(height: 0.5, color: AppColor.lineColor),
         ],
       ),
       cancelButton: buildTextButton(title: "取消"),
@@ -255,7 +255,7 @@ class FlutterPickerUtil {
 
   static Widget buildTextButton({
     required String title,
-    Color? textColor = fontColor737373,
+    Color? textColor = AppColor.fontColor737373,
     VoidCallback? onPressed,
   }) {
     return InkWell(

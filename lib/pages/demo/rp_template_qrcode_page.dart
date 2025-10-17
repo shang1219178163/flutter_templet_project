@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/n_ticket_divder.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/Resource.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
@@ -49,7 +49,7 @@ class _QrcodePageState extends State<QrcodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: AppColor.bgColor,
       appBar: AppBar(
         title: Text('二维码'),
       ),
@@ -183,7 +183,7 @@ class _QrcodePageState extends State<QrcodePage> {
                 e.item1,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
-                color: fontColor777777,
+                color: AppColor.fontColor777777,
               ),
             ),
           );

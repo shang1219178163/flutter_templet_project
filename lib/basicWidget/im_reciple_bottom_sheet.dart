@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 /// 处方弹窗
@@ -94,20 +94,16 @@ class IMRecipleBottomSheet extends StatelessWidget {
     ValueChanged<int>? onAfter,
   }) {
     final items = [
-      Tuple4("西/中成药", "icon_chinese_medicine.png".toPath(), onWestMedicine,
-          Color(0xff55D7D2)),
+      Tuple4("西/中成药", "icon_chinese_medicine.png".toPath(), onWestMedicine, Color(0xff55D7D2)),
       Tuple4("检测检验", "icon_jc.png".toPath(), onJC, Color(0xffF7BE65)),
-      Tuple4("医疗器械", "icon_medical_appliance.png".toPath(), onMedicalAppliancee,
-          Color(0xff6CA0FB)),
-      Tuple4("中药", "icon_chinese_medicine.png".toPath(), onChineseMedicinee,
-          Color(0xffF9A46D)),
+      Tuple4("医疗器械", "icon_medical_appliance.png".toPath(), onMedicalAppliancee, Color(0xff6CA0FB)),
+      Tuple4("中药", "icon_chinese_medicine.png".toPath(), onChineseMedicinee, Color(0xffF9A46D)),
     ];
 
     return LayoutBuilder(builder: (context, constraints) {
       const numPerRow = 4.0;
       final itemWidth = 80.0;
-      final spacing = (constraints.maxWidth - itemWidth * numPerRow) /
-          (numPerRow - 1).truncateToDouble();
+      final spacing = (constraints.maxWidth - itemWidth * numPerRow) / (numPerRow - 1).truncateToDouble();
       final runSpacing = 16.0;
 
       return Wrap(
@@ -145,7 +141,7 @@ class IMRecipleBottomSheet extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: fontColor,
+                        color: AppColor.fontColor,
                       ),
                     ),
                   ),
@@ -164,7 +160,7 @@ class IMRecipleBottomSheet extends StatelessWidget {
     AssetImage? assetImage,
     double assetImageSize = 20,
     Widget? icon,
-    Color color = white,
+    Color color = AppColor.white,
     Color borderColor = const Color(0xffE4E4E4),
     EdgeInsets? margin,
     EdgeInsets? padding,

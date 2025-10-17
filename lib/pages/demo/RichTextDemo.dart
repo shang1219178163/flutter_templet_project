@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 
 class RichTextDemo extends StatefulWidget {
@@ -279,7 +279,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
                 text: departmentDesc,
                 style: TextStyle(
                   fontSize: 14,
-                  color: fontColor737373,
+                  color: AppColor.fontColor737373,
                   // height: 1.5,
                 ),
               ),

@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 ///选择盒子
 class NChoiceBox<T> extends StatefulWidget {
@@ -67,11 +67,9 @@ class NChoiceBox<T> extends StatefulWidget {
 
 class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
   /// 选中的 items
-  List<ChoiceBoxModel<T>> get selectedItems =>
-      widget.items.where((e) => e.isSelected).toList();
+  List<ChoiceBoxModel<T>> get selectedItems => widget.items.where((e) => e.isSelected).toList();
 
-  List<String> get selectedItemNames =>
-      selectedItems.map((e) => e.title).toList();
+  List<String> get selectedItemNames => selectedItems.map((e) => e.title).toList();
 
   @override
   void initState() {
@@ -115,14 +113,11 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
       return SizedBox();
     }
 
-    final textColor = e.isSelected ? widget.itemSelectedColor : fontColor;
+    final textColor = e.isSelected ? widget.itemSelectedColor : AppColor.fontColor;
 
-    final bgColor = e.isSelected
-        ? widget.itemSelectedColor.withOpacity(0.08)
-        : widget.itemColor;
+    final bgColor = e.isSelected ? widget.itemSelectedColor.withOpacity(0.08) : widget.itemColor;
 
-    final borderColor =
-        e.isSelected ? widget.itemSelectedColor : Colors.transparent;
+    final borderColor = e.isSelected ? widget.itemSelectedColor : Colors.transparent;
 
     return GestureDetector(
       onTap: () {

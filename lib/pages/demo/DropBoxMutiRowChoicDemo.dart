@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class DropBoxMutiRowChoicDemo extends StatefulWidget {
   DropBoxMutiRowChoicDemo({Key? key, this.title}) : super(key: key);
@@ -186,8 +186,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
         prefixInsets: EdgeInsets.only(left: 14.w, top: 5, bottom: 5, right: 6.w),
         // padding: EdgeInsets.only(left: 3, top: 5, bottom: 5, right: 5),
         placeholder: placeholder,
-        placeholderStyle: TextStyle(fontSize: 15.sp, color: fontColorBCBFC2),
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4.w)), color: bgColor),
+        placeholderStyle: TextStyle(fontSize: 15.sp, color: AppColor.fontColorBCBFC2),
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4.w)), color: AppColor.bgColor),
         onChanged: (String value) {
           _debounce(() {
             debugPrint('searchText: $value');

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 
 /// 日期起止选择器(截止到天)
@@ -62,10 +62,8 @@ class _NDateStartEndState extends State<NDateStartEnd> {
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: NText(
-                startDate == null
-                    ? "开始时间"
-                    : (startDate ?? "").split(" ").firstOrNull ?? "",
-                color: startDate == null ? fontColorB3B3B3 : fontColor737373,
+                startDate == null ? "开始时间" : (startDate ?? "").split(" ").firstOrNull ?? "",
+                color: startDate == null ? AppColor.fontColorB3B3B3 : AppColor.fontColor737373,
                 fontSize: 14,
               ),
             ),
@@ -75,7 +73,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
           padding: EdgeInsets.symmetric(horizontal: 7),
           child: NText(
             "－",
-            color: fontColor999999,
+            color: AppColor.fontColor999999,
             fontSize: 14,
           ),
         ),
@@ -92,10 +90,8 @@ class _NDateStartEndState extends State<NDateStartEnd> {
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: NText(
-                endDate == null
-                    ? "结束时间"
-                    : (endDate ?? "").split(" ").firstOrNull ?? "",
-                color: endDate == null ? fontColorB3B3B3 : fontColor737373,
+                endDate == null ? "结束时间" : (endDate ?? "").split(" ").firstOrNull ?? "",
+                color: endDate == null ? AppColor.fontColorB3B3B3 : AppColor.fontColor737373,
                 fontSize: 14,
               ),
             ),
@@ -120,9 +116,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
   }
 
   void onPickEnd() {
-    final bDate = startDate == null
-        ? null
-        : DateTimeExt.dateFromString(dateStr: startDate!);
+    final bDate = startDate == null ? null : DateTimeExt.dateFromString(dateStr: startDate!);
     pickerDate(
       minDateTime: bDate,
       selectDateStr: endDate,
@@ -142,11 +136,8 @@ class _NDateStartEndState extends State<NDateStartEnd> {
     String? selectDateStr,
     required ValueChanged<DateTime> onConfirm,
   }) async {
-    final minDateTimeNew =
-        minDateTime == null ? null : PDuration.parse(minDateTime);
-    final selectDate = selectDateStr == null
-        ? null
-        : DateTimeExt.dateFromString(dateStr: selectDateStr);
+    final minDateTimeNew = minDateTime == null ? null : PDuration.parse(minDateTime);
+    final selectDate = selectDateStr == null ? null : DateTimeExt.dateFromString(dateStr: selectDateStr);
     FlutterPickerUtil.showDatePicker(
       title: '日期选择',
       selectDate: selectDate == null ? null : PDuration.parse(selectDate),

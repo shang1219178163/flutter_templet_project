@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_refresh_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 基于接口的搜索选择列表(子类实现 PickerDrugBox)
 class NPickRequestListBox<E> extends StatefulWidget {
@@ -47,8 +47,7 @@ class NPickRequestListBox<E> extends StatefulWidget {
   final ValueChanged<List<E>> onChanged;
 
   /// 请求列表
-  final Future<List<E>> Function(
-      bool isRefresh, int pageNo, int pageSize, String? search) requestList;
+  final Future<List<E>> Function(bool isRefresh, int pageNo, int pageSize, String? search) requestList;
 
   /// 选择
   final E Function(E e)? onSelectedTap;
@@ -108,7 +107,7 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
             ),
             child: NSearchBar(
               placeholder: widget.placeholder,
-              backgroundColor: bgColorF3F3F3,
+              backgroundColor: AppColor.bgColorF3F3F3,
               onChanged: (val) {
                 search = val;
                 refreshViewController.onRefresh();
@@ -143,7 +142,7 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
-            color: fontColor737373,
+            color: AppColor.fontColor737373,
           ),
         ),
       ),
@@ -164,7 +163,7 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
       },
       itemBuilder: (BuildContext context, int index, model) {
         final isSelected = widget.selected(widget.items, model);
-        final textColor = isSelected ? primary : fontColor;
+        final textColor = isSelected ? primary : AppColor.fontColor;
         final color = isSelected ? primary : Colors.transparent;
 
         final name = widget.cbName(model);

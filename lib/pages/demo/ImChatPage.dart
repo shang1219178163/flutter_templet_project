@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/model/im_msg_list_root_model.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/util/Resource.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
@@ -304,7 +304,7 @@ class _ImChatPageState extends State<ImChatPage>
     final name = model.nickName ?? "";
     final timeStr = model.timeDes ?? "";
 
-    final contentBgColor = isOwner ? primaryColor : bgColor;
+    final contentBgColor = isOwner ? primaryColor : AppColor.bgColor;
     final contentFontColor = Colors.white;
 
     var contentWidget = contentChild ??
@@ -729,7 +729,7 @@ class _ImChatPageState extends State<ImChatPage>
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
-                          color: fontColor,
+                          color: AppColor.fontColor,
                         ),
                       ),
                     ),

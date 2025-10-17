@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart' as html_parser;
@@ -71,14 +71,11 @@ class AppWebViewPage extends StatefulWidget {
 
   final void Function(InAppWebViewController controller)? onWebViewCreated;
 
-  final void Function(InAppWebViewController controller, WebUri? url)?
-      onLoadStart;
+  final void Function(InAppWebViewController controller, WebUri? url)? onLoadStart;
 
-  final void Function(InAppWebViewController controller, WebUri? url)?
-      onLoadStop;
+  final void Function(InAppWebViewController controller, WebUri? url)? onLoadStop;
 
-  final Future<NavigationActionPolicy?> Function(
-          InAppWebViewController controller, NavigationAction navigationAction)?
+  final Future<NavigationActionPolicy?> Function(InAppWebViewController controller, NavigationAction navigationAction)?
       shouldOverrideUrlLoading;
 
   @override
@@ -185,7 +182,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
           widget.title ?? value,
           style: TextStyle(
             fontSize: 18,
-            color: fontColor,
+            color: AppColor.fontColor,
             fontWeight: FontWeight.w500,
           ),
           maxLines: 1,
@@ -202,7 +199,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
       child: ValueListenableBuilder<double>(
         valueListenable: progressVN,
         builder: (context, value, child) {
-          final indicatorColor = value >= 1.0 ? Colors.transparent : primary;
+          final indicatorColor = value >= 1.0 ? Colors.transparent : AppColor.primary;
 
           return LinearProgressIndicator(
             value: value,
@@ -245,9 +242,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
   }
 
   Widget buildWebView() {
-    final urlRequest = widget.url.startsWith("http")
-        ? URLRequest(url: WebUri(widget.url))
-        : null;
+    final urlRequest = widget.url.startsWith("http") ? URLRequest(url: WebUri(widget.url)) : null;
 
     return InAppWebView(
       initialUrlRequest: urlRequest,
@@ -265,8 +260,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
       },
       onReceivedServerTrustAuthRequest: (controller, challenge) async {
         //解决 handshake failed问题 修复白屏问题
-        return ServerTrustAuthResponse(
-            action: ServerTrustAuthResponseAction.PROCEED);
+        return ServerTrustAuthResponse(action: ServerTrustAuthResponseAction.PROCEED);
       },
       onLoadStart: (controller, url) async {},
       onPermissionRequest: (controller, request) async {
@@ -376,8 +370,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
       ),
     );
 
-    final response = await Dio().download(widget.url, tmpPath,
-        onReceiveProgress: (received, total) {
+    final response = await Dio().download(widget.url, tmpPath, onReceiveProgress: (received, total) {
       if (total != -1) {
         final percent = (received / total);
         final percentStr = "${(percent * 100).toStringAsFixed(0)}%";

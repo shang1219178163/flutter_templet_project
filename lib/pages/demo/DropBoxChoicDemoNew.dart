@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_filter_box.dart';
@@ -14,7 +13,7 @@ import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 筛选框重构
 class DropBoxChoicDemoNew extends StatefulWidget {
@@ -43,8 +42,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
 
   final patientFilterController = ChoiceFilterBoxController();
 
-  NFilterDropBoxController? get filterController =>
-      patientFilterController.anchor?.filterController;
+  NFilterDropBoxController? get filterController => patientFilterController.anchor?.filterController;
 
   final filterModel = NChoiceFilterBoxModel(
     choices: [
@@ -152,7 +150,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
           Expanded(
             child: NSearchTextField(
               placeholder: "搜索",
-              backgroundColor: white,
+              backgroundColor: AppColor.white,
               onChanged: (String value) {},
             ),
           ),
@@ -161,7 +159,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
             valueListenable: isHighlight,
             builder: (context, value, child) {
               return NFilterButton(
-                color: value == true ? context.primaryColor : fontColor,
+                color: value == true ? context.primaryColor : AppColor.fontColor,
                 onPressed: () {
                   patientFilterController.anchor?.onFilterInit();
                   filterController?.onToggle();
@@ -226,7 +224,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
       separatorBuilder: (context, index) {
         return const Divider(
           height: 0.5,
-          color: lineColor,
+          color: AppColor.lineColor,
           indent: 16,
         );
       },

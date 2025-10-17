@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class SegmentedControlDemo extends StatefulWidget {
   SegmentedControlDemo({Key? key, this.title}) : super(key: key);
@@ -621,7 +621,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: fontColor737373,
+              color: AppColor.fontColor737373,
               // fontStyle: FontStyle.italic,
             ),
           ),
@@ -633,7 +633,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: fontColor737373,
+              color: AppColor.fontColor737373,
               // fontStyle: FontStyle.italic,
             ),
           ),
@@ -645,7 +645,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: fontColor737373,
+              color: AppColor.fontColor737373,
               // fontStyle: FontStyle.italic,
             ),
           ),

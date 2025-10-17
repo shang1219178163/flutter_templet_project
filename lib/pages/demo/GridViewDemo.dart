@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/Resource.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class GridViewDemo extends StatefulWidget {
   const GridViewDemo({Key? key}) : super(key: key);
@@ -308,7 +308,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
                   '查看更多群成员',
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
-                  color: fontColor737373,
+                  color: AppColor.fontColor737373,
                 ),
                 Image(
                   image: 'icon_arrow_right.png'.toAssetImage(),

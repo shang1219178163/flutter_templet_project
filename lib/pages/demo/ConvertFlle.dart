@@ -25,7 +25,7 @@ import 'package:flutter_templet_project/pages/demo/convert/PackageExportConvert.
 import 'package:flutter_templet_project/pages/demo/convert/SizeFilterConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -274,7 +274,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                       if (files.isEmpty)
                         NText(
                           "拖拽文件",
-                          style: TextStyle(color: fontColor737373),
+                          style: TextStyle(color: AppColor.fontColor737373),
                         ),
                     ],
                   ),

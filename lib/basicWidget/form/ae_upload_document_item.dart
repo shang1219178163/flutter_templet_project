@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// AE 输入框组件
 class AeUploadDocumentItem extends StatelessWidget {
@@ -78,8 +78,7 @@ class AeUploadDocumentItem extends StatelessWidget {
       canEdit: enable,
       onChanged: (items) {
         debugPrint("onChanged items.length: ${items.length}");
-        selectedModelsNew =
-            items.where((e) => e.url?.startsWith("http") == true).toList();
+        selectedModelsNew = items.where((e) => e.url?.startsWith("http") == true).toList();
         final imgUrls = selectedModelsNew.map((e) => e.url ?? "").toList();
         onUpload?.call(selectedModelsNew);
         isUploading.value = false;
@@ -97,7 +96,7 @@ class AeUploadDocumentItem extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: const BoxDecoration(
-          color: bgColorF9F9F9,
+          color: AppColor.bgColorF9F9F9,
           // borderRadius: BorderRadius.circular(radius),
         ),
         child: Image(

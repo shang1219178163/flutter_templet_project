@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 
 class TextFieldDemoTwo extends StatefulWidget {
@@ -25,10 +25,8 @@ class TextFieldDemoTwo extends StatefulWidget {
   State<TextFieldDemoTwo> createState() => _TextFieldDemoTwoState();
 }
 
-class _TextFieldDemoTwoState extends State<TextFieldDemoTwo>
-    with SingleTickerProviderStateMixin {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerProviderStateMixin {
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -114,7 +112,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo>
             ),
             Container(
               decoration: BoxDecoration(
-                color: bgColor,
+                color: AppColor.bgColor,
               ),
               child: NSectionBox(
                 title: "填空组件封装 - 白底",
@@ -156,9 +154,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo>
       child: TabBar(
         controller: tabController,
         isScrollable: true,
-        tabs: items
-            .map((e) => Tab(key: PageStorageKey<String>(e.name), text: e.name))
-            .toList(),
+        tabs: items.map((e) => Tab(key: PageStorageKey<String>(e.name), text: e.name)).toList(),
         labelColor: context.primaryColor,
         // indicatorSize: TabBarIndicatorSize.label,
         // indicatorPadding: EdgeInsets.only(left: 6, right: 6),

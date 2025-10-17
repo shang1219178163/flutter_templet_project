@@ -6,7 +6,6 @@
 //  Copyright © 2024/9/3 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 人员选择盒子
 class NPickUsersBox extends NPickRequestListBox<UserModel> {
@@ -89,13 +88,13 @@ class NPickUsersBox extends NPickRequestListBox<UserModel> {
                   child: NText(
                     name,
                     fontSize: 16,
-                    color: fontColor,
+                    color: AppColor.fontColor,
                   ),
                 ),
                 NText(
                   desc,
                   fontSize: 16,
-                  color: fontColor999999,
+                  color: AppColor.fontColor999999,
                 ),
               ],
             );

@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class DialogChoiceChipDemo extends StatefulWidget {
@@ -59,8 +59,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   List<SelectModel<FakeDataModel>> selectedTagsTmp = [];
 
   /// 已选择的列表名称
-  List<String> get selectedTagsNames =>
-      selectedTags.map((e) => e.name ?? "-").toList();
+  List<String> get selectedTagsNames => selectedTags.map((e) => e.name ?? "-").toList();
 
   final info = ValueNotifier("");
 
@@ -88,8 +87,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                 ValueListenableBuilder<String>(
                     valueListenable: info,
                     builder: (context, value, child) {
-                      return Container(
-                          padding: EdgeInsets.all(16), child: Text(value));
+                      return Container(padding: EdgeInsets.all(16), child: Text(value));
                     }),
                 Wrap(
                   runSpacing: 12,
@@ -161,14 +159,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         side: BorderSide(color: Color(0xfff3f3f3)),
                         label: Text(e.name ?? "-"),
                         labelStyle: TextStyle(
-                          color:
-                              e.isSelected == true ? Colors.white : fontColor,
+                          color: e.isSelected == true ? Colors.white : AppColor.fontColor,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: bgColorF9F9F9,
+                        backgroundColor: AppColor.bgColorF9F9F9,
                         onSelected: (bool selected) {
                           for (final element in tags) {
                             if (element.data?.id == e.data?.id) {
@@ -180,8 +177,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                             }
                           }
 
-                          selectedTagsTmp =
-                              tags.where((e) => e.isSelected == true).toList();
+                          selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
                           setState1(() {});
                           // debugPrint("${e.toString()}");
                         },
@@ -274,12 +270,9 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: (e.name ?? "-") * 5 +
-                                    '一二三四五六七八九十'.substring(0, 3),
+                                text: (e.name ?? "-") * 5 + '一二三四五六七八九十'.substring(0, 3),
                                 style: TextStyle(
-                                  color: e.isSelected == true
-                                      ? Colors.white
-                                      : fontColor,
+                                  color: e.isSelected == true ? Colors.white : AppColor.fontColor,
                                 ),
                               ),
                             ],
@@ -289,14 +282,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         labelStyle: TextStyle(
-                          color:
-                              e.isSelected == true ? Colors.white : fontColor,
+                          color: e.isSelected == true ? Colors.white : AppColor.fontColor,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: bgColorF9F9F9,
+                        backgroundColor: AppColor.bgColorF9F9F9,
                         onSelected: (bool selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
@@ -308,8 +300,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                             }
                           }
 
-                          selectedTagsTmp =
-                              tags.where((e) => e.isSelected == true).toList();
+                          selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
                           // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
                           setState1(() {});
                           // debugPrint("${e.toString()}");
@@ -368,12 +359,9 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: (e.name ?? "-") * 5 +
-                                    '一二三四五六七八九十'.substring(0, 3),
+                                text: (e.name ?? "-") * 5 + '一二三四五六七八九十'.substring(0, 3),
                                 style: TextStyle(
-                                  color: e.isSelected == true
-                                      ? Colors.white
-                                      : fontColor,
+                                  color: e.isSelected == true ? Colors.white : AppColor.fontColor,
                                 ),
                               ),
                             ],
@@ -383,14 +371,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         labelStyle: TextStyle(
-                          color:
-                              e.isSelected == true ? Colors.white : fontColor,
+                          color: e.isSelected == true ? Colors.white : AppColor.fontColor,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: bgColorF9F9F9,
+                        backgroundColor: AppColor.bgColorF9F9F9,
                         onSelected: (bool selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
@@ -402,8 +389,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                             }
                           }
 
-                          selectedTagsTmp =
-                              tags.where((e) => e.isSelected == true).toList();
+                          selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
                           // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
                           setState1(() {});
                           // debugPrint("${e.toString()}");
@@ -460,8 +446,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                 children: tags
                     .map((e) => Material(
                           color: Colors.transparent,
-                          child: StatefulBuilder(builder:
-                              (BuildContext context, StateSetter setState) {
+                          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
                             return InkWell(
                               onTap: () {
                                 e.isSelected = !e.isSelected!;
@@ -476,18 +461,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                                   }
                                 }
 
-                                selectedTagsTmp = tags
-                                    .where((e) => e.isSelected == true)
-                                    .toList();
+                                selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
                                 // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
                                 setState(() => {});
-                                debugPrint(selectedTagsTmp
-                                    .map((e) => e.name ?? "")
-                                    .join(","));
+                                debugPrint(selectedTagsTmp.map((e) => e.name ?? "").join(","));
                               },
                               child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 4),
+                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                                 // decoration: BoxDecoration(
                                 //   color: e.isSelected == true ? Theme.of(context).primaryColor : bgColorF9F9F9,
                                 //   border: Border.all(color: Color(0xfff3f3f3)),
@@ -495,23 +475,16 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                                 //   shape: StadiumBorder(),
                                 // ),
                                 decoration: ShapeDecoration(
-                                  color: e.isSelected == true
-                                      ? Theme.of(context).primaryColor
-                                      : bgColorF9F9F9,
-                                  shape: StadiumBorder(
-                                      side:
-                                          BorderSide(color: Color(0xfff3f3f3))),
+                                  color: e.isSelected == true ? Theme.of(context).primaryColor : AppColor.bgColorF9F9F9,
+                                  shape: StadiumBorder(side: BorderSide(color: Color(0xfff3f3f3))),
                                 ),
                                 child: Text(
-                                  (e.name ?? "-") * 5 +
-                                      '一二三四五六七八九十'.substring(0, 3),
+                                  (e.name ?? "-") * 5 + '一二三四五六七八九十'.substring(0, 3),
                                   maxLines: 2,
                                   softWrap: true,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    color: e.isSelected == true
-                                        ? Colors.white
-                                        : fontColor,
+                                    color: e.isSelected == true ? Colors.white : AppColor.fontColor,
                                   ),
                                 ),
                               ),
@@ -594,9 +567,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                   .map((e) => ChoiceChip(
                         label: Text(e.name ?? ""),
                         labelStyle: TextStyle(
-                          color: e.isSelected == true
-                              ? Colors.white
-                              : Color(0xff181818),
+                          color: e.isSelected == true ? Colors.white : Color(0xff181818),
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         selected: e.isSelected == true,
@@ -611,8 +582,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                               }
                             }
                           }
-                          selectedTagsTmp =
-                              tags.where((e) => e.isSelected == true).toList();
+                          selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
                           setState(() {});
                         },
                       ))
@@ -769,7 +739,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: fontColor,
+              color: AppColor.fontColor,
             ),
           ),
         ),

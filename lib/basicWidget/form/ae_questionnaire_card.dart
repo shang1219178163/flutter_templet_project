@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 不良事件问卷信息展示
 class AeQuestionnaireCard<T> extends StatelessWidget {
@@ -45,13 +45,13 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: cancelColor.withOpacity(0.1),
+                color: AppColor.cancelColor.withOpacity(0.1),
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: NText(
                 "注：AE&SAE表单仅支持PC端添加与填写。",
                 fontSize: 14,
-                color: cancelColor,
+                color: AppColor.cancelColor,
                 maxLines: 1,
               ),
             ),
@@ -59,8 +59,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
     );
   }
 
-  Widget buildItem(
-      {required BuildContext context, required ChooseItemRecord<T> e}) {
+  Widget buildItem({required BuildContext context, required ChooseItemRecord<T> e}) {
     return InkWell(
       onTap: () {
         onTap?.call(e);
@@ -72,7 +71,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: white,
+          color: AppColor.white,
           border: Border.all(color: const Color(0xFFE6E6E6), width: 0.5),
           boxShadow: const [
             BoxShadow(
@@ -88,7 +87,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               child: NText(
                 e.title,
                 fontSize: 14,
-                color: fontColor,
+                color: AppColor.fontColor,
                 maxLines: 1,
               ),
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 // Padding(
 //   padding: EdgeInsets.all(16),
@@ -51,7 +51,7 @@ class NTextField extends StatefulWidget {
     this.autofocus = false,
     this.obscureText = false,
     this.contentPadding,
-    this.fillColor = bgColor,
+    this.fillColor = AppColor.bgColor,
     this.focusColor = Colors.white,
     this.radius = 4,
     this.borderWidth = 1,
@@ -351,7 +351,7 @@ class _NTextFieldState extends State<NTextField> {
           const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: fontColor,
+            color: AppColor.fontColor,
           ),
       inputFormatters: widget.inputFormatters ??
           [
@@ -362,7 +362,7 @@ class _NTextFieldState extends State<NTextField> {
     );
   }
 
-  buildEnabledBorder({Color color = lineColor, double radius = 4}) {
+  buildEnabledBorder({Color color = AppColor.lineColor, double radius = 4}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       borderSide: BorderSide(

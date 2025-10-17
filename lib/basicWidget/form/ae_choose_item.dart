@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
@@ -28,7 +28,7 @@ class AeChooseItem<T> extends StatelessWidget {
     this.enable = true,
     this.header,
     this.footer,
-    this.disableTextColor = fontColor,
+    this.disableTextColor = AppColor.fontColor,
     this.disableBgColor,
   });
 
@@ -74,7 +74,7 @@ class AeChooseItem<T> extends StatelessWidget {
   }
 
   Widget buildBody(BuildContext context) {
-    final bgColor = enable ? white : disableBgColor ?? bgColorEDEDED;
+    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgColorEDEDED;
 
     return GestureDetector(
       onTap: () => onPicker(context),
@@ -101,13 +101,12 @@ class AeChooseItem<T> extends StatelessWidget {
               child: ValueListenableBuilder(
                 valueListenable: selectVN,
                 builder: (context, value, child) {
-                  final names =
-                      (value ?? []).map((e) => convertCb(e)).join(",");
+                  final names = (value ?? []).map((e) => convertCb(e)).join(",");
 
                   var name = value == null ? '请选择' : names;
                   final color = enable
-                      ? (value != null ? fontColor : fontColorB3B3B3)
-                      : (disableTextColor ?? fontColorB3B3B3);
+                      ? (value != null ? AppColor.fontColor : AppColor.fontColorB3B3B3)
+                      : (disableTextColor ?? AppColor.fontColorB3B3B3);
                   if (value == null && !enable) {
                     name = "--";
                   }
@@ -125,7 +124,7 @@ class AeChooseItem<T> extends StatelessWidget {
                 image: 'assets/images/icon_arrow_down.png'.toAssetImage(),
                 width: 12,
                 height: 12,
-                color: fontColorB3B3B3,
+                color: AppColor.fontColorB3B3B3,
                 // color: primary,
               ),
           ],
@@ -161,9 +160,7 @@ class AeChooseItem<T> extends StatelessWidget {
 
             final name = convertCb(e);
 
-            final isSame = selectVN.value != null
-                ? selectVN.value!.map((e) => convertCb(e)).contains(name)
-                : false;
+            final isSame = selectVN.value != null ? selectVN.value!.map((e) => convertCb(e)).contains(name) : false;
             final textColor = isSame ? Colors.blue : Colors.black87;
             final checkColor = isSame ? Colors.blue : Colors.transparent;
 

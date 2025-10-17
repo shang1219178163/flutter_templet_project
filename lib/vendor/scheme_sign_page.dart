@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button_confirm.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -69,7 +69,7 @@ class SchemeSignPageState extends State<SchemeSignPage> {
                 onPressed: () => Get.back(),
                 icon: const Icon(
                   Icons.arrow_back_ios_new,
-                  color: fontColor,
+                  color: AppColor.fontColor,
                   size: 24,
                 ),
               ),

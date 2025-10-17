@@ -16,7 +16,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_mo
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 typedef NFileUploadItemBuilder = Widget Function(
   NFileUploadModel model,
@@ -66,8 +66,7 @@ class NFileUploadItem extends StatefulWidget {
   NFileUploadItemState createState() => NFileUploadItemState();
 }
 
-class NFileUploadItemState extends State<NFileUploadItem>
-    with AutomaticKeepAliveClientMixin {
+class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliveClientMixin {
   /// 防止触发多次上传动作
   var _isLoading = false;
 
@@ -97,8 +96,7 @@ class NFileUploadItemState extends State<NFileUploadItem>
         oldWidget.model.url?.startsWith("http") == true &&
         widget.model.url == oldWidget.model.url;
 
-    if (widget.model.assetFile?.path == oldWidget.model.assetFile?.path ||
-        urlSame) {
+    if (widget.model.assetFile?.path == oldWidget.model.assetFile?.path || urlSame) {
       // EasyToast.showInfoToast("path相同");
       return;
     }
@@ -130,14 +128,14 @@ class NFileUploadItemState extends State<NFileUploadItem>
           child: NText(
             fileNameNew,
             fontSize: 14,
-            color: fontColor737373,
+            color: AppColor.fontColor737373,
             maxLines: 1,
           ),
         ),
         NText(
           ".$ext",
           fontSize: 14,
-          color: fontColor737373,
+          color: AppColor.fontColor737373,
           maxLines: 1,
         ),
       ],
@@ -154,7 +152,7 @@ class NFileUploadItemState extends State<NFileUploadItem>
         right: 12,
       ),
       decoration: const BoxDecoration(
-        color: bgColor,
+        color: AppColor.bgColor,
         // border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
@@ -215,8 +213,7 @@ class NFileUploadItemState extends State<NFileUploadItem>
           return const SizedBox();
         }
 
-        final showPercent = widget.model.assetFile != null &&
-            (widget.model.assetFile!.size > 2 * 1024 * 1024) == true;
+        final showPercent = widget.model.assetFile != null && (widget.model.assetFile!.size > 2 * 1024 * 1024) == true;
 
         final desc = showPercent ? value.toStringAsPercent(2) : "上传中";
 
@@ -286,8 +283,7 @@ class NFileUploadItemState extends State<NFileUploadItem>
       return;
     }
 
-    if (widget.model.assetFile == null &&
-        widget.model.url?.startsWith("http") == true) {
+    if (widget.model.assetFile == null && widget.model.url?.startsWith("http") == true) {
       return;
     }
 

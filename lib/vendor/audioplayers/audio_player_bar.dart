@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/duration_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:path/path.dart';
 
 /// 音频播放 bar
@@ -30,8 +30,7 @@ class AudioPlayerBar extends StatefulWidget {
   State<StatefulWidget> createState() => _AudioPlayerBarState();
 }
 
-class _AudioPlayerBarState extends State<AudioPlayerBar>
-    with WidgetsBindingObserver {
+class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObserver {
   AudioPlayer player = AudioPlayer();
   PlayerState? _playerState;
   late Duration? _duration = widget.duration;
@@ -136,9 +135,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar>
       debugPrint("$widget 无效链接: $url");
       return const SizedBox();
     }
-    final imgPath = _isPlaying
-        ? 'assets/images/icon_pause.png'
-        : 'assets/images/icon_play.png';
+    final imgPath = _isPlaying ? 'assets/images/icon_pause.png' : 'assets/images/icon_play.png';
 
     final totalDesc = _duration == null ? "--" : _duration!.toTime();
 
@@ -148,9 +145,9 @@ class _AudioPlayerBarState extends State<AudioPlayerBar>
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: white,
+        color: AppColor.white,
         borderRadius: BorderRadius.circular(29),
-        border: Border.all(width: 0.5, color: lineColor),
+        border: Border.all(width: 0.5, color: AppColor.lineColor),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -169,7 +166,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar>
             child: NText(
               _positionText ?? "",
               fontSize: 14,
-              color: fontColor737373,
+              color: AppColor.fontColor737373,
             ),
           ),
           Expanded(
@@ -184,10 +181,8 @@ class _AudioPlayerBarState extends State<AudioPlayerBar>
                         _position!.inMilliseconds < _duration!.inMilliseconds)
                     ? _position!.inMilliseconds / _duration!.inMilliseconds
                     : 0.0,
-                backgroundColor:
-                    const Color(0xFF5D6D7E).withOpacity(0.16), // 背景颜色
-                valueColor: const AlwaysStoppedAnimation<Color>(
-                    Color(0xFF5D6D7E)), // 进度条颜色
+                backgroundColor: const Color(0xFF5D6D7E).withOpacity(0.16), // 背景颜色
+                valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF5D6D7E)), // 进度条颜色
               ),
             ),
           ),
@@ -197,7 +192,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar>
           NText(
             totalDesc,
             fontSize: 14,
-            color: fontColor737373,
+            color: AppColor.fontColor737373,
           ),
         ],
       ),
@@ -225,8 +220,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar>
       setState(() {});
     });
 
-    _playerStateChangeSubscription =
-        player.onPlayerStateChanged.listen((state) {
+    _playerStateChangeSubscription = player.onPlayerStateChanged.listen((state) {
       _playerState = state;
       setState(() {});
     });

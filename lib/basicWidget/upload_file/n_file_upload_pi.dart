@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_ha
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 文件上传样式示例
 class NFileUploadPI extends NFileUploadHandle {
@@ -35,10 +35,7 @@ class NFileUploadPI extends NFileUploadHandle {
       urlBlock: urlBlock,
       onDelete: canEdit == false ? null : deleteItem,
       showFileSize: showFileSize,
-      builder: (NFileUploadModel model,
-          VoidCallback? onDelete,
-          VoidCallback? onRefresh,
-          ValueNotifier<bool> successVN,
+      builder: (NFileUploadModel model, VoidCallback? onDelete, VoidCallback? onRefresh, ValueNotifier<bool> successVN,
           ValueNotifier<double> percentVN) {
         final validUrl = model.url?.startsWith("http") == true;
 
@@ -59,7 +56,7 @@ class NFileUploadPI extends NFileUploadHandle {
                   if (canEdit && onDelete != null)
                     GestureDetector(
                       onTap: onDelete,
-                      child: Icon(Icons.delete, color: cancelColor),
+                      child: Icon(Icons.delete, color: AppColor.cancelColor),
                     ),
                 ],
               ),
@@ -70,13 +67,11 @@ class NFileUploadPI extends NFileUploadHandle {
                 //   return const SizedBox();
                 // }
 
-                final showPercent = model.assetFile != null &&
-                    (model.assetFile!.size > 2 * 1024 * 1024) == true;
+                final showPercent = model.assetFile != null && (model.assetFile!.size > 2 * 1024 * 1024) == true;
 
                 final desc = showPercent ? percent.toStringAsPercent(2) : "上传中";
 
-                final indicatorColor =
-                    percent < 1 ? primary.withOpacity(0.5) : Colors.transparent;
+                final indicatorColor = percent < 1 ? AppColor.primary.withOpacity(0.5) : Colors.transparent;
 
                 // return Padding(
                 //   padding: const EdgeInsets.only(bottom: 8.0),
@@ -182,8 +177,8 @@ class NFileUploadPI extends NFileUploadHandle {
         width: double.infinity,
         height: 36,
         decoration: BoxDecoration(
-          color: primary.withOpacity(0.1),
-          border: Border.all(color: primary),
+          color: AppColor.primary.withOpacity(0.1),
+          border: Border.all(color: AppColor.primary),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         child: NPair(
@@ -191,12 +186,12 @@ class NFileUploadPI extends NFileUploadHandle {
             image: "icon_upload_one.png".toAssetImage(),
             width: 16,
             height: 16,
-            color: primary,
+            color: AppColor.primary,
           ),
           child: NText(
             "选择文件并上传",
             fontSize: 14,
-            color: primary,
+            color: AppColor.primary,
           ),
         ),
       ),

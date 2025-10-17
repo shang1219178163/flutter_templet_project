@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 表单中每项标题
 class AeSectionHeader extends StatelessWidget {
@@ -69,7 +69,7 @@ class AeSectionHeader extends StatelessWidget {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
-                color: cancelColor,
+                color: AppColor.cancelColor,
               ),
             ),
           TextSpan(

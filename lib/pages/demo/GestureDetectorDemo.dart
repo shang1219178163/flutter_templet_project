@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/sound_state_mixin.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class GestureDetectorDemo extends StatefulWidget {
@@ -17,8 +17,7 @@ class GestureDetectorDemo extends StatefulWidget {
   _GestureDetectorDemoState createState() => _GestureDetectorDemoState();
 }
 
-class _GestureDetectorDemoState extends State<GestureDetectorDemo>
-    with SoundStateMixin {
+class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundStateMixin {
   final cancelVN = ValueNotifier(false);
 
   late final screeenSize = MediaQuery.of(context).size;
@@ -61,8 +60,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
         );
       },
       onPanUpdate: (e) {
-        debugPrint(
-            "${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
+        debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
         final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
         if (cancelVN.value == temp) return;
@@ -89,8 +87,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
         child: Text(
           "按住说话",
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 18.sp, fontWeight: FontWeight.bold, color: fontColor),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.fontColor),
         ),
       ),
     );
@@ -103,8 +100,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
         );
       },
       onLongPressMoveUpdate: (e) {
-        debugPrint(
-            "${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
+        debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
         final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
         if (cancelVN.value == temp) return;
@@ -131,8 +127,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
         child: Text(
           "按住说话",
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 18.sp, fontWeight: FontWeight.bold, color: fontColor),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.fontColor),
         ),
       ),
     );
@@ -164,12 +159,9 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
     return ValueListenableBuilder<bool>(
         valueListenable: cancelVN,
         builder: (context, isCancel, child) {
-          final closeButtonIconName = (isCancel
-              ? "img_sound_overlay_button_cancel.png"
-              : "img_sound_overlay_button.png");
-          final bottombarIconName = (isCancel
-              ? "img_sound_overlay_bottom_cancel.png"
-              : "img_sound_overlay_bottom.png");
+          final closeButtonIconName =
+              (isCancel ? "img_sound_overlay_button_cancel.png" : "img_sound_overlay_button.png");
+          final bottombarIconName = (isCancel ? "img_sound_overlay_bottom_cancel.png" : "img_sound_overlay_bottom.png");
 
           return Material(
             type: MaterialType.transparency,
@@ -185,8 +177,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image:
-                            "img_sound_overlay_bg_recording.png".toAssetImage(),
+                        image: "img_sound_overlay_bg_recording.png".toAssetImage(),
                         fit: BoxFit.scaleDown,
                         colorFilter: ColorFilter.mode(
                           isCancel ? Colors.red : context.primaryColor,
@@ -211,7 +202,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
                       child: Text(
                         "松开 取消",
                         style: TextStyle(
-                          color: fontColorB3B3B3,
+                          color: AppColor.fontColorB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -235,7 +226,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo>
                       child: Text(
                         "松开 发送",
                         style: TextStyle(
-                          color: fontColorB3B3B3,
+                          color: AppColor.fontColorB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),

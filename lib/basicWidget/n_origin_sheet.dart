@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
@@ -173,7 +173,7 @@ class _NOriginSheetState extends State<NOriginSheet> {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: fontColor,
+              color: AppColor.fontColor,
             ),
             isCollapsed: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class NCollectionView extends StatefulWidget {
@@ -161,7 +161,7 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
                                     TextStyle(
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: fontColor,
+                                      color: AppColor.fontColor,
                                     ),
                               ),
                             ),

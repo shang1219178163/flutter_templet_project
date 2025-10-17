@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 enum NPlaceholderType {
   none,
@@ -13,8 +13,7 @@ class NPlaceholder extends StatelessWidget {
   const NPlaceholder({
     super.key,
     this.onTap,
-    this.placeholder =
-        const AssetImage("assets/images/img_placeholder_empty.png"),
+    this.placeholder = const AssetImage("assets/images/img_placeholder_empty.png"),
     this.message,
     this.imageAndTextSpacing = 10,
     this.image,
@@ -40,8 +39,7 @@ class NPlaceholder extends StatelessWidget {
       // alignment: Alignment.center,
       child: TextButton(
           style: ButtonStyle(
-            overlayColor:
-                WidgetStateColor.resolveWith((states) => Colors.transparent),
+            overlayColor: WidgetStateColor.resolveWith((states) => Colors.transparent),
           ),
           onPressed: onTap,
           child: Column(
@@ -60,7 +58,7 @@ class NPlaceholder extends StatelessWidget {
                   Text(
                     message ?? "暂无数据",
                     style: TextStyle(
-                      color: fontColor999999,
+                      color: AppColor.fontColor999999,
                       fontSize: 14.sp,
                     ),
                   )

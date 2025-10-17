@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 ///选择盒子水平
 class NChoiceBoxHorizontal<T> extends StatefulWidget {
@@ -9,7 +9,7 @@ class NChoiceBoxHorizontal<T> extends StatefulWidget {
     required this.items,
     required this.onChanged,
     this.isSingle = false,
-    this.itemColor = bgColor,
+    this.itemColor = AppColor.bgColor,
     this.itemSelectedColor = Colors.blue,
     this.spacing = 8,
     this.itemBuilder,
@@ -35,17 +35,14 @@ class NChoiceBoxHorizontal<T> extends StatefulWidget {
   final Widget? Function(T e, bool isSelected)? itemBuilder;
 
   @override
-  _NChoiceBoxHorizontalState<T> createState() =>
-      _NChoiceBoxHorizontalState<T>();
+  _NChoiceBoxHorizontalState<T> createState() => _NChoiceBoxHorizontalState<T>();
 }
 
 class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
   /// 选中的 items
-  List<ChoiceBoxModel<T>> get seletectedItems =>
-      widget.items.where((e) => e.isSelected == true).toList();
+  List<ChoiceBoxModel<T>> get seletectedItems => widget.items.where((e) => e.isSelected == true).toList();
 
-  List<String> get seletectedItemNames =>
-      seletectedItems.map((e) => e.title).toList();
+  List<String> get seletectedItemNames => seletectedItems.map((e) => e.title).toList();
 
   @override
   void initState() {
@@ -103,7 +100,7 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
         label: Text(
           e.title,
           style: TextStyle(
-            color: e.isSelected == true ? Colors.white : fontColor,
+            color: e.isSelected == true ? Colors.white : AppColor.fontColor,
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),

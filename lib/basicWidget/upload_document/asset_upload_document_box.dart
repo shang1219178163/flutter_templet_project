@@ -6,7 +6,6 @@
 //  Copyright © 2024/6/30 shang. All rights reserved.
 //
 
-
 // ignore_for_file: use_setters_to_change_properties
 
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/file_picker_mixin.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
@@ -85,8 +84,7 @@ class AssetUploadDocumentBox extends StatefulWidget {
   AssetUploadDocumentBoxState createState() => AssetUploadDocumentBoxState();
 }
 
-class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
-    with FilePickerMixin {
+class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with FilePickerMixin {
   late final List<AssetUploadDocumentModel> selectedModels = [];
 
   /// 全部上传结束
@@ -108,8 +106,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
   @override
   void didUpdateWidget(covariant AssetUploadDocumentBox oldWidget) {
     final entityIds = widget.items.map((e) => e.file?.path).join(",");
-    final oldWidgetEntityIds =
-        oldWidget.items.map((e) => e.file?.path).join(",");
+    final oldWidgetEntityIds = oldWidget.items.map((e) => e.file?.path).join(",");
     if (entityIds != oldWidgetEntityIds) {
       selectedModels
         ..clear()
@@ -170,8 +167,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
                     radius: radius,
                     canEdit: canEdit,
                     urlBlock: (url) {
-                      final isAllFinished =
-                          items.where((e) => e.url == null).isEmpty;
+                      final isAllFinished = items.where((e) => e.url == null).isEmpty;
                       if (isAllFinished) {
                         widget.onChanged?.call(items);
                         isAllUploadFinished.value = true;
@@ -203,7 +199,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
                 height: itemWidth,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: bgColorF9F9F9,
+                  color: AppColor.bgColorF9F9F9,
                   borderRadius: BorderRadius.circular(radius),
                 ),
                 child: Image(

@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/network/dio_upload_service.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 会话列表 cell
 class IMConversationCell extends StatelessWidget {
@@ -146,7 +146,7 @@ class IMConversationCell extends StatelessWidget {
                                   text: TextSpan(
                                     text: '',
                                     style: const TextStyle(
-                                      color: fontColor,
+                                      color: AppColor.fontColor,
                                       fontSize: 17,
                                     ),
                                     children: [
@@ -154,7 +154,7 @@ class IMConversationCell extends StatelessWidget {
                                         return TextSpan(
                                             text: e,
                                             style: TextStyle(
-                                              color: e == highlightContent ? primary : fontColor,
+                                              color: e == highlightContent ? AppColor.primary : AppColor.fontColor,
                                               fontSize: 17,
                                             ));
                                       }).toList()
@@ -163,7 +163,7 @@ class IMConversationCell extends StatelessWidget {
                                 )
                               : NText(
                                   title,
-                                  color: fontColor,
+                                  color: AppColor.fontColor,
                                   fontSize: 17,
                                   fontWeight: FontWeight.normal,
                                   maxLines: 1,
@@ -197,7 +197,7 @@ class IMConversationCell extends StatelessWidget {
                               textAlign: TextAlign.left,
                               maxLines: 1,
                               fontWeight: FontWeight.w400,
-                              color: fontColor,
+                              color: AppColor.fontColor,
                               fontSize: 14,
                             ),
                           ),
@@ -215,7 +215,7 @@ class IMConversationCell extends StatelessWidget {
           height: 1,
           indent: (imgGap + imgSize) + 1,
           // indent:12,
-          color: lineColor,
+          color: AppColor.lineColor,
         ),
       ],
     );

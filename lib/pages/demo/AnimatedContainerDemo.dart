@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class AnimatedContainerDemo extends StatefulWidget {
   const AnimatedContainerDemo({Key? key, this.title}) : super(key: key);
@@ -44,7 +44,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: bgColor,
+        backgroundColor: AppColor.bgColor,
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: [
@@ -149,15 +149,10 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   void _changeSize() {
-    _width.value =
-        _width.value == sizeStart.width ? sizeEnd.width : sizeStart.width;
-    _height.value =
-        _height.value == sizeStart.height ? sizeEnd.height : sizeStart.height;
-    _color.value =
-        _color.value == Colors.green ? Colors.lightBlue : Colors.green;
-    _alignment.value = _alignment.value == Alignment.topLeft
-        ? Alignment.center
-        : Alignment.topLeft;
+    _width.value = _width.value == sizeStart.width ? sizeEnd.width : sizeStart.width;
+    _height.value = _height.value == sizeStart.height ? sizeEnd.height : sizeStart.height;
+    _color.value = _color.value == Colors.green ? Colors.lightBlue : Colors.green;
+    _alignment.value = _alignment.value == Alignment.topLeft ? Alignment.center : Alignment.topLeft;
   }
 
   // 搜索框初始宽度
@@ -246,8 +241,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               fillColor: Colors.green,
-                              hintStyle:
-                                  TextStyle(color: fontColor.withOpacity(0.2)),
+                              hintStyle: TextStyle(color: fontColor.withOpacity(0.2)),
                               isCollapsed: true,
                               contentPadding: EdgeInsets.zero,
                               counterText: '',
@@ -292,27 +286,21 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
           return Container(
             height: 100,
             color: Colors.green,
-            child:
-                IconButton(onPressed: onToggle, icon: Icon(Icons.expand_more)),
+            child: IconButton(onPressed: onToggle, icon: Icon(Icons.expand_more)),
           );
         },
         expandedBuilder: (isExpanded, onToggle) {
           return Container(
             height: 200,
             color: Colors.red,
-            child:
-                IconButton(onPressed: onToggle, icon: Icon(Icons.expand_less)),
+            child: IconButton(onPressed: onToggle, icon: Icon(Icons.expand_less)),
           );
         });
   }
 
-  buildExpansionChild(
-      {required String content,
-      required bool isExpanded,
-      required VoidCallback onToggle}) {
+  buildExpansionChild({required String content, required bool isExpanded, required VoidCallback onToggle}) {
     final maxLines = isExpanded ? 10 : 5;
-    final arrowImage =
-        isExpanded ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+    final arrowImage = isExpanded ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
 
     return InkWell(
       onTap: onToggle,

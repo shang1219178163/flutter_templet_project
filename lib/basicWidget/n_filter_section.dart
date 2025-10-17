@@ -10,7 +10,7 @@ import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class NFilterSection<T> extends StatefulWidget {
   NFilterSection({
@@ -80,8 +80,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
     final disable = (models.length <= widget.collapseCount);
 
     return StatefulBuilder(builder: (context, setState) {
-      final items =
-          isExpand ? models : models.take(widget.collapseCount).toList();
+      final items = isExpand ? models : models.take(widget.collapseCount).toList();
 
       return buildExpandMenu(
         title: widget.title,
@@ -109,10 +108,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
                   final tmp = value.isEmpty ? null : value.first.data;
                   widget.onSingleChanged?.call(tmp);
                 } else {
-                  var tmp = value
-                      .map((e) => e.data!)
-                      .where((e) => e != null)
-                      .toList();
+                  var tmp = value.map((e) => e.data!).where((e) => e != null).toList();
                   widget.onChanged?.call(tmp);
                 }
               },
@@ -151,14 +147,14 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
           borderColor: color.withOpacity(0.2),
           hide: disable,
         ),
-        collapsedTextColor: fontColor,
-        textColor: fontColor,
+        collapsedTextColor: AppColor.fontColor,
+        textColor: AppColor.fontColor,
         iconColor: color,
         collapsedIconColor: color,
         title: Text(
           title,
           style: TextStyle(
-            color: fontColor,
+            color: AppColor.fontColor,
             fontSize: 15,
             fontWeight: FontWeight.w500,
           ),
@@ -180,9 +176,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
       return const SizedBox();
     }
 
-    final tuple = isExpand
-        ? (title: "收起", image: "icon_arrow_up.png")
-        : (title: "展开", image: "icon_arrow_down.png");
+    final tuple = isExpand ? (title: "收起", image: "icon_arrow_up.png") : (title: "展开", image: "icon_arrow_down.png");
 
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 6, top: 4, bottom: 4),

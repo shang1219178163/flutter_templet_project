@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class ImGroupAvatar extends StatelessWidget {
   const ImGroupAvatar({
@@ -59,7 +59,7 @@ class ImGroupAvatar extends StatelessWidget {
               child: NText(
                 title,
                 fontSize: 11,
-                color: fontColor737373,
+                color: AppColor.fontColor737373,
                 maxLines: 1,
               ),
             ),
@@ -67,7 +67,7 @@ class ImGroupAvatar extends StatelessWidget {
               NText(
                 subtitle,
                 fontSize: 11,
-                color: fontColor737373,
+                color: AppColor.fontColor737373,
                 maxLines: 1,
               ),
           ],

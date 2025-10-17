@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
@@ -8,7 +7,7 @@ import 'package:flutter_templet_project/extension/clipboard_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreateTemplet.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 
 class ApiCreatePage extends StatefulWidget {
@@ -83,8 +82,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
   buildBody() {
     return Container(
       child: LayoutBuilder(builder: (context, constraints) {
-        final direction =
-            constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
+        final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
         if (direction == Axis.horizontal) {
           return buildBodyHorizontal(constraints: constraints);
         }
@@ -93,8 +91,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     );
   }
 
-  buildBodyVertical(
-      {double spacing = 10, required BoxConstraints constraints}) {
+  buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -122,8 +119,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     );
   }
 
-  buildBodyHorizontal(
-      {double spacing = 10, required BoxConstraints constraints}) {
+  buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
     return Container(
       padding: EdgeInsets.all(spacing * 3),
       child: Column(
@@ -190,7 +186,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: bgColor,
+        fillColor: AppColor.bgColor,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,
@@ -331,16 +327,13 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     try {
       _focusNode.unfocus();
 
-      final className =
-          fileName.contains("_") ? fileName.toCamlCase("_") : fileName;
+      final className = fileName.contains("_") ? fileName.toCamlCase("_") : fileName;
 
-      outVN.value = ApiCreateTemplet.createApi(
-          appScheme: appScheme, className: className);
+      outVN.value = ApiCreateTemplet.createApi(appScheme: appScheme, className: className);
       // debugPrint("fileName: $fileName");
 
       /// 生成本地文件
-      final file = await FileManager()
-          .createFile(fileName: fileName, content: outVN.value);
+      final file = await FileManager().createFile(fileName: fileName, content: outVN.value);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 /// 字符串转换
@@ -98,7 +98,7 @@ class _StringTransformPageState extends State<StringTransformPage> {
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: bgColor,
+        fillColor: AppColor.bgColor,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

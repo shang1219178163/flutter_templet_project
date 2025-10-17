@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class StackDemoTwo extends StatefulWidget {
@@ -22,15 +22,13 @@ class StackDemoTwo extends StatefulWidget {
   _StackDemoTwoState createState() => _StackDemoTwoState();
 }
 
-class _StackDemoTwoState extends State<StackDemoTwo>
-    with SingleTickerProviderStateMixin {
+class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderStateMixin {
   late final List<Tuple2<String, Widget>> _tabItems = [
     Tuple2("患者档案", buildPaticentRecord()),
     Tuple2("全病程轨迹", buildPaticentDepartmentPage()),
     Tuple2("日程", buildPaticentSchedule()),
   ];
-  late final _tabController =
-      TabController(length: _tabItems.length, vsync: this);
+  late final _tabController = TabController(length: _tabItems.length, vsync: this);
 
   late final _pageController = PageController(initialPage: 0, keepPage: true);
 
@@ -41,7 +39,7 @@ class _StackDemoTwoState extends State<StackDemoTwo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: AppColor.bgColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -213,7 +211,7 @@ class _StackDemoTwoState extends State<StackDemoTwo>
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: fontColor777777,
+          unselectedLabelColor: AppColor.fontColor777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/apple_sigin_mixin.dart';
 import 'package:flutter_templet_project/vendor/fluwx/fluwx_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
@@ -32,12 +32,10 @@ class NThirdLogin extends StatefulWidget {
   NThirdLoginState createState() => NThirdLoginState();
 }
 
-class NThirdLoginState extends State<NThirdLogin>
-    with AppleSiginMixin, LoginMixin {
+class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMixin {
   List<Tuple2<String, VoidCallback>> get thirdLoginItems {
     return [
-      if (Platform.isIOS)
-        Tuple2("icon_apple_bg_grey.png".toPath(), onLoginApple),
+      if (Platform.isIOS) Tuple2("icon_apple_bg_grey.png".toPath(), onLoginApple),
       Tuple2("icon_wechat_bg_green.png".toPath(), onLoginWechat),
     ];
   }
@@ -73,7 +71,7 @@ class NThirdLoginState extends State<NThirdLogin>
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 9, right: 9),
-                child: NText('第三方登录', fontSize: 14, color: fontColorB3B3B3),
+                child: NText('第三方登录', fontSize: 14, color: AppColor.fontColorB3B3B3),
               ),
               const Expanded(
                 child: Divider(
@@ -91,8 +89,7 @@ class NThirdLoginState extends State<NThirdLogin>
             children: thirdLoginItems.map((e) {
               return InkWell(
                 onTap: e.item2,
-                child:
-                    Image(image: e.item1.toAssetImage(), width: 40, height: 40),
+                child: Image(image: e.item1.toAssetImage(), width: 40, height: 40),
               );
             }).toList(),
           ),

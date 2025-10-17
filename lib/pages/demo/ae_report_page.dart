@@ -30,7 +30,7 @@ import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:get/get.dart';
@@ -134,16 +134,16 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: AppColor.bgColor,
       appBar: AppBar(
         title: Text(title),
         titleTextStyle: TextStyle(
-          color: fontColor,
+          color: AppColor.fontColor,
           fontWeight: FontWeight.w500,
         ),
-        iconTheme: const IconThemeData(color: fontColor, size: 20),
+        iconTheme: const IconThemeData(color: AppColor.fontColor, size: 20),
         elevation: 0.0,
-        backgroundColor: bgColor,
+        backgroundColor: AppColor.bgColor,
         actions: [
           IconButton(
             onPressed: () {
@@ -383,9 +383,7 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                 AeAddressChooseItem(
                   selectVN: addressVN,
                   convertCb: (AddressPickerModel e) {
-                    return [e.province, e.city, e.town]
-                        .where((e) => e?.isNotEmpty == true)
-                        .join();
+                    return [e.province, e.city, e.town].where((e) => e?.isNotEmpty == true).join();
                   },
                   onChanged: (e) {
                     DLog.d("$e");
@@ -600,20 +598,17 @@ class AdverseEventRecord {
   bool? get isSaeBool => isSae?.toBool();
 
   ActivityType? get aePrognosisEnum {
-    final result =
-        ActivityType.values.where((e) => e.name == aePrognosis).firstOrNull;
+    final result = ActivityType.values.where((e) => e.name == aePrognosis).firstOrNull;
     return result;
   }
 
   ActivityType? get drugCorrelationEnum {
-    final result =
-        ActivityType.values.where((e) => e.name == drugCorrelation).firstOrNull;
+    final result = ActivityType.values.where((e) => e.name == drugCorrelation).firstOrNull;
     return result;
   }
 
   ActivityType? get takenForDrugUseEnum {
-    final result =
-        ActivityType.values.where((e) => e.name == takenForDrugUse).firstOrNull;
+    final result = ActivityType.values.where((e) => e.name == takenForDrugUse).firstOrNull;
     return result;
   }
 

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/im_sound_recording_page.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/vendor/vibration_service.dart';
 
 /// 音频录制(按住说话)组件
@@ -93,7 +93,7 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: fontColor,
+            color: AppColor.fontColor,
           ),
         ),
       ),

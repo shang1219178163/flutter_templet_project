@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
 
 /// AssetUploadBox演示demo
@@ -73,7 +73,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     return AppBar(
       backgroundColor: Colors.white,
       iconTheme: const IconThemeData(
-        color: fontColor,
+        color: AppColor.fontColor,
         // size: 20,
       ),
       elevation: 0,

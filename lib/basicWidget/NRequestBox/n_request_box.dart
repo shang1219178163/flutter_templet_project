@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 // buildBody2() {
 //   return NRequestListBox(
@@ -74,8 +74,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 //   );
 // }
 
-typedef ToggleWidgetBuilder = Widget Function(
-    bool isVisible, VoidCallback onToggle);
+typedef ToggleWidgetBuilder = Widget Function(bool isVisible, VoidCallback onToggle);
 
 /// 列表请求组件
 /// 支持: 下拉刷新,上拉加载; 搜索框回调; dropbox
@@ -136,7 +135,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     return Container(
       decoration: widget.bodyDecoration ??
           BoxDecoration(
-            color: bgColor,
+            color: AppColor.bgColor,
             // border: Border.all(color: Colors.blue),
             // borderRadius: BorderRadius.all(Radius.circular(0.w)),
           ),
@@ -205,8 +204,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     VoidCallback? onClick,
   }) {
     return Container(
-      padding:
-          EdgeInsets.only(left: 16.w, right: 16.w, top: 12.h, bottom: 12.h),
+      padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 12.h, bottom: 12.h),
       decoration: BoxDecoration(
         color: Colors.white,
       ),
@@ -311,7 +309,7 @@ class _NRequestBoxState extends State<NRequestBox> {
           children: [
             Divider(
               height: 1.h,
-              color: lineColor,
+              color: AppColor.lineColor,
             ),
             Expanded(
               child: CupertinoScrollbar(
@@ -369,7 +367,7 @@ class _NRequestBoxState extends State<NRequestBox> {
             children: [
               Divider(
                 height: 1.h,
-                color: lineColor,
+                color: AppColor.lineColor,
               ),
               Expanded(
                 child: CupertinoScrollbar(

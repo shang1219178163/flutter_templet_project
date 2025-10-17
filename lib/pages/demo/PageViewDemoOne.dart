@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class PageViewDemoOne extends StatefulWidget {
@@ -124,7 +124,7 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: fontColor777777,
+          unselectedLabelColor: AppColor.fontColor777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 
@@ -26,7 +26,7 @@ class AeAddressChooseItem extends StatelessWidget {
     this.enable = true,
     this.header,
     this.footer,
-    this.disableTextColor = fontColor,
+    this.disableTextColor = AppColor.fontColor,
     this.disableBgColor,
   });
 
@@ -72,7 +72,7 @@ class AeAddressChooseItem extends StatelessWidget {
   }
 
   Widget buildBody() {
-    final bgColor = enable ? white : disableBgColor ?? bgColorEDEDED;
+    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgColorEDEDED;
 
     return GestureDetector(
       onTap: onPicker,
@@ -101,8 +101,8 @@ class AeAddressChooseItem extends StatelessWidget {
                 builder: (context, value, child) {
                   var name = value == null ? '请选择' : convertCb(value);
                   final color = enable
-                      ? (value != null ? fontColor : fontColorB3B3B3)
-                      : (disableTextColor ?? fontColorB3B3B3);
+                      ? (value != null ? AppColor.fontColor : AppColor.fontColorB3B3B3)
+                      : (disableTextColor ?? AppColor.fontColorB3B3B3);
                   if (value == null && !enable) {
                     name = "--";
                   }
@@ -120,7 +120,7 @@ class AeAddressChooseItem extends StatelessWidget {
                 image: 'assets/images/icon_arrow_down.png'.toAssetImage(),
                 width: 12,
                 height: 12,
-                color: fontColorB3B3B3,
+                color: AppColor.fontColorB3B3B3,
                 // color: primary,
               ),
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class NCancelAndConfirmBar extends StatelessWidget {
   NCancelAndConfirmBar({
@@ -13,7 +13,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
     this.dividerTop,
     this.cancelTextStyle,
     this.confirmTextStyle,
-    this.cancelBgColor = bgColor,
+    this.cancelBgColor = AppColor.bgColor,
     this.confirmBgColor = Colors.blueAccent,
     required this.onCancel,
     required this.onConfirm,
@@ -99,7 +99,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
                                   TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: fontColor777777,
+                                    color: AppColor.fontColor777777,
                                   ),
                             ),
                           ),

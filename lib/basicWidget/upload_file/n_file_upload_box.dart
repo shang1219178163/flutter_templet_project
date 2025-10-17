@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -115,8 +115,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
   @override
   void didUpdateWidget(covariant NFileUploadBox oldWidget) {
     final entityIds = widget.items.map((e) => e.assetFile?.path).join(",");
-    final oldWidgetEntityIds =
-        oldWidget.items.map((e) => e.assetFile?.path).join(",");
+    final oldWidgetEntityIds = oldWidget.items.map((e) => e.assetFile?.path).join(",");
     if (entityIds != oldWidgetEntityIds) {
       selectedModels
         ..clear()
@@ -169,15 +168,14 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
               child: NText(
                 widget.title,
                 fontSize: 14,
-                color: fontColor737373,
+                color: AppColor.fontColor737373,
               ),
             ),
         ...selectedModels.map((e) {
           final index = selectedModels.indexOf(e);
 
           void deleteItem() {
-            debugPrint(
-                "onDelete: $index, length: ${selectedModels[index].assetFile?.path}");
+            debugPrint("onDelete: $index, length: ${selectedModels[index].assetFile?.path}");
             selectedModels.remove(e);
             setState(() {});
             widget.onChanged(selectedModels);
@@ -211,8 +209,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           );
         }).toList(),
         if (selectedModels.length < widget.maxCount)
-          widget.fileUpload?.buildUploadButton(onPressed: onPick) ??
-              buildUploadButton(onPressed: onPick),
+          widget.fileUpload?.buildUploadButton(onPressed: onPick) ?? buildUploadButton(onPressed: onPick),
         Offstage(
           offstage: !widget.canEdit,
           child: widget.footer ??
@@ -221,7 +218,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
                 child: NText(
                   widget.description,
                   fontSize: 12,
-                  color: fontColorB3B3B3,
+                  color: AppColor.fontColorB3B3B3,
                 ),
               ),
         ),
@@ -237,7 +234,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
         height: 36,
         decoration: BoxDecoration(
           // color: bgColor,
-          border: Border.all(color: lineColor),
+          border: Border.all(color: AppColor.lineColor),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         child: NPair(
@@ -249,7 +246,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           child: NText(
             "选择文件并上传",
             fontSize: 14,
-            color: fontColorB3B3B3,
+            color: AppColor.fontColorB3B3B3,
           ),
         ),
       ),
@@ -286,8 +283,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
       final lengthBefore = result.length;
       DLog.d("result: 过滤前 ${result.length}");
       result.removeWhere((el) {
-        final same =
-            selectedModels.map((e) => e.assetFile?.path).contains(el.path);
+        final same = selectedModels.map((e) => e.assetFile?.path).contains(el.path);
         final result = same || el.size > maxMB * 1024 * 1024;
         return result;
       });
@@ -309,8 +305,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
 
       for (final e in result) {
         if (!selectedModels.contains(e)) {
-          selectedModels
-              .add(NFileUploadModel(assetFile: NPickFile.fromPlatformFile(e)));
+          selectedModels.add(NFileUploadModel(assetFile: NPickFile.fromPlatformFile(e)));
         }
       }
 
@@ -330,10 +325,8 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
       switch (model.url!.fileType) {
         case NFileType.image:
           {
-            final urls = selectedModels
-                .where((e) => e.url?.startsWith("http") == true)
-                .map((e) => e.url ?? "")
-                .toList();
+            final urls =
+                selectedModels.where((e) => e.url?.startsWith("http") == true).map((e) => e.url ?? "").toList();
             final index = urls.indexOf(model.url ?? "");
             // debugPrint("urls: ${urls.length}, $index");
             FocusScope.of(context).unfocus();

@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class NChoiceBoxOneDemo extends StatefulWidget {
@@ -261,7 +261,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-        color: white,
+        color: AppColor.white,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,7 +301,8 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          NText(detailTitle ?? "", color: fontColorBCBFC2, fontSize: 12, fontWeight: FontWeight.w500),
+                          NText(detailTitle ?? "",
+                              color: AppColor.fontColorBCBFC2, fontSize: 12, fontWeight: FontWeight.w500),
                         ],
                       ),
                   ],

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 
 class TextFieldLoginDemo extends StatefulWidget {
@@ -16,8 +16,7 @@ class TextFieldLoginDemo extends StatefulWidget {
 }
 
 class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final FocusNode _focusNode = FocusNode();
 
@@ -141,7 +140,7 @@ class LoginInput extends StatefulWidget {
     this.isFocusClear = false,
     this.showEyeIcon = false,
     this.keyboardType,
-    this.fillColor = bgColor,
+    this.fillColor = AppColor.bgColor,
     this.focusColor = Colors.white,
     this.radius = 30,
     this.inputFormatters,
@@ -181,8 +180,7 @@ class _LoginInputState extends State<LoginInput> {
 
   bool isCloseEye = true;
 
-  late final _textEditingController =
-      widget.controller ?? TextEditingController();
+  late final _textEditingController = widget.controller ?? TextEditingController();
 
   @override
   void initState() {
@@ -276,11 +274,9 @@ class _LoginInputState extends State<LoginInput> {
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: IconButton(
-                    focusColor: fontColorF9F9F9,
+                    focusColor: AppColor.fontColorF9F9F9,
                     icon: Image.asset(
-                      isCloseEye
-                          ? 'assets/images/icon_eye_close.png'
-                          : 'assets/images/icon_eye_open.png',
+                      isCloseEye ? 'assets/images/icon_eye_close.png' : 'assets/images/icon_eye_open.png',
                       width: 20,
                       height: 20,
                       color: isFocus ? primaryColor : null,
@@ -299,14 +295,13 @@ class _LoginInputState extends State<LoginInput> {
       focusNode: _focusNode,
       onChanged: widget.onChanged,
       obscureText: widget.isPwd ? isCloseEye : false,
-      keyboardType:
-          widget.isPwd ? TextInputType.visiblePassword : widget.keyboardType,
+      keyboardType: widget.isPwd ? TextInputType.visiblePassword : widget.keyboardType,
       autofocus: !isCloseEye,
       cursorColor: primaryColor,
       style: TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w400,
-        color: fontColor,
+        color: AppColor.fontColor,
       ),
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
@@ -315,10 +310,10 @@ class _LoginInputState extends State<LoginInput> {
         // fillColor:  widget.focusColor,
         contentPadding: const EdgeInsets.only(left: 20, right: 20),
         border: InputBorder.none,
-        enabledBorder: buildBorder(color: lineColor),
+        enabledBorder: buildBorder(color: AppColor.lineColor),
         focusedBorder: buildBorder(color: context.primaryColor),
         hintText: widget.hint,
-        hintStyle: TextStyle(fontSize: 16.sp, color: fontColorF9F9F9),
+        hintStyle: TextStyle(fontSize: 16.sp, color: AppColor.fontColorF9F9F9),
         prefixIcon: IconButton(
           focusColor: primaryColor,
           icon: widget.image == null
@@ -343,7 +338,7 @@ class _LoginInputState extends State<LoginInput> {
         Radius.circular(raduis),
       ),
       borderSide: BorderSide(
-        color: color ?? lineColor, //边线颜色为白色
+        color: color ?? AppColor.lineColor, //边线颜色为白色
         width: 1, //边线宽度为1
       ),
     );

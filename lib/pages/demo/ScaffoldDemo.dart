@@ -9,7 +9,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 class ScaffoldDemo extends StatefulWidget {
   const ScaffoldDemo({
@@ -23,8 +23,7 @@ class ScaffoldDemo extends StatefulWidget {
   State<ScaffoldDemo> createState() => _ScaffoldDemoState();
 }
 
-class _ScaffoldDemoState extends State<ScaffoldDemo>
-    with SingleTickerProviderStateMixin {
+class _ScaffoldDemoState extends State<ScaffoldDemo> with SingleTickerProviderStateMixin {
   late bool _isOpen = false;
   late AnimationController _animationController;
   late Animation<Color?> _animationColor;
@@ -42,8 +41,7 @@ class _ScaffoldDemoState extends State<ScaffoldDemo>
       )
     ),
     (
-      barItem: BottomNavigationBarItem(
-          icon: Icon(Icons.my_library_add), label: "我的"),
+      barItem: BottomNavigationBarItem(icon: Icon(Icons.my_library_add), label: "我的"),
       page: Center(
         child: Text("tab2"),
       )
@@ -55,16 +53,13 @@ class _ScaffoldDemoState extends State<ScaffoldDemo>
     // TODO: implement initState
     super.initState();
 
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 250))
-          ..addListener(() {
-            setState(() {});
-          });
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 250))
+      ..addListener(() {
+        setState(() {});
+      });
 
-    _animationColor = ColorTween(begin: Colors.red, end: Colors.green).animate(
-        CurvedAnimation(
-            parent: _animationController,
-            curve: Interval(0.0, 1.0, curve: _curve)));
+    _animationColor = ColorTween(begin: Colors.red, end: Colors.green)
+        .animate(CurvedAnimation(parent: _animationController, curve: Interval(0.0, 1.0, curve: _curve)));
 
     _animationIcon = Tween(begin: 0.0, end: 1.0).animate(_animationController);
   }
@@ -80,7 +75,7 @@ class _ScaffoldDemoState extends State<ScaffoldDemo>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldStateKey,
-      backgroundColor: bgColor,
+      backgroundColor: AppColor.bgColor,
       resizeToAvoidBottomInset: true,
       primary: true,
       extendBody: false,
@@ -143,10 +138,7 @@ class _ScaffoldDemoState extends State<ScaffoldDemo>
         },
       ),
       bottomSheet: Row(
-        children: [
-          Expanded(child: TextField()),
-          TextButton(onPressed: () {}, child: Text("发送"))
-        ],
+        children: [Expanded(child: TextField()), TextButton(onPressed: () {}, child: Text("发送"))],
       ),
     );
   }

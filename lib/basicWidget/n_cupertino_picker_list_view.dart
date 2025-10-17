@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// 底部列表选择封装
 class NCupertinoPickerListView<E> extends StatefulWidget {
@@ -115,7 +115,7 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
                     ),
                   ),
           ),
-        if (widget.toolbar == null) const Divider(height: 0.5, color: lineColor),
+        if (widget.toolbar == null) const Divider(height: 0.5, color: AppColor.lineColor),
         widget.toolbar ?? const SizedBox(),
         Expanded(
           child: CupertinoPicker(
@@ -140,11 +140,11 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
                           widget.cbName?.call(e) ?? "-",
                           style: const TextStyle(
                             fontSize: 18,
-                            color: fontColor,
+                            color: AppColor.fontColor,
                           ),
                         ),
                       ),
-                      const Divider(height: 0.5, color: lineColor),
+                      const Divider(height: 0.5, color: AppColor.lineColor),
                     ],
                   );
             }).toList(),

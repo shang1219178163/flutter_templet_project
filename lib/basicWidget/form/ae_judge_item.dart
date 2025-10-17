@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 
 /// AE 判断组件
 class AeJudgeItem extends StatelessWidget {
@@ -93,7 +93,7 @@ class AeJudgeItem extends StatelessWidget {
       numPerRow: numPerRow,
       itemPadding: itemPadding,
       style: const TextStyle(
-        color: fontColorB3B3B3,
+        color: AppColor.fontColorB3B3B3,
         fontSize: 14,
       ),
       styleSelected: TextStyle(
@@ -123,14 +123,14 @@ class AeJudgeItem extends StatelessWidget {
             padding: EdgeInsets.only(right: 8.0),
             child: NIndicatorCircle(
               isSelected: true,
-              colorSelected: fontColorB3B3B3,
+              colorSelected: AppColor.fontColorB3B3B3,
             ),
           ),
           Flexible(
             child: Text(
               title,
               style: const TextStyle(
-                color: fontColor,
+                color: AppColor.fontColor,
               ),
             ),
           ),

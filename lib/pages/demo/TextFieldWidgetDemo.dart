@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_text_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 
 class TextFieldWidgetDemo extends StatefulWidget {
@@ -29,8 +29,7 @@ class TextFieldWidgetDemo extends StatefulWidget {
 }
 
 class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -80,7 +79,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   child: buildNTextField(
                     hideSuffix: true,
                     decorationBuilder: (dt) {
-                      return dt.copyWith(fillColor: bgColor);
+                      return dt.copyWith(fillColor: AppColor.bgColor);
                     },
                   ),
                 ),
@@ -164,7 +163,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   title: "NSearchBar ",
                   child: NSearchBar(
                     decoration: BoxDecoration(
-                      color: bgColor,
+                      color: AppColor.bgColor,
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
                     onChanged: (String value) {},

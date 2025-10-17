@@ -11,7 +11,7 @@ import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 
@@ -99,7 +99,7 @@ class AeDateChooseItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: enable ? white : disableBgColor ?? bgColorEDEDED,
+          color: enable ? AppColor.white : disableBgColor ?? AppColor.bgColorEDEDED,
           border: Border.all(color: const Color(0xFFE6E6E6), width: 0.5),
           boxShadow: const [
             BoxShadow(
@@ -115,12 +115,10 @@ class AeDateChooseItem extends StatelessWidget {
               child: ValueListenableBuilder(
                 valueListenable: selectVN,
                 builder: (context, value, child) {
-                  var name = value == null
-                      ? '请选择'
-                      : convertCb?.call(value) ?? convert(value);
+                  var name = value == null ? '请选择' : convertCb?.call(value) ?? convert(value);
                   final color = enable
-                      ? (value != null ? fontColor : fontColorB3B3B3)
-                      : (disableTextColor ?? fontColorB3B3B3);
+                      ? (value != null ? AppColor.fontColor : AppColor.fontColorB3B3B3)
+                      : (disableTextColor ?? AppColor.fontColorB3B3B3);
                   if (value == null && !enable) {
                     name = "--";
                   }
