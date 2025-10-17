@@ -115,6 +115,15 @@ class ThemeProvider extends ChangeNotifier {
 
   /// 边框线
   Color get borderColor => isDark ? Colors.white.withOpacity(0.04) : Colors.transparent;
+
+  /// 兼容老样式
+  Color get color181829OrF6F6F6 => isDark ? Color(0xFF181829) : Color(0xFFF6F6F6);
+
+  /// 兼容老样式
+  Color get color242434OrWhite => isDark ? Color(0xFF242434) : Colors.white;
+
+  /// 反色, isDark ? Colors.white : Colors.black;
+  Color get inverseColor => isDark ? Colors.white : Colors.black;
 }
 
 /// 主题模型

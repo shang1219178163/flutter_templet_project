@@ -190,7 +190,7 @@ class AppThemeService {
         dialogBackgroundColor: Colors.white,
         dialogTheme: DialogTheme(
           backgroundColor: Colors.white,
-          // shadowColor: AppColors.color_242434,
+          // shadowColor: AppColor.color_242434,
           // elevation: 8,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -735,7 +735,7 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
   ThemeExtension<NAppTheme> copyWith({
     Color? primary,
     Color? primary2,
-    Color? AppColor.bgColor,
+    Color? bgColor,
     Color? fontColor,
     TextStyle? titleStyle,
     TextStyle? textStyle,
@@ -747,7 +747,7 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
       NAppTheme(
         primary: primary ?? this.primary,
         primary2: primary2 ?? this.primary2,
-        bgColor: AppColor.bgColor, ?? this.bgColor,
+        bgColor: bgColor ?? this.bgColor,
         fontColor: fontColor ?? this.fontColor,
         titleStyle: titleStyle ?? this.titleStyle,
         textStyle: textStyle ?? this.textStyle,

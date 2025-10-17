@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/provider/theme_provider.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:provider/provider.dart';
-import 'package:social_fe_app/provider/theme_provider.dart';
-import 'package:social_fe_app/value/app_colors.dart';
 
 class SessionSelectWidget extends StatefulWidget {
   final Function(String) callback;
@@ -37,9 +37,9 @@ class _SessionSelectWidgetState extends State<SessionSelectWidget> with TickerPr
       height: 25,
       width: 140,
       decoration: BoxDecoration(
-        color: themeProvider.isDark ? Colors.white.withOpacity(0.05) : AppColors.bgColorF6F6F6,
+        color: themeProvider.isDark ? Colors.white.withOpacity(0.05) : Color(0xffF6F6F6),
         border: Border.all(
-          color: themeProvider.isDark ? Colors.white.withOpacity(0.1) : AppColors.bgColorF6F6F6,
+          color: themeProvider.isDark ? Colors.white.withOpacity(0.1) : Color(0xffF6F6F6),
           width: 0.5,
         ),
         borderRadius: BorderRadius.circular(12),
@@ -53,8 +53,8 @@ class _SessionSelectWidgetState extends State<SessionSelectWidget> with TickerPr
           indicatorSize: TabBarIndicatorSize.tab,
           labelPadding: const EdgeInsets.symmetric(horizontal: 0),
           indicator: BoxDecoration(
-            color: AppColors.colorE44554.withOpacity(0.1),
-            border: Border.all(color: AppColors.colorE44554, width: 0.5),
+            color: AppColor.cancelColor.withOpacity(0.1),
+            border: Border.all(color: AppColor.cancelColor, width: 0.5),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           tabs: List.generate(titles.length, (index) {
@@ -65,7 +65,7 @@ class _SessionSelectWidgetState extends State<SessionSelectWidget> with TickerPr
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 10,
-                  color: selected ? AppColors.colorE44554 : themeProvider.titleColor,
+                  color: selected ? AppColor.cancelColor : themeProvider.titleColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),

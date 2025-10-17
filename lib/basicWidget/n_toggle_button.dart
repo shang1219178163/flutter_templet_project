@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:social_fe_app/provider/theme_provider.dart';
 
 class ToggleButton<T> extends StatefulWidget {
   const ToggleButton(
@@ -98,7 +98,9 @@ class _ToggleButtonState<T> extends State<ToggleButton<T>> {
   Widget build(BuildContext context) {
     late final themeProvider = context.read<ThemeProvider>();
 
-    if (originData.isEmpty) return const SizedBox.shrink();
+    if (originData.isEmpty) {
+      return const SizedBox.shrink();
+    }
 
     final int index = originData.contains(selected) ? originData.indexOf(selected as T) : -1;
     final int itemCount = originData.length;
