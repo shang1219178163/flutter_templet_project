@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/app_color.dart';
 import 'package:get/get.dart';
 
 class AppThemeService {
@@ -93,7 +93,7 @@ class AppThemeService {
         // textTheme: ThemeData.light().textTheme.copyWith(
         //     button: TextStyle(color: Colors.red)
         // ),//设置文本颜色为红色
-        scaffoldBackgroundColor: bgColor,
+        scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           elevation: 0,
           scrolledUnderElevation: 0,
@@ -233,6 +233,46 @@ class AppThemeService {
           thumbColor: seedColor,
           overlayColor: Colors.grey,
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          // isCollapsed: true,
+          // contentPadding: const EdgeInsets.symmetric(vertical: 11),
+          filled: true,
+          fillColor: AppColor.bgColor,
+          focusColor: AppColor.bgColor,
+          hoverColor: AppColor.bgColor,
+          hintStyle: TextStyle(
+            fontSize: 14,
+            color: Colors.white.withOpacity(0.4),
+            fontWeight: FontWeight.w400,
+          ),
+          labelStyle: TextStyle(
+            fontSize: 14,
+            color: Colors.red.withOpacity(0.9),
+            fontWeight: FontWeight.w400,
+          ),
+          prefixIconColor: Color(0xFF7C7C85),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              width: 1,
+              color: const Color(0xFFA79AF8).withOpacity(0.1),
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              width: 1,
+              color: const Color(0xFFA79AF8).withOpacity(0.1),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              width: 1,
+              color: const Color(0xFFA79AF8).withOpacity(0.1),
+            ),
+          ),
+        ),
         extensions: appThemeDataExtensions(),
       );
 
@@ -270,8 +310,23 @@ class AppThemeService {
         //   color: Colors.black54,
         // ),
         // indicatorColor: Colors.white,
+        scaffoldBackgroundColor: Colors.black,
         appBarTheme: const AppBarTheme(
           elevation: 0,
+          scrolledUnderElevation: 0,
+          titleTextStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+          toolbarTextStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+          actionsIconTheme: IconThemeData(
+            color: Colors.white, // 图标颜色
+            size: 24.0, // 图标大小
+            opacity: 0.8, // 图标透明度
+          ),
         ),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         dividerTheme: const DividerThemeData(
@@ -334,6 +389,44 @@ class AppThemeService {
             minHeight: 100,
             maxHeight: 400,
             minWidth: double.infinity,
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          // isCollapsed: true,
+          // contentPadding: const EdgeInsets.symmetric(vertical: 11),
+          filled: true,
+          fillColor: Colors.black.withOpacity(0.5),
+          hintStyle: TextStyle(
+            fontSize: 14,
+            color: Colors.white.withOpacity(0.4),
+            fontWeight: FontWeight.w400,
+          ),
+          labelStyle: TextStyle(
+            fontSize: 14,
+            color: Colors.red.withOpacity(0.9),
+            fontWeight: FontWeight.w400,
+          ),
+          prefixIconColor: Color(0xFF7C7C85),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              width: 1,
+              color: const Color(0xFFA79AF8).withOpacity(0.1),
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              width: 1,
+              color: const Color(0xFFA79AF8).withOpacity(0.1),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              width: 1,
+              color: const Color(0xFFA79AF8).withOpacity(0.1),
+            ),
           ),
         ),
       );
@@ -642,7 +735,7 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
   ThemeExtension<NAppTheme> copyWith({
     Color? primary,
     Color? primary2,
-    Color? bgColor,
+    Color? AppColor.bgColor,
     Color? fontColor,
     TextStyle? titleStyle,
     TextStyle? textStyle,
@@ -654,7 +747,7 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
       NAppTheme(
         primary: primary ?? this.primary,
         primary2: primary2 ?? this.primary2,
-        bgColor: bgColor ?? this.bgColor,
+        bgColor: AppColor.bgColor, ?? this.bgColor,
         fontColor: fontColor ?? this.fontColor,
         titleStyle: titleStyle ?? this.titleStyle,
         textStyle: textStyle ?? this.textStyle,
@@ -672,7 +765,7 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
       NAppTheme(
         primary: Color.lerp(primary, other?.primary, t) ?? primary,
         primary2: Color.lerp(primary2, other?.primary2, t) ?? primary2,
-        bgColor: Color.lerp(bgColor, other?.bgColor, t) ?? bgColor,
+        bgColor: Color.lerp(bgColor, other?.bgColor, t) ?? AppColor.bgColor,
         fontColor: Color.lerp(fontColor, other?.fontColor, t) ?? fontColor,
         titleStyle: TextStyle.lerp(titleStyle, other?.titleStyle, t) ?? titleStyle,
         textStyle: TextStyle.lerp(textStyle, other?.textStyle, t) ?? textStyle,

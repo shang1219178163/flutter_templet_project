@@ -194,9 +194,9 @@ class MyApp extends StatelessWidget {
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
       // initialRoute: "/MyHomePage",
       // routes: kRoutes,
-      initialRoute: AppPage.INITIAL,
-      getPages: AppPage.routes,
-      unknownRoute: AppPage.unknownRoute,
+      initialRoute: AppRouter.INITIAL,
+      getPages: AppRouter.pages,
+      unknownRoute: AppRouter.unknownRoute,
       navigatorObservers: [
         AppRouteObserver().routeObserver,
         RouteManagerObserver(),
@@ -204,7 +204,20 @@ class MyApp extends StatelessWidget {
       routingCallback: (routing) {
         AppRouteObserver.routingCallback(routing);
       },
-      builder: EasyLoading.init(),
+      // builder: EasyLoading.init(),
+      builder: EasyLoading.init(
+        builder: (context, child) {
+          return GestureDetector(
+            onTap: () {
+              // Hide the keyboard using SystemChannels
+              SystemChannels.textInput.invokeMethod('TextInput.hide');
+              // Remove focus from the current text field
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: child,
+          );
+        },
+      ),
     );
 
     return ScreenUtilInit(

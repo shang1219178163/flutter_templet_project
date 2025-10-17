@@ -9,7 +9,6 @@ class AppRouteObserver {
 
   //这是个单例
   static final AppRouteObserver _instance = AppRouteObserver._();
-
   factory AppRouteObserver() => _instance;
 
   //这是实际上的路由监听
@@ -22,7 +21,7 @@ class AppRouteObserver {
     if (routing == null) {
       return;
     }
-    if (routing.route?.settings.name == AppPage.INITIAL) {
+    if (routing.route?.settings.name == AppRouter.INITIAL) {
       return;
     }
 
@@ -40,7 +39,7 @@ class AppRouteObserver {
     }
     final lastRouteInfo = CacheService().getMap(CacheKey.lastPageRoute.name);
     final settings = RouteSettingsExt.fromJson(lastRouteInfo);
-    if (AppPage.routes.firstWhereOrNull((e) => e.name == settings.name) == null) {
+    if (AppRouter.pages.firstWhereOrNull((e) => e.name == settings.name) == null) {
       return;
     }
     await Get.toNamed(settings.name!, arguments: settings.arguments);

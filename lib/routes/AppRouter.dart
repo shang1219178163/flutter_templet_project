@@ -213,6 +213,7 @@ import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedNavigatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoFive.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoThree.dart';
@@ -803,6 +804,8 @@ class AppRouter {
   static const String secureKeyboardDemo = '/secureKeyboardDemo';
   static const String popScopeDemo = '/popScopeDemo';
   static const String nestedScrollViewDemoHome = '/nestedScrollViewDemoHome';
+  static const String nestedScrollViewDemoFive = '/nestedScrollViewDemoFive';
+
   static const String irregularClipperDemo = '/irregularClipperDemo';
   static const String ocrPhotoDemo = '/ocrPhotoDemo';
   static const String translationTextPage = '/translationTextPage';
@@ -841,33 +844,6 @@ class AppRouter {
   static const String colorAnimationDemo = '/colorAnimationDemo';
   static const String restorationMixinDemo = '/restorationMixinDemo';
 
-  // static final routes = <String, WidgetBuilder>{
-  //   homePage: (context) => MyHomePage(),
-  // };
-  // AppRouter.push(BuildContext context, String url, {Object? arguments,}) {
-  //   if (url.startsWith('https://') || url.startsWith('http://')) {
-  //     Navigator.push(context, MaterialPageRoute(builder: (context) {
-  //       return WebViewPage(url: url, params: arguments);
-  //     }));
-  //     return;
-  //   }
-  //
-  //   if (!AppRouter.routes.keys.contains(url)){
-  //     // Navigator.pushNamed(context, AppRouter.NotFound, arguments: arguments);
-  //     Get.toNamed(AppRouter.notFound, arguments: arguments);
-  //     return;
-  //   }
-  //   Navigator.pushNamed(context, url, arguments: arguments);
-  //   // Get.toNamed(url, arguments: args);
-  //   return;
-  //
-  //   // Navigator.push(context, MaterialPageRoute(builder: (context) {
-  //   //   return _getPage(url, args);
-  //   // }));
-  // }
-}
-
-class AppPage {
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
 
@@ -876,7 +852,7 @@ class AppPage {
     page: () => APPNotFoundPage(),
   );
 
-  static final List<GetPage> routes = [
+  static final List<GetPage> pages = [
     unknownRoute,
 
     GetPage(
@@ -2366,6 +2342,11 @@ class AppPage {
       name: AppRouter.nestedScrollViewDemoHome,
       page: () => NestedScrollViewDemoHome(),
     ),
+    GetPage(
+      name: AppRouter.nestedScrollViewDemoFive,
+      page: () => NestedScrollViewDemoFive(),
+    ),
+
     GetPage(
       name: AppRouter.irregularClipperDemo,
       page: () => IrregularClipperDemo(),
