@@ -169,6 +169,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalAuthDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
@@ -843,6 +844,7 @@ class AppRouter {
   static const String fontFeatureDemo = '/fontFeatureDemo';
   static const String colorAnimationDemo = '/colorAnimationDemo';
   static const String restorationMixinDemo = '/restorationMixinDemo';
+  static const String listenableDemo = '/listenableDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2476,6 +2478,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.restorationMixinDemo,
       page: () => RestorationMixinDemo(),
+    ),
+    GetPage(
+      name: AppRouter.listenableDemo,
+      page: () => ListenableDemo(),
     ),
   ];
 }

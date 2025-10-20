@@ -6,9 +6,11 @@
 //  Copyright © 2025/3/13 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
+import 'package:flutter_templet_project/provider/counter_change_notifier.dart';
 import 'package:get/get.dart';
 
 class ListenableDemo extends StatefulWidget {
@@ -24,7 +26,7 @@ class ListenableDemo extends StatefulWidget {
 }
 
 class _ListenableDemoState extends State<ListenableDemo> {
-  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final counter = CounterChangeNotifier();
 
   final scrollController = ScrollController();
 
@@ -70,11 +72,9 @@ class _ListenableDemoState extends State<ListenableDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp
-          ? null
-          : AppBar(
-              title: Text("$widget"),
-            ),
+      appBar: AppBar(
+        title: Text("$widget"),
+      ),
       body: buildBody(),
     );
   }
@@ -97,7 +97,7 @@ class _ListenableDemoState extends State<ListenableDemo> {
                       focusNode: e.focusNode,
                       controller: e.controller,
                     ),
-                    buildListenable(
+                    buildListenableFocusNode(
                       focusNode: e.focusNode,
                       controller: e.controller,
                     ),
@@ -105,6 +105,7 @@ class _ListenableDemoState extends State<ListenableDemo> {
                   ],
                 );
               }),
+              buildListenableList(),
             ],
           ),
         ),
@@ -140,7 +141,7 @@ class _ListenableDemoState extends State<ListenableDemo> {
     );
   }
 
-  Widget buildListenable({
+  Widget buildListenableFocusNode({
     required FocusNode focusNode,
     required TextEditingController controller,
   }) {
@@ -166,6 +167,76 @@ class _ListenableDemoState extends State<ListenableDemo> {
             final desc = "ListenableBuilder: ${value ? "展示键盘" : "隐藏键盘"}";
             return Text(desc);
           },
+        ),
+      ],
+    );
+  }
+
+  Widget buildListenableList() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                counter.increment();
+              },
+              child: Icon(Icons.add),
+            ),
+            SizedBox(width: 8),
+            ElevatedButton(
+              onPressed: () {
+                counter.decrement();
+              },
+              child: Icon(Icons.remove),
+            ),
+          ],
+        ),
+        NSectionBox(
+          title: '1️⃣ ListenableBuilder extends AnimatedWidget',
+          child: ListenableBuilder(
+            listenable: counter,
+            child: Container(
+              margin: EdgeInsets.only(left: 8),
+              decoration: BoxDecoration(
+                color: ColorExt.random,
+              ),
+              child: Text("缓存"),
+            ),
+            builder: (context, child) {
+              return IntrinsicHeight(
+                child: Row(
+                  children: [
+                    Text('当前计数: ${counter.value}'),
+                    child ?? SizedBox(),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        NSectionBox(
+          title: '1️⃣ AnimatedBuilder extends ListenableBuilder ',
+          child: AnimatedBuilder(
+            animation: counter,
+            child: Container(
+              margin: EdgeInsets.only(left: 8),
+              decoration: BoxDecoration(
+                color: ColorExt.random,
+              ),
+              child: Text("缓存"),
+            ),
+            builder: (context, child) {
+              return IntrinsicHeight(
+                child: Row(
+                  children: [
+                    Text('当前计数: ${counter.value}'),
+                    child ?? SizedBox(),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
