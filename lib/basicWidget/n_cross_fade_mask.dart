@@ -16,7 +16,9 @@ class NCrossFadeMask<T> extends StatelessWidget {
     super.key,
     required this.items,
     this.max = 3,
+    this.isExpand = false,
     this.expandTitle = "展开",
+    this.collapseTitle = "收起",
     required this.first,
     required this.secondChild,
   });
@@ -26,7 +28,9 @@ class NCrossFadeMask<T> extends StatelessWidget {
   /// 最多显示数量
   final int max;
 
+  final bool isExpand;
   final String expandTitle;
+  final String collapseTitle;
 
   /// 未展开时
   final Widget Function(int limit) first;
@@ -36,6 +40,11 @@ class NCrossFadeMask<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final expandColor = Color(0xff5871F5);
+
     return NCrossFade(
       isFirst: true,
       onChanged: (v) {
@@ -74,9 +83,9 @@ class NCrossFadeMask<T> extends StatelessWidget {
                       begin: Alignment.topCenter, // CSS 90deg 相当于从左到右
                       end: Alignment.bottomCenter,
                       colors: [
-                        Color(0xff242434).withOpacity(0),
-                        Color(0xff242434).withOpacity(0.35),
-                        Color(0xff242434).withOpacity(1.0),
+                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withOpacity(0),
+                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withOpacity(0),
+                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withOpacity(0),
                       ],
                       stops: [0, 0.6, 1.0],
                     ),
@@ -99,8 +108,8 @@ class NCrossFadeMask<T> extends StatelessWidget {
                         begin: Alignment.topCenter, // CSS 90deg 相当于从左到右
                         end: Alignment.bottomCenter,
                         colors: [
-                          Color(0xff28283B).withOpacity(0),
-                          Color(0xff28283B).withOpacity(1.0),
+                          (isDark ? Color(0xff28283B) : Color(0xffF9F9F9)).withOpacity(0),
+                          (isDark ? Color(0xff28283B) : Color(0xffF9F9F9)).withOpacity(1.0),
                         ],
                       ),
                     ),
@@ -110,7 +119,7 @@ class NCrossFadeMask<T> extends StatelessWidget {
                       children: [
                         Text(
                           expandTitle,
-                          style: TextStyle(fontSize: 12, color: Color(0xff5871F5)),
+                          style: TextStyle(fontSize: 12, color: expandColor),
                         ),
                         SizedBox(width: 4),
                         RotatedBox(
@@ -118,7 +127,7 @@ class NCrossFadeMask<T> extends StatelessWidget {
                           child: Icon(
                             Icons.arrow_forward_ios,
                             size: 9,
-                            color: Color(0xff5871F5),
+                            color: expandColor,
                           ),
                         ),
                       ],
@@ -129,7 +138,43 @@ class NCrossFadeMask<T> extends StatelessWidget {
           ],
         );
       },
-      secondChild: secondChild,
+      secondChild: (onToggle) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          secondChild(onToggle),
+          GestureDetector(
+            onTap: onToggle,
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.only(top: 4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                // border: Border.all(color: Colors.blue),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    collapseTitle,
+                    style: TextStyle(fontSize: 12, color: expandColor),
+                  ),
+                  const SizedBox(width: 4),
+                  RotatedBox(
+                    quarterTurns: 3,
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 9,
+                      color: expandColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
