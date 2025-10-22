@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_scroll_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -17,15 +18,17 @@ class CustomScrollBarDemo extends StatefulWidget {
 
 class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   final _scrollController = ScrollController();
+  final scrollController1 = ScrollController();
+  final scrollController2 = ScrollController();
 
   ///标准轮播页码监听
-  ValueNotifier<int> currentIndex = ValueNotifier(0);
+  final currentIndex = ValueNotifier(0);
 
   ///滚动条监听
-  ValueNotifier<double> scrollerOffset = ValueNotifier(0.0);
+  final scrollerOffset = ValueNotifier(0.0);
 
   ///滚动中监听
-  ValueNotifier<bool> isScrolling = ValueNotifier(false);
+  final isScrolling = ValueNotifier(false);
 
   final items = Resource.image.urls;
 
@@ -49,8 +52,6 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     final result = (showCount != items.length);
     return result;
   }
-
-  bool isCustomScrollView = false;
 
   @override
   void dispose() {
@@ -77,43 +78,45 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  onPressed: () {
-                    isCustomScrollView = !isCustomScrollView;
-                    setState(() {});
-                  },
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
       ),
-      body: buildBody(isCustomScrollView: isCustomScrollView),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              child: buildBody(),
+            ),
+            Container(
+              height: 300,
+              child: buildBottom(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  buildBody({isCustomScrollView = false}) {
+  Widget buildBody() {
     final child = ListView(children: [
       NSectionBox(
-        title: "${isCustomScrollView ? "CustomScrollView" : "ListView"}(自定义滚动条/ScrollerBar)",
+        title: "${"ListView"}(自定义滚动条/ScrollerBar)",
         child: Container(
           height: 100,
           padding: padding,
-          child: _buildListView(),
+          child: buildListView(),
         ),
       )
     ]);
-    if (isCustomScrollView) {
-      return child.toCustomScrollView();
-    }
     return child;
   }
 
-  _buildListView({
+  Widget buildListView({
     IndexedWidgetBuilder? itemBuilder,
   }) {
     return LayoutBuilder(
@@ -139,8 +142,11 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                   padding: EdgeInsets.all(0),
                   itemCount: items.length,
                   // cacheExtent: 10,
-                  itemBuilder: itemBuilder ?? (context, index) => _buildItem(context, index, itemWidth),
-                  separatorBuilder: (context, index) => _buildSeparator(context, index),
+                  itemBuilder: itemBuilder ?? (context, index) => buildItem(context, index, itemWidth),
+                  separatorBuilder: (context, index) => Divider(
+                    indent: gap,
+                    // color: Colors.blue,
+                  ),
                 ),
               ),
             ),
@@ -154,7 +160,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                       return Offstage(
                         // offstage: !value,
                         offstage: false,
-                        child: _scrollerBar(
+                        child: buildScrollBar(
                           maxWidth: constraints.maxWidth,
                         ),
                       );
@@ -167,7 +173,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   }
 
   ///创建子项
-  _buildItem(
+  Widget buildItem(
     context,
     index,
     double itemWidth,
@@ -189,7 +195,18 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
       child: Container(
         // color: Colors.green,
         width: itemWidth,
-        decoration: _buildDecoration(),
+        decoration: BoxDecoration(
+          // color: Colors.green,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.red.withOpacity(0.5),
+              // spreadRadius: 5,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         child: ClipRRect(
           borderRadius: borderRadius,
           child: Stack(
@@ -221,31 +238,8 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     );
   }
 
-  //分割区间
-  _buildSeparator(context, index) {
-    return Divider(
-      indent: gap,
-      // color: Colors.blue,
-    );
-  }
-
-  _buildDecoration() {
-    return BoxDecoration(
-      // color: Colors.green,
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.red.withOpacity(0.5),
-          // spreadRadius: 5,
-          blurRadius: 5,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      ],
-    );
-  }
-
   /// 水平滚动条
-  Widget _scrollerBar({
+  Widget buildScrollBar({
     required double maxWidth,
     double barHeight = 3.5,
     Color barColor = Colors.red,
@@ -283,5 +277,88 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
             }),
       ],
     );
+  }
+
+  /// NScrollBar
+  Widget buildBottom() {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      return Row(
+        children: [
+          Expanded(
+            child: NScrollBar(
+              controller: scrollController1,
+              scrollDirection: Axis.vertical,
+              length: 200,
+              indicatorLength: 40,
+              // thickness: 20,
+              indicator: ShapeDecoration(
+                shape: const StadiumBorder(),
+                gradient: LinearGradient(
+                  colors: [Colors.red, Colors.blue],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: ListView.builder(
+                controller: scrollController1,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text('item $index'),
+                  );
+                },
+                itemCount: 30,
+              ),
+            ),
+          ),
+          SizedBox(width: 20),
+          Expanded(
+            child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+              return NScrollBar(
+                controller: scrollController2,
+                scrollDirection: Axis.horizontal,
+                length: 200,
+                indicatorLength: 40,
+                // thickness: 20,
+                indicator: ShapeDecoration(
+                  shape: const StadiumBorder(),
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                // indicatorBg: ShapeDecoration(
+                //   shape: const StadiumBorder(),
+                //   gradient: LinearGradient(
+                //     colors: [Colors.purple, Colors.green],
+                //     begin: Alignment.centerLeft,
+                //     end: Alignment.centerRight,
+                //   ),
+                // ),
+                child: ListView.builder(
+                  controller: scrollController2,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        // border: Border.all(color: Colors.blue),
+                      ),
+                      child: ListTile(
+                        title: Text('item $index'),
+                      ),
+                    );
+                  },
+                  itemCount: 30,
+                ),
+              );
+            }),
+          ),
+        ],
+      );
+    });
   }
 }

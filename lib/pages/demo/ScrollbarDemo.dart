@@ -10,6 +10,8 @@ class ScrollbarDemo extends StatefulWidget {
 }
 
 class _ScrollbarDemoState extends State<ScrollbarDemo> {
+  final scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,25 +22,47 @@ class _ScrollbarDemoState extends State<ScrollbarDemo> {
     );
   }
 
-  buildBody() {
-    return NotificationListener<OverscrollIndicatorNotification>(
-      onNotification: (notification) {
-        //滑动指示器是否在头部 true在前端，false在末端
-        debugPrint('notification:${notification.leading}');
-        return true;
+  Widget buildBody() {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      DLog.d("constraints: $constraints");
+
+      return Row(
+        children: [
+          Expanded(
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (notification) {
+                //滑动指示器是否在头部 true在前端，false在末端
+                debugPrint('notification:${notification.leading}');
+                return true;
+              },
+              child: Scrollbar(
+                controller: scrollController,
+                radius: Radius.circular(10),
+                thickness: 10,
+                child: buildListView(
+                  controller: scrollController,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    });
+  }
+
+  Widget buildListView({
+    required ScrollController controller,
+    scrollDirection = Axis.vertical,
+  }) {
+    return ListView.builder(
+      controller: controller,
+      scrollDirection: scrollDirection,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text('item $index'),
+        );
       },
-      child: Scrollbar(
-        radius: Radius.circular(10),
-        thickness: 10,
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('item $index'),
-            );
-          },
-          itemCount: 30,
-        ),
-      ),
+      itemCount: 30,
     );
   }
 }
