@@ -24,8 +24,6 @@ class _ScrollbarDemoState extends State<ScrollbarDemo> {
 
   Widget buildBody() {
     return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      DLog.d("constraints: $constraints");
-
       return Row(
         children: [
           Expanded(
