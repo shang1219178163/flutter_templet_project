@@ -14,8 +14,7 @@ class NestedScrollViewDemoThree extends StatefulWidget {
   const NestedScrollViewDemoThree({super.key});
 
   @override
-  State<NestedScrollViewDemoThree> createState() =>
-      _NestedScrollViewDemoThreeState();
+  State<NestedScrollViewDemoThree> createState() => _NestedScrollViewDemoThreeState();
 }
 
 class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
@@ -66,7 +65,7 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
             labelColor = Colors.blue;
 
             return <Widget>[
-              _buildHeader(
+              buildHeader(
                 context: context,
                 innerBoxIsScrolled: innerBoxIsScrolled,
                 bottom: NTabBarColoredBox(
@@ -96,7 +95,7 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
   }
 
   // 头部
-  Widget _buildHeader({
+  Widget buildHeader({
     required BuildContext context,
     required bool innerBoxIsScrolled,
     required PreferredSizeWidget? bottom,
@@ -141,8 +140,6 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
             ),
           ),
         ),
-
-        // 底部固定栏
         bottom: bottom,
       ),
     );
@@ -229,29 +226,4 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
       ),
     );
   }
-}
-
-class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyCustomAppBar({
-    super.key,
-    required this.context,
-    required this.child,
-  });
-
-  final BuildContext context;
-
-  final PreferredSizeWidget child;
-
-  double get top => MediaQuery.of(context).viewPadding.top;
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
-  }
-
-  // @override
-  // Size get preferredSize => Size.fromHeight(kToolbarHeight + top);
-
-  @override
-  Size get preferredSize => child.preferredSize;
 }

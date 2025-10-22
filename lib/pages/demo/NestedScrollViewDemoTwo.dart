@@ -22,8 +22,8 @@ class NestedScrollViewDemoTwo extends StatefulWidget {
 }
 
 class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with SingleTickerProviderStateMixin {
-  TabController? _tabController;
-  ScrollController? _scrollController;
+  late final tabController = TabController(length: items.length, vsync: this);
+  late final scrollController = ScrollController(initialScrollOffset: 0.0);
 
   List<String> items = List.generate(9, (index) => 'item_$index').toList();
 
@@ -33,20 +33,17 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
 
   @override
   void dispose() {
-    _tabController?.dispose();
+    tabController?.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: items.length, vsync: this);
-    // _tabController?.addListener(() {
-    //   indexVN.value = _tabController!.index;
-    //   print("indexVN:${indexVN.value}_${_tabController?.index}");
+    // tabController?.addListener(() {
+    //   indexVN.value = tabController!.index;
+    //   print("indexVN:${indexVN.value}_${tabController?.index}");
     // });
-
-    _scrollController = ScrollController(initialScrollOffset: 0.0);
   }
 
   @override
@@ -76,16 +73,20 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     setState(() {});
   }
 
-  buildBody() {
+  Widget buildBody() {
     if (flagVN.value) {
-      return _buildBody2(
-          scrollController: _scrollController, tabController: _tabController, indexVN: indexVN, items: items);
+      return buildBody2(
+          scrollController: scrollController, tabController: tabController, indexVN: indexVN, items: items);
     }
-    return _buildBody1(
-        scrollController: _scrollController, tabController: _tabController, indexVN: indexVN, items: items);
+    return buildBody1(
+      scrollController: scrollController,
+      tabController: tabController,
+      indexVN: indexVN,
+      items: items,
+    );
   }
 
-  _buildBody1({
+  Widget buildBody1({
     required ScrollController? scrollController,
     required TabController? tabController,
     required ValueNotifier<int> indexVN,
@@ -106,28 +107,30 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
       body: TabBarView(
         controller: tabController,
         children: items.map((e) {
-          return SafeArea(child: Builder(
-            builder: (BuildContext context) {
-              return CustomScrollView(
-                slivers: <Widget>[
-                  SliverFillRemaining(
-                    // child: e
-                    child: Container(
-                      color: ColorExt.random,
-                      alignment: Alignment.center,
-                      child: Text(e),
-                    ),
-                  )
-                ],
-              );
-            },
-          ));
+          return SafeArea(
+            child: Builder(
+              builder: (BuildContext context) {
+                return CustomScrollView(
+                  slivers: <Widget>[
+                    SliverFillRemaining(
+                      // child: e
+                      child: Container(
+                        color: ColorExt.random,
+                        alignment: Alignment.center,
+                        child: Text(e),
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
+          );
         }).toList(),
       ),
     );
   }
 
-  _buildBody2({
+  Widget buildBody2({
     required ScrollController? scrollController,
     required TabController? tabController,
     required ValueNotifier<int> indexVN,
@@ -167,7 +170,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
                           child: TabBar(
                             padding: EdgeInsets.zero,
                             // labelPadding: EdgeInsets.zero,
-                            controller: _tabController,
+                            controller: tabController,
                             isScrollable: true,
                             tabs: items
                                 .map((e) => Tab(
@@ -191,7 +194,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     );
   }
 
-  buildTabBar({
+  Widget buildTabBar({
     required TabController? controller,
     required ValueNotifier<int> indexVN,
     required List<String> items,
@@ -246,7 +249,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
   }
 
   ///有小问题
-  buildSliverOverlapAbsorber({
+  Widget buildSliverOverlapAbsorber({
     required BuildContext context,
     bool innerBoxIsScrolled = false,
     TabController? controller,
@@ -269,7 +272,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     );
   }
 
-  buildSliverFillRemaining() {
+  Widget buildSliverFillRemaining() {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Container(
@@ -306,7 +309,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     );
   }
 
-  buildTabBarView({
+  Widget buildTabBarView({
     required TabController? controller,
     required List<String> items,
   }) {
@@ -325,7 +328,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     );
   }
 
-  buildList() {
+  Widget buildList() {
     const items = Colors.primaries;
     return ListView.builder(
         // controller: _scrollController,

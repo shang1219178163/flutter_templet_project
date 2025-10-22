@@ -243,6 +243,8 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           borderRadius: BorderRadius.circular(4),
         ),
         child: Text.rich(
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             textBaseline: textBaseline,
           ),

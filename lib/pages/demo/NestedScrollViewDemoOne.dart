@@ -26,7 +26,7 @@ class NestedScrollViewDemoOne extends StatefulWidget {
 }
 
 class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with SingleTickerProviderStateMixin {
-  TabController? tabController;
+  late final tabController = TabController(length: items.length, vsync: this);
   final ScrollController? _scrollController = ScrollController(initialScrollOffset: 0.0);
 
   List<String> items = List.generate(9, (index) => 'item_$index').toList();
@@ -44,7 +44,6 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: items.length, vsync: this);
     // _tabController?.addListener(() {
     //   indexVN.value = _tabController!.index;
     //   print("indexVN:${indexVN.value}_${_tabController?.index}");
@@ -90,54 +89,66 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
           ),
           bottom: TabBar(
             controller: tabController,
+            isScrollable: true,
             tabs: items.map((e) => Tab(text: e)).toList(),
           ),
+        );
+        Widget? sliver = appBar;
+        sliver = MultiSliver(
+          children: [
+            // buildNSliverPersistentHeader(),
+            //自定义顶部
+            NSliverPersistentHeaderBuilder(
+              pinned: true,
+              min: min,
+              max: max,
+              builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+                final opacity = 1 - (shrinkOffset / (max - min));
+
+                return Container(
+                  alignment: Alignment.bottomCenter,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    image: DecorationImage(
+                      // opacity: opacity,
+                      image: ExtendedNetworkImageProvider(
+                        Resource.image.urls[4],
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue),
+                          ),
+                          child: Text(
+                            "Pinned Header ${{
+                              "shrinkOffset": shrinkOffset.toStringAsFixed(2),
+                            }} ",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ),
+                      ),
+                      TabBar(
+                        controller: tabController,
+                        isScrollable: true,
+                        tabs: items.map((e) => Tab(text: e)).toList(),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            // appBar,
+          ],
         );
         return [
           SliverOverlapAbsorber(
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            sliver: appBar,
-          ),
-        ];
-        return [
-          SliverOverlapAbsorber(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            sliver: MultiSliver(
-              children: [
-                // NSliverPersistentHeaderBuilder(
-                //   pinned: true,
-                //   min: min,
-                //   max: max,
-                //   builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
-                //     final opacity = 1 - (shrinkOffset / (max - min));
-                //
-                //     return Container(
-                //       alignment: Alignment.bottomCenter,
-                //       decoration: BoxDecoration(
-                //         color: Colors.blue,
-                //         image: DecorationImage(
-                //           // opacity: opacity,
-                //           image: ExtendedNetworkImageProvider(
-                //             Resource.image.urls[4],
-                //           ),
-                //           fit: BoxFit.cover,
-                //         ),
-                //       ),
-                //       child: Text(
-                //         "Pinned Header ${{
-                //           "shrinkOffset": shrinkOffset.toStringAsFixed(2),
-                //         }} ",
-                //         style: TextStyle(color: Colors.white, fontSize: 20),
-                //       ),
-                //       // child: SearchBar(
-                //       //   hintText: "search",
-                //       // ),
-                //     );
-                //   },
-                // ),
-                appBar,
-              ],
-            ),
+            sliver: sliver,
           ),
         ];
       },
@@ -148,7 +159,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
             return Builder(
               builder: (context) {
                 return CustomScrollView(
-                  key: const PageStorageKey<String>('Tab1'),
+                  key: PageStorageKey<String>(e),
                   slivers: [
                     // ✅ 每个 tab 内必须是 CustomScrollView 并带 Injector
                     SliverOverlapInjector(
@@ -196,35 +207,15 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
     );
   }
 
-  Widget buildSliverPersistentHeader() {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: NSliverPersistentHeaderDelegate(builder: (ctx, offset, overlapsContent) {
-        return ColoredBox(
-          color: Colors.yellow,
-          child: Align(
-              alignment: Alignment.center,
-              child: ColoredBox(
-                color: Colors.blue,
-                child: buildTabBar(
-                  controller: tabController,
-                  indexVN: indexVN,
-                  items: items,
-                ),
-              )),
-        );
-      }),
-    );
-  }
-
   Widget buildNSliverPersistentHeader() {
     return NSliverPersistentHeaderBuilder(
         pinned: true,
+        max: 200,
         builder: (ctx, offset, overlapsContent) {
           return ColoredBox(
             color: Colors.yellow,
             child: Align(
-                alignment: Alignment.center,
+                alignment: Alignment.bottomCenter,
                 child: ColoredBox(
                   color: Colors.blue,
                   child: buildTabBar(
