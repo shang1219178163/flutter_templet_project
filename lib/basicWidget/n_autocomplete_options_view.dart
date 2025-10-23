@@ -13,14 +13,14 @@ import 'package:flutter/scheduler.dart';
 
 /// Autocomplete 组件的 optionsViewBuilder 返回视图
 class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
-  const NAutocompleteOptionsView(
-      {Key? key,
-      required this.displayStringForOption,
-      required this.onSelected,
-      required this.options,
-      required this.maxHeight,
-      this.itemBuilder})
-      : super(key: key);
+  const NAutocompleteOptionsView({
+    Key? key,
+    required this.displayStringForOption,
+    required this.onSelected,
+    required this.options,
+    required this.maxHeight,
+    this.itemBuilder,
+  }) : super(key: key);
 
   final AutocompleteOptionToString<T> displayStringForOption;
 
@@ -54,17 +54,14 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
                         onSelected(option);
                       },
                       child: Builder(builder: (BuildContext context) {
-                        final highlight =
-                            AutocompleteHighlightedOption.of(context) == index;
+                        final highlight = AutocompleteHighlightedOption.of(context) == index;
                         if (highlight) {
-                          SchedulerBinding.instance
-                              .addPostFrameCallback((Duration timeStamp) {
+                          SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
                             Scrollable.ensureVisible(context, alignment: 0.5);
                           });
                         }
                         return Container(
-                          color:
-                              highlight ? Theme.of(context).focusColor : null,
+                          color: highlight ? Theme.of(context).focusColor : null,
                           padding: const EdgeInsets.all(16.0),
                           child: Text(displayStringForOption(option)),
                         );

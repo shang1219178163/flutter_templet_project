@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_demo.dart';
 import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
+import 'package:flutter_templet_project/basicWidget/n_autocomplete_search.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/IrregularClipperDemo.dart';
@@ -49,6 +50,7 @@ import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AutocompletePage.dart';
 import 'package:flutter_templet_project/pages/demo/AutofillGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BackdropFilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BackgroundTaskDemo.dart';
@@ -845,6 +847,7 @@ class AppRouter {
   static const String colorAnimationDemo = '/colorAnimationDemo';
   static const String restorationMixinDemo = '/restorationMixinDemo';
   static const String listenableDemo = '/listenableDemo';
+  static const String autocompletePage = '/autocompletePage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2482,6 +2485,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.listenableDemo,
       page: () => ListenableDemo(),
+    ),
+    GetPage(
+      name: AppRouter.autocompletePage,
+      page: () => AutocompletePage(),
     ),
   ];
 }
