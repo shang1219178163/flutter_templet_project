@@ -17,7 +17,7 @@ class CustomScrollBarDemo extends StatefulWidget {
 }
 
 class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
   final scrollController1 = ScrollController();
   final scrollController2 = ScrollController();
 
@@ -31,8 +31,6 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   final isScrolling = ValueNotifier(false);
 
   final items = Resource.image.urls;
-
-  double screenWidth = 0;
 
   double gap = 8;
 
@@ -55,16 +53,16 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
-    _scrollController.addListener(() {
+    scrollController.addListener(() {
       // scrollerOffset.value = _scrollController.offset;
       // print("scrollerOffset.value:${scrollerOffset.value}");
-      var position = _scrollController.position;
+      var position = scrollController.position;
       //滚动进度
       var progress = position.pixels / position.maxScrollExtent;
       scrollerOffset.value = progress;
@@ -137,7 +135,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                   return false; //为 true，则事件会阻止向上冒泡，不推荐(除非有必要)
                 },
                 child: ListView.separated(
-                  controller: _scrollController,
+                  controller: scrollController,
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.all(0),
                   itemCount: items.length,
@@ -182,15 +180,15 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     return InkWell(
       onTap: () {
         var offset = (itemWidth + gap) * index;
-        _scrollController.position.printInfo();
-        var position = _scrollController.position;
+        scrollController.position.printInfo();
+        var position = scrollController.position;
         debugPrint("${index}_${itemWidth}_${offset}_");
 
         if (index > (items.length - showCount.ceil())) {
           debugPrint("$index");
           offset = position.maxScrollExtent;
         }
-        _scrollController.animateTo(offset, duration: Duration(milliseconds: 300), curve: Curves.linear);
+        scrollController.animateTo(offset, duration: Duration(milliseconds: 300), curve: Curves.linear);
       },
       child: Container(
         // color: Colors.green,
