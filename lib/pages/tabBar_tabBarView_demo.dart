@@ -15,10 +15,9 @@ import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
-import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RouteNameSearchPage.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
@@ -218,45 +217,16 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   }
 
   buildPage3() {
-    return AutocompleteDemo(
+    return RouteNameSearchPage(
       hideAppBar: true,
-      routingCallback: (val) {
-        if (val.name == AppRouter.componentMiddlePage) {
-          Get.toNamed(
-            val.name,
-            arguments: {
-              ...val.toJson(),
-              "onSkip": onSkip,
-              "header": buildHeader(),
-            },
-          );
-          return;
-        }
-        Get.toNamed(val.name, arguments: val.toJson());
-      },
     );
-  }
-
-  Widget buildHeader() {
-    return ElevatedButton(
-        onPressed: () {
-          DLog.d("buildHeader");
-        },
-        child: Text("header_${IntExt.random(max: 100)}"));
-  }
-
-  onSkip() {
-    Get.back();
   }
 
   buildPage4() {
     Widget buildHeader({required String sectionTile, required bool isExpand}) {
       final trailing = isExpand
           ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)
-          : Icon(
-              Icons.keyboard_arrow_down,
-              color: Colors.blue,
-            );
+          : Icon(Icons.keyboard_arrow_down, color: Colors.blue);
       return Container(
         // color: Colors.green,
         color: isExpand ? Colors.black12 : null,
@@ -415,7 +385,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.navigationToolbarDemo, "navigationToolbar"),
   Tuple2(AppRouter.selectableTextDemo, "文字选择"),
   Tuple2(AppRouter.materialBannerDemo, "一个 Banner"),
-  Tuple2(AppRouter.autocompleteDemo, "自动填写"),
+  Tuple2(AppRouter.routeNameSearchPage, "自动填写"),
   Tuple2(AppRouter.rotatedBoxDemo, "rotatedBoxDemo"),
   Tuple2(AppRouter.dismissibleDemo, "左滑删除"),
   Tuple2(AppRouter.modalBarrierDemo, "静态蒙版"),
@@ -743,7 +713,6 @@ var others = <Tuple2<String, String>>[
 ];
 
 var forms = <Tuple2<String, String>>[
-  Tuple2(AppRouter.autocompleteDemo, "autocompleteDemo"),
   Tuple2(AppRouter.autofillGroupDemo, "autofillGroupDemo"),
   Tuple2(AppRouter.inputDatePickerFormFieldDemo, "inputDatePickerFormFieldDemo"),
 ];

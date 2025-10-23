@@ -11,7 +11,6 @@ class NAutocompleteSearch<T extends Object> extends StatefulWidget {
     super.key,
     this.controller,
     this.onChanged,
-    required this.items,
     this.fieldViewBuilder,
     required this.displayStringForOption,
     required this.optionsBuilder,
@@ -22,7 +21,6 @@ class NAutocompleteSearch<T extends Object> extends StatefulWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
 
-  final List<T> items;
   final AutocompleteFieldViewBuilder? fieldViewBuilder;
   final String Function(T option) displayStringForOption;
   final FutureOr<Iterable<T>> Function(TextEditingValue textEditingValue) optionsBuilder;
@@ -56,7 +54,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
       optionsBuilder: (TextEditingValue textEditingValue) {
         _textEditingValue = textEditingValue;
         final text = textEditingValue.text;
-        if (text.isEmpty || widget.items.isEmpty) {
+        if (text.isEmpty) {
           return Iterable<T>.empty();
         }
 

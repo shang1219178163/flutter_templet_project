@@ -1,13 +1,13 @@
 import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_search.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/model/ProjectPubDepsModel.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
 
+/// Autocomplete 组件示例
 class AutocompletePage extends StatefulWidget {
   const AutocompletePage({
     super.key,
@@ -80,7 +80,6 @@ class _AutocompletePageState extends State<AutocompletePage> {
               // ),
               child: NAutocompleteSearch(
                 controller: controller,
-                items: packages,
                 displayStringForOption: (option) {
                   return option.name ?? "";
                 },

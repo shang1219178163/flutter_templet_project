@@ -49,7 +49,7 @@ import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
-import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
+
 import 'package:flutter_templet_project/pages/demo/AutocompletePage.dart';
 import 'package:flutter_templet_project/pages/demo/AutofillGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BackdropFilterDemo.dart';
@@ -262,6 +262,7 @@ import 'package:flutter_templet_project/pages/demo/RestorationMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RichTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
 import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RouteNameSearchPage.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldBottomSheet.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScanAnimationDemo.dart';
@@ -600,7 +601,7 @@ class AppRouter {
   static const String navigationToolbarDemo = '/navigationToolbarDemo';
   static const String selectableTextDemo = '/SelectableTextDemo';
   static const String materialBannerDemo = '/materialBannerDemo';
-  static const String autocompleteDemo = '/autocompleteDemo';
+  static const String routeNameSearchPage = '/routeNameSearchPage';
 
   static const String autofillGroupDemo = '/autofillGroupDemo';
   static const String promptBuilderDemo = '/promptBuilderDemo';
@@ -1530,8 +1531,8 @@ class AppRouter {
       page: () => MaterialBannerDemo(),
     ),
     GetPage(
-      name: AppRouter.autocompleteDemo,
-      page: () => AutocompleteDemo(),
+      name: AppRouter.routeNameSearchPage,
+      page: () => RouteNameSearchPage(),
     ),
 
     GetPage(
