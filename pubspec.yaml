@@ -307,12 +307,9 @@ flutter:
     - assets/images/
     - assets/images/curve/
     - lib/pages/demo/
-    - lib/pages/demo/widget/
-    - lib/pages/demo/convert/
-    - lib/pages/demo/weather/
-    - lib/pages/demo/weather/models/
-    - lib/pages/demo/weather/screens/
-    - lib/pages/demo/weather/widgets/
-    - lib/pages/demo/weather/widgets/weather_effects/
 
 
+flutter_assets_generator:
+  assets_path: assets/
+  path_ignore:
+    - lib/
