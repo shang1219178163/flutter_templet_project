@@ -44,6 +44,20 @@ class _NSliverPageOneState extends State<NSliverPageOne> with SingleTickerProvid
   final opacity = ValueNotifier(0);
 
   @override
+  void didUpdateWidget(covariant NSliverPageOne oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.collapsedHeight != widget.collapsedHeight ||
+        oldWidget.expandedHeight != widget.expandedHeight ||
+        oldWidget.tabBarHeight != widget.tabBarHeight ||
+        oldWidget.title != widget.title ||
+        oldWidget.header != widget.header ||
+        oldWidget.tabBuilder != widget.tabBuilder ||
+        oldWidget.body != widget.body) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final collapsedHeight = widget.collapsedHeight ?? kToolbarHeight;
     final expandedHeight = widget.expandedHeight ?? 300.0;
@@ -52,16 +66,17 @@ class _NSliverPageOneState extends State<NSliverPageOne> with SingleTickerProvid
     final tabDefault = TabBar(
       controller: tabController,
       isScrollable: true,
-      tabs: items.map((e) => Tab(text: e)).toList(),
+      tabs: items.map((e) => Tab(text: e, height: tabBarHeight)).toList(),
     );
 
     final appBar = SliverAppBar(
-      title: widget.title,
+      // title: widget.title,
       pinned: true,
       collapsedHeight: collapsedHeight,
       expandedHeight: expandedHeight,
       flexibleSpace: Container(
-        padding: EdgeInsets.only(top: 0, bottom: tabBarHeight),
+        // margin: EdgeInsets.only(top: 0, bottom: tabBarHeight),
+        // padding: EdgeInsets.only(top: 0, bottom: tabBarHeight),
         child: widget.header,
       ),
       bottom: PreferredSize(
