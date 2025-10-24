@@ -117,6 +117,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
                     ),
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Container(

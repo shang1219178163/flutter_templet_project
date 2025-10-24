@@ -1,9 +1,12 @@
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_page_one.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
+import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/util/Resource.dart';
 
 class NestedScrollViewDemoSix extends StatefulWidget {
   const NestedScrollViewDemoSix({
@@ -100,57 +103,26 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
         return Stack(
           fit: StackFit.expand,
           children: [
-            AnimatedOpacity(
-              opacity: opacity,
-              duration: Duration(milliseconds: 200),
-              child: Container(
-                margin: EdgeInsets.only(bottom: tabBarHeight),
-                constraints: constraints,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.yellow.withOpacity(0.3),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/bg_jiguang.png"),
-                    fit: BoxFit.fill,
+            Container(
+              margin: EdgeInsets.only(bottom: tabBarHeight), //是否包含TabBar
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                image: DecorationImage(
+                  // opacity: opacity,
+                  image: ExtendedNetworkImageProvider(
+                    Resource.image.urls[4],
                   ),
+                  fit: BoxFit.cover,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      child: Image.asset(
-                        "assets/images/avatar.png",
-                        width: 80,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      "英格兰超级联赛$desc",
-                      // style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(height: 4),
-                    Text("English Premier League"),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: LinearProgressIndicator(
-                        minHeight: 10,
-                        borderRadius: BorderRadius.circular(5),
-                        backgroundColor: Colors.black12,
-                        color: Colors.white.withOpacity(0.5),
-                        value: 0.5,
-                      ),
-                    ),
-                    // SizedBox(height: 20),
-                  ],
+              ),
+              child: AnimatedOpacity(
+                opacity: opacity,
+                duration: Duration(milliseconds: 200),
+                child: UserHeader(
+                  constraints: constraints,
                 ),
               ),
             ),
-            // HeaderCollapsedTopLeft(
-            //   opacity: opacity,
-            //   statusBarHeight: statusBarHeight,
-            // ),
             Positioned(
               child: HeaderCollapsedTopLeft(
                 opacity: opacity,

@@ -15,6 +15,7 @@ class NSliverPageOne extends StatefulWidget {
     this.expandedHeight = 300.0,
     this.tabBarHeight = kToolbarHeight,
     this.backgroundColor,
+    this.actions,
     required this.title,
     required this.header,
     required this.body,
@@ -27,6 +28,7 @@ class NSliverPageOne extends StatefulWidget {
   final double tabBarHeight;
 
   final Color? backgroundColor;
+  final List<Widget>? actions;
 
   final Widget title;
 
@@ -78,11 +80,8 @@ class _NSliverPageOneState extends State<NSliverPageOne> with SingleTickerProvid
       backgroundColor: widget.backgroundColor,
       collapsedHeight: collapsedHeight,
       expandedHeight: expandedHeight,
-      flexibleSpace: Container(
-        // margin: EdgeInsets.only(top: 0, bottom: tabBarHeight),
-        // padding: EdgeInsets.only(top: 0, bottom: tabBarHeight),
-        child: widget.header,
-      ),
+      actions: widget.actions,
+      flexibleSpace: widget.header,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(tabBarHeight),
         child: widget.tabBuilder?.call(context, tabDefault) ?? tabDefault,

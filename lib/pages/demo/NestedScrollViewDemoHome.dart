@@ -41,7 +41,6 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
 
   /// 嵌套滚动
   final scrollControllerNew = ScrollController();
-  final scrollY = ValueNotifier(0.0);
   final scrollProgress = ValueNotifier(0.0);
 
   /// 用于记录页面可见度变化
@@ -65,7 +64,6 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
   }
 
   onScrollerLtr() {
-    scrollY.value = scrollControllerNew.offset;
     scrollProgress.value = scrollControllerNew.position.progress;
   }
 
@@ -126,10 +124,11 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                 final color = scrollProgress.value > 0.65 ? collapsedBackgroundColor : AppColor.bgColor;
                 return color;
               },
-              title: ValueListenableBuilder(
-                valueListenable: scrollY,
-                builder: (context, value, child) {
+              title: ListenableBuilder(
+                listenable: scrollControllerNew,
+                builder: (context, child) {
                   try {
+                    final value = scrollControllerNew.offset;
                     final opacity = scrollControllerNew.position.progress > 0.9 ? 1.0 : 0.0;
                     return AnimatedOpacity(
                       opacity: opacity,
