@@ -7,8 +7,8 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-class NSliverBody extends StatefulWidget {
-  const NSliverBody({
+class NSliverPage extends StatefulWidget {
+  const NSliverPage({
     super.key,
     this.scrollController,
     this.collapsedHeight = kToolbarHeight,
@@ -32,10 +32,10 @@ class NSliverBody extends StatefulWidget {
   final Widget body;
 
   @override
-  State<NSliverBody> createState() => _NSliverBodyState();
+  State<NSliverPage> createState() => _NSliverPageState();
 }
 
-class _NSliverBodyState extends State<NSliverBody> with SingleTickerProviderStateMixin {
+class _NSliverPageState extends State<NSliverPage> with SingleTickerProviderStateMixin {
   late final scrollController = widget.scrollController ?? ScrollController();
 
   List<String> items = List.generate(9, (index) => 'item_$index').toList();
@@ -51,6 +51,7 @@ class _NSliverBodyState extends State<NSliverBody> with SingleTickerProviderStat
 
     final tabDefault = TabBar(
       controller: tabController,
+      isScrollable: true,
       tabs: items.map((e) => Tab(text: e)).toList(),
     );
 

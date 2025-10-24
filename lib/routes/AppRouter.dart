@@ -219,6 +219,7 @@ import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoFive.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoSix.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/NetStateListenerDemo.dart';
@@ -809,7 +810,7 @@ class AppRouter {
   static const String popScopeDemo = '/popScopeDemo';
   static const String nestedScrollViewDemoHome = '/nestedScrollViewDemoHome';
   static const String nestedScrollViewDemoFive = '/nestedScrollViewDemoFive';
-
+  static const String nestedScrollViewDemoSix = '/nestedScrollViewDemoSix';
   static const String irregularClipperDemo = '/irregularClipperDemo';
   static const String ocrPhotoDemo = '/ocrPhotoDemo';
   static const String translationTextPage = '/translationTextPage';
@@ -2351,6 +2352,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.nestedScrollViewDemoFive,
       page: () => NestedScrollViewDemoFive(),
+    ),
+    GetPage(
+      name: AppRouter.nestedScrollViewDemoSix,
+      page: () => NestedScrollViewDemoSix(),
     ),
 
     GetPage(
