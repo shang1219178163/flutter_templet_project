@@ -258,20 +258,22 @@ class _NewsPageState extends State<NewsPage> {
       child: MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: ListView.separated(
-          key: PageStorageKey(tabTitlte),
-          controller: scrollController,
-          itemBuilder: (_, i) {
-            final e = items[i];
+        child: Scrollbar(
+          child: ListView.separated(
+            key: PageStorageKey(tabTitlte),
+            controller: scrollController,
+            itemBuilder: (_, i) {
+              final e = items[i];
 
-            return ListTile(
-              title: Text([tabTitlte, e].join("_")),
-            );
-          },
-          separatorBuilder: (_, i) {
-            return Divider();
-          },
-          itemCount: items.length,
+              return ListTile(
+                title: Text([tabTitlte, e].join("_")),
+              );
+            },
+            separatorBuilder: (_, i) {
+              return Divider();
+            },
+            itemCount: items.length,
+          ),
         ),
       ),
     );
@@ -302,16 +304,6 @@ class HeaderContentAnimated extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: statusBarHeight + kToolbarHeight,
-      // left: 0,
-      // right: 0,
-      child: Opacity(
-        opacity: opacity,
-        child: child,
-      ),
-    );
-
     return Positioned(
       top: statusBarHeight + kToolbarHeight,
       left: 0,

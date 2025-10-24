@@ -14,6 +14,7 @@ class NSliverPageOne extends StatefulWidget {
     this.collapsedHeight = kToolbarHeight,
     this.expandedHeight = 300.0,
     this.tabBarHeight = kToolbarHeight,
+    this.backgroundColor,
     required this.title,
     required this.header,
     required this.body,
@@ -24,6 +25,8 @@ class NSliverPageOne extends StatefulWidget {
   final double collapsedHeight;
   final double expandedHeight;
   final double tabBarHeight;
+
+  final Color? backgroundColor;
 
   final Widget title;
 
@@ -72,6 +75,7 @@ class _NSliverPageOneState extends State<NSliverPageOne> with SingleTickerProvid
     final appBar = SliverAppBar(
       // title: widget.title,
       pinned: true,
+      backgroundColor: widget.backgroundColor,
       collapsedHeight: collapsedHeight,
       expandedHeight: expandedHeight,
       flexibleSpace: Container(
