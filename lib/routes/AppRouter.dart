@@ -84,6 +84,7 @@ import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CustomRefreshIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomScrollBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
@@ -850,6 +851,7 @@ class AppRouter {
   static const String restorationMixinDemo = '/restorationMixinDemo';
   static const String listenableDemo = '/listenableDemo';
   static const String autocompletePage = '/autocompletePage';
+  static const String customRefreshIndicatorDemo = '/customRefreshIndicatorDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2495,6 +2497,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.autocompletePage,
       page: () => AutocompletePage(),
+    ),
+    GetPage(
+      name: AppRouter.customRefreshIndicatorDemo,
+      page: () => CustomRefreshIndicatorDemo(),
     ),
   ];
 }
