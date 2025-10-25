@@ -17,7 +17,7 @@ class DragDestinationView extends StatefulWidget {
     required this.onChanged,
   });
 
-  final ValueChanged<List<XFile>> onChanged;
+  final ValueChanged<List<File>> onChanged;
 
   @override
   _DragDestinationViewState createState() => _DragDestinationViewState();
@@ -31,6 +31,7 @@ class _DragDestinationViewState extends State<DragDestinationView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: double.infinity,
       padding: EdgeInsets.all(0),
       decoration: BoxDecoration(
         border: Border.all(width: 2, color: Colors.red),
@@ -40,31 +41,28 @@ class _DragDestinationViewState extends State<DragDestinationView> {
   }
 
   Widget buildDropTarget() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 2, color: Colors.blue),
-      ),
-      child: DropTarget(
-        onDragDone: (detail) {
-          files = detail.files;
-          if (files.isEmpty) {
-            return;
-          }
-          // 读取第一个文件
-          debugPrint("file: ${files.map((e) => e.path).join("\n")}");
-          widget.onChanged(files);
-          setState(() {});
-        },
-        onDragEntered: (detail) {
-          dragging = true;
-          setState(() {});
-        },
-        onDragExited: (detail) {
-          dragging = false;
-          setState(() {});
-        },
-        child: buildBody(),
-      ),
+    return DropTarget(
+      onDragDone: (detail) {
+        files = detail.files;
+        if (files.isEmpty) {
+          return;
+        }
+        // 读取第一个文件
+        debugPrint("file: ${files.map((e) => e.path).join("\n")}");
+
+        final filesNew = detail.files.map((e) => File(e.path)).toList();
+        widget.onChanged(filesNew);
+        setState(() {});
+      },
+      onDragEntered: (detail) {
+        dragging = true;
+        setState(() {});
+      },
+      onDragExited: (detail) {
+        dragging = false;
+        setState(() {});
+      },
+      child: buildBody(),
     );
   }
 

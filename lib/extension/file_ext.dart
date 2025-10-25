@@ -50,6 +50,8 @@ extension FileExt on File {
     return file;
   }
 
+  String get name => uri.pathSegments.last;
+
   /// 获取文件类型
   NFileType get fileType => path.fileType;
 
