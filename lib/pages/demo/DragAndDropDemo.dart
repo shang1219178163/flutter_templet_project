@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class DragAndDropDemo extends StatefulWidget {
   final String? title;
@@ -22,23 +23,20 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Container(
-          // constraints: BoxConstraints(
-          // maxWidth: 120,
-          // maxHeight: 200,
-          // minWidth: 120,
-          // minHeight: 200,
-          // ),
-          // width: 120,
-          // height: 200,
-          child: FractionallySizedBox(
-            heightFactor: 0.5,
-            widthFactor: 0.5,
-            child: DragDestinationView(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Container(
+        child: FractionallySizedBox(
+          heightFactor: 0.9,
+          widthFactor: 0.5,
+          child: DragDestinationView(
+            onChanged: (files) {
+              DLog.d("file: ${files.map((e) => e.path).join("\n")}");
+            },
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
