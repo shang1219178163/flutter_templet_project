@@ -245,6 +245,8 @@ dependencies:
 
   animated_toggle_switch: ^0.8.5
 
+  flutter_pdfview: ^1.4.3
+
   record: ^5.1.2
   audio_visualizer:
     git:

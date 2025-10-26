@@ -926,6 +926,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.4.4"
+  flutter_pdfview:
+    dependency: "direct main"
+    description:
+      name: flutter_pdfview
+      sha256: c0b2cc4ebf461a5a4bb9312a165222475a7d93845c7a0703f4abb7f442eb6d54
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.4.3"
   flutter_pickers:
     dependency: "direct main"
     description:

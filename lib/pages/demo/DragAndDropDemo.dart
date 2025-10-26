@@ -7,9 +7,13 @@
 //
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_file_viewer/n_file_viewer.dart';
+import 'package:flutter_templet_project/basicWidget/n_file_viewer/src/NFileViewer.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
@@ -24,7 +28,12 @@ class DragAndDropDemo extends StatefulWidget {
 }
 
 class _DragAndDropDemoState extends State<DragAndDropDemo> {
-  List<String> fileList = [];
+  List<File> fileList = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +43,21 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
       ),
       body: Container(
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: DragDestinationView(
                 onChanged: (files) {
-                  fileList = files
-                      .map((e) {
-                        final file = File(e.path);
-                        final content = file.readAsStringSync();
-                        return content;
-                      })
-                      .toList()
-                      .sorted();
+                  // fileList = files
+                  //     .map((e) {
+                  //       final file = File(e.path);
+                  //       final content = file.readAsStringSync();
+                  //       return content;
+                  //     })
+                  //     .toList()
+                  //     .sorted();
+
+                  fileList = files.map((e) => File(e.path)).toList();
                   DLog.d("files: ${files.map((e) => e.path).join("\n")}");
                   setState(() {});
                   // readFiles(files: files);
@@ -63,18 +75,8 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
                             color: Colors.transparent,
                             border: Border.all(color: Colors.blue),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              // Text(
-                              //   ,
-                              // ),
-                              Text(
-                                e,
-                                softWrap: true,
-                              ),
-                            ],
-                          ),
+                          child: buildFileVier(e: e),
+                          // child: NFileViewer(path: e.path),
                         );
                       }),
                     ],
@@ -85,6 +87,55 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildFileVier({required File e}) {
+    return FutureBuilder<String>(
+      future: e.readAsString(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return CircularProgressIndicator();
+        }
+
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        final result = snapshot.data ?? "";
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.05),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      e.name,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      FileManager().createFile(fileName: e.name, content: result);
+                    },
+                    icon: Icon(Icons.download),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Text(result, softWrap: true),
+            ),
+          ],
+        );
+      },
     );
   }
 
