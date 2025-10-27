@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_refresh_indicator.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 
@@ -69,49 +70,54 @@ class _CustomRefreshIndicatorDemoState extends State<CustomRefreshIndicatorDemo>
   }
 
   Widget buildRefreshIndicator({required TabItemRecord e, required Widget child}) {
-    return CustomRefreshIndicator(
-      onRefresh: onRefresh, // Your refresh logic
-      builder: (context, child, controller) {
-        final state = controller.state;
-        final progress = controller.value; // 0~1
-        const displacement = 50.0; //触发刷新阈值
-        final childOffset = progress * displacement;
-
-        final isLoading = controller.state == IndicatorState.loading;
-
-        return Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Transform.translate(
-              offset: Offset(0, childOffset),
-              child: child,
-            ),
-            if (isLoading)
-              Positioned(
-                top: 0,
-                child: Container(
-                  height: displacement,
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      CircularProgressIndicator(
-                        color: e.value,
-                        value: controller.state.isLoading ? null : min(controller.value, 1.0),
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        "刷新中...",
-                        style: TextStyle(color: Colors.black87),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-          ],
-        );
-      },
+    return NRefreshIndicator(
+      offsetY: 0,
+      onRefresh: onRefresh,
       child: child,
     );
+    // return CustomRefreshIndicator(
+    //   onRefresh: onRefresh, // Your refresh logic
+    //   builder: (context, child, controller) {
+    //     final state = controller.state;
+    //     final progress = controller.value; // 0~1
+    //     const displacement = 50.0; //触发刷新阈值
+    //     final childOffset = progress * displacement;
+    //
+    //     final isLoading = controller.state == IndicatorState.loading;
+    //
+    //     return Stack(
+    //       alignment: AlignmentDirectional.center,
+    //       children: [
+    //         Transform.translate(
+    //           offset: Offset(0, childOffset),
+    //           child: child,
+    //         ),
+    //         if (isLoading)
+    //           Positioned(
+    //             top: 0,
+    //             child: Container(
+    //               height: displacement,
+    //               padding: const EdgeInsets.all(8.0),
+    //               child: Row(
+    //                 children: [
+    //                   CircularProgressIndicator(
+    //                     color: e.value,
+    //                     value: controller.state.isLoading ? null : min(controller.value, 1.0),
+    //                   ),
+    //                   SizedBox(width: 8),
+    //                   Text(
+    //                     "刷新中...",
+    //                     style: TextStyle(color: Colors.black87),
+    //                   )
+    //                 ],
+    //               ),
+    //             ),
+    //           ),
+    //       ],
+    //     );
+    //   },
+    //   child: child,
+    // );
   }
 
   Widget buildListView() {
@@ -168,6 +174,7 @@ class _CustomRefreshIndicatorDemoState extends State<CustomRefreshIndicatorDemo>
               border: Border.all(color: Colors.blue),
               borderRadius: BorderRadius.all(Radius.circular(0)),
             ),
+            // child: buildListView(),
           ),
         )
       ],
