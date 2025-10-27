@@ -231,6 +231,7 @@ class _NewsPageState extends State<NewsPage> {
         context: context,
         removeTop: true,
         child: Scrollbar(
+          controller: scrollController,
           child: ListView.separated(
             key: PageStorageKey(tabTitlte),
             controller: scrollController,

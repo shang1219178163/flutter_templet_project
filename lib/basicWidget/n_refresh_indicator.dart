@@ -9,6 +9,7 @@ class NRefreshIndicator extends StatefulWidget {
   const NRefreshIndicator({
     super.key,
     this.controller,
+    this.offsetY,
     this.builder,
     required this.onRefresh,
     this.slivers = const <Widget>[],
@@ -16,6 +17,7 @@ class NRefreshIndicator extends StatefulWidget {
   });
 
   final IndicatorController? controller;
+  final double? offsetY;
 
   final AsyncCallback onRefresh;
 
@@ -34,6 +36,7 @@ class _NRefreshIndicatorState extends State<NRefreshIndicator> {
   void didUpdateWidget(covariant NRefreshIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller ||
+        oldWidget.offsetY != widget.offsetY ||
         oldWidget.builder != widget.builder ||
         oldWidget.onRefresh != widget.onRefresh ||
         oldWidget.child != widget.child ||
@@ -56,9 +59,10 @@ class _NRefreshIndicatorState extends State<NRefreshIndicator> {
         final progress = controller.value; // 0~1
         const double tabHeight = 44.0;
         const displacement = 44.0; //触发刷新阈值
-        final childOffset = progress * displacement;
+        final childOffset = widget.offsetY ?? progress * displacement;
         final refreshHeadOffset = progress * displacement;
         var showRefreshHead = refreshHeadOffset > tabHeight || state == IndicatorState.loading;
+        showRefreshHead = state == IndicatorState.loading;
 
         return Stack(
           children: [
@@ -66,43 +70,43 @@ class _NRefreshIndicatorState extends State<NRefreshIndicator> {
               offset: Offset(0, childOffset),
               child: child,
             ),
-            // if (showRefreshHead)
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              // 高度跟随进度，可选
-              height: tabHeight,
-              child: Transform.translate(
-                offset: Offset(0, childOffset),
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    border: Border.all(color: Colors.blue),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/loading_more.gif',
-                        width: 20,
-                        height: 20,
-                        color: titleColor,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        state == IndicatorState.loading ? "加载中..." : "释放刷新",
-                        style: TextStyle(
+            if (showRefreshHead)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                // 高度跟随进度，可选
+                height: tabHeight,
+                child: Transform.translate(
+                  offset: Offset(0, childOffset),
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/loading_more.gif',
+                          width: 20,
+                          height: 20,
                           color: titleColor,
-                          fontSize: 12,
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 10),
+                        Text(
+                          state == IndicatorState.loading ? "加载中..." : "释放刷新",
+                          style: TextStyle(
+                            color: titleColor,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
+              )
           ],
         );
       },

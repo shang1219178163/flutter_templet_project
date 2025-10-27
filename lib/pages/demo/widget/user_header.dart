@@ -23,7 +23,7 @@ class UserHeader extends StatelessWidget {
           BoxDecoration(
             color: Colors.yellow.withOpacity(0.3),
             image: DecorationImage(
-              image: AssetImage("assets/images/bg_jiguang.png"),
+              image: AssetImage("assets/images/bg_purple.png"),
               fit: BoxFit.fill,
             ),
           ),
@@ -35,7 +35,7 @@ class UserHeader extends StatelessWidget {
           children: [
             Flexible(
               child: Image.asset(
-                "assets/images/avatar.png",
+                "assets/images/avatar_lion.png",
                 width: 80,
               ),
             ),
