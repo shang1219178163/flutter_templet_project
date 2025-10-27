@@ -220,6 +220,7 @@ import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoFive.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoSeven.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoSix.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoTwo.dart';
@@ -852,6 +853,7 @@ class AppRouter {
   static const String listenableDemo = '/listenableDemo';
   static const String autocompletePage = '/autocompletePage';
   static const String customRefreshIndicatorDemo = '/customRefreshIndicatorDemo';
+  static const String nestedScrollViewDemoSeven = '/nestedScrollViewDemoSeven';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2501,6 +2503,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.customRefreshIndicatorDemo,
       page: () => CustomRefreshIndicatorDemo(),
+    ),
+    GetPage(
+      name: AppRouter.nestedScrollViewDemoSeven,
+      page: () => NestedScrollViewDemoSeven(),
     ),
   ];
 }
