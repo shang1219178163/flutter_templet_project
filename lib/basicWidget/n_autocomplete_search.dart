@@ -74,54 +74,54 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
             final name = widget.displayStringForOption(option);
             final query = _textEditingValue.text;
 
-            return GestureDetector(
-              onTap: () => onSelected(option),
-              child: widget.optionsItemBuilder?.call(context, index) ??
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        height: 50,
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(right: 8),
-                                  // decoration: BoxDecoration(
-                                  //   border: Border.all(color: Colors.blue),
-                                  // ),
-                                  child: Icon(Icons.search, color: Colors.grey, size: 22),
-                                ),
-                                Container(
-                                  // decoration: BoxDecoration(
-                                  //   border: Border.all(color: Colors.blue),
-                                  // ),
-                                  child: Text.rich(
-                                    TextSpan(
-                                      children: RichTextExt.createTextSpans(
-                                        text: name ?? "",
-                                        textTaps: [query],
-                                        linkStyle: TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+            return widget.optionsItemBuilder?.call(context, index) ??
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 50,
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 8),
+                                // decoration: BoxDecoration(
+                                //   border: Border.all(color: Colors.blue),
+                                // ),
+                                child: Icon(Icons.search, color: Colors.grey, size: 22),
+                              ),
+                              Container(
+                                // decoration: BoxDecoration(
+                                //   border: Border.all(color: Colors.blue),
+                                // ),
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: RichTextExt.createTextSpans(
+                                      text: name ?? "",
+                                      textTaps: [query],
+                                      linkStyle: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                      Divider(indent: 16),
-                    ],
-                  ),
-            );
+                    ),
+                    Divider(indent: 16),
+                  ],
+                );
           },
         );
       },

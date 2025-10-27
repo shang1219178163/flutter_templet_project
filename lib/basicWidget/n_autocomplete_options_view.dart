@@ -62,11 +62,6 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
                           });
                         }
                         return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.blue),
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
-                          ),
                           color: highlight ? Theme.of(context).focusColor : null,
                           padding: const EdgeInsets.all(16.0),
                           child: Text(displayStringForOption(option)),
