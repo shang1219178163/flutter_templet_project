@@ -70,6 +70,8 @@ PODS:
     - Flutter
   - flutter_native_splash (2.4.3):
     - Flutter
+  - flutter_pdfview (1.0.2):
+    - Flutter
   - flutter_screen_wake (0.0.1):
     - Flutter
   - flutter_sound (9.6.0):
@@ -316,6 +318,7 @@ DEPENDENCIES:
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_isolate (from `.symlinks/plugins/flutter_isolate/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - flutter_screen_wake (from `.symlinks/plugins/flutter_screen_wake/ios`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - flutter_tts (from `.symlinks/plugins/flutter_tts/ios`)
@@ -426,6 +429,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_isolate/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
+  flutter_pdfview:
+    :path: ".symlinks/plugins/flutter_pdfview/ios"
   flutter_screen_wake:
     :path: ".symlinks/plugins/flutter_screen_wake/ios"
   flutter_sound:
@@ -523,6 +528,7 @@ SPEC CHECKSUMS:
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_isolate: 0edf5081826d071adf21759d1eb10ff5c24503b5
   flutter_native_splash: f71420956eb811e6d310720fee915f1d42852e7a
+  flutter_pdfview: 2e4d13ffb774858562ffbdfdb61b40744b191adc
   flutter_screen_wake: 4d3c2b43943ea81bd5e591fd4e639ea537f4ca5e
   flutter_sound: dde9a913063b65a27ba8fdc2039036b99b136c79
   flutter_sound_core: 0c6eb9d5268adc70ff159b3d65fd3d98a82d3a27
