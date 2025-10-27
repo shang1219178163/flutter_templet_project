@@ -135,7 +135,7 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
       tabBuilder: (context, tab) {
         return Container(
           decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.5),
+            color: Colors.green.withOpacity(0.5),
           ),
           child: TabBar(
             controller: tabController,
@@ -189,7 +189,7 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  final items = List.generate(30, (i) => "item_$i");
+  var items = List.generate(20, (i) => "item_$i");
   late String tabTitlte = widget.tabTitlte;
 
   final scrollController = ScrollController();
@@ -255,11 +255,15 @@ class _NewsPageState extends State<NewsPage> {
   Future<void> onRefresh() async {
     DLog.d("onRefresh");
     await Future.delayed(Duration(seconds: 1));
+    items = List.generate(20, (i) => "item_$i");
+    setState(() {});
   }
 
   Future<void> onLoad() async {
     DLog.d("onLoad");
     await Future.delayed(Duration(seconds: 1));
+    items.addAll(List.generate(20, (i) => "item_${items.length + i}"));
+    setState(() {});
   }
 }
 
