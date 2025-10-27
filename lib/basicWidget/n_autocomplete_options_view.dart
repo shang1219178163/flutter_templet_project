@@ -48,12 +48,13 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
               itemCount: options.length,
               itemBuilder: (BuildContext context, int index) {
                 final option = options.elementAt(index);
-                return itemBuilder?.call(context, index) ??
-                    InkWell(
-                      onTap: () {
-                        onSelected(option);
-                      },
-                      child: Builder(builder: (BuildContext context) {
+
+                return GestureDetector(
+                  onTap: () {
+                    onSelected(option);
+                  },
+                  child: itemBuilder?.call(context, index) ??
+                      Builder(builder: (BuildContext context) {
                         final highlight = AutocompleteHighlightedOption.of(context) == index;
                         if (highlight) {
                           SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
@@ -61,12 +62,17 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
                           });
                         }
                         return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
                           color: highlight ? Theme.of(context).focusColor : null,
                           padding: const EdgeInsets.all(16.0),
                           child: Text(displayStringForOption(option)),
                         );
                       }),
-                    );
+                );
               },
             ),
           ),
