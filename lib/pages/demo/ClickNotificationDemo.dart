@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/TapGestureIntercept.dart';
+import 'package:flutter_templet_project/basicWidget/n_tap_gesture_intercept.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 
 class ClickNotificationDemo extends StatelessWidget {
@@ -17,7 +17,7 @@ class ClickNotificationDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("页面点击拦截")),
-      body: TapGestureIntercept(
+      body: NTapGestureIntercept(
         ignoring: true,
         onTap: () {
           DLog.d('页面点击事件');

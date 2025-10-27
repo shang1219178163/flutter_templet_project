@@ -9,8 +9,8 @@
 import 'package:flutter/widgets.dart';
 
 /// 拦截被包裹部分的事件响应
-class TapGestureIntercept extends StatelessWidget {
-  const TapGestureIntercept({
+class NTapGestureIntercept extends StatelessWidget {
+  const NTapGestureIntercept({
     super.key,
     this.behavior = HitTestBehavior.opaque,
     this.ignoring = true,
