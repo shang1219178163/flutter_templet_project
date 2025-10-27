@@ -11,36 +11,6 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
 
 /// DLog 日志打印
-// class DLog {
-//   static void d(
-//     Object? obj, {
-//     String prefix = "DLog",
-//     bool hasTime = true,
-//     }) {
-//     if (kReleaseMode) {
-//       return;
-//     }
-//     developer.log("$prefix ${hasTime ? DateTime.now() : ""} $obj");
-//   }
-//
-//   static void center(List<String> list) {
-//     String line(String text, {String fill = "", required int maxLength}) {
-//       final fillCount = maxLength - text.length;
-//       final left = List.filled(fillCount ~/ 2, fill);
-//       final right = List.filled(fillCount - left.length, fill);
-//       return left.join() + text + right.join();
-//     }
-//
-//     final listNew = [...list];
-//     listNew.sort((a, b) => b.length.compareTo(a.length));
-//     final maxLength = listNew.first.length;
-//
-//     for (final e in list) {
-//       d(line(e, fill: ' ', maxLength: maxLength));
-//     }
-//   }
-// }
-
 class DLog {
   /// 是否启用日志打印
   static bool enableLog = true;
