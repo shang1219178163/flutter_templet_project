@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class WrapDemo extends StatefulWidget {
   final String? title;
@@ -93,7 +93,7 @@ class _WrapDemoState extends State<WrapDemo> {
                 NNetworkImage(
                   width: 50,
                   height: 60,
-                  url: Resource.image.urls[IntExt.random(max: Resource.image.urls.length)],
+                  url: AppRes.image.urls[IntExt.random(max: AppRes.image.urls.length)],
                 ),
                 Text("选项_$index"),
               ],

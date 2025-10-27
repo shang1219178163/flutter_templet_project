@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class NBoxWidgetDemo extends StatefulWidget {
   const NBoxWidgetDemo({Key? key, this.title}) : super(key: key);
@@ -115,7 +115,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
       // border: border,
       bgColor: Colors.transparent,
       bgGradient: bgGradient,
-      bgUrl: Resource.image.urls[5],
+      bgUrl: AppRes.image.urls[5],
       imageFit: BoxFit.cover,
       boxShadows: boxShadows,
       child: Image(

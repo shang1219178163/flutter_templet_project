@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class ContainerDemo extends StatefulWidget {
   final String? title;
@@ -120,7 +120,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
               ),
             ],
             image: DecorationImage(
-              image: NetworkImage(Resource.image.urls[0]),
+              image: NetworkImage(AppRes.image.urls[0]),
               fit: BoxFit.cover,
             ),
           ),

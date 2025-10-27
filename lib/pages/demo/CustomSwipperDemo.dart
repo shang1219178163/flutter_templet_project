@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/custom_swiper.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class CustomSwipperDemo extends StatefulWidget {
   final String? title;
@@ -12,7 +12,7 @@ class CustomSwipperDemo extends StatefulWidget {
 }
 
 class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
-  final List<String> images = Resource.image.urls;
+  final List<String> images = AppRes.image.urls;
 
   @override
   Widget build(BuildContext context) {

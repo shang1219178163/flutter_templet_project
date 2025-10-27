@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class TabBarViewDemo extends StatefulWidget {
   TabBarViewDemo({
@@ -96,7 +96,7 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
                               return Tab(text: e);
                             }
 
-                            final url = (value == index) ? Resource.image.urls[1] : Resource.image.urls[0];
+                            final url = (value == index) ? AppRes.image.urls[1] : AppRes.image.urls[0];
                             return Tab(
                               child: FadeInImage(
                                 image: NetworkImage(url),

@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -671,7 +671,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
         },
         child: ListView.separated(
           itemBuilder: (_, index) {
-            final random = IntExt.random(max: Resource.image.urls.length);
+            final random = IntExt.random(max: AppRes.image.urls.length);
             return Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -682,7 +682,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                 leading: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.8),
                   child: NNetworkImage(
-                    url: Resource.image.urls[random],
+                    url: AppRes.image.urls[random],
                     width: 48,
                     fit: BoxFit.fitHeight,
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class AppBarDemo extends StatefulWidget {
   AppBarDemo({Key? key, this.title}) : super(key: key);
@@ -76,7 +76,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(Resource.image.urls[5]),
+          image: NetworkImage(AppRes.image.urls[5]),
           fit: BoxFit.cover,
         ),
       ),

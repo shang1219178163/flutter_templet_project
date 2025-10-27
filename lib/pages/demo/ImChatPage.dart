@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/model/im_msg_list_root_model.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -865,7 +865,7 @@ class _ImChatPageState extends State<ImChatPage>
         sequence: sequence,
         isOwner: isOwner,
         restructureMsgBody: text,
-        avatar: isOwner ? Resource.image.urls.first : Resource.image.urls.sublist(1).randomOne,
+        avatar: isOwner ? AppRes.image.urls.first : AppRes.image.urls.sublist(1).randomOne,
         nickName: isOwner ? "我" : name,
         time: DateTime.now().secondsSinceEpoch,
       );
@@ -880,7 +880,7 @@ class _ImChatPageState extends State<ImChatPage>
       sequence: sequence,
       isOwner: true,
       restructureMsgBody: content,
-      avatar: Resource.image.urls.first,
+      avatar: AppRes.image.urls.first,
       nickName: "我",
       time: DateTime.now().secondsSinceEpoch,
     );

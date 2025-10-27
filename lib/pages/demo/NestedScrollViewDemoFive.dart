@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 class NestedScrollViewDemoFive extends StatefulWidget {
@@ -188,7 +188,7 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
         image: DecorationImage(
           // opacity: opacity,
           image: ExtendedNetworkImageProvider(
-            Resource.image.urls[4],
+            AppRes.image.urls[4],
           ),
           fit: BoxFit.cover,
         ),
@@ -207,7 +207,7 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
             image: DecorationImage(
               // opacity: opacity,
               image: ExtendedNetworkImageProvider(
-                Resource.image.urls[6],
+                AppRes.image.urls[6],
               ),
               fit: BoxFit.cover,
             ),

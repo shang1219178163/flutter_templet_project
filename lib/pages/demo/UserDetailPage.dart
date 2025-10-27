@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_fixed_width_indicator.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 
 class UserDetailPage extends StatelessWidget {
@@ -62,7 +62,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
     }
   }
 
-  final avatar = Resource.image.urls[3];
+  final avatar = AppRes.image.urls[3];
 
   Widget? buildHeader;
 

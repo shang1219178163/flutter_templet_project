@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_page_one.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class NestedScrollViewDemoSix extends StatefulWidget {
   const NestedScrollViewDemoSix({
@@ -110,7 +110,7 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
                 image: DecorationImage(
                   // opacity: opacity,
                   image: ExtendedNetworkImageProvider(
-                    Resource.image.urls[4],
+                    AppRes.image.urls[4],
                   ),
                   fit: BoxFit.cover,
                 ),

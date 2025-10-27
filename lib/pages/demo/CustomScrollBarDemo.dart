@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 /// 自定义 ScrollBar
 class CustomScrollBarDemo extends StatefulWidget {
@@ -30,7 +30,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   ///滚动中监听
   final isScrolling = ValueNotifier(false);
 
-  final items = Resource.image.urls;
+  final items = AppRes.image.urls;
 
   double gap = 8;
 

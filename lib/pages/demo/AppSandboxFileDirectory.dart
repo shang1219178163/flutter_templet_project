@@ -33,7 +33,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_picker_mixin.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -126,7 +126,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   title: "网络图像缓存",
                   onPressed: () async {
-                    final file = await AssetCacheService().saveNetworkImage(url: Resource.image.urls.randomOne!);
+                    final file = await AssetCacheService().saveNetworkImage(url: AppRes.image.urls.randomOne!);
                     final bytes = await file.readAsBytes();
 
                     // 使用 image 库加载图片

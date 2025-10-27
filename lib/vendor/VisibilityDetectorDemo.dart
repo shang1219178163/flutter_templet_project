@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 /// 曝光检测
@@ -72,7 +72,7 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
   }
 
   Widget _buildPage1() {
-    final imgUrls = Resource.image.urls;
+    final imgUrls = AppRes.image.urls;
     return ListView.builder(
         itemCount: imgUrls.length,
         itemBuilder: (context, i) {

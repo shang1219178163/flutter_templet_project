@@ -11,7 +11,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class DraggableScrollableSheetDemo extends StatefulWidget {
   final String? title;
@@ -174,7 +174,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
                 color: Colors.green,
                 image: DecorationImage(
                   image: ExtendedNetworkImageProvider(
-                    Resource.image.urls[6],
+                    AppRes.image.urls[6],
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -234,7 +234,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
         color: Colors.green,
         image: DecorationImage(
           image: ExtendedNetworkImageProvider(
-            Resource.image.urls[6],
+            AppRes.image.urls[6],
           ),
           fit: BoxFit.cover,
         ),

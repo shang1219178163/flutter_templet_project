@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_badge.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
 
 class BadgeDemo extends StatefulWidget {
@@ -213,7 +213,7 @@ class _BadgeDemoState extends State<BadgeDemo> {
           borderRadius: BorderRadius.all(Radius.circular(8)),
           image: DecorationImage(
             image: ExtendedNetworkImageProvider(
-              Resource.image.urls[7],
+              AppRes.image.urls[7],
               cache: true,
             ),
             fit: BoxFit.fill,

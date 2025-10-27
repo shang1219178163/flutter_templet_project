@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_nav_widget.dart';
 import 'package:flutter_templet_project/basicWidget/number_stepper.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:tuple/tuple.dart';
 
 class NCollectionNavWidgetDemo extends StatefulWidget {
@@ -22,7 +22,7 @@ class NCollectionNavWidgetDemo extends StatefulWidget {
 }
 
 class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
-  List<String> imgUrls = Resource.image.urls;
+  List<String> imgUrls = AppRes.image.urls;
 
   var _items = <AttrNavItem>[];
 

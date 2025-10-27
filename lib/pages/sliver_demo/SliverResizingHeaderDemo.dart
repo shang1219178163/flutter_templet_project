@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class SliverResizingHeaderDemo extends StatelessWidget {
   const SliverResizingHeaderDemo({super.key});
@@ -55,7 +55,7 @@ class ResizingHeaderDelegate extends SliverPersistentHeaderDelegate {
       children: [
         // 背景图片
         Image.network(
-          Resource.image.urls[5],
+          AppRes.image.urls[5],
           fit: BoxFit.cover,
         ),
         // 带有渐变的遮罩层

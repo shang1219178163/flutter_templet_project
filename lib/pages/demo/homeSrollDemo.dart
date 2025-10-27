@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/basicWidget/x_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:tuple/tuple.dart';
 
 class HomeSrollDemo extends StatefulWidget {
@@ -112,7 +112,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       // margin: const EdgeInsets.all(50),
       padding: const EdgeInsets.all(10),
       borderRadius: BorderRadius.all(Radius.circular(15)),
-      bgUrl: Resource.image.urls[0],
+      bgUrl: AppRes.image.urls[0],
       // bgChild: FadeInImage.assetNetwork(
       //   placeholder: 'assets/images/img_placeholder.png',
       //   image: R.image.urls[0],

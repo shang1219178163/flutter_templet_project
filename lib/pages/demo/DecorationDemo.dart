@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class DecorationDemo extends StatefulWidget {
   const DecorationDemo({Key? key, this.title}) : super(key: key);
@@ -47,7 +47,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(30),
       borderRadius: BorderRadius.all(Radius.circular(15)),
-      bgUrl: Resource.image.urls[0],
+      bgUrl: AppRes.image.urls[0],
       // bgChild: FadeInImage(
       //   placeholder: 'img_placeholder.png'.toAssetImage(),
       //   image: NetworkImage(R.image.urls[0]),
@@ -102,7 +102,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
             ),
           ],
           image: DecorationImage(
-            image: NetworkImage(Resource.image.urls.first),
+            image: NetworkImage(AppRes.image.urls.first),
             fit: BoxFit.cover,
           ),
         ),
@@ -125,7 +125,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
     double width = 200,
     double height = 200,
   }) {
-    var url = Resource.image.urls.first;
+    var url = AppRes.image.urls.first;
     return FadeInImage.assetNetwork(
       placeholder: 'assets/images/img_placeholder.png',
       image: url,

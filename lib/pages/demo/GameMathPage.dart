@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
 
 class GameMathPage extends StatefulWidget {
@@ -123,7 +123,7 @@ class TournamentView extends StatelessWidget {
             border: Border.all(color: Colors.blue),
           ),
           child: NetworkImageWithText(
-            imageUrl: Resource.image.urls.first,
+            imageUrl: AppRes.image.urls.first,
             text: "韩国男篮",
           ),
         ),

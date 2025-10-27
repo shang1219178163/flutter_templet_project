@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class SearchDemo extends StatefulWidget {
   SearchDemo({Key? key, this.title}) : super(key: key);
@@ -83,7 +83,7 @@ class _SearchDemoState extends State<SearchDemo> {
           (int i) {
             final item = 'item $i';
             return buildItem(
-                url: Resource.image.urls[i],
+                url: AppRes.image.urls[i],
                 title: item,
                 onTap: () {
                   controller.closeView(item);

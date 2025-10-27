@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_ticket_divder.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -28,7 +28,7 @@ class _QrcodePageState extends State<QrcodePage> {
   late final name = "标题";
 
   /// 二维码链接
-  late final qrUrl = Resource.image.urls[1];
+  late final qrUrl = AppRes.image.urls[1];
 
   /// 分享 shareItems
   List<Tuple3<String, String, VoidCallback>> get shareItems {

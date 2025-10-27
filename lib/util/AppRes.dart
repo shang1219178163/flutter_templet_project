@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///资源整合
-class Resource {
+class AppRes {
   static final _RString string = _RString._instance;
   static final _RColor color = _RColor._instance;
   static final _REvent event = _REvent._instance;

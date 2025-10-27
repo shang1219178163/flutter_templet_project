@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/duration_ext.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:http/http.dart' as http;
 // import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
@@ -55,7 +55,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(Resource.image.urls[5]),
+                image: NetworkImage(AppRes.image.urls[5]),
                 fit: BoxFit.cover,
               ),
             ),

@@ -13,7 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/service/ocr_text_recognition_manager.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -56,7 +56,7 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
 
   final pageController = PageController();
 
-  List<String> urls = Resource.image.urls;
+  List<String> urls = AppRes.image.urls;
 
   @override
   void dispose() {
@@ -102,7 +102,7 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
   }
 
   Widget buildPageView({int index = 0}) {
-    final urls = Resource.image.urls;
+    final urls = AppRes.image.urls;
     final pageController = PageController(initialPage: index);
     final indexVN = ValueNotifier(index);
 

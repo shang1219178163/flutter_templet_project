@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
@@ -87,9 +87,9 @@ class ScoreBoard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildTeam(Resource.image.urls.first, "韩国男篮"),
+              _buildTeam(AppRes.image.urls.first, "韩国男篮"),
               const SizedBox(width: 60),
-              _buildTeam(Resource.image.urls.last, "关岛男篮"),
+              _buildTeam(AppRes.image.urls.last, "关岛男篮"),
             ],
           ),
           const SizedBox(height: 8),

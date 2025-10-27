@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class HeroDemo extends StatefulWidget {
   HeroDemo({Key? key, this.title}) : super(key: key);
@@ -66,7 +66,7 @@ class _HeroDemoState extends State<HeroDemo> {
             return Wrap(
               spacing: spacing,
               runSpacing: runSpacing,
-              children: Resource.image.urls.map((e) {
+              children: AppRes.image.urls.map((e) {
                 final child = NNetworkImage(
                   url: e,
                 );

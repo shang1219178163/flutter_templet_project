@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class GridViewDemo extends StatefulWidget {
@@ -31,7 +31,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
             id: e.toString(),
             name: "用户名称${IntExt.random(max: 10000, min: 1000)}",
             nickName: 4.generateChars(),
-            avatar: Resource.image.urls[IntExt.random(max: Resource.image.urls.length)],
+            avatar: AppRes.image.urls[IntExt.random(max: AppRes.image.urls.length)],
           ))
       .toList();
 

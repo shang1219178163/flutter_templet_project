@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_avatar_group.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class NAvatarGroupDemo extends StatefulWidget {
   NAvatarGroupDemo({Key? key, this.title}) : super(key: key);
@@ -64,7 +64,7 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
               ),
               Row(
                 children: [
-                  buildGroupAvatar(urls: Resource.image.urls.sublist(0, 4)),
+                  buildGroupAvatar(urls: AppRes.image.urls.sublist(0, 4)),
                   SizedBox(width: 16),
                   buildGroupAvatar(urls: []),
                 ],
@@ -87,7 +87,7 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
   }
 
   Widget buildAvatarGroup({int Function(int length)? countCb}) {
-    var urls = Resource.image.urls;
+    var urls = AppRes.image.urls;
     if (countCb != null) {
       urls = urls.sublist(0, countCb(urls.length));
     }

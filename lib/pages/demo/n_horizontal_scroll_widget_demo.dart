@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_horizontal_scroll_widget.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class NHorizontalScrollWidgetDemo extends StatefulWidget {
   const NHorizontalScrollWidgetDemo({Key? key, this.title}) : super(key: key);
@@ -12,7 +12,7 @@ class NHorizontalScrollWidgetDemo extends StatefulWidget {
 }
 
 class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDemo> {
-  List<String> imgUrls = Resource.image.urls;
+  List<String> imgUrls = AppRes.image.urls;
 
   var _items = <AttrCarouseItem>[];
 

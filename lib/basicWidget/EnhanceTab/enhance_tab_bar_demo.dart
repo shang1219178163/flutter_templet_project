@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.d
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {
   const EnhanceTabBarDemo({Key? key, this.title}) : super(key: key);
@@ -61,7 +61,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     if (index != 1) {
       return Tab(height: height, text: e);
     }
-    final url = isSelect ? Resource.image.urls[1] : Resource.image.urls[0];
+    final url = isSelect ? AppRes.image.urls[1] : AppRes.image.urls[0];
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),
@@ -144,7 +144,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
                         return Tab(text: e);
                       }
 
-                      final url = (value == index) ? Resource.image.urls[1] : Resource.image.urls[0];
+                      final url = (value == index) ? AppRes.image.urls[1] : AppRes.image.urls[0];
                       return Tab(
                         child: FadeInImage(
                           image: NetworkImage(url),

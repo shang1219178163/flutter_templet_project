@@ -16,7 +16,7 @@ import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/OcrPhotoDemo.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
 
 class SwiperCardDemo extends StatefulWidget {
@@ -43,8 +43,8 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
 
   final AppinioSwiperController controller = AppinioSwiperController();
 
-  late List<_CandidateModel> candidates = Resource.image.urls.map((e) {
-    final i = Resource.image.urls.indexOf(e);
+  late List<_CandidateModel> candidates = AppRes.image.urls.map((e) {
+    final i = AppRes.image.urls.indexOf(e);
     return _CandidateModel(
       avatar: e,
       name: '用户 $i',

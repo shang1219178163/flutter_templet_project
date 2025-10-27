@@ -11,7 +11,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class LayoutBuilderDemo extends StatefulWidget {
   const LayoutBuilderDemo({Key? key, this.title}) : super(key: key);
@@ -79,9 +79,9 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     //   width: constraints?.maxWidth,
     //   height: 100,
     // );
-    final index = Random().nextInt(Resource.image.urls.length);
+    final index = Random().nextInt(AppRes.image.urls.length);
     return Image(
-      image: NetworkImage(Resource.image.urls[index]),
+      image: NetworkImage(AppRes.image.urls[index]),
       fit: BoxFit.fill,
       width: constraints?.maxWidth,
       height: 100,

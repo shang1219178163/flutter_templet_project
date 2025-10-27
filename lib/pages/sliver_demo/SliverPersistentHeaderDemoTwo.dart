@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_d
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
 
 class SliverPersistentHeaderDemoTwo extends StatefulWidget {
@@ -88,7 +88,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
           children: [
             // 背景图片
             Image.network(
-              Resource.image.urls[5],
+              AppRes.image.urls[5],
               fit: BoxFit.cover,
             ),
             // 带有渐变的遮罩层

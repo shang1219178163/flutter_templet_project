@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -80,7 +80,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
               image: DecorationImage(
                 // opacity: opacity,
                 image: ExtendedNetworkImageProvider(
-                  Resource.image.urls[4],
+                  AppRes.image.urls[4],
                 ),
                 fit: BoxFit.cover,
               ),
@@ -111,7 +111,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
                     image: DecorationImage(
                       // opacity: opacity,
                       image: ExtendedNetworkImageProvider(
-                        Resource.image.urls[4],
+                        AppRes.image.urls[4],
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -271,7 +271,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
                         return Tab(text: e);
                       }
 
-                      final url = (value == index) ? Resource.image.urls[1] : Resource.image.urls[0];
+                      final url = (value == index) ? AppRes.image.urls[1] : AppRes.image.urls[0];
                       return Tab(
                         child: FadeInImage(
                           image: NetworkImage(url),

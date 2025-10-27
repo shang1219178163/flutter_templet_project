@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/model/im_conversation_detail_model.dart';
 import 'package:flutter_templet_project/pages/demo/widget/im_conversation_cell.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:flutter_templet_project/util/Resource.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
@@ -165,7 +165,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
     // final rootModel = DepartmentPageRootModel.fromJson(response ?? {});
     // var list = rootModel.result?.content ?? [];
 
-    final urls = Resource.image.urls;
+    final urls = AppRes.image.urls;
 
     if (refreshViewController.items.length >= urls.length) {
       return [];
