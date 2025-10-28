@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_blinking_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_color_Animation.dart';
+import 'package:flutter_templet_project/basicWidget/n_enter_ball_anim.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -31,6 +33,22 @@ class _ColorAnimationDemoState extends State<ColorAnimationDemo> {
     Colors.blue, // 回到起始颜色形成循环
   ];
 
+  final homeEnter = ValueNotifier(false);
+  final awayEnter = ValueNotifier(false);
+
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _timer = null;
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      homeEnter.value = !homeEnter.value;
+      awayEnter.value = !awayEnter.value;
+    });
+  }
+
   @override
   void didUpdateWidget(covariant ColorAnimationDemo oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -54,6 +72,23 @@ class _ColorAnimationDemoState extends State<ColorAnimationDemo> {
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Row(
+              children: [
+                Expanded(
+                  child: NEnterBallAnim(
+                    valueListenable: homeEnter,
+                    child: Text("主队"),
+                  ),
+                ),
+                Text("VS"),
+                Expanded(
+                  child: NEnterBallAnim(
+                    valueListenable: awayEnter,
+                    child: Text("客队"),
+                  ),
+                ),
+              ],
+            ),
             NColorAnimation(
               colors: [
                 Colors.transparent,
