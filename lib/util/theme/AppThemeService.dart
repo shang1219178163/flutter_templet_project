@@ -220,10 +220,10 @@ class AppThemeService {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
           ),
-          showDragHandle: true,
+          showDragHandle: false,
           dragHandleColor: seedColor,
           dragHandleSize: const Size(40, 6),
-          clipBehavior: Clip.antiAlias,
+          clipBehavior: Clip.none,
           constraints: const BoxConstraints(
             minHeight: 100,
             maxHeight: 400,
@@ -275,6 +275,7 @@ class AppThemeService {
             ),
           ),
         ),
+
         extensions: appThemeDataExtensions(),
       );
 
@@ -383,10 +384,10 @@ class AppThemeService {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
           ),
-          showDragHandle: true,
+          showDragHandle: false,
           dragHandleColor: Colors.tealAccent,
           dragHandleSize: const Size(40, 6),
-          clipBehavior: Clip.antiAlias,
+          clipBehavior: Clip.none,
           constraints: const BoxConstraints(
             minHeight: 100,
             maxHeight: 400,

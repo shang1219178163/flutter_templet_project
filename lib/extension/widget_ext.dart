@@ -176,14 +176,21 @@ extension WidgetExt on Widget {
     Color? backgroundColor,
     double? elevation,
     ShapeBorder? shape,
-    Clip? clipBehavior,
+    Clip? clipBehavior = Clip.none,
     Color? barrierColor,
     bool isScrollControlled = false,
     bool useRootNavigator = false,
     bool isDismissible = true,
     bool enableDrag = true,
+    bool? showDragHandle = false,
+    bool useSafeArea = false,
     RouteSettings? routeSettings,
     AnimationController? transitionAnimationController,
+    String? barrierLabel,
+    BoxConstraints? constraints,
+    double scrollControlDisabledMaxHeightRatio = 9.0 / 16.0,
+    Offset? anchorPoint,
+    AnimationStyle? sheetAnimationStyle,
   }) =>
       showModalBottomSheet(
         context: context,
@@ -197,8 +204,14 @@ extension WidgetExt on Widget {
         useRootNavigator: useRootNavigator,
         isDismissible: isDismissible,
         enableDrag: enableDrag,
+        showDragHandle: showDragHandle,
         routeSettings: routeSettings,
         transitionAnimationController: transitionAnimationController,
+        barrierLabel: barrierLabel,
+        constraints: constraints,
+        scrollControlDisabledMaxHeightRatio: scrollControlDisabledMaxHeightRatio,
+        anchorPoint: anchorPoint,
+        sheetAnimationStyle: sheetAnimationStyle,
       );
 
   /// 加拟物风格
