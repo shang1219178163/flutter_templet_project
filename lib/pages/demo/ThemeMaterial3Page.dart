@@ -104,7 +104,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
           const SizedBox(height: 12),
           FilledButton.icon(
             onPressed: () {},
-            icon: const Icon(Icons.send),
+            icon: const Icon(Icons.send, size: 16),
             label: const Text('FilledButton.icon'),
           ),
           const SizedBox(height: 12),
