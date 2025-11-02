@@ -54,7 +54,8 @@ class NConvertViewState extends State<NConvertView> {
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();
 
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
+  final scrollControllerRight = ScrollController();
 
   final outVN = ValueNotifier("");
 
@@ -91,9 +92,9 @@ class NConvertViewState extends State<NConvertView> {
     required BoxConstraints constraints,
   }) {
     return Scrollbar(
-      controller: _scrollController,
+      controller: scrollController,
       child: SingleChildScrollView(
-        controller: _scrollController,
+        controller: scrollController,
         child: Container(
           padding: EdgeInsets.all(spacing * 3),
           child: Column(
@@ -108,7 +109,7 @@ class NConvertViewState extends State<NConvertView> {
                 height: spacing * 3,
               ),
               Container(
-                child: buildRight(),
+                child: buildRight(controller: scrollControllerRight),
               ),
             ],
           ),
@@ -128,17 +129,19 @@ class NConvertViewState extends State<NConvertView> {
         children: [
           buildTop(),
           Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                buildLeft(width: constraints.maxWidth * 0.45),
-                SizedBox(
-                  width: spacing * 3,
-                ),
-                Expanded(
-                  child: buildRight(),
-                ),
-              ],
+            child: IntrinsicHeight(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  buildLeft(width: constraints.maxWidth * 0.45),
+                  SizedBox(
+                    width: spacing * 3,
+                  ),
+                  Expanded(
+                    child: buildRight(controller: scrollControllerRight),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -243,25 +246,18 @@ class NConvertViewState extends State<NConvertView> {
   }
 
   Widget buildRight({
-    ScrollController? controller,
+    required ScrollController controller,
     double spacing = 10,
     bool selectable = true,
   }) {
     return ValueListenableBuilder<String>(
       valueListenable: outVN,
       builder: (context, value, child) {
-        final text = selectable
-            ? SelectableText(
-                value,
-                // maxLines: 1000,
-              )
-            : NText(
-                value,
-                // maxLines: 1000,
-              );
+        final text = selectable ? SelectableText(value) : NText(value);
 
         return widget.end ??
             Container(
+              height: double.infinity,
               padding: EdgeInsets.only(left: 4, top: 2, bottom: 2),
               decoration: BoxDecoration(
                 color: Colors.transparent,
@@ -296,6 +292,10 @@ class NTransformViewController {
 
   TextEditingController get textEditingController {
     return _anchor!._textEditingController;
+  }
+
+  ValueNotifier<String> get outVN {
+    return _anchor!.outVN;
   }
 
   set input(String value) {

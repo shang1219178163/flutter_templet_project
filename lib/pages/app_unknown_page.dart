@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
-class APPNotFoundPage extends StatelessWidget {
+class AppUnknownPage extends StatelessWidget {
   final String? title;
 
-  const APPNotFoundPage({
+  const AppUnknownPage({
     Key? key,
     this.title,
   }) : super(key: key);

@@ -67,7 +67,7 @@ class _JsonToModelState extends State<JsonToModel> {
                 ),
               ));
             },
-            icon: Icon(Icons.warning_amber_rounded)),
+            icon: Icon(Icons.info_outline)),
       ]),
       body: buildBody(),
     );

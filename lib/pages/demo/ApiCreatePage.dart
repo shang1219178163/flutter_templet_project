@@ -73,7 +73,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
                 ),
               ));
             },
-            icon: Icon(Icons.warning_amber_rounded)),
+            icon: Icon(Icons.info_outline)),
       ]),
       body: buildBody(),
     );

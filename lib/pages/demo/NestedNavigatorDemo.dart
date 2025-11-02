@@ -102,7 +102,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
                     onTap: () {
                       DLog.d("error");
                     },
-                    child: Icon(Icons.error_outline),
+                    child: Icon(Icons.info_outline),
                   ),
                 ]
                     .map((e) => Container(

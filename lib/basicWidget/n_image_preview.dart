@@ -92,7 +92,7 @@ class _NImagePreviewState extends State<NImagePreview> {
   bool showImageInfo = false;
 
   late final buttonItems = [
-    (child: Icon(Icons.warning, color: Colors.white), action: onDetail),
+    (child: Icon(Icons.info_outline, color: Colors.white), action: onDetail),
     (child: Icon(Icons.refresh, color: Colors.white), action: onRotate),
     (child: Icon(Icons.download, color: Colors.white), action: onDownload),
   ];

@@ -6,11 +6,13 @@ class NEnterBallAnim extends StatelessWidget {
     super.key,
     required this.valueListenable,
     this.textAlign,
+    this.style,
     required this.child,
   });
 
   final ValueNotifier<bool> valueListenable;
   final TextAlign? textAlign;
+  final TextStyle Function(bool isEnter)? style;
 
   final Widget child;
 
@@ -35,11 +37,12 @@ class NEnterBallAnim extends StatelessWidget {
             textAlign: textAlign,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: value ? Colors.white : fontColor,
-              fontSize: 16,
-              fontFamily: 'DingTalk',
-            ),
+            style: style?.call(value) ??
+                TextStyle(
+                  color: value ? Colors.white : fontColor,
+                  fontSize: 16,
+                  fontFamily: 'DingTalk',
+                ),
             child: child,
           ),
         );

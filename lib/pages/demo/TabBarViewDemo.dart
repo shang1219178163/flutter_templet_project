@@ -83,9 +83,7 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
                             if (index != 1) {
                               if (index == 2) {
                                 return Tab(
-                                  child: Text(
-                                    e + e,
-                                  ),
+                                  child: Text(e + e),
                                 );
                               }
                               if (index == 3) {

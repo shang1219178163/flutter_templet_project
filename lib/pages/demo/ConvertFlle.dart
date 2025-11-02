@@ -12,6 +12,7 @@ import 'dart:io';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_convert_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
@@ -51,13 +52,18 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
 
   final _scrollController = ScrollController();
 
-  final transformViewController = NTransformViewController();
+  final transformController = NTransformViewController();
 
   late final actionItems = <({String name, VoidCallback action})>[
     (name: "Generate", action: onGenerate),
     (name: "Paste", action: onPaste),
     (name: "Clear", action: onClear),
     (name: "Try", action: onTry),
+  ];
+
+  late final actionFiles = <({String name, VoidCallback action})>[
+    (name: "Copy", action: onCopy),
+    (name: "Download", action: onDownload),
   ];
 
   final canDrag = ValueNotifier(Platform.isMacOS);
@@ -121,7 +127,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
 
   Widget buildBody() {
     return NConvertView(
-      controller: transformViewController,
+      controller: transformController,
       header: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -174,40 +180,66 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
         return ValueListenableBuilder(
           valueListenable: canDrag,
           builder: (context, value, child) {
-            return Wrap(
-              spacing: 8,
-              runSpacing: 8,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ...actionItems.map((e) {
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    onPressed: e.action,
-                    child: NText(e.name),
-                  );
-                }).toList(),
-                NPair(
-                  icon: Text(
-                    "Drag",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  child: SizedBox(
-                    // width: 50,
-                    height: 28,
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: CupertinoSwitch(
-                        value: canDrag.value,
-                        onChanged: (val) {
-                          onDrag(val);
-                        },
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    ...actionItems.map((e) {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        onPressed: e.action,
+                        child: NText(e.name),
+                      );
+                    }).toList(),
+                    NPair(
+                      icon: Text(
+                        "Drag",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      child: SizedBox(
+                        height: 28,
+                        child: FittedBox(
+                          fit: BoxFit.fill,
+                          child: CupertinoSwitch(
+                            value: canDrag.value,
+                            onChanged: (val) {
+                              onDrag(val);
+                            },
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
+                SizedBox(height: 8),
+                ValueListenableBuilder(
+                    valueListenable: transformController.outVN,
+                    builder: (context, value, Widget? child) {
+                      return Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          ...actionFiles.map((e) {
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: value.isEmpty ? null : e.action,
+                              child: NText(e.name),
+                            );
+                          }).toList(),
+                        ],
+                      );
+                    }),
               ],
             );
           },
@@ -318,7 +350,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     } else {
       onCreateFile(
         name: fileName ?? "未知文件_${DateTime.now()}.dart",
-        content: transformViewController.out,
+        content: transformController.out,
       );
     }
   }
@@ -332,7 +364,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       return;
     }
 
-    transformViewController.out = model.contentNew ?? "";
+    transformController.out = model.contentNew ?? "";
 
     final isSuccess = await onCreateFile(
       name: model.nameNew ?? "",
@@ -341,29 +373,37 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   }
 
   onClear() {
-    transformViewController.clear();
+    transformController.clear();
     files.clear();
     tabItems.clear();
     setState(() {});
   }
 
   onPaste() async {
-    transformViewController.paste();
-    onGenerate();
+    transformController.paste();
   }
 
   onTry() async {
-    transformViewController.input = current.exampleTemplet();
+    canDrag.value = false;
+    transformController.input = current.exampleTemplet();
 
     final model = await current.convert(
-      content: transformViewController.input,
+      content: transformController.input,
     );
-    transformViewController.out = model?.contentNew ?? "";
-    onGenerate(fileName: model?.nameNew);
+    transformController.out = model?.contentNew ?? "";
   }
 
   onDrag(bool? val) async {
     canDrag.value = val ?? !canDrag.value;
     setState(() {});
+  }
+
+  onCopy() async {
+    debugPrint("copy");
+    Clipboard.setData(ClipboardData(text: transformController.out));
+  }
+
+  onDownload() async {
+    onGenerate();
   }
 }

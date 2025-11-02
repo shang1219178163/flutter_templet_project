@@ -146,7 +146,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                           Padding(
                             padding: EdgeInsets.only(right: 8.0),
                             child: Icon(
-                              Icons.error_outline,
+                              Icons.info_outline,
                               color: Colors.white,
                             ),
                           ),
@@ -183,7 +183,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                           Padding(
                             padding: EdgeInsets.only(right: 8.0),
                             child: Icon(
-                              Icons.error_outline,
+                              Icons.info_outline,
                               color: Colors.white,
                             ),
                           ),

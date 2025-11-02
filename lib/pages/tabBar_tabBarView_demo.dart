@@ -692,10 +692,12 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.autocompletePage, "autocompletePage"),
   Tuple2(AppRouter.customRefreshIndicatorDemo, "customRefreshIndicatorDemo"),
   Tuple2(AppRouter.nestedScrollViewDemoSeven, "nestedScrollViewDemoSeven"),
+  Tuple2(AppRouter.stackDemoThree, "stackDemoThree"),
+  Tuple2(AppRouter.themeMaterial3Page, "themeMaterial3Page"),
 ];
 
 var others = <Tuple2<String, String>>[
-  Tuple2(AppRouter.notFound, "notFound"),
+  Tuple2(AppRouter.unknown, "notFound"),
   Tuple2(AppRouter.firstPage, "firstPage"),
   Tuple2(AppRouter.fourthPage, "fourthPage"),
   Tuple2(AppRouter.loginPage, "LoginPage"),

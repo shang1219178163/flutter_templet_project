@@ -177,17 +177,17 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
           color: Colors.black,
           fontSize: 16.0,
           height: 2,
-          fontFamily: 'PingFang SC',
-          fontFamilyFallback: [
-            "PingFang SC",
-            "Heiti SC",
-            "Roboto",
-            'NotoSansSC', // 思源黑体
-            'Microsoft YaHei', // 微软雅黑 (Windows)
-            'Arial', // 通用英文字体
-            'Helvetica', // 备选英文字体
-            'sans-serif', // 通用字体族
-          ],
+          // fontFamily: 'PingFang SC',
+          // fontFamilyFallback: [
+          //   "PingFang SC",
+          //   "Heiti SC",
+          //   "Roboto",
+          //   'NotoSansSC', // 思源黑体
+          //   'Microsoft YaHei', // 微软雅黑 (Windows)
+          //   'Arial', // 通用英文字体
+          //   'Helvetica', // 备选英文字体
+          //   'sans-serif', // 通用字体族
+          // ],
         ),
         child: Column(
           children: [

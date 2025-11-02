@@ -18,9 +18,9 @@ import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/IrregularClipperDemo.dart';
 import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
-import 'package:flutter_templet_project/pages/app_not_found_page.dart';
 import 'package:flutter_templet_project/pages/app_settings_page.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
+import 'package:flutter_templet_project/pages/app_unknown_page.dart';
 import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/APPForgetPwdPage.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
@@ -290,6 +290,7 @@ import 'package:flutter_templet_project/pages/demo/SnackBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/SplitViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/StackDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
@@ -308,6 +309,7 @@ import 'package:flutter_templet_project/pages/demo/TextFieldWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextPaintDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ThemeMaterial3Page.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TooltipDemo.dart';
@@ -400,6 +402,8 @@ import 'package:flutter_templet_project/vendor/wechat_assets_picker_demo.dart';
 import 'package:get/get.dart';
 
 class AppRouter {
+  static const String unknown = '/AppUnknownPage';
+
   static const String appTabPage = '/AppTabPage';
   static const String yamlParsePage = '/yamlParsePage';
 
@@ -409,8 +413,6 @@ class AppRouter {
   static const String launchPage = '/APPLaunchPage';
   static const String emojiPage = '/emojiPage';
   static const String developToolList = '/developToolList';
-
-  static const String notFound = '/APPNotFoundPage';
 
   static const String mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
   static const String autoLayoutDemo = '/AutoLayoutDemo';
@@ -854,13 +856,15 @@ class AppRouter {
   static const String autocompletePage = '/autocompletePage';
   static const String customRefreshIndicatorDemo = '/customRefreshIndicatorDemo';
   static const String nestedScrollViewDemoSeven = '/nestedScrollViewDemoSeven';
+  static const String stackDemoThree = '/stackDemoThree';
+  static const String themeMaterial3Page = '/themeMaterial3Page';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
 
   static final unknownRoute = GetPage(
-    name: AppRouter.notFound,
-    page: () => APPNotFoundPage(),
+    name: AppRouter.unknown,
+    page: () => AppUnknownPage(),
   );
 
   static final List<GetPage> pages = [
@@ -2507,6 +2511,14 @@ class AppRouter {
     GetPage(
       name: AppRouter.nestedScrollViewDemoSeven,
       page: () => NestedScrollViewDemoSeven(),
+    ),
+    GetPage(
+      name: AppRouter.stackDemoThree,
+      page: () => StackDemoThree(),
+    ),
+    GetPage(
+      name: AppRouter.themeMaterial3Page,
+      page: () => ThemeMaterial3Page(),
     ),
   ];
 }

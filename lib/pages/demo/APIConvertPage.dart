@@ -114,7 +114,7 @@ class TagGetApi extends BaseRequestAPI{
             onPressed: () {
               readContent();
             },
-            icon: Icon(Icons.warning_amber_rounded)),
+            icon: Icon(Icons.info_outline)),
       ]),
       body: buildBody(),
     );
