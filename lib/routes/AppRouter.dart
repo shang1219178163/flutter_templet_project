@@ -248,6 +248,7 @@ import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PopScopeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PreferredSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
@@ -812,6 +813,7 @@ class AppRouter {
   static const String webviewDemo = '/webviewDemo';
   static const String secureKeyboardDemo = '/secureKeyboardDemo';
   static const String popScopeDemo = '/popScopeDemo';
+  static const String popScopeDemoOne = '/popScopeDemoOne';
   static const String nestedScrollViewDemoHome = '/nestedScrollViewDemoHome';
   static const String nestedScrollViewDemoFive = '/nestedScrollViewDemoFive';
   static const String nestedScrollViewDemoSix = '/nestedScrollViewDemoSix';
@@ -2352,6 +2354,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.popScopeDemo,
       page: () => PopScopeDemo(),
+    ),
+    GetPage(
+      name: AppRouter.popScopeDemoOne,
+      page: () => PopScopeDemoOne(),
     ),
     GetPage(
       name: AppRouter.nestedScrollViewDemoHome,

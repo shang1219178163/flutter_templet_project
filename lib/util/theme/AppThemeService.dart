@@ -53,11 +53,24 @@ class AppThemeService {
   Color seedColor = Colors.blue;
   Brightness brightness = Brightness.light;
 
+  bool get isDark => brightness == Brightness.dark;
+
   // 基于种子颜色和亮度生成配色方案
   ColorScheme get colorScheme => ColorScheme.fromSeed(
         seedColor: seedColor,
         brightness: brightness,
       );
+
+  /// SystemUiOverlayStyle.light
+  SystemUiOverlayStyle get overlayStyleLight =>
+      SystemUiOverlayStyle.light.copyWith(systemNavigationBarColor: AppColor.bgColor);
+
+  /// SystemUiOverlayStyle.dark
+  SystemUiOverlayStyle get overlayStyleDark =>
+      SystemUiOverlayStyle.dark.copyWith(systemNavigationBarColor: AppColor.white);
+
+  /// isDark ? overlayStyleLight : overlayStyleDark;
+  SystemUiOverlayStyle get overlayStyle => isDark ? overlayStyleLight : overlayStyleDark;
 
   void changeTheme(ThemeData theme) {
     // Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);

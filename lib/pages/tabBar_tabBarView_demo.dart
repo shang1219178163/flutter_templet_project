@@ -490,6 +490,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.webviewDemo, "webviewDemo"),
   Tuple2(AppRouter.secureKeyboardDemo, "secureKeyboardDemo"),
   Tuple2(AppRouter.popScopeDemo, "popScopeDemo"),
+  Tuple2(AppRouter.popScopeDemoOne, "popScopeDemoOne"),
   Tuple2(AppRouter.nestedScrollViewDemoHome, "nestedScrollViewDemoHome"),
   Tuple2(AppRouter.nestedScrollViewDemoFive, "nestedScrollViewDemoFive"),
   Tuple2(AppRouter.nestedScrollViewDemoSix, "nestedScrollViewDemoSix"),

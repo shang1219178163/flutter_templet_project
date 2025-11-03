@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
+
 
 class ThemeProvider extends ChangeNotifier {
   static final ThemeProvider _instance = ThemeProvider._();
@@ -88,14 +90,28 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   void _setCurrentSystemChrome() {
-    if (themeMode == ThemeMode.dark) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    } else {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    }
-
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); //home Indicator一直显示
+
+    if (themeMode == ThemeMode.dark) {
+      SystemChrome.setSystemUIOverlayStyle(overlayStyleLight);
+    } else {
+      SystemChrome.setSystemUIOverlayStyle(overlayStyleDark);
+    }
   }
+
+  /// SystemUiOverlayStyle.light
+  SystemUiOverlayStyle get overlayStyleLight =>
+      SystemUiOverlayStyle.light.copyWith(systemNavigationBarColor: AppColor.bgColor);
+
+  /// SystemUiOverlayStyle.dark
+  SystemUiOverlayStyle get overlayStyleDark =>
+      SystemUiOverlayStyle.dark.copyWith(systemNavigationBarColor: AppColor.white);
+
+  /// isDark ? overlayStyleLight : overlayStyleDark;
+  SystemUiOverlayStyle get overlayStyle => isDark ? overlayStyleLight : overlayStyleDark;
+
+  /// 页面背景色(isDark ? Color(0xFF181829) : Color(0xFFF6F6F6))
+  Color get scaffoldBackgroundColor => isDark ? Color(0xFF181829) : Color(0xFFF6F6F6);
 
   /// 背景色
   Color get itemBgColor => isDark ? Colors.white.withOpacity(0.05) : Colors.white;
