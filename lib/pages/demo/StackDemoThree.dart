@@ -24,10 +24,10 @@ class StackDemoThree extends StatefulWidget {
 class _StackDemoThreeState extends State<StackDemoThree> {
   final scrollController = ScrollController();
 
-  final provider = CategoryProvider();
+  final provider = CategoryProviderThree();
 
   double _topOffset = -1;
-  double _minTop = -1;
+  final _minTop = -1.0;
   final double _maxTop = 200.0;
 
   // bool _isExpanded = false;
@@ -156,7 +156,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
                 onVerticalDragEnd: _handleDragEnd,
                 child: NotificationListener<ScrollNotification>(
                   onNotification: _onScrollNotification,
-                  child: HotScreenView(arguments: args),
+                  child: HotScreenViewThree(arguments: args),
                 ),
               ),
             );
@@ -197,8 +197,8 @@ class _StackDemoThreeState extends State<StackDemoThree> {
   }
 }
 
-class HotScreenView extends StatefulWidget {
-  const HotScreenView({
+class HotScreenViewThree extends StatefulWidget {
+  const HotScreenViewThree({
     super.key,
     this.arguments,
   });
@@ -206,17 +206,17 @@ class HotScreenView extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<HotScreenView> createState() => _HotScreenViewState();
+  State<HotScreenViewThree> createState() => _HotScreenViewThreeState();
 }
 
-class _HotScreenViewState extends State<HotScreenView> {
+class _HotScreenViewThreeState extends State<HotScreenViewThree> {
   final scrollController = ScrollController();
 
   var indexVN = ValueNotifier(0);
   final leftItems = List.generate(10, (i) => (title: "Section$i", color: ColorExt.random));
 
   @override
-  void didUpdateWidget(covariant HotScreenView oldWidget) {
+  void didUpdateWidget(covariant HotScreenViewThree oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
@@ -344,7 +344,7 @@ class _HotScreenViewState extends State<HotScreenView> {
   }
 }
 
-class CategoryProvider with ChangeNotifier {
+class CategoryProviderThree with ChangeNotifier {
   var _isLoading = false;
   String? _error;
 
