@@ -128,6 +128,7 @@ import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FontFeatureDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FootballTeamPage.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FractionallySizedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
@@ -860,6 +861,7 @@ class AppRouter {
   static const String nestedScrollViewDemoSeven = '/nestedScrollViewDemoSeven';
   static const String stackDemoThree = '/stackDemoThree';
   static const String themeMaterial3Page = '/themeMaterial3Page';
+  static const String footballTeamPage = '/footballTeamPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2525,6 +2527,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.themeMaterial3Page,
       page: () => ThemeMaterial3Page(),
+    ),
+    GetPage(
+      name: AppRouter.footballTeamPage,
+      page: () => FootballTeamPage(),
     ),
   ];
 }

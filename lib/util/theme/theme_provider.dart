@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
+import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class ThemeProvider extends ChangeNotifier {
   static final ThemeProvider _instance = ThemeProvider._();
@@ -20,7 +21,7 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   // 当前主题索引
-  late ThemeMode themeMode;
+  ThemeMode get themeMode => AppThemeService().themeMode;
 
   bool get isDark => themeMode == ThemeMode.dark;
 
@@ -50,8 +51,8 @@ class ThemeProvider extends ChangeNotifier {
   ];
 
   /// 修改主题
-  void toggleTheme(ThemeMode themeModel) {
-    themeMode = themeModel;
+  void toggleTheme(ThemeMode v) {
+    AppThemeService().themeMode = v;
     notifyListeners();
     CacheService().setInt(themeKey, themeMode.index);
     _setCurrentSystemChrome();
@@ -59,7 +60,6 @@ class ThemeProvider extends ChangeNotifier {
 
   /// 切换主题
   void exchangeTheme(BuildContext context) {
-    // debugPrint("主题切换");
     switch (themeMode) {
       case ThemeMode.system:
         {

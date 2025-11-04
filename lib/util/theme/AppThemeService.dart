@@ -48,12 +48,14 @@ class AppThemeService {
   }
 
   var themeMode = ThemeMode.system;
-  // ThemeMode get themeMode => brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
 
   Color seedColor = Colors.blue;
   Brightness brightness = Brightness.light;
 
   bool get isDark => brightness == Brightness.dark;
+
+  /// 反色, isDark ? Colors.white : Colors.black;
+  Color get inverseColor => isDark ? Colors.white : Colors.black;
 
   // 基于种子颜色和亮度生成配色方案
   ColorScheme get colorScheme => ColorScheme.fromSeed(
@@ -182,6 +184,11 @@ class AppThemeService {
             splashFactory: NoSplash.splashFactory,
             backgroundColor: seedColor,
           ).merge(buildButtonStyle()),
+        ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: seedColor,
+          selectionColor: seedColor.withOpacity(0.3),
+          selectionHandleColor: seedColor,
         ),
         textTheme: ThemeData.dark().textTheme.apply(
               bodyColor: Colors.black, // 普通文字颜色
@@ -367,6 +374,30 @@ class AppThemeService {
           pressElevation: 0, //不明原因未生效
           showCheckmark: false,
         ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: seedColor,
+          selectionColor: seedColor.withOpacity(0.3),
+          selectionHandleColor: seedColor,
+        ),
+        textTheme: ThemeData.dark().textTheme.apply(
+              bodyColor: Colors.white, // 普通文字颜色
+              displayColor: Colors.white, // 标题文字颜色
+            ),
+        // textTheme: const TextTheme(
+        //   displayLarge: TextStyle(color: Colors.white, fontSize: 96.0, fontWeight: FontWeight.w300),
+        //   displayMedium: TextStyle(color: Colors.white, fontSize: 60.0, fontWeight: FontWeight.w300),
+        //   displaySmall: TextStyle(color: Colors.white, fontSize: 48.0, fontWeight: FontWeight.w400),
+        //   headlineMedium: TextStyle(color: Colors.white, fontSize: 34.0, fontWeight: FontWeight.w400),
+        //   headlineSmall: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.w400),
+        //   titleLarge: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.w500),
+        //   titleMedium: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w400),
+        //   titleSmall: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.w500),
+        //   bodyLarge: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w400),
+        //   bodyMedium: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.w400),
+        //   bodySmall: TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w400),
+        //   labelLarge: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.w500),
+        //   labelSmall: TextStyle(color: Colors.white, fontSize: 10.0, fontWeight: FontWeight.w400),
+        // ),
         dialogBackgroundColor: Color(0xFF242434),
         dialogTheme: DialogTheme(
           backgroundColor: Color(0xFF242434),

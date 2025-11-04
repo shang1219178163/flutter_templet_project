@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/basicWidget/n_file_viewer/n_file_viewer.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
+import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
@@ -28,6 +29,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
 import 'package:flutter_templet_project/util/screen_manager.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
+import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
@@ -92,6 +94,8 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+
         // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
 
@@ -100,16 +104,13 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => DBGenericProvider<DBOrder>()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
-        ChangeNotifierProvider<Person>(
-          create: (ctx) => Person(),
-        ),
-        ChangeNotifierProvider<Foo>(
-          create: (ctx) => Foo(),
-        ),
+        ChangeNotifierProvider<Person>(create: (ctx) => Person()),
+        ChangeNotifierProvider<Foo>(create: (ctx) => Foo()),
         Provider(create: (context) => CounterBloc()),
         ProxyProvider<Person, EatModel>(
           update: (ctx, person, eatModel) => EatModel(name: person.name),
         ),
+        ChangeNotifierProvider(create: (context) => BallCategoryProvider()),
       ],
       child: EasyLocalization(
         supportedLocales: [Locale('zh'), Locale('en')],
@@ -170,6 +171,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    AppThemeService().brightness = theme.brightness;
+
     final app = GetMaterialApp(
       popGesture: true, //swipe back
       navigatorKey: ToolUtil.navigatorKey,
