@@ -696,6 +696,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.stackDemoThree, "stackDemoThree"),
   Tuple2(AppRouter.themeMaterial3Page, "themeMaterial3Page"),
   Tuple2(AppRouter.footballTeamPage, "footballTeamPage"),
+  Tuple2(AppRouter.scrollablePositionedListDemo, "scrollablePositionedListDemo"),
 ];
 
 var others = <Tuple2<String, String>>[

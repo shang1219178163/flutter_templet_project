@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_autocomplete_search.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/IrregularClipperDemo.dart';
+import 'package:flutter_templet_project/pages/ScrollablePositionedListDemo.dart';
 import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
 import 'package:flutter_templet_project/pages/app_settings_page.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
@@ -862,6 +863,8 @@ class AppRouter {
   static const String stackDemoThree = '/stackDemoThree';
   static const String themeMaterial3Page = '/themeMaterial3Page';
   static const String footballTeamPage = '/footballTeamPage';
+  static const String scrollablePositionedListDemo = '/scrollablePositionedListDemo';
+
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2532,6 +2535,12 @@ class AppRouter {
       name: AppRouter.footballTeamPage,
       page: () => FootballTeamPage(),
     ),
+
+    GetPage(
+      name: AppRouter.scrollablePositionedListDemo,
+      page: () => ScrollablePositionedListDemo(),
+    ),
+
   ];
 }
 
