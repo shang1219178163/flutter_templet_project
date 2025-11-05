@@ -49,7 +49,9 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
   // 当右侧列表滚动时触发
   void _onRightListScroll() {
     // 如果是程序触发的滚动，则忽略，防止循环触发
-    if (_isScrollingProgrammatically) return;
+    if (_isScrollingProgrammatically) {
+      return;
+    }
 
     // 获取当前可见的第一个 item 的索引
     final firstVisibleIndex = _itemPositionsListener.itemPositions.value
@@ -58,9 +60,8 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
         .firstOrNull;
 
     if (firstVisibleIndex != null && firstVisibleIndex != _selectedLeftNavIndex) {
-      setState(() {
-        _selectedLeftNavIndex = firstVisibleIndex;
-      });
+      _selectedLeftNavIndex = firstVisibleIndex;
+      setState(() {});
 
       // 自动滚动左侧导航到选中项
       _scrollLeftNavToSelected();
@@ -89,9 +90,8 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
   Future<void> _scrollToIndex(int index) async {
     // 标记为程序滚动
     _isScrollingProgrammatically = true;
-    setState(() {
-      _selectedLeftNavIndex = index;
-    });
+    _selectedLeftNavIndex = index;
+    setState(() {});
 
     // 执行滚动动画
     await _itemScrollController.scrollTo(
@@ -117,15 +117,15 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // 左侧导航栏
-        _buildLeftNav(widget.leftNavItems),
+        buildLeftNav(widget.leftNavItems),
         // 右侧内容网格（现在是可滚动的列表）
-        _buildRightContent(widget.leftNavItems),
+        buildRightContent(widget.leftNavItems),
       ],
     );
   }
 
   // 构建左侧导航栏
-  Widget _buildLeftNav(List<CategoryItem> leftNavItems) {
+  Widget buildLeftNav(List<CategoryItem> leftNavItems) {
     return Container(
       width: 88,
       color: themeProvider.color181829OrF6F6F6,
@@ -184,7 +184,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
   }
 
   // 构建右侧内容
-  Widget _buildRightContent(List<CategoryItem> leftNavItems) {
+  Widget buildRightContent(List<CategoryItem> leftNavItems) {
     return Expanded(
       child: Container(
         color: themeProvider.color242434OrWhite,
