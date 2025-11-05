@@ -666,6 +666,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.syncfusionFlutterDatepickerDemo, "日期多选"),
   Tuple2(AppRouter.tableCalenderMain, "日期"),
   Tuple2(AppRouter.keyboardAttachDemo, "keyboardAttachableDemo"),
+  Tuple2(AppRouter.keyboardObserverDemo, "keyboardObserverDemo"),
   Tuple2(AppRouter.getxDemo, "getxDemo"),
   Tuple2(AppRouter.flutterPickersDemo, "flutterPickersDemo"),
   Tuple2(AppRouter.scanBarcodeDemo, "scanBarcodeDemo"),

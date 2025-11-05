@@ -61,17 +61,6 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  onPressed: onPressed,
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
       ),
       body: buildBody(),
     );
@@ -81,16 +70,15 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("assets/images/bg.png"),
-          fit: BoxFit.fill,
-        )),
+            // image: DecorationImage(
+            //   image: AssetImage("assets/images/bg.png"),
+            //   fit: BoxFit.fill,
+            // ),
+            ),
         child: ListView(
           children: List.generate(20, (i) {
             return ListTile(
-              title: NText(
-                "item_$i",
-              ),
+              title: NText("item_$i"),
             );
           }).toList(),
         ),

@@ -40,20 +40,6 @@ class _KeyDemoState extends State<KeyDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  onPressed: () {
-                    debugPrint("${DateTime.now()}: $e");
-                    setState(() {});
-                  },
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
       ),
       body: buildBody(),
       floatingActionButton: FloatingActionButton(

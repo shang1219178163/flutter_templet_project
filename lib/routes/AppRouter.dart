@@ -339,6 +339,7 @@ import 'package:flutter_templet_project/pages/demo/file_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/keyboard_attach_demo.dart';
+import 'package:flutter_templet_project/pages/demo/keyboard_observer_demo.dart';
 import 'package:flutter_templet_project/pages/demo/lerpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
@@ -734,6 +735,7 @@ class AppRouter {
   static const String jsonToModel = '/jsonToModel';
   static const String assetUploadBoxDemo = '/assetUploadBoxDemo';
   static const String keyboardAttachDemo = '/keyboardAttachDemo';
+  static const String keyboardObserverDemo = '/keyboardObserverDemo';
   static const String dashLineDemo = '/dashLineDemo';
   static const String scaffoldBottomSheet = '/scaffoldBottomSheet';
   static const String floatingActionButtonDemo = '/floatingActionButtonDemo';
@@ -864,7 +866,6 @@ class AppRouter {
   static const String themeMaterial3Page = '/themeMaterial3Page';
   static const String footballTeamPage = '/footballTeamPage';
   static const String scrollablePositionedListDemo = '/scrollablePositionedListDemo';
-
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2034,6 +2035,11 @@ class AppRouter {
       page: () => KeyboardAttachDemo(),
     ),
     GetPage(
+      name: AppRouter.keyboardObserverDemo,
+      page: () => KeyboardObserverDemo(),
+    ),
+
+    GetPage(
       name: AppRouter.dashLineDemo,
       page: () => DashLineDemo(),
     ),
@@ -2540,7 +2546,6 @@ class AppRouter {
       name: AppRouter.scrollablePositionedListDemo,
       page: () => ScrollablePositionedListDemo(),
     ),
-
   ];
 }
 
