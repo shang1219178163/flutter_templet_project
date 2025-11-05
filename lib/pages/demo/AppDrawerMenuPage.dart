@@ -33,7 +33,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
     CellModel(
       icon: Icons.recycling,
       title: "记录路由",
-      isOpen: CacheService().getBool(CacheKey.resetLastPageRoute.name) ?? false,
+      isOpen: CacheService().getBool(CacheKey.recoverLastPageRoute.name) ?? false,
     ),
   ];
 
@@ -75,9 +75,9 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
                                 onChanged: (bool value) {
                                   e.isOpen = !open;
                                   setState(() {});
-                                  CacheService().setBool(CacheKey.resetLastPageRoute.name, e.isOpen);
+                                  CacheService().setBool(CacheKey.recoverLastPageRoute.name, e.isOpen);
                                   DLog.d(
-                                      "resetLastPageRoute: ${CacheService().getBool(CacheKey.resetLastPageRoute.name)}");
+                                      "resetLastPageRoute: ${CacheService().getBool(CacheKey.recoverLastPageRoute.name)}");
                                 },
                                 value: open,
                               ),

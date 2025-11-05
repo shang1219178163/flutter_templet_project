@@ -31,10 +31,10 @@ class AppRouteObserver {
   }
 
   /// 恢复路由
-  static Future<void> resetRoute() async {
-    final isReset = CacheService().getBool(CacheKey.resetLastPageRoute.name) ?? false;
+  static Future<void> recoverRoute() async {
+    final isRecover = CacheService().getBool(CacheKey.recoverLastPageRoute.name) ?? false;
     // DLog.d("resetLastPageRoute: ${CacheService().getBool(CacheKey.resetLastPageRoute.name)}");
-    if (!isReset) {
+    if (!isRecover) {
       return;
     }
     final lastRouteInfo = CacheService().getMap(CacheKey.lastPageRoute.name);
