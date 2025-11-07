@@ -4,6 +4,8 @@ import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
+import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
@@ -437,36 +439,59 @@ class _GameMatchItemState extends State<GameMatchItem> {
     initData();
   }
 
-  initData() async {
-    _image = await _loadImage(widget.imageUrl);
-    _imageRight = await _loadImage(widget.imageUrlRight);
+  Future<void> initData() async {
+    final results = await Future.wait([
+      _loadImage(widget.imageUrl),
+      _loadImage(widget.imageUrlRight),
+    ]);
+    _image = results.first;
+    _imageRight = results.last;
+    if (!mounted) {
+      return;
+    }
+    setState(() {});
   }
 
   @override
   void didUpdateWidget(covariant GameMatchItem oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (_image == null || _imageRight == null) {
+    if (oldWidget.text != widget.text ||
+        oldWidget.textRight != widget.textRight ||
+        oldWidget.imageUrl != widget.imageUrl ||
+        oldWidget.imageUrlRight != widget.imageUrlRight) {
       initData();
     }
   }
 
   Future<ui.Image?> _loadImage(String url) async {
-    ui.Image? _image;
     try {
+      ui.Image? _image;
+
+      final fileName = url.split("/").last;
+      final imageCache = await FileManager.imageFromCache(fileName: fileName);
+      if (imageCache != null) {
+        _image = imageCache;
+        return _image;
+      }
+
       final response = await Dio().get<List<int>>(
         url,
         options: Options(responseType: ResponseType.bytes),
       );
       // 转成 Uint8List
       final Uint8List data = Uint8List.fromList(response.data!);
-      final codec = await ui.instantiateImageCodec(data);
-      final frame = await codec.getNextFrame();
-      _image = frame.image;
+      _image = await data.toImage();
+
+      final cacheFile = await FileManager.cacheImage(image: _image, fileName: fileName);
+      if (cacheFile != null) {
+        debugPrint("图片缓存成功: ${cacheFile.path}");
+      }
+      return _image;
     } catch (e) {
       debugPrint("图片加载失败: $e");
     }
-    return _image;
+    return null;
   }
 
   @override
@@ -589,7 +614,11 @@ class GameMatchItemPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant GameMatchItemPainter oldDelegate) =>
+      oldDelegate.text != text ||
+      oldDelegate.textRight != textRight ||
+      oldDelegate.image != image ||
+      oldDelegate.imageRight != imageRight;
 
   ({ui.Offset startPoint, ui.Offset leftEndPoint, ui.Offset rightEndPoint}) paintGameItem(
     Canvas canvas,

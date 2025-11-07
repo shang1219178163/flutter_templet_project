@@ -8,10 +8,14 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
+import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 文件管理类
@@ -180,15 +184,19 @@ class FileManager {
 
     final percentVN = ValueNotifier(0.0);
 
-    final response = await Dio().download(url, tmpPath, onReceiveProgress: (received, total) {
-      if (total != -1) {
-        final percent = (received / total);
-        final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
-        percentVN.value = percent;
-        debugPrint("percentStr: $percentStr");
-        onProgress?.call(percent);
-      }
-    });
+    final response = await Dio().download(
+      url,
+      tmpPath,
+      onReceiveProgress: (received, total) {
+        if (total != -1) {
+          final percent = (received / total);
+          final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
+          percentVN.value = percent;
+          debugPrint("percentStr: $percentStr");
+          onProgress?.call(percent);
+        }
+      },
+    );
     if (response.statusCode != 200) {
       debugPrint("❌FileShare onDownload: $response");
       return null;
@@ -198,5 +206,51 @@ class FileManager {
     }
     // debugPrint("response: ${response.data}");
     return File(tmpPath);
+  }
+
+  static Future<File?> getCacheFile({required String fileName, bool isTemDir = true}) async {
+    try {
+      // 获取应用沙盒目录（iOS/Android 都可）
+      final directory = isTemDir ? (await getTemporaryDirectory()) : (await getApplicationDocumentsDirectory());
+      DLog.d("directory: ${directory}");
+      final path = '${directory.path}/$fileName';
+      final file = File(path);
+      return file;
+    } catch (e) {
+      DLog.d("$e");
+    }
+    return null;
+  }
+
+  /// 将 Uint8List 保存到沙盒，返回保存的文件路径
+  static Future<File?> cacheImage({required ui.Image image, required String fileName, bool isTemDir = true}) async {
+    final file = await getCacheFile(fileName: fileName, isTemDir: isTemDir);
+    if (file == null) {
+      return null;
+    }
+
+    final data = await image.toUint8List();
+    if (data == null) {
+      return null;
+    }
+    final fileNew = await file.writeAsBytes(data, flush: true); // flush 确保写入磁盘
+    return fileNew;
+  }
+
+  /// 根据文件路径读取 Uint8List
+  static Future<ui.Image?> imageFromCache({required String fileName, bool isTemDir = true}) async {
+    try {
+      final file = await getCacheFile(fileName: fileName, isTemDir: isTemDir);
+      if (file == null || !file.existsSync()) {
+        return null;
+      }
+
+      final bytes = await file.readAsBytes();
+      final image = await bytes.toImage();
+      return image;
+    } catch (e) {
+      DLog.d("$e");
+    }
+    return null;
   }
 }

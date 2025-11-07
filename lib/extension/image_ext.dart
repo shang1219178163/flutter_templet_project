@@ -28,17 +28,16 @@ extension UIImageExt on ui.Image {
   /// ui.Image 类型转 Uint8List
   FutureOr<Uint8List?> toUint8List({
     ui.ImageByteFormat format = ui.ImageByteFormat.png,
-    // Exception? exception
   }) async {
     var byteData = await toByteData(format: format);
-    // if (byteData == null) throw exception ?? Exception('toByteData 数据为空');
     final bytes = byteData?.buffer.asUint8List();
     return bytes;
   }
 
   /// 获取文件在内存中的大小
-  FutureOr<String?> fileSize(
-      {ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
+  FutureOr<String?> fileSize({
+    ui.ImageByteFormat format = ui.ImageByteFormat.png,
+  }) async {
     var byteData = await toByteData(format: format);
     final result = byteData?.fileSize();
     // print("imageSize: ${result}");
@@ -81,6 +80,16 @@ extension ImageProviderExt on ImageProvider {
   }
 }
 
+extension Uint8ListExt on Uint8List {
+  /// 转 ui.Image
+  Future<ui.Image> toImage() async {
+    final data = this;
+    final codec = await ui.instantiateImageCodec(data);
+    final frame = await codec.getNextFrame();
+    return frame.image;
+  }
+}
+
 extension ByteDataExt on ByteData {
   /// 获取文件在内存中的大小
   String fileSize() {
@@ -117,9 +126,7 @@ extension ImageCacheExt on ImageCache {
 
   /// evict
   static bool evict(Object key, {bool includeLive = true}) {
-    return (PaintingBinding.instance.imageCache
-            .evict(key, includeLive: includeLive) ==
-        true);
+    return (PaintingBinding.instance.imageCache.evict(key, includeLive: includeLive) == true);
   }
 
   /// evict images
