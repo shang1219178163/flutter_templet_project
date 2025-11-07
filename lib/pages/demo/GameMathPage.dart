@@ -1,10 +1,12 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class GameMathPage extends StatefulWidget {
   const GameMathPage({
@@ -59,7 +61,7 @@ class _GameMathPageState extends State<GameMathPage> {
                 child: GameMatchItem(
                   imageUrl: 'https://flagcdn.com/w40/kr.png',
                   text: '韩国男篮',
-                  imageUrlRight: 'https://flagcdn.com/w40/gum.png',
+                  imageUrlRight: 'https://flagpedia.net/data/flags/w40/cn.webp',
                   textRight: '关岛男篮',
                 ),
               ),
@@ -437,7 +439,7 @@ class _GameMatchItemState extends State<GameMatchItem> {
 
   initData() async {
     _image = await _loadImage(widget.imageUrl);
-    // _imageRight = await _loadImage(widget.imageUrlRight);
+    _imageRight = await _loadImage(widget.imageUrlRight);
   }
 
   @override
@@ -497,57 +499,60 @@ class GameMatchItemPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double lineHori = 50;
-    double lineVert = 20;
+    final bool isVer = size.height > size.width;
+    double lineHor = 50;
+    double lineVer = 20;
 
-    double leve1Hori = lineHori * 2.4;
-    double leve2Hori = lineHori * 1.2;
-    double leve3Hori = lineHori * 0.6;
+    double leve1Hor = lineHor * 2.4;
+    double leve2Hor = lineHor * 1.2;
+    double leve3Hor = lineHor * 0.6;
 
-    leve1Hori = size.width / 4;
-    leve2Hori = size.width / 4 - 3 * 10 - 20;
-    leve3Hori = size.width / 8 - 7 * 4 + 4;
+    if (isVer) {
+      leve1Hor = size.width / 4;
+      leve2Hor = size.width / 4 - 3 * 10 - 20;
+      leve3Hor = size.width / 8 - 7 * 4 + 4;
+    } else {
+      leve1Hor = size.width / 4;
+      leve2Hor = size.width / 5 - 3 * 10 - 20;
+      leve3Hor = size.width / 12 - 7 * 4 + 4;
+    }
 
-    final level0 = paintGameItem(canvas, size,
-        startPoint: size.center(ui.Offset(0, 100)), lineVert: lineVert, lineHori: leve1Hori);
-    final level10 =
-        paintGameItem(canvas, size, startPoint: level0.leftEndPoint, lineVert: lineVert, lineHori: leve2Hori);
-    final level11 =
-        paintGameItem(canvas, size, startPoint: level0.rightEndPoint, lineVert: lineVert, lineHori: leve2Hori);
+    DLog.d([size, leve1Hor, leve2Hor, leve3Hor].asMap());
 
-    final level20 =
-        paintGameItem(canvas, size, startPoint: level10.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
-    final level21 =
-        paintGameItem(canvas, size, startPoint: level10.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+    final level0 =
+        paintGameItem(canvas, size, startPoint: size.center(ui.Offset(0, 100)), lineVer: lineVer, lineHor: leve1Hor);
+    final level10 = paintGameItem(canvas, size, startPoint: level0.leftEndPoint, lineVer: lineVer, lineHor: leve2Hor);
+    final level11 = paintGameItem(canvas, size, startPoint: level0.rightEndPoint, lineVer: lineVer, lineHor: leve2Hor);
 
-    final level22 =
-        paintGameItem(canvas, size, startPoint: level11.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
-    final level23 =
-        paintGameItem(canvas, size, startPoint: level11.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+    final level20 = paintGameItem(canvas, size, startPoint: level10.leftEndPoint, lineVer: lineVer, lineHor: leve3Hor);
+    final level21 = paintGameItem(canvas, size, startPoint: level10.rightEndPoint, lineVer: lineVer, lineHor: leve3Hor);
+
+    final level22 = paintGameItem(canvas, size, startPoint: level11.leftEndPoint, lineVer: lineVer, lineHor: leve3Hor);
+    final level23 = paintGameItem(canvas, size, startPoint: level11.rightEndPoint, lineVer: lineVer, lineHor: leve3Hor);
 
     final level0Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: size.center(ui.Offset(0, 100 + 60)), lineVert: lineVert, lineHori: leve1Hori);
+        isReverse: false, startPoint: size.center(ui.Offset(0, 100 + 60)), lineVer: lineVer, lineHor: leve1Hor);
     final level10Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: level0Bom.leftEndPoint, lineVert: lineVert, lineHori: leve2Hori);
+        isReverse: false, startPoint: level0Bom.leftEndPoint, lineVer: lineVer, lineHor: leve2Hor);
     final level11Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: level0Bom.rightEndPoint, lineVert: lineVert, lineHori: leve2Hori);
+        isReverse: false, startPoint: level0Bom.rightEndPoint, lineVer: lineVer, lineHor: leve2Hor);
 
     final level20Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: level10Bom.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+        isReverse: false, startPoint: level10Bom.leftEndPoint, lineVer: lineVer, lineHor: leve3Hor);
     final level21Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: level10Bom.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+        isReverse: false, startPoint: level10Bom.rightEndPoint, lineVer: lineVer, lineHor: leve3Hor);
 
     final level22Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: level11Bom.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+        isReverse: false, startPoint: level11Bom.leftEndPoint, lineVer: lineVer, lineHor: leve3Hor);
     final level23Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: level11Bom.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+        isReverse: false, startPoint: level11Bom.rightEndPoint, lineVer: lineVer, lineHor: leve3Hor);
 
     /// 决赛
     final left = size.center(ui.Offset(0 - 50, 165));
     final right = size.center(ui.Offset(0 + 50, 165));
 
     paintGameImageAndText(canvas, size, isReverse: true, startPoint: left, text: text, image: image);
-    paintGameImageAndText(canvas, size, isReverse: true, startPoint: right, text: text, image: image);
+    paintGameImageAndText(canvas, size, isReverse: true, startPoint: right, text: text, image: imageRight);
 
     return;
 
@@ -590,9 +595,10 @@ class GameMatchItemPainter extends CustomPainter {
     Canvas canvas,
     Size size, {
     bool isReverse = true,
+    bool isLeftWin = true,
     required Offset startPoint,
-    double lineHori = 60,
-    double lineVert = 30,
+    double lineHor = 60,
+    double lineVer = 30,
   }) {
     double factor = isReverse == true ? 1.0 : -1.0;
 
@@ -600,10 +606,11 @@ class GameMatchItemPainter extends CustomPainter {
     var line = paintGameLine(
       canvas,
       size,
+      isLeftWin: isLeftWin,
       isReverse: isReverse,
       startPoint: startPoint,
-      lineHori: lineHori,
-      lineVert: lineVert,
+      lineHori: lineHor,
+      lineVert: lineVer,
     );
 
     // 比分
@@ -611,7 +618,7 @@ class GameMatchItemPainter extends CustomPainter {
       canvas,
       point: Offset(
         line.startPoint.dx,
-        line.startPoint.dy - (lineVert + lineVert / 2) * factor,
+        line.startPoint.dy - (lineVer + lineVer / 2) * factor,
       ),
       text: "99 - 66",
       style: const TextStyle(
@@ -639,32 +646,37 @@ class GameMatchItemPainter extends CustomPainter {
       isReverse: isReverse,
       startPoint: line.rightEndPoint,
       text: textRight,
-      image: image,
+      image: imageRight,
     );
     return (startPoint: startPoint, leftEndPoint: left.endPoint, rightEndPoint: right.endPoint);
   }
 
-  /// 绘制直线
+  /// 绘制线
   ({ui.Offset startPoint, ui.Offset leftEndPoint, ui.Offset rightEndPoint}) paintGameLine(
     Canvas canvas,
     Size size, {
+    double radius = 4.0,
+    required bool isLeftWin,
     required bool isReverse,
     required ui.Offset startPoint,
     double lineHori = 120,
     double lineVert = 60,
   }) {
+    final strokeColor = Colors.white38;
+    final winStrokeColor = Colors.red;
+
     final paintCenter = Paint()
-      ..color = Colors.white38
+      ..color = isLeftWin ? winStrokeColor : strokeColor
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final paintLeft = Paint()
-      ..color = Colors.red
+      ..color = isLeftWin ? winStrokeColor : strokeColor
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final paintRight = Paint()
-      ..color = Colors.blue
+      ..color = !isLeftWin ? winStrokeColor : strokeColor
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
@@ -684,16 +696,102 @@ class GameMatchItemPainter extends CustomPainter {
 
     // 中间到决赛
     canvas.drawLine(startPoint, centerPoint, paintCenter);
-
-    // 中间到上半场
-    canvas.drawLine(centerPoint, pointLeft1, paintLeft);
-    canvas.drawLine(pointLeft1, pointLeft2, paintLeft);
-
+    // // 中间到上半场
+    // canvas.drawLine(centerPoint, pointLeft1, paintLeft);
+    // canvas.drawLine(pointLeft1, pointLeft2, paintLeft);
     // 下半场到中间
-    canvas.drawLine(centerPoint, pointRight1, paintRight);
-    canvas.drawLine(pointRight1, pointRight2, paintRight);
+    // canvas.drawLine(centerPoint, pointRight1, paintRight);
+    // canvas.drawLine(pointRight1, pointRight2, paintRight);
+
+    paintCornerArc(
+      canvas: canvas,
+      paint: paintLeft,
+      radius: radius,
+      centerPoint: centerPoint,
+      point1: pointLeft1,
+      point2: pointLeft2,
+      alignment: isReverse ? Alignment.bottomLeft : Alignment.topLeft,
+    );
+
+    paintCornerArc(
+      canvas: canvas,
+      paint: paintRight,
+      radius: radius,
+      centerPoint: centerPoint,
+      point1: pointRight1,
+      point2: pointRight2,
+      alignment: isReverse ? Alignment.bottomRight : Alignment.topRight,
+    );
 
     return (startPoint: startPoint, leftEndPoint: pointLeft2, rightEndPoint: pointRight2);
+  }
+
+  /// 绘制四角圆弧
+  void paintCornerArc({
+    required Canvas canvas,
+    required Paint paint,
+    double radius = 4.0,
+    required ui.Offset centerPoint,
+    required ui.Offset point1,
+    required ui.Offset point2,
+    required Alignment alignment,
+  }) {
+    var arcPointStart = point1.translate(radius, 0);
+    var arcPointEnd = point1.translate(0, -radius);
+
+    var startAngle = 0.0;
+    var sweepAngle = math.pi / 2;
+
+    switch (alignment) {
+      case Alignment.bottomLeft:
+        {
+          arcPointStart = point1.translate(radius, 0);
+          arcPointEnd = point1.translate(0, -radius);
+
+          startAngle = math.pi / 2;
+          sweepAngle = math.pi / 2;
+        }
+        break;
+      case Alignment.topLeft:
+        {
+          arcPointStart = point1.translate(radius, 0);
+          arcPointEnd = point1.translate(0, radius);
+
+          startAngle = -math.pi;
+          sweepAngle = math.pi / 2;
+        }
+        break;
+      case Alignment.bottomRight:
+        {
+          arcPointStart = point1.translate(-radius, 0);
+          arcPointEnd = point1.translate(0, -radius);
+
+          startAngle = math.pi / 2;
+          sweepAngle = -math.pi / 2;
+        }
+        break;
+      case Alignment.topRight:
+        {
+          arcPointStart = point1.translate(-radius, 0);
+          arcPointEnd = point1.translate(0, radius);
+
+          startAngle = math.pi / 2 * 3;
+          sweepAngle = math.pi / 2;
+        }
+        break;
+      default:
+        break;
+    }
+
+    canvas.drawLine(centerPoint, arcPointStart, paint);
+    canvas.drawLine(arcPointEnd, point2, paint);
+
+    // 定义圆的外接矩形
+    final rect = Rect.fromCircle(
+      center: ui.Offset(arcPointStart.dx, arcPointEnd.dy),
+      radius: radius,
+    );
+    canvas.drawArc(rect, startAngle, sweepAngle, false, paint);
   }
 
   /// 上图下字
@@ -717,7 +815,7 @@ class GameMatchItemPainter extends CustomPainter {
       text: text,
       style: const TextStyle(
         color: Colors.white,
-        fontSize: 11,
+        fontSize: 9,
         backgroundColor: Colors.green,
       ),
     );

@@ -1,4 +1,5 @@
-import 'dart:math';
+import 'dart:math' as math;
+import 'dart:ui';
 
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,21 @@ class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
                         ),
                       ),
                     ),
+                    CustomPaint(
+                      size: const Size(200, 200),
+                      painter: QuarterArcPainter(
+                        radius: 30,
+                        startAngle: math.pi / 2,
+                      ),
+                    ),
+                    CustomPaint(
+                      size: const Size(200, 200),
+                      painter: QuarterArcPainter(
+                        radius: 30,
+                        startAngle: math.pi / 2,
+                        sweepAngle: -math.pi / 2,
+                      ),
+                    ),
                   ]
                       .map((e) => Container(
                             padding: EdgeInsets.all(10),
@@ -153,8 +169,8 @@ class NTrianglePainter extends CustomPainter {
 
     path.arcTo(
       Rect.fromCircle(center: Offset(size.width - arrowRadius, size.height / 2), radius: arrowRadius),
-      -90.0 * (pi / 180.0), // 起始弧度
-      180.0 * (pi / 180.0), // 结束弧度
+      -90.0 * (math.pi / 180.0), // 起始弧度
+      180.0 * (math.pi / 180.0), // 结束弧度
       false,
     );
 
@@ -249,18 +265,18 @@ class ProgressBarPainter extends CustomPainter {
 
     // 计算弧形的圆心和半径
     final center = size.center(Offset.zero);
-    final radius = (min(size.width, size.height) - strokeWidth) / 2;
+    final radius = (math.min(size.width, size.height) - strokeWidth) / 2;
 
     // 绘制背景弧
     canvas.drawCircle(center, radius, backgroundPaint);
 
     // 计算进度的角度
-    var sweepAngle = 2 * pi * progress;
+    var sweepAngle = 2 * math.pi * progress;
 
     // 绘制前景弧（表示进度）
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
-      -pi / 2,
+      -math.pi / 2,
       sweepAngle, // 根据进度值计算的角度
       false, // 是否是扇形
       foregroundPaint,
@@ -271,4 +287,45 @@ class ProgressBarPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false; // 这里不需要重绘
   }
+}
+
+class QuarterArcPainter extends CustomPainter {
+  QuarterArcPainter({
+    required this.radius,
+    this.strokeWidth = 3,
+    this.center = const Offset(100, 100),
+    this.startAngle = 0,
+    this.sweepAngle = math.pi / 2,
+  });
+
+  /// 进度值
+  final double radius;
+
+  final double startAngle;
+  final double sweepAngle;
+  final double strokeWidth;
+  final Offset center;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.blue
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth;
+
+    // 定义圆的外接矩形
+    final rect = Rect.fromCircle(center: center, radius: radius);
+
+    // 绘制右上角 1/4 圆弧（从 270° 到 360°）
+    canvas.drawArc(
+      rect,
+      startAngle, // 起始角（270°，上）
+      sweepAngle, // 扫过 90°（右上）
+      false, // 不连圆心，仅画弧线
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

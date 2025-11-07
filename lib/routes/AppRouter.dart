@@ -21,7 +21,6 @@ import 'package:flutter_templet_project/pages/ScrollablePositionedListDemo.dart'
 import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
 import 'package:flutter_templet_project/pages/app_settings_page.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
-import 'package:flutter_templet_project/pages/app_unknown_page.dart';
 import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/APPForgetPwdPage.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
@@ -370,6 +369,7 @@ import 'package:flutter_templet_project/pages/tabBar_pageView_demo.dart';
 import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/pages/third_page.dart';
+import 'package:flutter_templet_project/pages/unknown_page.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo_new.dart';
@@ -872,7 +872,7 @@ class AppRouter {
 
   static final unknownRoute = GetPage(
     name: AppRouter.unknown,
-    page: () => AppUnknownPage(),
+    page: () => UnknownPage(),
   );
 
   static final List<GetPage> pages = [
