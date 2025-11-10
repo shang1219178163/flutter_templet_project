@@ -36,108 +36,6 @@ class _SaltedKey<S, V> extends LocalKey {
   }
 }
 
-/// A material expansion panel. It has a header and a body and can be either
-/// expanded or collapsed. The body of the panel is only visible when it is
-/// expanded.
-///
-/// {@youtube 560 315 https://www.youtube.com/watch?v=2aJZzRMziJc}
-///
-/// Expansion panels are only intended to be used as children for
-/// [ExpansionPanelList].
-///
-/// See [ExpansionPanelList] for a sample implementation.
-///
-/// See also:
-///
-///  * [ExpansionPanelList]
-///  * <https://material.io/design/components/lists.html#types>
-class EnExpansionPanel {
-  /// Creates an expansion panel to be used as a child for [ExpansionPanelList].
-  /// See [ExpansionPanelList] for an example on how to use this widget.
-  EnExpansionPanel({
-    required this.headerBuilder,
-    required this.body,
-    this.isExpanded = false,
-    this.canTapOnHeader = false,
-    this.backgroundColor,
-    this.splashColor,
-    this.highlightColor,
-  });
-
-  /// The widget builder that builds the expansion panels' header.
-  final ExpansionPanelHeaderBuilder headerBuilder;
-
-  /// The body of the expansion panel that's displayed below the header.
-  ///
-  /// This widget is visible only when the panel is expanded.
-  final Widget body;
-
-  /// Whether the panel is expanded.
-  ///
-  /// Defaults to false.
-  final bool isExpanded;
-
-  /// Defines the splash color of the panel if [canTapOnHeader] is true,
-  /// or the splash color of the expand/collapse IconButton if [canTapOnHeader]
-  /// is false.
-  ///
-  /// If [canTapOnHeader] is false, and [ThemeData.useMaterial3] is
-  /// true, this field will be ignored, as [IconButton.splashColor]
-  /// will be ignored, and you should use [highlightColor] instead.
-  ///
-  /// If this is null, then the icon button will use its default splash color
-  /// [ThemeData.splashColor], and the panel will use its default splash color
-  /// [ThemeData.splashColor] (if [canTapOnHeader] is true).
-  final Color? splashColor;
-
-  /// Defines the highlight color of the panel if [canTapOnHeader] is true, or
-  /// the highlight color of the expand/collapse IconButton if [canTapOnHeader]
-  /// is false.
-  ///
-  /// If this is null, then the icon button will use its default highlight color
-  /// [ThemeData.highlightColor], and the panel will use its default highlight
-  /// color [ThemeData.highlightColor] (if [canTapOnHeader] is true).
-  final Color? highlightColor;
-
-  /// Whether tapping on the panel's header will expand/collapse it.
-  ///
-  /// Defaults to false.
-  final bool canTapOnHeader;
-
-  /// Defines the background color of the panel.
-  ///
-  /// Defaults to [ThemeData.cardColor].
-  final Color? backgroundColor;
-}
-
-/// An expansion panel that allows for radio-like functionality.
-/// This means that at any given time, at most, one [ExpansionPanelRadio]
-/// can remain expanded.
-///
-/// A unique identifier [value] must be assigned to each panel.
-/// This identifier allows the [ExpansionPanelList] to determine
-/// which [ExpansionPanelRadio] instance should be expanded.
-///
-/// See [ExpansionPanelList.radio] for a sample implementation.
-class EnExpansionPanelRadio extends EnExpansionPanel {
-  /// An expansion panel that allows for radio functionality.
-  ///
-  /// A unique [value] must be passed into the constructor.
-  EnExpansionPanelRadio({
-    required this.value,
-    required super.headerBuilder,
-    required super.body,
-    super.canTapOnHeader,
-    super.backgroundColor,
-    super.splashColor,
-    super.highlightColor,
-  });
-
-  /// The value that uniquely identifies a radio panel so that the currently
-  /// selected radio panel can be identified.
-  final Object value;
-}
-
 /// A material expansion panel list that lays out its children and animates
 /// expansions.
 ///
@@ -165,11 +63,12 @@ class EnExpansionPanelList extends StatefulWidget {
   /// triggered when an expansion panel expand/collapse button is pushed.
   const EnExpansionPanelList({
     super.key,
-    this.children = const <EnExpansionPanel>[],
+    this.children = const <ExpansionPanel>[],
     this.expansionCallback,
     this.animationDuration = kThemeAnimationDuration,
     this.expandedHeaderPadding = _kPanelHeaderExpandedDefaultPadding,
     this.dividerColor,
+    this.radius = Radius.zero,
     this.elevation = 2,
     this.expandIconColor,
     this.materialGapSize = 16.0,
@@ -181,21 +80,22 @@ class EnExpansionPanelList extends StatefulWidget {
   /// This widget allows for at most one panel in the list to be open. The
   /// expansion panel callback is triggered when an expansion panel
   /// expand/collapse button is pushed. The [children] objects must be instances
-  /// of [EnExpansionPanelRadio].
+  /// of [ExpansionPanelRadio].
   ///
   /// {@tool dartpad}
-  /// Here is a simple example of how to implement EnExpansionPanelList.radio.
+  /// Here is a simple example of how to implement ExpansionPanelList.radio.
   ///
   /// ** See code in examples/api/lib/material/expansion_panel/expansion_panel_list.expansion_panel_list_radio.0.dart **
   /// {@end-tool}
   const EnExpansionPanelList.radio({
     super.key,
-    this.children = const <EnExpansionPanelRadio>[],
+    this.children = const <ExpansionPanelRadio>[],
     this.expansionCallback,
     this.animationDuration = kThemeAnimationDuration,
     this.initialOpenPanelValue,
     this.expandedHeaderPadding = _kPanelHeaderExpandedDefaultPadding,
     this.dividerColor,
+    this.radius = Radius.zero,
     this.elevation = 2,
     this.expandIconColor,
     this.materialGapSize = 16.0,
@@ -203,26 +103,26 @@ class EnExpansionPanelList extends StatefulWidget {
 
   /// The children of the expansion panel list. They are laid out in a similar
   /// fashion to [ListBody].
-  final List<EnExpansionPanel> children;
+  final List<ExpansionPanel> children;
 
   /// The callback that gets called whenever one of the expand/collapse buttons
   /// is pressed. The arguments passed to the callback are the index of the
   /// pressed panel and whether the panel is currently expanded or not.
   ///
-  /// If [EnExpansionPanelList.radio] is used, the callback may be called a
+  /// If [ExpansionPanelList.radio] is used, the callback may be called a
   /// second time if a different panel was previously open. The arguments
   /// passed to the second callback are the index of the panel that will close
   /// and false, marking that it will be closed.
   ///
   /// For [EnExpansionPanelList], the callback should call [State.setState] when
   /// it is notified about the closing/opening panel. On the other hand, the
-  /// callback for [EnExpansionPanelList.radio] is intended to inform the parent
+  /// callback for [ExpansionPanelList.radio] is intended to inform the parent
   /// widget of changes, as the radio panels' open/close states are managed
   /// internally.
   ///
   /// This callback is useful in order to keep track of the expanded/collapsed
   /// panels in a parent widget that may need to react to these changes.
-  final EnExpansionPanelCallback? expansionCallback;
+  final ExpansionPanelCallback? expansionCallback;
 
   /// The duration of the expansion animation.
   final Duration animationDuration;
@@ -231,7 +131,7 @@ class EnExpansionPanelList extends StatefulWidget {
   final bool _allowOnlyOnePanelOpen;
 
   /// The value of the panel that initially begins open. (This value is
-  /// only used when initializing with the [EnExpansionPanelList.radio]
+  /// only used when initializing with the [ExpansionPanelList.radio]
   /// constructor.)
   final Object? initialOpenPanelValue;
 
@@ -240,6 +140,9 @@ class EnExpansionPanelList extends StatefulWidget {
   /// By default, 16px of space is added to the header vertically (above and below)
   /// during expansion.
   final EdgeInsets expandedHeaderPadding;
+
+  /// 默认圆角 Radius.circular(2)
+  final Radius? radius;
 
   /// Defines color for the divider when [EnExpansionPanel.isExpanded] is false.
   ///
@@ -441,6 +344,7 @@ class _EnExpansionPanelListState extends State<EnExpansionPanelList> {
 
     return EnMergeableMaterial(
       hasDividers: true,
+      radius: widget.radius,
       dividerColor: widget.dividerColor,
       elevation: widget.elevation,
       children: items,
