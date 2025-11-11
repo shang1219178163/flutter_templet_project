@@ -193,7 +193,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
               // child: Icon(Icons.camera_alt, color: Colors.black12,),
               child: Center(
                 child: Image(
-                  image: AssetImage("assets/images/medical/icon_camera.png"),
+                  image: AssetImage("assets/images/icon_camera.png"),
                   width: 24.w,
                   height: 24.w,
                 ),

@@ -39,13 +39,14 @@ class ImageService {
       }
 
       var format = CompressFormat.jpeg;
-      if (filePath.toLowerCase().endsWith(".jpeg")) {
+      final filePathLowerCase = filePath.toLowerCase();
+      if (filePathLowerCase.endsWith(".jpeg") || filePathLowerCase.endsWith(".jpg")) {
         format = CompressFormat.jpeg;
-      } else if (filePath.toLowerCase().endsWith(".png")) {
+      } else if (filePathLowerCase.endsWith(".png")) {
         format = CompressFormat.png;
-      } else if (filePath.toLowerCase().endsWith(".heic")) {
+      } else if (filePathLowerCase.endsWith(".heic")) {
         format = CompressFormat.heic;
-      } else if (filePath.toLowerCase().endsWith(".webp")) {
+      } else if (filePathLowerCase.endsWith(".webp")) {
         format = CompressFormat.webp;
       } else {
         return file;
