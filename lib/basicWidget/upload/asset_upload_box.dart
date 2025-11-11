@@ -139,100 +139,104 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     double runSpacing = 10,
     bool canEdit = true,
   }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
-      // print("itemWidth: $itemWidth");
-      return Wrap(spacing: spacing, runSpacing: runSpacing, alignment: WrapAlignment.start, children: [
-        ...items.map((e) {
-          // final size = await e.length()/(1024*1024);
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
+        // print("itemWidth: $itemWidth");
+        return Wrap(spacing: spacing, runSpacing: runSpacing, alignment: WrapAlignment.start, children: [
+          ...items.map(
+            (e) {
+              // final size = await e.length()/(1024*1024);
 
-          final index = items.indexOf(e);
+              final index = items.indexOf(e);
 
-          return Container(
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  child: SizedBox(
-                    width: itemWidth,
-                    height: itemWidth,
-                    child: InkWell(
-                      onTap: () {
-                        // debugPrint("onTap: ${e.url}");
-                        final urls =
-                            items.where((e) => e.url?.startsWith("http") == true).map((e) => e.url ?? "").toList();
-                        final index = urls.indexOf(e.url ?? "");
-                        // debugPrint("urls: ${urls.length}, $index");
-                        FocusScope.of(context).unfocus();
+              return Container(
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      child: SizedBox(
+                        width: itemWidth,
+                        height: itemWidth,
+                        child: InkWell(
+                          onTap: () {
+                            // debugPrint("onTap: ${e.url}");
+                            final urls =
+                                items.where((e) => e.url?.startsWith("http") == true).map((e) => e.url ?? "").toList();
+                            final index = urls.indexOf(e.url ?? "");
+                            // debugPrint("urls: ${urls.length}, $index");
+                            FocusScope.of(context).unfocus();
 
-                        if (widget.onTap != null) {
-                          widget.onTap?.call(urls, index);
-                          return;
-                        }
+                            if (widget.onTap != null) {
+                              widget.onTap?.call(urls, index);
+                              return;
+                            }
 
-                        jumpImagePreview(urls: urls, index: index);
-                      },
-                      child: AssetUploadButton(
-                        model: e,
-                        urlBlock: (url) {
-                          // e.url = url;
-                          // debugPrint("e: ${e.data?.name}_${e.url}");
-                          final isAllFinished = items.where((e) => e.url == null).isEmpty;
-                          // debugPrint("isAllFinsied: ${isAllFinsied}");
-                          if (isAllFinished) {
-                            final urls = items.map((e) => e.url).toList();
-                            debugPrint("isAllFinsied urls: $urls");
-                            widget.onChanged(items);
-                            isAllUploadFinished.value = true;
-                          }
-                        },
-                        onDelete: canEdit == false
-                            ? null
-                            : () {
-                                debugPrint("onDelete: $index, lenth: ${items[index].file?.path}");
-                                items.remove(e);
-                                setState(() {});
+                            jumpImagePreview(urls: urls, index: index);
+                          },
+                          child: AssetUploadButton(
+                            model: e,
+                            urlBlock: (url) {
+                              // e.url = url;
+                              // debugPrint("e: ${e.data?.name}_${e.url}");
+                              final isAllFinished = items.where((e) => e.url == null).isEmpty;
+                              // debugPrint("isAllFinsied: ${isAllFinsied}");
+                              if (isAllFinished) {
+                                final urls = items.map((e) => e.url).toList();
+                                debugPrint("isAllFinsied urls: $urls");
                                 widget.onChanged(items);
-                              },
-                        showFileSize: widget.showFileSize,
+                                isAllUploadFinished.value = true;
+                              }
+                            },
+                            onDelete: canEdit == false
+                                ? null
+                                : () {
+                                    debugPrint("onDelete: $index, lenth: ${items[index].file?.path}");
+                                    items.remove(e);
+                                    setState(() {});
+                                    widget.onChanged(items);
+                                  },
+                            showFileSize: widget.showFileSize,
+                          ),
+                        ),
                       ),
                     ),
+                  ],
+                ),
+              );
+            },
+          ).toList(),
+          if (items.length < maxCount)
+            InkWell(
+              onTap: () {
+                if (!canEdit) {
+                  debugPrint("无图片编辑权限");
+                  return;
+                }
+                onPicker(maxCount: maxCount);
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 10, right: 10),
+                width: itemWidth - 10,
+                height: itemWidth - 10,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.1),
+                  // border: Border.all(width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+                // child: Icon(Icons.camera_alt, color: Colors.black12,),
+                child: Center(
+                  child: Image(
+                    image: AssetImage("assets/images/icon_camera.png"),
+                    width: 24.w,
+                    height: 24.w,
                   ),
                 ),
-              ],
-            ),
-          );
-        }).toList(),
-        if (items.length < maxCount)
-          InkWell(
-            onTap: () {
-              if (!canEdit) {
-                debugPrint("无图片编辑权限");
-                return;
-              }
-              onPicker(maxCount: maxCount);
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: 10, right: 10),
-              width: itemWidth - 10,
-              height: itemWidth - 10,
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
-                // border: Border.all(width: 1),
-                borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
-              // child: Icon(Icons.camera_alt, color: Colors.black12,),
-              child: Center(
-                child: Image(
-                  image: AssetImage("assets/images/icon_camera.png"),
-                  width: 24.w,
-                  height: 24.w,
-                ),
-              ),
-            ),
-          )
-      ]);
-    });
+            )
+        ]);
+      },
+    );
   }
 
   onPicker({
