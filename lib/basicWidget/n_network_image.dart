@@ -63,6 +63,7 @@ class NNetworkImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius),
       child: ExtendedImage.network(
         url,
+        key: ValueKey(url),
         width: width,
         height: height,
         cacheWidth: width == null ? null : (width! * 3).toInt(),
