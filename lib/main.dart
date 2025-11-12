@@ -18,6 +18,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/basicWidget/n_file_viewer/n_file_viewer.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
@@ -58,6 +59,9 @@ import 'package:route_stack_manager/route_stack_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final appEnv = const String.fromEnvironment("app_env");
+  DLog.d("appEnv: $appEnv");
 
   // /// 从  --dart-define=app_env=beta 读取运行环境
   RequestConfig.initFromEnvironment();

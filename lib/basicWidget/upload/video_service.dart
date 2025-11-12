@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:video_compress/video_compress.dart';
 
 /// 视频处理工具类
@@ -30,9 +29,7 @@ class VideoService {
     try {
       // if(showToast)EasyToast.showLoading("视频处理中...");
 
-      final quality = needCompress
-          ? VideoQuality.MediumQuality
-          : VideoQuality.HighestQuality;
+      final quality = needCompress ? VideoQuality.MediumQuality : VideoQuality.HighestQuality;
       final compressVideoMediaInfo = await VideoCompress.compressVideo(
         file.path,
         quality: quality,
@@ -42,8 +39,7 @@ class VideoService {
         includeAudio: includeAudio,
         frameRate: frameRate,
       );
-      debugPrint(
-          "compressVideoMediaInfo: ${compressVideoMediaInfo?.toJson()},");
+      debugPrint("compressVideoMediaInfo: ${compressVideoMediaInfo?.toJson()},");
       // flutter: compressVideoMediaInfo: {
       // path: /Users/shang/Library/Developer/CoreSimulator/Devices/0F4619D8-E3FB-4AB1-BFCA-16209BC1C1DE/data/Containers/Data/Application/DF484842-8F8F-4011-9C97-A4B044C96F37/tmp/video_compress/3DC271D4-2CCA-4BB4-9E35-52212E604560_L0_001_1693920819.575075_134159A2-0202-4862-BF3A-1279987455655D4E097E-2E5C-4CA2-A928-43299E69B5F0.mp4,
       // title: ,
@@ -125,7 +121,7 @@ class VideoService {
     // debugPrint("savePath: ${savePath}");
     ToastUtil.hideLoading();
 
-    final result = await ImageGallerySaver.saveFile(savePath);
+    final result = await ImageGallerySaverPlus.saveFile(savePath);
     debugPrint("saveFile: $result $url");
     final isSuccess = result["isSuccess"];
     final message = isSuccess ? "已保存到相册" : "操作失败";

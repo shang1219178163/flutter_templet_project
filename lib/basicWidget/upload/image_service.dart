@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 /// 图片处理工具类
 class ImageService {
@@ -172,7 +172,7 @@ class ImageService {
     // debugPrint("savePath: ${savePath}");
     ToastUtil.hideLoading();
 
-    final result = await ImageGallerySaver.saveFile(savePath);
+    final result = await ImageGallerySaverPlus.saveFile(savePath);
     debugPrint("saveFile: $result $url");
     final isSuccess = result["isSuccess"];
     final message = isSuccess ? "已保存到相册" : "操作失败";

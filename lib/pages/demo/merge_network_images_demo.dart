@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
   final String? title;
@@ -76,7 +76,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           TextButton(
             onPressed: () {
               _globalKey.currentState?.toCompositePics().then((pngBytes) {
-                return ImageGallerySaver.saveImage(
+                return ImageGallerySaverPlus.saveImage(
                   pngBytes,
                   quality: 100,
                 );

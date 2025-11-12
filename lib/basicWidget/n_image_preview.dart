@@ -15,11 +15,10 @@ import 'package:flutter_templet_project/basicWidget/n_image_indicator.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
+import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
-import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -377,33 +376,7 @@ class _NImagePreviewState extends State<NImagePreview> {
   }
 
   void onDownload() {
-    saveNetworkImage(url: widget.urls[currentIndex.value]);
-  }
-
-  saveNetworkImage({required String url}) async {
-    String? name;
-    try {
-      name = url.split("/").last;
-    } catch (e) {
-      debugPrint("saveNetworkImage name: ${e.toString()}");
-    }
-
-    var response = await Dio().get(
-      url,
-      options: Options(responseType: ResponseType.bytes),
-    );
-
-    final imageBytes = Uint8List.fromList(response.data);
-    final result = await ImageGallerySaver.saveImage(
-      imageBytes,
-      quality: 90,
-      name: name,
-    );
-    debugPrint("saveImage: $result $url");
-    final isSuccess = result["isSuccess"];
-    if (isSuccess) {
-      final message = result["isSuccess"] ? "图片已保存到相册" : "操作失败";
-      showToast(message, barrierDismissible: false);
-    }
+    final url = widget.urls[currentIndex.value];
+    ImageService().saveImage(url: url);
   }
 }

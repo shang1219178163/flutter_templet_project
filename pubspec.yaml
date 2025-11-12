@@ -152,7 +152,7 @@ dependencies:
   # 图片裁剪
   image_cropper: ^5.0.1
   # 图片保存
-  image_gallery_saver: ^2.0.3
+  image_gallery_saver_plus: ^3.0.5
   # 图片选择
   wechat_camera_picker: ^4.1.2
   wechat_assets_picker: ^9.0.4
