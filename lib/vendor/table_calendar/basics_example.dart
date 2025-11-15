@@ -54,7 +54,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     _selectedEvents.value = events;
     super.initState();
   }

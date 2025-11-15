@@ -22,7 +22,7 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
   }
 
