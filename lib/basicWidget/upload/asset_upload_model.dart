@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
@@ -13,7 +14,10 @@ class AssetUploadModel {
     this.extraInfoMap,
   });
 
-  final AssetEntity? entity;
+  /// 证件占位图
+  AssetImage? assetImage;
+
+  AssetEntity? entity;
 
   /// 上传之后的文件 url
   String? url;
@@ -30,8 +34,12 @@ class AssetUploadModel {
   /// 额外信息
   Map<String, dynamic>? extraInfoMap;
 
+  /// url 有效
+  bool get urlValid => url?.startsWith("http") == true;
+
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
+    data['assetImage'] = assetImage?.assetName;
     data['entity'] = entity;
     data['url'] = url;
     data['file'] = file;
