@@ -637,6 +637,10 @@ class _SecondPageState extends State<SecondPage> {
               title: 'ElevatedButton',
               onPressed: () {},
             ),
+            buildGradientElevatedButton(
+              onPressed: () {},
+            ),
+            buildGradientElevatedButton(),
             buildMaterialButtonGradient(
               onPressed: () {
                 DLog.d("buildMaterialButtonGradient");
@@ -1215,6 +1219,43 @@ class _SecondPageState extends State<SecondPage> {
           // style: TextStyle(
           //   fontSize: 14,
           // ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildGradientElevatedButton({
+    VoidCallback? onPressed,
+    double radius = 8,
+  }) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        padding: EdgeInsets.zero,
+        minimumSize: const Size(40, 20),
+        elevation: 0,
+      ),
+      onPressed: onPressed,
+      child: Ink(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        decoration: onPressed == null
+            ? null
+            : BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.orange, Colors.pink],
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(radius)),
+              ),
+        child: Container(
+          alignment: Alignment.center,
+          child: const Text(
+            'Custom Gradient',
+            // style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
         ),
       ),
     );
