@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
+@Deprecated("已弃用,请使用 ConvertFlle.dart")
 class APIConvertPage extends StatefulWidget {
   APIConvertPage({Key? key, this.title}) : super(key: key);
 
