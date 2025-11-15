@@ -9,7 +9,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
@@ -23,8 +23,7 @@ class VideoPlayerByChewiePage extends StatefulWidget {
   final VoidCallback? onBack;
 
   @override
-  _VideoPlayerByChewiePageState createState() =>
-      _VideoPlayerByChewiePageState();
+  _VideoPlayerByChewiePageState createState() => _VideoPlayerByChewiePageState();
 }
 
 class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
@@ -58,8 +57,7 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
   }
 
   Future<void> initPlayer() async {
-    _videoPlayerController =
-        VideoPlayerController.networkUrl(Uri.parse(videoUrl));
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(videoUrl));
     await _videoPlayerController.initialize();
 
     _createChewieController();
@@ -71,8 +69,7 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
       videoPlayerController: _videoPlayerController,
       autoPlay: true,
       looping: false,
-      progressIndicatorDelay:
-          bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
+      progressIndicatorDelay: bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
       // additionalOptions: (context) {
       //   return <OptionItem>[
@@ -153,9 +150,7 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
         children: <Widget>[
           Expanded(
             child: Center(
-              child: _chewieController != null &&
-                      _chewieController!
-                          .videoPlayerController.value.isInitialized
+              child: _chewieController != null && _chewieController!.videoPlayerController.value.isInitialized
                   ? Chewie(
                       controller: _chewieController!,
                     )

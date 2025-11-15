@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:fluwx/fluwx.dart';

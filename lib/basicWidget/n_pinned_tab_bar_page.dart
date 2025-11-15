@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// 悬浮 TabBarPage
 class NPinnedTabBarPage extends StatefulWidget {
@@ -45,10 +44,8 @@ class NPinnedTabBarPage extends StatefulWidget {
   State<NPinnedTabBarPage> createState() => _NPinnedTabBarPageState();
 }
 
-class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
-    with SingleTickerProviderStateMixin {
-  late final tabController =
-      TabController(length: widget.tabItems.length, vsync: this);
+class _NPinnedTabBarPageState extends State<NPinnedTabBarPage> with SingleTickerProviderStateMixin {
+  late final tabController = TabController(length: widget.tabItems.length, vsync: this);
 
   @override
   void dispose() {

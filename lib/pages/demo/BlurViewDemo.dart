@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_blur_view.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class BlurViewDemo extends StatelessWidget {
   final String? title;
@@ -30,8 +29,7 @@ class BlurViewDemo extends StatelessWidget {
 
   Widget buildBody() {
     const title = 'BackdropFilter class';
-    const message =
-        'A widget that applies a filter to the existing painted content and then paints child.'
+    const message = 'A widget that applies a filter to the existing painted content and then paints child.'
         'The filter will be applied to all the area within its parent or ancestor widget\'s clip. If there\'s no clip, the filter will be applied to the full screen.';
 
     return Stack(

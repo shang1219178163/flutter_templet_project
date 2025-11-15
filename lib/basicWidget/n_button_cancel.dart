@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// 浅主题色(10%)取消按钮
 class NButtonCancel extends StatelessWidget {

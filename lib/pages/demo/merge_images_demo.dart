@@ -4,9 +4,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_templet_project/extension/image_ext.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class MergeImagesDemo extends StatefulWidget {
   final String? title;
@@ -27,7 +24,6 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
 
   Widget? imageMerged;
   ImageProvider? _imageProvider;
-
 
   @override
   Widget build(BuildContext context) {

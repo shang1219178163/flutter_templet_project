@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_search.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/map_ext.dart';
+
 import 'package:flutter_templet_project/model/ProjectPubDepsModel.dart';
 
 /// Autocomplete 组件示例

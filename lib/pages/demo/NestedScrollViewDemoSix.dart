@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:flutter_templet_project/basicWidget/n_sliver_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_page_one.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 

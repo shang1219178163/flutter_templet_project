@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tween_transition.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:get/get.dart';
 
 class NTweenTransitionDemo extends StatefulWidget {
@@ -24,8 +24,7 @@ class NTweenTransitionDemo extends StatefulWidget {
 }
 
 class _NTweenTransitionDemoState extends State<NTweenTransitionDemo> {
-  bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

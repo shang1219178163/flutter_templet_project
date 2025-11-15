@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/tween_animated_widget.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class AnimatedBuilderDemo extends StatefulWidget {
   const AnimatedBuilderDemo({Key? key, this.title}) : super(key: key);
@@ -11,13 +10,10 @@ class AnimatedBuilderDemo extends StatefulWidget {
   _AnimatedBuilderDemoState createState() => _AnimatedBuilderDemoState();
 }
 
-class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo>
-    with SingleTickerProviderStateMixin {
-  late AnimationController controller =
-      AnimationController(duration: Duration(seconds: 2), vsync: this);
+class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTickerProviderStateMixin {
+  late AnimationController controller = AnimationController(duration: Duration(seconds: 2), vsync: this);
   //图片宽高从0变到400
-  late Animation<double> animation =
-      Tween(begin: 0.0, end: 400.0).animate(controller);
+  late Animation<double> animation = Tween(begin: 0.0, end: 400.0).animate(controller);
 
   @override
   initState() {

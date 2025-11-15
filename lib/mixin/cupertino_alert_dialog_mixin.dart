@@ -10,7 +10,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 简单提示信息
 mixin CupertinoAlertDialogMixin<T extends StatefulWidget> on State<T> {
@@ -22,10 +21,7 @@ mixin CupertinoAlertDialogMixin<T extends StatefulWidget> on State<T> {
     VoidCallback? onCancel,
     VoidCallback? onConfirm,
   }) {
-    if (titleStr.isEmpty &&
-        contentStr.isEmpty &&
-        title == null &&
-        content == null) {
+    if (titleStr.isEmpty && contentStr.isEmpty && title == null && content == null) {
       return;
     }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:tuple/tuple.dart';
 

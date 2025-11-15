@@ -9,8 +9,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_tts/flutter_tts.dart';
 
 /*

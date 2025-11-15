@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class MediaQueryScreeenDemo extends StatefulWidget {
   MediaQueryScreeenDemo({Key? key, this.title}) : super(key: key);
@@ -27,12 +25,10 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
   late final iosTabHeight = mq.viewPadding.bottom;
 
   /// 安全内容高度(包含 AppBar 和 BottomNavigationBar 高度)
-  double get safeContentHeight =>
-      screenHeight - statusBarHeight - bottomBarHeight;
+  double get safeContentHeight => screenHeight - statusBarHeight - bottomBarHeight;
 
   /// 实际的安全高度
-  double get safeHeight =>
-      safeContentHeight - kToolbarHeight - kBottomNavigationBarHeight;
+  double get safeHeight => safeContentHeight - kToolbarHeight - kBottomNavigationBarHeight;
 
   final _globalKey = GlobalKey();
 
@@ -182,8 +178,7 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
               color: ColorExt.random,
               height: kBottomNavigationBarHeight,
               padding: EdgeInsets.only(top: 20, left: 20),
-              child: Text(
-                  "kBottomNavigationBarHeight: $kBottomNavigationBarHeight"),
+              child: Text("kBottomNavigationBarHeight: $kBottomNavigationBarHeight"),
             ),
             Container(
               color: ColorExt.random,
@@ -254,10 +249,8 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
     var safeContentHeight = screenHeight - statusBarHeight - bottomBarHeight;
 
     /// 实际的安全高度
-    var safeHeight =
-        safeContentHeight - kToolbarHeight - kBottomNavigationBarHeight;
-    debugPrint(
-        "kBottomNavigationBarHeight:${kBottomNavigationBarHeight.toString()}");
+    var safeHeight = safeContentHeight - kToolbarHeight - kBottomNavigationBarHeight;
+    debugPrint("kBottomNavigationBarHeight:${kBottomNavigationBarHeight.toString()}");
     debugPrint("statusBarHeight:${statusBarHeight.toString()}");
     debugPrint("bottomBarHeight:${bottomBarHeight.toString()}");
     debugPrint("safeContentHeight:${safeContentHeight.toString()}");

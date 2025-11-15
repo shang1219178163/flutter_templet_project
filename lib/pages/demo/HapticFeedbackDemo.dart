@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:get/get.dart';
 
 class HapticFeedbackDemo extends StatefulWidget {
@@ -24,8 +24,7 @@ class HapticFeedbackDemo extends StatefulWidget {
 }
 
 class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
-  bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

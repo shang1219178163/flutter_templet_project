@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class FlexDemo extends StatefulWidget {
   const FlexDemo({Key? key, this.title}) : super(key: key);
@@ -25,22 +23,19 @@ class _FlexDemoState extends State<FlexDemo> {
         body: Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: ListView(children: [
-            NSectionBox(
-                title: "Flex.Horizontal", child: _buildFlexHorizontal()),
+            NSectionBox(title: "Flex.Horizontal", child: _buildFlexHorizontal()),
             NSectionBox(title: "Flex.Vertical", child: _buildFlexVertical()),
             NSectionBox(title: "_buildSection", child: _buildSection()),
             NSectionBox(title: "_buildSection2", child: _buildSection2()),
             NSectionBox(title: "_buildSection3", child: _buildSection3()),
-            NSectionBox(
-                title: "buildMutipleExpanded", child: buildMutipleExpanded()),
+            NSectionBox(title: "buildMutipleExpanded", child: buildMutipleExpanded()),
             NSectionBox(
               title: "buildMutipleFlexible",
               child: buildMutipleFlexible(),
             ),
             NSectionBox(
               title: "tips",
-              child:
-                  buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),
+              child: buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),
             ),
           ]),
         ));
@@ -60,9 +55,7 @@ class _FlexDemoState extends State<FlexDemo> {
           Expanded(
             flex: 2,
             child: Column(
-              children: <Widget>[
-                Text("This is a long text this is a long test" * 5)
-              ],
+              children: <Widget>[Text("This is a long text this is a long test" * 5)],
             ),
           )
         ],
@@ -146,9 +139,7 @@ class _FlexDemoState extends State<FlexDemo> {
           Column(
             children: <Widget>[
               Text("Hello World"),
-              ElevatedButton(
-                  onPressed: () => debugPrint("OutlinedButton"),
-                  child: Text("OutlinedButton")),
+              ElevatedButton(onPressed: () => debugPrint("OutlinedButton"), child: Text("OutlinedButton")),
             ],
           ),
           Expanded(

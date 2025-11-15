@@ -1,7 +1,7 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class CarModelsPage extends StatefulWidget {
@@ -93,8 +93,7 @@ class _CarModelsPageState extends State<CarModelsPage> {
         itemBuilder: (BuildContext context, int index) {
           // if (index == 0) return customHeader();
           var model = contactList[index];
-          return Utils.getWeChatListItem(context, model,
-              susHeight: susItemHeight);
+          return Utils.getWeChatListItem(context, model, susHeight: susItemHeight);
         },
         susItemHeight: susItemHeight,
         susItemBuilder: (BuildContext context, int index) {
@@ -115,10 +114,8 @@ class _CarModelsPageState extends State<CarModelsPage> {
         },
         indexBarOptions: IndexBarOptions(
           needRebuild: true,
-          selectTextStyle: TextStyle(
-              fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
-          selectItemDecoration:
-              BoxDecoration(shape: BoxShape.circle, color: Color(0xFF333333)),
+          selectTextStyle: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+          selectItemDecoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFF333333)),
           indexHintWidth: 96,
           indexHintHeight: 97,
           indexHintDecoration: BoxDecoration(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter_templet_project/extension/dlog.dart';
-
 class BackgroundTaskDemo extends StatefulWidget {
   const BackgroundTaskDemo({
     super.key,

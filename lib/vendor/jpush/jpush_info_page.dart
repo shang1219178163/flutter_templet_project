@@ -7,7 +7,6 @@ import 'package:flutter_templet_project/basicWidget/n_future_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/service_protocol_info_ext.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';

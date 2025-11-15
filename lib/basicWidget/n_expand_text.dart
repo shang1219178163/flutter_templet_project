@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/text_painter_ext.dart';
 
 // Header.h4(title: "字符串超过一行时(折叠)"),
 // Container(
@@ -61,8 +60,7 @@ class _NExpandTextState extends State<NExpandText> {
     int expandMaxLine = 10,
     TextStyle? expandTitleStyle,
   }) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final textPainter = TextPainterExt.getTextPainter(
         text: text,
         textStyle: textStyle,
@@ -72,16 +70,14 @@ class _NExpandTextState extends State<NExpandText> {
       final numberOfLines = textPainter.computeLineMetrics().length;
       // debugPrint("numberOfLines:${numberOfLines}");
 
-      return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+      return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         final btnTitle = isExpand ? "收起" : "展开";
         return Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(19))),
+                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(19))),
                 child: Container(
                   // color: Colors.green,
                   padding: EdgeInsets.symmetric(vertical: 8),

@@ -8,11 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/duration_ext.dart';
-import 'package:flutter_templet_project/extension/file_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:http/http.dart' as http;
 // import 'package:get/get.dart';

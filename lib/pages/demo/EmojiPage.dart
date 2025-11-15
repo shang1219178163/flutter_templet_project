@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/FloatingActionButtonLocationOffset.dart';
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/regexp_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
 //https://getemoji.com/
@@ -54,8 +52,8 @@ class _EmojiPageState extends State<EmojiPage> {
   // var currentVN = ValueNotifier("🇨🇳");
   var currentVN = ValueNotifier("💯");
 
-  static final RegExp emojiReg = RegExp(
-      r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
+  static final RegExp emojiReg =
+      RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
 
   static final RegExp textReg = RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]");
 
@@ -107,8 +105,7 @@ class _EmojiPageState extends State<EmojiPage> {
                     height: 30,
                     child: FloatingActionButton.extended(
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      extendedPadding:
-                          EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                      extendedPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(8),
@@ -129,8 +126,7 @@ class _EmojiPageState extends State<EmojiPage> {
                     height: 30,
                     child: FloatingActionButton.extended(
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      extendedPadding:
-                          EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                      extendedPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(8),
@@ -183,8 +179,7 @@ class _EmojiPageState extends State<EmojiPage> {
                               decoration: BoxDecoration(
                                 // color: ColorExt.random,
                                 // border: Border.all(color: Colors.blue),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(0)),
+                                borderRadius: BorderRadius.all(Radius.circular(0)),
                               ),
                               child: Column(
                                 children: [
@@ -200,16 +195,13 @@ class _EmojiPageState extends State<EmojiPage> {
                                         child: Container(
                                             alignment: Alignment.center,
                                             decoration: BoxDecoration(
-                                                color: Colors.blue,
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
+                                                color: Colors.blue, borderRadius: BorderRadius.circular(5)),
                                             padding: const EdgeInsets.all(10),
                                             width: 50,
                                             height: 100,
                                             child: Text(
                                               e.runes.toList().toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                              style: TextStyle(color: Colors.white),
                                             )),
                                       );
                                     },
@@ -240,16 +232,14 @@ class _EmojiPageState extends State<EmojiPage> {
     return Container(
       padding: EdgeInsets.all(8),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 4),
-              blurRadius: 4,
-              color: Color(0xff999999).withOpacity(0.2),
-              // color: Colors.red,
-            ),
-          ]),
+      decoration: BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor, boxShadow: [
+        BoxShadow(
+          offset: Offset(0, 4),
+          blurRadius: 4,
+          color: Color(0xff999999).withOpacity(0.2),
+          // color: Colors.red,
+        ),
+      ]),
       child: ValueListenableBuilder(
           valueListenable: currentVN,
           builder: (context, value, child) {

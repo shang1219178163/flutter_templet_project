@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_fixed_width_indicator.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class UserDetailPage extends StatelessWidget {

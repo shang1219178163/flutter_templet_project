@@ -3,7 +3,6 @@ import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text_vertical.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NExpandTextDemo extends StatefulWidget {
   NExpandTextDemo({Key? key, this.title}) : super(key: key);
@@ -58,10 +57,8 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                 child: Container(
                   color: Colors.yellow,
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: NExpandText(
-                      text: text,
-                      textStyle: textStyle,
-                      expandTitleStyle: TextStyle(color: Colors.green)),
+                  child:
+                      NExpandText(text: text, textStyle: textStyle, expandTitleStyle: TextStyle(color: Colors.green)),
                 ),
               ),
               NSectionBox(
@@ -69,10 +66,8 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                 child: Container(
                   color: Colors.yellow,
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: NExpandText(
-                      text: text,
-                      textStyle: textStyle,
-                      expandTitleStyle: TextStyle(color: Colors.green)),
+                  child:
+                      NExpandText(text: text, textStyle: textStyle, expandTitleStyle: TextStyle(color: Colors.green)),
                 ),
               ),
               NSectionBox(
@@ -156,10 +151,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                       minHeight: 38,
                     ),
                     alignment: Alignment.centerLeft,
-                    child: NExpandText(
-                        text: e,
-                        textStyle: textStyle,
-                        expandTitleStyle: TextStyle(color: Colors.green)),
+                    child: NExpandText(text: e, textStyle: textStyle, expandTitleStyle: TextStyle(color: Colors.green)),
                   ),
                 );
               },

@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/overlay_ext.dart';
+
 import 'package:get/get.dart';
 
 /// 浮层工具类
@@ -207,8 +207,7 @@ class _SpinkitWidget extends StatefulWidget {
   _SpinkitWidgetState createState() => _SpinkitWidgetState();
 }
 
-class _SpinkitWidgetState extends State<_SpinkitWidget>
-    with SingleTickerProviderStateMixin {
+class _SpinkitWidgetState extends State<_SpinkitWidget> with SingleTickerProviderStateMixin {
   final spinkit = SpinKitFadingCircle(
     color: Colors.white,
     // itemBuilder: (BuildContext context, int index) {

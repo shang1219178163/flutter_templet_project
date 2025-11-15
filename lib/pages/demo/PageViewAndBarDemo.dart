@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class PageViewAndBarDemo extends StatefulWidget {
   PageViewAndBarDemo({Key? key, this.title}) : super(key: key);

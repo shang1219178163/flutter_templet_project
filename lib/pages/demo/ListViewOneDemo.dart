@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:tuple/tuple.dart';
 
@@ -105,17 +103,14 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
               onKeyCallback: (context, index, itemKey) {
-                _scrollController.jumToHorizontal(
-                    key: itemKey,
-                    offsetX: (MediaQuery.of(context).size.width / 2));
+                _scrollController.jumToHorizontal(key: itemKey, offsetX: (MediaQuery.of(context).size.width / 2));
               }),
           Container(
             height: 30,
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: MarqueeWidget(
               itemCount: itemCount,
-              itemBuilder: (BuildContext context, int index,
-                  BoxConstraints constraints) {
+              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 // print("MarqueeWidget: $index ${index % 2 == 0}");
                 final isEdge = (index == 0 || index == itemCount - 1);
                 if (isEdge) {
@@ -192,14 +187,12 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
                         ? Text(e.item2)
                         : e.item1.startsWith('http')
                             ? FadeInImage(
-                                placeholder:
-                                    'img_placeholder.png'.toAssetImage(),
+                                placeholder: 'img_placeholder.png'.toAssetImage(),
                                 image: NetworkImage(e.item1),
                                 fit: BoxFit.cover,
                                 height: 60,
                               )
-                            : Container(
-                                height: 60, child: Text('Index:${e.item1}')),
+                            : Container(height: 60, child: Text('Index:${e.item1}')),
                   ),
                 );
               },
@@ -224,8 +217,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
   _initTimer() {
     _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
       final val = _scrollController.offset + 30;
-      _scrollController.animateTo(val,
-          duration: Duration(milliseconds: 350), curve: Curves.linear);
+      _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
       if (_scrollController.position.outOfRange) {
         debugPrint("atEdge:到边界了");
         _scrollController.jumpTo(0);
@@ -235,8 +227,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
 }
 
 /// 跑马灯 Builder 类型
-typedef MarqueeWidgetBuilder = Widget Function(
-    BuildContext context, int index, BoxConstraints constraints);
+typedef MarqueeWidgetBuilder = Widget Function(BuildContext context, int index, BoxConstraints constraints);
 
 class MarqueeSimpleWidget extends StatelessWidget {
   MarqueeSimpleWidget({
@@ -267,8 +258,7 @@ class MarqueeSimpleWidget extends StatelessWidget {
 
     return MarqueeWidget(
       itemCount: totalCount,
-      itemBuilder:
-          (BuildContext context, int index, BoxConstraints constraints) {
+      itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
         debugPrint("MarqueeWidget: $index ${index % 2 == 0}");
         final isEdge = (index == 0 || index == totalCount - 1);
         if (isEdge) {
@@ -301,8 +291,7 @@ class MarqueeSimpleWidget extends StatelessWidget {
         // double indexNew = ((index - 1) / 2);
         var indexNew = (index - 1) ~/ 2;
         debugPrint("MarqueeWidget indexNew: $index $indexNew");
-        final e =
-            Text("真实索引:${index}_item索引:${indexNew}_AAAAAAAAAAAAAAAAAAAAA");
+        final e = Text("真实索引:${index}_item索引:${indexNew}_AAAAAAAAAAAAAAAAAAAAA");
         return itemBuilder(context, indexNew, constraints);
         return Container(
           color: Colors.green,
@@ -418,8 +407,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
   _initTimer() {
     _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
       final val = _scrollController.offset + 30;
-      _scrollController.animateTo(val,
-          duration: Duration(milliseconds: 350), curve: Curves.linear);
+      _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
       if (_scrollController.position.outOfRange) {
         debugPrint("atEdge:到边界了");
         _scrollController.jumpTo(0);

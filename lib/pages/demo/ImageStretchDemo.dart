@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/asset_image_stretch.dart';
-import 'package:flutter_templet_project/extension/text_painter_ext.dart';
-
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 图片拉伸
 class ImageStretchDemo extends StatefulWidget {
@@ -15,8 +12,7 @@ class ImageStretchDemo extends StatefulWidget {
 }
 
 class _ImageStretchDemoState extends State<ImageStretchDemo> {
-  final message =
-      "这里的气泡背景是作为Container的背景展示的，在Container外层需要再套一层ConstrainedBox，并设置最小高度minHeight，否则当当只有一行文字的时候背景图片无法显示.";
+  final message = "这里的气泡背景是作为Container的背景展示的，在Container外层需要再套一层ConstrainedBox，并设置最小高度minHeight，否则当当只有一行文字的时候背景图片无法显示.";
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +48,7 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
         RotatedBox(
           quarterTurns: 2,
           child: buildChatBubble(
-            child: RotatedBox(
-                quarterTurns: 2, child: Text(message).toColoredBox()),
+            child: RotatedBox(quarterTurns: 2, child: Text(message).toColoredBox()),
           ),
         ),
         Container(
@@ -82,8 +77,7 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
         Flexible(
           child: Text('Very texttttttttttttt').toColoredBox(),
         ),
-        LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
+        LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
           final text = 'Flutter 聊一会' * 3;
 
           final textStyle = TextStyle(color: Colors.red);

@@ -10,8 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/enum/FileType.dart';
-import 'package:flutter_templet_project/extension/src/num_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
 import 'package:get/get.dart';
 

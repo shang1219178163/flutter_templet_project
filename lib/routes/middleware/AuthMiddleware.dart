@@ -1,4 +1,3 @@
-import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:get/get.dart';
 
 class AuthMiddleware extends GetMiddleware {

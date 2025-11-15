@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
+
 import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
 

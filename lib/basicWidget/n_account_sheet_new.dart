@@ -11,7 +11,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 账号选择器(泛型尝试)
 class NAccountSheetNew<E extends MapEntry<String, dynamic>> extends StatefulWidget {

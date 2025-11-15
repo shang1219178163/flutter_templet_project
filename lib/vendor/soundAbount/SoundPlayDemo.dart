@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_templet_project/basicWidget/voice_animation_image.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 ///类似微信语音播放动画
 class SoundPlayDemo extends StatefulWidget {
@@ -21,14 +19,12 @@ class _SoundPlayDemoState extends State<SoundPlayDemo> {
 
   bool isPlaying = false;
 
-  final _voiceGlobalKey = GlobalKey<VoiceAnimationImageState>(
-      debugLabel: "VoiceAnimationImageState");
+  final _voiceGlobalKey = GlobalKey<VoiceAnimationImageState>(debugLabel: "VoiceAnimationImageState");
 
   final FlutterSoundPlayer? _mPlayer = FlutterSoundPlayer();
   bool _mPlayerIsInited = false;
 
-  final _exampleAudioFilePathMP3 =
-      'https://flutter-sound.canardoux.xyz/extract/05.mp3';
+  final _exampleAudioFilePathMP3 = 'https://flutter-sound.canardoux.xyz/extract/05.mp3';
 
   @override
   void dispose() {

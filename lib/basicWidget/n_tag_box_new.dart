@@ -9,7 +9,6 @@
 ///type '((int, String)) => void' is not a subtype of type '((dynamic) => void)?'
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 typedef StringValueChanged<T> = String Function(T value);
 
@@ -166,8 +165,7 @@ class _NTagBoxNewState<E> extends State<NTagBoxNew> {
             child: InkWell(
               onTap: () => onDelete.call(e),
               child: Container(
-                decoration:
-                    ShapeDecoration(color: Colors.white, shape: CircleBorder()),
+                decoration: ShapeDecoration(color: Colors.white, shape: CircleBorder()),
                 child: Image(
                   image: "icon_delete.png".toAssetImage(),
                   width: 16,

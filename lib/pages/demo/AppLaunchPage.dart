@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
@@ -26,8 +26,6 @@ class _AppLaunchPageState extends State<AppLaunchPage> {
 
   @override
   void initState() {
-
-
     timer?.cancel();
     timer ??= Timer(const Duration(milliseconds: 300), () {
       Get.offAndToNamed(AppRouter.appTabPage);

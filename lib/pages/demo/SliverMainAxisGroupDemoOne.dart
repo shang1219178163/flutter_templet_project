@@ -9,8 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_section.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_section_list.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 
 class SliverMainAxisGroupDemoOne extends StatefulWidget {
   const SliverMainAxisGroupDemoOne({
@@ -18,12 +16,10 @@ class SliverMainAxisGroupDemoOne extends StatefulWidget {
   });
 
   @override
-  State<SliverMainAxisGroupDemoOne> createState() =>
-      _SliverMainAxisGroupDemoOneState();
+  State<SliverMainAxisGroupDemoOne> createState() => _SliverMainAxisGroupDemoOneState();
 }
 
-class _SliverMainAxisGroupDemoOneState
-    extends State<SliverMainAxisGroupDemoOne> {
+class _SliverMainAxisGroupDemoOneState extends State<SliverMainAxisGroupDemoOne> {
   final dataList = [
     NSliverSectionModel(name: '水果', items: [
       '苹果',

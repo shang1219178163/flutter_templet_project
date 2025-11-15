@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// appBar 主题随滚动改变组件
 class NAppBarThemChange extends StatefulWidget {
@@ -99,9 +98,7 @@ class _NAppBarThemChangeState extends State<NAppBarThemChange> {
 
   @override
   Widget build(BuildContext context) {
-    final data = noDefault
-        ? (widget.themeData ?? _transparentThemeData)
-        : (widget.defaultThemeData ?? _whiteThemeData);
+    final data = noDefault ? (widget.themeData ?? _transparentThemeData) : (widget.defaultThemeData ?? _whiteThemeData);
 
     return NotificationListener<ScrollNotification>(
       onNotification: onNotification,

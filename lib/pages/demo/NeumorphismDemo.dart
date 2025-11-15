@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/neumorphism_button.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NeumorphismDemo extends StatefulWidget {
   const NeumorphismDemo({Key? key, this.title}) : super(key: key);
@@ -48,8 +46,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
           children: [
             Text(
               'Neumorphism',
-              style: TextStyle(
-                  fontSize: 22, letterSpacing: 5, fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 22, letterSpacing: 5, fontWeight: FontWeight.w900),
             ),
             const SizedBox(
               height: 50,
@@ -105,19 +102,17 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   onClick: () => debugPrint('Share'),
                   // borderRadius: 12,
-                  child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.share,
-                          color: ColorExt.random,
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        Text("Share"),
-                      ]),
+                  child:
+                      Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                    Icon(
+                      Icons.share,
+                      color: ColorExt.random,
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Text("Share"),
+                  ]),
                 ),
                 NeumorphismButton(
                   height: 50,
@@ -152,18 +147,13 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
         borderRadius: BorderRadius.circular(30),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Icon(Icons.share),
-            SizedBox(
-              width: 12,
-            ),
-            Text("Share")
-          ]),
-    ).toNeumorphism(
-        bottomShadowColor: const Color(0xFFA3B1C6),
-        topShadowColor: Colors.white);
+      child: Row(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: const [
+        Icon(Icons.share),
+        SizedBox(
+          width: 12,
+        ),
+        Text("Share")
+      ]),
+    ).toNeumorphism(bottomShadowColor: const Color(0xFFA3B1C6), topShadowColor: Colors.white);
   }
 }

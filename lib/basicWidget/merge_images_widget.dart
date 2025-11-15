@@ -4,9 +4,6 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_templet_project/extension/image_ext.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 合并多张图片为长图
 class MergeImagesWidget extends StatefulWidget {
@@ -48,7 +45,6 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
   late final devicePixelRatio = keyView.devicePixelRatio;
 
-
   @override
   Widget build(BuildContext context) {
     return buildBody();
@@ -73,20 +69,12 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
                         placeholder: 'assets/images/img_placeholder.png',
                         image: e.url ?? '',
                         fit: BoxFit.cover,
-                        width:
-                            double.tryParse(e.width ?? "${screenSize.width}") ??
-                                screenSize.width,
-                        height: double.tryParse(
-                                e.height ?? "${screenSize.height}") ??
-                            screenSize.height,
-                        imageCacheWidth: ((double.tryParse(
-                                        e.width ?? "${screenSize.width}") ??
-                                    screenSize.width) *
-                                devicePixelRatio)
-                            .toInt(),
-                        imageCacheHeight: ((double.tryParse(
-                                        e.height ?? "${screenSize.height}") ??
-                                    screenSize.height) *
+                        width: double.tryParse(e.width ?? "${screenSize.width}") ?? screenSize.width,
+                        height: double.tryParse(e.height ?? "${screenSize.height}") ?? screenSize.height,
+                        imageCacheWidth:
+                            ((double.tryParse(e.width ?? "${screenSize.width}") ?? screenSize.width) * devicePixelRatio)
+                                .toInt(),
+                        imageCacheHeight: ((double.tryParse(e.height ?? "${screenSize.height}") ?? screenSize.height) *
                                 devicePixelRatio)
                             .toInt(),
                       ),
@@ -172,8 +160,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   }
 
   FutureOr<ui.Image?> _capturePic(GlobalKey key) async {
-    var boundary =
-        key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    var boundary = key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
 
     final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
     var image = await boundary?.toImage(pixelRatio: keyView.devicePixelRatio);
@@ -256,8 +243,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     int bottom = 16,
   }) async {
     var images = await Future.wait(imageUrls.map((imageUrl) async {
-      final imageUint8List =
-          await ImageExt.imageDataFromUrl(imageUrl: imageUrl);
+      final imageUint8List = await ImageExt.imageDataFromUrl(imageUrl: imageUrl);
       if (imageUint8List == null) {
         throw Exception('图片数据异常');
       }
@@ -265,8 +251,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
       return image;
     }).toList());
 
-    final bytes = await toCompositeUIImages(
-        images: images, miniCode: miniCode, right: right, bottom: bottom);
+    final bytes = await toCompositeUIImages(images: images, miniCode: miniCode, right: right, bottom: bottom);
     return bytes;
   }
 
@@ -298,8 +283,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
       //画图
       for (var i = 0; i < images.length; i++) {
         final e = images[i];
-        final offsetY =
-            i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
+        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
         canvas.drawImage(e, Offset(0, offsetY.toDouble()), paint);
       }
@@ -315,17 +299,14 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
 
         canvas.drawImageRect(
           miniCodeImage,
-          Rect.fromLTWH(0, 0, miniCodeImage.width.toDouble(),
-              miniCodeImage.height.toDouble()),
+          Rect.fromLTWH(0, 0, miniCodeImage.width.toDouble(), miniCodeImage.height.toDouble()),
           Rect.fromLTWH(dx.toDouble(), dy.toDouble(), w, h),
           paint,
         );
       }
 
       //获取合成的图片
-      var image = await recorder
-          .endRecording()
-          .toImage(totalWidth.toInt(), totalHeight.toInt());
+      var image = await recorder.endRecording().toImage(totalWidth.toInt(), totalHeight.toInt());
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
       if (pngBytes == null) {
@@ -346,8 +327,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     // List<GlobalKey?> keys = widget.models.map((e) => e.globalKey).toList();
     // return _compositePics(keys);
     var urls = widget.models.map((e) => e.url ?? "").toList();
-    final miniCodeBytes =
-        await ImageExt.imageDataFromUrl(imageUrl: widget.qrCodeUrl);
+    final miniCodeBytes = await ImageExt.imageDataFromUrl(imageUrl: widget.qrCodeUrl);
     return toCompositeImageUrls(imageUrls: urls, miniCode: miniCodeBytes);
   }
 }

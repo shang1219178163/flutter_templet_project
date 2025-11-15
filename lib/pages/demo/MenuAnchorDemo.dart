@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor_for_image.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 enum SomeItemType { none, itemOne, itemTwo, itemThree }
 
@@ -116,8 +115,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
   }) {
     var selectedItem = initialItem;
 
-    return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return MenuAnchor(
         alignmentOffset: Offset(0, 0),
         builder: (context, MenuController controller, Widget? child) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
 
 class RefreshIndicatorDemoOne extends StatefulWidget {
   const RefreshIndicatorDemoOne({Key? key, this.title}) : super(key: key);

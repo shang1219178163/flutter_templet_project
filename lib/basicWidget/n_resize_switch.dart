@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// 可设置尺寸的 Switch 组件
 class NResizeSwitch extends StatefulWidget {

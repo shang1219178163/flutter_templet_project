@@ -7,9 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/text_painter_ext.dart';
 
 /// 用 Textfield实现的文字折叠组件
 class NExpandTextfield extends StatefulWidget {
@@ -60,8 +57,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
 
   final textEditingController = TextEditingController();
 
-  late final wordCount =
-      ValueNotifier(textEditingController.text.characters.length);
+  late final wordCount = ValueNotifier(textEditingController.text.characters.length);
 
   @override
   void initState() {
@@ -75,8 +71,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final textPainter = TextPainterExt.getTextPainter(
         text: widget.text,
         textStyle: widget.textStyle,
@@ -88,30 +83,24 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
 
       var isBeyond = textPainter.didExceedMaxLines;
 
-      return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+      return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         // final btnTitle = isExpand ? "收起" : "展开";
 
-        final toggleImage = (isExpand
-                ? "icon_expand_arrow_up.png"
-                : "icon_expand_arrow_down.png")
-            .toAssetImage();
+        final toggleImage = (isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png").toAssetImage();
 
         onToggle() {
           isExpand = !isExpand;
           setState(() {});
         }
 
-        final textChild =
-            widget.textBuilder?.call(isExpand, widget.expandMinLine) ??
-                buildTextField(
-                  text: widget.text,
-                  style: widget.textStyle,
-                  maxLines:
-                      isExpand ? widget.expandMaxLine : widget.expandMinLine,
-                  readOnly: widget.readOnly,
-                  maxLength: widget.maxLength,
-                );
+        final textChild = widget.textBuilder?.call(isExpand, widget.expandMinLine) ??
+            buildTextField(
+              text: widget.text,
+              style: widget.textStyle,
+              maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
+              readOnly: widget.readOnly,
+              maxLength: widget.maxLength,
+            );
 
         final opacity = widget.fillColor == Colors.white ? 0.1 : 0.05;
         return GestureDetector(

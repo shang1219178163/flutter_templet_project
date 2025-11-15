@@ -9,7 +9,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 扫描图片
 class NScanPhoto extends StatefulWidget {
@@ -40,8 +39,7 @@ class NScanPhoto extends StatefulWidget {
   State<NScanPhoto> createState() => _NScanPhotoState();
 }
 
-class _NScanPhotoState extends State<NScanPhoto>
-    with SingleTickerProviderStateMixin {
+class _NScanPhotoState extends State<NScanPhoto> with SingleTickerProviderStateMixin {
   //扫描动画
   AnimationController? _controller;
   Animation? _animation;
@@ -116,8 +114,7 @@ class _NScanPhotoState extends State<NScanPhoto>
 
     //Tween
     //.1创建位移的tween，值必须是double类型
-    _animation =
-        (widget.tween ?? Tween(begin: 0.0, end: 600)).animate(_controller!);
+    _animation = (widget.tween ?? Tween(begin: 0.0, end: 600)).animate(_controller!);
 
     //监听动画的状态改变
     _controller?.addStatusListener((status) {

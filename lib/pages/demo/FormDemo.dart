@@ -9,10 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/editable_text_ext.dart';
-import 'package:flutter_templet_project/extension/rich_text_ext.dart';
+
 import 'package:get/get.dart';
 
 /// 表单组件测试

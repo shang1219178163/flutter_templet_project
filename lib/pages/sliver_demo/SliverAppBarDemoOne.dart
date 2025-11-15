@@ -7,9 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 
 class SliverAppBarDemoOne extends StatefulWidget {
   final String? title;
@@ -20,8 +17,7 @@ class SliverAppBarDemoOne extends StatefulWidget {
   _SliverAppBarDemoOneState createState() => _SliverAppBarDemoOneState();
 }
 
-class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
-    with SingleTickerProviderStateMixin {
+class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTickerProviderStateMixin {
   /// 嵌套滚动
   final scrollControllerNew = ScrollController();
   final scrollY = ValueNotifier(0.0);
@@ -78,10 +74,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
                       //   scrollControllerNew.position.progress
                       // ]}");
 
-                      final opacity =
-                          scrollControllerNew.position.progress > 0.9
-                              ? 1.0
-                              : 0.0;
+                      final opacity = scrollControllerNew.position.progress > 0.9 ? 1.0 : 0.0;
                       return AnimatedOpacity(
                         opacity: opacity,
                         duration: const Duration(milliseconds: 100),
@@ -163,8 +156,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
                 key: PageStorageKey<String>(name),
                 slivers: <Widget>[
                   SliverOverlapInjector(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                        context),
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                   ),
                   SliverPadding(
                     padding: EdgeInsets.all(10.0),
@@ -173,8 +165,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
                           return ListTile(
-                            title:
-                                Text('Item $index, tab${tabController.index}'),
+                            title: Text('Item $index, tab${tabController.index}'),
                           );
                         },
                         childCount: 20,
@@ -210,9 +201,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
           mainAxisSpacing: 8,
           //宽高比
           // childAspectRatio: 3 / 4,
-          children: list
-              .map((e) => buildMenuItem(top: FlutterLogo(), bottom: Text(e)))
-              .toList(),
+          children: list.map((e) => buildMenuItem(top: FlutterLogo(), bottom: Text(e))).toList(),
         ),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
+
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 import 'package:github_language_colors/github_language_colors.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -91,8 +91,7 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
     );
   }
 
-  Widget getListItem(BuildContext context, Languages model,
-      {double susHeight = 40}) {
+  Widget getListItem(BuildContext context, Languages model, {double susHeight = 40}) {
     return ListTile(
       title: Text(
         model.name,
@@ -128,8 +127,7 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
             Container(
               margin: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Color.fromARGB(255, 225, 226, 230), width: 0.33),
+                  border: Border.all(color: Color.fromARGB(255, 225, 226, 230), width: 0.33),
                   color: Color.fromARGB(255, 239, 240, 244),
                   borderRadius: BorderRadius.circular(12)),
               child: TextField(
@@ -178,24 +176,18 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
                 indexBarOptions: IndexBarOptions(
                   needRebuild: true,
                   hapticFeedback: true,
-                  selectTextStyle: TextStyle(
-                      fontSize: 12,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),
-                  selectItemDecoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Color(0xFF333333)),
+                  selectTextStyle: TextStyle(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w500),
+                  selectItemDecoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFF333333)),
                   indexHintWidth: 96,
                   indexHintHeight: 97,
                   indexHintDecoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(
-                          Utils.getImgPath('ic_index_bar_bubble_white')),
+                      image: AssetImage(Utils.getImgPath('ic_index_bar_bubble_white')),
                       fit: BoxFit.contain,
                     ),
                   ),
                   indexHintAlignment: Alignment.centerRight,
-                  indexHintTextStyle:
-                      TextStyle(fontSize: 24.0, color: Colors.black87),
+                  indexHintTextStyle: TextStyle(fontSize: 24.0, color: Colors.black87),
                   indexHintOffset: Offset(-30, 0),
                 ),
               ),

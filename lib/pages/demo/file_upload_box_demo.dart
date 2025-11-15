@@ -9,8 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/file_ext.dart';
+
 import 'package:get/get.dart';
 
 /// 文件选择demo
@@ -27,8 +26,7 @@ class FileUploadBoxDemo extends StatefulWidget {
 }
 
 class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 

@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
+
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:photo_view/photo_view.dart';

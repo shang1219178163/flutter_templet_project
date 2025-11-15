@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -20,10 +19,8 @@ class ListViewStyleDemo extends StatefulWidget {
   _ListViewStyleDemoState createState() => _ListViewStyleDemoState();
 }
 
-class _ListViewStyleDemoState extends State<ListViewStyleDemo>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController =
-      TabController(length: _pages.length, vsync: this);
+class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTickerProviderStateMixin {
+  late final TabController _tabController = TabController(length: _pages.length, vsync: this);
 
   List<Tuple2<String, Widget>> _pages = [];
 
@@ -58,10 +55,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: _pages
-              .map((e) =>
-                  Tab(key: PageStorageKey<String>(e.item1), text: e.item1))
-              .toList(),
+          tabs: _pages.map((e) => Tab(key: PageStorageKey<String>(e.item1), text: e.item1)).toList(),
           // indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
         ),
@@ -164,8 +158,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo>
       itemList: tuples
           .map((e) => e.item2)
           .toList()
-          .map((e) => e.sorted(
-              (a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
+          .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
           .toList(),
       headerBuilder: (e) {
         return Container(
@@ -199,63 +192,59 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo>
   _buildPage4() {
     return EnhanceExpandListView(
       children: tuples
-          .map<ExpandPanelModel<Tuple2<String, String>>>(
-              (e) => ExpandPanelModel(
-                    canTapOnHeader: true,
-                    isExpanded: false,
-                    arrowPosition: EnhanceExpansionPanelArrowPosition.none,
-                    // backgroundColor: Color(0xFFDDDDDD),
-                    headerBuilder: (contenx, isExpand) {
-                      final trailing = isExpand
-                          ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)
-                          : Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.blue,
-                            );
-                      return Container(
-                        // color: Colors.green,
-                        color: isExpand ? Colors.black12 : null,
-                        child: ListTile(
-                          title: Text(
-                            e.item1,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          // subtitle: Text("subtitle"),
-                          trailing: trailing,
-                        ),
-                      );
-                    },
-                    bodyChildren: e.item2,
-                    bodyItemBuilder: (context, e) {
-                      return ListTile(
-                          title: Text(
-                            e.item1,
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          subtitle: Text(
-                            e.item2,
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          trailing: Icon(Icons.chevron_right),
-                          dense: true,
-                          // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                          onTap: () {
-                            if (e.item1
-                                .toLowerCase()
-                                .contains("loginPage".toLowerCase())) {
-                              Get.offNamed(e.item1, arguments: e.item1);
-                            } else {
-                              Get.toNamed(e.item1, arguments: e.item1);
-                            }
-                          });
-                    },
-                  ))
+          .map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
+                canTapOnHeader: true,
+                isExpanded: false,
+                arrowPosition: EnhanceExpansionPanelArrowPosition.none,
+                // backgroundColor: Color(0xFFDDDDDD),
+                headerBuilder: (contenx, isExpand) {
+                  final trailing = isExpand
+                      ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)
+                      : Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.blue,
+                        );
+                  return Container(
+                    // color: Colors.green,
+                    color: isExpand ? Colors.black12 : null,
+                    child: ListTile(
+                      title: Text(
+                        e.item1,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      // subtitle: Text("subtitle"),
+                      trailing: trailing,
+                    ),
+                  );
+                },
+                bodyChildren: e.item2,
+                bodyItemBuilder: (context, e) {
+                  return ListTile(
+                      title: Text(
+                        e.item1,
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      subtitle: Text(
+                        e.item2,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      trailing: Icon(Icons.chevron_right),
+                      dense: true,
+                      // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                      onTap: () {
+                        if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
+                          Get.offNamed(e.item1, arguments: e.item1);
+                        } else {
+                          Get.toNamed(e.item1, arguments: e.item1);
+                        }
+                      });
+                },
+              ))
           .toList(),
     );
   }
 
-  List<String> getTitles(
-      {required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
+  List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
     final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
     final result = List<String>.from(titles);
     // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');

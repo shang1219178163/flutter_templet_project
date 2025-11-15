@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// 封装输入框组件
 class NTextView extends StatefulWidget {
@@ -81,8 +80,7 @@ class NTextView extends StatefulWidget {
 }
 
 class _NTextViewState extends State<NTextView> {
-  late final textEditingController =
-      widget.controller ?? TextEditingController(text: widget.value);
+  late final textEditingController = widget.controller ?? TextEditingController(text: widget.value);
 
   late final focusNode = widget.focusNode ?? FocusNode();
 
@@ -111,8 +109,7 @@ class _NTextViewState extends State<NTextView> {
         ? EdgeInsets.only(left: 8, right: 8, top: 6)
         : EdgeInsets.symmetric(horizontal: 8, vertical: 6);
 
-    var contentMargin =
-        widget.isCounterInner ? EdgeInsets.only(bottom: 6) : EdgeInsets.zero;
+    var contentMargin = widget.isCounterInner ? EdgeInsets.only(bottom: 6) : EdgeInsets.zero;
 
     final textField = NTextField(
       focusNode: focusNode,
@@ -125,9 +122,8 @@ class _NTextViewState extends State<NTextView> {
       decorationBuilder: (dt) {
         final border = buildBorder(color: Colors.white);
 
-        final focusedBorder = widget.isCounterInner
-            ? buildBorder(color: Colors.white)
-            : buildBorder(color: context.primaryColor);
+        final focusedBorder =
+            widget.isCounterInner ? buildBorder(color: Colors.white) : buildBorder(color: context.primaryColor);
 
         final dtNew = dt.copyWith(
           fillColor: Colors.white,

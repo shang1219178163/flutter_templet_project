@@ -3,11 +3,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
-typedef XHomeSwiperBGWidgetBuilder = Widget Function(
-    double itemWidth, int index);
+typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
 typedef XHomeSwiperItemWidgetBuilder = Widget Function(int index);
 
 class XHorizontalScrollWidget extends StatelessWidget {
@@ -85,8 +84,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
           // color: Colors.green,
           // border: Border.all(width: 3, color: Colors.red),
           // borderRadius:const BorderRadius.all(Radius.circular(8)),
-          image:
-              bg == null ? null : DecorationImage(image: bg!, fit: BoxFit.fill),
+          image: bg == null ? null : DecorationImage(image: bg!, fit: BoxFit.fill),
           boxShadow: boxShadow,
           //  boxShadow: [
           //     BoxShadow(
@@ -191,8 +189,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
         width: itemWidth,
         // constraints: BoxConstraints(maxWidth: itemWidth),
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.only(bottomLeft: radius, bottomRight: radius),
+          borderRadius: BorderRadius.only(bottomLeft: radius, bottomRight: radius),
           gradient: _buildLinearGradient(isVertical: true),
         ),
         child: Text(
@@ -254,9 +251,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
         color: Colors.green,
         // border: Border.all(width: 3, color: Colors.red),
         // borderRadius:const BorderRadius.all(Radius.circular(8)),
-        image: bg == null
-            ? null
-            : DecorationImage(image: bg!, fit: BoxFit.fill), //设置图片
+        image: bg == null ? null : DecorationImage(image: bg!, fit: BoxFit.fill), //设置图片
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.all(radius),
@@ -281,11 +276,12 @@ class XHorizontalScrollWidget extends StatelessWidget {
 
 class _SynHomeSwiperTitleWidget extends StatelessWidget {
   const _SynHomeSwiperTitleWidget({
-    Key? key, 
-    this.text, 
-    this.maxLines, 
-    this.style, this.title, 
-    this.padding, 
+    Key? key,
+    this.text,
+    this.maxLines,
+    this.style,
+    this.title,
+    this.padding,
     this.alignment,
   }) : super(key: key);
 
@@ -416,8 +412,7 @@ class HorizontalScrollWidget extends StatelessWidget {
         padding: EdgeInsets.all(0),
         itemCount: items.length,
         // cacheExtent: 10,
-        itemBuilder:
-            itemBuilder ?? (context, index) => _buildItem(context, index),
+        itemBuilder: itemBuilder ?? (context, index) => _buildItem(context, index),
         separatorBuilder: (context, index) => _buildSeparator(context, index),
       ),
     );

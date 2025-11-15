@@ -8,8 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NSliverPersistentHeaderDemo extends StatefulWidget {
   const NSliverPersistentHeaderDemo({Key? key, this.title}) : super(key: key);
@@ -17,12 +15,10 @@ class NSliverPersistentHeaderDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _NSliverPersistentHeaderDemoState createState() =>
-      _NSliverPersistentHeaderDemoState();
+  _NSliverPersistentHeaderDemoState createState() => _NSliverPersistentHeaderDemoState();
 }
 
-class _NSliverPersistentHeaderDemoState
-    extends State<NSliverPersistentHeaderDemo> {
+class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDemo> {
   @override
   void initState() {
     super.initState();
@@ -52,11 +48,7 @@ class _NSliverPersistentHeaderDemoState
   buildBody() {
     return CustomScrollView(
       slivers: [
-        Container(
-                height: 200,
-                alignment: Alignment.center,
-                color: Colors.green,
-                child: Text("$widget"))
+        Container(height: 200, alignment: Alignment.center, color: Colors.green, child: Text("$widget"))
             .toSliverToBoxAdapter(),
         NSliverPersistentHeaderBuilder(
           // pinned: true,
@@ -84,8 +76,7 @@ class _NSliverPersistentHeaderDemoState
 
   onPressed() {}
 
-  SliverPersistentHeader buildSliverHeader(
-      {required Text text, bool pinned = true}) {
+  SliverPersistentHeader buildSliverHeader({required Text text, bool pinned = true}) {
     return SliverPersistentHeader(
       pinned: pinned,
       delegate: NSliverPersistentHeaderDelegate(

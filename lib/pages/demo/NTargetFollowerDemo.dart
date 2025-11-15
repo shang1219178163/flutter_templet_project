@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:tuple/tuple.dart';
 
@@ -110,8 +110,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                               followerBuilder: (context, onHide) {
                                 _onHide = onHide;
 
-                                debugPrint(
-                                    "${DateTime.now()} followerBuilder:");
+                                debugPrint("${DateTime.now()} followerBuilder:");
                                 return TapRegion(
                                   onTapInside: (tap) {
                                     debugPrint('On Tap Inside!!');
@@ -121,10 +120,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                                     onHide();
                                   },
                                   child: NLongPressMenu(
-                                      items: items
-                                          .map((e) => Tuple2(
-                                              e.item1, e.item2.toAssetImage()))
-                                          .toList(),
+                                      items: items.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
                                       onItem: (Tuple2<String, AssetImage> t) {
                                         onHide();
                                         debugPrint("onChanged_$t");
@@ -144,8 +140,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                                         }
                                       }),
                                 );
-                                return buildFollowerDefault(
-                                    onHide: onHide, index: i);
+                                return buildFollowerDefault(onHide: onHide, index: i);
                               }),
                     ),
                   );

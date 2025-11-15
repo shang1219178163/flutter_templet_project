@@ -7,8 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class HorizontalCell extends StatelessWidget {
   HorizontalCell({
@@ -88,39 +86,30 @@ class HorizontalCell extends StatelessWidget {
           if (left != null) left!,
           mid ??
               Expanded(
-                child: Column(
+                child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          title,
-                          if (titleRight != null) titleRight!,
-                        ]
-                            .map(
-                                (e) => e.toDecoratedBox(color: ColorExt.random))
-                            .toList(),
-                      ),
-                      if (subtitle != null || subtitleRight != null) titleSpace,
-                      if (subtitle != null || subtitleRight != null)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            if (subtitle != null) subtitle!,
-                            if (subtitleRight != null) subtitleRight!,
-                          ]
-                              .map((e) =>
-                                  e.toDecoratedBox(color: ColorExt.random))
-                              .toList(),
-                        ),
-                    ]).toDecoratedBox(color: ColorExt.random),
+                    children: <Widget>[
+                      title,
+                      if (titleRight != null) titleRight!,
+                    ].map((e) => e.toDecoratedBox(color: ColorExt.random)).toList(),
+                  ),
+                  if (subtitle != null || subtitleRight != null) titleSpace,
+                  if (subtitle != null || subtitleRight != null)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        if (subtitle != null) subtitle!,
+                        if (subtitleRight != null) subtitleRight!,
+                      ].map((e) => e.toDecoratedBox(color: ColorExt.random)).toList(),
+                    ),
+                ]).toDecoratedBox(color: ColorExt.random),
               ),
           if (right != null) right!,
           arrow ??
               Container(
                 padding: const EdgeInsets.only(left: 20),
-                child:
-                    Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
+                child: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
               ),
         ],
       ),

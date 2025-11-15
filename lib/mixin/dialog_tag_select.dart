@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
 
@@ -125,8 +125,7 @@ class DialogTagSelect with DialogMixin {
                       : const BorderSide(color: Color(0xffF3F3F3)),
                   label: Text(e.name ?? "-", maxLines: 2, softWrap: true),
                   labelStyle: TextStyle(
-                    color:
-                        e.isSelected == true ? Colors.white : Color(0xff181818),
+                    color: e.isSelected == true ? Colors.white : Color(0xff181818),
                   ),
                   // padding: EdgeInsets.only(left: 15, right: 15),
                   // selected: (e == selectTagModel),
@@ -134,8 +133,7 @@ class DialogTagSelect with DialogMixin {
                   selectedColor: context.primaryColor,
                   backgroundColor: Colors.white,
                   onSelected: (bool selected) {
-                    final chooseCount =
-                        tags.where((e) => e.isSelected == true).toList().length;
+                    final chooseCount = tags.where((e) => e.isSelected == true).toList().length;
 
                     for (final element in tags) {
                       if (element.id == e.id) {
@@ -150,8 +148,7 @@ class DialogTagSelect with DialogMixin {
                         }
                       }
                     }
-                    selectTagsTmp =
-                        tags.where((e) => e.isSelected == true).toList();
+                    selectTagsTmp = tags.where((e) => e.isSelected == true).toList();
                     setState1(() {});
                   },
                 ),

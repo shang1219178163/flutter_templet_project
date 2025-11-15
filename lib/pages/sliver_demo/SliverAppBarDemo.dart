@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class SliverAppBarDemo extends StatefulWidget {
   const SliverAppBarDemo({Key? key}) : super(key: key);
@@ -8,8 +7,7 @@ class SliverAppBarDemo extends StatefulWidget {
   _SliverAppBarDemoState createState() => _SliverAppBarDemoState();
 }
 
-class _SliverAppBarDemoState extends State<SliverAppBarDemo>
-    with SingleTickerProviderStateMixin {
+class _SliverAppBarDemoState extends State<SliverAppBarDemo> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

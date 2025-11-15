@@ -12,7 +12,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 /// 创建文件并保存

@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 
 /// 扫动手势
 class NSwiperGestureDetector extends StatelessWidget {

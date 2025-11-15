@@ -10,7 +10,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -52,8 +52,7 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
           child: ValueListenableBuilder<double>(
               valueListenable: _progressVN,
               builder: (context, value, child) {
-                final indicatorColor =
-                    value >= 1.0 ? Colors.transparent : primaryColor;
+                final indicatorColor = value >= 1.0 ? Colors.transparent : primaryColor;
 
                 return LinearProgressIndicator(
                   value: value,
@@ -92,8 +91,7 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
               );
             }));
 
-    final response = await Dio().download(widget.url, tmpPath,
-        onReceiveProgress: (received, total) {
+    final response = await Dio().download(widget.url, tmpPath, onReceiveProgress: (received, total) {
       if (total != -1) {
         final percent = (received / total);
         final percentStr = "${(percent * 100).toStringAsFixed(0)}%";

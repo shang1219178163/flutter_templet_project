@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:tuple/tuple.dart';
 

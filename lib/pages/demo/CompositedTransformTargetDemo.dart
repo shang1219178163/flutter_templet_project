@@ -3,8 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/alignment_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 import 'package:get/get.dart';
 
 class CompositedTransformTargetDemo extends StatefulWidget {
@@ -13,12 +12,10 @@ class CompositedTransformTargetDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _CompositedTransformTargetDemoState createState() =>
-      _CompositedTransformTargetDemoState();
+  _CompositedTransformTargetDemoState createState() => _CompositedTransformTargetDemoState();
 }
 
-class _CompositedTransformTargetDemoState
-    extends State<CompositedTransformTargetDemo> {
+class _CompositedTransformTargetDemoState extends State<CompositedTransformTargetDemo> {
   final LayerLink layerLink = LayerLink();
   late OverlayEntry _overlayEntry;
   bool show = false;
@@ -105,8 +102,7 @@ class _CompositedTransformTargetDemoState
   }
 
   PreferredSize buildTab() {
-    var items =
-        AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
+    var items = AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
 
     final rotations = <double>[-180, -135, -90, -45, 0, 45, 90, 135, 180];
     final height = 24 * 3.0 + 8 + 3;
@@ -273,8 +269,7 @@ class _CustomSlideDemoState extends State {
 
   Offset indicatorOffset = const Offset(0, 0);
   Offset getIndicatorOffset(Offset dragOffset) {
-    final x = (dragOffset.dx - (indicatorWidth / 2.0))
-        .clamp(0.0, slideWidth - indicatorWidth);
+    final x = (dragOffset.dx - (indicatorWidth / 2.0)).clamp(0.0, slideWidth - indicatorWidth);
     final y = (slideHeight - indicatorHeight) / 2.0;
     return Offset(x, y);
   }

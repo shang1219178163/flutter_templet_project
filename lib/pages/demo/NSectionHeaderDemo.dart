@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/text_style_ext.dart';
 
 class NSectionHeaderDemo extends StatefulWidget {
   NSectionHeaderDemo({super.key, this.title});

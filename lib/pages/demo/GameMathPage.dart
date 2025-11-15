@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/image_ext.dart';
+
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class GameMathPage extends StatefulWidget {

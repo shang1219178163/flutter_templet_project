@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/floating_action_button_location_ext.dart';
 
 class BottomAppBarDemo extends StatefulWidget {
   const BottomAppBarDemo({Key? key}) : super(key: key);
@@ -19,8 +18,7 @@ class BottomAppBarDemo extends StatefulWidget {
 class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   bool _showFab = true;
   bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation =
-      FloatingActionButtonLocation.endDocked;
+  FloatingActionButtonLocation _fabLocation = FloatingActionButtonLocation.endDocked;
 
   final locations = FloatingActionButtonLocationExt.allCases;
 
@@ -92,8 +90,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   }
 
   _buildPage1() {
-    ShapeBorder? buttonShape =
-        BeveledRectangleBorder(borderRadius: BorderRadius.circular(10));
+    ShapeBorder? buttonShape = BeveledRectangleBorder(borderRadius: BorderRadius.circular(10));
     buttonShape = StadiumBorder(side: BorderSide(color: Colors.transparent));
     return Scaffold(
       appBar: AppBar(
@@ -154,8 +151,7 @@ class _DemoBottomAppBar extends StatelessWidget {
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: <Widget>[
-            if (fabLocation == FloatingActionButtonLocation.startDocked)
-              const Spacer(),
+            if (fabLocation == FloatingActionButtonLocation.startDocked) const Spacer(),
             IconButton(
               tooltip: 'Open navigation menu',
               icon: const Icon(Icons.menu),

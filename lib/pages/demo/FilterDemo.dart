@@ -10,7 +10,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class FilterDemo extends StatefulWidget {
   const FilterDemo({Key? key, this.title}) : super(key: key);

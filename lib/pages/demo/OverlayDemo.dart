@@ -3,8 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dar
 import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/overlay_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:get/get.dart';

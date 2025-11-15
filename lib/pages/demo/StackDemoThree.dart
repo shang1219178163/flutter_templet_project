@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class StackDemoThree extends StatefulWidget {

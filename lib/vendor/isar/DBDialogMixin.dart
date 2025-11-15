@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 mixin DBDialogMxin<T extends StatefulWidget> on State<T> {
   presentDialog({
@@ -21,13 +20,11 @@ mixin DBDialogMxin<T extends StatefulWidget> on State<T> {
             controller: controller,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
               hintText: "请输入",
               fillColor: Colors.white,
               filled: true,
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
             ),
           ),
           const SizedBox(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_convert_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:get/get.dart';
 
 class NTransformViewDemo extends StatefulWidget {

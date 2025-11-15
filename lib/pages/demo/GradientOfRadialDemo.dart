@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/alignment_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
 class GradientOfRadialDemo extends StatefulWidget {
@@ -113,8 +113,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
         margin: const EdgeInsets.all(8.0),
         decoration: decoration,
         alignment: Alignment.center,
-        child:
-            Text(text, style: TextStyle(color: Colors.white, fontSize: 16.0)),
+        child: Text(text, style: TextStyle(color: Colors.white, fontSize: 16.0)),
       );
     });
   }
@@ -128,13 +127,9 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     ];
 
     _radius = _dropValue.radiusOfRadialGradient(
-            width: maxWidth,
-            height: maxHeight,
-            isGreed: isGreed,
-            isDiagonal: isDiagonal) ??
+            width: maxWidth, height: maxHeight, isGreed: isGreed, isDiagonal: isDiagonal) ??
         0.5;
-    debugPrint(
-        "_dropValue:$_dropValue _radius:$_radius maxWidth:$maxWidth maxHeight:$maxHeight");
+    debugPrint("_dropValue:$_dropValue _radius:$_radius maxWidth:$maxWidth maxHeight:$maxHeight");
     return _buildBox(
       height: 100,
       text: 'RadialGradient',

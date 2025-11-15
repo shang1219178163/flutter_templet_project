@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/text_style_ext.dart';
+
 import 'package:get/get.dart';
 
 /// 长截图
@@ -79,8 +77,7 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
   onPressed() async {
     // debugPrint(e)
     final image = await _shareKey.currentContext?.toImage(pixelRatio: 2);
-    final imageWidget =
-        await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
+    final imageWidget = await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
 
     Get.bottomSheet(
       Container(

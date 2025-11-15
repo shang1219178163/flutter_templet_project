@@ -11,8 +11,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_button.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 import 'package:flutter_templet_project/mixin/file_picker_mixin.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';

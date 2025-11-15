@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_expansion_tile.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class NTree extends StatefulWidget {
   const NTree({
@@ -159,9 +158,7 @@ class _NTreeState extends State<NTree> {
     );
   }
 
-  recursion(
-      {required NTreeNodeModel e,
-      required void Function(NTreeNodeModel e) cb}) {
+  recursion({required NTreeNodeModel e, required void Function(NTreeNodeModel e) cb}) {
     cb(e);
     debugPrint("item:${e.name} ${e.isSelected}");
     e.items.forEach((item) {

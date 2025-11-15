@@ -7,8 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:flutter_templet_project/util/screen_manager.dart';
 
 import 'package:tuple/tuple.dart';

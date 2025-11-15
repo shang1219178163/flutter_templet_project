@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {

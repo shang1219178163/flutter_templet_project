@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
-import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 
 /// 自动填充搜索框

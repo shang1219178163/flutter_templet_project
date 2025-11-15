@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 标签编辑
 class NTagBox<E> extends StatelessWidget {
@@ -137,8 +136,7 @@ class NTagBox<E> extends StatelessWidget {
             child: InkWell(
               onTap: () => onDelete.call(e),
               child: Container(
-                decoration:
-                    ShapeDecoration(color: Colors.white, shape: CircleBorder()),
+                decoration: ShapeDecoration(color: Colors.white, shape: CircleBorder()),
                 child: Image(
                   image: "icon_delete.png".toAssetImage(),
                   width: 16,

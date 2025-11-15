@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 自定义顶部appBar
 class NAppBar extends StatelessWidget implements PreferredSizeWidget {

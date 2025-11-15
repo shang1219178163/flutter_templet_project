@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
 class PageViewDemoThree extends StatefulWidget {

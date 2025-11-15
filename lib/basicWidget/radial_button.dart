@@ -10,7 +10,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_templet_project/extension/alignment_ext.dart';
 
 /// 雷达渐进色按钮
 class RadialButton extends StatefulWidget {

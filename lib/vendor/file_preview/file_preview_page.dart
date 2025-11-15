@@ -8,7 +8,7 @@
 
 import 'package:file_preview/file_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -54,8 +54,7 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
           child: ValueListenableBuilder<double>(
               valueListenable: _progressVN,
               builder: (context, value, child) {
-                final indicatorColor =
-                    value >= 1.0 ? Colors.transparent : primaryColor;
+                final indicatorColor = value >= 1.0 ? Colors.transparent : primaryColor;
 
                 return LinearProgressIndicator(
                   value: value,

@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/duration_ext.dart';
+
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 
 class AppLifecycleStateObserverDemo extends StatefulWidget {
@@ -11,13 +10,10 @@ class AppLifecycleStateObserverDemo extends StatefulWidget {
   final String? title;
 
   @override
-  State<AppLifecycleStateObserverDemo> createState() =>
-      _AppLifecycleStateObserverDemoState();
+  State<AppLifecycleStateObserverDemo> createState() => _AppLifecycleStateObserverDemoState();
 }
 
-class _AppLifecycleStateObserverDemoState
-    extends State<AppLifecycleStateObserverDemo>
-    with AppLifecycleObserverMixin {
+class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserverDemo> with AppLifecycleObserverMixin {
   final _scrollController = ScrollController();
 
   late AppLifecycleListener _lifecycleListener;

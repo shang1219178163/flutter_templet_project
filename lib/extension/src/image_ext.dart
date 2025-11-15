@@ -12,7 +12,6 @@ import 'dart:ui' as ui;
 // import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/extension/src/file_ext.dart';
 
 extension UIImageExt on ui.Image {
   /// 获取本地图片图像

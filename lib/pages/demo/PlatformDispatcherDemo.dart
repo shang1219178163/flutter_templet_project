@@ -7,9 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/media_query_ext.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
+
 import 'package:get/get.dart';
 
 class PlatformDispatcherDemo extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 
 class DrawCanvasDemo extends StatefulWidget {

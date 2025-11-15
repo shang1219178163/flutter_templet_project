@@ -8,11 +8,7 @@ import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_user_privacy.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/rich_text_ext.dart';
-import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';

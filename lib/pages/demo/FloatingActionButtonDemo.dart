@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
 class FloatingActionButtonDemo extends StatefulWidget {
@@ -9,8 +9,7 @@ class FloatingActionButtonDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _FloatingActionButtonDemoState createState() =>
-      _FloatingActionButtonDemoState();
+  _FloatingActionButtonDemoState createState() => _FloatingActionButtonDemoState();
 }
 
 class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {

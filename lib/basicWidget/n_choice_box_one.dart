@@ -9,7 +9,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 
 typedef ChoiceSelectedType<T> = void Function(T e, bool selected);
 
@@ -132,8 +131,7 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
   Widget buildItem({required T e}) {
     final isSelected = widget.selectedItem.value == e;
 
-    final avatarColor =
-        !widget.enable ? widget.disabledAvatarColor : widget.primaryColor;
+    final avatarColor = !widget.enable ? widget.disabledAvatarColor : widget.primaryColor;
 
     final avatar = isSelected
         ? (widget.avatarSelected ??
@@ -209,8 +207,7 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
 
     var selected = !isSelected;
     // debugPrint("e: $selected,  $e");
-    final canChange =
-        widget.canChanged?.call(e, onSelect as ChoiceSelectedType) ?? true;
+    final canChange = widget.canChanged?.call(e, onSelect as ChoiceSelectedType) ?? true;
     if (!canChange) {
       return;
     }

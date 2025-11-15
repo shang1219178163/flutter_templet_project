@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
 /// 多页面左右滑动封装
@@ -46,8 +46,7 @@ class NPageView extends StatefulWidget {
 }
 
 class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
-  late TabController tabController =
-      TabController(length: widget.items.length, vsync: this);
+  late TabController tabController = TabController(length: widget.items.length, vsync: this);
 
   late final pageController = PageController(initialPage: 0, keepPage: true);
 

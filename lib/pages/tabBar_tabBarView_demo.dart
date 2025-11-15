@@ -12,9 +12,7 @@ import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_icons.d
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_layout.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
+
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/RouteNameSearchPage.dart';

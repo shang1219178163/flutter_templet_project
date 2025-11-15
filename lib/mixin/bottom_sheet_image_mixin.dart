@@ -11,7 +11,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';

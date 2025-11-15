@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// 主题色确定按钮
 class NButtonConfirm extends StatelessWidget {
@@ -86,8 +85,7 @@ class NButtonConfirm extends StatelessWidget {
       );
     }
 
-    final borderRadiusNew =
-        borderRadius ?? const BorderRadius.all(Radius.circular(8));
+    final borderRadiusNew = borderRadius ?? const BorderRadius.all(Radius.circular(8));
 
     final gradientNew = gradient ??
         LinearGradient(

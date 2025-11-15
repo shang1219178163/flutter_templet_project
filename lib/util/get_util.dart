@@ -14,8 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 import 'package:flutter_templet_project/util/theme/NAppTheme.dart';
 import 'package:flutter_templet_project/util/theme/NDialogTheme.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';

@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 图标弹出菜单 简易封装,方便代码复用
 class NMenuAnchorForImage extends StatefulWidget {
@@ -51,8 +50,7 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
             backgroundColor: WidgetStateProperty.all(Colors.transparent),
             shadowColor: WidgetStateProperty.all(Colors.transparent),
             // surfaceTintColor: MaterialStateProperty.all(Colors.red),
-            shape: WidgetStateProperty.all<OutlinedBorder?>(
-                const RoundedRectangleBorder()),
+            shape: WidgetStateProperty.all<OutlinedBorder?>(const RoundedRectangleBorder()),
             elevation: WidgetStateProperty.all<double?>(0.0),
           )),
           menuButtonTheme: MenuButtonThemeData(

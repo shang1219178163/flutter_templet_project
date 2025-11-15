@@ -12,7 +12,7 @@ import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:flutter_templet_project/network/oss/oss_auth_api.dart';
 import 'package:flutter_templet_project/network/oss/oss_auth_model.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';

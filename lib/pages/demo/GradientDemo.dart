@@ -3,8 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/alignment_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/GradientOfRadialDemo.dart';
 
@@ -140,28 +139,20 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
               text: '两种颜色 均分',
               decoration: BoxDecoration(
                   color: Colors.red,
-                  gradient: LinearGradient(
-                      tileMode: tileMode,
-                      colors: [Color(0xFFFFC125), Color(0xFFFF7F24)])),
+                  gradient: LinearGradient(tileMode: tileMode, colors: [Color(0xFFFFC125), Color(0xFFFF7F24)])),
             ),
             _buildBox(
               text: '多种颜色 均分',
               decoration: BoxDecoration(
-                  gradient: LinearGradient(tileMode: tileMode, colors: [
-                Color(0xFFFFC125),
-                Color(0xFFFF7F24),
-                Color(0xFFFF4040)
-              ])),
+                  gradient: LinearGradient(
+                      tileMode: tileMode, colors: [Color(0xFFFFC125), Color(0xFFFF7F24), Color(0xFFFF4040)])),
             ),
             _buildBox(
               text: '两种颜色 1:3',
               decoration: BoxDecoration(
-                  gradient: LinearGradient(tileMode: tileMode, colors: [
-                Color(0xFFFFC125),
-                Color(0xFFFF7F24),
-                Color(0xFFFF7F24),
-                Color(0xFFFF7F24)
-              ])),
+                  gradient: LinearGradient(
+                      tileMode: tileMode,
+                      colors: [Color(0xFFFFC125), Color(0xFFFF7F24), Color(0xFFFF7F24), Color(0xFFFF7F24)])),
             ),
             _buildBox(
                 text: '两种颜色 垂直均分 topRight',
@@ -170,14 +161,12 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                         tileMode: tileMode,
                         begin: Alignment.topRight,
                         colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
-            _buildBox(
-                text: '两种颜色 前半部均分 延伸',
-                decoration: BoxDecoration(gradient: LinearGradient(
-                    tileMode: tileMode,
-                    begin: Alignment(-1.0, 0.0),
-                    end: Alignment(0.0, 0.0),
-                    // tileMode: TileMode.clamp,
-                    colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
+            _buildBox(text: '两种颜色 前半部均分 延伸', decoration: BoxDecoration(gradient: LinearGradient(
+                tileMode: tileMode,
+                begin: Alignment(-1.0, 0.0),
+                end: Alignment(0.0, 0.0),
+                // tileMode: TileMode.clamp,
+                colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
             _buildBox(
                 text: '两种颜色 均分 重复 repeated',
                 decoration: BoxDecoration(
@@ -186,14 +175,12 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                         begin: Alignment(-1.0, 0.0),
                         end: Alignment(0.0, 0.0),
                         colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
-            _buildBox(
-                text: '两种颜色 均分 mirror',
-                decoration: BoxDecoration(gradient: LinearGradient(
-                    tileMode: tileMode,
-                    begin: Alignment(-1.0, 0.0),
-                    end: Alignment(0.0, 0.0),
-                    // tileMode: TileMode.mirror,
-                    colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
+            _buildBox(text: '两种颜色 均分 mirror', decoration: BoxDecoration(gradient: LinearGradient(
+                tileMode: tileMode,
+                begin: Alignment(-1.0, 0.0),
+                end: Alignment(0.0, 0.0),
+                // tileMode: TileMode.mirror,
+                colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
             _buildBox(
                 text: '两种颜色 设置起始位置与终止位置',
                 decoration: BoxDecoration(
@@ -370,22 +357,16 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             ),
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: buildGradientText(
-                    from: const Offset(0, 40),
-                    to: const Offset(150, 40),
-                    colors: <Color>[
-                      Colors.red,
-                      Colors.yellow,
-                    ])),
+                child: buildGradientText(from: const Offset(0, 40), to: const Offset(150, 40), colors: <Color>[
+                  Colors.red,
+                  Colors.yellow,
+                ])),
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: buildGradientText(
-                    from: const Offset(0, 40),
-                    to: const Offset(40, 100),
-                    colors: <Color>[
-                      Colors.red,
-                      Colors.yellow,
-                    ])),
+                child: buildGradientText(from: const Offset(0, 40), to: const Offset(40, 100), colors: <Color>[
+                  Colors.red,
+                  Colors.yellow,
+                ])),
           ],
         ),
       ),
@@ -408,8 +389,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-  _buildShaderMask(
-      {required BlendMode blendMode, required ShaderCallback shaderCallback}) {
+  _buildShaderMask({required BlendMode blendMode, required ShaderCallback shaderCallback}) {
     return ShaderMask(
       shaderCallback: shaderCallback,
       blendMode: blendMode,

@@ -6,11 +6,10 @@
 //  Copyright © 8/14/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/TextInputFormatter/fraction_digits_text_input_formatter.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -24,8 +23,7 @@ class TextFieldDemoOne extends StatefulWidget {
 }
 
 class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final textEditingController = TextEditingController();
 
@@ -38,17 +36,11 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   bool isEnable = true;
 
   final inputFormatters = <Tuple3<String, TextInputFormatter, String>>[
-    Tuple3("长度限制", LengthLimitingTextInputFormatter(10),
-        "LengthLimitingTextInputFormatter(10)"),
-    Tuple3(
-        "英文字母/汉字/数字",
-        FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"),
-            allow: true),
+    Tuple3("长度限制", LengthLimitingTextInputFormatter(10), "LengthLimitingTextInputFormatter(10)"),
+    Tuple3("英文字母/汉字/数字", FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"), allow: true),
         "FilteringTextInputFormatter(RegExp('[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]'), allow: true)"),
-    Tuple3("仅数字", FilteringTextInputFormatter.digitsOnly,
-        "FilteringTextInputFormatter.digitsOnly"),
-    Tuple3("仅单行", FilteringTextInputFormatter.singleLineFormatter,
-        "FilteringTextInputFormatter.singleLineFormatter,"),
+    Tuple3("仅数字", FilteringTextInputFormatter.digitsOnly, "FilteringTextInputFormatter.digitsOnly"),
+    Tuple3("仅单行", FilteringTextInputFormatter.singleLineFormatter, "FilteringTextInputFormatter.singleLineFormatter,"),
   ];
 
   @override

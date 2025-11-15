@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_split_view.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class SplitViewDemo extends StatefulWidget {
   const SplitViewDemo({
@@ -47,8 +46,7 @@ class _SplitViewDemoState extends State<SplitViewDemo> {
   Widget buildExchange() {
     return IconButton(
       onPressed: () {
-        direction =
-            direction == Axis.horizontal ? Axis.vertical : Axis.horizontal;
+        direction = direction == Axis.horizontal ? Axis.vertical : Axis.horizontal;
         ratio = 0.5;
         setState(() {});
       },

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 ///多选列表
 class ChioceList extends StatefulWidget {

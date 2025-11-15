@@ -8,8 +8,6 @@
 /// TrackingScrollController 在2.0.6 mac 平台无效,后续观察
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class NavigationRailDemo extends StatefulWidget {
   const NavigationRailDemo({Key? key, this.title}) : super(key: key);
@@ -28,14 +26,10 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
 
   final destinations = const <NavigationRailDestination>[
     NavigationRailDestination(icon: Icon(Icons.message), label: Text("消息")),
-    NavigationRailDestination(
-        icon: Icon(Icons.video_camera_back), label: Text("视频会议")),
-    NavigationRailDestination(
-        icon: Icon(Icons.book_outlined), label: Text("通讯录")),
-    NavigationRailDestination(
-        icon: Icon(Icons.cloud_upload), label: Text("云文档")),
-    NavigationRailDestination(
-        icon: Icon(Icons.games_sharp), label: Text("工作台")),
+    NavigationRailDestination(icon: Icon(Icons.video_camera_back), label: Text("视频会议")),
+    NavigationRailDestination(icon: Icon(Icons.book_outlined), label: Text("通讯录")),
+    NavigationRailDestination(icon: Icon(Icons.cloud_upload), label: Text("云文档")),
+    NavigationRailDestination(icon: Icon(Icons.games_sharp), label: Text("工作台")),
     NavigationRailDestination(icon: Icon(Icons.camera), label: Text("日历"))
   ];
 
@@ -69,9 +63,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
           AnimatedBuilder(
             animation: Listenable.merge([_selectIndex, isNavigationRailExpand]),
             builder: (context, child) {
-              return _buildLeftNavigation(
-                  selectedIndex: _selectIndex.value,
-                  extended: isNavigationRailExpand.value);
+              return _buildLeftNavigation(selectedIndex: _selectIndex.value, extended: isNavigationRailExpand.value);
             },
           ),
           _buildRight(),
@@ -133,8 +125,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
                   color: ColorExt.random,
                   child: ListView(
                     controller: _trackingScrollController,
-                    children:
-                        List.generate(199, (index) => Text("data_$index")),
+                    children: List.generate(199, (index) => Text("data_$index")),
                     // children: List.generate(299, (index) => TextButton(
                     //   onPressed: () { print("data_${index}"); },
                     //   child: Text("data_${index}"),

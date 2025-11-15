@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
 class DefaultTabControllerDemo extends StatefulWidget {
@@ -8,12 +8,10 @@ class DefaultTabControllerDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _DefaultTabControllerDemoState createState() =>
-      _DefaultTabControllerDemoState();
+  _DefaultTabControllerDemoState createState() => _DefaultTabControllerDemoState();
 }
 
-class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo>
-    with AutomaticKeepAliveClientMixin {
+class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> with AutomaticKeepAliveClientMixin {
   var initialIndex = 0;
 
   var items = <Tuple2<Tab, Widget>>[];
@@ -86,8 +84,7 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo>
                 padding: EdgeInsets.all(8),
                 child: Wrap(
                   children: [
-                    ElevatedButton(
-                        onPressed: onPressed, child: Text("Iterable")),
+                    ElevatedButton(onPressed: onPressed, child: Text("Iterable")),
                   ],
                 ),
               )

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_drop_menu_filter_section_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 
 class DropdownMenuDemo extends StatefulWidget {
   DropdownMenuDemo({Key? key, this.title}) : super(key: key);
@@ -22,8 +21,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
   IconLabel? selectedIcon;
 
   final colorEntries = ColorLabel.values.map((e) {
-    return DropdownMenuEntry<ColorLabel>(
-        value: e, label: e.label, enabled: e.label != 'Grey');
+    return DropdownMenuEntry<ColorLabel>(value: e, label: e.label, enabled: e.label != 'Grey');
   }).toList();
 
   final iconEntries = IconLabel.values.map((e) {
@@ -120,8 +118,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                  'You selected a ${selectedColor?.label} ${selectedIcon?.label}'),
+              Text('You selected a ${selectedColor?.label} ${selectedIcon?.label}'),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Icon(
@@ -147,8 +144,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
   }) {
     var selectedItem = initialItem;
 
-    return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return MenuAnchor(
         alignmentOffset: Offset(0, 0),
         builder: (context, MenuController controller, Widget? child) {

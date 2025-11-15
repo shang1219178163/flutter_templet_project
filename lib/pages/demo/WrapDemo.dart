@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/src/num_ext.dart';
+
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class WrapDemo extends StatefulWidget {

@@ -1,10 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/src/edge_insets_ext.dart';
-import 'package:flutter_templet_project/extension/enum_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 默认图标大小
 const double DEFALUT_ICON_SIZE = 44;

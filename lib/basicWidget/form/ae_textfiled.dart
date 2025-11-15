@@ -8,8 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/editable_text_ext.dart';
 
 /// AE 输入框组件
 class AeTextfiled extends StatelessWidget {
@@ -111,8 +109,7 @@ class AeTextfiled extends StatelessWidget {
           ),
           inputFormatters: inputFormatters ??
               [
-                if (maxLength != null)
-                  LengthLimitingTextInputFormatter(maxLength),
+                if (maxLength != null) LengthLimitingTextInputFormatter(maxLength),
               ],
         ),
         if (hasMaxLengthLimit && isCounterInner)

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
+
 import 'package:tuple/tuple.dart';
 
 /// 长按黑色菜单
@@ -115,9 +115,8 @@ class NLongPressMenuOne extends StatelessWidget {
           // 计算每行可以显示的组件数
           var crossAxisCount = (containerWidth / (itemWidthNew + 0)).floor();
           // 计算行数
-          final rowCount = items.length % crossAxisCount == 0
-              ? items.length / crossAxisCount
-              : items.length ~/ crossAxisCount + 1;
+          final rowCount =
+              items.length % crossAxisCount == 0 ? items.length / crossAxisCount : items.length ~/ crossAxisCount + 1;
 
           DLog.d([crossAxisCount, rowCount, itemWidthNew]);
           return Wrap(
@@ -138,15 +137,12 @@ class NLongPressMenuOne extends StatelessWidget {
               //   ((rowCount - 1) * crossAxisCount - 1)
               // ]);
 
-              final borderSideColor = isLastRow
-                  ? Colors.transparent
-                  : const Color(0xffE5E5E5).withOpacity(0.2);
+              final borderSideColor = isLastRow ? Colors.transparent : const Color(0xffE5E5E5).withOpacity(0.2);
 
               final child = Container(
                 width: itemWidthNew,
                 height: itemHeight,
-                padding:
-                    const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
+                padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   // color: ColorExt.random,

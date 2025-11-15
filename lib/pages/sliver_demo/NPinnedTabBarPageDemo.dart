@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pinned_tab_bar_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:get/get.dart';
 
@@ -18,10 +17,8 @@ class NPinnedTabBarPageDemo extends StatefulWidget {
   State<NPinnedTabBarPageDemo> createState() => _NPinnedTabBarPageDemoState();
 }
 
-class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
-    with SingleTickerProviderStateMixin {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with SingleTickerProviderStateMixin {
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final List<({Tab tab, Widget child})> tabItems = [
     (
@@ -56,8 +53,7 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
     ),
   ];
 
-  late final tabController =
-      TabController(length: tabItems.length, vsync: this);
+  late final tabController = TabController(length: tabItems.length, vsync: this);
 
   @override
   Widget build(BuildContext context) {

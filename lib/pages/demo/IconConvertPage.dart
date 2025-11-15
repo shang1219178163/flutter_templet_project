@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
+
 import 'package:tuple/tuple.dart';
 
 class IconConvertPage extends StatefulWidget {

@@ -9,8 +9,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/image_ext.dart';
-import 'package:flutter_templet_project/extension/src/num_ext.dart';
+
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class LayoutBuilderDemo extends StatefulWidget {

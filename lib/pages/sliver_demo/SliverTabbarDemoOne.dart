@@ -7,8 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class SliverTabbarDemoOne extends StatefulWidget {
   const SliverTabbarDemoOne({Key? key}) : super(key: key);
@@ -17,8 +15,7 @@ class SliverTabbarDemoOne extends StatefulWidget {
   _SliverTabbarDemoOneState createState() => _SliverTabbarDemoOneState();
 }
 
-class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne>
-    with SingleTickerProviderStateMixin {
+class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne> with SingleTickerProviderStateMixin {
   var items = List.generate(3, (index) => "Tab $index");
 
   late final tabController = TabController(length: items.length, vsync: this);
@@ -118,8 +115,7 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne>
               key: PageStorageKey<String>(name),
               slivers: <Widget>[
                 SliverOverlapInjector(
-                  handle:
-                      NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                  handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 ),
                 SliverPadding(
                   padding: EdgeInsets.all(10.0),
@@ -163,9 +159,7 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne>
           mainAxisSpacing: 8,
           //宽高比
           // childAspectRatio: 3 / 4,
-          children: list
-              .map((e) => buildMenuItem(top: FlutterLogo(), bottom: Text(e)))
-              .toList(),
+          children: list.map((e) => buildMenuItem(top: FlutterLogo(), bottom: Text(e))).toList(),
         ),
       ),
     );

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 

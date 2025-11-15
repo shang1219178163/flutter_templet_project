@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 import 'package:get/get.dart';
 
 /// 队列弹窗
@@ -17,8 +17,7 @@ class QueueAlertDemo extends StatefulWidget {
 }
 
 class _QueueAlertDemoState extends State<QueueAlertDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 

@@ -7,8 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class SliverListPopverDemo extends StatefulWidget {
   final String? title;
@@ -74,8 +72,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
             return _buildItem(color: colors[index]);
           }, childCount: colors.length),
         ),
-        sectionHeader(
-            child: Text('SliverFixedExtentList - SliverChildBuilderDelegate')),
+        sectionHeader(child: Text('SliverFixedExtentList - SliverChildBuilderDelegate')),
         SliverFixedExtentList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {

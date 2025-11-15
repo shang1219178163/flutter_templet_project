@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class TabBarViewDemo extends StatefulWidget {

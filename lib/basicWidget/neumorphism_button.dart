@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 拟物按钮
 class NeumorphismButton extends StatelessWidget {
@@ -63,9 +62,7 @@ class NeumorphismButton extends StatelessWidget {
         ),
         child: child,
       ).toNeumorphism(
-          bottomShadowColor: const Color(0xFFA3B1C6),
-          borderRadius: borderRadius,
-          topShadowColor: Colors.white),
+          bottomShadowColor: const Color(0xFFA3B1C6), borderRadius: borderRadius, topShadowColor: Colors.white),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 // show AssetEntity, AssetEntityImageProvider;
 
@@ -52,11 +51,8 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
     int rowCount = 3,
     double spacing = 10,
   }) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      var itemWidth =
-          ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
-              .truncateToDouble();
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: spacing, children: [
         ...items.map((e) {
@@ -126,8 +122,7 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
   int maxCount = 9;
   var selectedAssets = <AssetEntity>[];
 
-  final _globalKey =
-      GlobalKey<WechatPhotoPickerState>(debugLabel: 'WechatPhotoPickerState');
+  final _globalKey = GlobalKey<WechatPhotoPickerState>(debugLabel: 'WechatPhotoPickerState');
 
   @override
   Widget build(BuildContext context) {
@@ -234,11 +229,8 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
     int rowCount = 3,
     double spacing = 10,
   }) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      var itemWidth =
-          ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
-              .truncateToDouble();
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: spacing, children: [
         ...selectedAssets
