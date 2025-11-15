@@ -70,7 +70,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     (name: "Download", action: onDownload),
   ];
 
-  final canDrag = ValueNotifier(Platform.isMacOS);
+  final canDrag = ValueNotifier(false);
 
   final progressVN = ValueNotifier(0.0);
 
