@@ -14,7 +14,7 @@
 * */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -124,8 +124,7 @@ class ProviderDemo extends StatelessWidget {
             },
             child: Column(
               children: [
-                Text(
-                    "Selector 监听 Foo 的 bar.name (String) 和 foo.baz.name (String)"),
+                Text("Selector 监听 Foo 的 bar.name (String) 和 foo.baz.name (String)"),
               ],
             ),
           ),

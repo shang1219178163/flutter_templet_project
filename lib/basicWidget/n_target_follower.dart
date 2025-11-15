@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/type_util.dart';
+import 'package:flutter_templet_project/extension/src/type_util.dart';
 
 /// 关联组件
 class NTargetFollower extends StatefulWidget {
@@ -35,20 +35,17 @@ class NTargetFollower extends StatefulWidget {
   final Alignment followerAnchor;
 
   /// 目标对齐方式(高优先级)
-  final Alignment Function(BuildContext context, LongPressStartDetails details)?
-      targetAnchorBuilder;
+  final Alignment Function(BuildContext context, LongPressStartDetails details)? targetAnchorBuilder;
 
   /// 跟随者对齐方式(高优先级)
-  final Alignment Function(BuildContext context, LongPressStartDetails details)?
-      followerAnchorBuilder;
+  final Alignment Function(BuildContext context, LongPressStartDetails details)? followerAnchorBuilder;
 
   final bool showWhenUnlinked;
 
   final Offset offset;
 
   /// 跟随者对齐方式(高优先级)
-  final Offset Function(BuildContext context, LongPressStartDetails details)?
-      offsetBuilder;
+  final Offset Function(BuildContext context, LongPressStartDetails details)? offsetBuilder;
 
   final GestureTapCallback? onTap;
 
@@ -163,11 +160,8 @@ class _NTargetFollowerState extends State<NTargetFollower> {
       builder: (BuildContext context) => UnconstrainedBox(
         child: CompositedTransformFollower(
           link: layerLink,
-          targetAnchor: widget.targetAnchorBuilder?.call(context, details) ??
-              widget.targetAnchor,
-          followerAnchor:
-              widget.followerAnchorBuilder?.call(context, details) ??
-                  widget.followerAnchor,
+          targetAnchor: widget.targetAnchorBuilder?.call(context, details) ?? widget.targetAnchor,
+          followerAnchor: widget.followerAnchorBuilder?.call(context, details) ?? widget.followerAnchor,
           offset: widget.offsetBuilder?.call(context, details) ?? widget.offset,
           showWhenUnlinked: widget.showWhenUnlinked,
           child: widget.followerBuilder?.call(context, _hideOverlay),

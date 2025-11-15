@@ -6,7 +6,7 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
-import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/src/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
 class WidgetNameConvert extends ConvertProtocol {

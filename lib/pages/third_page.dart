@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 
 class ThirdPage extends StatefulWidget {

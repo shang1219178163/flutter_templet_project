@@ -14,7 +14,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/image_ext.dart';
+import 'package:flutter_templet_project/extension/src/image_ext.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 文件管理类

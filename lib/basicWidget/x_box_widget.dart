@@ -10,7 +10,7 @@ import 'dart:ui' as ui;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
+import 'package:flutter_templet_project/extension/src/edge_insets_ext.dart';
 
 /// 组件通用外观设置
 class XBoxWidget extends StatelessWidget {
@@ -105,10 +105,7 @@ class XBoxWidget extends StatelessWidget {
           )
         : null;
 
-    if (boxShadow != null &&
-        boxShadow!.isNotEmpty &&
-        width != null &&
-        height != null) {
+    if (boxShadow != null && boxShadow!.isNotEmpty && width != null && height != null) {
       var shadow = boxShadow![0];
 
       /// 留出阴影空间

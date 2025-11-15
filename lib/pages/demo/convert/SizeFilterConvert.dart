@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/src/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
 typedef LineRecord = ({String line, double num, String? comment});

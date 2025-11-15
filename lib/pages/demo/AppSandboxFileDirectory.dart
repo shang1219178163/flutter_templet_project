@@ -27,7 +27,7 @@ import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_picker_mixin.dart';

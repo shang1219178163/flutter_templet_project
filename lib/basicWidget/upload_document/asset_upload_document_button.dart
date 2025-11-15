@@ -6,12 +6,11 @@
 //  Copyright © 2023/04/30 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/enum/FileType.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
 import 'package:get/get.dart';
@@ -54,12 +53,10 @@ class AssetUploadDocumentButton extends StatefulWidget {
   final bool canEdit;
 
   @override
-  AssetUploadDocumentButtonState createState() =>
-      AssetUploadDocumentButtonState();
+  AssetUploadDocumentButtonState createState() => AssetUploadDocumentButtonState();
 }
 
-class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
-    with AutomaticKeepAliveClientMixin {
+class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton> with AutomaticKeepAliveClientMixin {
   /// 防止触发多次上传动作
   var _isLoading = false;
 
@@ -83,8 +80,7 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
   @override
   void didUpdateWidget(covariant AssetUploadDocumentButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.model.file?.path == oldWidget.model.file?.path ||
-        widget.model.url == oldWidget.model.url) {
+    if (widget.model.file?.path == oldWidget.model.file?.path || widget.model.url == oldWidget.model.url) {
       // EasyToast.showInfoToast("path相同");
       return;
     }
@@ -95,11 +91,8 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final fileName =
-        (widget.model.file?.path ?? widget.model.url)?.split("/").last ?? "";
-    final fileType = IMFileType.values
-            .firstWhereOrNull((e) => fileName.endsWith(e.name) == true) ??
-        IMFileType.unknow;
+    final fileName = (widget.model.file?.path ?? widget.model.url)?.split("/").last ?? "";
+    final fileType = IMFileType.values.firstWhereOrNull((e) => fileName.endsWith(e.name) == true) ?? IMFileType.unknow;
     Widget img = FractionallySizedBox(
       heightFactor: 0.75,
       child: Image(
@@ -187,8 +180,7 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
           return const SizedBox();
         }
 
-        final showPercent = widget.model.file != null &&
-            (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true;
+        final showPercent = widget.model.file != null && (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true;
 
         final desc = showPercent ? value.toStringAsPercent(2) : "上传中";
 

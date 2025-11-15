@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_tag_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_tag_box_new.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/cupertino_alert_dialog_mixin.dart';
 import 'package:tuple/tuple.dart';

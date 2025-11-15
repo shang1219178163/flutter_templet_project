@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
+import 'package:flutter_templet_project/extension/src/edge_insets_ext.dart';
 
 /// 组件通用外观设置
 class NBox extends StatelessWidget {
@@ -26,7 +26,6 @@ class NBox extends StatelessWidget {
     this.foregroundFilter,
     required this.child,
   });
-
 
   /// 高斯模糊
   final double? width;

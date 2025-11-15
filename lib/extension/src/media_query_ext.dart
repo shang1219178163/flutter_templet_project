@@ -12,8 +12,8 @@ import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
-import 'package:flutter_templet_project/extension/geometry_ext.dart';
+import 'package:flutter_templet_project/extension/src/edge_insets_ext.dart';
+import 'package:flutter_templet_project/extension/src/geometry_ext.dart';
 
 extension MediaQueryDataExt on MediaQueryData {
   /// 将 MediaQueryData 转换为 JSON 格式

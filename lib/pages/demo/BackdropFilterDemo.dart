@@ -8,7 +8,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/stack_ext.dart';
+import 'package:flutter_templet_project/extension/src/stack_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class BackdropFilterDemo extends StatefulWidget {

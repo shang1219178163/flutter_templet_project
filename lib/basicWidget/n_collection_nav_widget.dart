@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
+import 'package:flutter_templet_project/extension/src/edge_insets_ext.dart';
 import 'package:flutter_templet_project/extension/enum_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
@@ -183,10 +183,8 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
       final num = (totalCount % widget.pageColumnNum) == 0
           ? totalCount ~/ widget.pageColumnNum
           : totalCount ~/ widget.pageColumnNum + 1;
-      totalHeight = itemHeight * num +
-          widget.columnSpacing * (num - 1) +
-          widget.indicatorGap +
-          widget.indicatorItemHeight;
+      totalHeight =
+          itemHeight * num + widget.columnSpacing * (num - 1) + widget.indicatorGap + widget.indicatorItemHeight;
     }
 
     var margin = EdgeInsets.zero;
@@ -233,9 +231,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
   Widget _pageContent() {
     return LayoutBuilder(builder: (context, constraints) {
       var edgeHorizontal = widget.rowSpacing * 0.5;
-      var itemWidth = (constraints.maxWidth -
-              widget.rowSpacing * (widget.pageColumnNum - 1) -
-              edgeHorizontal * 2) /
+      var itemWidth = (constraints.maxWidth - widget.rowSpacing * (widget.pageColumnNum - 1) - edgeHorizontal * 2) /
           widget.pageColumnNum;
 
       return PageView.builder(
@@ -266,8 +262,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
   }
 
   /// item 数组集合
-  List<Widget> _getChildren(
-      {required int pageIndex, required int pageTotal, required double width}) {
+  List<Widget> _getChildren({required int pageIndex, required int pageTotal, required double width}) {
     return List.generate(
         pageTotal,
         (i) => Container(
@@ -282,10 +277,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
   }
 
   /// item 组件
-  Widget _getItem(
-      {required BuildContext ctx,
-      required int index,
-      required double imgWidth}) {
+  Widget _getItem({required BuildContext ctx, required int index, required double imgWidth}) {
     if (index >= _items.length) {
       return SizedBox();
     }

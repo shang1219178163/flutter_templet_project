@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
 
 class IndicatorDemo extends StatefulWidget {
   const IndicatorDemo({super.key});
@@ -20,8 +20,7 @@ class IndicatorDemo extends StatefulWidget {
   _IndicatorDemoState createState() => _IndicatorDemoState();
 }
 
-class _IndicatorDemoState extends State<IndicatorDemo>
-    with TickerProviderStateMixin {
+class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateMixin {
   late AnimationController controller;
 
   @override

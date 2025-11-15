@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_refresh_indicator.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/type_util.dart';
+import 'package:flutter_templet_project/extension/src/type_util.dart';
 
 class CustomRefreshIndicatorDemo extends StatefulWidget {
   const CustomRefreshIndicatorDemo({

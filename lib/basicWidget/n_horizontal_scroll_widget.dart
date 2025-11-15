@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
-import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
+import 'package:flutter_templet_project/extension/src/edge_insets_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 // import 'package:tuple/tuple.dart';
 
@@ -53,8 +52,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
 
   /// 根据 maxWidth 计算 item 宽度
   double getItemWidth(double maxWidth) {
-    var result = (maxWidth - widget.gap * (widget.showCount.ceil() - 1)) /
-        widget.showCount;
+    var result = (maxWidth - widget.gap * (widget.showCount.ceil() - 1)) / widget.showCount;
     return result;
   }
 
@@ -123,10 +121,8 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
                   padding: EdgeInsets.all(0),
                   itemCount: _items.length,
                   // cacheExtent: 10,
-                  itemBuilder: (context, index) =>
-                      _buildItem(context, index, constraints.maxWidth),
-                  separatorBuilder: (context, index) =>
-                      _buildSeparator(context, index),
+                  itemBuilder: (context, index) => _buildItem(context, index, constraints.maxWidth),
+                  separatorBuilder: (context, index) => _buildSeparator(context, index),
                 ),
               ),
             ),
@@ -228,8 +224,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
             child: Stack(
               children: [
                 Swiper(
-                    itemBuilder: (context, index) =>
-                        _buildItem(context, index, constraints.maxWidth),
+                    itemBuilder: (context, index) => _buildItem(context, index, constraints.maxWidth),
                     // indicatorLayout: PageIndicatorLayout.COLOR,
                     autoplay: _items.length > 1,
                     loop: _items.length > 1,

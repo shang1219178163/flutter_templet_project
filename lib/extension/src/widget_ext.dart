@@ -11,7 +11,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 // const double kCupertinoButtonHeight = 56.0;
 
@@ -305,19 +304,6 @@ extension ScrollViewExt on ScrollView {
         radius: radius,
         notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
         child: this,
-      );
-}
-
-extension FlexExt on Flex {
-  /// 转为 SliverToBoxAdapter
-  CustomScrollView toCustomScrollView({
-    Key? key,
-    Widget Function(Widget e)? itemBuilder,
-  }) =>
-      CustomScrollView(
-        key: key,
-        slivers: children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
-        clipBehavior: clipBehavior,
       );
 }
 

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
+imp'package:flutter_templet_project/extension/src/snack_bar_ext.dart'art';
 import 'package:get/get.dart';
 
 const kUpdateContent = """

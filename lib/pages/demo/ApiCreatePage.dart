@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/clipboard_ext.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
+import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreateTemplet.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';

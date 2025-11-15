@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
+import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class IconConvertPage extends StatefulWidget {
@@ -107,8 +107,7 @@ class _IconConvertPageState extends State<IconConvertPage> {
                         final subtitle = onConvert?.call(e) ?? "";
 
                         return Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
+                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -133,18 +132,12 @@ class _IconConvertPageState extends State<IconConvertPage> {
   }
 
   onDone() async {
-    var lines = await readFile(
-        path:
-            '/Users/shang/fvm/versions/3.16.7/packages/flutter/lib/src/material/icons.dart');
-    lines = lines
-        .where(
-            (e) => e.contains("IconData get") || e.contains("const IconData "))
-        .toList();
+    var lines = await readFile(path: '/Users/shang/fvm/versions/3.16.7/packages/flutter/lib/src/material/icons.dart');
+    lines = lines.where((e) => e.contains("IconData get") || e.contains("const IconData ")).toList();
     linesVN.value = lines;
 
     linesOneVN.value = lines.where((e) => e.contains("IconData get")).toList();
-    linesTwoVN.value =
-        lines.where((e) => e.contains("const IconData ")).toList();
+    linesTwoVN.value = lines.where((e) => e.contains("const IconData ")).toList();
     debugPrint("$widget linesOneVN: ${linesOneVN.value.length},");
     debugPrint("$widget linesTwoVN: ${linesTwoVN.value.length},");
 
@@ -203,8 +196,7 @@ Map<String, IconData> kIConDic = {
 
   createFile({String? fileName, required String content}) async {
     fileName ??= "未命名_${DateTime.now().toString().substring(0, 9)}";
-    final file =
-        await FileManager().createFile(fileName: fileName, content: content);
+    final file = await FileManager().createFile(fileName: fileName, content: content);
     debugPrint("file: ${file.path}");
 
     showSnackBar(SnackBar(

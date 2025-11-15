@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/src/widget_ext.dart';
 
 extension FlexExt on Flex {
   /// 自定义方法
@@ -35,4 +36,15 @@ extension FlexExt on Flex {
       children: children ?? this.children,
     );
   }
+
+  /// 转为 SliverToBoxAdapter
+  CustomScrollView toCustomScrollView({
+    Key? key,
+    Widget Function(Widget e)? itemBuilder,
+  }) =>
+      CustomScrollView(
+        key: key,
+        slivers: children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
+        clipBehavior: clipBehavior,
+      );
 }

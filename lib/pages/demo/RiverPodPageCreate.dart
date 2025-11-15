@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
+import 'package:flutter_templet_project/extension/src/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -21,8 +21,7 @@ class RiverPodPageCreate extends StatefulWidget {
 }
 
 class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final scrollController = ScrollController();
 
@@ -122,8 +121,7 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
       final content = ceatePage(className: className);
 
       /// 生成本地文件
-      final file =
-          await FileManager().createFile(fileName: fileName, content: content);
+      final file = await FileManager().createFile(fileName: fileName, content: content);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(
