@@ -13,6 +13,7 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/pages/demo/convert/ApiParamsConvert.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -80,6 +81,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
 
   final convertTypes = <ConvertProtocol>[
     ApiCreateConvert(),
+    ApiParamsConvert(),
     WidgetThemeConvert(),
     WidgetNameConvert(),
     PackageExportConvert(),
@@ -145,27 +147,29 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: NMenuAnchor<String>(
-                  values: productNames,
-                  initialItem: productName,
-                  cbName: (e) => e ?? "请选择",
-                  equal: (a, b) => a == b,
-                  onChanged: (e) async {
-                    DLog.d(e);
-                    productName = e;
-                    onClear();
-                    await onDragChanged();
-                  },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Flexible(
+                      child: NMenuAnchor<String>(
+                        values: productNames,
+                        initialItem: productName,
+                        cbName: (e) => e ?? "请选择",
+                        equal: (a, b) => a == b,
+                        onChanged: (e) async {
+                          DLog.d(e);
+                          productName = e;
+                          onClear();
+                          await onDragChanged();
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
               Flexible(
                 child: NMenuAnchor<ConvertProtocol>(
                   values: convertTypes,

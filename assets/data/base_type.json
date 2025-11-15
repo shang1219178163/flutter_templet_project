@@ -1,0 +1,46 @@
+{
+  "customerId": {
+    "type": "integer",
+    "format": "int64",
+    "description": "被举报用户id"
+  },
+  "pageNum": {
+    "type": "integer",
+    "format": "int32",
+    "description": "分页页数"
+  },
+  "pageSize": {
+    "type": "integer",
+    "format": "int32",
+    "description": "分页条数",
+    "maximum": 500.0,
+    "exclusiveMaximum": false
+  },
+  "multiMaxOdds": {
+    "type": "number",
+    "description": "本月串关总倍数"
+  },
+  "startDate": {
+    "type": "string"
+  },
+  "endDate": {
+    "type": "string"
+  },
+  "commentaryHasApply": {
+    "type": "boolean",
+    "description": "是否有解说申请"
+  },
+  "desc": {
+    "type": "string",
+    "description": "反馈描述"
+  },
+  "proofList": {
+    "type": "array",
+    "description": "凭证照片",
+    "items": {
+      "type": "string"
+    },
+    "maxItems": 6,
+    "minItems": 0
+  }
+}
