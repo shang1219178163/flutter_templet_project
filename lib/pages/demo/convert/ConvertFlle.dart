@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
+import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 import 'package:flutter_templet_project/pages/demo/convert/CopyWithConvert.dart';
@@ -29,6 +30,8 @@ import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.da
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
+
+import 'package:flutter_templet_project/pages/demo/convert/ApiCreateConvert.dart';
 
 class ConvertFlle extends StatefulWidget {
   ConvertFlle({
@@ -76,6 +79,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   final convertTypeIndex = 0;
 
   final convertTypes = <ConvertProtocol>[
+    ApiCreateConvert(),
     WidgetThemeConvert(),
     WidgetNameConvert(),
     PackageExportConvert(),
@@ -84,6 +88,14 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   ];
 
   late var current = convertTypes[convertTypeIndex];
+
+  final productNames = [
+    "yl_health_app",
+    "yl_health_manage_app",
+    "yl_patient_app",
+  ];
+
+  late var productName = productNames[0];
 
   @override
   void initState() {
@@ -136,13 +148,32 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Flexible(
+                child: NMenuAnchor<String>(
+                  values: productNames,
+                  initialItem: productName,
+                  cbName: (e) => e ?? "请选择",
+                  equal: (a, b) => a == b,
+                  onChanged: (e) async {
+                    DLog.d(e);
+                    productName = e;
+                    onClear();
+                    await onDragChanged();
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Flexible(
                 child: NMenuAnchor<ConvertProtocol>(
                   values: convertTypes,
                   initialItem: current,
                   cbName: (e) => e?.name ?? "请选择",
                   equal: (a, b) => a == b,
                   onChanged: (e) async {
-                    debugPrint(e.name);
+                    DLog.d(e.name);
                     current = e;
                     onClear();
                     await onDragChanged();
@@ -322,7 +353,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   Future<void> onDragChanged() async {
     final list = <Tuple2<String, SelectableText>>[];
     for (final e in files) {
-      final model = await current.convertFile(file: e);
+      final model = await current.convertFile(productName: productName, file: e);
       progressVN.value = files.indexOf(e) / (files.length - 1);
       if (model == null) {
         continue;
@@ -341,35 +372,32 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     if (canDrag.value) {
       for (final e in tabItems) {
         try {
-          onCreateFile(name: e.item1, content: e.item2.data ?? "");
+          onConvert(
+            content: e.item2.data ?? "",
+          );
         } catch (e) {
           debugPrint("❌$this $e");
           continue;
         }
       }
     } else {
-      onCreateFile(
-        name: fileName ?? "未知文件_${DateTime.now()}.dart",
-        content: transformController.out,
+      onConvert(
+        content: transformController.input,
       );
     }
   }
 
-  onConvert({
+  Future<ConvertModel?> onConvert({
     required String content,
   }) async {
-    final model = await current.convert(content: content);
+    final model = await current.convert(productName: productName, content: content);
     if (model == null) {
       DLog.d("❌convert 转换失败");
-      return;
+      return null;
     }
 
     transformController.out = model.contentNew ?? "";
-
-    final isSuccess = await onCreateFile(
-      name: model.nameNew ?? "",
-      content: model.contentNew ?? "",
-    );
+    return model;
   }
 
   onClear() {
@@ -388,6 +416,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     transformController.input = current.exampleTemplet();
 
     final model = await current.convert(
+      productName: productName,
       content: transformController.input,
     );
     transformController.out = model?.contentNew ?? "";
@@ -404,6 +433,18 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   }
 
   onDownload() async {
-    onGenerate();
+    final model = await onConvert(content: transformController.input);
+    if (model == null) {
+      showSnackBar(const SnackBar(
+        content: NText(
+          "文件转换失败",
+          color: Colors.red,
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: AppColor.fontColor333333,
+      ));
+      return;
+    }
+    await onCreateFile(name: model.name, content: model.contentNew ?? "");
   }
 }

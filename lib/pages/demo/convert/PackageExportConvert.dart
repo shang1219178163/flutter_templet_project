@@ -6,7 +6,6 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
@@ -148,6 +147,7 @@ class PackageExportConvert extends ConvertProtocol {
 
   @override
   Future<ConvertModel?> convert({
+    required String productName,
     String? name,
     required String content,
   }) async {
@@ -175,6 +175,7 @@ ${exports.join("\n")}
     """;
 
     return ConvertModel(
+      productName: productName,
       name: name ?? clsName,
       content: content,
       nameNew: fileName,

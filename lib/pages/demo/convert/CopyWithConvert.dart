@@ -6,7 +6,6 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
@@ -102,6 +101,7 @@ class UserModel with SelectableMixin {
 
   @override
   Future<ConvertModel?> convert({
+    required String productName,
     String? name,
     required String content,
   }) async {
@@ -110,42 +110,30 @@ class UserModel with SelectableMixin {
     }
 
     final className = content.splitSet(["class ", "with "].toSet())[1].trim();
-    final list =
-        content.splitSet(["});", "$className.fromJson("].toSet()).toList();
+    final list = content.splitSet(["});", "$className.fromJson("].toSet()).toList();
 
-    final exports = list[1]
-        .split("\n")
-        .map((e) => e.trim())
-        .where((e) => e.isNotEmpty)
-        .toList();
+    final exports = list[1].split("\n").map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
     exports.removeWhere((e) {
       final content = e.trim();
-      final result = content.isEmpty ||
-          content.startsWith("@") ||
-          content.contains(" get ") ||
-          content.startsWith(className);
+      final result =
+          content.isEmpty || content.startsWith("@") || content.contains(" get ") || content.startsWith(className);
       return result;
     });
 
     final propertys = exports.map((e) {
       final list = e.split(" ");
-      return (
-        name: list.last.replaceAll(";", ""),
-        type: list.first,
-        comment: ""
-      );
+      return (name: list.last.replaceAll(";", ""), type: list.first, comment: "");
     }).toList();
 
     var clsName = "BigFile";
     var clsNameNew = clsName;
 
-    final fileName =
-        "${clsNameNew.toUncamlCase("_")}_${DateTime.now().toString19()}"
+    final fileName = "${clsNameNew.toUncamlCase("_")}_${DateTime.now().toString19()}"
         ".dart";
-    final contentNew =
-        _createFileContent(className: className, propertys: propertys);
+    final contentNew = _createFileContent(className: className, propertys: propertys);
 
     return ConvertModel(
+      productName: productName,
       name: name ?? clsName,
       content: content,
       nameNew: fileName,

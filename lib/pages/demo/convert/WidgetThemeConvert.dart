@@ -6,7 +6,6 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
@@ -145,6 +144,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Future<ConvertModel?> convert({
+    required String productName,
     String? name,
     required String content,
   }) async {
@@ -158,12 +158,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         .split("Widget build(BuildContext context)")
         .first
         .split("\n")
-        .where(
-            (e) => e.startsWith("class ") || e.trimLeft().startsWith("final "))
+        .where((e) => e.startsWith("class ") || e.trimLeft().startsWith("final "))
         .toList();
 
-    final line =
-        (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName");
+    final line = (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName");
     // final clsName =
     //     (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName")
     //         .split(" ")[1]
@@ -179,9 +177,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     clsName = clsName.replaceFirst("My", "Yl").replaceFirst("N", "Yl");
 
     final propertys = lines.where((e) {
-      final result = e.trimLeft().startsWith("final ") &&
-          e.contains("?") &&
-          !e.contains(")");
+      final result = e.trimLeft().startsWith("final ") && e.contains("?") && !e.contains(")");
       return result;
     }).map((e) {
       final eContent = e.trimLeft();
@@ -194,13 +190,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     //     propertys.map((e) => e.toString()).join(""
     //         "\n");
 
-    final fileName =
-        "${clsName.toUncamlCase("_")}_theme.dart".replaceFirst("yl_", "");
+    final fileName = "${clsName.toUncamlCase("_")}_theme.dart".replaceFirst("yl_", "");
     final contentNew = _createThemeFileContent(
       clsName: clsName,
       propertys: propertys,
     );
     return ConvertModel(
+      productName: productName,
       name: name ?? clsName,
       content: content,
       nameNew: fileName,

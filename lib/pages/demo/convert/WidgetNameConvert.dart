@@ -6,7 +6,6 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
@@ -205,17 +204,16 @@ class ChoiceBoxModel<T> {
 
   @override
   Future<ConvertModel?> convert({
+    required String productName,
     String? name,
     required String content,
   }) async {
     if (content.isEmpty) {
       return null;
     }
-    final lines =
-        content.split("\n").where((e) => e.startsWith("class ")).toList();
+    final lines = content.split("\n").where((e) => e.startsWith("class ")).toList();
 
-    final line =
-        (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName");
+    final line = (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName");
 
     var clsName = "";
     if (line.contains("<")) {
@@ -225,8 +223,7 @@ class ChoiceBoxModel<T> {
     }
 
     final clsNameNew = clsName.replaceFirst("My", "Yl").replaceFirst("N", "Yl");
-    final fileName =
-        "${clsNameNew.toUncamlCase("_")}.dart".replaceFirst("yl_", "");
+    final fileName = "${clsNameNew.toUncamlCase("_")}.dart".replaceFirst("yl_", "");
     final contentNew = content.replaceAll(clsName, clsNameNew).replaceFirst(
         "Widget build(BuildContext context) {",
         "Widget build(BuildContext context) {"
@@ -234,6 +231,7 @@ class ChoiceBoxModel<T> {
             ".extension<${clsNameNew}Theme>();\n");
 
     return ConvertModel(
+      productName: productName,
       name: name ?? clsName,
       content: content,
       nameNew: fileName,

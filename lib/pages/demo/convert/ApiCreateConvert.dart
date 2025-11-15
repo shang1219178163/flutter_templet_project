@@ -1,43 +1,71 @@
 //
-//  RequestApiTemplet.dart
+//  ApiCreateConvert.dart
 //  flutter_templet_project
 //
-//  Created by shang on 2024/3/26 14:12.
-//  Copyright © 2024/3/26 shang. All rights reserved.
+//  Created by shang on 2025/11/15 14:04.
+//  Copyright © 2025/11/15 shang. All rights reserved.
 //
 
-/// api 模板
-class ApiCreateTemplet {
-  static String createCopyRights({
-    required String productName,
-    required String className,
-  }) {
-    final now = DateTime.now();
-    final nowStr = "$now".substring(0, 19);
-    final yearStr = nowStr.substring(0, 10);
+import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/main.dart';
+import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
+
+class ApiCreateConvert extends ConvertProtocol {
+  @override
+  String get name => "ApiCreate";
+
+  @override
+  String exampleTemplet() {
     return """
-//
-//  $className.dart
-//  $productName
-//
-//  Created by shang on $nowStr.
-//  Copyright © $yearStr shang. All rights reserved.
-//
+GET,/v1/article/catalog/query
+TagGetApi
+TagSetApi
+TagClearApi
 """;
   }
 
-  static String createApi({
+  // @override
+  // Future<ConvertModel?> convertFile({required File file}) async {
+  //   final name = file.path.split("/").last;
+  //   String content = await file.readAsString();
+  //   return convert(content: content, name: name);
+  // }
+
+  @override
+  Future<ConvertModel?> convert({
+    required String productName,
+    String? name,
+    required String content,
+  }) async {
+    if (content.isEmpty) {
+      return null;
+    }
+    final lines = content.split("\n").where((e) => e.isNotEmpty).toList();
+    var nameNew = name ?? lines.first;
+    if (nameNew.contains("/")) {
+      nameNew = "${nameNew.splitByLastNumberAndPascal()}Api";
+    }
+    final contentNew = _createApi(productName: productName, className: nameNew);
+
+    return ConvertModel(
+      productName: productName,
+      name: name ?? nameNew,
+      content: content,
+      nameNew: nameNew,
+      contentNew: contentNew,
+    );
+  }
+
+  String _createApi({
     required String productName,
     required String className,
   }) {
     final copyRights = createCopyRights(productName: productName, className: className);
     return """
 $copyRights
-    
-import 'package:$productName/http/request_manager.dart';
 
-/// 
-/// 
+import '../base_request_api.dart';
+
 /// 
 class $className extends BaseRequestAPI {
   $className({

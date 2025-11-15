@@ -39,13 +39,13 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
   var jsonStr = "";
   final outVN = ValueNotifier("");
 
-  final appSchemes = [
+  final productNames = [
     "yl_health_app",
     "yl_health_manage_app",
     "yl_patient_app",
   ];
 
-  late var appScheme = appSchemes[0];
+  late var productName = productNames[0];
 
   @override
   void initState() {
@@ -234,10 +234,10 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
         Padding(
           padding: EdgeInsets.symmetric(vertical: spacing),
           child: NMenuAnchor<String>(
-            values: appSchemes,
-            initialItem: appScheme,
+            values: productNames,
+            initialItem: productName,
             onChanged: (val) {
-              appScheme = val;
+              productName = val;
             },
             cbName: (e) => e ?? "请选择",
             equal: (a, b) => a == b,
@@ -329,7 +329,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
 
       final className = fileName.contains("_") ? fileName.toCamlCase("_") : fileName;
 
-      outVN.value = ApiCreateTemplet.createApi(appScheme: appScheme, className: className);
+      outVN.value = ApiCreateTemplet.createApi(productName: productName, className: className);
       // debugPrint("fileName: $fileName");
 
       /// 生成本地文件

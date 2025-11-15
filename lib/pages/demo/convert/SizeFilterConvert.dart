@@ -434,6 +434,7 @@ class SizeFilterConvert extends ConvertProtocol {
 
   @override
   Future<ConvertModel?> convert({
+    required String productName,
     String? name,
     required String content,
   }) async {
@@ -487,6 +488,7 @@ totalSize: $totalSizeDesc
     """;
 
     return ConvertModel(
+      productName: productName,
       name: name ?? clsName,
       content: content,
       nameNew: fileName,
