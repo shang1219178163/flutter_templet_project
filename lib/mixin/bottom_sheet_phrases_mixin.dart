@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 // 常用语使用1:
 // sendPhrases() {

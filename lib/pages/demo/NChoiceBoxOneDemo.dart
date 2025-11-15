@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NChoiceBoxOneDemo extends StatefulWidget {
   NChoiceBoxOneDemo({Key? key, this.title}) : super(key: key);

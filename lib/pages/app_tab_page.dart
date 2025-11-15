@@ -30,6 +30,7 @@ import 'package:get/get.dart';
 
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 final kScaffoldKey = GlobalKey<ScaffoldState>();
 

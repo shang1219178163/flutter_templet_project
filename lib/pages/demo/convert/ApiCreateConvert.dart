@@ -6,6 +6,7 @@
 //  Copyright © 2025/11/15 shang. All rights reserved.
 //
 
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
 class ApiCreateConvert extends ConvertProtocol {
@@ -63,6 +64,7 @@ TagClearApi
 $copyRights
 
 import '../base_request_api.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 
 class $className extends BaseRequestAPI {

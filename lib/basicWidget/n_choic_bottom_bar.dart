@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 选择列表,底部菜单
 class NChoicBottomBar extends StatelessWidget {

@@ -22,6 +22,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quiver/collection.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 基础类型数据测试
 class DataTypeDemo extends StatefulWidget {

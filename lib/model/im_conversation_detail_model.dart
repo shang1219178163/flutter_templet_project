@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 
 import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
 import 'package:flutter_templet_project/vendor/isar/db_mixin.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// V2TimConversation
 /// 自定义会话模型(用于数据库存储, sdk 类无法标记)

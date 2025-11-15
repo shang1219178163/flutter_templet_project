@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 组件或者中间页
 class ComponentMiddlePage extends StatefulWidget {

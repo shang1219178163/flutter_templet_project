@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/cache/file_manager.dart';
 
 import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class JsonToModel extends StatefulWidget {
   JsonToModel({Key? key, this.title}) : super(key: key);

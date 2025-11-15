@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 图片处理工具类
 class ImageService {

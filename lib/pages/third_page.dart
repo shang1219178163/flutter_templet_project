@@ -2,6 +2,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class ThirdPage extends StatefulWidget {
   final String? title;

@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NPageViewDemo extends StatefulWidget {
   NPageViewDemo({Key? key, this.title}) : super(key: key);

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -160,6 +160,7 @@ import 'package:yl_gcp_app/module/_examples/page/state.dart';
 import 'package:yl_gcp_app/module/account/model/auth_token_vo.dart';
 import 'package:yl_gcp_app/vender/toast_util.dart';
 
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class $className extends ConsumerStatefulWidget {
   

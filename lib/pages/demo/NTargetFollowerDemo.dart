@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NTargetFollowerDemo extends StatefulWidget {
   NTargetFollowerDemo({Key? key, this.title}) : super(key: key);

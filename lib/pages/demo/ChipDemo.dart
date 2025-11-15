@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_tag_box_new.dart';
 
 import 'package:flutter_templet_project/mixin/cupertino_alert_dialog_mixin.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class ChipDemo extends StatefulWidget {
   final String? title;

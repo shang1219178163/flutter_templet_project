@@ -7,6 +7,7 @@ import 'package:flutter_pickers/time_picker/model/pduration.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 // 地址选择器模型
 class AddressPickerModel {

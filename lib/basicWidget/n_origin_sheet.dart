@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 import 'package:flutter_templet_project/vendor/toast_util.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 域名选择器
 class NOriginSheet extends StatefulWidget {

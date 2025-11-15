@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/basicWidget/TextInputFormatter/fraction_
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TextFieldDemoOne extends StatefulWidget {
   final String? title;

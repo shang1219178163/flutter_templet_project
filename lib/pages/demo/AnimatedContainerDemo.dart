@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class AnimatedContainerDemo extends StatefulWidget {
   const AnimatedContainerDemo({Key? key, this.title}) : super(key: key);

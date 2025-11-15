@@ -6,6 +6,7 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
 class WidgetNameConvert extends ConvertProtocol {
@@ -17,6 +18,7 @@ class WidgetNameConvert extends ConvertProtocol {
     return """
 import 'package:flutter/material.dart';
 import 'package:yl_health_app/util/color_util_new.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 ///选择盒子
 class NChoiceBox<T> extends StatefulWidget {

@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_d
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SliverTabBarDemo extends StatefulWidget {
   SliverTabBarDemo({

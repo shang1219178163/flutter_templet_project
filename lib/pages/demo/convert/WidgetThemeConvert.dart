@@ -6,6 +6,7 @@
 //  Copyright © 2024/8/9 shang. All rights reserved.
 //
 
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
 class WidgetThemeConvert extends ConvertProtocol {
@@ -223,6 +224,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 自定义 
 class ${name}Theme extends ThemeExtension<${name}Theme> {

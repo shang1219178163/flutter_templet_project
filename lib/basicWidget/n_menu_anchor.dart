@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// MenuAnchor 简易封装,方便代码复用
 class NMenuAnchor<E> extends StatelessWidget {

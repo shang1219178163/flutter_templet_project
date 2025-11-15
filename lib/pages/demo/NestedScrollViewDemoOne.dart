@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.da
 
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NestedScrollViewDemoOne extends StatefulWidget {
   const NestedScrollViewDemoOne({Key? key, this.title}) : super(key: key);

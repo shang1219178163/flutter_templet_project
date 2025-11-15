@@ -21,6 +21,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class ImChatPage extends StatefulWidget {
   ImChatPage({Key? key, this.title}) : super(key: key);

@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
 import 'package:flutter_templet_project/mixin/sound_state_mixin.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class GestureDetectorDemo extends StatefulWidget {
   GestureDetectorDemo({Key? key, this.title}) : super(key: key);

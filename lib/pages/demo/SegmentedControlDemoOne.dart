@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_segment_control_emoj_view.
 import 'package:flutter_templet_project/basicWidget/n_segment_control_emoji.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SegmentedControlDemoOne extends StatefulWidget {
   SegmentedControlDemoOne({

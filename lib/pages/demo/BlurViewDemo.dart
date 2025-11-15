@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_blur_view.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class BlurViewDemo extends StatelessWidget {
   final String? title;

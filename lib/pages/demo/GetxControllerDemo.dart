@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/network/controller/tag_gex_controller.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class GetxControllerDemo extends StatefulWidget {
   GetxControllerDemo({

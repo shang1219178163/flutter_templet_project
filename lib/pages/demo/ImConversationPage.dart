@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 会话列表
 class ImConversationPage extends StatefulWidget {

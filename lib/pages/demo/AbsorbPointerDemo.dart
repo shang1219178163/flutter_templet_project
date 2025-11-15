@@ -9,7 +9,6 @@
 
 import "package:flutter/material.dart";
 import "package:flutter_templet_project/basicWidget/n_text.dart";
-import "package:flutter_templet_project/extension/dlog.dart";
 
 class AbsorbPointerDemo extends StatefulWidget {
   const AbsorbPointerDemo({Key? key}) : super(key: key);

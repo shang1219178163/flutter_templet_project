@@ -1,4 +1,4 @@
-// library extensions.dart;
+// library extension_local.dart;
 
 export 'src/alignment_ext.dart';
 export 'src/app_bar_ext.dart';

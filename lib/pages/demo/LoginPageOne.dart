@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class LoginPageOne extends StatefulWidget {
   const LoginPageOne({Key? key, this.title}) : super(key: key);

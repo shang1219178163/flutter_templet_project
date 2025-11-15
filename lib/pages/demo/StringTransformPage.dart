@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 字符串转换
 class StringTransformPage extends StatefulWidget {

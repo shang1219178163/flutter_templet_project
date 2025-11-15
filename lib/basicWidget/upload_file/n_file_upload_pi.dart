@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_ha
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 文件上传样式示例
 class NFileUploadPI extends NFileUploadHandle {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class AnimatedListSample extends StatefulWidget {
   const AnimatedListSample({Key? key}) : super(key: key);

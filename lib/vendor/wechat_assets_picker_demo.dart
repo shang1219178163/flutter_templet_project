@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';import 'package:flutter_templet_project/extension/extension_local.dart';
+
 // show AssetEntity, AssetEntityImageProvider;
 
 class WechatAssetsPickerDemo extends StatefulWidget {

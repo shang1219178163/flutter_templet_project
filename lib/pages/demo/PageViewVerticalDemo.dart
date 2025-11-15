@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class PageViewVerticalDemo extends StatefulWidget {
   const PageViewVerticalDemo({

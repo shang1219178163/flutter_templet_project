@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/enum/FileType.dart';
 
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 上传文档子项
 class AssetUploadDocumentButton extends StatefulWidget {

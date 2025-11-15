@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 筛选框重构
 class DropBoxChoicDemoNew extends StatefulWidget {

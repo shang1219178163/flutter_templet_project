@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -148,7 +149,8 @@ class _IconConvertPageState extends State<IconConvertPage> {
     createFile(fileName: "icons_map", content: """
 import 'package:flutter/material.dart';
   
-  
+  import 'package:flutter_templet_project/extension/extension_local.dart';
+
 Map<String, IconData> kIConDic = {
   $keyValues
 };

@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
 
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
   final String? title;

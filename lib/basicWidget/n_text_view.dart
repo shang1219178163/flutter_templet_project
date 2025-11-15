@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 封装输入框组件
 class NTextView extends StatefulWidget {

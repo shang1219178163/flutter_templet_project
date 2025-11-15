@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 mixin DBDialogMxin<T extends StatefulWidget> on State<T> {
   presentDialog({

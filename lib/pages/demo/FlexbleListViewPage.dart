@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class FlexbleListViewDemo extends StatefulWidget {
   const FlexbleListViewDemo({

@@ -18,6 +18,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 头像更换(回调返回单张图片的路径)
 /// 默认图片压缩,图片裁剪

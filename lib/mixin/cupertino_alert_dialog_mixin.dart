@@ -10,6 +10,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 简单提示信息
 mixin CupertinoAlertDialogMixin<T extends StatefulWidget> on State<T> {

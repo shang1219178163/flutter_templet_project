@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 档案文字展开/收起组件
 class NExpandTextVertical extends StatefulWidget {

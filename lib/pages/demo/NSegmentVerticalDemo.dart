@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SegmentVerticalDemo extends StatefulWidget {
   const SegmentVerticalDemo({

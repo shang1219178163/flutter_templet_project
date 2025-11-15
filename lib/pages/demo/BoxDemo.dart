@@ -21,6 +21,7 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class BoxDemo extends StatefulWidget {
   final String? title;

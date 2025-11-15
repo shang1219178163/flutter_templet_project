@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_path.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class ClipDemo extends StatefulWidget {
   final String? title;

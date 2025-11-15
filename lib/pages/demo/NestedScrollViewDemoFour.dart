@@ -18,6 +18,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_d
 import 'package:flutter_templet_project/basicWidget/scroll/NCustomScrollBehavior.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 电商首页
 class NestedScrollViewDemoFour extends StatefulWidget {

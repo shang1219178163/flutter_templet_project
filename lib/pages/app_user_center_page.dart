@@ -18,6 +18,7 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class APPUserCenterPage extends StatefulWidget {
   const APPUserCenterPage({Key? key}) : super(key: key);

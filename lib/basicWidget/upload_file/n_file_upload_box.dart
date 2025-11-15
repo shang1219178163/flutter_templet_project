@@ -24,6 +24,7 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 从文件存储系统选择文件
 class NFileUploadBox extends StatefulWidget {

@@ -10,6 +10,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class CurvedNavigationBarDemo extends StatefulWidget {
   const CurvedNavigationBarDemo({

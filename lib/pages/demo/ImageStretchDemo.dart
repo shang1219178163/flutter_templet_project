@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/asset_image_stretch.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 图片拉伸
 class ImageStretchDemo extends StatefulWidget {

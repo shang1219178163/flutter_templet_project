@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/en_sliding_segmented_control.dart';
-import 'package:flutter_templet_project/extension/extensions.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 滑动分段组件(ENCupertinoSlidingSegmentedControl)封装
 class NSlidingSegmentedControl<T> extends StatefulWidget {

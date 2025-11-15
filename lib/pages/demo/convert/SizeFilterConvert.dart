@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 typedef LineRecord = ({String line, double num, String? comment});
 

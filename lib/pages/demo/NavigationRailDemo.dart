@@ -8,6 +8,7 @@
 /// TrackingScrollController 在2.0.6 mac 平台无效,后续观察
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NavigationRailDemo extends StatefulWidget {
   const NavigationRailDemo({Key? key, this.title}) : super(key: key);

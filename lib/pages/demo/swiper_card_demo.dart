@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/OcrPhotoDemo.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SwiperCardDemo extends StatefulWidget {
   const SwiperCardDemo({

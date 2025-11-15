@@ -11,6 +11,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class FilterDemoOne extends StatefulWidget {
   const FilterDemoOne({Key? key, this.title}) : super(key: key);

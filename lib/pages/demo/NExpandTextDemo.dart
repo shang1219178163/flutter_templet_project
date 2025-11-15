@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text_vertical.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NExpandTextDemo extends StatefulWidget {
   NExpandTextDemo({Key? key, this.title}) : super(key: key);

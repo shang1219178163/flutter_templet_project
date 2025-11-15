@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 上传图片单元(基于 wechat_assets_picker)
 class AssetUploadBox extends StatefulWidget {

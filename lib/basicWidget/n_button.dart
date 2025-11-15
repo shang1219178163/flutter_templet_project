@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 主题色背景确定按钮
 class NButton extends StatelessWidget {

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TextFieldLoginDemo extends StatefulWidget {
   TextFieldLoginDemo({Key? key, this.title}) : super(key: key);

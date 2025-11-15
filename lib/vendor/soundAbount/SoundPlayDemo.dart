@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_templet_project/basicWidget/voice_animation_image.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 ///类似微信语音播放动画
 class SoundPlayDemo extends StatefulWidget {

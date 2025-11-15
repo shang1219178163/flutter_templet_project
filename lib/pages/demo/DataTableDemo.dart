@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 final titles = [
   (title: "姓名", key: "name"),

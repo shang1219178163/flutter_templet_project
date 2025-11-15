@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_cross_fade_mask.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class IntrinsicHeightDemo extends StatefulWidget {
   const IntrinsicHeightDemo({Key? key, this.title}) : super(key: key);

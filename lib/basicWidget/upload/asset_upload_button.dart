@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
 
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 上传图片单元(基于 wechat_assets_picker)
 class AssetUploadButton extends StatefulWidget {

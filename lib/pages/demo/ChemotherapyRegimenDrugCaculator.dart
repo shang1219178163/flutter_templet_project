@@ -18,6 +18,7 @@ import 'package:flutter_templet_project/pages/demo/drug_dosage_cal_page.dart';
 import 'package:flutter_templet_project/pages/medication_calculator.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 化疗药品计算
 class ChemotherapyRegimenDrugCaculator extends StatefulWidget {

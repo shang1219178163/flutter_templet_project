@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class DrawCanvasDemo extends StatefulWidget {
   DrawCanvasDemo({Key? key, this.title}) : super(key: key);

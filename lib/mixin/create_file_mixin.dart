@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 创建文件并保存
 mixin CreateFileMixin<T extends StatefulWidget> on State<T> {

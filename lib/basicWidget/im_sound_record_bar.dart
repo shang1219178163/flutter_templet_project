@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/im_sound_recording_page.dart
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/vibration_service.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 音频录制(按住说话)组件
 class IMSoundRecordBar extends StatefulWidget {

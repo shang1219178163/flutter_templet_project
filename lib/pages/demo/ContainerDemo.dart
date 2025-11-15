@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class ContainerDemo extends StatefulWidget {
   final String? title;

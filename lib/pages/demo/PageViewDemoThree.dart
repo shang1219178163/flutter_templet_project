@@ -4,6 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_collection_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class PageViewDemoThree extends StatefulWidget {
   PageViewDemoThree({Key? key, this.title}) : super(key: key);

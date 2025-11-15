@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/tts_manager.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 极光推送相关信息页面
 class JPushInfoPage extends StatefulWidget {

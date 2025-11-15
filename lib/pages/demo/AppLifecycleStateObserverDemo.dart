@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class AppLifecycleStateObserverDemo extends StatefulWidget {
   AppLifecycleStateObserverDemo({super.key, this.title});
