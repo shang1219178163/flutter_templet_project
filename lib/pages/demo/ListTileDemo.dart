@@ -31,7 +31,6 @@ class _ListTileDemoState extends State<ListTileDemo> {
 
   @override
   void initState() {
-    // TODO: implement initState
     // groupValue = items[0];
 
     super.initState();

@@ -40,7 +40,6 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
 
   @override
   void initState() {
-    // TODO: implement initState
     SystemChannels.navigation.setMethodCallHandler((call) {
       debugPrint('<SystemChannels.navigation> ${call.method} (${call.arguments})');
       /*

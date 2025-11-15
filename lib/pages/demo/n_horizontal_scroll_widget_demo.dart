@@ -18,7 +18,6 @@ class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDem
 
   @override
   void initState() {
-
     _items = List.generate(imgUrls.length, (index) => AttrCarouseItem(icon: imgUrls[index], title: "标题_$index"));
 
     super.initState();

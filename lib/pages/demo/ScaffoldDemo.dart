@@ -50,7 +50,6 @@ class _ScaffoldDemoState extends State<ScaffoldDemo> with SingleTickerProviderSt
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 250))

@@ -29,8 +29,6 @@ class _APIConvertPageState extends State<APIConvertPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     _textEditingController.text = """
 import 'dart:convert';
 

@@ -42,7 +42,7 @@ class _QrcodePageState extends State<QrcodePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
   }
 

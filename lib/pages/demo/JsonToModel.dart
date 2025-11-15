@@ -43,8 +43,6 @@ class _JsonToModelState extends State<JsonToModel> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
   }
 

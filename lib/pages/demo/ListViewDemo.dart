@@ -5,8 +5,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:tuple/tuple.dart';
 
-typedef KeyCallback = void Function(
-    BuildContext context, int index, GlobalKey key);
+typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 
 class ListViewDemo extends StatefulWidget {
   final String? title;
@@ -41,22 +40,14 @@ class _ListViewDemoState extends State<ListViewDemo> {
       '跳转url',
       false,
     ),
-    Tuple4(
-        'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
-        '海尔｜无边界其他',
-        '跳转url',
-        false),
-    ...List.generate(
-        19,
-        (index) =>
-            Tuple4('item_$index${'z' * index}', '海尔｜无边界其他', '跳转url', false)),
+    Tuple4('https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg', '海尔｜无边界其他', '跳转url', false),
+    ...List.generate(19, (index) => Tuple4('item_$index${'z' * index}', '海尔｜无边界其他', '跳转url', false)),
   ];
 
   final offsetY = ValueNotifier(0.0);
 
   @override
   void initState() {
-    // TODO: implement initState
     _scrollController2.addListener(() {
       offsetY.value = _scrollController2.position.pixels;
     });
@@ -99,9 +90,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
               onKeyCallback: (context, index, itemKey) {
-                _scrollController.jumToHorizontal(
-                    key: itemKey,
-                    offsetX: (MediaQuery.of(context).size.width / 2));
+                _scrollController.jumToHorizontal(key: itemKey, offsetX: (MediaQuery.of(context).size.width / 2));
               }),
           Expanded(
             child: _buildListView(
@@ -219,9 +208,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                     key: itemKey,
                     onTap: () {
                       debugPrint("$e");
-                      _scrollController.jumToHorizontal(
-                          key: itemKey,
-                          offsetX: (MediaQuery.of(context).size.width / 2));
+                      _scrollController.jumToHorizontal(key: itemKey, offsetX: (MediaQuery.of(context).size.width / 2));
 
                       // _scrollController.scrollToItem(
                       //   itemKey: itemKey,
@@ -295,9 +282,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                               image: NetworkImage(e.item1),
                               fit: BoxFit.cover,
                               height: 70)
-                          : Container(
-                              height: 75,
-                              child: Center(child: Text('Index:${e.item1}'))),
+                          : Container(height: 75, child: Center(child: Text('Index:${e.item1}'))),
                     ),
                   ),
                 );

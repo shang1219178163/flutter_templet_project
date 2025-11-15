@@ -4,12 +4,10 @@
   // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
     {
       "name": "flutter_templet_project",
       "request": "launch",
       "type": "dart",
-      "deviceId": "E5A00D5F-42D9-497F-A789-FAD398EE3F17"
     },
     {
       "name": "flutter_templet_project (profile mode)",

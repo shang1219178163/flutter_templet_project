@@ -37,7 +37,6 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     _width.value = sizeStart.width;
     _height.value = sizeStart.height;
 
-    // TODO: implement initState
     super.initState();
   }
 

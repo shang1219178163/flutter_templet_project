@@ -39,7 +39,6 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     keys = List.from(widget.map.keys);
     searchResults = List.from(widget.map.keys);
 

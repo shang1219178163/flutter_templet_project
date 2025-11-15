@@ -35,8 +35,6 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
 
   @override
   void initState() {
-
-
     // _scrollController.addListener(() {
     //   final isBottom =_scrollController.position.pixels ==
     //       _scrollController.position.maxScrollExtent;

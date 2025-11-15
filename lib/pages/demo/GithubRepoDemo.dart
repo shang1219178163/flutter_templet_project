@@ -30,7 +30,6 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
 
   @override
   void initState() {
-
     super.initState();
   }
 

@@ -89,8 +89,6 @@ class _NumberStepperState extends State<NumberStepper> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     _textController.text = "$current";
     super.initState();
   }

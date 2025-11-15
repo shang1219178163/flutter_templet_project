@@ -54,7 +54,6 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
 
   @override
   void initState() {
-
     _selectedEvents.value = events;
     super.initState();
   }
@@ -94,11 +93,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                   margin: EdgeInsets.all(6),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: [
-                      Colors.green,
-                      Colors.blue,
-                      Colors.orange
-                    ][Random().nextInt(3)],
+                    color: [Colors.green, Colors.blue, Colors.orange][Random().nextInt(3)],
                     shape: BoxShape.circle,
                   ),
                   child: Text(
@@ -174,10 +169,8 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
               // No need to call `setState()` here
               _focusedDay = focusedDay;
 
-              final first = _focusedDay.calenderMonthPageFisrtDayStr(
-                  format: DATE_FORMAT_DAY);
-              final last = _focusedDay.calenderMonthPageLastDayStr(
-                  format: DATE_FORMAT_DAY_END);
+              final first = _focusedDay.calenderMonthPageFisrtDayStr(format: DATE_FORMAT_DAY);
+              final last = _focusedDay.calenderMonthPageLastDayStr(format: DATE_FORMAT_DAY_END);
               debugPrint("onPageChanged: calenderMonthPage $first, $last");
             },
           ),

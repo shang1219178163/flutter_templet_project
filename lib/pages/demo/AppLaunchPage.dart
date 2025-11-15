@@ -26,7 +26,7 @@ class _AppLaunchPageState extends State<AppLaunchPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
 
     timer?.cancel();
     timer ??= Timer(const Duration(milliseconds: 300), () {

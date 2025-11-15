@@ -78,7 +78,6 @@ class _NSliderState extends State<NSlider> {
 
   @override
   void initState() {
-    // TODO: implement initState
     sliderVN.value = widget.value ?? 0;
     super.initState();
   }

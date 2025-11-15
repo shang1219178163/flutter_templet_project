@@ -67,7 +67,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       // Tuple4("行数", 1, 2, ValueNotifier(2)),
     ];
 
-    // TODO: implement initState
     super.initState();
   }
 

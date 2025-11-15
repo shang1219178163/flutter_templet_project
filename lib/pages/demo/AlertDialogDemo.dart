@@ -102,7 +102,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
   }
 

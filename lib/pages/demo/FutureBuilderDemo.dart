@@ -31,7 +31,6 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _res = mockNetworkData();
     super.initState();
   }
