@@ -1,12 +1,6 @@
-import 'dart:convert';
-
-import 'package:color_converter/color_converter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class StackDemoThree extends StatefulWidget {
@@ -139,7 +133,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
         ListenableBuilder(
           listenable: provider,
           builder: (context, Widget? child) {
-            double top = provider.topOffset == -1 ? (provider.isExpanded ? _maxTop : _minTop) : provider.topOffset;
+            var top = provider.topOffset == -1 ? (provider.isExpanded ? _maxTop : _minTop) : provider.topOffset;
 
             final args = {
               "top": top.toStringAsFixed(1),

@@ -84,13 +84,13 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
   Future<bool> authBiometrics() async {
     final auth = LocalAuthentication();
 
-    final bool isDeviceSupported = await auth.isDeviceSupported();
+    final isDeviceSupported = await auth.isDeviceSupported();
     if (!isDeviceSupported) {
       DLog.d("设备不支持");
       return false;
     }
 
-    final bool canAuthWithBiometrics = await auth.canCheckBiometrics;
+    final canAuthWithBiometrics = await auth.canCheckBiometrics;
     if (!canAuthWithBiometrics) {
       DLog.d("设备不支持1");
       return false;

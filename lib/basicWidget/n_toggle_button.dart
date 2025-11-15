@@ -75,7 +75,7 @@ class _ToggleButtonState<T> extends State<ToggleButton<T>> {
   @override
   void didUpdateWidget(covariant ToggleButton<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    bool shouldUpdate = false;
+    var shouldUpdate = false;
     if (!listEquals(oldWidget.originData, widget.originData)) {
       originData = widget.originData;
       shouldUpdate = true;
@@ -102,10 +102,10 @@ class _ToggleButtonState<T> extends State<ToggleButton<T>> {
       return const SizedBox.shrink();
     }
 
-    final int index = originData.contains(selected) ? originData.indexOf(selected as T) : -1;
-    final int itemCount = originData.length;
-    final double width = itemWidth * itemCount + 2;
-    final double sliderWidth = itemWidth;
+    final index = originData.contains(selected) ? originData.indexOf(selected as T) : -1;
+    final itemCount = originData.length;
+    final width = itemWidth * itemCount + 2;
+    final sliderWidth = itemWidth;
 
     return Container(
       margin: margin ?? const EdgeInsets.only(left: 16, right: 16),
@@ -134,7 +134,7 @@ class _ToggleButtonState<T> extends State<ToggleButton<T>> {
           ),
           Row(
             children: List.generate(itemCount, (index) {
-              final T value = originData[index];
+              final value = originData[index];
               final isSelected = value == selected;
               final label = widget.labelBuilder?.call(value) ?? value.toString();
 

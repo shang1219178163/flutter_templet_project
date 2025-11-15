@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
 class ApiCreateConvert extends ConvertProtocol {

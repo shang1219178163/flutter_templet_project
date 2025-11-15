@@ -57,7 +57,7 @@ class _ColorSchemeDemoState extends State<ColorSchemeDemo> {
 
         return GestureDetector(
           onTap: () async {
-            ColorScheme scheme = await ColorScheme.fromImageProvider(provider: imageProvider);
+            var scheme = await ColorScheme.fromImageProvider(provider: imageProvider);
             activeColor = scheme.primary;
             activeIndex = i;
             setState(() {});

@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';

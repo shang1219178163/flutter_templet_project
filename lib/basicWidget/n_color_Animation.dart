@@ -51,10 +51,10 @@ class _NColorAnimationState extends State<NColorAnimation> with SingleTickerProv
   }
 
   Color _getCurrentColor() {
-    int segmentCount = _colors.length - 1;
-    double segmentValue = _anim.value * segmentCount;
-    int currentSegment = segmentValue.floor();
-    double progress = segmentValue - currentSegment;
+    var segmentCount = _colors.length - 1;
+    var segmentValue = _anim.value * segmentCount;
+    var currentSegment = segmentValue.floor();
+    var progress = segmentValue - currentSegment;
 
     if (currentSegment >= _colors.length - 1) {
       return _colors.last;

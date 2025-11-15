@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/rich_text_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-
 import 'package:get/get.dart';
+
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class BackgroundTaskDemo extends StatefulWidget {
   const BackgroundTaskDemo({

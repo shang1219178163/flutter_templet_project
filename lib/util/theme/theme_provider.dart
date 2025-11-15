@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
-
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class ThemeProvider extends ChangeNotifier {
   static final ThemeProvider _instance = ThemeProvider._();
@@ -16,7 +15,7 @@ class ThemeProvider extends ChangeNotifier {
   static const themeKey = "themeModel"; // 存储 key
 
   init() {
-    ThemeMode themeMode = ThemeMode.values[_loadThemeFromPreferences()];
+    var themeMode = ThemeMode.values[_loadThemeFromPreferences()];
     toggleTheme(themeMode);
   }
 
@@ -63,7 +62,7 @@ class ThemeProvider extends ChangeNotifier {
     switch (themeMode) {
       case ThemeMode.system:
         {
-          bool isDark = Theme.of(context).brightness == Brightness.dark;
+          var isDark = Theme.of(context).brightness == Brightness.dark;
           final model = isDark ? ThemeMode.light : ThemeMode.dark;
           toggleTheme(model);
         }

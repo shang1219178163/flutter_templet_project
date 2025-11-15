@@ -6,8 +6,8 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// AssetUploadBox演示demo
 class AssetUploadBoxDemo extends StatefulWidget {

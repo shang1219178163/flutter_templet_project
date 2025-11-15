@@ -117,7 +117,7 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
         final itemWidth = ((constraints.maxWidth - (numPerRow - 1) * 8) / numPerRow).truncateToDouble();
 
         final list = List.generate(20, (i) => i * 5).map((e) {
-          double v = e / 100.0;
+          var v = e / 100.0;
           final color = Colors.white.withOpacity(v);
           return "${color.toHex()}, $v";
         }).toList();

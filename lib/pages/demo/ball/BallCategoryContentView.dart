@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
 import 'package:flutter_templet_project/basicWidget/scroll/EndBounceScrollPhysics.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/model/footbal_category_item.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
-import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 
 class BallCategoryContentView extends StatefulWidget {
   final List<CategoryItem> leftNavItems;
@@ -241,9 +241,9 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
                               final gridItemWidth = constraints.maxWidth;
                               // final imageSize = (gridItemWidth * 0.5).clamp(24.0, 36.0);
                               // double fontSize = gridItemWidth < 70 ? 10 : 12;
-                              double spacingHeight = gridItemWidth < 70 ? 2.5 : 5;
-                              double imageSize = 36;
-                              double fontSize = 12;
+                              var spacingHeight = gridItemWidth < 70 ? 2.5 : 5.0;
+                              var imageSize = 36.0;
+                              var fontSize = 12.0;
 
                               return Container(
                                 // color: Colors.green,

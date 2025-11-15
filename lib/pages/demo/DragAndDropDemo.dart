@@ -7,16 +7,12 @@
 //
 
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
-import 'package:flutter_templet_project/basicWidget/n_file_viewer/n_file_viewer.dart';
-import 'package:flutter_templet_project/basicWidget/n_file_viewer/src/NFileViewer.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
 
 class DragAndDropDemo extends StatefulWidget {
   final String? title;

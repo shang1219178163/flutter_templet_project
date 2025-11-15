@@ -77,7 +77,7 @@ class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
   }
 
   Widget buildSwitch() {
-    ThemeData theme = Theme.of(context);
+    var theme = Theme.of(context);
     const green = Color(0xFF45CC0D);
 
     return DefaultTextStyle(
@@ -742,8 +742,8 @@ class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
               selectedIconScale: 1.0,
               indicatorSize: const Size.fromWidth(25),
               foregroundIndicatorIconBuilder: (context, global) {
-                double pos = global.position;
-                double transitionValue = pos - pos.floorToDouble();
+                var pos = global.position;
+                var transitionValue = pos - pos.floorToDouble();
                 return Transform.rotate(
                     angle: 2.0 * pi * transitionValue,
                     child: Stack(children: [
@@ -828,7 +828,7 @@ class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
 
   Widget alternativeIconBuilder(
       BuildContext context, AnimatedToggleProperties<int> local, GlobalToggleProperties<int> global) {
-    IconData data = Icons.access_time_rounded;
+    var data = Icons.access_time_rounded;
     switch (local.value) {
       case 0:
         data = Icons.ac_unit_outlined;

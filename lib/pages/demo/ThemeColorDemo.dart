@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:tuple/tuple.dart';
+
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 /// scaffoldBackgroundColor 背景色
 /// dialogBackgroundColor 弹窗背景色

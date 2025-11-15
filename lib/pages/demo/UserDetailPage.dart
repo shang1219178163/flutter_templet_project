@@ -11,11 +11,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_fixed_width_indicator.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class UserDetailPage extends StatelessWidget {
   const UserDetailPage({super.key});
@@ -671,8 +671,8 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     onHeightChanged?.call(shrinkOffset);
 
-    double rawHeight = maxExtent - shrinkOffset;
-    double currentHeight = rawHeight.clamp(minExtent, maxExtent);
+    var rawHeight = maxExtent - shrinkOffset;
+    var currentHeight = rawHeight.clamp(minExtent, maxExtent);
     return SizedBox(height: currentHeight, child: child);
   }
 

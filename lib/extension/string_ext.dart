@@ -166,7 +166,7 @@ extension StringExt on String {
       return buffer.toString();
     }
 
-    String path = this;
+    var path = this;
     // 去掉开头和结尾 "/"
     path = path.replaceAll(RegExp(r'^/+|/+$'), '');
 

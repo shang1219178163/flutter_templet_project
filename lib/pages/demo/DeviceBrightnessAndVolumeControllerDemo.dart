@@ -7,8 +7,8 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_screen_wake/flutter_screen_wake.dart';
+import 'package:get/get.dart';
 import 'package:volume_controller/volume_controller.dart';
 
 class DeviceBrightnessAndVolumeControllerDemo extends StatefulWidget {

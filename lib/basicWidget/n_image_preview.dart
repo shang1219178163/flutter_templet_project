@@ -6,10 +6,8 @@
 //  Copyright © 2024/1/19 shang. All rights reserved.
 //
 
-import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_indicator.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';

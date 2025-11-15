@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 /// 属性元祖
 typedef SystemThemeTabRecord<T> = ({String example, String name, T value});

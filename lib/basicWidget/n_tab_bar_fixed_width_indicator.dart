@@ -57,16 +57,16 @@ class _RoundedPainter extends BoxPainter {
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    final double startX = offset.dx + (configuration.size!.width - width) / 2;
-    final double endX = startX + width;
-    final double topY = configuration.size!.height - height - topMargin;
+    final startX = offset.dx + (configuration.size!.width - width) / 2;
+    final endX = startX + width;
+    final topY = configuration.size!.height - height - topMargin;
 
-    final RRect indicatorRect = RRect.fromRectAndRadius(
+    final indicatorRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(startX, topY, width, height),
       Radius.circular(borderRadius),
     );
 
-    final Paint paint = Paint()..style = PaintingStyle.fill;
+    final paint = Paint()..style = PaintingStyle.fill;
 
     if (gradient != null) {
       paint.shader = gradient!.createShader(indicatorRect.outerRect);

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_blinking_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_color_Animation.dart';
 import 'package:flutter_templet_project/basicWidget/n_enter_ball_anim.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class ColorAnimationDemo extends StatefulWidget {
@@ -184,9 +182,9 @@ class _TweenSequenceColorAnimationState extends State<TweenSequenceColorAnimatio
   }
 
   void _setupTweenSequence() {
-    List<TweenSequenceItem<Color?>> items = [];
+    var items = <TweenSequenceItem<Color?>>[];
 
-    for (int i = 0; i < colors.length - 1; i++) {
+    for (var i = 0; i < colors.length - 1; i++) {
       items.add(
         TweenSequenceItem<Color?>(
           weight: 1.0,

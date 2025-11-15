@@ -1,14 +1,15 @@
+import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:flutter_templet_project/cache/file_manager.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
-import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 
 class GameMathPage extends StatefulWidget {
   const GameMathPage({
@@ -236,11 +237,11 @@ class BracketHorLinePainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    double paddingX = 25;
-    double paddingY = 10;
+    var paddingX = 25.0;
+    var paddingY = 10.0;
 
-    double lineHori = (size.width - paddingX * 2) / 2;
-    double lineVert = (size.height - paddingY * 2) / 2;
+    var lineHori = (size.width - paddingX * 2) / 2;
+    var lineVert = (size.height - paddingY * 2) / 2;
 
     // 上半场到中间
     canvas.drawLine(Offset(paddingX, paddingY), Offset(paddingX, size.height / 2), paint);
@@ -332,7 +333,7 @@ class _NetworkImageWithTextState extends State<NetworkImageWithText> {
         options: Options(responseType: ResponseType.bytes),
       );
       // 转成 Uint8List
-      final Uint8List data = Uint8List.fromList(response.data!);
+      final data = Uint8List.fromList(response.data!);
       final codec = await ui.instantiateImageCodec(data);
       final frame = await codec.getNextFrame();
       _image = frame.image;
@@ -480,7 +481,7 @@ class _GameMatchItemState extends State<GameMatchItem> {
         options: Options(responseType: ResponseType.bytes),
       );
       // 转成 Uint8List
-      final Uint8List data = Uint8List.fromList(response.data!);
+      final data = Uint8List.fromList(response.data!);
       _image = await data.toImage();
 
       final cacheFile = await FileManager.cacheImage(image: _image, fileName: fileName);
@@ -524,13 +525,13 @@ class GameMatchItemPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final bool isVer = size.height > size.width;
-    double lineHor = 50;
-    double lineVer = 20;
+    final isVer = size.height > size.width;
+    var lineHor = 50.0;
+    var lineVer = 20.0;
 
-    double leve1Hor = lineHor * 2.4;
-    double leve2Hor = lineHor * 1.2;
-    double leve3Hor = lineHor * 0.6;
+    var leve1Hor = lineHor * 2.4;
+    var leve2Hor = lineHor * 1.2;
+    var leve3Hor = lineHor * 0.6;
 
     if (isVer) {
       leve1Hor = size.width / 4;
@@ -629,7 +630,7 @@ class GameMatchItemPainter extends CustomPainter {
     double lineHor = 60,
     double lineVer = 30,
   }) {
-    double factor = isReverse == true ? 1.0 : -1.0;
+    var factor = isReverse == true ? 1.0 : -1.0;
 
     // 绘制曲线
     var line = paintGameLine(
@@ -833,11 +834,11 @@ class GameMatchItemPainter extends CustomPainter {
     required ui.Image? image,
   }) {
     // 图片高度（限制最大高度）
-    double imgHeight = 30;
-    double imgWidth = 30;
-    double imgTextSpacing = 4;
+    var imgHeight = 30.0;
+    var imgWidth = 30.0;
+    var imgTextSpacing = 4.0;
 
-    double factor = isReverse == true ? 1.0 : -1.0;
+    var factor = isReverse == true ? 1.0 : -1.0;
 
     // 文字绘制
     final textSpan = TextSpan(
@@ -900,7 +901,7 @@ class GameMatchItemPainter extends CustomPainter {
       paintImage(
         canvas: canvas,
         rect: imgRect,
-        image: image!,
+        image: image,
         fit: BoxFit.contain,
       );
     }

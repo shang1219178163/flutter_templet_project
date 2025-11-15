@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/foundation.dart';
@@ -57,7 +56,7 @@ class _NRefreshIndicatorState extends State<NRefreshIndicator> {
       builder: (BuildContext context, Widget child, IndicatorController controller) {
         final state = controller.state;
         final progress = controller.value; // 0~1
-        const double tabHeight = 44.0;
+        const tabHeight = 44.0;
         const displacement = 44.0; //触发刷新阈值
         final childOffset = widget.offsetY ?? progress * displacement;
         final refreshHeadOffset = progress * displacement;

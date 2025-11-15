@@ -116,7 +116,7 @@ class LinkedScrollUtils {
         // 滚动时触发震动
         HapticFeedback.lightImpact();
 
-        double targetScroll = targetPosition - viewportHeight / 2 + itemHeight / 2;
+        var targetScroll = targetPosition - viewportHeight / 2 + itemHeight / 2;
         targetScroll = targetScroll.clamp(0.0, maxScrollExtent);
 
         controller.animateTo(

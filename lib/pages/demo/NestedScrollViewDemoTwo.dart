@@ -33,7 +33,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
 
   @override
   void dispose() {
-    tabController?.dispose();
+    tabController.dispose();
     super.dispose();
   }
 

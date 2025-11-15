@@ -1,11 +1,5 @@
-import 'dart:io';
 
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_empty.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
 class NSliverPageOne extends StatefulWidget {
   const NSliverPageOne({

@@ -46,7 +46,7 @@ class _NBlinkingTextState extends State<NBlinkingText> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     final textStyle = widget.style ?? Theme.of(context).textTheme.bodyLarge ?? TextStyle(color: Colors.black);
-    final textStyleHighlighted = (widget.highlightedstyle ?? textStyle)!.copyWith(
+    final textStyleHighlighted = (widget.highlightedstyle ?? textStyle).copyWith(
       color: Colors.white,
     );
 

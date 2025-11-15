@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
-import 'package:flutter_templet_project/model/footbal_category_item.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryContentView.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
@@ -82,7 +81,7 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
         if (_tabController == null || _tabController!.length != provider.categories.length) {
           _initTabController(provider.categories.length);
         }
-        final int currentIndex = _tabController!.index;
+        final currentIndex = _tabController!.index;
         return Column(
           children: [
             Material(
@@ -116,9 +115,9 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
                         labelStyle: const TextStyle(fontSize: 13),
                         unselectedLabelStyle: const TextStyle(fontSize: 13),
                         tabs: provider.categories.asMap().entries.map((entry) {
-                          final int index = entry.key;
-                          final CategoryItem category = entry.value;
-                          final bool isSelected = index == currentIndex;
+                          final index = entry.key;
+                          final category = entry.value;
+                          final isSelected = index == currentIndex;
                           return Tab(
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
