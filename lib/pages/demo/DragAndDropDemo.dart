@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
+import 'package:flutter_templet_project/model/n_expand_model.dart';
 
 class DragAndDropDemo extends StatefulWidget {
   final String? title;
@@ -24,7 +25,7 @@ class DragAndDropDemo extends StatefulWidget {
 }
 
 class _DragAndDropDemoState extends State<DragAndDropDemo> {
-  List<File> fileList = [];
+  List<NExpandModel<File>> fileList = [];
 
   @override
   void initState() {
@@ -53,7 +54,7 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
                   //     .toList()
                   //     .sorted();
 
-                  fileList = files.map((e) => File(e.path)).toList();
+                  fileList = files.map((e) => NExpandModel(value: File(e.path))).toList();
                   DLog.d("files: ${files.map((e) => e.path).join("\n")}");
                   setState(() {});
                   // readFiles(files: files);
@@ -65,16 +66,18 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      ...fileList.map((e) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.blue),
-                          ),
-                          child: buildFileVier(e: e),
-                          // child: NFileViewer(path: e.path),
-                        );
-                      }),
+                      ...fileList.map(
+                        (e) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border(bottom: BorderSide(color: Colors.white)),
+                            ),
+                            child: buildFileVier(e: e),
+                            // child: NFileViewer(path: e.path),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -86,9 +89,9 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
     );
   }
 
-  Widget buildFileVier({required File e}) {
+  Widget buildFileVier({required NExpandModel<File> e}) {
     return FutureBuilder<String>(
-      future: e.readAsString(),
+      future: e.value.readAsString(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return CircularProgressIndicator();
@@ -100,37 +103,46 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
 
         final result = snapshot.data ?? "";
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.05),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      e.name,
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
+        return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  e.isExpand = !e.isExpand;
+                  setState(() {});
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.05),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      FileManager().createFile(fileName: e.name, content: result);
-                    },
-                    icon: Icon(Icons.download),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          e.value.name,
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          FileManager().createFile(fileName: e.value.name, content: result);
+                        },
+                        icon: Icon(Icons.download),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Text(result, softWrap: true),
-            ),
-          ],
-        );
+              if (e.isExpand)
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(result, softWrap: true),
+                ),
+            ],
+          );
+        });
       },
     );
   }
