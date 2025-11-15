@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 ///移动动画
 class NSlideTransition extends AnimatedWidget {

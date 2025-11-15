@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/mixin/expression_formula_mxin.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 表达式计算
 class ExpressionsCalulatorDemo extends StatefulWidget {

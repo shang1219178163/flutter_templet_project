@@ -9,6 +9,7 @@
 import 'dart:io';
 
 import 'package:yaml/yaml.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension YamlMapExt on YamlMap {
   /// 字符串转

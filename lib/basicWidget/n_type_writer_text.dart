@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NTypeWriterText extends StatefulWidget {
   const NTypeWriterText({

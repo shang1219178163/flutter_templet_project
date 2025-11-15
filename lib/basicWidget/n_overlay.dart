@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:get/get.dart';
 
 /// 浮层工具类

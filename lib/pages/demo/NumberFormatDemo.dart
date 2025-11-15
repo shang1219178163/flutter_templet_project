@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 
 import "package:intl/intl.dart";
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NumberFormatDemo extends StatefulWidget {
   final String? title;

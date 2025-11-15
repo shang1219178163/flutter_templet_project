@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 typedef ChoiceSelectedType<T> = void Function(T e, bool selected);
 

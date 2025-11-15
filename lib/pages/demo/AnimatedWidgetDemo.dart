@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class AnimatedWidgetDemo extends StatefulWidget {
   final String? title;

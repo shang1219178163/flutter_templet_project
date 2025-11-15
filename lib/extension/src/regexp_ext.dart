@@ -7,6 +7,7 @@
 //
 
 /// emoji 正则
+import 'package:flutter_templet_project/extension/extension_local.dart';
 final RegExp emojiReg = RegExp(RegExpSource.emoji);
 
 extension RegExpExt on RegExp {

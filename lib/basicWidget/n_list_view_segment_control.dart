@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 // ignore: must_be_immutable (水平菜单单选器)
 class NListViewSegmentControl extends StatefulWidget {

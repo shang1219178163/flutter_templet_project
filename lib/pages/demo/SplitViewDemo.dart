@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_split_view.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SplitViewDemo extends StatefulWidget {
   const SplitViewDemo({

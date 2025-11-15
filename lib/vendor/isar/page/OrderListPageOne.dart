@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/page/OrderItem.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_generic_controller.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// DBGenericProvider 示例
 class OrderListPageOne extends StatefulWidget {

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/util/yaml_ext.dart';
 import 'package:path/path.dart' as path;
 import 'package:pubspec_parse/pubspec_parse.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 解析 Yaml
 class YamlParsePage extends StatefulWidget {

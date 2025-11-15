@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_templet_project/Model/app_update_model.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 // ignore: must_be_immutable
 class AppUpdateCard extends StatefulWidget {

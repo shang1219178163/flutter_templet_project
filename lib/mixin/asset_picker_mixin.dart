@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 媒体文件选择
 mixin AssetPickerMixin<T extends StatefulWidget> on State<T> {

@@ -9,6 +9,7 @@ import 'package:flutter_sound_platform_interface/flutter_sound_recorder_platform
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:logger/logger.dart' show Level;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 const theSource = AudioSource.microphone;
 

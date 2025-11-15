@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// Defines the [Stepper]'s titles position when the [type] is [StepperType.horizontal].
 enum HorizontalTitlePosition {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/basicWidget/x_collection_nav_widget.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
 class HomeNavDemo extends StatefulWidget {
@@ -31,7 +31,7 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
           children: [
             _buildNav(
                 child: XCollectionNavWidget(
-              width: screenSize.width - 24,
+              width: context.screenSize.width - 24,
               rowCount: 5,
             )),
             Divider(),
@@ -67,7 +67,7 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
         itemBuilder: (BuildContext context, int index) {
           return _buildNav(
               child: XCollectionNavWidget(
-            width: screenSize.width - 24,
+            width: context.screenSize.width - 24,
             rowCount: 3,
           ));
           return CustomSwiperItem(

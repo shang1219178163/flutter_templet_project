@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class PageRouteAnimationDemo extends StatefulWidget {
   const PageRouteAnimationDemo({

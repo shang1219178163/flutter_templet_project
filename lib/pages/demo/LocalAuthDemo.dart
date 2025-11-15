@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_button.dart';
 
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 生物识别技术（例如指纹或面部识别） https://pub.dev/packages/local_auth
 class LocalAuthDemo extends StatefulWidget {

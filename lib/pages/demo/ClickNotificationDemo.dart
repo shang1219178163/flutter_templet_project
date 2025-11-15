@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tap_gesture_intercept.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class ClickNotificationDemo extends StatelessWidget {
   const ClickNotificationDemo({super.key});

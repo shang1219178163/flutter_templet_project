@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_slidable_tabbar.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class CustomTabbarPage extends StatefulWidget {
   const CustomTabbarPage({

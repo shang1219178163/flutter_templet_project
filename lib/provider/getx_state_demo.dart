@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class GetxStateDemo extends StatelessWidget {
   const GetxStateDemo({Key? key}) : super(key: key);

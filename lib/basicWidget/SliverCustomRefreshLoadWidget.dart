@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 刷新状态
 enum RefreshState { idle, dragging, armed, refreshing, done }

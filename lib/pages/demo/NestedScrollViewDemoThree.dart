@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_colored_box.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NestedScrollViewDemoThree extends StatefulWidget {
   const NestedScrollViewDemoThree({super.key});
@@ -121,7 +122,7 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
                 // border: Border.all(color: Colors.blue),
                 ),
             padding: EdgeInsets.only(
-              top: mediaQuery.viewPadding.top + kToolbarHeight,
+              top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
               bottom: 46,
             ),
             child: Container(

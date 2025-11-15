@@ -14,6 +14,7 @@
 // print('Milliseconds: ${duration.inMillisecondsRest}'); // 0
 // print('Microseconds: ${duration.inMicrosecondsRest}'); // 0
 
+import 'package:flutter_templet_project/extension/extension_local.dart';
 extension DurationExt on Duration {
   int get inDaysRest => inDays;
   int get inHoursRest => inHours - (inDays * 24);

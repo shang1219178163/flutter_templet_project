@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension TextPainterExt on TextPainter {
   /// 获取布局后的文字属性

@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/util/device_info_plugin_ext.dart';
 import 'package:google_mlkit_language_id/google_mlkit_language_id.dart';
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TranslationTextPage extends StatefulWidget {
   const TranslationTextPage({super.key});

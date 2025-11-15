@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:tuple/tuple.dart';
 
 /// 多页面左右滑动封装
@@ -166,7 +166,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     }
 
     return Material(
-      color: isThemeBg ? primaryColor : null,
+      color: isThemeBg ? context.primaryColor : null,
       child: tabBar,
     );
   }

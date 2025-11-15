@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter/services.dart';
 
 /// appBar 主题随滚动改变组件
@@ -65,7 +66,7 @@ class _NAppBarThemChangeState extends State<NAppBarThemChange> {
       // ),
       appBarTheme: AppBarTheme.of(context).copyWith(
         systemOverlayStyle: NSystemOverlayStyle.transparent,
-        backgroundColor: primaryColor,
+        backgroundColor: context.primaryColor,
       ),
     );
   }

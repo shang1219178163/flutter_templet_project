@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class BallCategoryContentView extends StatefulWidget {
   final List<CategoryItem> leftNavItems;

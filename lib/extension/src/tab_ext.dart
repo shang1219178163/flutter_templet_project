@@ -8,6 +8,7 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension TabBarExt on TabBar {
   /// 自定义 copy

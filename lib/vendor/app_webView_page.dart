@@ -22,6 +22,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 基于 flutter_inappwebview 的 全局 webview 页面封装
 class AppWebViewPage extends StatefulWidget {

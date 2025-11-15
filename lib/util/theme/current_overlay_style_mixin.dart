@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:route_stack_manager/route_stack_manager.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 电池栏颜色单独处理 mixin
 mixin CurrentOverlayStyleMixin<T extends StatefulWidget> on State<T> {

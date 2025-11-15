@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor_for_image.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 enum SomeItemType { none, itemOne, itemTwo, itemThree }
 

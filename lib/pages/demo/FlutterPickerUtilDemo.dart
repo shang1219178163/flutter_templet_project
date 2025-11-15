@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class FlutterPickerUtilDemo extends StatefulWidget {
   const FlutterPickerUtilDemo({

@@ -8,6 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension OrientationExt on Orientation {
   /// 进入横屏模式

@@ -9,6 +9,7 @@
 // import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class CarouselSliderDemo extends StatelessWidget {
   const CarouselSliderDemo({Key? key}) : super(key: key);

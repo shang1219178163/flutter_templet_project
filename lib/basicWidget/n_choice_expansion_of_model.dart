@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 模型(必须包含 bool isSelected 属性)的标签选择器
 // class NChoiceExpansionOfModel<T extends SelectableMixin> extends StatelessWidget {

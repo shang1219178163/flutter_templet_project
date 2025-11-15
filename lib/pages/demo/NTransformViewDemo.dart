@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_convert_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NTransformViewDemo extends StatefulWidget {
   NTransformViewDemo({

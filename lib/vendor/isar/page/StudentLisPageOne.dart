@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/vendor/isar/page/StudentCell.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_generic_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class StudentLisPageOne extends StatefulWidget {
   StudentLisPageOne({

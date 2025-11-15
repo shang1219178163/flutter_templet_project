@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class TransformDemo extends StatefulWidget {
@@ -66,7 +67,7 @@ class _TransformDemoState extends State<TransformDemo> {
             child: Container(
               width: 50,
               height: 50,
-              color: primaryColor,
+              color: context.primaryColor,
               child: Text("rotate"),
             ),
           ),

@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 typedef OverlayWidgetBuilder = Widget Function(
     BuildContext context, VoidCallback onHide);

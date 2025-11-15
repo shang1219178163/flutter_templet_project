@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/src/string_ext.dart';
 
 import 'package:isar/isar.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension ServiceProtocolInfoExt on ServiceProtocolInfo {
   /// 获取 isar 链接

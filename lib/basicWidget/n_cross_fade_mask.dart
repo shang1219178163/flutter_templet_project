@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_cross_fade.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 遮罩折叠器
 class NCrossFadeMask<T> extends StatelessWidget {

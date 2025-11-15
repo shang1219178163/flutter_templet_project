@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 abstract class AppTabBarState<T extends StatefulWidget> extends State<T> {
   /// tab bar item 单击回调

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
 
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NTabBarPageDemo extends StatefulWidget {
   NTabBarPageDemo({super.key, this.title});

@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentCell.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_generic_controller.dart';
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class StudentLisPage extends StatefulWidget {
   StudentLisPage({

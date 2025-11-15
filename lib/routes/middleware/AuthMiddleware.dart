@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class AuthMiddleware extends GetMiddleware {
   AuthMiddleware({this.newRouteCb});

@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension PageControllerExt on PageController {
   /// 跳转到对应位子

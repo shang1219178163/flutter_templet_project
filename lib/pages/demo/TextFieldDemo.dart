@@ -23,6 +23,7 @@ import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TextFieldDemo extends StatefulWidget {
   final String? title;

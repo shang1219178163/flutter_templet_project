@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// app升级提示控件
 class AppUpgradeView extends StatefulWidget {

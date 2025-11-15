@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class EmailSenderDemo extends StatefulWidget {
   const EmailSenderDemo({

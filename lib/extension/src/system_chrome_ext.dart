@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension SystemChromeExt on SystemChrome {
   // 强制竖屏

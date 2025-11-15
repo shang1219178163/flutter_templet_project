@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// ImagePicker 功能封装类
 class ImagePickerUtil {

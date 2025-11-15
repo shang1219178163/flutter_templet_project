@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
 /// 悬浮 TabBarPage
@@ -107,7 +108,7 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage> with SingleTicker
       length: tabItems.length,
       child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          final top = mediaQuery.viewPadding.top + kToolbarHeight;
+          final top = MediaQuery.of(context).viewPadding.top + kToolbarHeight;
 
           return <Widget>[
             SliverAppBar(

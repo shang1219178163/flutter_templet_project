@@ -9,6 +9,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension RenderRepaintBoundaryExt on RenderRepaintBoundary {
   /// 保存图片
