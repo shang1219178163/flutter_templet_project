@@ -74,6 +74,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     (e: "printFormat", action: printFormat),
     (e: "onPrint", action: onPrint),
     (e: "onTrackTime", action: onTrackTime),
+    (e: "onTest", action: onTest),
   ];
 
   @override
@@ -594,6 +595,11 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
         .trackTime("fetchData 2");
 
     await Future.delayed(Duration(milliseconds: 1200)).then((_) => throw Exception("错误3")).trackTime("fetchData 3");
+  }
+
+  void onTest() {
+    final result = "/v1/api2/article/catalog/query".splitByLastNumberAndPascal();
+    DLog.d(result);
   }
 
   testData() {

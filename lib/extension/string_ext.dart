@@ -155,6 +155,37 @@ extension StringExt on String {
     return parts;
   }
 
+  /// 通过链接中最后出出现的数字的后边转驼峰
+  /// "/v1/api2/article/catalog/query"
+  String splitByLastNumberAndPascal() {
+    pascal({required List<String> parts}) {
+      final buffer = StringBuffer();
+      for (final p in parts) {
+        buffer.write(p[0].toUpperCase() + p.substring(1));
+      }
+      return buffer.toString();
+    }
+
+    String path = this;
+    // 去掉开头和结尾 "/"
+    path = path.replaceAll(RegExp(r'^/+|/+$'), '');
+
+    // 查找最后一个数字
+    final match = RegExp(r'\d+').allMatches(path).lastOrNull;
+    if (match == null) {
+      final result = pascal(parts: path.split("/"));
+      return result;
+    }
+
+    // 从最后一个数字开始切分
+    final rest = path.substring(match.end);
+
+    // 按 "/" 拆分剩余部分
+    final segs = rest.split('/').where((e) => e.isNotEmpty).toList();
+    final result = pascal(parts: segs);
+    return result;
+  }
+
   /// 填满一行
   String filledLine({
     required int maxLength,

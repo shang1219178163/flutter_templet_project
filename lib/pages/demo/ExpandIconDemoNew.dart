@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 import 'package:flutter_templet_project/extension/dlog.dart';
 
@@ -24,7 +25,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
 
   @override
   void initState() {
-    _data = _generateItems(20);
+    _data = _generateItems(3);
 
     super.initState();
   }
@@ -40,7 +41,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildExpandIcon(),
+            // _buildExpandIcon(),
             Expanded(child: _buildExpansionPanelList()),
           ],
         ),
@@ -213,6 +214,7 @@ class CustomExpansionTileState extends State<CustomExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      backgroundColor: ColorExt.random,
       leading: Icon(
         Icons.face,
         size: 36.0,

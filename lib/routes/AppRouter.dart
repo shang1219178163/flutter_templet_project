@@ -75,13 +75,14 @@ import 'package:flutter_templet_project/pages/demo/ColorAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorFilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CompileEnvironmentPage.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConcurrentExecutorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
-import 'package:flutter_templet_project/pages/demo/ConvertFlle.dart';
+import 'package:flutter_templet_project/pages/demo/convert/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomRefreshIndicatorDemo.dart';
@@ -410,6 +411,8 @@ class AppRouter {
 
   static const String appTabPage = '/AppTabPage';
   static const String yamlParsePage = '/yamlParsePage';
+
+  static const String compileEnvironmentPage = '/compileEnvironmentPage';
 
   static const String appLifecycleObserverDemo = '/appLifecycleObserverDemo';
   static const String themeColorDemo = '/themeColorDemo';
@@ -878,6 +881,10 @@ class AppRouter {
   static final List<GetPage> pages = [
     unknownRoute,
 
+    GetPage(
+      name: AppRouter.compileEnvironmentPage,
+      page: () => CompileEnvironmentPage(),
+    ),
     GetPage(
       name: AppRouter.appLifecycleObserverDemo,
       page: () => AppLifecycleStateObserverDemo(),

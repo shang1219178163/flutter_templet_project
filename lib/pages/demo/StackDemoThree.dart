@@ -345,7 +345,7 @@ class _HotScreenViewThreeState extends State<HotScreenViewThree> {
 }
 
 class CategoryProviderThree with ChangeNotifier {
-  var _isLoading = false;
+  final bool _isLoading = false;
   String? _error;
 
   bool get isLoading => _isLoading;
