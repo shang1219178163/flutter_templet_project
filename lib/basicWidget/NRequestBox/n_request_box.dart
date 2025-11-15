@@ -5,9 +5,8 @@ import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dar
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
-
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 // buildBody2() {
 //   return NRequestListBox(

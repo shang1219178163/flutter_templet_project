@@ -9,9 +9,8 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 /*
 * 魅族手机无此语音合并功能模块,无声音正常

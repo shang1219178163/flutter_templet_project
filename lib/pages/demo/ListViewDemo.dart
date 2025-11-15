@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:tuple/tuple.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 

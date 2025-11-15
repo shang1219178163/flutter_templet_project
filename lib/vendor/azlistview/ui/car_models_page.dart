@@ -1,9 +1,8 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class CarModelsPage extends StatefulWidget {
   const CarModelsPage({Key? key}) : super(key: key);

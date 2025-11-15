@@ -9,10 +9,9 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class VideoPlayerByChewiePage extends StatefulWidget {
   VideoPlayerByChewiePage({

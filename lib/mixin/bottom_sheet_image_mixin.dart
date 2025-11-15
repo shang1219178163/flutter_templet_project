@@ -11,14 +11,13 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 头像更换(回调返回单张图片的路径)
 /// 默认图片压缩,图片裁剪

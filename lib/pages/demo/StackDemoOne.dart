@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class StackDemoOne extends StatefulWidget {
   StackDemoOne({Key? key, this.title}) : super(key: key);

@@ -9,10 +9,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/photo_picker_mixin.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class ScanBarcodeDemo extends StatefulWidget {
   const ScanBarcodeDemo({

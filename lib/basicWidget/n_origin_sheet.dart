@@ -11,12 +11,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 域名选择器
 class NOriginSheet extends StatefulWidget {

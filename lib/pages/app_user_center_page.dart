@@ -9,16 +9,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:tuple/tuple.dart';
-
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 class APPUserCenterPage extends StatefulWidget {
   const APPUserCenterPage({Key? key}) : super(key: key);

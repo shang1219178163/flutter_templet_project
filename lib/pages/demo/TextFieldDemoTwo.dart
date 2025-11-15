@@ -9,10 +9,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TextFieldDemoTwo extends StatefulWidget {
   TextFieldDemoTwo({

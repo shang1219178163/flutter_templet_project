@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 // 定义数据源
 // TagsRootModel? tagsRootModel = CacheService().tagsRootModel;

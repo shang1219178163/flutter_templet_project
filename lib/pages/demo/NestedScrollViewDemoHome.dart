@@ -16,13 +16,12 @@ import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 嵌套滚动
 class NestedScrollViewDemoHome extends StatefulWidget {

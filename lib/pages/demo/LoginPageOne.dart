@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_account_sheet.dart';
 import 'package:flutter_templet_project/basicWidget/n_origin_sheet.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class LoginPageOne extends StatefulWidget {
   const LoginPageOne({Key? key, this.title}) : super(key: key);

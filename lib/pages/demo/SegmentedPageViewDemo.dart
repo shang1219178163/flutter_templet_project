@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/n_sliding_segmented_control.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/n_sliding_segmented_page_view.dart';
-
-import 'package:get/get.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:get/get.dart';
 
 /// 带页面的滑动分段组件页面 NSlidingSegmentedPageView
 class SegmentedPageViewDemo extends StatefulWidget {

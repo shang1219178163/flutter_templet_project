@@ -13,9 +13,8 @@ import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:path_provider/path_provider.dart';
 
 /// 文件管理类
 class FileManager {

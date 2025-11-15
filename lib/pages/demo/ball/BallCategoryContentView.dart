@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-
 import 'package:flutter_templet_project/basicWidget/scroll/EndBounceScrollPhysics.dart';
-
 import 'package:flutter_templet_project/model/footbal_category_item.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class BallCategoryContentView extends StatefulWidget {
   final List<CategoryItem> leftNavItems;

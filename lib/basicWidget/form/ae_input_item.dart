@@ -9,9 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// AE 输入框组件
 class AeInputItem extends StatelessWidget {

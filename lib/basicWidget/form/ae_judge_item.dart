@@ -9,9 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
-
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// AE 判断组件
 class AeJudgeItem extends StatelessWidget {

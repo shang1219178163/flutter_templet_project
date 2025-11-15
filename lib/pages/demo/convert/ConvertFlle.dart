@@ -13,18 +13,15 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/pages/demo/convert/ApiParamsConvert.dart';
-import 'package:get/get.dart';
-import 'package:tuple/tuple.dart';
-
 import 'package:flutter_templet_project/basicWidget/n_convert_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ApiCreateConvert.dart';
+import 'package:flutter_templet_project/pages/demo/convert/ApiParamsConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 import 'package:flutter_templet_project/pages/demo/convert/CopyWithConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/PackageExportConvert.dart';
@@ -32,7 +29,8 @@ import 'package:flutter_templet_project/pages/demo/convert/SizeFilterConvert.dar
 import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 class ConvertFlle extends StatefulWidget {
   ConvertFlle({

@@ -11,9 +11,8 @@ import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_refresh_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 基于接口的搜索选择列表(子类实现 PickerDrugBox)
 class NPickRequestListBox<E> extends StatefulWidget {

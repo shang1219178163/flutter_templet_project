@@ -6,9 +6,8 @@ import 'package:flutter_templet_project/basicWidget/n_chrome_segment.dart';
 import 'package:flutter_templet_project/basicWidget/n_line_segment_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class SegmentedControlDemo extends StatefulWidget {
   SegmentedControlDemo({Key? key, this.title}) : super(key: key);

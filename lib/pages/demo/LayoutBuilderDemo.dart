@@ -9,9 +9,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
-import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class LayoutBuilderDemo extends StatefulWidget {
   const LayoutBuilderDemo({Key? key, this.title}) : super(key: key);

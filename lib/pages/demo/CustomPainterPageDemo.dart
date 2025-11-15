@@ -9,9 +9,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:get/get.dart';
 
 class CustomPainterPageDemo extends StatefulWidget {
   const CustomPainterPageDemo({

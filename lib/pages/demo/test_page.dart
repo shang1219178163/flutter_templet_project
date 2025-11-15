@@ -8,12 +8,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:http/http.dart' as http;
 // import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({Key? key, this.title}) : super(key: key);

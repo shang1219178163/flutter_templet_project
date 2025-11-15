@@ -5,9 +5,8 @@ import 'package:flutter_templet_project/basicWidget/n_flex_separated.dart';
 import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
-import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class ContainerDemo extends StatefulWidget {
   final String? title;

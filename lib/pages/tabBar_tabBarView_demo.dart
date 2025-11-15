@@ -12,14 +12,13 @@ import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_icons.d
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_layout.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/RouteNameSearchPage.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TabBarTabBarViewDemo extends StatefulWidget {
   const TabBarTabBarViewDemo({Key? key}) : super(key: key);

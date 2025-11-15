@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 // show AssetEntity, AssetEntityImageProvider;
 

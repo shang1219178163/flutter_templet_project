@@ -9,7 +9,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoTabScaffoldDemo.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';

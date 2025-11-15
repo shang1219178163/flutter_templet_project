@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/FloatingActionButtonLocationOffset.dart';
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
-
-import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:tuple/tuple.dart';
 
 //https://getemoji.com/
 //https://emoji-copy-paste.com/

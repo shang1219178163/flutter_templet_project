@@ -3,9 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-
-import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:tuple/tuple.dart';
 
 typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
 typedef XHomeSwiperItemWidgetBuilder = Widget Function(int index);

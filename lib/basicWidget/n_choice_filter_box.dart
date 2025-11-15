@@ -13,10 +13,9 @@ import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.
 import 'package:flutter_templet_project/basicWidget/n_date_start_end.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NChoiceFilterBoxItemModel<T extends SelectableMixin> {
   NChoiceFilterBoxItemModel({

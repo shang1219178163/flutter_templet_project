@@ -11,7 +11,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_templet_project/basicWidget/n_refresh_view.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/model/im_conversation_detail_model.dart';
 import 'package:flutter_templet_project/pages/demo/widget/im_conversation_cell.dart';
@@ -19,7 +19,6 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 会话列表
 class ImConversationPage extends StatefulWidget {

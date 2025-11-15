@@ -6,13 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_button.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 上传图片单元(基于 wechat_assets_picker)
 class AssetUploadBox extends StatefulWidget {
