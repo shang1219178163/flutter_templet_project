@@ -6,10 +6,14 @@
 //  Copyright © 2022/9/17 shang. All rights reserved.
 //
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
 
 import 'package:flutter_templet_project/util/icons_map.dart';
+import 'package:flutter_templet_project/util/icons_map_output.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SystemIconsPage extends StatefulWidget {
@@ -22,8 +26,8 @@ class SystemIconsPage extends StatefulWidget {
 class _SystemIconsPageState extends State<SystemIconsPage> {
   TextEditingController editingController = TextEditingController();
 
-  var list = List.from(kIConDic.keys);
-  var searchResults = List.from(kIConDic.keys);
+  var list = List.from(kIConMap.keys);
+  var searchResults = List.from(kIConMap.keys);
 
   bool isGrid = false;
 
@@ -33,8 +37,12 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("fluttefr 系统 Icons"),
+        title: Text("系统 Icons"),
         actions: [
+          IconButton(
+            onPressed: genSystemIconsMap,
+            icon: Icon(Icons.change_circle_outlined),
+          ),
           TextButton(
             onPressed: () {
               isGrid = !isGrid;
@@ -98,10 +106,6 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
             color: Colors.grey,
           ),
         ),
-
-        // border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.all(Radius.circular(25.0))
-        // ),
       ),
     );
   }
@@ -115,7 +119,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
           itemBuilder: (context, index) {
             final item = searchResults[index];
             return ListTile(
-              leading: Icon(kIConDic[item]),
+              leading: Icon(kIConMap[item]),
               title: Text("$item"),
               // subtitle: Text(array[0]),
               onTap: () {
@@ -157,7 +161,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
             footer: Text(
               "$item",
             ),
-            child: Icon(kIConDic[item]),
+            child: Icon(kIConMap[item]),
           ),
         );
       },
@@ -176,5 +180,45 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
       DLog.d(searchResults.length);
     }
     setState(() {});
+  }
+
+  Future<void> genSystemIconsMap() async {
+    try {
+      final path = '/Users/shang/fvm/versions/3.24.4/packages/flutter/lib/src/material/icons.dart';
+      // final pathOut = '/Users/shang/GitHub/flutter_templet_project/assets/data';
+      final file = File(path);
+      final text = await file.readAsString();
+
+      final reg = RegExp(
+        r'static const IconData\s+(\w+)\s*=\s*IconData',
+        multiLine: true,
+      );
+
+      final matches = reg.allMatches(text);
+
+      final buffer = StringBuffer();
+      buffer.writeln("final Map<String, IconData> kIConMap = {");
+
+      for (final m in matches) {
+        final name = m.group(1)!;
+        buffer.writeln('  "Icons.$name": Icons.$name,');
+      }
+
+      buffer.writeln("};");
+      final content = buffer.toString();
+      debugPrint([content.length].join("_"));
+
+      final fileName = "icons_map_output.dart";
+      final genFile = await FileManager().createFile(fileName: fileName, content: content);
+      DLog.d(genFile.path);
+      return;
+
+      // final out = File("icons_map_output.dart");
+      // await out.writeAsString(content);
+
+      debugPrint("生成成功 → icons_map_output.dart");
+    } catch (e) {
+      debugPrint("生成失败 $e");
+    }
   }
 }
