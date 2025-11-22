@@ -92,19 +92,19 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
       onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(
-        icon: Icon(Icons.search),
+        // isDense: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         // labelText: "Search",
         hintText: "Search",
-        // prefixIcon: Icon(Icons.search),
-        suffixIcon: InkWell(
+        prefixIconConstraints: BoxConstraints(minHeight: 24, minWidth: 24 + 16),
+        suffixIconConstraints: BoxConstraints(minHeight: 24, minWidth: 24 + 16),
+        prefixIcon: Icon(Icons.search),
+        suffixIcon: GestureDetector(
           onTap: () {
             controller?.clear();
             onChanged("");
           },
-          child: Icon(
-            Icons.cancel,
-            color: Colors.grey,
-          ),
+          child: Icon(Icons.cancel, color: Colors.grey),
         ),
       ),
     );
