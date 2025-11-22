@@ -19,13 +19,15 @@ class DraggableDemo extends StatefulWidget {
   _DraggableDemoState createState() => _DraggableDemoState();
 }
 
-class _DraggableDemoState extends State<DraggableDemo> {
+class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateMixin {
   final scrollController = ScrollController();
 
   int acceptedData = 0;
 
   List<String> tags = List.generate(20, (i) => "标签$i");
   late List<String> others = List.generate(10, (i) => "其他${i + tags.length}");
+
+  late var tabController = TabController(length: tags.length, vsync: this);
 
   bool canEdit = true;
 
@@ -48,8 +50,8 @@ class _DraggableDemoState extends State<DraggableDemo> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            buildDraggable(),
-            Divider(height: 16),
+            // buildDraggable(),
+            // Divider(height: 16),
             buildDragSortWrap(),
           ],
         ),
@@ -124,9 +126,37 @@ class _DraggableDemoState extends State<DraggableDemo> {
   Widget buildDragSortWrap() {
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
+        tabController = TabController(length: tags.length, vsync: this);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Material(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TabBar(
+                      controller: tabController,
+                      isScrollable: true,
+                      tabs: tags.map((e) => Tab(text: e)).toList(),
+                      labelColor: Colors.black87,
+                      unselectedLabelColor: Colors.black38,
+                      indicatorColor: Colors.red,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorPadding: EdgeInsets.symmetric(horizontal: 16),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      DLog.d("more");
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      child: Icon(Icons.keyboard_arrow_down),
+                    ),
+                  )
+                ],
+              ),
+            ),
             buildTagBar(
               onEdit: () {
                 canEdit = !canEdit;
