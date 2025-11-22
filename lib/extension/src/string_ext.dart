@@ -141,11 +141,24 @@ extension StringExt on String {
 
   ///反驼峰命名法
   String toUncamlCase([String separator = "_"]) {
-    var reg = RegExp(r'[A-Z]');
-    return split("").map((e) {
-      final i = indexOf(e);
-      return e.contains(reg) ? "${i == 0 ? "" : separator}${e.toLowerCase()}" : e;
-    }).join("");
+    return replaceAllMapped(
+      RegExp(r'[A-Z]'),
+      (m) => '_${m.group(0)!.toLowerCase()}',
+    ).replaceFirst('_', '');
+  }
+
+  /// 脱敏
+  String maskNumber({int start = 3, int end = 4, String replace = "*"}) {
+    String number = this;
+    if (number.length <= (start + end)) {
+      return number;
+    }
+
+    String firstThree = number.substring(0, start);
+    String lastFour = number.substring(number.length - end);
+    int starCount = number.length - 7;
+
+    return '$firstThree${replace * starCount}$lastFour';
   }
 
   /// 用多个字符串分割文本
@@ -157,8 +170,11 @@ extension StringExt on String {
 
   /// 通过链接中最后出出现的数字的后边转驼峰
   /// "/v1/api2/article/catalog/query"
-  String splitByLastNumberAndPascal() {
+  String splitByLastNumberAndPascal({String Function(List<String> parts)? name}) {
     pascal({required List<String> parts}) {
+      if (name != null) {
+        return name(parts);
+      }
       final buffer = StringBuffer();
       for (final p in parts) {
         buffer.write(p[0].toUpperCase() + p.substring(1));
@@ -314,4 +330,7 @@ extension StringNullableExt on String? {
     final result = int.tryParse(this ?? "");
     return result;
   }
+
+  /// url 有效
+  bool get urlValid => this?.startsWith("http") == true;
 }

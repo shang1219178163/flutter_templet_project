@@ -45,13 +45,12 @@ class NFadePageRoute extends PageRoute {
   final WidgetBuilder builder;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation) =>
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
       builder(context);
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     //当前路由被激活，是打开新路由
     if (!isActive) {
       return builder(context);
@@ -66,4 +65,37 @@ class NFadePageRoute extends PageRoute {
       child: builder(context),
     );
   }
+}
+
+class CustomFadePageRoute<T> extends PageRoute<T> {
+  CustomFadePageRoute({
+    required this.builder,
+    required this.barrColor,
+    this.barrLabel,
+  });
+
+  @override
+  Color get barrierColor => barrColor ?? Color(0xFF000000);
+
+  @override
+  String get barrierLabel => barrLabel ?? "CustomFadePageRoute";
+
+  final Color? barrColor;
+  final String? barrLabel;
+
+  final WidgetBuilder builder;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return FadeTransition(
+      opacity: animation,
+      child: builder(context),
+    );
+  }
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 300);
 }

@@ -6,7 +6,7 @@ class ApiPropertyModel<T> {
     this.typeDart = "unknown",
     this.typeValidate = "",
     this.format,
-    this.description,
+    this.description = "",
     this.result,
   });
 
@@ -29,8 +29,8 @@ class ApiPropertyModel<T> {
       type: json['type'] ?? "unknown",
       typeDart: json['typeDart'] ?? "unknown",
       typeValidate: json['typeValidate'] ?? "",
-      format: json['format'],
-      description: json['description'],
+      format: json['format'] ?? "",
+      description: json['description'] ?? "",
       result: fromJsonT?.call(json['result']),
     );
   }

@@ -102,9 +102,13 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
 
   @override
   void initState() {
-    selectedModels.addAll(widget.items);
+    initData();
     widget.controller?._attach(this);
     super.initState();
+  }
+
+  initData() {
+    selectedModels.replaceRange(0, selectedModels.length, widget.items);
   }
 
   @override
@@ -112,9 +116,10 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     final entityIds = widget.items.map((e) => e.entity?.id).join(",");
     final oldWidgetEntityIds = oldWidget.items.map((e) => e.entity?.id).join(",");
     if (entityIds != oldWidgetEntityIds) {
-      selectedModels
-        ..clear()
-        ..addAll(widget.items);
+      initData();
+    }
+    if (widget.items.isNotEmpty && selectedModels.isEmpty) {
+      initData();
     }
     super.didUpdateWidget(oldWidget);
   }

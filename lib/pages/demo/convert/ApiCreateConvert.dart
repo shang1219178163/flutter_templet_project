@@ -40,12 +40,13 @@ TagClearApi
       return null;
     }
     final lines = content.split("\n").where((e) => e.isNotEmpty).toList();
-    var nameNew = name ?? lines.first;
-    if (nameNew.contains("/")) {
-      nameNew = "${nameNew.splitByLastNumberAndPascal()}Api";
+    var className = name ?? lines.first;
+    if (className.contains("/")) {
+      className = "${className.splitByLastNumberAndPascal()}Api";
     }
-    final contentNew = _createApi(productName: productName, className: nameNew);
-
+    final contentNew = _createApi(productName: productName, className: className);
+    final nameNew = className.toUncamlCase();
+    DLog.d([className, nameNew]);
     return ConvertModel(
       productName: productName,
       name: name ?? nameNew,
@@ -113,13 +114,9 @@ class $className extends BaseRequestAPI {
     return map;
   }
 
-  /// 使用新的参数校验方法
-  @override
-  bool get useValidateParamsTuple => true;
-
   /// 参数校验
   @override
-  (bool, String) get validateParamsTuple {
+  (bool, String) get validateParams {
     if (packageId == null) {
       return (false, 'packageId 不能为空');
     }
