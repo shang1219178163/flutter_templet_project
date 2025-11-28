@@ -7,12 +7,11 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/mixin/safe_change_notifier_mixin.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 
 /// 订单接口集合
-class OrderProvider<E extends OrderModel> extends ChangeNotifier {
-  OrderProvider();
-
+class OrderProvider<E extends OrderModel> extends ChangeNotifier with SafeChangeNotifierMixin {
   /// 查
   Future<E?> read() async {
     notifyListeners();

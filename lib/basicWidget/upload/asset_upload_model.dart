@@ -48,4 +48,17 @@ class AssetUploadModel {
     data['extraInfoMap'] = extraInfoMap;
     return data;
   }
+
+  clear() {
+    entity = null;
+    url = null;
+    file = null;
+    extraInfoMap = null;
+    time = null;
+  }
+
+  @override
+  String toString() {
+    return "$runtimeType:${toJson()}";
+  }
 }

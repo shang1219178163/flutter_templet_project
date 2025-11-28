@@ -40,7 +40,7 @@ extension FunctionExt on Function {
 
   /// 获取缓存的 Debounce 方法,没有就常见一个新的
   Debounce getDebounceFn({
-    Duration duration = const Duration(milliseconds: 500),
+    Duration duration = const Duration(milliseconds: 300),
   }) {
     var debounceFn = _debounceMap[this];
     if (debounceFn == null) {
@@ -55,13 +55,13 @@ extension FunctionExt on Function {
 extension VoidCallbackExt on VoidCallback {
   /// 延迟执行
   Future delayed({
-    Duration duration = const Duration(milliseconds: 500),
+    Duration duration = const Duration(milliseconds: 300),
   }) =>
       Future.delayed(duration, this);
 
   /// 防抖
   void debounce({
-    Duration duration = const Duration(milliseconds: 500),
+    Duration duration = const Duration(milliseconds: 300),
   }) {
     var debounceFn = getDebounceFn(duration: duration);
     debounceFn(() => this());
@@ -89,7 +89,7 @@ extension ValueChangedExt<T> on ValueChanged<T> {
   /// 防抖
   debounce(
     T value, {
-    Duration duration = const Duration(milliseconds: 500),
+    Duration duration = const Duration(milliseconds: 300),
   }) {
     var debounceFn = getDebounceFn(duration: duration);
     debounceFn(() => this.call(value));

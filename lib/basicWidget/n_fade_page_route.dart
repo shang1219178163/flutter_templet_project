@@ -45,12 +45,28 @@ class NFadePageRoute extends PageRoute {
   final WidgetBuilder builder;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
-      builder(context);
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    if (!isActive) {
+      return builder(context);
+    }
+
+    if (!needFadeTransition) {
+      return builder(context);
+    }
+    return FadeTransition(opacity: animation, child: builder(context));
+  }
 
   @override
   Widget buildTransitions(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     //当前路由被激活，是打开新路由
     if (!isActive) {
       return builder(context);
@@ -60,17 +76,14 @@ class NFadePageRoute extends PageRoute {
       return builder(context);
     }
 
-    return FadeTransition(
-      opacity: animation,
-      child: builder(context),
-    );
+    return FadeTransition(opacity: animation, child: builder(context));
   }
 }
 
 class CustomFadePageRoute<T> extends PageRoute<T> {
   CustomFadePageRoute({
     required this.builder,
-    required this.barrColor,
+    this.barrColor,
     this.barrLabel,
   });
 
@@ -80,22 +93,23 @@ class CustomFadePageRoute<T> extends PageRoute<T> {
   @override
   String get barrierLabel => barrLabel ?? "CustomFadePageRoute";
 
+  @override
+  bool get maintainState => true;
+
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 300);
+
   final Color? barrColor;
   final String? barrLabel;
 
   final WidgetBuilder builder;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    return FadeTransition(
-      opacity: animation,
-      child: builder(context),
-    );
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    return FadeTransition(opacity: animation, child: builder(context));
   }
-
-  @override
-  bool get maintainState => true;
-
-  @override
-  Duration get transitionDuration => Duration(milliseconds: 300);
 }

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class ThemeProvider extends ChangeNotifier {
   static final ThemeProvider _instance = ThemeProvider._();
@@ -58,15 +59,21 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   /// 切换主题
-  void exchangeTheme(BuildContext context) {
+  void exchangeTheme({bool showToast = true}) {
+    if (themeMode == ThemeMode.system) {
+      if (showToast) {
+        ToastUtil.show("跟随系统模式不支持手动切换");
+      }
+      return;
+    }
+    // debugPrint("主题切换");
     switch (themeMode) {
-      case ThemeMode.system:
-        {
-          var isDark = Theme.of(context).brightness == Brightness.dark;
-          final model = isDark ? ThemeMode.light : ThemeMode.dark;
-          toggleTheme(model);
-        }
-        break;
+      // case ThemeMode.system:
+      //   {
+      //     final model = isDarkSystem ? ThemeMode.light : ThemeMode.dark;
+      //     toggleTheme(model);
+      //   }
+      //   break;
       case ThemeMode.light:
         {
           toggleTheme(ThemeMode.dark);
@@ -176,5 +183,21 @@ class ThemeDataModel {
   @override
   String toString() {
     return toJson().toString();
+  }
+}
+
+extension ThemeStringExt on String {
+  /// 根据 isDark 获取对应的本地图片
+  String get orLight {
+    if (!startsWith('assets/images/')) {
+      return this;
+    }
+
+    if (ThemeProvider().isDark) {
+      return this;
+    }
+    final result = replaceFirst(".", "_light.");
+    // DLog.d(result);
+    return result;
   }
 }

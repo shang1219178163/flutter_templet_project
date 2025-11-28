@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 字符串转文件
 class NConvertView extends StatefulWidget {
-  NConvertView({
+  const NConvertView({
     super.key,
     this.controller,
     this.title,
@@ -51,8 +51,11 @@ class NConvertView extends StatefulWidget {
 }
 
 class NConvertViewState extends State<NConvertView> {
-  final _textEditingController = TextEditingController();
-  final _focusNode = FocusNode();
+  final extraController = TextEditingController();
+  final extraFocusNode = FocusNode();
+
+  final textEditingController = TextEditingController();
+  final focusNode = FocusNode();
 
   final scrollController = ScrollController();
   final scrollControllerRight = ScrollController();
@@ -101,7 +104,7 @@ class NConvertViewState extends State<NConvertView> {
             mainAxisSize: MainAxisSize.min,
             children: [
               buildTop(),
-              Container(
+              SizedBox(
                 height: constraints.maxHeight * 0.7,
                 child: buildLeft(isVertical: true),
               ),
@@ -157,9 +160,9 @@ class NConvertViewState extends State<NConvertView> {
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            widget.title ?? SizedBox(),
+            widget.title ?? const SizedBox(),
             if (widget.title != null) SizedBox(height: spacing),
-            widget.message ?? SizedBox(),
+            widget.message ?? const SizedBox(),
             if (widget.message != null) SizedBox(height: spacing * 2),
           ],
         );
@@ -175,16 +178,16 @@ class NConvertViewState extends State<NConvertView> {
       focusNode: focusNode,
       controller: controller,
       maxLines: maxLines,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w300,
       ),
       decoration: InputDecoration(
         isCollapsed: true,
-        contentPadding: EdgeInsets.all(12),
+        contentPadding: const EdgeInsets.all(12),
         hintText: hintText,
-        hintStyle: TextStyle(
-          color: const Color(0xff999999),
+        hintStyle: const TextStyle(
+          color: Color(0xff999999),
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
@@ -221,25 +224,37 @@ class NConvertViewState extends State<NConvertView> {
   }) {
     double? maxWidth = isVertical ? double.maxFinite : width;
 
-    var child = widget.start ??
-        buildTextfield(
-          controller: _textEditingController,
-          focusNode: _focusNode,
-          maxLines: 200,
-        );
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Container(
+          child: SizedBox(
             width: maxWidth,
-            child: child,
+            child: widget.start ??
+                Column(
+                  children: [
+                    Expanded(
+                      child: buildTextfield(
+                        controller: textEditingController,
+                        focusNode: focusNode,
+                        maxLines: 200,
+                        hintText: "input",
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 8),
+                      child: buildTextfield(
+                        controller: extraController,
+                        focusNode: extraFocusNode,
+                        maxLines: 1,
+                        hintText: "",
+                      ),
+                    ),
+                  ],
+                ),
           ),
         ),
-        SizedBox(
-          height: 8,
-        ),
+        const SizedBox(height: 8),
         widget.toolbarBuilder(context),
       ],
     );
@@ -258,10 +273,11 @@ class NConvertViewState extends State<NConvertView> {
         return widget.end ??
             Container(
               height: double.infinity,
-              padding: EdgeInsets.only(left: 4, top: 2, bottom: 2),
+              padding: const EdgeInsets.only(left: 4, top: 2, bottom: 2),
               decoration: BoxDecoration(
                 color: Colors.transparent,
-                border: Border.all(color: Color(0xffe4e4e4), width: 1),
+                border: Border.all(color: const Color(0xffe4e4e4), width: 1),
+                borderRadius: BorderRadius.circular(4),
               ),
               child: Scrollbar(
                 controller: controller,
@@ -290,8 +306,20 @@ class NTransformViewController {
     }
   }
 
+  TextEditingController get extraController {
+    return _anchor!.extraController;
+  }
+
+  set extra(String value) {
+    extraController.text = value;
+  }
+
+  String get extra {
+    return extraController.text;
+  }
+
   TextEditingController get textEditingController {
-    return _anchor!._textEditingController;
+    return _anchor!.textEditingController;
   }
 
   ValueNotifier<String> get outVN {

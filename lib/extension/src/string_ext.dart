@@ -156,9 +156,10 @@ extension StringExt on String {
 
     String firstThree = number.substring(0, start);
     String lastFour = number.substring(number.length - end);
-    int starCount = number.length - 7;
+    int starCount = number.length - (start + end);
 
-    return '$firstThree${replace * starCount}$lastFour';
+    final result = '$firstThree${replace * starCount}$lastFour';
+    return result;
   }
 
   /// 用多个字符串分割文本

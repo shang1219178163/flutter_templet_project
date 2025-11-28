@@ -90,6 +90,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   late var current = convertTypes[convertTypeIndex];
 
   final productNames = [
+    "kbs_fe_app",
     "yl_health_app",
     "yl_health_manage_app",
     "yl_patient_app",
@@ -145,27 +146,30 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Flexible(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Flexible(
-                      child: NMenuAnchor<String>(
-                        values: productNames,
-                        initialItem: productName,
-                        cbName: (e) => e ?? "请选择",
-                        equal: (a, b) => a == b,
-                        onChanged: (e) async {
-                          DLog.d(e);
-                          productName = e;
-                          onClear();
-                          await onDragChanged();
-                        },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Flexible(
+                        child: NMenuAnchor<String>(
+                          values: productNames,
+                          initialItem: productName,
+                          cbName: (e) => e ?? "请选择",
+                          equal: (a, b) => a == b,
+                          onChanged: (e) async {
+                            DLog.d(e);
+                            productName = e;
+                            onClear();
+                            await onDragChanged();
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Flexible(
