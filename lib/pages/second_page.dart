@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/mixin/count_down_timer.dart';
 import 'package:flutter_templet_project/pages/demo/CirclePainter.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
@@ -663,7 +664,13 @@ class _SecondPageState extends State<SecondPage> {
               color: Colors.blue.withOpacity(0.5),
               disabledColor: Colors.grey.withOpacity(0.5),
               child: Text("Button"),
-            )
+            ),
+            TimerButton(
+              onRequest: () async {
+                await Future.delayed(Duration(milliseconds: 1));
+                return true;
+              },
+            ),
           ],
         ),
       ],

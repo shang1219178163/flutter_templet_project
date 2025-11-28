@@ -47,6 +47,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     "DialogMixin - presentDialog",
     "DialogMixin - presentDialogAlert",
     "DialogMixin - presentCupertinoAlert",
+    "showCupertinoTextFieldDialog",
   ];
 
   final title = "新版本 v${2.1}";
@@ -583,6 +584,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
           });
         }
         break;
+      case 22:
+        {
+          showCupertinoTextFieldDialog();
+        }
+        break;
       default:
         showCupertinoAlertDialog();
         break;
@@ -649,6 +655,54 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
               ))
           .toList(),
     ).toShowCupertinoDialog(context: context);
+  }
+
+  showCupertinoTextFieldDialog() {
+    final controller = TextEditingController();
+    controller.text = "";
+    return CupertinoTheme(
+        data: const CupertinoThemeData(brightness: Brightness.light),
+        child: CupertinoAlertDialog(
+          title: const Text('修改个人简介'),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: CupertinoTextField(
+              controller: controller,
+              enabled: true,
+              minLines: 3,
+              maxLines: 5,
+              maxLength: 100,
+              // placeholder: "请输入",
+              textAlignVertical: TextAlignVertical.top,
+            ),
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: Text(
+                "取消",
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.6),
+                  fontSize: 14,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            CupertinoDialogAction(
+              child: const Text(
+                "确定",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 14,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )).toShowCupertinoDialog(context: context);
   }
 
   showAlertDialog() {
