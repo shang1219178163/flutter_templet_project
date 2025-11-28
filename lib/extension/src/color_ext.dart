@@ -96,6 +96,20 @@ extension ColorExt on Color {
     );
   }
 
+  // /// 颜色名称描述
+  // String get toRadixString {
+  //   final result = "#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
+  //   return result;
+  // }
+
+  String toHex({String prefix = '#'}) {
+    return '$prefix'
+        '${alpha.toRadixString(16).padLeft(2, '0')}'
+        '${red.toRadixString(16).padLeft(2, '0')}'
+        '${green.toRadixString(16).padLeft(2, '0')}'
+        '${blue.toRadixString(16).padLeft(2, '0')}';
+  }
+
   ///转渐进色
   Gradient? toGradient() => LinearGradient(colors: [this, this], stops: const [0.0, 1]);
 
@@ -109,19 +123,5 @@ extension ColorExt on Color {
       return colorsMap[this] ?? "";
     }
     return toString();
-  }
-
-  // /// 颜色名称描述
-  // String get toRadixString {
-  //   final result = "#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
-  //   return result;
-  // }
-
-  String toHex({String prefix = '#'}) {
-    return '$prefix'
-        '${alpha.toRadixString(16).padLeft(2, '0')}'
-        '${red.toRadixString(16).padLeft(2, '0')}'
-        '${green.toRadixString(16).padLeft(2, '0')}'
-        '${blue.toRadixString(16).padLeft(2, '0')}';
   }
 }
