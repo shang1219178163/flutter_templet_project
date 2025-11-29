@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
+import 'package:flutter_templet_project/basicWidget/n_scale_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
@@ -577,99 +578,175 @@ class _SecondPageState extends State<SecondPage> {
                     .toList(),
               ),
             ),
-            Container(
-              height: 100,
-              width: 100,
-              child: CustomPaint(
-                painter: CurvePainter(
-                  color: Colors.yellow,
+            NSectionBox(
+              title: "CustomPaint",
+              child: Container(
+                child: Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                      ),
+                      child: CustomPaint(
+                        painter: CurvePainter(
+                          color: Colors.yellow,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 160,
+                      height: 60,
+                      decoration: NDashDecoration(
+                        step: 4,
+                        // pointWidth: 2,
+                        // pointCount: 1,
+                        radius: Radius.circular(15),
+                        strokeWidth: 1,
+                        strokeColor: Colors.red,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("自定义虚线\nNDashDecoration"),
+                    ),
+                    Container(
+                      width: 160,
+                      height: 60,
+                      decoration: DashDecoration(
+                        step: 5,
+                        span: 5,
+                        // pointCount: 0,
+                        pointWidth: 1,
+                        radius: Radius.circular(15),
+                        gradient: SweepGradient(
+                          colors: [Colors.blue, Colors.red, Colors.yellow, Colors.green],
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("dash_painter"),
+                    ),
+                    Stack(
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
+                          child: NText("TriangleDecoration"),
+                        ),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: RotatedBox(
+                            quarterTurns: 0,
+                            child: Container(
+                              decoration: TriangleDecoration(
+                                color: Colors.green,
+                                size: 16.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    buildGradientBound(),
+                  ],
                 ),
               ),
             ),
             Container(
-              width: 160,
-              height: 60,
-              decoration: NDashDecoration(
-                step: 4,
-                // pointWidth: 2,
-                // pointCount: 1,
-                radius: Radius.circular(15),
-                strokeWidth: 1,
-                strokeColor: Colors.red,
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  // buildElevatedButtonGradient(
+                  //   width: 120,
+                  //   child: Text('ElevatedButton'),
+                  //   onPressed: () {},
+                  // ),
+                  buildGradientElevatedButton(
+                    width: 150,
+                    height: 35,
+                    child: Text('GradientElevated'),
+                    onPressed: () {},
+                  ),
+                  buildGradientElevatedButton(
+                    width: 150,
+                    height: 35,
+                    child: Text('GradientElevated'),
+                  ),
+                  buildMaterialButtonGradient(
+                    onPressed: () {
+                      DLog.d("MaterialButton");
+                    },
+                    child: Text('GradientElevated'),
+                  ),
+                  buildMaterialButtonGradient(
+                    onPressed: null,
+                    child: Text('GradientElevated'),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      DLog.d("MaterialButton");
+                    },
+                    elevation: 0,
+                    disabledElevation: 0,
+                    textColor: Colors.white,
+                    disabledTextColor: Colors.white,
+                    color: Colors.blue,
+                    disabledColor: Colors.grey.withOpacity(0.5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    ),
+                    child: Text("MaterialButton"),
+                  ),
+                  MaterialButton(
+                    onPressed: null,
+                    elevation: 0,
+                    disabledElevation: 0,
+                    textColor: Colors.white,
+                    disabledTextColor: Colors.white,
+                    color: Colors.blue.withOpacity(0.5),
+                    disabledColor: Colors.grey.withOpacity(0.5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    ),
+                    child: Text("MaterialButton"),
+                  ),
+                  TimerButton(
+                    onRequest: () async {
+                      await Future.delayed(Duration(milliseconds: 1));
+                      return true;
+                    },
+                  ),
+                  NScaleButton(
+                    builder: (AnimationController controller) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          DLog.d('NScaleButton');
+                        },
+                        child: const Text('NScaleButton'),
+                      );
+                    },
+                  ),
+                  NScaleButton(
+                    enabled: false,
+                    builder: (AnimationController controller) {
+                      return ElevatedButton(
+                        onPressed: null,
+                        child: const Text('NScaleButton'),
+                      );
+                    },
+                  ),
+                ],
               ),
-              alignment: Alignment.center,
-              child: Text("自定义虚线\nNDashDecoration"),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Container(
-              width: 160,
-              height: 60,
-              decoration: DashDecoration(
-                step: 5,
-                span: 5,
-                // pointCount: 0,
-                pointWidth: 1,
-                radius: Radius.circular(15),
-                gradient: SweepGradient(
-                  colors: [Colors.blue, Colors.red, Colors.yellow, Colors.green],
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Text("dash_painter"),
-            ),
-            Container(
-              width: 100,
-              height: 100,
-              decoration: TriangleDecoration(color: Colors.red, size: 8.0),
-              child: NText("TriangleDecoration"),
-            ),
-            SizedBox(height: 20),
-            _buildGradientBound(),
-            SizedBox(height: 20),
-            buildElevatedButtonGradient(
-              width: 300,
-              title: 'ElevatedButton',
-              onPressed: () {},
-            ),
-            buildGradientElevatedButton(
-              onPressed: () {},
-            ),
-            buildGradientElevatedButton(),
-            buildMaterialButtonGradient(
-              onPressed: () {
-                DLog.d("buildMaterialButtonGradient");
-              },
-            ),
-            buildMaterialButtonGradient(
-              onPressed: null,
-            ),
-            MaterialButton(
-              onPressed: () {},
-              elevation: 0,
-              disabledElevation: 0,
-              textColor: Colors.white,
-              disabledTextColor: Colors.white,
-              color: Colors.blue.withOpacity(0.5),
-              disabledColor: Colors.grey.withOpacity(0.5),
-              child: Text("Button"),
-            ),
-            MaterialButton(
-              onPressed: null,
-              elevation: 0,
-              disabledElevation: 0,
-              textColor: Colors.white,
-              disabledTextColor: Colors.white,
-              color: Colors.blue.withOpacity(0.5),
-              disabledColor: Colors.grey.withOpacity(0.5),
-              child: Text("Button"),
-            ),
-            TimerButton(
-              onRequest: () async {
-                await Future.delayed(Duration(milliseconds: 1));
-                return true;
-              },
             ),
           ],
         ),
@@ -1101,7 +1178,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  Widget _buildGradientBound({
+  Widget buildGradientBound({
     VoidCallback? onTap,
   }) {
     return InkWell(
@@ -1149,7 +1226,7 @@ class _SecondPageState extends State<SecondPage> {
   buildElevatedButtonGradient({
     double? width,
     double? height = 45,
-    required String title,
+    required Widget child,
     required VoidCallback? onPressed,
     double radius = 22.5,
     Gradient? gradient,
@@ -1159,43 +1236,38 @@ class _SecondPageState extends State<SecondPage> {
     final borderRadius = BorderRadius.circular(radius);
 
     return ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.zero,
-          disabledForegroundColor: Colors.white,
-          disabledBackgroundColor: Colors.grey,
-          shape: RoundedRectangleBorder(
-            borderRadius: borderRadius,
-          ),
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        disabledForegroundColor: Colors.white,
+        disabledBackgroundColor: Colors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius,
         ),
-        child: Container(
-          width: width,
-          height: height,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: borderRadius,
-            gradient: !enable
-                ? null
-                : (gradient ??
-                    LinearGradient(
-                      colors: [
-                        Colors.red,
-                        Colors.blue,
-                        Colors.green,
-                      ],
-                    )),
-          ),
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 18),
-          ),
-        ));
+      ),
+      child: Container(
+        width: width,
+        height: height,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
+          gradient: !enable
+              ? null
+              : (gradient ??
+                  LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                  )),
+        ),
+        child: child,
+      ),
+    );
   }
 
   buildMaterialButtonGradient({
     ShapeBorder shape = const StadiumBorder(),
     Gradient? gradient,
     VoidCallback? onPressed,
+    required Widget child,
   }) {
     return Container(
       // width: 300,
@@ -1206,7 +1278,7 @@ class _SecondPageState extends State<SecondPage> {
             LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Colors.blue, Colors.orange, Colors.green],
+              colors: [Colors.orange, Colors.pink],
             ),
       ),
       child: MaterialButton(
@@ -1216,19 +1288,17 @@ class _SecondPageState extends State<SecondPage> {
         disabledColor: Colors.grey,
         textColor: Colors.white,
         disabledTextColor: Colors.red,
-        child: const Text(
-          'MaterialButton',
-          // style: TextStyle(
-          //   fontSize: 14,
-          // ),
-        ),
+        child: child,
       ),
     );
   }
 
   Widget buildGradientElevatedButton({
     VoidCallback? onPressed,
+    double? width,
+    double? height,
     double radius = 8,
+    required Widget child,
   }) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -1243,7 +1313,9 @@ class _SecondPageState extends State<SecondPage> {
       ),
       onPressed: onPressed,
       child: Ink(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        width: width,
+        height: height,
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: onPressed == null
             ? null
             : BoxDecoration(
@@ -1252,12 +1324,8 @@ class _SecondPageState extends State<SecondPage> {
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-        child: Container(
-          alignment: Alignment.center,
-          child: const Text(
-            'Custom Gradient',
-            // style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
+        child: Center(
+          child: child,
         ),
       ),
     );
