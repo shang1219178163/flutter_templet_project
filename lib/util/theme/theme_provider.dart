@@ -20,6 +20,8 @@ class ThemeProvider extends ChangeNotifier {
     toggleTheme(themeMode);
   }
 
+  /// 本地缓存
+  late ThemeMode themeModeTarget = ThemeMode.light;
   // 当前主题索引
   ThemeMode get themeMode => AppThemeService().themeMode;
 
