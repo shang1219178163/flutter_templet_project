@@ -23,7 +23,13 @@ class ThemeProvider extends ChangeNotifier {
   // 当前主题索引
   ThemeMode get themeMode => AppThemeService().themeMode;
 
-  bool get isDark => themeMode == ThemeMode.dark;
+  bool get isDarkSystem => WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark;
+
+  bool get isDark => [
+        themeMode == ThemeMode.dark,
+        themeModeTarget == ThemeMode.dark,
+        themeModeTarget == ThemeMode.system && isDarkSystem,
+      ].contains(true);
 
   /// 当前主题模型
   ThemeDataModel get themeDataModel => themeDataModels.firstWhere((e) => e.value == themeMode);
