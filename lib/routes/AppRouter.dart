@@ -32,6 +32,7 @@ import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedModalBarrierDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedPositionedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
@@ -866,6 +867,7 @@ class AppRouter {
   static const String themeMaterial3Page = '/themeMaterial3Page';
   static const String footballTeamPage = '/footballTeamPage';
   static const String scrollablePositionedListDemo = '/scrollablePositionedListDemo';
+  static const String animatedPositionedDemo = '/animatedPositionedDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2549,6 +2551,11 @@ class AppRouter {
     GetPage(
       name: AppRouter.scrollablePositionedListDemo,
       page: () => ScrollablePositionedListDemo(),
+    ),
+
+    GetPage(
+      name: AppRouter.animatedPositionedDemo,
+      page: () => AnimatedPositionedDemo(),
     ),
   ];
 }
