@@ -25,30 +25,41 @@ class AudioPlayerManager {
   }
 
   static final AudioPlayerManager _instance = AudioPlayerManager._();
-
   factory AudioPlayerManager() => _instance;
 
-  late final player = AudioPlayer();
+  late final _audioPlayer = AudioPlayer();
+
+  var playerState = PlayerState.stopped;
+  var currentPosition = Duration.zero;
+  var totalDuration = Duration.zero;
+
+  Stream<Duration> get positionStream => _audioPlayer.onPositionChanged;
+  Stream<Duration> get durationStream => _audioPlayer.onDurationChanged;
+  Stream<PlayerState> get stateStream => _audioPlayer.onPlayerStateChanged;
 
   init() async {}
 
-  destory() {
-    player.dispose();
+  Future<void> dispose() async {
+    await _audioPlayer.dispose();
   }
 
   /// 停止播放音频
   Future<void> stop() async {
-    return player.stop();
+    return _audioPlayer.stop();
   }
 
   /// 暂停播放音频
   Future<void> pause() async {
-    return player.pause();
+    return _audioPlayer.pause();
+  }
+
+  Future<void> seek(Duration position) async {
+    await _audioPlayer.seek(position);
   }
 
   /// 继续播放音频
   Future<void> resume() async {
-    return player.resume();
+    return _audioPlayer.resume();
   }
 
   // 播放循环音频呼叫铃声
@@ -65,16 +76,16 @@ class AudioPlayerManager {
   // 播放循环音频
   Future<void> play(String url, {bool isLoop = false}) async {
     final model = isLoop ? ReleaseMode.loop : ReleaseMode.stop;
-    player.setReleaseMode(model);
+    _audioPlayer.setReleaseMode(model);
 
-    await player.stop();
+    await _audioPlayer.stop();
     final source = url.startsWith("http") ? UrlSource(url) : AssetSource(url);
-    await player.play(source);
+    await _audioPlayer.play(source);
   }
 
   /// 播放/停止
-  playback(String url, {bool isLoop = false}) async {
-    if (player.state == PlayerState.playing) {
+  Future<void> playback(String url, {bool isLoop = false}) async {
+    if (_audioPlayer.state == PlayerState.playing) {
       await stop();
     } else {
       await play(url, isLoop: isLoop);
