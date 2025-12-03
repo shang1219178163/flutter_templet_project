@@ -92,7 +92,7 @@ class _NAccountSheetState extends State<NAccountSheet> {
 
   /// 保存数据到沙盒
   Future<void> saveToSandbox({required Map<String, dynamic> map}) async {
-    final file = await FileManager().saveJson(fileName: cacheKey, map: map);
+    final file = await FileManager().saveJson(fileName: cacheKey, obj: map);
     DLog.d("file: $file");
   }
 

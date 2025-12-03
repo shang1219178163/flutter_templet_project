@@ -119,10 +119,15 @@ class FileManager {
     required String fileName,
     String ext = "dart",
     Directory? dir,
-    required Map<String, dynamic> map,
+    required Object obj,
   }) async {
-    final content = jsonEncode(map);
-    final file = await FileManager().createFile(fileName: fileName, ext: ext, content: content, dir: dir);
+    final content = jsonEncode(obj);
+    final file = await FileManager().createFile(
+      fileName: fileName,
+      ext: ext,
+      content: content,
+      dir: dir,
+    );
     return file;
   }
 
@@ -133,7 +138,7 @@ class FileManager {
   /// - ext 文件类型, 默认 txt
   ///
   /// - dir 目标文件夹
-  Future<Map<String, dynamic>?> readJson({
+  Future<dynamic> readJson({
     required String fileName,
     String ext = "dart",
     Directory? dir,
@@ -161,7 +166,7 @@ class FileManager {
   }) async {
     final map = await readJson(fileName: fileName, ext: ext, dir: dir);
     final mapNew = await onUpdate(map ?? {});
-    final fileNew = await saveJson(fileName: fileName, map: mapNew);
+    final fileNew = await saveJson(fileName: fileName, obj: mapNew);
     return fileNew;
   }
 

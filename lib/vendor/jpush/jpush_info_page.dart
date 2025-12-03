@@ -157,7 +157,7 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
   requestUnbindPhone() async {}
 
   onClearAccount() async {
-    await FileManager().saveJson(fileName: "CACHE_ACCOUNT_List", map: {});
+    await FileManager().saveJson(fileName: "CACHE_ACCOUNT_List", obj: {});
   }
 
   onOperateLog() async {
