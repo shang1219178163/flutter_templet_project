@@ -573,7 +573,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     DLog.e("$runtimeType e");
   }
 
-  /// 函数执行耗时统计
+  /// 函数300统计
   Future<void> onTrackTime() async {
     await Future.delayed(Duration(milliseconds: 111))
         // .then((_) => throw Exception("错误1"))
@@ -587,8 +587,12 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   }
 
   void onTest() {
-    final result = "/v1/api2/article/catalog/query".splitByLastNumberAndPascal();
+    final apiShortUrl = "/v1/api2/article/catalog/query";
+    final result = apiShortUrl.splitByLastNumberAndPascal();
     DLog.d(result);
+
+    final result1 = apiShortUrl.splitByLastNumberAndPascal(name: (list) => list.join("_"));
+    DLog.d(result1);
   }
 
   testData() {

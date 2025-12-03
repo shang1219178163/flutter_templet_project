@@ -138,7 +138,7 @@ class CacheController {
   Future<File?> saveToDisk({required String cacheKey, required Map<String, dynamic> map}) async {
     try {
       final dir = await FileManager().getDocumentsDir();
-      final file = await FileManager().saveJson(fileName: cacheKey, map: map, dir: dir);
+      final file = await FileManager().saveJson(fileName: cacheKey, obj: map, dir: dir);
       DLog.d("$runtimeType saveToDisk file: $file");
       return file;
     } catch (e) {

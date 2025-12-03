@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/util/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 /// 属性元祖
 typedef SystemThemeTabRecord<T> = ({String example, String name, T value});
@@ -100,8 +102,8 @@ class _NSystemThemeTabState extends State<NSystemThemeTab> {
   Widget buildTab({
     required BuildContext context,
   }) {
-    // ThemeProvider themeProvider = context.read<ThemeProvider>();
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final themeProvider = context.read<ThemeProvider>();
+    // final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 36, vertical: 20),
@@ -120,17 +122,12 @@ class _NSystemThemeTabState extends State<NSystemThemeTab> {
               final isSelected = i == index;
               final imagePath =
                   isSelected ? "assets/images/ic_circle_selected.png" : "assets/images/ic_circle_unselected.png";
-              final color = isSelected ? null : (isDark ? null : Colors.red);
+              final color = isSelected ? null : (themeProvider.isDark ? null : Colors.red);
               return GestureDetector(
                 onTap: () {
-                  // debugPrint("$this ${[index, e, themeProvider.themeMode].asMap()}}");
-                  // if (themeProvider.themeMode == e.value) {
-                  //   return;
-                  // }
                   index = i;
-                  setState(() {});
+                  themeProvider.toggleTheme(e.value);
                   widget.onChanged(e.value);
-                  // themeProvider.toggleTheme(e.value);
                 },
                 child: Container(
                   width: itemWidth,

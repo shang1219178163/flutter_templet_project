@@ -11,13 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 
-typedef ValueIndexedWidgetBuilder<T> = Widget Function(
-    BuildContext context, int index, T data);
+typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T data);
 
 /// 请求列表回调
 typedef RequestListCallback<T> = Future<List<T>> Function(
   bool isRefresh,
-  int pageNo,
+  int page,
   int pageSize,
   T? last,
 );
@@ -65,7 +64,7 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 //
 //         return await requestList(pageNo: page, pageSize: pageSize);
 //       },
-//       itemBuilder: (BuildContext context, int index, e, onRefresh) {
+//       itemBuilder: (BuildContext context, int index, e) {
 //
 //         return InkWell(
 //           onTap: () {
@@ -113,7 +112,7 @@ class NRefreshView<T> extends StatefulWidget {
     this.placeholder,
     required this.onRequest,
     this.pageSize = 20,
-    this.pageNoInitial = 1,
+    this.pageInitial = 1,
     this.disableOnReresh = false,
     this.disableOnLoad = false,
     this.needRemovePadding = false,
@@ -144,7 +143,7 @@ class NRefreshView<T> extends StatefulWidget {
   final int pageSize;
 
   /// 页面初始索引
-  final int pageNoInitial;
+  final int pageInitial;
 
   /// 禁用下拉刷新
   final bool disableOnReresh;
@@ -179,8 +178,7 @@ class NRefreshView<T> extends StatefulWidget {
   NRefreshViewState<T> createState() => NRefreshViewState<T>();
 }
 
-class NRefreshViewState<T> extends State<NRefreshView<T>>
-    with AutomaticKeepAliveClientMixin {
+class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -194,9 +192,9 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 
   var indicator = IndicatorResult.none;
 
-  late var pageNo = widget.pageNoInitial;
+  late var page = widget.pageInitial;
 
-  late final items = ValueNotifier(<T>[]);
+  late final itemsVN = ValueNotifier(<T>[]);
 
   /// 首次加载
   var isFirstLoad = true;
@@ -249,7 +247,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 
   Widget buildBody() {
     return ValueListenableBuilder<List<T>>(
-      valueListenable: items,
+      valueListenable: itemsVN,
       builder: (context, list, child) {
         if (list.isEmpty) {
           return widget.placeholder ?? NPlaceholder(onTap: onRefresh);
@@ -274,19 +272,15 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
       controller: _easyRefreshController,
       triggerAxis: Axis.vertical,
       onRefresh: widget.disableOnReresh ? null : () => onRefresh(),
-      onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore
-          ? null
-          : () => onLoad(),
+      onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore ? null : () => onLoad(),
       child: child,
     );
   }
 
   onRefresh() async {
-    pageNo = widget.pageNoInitial;
-    items.value = await widget.onRequest(true, pageNo, widget.pageSize, null);
-    indicator = items.value.length < widget.pageSize
-        ? IndicatorResult.noMore
-        : IndicatorResult.success;
+    page = widget.pageInitial;
+    itemsVN.value = await widget.onRequest(true, page, widget.pageSize, null);
+    indicator = itemsVN.value.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
     _easyRefreshController.finishRefresh(IndicatorResult.success);
   }
 
@@ -298,15 +292,13 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
       return;
     }
 
-    pageNo += 1;
+    page += 1;
 
-    final models = await widget.onRequest(false, pageNo, widget.pageSize,
-        items.value.isNotEmpty ? items.value.last : null);
-    items.value = [...items.value, ...models];
+    final models =
+        await widget.onRequest(false, page, widget.pageSize, itemsVN.value.isNotEmpty ? itemsVN.value.last : null);
+    itemsVN.value = [...itemsVN.value, ...models];
 
-    indicator = models.length < widget.pageSize
-        ? IndicatorResult.noMore
-        : IndicatorResult.success;
+    indicator = models.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
     _easyRefreshController.finishLoad(indicator);
   }
 
@@ -369,7 +361,7 @@ class NRefreshViewController<E> {
 
   List<E> get items {
     assert(_anchor != null);
-    return _anchor!.items.value;
+    return _anchor!.itemsVN.value;
   }
 
   void onRefresh() {
@@ -383,21 +375,21 @@ class NRefreshViewController<E> {
   void onUpdate(bool Function(E element)? test) {
     assert(_anchor != null);
     if (test != null) {
-      _anchor!.items.value = _anchor!.items.value.where(test).toList();
+      _anchor!.itemsVN.value = _anchor!.itemsVN.value.where(test).toList();
       return;
     }
-    _anchor!.items.value = [..._anchor!.items.value];
+    _anchor!.itemsVN.value = [..._anchor!.itemsVN.value];
   }
 
   /// 页码减一
   void turnPrePage() {
     assert(_anchor != null);
-    _anchor!.pageNo--;
+    _anchor!.page--;
   }
 
   /// 页码加一
   void turnNextPage() {
     assert(_anchor != null);
-    _anchor!.pageNo++;
+    _anchor!.page++;
   }
 }

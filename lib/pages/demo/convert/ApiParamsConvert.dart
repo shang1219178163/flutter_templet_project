@@ -102,7 +102,7 @@ class ApiParamsConvert extends ConvertProtocol {
             {
               model.typeDart = "int?";
               model.typeValidate = [
-                "if ((${name} ?? 0) > 0) {",
+                "if ((${name} ?? 0) <= 0) {",
                 "return (false, '${name} 必须大于 0');",
                 "}",
               ].join("\n");
@@ -112,7 +112,7 @@ class ApiParamsConvert extends ConvertProtocol {
             {
               model.typeDart = "double?";
               model.typeValidate = [
-                "if ((${name} ?? 0) > 0) {",
+                "if ((${name} ?? 0) <= 0) {",
                 "return (false, '${name} 必须大于 0');",
                 "}",
               ].join("\n");
