@@ -352,6 +352,7 @@ import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
 import 'package:flutter_templet_project/pages/demo/system_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
+import 'package:flutter_templet_project/pages/demo/tag_sort/tag_sort_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
@@ -868,6 +869,7 @@ class AppRouter {
   static const String footballTeamPage = '/footballTeamPage';
   static const String scrollablePositionedListDemo = '/scrollablePositionedListDemo';
   static const String animatedPositionedDemo = '/animatedPositionedDemo';
+  static const String tagSortPage = '/tagSortPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2547,15 +2549,17 @@ class AppRouter {
       name: AppRouter.footballTeamPage,
       page: () => FootballTeamPage(),
     ),
-
     GetPage(
       name: AppRouter.scrollablePositionedListDemo,
       page: () => ScrollablePositionedListDemo(),
     ),
-
     GetPage(
       name: AppRouter.animatedPositionedDemo,
       page: () => AnimatedPositionedDemo(),
+    ),
+    GetPage(
+      name: AppRouter.tagSortPage,
+      page: () => TagSortPage(),
     ),
   ];
 }

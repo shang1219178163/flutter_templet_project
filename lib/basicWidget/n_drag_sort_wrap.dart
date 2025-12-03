@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
+/// 拖拽排序
+/// 拖拽排序
 class NDragSortWrap<T extends Object> extends StatefulWidget {
   const NDragSortWrap({
     super.key,
     required this.items,
+    this.enableBuilder,
     required this.itemBuilder,
     this.onChanged,
     this.spacing = 8,
@@ -12,6 +15,9 @@ class NDragSortWrap<T extends Object> extends StatefulWidget {
   });
 
   final List<T> items;
+
+  /// 是否可拖拽
+  final bool Function(BuildContext context, T item)? enableBuilder;
   final Widget Function(BuildContext context, T item, bool isDragging) itemBuilder;
   final void Function(List<T> newList)? onChanged;
   final double spacing;
@@ -54,6 +60,13 @@ class _NDragSortWrapState<T extends Object> extends State<NDragSortWrap<T>> {
 
   Widget _buildDraggableItem(BuildContext context, int index) {
     final item = _list[index];
+    final enbaleItem = widget.enableBuilder?.call(context, item) ?? true;
+    if (!enbaleItem) {
+      return Material(
+        color: Colors.transparent,
+        child: widget.itemBuilder(context, item, true),
+      );
+    }
 
     return LongPressDraggable<T>(
       data: item,
