@@ -341,6 +341,7 @@ import 'package:flutter_templet_project/pages/demo/keyboard_observer_demo.dart';
 import 'package:flutter_templet_project/pages/demo/lerpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
+import 'package:flutter_templet_project/pages/demo/music/MusicPlayerPage.dart';
 import 'package:flutter_templet_project/pages/demo/n_collection_nav_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/n_horizontal_scroll_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/navgation_bar_demo.dart';
@@ -870,6 +871,7 @@ class AppRouter {
   static const String scrollablePositionedListDemo = '/scrollablePositionedListDemo';
   static const String animatedPositionedDemo = '/animatedPositionedDemo';
   static const String tagSortPage = '/tagSortPage';
+  static const String musicPlayerPage = '/musicPlayerPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2560,6 +2562,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.tagSortPage,
       page: () => TagSortPage(),
+    ),
+    GetPage(
+      name: AppRouter.musicPlayerPage,
+      page: () => MusicPlayerPage(),
     ),
   ];
 }

@@ -67,22 +67,12 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
 
   // 滚动到当前歌词
   void _scrollToCurrentLyric(int index) {
-    DLog.d(index);
-
     _itemScrollController.scrollTo(
       index: index,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
+      alignment: 0.1,
     );
-
-    // if (!_isScrolling && _itemScrollController.isAttached && index < widget.lyrics.length) {
-    //   DLog.d("index: $index");
-    //   _itemScrollController.scrollTo(
-    //     index: index,
-    //     duration: const Duration(milliseconds: 300),
-    //     curve: Curves.easeInOut,
-    //   );
-    // }
   }
 
   @override
@@ -107,7 +97,7 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
             child: Text(
               title,
               style: TextStyle(
-                fontSize: isCurrent ? 16 : 14,
+                fontSize: isCurrent ? 16 : 15,
                 color: isCurrent ? Colors.blue : Colors.grey,
                 fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
               ),
