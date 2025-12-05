@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class LyricScrollWidget extends StatefulWidget {
   final List<LyricLine> lyrics;
-  final Duration currentPosition;
+  final Stream<Duration> positionStream;
   final Function(Duration) onSeek;
 
   const LyricScrollWidget({
     Key? key,
     required this.lyrics,
-    required this.currentPosition,
+    required this.positionStream,
     required this.onSeek,
   }) : super(key: key);
 
@@ -34,14 +36,22 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
   void initState() {
     super.initState();
     _itemPositionsListener.itemPositions.addListener(_onScroll);
+    widget.positionStream.listen(_onPosition);
   }
 
   void _onScroll() {
     if (_itemPositionsListener.itemPositions.value.isNotEmpty) {
       final firstVisible = _itemPositionsListener.itemPositions.value.first;
-      setState(() {
-        _isScrolling = firstVisible.itemLeadingEdge != 0;
-      });
+      _isScrolling = firstVisible.itemLeadingEdge != 0;
+      setState(() {});
+    }
+  }
+
+  void _onPosition(Duration position) {
+    final newIndex = _findCurrentLyricIndex(position);
+    if (newIndex != _currentIndex) {
+      _currentIndex = newIndex;
+      _scrollToCurrentLyric(_currentIndex);
     }
   }
 
@@ -57,24 +67,22 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
 
   // 滚动到当前歌词
   void _scrollToCurrentLyric(int index) {
-    if (!_isScrolling && _itemScrollController.isAttached && index < widget.lyrics.length) {
-      _itemScrollController.scrollTo(
-        index: index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
+    DLog.d(index);
 
-  @override
-  void didUpdateWidget(LyricScrollWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
+    _itemScrollController.scrollTo(
+      index: index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
 
-    final newIndex = _findCurrentLyricIndex(widget.currentPosition);
-    if (newIndex != _currentIndex) {
-      _currentIndex = newIndex;
-      _scrollToCurrentLyric(_currentIndex);
-    }
+    // if (!_isScrolling && _itemScrollController.isAttached && index < widget.lyrics.length) {
+    //   DLog.d("index: $index");
+    //   _itemScrollController.scrollTo(
+    //     index: index,
+    //     duration: const Duration(milliseconds: 300),
+    //     curve: Curves.easeInOut,
+    //   );
+    // }
   }
 
   @override
@@ -84,20 +92,22 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
       itemScrollController: _itemScrollController,
       itemPositionsListener: _itemPositionsListener,
       itemBuilder: (context, index) {
-        final lyric = widget.lyrics[index];
+        final e = widget.lyrics[index];
         final isCurrent = index == _currentIndex;
 
+        var title = e.text;
+        title = "$e";
         return GestureDetector(
           onTap: () {
-            widget.onSeek(lyric.startTime);
+            widget.onSeek(e.startTime);
           },
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             alignment: Alignment.center,
             child: Text(
-              lyric.text,
+              title,
               style: TextStyle(
-                fontSize: isCurrent ? 22 : 18,
+                fontSize: isCurrent ? 16 : 14,
                 color: isCurrent ? Colors.blue : Colors.grey,
                 fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
               ),
@@ -111,13 +121,21 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
 }
 
 class LyricLine {
-  final Duration startTime; // 开始时间
-  final Duration endTime; // 结束时间
-  final String text; // 歌词文本
-
   LyricLine({
     required this.startTime,
     required this.endTime,
     required this.text,
   });
+
+  final Duration startTime; // 开始时间
+  final Duration endTime; // 结束时间
+  final String text; // 歌词文本
+
+  @override
+  String toString() {
+    final startTimeStr = startTime.toString().split(".").first;
+    final endTimeStr = endTime.toString().split(".").first;
+    final result = "[${startTimeStr} - ${endTimeStr}] ${text}";
+    return result;
+  }
 }

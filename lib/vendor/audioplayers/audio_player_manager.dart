@@ -29,9 +29,11 @@ class AudioPlayerManager {
 
   late final _audioPlayer = AudioPlayer();
 
-  var playerState = PlayerState.stopped;
-  var currentPosition = Duration.zero;
-  var totalDuration = Duration.zero;
+  // var playerState = PlayerState.stopped;
+  // var currentPosition = Duration.zero;
+  // var totalDuration = Duration.zero;
+
+  bool get isPlaying => _audioPlayer.state == PlayerState.playing;
 
   Stream<Duration> get positionStream => _audioPlayer.onPositionChanged;
   Stream<Duration> get durationStream => _audioPlayer.onDurationChanged;
@@ -78,7 +80,9 @@ class AudioPlayerManager {
     final model = isLoop ? ReleaseMode.loop : ReleaseMode.stop;
     _audioPlayer.setReleaseMode(model);
 
-    await _audioPlayer.stop();
+    if (_audioPlayer.state == PlayerState.playing) {
+      await _audioPlayer.stop();
+    }
     final source = url.startsWith("http") ? UrlSource(url) : AssetSource(url);
     await _audioPlayer.play(source);
   }

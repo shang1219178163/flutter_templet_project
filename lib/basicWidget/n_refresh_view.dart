@@ -18,7 +18,7 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
   bool isRefresh,
   int page,
   int pageSize,
-  T? last,
+  List<T> pres,
 );
 
 /// 使用示例:
@@ -279,7 +279,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
 
   onRefresh() async {
     page = widget.pageInitial;
-    itemsVN.value = await widget.onRequest(true, page, widget.pageSize, null);
+    itemsVN.value = await widget.onRequest(true, page, widget.pageSize, <T>[]);
     indicator = itemsVN.value.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
     _easyRefreshController.finishRefresh(IndicatorResult.success);
   }
@@ -294,8 +294,12 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
 
     page += 1;
 
-    final models =
-        await widget.onRequest(false, page, widget.pageSize, itemsVN.value.isNotEmpty ? itemsVN.value.last : null);
+    final models = await widget.onRequest(
+      false,
+      page,
+      widget.pageSize,
+      itemsVN.value.sublist(itemsVN.value.length - widget.pageSize),
+    );
     itemsVN.value = [...itemsVN.value, ...models];
 
     indicator = models.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;

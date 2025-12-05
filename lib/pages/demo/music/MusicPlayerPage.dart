@@ -1,4 +1,7 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
 import 'package:flutter_templet_project/pages/demo/music/MusicLyricScrollWidget.dart';
 import 'package:flutter_templet_project/vendor/audioplayers/audio_player_manager.dart';
 
@@ -12,7 +15,10 @@ class MusicPlayerPage extends StatefulWidget {
 class _MusicPlayerPageState extends State<MusicPlayerPage> {
   late AudioPlayerManager _audioManager;
   List<LyricLine> _lyrics = [];
-  Duration _currentPosition = Duration.zero;
+  // Duration _currentPosition = Duration.zero;
+  Duration totalDuration = Duration.zero;
+
+  final loopVN = ValueNotifier(false);
 
   @override
   void dispose() {
@@ -29,25 +35,21 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
   }
 
   Future<void> _loadLyrics() async {
-//     const lrcContent = '''
-// [00:00.00]歌曲开始
-// [00:15.50]第一句歌词
-// [00:20.30]第二句歌词
-// [00:25.10]第三句歌词
-// [00:30.00]第四句歌词
-// ''';
-
     final assetFilePath = "assets/media/立心-国风集.河图.lrc";
-    String lrcContent = await rootBundle.loadString(assetFilePath);
+    final lrcContent = await rootBundle.loadString(assetFilePath);
     _lyrics = parseLrc(lrcContent);
+    setState(() {});
   }
 
   void _setupAudioListeners() {
-    _audioManager.positionStream.listen((position) {
-      setState(() {
-        _currentPosition = position;
-      });
+    _audioManager.durationStream.listen((position) {
+      totalDuration = position;
+      setState(() {});
     });
+    // _audioManager.positionStream.listen((position) {
+    //   _currentPosition = position;
+    //   // setState(() {});
+    // });
   }
 
   void _onLyricSeek(Duration position) {
@@ -64,16 +66,16 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
         children: [
           // 音频控制面板
           _buildAudioControls(),
+          // 进度条
+          _buildProgressBar(),
           // 歌词显示区域
           Expanded(
             child: LyricScrollWidget(
               lyrics: _lyrics,
-              currentPosition: _currentPosition,
+              positionStream: _audioManager.positionStream,
               onSeek: _onLyricSeek,
             ),
           ),
-          // 进度条
-          _buildProgressBar(),
         ],
       ),
     );
@@ -83,24 +85,37 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        ValueListenableBuilder(
+          valueListenable: loopVN,
+          builder: (context, value, child) {
+            return IconButton(
+              icon: Icon(value ? Icons.repeat_one : Icons.loop),
+              onPressed: () {
+                loopVN.value = !loopVN.value;
+              },
+            );
+          },
+        ),
         IconButton(
           icon: Icon(Icons.skip_previous),
           onPressed: () {
             // 上一首逻辑
           },
         ),
-        IconButton(
-          icon: Icon(Icons.play_arrow),
-          onPressed: () {
-            _audioManager.play('https://example.com/audio.mp3');
-          },
-        ),
-        IconButton(
-          icon: Icon(Icons.pause),
-          onPressed: () {
-            _audioManager.pause();
-          },
-        ),
+        if (!_audioManager.isPlaying)
+          IconButton(
+            icon: Icon(Icons.play_arrow),
+            onPressed: () {
+              _audioManager.play('media/立心-国风集.河图.mp3', isLoop: loopVN.value);
+            },
+          ),
+        if (_audioManager.isPlaying)
+          IconButton(
+            icon: Icon(Icons.pause),
+            onPressed: () {
+              _audioManager.pause();
+            },
+          ),
         IconButton(
           icon: Icon(Icons.skip_next),
           onPressed: () {
@@ -113,12 +128,12 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
 
   Widget _buildProgressBar() {
     return StreamBuilder<Duration>(
-      stream: _audioManager.durationStream,
+      stream: _audioManager.positionStream,
       builder: (context, snapshot) {
-        final totalDuration = snapshot.data ?? Duration.zero;
+        final currentPosition = snapshot.data ?? Duration.zero;
 
         return Slider(
-          value: _currentPosition.inMilliseconds.toDouble(),
+          value: currentPosition.inMilliseconds.toDouble(),
           min: 0,
           max: totalDuration.inMilliseconds.toDouble(),
           onChanged: (value) {
@@ -128,6 +143,23 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
         );
       },
     );
+
+    // return StreamBuilder<Duration>(
+    //   stream: _audioManager.durationStream,
+    //   builder: (context, snapshot) {
+    //     final totalDuration = snapshot.data ?? Duration.zero;
+    //
+    //     return Slider(
+    //       value: _currentPosition.inMilliseconds.toDouble(),
+    //       min: 0,
+    //       max: totalDuration.inMilliseconds.toDouble(),
+    //       onChanged: (value) {
+    //         final position = Duration(milliseconds: value.toInt());
+    //         _audioManager.seek(position);
+    //       },
+    //     );
+    //   },
+    // );
   }
 
   // 解析 LRC 歌词文件
