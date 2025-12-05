@@ -15,6 +15,7 @@
 // print('Microseconds: ${duration.inMicrosecondsRest}'); // 0
 
 import 'package:flutter_templet_project/extension/extension_local.dart';
+
 extension DurationExt on Duration {
   int get inDaysRest => inDays;
   int get inHoursRest => inHours - (inDays * 24);
@@ -36,7 +37,9 @@ extension DurationExt on Duration {
     final mm = '${inMinutes % 60}'.padLeft(2, '0');
     final ss = '${inSeconds % 60}'.padLeft(2, '0');
     var hms = '$hh:$mm:$ss';
-    final result = inDays > 0 ? '$inDays天$hms' : hms;
+    var result = inDays > 0 ? '$inDays天$hms' : hms;
+    final prefix = isNegative ? "-" : "";
+    result = prefix + result;
     return result;
   }
 
