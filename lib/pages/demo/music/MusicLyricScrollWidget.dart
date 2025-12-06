@@ -102,7 +102,6 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
           },
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-            alignment: Alignment.center,
             child: Text(
               title,
               style: TextStyle(

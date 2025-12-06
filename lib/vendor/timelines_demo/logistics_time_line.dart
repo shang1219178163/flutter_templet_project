@@ -11,7 +11,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:timelines/timelines.dart';
+import 'package:timelines_plus/timelines_plus.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class LogisticsTimeLine extends StatefulWidget {

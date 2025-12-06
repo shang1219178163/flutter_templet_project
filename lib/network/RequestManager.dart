@@ -18,7 +18,8 @@ import 'package:flutter_templet_project/network/interceptors/token_interceptor.d
 import 'package:flutter_templet_project/network/interceptors/validate_interceptor.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
-import 'package:flutter_templet_project/vendor/toast_util.dart';import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 import 'package:get/get.dart' as get_navigation;
 
@@ -46,7 +47,7 @@ class RequestManager extends BaseRequestAPI {
   late final cacheInterceptor = DioCacheInterceptor(
     options: CacheOptions(
       store: MemCacheStore(maxSize: 10485760, maxEntrySize: 1048576),
-      hitCacheOnErrorExcept: [], // for offline behaviour
+      // hitCacheOnErrorExcept: [], // for offline behaviour
     ),
   );
 

@@ -7,13 +7,12 @@
 //
 
 import 'package:flutter/material.dart';
-
-import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/extension/src/dlog.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 final GlobalKey _globalKey = GlobalKey();
 
@@ -242,17 +241,18 @@ class _ToastContextState extends State<ToastContext> {
   }
 
   _showBuilderToast() {
-    fToast.showToast(
-        child: toast,
-        gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
-        positionedToastBuilder: (context, child) {
-          return Positioned(
-            top: 16.0,
-            left: 16.0,
-            child: child,
-          );
-        });
+    // fToast.showToast(
+    //   child: toast,
+    //   gravity: ToastGravity.BOTTOM,
+    //   toastDuration: Duration(seconds: 2),
+    //   positionedToastBuilder: (context, child) {
+    //     return Positioned(
+    //       top: 16.0,
+    //       left: 16.0,
+    //       child: child,
+    //     );
+    //   },
+    // );
   }
 
   _showToastCancel() {

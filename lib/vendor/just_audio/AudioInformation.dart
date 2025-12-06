@@ -3,7 +3,7 @@
 // import 'package:flutter_templet_project/cache/cache_service.dart';
 // import 'package:just_audio/just_audio.dart';
 //
-// 此功能依赖 just_audio: ^0.10.5
+// ///此功能依赖 just_audio: ^0.10.5
 //
 //
 // class AudioInformation {

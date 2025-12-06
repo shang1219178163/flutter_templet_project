@@ -89,9 +89,9 @@ class TTSManager {
         DLog.d("setErrorHandler: $message");
       });
 
-      flutterTts.setInitHandler(() {
-        DLog.d("✅ $runtimeType flutterTts 初始完成!!!");
-      });
+      // flutterTts.setInitHandler(() {
+      //   DLog.d("✅ $runtimeType flutterTts 初始完成!!!");
+      // });
 
       flutterTts.setStartHandler(() {
         playerState = TTSManagerPlayerState.playing;

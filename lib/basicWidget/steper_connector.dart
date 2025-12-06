@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:timelines/timelines.dart';
+import 'package:timelines_plus/timelines_plus.dart';
 
 // ignore: unused_element
 class SteperConnector extends StatelessWidget {
@@ -184,8 +184,7 @@ class NNTimelineTile extends StatelessWidget {
     this.mainAxisExtent,
     this.crossAxisExtent,
   })  : assert(
-          nodeAlign == TimelineNodeAlign.basic ||
-              (nodeAlign != TimelineNodeAlign.basic && nodePosition == null),
+          nodeAlign == TimelineNodeAlign.basic || (nodeAlign != TimelineNodeAlign.basic && nodePosition == null),
           'Cannot provide both a nodeAlign and a nodePosition',
         ),
         assert(nodePosition == null || nodePosition >= 0),
@@ -264,9 +263,7 @@ class NNTimelineTile extends StatelessWidget {
         Expanded(
           flex: nodeFlex.toInt(),
           child: Align(
-            alignment: direction == Axis.vertical
-                ? AlignmentDirectional.centerEnd
-                : Alignment.bottomCenter,
+            alignment: direction == Axis.vertical ? AlignmentDirectional.centerEnd : Alignment.bottomCenter,
             child: oppositeContents ?? SizedBox.shrink(),
           ),
         ),
@@ -281,9 +278,7 @@ class NNTimelineTile extends StatelessWidget {
         Expanded(
           flex: (kFlexMultiplier - nodeFlex).toInt(),
           child: Align(
-            alignment: direction == Axis.vertical
-                ? AlignmentDirectional.centerStart
-                : Alignment.topCenter,
+            alignment: direction == Axis.vertical ? AlignmentDirectional.centerStart : Alignment.topCenter,
             child: contents ?? SizedBox.shrink(),
           ),
         ),

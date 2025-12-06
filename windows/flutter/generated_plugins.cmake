@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   desktop_drop
   file_selector_windows
+  flutter_inappwebview_windows
   flutter_tts
   isar_flutter_libs
   local_auth_windows
@@ -14,6 +15,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   record_windows
   share_plus
   url_launcher_windows
+  volume_controller
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

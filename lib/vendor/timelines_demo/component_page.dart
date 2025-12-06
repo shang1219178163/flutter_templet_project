@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/logistics_time_line.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
-import 'package:timelines/timelines.dart';
+import 'package:timelines_plus/timelines_plus.dart';
 
 class ComponentPage extends StatelessWidget {
   const ComponentPage({Key? key}) : super(key: key);
@@ -40,8 +40,7 @@ class ComponentPage extends StatelessWidget {
                     ),
                   );
                 },
-                connectorStyleBuilder: (context, index) =>
-                    ConnectorStyle.solidLine,
+                connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
                 // connectorStyleBuilder: (context, index) => index == 0 ? ConnectorStyle.transparent : ConnectorStyle.solidLine,
                 indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
                 itemCount: listData.length,
@@ -151,9 +150,7 @@ class ComponentPage extends StatelessWidget {
             builder: TimelineTileBuilder.connectedFromStyle(
               connectionDirection: ConnectionDirection.before,
               connectorStyleBuilder: (context, index) {
-                return (index == 1)
-                    ? ConnectorStyle.dashedLine
-                    : ConnectorStyle.solidLine;
+                return (index == 1) ? ConnectorStyle.dashedLine : ConnectorStyle.solidLine;
               },
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemExtent: 40.0,
@@ -170,9 +167,7 @@ class ComponentPage extends StatelessWidget {
             builder: TimelineTileBuilder.connectedFromStyle(
               connectionDirection: ConnectionDirection.after,
               connectorStyleBuilder: (context, index) {
-                return (index == 1)
-                    ? ConnectorStyle.dashedLine
-                    : ConnectorStyle.solidLine;
+                return (index == 1) ? ConnectorStyle.dashedLine : ConnectorStyle.solidLine;
               },
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemExtent: 40.0,
@@ -198,8 +193,7 @@ class ComponentPage extends StatelessWidget {
                   child: Text('Contents'),
                 ),
               ),
-              connectorStyleBuilder: (context, index) =>
-                  ConnectorStyle.solidLine,
+              connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemCount: 3,
             ),
@@ -223,8 +217,7 @@ class ComponentPage extends StatelessWidget {
                   child: Text('Contents'),
                 ),
               ),
-              connectorStyleBuilder: (context, index) =>
-                  ConnectorStyle.solidLine,
+              connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemCount: 3,
             ),
