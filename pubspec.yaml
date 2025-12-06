@@ -169,11 +169,14 @@ dependencies:
   # 文件分享
   share_plus: ^7.1.0
 
-  # 音频
+  # 录音 + 播放音频的 SDK 工具库
   flutter_sound: ^9.2.13
+  # 环境音频策略统一、后台管理
   audio_session: ^0.1.6
-  # 音频播放
+  # 简单播放一两段音效、短音频
   audioplayers: ^5.2.1
+  # 音乐播放器（流畅、缓存、精控、后台、锁屏控制）
+  just_audio: ^0.9.44
 
   # 视频播放
   video_player: ^2.2.3
@@ -254,6 +257,7 @@ dependencies:
       ref: 'develop'
 
 
+
 #  User:
 #    hosted:
 #      name: syn_mine_pages
@@ -280,7 +284,6 @@ dependency_overrides:
       url: https://github.com/andychucs/flutter_inappwebview.git
       ref: master
       path: flutter_inappwebview_ios
-
 
 # User:
 #   path: ../User
