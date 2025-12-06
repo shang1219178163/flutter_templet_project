@@ -45,7 +45,8 @@ class AudioPlayerManager {
   init() async {}
 
   Future<void> dispose() async {
-    await _audioPlayer.dispose();
+    // await _audioPlayer.dispose();
+    await _audioPlayer.release();
   }
 
   /// 停止播放音频
@@ -82,6 +83,11 @@ class AudioPlayerManager {
   Future<void> play(String url, {bool isLoop = false}) async {
     final model = isLoop ? ReleaseMode.loop : ReleaseMode.stop;
     _audioPlayer.setReleaseMode(model);
+
+    if (_audioPlayer.state == PlayerState.paused) {
+      await _audioPlayer.resume();
+      return;
+    }
 
     if (_audioPlayer.state == PlayerState.playing) {
       await _audioPlayer.stop();

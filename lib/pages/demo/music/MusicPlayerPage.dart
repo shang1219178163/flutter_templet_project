@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 
 import 'package:flutter_templet_project/pages/demo/music/MusicLyricScrollWidget.dart';
 import 'package:flutter_templet_project/vendor/audioplayers/audio_player_manager.dart';
@@ -12,7 +13,7 @@ class MusicPlayerPage extends StatefulWidget {
   _MusicPlayerPageState createState() => _MusicPlayerPageState();
 }
 
-class _MusicPlayerPageState extends State<MusicPlayerPage> {
+class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixin {
   late AudioPlayerManager _audioManager;
   List<LyricLine> _lyrics = [];
   // Duration _currentPosition = Duration.zero;
