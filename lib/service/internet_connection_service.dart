@@ -11,6 +11,7 @@ class InternetConnectionService {
         var connected = switch (event) {
           InternetConnectionStatus.connected => true,
           InternetConnectionStatus.disconnected => false,
+          InternetConnectionStatus.slow => false,
         };
         onLine.value = connected;
       });
@@ -28,17 +29,16 @@ class InternetConnectionService {
   /// 是否联网; 可通过 ValueListenableBuilder 监听网络状态改变
   final onLine = ValueNotifier<bool>(true);
 
-  InternetConnectionChecker _createChecker() =>
-      InternetConnectionChecker.createInstance(
+  InternetConnectionChecker _createChecker() => InternetConnectionChecker.createInstance(
         checkTimeout: const Duration(seconds: 3),
         checkInterval: const Duration(seconds: 3),
         addresses: [
-          AddressCheckOptions(
-            address: InternetAddress(
-              '114.114.114.114', // CloudFlare
-              type: InternetAddressType.IPv4,
-            ),
-          ),
+          // AddressCheckOptions(
+          //   address: InternetAddress(
+          //     '114.114.114.114', // CloudFlare
+          //     type: InternetAddressType.IPv4,
+          //   ),
+          // ),
           ...InternetConnectionChecker.DEFAULT_ADDRESSES,
         ],
       );

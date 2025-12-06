@@ -164,11 +164,11 @@ class FluwxUtil {
     required String title,
     required String desc,
     WeChatScene scene = WeChatScene.session,
-  }) {
-    final image = WeChatImage.file(File(thumbFile));
+  }) async {
+    final thumbBytes = await File(thumbFile).readAsBytes();
     final model = WeChatShareVideoModel(
       videoUrl: videoUrl,
-      thumbnail: image,
+      thumbData: thumbBytes,
       title: title,
       description: desc,
       scene: scene,
@@ -199,19 +199,19 @@ class FluwxUtil {
       title = "${title.substring(0, 20)}...";
     }
 
-    WeChatImage? image;
-    if (thumbFile != null) {
-      image = WeChatImage.file(File(thumbFile));
-    } else if (thumbBytes != null) {
-      image = WeChatImage.binary(thumbBytes);
-    } else if (networkThumb?.isNotEmpty == true) {
-      image = WeChatImage.network(Uri.encodeFull(networkThumb!));
-    } else if (assetThumb?.isNotEmpty == true) {
-      image = WeChatImage.asset(assetThumb!, suffix: ".png");
-    }
+    // WeChatImage? image;
+    // if (thumbFile != null) {
+    //   image = WeChatImage.file(File(thumbFile));
+    // } else if (thumbBytes != null) {
+    //   image = WeChatImage.binary(thumbBytes);
+    // } else if (networkThumb?.isNotEmpty == true) {
+    //   image = WeChatImage.network(Uri.encodeFull(networkThumb!));
+    // } else if (assetThumb?.isNotEmpty == true) {
+    //   image = WeChatImage.asset(assetThumb!, suffix: ".png");
+    // }
     var model = WeChatShareWebPageModel(
       url,
-      thumbnail: image,
+      thumbData: thumbBytes,
       title: title,
       description: desc,
       scene: scene,

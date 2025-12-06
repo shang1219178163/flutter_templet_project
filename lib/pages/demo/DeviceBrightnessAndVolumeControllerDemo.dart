@@ -40,7 +40,7 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
 
   Future<void> _initValues() async {
     final currentBrightness = await FlutterScreenWake.brightness;
-    final currentVolume = await VolumeController().getVolume();
+    final currentVolume = await VolumeController.instance.getVolume();
 
     setState(() {
       _brightness = currentBrightness;
@@ -77,7 +77,7 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
         // 右半屏调节音量
         final delta = -dy / 300;
         _volume = (_volume + delta).clamp(0.0, 1.0);
-        VolumeController().setVolume(_volume, showSystemUI: false);
+        VolumeController.instance.setVolume(_volume);
         debugPrint("音量: $_volume");
       }
     }

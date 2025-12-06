@@ -12,7 +12,7 @@ class ConnectivityService {
   ConnectivityService._() {
     try {
       _listener = _connectivity.onConnectivityChanged.listen((result) async {
-        _changedOnline(result);
+        // _changedOnline(result);
       });
     } catch (e, trace) {
       debugPrint(
@@ -29,7 +29,7 @@ class ConnectivityService {
 
   final Connectivity _connectivity = Connectivity();
 
-  StreamSubscription<ConnectivityResult>? _listener;
+  late StreamSubscription<List<ConnectivityResult>> _listener;
 
   final _listeners = <NetConnectivityListener>[];
 
@@ -44,7 +44,7 @@ class ConnectivityService {
     return _changedOnline(result);
   }
 
-  Future<bool> _changedOnline(ConnectivityResult result) async {
+  Future<bool> _changedOnline(List<ConnectivityResult> result) async {
     debugPrint(">>> ConnectivityService: $result");
     // netState.value = result;
     onLine.value = [
@@ -56,11 +56,11 @@ class ConnectivityService {
     // for (final listener in listeners) {
     //   listener.onNetStateChaneged(result);
     // }
-    if (result != ConnectivityResult.none) {
-      onLine.value = await InternetConnectionChecker().hasConnection;
-    } else {
-      onLine.value = false;
-    }
+    // if (result != ConnectivityResult.none) {
+    //   onLine.value = await InternetConnectionChecker().hasConnection;
+    // } else {
+    //   onLine.value = false;
+    // }
     return onLine.value;
   }
 

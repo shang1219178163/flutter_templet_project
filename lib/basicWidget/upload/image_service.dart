@@ -104,9 +104,9 @@ class ImageService {
       sourcePath: sourcePath,
       maxWidth: maxWidth,
       maxHeight: maxHeight,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-      ],
+      // aspectRatioPresets: [
+      //   CropAspectRatioPreset.square,
+      // ],
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: '',
