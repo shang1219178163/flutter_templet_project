@@ -4,16 +4,16 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class LyricScrollWidget extends StatefulWidget {
-  final List<LyricLine> lyrics;
-  final Stream<Duration> positionStream;
-  final Function(Duration) onSeek;
-
   const LyricScrollWidget({
     Key? key,
     required this.lyrics,
     required this.positionStream,
     required this.onSeek,
   }) : super(key: key);
+
+  final List<LyricLine> lyrics;
+  final Stream<Duration> positionStream;
+  final Function(Duration position) onSeek;
 
   @override
   _LyricScrollWidgetState createState() => _LyricScrollWidgetState();
@@ -67,6 +67,9 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
 
   // 滚动到当前歌词
   void _scrollToCurrentLyric(int index) {
+    if (!_itemScrollController.isAttached) {
+      return;
+    }
     _itemScrollController.scrollTo(
       index: index,
       duration: const Duration(milliseconds: 300),
@@ -78,10 +81,16 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
   @override
   Widget build(BuildContext context) {
     return ScrollablePositionedList.builder(
-      itemCount: widget.lyrics.length,
+      itemCount: widget.lyrics.length + 1,
       itemScrollController: _itemScrollController,
       itemPositionsListener: _itemPositionsListener,
       itemBuilder: (context, index) {
+        if (index == widget.lyrics.length) {
+          return Container(
+            height: MediaQuery.of(context).size.height,
+            color: Colors.green,
+          );
+        }
         final e = widget.lyrics[index];
         final isCurrent = index == _currentIndex;
 
@@ -121,10 +130,11 @@ class LyricLine {
   final Duration endTime; // 结束时间
   final String text; // 歌词文本
 
+  String get startTimeStr => startTime.toString().split(".").first;
+  String get endTimeStr => endTime.toString().split(".").first;
+
   @override
   String toString() {
-    final startTimeStr = startTime.toString().split(".").first;
-    final endTimeStr = endTime.toString().split(".").first;
     final result = "[${startTimeStr} - ${endTimeStr}] ${text}";
     return result;
   }

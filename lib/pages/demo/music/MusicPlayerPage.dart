@@ -82,48 +82,56 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
   }
 
   Widget _buildAudioControls() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ValueListenableBuilder(
-          valueListenable: loopVN,
-          builder: (context, value, child) {
-            return IconButton(
-              icon: Icon(value ? Icons.repeat_one : Icons.loop),
-              onPressed: () {
-                loopVN.value = !loopVN.value;
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ValueListenableBuilder(
+            valueListenable: loopVN,
+            builder: (context, value, child) {
+              return IconButton(
+                icon: Icon(value ? Icons.repeat_one : Icons.loop),
+                onPressed: () async {
+                  loopVN.value = !loopVN.value;
+                },
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.skip_previous),
+            onPressed: () async {
+              // 上一首逻辑
+            },
+          ),
+          if (!_audioManager.isPlaying)
+            IconButton(
+              icon: Icon(Icons.play_arrow),
+              onPressed: () async {
+                if (_audioManager.isPaused) {
+                  await _audioManager.resume();
+                } else {
+                  await _audioManager.play('media/立心-国风集.河图.mp3', isLoop: loopVN.value);
+                }
+                setState(() {});
               },
-            );
-          },
-        ),
-        IconButton(
-          icon: Icon(Icons.skip_previous),
-          onPressed: () {
-            // 上一首逻辑
-          },
-        ),
-        if (!_audioManager.isPlaying)
+            ),
+          if (_audioManager.isPlaying)
+            IconButton(
+              icon: Icon(Icons.pause),
+              onPressed: () async {
+                await _audioManager.pause();
+                setState(() {});
+              },
+            ),
           IconButton(
-            icon: Icon(Icons.play_arrow),
+            icon: Icon(Icons.skip_next),
             onPressed: () {
-              _audioManager.play('media/立心-国风集.河图.mp3', isLoop: loopVN.value);
+              // 下一首逻辑
             },
           ),
-        if (_audioManager.isPlaying)
-          IconButton(
-            icon: Icon(Icons.pause),
-            onPressed: () {
-              _audioManager.pause();
-            },
-          ),
-        IconButton(
-          icon: Icon(Icons.skip_next),
-          onPressed: () {
-            // 下一首逻辑
-          },
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 
   Widget _buildProgressBar() {
@@ -132,14 +140,22 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
       builder: (context, snapshot) {
         final currentPosition = snapshot.data ?? Duration.zero;
 
-        return Slider(
-          value: currentPosition.inMilliseconds.toDouble(),
-          min: 0,
-          max: totalDuration.inMilliseconds.toDouble(),
-          onChanged: (value) {
-            final position = Duration(milliseconds: value.toInt());
-            _audioManager.seek(position);
-          },
+        return SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            thumbShape: const RoundSliderThumbShape(
+              enabledThumbRadius: 8.0, //默认
+              pressedElevation: 0,
+            ), //按下效果
+          ),
+          child: Slider(
+            value: currentPosition.inMilliseconds.toDouble(),
+            min: 0,
+            max: totalDuration.inMilliseconds.toDouble(),
+            onChanged: (value) {
+              final position = Duration(milliseconds: value.toInt());
+              _audioManager.seek(position);
+            },
+          ),
         );
       },
     );

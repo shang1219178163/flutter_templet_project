@@ -33,7 +33,10 @@ class AudioPlayerManager {
   // var currentPosition = Duration.zero;
   // var totalDuration = Duration.zero;
 
-  bool get isPlaying => _audioPlayer.state == PlayerState.playing;
+  PlayerState get playState => _audioPlayer.state;
+  bool get isPlaying => playState == PlayerState.playing;
+  bool get isPaused => playState == PlayerState.paused;
+  bool get isStopped => playState == PlayerState.stopped;
 
   Stream<Duration> get positionStream => _audioPlayer.onPositionChanged;
   Stream<Duration> get durationStream => _audioPlayer.onDurationChanged;
