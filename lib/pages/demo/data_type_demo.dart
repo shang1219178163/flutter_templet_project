@@ -587,12 +587,17 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   }
 
   void onTest() {
-    final apiShortUrl = "/v1/api2/article/catalog/query";
-    final result = apiShortUrl.splitByLastNumberAndPascal();
-    DLog.d(result);
+    // final apiShortUrl = "/v1/api2/article/catalog/query";
+    // final result = apiShortUrl.splitByLastNumberAndPascal();
+    // DLog.d(result);
+    //
+    // final result1 = apiShortUrl.splitByLastNumberAndPascal(name: (list) => list.join("_"));
+    // DLog.d(result1);
 
-    final result1 = apiShortUrl.splitByLastNumberAndPascal(name: (list) => list.join("_"));
-    DLog.d(result1);
+    final duration = Duration(seconds: 1000);
+    for (final v in DurationFormatEnum.values) {
+      DLog.d([v.name, duration.toStringFormat(format: v)]);
+    }
   }
 
   testData() {

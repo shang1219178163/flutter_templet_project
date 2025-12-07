@@ -43,7 +43,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
   bool get _isPlaying => _playerState == PlayerState.playing;
   bool get _isPaused => _playerState == PlayerState.paused;
 
-  String? get _positionText => _position?.toTime();
+  String? get _positionText => _position?.toStringFormat();
 
   @override
   void initState() {
@@ -136,7 +136,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
     }
     final imgPath = _isPlaying ? 'assets/images/icon_pause.png' : 'assets/images/icon_play.png';
 
-    final totalDesc = _duration == null ? "--" : _duration!.toTime();
+    final totalDesc = _duration == null ? "--" : _duration!.toStringFormat();
 
     return Container(
       width: double.infinity,
@@ -200,7 +200,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
 
   void _initStreams() {
     _durationSubscription = player.onDurationChanged.listen((duration) {
-      if (_duration?.toTime() == duration.toTime()) {
+      if (_duration?.toStringFormat() == duration.toStringFormat()) {
         return;
       }
       _duration = duration;

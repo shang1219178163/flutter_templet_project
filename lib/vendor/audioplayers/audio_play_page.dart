@@ -83,7 +83,7 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
           AudioPlayerBar(
             url: url ?? '',
             onDuration: (val) {
-              DLog.d(val.toTime());
+              DLog.d(val.toStringFormat());
             },
           ),
         ],

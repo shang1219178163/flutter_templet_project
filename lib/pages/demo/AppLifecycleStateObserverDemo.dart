@@ -92,7 +92,7 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
             ValueListenableBuilder(
               valueListenable: durationVN,
               builder: (context, value, child) {
-                final desc = value.toTime();
+                final desc = value.toStringFormat();
                 return Text("定时器:$desc");
               },
             ),

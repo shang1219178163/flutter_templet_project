@@ -14,7 +14,17 @@
 // print('Milliseconds: ${duration.inMillisecondsRest}'); // 0
 // print('Microseconds: ${duration.inMicrosecondsRest}'); // 0
 
-import 'package:flutter_templet_project/extension/extension_local.dart';
+/// Duration 字符串格式化枚举类型
+enum DurationFormatEnum {
+  HMMSS("H:MM:SS"),
+  HHMMSS("HH:MM:SS"),
+  MMSS("MM:SS"),
+  ;
+
+  const DurationFormatEnum(this.value);
+
+  final String value;
+}
 
 extension DurationExt on Duration {
   int get inDaysRest => inDays;
@@ -24,26 +34,79 @@ extension DurationExt on Duration {
   int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
   int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
 
-  /// 秒转计时器格式 00:00:00
-  String toTime() {
-    final duration = this;
-    final result = "$duration".split(".").first;
+  /// 格式化显示
+  String toStringFormat({DurationFormatEnum format = DurationFormatEnum.HMMSS}) {
+    var microseconds = inMicroseconds;
+    var sign = "";
+    var negative = microseconds < 0;
+
+    var hours = microseconds ~/ Duration.microsecondsPerHour;
+    microseconds = microseconds.remainder(Duration.microsecondsPerHour);
+
+    // Correcting for being negative after first division, instead of before,
+    // to avoid negating min-int, -(2^31-1), of a native int64.
+    if (negative) {
+      hours = 0 - hours; // Not using `-hours` to avoid creating -0.0 on web.
+      microseconds = 0 - microseconds;
+      sign = "-";
+    }
+
+    var minutes = microseconds ~/ Duration.microsecondsPerMinute;
+    microseconds = microseconds.remainder(Duration.microsecondsPerMinute);
+
+    var minutesPadding = minutes < 10 ? "0" : "";
+
+    var seconds = microseconds ~/ Duration.microsecondsPerSecond;
+    microseconds = microseconds.remainder(Duration.microsecondsPerSecond);
+
+    var secondsPadding = seconds < 10 ? "0" : "";
+
+    var result = "";
+    switch (format) {
+      case DurationFormatEnum.HHMMSS:
+        {
+          var hoursPadding = hours < 10 ? "0" : "";
+          if (hoursPadding == "0") {
+            hoursPadding = "00";
+          }
+          result = "$sign$hoursPadding:"
+              "$minutesPadding$minutes:"
+              "$secondsPadding$seconds";
+        }
+        break;
+      case DurationFormatEnum.MMSS:
+        {
+          result = "$sign"
+              "$minutesPadding$minutes:"
+              "$secondsPadding$seconds";
+        }
+        break;
+      default:
+        {
+          result = "$sign$hours:"
+              "$minutesPadding$minutes:"
+              "$secondsPadding$seconds";
+        }
+        break;
+    }
     return result;
   }
 
-  /// 天
+  /// 含天
+  @Deprecated("已弃用,请使用 toStringFormatted")
   String formatedString() {
+    final prefix = isNegative ? "-" : "";
+    final day = inDays > 0 ? '$inDays天' : "";
     final hh = '${inHours % 24}'.padLeft(2, '0');
     final mm = '${inMinutes % 60}'.padLeft(2, '0');
     final ss = '${inSeconds % 60}'.padLeft(2, '0');
     var hms = '$hh:$mm:$ss';
-    var result = inDays > 0 ? '$inDays天$hms' : hms;
-    final prefix = isNegative ? "-" : "";
-    result = prefix + result;
+    var result = '$prefix$day$hms';
     return result;
   }
 
   /// 转为 00:00:00
+  @Deprecated("已弃用,请使用 toStringFormatted")
   String toTimeNew() {
     String _twoDigits(int n) {
       if (n >= 10) {

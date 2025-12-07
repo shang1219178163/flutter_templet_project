@@ -109,7 +109,7 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
                 color: isCurrent ? Colors.blue : Colors.grey,
                 fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
               ),
-              textAlign: TextAlign.center,
+              // textAlign: TextAlign.center,
             ),
           ),
         );

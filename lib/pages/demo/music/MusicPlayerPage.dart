@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 
 import 'package:flutter_templet_project/pages/demo/music/MusicLyricScrollWidget.dart';
@@ -141,22 +142,46 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
       builder: (context, snapshot) {
         final currentPosition = snapshot.data ?? Duration.zero;
 
-        return SliderTheme(
-          data: SliderTheme.of(context).copyWith(
-            thumbShape: const RoundSliderThumbShape(
-              enabledThumbRadius: 8.0, //默认
-              pressedElevation: 0,
-            ), //按下效果
-          ),
-          child: Slider(
-            value: currentPosition.inMilliseconds.toDouble(),
-            min: 0,
-            max: totalDuration.inMilliseconds.toDouble(),
-            onChanged: (value) {
-              final position = Duration(milliseconds: value.toInt());
-              _audioManager.seek(position);
-            },
-          ),
+        return Column(
+          children: [
+            Container(
+              height: 20,
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 4, // 修改高度
+                  thumbShape: const RoundSliderThumbShape(
+                    enabledThumbRadius: 8.0, //默认
+                    pressedElevation: 0,
+                  ), //按下效果
+                ),
+                child: Slider(
+                  value: currentPosition.inMilliseconds.toDouble(),
+                  min: 0,
+                  max: totalDuration.inMilliseconds.toDouble(),
+                  onChanged: (value) {
+                    final position = Duration(milliseconds: value.toInt());
+                    _audioManager.seek(position);
+                  },
+                ),
+              ),
+            ),
+            DefaultTextStyle(
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.blue,
+              ),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(currentPosition.toTimeNew()),
+                    Text(totalDuration.toTimeNew()),
+                  ],
+                ),
+              ),
+            ),
+          ],
         );
       },
     );

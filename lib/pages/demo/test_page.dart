@@ -128,7 +128,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     DLog.d("duration: $duration");
 
     DLog.d("toTimeNew: ${duration.toTimeNew()}");
-    DLog.d("toTime: ${duration.toTime()}");
+    DLog.d("toTime: ${duration.toStringFormat()}");
 
     DLog.d("list: ${[
       duration.inHours.remainder(24),
