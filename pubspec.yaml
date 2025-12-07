@@ -325,4 +325,4 @@ flutter_assets_generator:
   assets_path: assets/
   path_ignore:
     - lib/
-#    - assets/media
+    - assets/media

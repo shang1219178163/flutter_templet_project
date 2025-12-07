@@ -5,21 +5,21 @@ import 'package:just_audio/just_audio.dart';
 
 ///此功能依赖 just_audio: ^0.10.5
 
-class AudioInfoModel {
+class AudioPlayerModel {
   final String image;
   final String name;
   final String artist;
   final String url;
   final AudioSource audioSource;
 
-  AudioInfoModel({
+  AudioPlayerModel({
     required this.image,
     required this.name,
     required this.artist,
     required this.url,
   }) : audioSource = AudioSource.uri(Uri.parse(url));
 
-  AudioInfoModel.fromJson(Map<String, dynamic> json)
+  AudioPlayerModel.fromJson(Map<String, dynamic> json)
       : image = json['image'] ?? 'assets/images/default.jpg',
         name = json['name'] ?? '',
         artist = json['artist'] ?? '',
@@ -43,17 +43,19 @@ class AudioInfoModel {
 
 class AudioPlayerUtil {
   AudioPlayerUtil._() {
+    initData();
+  }
+  static final AudioPlayerUtil _instance = AudioPlayerUtil._();
+  factory AudioPlayerUtil() => _instance;
+  static AudioPlayerUtil get instance => _instance;
+
+  /// 初始化
+  initData() {
     _positionTimer = Timer.periodic(const Duration(milliseconds: 40), (t) {
       if (_player.playing) {
         _positionController.add(_player.position);
       }
     });
-  }
-
-  static final AudioPlayerUtil _instance = AudioPlayerUtil._();
-
-  static AudioPlayerUtil of() {
-    return _instance;
   }
 
   /// 音频列表存储 key
@@ -101,7 +103,7 @@ class AudioPlayerUtil {
   final _countdownController = StreamController<int>.broadcast();
 
 // 播放列表
-  final List<AudioInfoModel> _audioInformationList = [];
+  final List<AudioPlayerModel> _audioInformationList = [];
 
   /// 设置播放源
   Future<Duration?> setAudioSource(
@@ -112,7 +114,7 @@ class AudioPlayerUtil {
       return Future.value(null);
     }
     // 转换为 AudioInformation 列表
-    var audioList = jsonList.map((json) => AudioInfoModel.fromJson(json)).toList();
+    var audioList = jsonList.map((json) => AudioPlayerModel.fromJson(json)).toList();
     _audioInformationList.clear();
     // 停止播放
     pause();
@@ -137,7 +139,7 @@ class AudioPlayerUtil {
       return Future.value(null);
     }
     // 添加音频
-    var audioList = jsonList.map((json) => AudioInfoModel.fromJson(json)).toList();
+    var audioList = jsonList.map((json) => AudioPlayerModel.fromJson(json)).toList();
     _audioInformationList.addAll(audioList);
     // 本地存储
     CacheService().setString(
@@ -150,7 +152,7 @@ class AudioPlayerUtil {
   }
 
   /// 添加到下一个播放
-  void addNext(AudioInfoModel audio) {
+  void addNext(AudioPlayerModel audio) {
     var nextIndex = (_player.currentIndex ?? -1) + 1;
     _audioInformationList.insert(nextIndex, audio);
     _player.insertAudioSource(
@@ -244,7 +246,7 @@ class AudioPlayerUtil {
   LoopMode get loopMode => _player.loopMode;
 
   /// 获取播放列表
-  List<AudioInfoModel> get audioInformationList => _audioInformationList;
+  List<AudioPlayerModel> get audioInformationList => _audioInformationList;
 
   /// 获取当前播放进度
   Duration get position => _player.position;
@@ -259,7 +261,7 @@ class AudioPlayerUtil {
   int? get currentIndex => _player.currentIndex;
 
   /// 获取当前播放音频
-  AudioInfoModel? get currentAudio {
+  AudioPlayerModel? get currentAudio {
     if (null == _player.currentIndex) {
       returnnull;
     }
