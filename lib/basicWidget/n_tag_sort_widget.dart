@@ -8,11 +8,15 @@ mixin NTagSortMixin on Object {
   /// 名称
   String get tagName;
 
-  /// 顺序号码
-  late int tagOrder;
+  /// 顺序号
+  int? _tagOrder;
+  int get tagOrder => _tagOrder ?? 0;
+  set tagOrder(int value) => _tagOrder = value;
 
-  /// 是否可以编辑
-  late bool tagEnable;
+  /// 是否可编辑
+  bool? _tagEnable;
+  bool get tagEnable => _tagEnable ?? true;
+  set tagEnable(bool value) => _tagEnable = value;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
