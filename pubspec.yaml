@@ -204,9 +204,6 @@ dependencies:
   # 签名
   signature: ^5.3.0
 
-  #震动
-  vibration: ^3.1.4
-
   json_to_dart:
     git:
       url: 'git@github.com:shang1219178163/json_to_dart.git'
@@ -250,13 +247,16 @@ dependencies:
 
   flutter_pdfview: ^1.4.3
 
+  # AudioRecord
   record: ^6.1.2
+  # 音浪
   audio_visualizer:
     git:
       url: 'git@github.com:shang1219178163/audio_visualizer.git'
       ref: 'develop'
 
-
+  f_limit: ^1.1.0
+  flutter_html: ^3.0.0
 
 #  User:
 #    hosted:

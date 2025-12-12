@@ -674,6 +674,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.6"
+  f_limit:
+    dependency: "direct main"
+    description:
+      name: f_limit
+      sha256: "48d0bef590d4688d8df5675754ea7c21cef4eae580267e100d2166d8f7f363c5"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -791,6 +799,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.21.2"
+  flutter_html:
+    dependency: "direct main"
+    description:
+      name: flutter_html
+      sha256: "38a2fd702ffdf3243fb7441ab58aa1bc7e6922d95a50db76534de8260638558d"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   flutter_image_compress:
     dependency: "direct main"
     description:
@@ -1529,6 +1545,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.1"
+  list_counter:
+    dependency: transitive
+    description:
+      name: list_counter
+      sha256: c447ae3dfcd1c55f0152867090e67e219d42fe6d4f2807db4bbe8b8d69912237
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   local_auth:
     dependency: "direct main"
     description:
@@ -2630,22 +2654,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.4"
-  vibration:
-    dependency: "direct main"
-    description:
-      name: vibration
-      sha256: "1fd51cb0f91c6d512734ca0e282dd87fbc7f389b6da5f03c77709ba2cf8fa901"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.1.4"
-  vibration_platform_interface:
-    dependency: transitive
-    description:
-      name: vibration_platform_interface
-      sha256: "4134fbfcd427b59a7a91f8733292e4e9b29a7f1e8224ff0d80f5745fbf0743c6"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.1.1"
   video_compress:
     dependency: "direct main"
     description:
