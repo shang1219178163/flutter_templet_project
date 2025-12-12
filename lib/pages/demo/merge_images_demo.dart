@@ -81,7 +81,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               child: Image(
                 image: 'bg_jiguang.png'.toAssetImage(),
                 fit: BoxFit.cover,
-                width: screenSize.width,
+                width: context.screenSize.width,
                 height: screenSize.height * 0.25,
               ),
             ),
@@ -107,7 +107,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               child: Image(
                 image: 'sha_qiu.png'.toAssetImage(),
                 fit: BoxFit.cover,
-                width: screenSize.width,
+                width: context.screenSize.width,
                 // height: screenSize.height,
               ),
             ),
@@ -121,7 +121,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               child: Image(
                 image: 'bg_beach.jpg'.toAssetImage(),
                 fit: BoxFit.cover,
-                width: screenSize.width,
+                width: context.screenSize.width,
                 height: screenSize.height,
               ),
             ),

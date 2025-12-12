@@ -233,7 +233,10 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
                 gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
-                  colors: [primaryColor.withOpacity(.35), primaryColor.withOpacity(.7)],
+                  colors: [
+                    context.primaryColor.withOpacity(.35),
+                    context.primaryColor.withOpacity(.7),
+                  ],
                 ),
               ),
               child: bom,

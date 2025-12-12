@@ -62,7 +62,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           TextButton(
               onPressed: () async {
                 _globalKey.currentState?.toCompositePics().then((pngBytes) {
-                  imageMerged = Image.memory(pngBytes, width: screenSize.width, height: 600);
+                  imageMerged = Image.memory(pngBytes, width: context.screenSize.width, height: 600);
                   setState(() {});
                 });
               },
@@ -106,7 +106,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           Divider(),
           MergeImagesWidget(
             key: _globalKey,
-            // width: screenSize.width,
+            // width: context.screenSize.width,
             models: detailList
                 .map((e) => MergeImageModel(
                       url: e.message,

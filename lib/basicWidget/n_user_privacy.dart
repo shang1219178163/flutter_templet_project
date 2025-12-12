@@ -48,8 +48,7 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
   void initState() {
     //监听滚动事件，打印滚动位置
     _scrollController.addListener(() {
-      isScrollBottom = (_scrollController.offset >=
-          _scrollController.position.maxScrollExtent);
+      isScrollBottom = (_scrollController.offset >= _scrollController.position.maxScrollExtent);
       setState(() {});
     });
 
@@ -76,21 +75,20 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(widget.radius),
           ),
-          width: screenSize.width * .8,
+          width: context.screenSize.width * .8,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.title != null)
                 Container(
                   height: 45,
-                  padding:
-                      EdgeInsets.only(top: 12, left: 12, bottom: 8, right: 12),
+                  padding: EdgeInsets.only(top: 12, left: 12, bottom: 8, right: 12),
                   child: widget.title,
                 ),
               if (widget.content != null)
                 Container(
                   padding: EdgeInsets.only(left: 16, bottom: 8, right: 16),
-                  height: screenSize.height * .5,
+                  height: context.screenSize.height * .5,
                   child: CupertinoScrollbar(
                     controller: _scrollController,
                     child: SingleChildScrollView(
@@ -139,17 +137,14 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
             child: Container(
               decoration: BoxDecoration(
                 color: _getConfirmBtnBgColor(),
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(widget.radius)),
+                borderRadius: BorderRadius.only(bottomRight: Radius.circular(widget.radius)),
               ),
               alignment: Alignment.center,
               child: widget.confirmBuilder != null
                   ? widget.confirmBuilder?.call(context)
                   : Text(
                       '同意',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: _getConfirmBtnTextColor()),
+                      style: TextStyle(fontWeight: FontWeight.w500, color: _getConfirmBtnTextColor()),
                     ),
             ),
           )),
@@ -159,9 +154,7 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
   }
 
   Color _getConfirmBtnBgColor() {
-    return !isScrollBottom
-        ? Colors.grey
-        : Theme.of(context).colorScheme.primary;
+    return !isScrollBottom ? Colors.grey : Theme.of(context).colorScheme.primary;
   }
 
   Color _getConfirmBtnTextColor() {

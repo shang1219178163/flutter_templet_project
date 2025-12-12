@@ -263,7 +263,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
         );
       },
       child: SizedBox(
-        width: screenSize.width * 0.7,
+        width: context.screenSize.width * 0.7,
         child: Theme(
           data: Theme.of(context).copyWith(
             appBarTheme: AppBarTheme.of(context).copyWith(

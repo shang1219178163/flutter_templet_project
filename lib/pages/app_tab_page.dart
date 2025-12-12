@@ -169,7 +169,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
                 ),
                 constraints: BoxConstraints(maxHeight: 40),
                 alignment: Alignment.center,
-                child: Icon(Icons.color_lens, color: primaryColor, size: 40),
+                child: Icon(Icons.color_lens, color: context.primaryColor, size: 40),
               );
             }
             return Column(

@@ -32,6 +32,9 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
 
   final globalKey = GlobalKey(debugLabel: "tab");
 
+  late MediaQueryData mediaQuery = context.mediaQuery;
+  late Size screenSize = context.screenSize;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +66,7 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
           controller: scrollController,
           children: [
             Container(
-              height: screenSize.height +
+              height: context.screenSize.height +
                   (globalKey.currentContext?.minY() ?? 0.0) -
                   mediaQuery.viewPadding.top -
                   mediaQuery.viewPadding.bottom -

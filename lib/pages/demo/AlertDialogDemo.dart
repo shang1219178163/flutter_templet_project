@@ -864,7 +864,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         DLog.d("tap Container");
       },
       child: Container(
-        width: screenSize.width - 30,
+        width: context.screenSize.width - 30,
         decoration: BoxDecoration(
           color: Theme.of(context).dialogBackgroundColor,
           borderRadius: BorderRadius.circular((10.0)), // 圆角度

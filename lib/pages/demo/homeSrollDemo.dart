@@ -76,7 +76,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       items: items,
       margin: EdgeInsets.all(12),
       height: 147 * 1.2,
-      width: screenSize.width,
+      width: context.screenSize.width,
       bg: AssetImage('assets/images/bg_horizontal_scroll.png'),
       boxShadow: [
         BoxShadow(

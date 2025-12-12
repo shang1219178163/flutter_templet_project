@@ -145,7 +145,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: context.primaryColor,
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: Center(

@@ -42,7 +42,7 @@ class _WrapDemoState extends State<WrapDemo> {
               ),
               margin: EdgeInsets.all(12),
               child: WrapWidget(
-                width: screenSize.width - 24,
+                width: context.screenSize.width - 24,
                 direction: Axis.horizontal,
                 // height: 500,
               ),
@@ -58,7 +58,7 @@ class _WrapDemoState extends State<WrapDemo> {
               ),
               margin: EdgeInsets.all(12),
               child: WrapWidget(
-                width: screenSize.width - 24,
+                width: context.screenSize.width - 24,
                 direction: Axis.vertical,
                 // height: 500,
               ),

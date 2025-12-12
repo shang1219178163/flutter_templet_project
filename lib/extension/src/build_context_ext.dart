@@ -119,10 +119,30 @@ extension BuildContextExt on BuildContext {
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   double get viewBottom => mediaQuery.viewInsets.bottom;
 
-  double get screenWidth => MediaQuery.of(this).size.width;
-  double get screenHeight => MediaQuery.of(this).size.height;
-  double get paddingTop => MediaQuery.of(this).padding.top;
-  double get paddingBottom => MediaQuery.of(this).padding.bottom;
+  double get screenWidth => screenSize.width;
+  double get screenHeight => screenSize.height;
+  double get paddingTop => mediaQuery.padding.top;
+  double get paddingBottom => mediaQuery.padding.bottom;
+
+  /// 确认显示
+  Future<void> scrollableEnsureVisible({
+    // Duration duration = const Duration(milliseconds: 300),
+    Duration duration = Duration.zero,
+    Curve curve = Curves.ease,
+    double alignment = 0.0,
+    ScrollPositionAlignmentPolicy alignmentPolicy = ScrollPositionAlignmentPolicy.explicit,
+  }) async {
+    final context = this;
+    if (context.mounted) {
+      await Scrollable.ensureVisible(
+        context,
+        duration: duration,
+        curve: curve,
+        alignment: alignment,
+        alignmentPolicy: alignmentPolicy,
+      );
+    }
+  }
 
   /// 截图(组件必须是 RepaintBoundary)
   Future<ui.Image?> toImage({double? pixelRatio}) async {
@@ -160,31 +180,31 @@ extension BuildContextExt on BuildContext {
   }
 }
 
-extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
-  /// 扩展属性 Theme.of(context)
-  ThemeData get theme => context.theme;
-
-  /// 扩展属性 Theme.of(context)
-  Color get primaryColor => theme.primaryColor;
-
-  /// 扩展属性 MediaQuery.of(context)
-  MediaQueryData get mediaQuery => context.mediaQuery;
-
-  /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
-  double get safeAreaTop => context.safeAreaTop;
-
-  /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
-  double get safeAreaBottom => context.safeAreaBottom;
-
-  /// 安全区高度(去除电池栏高度和 iphone底部34)
-  double get safeAreaHeight => context.safeAreaHeight;
-
-  /// 扩展属性 MediaQuery.of(context).size
-  Size get screenSize => context.screenSize;
-
-  /// 扩展属性 MediaQuery.of(.devicePixelRatio
-  double get devicePixelRatio => context.devicePixelRatio;
-}
+// extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
+//   /// 扩展属性 Theme.of(context)
+//   ThemeData get theme => context.theme;
+//
+//   /// 扩展属性 Theme.of(context)
+//   Color get primaryColor => theme.primaryColor;
+//
+//   /// 扩展属性 MediaQuery.of(context)
+//   MediaQueryData get mediaQuery => context.mediaQuery;
+//
+//   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
+//   double get safeAreaTop => context.safeAreaTop;
+//
+//   /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
+//   double get safeAreaBottom => context.safeAreaBottom;
+//
+//   /// 安全区高度(去除电池栏高度和 iphone底部34)
+//   double get safeAreaHeight => context.safeAreaHeight;
+//
+//   /// 扩展属性 MediaQuery.of(context).size
+//   Size get screenSize => context.screenSize;
+//
+//   /// 扩展属性 MediaQuery.of(.devicePixelRatio
+//   double get devicePixelRatio => context.devicePixelRatio;
+// }
 
 // extension GlobalKeyExt on GlobalKey{
 //

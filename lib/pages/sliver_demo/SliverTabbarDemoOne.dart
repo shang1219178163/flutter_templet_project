@@ -71,7 +71,7 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne> with SingleTi
                 flexibleSpace: FlexibleSpaceBar(
                   // background: Image.asset("assets/images/bg.png", fit: BoxFit.fill),
                   background: Container(
-                    padding: EdgeInsets.fromLTRB(20, safeAreaTop, 20, 60),
+                    padding: EdgeInsets.fromLTRB(20, context.safeAreaTop, 20, 60),
                     // height: 80,
                     // color: Colors.green,
                     child: buildTopMenu(),

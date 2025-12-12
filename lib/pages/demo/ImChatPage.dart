@@ -296,7 +296,7 @@ class _ImChatPageState extends State<ImChatPage>
     final name = model.nickName ?? "";
     final timeStr = model.timeDes ?? "";
 
-    final contentBgColor = isOwner ? primaryColor : AppColor.bgColor;
+    final contentBgColor = isOwner ? context.primaryColor : AppColor.bgColor;
     final contentFontColor = Colors.white;
 
     var contentWidget = contentChild ??
@@ -365,7 +365,7 @@ class _ImChatPageState extends State<ImChatPage>
                     contentWidget,
                     if (showDebugInfo)
                       Container(
-                        color: primaryColor,
+                        color: context.primaryColor,
                         padding: const EdgeInsets.only(left: 4, bottom: 4),
                         child: NText(
                           model.sequence ?? "",

@@ -184,7 +184,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [primaryColor.withOpacity(.35), primaryColor.withOpacity(.7)],
+              colors: [context.primaryColor.withOpacity(.35), context.primaryColor.withOpacity(.7)],
             ),
           ),
           child: bom,
@@ -414,7 +414,7 @@ class _NFloatingButtonTestState extends State<NFloatingButtonTest> {
                 gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
-                  colors: [primaryColor.withOpacity(.35), primaryColor.withOpacity(.7)],
+                  colors: [context.primaryColor.withOpacity(.35), context.primaryColor.withOpacity(.7)],
                 ),
               ),
               child: bom,

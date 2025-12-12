@@ -17,6 +17,8 @@ class TextFieldLoginDemo extends StatefulWidget {
 class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
+  late final primaryColor = context.primaryColor;
+
   late final FocusNode _focusNode = FocusNode();
 
   String loginId = "";
@@ -310,7 +312,7 @@ class _LoginInputState extends State<LoginInput> {
         contentPadding: const EdgeInsets.only(left: 20, right: 20),
         border: InputBorder.none,
         enabledBorder: buildBorder(color: AppColor.lineColor),
-        focusedBorder: buildBorder(color: context.primaryColor),
+        focusedBorder: buildBorder(color: primaryColor),
         hintText: widget.hint,
         hintStyle: TextStyle(fontSize: 16.sp, color: AppColor.fontColorF9F9F9),
         prefixIcon: IconButton(

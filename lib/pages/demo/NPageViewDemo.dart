@@ -75,7 +75,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
         ),
         Container(
           height: MediaQuery.of(context).viewPadding.bottom,
-          color: isThemeBg && isBottom ? primaryColor : null,
+          color: isThemeBg && isBottom ? context.primaryColor : null,
         ),
       ],
     );
