@@ -180,8 +180,8 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
     required String Function(T e) titleCb,
     Color primaryColor = Colors.green,
   }) {
-    final textColor = isSelected ? context.primaryColor : Color(0xff737373);
-    final borderColor = isSelected ? context.primaryColor : Colors.transparent;
+    final textColor = isSelected ? primaryColor : Color(0xff737373);
+    final borderColor = isSelected ? primaryColor : Colors.transparent;
     final bgColor = textColor.withOpacity(0.1);
 
     final title = titleCb(e);

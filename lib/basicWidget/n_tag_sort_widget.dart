@@ -30,6 +30,7 @@ class NTagSortWidget<T extends NTagSortMixin> extends StatefulWidget {
     required this.tags,
     required this.others,
     required this.onFinish,
+    this.onTap,
   });
 
   final List<T> tags;
@@ -38,6 +39,8 @@ class NTagSortWidget<T extends NTagSortMixin> extends StatefulWidget {
   final bool showTab;
 
   final void Function(List<T> tags, List<T> others) onFinish;
+
+  final void Function(T e)? onTap;
 
   @override
   State<NTagSortWidget<T>> createState() => _NTagSortWidgetState<T>();
@@ -127,22 +130,33 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
                     return item.tagEnable;
                   },
                   itemBuilder: (context, item, isDragging) {
-                    return buildItem(
-                      width: itemWidth,
-                      height: 38,
-                      bgColor: bgColor,
-                      titleColor: titleColor,
-                      isDragging: isDragging,
-                      item: item,
-                      isTopRightVisible: canEdit,
-                      topRight: GestureDetector(
-                        onTap: () {
-                          DLog.d(item.tagName);
-                          others.add(item);
-                          tags.remove(item);
-                          setState(() {});
-                        },
-                        child: Icon(Icons.close, size: 12, color: actionColor),
+                    deleteItem() {
+                      DLog.d(item.tagName);
+                      others.add(item);
+                      tags.remove(item);
+                      setState(() {});
+                    }
+
+                    return GestureDetector(
+                      onTap: () {
+                        if (canEdit) {
+                          deleteItem();
+                          return;
+                        }
+                        widget.onTap?.call(item);
+                      },
+                      child: buildItem(
+                        width: itemWidth,
+                        height: 38,
+                        bgColor: bgColor,
+                        titleColor: titleColor,
+                        isDragging: isDragging,
+                        item: item,
+                        isTopRightVisible: canEdit,
+                        topRight: GestureDetector(
+                          onTap: deleteItem,
+                          child: Icon(Icons.close, size: 12, color: actionColor),
+                        ),
                       ),
                     );
                   },
@@ -173,22 +187,33 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
                   children: [
                     ...others.map(
                       (item) {
-                        return buildItem(
-                          width: itemWidth,
-                          height: 38,
-                          bgColor: bgColor,
-                          titleColor: titleColor,
-                          isDragging: false,
-                          item: item,
-                          isTopRightVisible: canEdit,
-                          topRight: GestureDetector(
-                            onTap: () {
-                              DLog.d(item.tagName);
-                              others.remove(item);
-                              tags.add(item);
-                              setState(() {});
-                            },
-                            child: Icon(Icons.add, size: 13, color: actionColor),
+                        addItem() {
+                          DLog.d(item.tagName);
+                          others.remove(item);
+                          tags.add(item);
+                          setState(() {});
+                        }
+
+                        return GestureDetector(
+                          onTap: () {
+                            if (canEdit) {
+                              addItem();
+                              return;
+                            }
+                            widget.onTap?.call(item);
+                          },
+                          child: buildItem(
+                            width: itemWidth,
+                            height: 38,
+                            bgColor: bgColor,
+                            titleColor: titleColor,
+                            isDragging: false,
+                            item: item,
+                            isTopRightVisible: canEdit,
+                            topRight: GestureDetector(
+                              onTap: addItem,
+                              child: Icon(Icons.add, size: 13, color: actionColor),
+                            ),
                           ),
                         );
                       },

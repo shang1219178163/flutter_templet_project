@@ -111,7 +111,7 @@ class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     minimumSize: Size(50, 18),
                     shape: const StadiumBorder(),
-                    disabledBackgroundColor: primaryColor.withOpacity(0.5),
+                    disabledBackgroundColor: context.primaryColor.withOpacity(0.5),
                     disabledForegroundColor: Colors.white,
                   ),
                   onPressed: !value ? null : () {},

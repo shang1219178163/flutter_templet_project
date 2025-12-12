@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:vibration/vibration.dart';
 
 /// 震动
 class VibrationService {
@@ -12,7 +11,7 @@ class VibrationService {
     int amplitude = -1,
   }) async {
     try {
-      Vibration.vibrate(amplitude: 128, duration: 100);
+      // Vibration.vibrate(amplitude: 128, duration: 100);
 
       // final hasVibrator = await Vibration.hasVibrator();
       // if (hasVibrator != true) {

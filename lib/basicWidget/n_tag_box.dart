@@ -102,9 +102,8 @@ class NTagBox<E> extends StatelessWidget {
       child: ChoiceChip(
         pressElevation: 0,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-          radius,
-        )),
+          borderRadius: BorderRadius.all(radius),
+        ),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         labelStyle: TextStyle(
           color: Colors.white,
