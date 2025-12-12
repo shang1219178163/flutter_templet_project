@@ -17,7 +17,7 @@ class TextFieldLoginDemo extends StatefulWidget {
 class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
-  late final primaryColor = context.primaryColor;
+  late final Color primaryColor = context.primaryColor;
 
   late final FocusNode _focusNode = FocusNode();
 
@@ -111,7 +111,7 @@ class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     minimumSize: Size(50, 18),
                     shape: const StadiumBorder(),
-                    disabledBackgroundColor: context.primaryColor.withOpacity(0.5),
+                    disabledBackgroundColor: primaryColor.withOpacity(0.5),
                     disabledForegroundColor: Colors.white,
                   ),
                   onPressed: !value ? null : () {},
@@ -173,6 +173,8 @@ class LoginInput extends StatefulWidget {
 }
 
 class _LoginInputState extends State<LoginInput> {
+  late final Color primaryColor = context.primaryColor;
+
   final _focusNode = FocusNode();
 
   // final _focusNodePwd = FocusNode();
@@ -270,25 +272,26 @@ class _LoginInputState extends State<LoginInput> {
     if (widget.showEyeIcon) {
       suffixIconTmp = widget.suffixIcon ??
           ValueListenableBuilder<bool>(
-              valueListenable: hasFocusVN,
-              builder: (_, isFocus, child) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: IconButton(
-                    focusColor: AppColor.fontColorF9F9F9,
-                    icon: Image.asset(
-                      isCloseEye ? 'assets/images/icon_eye_close.png' : 'assets/images/icon_eye_open.png',
-                      width: 20,
-                      height: 20,
-                      color: isFocus ? primaryColor : null,
-                    ),
-                    onPressed: () {
-                      isCloseEye = !isCloseEye;
-                      setState(() {});
-                    },
+            valueListenable: hasFocusVN,
+            builder: (_, isFocus, child) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: IconButton(
+                  focusColor: AppColor.fontColorF9F9F9,
+                  icon: Image.asset(
+                    isCloseEye ? 'assets/images/icon_eye_close.png' : 'assets/images/icon_eye_open.png',
+                    width: 20,
+                    height: 20,
+                    color: isFocus ? primaryColor : null,
                   ),
-                );
-              });
+                  onPressed: () {
+                    isCloseEye = !isCloseEye;
+                    setState(() {});
+                  },
+                ),
+              );
+            },
+          );
     }
 
     return TextField(
