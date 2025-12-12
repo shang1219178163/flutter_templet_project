@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:f_limit/f_limit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart' as painting;
-import 'package:f_limit/f_limit.dart';
 import 'package:path_provider/path_provider.dart';
 
 @immutable
@@ -41,7 +40,7 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
     painting.NetworkImage key,
     painting.ImageDecoderCallback decode,
   ) {
-    final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
+    final chunkEvents = StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
       chunkEvents: chunkEvents.stream,
@@ -63,7 +62,7 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
         assert(key == this);
 
         final String cacheKey = _cacheKeyFromImage(key.url);
-        final File cacheFile = _childFile(cacheKey);
+        final File cacheFile = await _childFile(cacheKey);
 
         // 先尝试从缓存加载
         if (cacheFile.existsSync()) {
@@ -89,8 +88,8 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
         }
 
         // 解码图片
-        final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
-        final ui.Codec codec = await decode(buffer);
+        final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
+        final codec = await decode(buffer);
 
         // 解码成功后写入缓存
         await cacheFile.writeAsBytes(bytes).catchError((_) => {});
@@ -113,9 +112,10 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
     return base64Url.encode(utf8.encode(url));
   }
 
-  static File _childFile(String cacheKey) async {
+  static Future<File> _childFile(String cacheKey) async {
     final dir = await getTemporaryDirectory();
-    return File('${dir.path}/image-caches/$cacheKey');
+    final file = File('${dir.path}/image-caches/$cacheKey');
+    return file;
   }
 
   static Future<Uint8List> getBytesFromNetwork(
@@ -123,7 +123,7 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
     Map<String, String>? headers,
     StreamController<ImageChunkEvent>? chunkEvents,
   }) async {
-    final Uri resolved = Uri.base.resolve(url);
+    final resolved = Uri.base.resolve(url);
     final httpClient = HttpClient()..autoUncompress = false;
 
     final request = await httpClient.getUrl(resolved);
