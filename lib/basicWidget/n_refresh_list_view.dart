@@ -118,7 +118,7 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automati
         pageSize,
         items.sublist(items.length - pageSize),
       );
-      items.addAll(list);
+      items.addAll(List<T>.from(list)); //fix:Cannot add to an unmodifiable list
       page++;
 
       if (list.length < pageSize) {
