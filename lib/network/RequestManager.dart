@@ -128,10 +128,11 @@ class RequestManager extends BaseRequestAPI {
     return _handleResponse(response: response, api: api);
   }
 
+  /// 发起请求
   Future<Response<Map<String, dynamic>>?> sendRequest<T extends Map<String, dynamic>>({
     required String url,
     required HttpMethod method,
-    dynamic queryParams,
+    Map<String, dynamic>? queryParams,
     dynamic data,
     Options? options,
     // MultipartFile? file,
@@ -140,50 +141,13 @@ class RequestManager extends BaseRequestAPI {
     ProgressCallback? onReceiveProgress,
     BaseRequestAPI? api,
   }) async {
-    final seperator = url.startsWith("/") ? "" : "/";
-    var path = "${RequestConfig.baseUrl}$seperator$url";
-    if (url.startsWith("http")) {
-      path = url;
-    }
-
     try {
       switch (method) {
-        case HttpMethod.GET:
-          return await getDio(api).get<T>(
-            path,
-            queryParameters: queryParams,
-            options: options,
-            cancelToken: api?.cancelToken,
-          );
-        case HttpMethod.PUT:
-          return await getDio(api).put<T>(
-            path,
-            queryParameters: queryParams,
-            data: data,
-            options: options,
-            cancelToken: api?.cancelToken,
-          );
-        case HttpMethod.POST:
-          return await getDio(api).post<T>(
-            path,
-            queryParameters: queryParams,
-            data: data,
-            options: options,
-            cancelToken: api?.cancelToken,
-          );
-        case HttpMethod.DELETE:
-          return await getDio(api).delete<T>(
-            path,
-            queryParameters: queryParams,
-            data: data,
-            options: options,
-            cancelToken: api?.cancelToken,
-          );
         case HttpMethod.UPLOAD:
           {
             assert(filePath?.isNotEmpty == true, "上传文件路径不能为空");
             return await getDio(api).post(
-              path,
+              url,
               queryParameters: queryParams,
               data: data ??
                   FormData.fromMap({
@@ -200,7 +164,7 @@ class RequestManager extends BaseRequestAPI {
           {
             assert(filePath?.isNotEmpty == true, "下载文件路径不能为空");
             return await getDio(api).get(
-              path,
+              url,
               queryParameters: queryParams,
               data: FormData.fromMap({
                 'dirName': 'APP',
@@ -216,7 +180,17 @@ class RequestManager extends BaseRequestAPI {
             );
           }
         default:
-        // BrunoUti.showInfoToast('请求方式错误');
+          {
+            final optionsNew = (options ?? getDio(api).options) as Options;
+            return getDio(api).request<T>(
+              url,
+              data: data,
+              queryParameters: queryParams,
+              options: optionsNew.copyWith(method: method.name),
+              cancelToken: api?.cancelToken,
+            );
+          }
+          break;
       }
     } on DioException {
       // final message = RequestMsg.statusCodeMap['${e.response?.statusCode}']
@@ -231,7 +205,7 @@ class RequestManager extends BaseRequestAPI {
   Future<Map<String, dynamic>> upload({
     required String url,
     required String filePath,
-    dynamic queryParams,
+    Map<String, dynamic>? queryParams,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     List<String> errorCodes = const [],

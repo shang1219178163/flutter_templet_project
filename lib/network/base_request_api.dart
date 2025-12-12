@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';
@@ -236,6 +238,40 @@ class BaseListApi extends BaseRequestAPI {
     if (search != null) {
       map["search"] = search;
     }
+    return map;
+  }
+}
+
+/// 根模型
+class BaseRootModel<T> {
+  BaseRootModel({
+    this.code,
+    this.message,
+    this.result,
+    this.onResult,
+    this.resultJson,
+  });
+
+  String? code;
+
+  String? message;
+
+  T? result;
+
+  T Function(Map<String, dynamic> response)? onResult;
+  Map<String, dynamic>? resultJson;
+
+  BaseRootModel.fromJson(Map<String, dynamic> json) {
+    code = (json['code'] as String?);
+    message = (json['message'] as String?);
+    result = onResult?.call(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['code'] = code;
+    map['message'] = message;
+    map['result'] = resultJson;
     return map;
   }
 }
