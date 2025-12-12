@@ -12,7 +12,7 @@ import 'package:get/get_navigation/src/routes/observers/route_observer.dart';
 extension RouteExt on Route<dynamic> {}
 
 extension RouteSettingsExt on RouteSettings {
-  static RouteSettings fromJson(Map<String, dynamic>? json) {
+  static RouteSettings fromJson(Map<String, dynamic> json) {
     return RouteSettings(
       name: json?["name"],
       arguments: json?["arguments"],

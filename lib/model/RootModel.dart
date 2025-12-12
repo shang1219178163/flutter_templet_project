@@ -14,10 +14,7 @@ class RootModel<T extends Coding> {
   String? traceId;
   String? message;
 
-  RootModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  RootModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
 
     switch (result) {
@@ -57,7 +54,7 @@ class RootModel<T extends Coding> {
 }
 
 interface class Coding {
-  // factory Codable(Map<String, dynamic>? json) {
+  // factory Codable(Map<String, dynamic> json) {
   //   throw UnimplementedError();
   // }
 

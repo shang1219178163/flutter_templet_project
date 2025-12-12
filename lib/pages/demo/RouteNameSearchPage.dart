@@ -182,10 +182,7 @@ class OptionModel {
 
   List<OptionModel> children;
 
-  static OptionModel? fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return null;
-    }
+  static OptionModel? fromJson(Map<String, dynamic> json) {
     return OptionModel(
       name: json['name'],
       desc: json['desc'],

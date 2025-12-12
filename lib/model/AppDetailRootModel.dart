@@ -8,14 +8,10 @@ class AppDetailRootModel {
 
   List<ResultsModel>? results;
 
-  AppDetailRootModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  AppDetailRootModel.fromJson(Map<String, dynamic> json) {
     resultCount = json['resultCount'];
     if (json['results'] != null) {
-      final array =
-          (json['results'] as List).map((e) => ResultsModel.fromJson(e));
+      final array = (json['results'] as List).map((e) => ResultsModel.fromJson(e));
       results = List<ResultsModel>.from(array);
     }
   }
@@ -166,10 +162,7 @@ class ResultsModel {
 
   int? userRatingCount;
 
-  ResultsModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  ResultsModel.fromJson(Map<String, dynamic> json) {
     // if (json['ipadScreenshotUrls'] != null) {
     //   final array =
     //       (json['ipadScreenshotUrls'] as List).map((e) => Null.fromJson(e));
@@ -201,8 +194,7 @@ class ResultsModel {
     fileSizeBytes = json['fileSizeBytes'];
     sellerUrl = json['sellerUrl'];
     contentAdvisoryRating = json['contentAdvisoryRating'];
-    averageUserRatingForCurrentVersion =
-        json['averageUserRatingForCurrentVersion'];
+    averageUserRatingForCurrentVersion = json['averageUserRatingForCurrentVersion'];
     userRatingCountForCurrentVersion = json['userRatingCountForCurrentVersion'];
     averageUserRating = json['averageUserRating'];
     trackViewUrl = json['trackViewUrl'];
@@ -260,8 +252,7 @@ class ResultsModel {
     map['fileSizeBytes'] = fileSizeBytes;
     map['sellerUrl'] = sellerUrl;
     map['contentAdvisoryRating'] = contentAdvisoryRating;
-    map['averageUserRatingForCurrentVersion'] =
-        averageUserRatingForCurrentVersion;
+    map['averageUserRatingForCurrentVersion'] = averageUserRatingForCurrentVersion;
     map['userRatingCountForCurrentVersion'] = userRatingCountForCurrentVersion;
     map['averageUserRating'] = averageUserRating;
     map['trackViewUrl'] = trackViewUrl;

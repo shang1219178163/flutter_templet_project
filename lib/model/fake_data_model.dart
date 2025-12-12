@@ -15,10 +15,7 @@ class FakeDataModel with SelectableMixin {
     this.createBy,
   });
 
-  FakeDataModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  FakeDataModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     code = json['code'];

@@ -24,10 +24,7 @@ class CellModel {
 
   Map<String, dynamic>? arguments;
 
-  CellModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  CellModel.fromJson(Map<String, dynamic> json) {
     icon = json['icon'];
     title = json['title'];
     subtitle = json['subtitle'];

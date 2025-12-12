@@ -144,10 +144,7 @@ class AudioSessionSoundPlayerModel {
   /// 停止播放
   Future<void> Function()? onStop;
 
-  AudioSessionSoundPlayerModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  AudioSessionSoundPlayerModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] ?? {};
     onPlay = json['onPlay'];
     onStop = json['onStop'];

@@ -36,10 +36,7 @@ class AddressPickerModel {
     return result;
   }
 
-  AddressPickerModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  AddressPickerModel.fromJson(Map<String, dynamic> json) {
     province = json['province'];
     provinceCode = json['provinceCode'];
     city = json['city'];

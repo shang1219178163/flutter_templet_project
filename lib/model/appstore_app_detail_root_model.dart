@@ -8,10 +8,7 @@ class AppstoreAppDetailRootModel {
   int? resultCount;
   List<AppstoreAppDetailModel>? results;
 
-  AppstoreAppDetailRootModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  AppstoreAppDetailRootModel.fromJson(Map<String, dynamic> json) {
     resultCount = json['resultCount'];
     if (json['results'] != null) {
       results = <AppstoreAppDetailModel>[];
@@ -124,10 +121,7 @@ class AppstoreAppDetailModel {
   String? wrapperType;
   int? userRatingCount;
 
-  AppstoreAppDetailModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  AppstoreAppDetailModel.fromJson(Map<String, dynamic> json) {
     supportedDevices = List<String>.from(json['supportedDevices'] ?? []);
 
     // if (json['features'] != null) {
@@ -145,8 +139,7 @@ class AppstoreAppDetailModel {
     // }
     screenshotUrls = List<String>.from(json['screenshotUrls'] ?? []);
     ipadScreenshotUrls = List<String>.from(json['ipadScreenshotUrls'] ?? []);
-    appletvScreenshotUrls =
-        List<String>.from(json['appletvScreenshotUrls'] ?? []);
+    appletvScreenshotUrls = List<String>.from(json['appletvScreenshotUrls'] ?? []);
     artworkUrl60 = json['artworkUrl60'];
     artworkUrl512 = json['artworkUrl512'];
     artworkUrl100 = json['artworkUrl100'];
@@ -174,8 +167,7 @@ class AppstoreAppDetailModel {
     sellerUrl = json['sellerUrl'];
     formattedPrice = json['formattedPrice'];
     contentAdvisoryRating = json['contentAdvisoryRating'];
-    averageUserRatingForCurrentVersion =
-        json['averageUserRatingForCurrentVersion'];
+    averageUserRatingForCurrentVersion = json['averageUserRatingForCurrentVersion'];
     userRatingCountForCurrentVersion = json['userRatingCountForCurrentVersion'];
     averageUserRating = json['averageUserRating'];
     trackViewUrl = json['trackViewUrl'];
@@ -228,8 +220,7 @@ class AppstoreAppDetailModel {
     data['sellerUrl'] = sellerUrl;
     data['formattedPrice'] = formattedPrice;
     data['contentAdvisoryRating'] = contentAdvisoryRating;
-    data['averageUserRatingForCurrentVersion'] =
-        averageUserRatingForCurrentVersion;
+    data['averageUserRatingForCurrentVersion'] = averageUserRatingForCurrentVersion;
     data['userRatingCountForCurrentVersion'] = userRatingCountForCurrentVersion;
     data['averageUserRating'] = averageUserRating;
     data['trackViewUrl'] = trackViewUrl;

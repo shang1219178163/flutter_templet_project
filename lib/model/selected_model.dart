@@ -16,10 +16,7 @@ class SelectModel<T> {
   /// 通用数据
   T? data;
 
-  SelectModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  SelectModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['title'];
     isSelected = json['isSelected'];

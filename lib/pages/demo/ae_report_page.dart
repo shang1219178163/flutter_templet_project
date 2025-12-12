@@ -683,10 +683,7 @@ class ProofDetailModel {
     );
   }
 
-  ProofDetailModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  ProofDetailModel.fromJson(Map<String, dynamic> json) {
     name = (json['name'] as String?);
     url = (json['url'] as String?);
   }

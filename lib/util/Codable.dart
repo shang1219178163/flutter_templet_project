@@ -24,11 +24,7 @@ class XYZModel implements Codable {
   String? id;
   String? name;
 
-  XYZModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
-
+  XYZModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     name = json["name"];
   }

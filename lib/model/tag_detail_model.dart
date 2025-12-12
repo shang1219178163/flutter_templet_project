@@ -30,15 +30,10 @@ class TagsRootModel {
   bool? isSelected;
 
   /// 疾病组名称
-  List<String> get tagNames => (result ?? [])
-      .where((e) => e.name != null && e.name!.isNotEmpty)
-      .map((e) => e.name!)
-      .toList();
+  List<String> get tagNames =>
+      (result ?? []).where((e) => e.name != null && e.name!.isNotEmpty).map((e) => e.name!).toList();
 
-  TagsRootModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  TagsRootModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     if (json['result'] != null) {
       result = <TagDetailModel>[];
@@ -81,10 +76,7 @@ class TagDetailModel with SelectableMixin {
   String? name;
   String? color;
 
-  TagDetailModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  TagDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? json['tagsId'];
     createTime = json['createTime'];
     updateTime = json['updateTime'];

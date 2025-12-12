@@ -31,15 +31,11 @@ class SectionRootModel {
 
   String? message;
 
-  SectionRootModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  SectionRootModel.fromJson(Map<String, dynamic> json) {
     code = (json['code'] as String?);
     errorCode = (json['errorCode'] as String?);
     if (json['result'] != null) {
-      final array =
-          (json['result'] as List).map((e) => SectionDetailModel.fromJson(e));
+      final array = (json['result'] as List).map((e) => SectionDetailModel.fromJson(e));
       result = List<SectionDetailModel>.from(array);
     }
     application = (json['application'] as String?);
@@ -111,10 +107,7 @@ class SectionDetailModel with SelectableMixin {
   @override
   bool get enable => !isLockStatus;
 
-  SectionDetailModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  SectionDetailModel.fromJson(Map<String, dynamic> json) {
     id = (json['id'] as String?);
     projectId = (json['projectId'] as String?);
     code = (json['code'] as String?);

@@ -65,10 +65,7 @@ class IMMsgDetailModel with DbMixin {
     return dateStr;
   }
 
-  IMMsgDetailModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  IMMsgDetailModel.fromJson(Map<String, dynamic> json) {
     restructureMsgBody = json['restructureMsgBody'];
     final restructure = jsonDecode(json['restructureMsgBody']);
     cloudCustomData = json['cloudCustomData'];
