@@ -160,7 +160,7 @@ extension ListExt<T, E> on List<E> {
     E target, {
     required List<E> replacements,
   }) {
-    final index = indexOf(target);
+    final index = this.indexOf(target);
     if (index != -1) {
       replaceRange(index, index + 1, replacements);
     }
@@ -197,10 +197,7 @@ extension ListExt<T, E> on List<E> {
     }
     return list;
   }
-}
 
-
-extension ListNullableExt<E> on List<E> {
   /// 重写属性
   E? get first {
     try {
@@ -234,6 +231,25 @@ extension ListNullableExt<E> on List<E> {
       return this.lastIndexOf(element);
     } catch (exception) {
       return null;
+    }
+  }
+
+  /// 是否可修改数据
+  bool get isUnmodifiable {
+    final List list = this;
+    // 快速判断常见不可变类型
+    final t = list.runtimeType.toString();
+    if (t.contains("Unmodifiable") || t.contains("Immutable")) {
+      return true;
+    }
+
+    // 精确判断：真正写临时值测试
+    try {
+      list.add(null);
+      list.removeLast();
+      return false;
+    } catch (_) {
+      return true;
     }
   }
 }
