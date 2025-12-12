@@ -1,8 +1,16 @@
+//
+//  AppVideoPlayer.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2025/12/12 18:11.
+//  Copyright © 2025/12/12 shang. All rights reserved.
+//
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/AppVideoPlayerService.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:video_player/video_player.dart';
-
-
 
 /// 播放器
 class AppVideoPlayer extends StatefulWidget {
@@ -39,7 +47,7 @@ class AppVideoPlayer extends StatefulWidget {
   State<AppVideoPlayer> createState() => _AppVideoPlayerState();
 }
 
-class _AppVideoPlayerState extends State<AppVideoPlayer> with AutomaticKeepAliveClientMixin {
+class _AppVideoPlayerState extends State<AppVideoPlayer> with WidgetsBindingObserver, AutomaticKeepAliveClientMixin {
   VideoPlayerController? _videoController;
   ChewieController? _chewieController;
 
@@ -48,6 +56,7 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with AutomaticKeepAlive
   @override
   void dispose() {
     widget.controller?._detach(this);
+    WidgetsBinding.instance.removeObserver(this);
     _onClose();
     // 不销毁 VideoPlayerController，让全局复用
     // _chewieController?.dispose();
@@ -58,10 +67,30 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with AutomaticKeepAlive
   void initState() {
     super.initState();
     widget.controller?._attach(this);
-
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initPlayer();
     });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.hidden:
+      case AppLifecycleState.paused:
+        {
+          _chewieController?.pause();
+        }
+        break;
+      case AppLifecycleState.detached:
+        break;
+      case AppLifecycleState.resumed:
+        {
+          _chewieController?.play();
+        }
+        break;
+    }
   }
 
   Future<void> initPlayer() async {
@@ -93,7 +122,9 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with AutomaticKeepAlive
         DLog.d("退出全屏");
       }
     });
-    if (mounted) setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future<void> _onClose() async {
