@@ -1,13 +1,13 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 /// 全局屏幕工具类，不依赖 BuildContext
 class ScreenManager {
-  static final ScreenManager _instance = ScreenManager._();
   ScreenManager._() {
     _init();
   }
+  static final ScreenManager _instance = ScreenManager._();
   factory ScreenManager() => _instance;
   static ScreenManager get instance => _instance;
 
@@ -17,27 +17,61 @@ class ScreenManager {
     PlatformDispatcher.instance.onMetricsChanged = () {
       _updateScreenSize();
       for (final listener in _listeners) {
-        listener(_size);
+        listener(size);
       }
     };
   }
 
-  static Size _size = const Size(0, 0);
+  /// 当前主 View
+  static FlutterView get current => PlatformDispatcher.instance.views.first;
 
-  /// 屏幕逻辑像素大小
-  static Size get size => _size;
+  /// 屏幕宽高
+  static Size get screenSize => current.physicalSize / current.devicePixelRatio;
 
-  /// 屏幕宽度
-  static double get width => _size.width;
-
-  /// 屏幕高度
-  static double get height => _size.height;
-
-  /// 屏幕像素密度
-  static double get devicePixelRatio => PlatformDispatcher.instance.views.first.devicePixelRatio;
+  /// 像素比
+  static double get devicePixelRatio => current.devicePixelRatio;
 
   /// 屏幕物理像素大小
-  static Size get physicalSize => PlatformDispatcher.instance.views.first.physicalSize;
+  static Size get physicalSize => current.physicalSize;
+
+  static ViewPadding get padding => current.padding;
+  static ViewPadding get viewInsets => current.viewInsets;
+  static ViewPadding get viewPadding => current.viewPadding;
+
+  /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
+  static double get safeAreaTop => current.viewPadding.top;
+
+  /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
+  static double get safeAreaBottom => current.viewPadding.bottom;
+
+  /// 安全区高度(去除电池栏高度和 iphone底部34)
+  static double get safeAreaHeight => screenSize.height - current.viewPadding.top - current.viewPadding.bottom;
+
+  /// 状态栏高度
+  static double get statusBarHeight => safeAreaTop;
+
+  /// appbar 高度
+  static double get appBarHeight => kToolbarHeight;
+
+  /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
+  static double get viewBottom => current.viewInsets.bottom;
+
+  /// 竖屏
+  static bool get isPortrait => current.physicalSize.height > current.physicalSize.width;
+
+  /// 横屏
+  static bool get isLandscape => !isPortrait;
+
+  static Size? _size;
+
+  /// 屏幕逻辑像素大小
+  static Size get size => _size ?? screenSize;
+
+  /// 屏幕宽度
+  static double get width => size.width;
+
+  /// 屏幕高度
+  static double get height => size.height;
 
   /// 屏幕方向
   static Orientation get orientation => width > height ? Orientation.landscape : Orientation.portrait;
