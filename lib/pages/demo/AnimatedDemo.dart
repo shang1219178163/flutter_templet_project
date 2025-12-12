@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_color_flash_anim.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
 
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
@@ -22,8 +23,12 @@ class AnimatedDemo extends StatefulWidget {
 }
 
 class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMixin {
-  late final AnimationController _controller =
-      AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
+  late final _controller = AnimationController(
+    duration: const Duration(milliseconds: 350),
+    vsync: this,
+  );
+
+  final colorController = NColorFlashAnimController();
 
   double size = 100;
   final isLoading = ValueNotifier(true);
@@ -49,6 +54,35 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         });
       },
       children: <Widget>[
+        NColorFlashAnim(
+          controller: colorController,
+          builder: (animationController, animation) {
+            return AnimatedBuilder(
+              animation: animationController,
+              child: GestureDetector(
+                onTap: colorController.startAnim,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.yellow,
+                  ),
+                  child: Text("ColorAnim"),
+                ),
+              ),
+              builder: (_, child) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: animation.value ?? Colors.transparent,
+                      width: 3,
+                    ),
+                  ),
+                  child: child ?? SizedBox(),
+                );
+              },
+            );
+          },
+        ),
         _buildPausePlayIcon(),
         _buildAnimatedSizeIcon(),
         _buildAnimatedCrossFade(),
