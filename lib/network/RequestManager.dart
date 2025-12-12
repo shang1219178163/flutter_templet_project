@@ -26,10 +26,7 @@ import 'package:get/get.dart' as get_navigation;
 class RequestManager extends BaseRequestAPI {
   // 私有构造器
   RequestManager._();
-
   static final RequestManager _instance = RequestManager._();
-
-  // 方案1：工厂构造方法获得实例变量
   factory RequestManager() => _instance;
 
   String? get token => CacheService().token;
