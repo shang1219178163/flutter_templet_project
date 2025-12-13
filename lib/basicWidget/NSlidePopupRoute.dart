@@ -65,16 +65,19 @@ class NSlidePopupRoute<T> extends PopupRoute<T> {
     }
 
     // ⭐ 其余方向：Slide
-    return SlideTransition(
-      position: animation.drive(
-        Tween<Offset>(
-          begin: _alignmentToOffset(from),
-          end: Offset.zero,
-        ).chain(
-          CurveTween(curve: curve),
+    return FadeTransition(
+      opacity: animation,
+      child: SlideTransition(
+        position: animation.drive(
+          Tween<Offset>(
+            begin: _alignmentToOffset(from),
+            end: Offset.zero,
+          ).chain(
+            CurveTween(curve: curve),
+          ),
         ),
+        child: content,
       ),
-      child: content,
     );
   }
 
