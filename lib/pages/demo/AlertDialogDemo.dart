@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
+import 'package:flutter_templet_project/basicWidget/n_draggable_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_user_privacy.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
@@ -24,6 +24,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
   var itemSize = Size(70, 70);
 
   late var items = <ActionRecord<String>>[
+    (e: "NDraggablePopupRoute", action: onNDraggablePopupRoute),
     (e: "NSlidePopupRoute", action: onNSlidePopupRoute),
     (e: "iOS风格", action: showCupertinoAlertDialog),
     (e: "安卓风格", action: showAlertDialog),
@@ -170,6 +171,68 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     // );
   }
 
+  void onNDraggablePopupRoute() {
+    Navigator.of(context).push(
+      NDraggablePopupRoute(
+        from: alignment,
+        builder: (_) {
+          return Align(
+            alignment: alignment,
+            child: Container(
+              width: 200,
+              height: 400,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("dismiss"),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void onNSlidePopupRoute() {
+    buildPopup({required Alignment alignment}) {
+      return NSlidePopupRoute(
+        from: alignment,
+        builder: (_) {
+          return Align(
+            alignment: alignment,
+            child: Container(
+              width: 200,
+              height: 400,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("dismiss"),
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).push(buildPopup(alignment: alignment));
+    });
+  }
+
   void onCupertinoAlertDialogWrap() {
     CupertinoAlertDialog(
       title: Text(title),
@@ -277,39 +340,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         )
       ],
     );
-  }
-
-  void onNSlidePopupRoute() {
-    buildPopup({required Alignment alignment}) {
-      return NSlidePopupRoute(
-        from: alignment,
-        builder: (_) {
-          return Align(
-            alignment: alignment,
-            child: Container(
-              width: 200,
-              height: 400,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.all(Radius.circular(0)),
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("dismiss"),
-              ),
-            ),
-          );
-        },
-      );
-    }
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).push(buildPopup(alignment: alignment));
-    });
   }
 
   void onGeneralDialog() {
