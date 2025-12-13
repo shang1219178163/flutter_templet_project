@@ -37,7 +37,7 @@ class AppRouteObserver {
     if (!isRecover) {
       return;
     }
-    final lastRouteInfo = CacheService().getMap(CacheKey.lastPageRoute.name);
+    final lastRouteInfo = CacheService().getMap(CacheKey.lastPageRoute.name) ?? {};
     final settings = RouteSettingsExt.fromJson(lastRouteInfo);
     if (AppRouter.pages.firstWhereOrNull((e) => e.name == settings.name) == null) {
       return;

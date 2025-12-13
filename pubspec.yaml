@@ -103,8 +103,6 @@ dependencies:
 
   workmanager: ^0.7.0
 
-  popover: ^0.3.0
-
 #  pull_to_refresh: ^1.6.5
   easy_refresh: ^3.3.1
   custom_refresh_indicator: ^4.0.1

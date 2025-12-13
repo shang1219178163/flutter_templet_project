@@ -396,7 +396,6 @@ import 'package:flutter_templet_project/vendor/isar/page/OrderListTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
 import 'package:flutter_templet_project/vendor/jpush/jpush_info_page.dart';
-import 'package:flutter_templet_project/vendor/popover_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
@@ -545,7 +544,6 @@ class AppRouter {
   static const String streamBuilderDemo = '/StreamBuilderDemo';
   static const String nestedScrollViewDemo = '/NestedScrollViewDemo';
 
-  static const String popoverDemo = '/popoverDemo';
   static const String tabBarViewDemo = '/tabBarViewDemo';
 
   static const String tabBarTabBarViewDemo = '/tabBarTabBarViewDemo';
@@ -1326,10 +1324,6 @@ class AppRouter {
     GetPage(
       name: AppRouter.nestedScrollViewDemo,
       page: () => NestedScrollViewDemo(),
-    ),
-    GetPage(
-      name: AppRouter.popoverDemo,
-      page: () => PopoverDemo(),
     ),
     GetPage(
       name: AppRouter.tabBarPageViewDemo,

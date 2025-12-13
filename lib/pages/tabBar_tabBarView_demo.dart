@@ -647,7 +647,6 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.smartDialogPageDemo, "弹窗"),
   Tuple2(AppRouter.ratingBarDemo, "星评"),
   Tuple2(AppRouter.dragAndDropDemo, "文件拖拽"),
-  Tuple2(AppRouter.popoverDemo, "popoverDemo"),
   Tuple2(AppRouter.badgesDemo, "badgesDemo"),
   Tuple2(AppRouter.flutterSwiperDemo, "flutterSwiperDemo"),
   Tuple2(AppRouter.flutterSwiperIndicatorDemo, "flutterSwiperIndicatorDemo"),

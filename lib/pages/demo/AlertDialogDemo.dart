@@ -1,7 +1,7 @@
 import 'dart:core';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NSlidePopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
@@ -12,7 +12,6 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
-import 'package:popover/popover.dart';
 
 class AlertDialogDemo extends StatefulWidget {
   const AlertDialogDemo({Key? key}) : super(key: key);
@@ -24,30 +23,22 @@ class AlertDialogDemo extends StatefulWidget {
 class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProviderStateMixin, DialogMixin {
   var itemSize = Size(70, 70);
 
-  var titles = [
-    "iOS风格",
-    "安卓风格",
-    "进度条",
-    "进度环",
-    "流水布局",
-    "单选列表",
-    "多选列表",
-    "单选菜单",
-    "多选菜单",
-    "性别选择",
-    "自定义",
-    "aboutDialog",
-    "Popover",
-    "NNPopupRoute",
-    "NNPopupRoute Alert",
-    "NNPopupRoute 自定义",
-    "NNPopupRoute 顶部消息",
-    "隐私协议",
-    "Dialog",
-    "DialogMixin - presentDialog",
-    "DialogMixin - presentDialogAlert",
-    "DialogMixin - presentCupertinoAlert",
-    "showCupertinoTextFieldDialog",
+  late var items = <ActionRecord<String>>[
+    (e: "NSlidePopupRoute", action: onNSlidePopupRoute),
+    (e: "iOS风格", action: showCupertinoAlertDialog),
+    (e: "安卓风格", action: showAlertDialog),
+    (e: "流水布局", action: onCupertinoAlertDialogWrap),
+    (e: "单选列表", action: onCupertinoAlertDialogSingleChoice),
+    (e: "多选列表", action: onCupertinoAlertDialogMutiChoice),
+    (e: "性别选择", action: onCupertinoAlertDialogSex),
+    (e: "自定义", action: onCupertinoAlertDialogCustom),
+    (e: "aboutDialog", action: onAboutDialog),
+    (e: "隐私协议", action: showUserPrivacy),
+    (e: "Dialog", action: onGeneralDialog),
+    (e: "DialogMixin - presentDialog", action: onPresentDialog),
+    (e: "DialogMixin - presentDialogAlert", action: onPresentDialogAlert),
+    (e: "DialogMixin - presentCupertinoAlert", action: onPresentCupertinoAlert),
+    (e: "showCupertinoTextFieldDialog", action: showCupertinoTextFieldDialog),
   ];
 
   final title = "新版本 v${2.1}";
@@ -141,17 +132,18 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
               // color: index %2 == 0 ? Colors.yellow : Colors.green,
               // child: Center(child: Text(name)),
               child: TextButton(
-                  onPressed: () {
-                    alignment = e;
-                    showSnackBar(
-                      SnackBar(content: Text(name)),
-                    );
-                    debugPrint("alignment:$alignment ${alignment.x} ${alignment.y}");
-                  },
-                  child: Text(
-                    name,
-                    style: TextStyle(color: Colors.white),
-                  )),
+                onPressed: () {
+                  alignment = e;
+                  showSnackBar(
+                    SnackBar(content: Text(name)),
+                  );
+                  debugPrint("alignment:$alignment ${alignment.x} ${alignment.y}");
+                },
+                child: Text(
+                  name,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             );
           },
           separatorBuilder: (BuildContext context, int index) {
@@ -178,424 +170,225 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     // );
   }
 
-  void _onPressed(int e) {
-    switch (e) {
-      case 1:
-        showAlertDialog();
-        break;
-      case 2:
-        {
-          CupertinoAlertDialog(
-            title: Text(title),
-            content: Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: LinearProgressIndicator(
-                backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation(Colors.blue),
-                value: .5,
-              ),
-            ),
-            actions: [
-              "确定",
-            ]
-                .map((e) => _buildButton(
-                      e,
-                      () => Navigator.pop(context),
-                    ))
-                .toList(),
-          ).toShowCupertinoDialog(context: context);
-          // .toShowDialog(context);
-        }
-        break;
-      case 3:
-        {
-          CupertinoAlertDialog(
-            title: Text(title),
-            content: SizedBox(
-              height: 160,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 36,
-                  right: 36,
-                  top: 16,
-                  bottom: 0,
-                ),
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.grey[200],
-                  valueColor: AlwaysStoppedAnimation(Colors.blue),
-                  value: .7,
-                ),
-              ),
-            ),
-            actions: [
-              "确定1",
-            ]
-                .map((e) => _buildButton(
-                      e,
-                      () => Navigator.pop(context),
-                    ))
-                .toList(),
-          ).toShowCupertinoDialog(context: context);
-          // .toShowDialog(context);
-        }
-        break;
-      case 4:
-        {
-          CupertinoAlertDialog(
-            title: Text(title),
-            content: buildWrap(context),
-            actions: [
-              "确定",
-            ]
-                .map((e) => _buildButton(
-                      e,
-                      () => Navigator.pop(context),
-                    ))
-                .toList(),
-          ).toShowCupertinoDialog(context: context);
-          // .toShowDialog(context);
-        }
-        break;
-      case 5:
-        {
-          showChioceListAlertDialog(isMutiple: false);
-        }
-        break;
-      case 6:
-        {
-          showChioceListAlertDialog(isMutiple: true);
-        }
-        break;
-      case 7:
-        {
-          showChioceWrapAlertDialog(isMutiple: false);
-        }
-        break;
-      case 8:
-        {
-          showChioceWrapAlertDialog(isMutiple: true);
-        }
-        break;
-      case 9:
-        {
-          CupertinoAlertDialog(
-            title: Text("性别"),
-            content: RadioTileSexWidget(
-              selectedIndex: 0,
-            ),
-            actions: [
-              "确定",
-            ]
-                .map((e) => _buildButton(
-                      e,
-                      () => Navigator.pop(context),
-                    ))
-                .toList(),
-          ).toShowCupertinoDialog(context: context);
-          // .toShowDialog(context);
-        }
-        break;
-      case 10:
-        {
-          Container(
-              height: 300,
-              width: MediaQuery.of(context).size.width - 80,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Theme.of(context).dialogBackgroundColor,
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: SingleChildScrollView(
-                        child: ChioceWrap(
-                          indexs: [0],
-                          callback: (indexs) {
-                            DLog.d(indexs);
-                          },
-                          children: titles.map((e) => Text(e)).toList(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  NCancelAndConfirmBar(
-                      cancelBgColor: Theme.of(context).dialogBackgroundColor,
-                      confirmBgColor: Theme.of(context).colorScheme.secondary,
-                      bottomRadius: const Radius.circular(16),
-                      onCancel: () {
-                        debugPrint("onCancel");
-                      },
-                      onConfirm: () {
-                        debugPrint("onConfirm");
-                      })
-                ],
-              )).toShowGeneralDialog(
-              context: context,
-              barrierDismissible: true,
-              onBarrier: () {
-                Navigator.of(context).pop();
-              });
-        }
-        break;
-      case 11:
-        {
-          showAboutDialog(
-            context: context,
-            // applicationIcon: FlutterLogo(size: 50,),
-            applicationName: '应用程序',
-            applicationVersion: '1.0.0',
-            applicationLegalese: message1,
-            children: <Widget>[
-              Container(
-                height: 30,
-                color: Colors.red,
-              ),
-              Container(
-                height: 30,
-                color: Theme.of(context).primaryColor,
-              ),
-              Container(
-                height: 30,
-                color: Colors.green,
-              )
-            ],
-          );
-        }
-        break;
-      case 12:
-        {
-          showPopover(
-            context: context,
-            transitionDuration: Duration(milliseconds: 150),
-            bodyBuilder: (context) => Container(
-              height: 150,
-              width: 100,
-              color: Colors.green,
-              child: TextButton(
-                onPressed: () {
-                  DLog.d("Button");
-                },
-                child: Text("Button"),
-              ),
-            ),
-            onPop: () => debugPrint('Popover was popped!'),
-            // direction: PopoverDirection.bottom,
-            // width: 200,
-            // height: 400,
-            // arrowHeight: 15,
-            // arrowWidth: 30,
-          );
-        }
-        break;
-      case 13:
-        {
-          var size = Size(120, 120);
-          Navigator.push(
-            context,
-            NPopupRoute(
-              onClick: () {
-                debugPrint("exit");
-              },
-              child: Container(
-                color: Colors.red,
-                width: size.width,
-                height: size.height,
-                child: TextButton.icon(
-                  onPressed: () {
-                    DLog.d("刷新");
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.refresh),
-                  label: Text("刷新"),
-                ),
-              ),
-            ),
-          );
-        }
-        break;
-      case 14:
-        {
-          var screenSize = MediaQuery.of(context).size;
-          var size = Size(screenSize.width - 40, 300);
-          Navigator.push(
-            context,
-            NPopupRoute(
-              alignment: alignment,
-              onClick: () {
-                DLog.d("exit");
-                //点击空白处
-                Navigator.of(context).pop();
-              },
-              child: Container(
-                // width: size.width,
-                // height: size.height,
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).dialogBackgroundColor,
-                  borderRadius: BorderRadius.circular(10), // 圆角度
-                ),
-                child: buildAlertColumn(),
-              ),
-            ),
-          );
-        }
-        break;
-      case 15:
-        {
-          Navigator.push(
-            context,
-            NPopupRoute(
-              alignment: alignment,
-              onClick: () {
-                Navigator.of(context).pop();
-              },
-              // child: buildAlertColumn(context, marginHor: 15),
-              child: NAlertDialog(
-                header: Container(
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 12),
-                  child: Text(
-                    title1,
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ),
-                content: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: Text(
-                    message1,
-                    style: TextStyle(fontWeight: FontWeight.w300),
-                  ),
-                ),
-                cancelButton: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("取消"),
-                ),
-                confirmButton: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("确定"),
-                ),
-                // actions: ["选择A", "选择B", "选择C", "选择D"].map((e) => TextButton(onPressed: (){
-                //   DLog.d(e);
-                //   Navigator.pop(context);
-                // }, child: Text(e),)).toList(),
-              ),
-            ),
-          );
-        }
-        break;
-      case 16:
-        {
-          Navigator.push(
-            context,
-            NPopupRoute(
-              alignment: alignment,
-              onClick: () {
-                Navigator.of(context).pop();
-              },
-              // child: buildAlertColumn(context, marginHor: 15),
-              child: buildNoticationView(context),
-              // child: SlideTransition(
-              //   position: animation,
-              //   child: buildNoticationView(context),
-              // )
-            ),
-          );
-        }
-        break;
-      case 17:
-        {
-          showUserPrivacy();
-        }
-        break;
-      case 18:
-        {
-          showGeneralDialog(
-              barrierDismissible: false,
-              context: context,
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return Center(
-                  child: Container(
-                      height: 400,
-                      color: Colors.red,
-                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 100),
-                      child: TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'showGeneralDialog弹窗',
-                            style: TextStyle(fontSize: 17),
-                          ))),
-                );
-              });
-        }
-        break;
-      case 19:
-        {
-          presentDialog(
-              context: context,
-              scrollController: ScrollController(),
-              buttonBarHeight: 60,
-              content: Container(
-                height: 400,
-                color: Colors.green,
-              ),
-              hasCancelButton: false,
-              onCancel: () {
-                Navigator.of(context).pop();
-              },
-              onConfirm: () {
-                Navigator.of(context).pop();
-              });
-        }
-        break;
-      case 20:
-        {
-          presentDialogAlert(
-              context: context,
-              scrollController: ScrollController(),
-              title: title,
-              message: message,
-              content: Container(
-                height: 400,
-                color: Colors.green,
-              ),
-              // hasCancelButton: false,
-              // cancellBgColor: context.dialogBackgroundColor,
-              confirmBgColor: context.primaryColor,
-              onCancel: () {
-                Navigator.of(context).pop();
-              },
-              onConfirm: () {
-                Navigator.of(context).pop();
-              });
-        }
-        break;
-      case 21:
-        {
-          presentCupertinoAlert(context, content: Text("presentCupertinoAlert"), onConfirm: () async {
-            // Navigator.of(context).pop();
-          });
-        }
-        break;
-      case 22:
-        {
-          showCupertinoTextFieldDialog();
-        }
-        break;
-      default:
-        showCupertinoAlertDialog();
-        break;
-    }
+  void onCupertinoAlertDialogWrap() {
+    CupertinoAlertDialog(
+      title: Text(title),
+      content: buildWrap(context),
+      actions: ["确定"]
+          .map((e) => buildButton(
+                e,
+                () => Navigator.pop(context),
+              ))
+          .toList(),
+    ).toShowCupertinoDialog(context: context);
+    // .toShowDialog(context);
   }
 
-  buildBody() {
+  void onCupertinoAlertDialogSingleChoice() {
+    showChioceListAlertDialog(isMutiple: false);
+  }
+
+  void onCupertinoAlertDialogMutiChoice() {
+    showChioceListAlertDialog(isMutiple: true);
+  }
+
+  void onCupertinoAlertDialogSex() {
+    CupertinoAlertDialog(
+      title: Text("性别"),
+      content: RadioTileSexWidget(
+        selectedIndex: 0,
+      ),
+      actions: ["确定"]
+          .map((e) => buildButton(
+                e,
+                () => Navigator.pop(context),
+              ))
+          .toList(),
+    ).toShowCupertinoDialog(context: context);
+    // .toShowDialog(context);
+  }
+
+  void onCupertinoAlertDialogCustom() {
+    Container(
+      height: 300,
+      width: MediaQuery.of(context).size.width - 80,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: SingleChildScrollView(
+                child: ChioceWrap(
+                  indexs: [0],
+                  callback: (indexs) {
+                    DLog.d(indexs);
+                  },
+                  children: items.map((e) => Text(e.e)).toList(),
+                ),
+              ),
+            ),
+          ),
+          NCancelAndConfirmBar(
+            cancelBgColor: Theme.of(context).dialogBackgroundColor,
+            confirmBgColor: Theme.of(context).colorScheme.secondary,
+            bottomRadius: const Radius.circular(16),
+            onCancel: () {
+              debugPrint("onCancel");
+            },
+            onConfirm: () {
+              debugPrint("onConfirm");
+            },
+          )
+        ],
+      ),
+    ).toShowGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      onBarrier: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  void onAboutDialog() {
+    showAboutDialog(
+      context: context,
+      // applicationIcon: FlutterLogo(size: 50,),
+      applicationName: '应用程序',
+      applicationVersion: '1.0.0',
+      applicationLegalese: message1,
+      children: <Widget>[
+        Container(
+          height: 30,
+          color: Colors.red,
+        ),
+        Container(
+          height: 30,
+          color: Theme.of(context).primaryColor,
+        ),
+        Container(
+          height: 30,
+          color: Colors.green,
+        )
+      ],
+    );
+  }
+
+  void onNSlidePopupRoute() {
+    buildPopup({required Alignment alignment}) {
+      return NSlidePopupRoute(
+        from: alignment,
+        builder: (_) {
+          return Align(
+            alignment: alignment,
+            child: Container(
+              width: 200,
+              height: 400,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("dismiss"),
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).push(buildPopup(alignment: alignment));
+    });
+  }
+
+  void onGeneralDialog() {
+    showGeneralDialog(
+      barrierDismissible: false,
+      context: context,
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return Center(
+          child: Container(
+            height: 400,
+            color: Colors.red,
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 100),
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'showGeneralDialog弹窗',
+                style: TextStyle(fontSize: 17),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void onPresentDialog() {
+    presentDialog(
+      context: context,
+      scrollController: ScrollController(),
+      buttonBarHeight: 60,
+      content: Container(
+        height: 400,
+        color: Colors.green,
+      ),
+      hasCancelButton: false,
+      onCancel: () {
+        Navigator.of(context).pop();
+      },
+      onConfirm: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  void onPresentDialogAlert() {
+    presentDialogAlert(
+      context: context,
+      scrollController: ScrollController(),
+      title: title,
+      message: message,
+      content: Container(
+        height: 400,
+        color: Colors.green,
+      ),
+      // hasCancelButton: false,
+      // cancellBgColor: context.dialogBackgroundColor,
+      confirmBgColor: context.primaryColor,
+      onCancel: () {
+        Navigator.of(context).pop();
+      },
+      onConfirm: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  void onPresentCupertinoAlert() {
+    presentCupertinoAlert(
+      context,
+      content: Text("presentCupertinoAlert"),
+      onConfirm: () async {
+        // Navigator.of(context).pop();
+      },
+    );
+  }
+
+  Widget buildBody() {
     // return Flow(
     //   delegate: TestFlowDelegate(
     //     margin: EdgeInsets.all(10.0),
@@ -617,13 +410,12 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         child: Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: titles
+          children: items
               .map(
                 (e) => OutlinedButton(
-                    onPressed: () {
-                      _onPressed(titles.indexOf(e));
-                    },
-                    child: Text('${e}_${titles.indexOf(e)}')),
+                  onPressed: e.action,
+                  child: Text('${e.e}_${items.indexOf(e)}'),
+                ),
               )
               .toList(),
         ),
@@ -631,7 +423,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     );
   }
 
-  Widget _buildButton(String title, VoidCallback onPressed) {
+  Widget buildButton(String title, VoidCallback onPressed) {
     return TextButton(
       onPressed: onPressed,
       child: Container(
@@ -641,7 +433,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     );
   }
 
-  showCupertinoAlertDialog() {
+  void showCupertinoAlertDialog() {
     CupertinoAlertDialog(
       title: Text(title),
       content: Text(message, textAlign: TextAlign.start),
@@ -705,7 +497,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         )).toShowCupertinoDialog(context: context);
   }
 
-  showAlertDialog() {
+  void showAlertDialog() {
     AlertDialog(
       title: Text(title),
       content: Text(message, textAlign: TextAlign.start),
@@ -727,16 +519,16 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: -8.0, // 纵轴（垂直）方向间距
       alignment: WrapAlignment.start, //沿主轴方向居中
-      children: titles
+      children: items
           .map((e) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: TextButton.icon(
                   onPressed: () {
-                    DLog.d(titles.indexOf(e));
+                    DLog.d(items.indexOf(e));
                     // }, icon: Icon(Icons.check_circle_outline), label: Text("Button"))).toList(),
                   },
                   icon: Icon(Icons.radio_button_unchecked_outlined),
-                  label: Text(e),
+                  label: Text(e.e),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.black87,
                     side: BorderSide(width: 1, color: Colors.transparent),
@@ -761,10 +553,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
           DLog.d([indexs.runtimeType, indexs]);
         },
       ),
-      actions: [
-        "确定",
-      ]
-          .map((e) => _buildButton(
+      actions: ["确定"]
+          .map((e) => buildButton(
                 e,
                 () => Navigator.pop(context),
               ))
@@ -782,12 +572,10 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         callback: (indexs) {
           DLog.d(indexs);
         },
-        children: titles.map((e) => Text(e)).toList(),
+        children: items.map((e) => Text(e.e)).toList(),
       ),
-      actions: [
-        "确定",
-      ]
-          .map((e) => _buildButton(
+      actions: ["确定"]
+          .map((e) => buildButton(
                 e,
                 () => Navigator.pop(context),
               ))

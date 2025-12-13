@@ -1969,14 +1969,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.5.2"
-  popover:
-    dependency: "direct main"
-    description:
-      name: popover
-      sha256: "0606f3e10f92fc0459f5c52fd917738c29e7552323b28694d50c2d3312d0e1a2"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.3.1"
   process_run:
     dependency: "direct dev"
     description:
