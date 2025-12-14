@@ -15,6 +15,16 @@ import 'package:flutter/material.dart';
 ///
 
 class CirclePulseLoadingWidget extends StatefulWidget {
+  const CirclePulseLoadingWidget({
+    Key? key,
+    this.radius = 24,
+    this.itemShape = BoxShape.circle,
+    this.itemColor = Colors.white,
+    this.count = 9,
+    this.duration = const Duration(milliseconds: 1000),
+    this.curve = Curves.linear,
+  }) : super(key: key);
+
   final double radius;
   final BoxShape itemShape;
   final Color itemColor;
@@ -22,27 +32,13 @@ class CirclePulseLoadingWidget extends StatefulWidget {
   final Curve curve;
   final int count;
 
-  const CirclePulseLoadingWidget(
-      {Key? key,
-      this.radius = 24,
-      this.itemShape = BoxShape.circle,
-      this.itemColor = Colors.white,
-      this.count = 9,
-      this.duration = const Duration(milliseconds: 1000),
-      this.curve = Curves.linear})
-      : super(key: key);
-
   @override
-  _CirclePulseLoadingWidgetState createState() =>
-      _CirclePulseLoadingWidgetState();
+  _CirclePulseLoadingWidgetState createState() => _CirclePulseLoadingWidgetState();
 }
 
-class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller =
-      AnimationController(vsync: this, duration: widget.duration)..repeat();
-  late final Animation<double> _animation =
-      _controller.drive(CurveTween(curve: widget.curve));
+class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(vsync: this, duration: widget.duration)..repeat();
+  late final Animation<double> _animation = _controller.drive(CurveTween(curve: widget.curve));
 
   @override
   void dispose() {
@@ -57,8 +53,7 @@ class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget>
       children: List.generate(widget.count, (index) {
         return Center(
           child: ScaleTransition(
-            scale: DelayTween(begin: 0.0, end: 1.0, delay: index * .1)
-                .animate(_animation),
+            scale: DelayTween(begin: 0.0, end: 1.0, delay: index * .1).animate(_animation),
             child: SizedBox(
               width: 10,
               height: 10,
@@ -104,8 +99,7 @@ class _CircleFlow extends FlowDelegate {
 class DelayTween extends Tween<double> {
   final double delay;
 
-  DelayTween({required double begin, required double end, required this.delay})
-      : super(begin: begin, end: end);
+  DelayTween({required double begin, required double end, required this.delay}) : super(begin: begin, end: end);
 
   @override
   double lerp(double t) {

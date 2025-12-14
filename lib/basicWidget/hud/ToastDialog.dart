@@ -3,16 +3,8 @@
 import 'package:flutter/material.dart';
 
 //loading加载框
+@Deprecated("已弃用")
 class ToastDialog extends Dialog {
-  //loading动画
-  final Widget? loadingView;
-  //提示内容
-  final String? message;
-  final EdgeInsets? messageMargin;
-
-  //圆角大小
-  final double? radius;
-
   const ToastDialog({
     Key? key,
     this.loadingView,
@@ -21,6 +13,15 @@ class ToastDialog extends Dialog {
     this.radius = 10,
   })  : assert((loadingView != null || message != null)),
         super(key: key);
+
+  //loading动画
+  final Widget? loadingView;
+  //提示内容
+  final String? message;
+  final EdgeInsets? messageMargin;
+
+  //圆角大小
+  final double? radius;
 
   ///展示
   static void show({
@@ -32,18 +33,19 @@ class ToastDialog extends Dialog {
     Color? backgroundColor,
   }) {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        barrierColor: Colors.transparent,
-        builder: (BuildContext context) {
-          return ToastDialog(
-            loadingView: loadingView,
-            message: message,
-            messageMargin: messageMargin,
-            radius: radius,
-            // backgroundColor: backgroundColor,
-          );
-        });
+      context: context,
+      barrierDismissible: false,
+      barrierColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return ToastDialog(
+          loadingView: loadingView,
+          message: message,
+          messageMargin: messageMargin,
+          radius: radius,
+          // backgroundColor: backgroundColor,
+        );
+      },
+    );
   }
 
   ///退出
@@ -55,15 +57,19 @@ class ToastDialog extends Dialog {
   Widget build(BuildContext context) {
     if (loadingView != null && message != null) {
       return buildProgressIndicatorAndText(
-          loadingView: loadingView,
-          message: message ?? "异常提示",
-          backgroundColor: backgroundColor ?? Colors.black54,
-          radius: radius ?? 10);
+        loadingView: loadingView,
+        message: message ?? "异常提示",
+        backgroundColor: backgroundColor ?? Colors.black54,
+        radius: radius ?? 10,
+      );
     }
 
     if (loadingView != null) {
       return buildProgressIndicator(
-          loadingView: loadingView, backgroundColor: backgroundColor ?? Colors.black54, radius: radius ?? 10);
+        loadingView: loadingView,
+        backgroundColor: backgroundColor ?? Colors.black54,
+        radius: radius ?? 10,
+      );
     }
 
     return buildMessage(
@@ -83,45 +89,55 @@ class ToastDialog extends Dialog {
     );
   }
 
-  Widget buildProgressIndicator({Widget? loadingView, required Color backgroundColor, required double radius}) {
+  Widget buildProgressIndicator({
+    Widget? loadingView,
+    required Color backgroundColor,
+    required double radius,
+  }) {
     return Center(
-        child: Container(
-      height: 90,
-      width: 90,
-      // color: Colors.black,
-      decoration: buildDecoration(backgroundColor: backgroundColor, radius: radius),
-      child: loadingView ??
-          Container(
-            padding: EdgeInsets.all(12),
-            child: CircularProgressIndicator(),
-          ),
-    ));
+      child: Container(
+        height: 90,
+        width: 90,
+        // color: Colors.black,
+        decoration: buildDecoration(backgroundColor: backgroundColor, radius: radius),
+        child: loadingView ??
+            Container(
+              padding: EdgeInsets.all(12),
+              child: CircularProgressIndicator(),
+            ),
+      ),
+    );
   }
 
   Widget buildMessage({required String message, required Color backgroundColor}) {
     return Center(
-        widthFactor: 1,
-        heightFactor: 1,
-        child: Container(
-          margin: messageMargin ?? EdgeInsets.only(left: 20, right: 20),
-          padding: EdgeInsets.all(8),
-          // color: Colors.black,
-          decoration: buildDecoration(backgroundColor: backgroundColor, radius: 4),
-          child: Text(
-            message,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
-              decoration: TextDecoration.none,
-            ),
-            textAlign: TextAlign.center,
+      widthFactor: 1,
+      heightFactor: 1,
+      child: Container(
+        margin: messageMargin ?? EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.all(8),
+        // color: Colors.black,
+        decoration: buildDecoration(backgroundColor: backgroundColor, radius: 4),
+        child: Text(
+          message,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.normal,
+            decoration: TextDecoration.none,
           ),
-        ));
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
 
-  Widget buildProgressIndicatorAndText(
-      {Widget? loadingView, required String message, required Color backgroundColor, required double radius}) {
+  Widget buildProgressIndicatorAndText({
+    Widget? loadingView,
+    required String message,
+    required Color backgroundColor,
+    required double radius,
+  }) {
     return Center(
       // widthFactor: 1,
       // heightFactor: 1,
@@ -157,22 +173,6 @@ class ToastDialog extends Dialog {
           ],
         ),
       ),
-    );
-  }
-}
-
-class Toast extends StatelessWidget {
-  const Toast({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("$runtimeType"),
-      ),
-      body: Text(arguments.toString()),
     );
   }
 }

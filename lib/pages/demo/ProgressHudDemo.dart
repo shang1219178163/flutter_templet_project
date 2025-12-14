@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/hud/progresshud.dart';
+import 'package:flutter_templet_project/basicWidget/hud/progress_hud_popup.dart';
 
 class ProgressHudDemo extends StatefulWidget {
   final String? title;
@@ -31,16 +31,12 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
+        actions: ['done']
             .map((e) => TextButton(
                   onPressed: () {
                     setState(() {});
                   },
-                  child: Text(
-                    e,
-                  ),
+                  child: Text(e),
                 ))
             .toList(),
       ),
@@ -58,50 +54,57 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
         children: <Widget>[
           TextButton(
             style: buttonStyle,
-            onPressed: () {
-              NNProgressHUD.showLoading(context);
+            onPressed: () async {
+              ProgressHudPopupExt.loading(context);
+              await Future.delayed(Duration(seconds: 2));
+              ProgressHudPopupExt.dismiss(context);
             },
-            child: Text("showLoading"),
+            child: Text("loading"),
+          ),
+          TextButton(
+            style: buttonStyle,
+            onPressed: () async {
+              ProgressHudPopupExt.loading(context, message: "loading");
+              await Future.delayed(Duration(seconds: 2));
+              ProgressHudPopupExt.dismiss(context);
+            },
+            child: Text("loadingMessage"),
           ),
           TextButton(
             style: buttonStyle,
             onPressed: () {
-              NNProgressHUD.showLoading(context, message: "loading");
+              ProgressHudPopupExt.success(context);
             },
-            child: Text("showLoadingMessage"),
+            child: Text("success"),
           ),
           TextButton(
             style: buttonStyle,
             onPressed: () {
-              NNProgressHUD.showSuccess(context);
+              ProgressHudPopupExt.success(context, message: "success");
             },
-            child: Text("showSuccess"),
+            child: Text("successMessage"),
           ),
           TextButton(
             style: buttonStyle,
             onPressed: () {
-              NNProgressHUD.showSuccess(context, message: "success");
+              ProgressHudPopupExt.error(context);
             },
-            child: Text("showSuccessMessage"),
+            child: Text("error"),
           ),
           TextButton(
             style: buttonStyle,
             onPressed: () {
-              NNProgressHUD.showError(context);
+              ProgressHudPopupExt.error(context, message: "error");
             },
-            child: Text("showError"),
+            child: Text("errorMessage"),
           ),
           TextButton(
             style: buttonStyle,
             onPressed: () {
-              NNProgressHUD.showError(context, message: "error");
-            },
-            child: Text("showErrorMessage"),
-          ),
-          TextButton(
-            style: buttonStyle,
-            onPressed: () {
-              NNProgressHUD.showToast(context, message: "这是一个 NNProgressHUD.toast 类型的文字提示 toast.");
+              ProgressHudPopupExt.toast(
+                context,
+                message: "这是一个 NProgressHudPopupExt.toast 类型的文字提示 toast.",
+              );
             },
             child: Text("showToast"),
           ),
