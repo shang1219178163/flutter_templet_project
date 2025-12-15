@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// path_provider
+/// 沙盒文件路径
 class PathProviderDirectory {
   static PathProviderDirectory get temporaryDirectory => PathProviderDirectory(
         name: "temporaryDirectory",

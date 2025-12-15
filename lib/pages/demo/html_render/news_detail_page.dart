@@ -157,8 +157,13 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
           alignment: Alignment.center,
           // border: Border.all(color: Colors.red), //add test by bin
         ),
-        "p.img": Style(
-          textAlign: TextAlign.center, // 保证内部 <img> 居中
+        "p img": Style(
+          // textAlign: TextAlign.center, // 保证内部 <img> 居中
+          display: Display.block,
+          margin: Margins(
+            left: Margin.auto(),
+            right: Margin.auto(),
+          ),
         ),
       },
       extensions: [
