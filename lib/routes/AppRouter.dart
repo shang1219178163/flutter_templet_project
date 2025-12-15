@@ -45,6 +45,7 @@ import 'package:flutter_templet_project/pages/demo/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppLifecycleStateObserverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/AppSandboxFileDirectory.dart';
 import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
@@ -408,6 +409,7 @@ import 'package:get/get.dart';
 
 class AppRouter {
   static const String unknown = '/AppUnknownPage';
+  static const String sandboxFileDirectory = '/sandboxFileDirectory';
 
   static const String appTabPage = '/AppTabPage';
   static const String yamlParsePage = '/yamlParsePage';
@@ -883,7 +885,10 @@ class AppRouter {
 
   static final List<GetPage> pages = [
     unknownRoute,
-
+    GetPage(
+      name: AppRouter.sandboxFileDirectory,
+      page: () => AppSandboxFileDirectory(),
+    ),
     GetPage(
       name: AppRouter.compileEnvironmentPage,
       page: () => CompileEnvironmentPage(),
