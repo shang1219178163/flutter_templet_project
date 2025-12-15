@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/StackPopup/StackPopup.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_slide_stack.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class StackDemo extends StatefulWidget {
@@ -17,17 +20,63 @@ class _StackDemoState extends State<StackDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: Column(
-        children: [
-          _buildSection(),
-          buildSection1(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildSection(),
+            buildSection1(),
+            ElevatedButton(
+              onPressed: () {
+                final popupController = StackPopupController();
+                popupController.show(
+                  context: context,
+                  from: Alignment.centerRight,
+                  child: Container(
+                    height: 300,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
+                  ),
+                  builder: (BuildContext context) {
+                    final items = List.generate(10, (i) => i);
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                      ),
+                      child: ListView.separated(
+                        itemBuilder: (context, i) {
+                          return ListTile(
+                            onTap: () {
+                              popupController.dismiss();
+                            },
+                            title: Text("item_$i"),
+                          );
+                        },
+                        separatorBuilder: (context, i) {
+                          return Divider();
+                        },
+                        itemCount: items.length,
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Text("StackPopupController"),
+            ),
+            buildSection2()
+          ],
+        ),
       ),
     );
   }
 
-  _buildSection() {
-    return Center(
+  buildSection() {
+    return NSectionBox(
+      title: "buildSection",
       child: Stack(
         children: [
           Container(
@@ -52,9 +101,7 @@ class _StackDemoState extends State<StackDemo> {
               child: Material(
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(10),
-                child: Text(
-                  '99+',
-                ),
+                child: Text('99+'),
               ),
             ),
           ),
@@ -64,28 +111,88 @@ class _StackDemoState extends State<StackDemo> {
   }
 
   buildSection1() {
-    return Stack(
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(width: 150, height: 150, color: Colors.yellow),
-            Container(width: 150, height: 28, color: Colors.transparent),
-          ],
-        ),
-        Positioned(
-          right: 0,
-          left: 0,
-          bottom: 0,
-          child: FloatingActionButton(
-            onPressed: () {
-              debugPrint('FAB tapped!');
-            },
-            backgroundColor: Colors.blueGrey,
-            child: Icon(Icons.add),
+    return NSectionBox(
+      title: "buildSection1",
+      child: Stack(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(width: 150, height: 150, color: Colors.yellow),
+              Container(width: 150, height: 28, color: Colors.transparent),
+            ],
+          ),
+          Positioned(
+            right: 0,
+            left: 0,
+            bottom: 0,
+            child: FloatingActionButton(
+              onPressed: () {
+                debugPrint('FAB tapped!');
+              },
+              backgroundColor: Colors.blueGrey,
+              child: Icon(Icons.add),
+            ),
+          ),
+        ],
+      ).toColoredBox(),
+    );
+  }
+
+  Widget buildSection2() {
+    return NSectionBox(
+      title: "NSlideStack",
+      child: NSlideStack(
+        // fromRight: false,
+        drawerWidth: 150,
+        drawerBuilder: (onToggle) => buildListView(onTap: onToggle),
+        childBuilder: (onToggle) => Container(
+          height: 150,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.all(Radius.circular(0)),
+          ),
+          child: Center(
+            child: ElevatedButton(
+              onPressed: onToggle,
+              child: Text("AnimatedPositioned"),
+            ),
           ),
         ),
-      ],
-    ).toColoredBox();
+      ),
+    );
+  }
+
+  Widget buildListView({VoidCallback? onTap}) {
+    final items = List.generate(10, (i) => i);
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.yellow,
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      child: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        removeBottom: true,
+        child: ListView.separated(
+          itemBuilder: (context, i) {
+            return ListTile(
+              dense: true,
+              onTap: () {
+                onTap?.call();
+                DLog.d("选项_$i");
+              },
+              title: Text("选项_$i"),
+            );
+          },
+          separatorBuilder: (context, i) {
+            return Divider();
+          },
+          itemCount: items.length,
+        ),
+      ),
+    );
   }
 }
