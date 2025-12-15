@@ -54,9 +54,38 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
   late List<T> tags = [...widget.tags];
   late List<T> others = [...widget.others];
 
-  late var tabController = TabController(length: tags.length, vsync: this);
+  late TabController? tabController = TabController(length: tags.length, vsync: this);
 
   bool canEdit = false;
+
+  @override
+  void dispose() {
+    tabController?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
+
+  initData() async {
+    updateTabController();
+  }
+
+  updateTabController() {
+    tabController?.dispose();
+
+    final initialIndex = tabController?.index.clamp(0, tags.length - 1) ?? 0;
+    tabController = TabController(initialIndex: initialIndex, length: tags.length, vsync: this);
+    tabController!.addListener(() {
+      if (tabController!.indexIsChanging) {
+        return;
+      }
+      DLog.d([tabController!.index]);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +99,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
 
     final actionColor = Color(0xFF999999);
 
-    tabController = TabController(length: tags.length, vsync: this);
+    updateTabController();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       child: Column(
