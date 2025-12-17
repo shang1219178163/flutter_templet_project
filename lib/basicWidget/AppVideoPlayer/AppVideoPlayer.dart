@@ -6,6 +6,7 @@
 //  Copyright © 2025/12/12 shang. All rights reserved.
 //
 
+import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/AppVideoPlayerService.dart';
@@ -81,13 +82,22 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with WidgetsBindingObse
       case AppLifecycleState.paused:
         {
           _chewieController?.pause();
+          if (Platform.isAndroid) {
+            _chewieController?.exitFullScreen();
+          }
         }
         break;
       case AppLifecycleState.detached:
         break;
       case AppLifecycleState.resumed:
         {
-          _chewieController?.play();
+          if (Platform.isAndroid) {
+            initPlayer().then((v) {
+              _chewieController?.play();
+            });
+          } else {
+            _chewieController?.play();
+          }
         }
         break;
     }

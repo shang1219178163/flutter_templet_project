@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:quiver/collection.dart';
 import 'package:video_player/video_player.dart';
 
-/// 视频播放控制器全局管理
+/// 视频播放控制器全局管理(安卓不支持多控制器,不可控不可测的视频解码错误)
 class AppVideoPlayerService {
   AppVideoPlayerService._();
   static final AppVideoPlayerService _instance = AppVideoPlayerService._();
@@ -21,9 +21,6 @@ class AppVideoPlayerService {
   LruMap<String, VideoPlayerController> get controllerMap => _controllerMap;
   // final _controllerMap = <String, VideoPlayerController>{};
   final _controllerMap = LruMap<String, VideoPlayerController>(maximumSize: 10);
-
-  /// 最新使用播放器
-  VideoPlayerController? current;
 
   /// 有缓存控制器
   bool hasCtrl({required String url}) => _controllerMap[url] != null;
@@ -62,10 +59,12 @@ class AppVideoPlayerService {
       return null;
     }
 
-    final ctrl = VideoPlayerController.networkUrl(videoUri);
+    final ctrl = VideoPlayerController.networkUrl(
+      videoUri,
+      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+    );
     await ctrl.initialize();
     _controllerMap[url] = ctrl;
-    current = ctrl;
     if (isLog) {
       DLog.d(["新建: ${_controllerMap[url].hashCode}"]);
     }
