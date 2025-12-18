@@ -72,6 +72,7 @@ class NTextView extends StatefulWidget {
 
   final List<TextInputFormatter>? inputFormatters;
 
+  /// 字数统计是否在内
   final bool isCounterInner;
 
   final InputDecoration Function(InputDecoration decoration)? decorationBuilder;

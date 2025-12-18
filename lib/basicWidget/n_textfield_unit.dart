@@ -430,7 +430,7 @@ class _NTextFieldState extends State<_NTextField> {
 
   late var hasFocusVN = widget.hasFocusVN ?? ValueNotifier<bool>(false);
 
-  bool isCloseEye = true;
+  bool isCloseEye = false;
 
   @override
   void dispose() {
@@ -493,6 +493,7 @@ class _NTextFieldState extends State<_NTextField> {
     final counter =
         widget.maxLength != null ? controller.buildInputDecorationCounter(maxLength: widget.maxLength!) : null;
 
+    final obscureText = widget.obscureText ?? isCloseEye;
     return TextField(
       enabled: widget.enabled,
       contextMenuBuilder: widget.contextMenuBuilder ??
@@ -515,7 +516,7 @@ class _NTextFieldState extends State<_NTextField> {
         widget.onSubmitted?.call(val);
         controller.clear();
       },
-      obscureText: widget.obscureText != null ? widget.obscureText! : isCloseEye,
+      obscureText: obscureText,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       autofocus: widget.autofocus,
