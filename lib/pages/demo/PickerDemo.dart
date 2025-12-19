@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/n_pick_users_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_list_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
+import 'package:flutter_templet_project/basicWidget/pick/n_pick_sex.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
@@ -52,6 +53,8 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     (name: "单项选择", action: onSingleOne),
     (name: "多项选择", action: onWeight),
     (name: "网络人员选择", action: onPickUser),
+    (name: "用户性别选择", action: onPickUserSex),
+    (name: "性别选择", action: onPickSex),
   ];
 
   /// 体重
@@ -390,6 +393,44 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           },
         ),
       ),
+    );
+  }
+
+  void onPickUserSex() {
+    final items = <String>[
+      "男",
+      "女",
+      "保密",
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      clipBehavior: Clip.hardEdge,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+        ),
+      ),
+      builder: (context) {
+        return NPickSex(
+          items: items,
+          onTap: (int index) {
+            DLog.d([index, items[index]]);
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
+  }
+
+  void onPickSex() {
+    NPickSex.show(
+      context: context,
+      onTap: (i) {
+        DLog.d(i);
+        Navigator.pop(context);
+      },
     );
   }
 
