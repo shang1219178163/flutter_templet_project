@@ -11,7 +11,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// app 文件类型
 enum NFileType {

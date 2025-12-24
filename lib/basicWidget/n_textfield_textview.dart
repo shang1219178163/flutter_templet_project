@@ -17,6 +17,7 @@ class TextfieldTextview extends StatefulWidget {
     this.style,
     this.controller,
     this.onChanged,
+    this.onTapOutside,
     this.contentPadding = const EdgeInsets.fromLTRB(8, 12, 8, 12),
     this.fillColor,
     this.border,
@@ -38,6 +39,7 @@ class TextfieldTextview extends StatefulWidget {
 
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
+  final TapRegionCallback? onTapOutside;
 
   /// 内容边距
   final EdgeInsetsGeometry? contentPadding;
@@ -131,6 +133,7 @@ class _TextfieldTextviewState extends State<TextfieldTextview> {
       enabled: widget.enabled,
       controller: controllerNew,
       onChanged: widget.onChanged,
+      onTapOutside: widget.onTapOutside,
       style: widget.style,
       readOnly: widget.readOnly,
       maxLength: widget.readOnly ? null : widget.maxLength,

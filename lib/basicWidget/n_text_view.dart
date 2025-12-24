@@ -18,6 +18,7 @@ class NTextView extends StatefulWidget {
     this.value = "",
     this.controller,
     required this.onChanged,
+    this.onTapOutside,
     this.style = const TextStyle(fontSize: 16),
     this.readOnly = false,
     this.hintText = "请输入",
@@ -41,6 +42,8 @@ class NTextView extends StatefulWidget {
 
   /// 改变回调
   final ValueChanged<String> onChanged;
+
+  final TapRegionCallback? onTapOutside;
 
   final TextStyle? style;
 
@@ -137,6 +140,7 @@ class _NTextViewState extends State<NTextView> {
         return widget.decorationBuilder?.call(dtNew) ?? dtNew;
       },
       onChanged: widget.onChanged,
+      onTapOutside: widget.onTapOutside,
     );
 
     if (!widget.isCounterInner) {

@@ -46,47 +46,45 @@ class NPickerToolBar extends StatelessWidget {
     return SizedBox(
       width: width ?? double.infinity,
       height: height ?? 50,
-      child: NavigationToolbar(
-        leading: CupertinoButton(
-          padding: EdgeInsets.all(12),
-          onPressed: onCancel ??
-              () {
-                Navigator.of(context).pop();
-              },
-          child: leading ??
-              Text(
-                cancelTitle,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                ),
-              ),
+      child: DefaultTextStyle(
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+          backgroundColor: Colors.white,
+          decoration: TextDecoration.none,
         ),
-        middle: Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-            backgroundColor: Colors.white,
-            decoration: TextDecoration.none,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        trailing: trailing ??
-            Offstage(
-              offstage: onConfirm == null,
-              child: CupertinoButton(
+        child: NavigationToolbar(
+          leading: leading ??
+              CupertinoButton(
                 padding: EdgeInsets.all(12),
-                onPressed: onConfirm,
+                onPressed: onCancel ??
+                    () {
+                      Navigator.of(context).pop();
+                    },
                 child: Text(
-                  confirmTitle,
+                  cancelTitle,
                   style: TextStyle(
-                    fontSize: 16,
+                    color: Colors.black54,
                   ),
                 ),
               ),
-            ),
+          middle: Text(
+            title,
+            textAlign: TextAlign.center,
+          ),
+          trailing: trailing ??
+              Offstage(
+                offstage: onConfirm == null,
+                child: CupertinoButton(
+                  padding: EdgeInsets.all(12),
+                  onPressed: onConfirm,
+                  child: Text(
+                    confirmTitle,
+                  ),
+                ),
+              ),
+        ),
       ),
     );
   }

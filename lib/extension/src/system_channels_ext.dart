@@ -7,16 +7,15 @@
 //
 
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension SystemChannelsExt on SystemChannels {
   /// 键盘展示
-  Future<T?> textInputShow<T>() {
+  static Future<T?> textInputShow<T>() {
     return SystemChannels.textInput.invokeMethod<T>('TextInput.show');
   }
 
   /// 键盘隐藏
-  Future<T?> textInputHide<T>() {
+  static Future<T?> textInputHide<T>() {
     return SystemChannels.textInput.invokeMethod<T>('TextInput.hide');
   }
 }

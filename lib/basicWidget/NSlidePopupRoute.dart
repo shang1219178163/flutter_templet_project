@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// 最新滑入弹窗
 class NSlidePopupRoute<T> extends PopupRoute<T> {
   NSlidePopupRoute({
+    super.settings,
     required this.builder,
     this.from = Alignment.bottomCenter,
     this.barrierColor = const Color(0x80000000),
@@ -18,6 +19,7 @@ class NSlidePopupRoute<T> extends PopupRoute<T> {
   final Alignment from;
 
   final Duration duration;
+
   final Curve curve;
 
   @override
@@ -31,6 +33,33 @@ class NSlidePopupRoute<T> extends PopupRoute<T> {
 
   @override
   Duration get transitionDuration => duration;
+
+  // 展示
+  static Future<T?> show<T>({
+    required BuildContext context,
+    required WidgetBuilder builder,
+    Alignment from = Alignment.bottomCenter,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+    Color barrierColor = const Color(0x80000000),
+    bool barrierDismissible = true,
+    String? barrierLabel,
+    bool useRootNavigator = true,
+    RouteSettings? routeSettings,
+  }) {
+    return Navigator.of(context, rootNavigator: useRootNavigator).push(
+      NSlidePopupRoute<T>(
+        builder: builder,
+        from: from,
+        duration: duration,
+        curve: curve,
+        barrierColor: barrierColor,
+        barrierDismissible: barrierDismissible,
+        barrierLabel: barrierLabel,
+        settings: routeSettings,
+      ),
+    );
+  }
 
   @override
   Widget buildPage(
