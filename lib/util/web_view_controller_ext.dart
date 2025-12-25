@@ -4,7 +4,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 extension WebViewControllerExt on WebViewController {
   /// 改变背景色
-  Future<void> changBodyStyle({
+  Future<void> changeBodyStyle({
     required Color textColor,
     required Color bgColor,
   }) async {
