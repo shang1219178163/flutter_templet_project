@@ -23,6 +23,22 @@ extension WidgetExt on Widget {
     return l;
   }
 
+  /// 修改类似 Cupertino 无法直接设置尺寸的组件
+  Widget toFittedBox({
+    required double width,
+    required double height,
+    BoxFit fit = BoxFit.contain,
+  }) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: FittedBox(
+        fit: fit,
+        child: this,
+      ),
+    );
+  }
+
   /// 展示边框线
   Widget toBorder({
     Color? color,
