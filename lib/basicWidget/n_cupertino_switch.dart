@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:social_fe_app/utils/dlog.dart';
 
 /// 继承 CupertinoSwitch 的 开关
 class NCupertinoSwitch extends StatelessWidget {
@@ -29,7 +28,7 @@ class NCupertinoSwitch extends StatelessWidget {
 
   final double? height;
 
-  final BoxFit? fit;
+  final BoxFit fit;
 
   /// Whether this switch is on or off.
   final bool value;

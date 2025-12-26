@@ -416,7 +416,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         return NPickOne(
           items: items,
           onSelected: (e) {
-            DLog.d([index, e]);
+            DLog.d([e]);
             Navigator.pop(context);
           },
         );
