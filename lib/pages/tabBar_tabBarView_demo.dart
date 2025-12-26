@@ -553,6 +553,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.containerDemo, "containerDemo"),
   Tuple2(AppRouter.animatedContainerDemo, "animatedContainerDemo"),
   Tuple2(AppRouter.scrollControllerDemo, "滚动行为"),
+  Tuple2(AppRouter.scrollControllerDemoOne, "滚动行为"),
   Tuple2(AppRouter.buttonStyleDemo, "按钮样式研究"),
   Tuple2(AppRouter.keyDemo, "key研究"),
   Tuple2(AppRouter.netStateListenerDemo, "netStateListenerDemo"),
