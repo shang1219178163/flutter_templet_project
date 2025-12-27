@@ -171,31 +171,30 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     // );
   }
 
-  void onNDraggablePopupRoute() {
-    Navigator.of(context).push(
+  Future<void> onNDraggablePopupRoute() async {
+    final result = await Navigator.of(context).push(
       NDraggablePopupRoute(
         from: alignment,
         builder: (_) {
-          return buildPopupView(alignment: alignment);
+          return buildPopupView(alignment: alignment, argsDismiss: {"a": "99"});
         },
       ),
     );
+    DLog.d([result]);
   }
 
-  void onNSlidePopupRoute() {
+  Future<void> onNSlidePopupRoute() async {
     final route = NSlidePopupRoute(
       from: alignment,
       builder: (_) {
-        return buildPopupView(alignment: alignment);
+        return buildPopupView(alignment: alignment, argsDismiss: {"b": "88"});
       },
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).push(route);
-    });
+    final result = await Navigator.of(context).push(route);
+    DLog.d([result]);
   }
 
-  Widget buildPopupView({required Alignment alignment}) {
+  Widget buildPopupView({required Alignment alignment, Map<String, dynamic>? argsDismiss}) {
     return Align(
       alignment: alignment,
       child: Container(
@@ -209,7 +208,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         ),
         child: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(argsDismiss);
           },
           child: Text("dismiss"),
         ),
