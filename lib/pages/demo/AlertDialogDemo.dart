@@ -176,61 +176,45 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
       NDraggablePopupRoute(
         from: alignment,
         builder: (_) {
-          return Align(
-            alignment: alignment,
-            child: Container(
-              width: 200,
-              height: 400,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.all(Radius.circular(0)),
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("dismiss"),
-              ),
-            ),
-          );
+          return buildPopupView(alignment: alignment);
         },
       ),
     );
   }
 
   void onNSlidePopupRoute() {
-    buildPopup({required Alignment alignment}) {
-      return NSlidePopupRoute(
-        from: alignment,
-        builder: (_) {
-          return Align(
-            alignment: alignment,
-            child: Container(
-              width: 200,
-              height: 400,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.all(Radius.circular(0)),
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("dismiss"),
-              ),
-            ),
-          );
-        },
-      );
-    }
+    final route = NSlidePopupRoute(
+      from: alignment,
+      builder: (_) {
+        return buildPopupView(alignment: alignment);
+      },
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).push(buildPopup(alignment: alignment));
+      Navigator.of(context).push(route);
     });
+  }
+
+  Widget buildPopupView({required Alignment alignment}) {
+    return Align(
+      alignment: alignment,
+      child: Container(
+        width: 300,
+        // height: 400,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          border: Border.all(color: Colors.blue),
+          borderRadius: BorderRadius.all(Radius.circular(0)),
+        ),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text("dismiss"),
+        ),
+      ),
+    );
   }
 
   void onCupertinoAlertDialogWrap() {
