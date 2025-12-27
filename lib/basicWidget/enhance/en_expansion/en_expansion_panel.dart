@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_mergeable_material.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_expansion/en_mergeable_material.dart';
 
 const double _kPanelHeaderCollapsedHeight = kMinInteractiveDimension;
 const EdgeInsets _kPanelHeaderExpandedDefaultPadding = EdgeInsets.symmetric(

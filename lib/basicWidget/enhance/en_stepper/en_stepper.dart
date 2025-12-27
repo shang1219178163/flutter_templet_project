@@ -49,11 +49,11 @@ const double _kTriangleHeight = _kStepSize * 0.866025; // Triangle height. sqrt(
 ///  * [Stepper]
 ///  * <https://material.io/archive/guidelines/components/steppers.html>
 @immutable
-class EnhanceStep {
+class EnStep {
   /// Creates a step for a [Stepper].
   ///
   /// The [title], [content], and [state] arguments must not be null.
-  const EnhanceStep({
+  const EnStep({
     this.icon,
     required this.title,
     this.subtitle,
@@ -181,7 +181,7 @@ class EnhanceStep {
 ///
 ///  * [Step]
 ///  * <https://material.io/archive/guidelines/components/steppers.html>
-class EnhanceStepper extends StatefulWidget {
+class EnStepper extends StatefulWidget {
   /// Creates a stepper from a list of steps.
   ///
   /// This widget is not meant to be rebuilt with a different list of steps
@@ -189,7 +189,7 @@ class EnhanceStepper extends StatefulWidget {
   /// new one.
   ///
   /// The [steps], [type], and [currentStep] arguments must not be null.
-  const EnhanceStepper({
+  const EnStepper({
     Key? key,
     required this.steps,
     this.physics,
@@ -208,7 +208,7 @@ class EnhanceStepper extends StatefulWidget {
   /// The steps of the stepper whose titles, subtitles, icons always get shown.
   ///
   /// The length of [steps] must not change.
-  final List<EnhanceStep> steps;
+  final List<EnStep> steps;
 
   /// The steps of the stepper icons size.
   final double? stepIconSize;
@@ -304,10 +304,10 @@ class EnhanceStepper extends StatefulWidget {
   final ControlsWidgetBuilder? controlsBuilder;
 
   @override
-  State<EnhanceStepper> createState() => _EnhanceStepperState();
+  State<EnStepper> createState() => _EnStepperState();
 }
 
-class _EnhanceStepperState extends State<EnhanceStepper> with TickerProviderStateMixin {
+class _EnStepperState extends State<EnStepper> with TickerProviderStateMixin {
   late List<GlobalKey> _keys;
   final Map<int, StepState> _oldStates = <int, StepState>{};
 
@@ -325,7 +325,7 @@ class _EnhanceStepperState extends State<EnhanceStepper> with TickerProviderStat
   }
 
   @override
-  void didUpdateWidget(EnhanceStepper oldWidget) {
+  void didUpdateWidget(EnStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
     assert(widget.steps.length == oldWidget.steps.length);
 

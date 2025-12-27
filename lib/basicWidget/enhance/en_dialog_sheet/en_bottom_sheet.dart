@@ -6,7 +6,7 @@ import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet/en_display_feature_sub_screen.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_dialog_sheet/en_display_feature_sub_screen.dart';
 
 const Duration _bottomSheetEnterDuration = Duration(milliseconds: 250);
 const Duration _bottomSheetExitDuration = Duration(milliseconds: 200);
@@ -43,9 +43,7 @@ class _ModalBottomSheetLayout extends SingleChildLayoutDelegate {
     return BoxConstraints(
       minWidth: constraints.maxWidth,
       maxWidth: constraints.maxWidth,
-      maxHeight: isScrollControlled
-          ? constraints.maxHeight
-          : constraints.maxHeight * 9.0 / 16.0,
+      maxHeight: isScrollControlled ? constraints.maxHeight : constraints.maxHeight * 9.0 / 16.0,
     );
   }
 
@@ -120,8 +118,7 @@ class _ModalBottomSheetNewState<T> extends State<_ModalBottomSheetNew<T>> {
     assert(debugCheckHasMediaQuery(context));
     assert(debugCheckHasMaterialLocalizations(context));
     final mediaQuery = MediaQuery.of(context);
-    final localizations =
-        MaterialLocalizations.of(context);
+    final localizations = MaterialLocalizations.of(context);
     final routeLabel = _getRouteLabel(localizations);
 
     return AnimatedBuilder(
@@ -156,8 +153,7 @@ class _ModalBottomSheetNewState<T> extends State<_ModalBottomSheetNew<T>> {
           explicitChildNodes: true,
           child: ClipRect(
             child: CustomSingleChildLayout(
-              delegate: _ModalBottomSheetLayout(
-                  animationValue, widget.isScrollControlled),
+              delegate: _ModalBottomSheetLayout(animationValue, widget.isScrollControlled),
               child: child,
             ),
           ),
@@ -390,28 +386,22 @@ class ModalBottomSheetRouteNew<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     final Widget content = EnDisplayFeatureSubScreen(
       anchorPoint: anchorPoint,
       right: right,
       child: Builder(
         builder: (BuildContext context) {
-          final sheetTheme =
-              Theme.of(context).bottomSheetTheme;
-          final defaults = Theme.of(context).useMaterial3
-              ? _BottomSheetDefaultsM3(context)
-              : const BottomSheetThemeData();
+          final sheetTheme = Theme.of(context).bottomSheetTheme;
+          final defaults =
+              Theme.of(context).useMaterial3 ? _BottomSheetDefaultsM3(context) : const BottomSheetThemeData();
           return _ModalBottomSheetNew<T>(
             route: this,
             backgroundColor: backgroundColor ??
                 sheetTheme.modalBackgroundColor ??
                 sheetTheme.backgroundColor ??
                 defaults.backgroundColor,
-            elevation: elevation ??
-                sheetTheme.modalElevation ??
-                defaults.modalElevation ??
-                sheetTheme.elevation,
+            elevation: elevation ?? sheetTheme.modalElevation ?? defaults.modalElevation ?? sheetTheme.elevation,
             shape: shape,
             clipBehavior: clipBehavior,
             constraints: constraints,
@@ -562,12 +552,10 @@ Future<T?> showModalBottomSheetNew<T>({
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
 
-  final navigator =
-      Navigator.of(context, rootNavigator: useRootNavigator);
+  final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
   return navigator.push(ModalBottomSheetRouteNew<T>(
     builder: builder,
-    capturedThemes:
-        InheritedTheme.capture(from: context, to: navigator.context),
+    capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
     isScrollControlled: isScrollControlled,
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     backgroundColor: backgroundColor,
@@ -576,8 +564,7 @@ Future<T?> showModalBottomSheetNew<T>({
     clipBehavior: clipBehavior,
     constraints: constraints,
     isDismissible: isDismissible,
-    modalBarrierColor:
-        barrierColor ?? Theme.of(context).bottomSheetTheme.modalBarrierColor,
+    modalBarrierColor: barrierColor ?? Theme.of(context).bottomSheetTheme.modalBarrierColor,
     enableDrag: enableDrag,
     settings: routeSettings,
     transitionAnimationController: transitionAnimationController,
@@ -601,8 +588,7 @@ class _BottomSheetDefaultsM3 extends BottomSheetThemeData {
       : super(
           elevation: 1.0,
           modalElevation: 1.0,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(28.0))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(28.0))),
         );
 
   final BuildContext context;

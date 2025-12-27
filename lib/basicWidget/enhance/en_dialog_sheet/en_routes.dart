@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet/en_display_feature_sub_screen.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_dialog_sheet/en_display_feature_sub_screen.dart';
 
 /// A general dialog route which allows for customization of the dialog popup.
 ///
@@ -96,8 +96,7 @@ class RawDialogRouteNew<T> extends PopupRoute<T> {
   final double? right;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     return Semantics(
       scopesRoute: true,
       explicitChildNodes: true,
@@ -110,8 +109,8 @@ class RawDialogRouteNew<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     if (_transitionBuilder == null) {
       // Some default transition.
       return FadeTransition(
@@ -217,8 +216,7 @@ Future<T?> showGeneralDialogNew<T extends Object?>({
   double? right,
 }) {
   assert(!barrierDismissible || barrierLabel != null);
-  return Navigator.of(context, rootNavigator: useRootNavigator)
-      .push<T>(RawDialogRouteNew<T>(
+  return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(RawDialogRouteNew<T>(
     pageBuilder: pageBuilder,
     barrierDismissible: barrierDismissible,
     barrierLabel: barrierLabel,

@@ -22,7 +22,7 @@ const double _kTextAndIconTabHeight = 72.0;
 ///  * [TabBarView], which displays a widget for the currently selected tab.
 ///  * [TabBar.indicator], which defines the appearance of the selected tab
 ///    indicator relative to the tab's bounds.
-enum EnhanceTabBarIndicatorSize {
+enum EnTabBarIndicatorSize {
   /// The tab indicator's bounds are as wide as the space occupied by the tab
   /// in the tab bar: from the right edge of the previous tab to the left edge
   /// of the next tab.
@@ -48,14 +48,14 @@ enum EnhanceTabBarIndicatorSize {
 ///  * [TabBarView], which displays a widget for the currently selected tab.
 ///  * [TabController], which coordinates tab selection between a [TabBar] and a [TabBarView].
 ///  * <https://material.io/design/components/tabs.html>
-class EnhanceTab extends StatelessWidget implements PreferredSizeWidget {
+class EnTab extends StatelessWidget implements PreferredSizeWidget {
   /// Creates a material design [TabBar] tab.
   ///
   /// At least one of [text], [icon], and [child] must be non-null. The [text]
   /// and [child] arguments must not be used at the same time. The
   /// [iconMargin] is only useful when [icon] and either one of [text] or
   /// [child] is non-null.
-  const EnhanceTab({
+  const EnTab({
     Key? key,
     this.text,
     this.icon,
@@ -317,13 +317,13 @@ double _indexChangeProgress(TabController controller) {
   return (controllerValue - currentIndex).abs() / (currentIndex - previousIndex).abs();
 }
 
-class _EnhanceIndicatorPainter extends CustomPainter {
-  _EnhanceIndicatorPainter({
+class _EnIndicatorPainter extends CustomPainter {
+  _EnIndicatorPainter({
     required this.controller,
     required this.indicator,
     required this.indicatorSize,
     required this.tabKeys,
-    required _EnhanceIndicatorPainter? old,
+    required _EnIndicatorPainter? old,
     required this.indicatorPadding,
     required this.indicatorWidth,
   }) : super(repaint: controller.animation) {
@@ -334,7 +334,7 @@ class _EnhanceIndicatorPainter extends CustomPainter {
 
   final TabController controller;
   final Decoration indicator;
-  final EnhanceTabBarIndicatorSize? indicatorSize;
+  final EnTabBarIndicatorSize? indicatorSize;
   final EdgeInsetsGeometry indicatorPadding;
   final List<GlobalKey> tabKeys;
 
@@ -393,12 +393,12 @@ class _EnhanceIndicatorPainter extends CustomPainter {
         break;
     }
 
-    if (indicatorSize == EnhanceTabBarIndicatorSize.label) {
+    if (indicatorSize == EnTabBarIndicatorSize.label) {
       final tabWidth = tabKeys[tabIndex].currentContext!.size!.width;
       final delta = ((tabRight - tabLeft) - tabWidth) / 2.0;
       tabLeft += delta;
       tabRight -= delta;
-    } else if (indicatorSize == EnhanceTabBarIndicatorSize.fixedWidth) {
+    } else if (indicatorSize == EnTabBarIndicatorSize.fixedWidth) {
       // final double tabWidth = tabKeys[tabIndex].currentContext!.size!.width;
       final delta = ((tabRight - tabLeft) - indicatorWidth) / 2.0;
       tabLeft += delta;
@@ -440,7 +440,7 @@ class _EnhanceIndicatorPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_EnhanceIndicatorPainter old) {
+  bool shouldRepaint(_EnIndicatorPainter old) {
     return _needsPaint ||
         controller != old.controller ||
         indicator != old.indicator ||
@@ -525,7 +525,7 @@ class _TabBarScrollPosition extends ScrollPositionWithSingleContext {
           oldPosition: oldPosition,
         );
 
-  final _EnhanceTabBarState tabBar;
+  final _EnTabBarState tabBar;
 
   bool? _initialViewportDimensionWasZero;
 
@@ -553,7 +553,7 @@ class _TabBarScrollPosition extends ScrollPositionWithSingleContext {
 class _TabBarScrollController extends ScrollController {
   _TabBarScrollController(this.tabBar);
 
-  final _EnhanceTabBarState tabBar;
+  final _EnTabBarState tabBar;
 
   @override
   ScrollPosition createScrollPosition(ScrollPhysics physics, ScrollContext context, ScrollPosition? oldPosition) {
@@ -601,7 +601,7 @@ class _TabBarScrollController extends ScrollController {
 ///
 ///  * [TabBarView], which displays page views that correspond to each tab.
 ///  * [TabBar], which is used to display the [Tab] that corresponds to each page of the [TabBarView].
-class EnhanceTabBar extends StatefulWidget implements PreferredSizeWidget {
+class EnTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// Creates a material design tab bar.
   ///
   /// The [tabs] argument must not be null and its length must match the [controller]'s
@@ -616,7 +616,7 @@ class EnhanceTabBar extends StatefulWidget implements PreferredSizeWidget {
   ///
   /// If [indicator] is not null or provided from [TabBarTheme],
   /// then [indicatorWeight], [indicatorPadding], and [indicatorColor] are ignored.
-  const EnhanceTabBar({
+  const EnTabBar({
     Key? key,
     required this.tabs,
     this.controller,
@@ -733,7 +733,7 @@ class EnhanceTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// The selected tab's location appearance can be refined further with
   /// the [indicatorColor], [indicatorWeight], [indicatorPadding], and
   /// [indicator] properties.
-  final EnhanceTabBarIndicatorSize? indicatorSize;
+  final EnTabBarIndicatorSize? indicatorSize;
 
   /// The color of selected tab labels.
   ///
@@ -859,13 +859,13 @@ class EnhanceTabBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   @override
-  State<EnhanceTabBar> createState() => _EnhanceTabBarState();
+  State<EnTabBar> createState() => _EnTabBarState();
 }
 
-class _EnhanceTabBarState extends State<EnhanceTabBar> {
+class _EnTabBarState extends State<EnTabBar> {
   ScrollController? _scrollController;
   TabController? _controller;
-  _EnhanceIndicatorPainter? _indicatorPainter;
+  _EnIndicatorPainter? _indicatorPainter;
   int? _currentIndex;
   late double _tabStripWidth;
   late List<GlobalKey> _tabKeys;
@@ -944,7 +944,7 @@ class _EnhanceTabBarState extends State<EnhanceTabBar> {
   void _initIndicatorPainter() {
     _indicatorPainter = !_controllerIsValid
         ? null
-        : _EnhanceIndicatorPainter(
+        : _EnIndicatorPainter(
             controller: _controller!,
             indicator: _indicator,
             indicatorSize: widget.indicatorSize,
@@ -964,7 +964,7 @@ class _EnhanceTabBarState extends State<EnhanceTabBar> {
   }
 
   @override
-  void didUpdateWidget(EnhanceTabBar oldWidget) {
+  void didUpdateWidget(EnTabBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       _updateTabController();

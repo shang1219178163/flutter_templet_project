@@ -5,7 +5,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet/en_routes.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_dialog_sheet/en_routes.dart';
 
 //   /// {@macro flutter.material.dialog.backgroundColor}
 //   final Color? backgroundColor;
@@ -144,10 +144,7 @@ import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet
 // }
 
 Widget _buildMaterialDialogTransitions(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child) {
+    BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
   return FadeTransition(
     opacity: CurvedAnimation(
       parent: animation,
@@ -266,8 +263,7 @@ Future<T?> showDialogNew<T>({
     ).context,
   );
 
-  return Navigator.of(context, rootNavigator: useRootNavigator)
-      .push<T>(DialogRouteNew<T>(
+  return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(DialogRouteNew<T>(
     context: context,
     builder: builder,
     barrierColor: barrierColor,
@@ -285,8 +281,7 @@ bool _debugIsActive(BuildContext context) {
   if (context is Element && !context.debugIsActive) {
     throw FlutterError.fromParts(<DiagnosticsNode>[
       ErrorSummary('This BuildContext is no longer valid.'),
-      ErrorDescription(
-          'The showDialog function context parameter is a BuildContext that is no longer valid.'),
+      ErrorDescription('The showDialog function context parameter is a BuildContext that is no longer valid.'),
       ErrorHint(
         'This can commonly occur when the showDialog function is called after awaiting a Future. '
         'In this situation the BuildContext might refer to a widget that has already been disposed during the await. '
@@ -355,9 +350,8 @@ class DialogRouteNew<T> extends RawDialogRouteNew<T> {
     super.settings,
     super.anchorPoint,
     super.right,
-  })  : super(
-          pageBuilder: (BuildContext buildContext, Animation<double> animation,
-              Animation<double> secondaryAnimation) {
+  }) : super(
+          pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
             final Widget pageChild = Builder(builder: builder);
             var dialog = themes?.wrap(pageChild) ?? pageChild;
             if (useSafeArea) {
@@ -365,8 +359,7 @@ class DialogRouteNew<T> extends RawDialogRouteNew<T> {
             }
             return pageChild;
           },
-          barrierLabel: barrierLabel ??
-              MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          barrierLabel: barrierLabel ?? MaterialLocalizations.of(context).modalBarrierDismissLabel,
           transitionDuration: const Duration(milliseconds: 150),
           transitionBuilder: _buildMaterialDialogTransitions,
         );

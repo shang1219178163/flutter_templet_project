@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_tab/en_tab_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
@@ -13,11 +13,11 @@ class EnhanceTabBarDemo extends StatefulWidget {
 }
 
 class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTickerProviderStateMixin {
-  final indicatorSizes = EnhanceTabBarIndicatorSize.values;
+  final indicatorSizes = EnTabBarIndicatorSize.values;
 
   // List<String> get indicatorTypes => indicatorSizes.map((e) => e.toString().split(".").last).toList();
 
-  var dropValue = EnhanceTabBarIndicatorSize.tab;
+  var dropValue = EnTabBarIndicatorSize.tab;
 
   // /// 初始索引
   // int initialIndex = 1;
@@ -103,9 +103,9 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     required TabController? controller,
     required ValueNotifier<int> indexVN,
     required List<String> items,
-    EnhanceTabBarIndicatorSize? indicatorSize = EnhanceTabBarIndicatorSize.fixedWidth,
+    EnTabBarIndicatorSize? indicatorSize = EnTabBarIndicatorSize.fixedWidth,
   }) {
-    return EnhanceTabBar(
+    return EnTabBar(
       isScrollable: true,
       controller: controller,
       // indicatorSize: EnhanceTabBarIndicatorSize.label,
@@ -224,7 +224,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     // var dropValue = '语文';
     // var list = ['语文', '数学', '英语'];
 
-    return DropdownButton<EnhanceTabBarIndicatorSize>(
+    return DropdownButton<EnTabBarIndicatorSize>(
       value: dropValue,
       items: indicatorSizes
           .map(
