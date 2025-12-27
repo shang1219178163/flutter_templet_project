@@ -10,6 +10,7 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 // import 'package:flutter/painting.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/extension/src/file_ext.dart';
@@ -115,6 +116,14 @@ extension ImageChunkEventExt on ImageChunkEvent {
 }
 
 extension ImageCacheExt on ImageCache {
+  /// CachedNetworkImageProvider 图片预缓存
+  static Future<void> preloadImage(BuildContext context, {required String url}) async {
+    return precacheImage(
+      CachedNetworkImageProvider(url),
+      context,
+    );
+  }
+
   /// PaintingBinding.instance?.imageCache?.clear();
   static clear() {
     PaintingBinding.instance.imageCache.clear();
@@ -133,10 +142,7 @@ extension ImageCacheExt on ImageCache {
   /// evict images
   static evictImages(List<String> urls) {
     urls.forEach((e) {
-      Object key = NetworkImage(
-        e,
-        scale: 1.0,
-      );
+      Object key = NetworkImage(e, scale: 1.0);
       PaintingBinding.instance.imageCache.evict(key, includeLive: true);
     });
   }
