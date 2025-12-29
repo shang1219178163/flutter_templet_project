@@ -29,6 +29,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   );
 
   final colorController = NColorFlashAnimController();
+  final colorControllerOne = NColorFlashAnimController();
 
   double size = 100;
   final isLoading = ValueNotifier(true);
@@ -54,35 +55,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         });
       },
       children: <Widget>[
-        NColorFlashAnim(
-          controller: colorController,
-          builder: (animationController, animation) {
-            return AnimatedBuilder(
-              animation: animationController,
-              child: GestureDetector(
-                onTap: colorController.startAnim,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.yellow,
-                  ),
-                  child: Text("ColorAnim"),
-                ),
-              ),
-              builder: (_, child) {
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: animation.value ?? Colors.transparent,
-                      width: 3,
-                    ),
-                  ),
-                  child: child ?? SizedBox(),
-                );
-              },
-            );
-          },
-        ),
+        buildColorFlashAnim(),
         _buildPausePlayIcon(),
         _buildAnimatedSizeIcon(),
         _buildAnimatedCrossFade(),
@@ -102,6 +75,75 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           child: Center(child: Text('第2页')),
         ),
       ],
+    );
+  }
+
+  Widget buildColorFlashAnim() {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: NColorFlashAnim(
+              controller: colorController,
+              builder: (animationController, animation) {
+                return AnimatedBuilder(
+                  animation: animationController,
+                  child: GestureDetector(
+                    onTap: colorController.startAnim,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.yellow,
+                      ),
+                      child: Text("ColorAnim"),
+                    ),
+                  ),
+                  builder: (_, child) {
+                    return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: animation.value ?? Colors.transparent,
+                          width: 3,
+                        ),
+                      ),
+                      child: child ?? SizedBox(),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+          Expanded(
+            child: NColorFlashAnim(
+              controller: colorControllerOne,
+              builder: (animationController, animation) {
+                return AnimatedBuilder(
+                  animation: animationController,
+                  builder: (_, child) {
+                    return GestureDetector(
+                      onTap: colorControllerOne.startAnim,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        decoration: BoxDecoration(
+                          color: animation.value,
+                          // border: Border.all(
+                          //   color: animation.value ?? Colors.transparent,
+                          //   width: 3,
+                          // ),
+                        ),
+                        child: Text(
+                          "ColorAnimOne",
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 

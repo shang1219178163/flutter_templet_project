@@ -38,7 +38,11 @@ class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProv
 
   bool isRunning = false;
 
-  late ColorTween tween = widget.tween ?? ColorTween(begin: Colors.transparent, end: Colors.red);
+  late ColorTween tween = widget.tween ??
+      ColorTween(
+        begin: Colors.red.withOpacity(0.0),
+        end: Colors.red,
+      );
 
   @override
   void dispose() {
