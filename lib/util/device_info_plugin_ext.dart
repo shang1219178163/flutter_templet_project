@@ -68,4 +68,25 @@ extension DeviceInfoPluginExt on DeviceInfoPlugin {
       androidCb: (v) => v.model.contains("Pad"),
     );
   }
+
+  /// 当前安卓机器是否特定品牌
+  static Future<bool> inBrands({List<String> brands = const ['huawei']}) async {
+    if (!supportPlatforms) {
+      return false;
+    }
+    return getDeviceInfo(
+      iosCb: (v) => false,
+      androidCb: (androidInfo) {
+        final brand = androidInfo.brand.toLowerCase();
+        final manufacturer = androidInfo.manufacturer.toLowerCase();
+        for (final e in brands) {
+          final result = brand.contains(e) || manufacturer.contains(e);
+          if (result) {
+            return result;
+          }
+        }
+        return false;
+      },
+    );
+  }
 }
