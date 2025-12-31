@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class ContainerDemo extends StatefulWidget {
@@ -27,8 +28,19 @@ class _ContainerDemoState extends State<ContainerDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        image: DecorationImage(
+          image: AssetImage(Assets.imagesBgLoginTopLight),
+          fit: BoxFit.contain,
+          alignment: Alignment.topCenter,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           title: Text(widget.title ?? "$widget"),
           actions: [
             TextButton(
@@ -53,7 +65,9 @@ class _ContainerDemoState extends State<ContainerDemo> {
             buildGradientBorder(),
             buildSection3(),
           ].map((e) => e.toSliverToBoxAdapter()).toList(),
-        ));
+        ),
+      ),
+    );
   }
 
   buildBodyColumn() {
