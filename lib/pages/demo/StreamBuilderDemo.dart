@@ -6,7 +6,14 @@
 //  Copyright © 10/19/21 shang. All rights reserved.
 //
 
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/mixin/search_controller_mixin.dart';
+import 'package:flutter_templet_project/util/debounce_text_controller.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class StreamBuilderDemo extends StatefulWidget {
   final String? title;
@@ -17,7 +24,23 @@ class StreamBuilderDemo extends StatefulWidget {
   _StreamBuilderDemoState createState() => _StreamBuilderDemoState();
 }
 
-class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
+class _StreamBuilderDemoState extends State<StreamBuilderDemo> with SearchControllerMixin {
+  // final textController = TextEditingController();
+  // late final debounceTextController = DebounceTextController(
+  //   controller: textController,
+  //   onChanged: (String v) {
+  //     searchVN.value = v;
+  //   },
+  // );
+
+  late final textController = TextEditingController().debounce(
+    onChanged: (String v) {
+      searchVN.value = v;
+    },
+  );
+
+  final searchVN = ValueNotifier("");
+
   final message = """
 ⚡ 与 Future 的关系
 Future 表示 一次异步结果。
@@ -43,8 +66,16 @@ UI 事件：onPressed, TextField.onChanged → 都是 Stream。
   }
 
   @override
+  void dispose() {
+    // debounceTextController.dispose();
+    textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.bgColorF9F9F9,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
@@ -53,30 +84,67 @@ UI 事件：onPressed, TextField.onChanged → 都是 Stream。
   }
 
   Widget buildBody() {
-    return Column(
-      children: [
-        Text(message),
-        StreamBuilder<int>(
-          stream: counter(), //
-          //initialData: ,// a Stream<int> or null
-          builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-            if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            }
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                return Text('没有Stream');
-              case ConnectionState.waiting:
-                return Text('等待数据...');
-              case ConnectionState.active:
-                return Text('active: ${snapshot.data}');
-              case ConnectionState.done:
-                return Text('Stream 已关闭');
-            }
-            return Text('0'); // unreachable
-          },
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Column(
+        children: [
+          Container(
+            child: CupertinoSearchTextField(
+              controller: textController,
+            ),
+          ),
+          Text(message),
+          Divider(),
+          StreamBuilder<int>(
+            stream: counter(), //
+            //initialData: ,// a Stream<int> or null
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              }
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return Text('没有Stream');
+                case ConnectionState.waiting:
+                  return Text('等待数据...');
+                case ConnectionState.active:
+                  return Text('active: ${snapshot.data}');
+                case ConnectionState.done:
+                  return Text('Stream 已关闭');
+              }
+              return Text('0'); // unreachable
+            },
+          ),
+          Divider(),
+          ValueListenableBuilder(
+            valueListenable: searchVN,
+            builder: (context, value, child) {
+              return Text(value);
+            },
+          ),
+        ],
+      ),
     );
+  }
+
+  @override
+  TextEditingController get searchController => textController;
+
+  @override
+  void onSearchChanged(String v) {
+    DLog.d(v);
+    searchVN.value = v;
+  }
+}
+
+class _StateController {
+  final _controller = StreamController<int>();
+  Stream<int> get counterStream => _controller.stream;
+
+  int _count = 0;
+
+  void increment() {
+    _count++;
+    _controller.add(_count);
   }
 }
