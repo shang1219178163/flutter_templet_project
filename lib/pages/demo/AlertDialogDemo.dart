@@ -1,12 +1,12 @@
 import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NSlidePopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_draggable_popup_route.dart';
+import 'package:flutter_templet_project/basicWidget/n_slide_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_user_privacy.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
@@ -199,7 +199,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
       alignment: alignment,
       child: Container(
         width: 300,
-        // height: 400,
+        height: 400,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: Colors.green,
