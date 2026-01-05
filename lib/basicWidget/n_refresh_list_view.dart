@@ -50,7 +50,7 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automati
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      DLog.d([widget.title, widget.key, hashCode]);
+      // DLog.d([widget.title, widget.key, hashCode]);
       if (items.isEmpty) {
         onRefresh();
       }
@@ -86,21 +86,21 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automati
   }
 
   Future<void> onRefresh() async {
-    page = 1;
-    indicator = IndicatorResult.success;
-
     try {
+      page = 1;
+
       final list = await widget.onRequest(true, page, pageSize, <T>[]);
       items.replaceRange(0, items.length, list);
-
       page++;
-      if (list.length < pageSize) {
+
+      final noMore = list.length < pageSize;
+      if (noMore) {
         indicator = IndicatorResult.noMore;
       }
-      refreshController.finishRefresh(indicator);
+      refreshController.finishRefresh();
       refreshController.resetFooter();
     } catch (e) {
-      refreshController.finishRefresh();
+      refreshController.finishRefresh(IndicatorResult.fail);
     }
     setState(() {});
   }
@@ -112,21 +112,19 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automati
     }
 
     try {
-      final list = await widget.onRequest(
-        true,
-        page,
-        pageSize,
-        items.sublist(items.length - pageSize),
-      );
+      final start = (items.length - pageSize).clamp(0, pageSize);
+      final prePages = items.sublist(start);
+      final list = await widget.onRequest(true, page, pageSize, prePages);
       items.addAll(list);
       page++;
 
-      if (list.length < pageSize) {
+      final noMore = list.length < pageSize;
+      if (noMore) {
         indicator = IndicatorResult.noMore;
       }
-      refreshController.finishLoad(IndicatorResult.noMore);
+      refreshController.finishLoad(indicator);
     } catch (e) {
-      refreshController.finishLoad();
+      refreshController.finishLoad(IndicatorResult.fail);
     }
     setState(() {});
   }
