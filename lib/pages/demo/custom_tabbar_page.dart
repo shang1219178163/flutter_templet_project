@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/tab/model/n_tabbar_data_mode
 import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_outline_tabbar.dart';
+import 'package:flutter_templet_project/basicWidget/tab/n_tab_outline_item.dart';
 
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -135,6 +136,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                           final i = items.indexOf(e);
                           // chromeTabController.jumpTo(i);
                           indexVN.value = i;
+                          titleIndexVN.value = i;
                         },
                         child: Text(e.title),
                       ),
@@ -216,6 +218,8 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                 indexVN: titleIndexVN,
                 onChanged: (v) {},
                 height: 30,
+                itemWidth: 80,
+                // itemPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 // itemBuilder: buildItemBuilderTwo,
               ),
             ),
@@ -250,7 +254,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                   items: titles,
                   indexVN: titleIndexVN,
                   isScrollable: true,
-                  itemWidth: 80,
+                  itemWidth: 86,
                   itemPadding: EdgeInsets.zero,
                   onChanged: (v) {},
                   itemBuilder: buildItemBuilderTwo,
@@ -390,66 +394,29 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
     final e = titles[i];
     final isSelected = titleIndexVN.value == i;
 
-    TextStyle textStyle = tabBarTheme.labelStyle ??
-        TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          color: Colors.red,
-        );
-
-    TextStyle unselectedTextStyle = tabBarTheme.unselectedLabelStyle ??
-        TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          color: Colors.black54,
-        );
-
-    final style = isSelected ? textStyle : unselectedTextStyle;
-
-    final textColor = style.color;
-
-    Widget imgPrefix = SizedBox();
-    switch (i) {
-      case 1:
-        {
-          imgPrefix = Padding(
-            padding: const EdgeInsets.only(right: 4.0),
-            child: Image(
-              image: AssetImage("assets/images/icon_football.png"),
-              width: 16,
-              height: 16,
+    return NTabOutlineItem(
+      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      title: e,
+      isSelected: isSelected,
+      fontColor: Colors.green,
+      unselectedFontColor: Colors.black54,
+      builder: (_, child) {
+        return Flex(
+          direction: Axis.horizontal,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 4.0),
+              child: Image(
+                image: AssetImage("assets/images/icon_football.png"),
+                width: 16,
+                height: 16,
+              ),
             ),
-          );
-        }
-        break;
-      case 2:
-        {
-          imgPrefix = Padding(
-            padding: const EdgeInsets.only(right: 4.0),
-            child: Image(
-              image: AssetImage("assets/images/icon_basketball.png"),
-              width: 16,
-              height: 16,
-            ),
-          );
-        }
-        break;
-      default:
-        break;
-    }
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      decoration: BoxDecoration(
-        // color: Colors.green,
-        border: Border.all(color: textColor ?? Colors.transparent, width: 1),
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-      ),
-      child: Flex(
-        direction: Axis.horizontal,
-        mainAxisSize: MainAxisSize.min,
-        children: [imgPrefix, FittedBox(child: Text(e, style: style))],
-      ),
+            Flexible(child: child),
+          ],
+        );
+      },
     );
   }
 }

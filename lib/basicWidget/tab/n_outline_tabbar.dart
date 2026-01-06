@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/tab/model/n_tabbar_data_model.dart';
 
 /// 圆角边框
 class NOutlineTabbar extends StatefulWidget {
@@ -15,13 +14,14 @@ class NOutlineTabbar extends StatefulWidget {
     super.key,
     required this.items,
     required this.indexVN,
-    required this.onChanged,
+    this.onChanged,
     this.isScrollable = false,
     this.isWrap = false,
     this.height = 30,
     this.itemWidth,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
     this.spacing = 6,
+    this.lastSpacing = 6,
     this.radius,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
@@ -49,6 +49,7 @@ class NOutlineTabbar extends StatefulWidget {
   /// default 4
   final double? radius;
   final double spacing;
+  final double lastSpacing;
   final TextStyle? selectedLabelStyle;
   final TextStyle? unselectedLabelStyle;
   final TabAlignment? tabAlignment;
@@ -116,13 +117,14 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, i) {
+            final isLast = i == widget.items.length - 1;
             return Container(
               width: widget.itemWidth,
+              margin: EdgeInsets.only(right: isLast ? widget.lastSpacing : 0),
               child: buildItem(i: i),
             );
           },
           separatorBuilder: (context, i) {
-            final e = widget.items[i];
             return SizedBox(width: widget.spacing);
           },
           itemCount: widget.items.length,
