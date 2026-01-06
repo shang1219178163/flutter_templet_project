@@ -24,6 +24,7 @@ class NChromeTab extends StatefulWidget {
     this.onChanged,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
+    this.tabAlignment,
     this.itemBuilder,
   });
 
@@ -42,6 +43,7 @@ class NChromeTab extends StatefulWidget {
 
   final TextStyle? selectedLabelStyle;
   final TextStyle? unselectedLabelStyle;
+  final TabAlignment? tabAlignment;
 
   /// 默认无法满足时自定义
   final IndexedWidgetBuilder? itemBuilder;
@@ -143,11 +145,22 @@ class _NChromeTabState extends State<NChromeTab> {
   }
 
   Widget buildRow() {
+    final alignmentMap = {
+      TabAlignment.start: MainAxisAlignment.start,
+      TabAlignment.center: MainAxisAlignment.center,
+      TabAlignment.startOffset: MainAxisAlignment.end,
+    };
+
     return Row(
+      mainAxisAlignment: alignmentMap[widget.tabAlignment] ?? MainAxisAlignment.start,
       children: widget.items.map(
         (e) {
           final i = widget.items.indexOf(e);
-          return Expanded(child: buildItem(i: i));
+          Widget child = buildItem(i: i);
+          if (widget.tabAlignment == TabAlignment.fill) {
+            child = Expanded(child: child);
+          }
+          return child;
         },
       ).toList(),
     );

@@ -19,12 +19,13 @@ class NOutlineTabbar extends StatefulWidget {
     this.isScrollable = false,
     this.isWrap = false,
     this.height = 30,
-    this.radius,
     this.itemWidth,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
     this.spacing = 6,
+    this.radius,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
+    this.tabAlignment,
     this.itemBuilder,
   });
 
@@ -39,17 +40,18 @@ class NOutlineTabbar extends StatefulWidget {
   /// default 30
   final double height;
 
-  /// default 4
-  final double? radius;
-
   /// 子项宽度
   final double? itemWidth;
 
   /// default EdgeInsets.symmetric(horizontal: 5, vertical: 2)
   final EdgeInsets? itemPadding;
+
+  /// default 4
+  final double? radius;
   final double spacing;
   final TextStyle? selectedLabelStyle;
   final TextStyle? unselectedLabelStyle;
+  final TabAlignment? tabAlignment;
 
   /// 默认无法满足时自定义
   final IndexedWidgetBuilder? itemBuilder;
@@ -84,6 +86,22 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
   @override
   void didUpdateWidget(covariant NOutlineTabbar oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.items != widget.items ||
+        oldWidget.indexVN != widget.indexVN ||
+        oldWidget.onChanged != widget.onChanged ||
+        oldWidget.isScrollable != widget.isScrollable ||
+        oldWidget.isWrap != widget.isWrap ||
+        oldWidget.height != widget.height ||
+        oldWidget.itemWidth != widget.itemWidth ||
+        oldWidget.itemPadding != widget.itemPadding ||
+        oldWidget.spacing != widget.spacing ||
+        oldWidget.radius != widget.radius ||
+        oldWidget.selectedLabelStyle != widget.selectedLabelStyle ||
+        oldWidget.unselectedLabelStyle != widget.unselectedLabelStyle ||
+        oldWidget.tabAlignment != widget.tabAlignment ||
+        oldWidget.itemBuilder != widget.itemBuilder) {
+      setState(() {});
+    }
   }
 
   @override
@@ -117,22 +135,36 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
   }
 
   Widget buildRow() {
+    final alignmentMap = {
+      TabAlignment.start: MainAxisAlignment.start,
+      TabAlignment.center: MainAxisAlignment.center,
+      TabAlignment.startOffset: MainAxisAlignment.end,
+    };
+
     return Row(
+      mainAxisAlignment: alignmentMap[widget.tabAlignment] ?? MainAxisAlignment.start,
       children: widget.items.map(
         (e) {
           final i = widget.items.indexOf(e);
-          return Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: e == widget.items.last ? 0 : widget.spacing),
-              child: buildItem(i: i),
-            ),
+          Widget child = Padding(
+            padding: EdgeInsets.only(right: e == widget.items.last ? 0 : widget.spacing),
+            child: buildItem(i: i),
           );
+          if (widget.tabAlignment == TabAlignment.fill) {
+            child = Expanded(child: child);
+          }
+          return child;
         },
       ).toList(),
     );
   }
 
   Widget buildWrap() {
+    final alignmentMap = {
+      TabAlignment.start: WrapAlignment.start,
+      TabAlignment.center: WrapAlignment.center,
+      TabAlignment.startOffset: WrapAlignment.end,
+    };
     return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       // final spacing = widget.spacing;
       // final rowCount = 4.0;
@@ -141,7 +173,7 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
       return Wrap(
         spacing: widget.spacing,
         runSpacing: widget.spacing,
-        // crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: alignmentMap[widget.tabAlignment] ?? WrapAlignment.start,
         children: [
           ...widget.items.map((e) {
             final i = widget.items.indexOf(e);

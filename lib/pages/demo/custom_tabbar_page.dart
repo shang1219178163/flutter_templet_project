@@ -179,6 +179,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                 items: items,
                 indexVN: indexVN,
                 // onChanged: (v) {},
+                tabAlignment: TabAlignment.fill,
                 // itemBuilder: buildItemBuilderOne,
               ),
             ),
@@ -211,7 +212,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
               title: "NOutlineTabbar - items",
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
               child: NOutlineTabbar(
-                items: titles.sublist(0, 5),
+                items: titles.sublist(0, 2),
                 indexVN: titleIndexVN,
                 onChanged: (v) {},
                 height: 30,
