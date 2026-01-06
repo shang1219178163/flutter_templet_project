@@ -16,27 +16,38 @@ class NOutlineTabbar extends StatefulWidget {
     required this.items,
     required this.indexVN,
     required this.onChanged,
-    this.height,
+    this.isScrollable = false,
+    this.isWrap = false,
+    this.height = 30,
     this.radius,
-    this.itemPadding,
+    this.itemWidth,
+    this.itemPadding = const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+    this.spacing = 6,
     this.selectedLabelStyle,
     this.unselectedLabelStyle,
     this.itemBuilder,
   });
 
-  final List<NTabbarDataModel> items;
+  final List<String> items;
   final ValueNotifier<int> indexVN;
 
   final ValueChanged<int>? onChanged;
 
-  /// default 24
-  final double? height;
+  final bool isScrollable;
+  final bool isWrap;
+
+  /// default 30
+  final double height;
 
   /// default 4
   final double? radius;
 
+  /// 子项宽度
+  final double? itemWidth;
+
   /// default EdgeInsets.symmetric(horizontal: 5, vertical: 2)
   final EdgeInsets? itemPadding;
+  final double spacing;
   final TextStyle? selectedLabelStyle;
   final TextStyle? unselectedLabelStyle;
 
@@ -50,9 +61,12 @@ class NOutlineTabbar extends StatefulWidget {
 class _NOutlineTabbarState extends State<NOutlineTabbar> {
   late var currIndex = widget.indexVN.value;
 
+  late final theme = Theme.of(context);
+  late final tabBarTheme = theme.tabBarTheme;
+
   @override
   void dispose() {
-    widget.indexVN.addListener(onIndexLtr);
+    widget.indexVN.removeListener(onIndexLtr);
     super.dispose();
   }
 
@@ -74,56 +88,113 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final tabBarTheme = theme.tabBarTheme;
+    Widget contentWidget = Container(
+      height: widget.height,
+      child: buildRow(),
+    );
+    if (widget.isScrollable) {
+      contentWidget = Container(
+        height: widget.height,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, i) {
+            return Container(
+              width: widget.itemWidth,
+              child: buildItem(i: i),
+            );
+          },
+          separatorBuilder: (context, i) {
+            final e = widget.items[i];
+            return SizedBox(width: widget.spacing);
+          },
+          itemCount: widget.items.length,
+        ),
+      );
+    } else if (widget.isWrap) {
+      contentWidget = buildWrap();
+    }
+    return contentWidget;
+  }
 
-    return Container(
-      height: widget.height ?? 30,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, i) {
-          final e = widget.items[i];
-          final isSelected = widget.indexVN.value == i;
-          final textStyle = isSelected
-              ? (e.style ?? widget.selectedLabelStyle ?? tabBarTheme.labelStyle)
-              : widget.unselectedLabelStyle ?? tabBarTheme.unselectedLabelStyle;
-
-          final textColorDefault = isSelected ? Color(0xffE91025) : Color(0xff7C7C85);
-          final textColor = textStyle?.color ?? textColorDefault;
-
-          return GestureDetector(
-            onTap: () {
-              if (currIndex == i) {
-                debugPrint("$runtimeType $i 重复点击");
-                return;
-              }
-              setState(() {});
-              currIndex = i;
-              widget.indexVN.value = i;
-              widget.onChanged?.call(widget.indexVN.value);
-            },
-            child: Container(
-              padding: widget.itemPadding ?? EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-              decoration: BoxDecoration(
-                border: Border.all(color: textColor, width: 1),
-                borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 4.0)),
-              ),
-              alignment: Alignment.center,
-              child: widget.itemBuilder?.call(context, i) ??
-                  Text(
-                    e.title,
-                    style: textStyle ?? TextStyle(color: textColorDefault),
-                  ),
+  Widget buildRow() {
+    return Row(
+      children: widget.items.map(
+        (e) {
+          final i = widget.items.indexOf(e);
+          return Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(right: e == widget.items.last ? 0 : widget.spacing),
+              child: buildItem(i: i),
             ),
           );
         },
-        separatorBuilder: (context, i) {
-          final e = widget.items[i];
-          return SizedBox(width: 6);
-        },
-        itemCount: widget.items.length,
-      ),
+      ).toList(),
     );
+  }
+
+  Widget buildWrap() {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      // final spacing = widget.spacing;
+      // final rowCount = 4.0;
+      // final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
+
+      return Wrap(
+        spacing: widget.spacing,
+        runSpacing: widget.spacing,
+        // crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          ...widget.items.map((e) {
+            final i = widget.items.indexOf(e);
+
+            return Container(
+              width: widget.itemWidth,
+              height: widget.height,
+              child: buildItem(i: i),
+            );
+          }),
+        ],
+      );
+    });
+  }
+
+  Widget buildItem({required int i}) {
+    final e = widget.items[i];
+    final isSelected = widget.indexVN.value == i;
+    final textStyle = isSelected
+        ? (widget.selectedLabelStyle ?? tabBarTheme.labelStyle)
+        : widget.unselectedLabelStyle ?? tabBarTheme.unselectedLabelStyle;
+
+    final textColorDefault = isSelected ? Color(0xffE91025) : Color(0xff7C7C85);
+    final textColor = textStyle?.color ?? textColorDefault;
+
+    return GestureDetector(
+      onTap: () {
+        jumpTo(i);
+      },
+      child: widget.itemBuilder?.call(context, i) ??
+          Container(
+            padding: widget.itemPadding,
+            decoration: BoxDecoration(
+              border: Border.all(color: textColor, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(widget.radius ?? 4.0)),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              e,
+              style: textStyle ?? TextStyle(color: textColorDefault),
+            ),
+          ),
+    );
+  }
+
+  void jumpTo(int i) {
+    if (currIndex == i) {
+      debugPrint("$runtimeType $i 重复点击");
+      return;
+    }
+    setState(() {});
+    currIndex = i;
+    widget.indexVN.value = i;
+    widget.onChanged?.call(widget.indexVN.value);
   }
 }

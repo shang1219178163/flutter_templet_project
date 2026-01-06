@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_slidable_tabbar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/model/n_tabbar_data_model.dart';
+import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_outline_tabbar.dart';
 
@@ -21,9 +23,14 @@ class CustomTabbarPage extends StatefulWidget {
 }
 
 class _CustomTabbarPageState extends State<CustomTabbarPage> {
+  late final theme = Theme.of(context);
+  late final tabBarTheme = theme.tabBarTheme;
+
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
+
+  final chromeTabController = NChromeTabController();
 
   final indexVN = ValueNotifier(1);
 
@@ -81,6 +88,9 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
     ),
   ];
 
+  final titles = List.generate(9, (i) => "选项$i");
+  final titleIndexVN = ValueNotifier(1);
+
   @override
   void didUpdateWidget(covariant CustomTabbarPage oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -113,30 +123,148 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                 return Text(str);
               },
             ),
-            NChromeTabBar(
-              items: itemsNew,
-              indexVN: indexVN,
-              // onChanged: (v) {},
-              bgColor: AppColor.bgColorF7F7F7,
-              selectedBgColor: Colors.white,
+            Row(
+              children: [
+                ...items.map((e) {
+                  final hideSeperator = e == items.last;
+                  return Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(right: hideSeperator ? 0 : 8),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          final i = items.indexOf(e);
+                          // chromeTabController.jumpTo(i);
+                          indexVN.value = i;
+                        },
+                        child: Text(e.title),
+                      ),
+                    ),
+                  );
+                }),
+              ],
             ),
-            NChromeTabBar(
-              items: items,
-              indexVN: indexVN,
-              // onChanged: (v) {},
-              itemBuilder: buildItemBuilder,
+            Container(
+              decoration: BoxDecoration(
+                color: AppColor.bgColorF7F7F7,
+              ),
+              child: NSectionBox(
+                hide: true,
+                title: "NChromeTabBar - itemsNew",
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12).copyWith(bottom: 0),
+                divider: SizedBox(),
+                child: NChromeTabBar(
+                  items: itemsNew,
+                  indexVN: indexVN,
+                  // onChanged: (v) {},
+                  bgColor: AppColor.bgColorF7F7F7,
+                  selectedBgColor: Colors.white,
+                ),
+              ),
             ),
-            NOutlineTabbar(
-              items: items,
-              indexVN: indexVN,
-              onChanged: (v) {},
-              itemBuilder: buildItemBuilder,
+            NSectionBox(
+              hide: true,
+              title: "NChromeTabBar - items",
+              child: NChromeTabBar(
+                items: items,
+                indexVN: indexVN,
+                // onChanged: (v) {},
+                // itemBuilder: buildItemBuilder,
+              ),
             ),
-            NSlidableTabbar(
-              items: List.generate(3, (i) => "选项$i"),
-              onChanged: (int v) {
-                DLog.d(v);
-              },
+            NSectionBox(
+              title: "NChromeTab",
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
+              child: NChromeTab(
+                controller: chromeTabController,
+                items: items,
+                indexVN: indexVN,
+                // onChanged: (v) {},
+                // itemBuilder: buildItemBuilderOne,
+              ),
+            ),
+            NSectionBox(
+              title: "NChromeTab - itemBuilder",
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
+              child: NChromeTab(
+                controller: chromeTabController,
+                items: items,
+                indexVN: indexVN,
+                // onChanged: (v) {},
+                itemBuilder: buildItemBuilderOne,
+              ),
+            ),
+            NSectionBox(
+              title: "NChromeTab - isScrollable",
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
+              child: NChromeTab(
+                controller: chromeTabController,
+                items: items,
+                indexVN: indexVN,
+                // onChanged: (v) {},
+                isScrollable: true,
+                itemPadding: EdgeInsets.symmetric(horizontal: 50),
+                // itemBuilder: buildItemBuilderOne,
+              ),
+            ),
+            NSectionBox(
+              // hide: true,
+              title: "NOutlineTabbar - items",
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+              child: NOutlineTabbar(
+                items: titles.sublist(0, 5),
+                indexVN: titleIndexVN,
+                onChanged: (v) {},
+                height: 30,
+                // itemBuilder: buildItemBuilderTwo,
+              ),
+            ),
+            NSectionBox(
+              // hide: true,
+              title: "NOutlineTabbar - isWrap",
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+              child: Container(
+                // decoration: BoxDecoration(
+                //   border: Border.all(color: Colors.blue),
+                // ),
+                child: NOutlineTabbar(
+                  key: ValueKey("value"),
+                  items: titles,
+                  indexVN: titleIndexVN,
+                  isWrap: true,
+                  itemWidth: 80,
+                  onChanged: (v) {},
+                  itemBuilder: buildItemBuilderTwo,
+                ),
+              ),
+            ),
+            NSectionBox(
+              // hide: true,
+              title: "NOutlineTabbar - isScrollable",
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+              child: Container(
+                // decoration: BoxDecoration(
+                //   border: Border.all(color: Colors.blue),
+                // ),
+                child: NOutlineTabbar(
+                  items: titles,
+                  indexVN: titleIndexVN,
+                  isScrollable: true,
+                  itemWidth: 80,
+                  itemPadding: EdgeInsets.zero,
+                  onChanged: (v) {},
+                  itemBuilder: buildItemBuilderTwo,
+                ),
+              ),
+            ),
+            NSectionBox(
+              hide: true,
+              title: "NSlidableTabbar",
+              child: NSlidableTabbar(
+                items: List.generate(3, (i) => "选项$i"),
+                onChanged: (int v) {
+                  DLog.d(v);
+                },
+              ),
             ),
           ].map((e) {
             return Container(
@@ -188,5 +316,139 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
         break;
     }
     return Text(e.title, style: e.style);
+  }
+
+  Widget buildItemBuilderOne(BuildContext context, int i) {
+    final e = items[i];
+    final isSelected = indexVN.value == i;
+
+    final bgColor = e.bgColor;
+    final colorFilter = bgColor == null ? null : ColorFilter.mode(bgColor, BlendMode.srcIn);
+    final image = isSelected
+        ? DecorationImage(
+            image: e.bg!,
+            fit: BoxFit.fill,
+            colorFilter: colorFilter,
+          )
+        : null;
+
+    Widget imgPrefix = SizedBox();
+    switch (i) {
+      case 1:
+        {
+          imgPrefix = Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: Image(
+              image: AssetImage("assets/images/icon_football.png"),
+              width: 16,
+              height: 16,
+            ),
+          );
+        }
+        break;
+      case 2:
+        {
+          imgPrefix = Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: Image(
+              image: AssetImage("assets/images/icon_basketball.png"),
+              width: 16,
+              height: 16,
+            ),
+          );
+        }
+        break;
+      default:
+        break;
+    }
+    return Container(
+      // padding: widget.itemPadding,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.blue),
+        image: image,
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        // decoration: BoxDecoration(
+        //   color: Colors.transparent,
+        //   border: Border.all(color: Colors.blue),
+        // ),
+        child: Flex(
+          direction: Axis.horizontal,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            imgPrefix,
+            Text(e.title, style: e.style),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildItemBuilderTwo(BuildContext context, int i) {
+    final e = titles[i];
+    final isSelected = titleIndexVN.value == i;
+
+    TextStyle textStyle = tabBarTheme.labelStyle ??
+        TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: Colors.red,
+        );
+
+    TextStyle unselectedTextStyle = tabBarTheme.unselectedLabelStyle ??
+        TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: Colors.black54,
+        );
+
+    final style = isSelected ? textStyle : unselectedTextStyle;
+
+    final textColor = style.color;
+
+    Widget imgPrefix = SizedBox();
+    switch (i) {
+      case 1:
+        {
+          imgPrefix = Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: Image(
+              image: AssetImage("assets/images/icon_football.png"),
+              width: 16,
+              height: 16,
+            ),
+          );
+        }
+        break;
+      case 2:
+        {
+          imgPrefix = Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: Image(
+              image: AssetImage("assets/images/icon_basketball.png"),
+              width: 16,
+              height: 16,
+            ),
+          );
+        }
+        break;
+      default:
+        break;
+    }
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      decoration: BoxDecoration(
+        // color: Colors.green,
+        border: Border.all(color: textColor ?? Colors.transparent, width: 1),
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+      ),
+      child: Flex(
+        direction: Axis.horizontal,
+        mainAxisSize: MainAxisSize.min,
+        children: [imgPrefix, FittedBox(child: Text(e, style: style))],
+      ),
+    );
   }
 }

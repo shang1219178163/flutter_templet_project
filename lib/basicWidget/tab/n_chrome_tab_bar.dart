@@ -50,7 +50,7 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
 
   @override
   void dispose() {
-    widget.indexVN.addListener(onIndexLtr);
+    widget.indexVN.removeListener(onIndexLtr);
     super.dispose();
   }
 
@@ -62,7 +62,9 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
 
   onIndexLtr() {
     currIndex = widget.indexVN.value;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -106,69 +108,63 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
       decoration: BoxDecoration(
         color: widget.bgColor,
       ),
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final itemWidth = (constraints.maxWidth / widget.items.length).truncateToDouble();
+      child: Row(
+        children: [
+          ...widget.items.map(
+            (e) {
+              final i = widget.items.indexOf(e);
+              final isSelected = widget.indexVN.value == i;
 
-          return Row(
-            children: [
-              ...widget.items.map(
-                (e) {
-                  final i = widget.items.indexOf(e);
-                  final isSelected = widget.indexVN.value == i;
-
-                  return Expanded(
-                    child: Container(
-                      padding: widget.itemPadding,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          if (isSelected)
-                            Positioned(
-                              left: 0,
-                              top: 0,
-                              bottom: 0,
-                              right: 0,
-                              child: Image(
-                                image: e.bg!,
-                                fit: BoxFit.fill,
-                                color: e.bgColor ?? widget.selectedBgColor,
-                              ),
-                            ),
-                          GestureDetector(
-                            onTap: () {
-                              if (currIndex == i) {
-                                debugPrint("$runtimeType $i 重复点击");
-                                return;
-                              }
-                              setState(() {});
-                              widget.indexVN.value = i;
-                              widget.onChanged?.call(widget.indexVN.value);
-                            },
-                            child: Container(
-                              width: itemWidth,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                border: Border.all(color: Colors.blue),
-                              ),
-                              child: widget.itemBuilder?.call(context, i) ??
-                                  Text(
-                                    e.title,
-                                    maxLines: 1,
-                                    style: isSelected ? (e.style ?? selectedTextStyle) : unselectedTextStyle,
-                                  ),
-                            ),
+              return Expanded(
+                child: Container(
+                  padding: widget.itemPadding,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      if (isSelected)
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                          right: 0,
+                          child: Image(
+                            image: e.bg!,
+                            fit: BoxFit.fill,
+                            color: e.bgColor ?? widget.selectedBgColor,
                           ),
-                        ],
+                        ),
+                      GestureDetector(
+                        onTap: () {
+                          if (currIndex == i) {
+                            debugPrint("$runtimeType $i 重复点击");
+                            return;
+                          }
+                          setState(() {});
+                          currIndex = i;
+                          widget.indexVN.value = i;
+                          widget.onChanged?.call(widget.indexVN.value);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          // decoration: BoxDecoration(
+                          //   color: Colors.transparent,
+                          //   border: Border.all(color: Colors.blue),
+                          // ),
+                          child: widget.itemBuilder?.call(context, i) ??
+                              Text(
+                                e.title,
+                                maxLines: 1,
+                                style: isSelected ? (e.style ?? selectedTextStyle) : unselectedTextStyle,
+                              ),
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          );
-        },
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
