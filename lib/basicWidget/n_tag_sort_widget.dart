@@ -75,8 +75,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
   }
 
   updateTabController() {
-    tabController?.dispose();
-
+    // tabController?.dispose();
     final initialIndex = tabController?.index.clamp(0, tags.length - 1) ?? 0;
     tabController = TabController(initialIndex: initialIndex, length: tags.length, vsync: this);
     tabController!.addListener(() {
