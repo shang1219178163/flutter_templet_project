@@ -182,7 +182,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
   @override
   bool get wantKeepAlive => true;
 
-  late final _easyRefreshController = widget.refreshController ??
+  late final refreshController = widget.refreshController ??
       EasyRefreshController(
         controlFinishRefresh: true,
         controlFinishLoad: true,
@@ -269,7 +269,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
     Widget? child,
   }) {
     return EasyRefresh(
-      controller: _easyRefreshController,
+      controller: refreshController,
       triggerAxis: Axis.vertical,
       onRefresh: widget.disableOnReresh ? null : () => onRefresh(),
       onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore ? null : () => onLoad(),
@@ -280,30 +280,26 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
   onRefresh() async {
     page = widget.pageInitial;
     itemsVN.value = await widget.onRequest(true, page, widget.pageSize, <T>[]);
+    page++;
+
     indicator = itemsVN.value.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
-    _easyRefreshController.finishRefresh(IndicatorResult.success);
+    refreshController.finishRefresh(IndicatorResult.success);
+    refreshController.resetFooter();
   }
 
   onLoad() async {
-    if (!mounted) {
-      return;
-    }
     if (indicator == IndicatorResult.noMore) {
       return;
     }
 
-    page += 1;
-
-    final models = await widget.onRequest(
-      false,
-      page,
-      widget.pageSize,
-      itemsVN.value.sublist(itemsVN.value.length - widget.pageSize),
-    );
+    final start = (itemsVN.value.length - widget.pageSize).clamp(0, widget.pageSize);
+    final prePages = itemsVN.value.sublist(start);
+    final models = await widget.onRequest(false, page, widget.pageSize, prePages);
     itemsVN.value = [...itemsVN.value, ...models];
+    page++;
 
     indicator = models.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
-    _easyRefreshController.finishLoad(indicator);
+    refreshController.finishLoad(indicator);
   }
 
   Widget buildListView({
