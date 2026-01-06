@@ -28,23 +28,12 @@ extension ScrollControllerExt on ScrollController {
     if (!hasClients) {
       return;
     }
+    final offset = value.clamp(position.minScrollExtent, position.maxScrollExtent);
     if (duration == Duration.zero) {
-      jumpTo(value);
+      jumpTo(offset);
     } else {
-      await animateTo(value, duration: duration, curve: curve);
+      await animateTo(offset, duration: duration, curve: curve);
     }
-  }
-
-  /// 跳转到对应位子
-  Future<void> jumpToBottom({
-    Duration duration = const Duration(milliseconds: 350),
-    Curve curve = Curves.ease,
-  }) async {
-    if (!hasClients) {
-      return;
-    }
-    final offset = position.pixels.clamp(position.pixels, position.maxScrollExtent);
-    await jumpTo(offset, duration: duration, curve: curve);
   }
 
   ///水平移动

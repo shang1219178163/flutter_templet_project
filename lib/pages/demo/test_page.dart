@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:flutter_templet_project/basicWidget/team_title_gradient_widget.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:http/http.dart' as http;
@@ -24,11 +25,13 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin {
-  List<String> items = List.generate(6, (index) => 'item_$index').toList();
-  late TabController _tabController;
+  late var items = <({String name, VoidCallback action})>[
+    (name: "splitMapJoin", action: onSplit),
+    (name: "日期时间", action: onTime),
+    (name: "测试", action: onTest),
+  ];
 
-  var titles = ["splitMapJoin", "1", "2", "3", "4", "5", "6", "7"];
-  int time = 60;
+  late final tabController = TabController(length: items.length, vsync: this);
 
   final textStyle = TextStyle(overflow: TextOverflow.ellipsis);
 
@@ -36,88 +39,104 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: items.length, vsync: this)
-      ..addListener(() {
-        if (!_tabController.indexIsChanging) {
-          debugPrint("_tabController:${_tabController.index}");
-        }
-      });
+    tabController.addListener(() {
+      if (!tabController.indexIsChanging) {
+        debugPrint("_tabController:${tabController.index}");
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(AppRes.image.urls[5]),
-                fit: BoxFit.cover,
-              ),
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(AppRes.image.urls[5]),
+              fit: BoxFit.cover,
             ),
           ),
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    onPressed: onDone,
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ))
-              .toList(),
-          // bottom: buildAppBarBottom(),
-          bottom: TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            // labelColor: context.primaryColor,
-            // unselectedLabelColor: Theme.of(context).colorScheme.primary,
-            tabs: List.generate(6, (index) {
-              return Tab(
-                text: 'item_$index',
-              );
-            }).toList(),
-            // indicatorSize: TabBarIndicatorSize.label,
-            // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-          ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              buildWrap(),
-              buildSection1(),
-              StatefulBuilder(builder: (context, setState) {
-                return buildSection2();
-              }),
-              RepaintBoundary(
-                child: buildSection3(),
-              ),
-              buildSection4(),
-              buildSection5(),
-              SizedBox(height: 34),
-            ],
-          ),
-        ));
-  }
-
-  buildAppBarBottom() {
-    final items = List.generate(
-        6,
-        (index) => Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Text('item_$index'),
-            )).toList();
-    return PreferredSize(
-      preferredSize: Size.fromHeight(60),
-      child: Row(
-        children: items,
+        title: Text(widget.title ?? "$widget"),
+        bottom: buildAppBarBottom(),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildWrap(),
+            TeamNameMatchGradientWidget(
+              logo: '',
+              name: "主队队名",
+              awayLogo: '',
+              awayName: "客队队名",
+              awayColor: Colors.green,
+            ),
+            SizedBox(height: 34),
+          ],
+        ),
       ),
     );
   }
 
-  onDone() {
+  PreferredSizeWidget buildAppBarBottom() {
+    // final items = List.generate(
+    //     6,
+    //     (index) => Container(
+    //           padding: EdgeInsets.symmetric(horizontal: 8),
+    //           child: Text('item_$index'),
+    //         )).toList();
+    // return PreferredSize(
+    //   preferredSize: Size.fromHeight(36),
+    //   child: Container(
+    //     height: 36,
+    //     decoration: BoxDecoration(
+    //       color: Colors.green,
+    //       border: Border.all(color: Colors.blue),
+    //       borderRadius: BorderRadius.all(Radius.circular(0)),
+    //     ),
+    //     child: Row(
+    //       children: items,
+    //     ),
+    //   ),
+    // );
+
+    return TabBar(
+      controller: tabController,
+      isScrollable: true,
+      // labelColor: context.primaryColor,
+      // unselectedLabelColor: Theme.of(context).colorScheme.primary,
+      tabs: List.generate(6, (index) {
+        return Tab(
+          text: 'item_$index',
+        );
+      }).toList(),
+      // indicatorSize: TabBarIndicatorSize.label,
+      // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
+    );
+  }
+
+  Widget buildWrap() {
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
+      alignment: WrapAlignment.start,
+      children: items
+          .map((e) => ActionChip(
+                avatar: CircleAvatar(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Text(e.name.characters.first.toUpperCase()),
+                ),
+                label: Text(e.name),
+                onPressed: e.action,
+              ))
+          .toList(),
+    );
+  }
+
+  void onSplit() {}
+
+  onTime() {
     const a = true;
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
@@ -137,118 +156,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     ]}");
   }
 
-  Wrap buildWrap() {
-    return Wrap(
-      spacing: 8.0,
-      runSpacing: 8.0,
-      alignment: WrapAlignment.start,
-      children: titles
-          .map((e) => ActionChip(
-                avatar: CircleAvatar(
-                    backgroundColor: Theme.of(context).primaryColor, child: Text(e.characters.first.toUpperCase())),
-                label: Text(e),
-                onPressed: () {
-                  _onPressed(titles.indexOf(e));
-                },
-              ))
-          .toList(),
-    );
-  }
-
-  buildSection1() {
-    return Column(
-      children: [
-        Row(
-          children: [Text('倒计时'), Text('$time')],
-        ),
-        ElevatedButton.icon(
-          icon: Icon(Icons.send),
-          label: Text("ElevatedButton"),
-          onPressed: () {
-            time++;
-            setState(() {});
-          },
-        ),
-      ],
-    );
-  }
-
-  buildSection2() {
-    return Column(
-      children: [
-        Row(
-          children: [Text('倒计时'), Text('$time')],
-        ),
-        ElevatedButton.icon(
-          icon: Icon(Icons.send),
-          label: Text("ElevatedButton"),
-          onPressed: () {
-            setState(() {
-              time++;
-            });
-          },
-        ),
-      ],
-    );
-  }
-
-  buildSection3() {
-    return Column(
-      children: [
-        Row(
-          children: [Text('倒计时'), Text('$time')],
-        ),
-        ElevatedButton.icon(
-          icon: Icon(Icons.send),
-          label: Text("ElevatedButton"),
-          onPressed: () {
-            setState(() {
-              time++;
-            });
-          },
-        ),
-      ],
-    );
-  }
-
-  buildSection4() {
-    final tuples = [
-      Tuple2('Color(0xFF4286f4)', Color(0xFF4286f4)),
-      Tuple2('Color(0xFF4286f4).withOpacity(0.5)', Color(0xFF4286f4).withOpacity(0.5)),
-      Tuple2('Colors.black.withOpacity(0.4)', Colors.black.withOpacity(0.4)),
-    ];
-    return Column(
-      children: tuples
-          .map((e) => Row(children: [
-                Container(
-                  width: 30,
-                  height: 30,
-                  margin: EdgeInsets.only(left: 16, right: 8),
-                  color: e.item2,
-                ),
-                Text(e.item1),
-              ]))
-          .toList(),
-    );
-  }
-
-  buildSection5() {
-    return Listener(
-      onPointerDown: (e) {
-        debugPrint("onPointerDown:$e");
-      },
-      child: Container(
-        height: 400,
-        child: ListView.builder(
-            itemCount: 3,
-            itemBuilder: (ctx, index) {
-              return Container(
-                height: 60,
-                child: ColoredBox(color: ColorExt.random, child: Text('Row_$index')),
-              );
-            }),
-      ),
-    );
+  void onTest() {
+    ScrollNotificationObserver.maybeOf(context);
+    Scrollable.maybeOf(context);
   }
 
   Future<void> _onPressed(int e) async {
@@ -256,13 +166,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     DLog.d("file: ${file.fileSizeDesc}");
   }
 
-  test() {}
-
   Future<XFile> multipartFileToXFile(http.MultipartFile file) async {
     final bytes = await file.finalize().toBytes();
     final xFile = XFile.fromData(bytes, name: file.filename ?? "unknown_file");
     return xFile;
   }
 }
-
-extension RecordExt on Record {}
