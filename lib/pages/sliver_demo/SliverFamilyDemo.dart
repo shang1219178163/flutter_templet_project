@@ -23,6 +23,7 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverListPopverDemo.d
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoTwo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverRefreshControlDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverResizingHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabbarDemoOne.dart';
@@ -111,6 +112,11 @@ class _SliverFamilyPageViewDemoState extends State<SliverFamilyPageViewDemo> {
 }
 
 List<Tuple3<String, String, Widget>> _list = [
+  Tuple3(
+    'SliverRefreshControlDemo',
+    '刷新组建',
+    SliverRefreshControlDemo(),
+  ),
   Tuple3(
     'SliverBaseDemo',
     '设置子控件透明度 SliverOpacity、SliverPadding',
