@@ -69,6 +69,18 @@ extension DeviceInfoPluginExt on DeviceInfoPlugin {
     );
   }
 
+  /// 是pad
+  static FutureOr<bool> isLowRamDevice() async {
+    if (!supportPlatforms) {
+      return false;
+    }
+
+    return getDeviceInfo(
+      iosCb: (v) => false,
+      androidCb: (v) => v.isLowRamDevice,
+    );
+  }
+
   /// 当前安卓机器是否特定品牌
   static Future<bool> inBrands({List<String> brands = const ['huawei']}) async {
     if (!supportPlatforms) {
