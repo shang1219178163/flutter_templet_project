@@ -178,7 +178,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
               child: NChromeTab(
                 controller: chromeTabController,
-                items: items,
+                items: titles,
                 indexVN: indexVN,
                 // onChanged: (v) {},
                 tabAlignment: TabAlignment.fill,
@@ -190,7 +190,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
               child: NChromeTab(
                 controller: chromeTabController,
-                items: items,
+                items: titles,
                 indexVN: indexVN,
                 // onChanged: (v) {},
                 itemBuilder: buildItemBuilderOne,
@@ -201,7 +201,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
               child: NChromeTab(
                 controller: chromeTabController,
-                items: items,
+                items: titles,
                 indexVN: indexVN,
                 // onChanged: (v) {},
                 isScrollable: true,

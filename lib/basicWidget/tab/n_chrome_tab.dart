@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/tab/model/n_tabbar_data_model.dart';
 
 /// Chrome 浏览器风格 tabbar
 class NChromeTab extends StatefulWidget {
@@ -30,7 +29,7 @@ class NChromeTab extends StatefulWidget {
 
   final NChromeTabController? controller;
 
-  final List<NTabbarDataModel> items;
+  final List<String> items;
   final ValueNotifier<int> indexVN;
 
   final ValueChanged<int>? onChanged;
@@ -71,7 +70,7 @@ class _NChromeTabState extends State<NChromeTab> {
       widget.unselectedLabelStyle ??
       tabBarTheme.unselectedLabelStyle ??
       TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: FontWeight.w600,
         color: Colors.black54,
       );
@@ -170,15 +169,15 @@ class _NChromeTabState extends State<NChromeTab> {
     final e = widget.items[i];
     final isSelected = widget.indexVN.value == i;
 
-    final bgColor = e.bgColor ?? widget.selectedBgColor;
-    final colorFilter = bgColor == null ? null : ColorFilter.mode(bgColor, BlendMode.srcIn);
-    final image = isSelected
-        ? DecorationImage(
-            image: e.bg!,
-            fit: BoxFit.fill,
-            colorFilter: colorFilter,
-          )
-        : null;
+    // final bgColor = widget.selectedBgColor;
+    // final colorFilter = bgColor == null ? null : ColorFilter.mode(bgColor, BlendMode.srcIn);
+    // final image = isSelected
+    //     ? DecorationImage(
+    //         image: e.bg!,
+    //         fit: BoxFit.fill,
+    //         colorFilter: colorFilter,
+    //       )
+    //     : null;
 
     return GestureDetector(
       onTap: () {
@@ -187,10 +186,10 @@ class _NChromeTabState extends State<NChromeTab> {
       child: widget.itemBuilder?.call(context, i) ??
           Container(
             padding: widget.itemPadding,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.blue),
-              image: image,
-            ),
+            // decoration: BoxDecoration(
+            //   border: Border.all(color: Colors.blue),
+            //   image: image,
+            // ),
             child: Container(
               alignment: Alignment.center,
               // decoration: BoxDecoration(
@@ -198,9 +197,9 @@ class _NChromeTabState extends State<NChromeTab> {
               //   border: Border.all(color: Colors.blue),
               // ),
               child: Text(
-                e.title,
+                e,
                 maxLines: 1,
-                style: isSelected ? (e.style ?? textStyle) : unselectedTextStyle,
+                style: isSelected ? textStyle : unselectedTextStyle,
               ),
             ),
           ),

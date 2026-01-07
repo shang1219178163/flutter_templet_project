@@ -48,6 +48,27 @@ class NChromeTabBar extends StatefulWidget {
 class _NChromeTabBarState extends State<NChromeTabBar> {
   late var currIndex = widget.indexVN.value;
 
+  late final theme = Theme.of(context);
+  late final tabBarTheme = theme.tabBarTheme;
+
+  TextStyle get textStyle =>
+      widget.selectedLabelStyle ??
+      tabBarTheme.labelStyle ??
+      TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Colors.red,
+      );
+
+  TextStyle get unselectedTextStyle =>
+      widget.unselectedLabelStyle ??
+      tabBarTheme.unselectedLabelStyle ??
+      TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Colors.black54,
+      );
+
   @override
   void dispose() {
     widget.indexVN.removeListener(onIndexLtr);
@@ -85,24 +106,6 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final tabBarTheme = theme.tabBarTheme;
-
-    final selectedTextStyle = widget.selectedLabelStyle ??
-        tabBarTheme.labelStyle ??
-        TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: Colors.red,
-        );
-
-    final unselectedTextStyle = widget.unselectedLabelStyle ??
-        tabBarTheme.unselectedLabelStyle ??
-        TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.black54,
-        );
     return Container(
       height: widget.height,
       decoration: BoxDecoration(
@@ -114,58 +117,72 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
             (e) {
               final i = widget.items.indexOf(e);
               final isSelected = widget.indexVN.value == i;
-
-              return Expanded(
-                child: Container(
-                  padding: widget.itemPadding,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      if (isSelected)
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          bottom: 0,
-                          right: 0,
-                          child: Image(
-                            image: e.bg!,
-                            fit: BoxFit.fill,
-                            color: e.bgColor ?? widget.selectedBgColor,
-                          ),
-                        ),
-                      GestureDetector(
-                        onTap: () {
-                          if (currIndex == i) {
-                            debugPrint("$runtimeType $i 重复点击");
-                            return;
-                          }
-                          setState(() {});
-                          currIndex = i;
-                          widget.indexVN.value = i;
-                          widget.onChanged?.call(widget.indexVN.value);
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          // decoration: BoxDecoration(
-                          //   color: Colors.transparent,
-                          //   border: Border.all(color: Colors.blue),
-                          // ),
-                          child: widget.itemBuilder?.call(context, i) ??
-                              Text(
-                                e.title,
-                                maxLines: 1,
-                                style: isSelected ? (e.style ?? selectedTextStyle) : unselectedTextStyle,
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return Expanded(child: buildItem(i: i));
             },
           ),
         ],
       ),
     );
+  }
+
+  Widget buildItem({required int i}) {
+    final e = widget.items[i];
+    final isSelected = widget.indexVN.value == i;
+
+    return GestureDetector(
+      onTap: () {
+        jumpTo(i);
+      },
+      child: widget.itemBuilder?.call(context, i) ??
+          Container(
+            padding: widget.itemPadding,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                if (isSelected)
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                    child: Image(
+                      image: e.bg!,
+                      fit: BoxFit.fill,
+                      color: e.bgColor ?? widget.selectedBgColor,
+                    ),
+                  ),
+                GestureDetector(
+                  onTap: () {
+                    jumpTo(i);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    // decoration: BoxDecoration(
+                    //   color: Colors.transparent,
+                    //   border: Border.all(color: Colors.blue),
+                    // ),
+                    child: widget.itemBuilder?.call(context, i) ??
+                        Text(
+                          e.title,
+                          maxLines: 1,
+                          style: isSelected ? (e.style ?? textStyle) : unselectedTextStyle,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+    );
+  }
+
+  void jumpTo(int i) {
+    if (currIndex == i) {
+      debugPrint("$runtimeType $i 重复点击");
+      return;
+    }
+    setState(() {});
+    currIndex = i;
+    widget.indexVN.value = i;
+    widget.onChanged?.call(widget.indexVN.value);
   }
 }
