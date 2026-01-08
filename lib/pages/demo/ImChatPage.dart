@@ -849,7 +849,7 @@ class _ImChatPageState extends State<ImChatPage>
 
       final isOwner = BoolExt.random();
       final names = ["路人甲", "路人乙", "路人丙", "路人丁"];
-      final name = names.randomOne ?? "未知";
+      final name = names.random ?? "未知";
       // final sequence = "${total - (index + 1) + (dataList.value.lastOrNull?.seqIntValue ?? -) - } ";
       final sequence = "${(dataList.value.lastOrNull?.seqIntValue ?? total) - (index + 1)}";
 
@@ -857,7 +857,7 @@ class _ImChatPageState extends State<ImChatPage>
         sequence: sequence,
         isOwner: isOwner,
         restructureMsgBody: text,
-        avatar: isOwner ? AppRes.image.urls.first : AppRes.image.urls.sublist(1).randomOne,
+        avatar: isOwner ? AppRes.image.urls.first : AppRes.image.urls.sublist(1).random,
         nickName: isOwner ? "我" : name,
         time: DateTime.now().secondsSinceEpoch,
       );

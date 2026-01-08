@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 
 extension IterableExt<E> on Iterable<E> {
   /// 获取随机元素
-  E? get randomOne {
+  E? get random {
     if (isEmpty) {
       return null;
     }

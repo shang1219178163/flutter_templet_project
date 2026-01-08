@@ -123,7 +123,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
               fit: BoxFit.fill,
             ),
             title: e.showName ?? "-",
-            subtitle: assetFileModels.firstOrNull?.content?.split("\n").randomOne ?? "",
+            subtitle: assetFileModels.firstOrNull?.content?.split("\n").random ?? "",
             time: dateStr,
           ),
         );

@@ -42,7 +42,7 @@ class NPickUsersBox extends NPickRequestListBox<UserModel> {
                 return UserModel(
                   id: "${1000 + index}",
                   name: 3.generateChars(chars: "张王李赵一二三四"),
-                  desc: ["教师", "公务员", "个体户", "消防员"].randomOne,
+                  desc: ["教师", "公务员", "个体户", "消防员"].random,
                 );
               });
             }
@@ -56,7 +56,7 @@ class NPickUsersBox extends NPickRequestListBox<UserModel> {
                   "公务员",
                   "个体户",
                   "消防员",
-                ].randomOne,
+                ].random,
               );
             });
             return list;

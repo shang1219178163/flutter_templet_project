@@ -25,7 +25,7 @@ List<UserModel> models = [
     // final name = "name$i";
     final name = "${1.generateList(items: ["张三", "赵四", "王五", "李六"])}$i";
     final age = IntExt.random(max: 100);
-    final sex = [0, 1].randomOne == 1 ? "男" : "女";
+    final sex = [0, 1].random == 1 ? "男" : "女";
     final birdthYear = IntExt.random(min: 1990, max: 2024);
     final birthMonth = 1.generateList(
         items: "子（鼠）、丑（牛）、寅（虎）、卯（兔）、辰（龙）、巳"

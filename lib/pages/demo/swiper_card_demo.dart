@@ -46,7 +46,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
     return _CandidateModel(
       avatar: e,
       name: '用户 $i',
-      job: ['Manager', 'Member'].randomOne,
+      job: ['Manager', 'Member'].random,
       city: 'Town',
     );
   }).toList();
