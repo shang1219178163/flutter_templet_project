@@ -1,12 +1,12 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/placehorlder/activity_indicator_placehorlder.dart';
 import 'package:flutter_templet_project/basicWidget/placehorlder/list_footer_no_more_placehorlder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/NLoadMoreControl.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/NRefreshControl.dart';
-import 'package:flutter_templet_project/basicWidget/refresh_control/cupertino_sliver_refresh_control_ext.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class SliverRefreshControlDemo extends StatefulWidget {
   const SliverRefreshControlDemo({
@@ -24,6 +24,8 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
   final scrollController = ScrollController();
 
   var list = List.generate(10, (i) => "item_$i");
+  var page = 1;
+  var pageSize = 20;
 
   final loadController = NLoadMoreController();
 
@@ -44,7 +46,6 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
 
   Widget buildBody() {
     return CustomScrollView(
-      // controller: scrollController,
       slivers: [
         ...buildRefreshListView(
           list: list,
@@ -84,9 +85,23 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
           (context, index) {
             final e = list[index];
             return SizedBox(
-              height: 45,
+              height: 58,
               child: ListTile(
-                leading: const Icon(Icons.place),
+                leading: CachedNetworkImage(
+                  // imageUrl: AppRes.image.urls.random ?? "",
+                  imageUrl: "",
+                  width: 48,
+                  height: 48,
+                  memCacheWidth: 48,
+                  memCacheHeight: 48,
+                  maxHeightDiskCache: 48,
+                  maxWidthDiskCache: 48,
+                  placeholder: (_, url) => Image(
+                    image: AssetImage(Assets.imagesAvatar),
+                    width: 48,
+                    height: 48,
+                  ),
+                ),
                 title: Text(e),
               ),
             );
@@ -122,12 +137,17 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
   Future<void> fetchPage({required bool isRefresh}) async {
     await Future.delayed(Duration(milliseconds: 1500));
     if (isRefresh) {
-      list = List.generate(20, (i) => "item_${i}");
+      page = 1;
+      list = List.generate(pageSize, (i) => "item_${i}");
+      page++;
+
       loadController.resetState(noMore: false);
     } else {
-      var items = List.generate(20, (i) => "item_${list.length + i}");
+      var items = List.generate(pageSize, (i) => "item_${list.length + i}");
       list.addAll(items);
-      var noMore = items.length < 20;
+      page++;
+
+      var noMore = items.length < pageSize;
       noMore = list.length > 59;
       debugPrint([items.length, list.length, noMore].join("_"));
       loadController.resetState(noMore: noMore);
