@@ -33,11 +33,12 @@ class ListFooterNoMorePlacehorlder extends StatelessWidget {
           ),
           child ??
               Container(
-                width: 4,
-                height: 4,
+                width: 2,
+                height: 2,
                 margin: EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black38),
+                  color: Colors.black38,
+                  borderRadius: BorderRadius.all(Radius.circular(1)),
                 ),
               ),
           Expanded(

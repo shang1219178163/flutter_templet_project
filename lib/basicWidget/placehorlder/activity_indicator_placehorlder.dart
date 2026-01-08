@@ -14,10 +14,12 @@ class ActivityIndicatorPlacehorlder extends StatelessWidget {
     super.key,
     this.icon,
     this.text,
+    this.message,
   });
 
   final Widget? icon;
   final Widget? text;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class ActivityIndicatorPlacehorlder extends StatelessWidget {
           text ??
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text("加载中..."),
+                child: Text(message ?? "加载中..."),
               )
         ],
       ),
