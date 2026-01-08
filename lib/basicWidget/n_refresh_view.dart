@@ -188,7 +188,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
         controlFinishLoad: true,
       );
 
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
 
   var indicator = IndicatorResult.none;
 
@@ -242,10 +242,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
       return const NSkeletonScreen();
     }
 
-    return buildBody();
-  }
-
-  Widget buildBody() {
     return ValueListenableBuilder<List<T>>(
       valueListenable: itemsVN,
       builder: (context, list, child) {
@@ -256,7 +252,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
         return buildRefresh(
           child: widget.child ??
               buildListView(
-                controller: _scrollController,
+                controller: scrollController,
                 needRemovePadding: widget.needRemovePadding,
                 items: list,
               ),
