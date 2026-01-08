@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/CupertinoSliverLoadMoreControl.dart';
-import 'package:get/get.dart';
+import 'package:flutter_templet_project/basicWidget/placehorlder/activity_indicator_placehorlder.dart';
+import 'package:flutter_templet_project/basicWidget/placehorlder/list_footer_no_more_placehorlder.dart';
 
 class SliverRefreshControlDemo extends StatefulWidget {
   const SliverRefreshControlDemo({
@@ -63,9 +64,22 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
           ),
         ),
         CupertinoSliverLoadMoreControl(
-          controller: scrollController,
+          // controller: scrollController,
           onLoadMore: onMore,
           hasMore: hasMoreVN.value,
+          // triggerDistance: 60,
+          placehorlderBuilder: (_, hasMore, isLoading) {
+            if (!hasMore) {
+              // return const SliverToBoxAdapter(child: SizedBox.shrink());
+              return SliverToBoxAdapter(
+                child: ListFooterNoMorePlacehorlder(),
+              );
+            }
+
+            return SliverToBoxAdapter(
+              child: isLoading ? ActivityIndicatorPlacehorlder() : const SizedBox(height: 16),
+            );
+          },
         ),
       ],
     );
@@ -170,15 +184,20 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
   }
 
   Future<bool> fetchPage({required bool isRefresh}) async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(Duration(milliseconds: 1500));
     if (isRefresh) {
       list = List.generate(20, (i) => "item_${i}");
     } else {
-      var items = List.generate(10, (i) => "item_${list.length + i}");
-      list.addAll(items);
+      if (list.length > 59) {
+        hasMoreVN.value = false;
+      } else {
+        var items = List.generate(20, (i) => "item_${list.length + i}");
+        list.addAll(items);
+        hasMoreVN.value = list.length % 20 == 0;
+      }
     }
-    hasMoreVN.value = list.length % 10 == 0;
-    print("hasMoreVN.value: ${hasMoreVN.value}");
+
+    debugPrint("hasMoreVN.value: ${hasMoreVN.value}");
     setState(() {});
     return hasMoreVN.value;
   }
