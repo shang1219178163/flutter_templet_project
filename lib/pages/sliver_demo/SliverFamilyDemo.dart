@@ -25,6 +25,7 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeader
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoTwo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverRefreshControlDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverResizingHeaderDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverStickyHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabbarDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/StaggeredGridViewDemo.dart';
@@ -116,6 +117,11 @@ List<Tuple3<String, String, Widget>> _list = [
     'SliverRefreshControlDemo',
     '刷新组建',
     SliverRefreshControlDemo(),
+  ),
+  Tuple3(
+    'SliverStickyHeaderDemo',
+    'SliverStickyHeader',
+    SliverStickyHeaderDemo(),
   ),
   Tuple3(
     'SliverBaseDemo',

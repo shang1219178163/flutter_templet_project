@@ -369,6 +369,7 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart'
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverRefreshControlDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverStickyHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/listener_header_page.dart';
 import 'package:flutter_templet_project/pages/tabBar_pageView_demo.dart';
 import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
@@ -513,6 +514,7 @@ class AppRouter {
   static const String carouselSliderDemo = '/carouselSliderDemo';
   static const String sliverAppBarDemo = '/SliverAppBarDemo';
   static const String sliverFamilyDemo = '/SliverFamilyDemo';
+  static const String sliverStickyHeaderDemo = '/sliverStickyHeaderDemo';
   static const String sliverRefreshControlDemo = '/sliverRefreshControlDemo';
   static const String sliverFamilyPageViewDemo = '/sliverFamilyPageViewDemo';
 
@@ -1326,6 +1328,11 @@ class AppRouter {
       name: AppRouter.sliverFamilyDemo,
       page: () => SliverFamilyDemo(),
     ),
+    GetPage(
+      name: AppRouter.sliverStickyHeaderDemo,
+      page: () => SliverStickyHeaderDemo(),
+    ),
+
     GetPage(
       name: AppRouter.sliverRefreshControlDemo,
       page: () => SliverRefreshControlDemo(),
