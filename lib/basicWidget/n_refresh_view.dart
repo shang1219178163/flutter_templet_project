@@ -22,41 +22,6 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 );
 
 /// 使用示例:
-// class SchemeListPage extends StatefulWidget {
-//
-//   const SchemeListPage({
-//     super.key,
-//     this.arguments,
-//   });
-//
-//   final Map<String, dynamic>? arguments;
-//
-//   @override
-//   State<SchemeListPage> createState() => _SchemeListPageState();
-// }
-//
-// class _SchemeListPageState extends State<SchemeListPage> {
-//
-//   /// 获取上个页面传的参数
-//   /// userId --- 用户id
-//   late Map<String, dynamic> arguments = widget.arguments ?? Get.arguments;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("$widget"),
-//         actions: ['done',].map((e) => TextButton(
-//           child: Text(e,
-//             style: TextStyle(color: Colors.white),
-//           ),
-//           onPressed: () => debugPrint(e),)
-//         ).toList(),
-//       ),
-//       body: buildBody(),
-//     );
-//   }
-//
 //   buildBody() {
 //     return NRefreshListView<DepartmentPageDetailModel>(
 //       pageSize: 2,
@@ -274,28 +239,39 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
   }
 
   onRefresh() async {
-    page = widget.pageInitial;
-    itemsVN.value = await widget.onRequest(true, page, widget.pageSize, <T>[]);
-    page++;
+    try {
+      page = widget.pageInitial;
+      itemsVN.value = await widget.onRequest(true, page, widget.pageSize, <T>[]);
+      page++;
 
-    indicator = itemsVN.value.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
-    refreshController.finishRefresh(IndicatorResult.success);
-    refreshController.resetFooter();
+      final noMore = itemsVN.value.length < widget.pageSize;
+      indicator = noMore ? IndicatorResult.noMore : IndicatorResult.success;
+      refreshController.finishRefresh(IndicatorResult.success);
+      refreshController.resetFooter();
+    } catch (e) {
+      refreshController.finishRefresh(IndicatorResult.fail);
+    }
   }
 
   onLoad() async {
     if (indicator == IndicatorResult.noMore) {
+      refreshController.finishLoad();
       return;
     }
 
-    final start = (itemsVN.value.length - widget.pageSize).clamp(0, widget.pageSize);
-    final prePages = itemsVN.value.sublist(start);
-    final models = await widget.onRequest(false, page, widget.pageSize, prePages);
-    itemsVN.value = [...itemsVN.value, ...models];
-    page++;
+    try {
+      final start = (itemsVN.value.length - widget.pageSize).clamp(0, widget.pageSize);
+      final prePages = itemsVN.value.sublist(start);
+      final models = await widget.onRequest(false, page, widget.pageSize, prePages);
+      itemsVN.value = [...itemsVN.value, ...models];
+      page++;
 
-    indicator = models.length < widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
-    refreshController.finishLoad(indicator);
+      final noMore = models.length < widget.pageSize;
+      indicator = noMore ? IndicatorResult.noMore : IndicatorResult.success;
+      refreshController.finishLoad(indicator);
+    } catch (e) {
+      refreshController.finishLoad(IndicatorResult.fail);
+    }
   }
 
   Widget buildListView({
