@@ -100,6 +100,7 @@ class _NChromeTabState extends State<NChromeTab> {
     if (oldWidget.items != widget.items ||
         oldWidget.indexVN != widget.indexVN ||
         oldWidget.isScrollable != widget.isScrollable ||
+        oldWidget.tabAlignment != widget.tabAlignment ||
         oldWidget.height != widget.height ||
         oldWidget.itemPadding != widget.itemPadding ||
         oldWidget.bgColor != widget.bgColor ||

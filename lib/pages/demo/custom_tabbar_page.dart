@@ -115,7 +115,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
       child: SingleChildScrollView(
         controller: scrollController,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ValueListenableBuilder(
               valueListenable: indexVN,
@@ -181,7 +181,9 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                 items: titles,
                 indexVN: indexVN,
                 // onChanged: (v) {},
-                tabAlignment: TabAlignment.fill,
+                // tabAlignment: TabAlignment.fill,
+                isScrollable: true,
+                itemPadding: EdgeInsets.symmetric(horizontal: 16),
                 // itemBuilder: buildItemBuilderOne,
               ),
             ),
@@ -190,23 +192,25 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
               child: NChromeTab(
                 controller: chromeTabController,
-                items: titles,
+                items: items.map((e) => e.title).toList(),
                 indexVN: indexVN,
                 // onChanged: (v) {},
-                itemBuilder: buildItemBuilderOne,
+                itemPadding: EdgeInsets.symmetric(horizontal: 16),
+                // itemBuilder: buildItemBuilderOne,
               ),
             ),
             NSectionBox(
               title: "NChromeTab - isScrollable",
-              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
               child: NChromeTab(
                 controller: chromeTabController,
-                items: titles,
+                items: items.map((e) => e.title).toList(),
                 indexVN: indexVN,
                 // onChanged: (v) {},
-                isScrollable: true,
+                tabAlignment: TabAlignment.fill,
+                // isScrollable: true,
                 itemPadding: EdgeInsets.symmetric(horizontal: 50),
-                // itemBuilder: buildItemBuilderOne,
+                itemBuilder: buildItemBuilderOne,
               ),
             ),
             NSectionBox(
