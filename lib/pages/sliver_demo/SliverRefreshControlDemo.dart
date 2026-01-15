@@ -115,8 +115,8 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
         child: NLoadMoreControl(
           controller: loadController,
           onLoad: onLoad,
-          builder: (_, hasMore, isLoading) {
-            if (!hasMore) {
+          builder: (_, noMore, isLoading) {
+            if (noMore) {
               return const ListFooterNoMorePlacehorlder();
             }
             return isLoading ? const ActivityIndicatorPlacehorlder() : const SizedBox.shrink();

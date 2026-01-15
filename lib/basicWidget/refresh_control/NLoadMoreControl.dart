@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 // typedef RefreshStateBuilder = Widget Function(BuildContext context, RefreshIndicatorMode state);
 
 /// 加载更多占位
-typedef LoadMoreBuilder = Widget Function(BuildContext context, bool hasMore, bool isLoading);
+typedef LoadMoreBuilder = Widget Function(BuildContext context, bool noMore, bool isLoading);
 
 /// iOS 风格 Sliver 上拉加载更多组件
 ///
@@ -53,7 +53,7 @@ class _NLoadMoreControlState extends State<NLoadMoreControl> {
   ScrollNotificationObserverState? _scrollNotificationObserver;
 
   bool _loading = false;
-  bool _hasMore = true;
+  bool _noMore = false;
 
   @override
   void dispose() {
@@ -103,7 +103,7 @@ class _NLoadMoreControlState extends State<NLoadMoreControl> {
   }
 
   void _onScroll(ScrollNotification n) {
-    if (!_hasMore || _loading) {
+    if (_noMore || _loading) {
       return;
     }
 
@@ -129,16 +129,16 @@ class _NLoadMoreControlState extends State<NLoadMoreControl> {
   /// 重置状态
   /// hasMore 是否有更多页
   void resetState({required bool noMore}) {
-    _hasMore = !noMore;
+    _noMore = noMore;
   }
 
   @override
   Widget build(BuildContext context) {
     if (widget.builder != null) {
-      return widget.builder!(context, _hasMore, _loading);
+      return widget.builder!(context, _noMore, _loading);
     }
 
-    if (!_hasMore) {
+    if (!_noMore) {
       return SizedBox.shrink();
     }
 
