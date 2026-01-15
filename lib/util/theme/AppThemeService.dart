@@ -253,6 +253,7 @@ class AppThemeService {
           activeTrackColor: seedColor,
           thumbColor: seedColor,
           overlayColor: Colors.grey,
+          overlayShape: SliderComponentShape.noOverlay,
         ),
         inputDecorationTheme: InputDecorationTheme(
           // isCollapsed: true,
@@ -436,6 +437,12 @@ class AppThemeService {
             maxHeight: 400,
             minWidth: double.infinity,
           ),
+        ),
+        sliderTheme: SliderThemeData(
+          activeTrackColor: seedColor,
+          thumbColor: seedColor,
+          overlayColor: Colors.grey,
+          overlayShape: SliderComponentShape.noOverlay,
         ),
         inputDecorationTheme: InputDecorationTheme(
           // isCollapsed: true,

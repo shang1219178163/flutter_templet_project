@@ -49,35 +49,44 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
       body: ListView(
         children: <Widget>[
           Text(tips),
-          _buildBox(
+          buildBox(
             text: "spreadRadius: 5.0",
-            decoration: BoxDecoration(color: Color(0xffffffff), boxShadow: [
-              BoxShadow(
-                color: Color(0xffff0000),
-                spreadRadius: 5.0,
-              ),
-            ]),
+            decoration: BoxDecoration(
+              color: Color(0xffffffff),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffff0000),
+                  spreadRadius: 5.0,
+                ),
+              ],
+            ),
           ),
-          _buildBox(
+          buildBox(
             text: "blurRadius: 5.0",
-            decoration: BoxDecoration(color: Color(0xffffffff), boxShadow: [
-              BoxShadow(
-                color: Color(0xffff0000),
-                blurRadius: 5.0,
-              ),
-            ]),
+            decoration: BoxDecoration(
+              color: Color(0xffffffff),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffff0000),
+                  blurRadius: 5.0,
+                ),
+              ],
+            ),
           ),
-          _buildBox(
+          buildBox(
             text: "spreadRadius: 5.0, blurRadius: 5.0",
-            decoration: BoxDecoration(color: Color(0xffffffff), boxShadow: [
-              BoxShadow(
-                color: Color(0xffff0000),
-                spreadRadius: 5.0,
-                blurRadius: 5.0,
-              ),
-            ]),
+            decoration: BoxDecoration(
+              color: Color(0xffffffff),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffff0000),
+                  spreadRadius: 5.0,
+                  blurRadius: 5.0,
+                ),
+              ],
+            ),
           ),
-          _buildBox(
+          buildBox(
             text: "spreadRadius: 5.0, blurRadius: 5.0, offset: Offset(3.0, 3.0)",
             decoration: BoxDecoration(
               color: Color(0xffffffff),
@@ -91,7 +100,7 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
               ],
             ),
           ),
-          _buildBox(
+          buildBox(
             text: "spreadRadius: 0, blurRadius: 0, offset: Offset(0, 0)",
             decoration: BoxDecoration(
               color: Color(0xffffffff),
@@ -111,7 +120,7 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
     );
   }
 
-  _buildBox({
+  buildBox({
     required BoxDecoration decoration,
     String text = "",
   }) {
