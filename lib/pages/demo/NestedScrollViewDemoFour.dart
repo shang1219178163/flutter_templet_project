@@ -205,7 +205,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
         .map(
           (e) => NPair(
             direction: Axis.vertical,
-            betweenGap: 2,
+            spacing: 2,
             icon: Image(
               image: e.iconImage.toAssetImage(),
               width: 44,

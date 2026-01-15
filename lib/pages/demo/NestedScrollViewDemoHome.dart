@@ -731,7 +731,7 @@ class ProjectGreyButton extends StatelessWidget {
             // borderRadius: const BorderRadius.all(Radius.circular(12)),
             ),
         child: NPair(
-          betweenGap: 7,
+          spacing: 7,
           isReverse: true,
           icon: image ??
               Image(

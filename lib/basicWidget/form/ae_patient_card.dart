@@ -80,7 +80,7 @@ class AePatientCard extends StatelessWidget {
                   child: NPair(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     direction: Axis.vertical,
-                    betweenGap: 2,
+                    spacing: 2,
                     icon: NText(
                       title,
                       color: AppColor.fontColor,

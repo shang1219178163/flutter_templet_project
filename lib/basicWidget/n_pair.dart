@@ -14,7 +14,7 @@ class NPair<T> extends StatelessWidget {
     super.key,
     this.data,
     this.isReverse = false,
-    this.betweenGap = 6,
+    this.spacing = 6,
     this.direction = Axis.horizontal,
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.mainAxisSize = MainAxisSize.min,
@@ -35,7 +35,7 @@ class NPair<T> extends StatelessWidget {
   final bool isReverse;
 
   /// 图标标题间距
-  final double betweenGap;
+  final double spacing;
 
   /// 标题图标方向
   final Axis direction;
@@ -63,10 +63,10 @@ class NPair<T> extends StatelessWidget {
 
     var gap = direction == Axis.horizontal
         ? SizedBox(
-            width: betweenGap,
+            width: spacing,
           )
         : SizedBox(
-            height: betweenGap,
+            height: spacing,
           );
     var children = <Widget>[
       icon ?? SizedBox(),
