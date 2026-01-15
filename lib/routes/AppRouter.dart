@@ -328,6 +328,7 @@ import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/ae_report_page.dart';
+import 'package:flutter_templet_project/pages/demo/ball/GradientPlaygroundPage.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertFlle.dart';
@@ -880,6 +881,7 @@ class AppRouter {
   static const String tagSortPage = '/tagSortPage';
   static const String musicPlayerPage = '/musicPlayerPage';
   static const String articleDetailPage = '/articleDetailPage';
+  static const String gradientPlaygroundPage = '/gradientPlaygroundPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2590,6 +2592,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.articleDetailPage,
       page: () => ArticleDetailPage(),
+    ),
+    GetPage(
+      name: AppRouter.gradientPlaygroundPage,
+      page: () => GradientPlaygroundPage(),
     ),
   ];
 }
