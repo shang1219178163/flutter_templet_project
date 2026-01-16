@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_templet_project/basicWidget/scroll/EndBounceScrollPhysics.dart';
+import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/end_bounce_scroll_physics.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/html_render/model/NewsDetailModel.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';

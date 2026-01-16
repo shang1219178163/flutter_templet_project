@@ -1,8 +1,7 @@
-
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/scroll/EndBounceScrollPhysics.dart';
+import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/end_bounce_scroll_physics.dart';
 
 class NRefreshIndicator extends StatefulWidget {
   const NRefreshIndicator({
