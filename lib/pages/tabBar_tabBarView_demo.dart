@@ -555,6 +555,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.imageBlendModeDemo, "图片渲染模式"),
   Tuple2(AppRouter.containerDemo, "containerDemo"),
   Tuple2(AppRouter.animatedContainerDemo, "animatedContainerDemo"),
+  Tuple2(AppRouter.scrollPhysicsPage, "滚动行为"),
   Tuple2(AppRouter.scrollControllerDemo, "滚动行为"),
   Tuple2(AppRouter.scrollControllerDemoOne, "滚动行为"),
   Tuple2(AppRouter.scrollControllerDemoTwo, "滚动行为"),

@@ -352,6 +352,7 @@ import 'package:flutter_templet_project/pages/demo/n_horizontal_scroll_widget_de
 import 'package:flutter_templet_project/pages/demo/navgation_bar_demo.dart';
 import 'package:flutter_templet_project/pages/demo/operator_demo.dart';
 import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
+import 'package:flutter_templet_project/pages/demo/scroll_physics_page.dart';
 import 'package:flutter_templet_project/pages/demo/secure_keyboard_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
@@ -660,6 +661,7 @@ class AppRouter {
   static const String notificationListenerDemo = '/notificationListenerDemo';
   static const String scrollbarDemo = '/scrollbarDemo';
   static const String notificationCustomDemo = '/notificationCustomDemo';
+  static const String scrollPhysicsPage = '/scrollPhysicsPage';
   static const String scrollControllerDemo = '/scrollControllerDemo';
   static const String scrollControllerDemoOne = '/scrollControllerDemoOne';
   static const String scrollControllerDemoTwo = '/scrollControllerDemoTwo';
@@ -1722,8 +1724,8 @@ class AppRouter {
       page: () => NotificationCustomDemo(),
     ),
     GetPage(
-      name: AppRouter.scrollControllerDemo,
-      page: () => ScrollControllerDemo(),
+      name: AppRouter.scrollPhysicsPage,
+      page: () => ScrollPhysicsPage(),
     ),
     GetPage(
       name: AppRouter.scrollControllerDemoOne,

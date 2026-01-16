@@ -19,7 +19,6 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
         title: Text(widget.title ?? "$widget"),
       ),
       body: buildPageView(),
-      // body: buildPageView(),
     );
   }
 
@@ -45,10 +44,10 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
   }
 
   buildChildren({int page = 0, int count = 20}) {
-    return List<Widget>.generate(
-        count,
-        (i) => ListTile(
-              leading: Text('page $page item $i'),
-            )).toList();
+    return List<Widget>.generate(count, (i) {
+      return ListTile(
+        leading: Text('page $page item $i'),
+      );
+    }).toList();
   }
 }
