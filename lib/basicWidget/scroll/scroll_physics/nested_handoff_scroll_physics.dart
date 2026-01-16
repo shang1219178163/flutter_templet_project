@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 
+@Deprecated("已弃用, 仅测试")
 class NestedHandoffScrollPhysics extends ScrollPhysics {
   const NestedHandoffScrollPhysics({super.parent});
 

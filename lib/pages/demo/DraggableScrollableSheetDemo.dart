@@ -57,23 +57,24 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
     return Scaffold(
       appBar: AppBar(
         title: ValueListenableBuilder(
-            valueListenable: extentVN,
-            builder: (context, value, child) {
-              var desc = widget.title ?? "$widget";
-              if (value == minExtent) {
-                desc = "底部";
-              } else {
-                desc = "中间";
-                return Opacity(
-                  opacity: value / 1.0,
-                  child: buildTopBar(),
-                );
-              }
-              return Text(
-                desc,
-                style: TextStyle(fontSize: 15),
+          valueListenable: extentVN,
+          builder: (context, value, child) {
+            var desc = widget.title ?? "$widget";
+            if (value == minExtent) {
+              desc = "底部";
+            } else {
+              desc = "中间";
+              return Opacity(
+                opacity: value / 1.0,
+                child: buildTopBar(),
               );
-            }),
+            }
+            return Text(
+              desc,
+              style: TextStyle(fontSize: 15),
+            );
+          },
+        ),
         actions: [
           ElevatedButton(
             onPressed: () {
@@ -83,8 +84,8 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
           ),
         ],
       ),
-      // body: buildBody(),
-      body: buildBody1(),
+      body: buildBody(),
+      // body: buildBody1(),
     );
   }
 
@@ -152,10 +153,8 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
   }
 
   Widget buildBody({double minChildSize = 0.3}) {
-    final height = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).viewPadding.top -
-        MediaQuery.of(context).viewPadding.bottom -
-        kToolbarHeight;
+    final mediaQuery = MediaQuery.of(context);
+    final height = mediaQuery.size.height - mediaQuery.viewPadding.top - mediaQuery.viewPadding.bottom - kToolbarHeight;
 
     minChildSize = minExtent;
 
@@ -185,7 +184,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
                 child: Column(
                   children: [
                     ...[
-                      MediaQuery.of(context).viewPadding,
+                      mediaQuery.viewPadding,
                       kToolbarHeight,
                     ].map((e) => Text(e.toString())).toList(),
                   ],

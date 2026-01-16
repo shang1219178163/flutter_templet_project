@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
+import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/no_top_over_scroll_physics.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:tuple/tuple.dart';
@@ -45,6 +46,10 @@ class _ListViewDemoState extends State<ListViewDemo> {
 
   final offsetY = ValueNotifier(0.0);
 
+  final options = <Map<String, dynamic>>[
+    {"lable": "禁止顶部滚动", "value": false},
+  ];
+
   @override
   void initState() {
     _scrollController2.addListener(() {
@@ -59,16 +64,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
-          TextButton(
-              onPressed: () {
-                test();
-                debugPrint("$_scrollController");
-                // _scrollController.jumpTo(200);
-              },
-              child: Text(
-                'done',
-                style: TextStyle(color: Colors.white),
-              )),
           IconButton(
             onPressed: () {
               height = height == 100 ? 200 : 100;
@@ -83,7 +78,8 @@ class _ListViewDemoState extends State<ListViewDemo> {
         children: [
           // _buildListViewSeparated(),
           // _buildListViewSeparatedNew(),
-          _buildListView(
+
+          buildListView(
               height: 100,
               key: _globalKey,
               controller: _scrollController,
@@ -92,7 +88,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                 _scrollController.jumToHorizontal(key: itemKey, offsetX: (MediaQuery.of(context).size.width / 2));
               }),
           Expanded(
-            child: _buildListView(
+            child: buildListView(
                 height: 600,
                 key: _globalKey2,
                 controller: _scrollController2,
@@ -130,7 +126,46 @@ class _ListViewDemoState extends State<ListViewDemo> {
     );
   }
 
-  Widget _buildListView({
+  Widget buildExpandMenu() {
+    return Theme(
+      data: ThemeData(
+        dividerColor: Colors.transparent,
+      ),
+      child: ExpansionTile(
+        tilePadding: EdgeInsets.symmetric(horizontal: 10),
+        leading: Icon(
+          Icons.ac_unit,
+          // color: selectedColor.value,
+        ),
+        title: Text(
+          '配置',
+          // style: TextStyle(color: selectedColor.value),
+        ),
+        initiallyExpanded: false,
+        children: <Widget>[
+          Column(
+            children: options.map((e) {
+              final lable = e["lable"] ?? "";
+              final value = e["value"] ?? false;
+
+              return ListTile(
+                title: Text(lable),
+                trailing: Switch(
+                  onChanged: (bool value) {
+                    e["value"] = value;
+                    setState(() {});
+                  },
+                  value: value,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildListView({
     required GlobalKey key,
     required ScrollController? controller,
     required KeyCallback onKeyCallback,
@@ -141,41 +176,46 @@ class _ListViewDemoState extends State<ListViewDemo> {
     return Container(
       height: height,
       padding: EdgeInsets.all(8),
-      child: Scrollbar(
-        controller: controller,
-        thumbVisibility: true,
-        // scrollbarOrientation: ScrollbarOrientation.left,
-        child: ListView.separated(
-          key: key,
-          // reverse: true,
+      child: MediaQuery.removePadding(
+        context: context,
+        removeBottom: true,
+        child: Scrollbar(
           controller: controller,
-          scrollDirection: scrollDirection,
-          padding: EdgeInsets.all(0),
-          itemCount: items.length,
-          // cacheExtent: 10,
-          itemBuilder: (context, index) {
-            final e = items[index];
+          thumbVisibility: true,
+          // scrollbarOrientation: ScrollbarOrientation.left,
+          child: ListView.separated(
+            key: key,
+            // reverse: true,
+            controller: controller,
+            scrollDirection: scrollDirection,
+            physics: NoTopOverScrollPhysics(),
+            padding: EdgeInsets.all(0),
+            itemCount: items.length,
+            // cacheExtent: 10,
+            itemBuilder: (context, index) {
+              final e = items[index];
 
-            final itemKey = GlobalKey(debugLabel: e.item1);
-            return InkWell(
-              key: itemKey,
-              onTap: () {
-                onKeyCallback(context, index, itemKey);
-              },
-              child: Container(
-                color: Colors.green,
-                child: e.item1.startsWith('http')
-                    ? FadeInImage(
-                        placeholder: 'img_placeholder.png'.toAssetImage(),
-                        image: NetworkImage(e.item1),
-                        fit: BoxFit.cover,
-                        height: 60,
-                      )
-                    : Container(height: 60, child: Text('Index:${e.item1}')),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => Divider(indent: gap),
+              final itemKey = GlobalKey(debugLabel: e.item1);
+              return InkWell(
+                key: itemKey,
+                onTap: () {
+                  onKeyCallback(context, index, itemKey);
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: e.item1.startsWith('http')
+                      ? FadeInImage(
+                          placeholder: 'img_placeholder.png'.toAssetImage(),
+                          image: NetworkImage(e.item1),
+                          fit: BoxFit.cover,
+                          height: 60,
+                        )
+                      : Container(height: 60, child: Text('Index:${e.item1}')),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => Divider(indent: gap),
+          ),
         ),
       ),
     );

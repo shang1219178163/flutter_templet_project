@@ -15,10 +15,13 @@ class ScrollControllerDemoTwo extends StatefulWidget {
   State<ScrollControllerDemoTwo> createState() => _ScrollControllerDemoTwoState();
 }
 
-class _ScrollControllerDemoTwoState extends State<ScrollControllerDemoTwo> with AutomaticKeepAliveClientMixin {
+class _ScrollControllerDemoTwoState extends State<ScrollControllerDemoTwo>
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   var initialIndex = 0;
 
   var items = <Tuple2<Tab, Widget>>[];
+
+  late final tabController = TabController(length: 3, vsync: this);
 
   @override
   void initState() {
@@ -64,14 +67,48 @@ class _ScrollControllerDemoTwoState extends State<ScrollControllerDemoTwo> with 
   Widget buildBodyNestedScrollView() {
     return NestedScrollView(
       headerSliverBuilder: (_, __) => [
-        SliverToBoxAdapter(
-          child: Container(height: 200, color: Colors.green),
+        SliverAppBar(
+          title: const Text('NestedScrollView'),
+          leading: SizedBox(),
+          pinned: true,
+          expandedHeight: 200,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Container(
+              color: Colors.green,
+              alignment: Alignment.center,
+              child: const Text(
+                'SliverAppBar',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+          ),
+          bottom: TabBar(
+            controller: tabController,
+            tabs: const [
+              Tab(text: 'Tab 1'),
+              Tab(text: 'Tab 2'),
+              Tab(text: 'Tab 3'),
+            ],
+          ),
         ),
       ],
-      body: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: 20,
-        itemBuilder: (_, i) => ListTile(title: Text('NestedScrollView item$i')),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          buildTabView(tab: 1),
+          buildTabView(tab: 2),
+          buildTabView(tab: 3),
+        ],
+      ),
+    );
+  }
+
+  Widget buildTabView({required int tab}) {
+    return ListView.builder(
+      padding: const EdgeInsets.only(top: 8),
+      itemCount: 40,
+      itemBuilder: (_, i) => ListTile(
+        title: Text('Tab $tab - Item $i'),
       ),
     );
   }
