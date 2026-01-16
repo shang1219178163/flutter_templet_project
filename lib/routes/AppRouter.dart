@@ -273,6 +273,7 @@ import 'package:flutter_templet_project/pages/demo/ScanAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScanBarcodeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollControllerDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/ScrollControllerDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedButtonDemo.dart';
@@ -661,6 +662,8 @@ class AppRouter {
   static const String notificationCustomDemo = '/notificationCustomDemo';
   static const String scrollControllerDemo = '/scrollControllerDemo';
   static const String scrollControllerDemoOne = '/scrollControllerDemoOne';
+  static const String scrollControllerDemoTwo = '/scrollControllerDemoTwo';
+
   static const String colorConverterDemo = '/colorConverterDemo';
   static const String intrinsicHeightDemo = '/intrinsicHeightDemo';
   static const String flexDemo = '/flexDemo';
@@ -1726,6 +1729,11 @@ class AppRouter {
       name: AppRouter.scrollControllerDemoOne,
       page: () => ScrollControllerDemoOne(),
     ),
+    GetPage(
+      name: AppRouter.scrollControllerDemoTwo,
+      page: () => ScrollControllerDemoTwo(),
+    ),
+
     GetPage(
       name: AppRouter.colorConverterDemo,
       page: () => ColorConverterDemo(),
