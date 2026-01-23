@@ -25,7 +25,7 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
   ///共享 ScrollController 可以同步列表滚动位置
   buildPageView() {
     return PageView(
-      scrollDirection: Axis.vertical,
+      scrollDirection: Axis.horizontal,
       children: <Widget>[
         ListView(
           controller: trackingScrollController,
