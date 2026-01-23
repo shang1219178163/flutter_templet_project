@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_decorated_box.dart';
 
 class SliverListDemo extends StatefulWidget {
   final String? title;
@@ -26,6 +27,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
 
     return CustomScrollView(
       slivers: <Widget>[
+        buildListView(),
         sectionHeader(title: 'SliverList - SliverChildListDelegate'),
         SliverList(
           delegate: SliverChildListDelegate(
@@ -38,8 +40,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
             return _buildItem(color: colors[index]);
           }, childCount: colors.length),
         ),
-        sectionHeader(
-            title: 'SliverFixedExtentList - SliverChildBuilderDelegate'),
+        sectionHeader(title: 'SliverFixedExtentList - SliverChildBuilderDelegate'),
         SliverFixedExtentList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -49,8 +50,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
           ),
           itemExtent: 50,
         ),
-        sectionHeader(
-            title: 'SliverPrototypeExtentList - SliverChildBuilderDelegate'),
+        sectionHeader(title: 'SliverPrototypeExtentList - SliverChildBuilderDelegate'),
         SliverPrototypeExtentList(
           prototypeItem: Container(
             height: 50,
@@ -83,6 +83,38 @@ class _SliverListDemoState extends State<SliverListDemo> {
     return Container(
       height: 50,
       color: color,
+    );
+  }
+
+  Widget buildListView() {
+    return NSliverDecoratedBox(
+      decoration: BoxDecoration(
+        // color: themeProvider.color242434OrWhite,
+        // border: Border.all(color: Colors.blue),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.green,
+            Colors.white.withOpacity(0.0),
+          ],
+        ),
+      ),
+      sliver: SliverPadding(
+        padding: EdgeInsets.all(20),
+        sliver: SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (content, index) {
+              return Container(
+                height: 45,
+                margin: EdgeInsets.only(bottom: 8),
+                color: Colors.primaries[index % Colors.primaries.length],
+              );
+            },
+            childCount: 20,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -3,7 +3,11 @@ import 'package:flutter/rendering.dart';
 
 ///提供一个 render 可以圆角背景
 ///用法如下
-//        SliverDecoratedBox(
+//  NSliverDecoratedBox(
+//   decoration: BoxDecoration(
+//       color: Color(0xffcc3322),
+//       borderRadius: BorderRadius.all(Radius.circular(20)),
+//   ),
 //   sliver: SliverPadding(
 //     padding: EdgeInsets.all(20),
 //     sliver: SliverList(
@@ -15,17 +19,14 @@ import 'package:flutter/rendering.dart';
 //       }, childCount: 20),
 //     ),
 //   ),
-//   decoration: BoxDecoration(
-//       color: Color(0xffcc3322),
-//       borderRadius: BorderRadius.all(Radius.circular(20))),
 // )
 class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
   const NSliverDecoratedBox({
-    Key? key,
+    super.key,
     required this.decoration,
     this.position = DecorationPosition.background,
     Widget? sliver,
-  }) : super(key: key, child: sliver);
+  }) : super(child: sliver);
 
   final Decoration decoration;
 
@@ -41,8 +42,7 @@ class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderSliverDecoratedBox renderObject) {
+  void updateRenderObject(BuildContext context, RenderSliverDecoratedBox renderObject) {
     renderObject
       ..decoration = decoration
       ..configuration = createLocalImageConfiguration(context)
@@ -61,8 +61,7 @@ class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
         label = 'fg';
         break;
     }
-    properties.add(EnumProperty<DecorationPosition>('position', position,
-        level: DiagnosticLevel.hidden));
+    properties.add(EnumProperty<DecorationPosition>('position', position, level: DiagnosticLevel.hidden));
     properties.add(DiagnosticsProperty<Decoration>(label, decoration));
   }
 }
@@ -129,8 +128,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
       if (borderRadius != null) {
         var clipRect = borderRadius
             .resolve(configuration.textDirection)
-            .toRRect(Rect.fromLTRB(
-                0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
+            .toRRect(Rect.fromLTRB(0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
         context.pushClipRRect(
           needsCompositing,
           offset,
@@ -152,8 +150,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
       assert(() {
         if (debugSaveCount != context.canvas.getSaveCount()) {
           throw FlutterError.fromParts(<DiagnosticsNode>[
-            ErrorSummary(
-                '${_decoration.runtimeType} painter had mismatching save and restore calls.'),
+            ErrorSummary('${_decoration.runtimeType} painter had mismatching save and restore calls.'),
             ErrorDescription(
               'Before painting the decoration, the canvas save count was $debugSaveCount. '
               'After painting it, the canvas save count was ${context.canvas.getSaveCount()}. '
@@ -161,8 +158,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
             ),
             DiagnosticsProperty<Decoration>('The decoration was', decoration,
                 style: DiagnosticsTreeStyle.errorProperty),
-            DiagnosticsProperty<BoxPainter>('The painter was', _painter,
-                style: DiagnosticsTreeStyle.errorProperty),
+            DiagnosticsProperty<BoxPainter>('The painter was', _painter, style: DiagnosticsTreeStyle.errorProperty),
           ]);
         }
         return true;
@@ -184,7 +180,6 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(_decoration.toDiagnosticsNode(name: 'decoration'));
-    properties.add(DiagnosticsProperty<ImageConfiguration>(
-        'configuration', configuration));
+    properties.add(DiagnosticsProperty<ImageConfiguration>('configuration', configuration));
   }
 }
