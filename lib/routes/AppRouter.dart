@@ -170,6 +170,7 @@ import 'package:flutter_templet_project/pages/demo/ListDismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListViewSeparatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
@@ -316,6 +317,7 @@ import 'package:flutter_templet_project/pages/demo/ThemeMaterial3Page.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TooltipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TrackingScrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TranslationTextPage.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
@@ -662,6 +664,7 @@ class AppRouter {
   static const String scrollbarDemo = '/scrollbarDemo';
   static const String notificationCustomDemo = '/notificationCustomDemo';
   static const String scrollPhysicsPage = '/scrollPhysicsPage';
+  static const String trackingScrollDemo = '/trackingScrollDemo';
   static const String scrollControllerDemo = '/scrollControllerDemo';
   static const String scrollControllerDemoOne = '/scrollControllerDemoOne';
   static const String scrollControllerDemoTwo = '/scrollControllerDemoTwo';
@@ -679,6 +682,7 @@ class AppRouter {
   static const String ignorePointerDemo = '/ignorePointerDemo';
   static const String horizontalCellDemo = '/horizontalCellDemo';
   static const String boxShadowDemo = '/boxShadowDemo';
+  static const String listViewSeparatedDemo = '/listViewSeparatedDemo';
   static const String listViewOneDemo = '/listViewOneDemo';
   static const String marqueeWidgetDemo = '/marqueeWidgetDemo';
   static const String animatedStaggerDemo = '/animatedStaggerDemo';
@@ -1723,9 +1727,10 @@ class AppRouter {
       name: AppRouter.notificationCustomDemo,
       page: () => NotificationCustomDemo(),
     ),
+
     GetPage(
-      name: AppRouter.scrollPhysicsPage,
-      page: () => ScrollPhysicsPage(),
+      name: AppRouter.trackingScrollDemo,
+      page: () => TrackingScrollDemo(),
     ),
     GetPage(
       name: AppRouter.scrollControllerDemoOne,
@@ -1783,6 +1788,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.boxShadowDemo,
       page: () => BoxShadowDemo(),
+    ),
+    GetPage(
+      name: AppRouter.listViewSeparatedDemo,
+      page: () => ListViewSeparatedDemo(),
     ),
     GetPage(
       name: AppRouter.listViewOneDemo,
