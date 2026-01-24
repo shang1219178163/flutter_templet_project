@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
+import 'package:flutter_templet_project/basicWidget/refresh_control/cupertino_sliver_refresh_control_ext.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SliverListDemo extends StatefulWidget {
   final String? title;
@@ -21,12 +24,17 @@ class _SliverListDemoState extends State<SliverListDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     List<Color> colors = Colors.primaries.sublist(5, 10);
     var list = colors.map((e) => _buildItem(color: e)).toList();
 
     return CustomScrollView(
       slivers: <Widget>[
+        CupertinoSliverRefreshControl(
+          builder: CupertinoSliverRefreshControlExt.customRefreshIndicator,
+          onRefresh: onRefresh,
+        ),
+        sectionHeader(title: 'SliverList - NSliverDecorated'),
         buildListView(),
         sectionHeader(title: 'SliverList - SliverChildListDelegate'),
         SliverList(
@@ -69,11 +77,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
   sectionHeader({required String title}) {
     return SliverToBoxAdapter(
       child: Container(
-        margin: EdgeInsets.only(
-          top: 20,
-          bottom: 20,
-          left: 20,
-        ),
+        margin: EdgeInsets.only(top: 20, bottom: 20, left: 20),
         child: Text(title),
       ),
     );
@@ -87,11 +91,12 @@ class _SliverListDemoState extends State<SliverListDemo> {
   }
 
   Widget buildListView() {
+    final primaries = Colors.primaries.sublist(0, 5);
     return NSliverDecorated(
       // position: DecorationPosition.foreground,
       decoration: BoxDecoration(
-        // color: themeProvider.color242434OrWhite,
-        // border: Border.all(color: Colors.blue),
+        border: Border.all(color: Colors.red),
+        borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -109,13 +114,19 @@ class _SliverListDemoState extends State<SliverListDemo> {
               return Container(
                 height: 45,
                 margin: EdgeInsets.only(bottom: 8),
-                color: Colors.primaries[index % Colors.primaries.length],
+                color: primaries[index],
               );
             },
-            childCount: 20,
+            childCount: primaries.length,
           ),
         ),
       ),
     );
+  }
+
+  Future<void> onRefresh() async {
+    DLog.d("开始刷新");
+    await Future.delayed(Duration(milliseconds: 1500));
+    DLog.d("结束刷新");
   }
 }
