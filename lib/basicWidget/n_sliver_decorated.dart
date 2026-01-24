@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 
 ///提供一个 render 可以圆角背景
 ///用法如下
-//  NSliverDecoratedBox(
+//  NSliverDecorated(
 //   decoration: BoxDecoration(
 //       color: Color(0xffcc3322),
 //       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -20,8 +20,10 @@ import 'package:flutter/rendering.dart';
 //     ),
 //   ),
 // )
-class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
-  const NSliverDecoratedBox({
+
+/// Sliver组件 装饰器
+class NSliverDecorated extends SingleChildRenderObjectWidget {
+  const NSliverDecorated({
     super.key,
     required this.decoration,
     this.position = DecorationPosition.background,
@@ -33,8 +35,8 @@ class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
   final DecorationPosition position;
 
   @override
-  RenderSliverDecoratedBox createRenderObject(BuildContext context) {
-    return RenderSliverDecoratedBox(
+  NRenderSliverDecorated createRenderObject(BuildContext context) {
+    return NRenderSliverDecorated(
       decoration: decoration,
       position: position,
       configuration: createLocalImageConfiguration(context),
@@ -42,7 +44,7 @@ class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderSliverDecoratedBox renderObject) {
+  void updateRenderObject(BuildContext context, NRenderSliverDecorated renderObject) {
     renderObject
       ..decoration = decoration
       ..configuration = createLocalImageConfiguration(context)
@@ -52,22 +54,14 @@ class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    final String label;
-    switch (position) {
-      case DecorationPosition.background:
-        label = 'bg';
-        break;
-      case DecorationPosition.foreground:
-        label = 'fg';
-        break;
-    }
+    final label = position.name;
     properties.add(EnumProperty<DecorationPosition>('position', position, level: DiagnosticLevel.hidden));
     properties.add(DiagnosticsProperty<Decoration>(label, decoration));
   }
 }
 
-class RenderSliverDecoratedBox extends RenderProxySliver {
-  RenderSliverDecoratedBox({
+class NRenderSliverDecorated extends RenderProxySliver {
+  NRenderSliverDecorated({
     required Decoration decoration,
     DecorationPosition position = DecorationPosition.background,
     ImageConfiguration configuration = ImageConfiguration.empty,

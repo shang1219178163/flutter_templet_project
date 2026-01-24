@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_decorated_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
 
 class SliverListDemo extends StatefulWidget {
   final String? title;
@@ -87,7 +87,8 @@ class _SliverListDemoState extends State<SliverListDemo> {
   }
 
   Widget buildListView() {
-    return NSliverDecoratedBox(
+    return NSliverDecorated(
+      // position: DecorationPosition.foreground,
       decoration: BoxDecoration(
         // color: themeProvider.color242434OrWhite,
         // border: Border.all(color: Colors.blue),
@@ -95,7 +96,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.green,
+            Colors.blue,
             Colors.white.withOpacity(0.0),
           ],
         ),
