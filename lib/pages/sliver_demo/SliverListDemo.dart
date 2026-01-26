@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/cupertino_sliver_refresh_control_ext.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class SliverListDemo extends StatefulWidget {
   final String? title;
@@ -97,6 +98,10 @@ class _SliverListDemoState extends State<SliverListDemo> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.red),
         borderRadius: BorderRadius.circular(12),
+        image: DecorationImage(
+          image: NetworkImage(AppRes.image.urls[5]),
+          fit: BoxFit.cover,
+        ),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

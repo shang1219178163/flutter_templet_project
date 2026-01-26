@@ -20,6 +20,8 @@ import 'package:flutter/rendering.dart';
 //     ),
 //   ),
 // )
+
+@Deprecated("请使用 NSliverDecorated")
 class NSliverDecoration extends SingleChildRenderObjectWidget {
   const NSliverDecoration({
     super.key,
