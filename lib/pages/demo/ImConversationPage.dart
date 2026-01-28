@@ -10,7 +10,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_templet_project/basicWidget/n_refresh_view.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/model/im_conversation_detail_model.dart';

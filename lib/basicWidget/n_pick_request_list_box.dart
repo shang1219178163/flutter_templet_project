@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_refresh_view.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
