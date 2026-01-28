@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/cupertino_sliver_refresh_control_ext.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/match_member_score_model.dart';
@@ -26,6 +27,8 @@ class _CompareToPageState extends State<CompareToPage> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
+
+  var teams = <Team>[];
 
   var players = <PlayerScoreItemModel>[];
   var sortKeys = <String>[
@@ -54,7 +57,16 @@ class _CompareToPageState extends State<CompareToPage> {
     final str = await rootBundle.loadString("assets/data/football_players.json");
     final map = jsonDecode(str) as Map<String, dynamic>;
     final matchScoreDataModel = MatchMemberScoreDataModel.fromJson(map['data']);
+    teams = [matchScoreDataModel.home!, matchScoreDataModel.away!];
     players = matchScoreDataModel.playerScoreItem ?? [];
+    players.forEach((p) {
+      final team = teams.where((e) => e.id == p.teamId).firstOrNull;
+      p.teamName = team?.name;
+      p.teamLogo = team?.logo;
+      if (!teams.map((e) => e.id).contains(p.teamId)) {
+        DLog.d([p.shortName, p.teamName]);
+      }
+    });
     players.sort(comparePlayer);
 
     sortKeys = players.first.toJson().keys.toList();
@@ -68,32 +80,30 @@ class _CompareToPageState extends State<CompareToPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp
-          ? null
-          : AppBar(
-              title: Text("$widget"),
-              actions: [
-                NMenuAnchor(
-                  constraints: BoxConstraints(
-                    maxHeight: 400,
-                  ),
-                  values: sortKeys,
-                  initialItem: sortSelected,
-                  onChanged: (v) {
-                    DLog.d(v);
-                    sortSelected = v;
-                    players.sort((a, b) {
-                      final aValue = a.toJson()[v];
-                      final bValue = b.toJson()[v];
-                      return bValue.compareTo(aValue);
-                    });
-                    setState(() {});
-                  },
-                  cbName: (e) => "$e",
-                  equal: (a, b) => a == b,
-                ),
-              ],
+      appBar: AppBar(
+        title: Text("$widget"),
+        actions: [
+          NMenuAnchor(
+            constraints: BoxConstraints(
+              maxHeight: 400,
             ),
+            values: sortKeys,
+            initialItem: sortSelected,
+            onChanged: (v) {
+              DLog.d(v);
+              sortSelected = v;
+              players.sort((a, b) {
+                final aValue = a.toJson()[v];
+                final bValue = b.toJson()[v];
+                return bValue.compareTo(aValue);
+              });
+              setState(() {});
+            },
+            cbName: (e) => "$e",
+            equal: (a, b) => a == b,
+          ),
+        ],
+      ),
       body: buildBody(),
     );
   }
@@ -105,13 +115,21 @@ class _CompareToPageState extends State<CompareToPage> {
           builder: CupertinoSliverRefreshControlExt.customRefreshIndicator,
           onRefresh: onRefresh,
         ),
+        NSliverPersistentHeaderBuilder(
+          pinned: true,
+          min: 30,
+          max: 200,
+          builder: (context, double shrinkOffset, bool overlapsContent) {
+            return buildHeader(context, shrinkOffset, overlapsContent);
+          },
+        ),
         SliverList.separated(
           itemCount: players.length,
           itemBuilder: (_, index) {
             final e = players[index];
             final avatar = e.logo ?? "";
 
-            final desc = [e.id, e.teamId, e.shirtNumber].join("_");
+            final desc = [e.id, e.teamName, e.teamId, e.shirtNumber].join("_");
             return ListTile(
               leading: NNetworkImage(
                 url: avatar,
@@ -120,12 +138,87 @@ class _CompareToPageState extends State<CompareToPage> {
               ),
               title: Text(e.shortName ?? ""),
               subtitle: Text(desc),
+              trailing: e.teamLogo?.startsWith("http") != true
+                  ? null
+                  : Container(
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(color: Colors.blue),
+                      // ),
+                      child: NNetworkImage(
+                        url: e.teamLogo ?? "",
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
             );
           },
           separatorBuilder: (_, index) {
             return Divider(indent: 16, endIndent: 16);
           },
         ),
+      ],
+    );
+  }
+
+  Widget buildHeader(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final isExchange = shrinkOffset > 16;
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        // color: Colors.black.withOpacity(0.15),
+        // border: Border.all(color: Colors.blue),
+        image: DecorationImage(
+          image: AssetImage('assets/images/bg_football_pitch.png'),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: isExchange
+          ? buildTeamVS(itemBuilder: (e) {
+              return Text(
+                e.name,
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              );
+            })
+          : Container(
+              padding: EdgeInsets.symmetric(horizontal: 60, vertical: 8).copyWith(top: 90),
+              child: buildTeamVS(),
+            ),
+    );
+  }
+
+  Widget buildTeamVS({Widget Function(Team e)? itemBuilder}) {
+    return Row(
+      children: [
+        ...teams.map((e) {
+          return Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              // decoration: BoxDecoration(
+              //   border: Border.all(color: Colors.blue),
+              //   borderRadius: BorderRadius.all(Radius.circular(0)),
+              // ),
+              child: itemBuilder?.call(e) ??
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 8.0),
+                        child: NNetworkImage(
+                          url: e.logo,
+                          width: 48,
+                          height: 48,
+                        ),
+                      ),
+                      Text(
+                        e.name,
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ],
+                  ),
+            ),
+          );
+        }),
       ],
     );
   }

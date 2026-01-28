@@ -57,6 +57,7 @@ class PlayerScoreItemModel {
     this.type,
     this.teamId,
     this.teamLogo,
+    this.teamName,
     this.shortName,
     this.logo,
     this.totalTime,
@@ -95,6 +96,8 @@ class PlayerScoreItemModel {
   int? teamId;
 
   String? teamLogo;
+
+  String? teamName;
 
   /// 名称简称
   String? shortName;
@@ -180,6 +183,8 @@ class PlayerScoreItemModel {
     type = json['type'];
     teamId = json['teamId'];
     teamLogo = json['teamLogo'];
+    teamName = json['teamName'];
+
     shortName = json['shortName'];
     logo = json['logo'];
     totalTime = json['totalTime'];
@@ -213,6 +218,8 @@ class PlayerScoreItemModel {
     map['type'] = type;
     map['teamId'] = teamId;
     map['teamLogo'] = teamLogo;
+    map['teamName'] = teamName;
+
     map['shortName'] = shortName;
     map['logo'] = logo;
     map['totalTime'] = totalTime;
