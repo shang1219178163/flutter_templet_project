@@ -75,6 +75,7 @@ import 'package:flutter_templet_project/pages/demo/ColorAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorFilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CompareToPage.dart';
 import 'package:flutter_templet_project/pages/demo/CompileEnvironmentPage.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
@@ -815,6 +816,7 @@ class AppRouter {
   static const String getxControllerDemo = '/GetxControllerDemo';
   static const String nTransformViewDemo = '/nTransformViewDemo';
   static const String dataTypeDemo = '/dataTypeDemo';
+  static const String compareToPage = '/compareToPage';
   static const String queueAlertDemo = '/queueAlertDemo';
   static const String flutterPickerUtilDemo = '/flutterPickerUtilDemo';
   static const String audioPlayPage = '/AudioPlayPage';
@@ -2327,6 +2329,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.dataTypeDemo,
       page: () => DataTypeDemo(),
+    ),
+    GetPage(
+      name: AppRouter.compareToPage,
+      page: () => CompareToPage(),
     ),
     GetPage(
       name: AppRouter.queueAlertDemo,

@@ -580,6 +580,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.apiCreatePage, "apiCreatePage"),
   Tuple2(AppRouter.asyncDemo, "asyncDemo"),
   Tuple2(AppRouter.dataTypeDemo, "testDataTyeDemo"),
+  Tuple2(AppRouter.compareToPage, "compareToPage"),
   Tuple2(AppRouter.audioPlayPageDemo, "audioPlayPage"),
   Tuple2(AppRouter.expressionsCalulatorDemo, "简单表达式计算"),
   Tuple2(AppRouter.localAuthDemo, "生物识别技术（例如指纹或面部识别）"),
