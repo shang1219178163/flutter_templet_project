@@ -68,7 +68,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   late RequestListCallback<T> onRequest = widget.onRequest;
 
   @override
-  late List<T> items = const [];
+  List<T> items = const [];
 
   @override
   void didUpdateWidget(covariant NCustomScrollView<T> oldWidget) {

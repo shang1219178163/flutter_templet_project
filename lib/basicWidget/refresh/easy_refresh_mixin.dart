@@ -17,9 +17,23 @@ mixin EasyRefreshMixin<W extends StatefulWidget, T> on State<W> {
     controlFinishLoad: true,
   );
 
-  late RequestListCallback<T> onRequest = throw UnimplementedError('onRequest Unimplemented');
+  // late RequestListCallback<T> onRequest = throw UnimplementedError('onRequest Unimplemented');
 
-  late List<T> items = throw UnimplementedError('items Unimplemented');
+  // late List<T> items = throw UnimplementedError('items Unimplemented');
+
+  /// 请求方式
+  late RequestListCallback<T> _onRequest;
+  RequestListCallback<T> get onRequest => _onRequest;
+  set onRequest(RequestListCallback<T> value) {
+    _onRequest = value;
+  }
+
+  // 数据列表
+  List<T> _items = [];
+  List<T> get items => _items;
+  set items(List<T> value) {
+    _items = value;
+  }
 
   int page = 1;
   final int pageSize = 20;
