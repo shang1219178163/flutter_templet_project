@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/drop_menu/drop_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
@@ -21,22 +22,14 @@ class _OverlayDemoState extends State<OverlayDemo> {
   OverlayState get overlayState => Overlay.of(context);
   OverlayEntry? overlayEntry;
 
+  List<String> menus = ['直播间', '专家'];
+  late final currentMenu = ValueNotifier(menus.first);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  onPressed: onPressed,
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -44,28 +37,36 @@ class _OverlayDemoState extends State<OverlayDemo> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
                   "icon_skipping.gif".toPath(),
                   height: 100.0,
                   width: 100.0,
                 ),
+                buildDropButton(),
+                SizedBox(),
               ],
             ),
-            ...[
-              Alignment.topCenter,
-              Alignment.center,
-              Alignment.bottomCenter,
-            ].map((e) {
-              return ElevatedButton(
-                onPressed: () => showToast(
-                  'Flutter is awesome!',
-                  // barrierDismissible: false,
-                  alignment: e,
-                ),
-                child: Text('Show Toast: ${e.toString().split(".").last}'),
-              );
-            }).toList(),
+            NSectionBox(
+              title: "NToast",
+              child: Column(
+                children: [
+                  Alignment.topCenter,
+                  Alignment.center,
+                  Alignment.bottomCenter,
+                ].map((e) {
+                  return ElevatedButton(
+                    onPressed: () => showToast(
+                      'Flutter is awesome!',
+                      // barrierDismissible: false,
+                      alignment: e,
+                    ),
+                    child: Text('Toast: ${e.toString().split(".").last}'),
+                  );
+                }).toList(),
+              ),
+            ),
             ElevatedButton(
               onPressed: () {
                 overlayEntry ??= OverlayEntry(builder: (context) {
@@ -112,10 +113,11 @@ class _OverlayDemoState extends State<OverlayDemo> {
                                 size: 200,
                               ),
                               NCancelAndConfirmBar(
-                                  onCancel: () {},
-                                  onConfirm: () {
-                                    onHide();
-                                  }),
+                                onCancel: () {},
+                                onConfirm: () {
+                                  onHide();
+                                },
+                              ),
                             ],
                           ),
                         );
@@ -209,7 +211,60 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 ],
               ),
             ),
+            SizedBox(height: 100),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildDropButton() {
+    return GestureDetector(
+      onTap: () {
+        DropMenu.instance.showFollower(
+          context: context,
+          items: menus,
+          onSelected: (i) {
+            DLog.d([i, menus[i]]);
+            currentMenu.value = menus[i];
+          },
+        );
+      },
+      child: DropMenu.instance.buildTarget(
+        child: Container(
+          width: 70,
+          height: 38,
+          decoration: BoxDecoration(
+            color: Color(0xFFF5F8F9),
+            borderRadius: const BorderRadius.horizontal(left: Radius.circular(7)),
+          ),
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ShaderMask(
+                  shaderCallback: (Rect bounds) {
+                    return const LinearGradient(
+                      colors: [Color(0xFFFE44554), Color(0xFFF6040FF)],
+                    ).createShader(bounds);
+                  },
+                  child: Row(
+                    children: [
+                      ValueListenableBuilder(
+                          valueListenable: currentMenu,
+                          builder: (context, value, child) {
+                            return Text(
+                              value,
+                              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+                            );
+                          }),
+                    ],
+                  ),
+                ),
+                Icon(Icons.arrow_drop_down, size: 20),
+              ],
+            ),
+          ),
         ),
       ),
     );
