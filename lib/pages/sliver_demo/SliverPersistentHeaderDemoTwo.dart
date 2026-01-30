@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_custom_scrollView.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
@@ -45,32 +46,56 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
       appBar: AppBar(
         title: Text(widget.toString()),
       ),
-      body: NestedScrollView(
-        headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-          return [
-            buildPersistentHeader(),
-          ];
-        },
-        body: EasyRefresh.builder(
-          controller: refreshController,
-          onRefresh: onRefresh,
-          onLoad: onLoad,
-          childBuilder: (_, physics) {
-            return CustomScrollView(
-              physics: physics,
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Container(
-                    height: 40,
-                    color: Colors.green,
-                  ),
+      body: buildBodyNew(),
+    );
+  }
+
+  Widget buildBody() {
+    return NestedScrollView(
+      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+        return [
+          buildPersistentHeader(),
+        ];
+      },
+      body: EasyRefresh.builder(
+        controller: refreshController,
+        onRefresh: onRefresh,
+        onLoad: onLoad,
+        childBuilder: (_, physics) {
+          return CustomScrollView(
+            physics: physics,
+            slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 40,
+                  color: Colors.green,
                 ),
-                buildListView(),
-              ],
-            );
-          },
-        ),
+              ),
+              buildListView(),
+            ],
+          );
+        },
       ),
+    );
+  }
+
+  Widget buildBodyNew() {
+    return NCustomScrollView<String>(
+      onRequest: (bool isRefresh, int page, int pageSize, pres) async {
+        final length = isRefresh ? 0 : pres.length;
+        final list = List<String>.generate(pageSize, (i) => "item${length + i}");
+        return list;
+      },
+      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+        return [
+          buildPersistentHeader(),
+        ];
+      },
+      itemBuilder: (_, i, e) {
+        return ListTile(
+          title: Text('Item $i'),
+        );
+      },
     );
   }
 

@@ -22,6 +22,7 @@ class NCustomScrollView<T> extends StatefulWidget {
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
     required this.onRequest,
+    required this.headerSliverBuilder,
     required this.itemBuilder,
     this.separatorBuilder,
     this.headerBuilder,
@@ -39,6 +40,9 @@ class NCustomScrollView<T> extends StatefulWidget {
 
   /// 请求方法
   final RequestListCallback<T> onRequest;
+
+  /// 列表表头
+  final NestedScrollViewHeaderSliversBuilder? headerSliverBuilder;
 
   /// ListView 的 itemBuilder
   final ValueIndexedWidgetBuilder<T> itemBuilder;
@@ -68,7 +72,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   late RequestListCallback<T> onRequest = widget.onRequest;
 
   @override
-  List<T> items = const [];
+  List<T> items = <T>[];
 
   @override
   void didUpdateWidget(covariant NCustomScrollView<T> oldWidget) {
@@ -88,23 +92,32 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   Widget build(BuildContext context) {
     super.build(context);
     if (items.isEmpty) {
-      return GestureDetector(onTap: onRefresh, child: widget.placeholder);
+      return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
     }
 
-    Widget child = EasyRefresh(
+    final child = EasyRefresh.builder(
       controller: refreshController,
       onRefresh: onRefresh,
       onLoad: onLoad,
-      child: CustomScrollView(
-        slivers: [
-          ...(widget.headerBuilder?.call(items.length) ?? []),
-          buildContent(),
-          ...(widget.footerBuilder?.call(items.length) ?? []),
-        ],
-      ),
+      childBuilder: (_, physics) {
+        return CustomScrollView(
+          physics: physics,
+          slivers: [
+            ...(widget.headerBuilder?.call(items.length) ?? []),
+            buildContent(),
+            ...(widget.footerBuilder?.call(items.length) ?? []),
+          ],
+        );
+      },
     );
+    if (widget.headerSliverBuilder == null) {
+      return child;
+    }
 
-    return child;
+    return NestedScrollView(
+      headerSliverBuilder: widget.headerSliverBuilder!,
+      body: child,
+    );
   }
 
   Widget buildContent() {
