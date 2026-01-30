@@ -36,6 +36,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   bool isEnable = true;
 
   final inputFormatters = <Tuple3<String, TextInputFormatter, String>>[
+    Tuple3("禁止换行符", FilteringTextInputFormatter.deny(RegExp(r'\n')), "FilteringTextInputFormatter.deny(RegExp(r'\n'))"),
     Tuple3("长度限制", LengthLimitingTextInputFormatter(10), "LengthLimitingTextInputFormatter(10)"),
     Tuple3("英文字母/汉字/数字", FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"), allow: true),
         "FilteringTextInputFormatter(RegExp('[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]'), allow: true)"),
