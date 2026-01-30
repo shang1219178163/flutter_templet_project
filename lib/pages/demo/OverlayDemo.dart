@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/drop_menu/drop_menu.dart';
+import 'package:flutter_templet_project/basicWidget/drop_menu/overlay_toast.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
@@ -211,6 +212,28 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 ],
               ),
             ),
+            NSectionBox(
+              title: "OverlayToast",
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      OverlayToast.instance.show(
+                        context,
+                        autoDismiss: false,
+                        child: buildToastContent(
+                          message: "OverlayToast",
+                          onTap: () {
+                            OverlayToast.instance.dismiss();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text('OverlayToast'),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 100),
           ],
         ),
@@ -264,6 +287,44 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 Icon(Icons.arrow_drop_down, size: 20),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildToastContent({
+    required String message,
+    VoidCallback? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  Icons.info_outline,
+                  color: Colors.white,
+                ),
+              ),
+              NText(
+                message,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
+            ],
           ),
         ),
       ),
