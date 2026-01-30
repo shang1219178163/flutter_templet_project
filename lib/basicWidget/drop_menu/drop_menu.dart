@@ -30,6 +30,7 @@ class DropMenu {
   void showFollower({
     required BuildContext context,
     required List<String> items,
+    Widget? child,
     NullableIndexedWidgetBuilder? itemBuilder,
     required ValueChanged<int> onSelected,
     VoidCallback? onCancel,
@@ -53,55 +54,57 @@ class DropMenu {
             link: _layerLink,
             targetAnchor: targetAnchor,
             followerAnchor: followerAnchor,
-            child: GestureDetector(
-              onTap: removeOverlay,
-              child: Container(
-                  width: 70,
-                  // height: 90,
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: color242434OrWhite,
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: inverseColor.withOpacity(0.12),
-                        offset: Offset(0, 0),
-                        blurRadius: 6,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: ListView.separated(
-                    padding: EdgeInsets.zero,
-                    itemCount: items.length,
-                    shrinkWrap: true,
-                    itemBuilder: itemBuilder ??
-                        (context, index) {
-                          return Center(
-                            child: TextButton(
-                              onPressed: () {
-                                removeOverlay();
-                                onSelected(index);
-                              },
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                minimumSize: const Size(70, 38),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+            child: child ??
+                GestureDetector(
+                  onTap: removeOverlay,
+                  child: Container(
+                    width: 70,
+                    // height: 90,
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: color242434OrWhite,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: inverseColor.withOpacity(0.12),
+                          offset: Offset(0, 0),
+                          blurRadius: 6,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                    ),
+                    child: ListView.separated(
+                      padding: EdgeInsets.zero,
+                      itemCount: items.length,
+                      shrinkWrap: true,
+                      itemBuilder: itemBuilder ??
+                          (context, index) {
+                            return Center(
+                              child: TextButton(
+                                onPressed: () {
+                                  removeOverlay();
+                                  onSelected(index);
+                                },
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  minimumSize: const Size(70, 38),
+                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                child: Text(
+                                  items[index],
+                                  style: TextStyle(fontSize: 14),
+                                  maxLines: 1,
                                 ),
                               ),
-                              child: Text(
-                                items[index],
-                                style: TextStyle(fontSize: 14),
-                                maxLines: 1,
-                              ),
-                            ),
-                          );
-                        },
-                    separatorBuilder: (BuildContext context, int index) => Divider(),
-                  )),
-            ),
+                            );
+                          },
+                      separatorBuilder: (BuildContext context, int index) => Divider(),
+                    ),
+                  ),
+                ),
           ),
         );
       },
