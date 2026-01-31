@@ -7,6 +7,7 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
@@ -23,6 +24,7 @@ class NCustomScrollView<T> extends StatefulWidget {
     this.contentPadding = const EdgeInsets.all(0),
     required this.onRequest,
     required this.headerSliverBuilder,
+    this.nestedScrollViewBuilder,
     required this.itemBuilder,
     this.separatorBuilder,
     this.headerBuilder,
@@ -43,6 +45,8 @@ class NCustomScrollView<T> extends StatefulWidget {
 
   /// 列表表头
   final NestedScrollViewHeaderSliversBuilder? headerSliverBuilder;
+
+  final NestedScrollView Function(NestedScrollView scrollView)? nestedScrollViewBuilder;
 
   /// ListView 的 itemBuilder
   final ValueIndexedWidgetBuilder<T> itemBuilder;
@@ -114,15 +118,16 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       return child;
     }
 
-    return NestedScrollView(
+    final scrollView = NestedScrollView(
       headerSliverBuilder: widget.headerSliverBuilder!,
       body: child,
     );
+    return widget.nestedScrollViewBuilder?.call(scrollView) ?? scrollView;
   }
 
   Widget buildContent() {
     if (items.isEmpty) {
-      return SliverToBoxAdapter(child: widget.placeholder);
+      return SliverToBoxAdapter(child: Center(child: widget.placeholder));
     }
 
     return NSliverDecorated(
@@ -139,6 +144,38 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       itemBuilder: (_, i) => widget.itemBuilder(context, i, items[i]),
       separatorBuilder: (_, i) => widget.separatorBuilder?.call(context, i) ?? const SizedBox(),
       itemCount: items.length,
+    );
+  }
+}
+
+extension NestedScrollViewExt on NestedScrollView {
+  NestedScrollView copyWith({
+    ScrollController? controller,
+    Axis? scrollDirection,
+    bool? reverse,
+    ScrollPhysics? physics,
+    NestedScrollViewHeaderSliversBuilder? headerSliverBuilder,
+    Widget? body,
+    DragStartBehavior? dragStartBehavior,
+    bool? floatHeaderSlivers,
+    Clip? clipBehavior,
+    HitTestBehavior? hitTestBehavior,
+    String? restorationId,
+    ScrollBehavior? scrollBehavior,
+  }) {
+    return NestedScrollView(
+      controller: controller ?? this.controller,
+      scrollDirection: scrollDirection ?? this.scrollDirection,
+      reverse: reverse ?? this.reverse,
+      physics: physics ?? this.physics,
+      headerSliverBuilder: headerSliverBuilder ?? this.headerSliverBuilder,
+      body: body ?? this.body,
+      dragStartBehavior: dragStartBehavior ?? this.dragStartBehavior,
+      floatHeaderSlivers: floatHeaderSlivers ?? this.floatHeaderSlivers,
+      clipBehavior: clipBehavior ?? this.clipBehavior,
+      hitTestBehavior: hitTestBehavior ?? this.hitTestBehavior,
+      restorationId: restorationId ?? this.restorationId,
+      scrollBehavior: scrollBehavior ?? this.scrollBehavior,
     );
   }
 }

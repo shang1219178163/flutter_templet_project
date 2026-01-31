@@ -91,6 +91,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
           buildPersistentHeader(),
         ];
       },
+      headerBuilder: buildListViewHeader,
       itemBuilder: (_, i, e) {
         return ListTile(
           title: Text('Item $i'),
@@ -232,6 +233,24 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
         );
       },
     );
+  }
+
+  List<Widget> buildListViewHeader(int count) {
+    return [
+      SliverToBoxAdapter(
+        child: Container(
+          height: 35,
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.all(Radius.circular(0)),
+          ),
+          child: Text("共 $count 数据"),
+        ),
+      ),
+    ];
   }
 
   Widget buildListView() {
