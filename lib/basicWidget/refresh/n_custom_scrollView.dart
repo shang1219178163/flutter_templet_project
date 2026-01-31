@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 
 /// 基于 CustomScrollView 的下拉刷新,上拉加载更多的滚动列表
 class NCustomScrollView<T> extends StatefulWidget {

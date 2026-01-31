@@ -1,7 +1,7 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
 
 /// 列表
 class NRefreshListView<T> extends StatefulWidget {
@@ -42,21 +42,18 @@ class NRefreshListView<T> extends StatefulWidget {
   State<NRefreshListView<T>> createState() => _NRefreshListViewState<T>();
 }
 
-class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with AutomaticKeepAliveClientMixin {
+class _NRefreshListViewState<T> extends State<NRefreshListView<T>>
+    with AutomaticKeepAliveClientMixin, EasyRefreshMixin<NRefreshListView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
   final scrollController = ScrollController();
 
-  late final refreshController = EasyRefreshController(
-    controlFinishRefresh: true,
-    controlFinishLoad: true,
-  );
+  @override
+  late RequestListCallback<T> onRequest = widget.onRequest;
 
-  final List<T> items = [];
-  int page = 1;
-  final int pageSize = 20;
-  IndicatorResult indicator = IndicatorResult.success;
+  @override
+  List<T> items = <T>[];
 
   @override
   void dispose() {
@@ -93,7 +90,7 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automati
   Widget build(BuildContext context) {
     super.build(context);
     if (items.isEmpty) {
-      return GestureDetector(onTap: onRefresh, child: widget.placeholder);
+      return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
     }
 
     final itemCount = items.length + 2;
@@ -101,7 +98,7 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automati
     Widget child = EasyRefresh(
       controller: refreshController,
       onRefresh: onRefresh,
-      onLoad: onMore,
+      onLoad: indicator == IndicatorResult.noMore ? null : () => onLoad(),
       child: ListView.separated(
         key: PageStorageKey(widget.title ?? hashCode),
         itemCount: itemCount,
@@ -132,125 +129,5 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automati
       );
     }
     return child;
-  }
-
-  Future<void> onRefresh() async {
-    try {
-      page = 1;
-
-      final list = await widget.onRequest(true, page, pageSize, <T>[]);
-      items.replaceRange(0, items.length, list);
-      page++;
-
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
-      refreshController.finishRefresh();
-      refreshController.resetFooter();
-    } catch (e) {
-      refreshController.finishRefresh(IndicatorResult.fail);
-    }
-    setState(() {});
-  }
-
-  Future<void> onMore() async {
-    if (indicator == IndicatorResult.noMore) {
-      refreshController.finishLoad();
-      return;
-    }
-
-    try {
-      final start = (items.length - pageSize).clamp(0, pageSize);
-      final prePages = items.sublist(start);
-      final list = await widget.onRequest(false, page, pageSize, prePages);
-      items.addAll(list);
-      page++;
-
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
-      refreshController.finishLoad(indicator);
-    } catch (e) {
-      refreshController.finishLoad(IndicatorResult.fail);
-    }
-    setState(() {});
-  }
-}
-
-mixin EasyRefreshMixin<W extends StatefulWidget, T extends Object> on State<W> {
-  late final refreshController = EasyRefreshController(
-    controlFinishRefresh: true,
-    controlFinishLoad: true,
-  );
-
-  final List<T> items = [];
-  int page = 1;
-  final int pageSize = 20;
-  IndicatorResult indicator = IndicatorResult.success;
-
-  RequestListCallback<T> onRequest = throw UnimplementedError('onRequest Unimplemented');
-
-  @override
-  void dispose() {
-    refreshController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // DLog.d([widget.title, widget.key, hashCode]);
-      if (items.isEmpty) {
-        onRefresh();
-      }
-    });
-  }
-
-  Future<void> onRefresh() async {
-    try {
-      page = 1;
-
-      final list = await onRequest(true, page, pageSize, <T>[]);
-      items.replaceRange(0, items.length, list);
-      page++;
-
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
-      refreshController.finishRefresh();
-      refreshController.resetFooter();
-    } catch (e) {
-      refreshController.finishRefresh(IndicatorResult.fail);
-    }
-    setState(() {});
-  }
-
-  Future<void> onMore() async {
-    if (indicator == IndicatorResult.noMore) {
-      refreshController.finishLoad();
-      return;
-    }
-
-    try {
-      final start = (items.length - pageSize).clamp(0, pageSize);
-      final prePages = items.sublist(start);
-      final list = await onRequest(false, page, pageSize, prePages);
-      items.addAll(list);
-      page++;
-
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
-      refreshController.finishLoad(indicator);
-    } catch (e) {
-      refreshController.finishLoad(IndicatorResult.fail);
-    }
-    setState(() {});
   }
 }

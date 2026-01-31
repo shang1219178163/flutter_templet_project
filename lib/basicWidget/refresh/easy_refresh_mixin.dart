@@ -8,7 +8,17 @@
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
+
+/// 带数据的自定义 itemBuilder
+typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T data);
+
+/// 请求列表回调
+typedef RequestListCallback<T> = Future<List<T>> Function(
+  bool isRefresh,
+  int page,
+  int pageSize,
+  List<T> pres,
+);
 
 /// EasyRefresh刷新 mixin
 mixin EasyRefreshMixin<W extends StatefulWidget, T> on State<W> {

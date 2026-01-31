@@ -8,18 +8,8 @@
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
-
-typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T data);
-
-/// 请求列表回调
-typedef RequestListCallback<T> = Future<List<T>> Function(
-  bool isRefresh,
-  int page,
-  int pageSize,
-  List<T> pres,
-);
+import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
 
 /// 使用示例:
 //   buildBody() {
@@ -143,23 +133,18 @@ class NRefreshView<T> extends StatefulWidget {
   NRefreshViewState<T> createState() => NRefreshViewState<T>();
 }
 
-class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliveClientMixin {
+class NRefreshViewState<T> extends State<NRefreshView<T>>
+    with AutomaticKeepAliveClientMixin, EasyRefreshMixin<NRefreshView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
-  late final refreshController = widget.refreshController ??
-      EasyRefreshController(
-        controlFinishRefresh: true,
-        controlFinishLoad: true,
-      );
-
   final scrollController = ScrollController();
 
-  var indicator = IndicatorResult.none;
+  @override
+  late RequestListCallback<T> onRequest = widget.onRequest;
 
-  late var page = widget.pageInitial;
-
-  late final itemsVN = ValueNotifier(<T>[]);
+  @override
+  List<T> items = <T>[];
 
   /// 首次加载
   var isFirstLoad = true;
@@ -207,71 +192,22 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
       return const NSkeletonScreen();
     }
 
-    return ValueListenableBuilder<List<T>>(
-      valueListenable: itemsVN,
-      builder: (context, list, child) {
-        if (list.isEmpty) {
-          return widget.placeholder ?? NPlaceholder(onTap: onRefresh);
-        }
+    if (items.isEmpty) {
+      return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
+    }
 
-        return buildRefresh(
-          child: widget.child ??
-              buildListView(
-                controller: scrollController,
-                needRemovePadding: widget.needRemovePadding,
-                items: list,
-              ),
-        );
-      },
-    );
-  }
-
-  Widget buildRefresh({
-    Widget? child,
-  }) {
     return EasyRefresh(
       controller: refreshController,
       triggerAxis: Axis.vertical,
       onRefresh: widget.disableOnReresh ? null : () => onRefresh(),
       onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore ? null : () => onLoad(),
-      child: child,
+      child: widget.child ??
+          buildListView(
+            controller: scrollController,
+            needRemovePadding: widget.needRemovePadding,
+            items: items,
+          ),
     );
-  }
-
-  onRefresh() async {
-    try {
-      page = widget.pageInitial;
-      itemsVN.value = await widget.onRequest(true, page, widget.pageSize, <T>[]);
-      page++;
-
-      final noMore = itemsVN.value.length < widget.pageSize;
-      indicator = noMore ? IndicatorResult.noMore : IndicatorResult.success;
-      refreshController.finishRefresh(IndicatorResult.success);
-      refreshController.resetFooter();
-    } catch (e) {
-      refreshController.finishRefresh(IndicatorResult.fail);
-    }
-  }
-
-  onLoad() async {
-    if (indicator == IndicatorResult.noMore) {
-      refreshController.finishLoad();
-      return;
-    }
-
-    try {
-      final start = (itemsVN.value.length - widget.pageSize).clamp(0, widget.pageSize);
-      final prePages = itemsVN.value.sublist(start);
-      final models = await widget.onRequest(false, page, widget.pageSize, prePages);
-      itemsVN.value = [...itemsVN.value, ...models];
-      page++;
-
-      final noMore = models.length < widget.pageSize;
-      indicator = noMore ? IndicatorResult.noMore : IndicatorResult.success;
-      refreshController.finishLoad(indicator);
-    } catch (e) {
-      refreshController.finishLoad(IndicatorResult.fail);
-    }
   }
 
   Widget buildListView({
@@ -333,7 +269,7 @@ class NRefreshViewController<E> {
 
   List<E> get items {
     assert(_anchor != null);
-    return _anchor!.itemsVN.value;
+    return _anchor!.items;
   }
 
   void onRefresh() {
@@ -347,10 +283,10 @@ class NRefreshViewController<E> {
   void onUpdate(bool Function(E element)? test) {
     assert(_anchor != null);
     if (test != null) {
-      _anchor!.itemsVN.value = _anchor!.itemsVN.value.where(test).toList();
+      _anchor!.items = _anchor!.items.where(test).toList();
       return;
     }
-    _anchor!.itemsVN.value = [..._anchor!.itemsVN.value];
+    _anchor!.items = [..._anchor!.items];
   }
 
   /// 页码减一
