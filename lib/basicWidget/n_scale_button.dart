@@ -4,10 +4,13 @@ class NScaleButton extends StatefulWidget {
   const NScaleButton({
     super.key,
     this.enabled = true,
+    this.tween,
     required this.builder,
   });
 
   final bool enabled;
+
+  final Tween<double>? tween;
 
   final Widget Function(AnimationController animationController) builder;
 
@@ -27,7 +30,8 @@ class _NScaleButtonState extends State<NScaleButton> with SingleTickerProviderSt
       duration: const Duration(milliseconds: 300),
     );
 
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+    final tweenNew = widget.tween ?? Tween<double>(begin: 1.0, end: 1.2);
+    _scaleAnimation = tweenNew.animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
   }

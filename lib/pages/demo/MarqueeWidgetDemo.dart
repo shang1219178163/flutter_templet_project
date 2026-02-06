@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/marquee_widget.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_marquee_widget.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:tuple/tuple.dart';
 
 // typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
@@ -49,8 +51,20 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
     // ),
   ];
 
-  get itemWidgets =>
-      items.map((e) => Text("${items.indexOf(e)}_${e.item2}")).toList();
+  List<String> mottos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
+
+  initData() async {
+    final str = await rootBundle.loadString("assets/data/motto.txt");
+    final list = str.split("\n");
+    DLog.d(list);
+    mottos.addAll(list);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,36 +88,36 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
             decoration: BoxDecoration(
               border: Border.all(),
             ),
-            child: MarqueeWidget(
-              itemCount: itemWidgets.length,
-              itemBuilder: (BuildContext context, int index,
-                  BoxConstraints constraints) {
+            child: NMarqueeWidget(
+              itemCount: mottos.length,
+              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+                final e = mottos[index];
+                // final text = "${index}_${e.item2}";
+                final text = e;
                 return Container(
                   // color: Colors.green,
                   // child: itemWidgets[index],
-                  child: Text("itemBuilder: $index"),
+                  child: Text(text),
                 );
               },
-              separatorBuilder: (BuildContext context, int index,
-                  BoxConstraints constraints) {
+              separatorBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 return Container(
                   width: 100,
                   // decoration: BoxDecoration(
-                  //   color: Colors.blue,
-                  //   border: Border.all(color: Colors.red),
+                  //   color: Colors.green,
+                  //   border: Border.all(color: Colors.blue),
                   // ),
                   // child: Text("$index"),
                 );
               },
-              edgeBuilder: (BuildContext context, int index,
-                  BoxConstraints constraints) {
+              edgeBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 // print("MarqueeWidget edgeBuilder: $index ${index % 2 == 0}");
                 return Container(
                   width: constraints.maxWidth,
-                  // decoration: BoxDecoration(
-                  //   color: Colors.yellow,
-                  //   border: Border.all(color: Colors.red),
-                  // ),
+                  decoration: BoxDecoration(
+                    color: Colors.yellow,
+                    border: Border.all(color: Colors.red),
+                  ),
                   // child: Text("$index"),
                 );
               },

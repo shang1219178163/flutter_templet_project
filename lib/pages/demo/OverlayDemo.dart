@@ -173,33 +173,35 @@ class _OverlayDemoState extends State<OverlayDemo> {
               child: Column(
                 children: [
                   ElevatedButton(
-                    onPressed: () => NOverlay.showToast(
-                      context,
-                      message: 'NToast is awesome!',
-                      onDismiss: () {
-                        debugPrint("onDismiss: ${DateTime.now()}");
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(right: 8.0),
-                            child: Icon(
-                              Icons.info_outline,
+                    onPressed: () {
+                      NOverlay.showToast(
+                        context,
+                        message: 'NToast is awesome!',
+                        onDismiss: () {
+                          debugPrint("onDismiss: ${DateTime.now()}");
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 8.0),
+                              child: Icon(
+                                Icons.info_outline,
+                                color: Colors.white,
+                              ),
+                            ),
+                            NText(
+                              'NToast is awesome!',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                               color: Colors.white,
                             ),
-                          ),
-                          NText(
-                            'NToast is awesome!',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                      // barrierDismissible: false,
-                      alignment: Alignment.center,
-                    ),
+                          ],
+                        ),
+                        // barrierDismissible: false,
+                        alignment: Alignment.center,
+                      );
+                    },
                     child: Text('Show NToast'),
                   ),
                   ElevatedButton(
@@ -220,7 +222,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                     onPressed: () {
                       OverlayToast.instance.show(
                         context,
-                        autoDismiss: false,
+                        autoDismiss: true,
                         child: buildToastContent(
                           message: "OverlayToast",
                           onTap: () {
