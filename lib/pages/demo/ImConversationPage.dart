@@ -10,6 +10,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
@@ -38,7 +39,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
 
   final _scrollController = ScrollController();
 
-  final refreshViewController = NRefreshViewController<ImConversationDetailModel>();
+  final refreshViewController = NRefreshController<ImConversationDetailModel>();
 
   // 创建一个随机数生成器
   Random random = Random();

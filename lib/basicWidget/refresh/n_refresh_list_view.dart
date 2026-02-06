@@ -7,6 +7,8 @@ import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.d
 class NRefreshListView<T> extends StatefulWidget {
   const NRefreshListView({
     super.key,
+    this.controller,
+    this.physics,
     this.title,
     this.placeholder = const NPlaceholder(),
     this.needRemovePadding = false,
@@ -16,6 +18,11 @@ class NRefreshListView<T> extends StatefulWidget {
     this.headerBuilder,
     this.footerBuilder,
   });
+
+  /// 控制器
+  final NRefreshController<T>? controller;
+
+  final ScrollPhysics? physics;
 
   final String? title;
 
@@ -39,11 +46,11 @@ class NRefreshListView<T> extends StatefulWidget {
   final Widget Function(int count)? footerBuilder;
 
   @override
-  State<NRefreshListView<T>> createState() => _NRefreshListViewState<T>();
+  State<NRefreshListView<T>> createState() => NRefreshListViewState<T>();
 }
 
-class _NRefreshListViewState<T> extends State<NRefreshListView<T>>
-    with AutomaticKeepAliveClientMixin, EasyRefreshMixin<NRefreshListView<T>, T> {
+class NRefreshListViewState<T> extends State<NRefreshListView<T>>
+    with AutomaticKeepAliveClientMixin, NEasyRefreshMixin<NRefreshListView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
@@ -82,6 +89,10 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>>
         widget.onRequest != oldWidget.onRequest ||
         widget.itemBuilder != oldWidget.itemBuilder ||
         widget.separatorBuilder != oldWidget.separatorBuilder) {
+      if (widget.controller != null && oldWidget.controller != widget.controller) {
+        oldWidget.controller?.detach(this);
+        widget.controller?.attach(this);
+      }
       onRefresh();
     }
   }
@@ -130,4 +141,51 @@ class _NRefreshListViewState<T> extends State<NRefreshListView<T>>
     }
     return child;
   }
+
 }
+
+// class NRefreshListViewController<E> {
+//   NRefreshListViewState<E>? _anchor;
+//
+//   void _attach(NRefreshListViewState<E> anchor) {
+//     _anchor = anchor;
+//   }
+//
+//   void _detach(NRefreshListViewState<E> anchor) {
+//     if (_anchor == anchor) {
+//       _anchor = null;
+//     }
+//   }
+//
+//   List<E> get items {
+//     assert(_anchor != null);
+//     return _anchor!.items;
+//   }
+//
+//   void onRefresh() {
+//     assert(_anchor != null);
+//     _anchor!.onRefresh();
+//   }
+//
+//   /// 页码减一
+//   void turnPrePage() {
+//     assert(_anchor != null);
+//     _anchor!.page--;
+//   }
+//
+//   /// 页码加一
+//   void turnNextPage() {
+//     assert(_anchor != null);
+//     _anchor!.page++;
+//   }
+//
+//   void changeItems(List<E> list) {
+//     assert(_anchor != null);
+//     _anchor!.changeItems(list);
+//   }
+//
+//   void updateUI() {
+//     assert(_anchor != null);
+//     _anchor!.updateUI();
+//   }
+// }

@@ -7,23 +7,24 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 
 /// 基于 CustomScrollView 的下拉刷新,上拉加载更多的滚动列表
+/// 可以配合 NestedScrollView 添加吸顶组件使用
 class NCustomScrollView<T> extends StatefulWidget {
   const NCustomScrollView({
     super.key,
     this.title,
+    this.controller,
     this.placeholder = const NPlaceholder(),
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
     required this.onRequest,
-    required this.headerSliverBuilder,
-    this.nestedScrollViewBuilder,
+    this.headerSliverBuilder,
     required this.itemBuilder,
     this.separatorBuilder,
     this.headerBuilder,
@@ -32,6 +33,9 @@ class NCustomScrollView<T> extends StatefulWidget {
   });
 
   final String? title;
+
+  /// 控制器
+  final NRefreshController<T>? controller;
 
   final Widget? placeholder;
 
@@ -44,8 +48,6 @@ class NCustomScrollView<T> extends StatefulWidget {
 
   /// 列表表头
   final NestedScrollViewHeaderSliversBuilder? headerSliverBuilder;
-
-  final NestedScrollView Function(NestedScrollView scrollView)? nestedScrollViewBuilder;
 
   /// ListView 的 itemBuilder
   final ValueIndexedWidgetBuilder<T> itemBuilder;
@@ -65,7 +67,7 @@ class NCustomScrollView<T> extends StatefulWidget {
 }
 
 class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
-    with AutomaticKeepAliveClientMixin, EasyRefreshMixin<NCustomScrollView<T>, T> {
+    with AutomaticKeepAliveClientMixin, NEasyRefreshMixin<NCustomScrollView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
@@ -98,7 +100,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
     }
 
-    final child = EasyRefresh.builder(
+    return EasyRefresh.builder(
       controller: refreshController,
       onRefresh: onRefresh,
       onLoad: onLoad,
@@ -113,15 +115,6 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
         );
       },
     );
-    if (widget.headerSliverBuilder == null) {
-      return child;
-    }
-
-    final scrollView = NestedScrollView(
-      headerSliverBuilder: widget.headerSliverBuilder!,
-      body: child,
-    );
-    return widget.nestedScrollViewBuilder?.call(scrollView) ?? scrollView;
   }
 
   Widget buildContent() {
@@ -143,38 +136,6 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       itemBuilder: (_, i) => widget.itemBuilder(context, i, items[i]),
       separatorBuilder: (_, i) => widget.separatorBuilder?.call(context, i) ?? const SizedBox(),
       itemCount: items.length,
-    );
-  }
-}
-
-extension NestedScrollViewExt on NestedScrollView {
-  NestedScrollView copyWith({
-    ScrollController? controller,
-    Axis? scrollDirection,
-    bool? reverse,
-    ScrollPhysics? physics,
-    NestedScrollViewHeaderSliversBuilder? headerSliverBuilder,
-    Widget? body,
-    DragStartBehavior? dragStartBehavior,
-    bool? floatHeaderSlivers,
-    Clip? clipBehavior,
-    HitTestBehavior? hitTestBehavior,
-    String? restorationId,
-    ScrollBehavior? scrollBehavior,
-  }) {
-    return NestedScrollView(
-      controller: controller ?? this.controller,
-      scrollDirection: scrollDirection ?? this.scrollDirection,
-      reverse: reverse ?? this.reverse,
-      physics: physics ?? this.physics,
-      headerSliverBuilder: headerSliverBuilder ?? this.headerSliverBuilder,
-      body: body ?? this.body,
-      dragStartBehavior: dragStartBehavior ?? this.dragStartBehavior,
-      floatHeaderSlivers: floatHeaderSlivers ?? this.floatHeaderSlivers,
-      clipBehavior: clipBehavior ?? this.clipBehavior,
-      hitTestBehavior: hitTestBehavior ?? this.hitTestBehavior,
-      restorationId: restorationId ?? this.restorationId,
-      scrollBehavior: scrollBehavior ?? this.scrollBehavior,
     );
   }
 }

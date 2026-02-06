@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_filter_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
@@ -24,7 +25,7 @@ class DropBoxChoicDemoNew extends StatefulWidget {
 }
 
 class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
-  final refreshViewController = NRefreshViewController<UserModel>();
+  final refreshViewController = NRefreshController<UserModel>();
 
   final items = List.generate(9, (i) => i).toList();
 

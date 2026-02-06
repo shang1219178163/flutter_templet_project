@@ -84,7 +84,7 @@ class NRefreshView<T> extends StatefulWidget {
   final Key? listViewKey;
 
   /// 控制器
-  final NRefreshViewController<T>? controller;
+  final NRefreshController<T>? controller;
 
   /// 子视图(为空 默认 带刷新组件的 ListView)
   final Widget? child;
@@ -134,7 +134,7 @@ class NRefreshView<T> extends StatefulWidget {
 }
 
 class NRefreshViewState<T> extends State<NRefreshView<T>>
-    with AutomaticKeepAliveClientMixin, EasyRefreshMixin<NRefreshView<T>, T> {
+    with AutomaticKeepAliveClientMixin, NEasyRefreshMixin<NRefreshView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
@@ -151,14 +151,14 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 
   @override
   void dispose() {
-    widget.controller?._detach(this);
+    widget.controller?.detach(this);
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?.attach(this);
     initData();
   }
 
@@ -172,7 +172,10 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
         widget.separatorBuilder != oldWidget.separatorBuilder ||
         widget.cachedChild != oldWidget.cachedChild ||
         widget.tag != widget.tag) {
-      widget.controller?._attach(this);
+      if (widget.controller != null && oldWidget.controller != widget.controller) {
+        oldWidget.controller?.detach(this);
+        widget.controller?.attach(this);
+      }
       onRefresh();
     }
   }
@@ -254,50 +257,50 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 }
 
 /// NRefreshListView 组件控制器,将 NRefreshListViewState 的私有属性或者方法暴漏出去
-class NRefreshViewController<E> {
-  NRefreshViewState<E>? _anchor;
-
-  void _attach(NRefreshViewState<E> anchor) {
-    _anchor = anchor;
-  }
-
-  void _detach(NRefreshViewState<E> anchor) {
-    if (_anchor == anchor) {
-      _anchor = null;
-    }
-  }
-
-  List<E> get items {
-    assert(_anchor != null);
-    return _anchor!.items;
-  }
-
-  void onRefresh() {
-    assert(_anchor != null);
-    _anchor!.onRefresh();
-  }
-
-  /// 更新列表
-  ///
-  /// - test 过滤条件
-  void onUpdate(bool Function(E element)? test) {
-    assert(_anchor != null);
-    if (test != null) {
-      _anchor!.items = _anchor!.items.where(test).toList();
-      return;
-    }
-    _anchor!.items = [..._anchor!.items];
-  }
-
-  /// 页码减一
-  void turnPrePage() {
-    assert(_anchor != null);
-    _anchor!.page--;
-  }
-
-  /// 页码加一
-  void turnNextPage() {
-    assert(_anchor != null);
-    _anchor!.page++;
-  }
-}
+// class NRefreshViewController<E> {
+//   NRefreshViewState<E>? _anchor;
+//
+//   void _attach(NRefreshViewState<E> anchor) {
+//     _anchor = anchor;
+//   }
+//
+//   void _detach(NRefreshViewState<E> anchor) {
+//     if (_anchor == anchor) {
+//       _anchor = null;
+//     }
+//   }
+//
+//   List<E> get items {
+//     assert(_anchor != null);
+//     return _anchor!.items;
+//   }
+//
+//   void onRefresh() {
+//     assert(_anchor != null);
+//     _anchor!.onRefresh();
+//   }
+//
+//   /// 更新列表
+//   ///
+//   /// - test 过滤条件
+//   void onUpdate(bool Function(E element)? test) {
+//     assert(_anchor != null);
+//     if (test != null) {
+//       _anchor!.items = _anchor!.items.where(test).toList();
+//       return;
+//     }
+//     _anchor!.items = [..._anchor!.items];
+//   }
+//
+//   /// 页码减一
+//   void turnPrePage() {
+//     assert(_anchor != null);
+//     _anchor!.page--;
+//   }
+//
+//   /// 页码加一
+//   void turnNextPage() {
+//     assert(_anchor != null);
+//     _anchor!.page++;
+//   }
+// }
