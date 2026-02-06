@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -68,7 +69,7 @@ class NPickRequestListBox<E> extends StatefulWidget {
 }
 
 class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
-  final refreshViewController = NRefreshViewController<E>();
+  final refreshViewController = NRefreshController<E>();
 
   var search = "";
 
