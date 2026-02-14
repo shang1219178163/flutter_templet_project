@@ -10,6 +10,8 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/AppVideoPlayerService.dart';
+import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/indicator/n_line_progress_indicator.dart';
+import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/indicator/volume_and_brightness_mixin.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:video_player/video_player.dart';
 
@@ -48,11 +50,14 @@ class AppVideoPlayer extends StatefulWidget {
   State<AppVideoPlayer> createState() => _AppVideoPlayerState();
 }
 
-class _AppVideoPlayerState extends State<AppVideoPlayer> with WidgetsBindingObserver, AutomaticKeepAliveClientMixin {
+class _AppVideoPlayerState extends State<AppVideoPlayer>
+    with WidgetsBindingObserver, AutomaticKeepAliveClientMixin, VolumeAndBrightnessMixin {
   VideoPlayerController? _videoController;
   ChewieController? _chewieController;
 
   Duration position = Duration.zero;
+
+  bool get isPortrait => MediaQuery.of(context).orientation == Orientation.portrait;
 
   @override
   void dispose() {
@@ -171,25 +176,61 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with WidgetsBindingObse
       return const Center(child: CircularProgressIndicator());
     }
     // return Chewie(controller: _chewieController!);
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: Chewie(
-            controller: _chewieController!,
+    return GestureDetector(
+      onPanStart: onPanStartForVolumeAndBrightness,
+      onPanUpdate: onPanUpdateForVolumeAndBrightness,
+      onPanEnd: onPanEndForVolumeAndBrightness,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Chewie(
+              controller: _chewieController!,
+            ),
           ),
-        ),
-        Positioned(
-          right: 20,
-          top: 10,
-          child: Container(
-            // decoration: BoxDecoration(
-            //   color: Colors.red,
-            //   border: Border.all(color: Colors.blue),
-            // ),
-            child: buildCloseBtn(onTap: widget.onClose),
+          Positioned(
+            right: 20,
+            top: 10,
+            child: Container(
+              // decoration: BoxDecoration(
+              //   color: Colors.red,
+              //   border: Border.all(color: Colors.blue),
+              // ),
+              child: buildCloseBtn(onTap: widget.onClose),
+            ),
           ),
-        ),
-      ],
+          Positioned(
+            top: 28,
+            left: 0,
+            right: 0,
+            child: AnimatedBuilder(
+              animation: Listenable.merge([
+                showVolumeOrBrightnessProgressVN,
+                showBrightnessProgressVN,
+                volumeVN,
+                brightnessVN,
+              ]),
+              builder: (context, child) {
+                if (!showVolumeOrBrightnessProgressVN.value) {
+                  return const SizedBox();
+                }
+
+                final indicatorWidth = isPortrait ? 160.0 : 200.0;
+                final isLeft = showBrightnessProgressVN.value;
+                return Container(
+                  // padding: const EdgeInsets.only(top: 28),
+                  alignment: Alignment.topCenter,
+                  decoration: BoxDecoration(
+                      // border: Border.all(color: Colors.blue),
+                      ),
+                  child: isLeft
+                      ? BrightnessProgressIndicator(valueVN: brightnessVN, width: indicatorWidth)
+                      : VolumeProgressIndicator(valueVN: volumeVN, width: indicatorWidth),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 

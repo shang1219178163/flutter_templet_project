@@ -184,6 +184,7 @@ dependencies:
   video_compress: ^3.1.2
 
   flutter_screen_wake: ^1.0.2
+  screen_brightness: ^2.1.7
   volume_controller: ^3.4.0
   pip: ^0.0.3
 
