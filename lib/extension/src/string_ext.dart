@@ -334,4 +334,17 @@ extension StringNullableExt on String? {
 
   /// url 有效
   bool get urlValid => this?.startsWith("http") == true;
+
+  /// 最大截取数量
+  String? ellipsis({int max = 6}) {
+    final val = this;
+    if (val == null) {
+      return val;
+    }
+    if (val.runes.length <= max) {
+      return val;
+    }
+    final result = '${String.fromCharCodes(val.runes.take(max))}…';
+    return result;
+  }
 }

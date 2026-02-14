@@ -91,6 +91,9 @@ extension DoubleExt on double {
   /// 3位小数
   double get fixed3 => fixed(3);
 
+  /// 角度转旋转弧度
+  double degreesToRadians(double degrees) => degrees * (pi / 180);
+
   /// 转为百分比描述
   String toStringAsPercent(int fractionDigits) {
     if (this >= 1.0) {
