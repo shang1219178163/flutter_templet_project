@@ -1729,7 +1729,10 @@ class AppRouter {
       name: AppRouter.notificationCustomDemo,
       page: () => NotificationCustomDemo(),
     ),
-
+    GetPage(
+      name: AppRouter.scrollPhysicsPage,
+      page: () => ScrollPhysicsPage(),
+    ),
     GetPage(
       name: AppRouter.trackingScrollDemo,
       page: () => TrackingScrollDemo(),
