@@ -54,7 +54,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
     return NestedScrollView(
       headerSliverBuilder: (context, bool innerBoxIsScrolled) {
         return [
-          buildPersistentHeader(),
+          buildPersistentHeader(bgUrl: AppRes.image.urls[6]),
         ];
       },
       body: EasyRefresh.builder(
@@ -80,23 +80,25 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
   }
 
   Widget buildBodyNew() {
-    return NCustomScrollView<String>(
-      onRequest: (bool isRefresh, int page, int pageSize, pres) async {
-        final length = isRefresh ? 0 : pres.length;
-        final list = List<String>.generate(pageSize, (i) => "item${length + i}");
-        return list;
-      },
+    return NestedScrollView(
       headerSliverBuilder: (context, bool innerBoxIsScrolled) {
         return [
-          buildPersistentHeader(),
+          buildPersistentHeader(bgUrl: AppRes.image.urls[5]),
         ];
       },
-      headerBuilder: buildListViewHeader,
-      itemBuilder: (_, i, e) {
-        return ListTile(
-          title: Text('Item $i'),
-        );
-      },
+      body: NCustomScrollView<String>(
+        onRequest: (bool isRefresh, int page, int pageSize, pres) async {
+          final length = isRefresh ? 0 : pres.length;
+          final list = List<String>.generate(pageSize, (i) => "item${length + i}");
+          return list;
+        },
+        headerBuilder: buildListViewHeader,
+        itemBuilder: (_, i, e) {
+          return ListTile(
+            title: Text('Item $i'),
+          );
+        },
+      ),
     );
   }
 
@@ -113,7 +115,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
     DLog.d("onLoad");
   }
 
-  Widget buildPersistentHeader() {
+  Widget buildPersistentHeader({required String bgUrl}) {
     var min = context.paddingTop;
     var max = 250.0;
 
@@ -145,7 +147,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
             children: [
               // 背景图片
               NNetworkImage(
-                url: AppRes.image.urls[5],
+                url: bgUrl,
                 fit: BoxFit.cover,
               ),
               // 带有渐变的遮罩层
