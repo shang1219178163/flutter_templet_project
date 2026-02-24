@@ -33,7 +33,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
     );
   }
 
-  _buildBox(String title) {
+  buildBox(String title) {
     return Container(
       width: 150.0,
       height: 50.0,
@@ -51,7 +51,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           title: "AnimatedBuilder",
           child: AnimatedBuilder(
             animation: _controller,
-            child: _buildBox('AnimatedBuilder'),
+            child: buildBox('AnimatedBuilder'),
             builder: (BuildContext context, Widget? child) {
               return Transform.rotate(
                 angle: _controller.value * 2.0 * math.pi,
@@ -64,7 +64,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           title: "AnimatedBuilder",
           child: AnimatedBuilder(
             animation: _controller,
-            child: _buildBox('AnimatedBuilder'),
+            child: buildBox('AnimatedBuilder'),
             builder: (BuildContext context, Widget? child) {
               return Transform.rotate(
                 angle: _controller.value * 2.0 * math.pi,
@@ -78,11 +78,13 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           title: 'Builder/约等于 StatelessWidget',
           child: AnimatedBuilder(
             animation: _controller,
-            child: _buildBox('AnimatedBuilder'),
+            child: buildBox('AnimatedBuilder'),
             builder: (BuildContext context, Widget? child) {
-              return Builder(builder: (BuildContext context) {
-                return _buildBox('Builder');
-              });
+              return Builder(
+                builder: (BuildContext context) {
+                  return buildBox('Builder');
+                },
+              );
             },
           ),
         ),
@@ -91,11 +93,13 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           title: 'Builder/约等于 StatelessWidget',
           child: AnimatedBuilder(
             animation: _controller,
-            child: _buildBox('AnimatedBuilder'),
+            child: buildBox('AnimatedBuilder'),
             builder: (BuildContext context, Widget? child) {
-              return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-                return _buildBox('StatefulBuilder');
-              });
+              return StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) {
+                  return buildBox('StatefulBuilder');
+                },
+              );
             },
           ),
         ),
