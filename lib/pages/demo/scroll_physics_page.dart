@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/bottom_bouncing_scroll_physics.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/no_top_over_scroll_physics.dart';
-import 'package:flutter_templet_project/mixin/MyScrollPhysics.dart';
+import 'package:flutter_templet_project/mixin/MyCustomScrollPhysics.dart';
 
 class ScrollPhysicsPage extends StatefulWidget {
   const ScrollPhysicsPage({
@@ -28,7 +28,7 @@ class _ScrollPhysicsPageState extends State<ScrollPhysicsPage> with SingleTicker
     (k: "Carousel", v: CarouselScrollPhysics()),
     (k: "NoTopOver", v: NoTopOverScrollPhysics()),
     (k: "BottomBouncing", v: BottomBouncingScrollPhysics()),
-    (k: "My", v: MyScrollPhysics()),
+    (k: "MyCustom", v: MyCustomScrollPhysics()),
   ];
 
   ScrollPhysics get scrollPhysics => items[tabController.index].v;
