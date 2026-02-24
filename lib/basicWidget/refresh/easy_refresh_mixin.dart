@@ -21,6 +21,10 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 );
 
 mixin NRefreshable<T> {
+  // 预置列表(弹窗类, 先请求第一页数据再显示页面)
+  List<T> get firstPageItems;
+  set firstPageItems(List<T> value);
+
   List<T> get items;
   set items(List<T> value);
 
@@ -71,6 +75,15 @@ mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W> implements NRef
     _items = value;
   }
 
+  // 数据列表
+  List<T> _firstPageItems = [];
+  @override
+  List<T> get firstPageItems => _firstPageItems;
+  @override
+  set firstPageItems(List<T> value) {
+    _firstPageItems = value;
+  }
+
   @override
   int page = 1;
 
@@ -102,7 +115,8 @@ mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W> implements NRef
   Future<void> onRefresh() async {
     try {
       page = 1;
-      final list = await onRequest(true, page, pageSize, <T>[]);
+
+      final list = firstPageItems.isNotEmpty ? firstPageItems : await onRequest(true, page, pageSize, <T>[]);
       items.replaceRange(0, items.length, list);
       page++;
 
