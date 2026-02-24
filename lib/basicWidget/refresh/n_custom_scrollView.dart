@@ -24,7 +24,6 @@ class NCustomScrollView<T> extends StatefulWidget {
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
     required this.onRequest,
-    this.headerSliverBuilder,
     required this.itemBuilder,
     this.separatorBuilder,
     this.headerBuilder,
@@ -45,9 +44,6 @@ class NCustomScrollView<T> extends StatefulWidget {
 
   /// 请求方法
   final RequestListCallback<T> onRequest;
-
-  /// 列表表头
-  final NestedScrollViewHeaderSliversBuilder? headerSliverBuilder;
 
   /// ListView 的 itemBuilder
   final ValueIndexedWidgetBuilder<T> itemBuilder;
