@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/Pages/demo/TextFieldDemo.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
+import 'package:flutter_templet_project/basicWidget/RedPacketRain/RedPacketRainDemo.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_tab/en_tab_bar_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
@@ -165,6 +166,7 @@ import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IteratorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/JsonToModel.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
+import 'package:flutter_templet_project/pages/demo/KeyboardShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LayoutBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListBodyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListDismissibleDemo.dart';
@@ -893,6 +895,8 @@ class AppRouter {
   static const String musicPlayerPage = '/musicPlayerPage';
   static const String articleDetailPage = '/articleDetailPage';
   static const String gradientPlaygroundPage = '/gradientPlaygroundPage';
+  static const String redPacketRainDemo = '/redPacketRainDemo';
+  static const String keyboardShortcutsDemo = '/keyboardShortcutsDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2624,6 +2628,14 @@ class AppRouter {
     GetPage(
       name: AppRouter.gradientPlaygroundPage,
       page: () => GradientPlaygroundPage(),
+    ),
+    GetPage(
+      name: AppRouter.redPacketRainDemo,
+      page: () => RedPacketRainDemo(),
+    ),
+    GetPage(
+      name: AppRouter.keyboardShortcutsDemo,
+      page: () => KeyboardShortcutsDemo(),
     ),
   ];
 }

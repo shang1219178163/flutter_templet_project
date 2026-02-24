@@ -599,6 +599,7 @@ var animateds = <Tuple2<String, String>>[
   Tuple2(AppRouter.animatedStaggerDemo, "staggerDemo"),
   Tuple2(AppRouter.animatedSizeDemo, "animatedSizeDemo"),
   Tuple2(AppRouter.animatedSizeDemoOne, "animatedSizeDemoOne"),
+  Tuple2(AppRouter.redPacketRainDemo, "redPacketRainDemo"),
 ];
 
 var customs = [
@@ -736,6 +737,7 @@ var others = <Tuple2<String, String>>[
 var forms = <Tuple2<String, String>>[
   Tuple2(AppRouter.autofillGroupDemo, "autofillGroupDemo"),
   Tuple2(AppRouter.inputDatePickerFormFieldDemo, "inputDatePickerFormFieldDemo"),
+  Tuple2(AppRouter.keyboardShortcutsDemo, "keyboardShortcutsDemo"),
 ];
 
 var dataTypes = <Tuple2<String, String>>[

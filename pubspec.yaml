@@ -258,6 +258,8 @@ dependencies:
   flutter_html: ^3.0.0
   flutter_sticky_header: ^0.7.0
 
+  flutter_form_builder: 9.5.0
+  flutter_context_menu: ^0.4.1
 #  User:
 #    hosted:
 #      name: syn_mine_pages

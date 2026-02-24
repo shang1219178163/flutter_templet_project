@@ -775,6 +775,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.4.1"
+  flutter_context_menu:
+    dependency: "direct main"
+    description:
+      name: flutter_context_menu
+      sha256: e8f2cd13ef5e3320e35b27b3f7de278d9fc6b3f9c328cc16cd90784fb66d1054
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.1"
   flutter_easyloading:
     dependency: "direct main"
     description:
@@ -791,6 +799,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "8.0.0"
+  flutter_form_builder:
+    dependency: "direct main"
+    description:
+      name: flutter_form_builder
+      sha256: c278ef69b08957d484f83413f0e77b656a39b7a7bb4eb8a295da3a820ecc6545
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "9.5.0"
   flutter_hooks:
     dependency: "direct main"
     description:
