@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class SelectedRedPacketWidget extends StatefulWidget {
@@ -34,6 +36,10 @@ class _SelectedRedPacketWidgetState extends State<SelectedRedPacketWidget> with 
   void initState() {
     super.initState();
 
+    onForward();
+  }
+
+  void onForward() {
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 450),
@@ -61,7 +67,19 @@ class _SelectedRedPacketWidgetState extends State<SelectedRedPacketWidget> with 
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
 
-    _controller.forward().whenComplete(widget.onFinish);
+    _controller.forward().whenComplete(_requestResult);
+  }
+
+  /// ③ 网络请求
+  Future<void> _requestResult() async {
+    // 👉 这里换成真实接口
+    await Future.delayed(const Duration(seconds: 2));
+    _controller.stop();
+
+    final win = Random().nextBool();
+    final resultText = win ? '🎉 恭喜中奖！' : '😢 未中奖';
+    debugPrint([runtimeType, resultText].join(", "));
+    widget.onFinish();
   }
 
   @override

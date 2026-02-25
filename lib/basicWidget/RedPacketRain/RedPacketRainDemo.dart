@@ -33,18 +33,17 @@ class _RedPacketRainDemoState extends State<RedPacketRainDemo> {
     RedPacketModel model,
     Offset globalPosition,
   ) {
-    setState(() {
-      _selectedPackets.add(
-        SelectedRedPacketWidget(
-          from: globalPosition,
-          size: model.size,
-          onFinish: () {
-            _selectedPackets.clear();
-            setState(() {});
-          },
-        ),
-      );
-    });
+    _selectedPackets.add(
+      SelectedRedPacketWidget(
+        from: globalPosition,
+        size: model.size,
+        onFinish: () {
+          _selectedPackets.clear();
+          setState(() {});
+        },
+      ),
+    );
+    setState(() {});
   }
 
   @override
