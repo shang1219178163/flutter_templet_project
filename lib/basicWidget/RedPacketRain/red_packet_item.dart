@@ -3,26 +3,27 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_model.dart';
 
-class RedPacketWidget extends StatefulWidget {
-  const RedPacketWidget({
+class RedPacketItem extends StatefulWidget {
+  const RedPacketItem({
     super.key,
     required this.model,
     required this.screenSize,
     required this.onFinish,
-    this.onTap,
+    required this.onTap,
   });
 
   final RedPacketModel model;
   final Size screenSize;
   final VoidCallback onFinish;
-  final VoidCallback? onTap;
+  final void Function(Offset global) onTap;
 
   @override
-  State<RedPacketWidget> createState() => _RedPacketWidgetState();
+  State<RedPacketItem> createState() => _RedPacketItemState();
 }
 
-class _RedPacketWidgetState extends State<RedPacketWidget> with SingleTickerProviderStateMixin {
+class _RedPacketItemState extends State<RedPacketItem> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
+  late final Animation<double> _y;
 
   @override
   void dispose() {
@@ -36,13 +37,20 @@ class _RedPacketWidgetState extends State<RedPacketWidget> with SingleTickerProv
     _controller = AnimationController(
       duration: widget.model.duration,
       vsync: this,
-    )..forward();
+    );
+
+    _y = Tween<double>(
+      begin: widget.model.startY,
+      end: widget.screenSize.height + 100,
+    ).animate(_controller);
 
     _controller.addStatusListener((s) {
       if (s == AnimationStatus.completed) {
         widget.onFinish();
       }
     });
+
+    _controller.forward();
   }
 
   @override
@@ -67,7 +75,9 @@ class _RedPacketWidgetState extends State<RedPacketWidget> with SingleTickerProv
       },
       child: RepaintBoundary(
         child: GestureDetector(
-          onTap: widget.onTap,
+          onTapDown: (d) {
+            widget.onTap(d.globalPosition);
+          },
           child: Container(
             // decoration: BoxDecoration(
             //   border: Border.all(color: Colors.blue),

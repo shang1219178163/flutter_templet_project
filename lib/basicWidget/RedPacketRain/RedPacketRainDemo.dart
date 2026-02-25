@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_controller.dart';
-import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_layer.dart';
+import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_model.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_rain.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_spawner.dart';
-import 'package:flutter_templet_project/vendor/toast_util.dart';
+import 'package:flutter_templet_project/basicWidget/RedPacketRain/selected_red_packet_widget.dart';
 
 class RedPacketRainDemo extends StatefulWidget {
   const RedPacketRainDemo({
@@ -20,9 +20,31 @@ class RedPacketRainDemo extends StatefulWidget {
 class _RedPacketRainDemoState extends State<RedPacketRainDemo> {
   final scrollController = ScrollController();
 
+  final RedPacketController _controller = RedPacketController(WeChatRedPacketSpawner());
+  final List<Widget> _selectedPackets = [];
+
   @override
-  void didUpdateWidget(covariant RedPacketRainDemo oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
+    _controller.start();
+  }
+
+  void _onPacketSelected(
+    RedPacketModel model,
+    Offset globalPosition,
+  ) {
+    setState(() {
+      _selectedPackets.add(
+        SelectedRedPacketWidget(
+          from: globalPosition,
+          size: model.size,
+          onFinish: () {
+            _selectedPackets.clear();
+            setState(() {});
+          },
+        ),
+      );
+    });
   }
 
   @override
@@ -41,14 +63,11 @@ class _RedPacketRainDemoState extends State<RedPacketRainDemo> {
                 border: Border.all(color: Colors.blue),
               ),
               child: RedPacketRain(
-                onTap: (model) {
-                  // TODO: 点击红包（爆炸 / 记分 / 音效）
-                  debugPrint([runtimeType, DateTime.now(), model.toJson()].join(" "));
-                  ToastUtil.show("${model.toJson()}");
-                },
+                onSelected: _onPacketSelected,
               ),
             ),
           ),
+          ..._selectedPackets,
         ],
       ),
     );

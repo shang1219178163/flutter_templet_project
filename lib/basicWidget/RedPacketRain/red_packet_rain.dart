@@ -5,9 +5,12 @@ import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_mod
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_spawner.dart';
 
 class RedPacketRain extends StatefulWidget {
-  const RedPacketRain({super.key, required this.onTap});
+  const RedPacketRain({
+    super.key,
+    required this.onSelected,
+  });
 
-  final void Function(RedPacketModel model) onTap;
+  final void Function(RedPacketModel model, Offset global) onSelected;
 
   @override
   State<RedPacketRain> createState() => _RedPacketRainState();
@@ -46,7 +49,7 @@ class _RedPacketRainState extends State<RedPacketRain> {
       child: RedPacketLayer(
         controller: _controller,
         screenSize: _screenSize,
-        onTap: widget.onTap,
+        onSelected: widget.onSelected,
       ),
     );
   }

@@ -17,7 +17,7 @@ class WeChatRedPacketSpawner implements RedPacketSpawner {
     int milliseconds = 5600 + _random.nextInt(1400);
 
     size = 55;
-    milliseconds = 5600;
+    // milliseconds = 5600;
 
     return RedPacketModel(
       x: x,
