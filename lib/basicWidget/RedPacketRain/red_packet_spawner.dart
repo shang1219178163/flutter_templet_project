@@ -25,6 +25,7 @@ class WeChatRedPacketSpawner implements RedPacketSpawner {
       duration: Duration(
         milliseconds: milliseconds,
       ),
+      startY: -size - _random.nextDouble() * 40, // ⭐ 屏幕外
     );
   }
 }

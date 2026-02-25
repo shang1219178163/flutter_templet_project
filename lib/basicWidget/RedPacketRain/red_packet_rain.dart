@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_controller.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_layer.dart';
+import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_model.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_spawner.dart';
 
 class RedPacketRain extends StatefulWidget {
-  const RedPacketRain({super.key});
+  const RedPacketRain({super.key, required this.onTap});
+
+  final void Function(RedPacketModel model) onTap;
 
   @override
   State<RedPacketRain> createState() => _RedPacketRainState();
@@ -36,11 +39,14 @@ class _RedPacketRainState extends State<RedPacketRain> {
 
   @override
   Widget build(BuildContext context) {
+    var enabled = ModalRoute.of(context)?.isCurrent ?? true;
+    // enabled = false;
     return TickerMode(
-      enabled: ModalRoute.of(context)?.isCurrent ?? true,
+      enabled: enabled,
       child: RedPacketLayer(
         controller: _controller,
         screenSize: _screenSize,
+        onTap: widget.onTap,
       ),
     );
   }

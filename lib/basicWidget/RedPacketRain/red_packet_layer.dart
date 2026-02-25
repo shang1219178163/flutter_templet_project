@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_controller.dart';
+import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_model.dart';
 import 'package:flutter_templet_project/basicWidget/RedPacketRain/red_packet_widget.dart';
 
 class RedPacketLayer extends StatelessWidget {
@@ -7,10 +8,13 @@ class RedPacketLayer extends StatelessWidget {
     super.key,
     required this.controller,
     required this.screenSize,
+    required this.onTap,
   });
 
   final RedPacketController controller;
   final Size screenSize;
+
+  final void Function(RedPacketModel model) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +28,7 @@ class RedPacketLayer extends StatelessWidget {
               model: model,
               screenSize: screenSize,
               onFinish: () => controller.remove(model),
-              onTap: () {
-                // TODO: 点击红包（爆炸 / 记分 / 音效）
-                debugPrint([runtimeType, DateTime.now(), model.toJson()].join(" "));
-              },
+              onTap: () => onTap(model),
             );
           }).toList(),
         );
