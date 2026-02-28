@@ -50,8 +50,9 @@ class NPickerToolBar extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: Colors.black,
-          backgroundColor: Colors.white,
+          fontFamily: "PingFang SC",
+          // color: Colors.black,
+          // backgroundColor: Colors.white,
           decoration: TextDecoration.none,
         ),
         child: NavigationToolbar(

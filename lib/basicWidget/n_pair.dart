@@ -61,13 +61,7 @@ class NPair<T> extends StatelessWidget {
       return child;
     }
 
-    var gap = direction == Axis.horizontal
-        ? SizedBox(
-            width: spacing,
-          )
-        : SizedBox(
-            height: spacing,
-          );
+    var gap = direction == Axis.horizontal ? SizedBox(width: spacing) : SizedBox(height: spacing);
     var children = <Widget>[
       icon ?? SizedBox(),
       if (icon != null) gap,

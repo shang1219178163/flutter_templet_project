@@ -8,6 +8,10 @@ class ElevatedBtn extends StatelessWidget {
     this.padding,
     this.radius = 12,
     this.gradient,
+    this.disabledFgColor,
+    this.disabledBgColor,
+    this.disabledFgColorDark,
+    this.disabledBgColorDark,
     this.title = "ElevatedBtn",
     this.child,
     this.onPressed,
@@ -23,6 +27,12 @@ class ElevatedBtn extends StatelessWidget {
 
   final Gradient? gradient;
 
+  final Color? disabledFgColor;
+  final Color? disabledBgColor;
+
+  final Color? disabledFgColorDark;
+  final Color? disabledBgColorDark;
+
   final String title;
 
   final Widget? child;
@@ -33,6 +43,13 @@ class ElevatedBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+
+    final disabledBackgroundColor = isDark
+        ? (disabledBgColorDark ?? disabledBgColor ?? const Color(0xFF3A3A48))
+        : (disabledBgColor ?? const Color(0xFFDEDEDE));
+    final disabledForegroundColor = isDark
+        ? (disabledFgColorDark ?? disabledFgColor ?? const Color(0xFF7C7C85))
+        : (disabledFgColor ?? const Color(0xFFA7A7AE));
 
     final gradientDefault = isDark
         ? const LinearGradient(colors: [Colors.red, Colors.purple])
@@ -48,6 +65,9 @@ class ElevatedBtn extends StatelessWidget {
         padding: EdgeInsets.zero,
         minimumSize: const Size(40, 20),
         elevation: 0,
+        foregroundColor: Colors.white,
+        disabledBackgroundColor: disabledBackgroundColor,
+        disabledForegroundColor: disabledForegroundColor,
       ),
       onPressed: onPressed,
       child: Ink(
@@ -65,7 +85,7 @@ class ElevatedBtn extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  color: Colors.white,
+                  // color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),

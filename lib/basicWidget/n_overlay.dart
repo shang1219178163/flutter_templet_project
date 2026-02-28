@@ -39,9 +39,6 @@ class NOverlay {
       return null;
     }
 
-    // debugPrint("AppUtil.globalContext: ${_globalContext}");
-    // final _overlayState = Overlay.of(_globalContext!);
-
     if (isReplace) {
       hide();
     }
