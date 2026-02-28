@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/n_render_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
@@ -28,43 +29,45 @@ class _WrapDemoState extends State<WrapDemo> {
   Widget buildBody() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          buildWrapBox(),
-          NSectionBox(
-            title: "Axis.horizontal",
-            child: Container(
-              // height: 200,
-              // width: 400,
-              constraints: BoxConstraints(
-                maxHeight: 200,
-              ),
-              margin: EdgeInsets.all(12),
-              child: WrapWidget(
-                width: context.screenSize.width - 24,
-                direction: Axis.horizontal,
-                // height: 500,
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "Axis.vertical",
-            child: Container(
-              // height: 200,
-              // width: 400,
-              constraints: BoxConstraints(
-                maxHeight: 200,
-              ),
-              margin: EdgeInsets.all(12),
-              child: WrapWidget(
-                width: context.screenSize.width - 24,
-                direction: Axis.vertical,
-                // height: 500,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            buildWrapBox(),
+            NSectionBox(
+              title: "Axis.horizontal",
+              child: Container(
+                // height: 200,
+                // width: 400,
+                constraints: BoxConstraints(
+                  maxHeight: 200,
+                ),
+                margin: EdgeInsets.all(12),
+                child: WrapWidget(
+                  width: context.screenSize.width - 24,
+                  direction: Axis.horizontal,
+                  // height: 500,
+                ),
               ),
             ),
-          ),
-        ],
+            NSectionBox(
+              title: "Axis.vertical",
+              child: Container(
+                // height: 200,
+                // width: 400,
+                constraints: BoxConstraints(
+                  maxHeight: 200,
+                ),
+                margin: EdgeInsets.all(12),
+                child: WrapWidget(
+                  width: context.screenSize.width - 24,
+                  direction: Axis.vertical,
+                  // height: 500,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -80,23 +83,25 @@ class _WrapDemoState extends State<WrapDemo> {
         spacing: 8.0,
         runSpacing: 8.0,
         children: List.generate(12, (index) {
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(color: Colors.blue),
-              borderRadius: BorderRadius.all(Radius.circular(0)),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                NNetworkImage(
-                  width: 50,
-                  height: 60,
-                  url: AppRes.image.urls[IntExt.random(max: AppRes.image.urls.length)],
-                ),
-                Text("选项_$index"),
-              ],
+          return NRenderBox(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  NNetworkImage(
+                    width: 50,
+                    height: 60,
+                    url: AppRes.image.urls[IntExt.random(max: AppRes.image.urls.length)],
+                  ),
+                  Text("选项_$index"),
+                ],
+              ),
             ),
           );
         }).toList(),
@@ -154,12 +159,12 @@ class WrapWidget extends StatelessWidget {
         // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){
         //   print(e);
         // })).toList(),
-        children: Colors.primaries.take(10).map((e) => _buildItemNew(color: e)).toList(),
+        children: Colors.primaries.take(10).map((e) => buildItem(color: e)).toList(),
       ),
     );
   }
 
-  Widget _buildItemNew({Color? color}) {
+  Widget buildItem({Color? color}) {
     return GestureDetector(
       onTap: () => debugPrint(color.toString()),
       child: Container(
@@ -180,14 +185,14 @@ class WrapWidget extends StatelessWidget {
             SizedBox(
               height: 6,
             ),
-            _buildText(text: '免费设计免'),
+            buildText(text: '免费设计免'),
           ],
         ),
       ),
     );
   }
 
-  _buildText({
+  Widget buildText({
     text = '-',
     maxLines = 1,
     style = const TextStyle(
