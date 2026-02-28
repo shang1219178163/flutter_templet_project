@@ -11,37 +11,25 @@ class OverlayPortalDemo extends StatefulWidget {
 }
 
 class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => debugPrint(e),
-                ))
-            .toList(),
       ),
       body: buildBody(),
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
-      controller: _scrollController,
+      controller: scrollController,
       child: SingleChildScrollView(
-        controller: _scrollController,
+        controller: scrollController,
         child: Column(
           children: [
-            Text("$widget"),
             NSectionBox(
               title: "OverlayPortal",
               child: buildOverlayPortal(),
@@ -52,15 +40,15 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
     );
   }
 
-  final _portalController = OverlayPortalController();
+  final portalController = OverlayPortalController();
 
   Widget buildOverlayPortal() {
     return TextButton(
-      onPressed: _portalController.toggle,
+      onPressed: portalController.toggle,
       child: DefaultTextStyle(
         style: DefaultTextStyle.of(context).style.copyWith(fontSize: 16),
         child: OverlayPortal(
-          controller: _portalController,
+          controller: portalController,
           overlayChildBuilder: (BuildContext context) {
             return Positioned(
               right: 30,
@@ -73,7 +61,7 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
               ),
             );
           },
-          child: const Text('Press to show/hide tooltip'),
+          child: Text('show/hide'),
         ),
       ),
     );

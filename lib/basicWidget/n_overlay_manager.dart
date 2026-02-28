@@ -17,9 +17,18 @@ class NOverlayManager {
 
   /// 当前 OverlayEntry 列表
   final List<OverlayEntry> _entries = [];
+  List<OverlayEntry> get entries => _entries;
+
+  /// 当前弹窗
+  OverlayEntry? get last {
+    if (_entries.isEmpty) {
+      return null;
+    }
+    return _entries.last;
+  }
 
   /// 当前是否有 Toast 显示
-  bool get isShowing => _entries.isNotEmpty;
+  bool get isLoading => _entries.isNotEmpty;
 
   // Timer? _autoHideTimer;
 

@@ -26,7 +26,7 @@ class OverlayMixinDemo extends StatefulWidget {
 }
 
 class _OverlayMixinDemoState extends State<OverlayMixinDemo> with OverlayMixin {
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
 
   Alignment alignment = Alignment.topCenter;
 
@@ -47,12 +47,11 @@ class _OverlayMixinDemoState extends State<OverlayMixinDemo> with OverlayMixin {
 
   Widget buildBody() {
     return Scrollbar(
-      controller: _scrollController,
+      controller: scrollController,
       child: SingleChildScrollView(
-        controller: _scrollController,
+        controller: scrollController,
         child: Column(
           children: [
-            Text("$widget"),
             NMenuAnchor(
               values: AlignmentExt.allCases,
               initialItem: alignment,

@@ -12,7 +12,7 @@ class OverlayDemoOne extends StatefulWidget {
 }
 
 class _OverlayDemoOneState extends State<OverlayDemoOne> {
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
 
   @override
   void dispose() {
@@ -33,12 +33,11 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
 
   buildBody() {
     return Scrollbar(
-      controller: _scrollController,
+      controller: scrollController,
       child: SingleChildScrollView(
-        controller: _scrollController,
+        controller: scrollController,
         child: Column(
           children: [
-            Text("$widget"),
             OutlinedButton(
               onPressed: () {
                 clickShow();

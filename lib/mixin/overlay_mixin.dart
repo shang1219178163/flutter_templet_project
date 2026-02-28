@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 
 /// 创建浮动拖拽按钮
+@Deprecated("已弃用,请使用 NOverlayManager")
 mixin OverlayMixin<T extends StatefulWidget> on State<T> {
   OverlayState get _overlayState => Overlay.of(context);
 
