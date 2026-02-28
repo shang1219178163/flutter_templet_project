@@ -63,39 +63,43 @@ class NOverlayContent extends StatelessWidget {
   const NOverlayContent({
     super.key,
     required this.message,
+    this.alignment = Alignment.center,
     this.offset = 0,
     this.backgroudColor = const Color(0xFF000000),
     this.color = const Color(0xFFFFFFFF),
+    this.child,
   });
 
   final String message;
+  final Alignment alignment;
   final double offset;
   final Color? backgroudColor;
   final Color? color;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.center,
+      alignment: alignment,
       child: Transform.translate(
         offset: Offset(0, offset),
-        child: Container(
-          // margin: EdgeInsets.only(bottom: 300),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: backgroudColor,
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-          child: Text(
-            message,
-            style: TextStyle(
-              color: color,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'PingFang SC',
+        child: child ??
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: backgroudColor,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+              child: Text(
+                message,
+                style: TextStyle(
+                  color: color,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'PingFang SC',
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
-            textAlign: TextAlign.center,
-          ),
-        ),
       ),
     );
   }
