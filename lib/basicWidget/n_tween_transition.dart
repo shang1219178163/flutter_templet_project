@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 
+@Deprecated("已弃用,请使用 TweenAnimationBuilder")
 class NTweenTransition<T> extends StatefulWidget {
   const NTweenTransition({
     super.key,
@@ -24,8 +25,7 @@ class NTweenTransition<T> extends StatefulWidget {
   State<NTweenTransition<T>> createState() => _NTweenTransitionState<T>();
 }
 
-class _NTweenTransitionState<T> extends State<NTweenTransition<T>>
-    with SingleTickerProviderStateMixin {
+class _NTweenTransitionState<T> extends State<NTweenTransition<T>> with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     vsync: this,
     duration: widget.duration,

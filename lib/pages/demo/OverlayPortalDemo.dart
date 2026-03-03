@@ -43,10 +43,10 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
   final portalController = OverlayPortalController();
 
   Widget buildOverlayPortal() {
-    return TextButton(
-      onPressed: portalController.toggle,
-      child: DefaultTextStyle(
-        style: DefaultTextStyle.of(context).style.copyWith(fontSize: 16),
+    return DefaultTextStyle(
+      style: DefaultTextStyle.of(context).style.copyWith(fontSize: 16),
+      child: TextButton(
+        onPressed: portalController.toggle,
         child: OverlayPortal(
           controller: portalController,
           overlayChildBuilder: (BuildContext context) {

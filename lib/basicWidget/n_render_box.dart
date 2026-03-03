@@ -40,7 +40,7 @@ class _NRenderBoxState extends State<NRenderBox> {
         final position = renderPosition;
         final size = renderBox!.size;
         final rect = Rect.fromLTWH(position!.dx, position.dy, size.width, size.height);
-        debugPrint("$runtimeType rect: $rect");
+        debugPrint("$widget rect: $rect");
       },
       child: widget.child,
     );
