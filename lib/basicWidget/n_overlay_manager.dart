@@ -8,6 +8,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// Overlay 管理器
 class NOverlayManager {
@@ -15,12 +16,14 @@ class NOverlayManager {
 
   static final NOverlayManager instance = NOverlayManager._internal();
 
+  static final _globalContext = Get.context;
+
   /// 当前 OverlayEntry 列表
-  final List<OverlayEntry> _entries = [];
-  List<OverlayEntry> get entries => _entries;
+  static final List<OverlayEntry> _entries = [];
+  static List<OverlayEntry> get entries => _entries;
 
   /// 当前弹窗
-  OverlayEntry? get last {
+  static OverlayEntry? get last {
     if (_entries.isEmpty) {
       return null;
     }
@@ -28,43 +31,106 @@ class NOverlayManager {
   }
 
   /// 当前是否有 Toast 显示
-  bool get isLoading => _entries.isNotEmpty;
+  static bool get isLoading => _entries.isNotEmpty;
 
-  // Timer? _autoHideTimer;
-
-  /// 显示 Toast
-  void show(
-    BuildContext context, {
-    required Widget child,
-    Duration duration = const Duration(seconds: 2),
-    bool autoDismiss = true,
-  }) {
-    // 1️⃣ 先清空已有 Toast
-    hideAll();
-
-    final overlay = Overlay.of(context, rootOverlay: true);
-    final entry = OverlayEntry(builder: (_) => child);
-
+  static void insert(OverlayEntry entry, {OverlayEntry? below, OverlayEntry? above}) {
+    final overlay = Overlay.of(_globalContext!, rootOverlay: true);
     _entries.add(entry);
-    overlay.insert(entry);
-
-    // 2️⃣ 自动移除
-    if (autoDismiss) {
-      Future.delayed(duration, hideAll);
-      // _autoHideTimer?.cancel();
-      // _autoHideTimer = Timer(duration, hideAll);
-    }
+    overlay.insert(entry, below: below, above: above);
   }
 
   /// 移除所有 Toast
-  void hideAll() {
-    // _autoHideTimer?.cancel();
-    // _autoHideTimer = null;
-
+  static void removeAll() {
     for (final entry in _entries) {
-      entry.remove();
+      if (entry.mounted) {
+        entry.remove();
+      }
     }
     _entries.clear();
+  }
+
+  /// 显示 Toast
+  static void show({
+    Duration duration = const Duration(seconds: 2),
+    bool autoDismiss = true,
+    required Widget child,
+  }) {
+    // 1️⃣ 先清空已有 Toast
+    removeAll();
+
+    final entry = OverlayEntry(builder: (_) => child);
+    insert(entry);
+    // 2️⃣ 自动移除
+    if (autoDismiss) {
+      Future.delayed(duration, removeAll);
+    }
+  }
+
+  static OverlayEntry? _current;
+
+  static void showAnimation({
+    BuildContext? context,
+    Duration duration = const Duration(seconds: 2),
+    required Widget child,
+  }) {
+    final contextNew = context ?? _globalContext;
+    // 移除旧的
+    // ✅ 安全移除旧的
+    // if (_current != null && _current!.mounted) {
+    //   _current!.remove();
+    // }
+    removeAll();
+
+    final controller = AnimationController(
+      vsync: Navigator.of(contextNew!),
+      duration: const Duration(milliseconds: 350),
+    );
+
+    late OverlayEntry entry;
+
+    controller.addListener(() {
+      Future.microtask(() {
+        if (entry.mounted) {
+          entry.markNeedsBuild();
+        }
+      });
+    });
+
+    entry = OverlayEntry(
+      builder: (_) {
+        final t = CurvedAnimation(
+          parent: controller,
+          curve: Curves.easeOut,
+        ).value;
+
+        return Positioned(
+          bottom: 100 * t,
+          left: 0,
+          right: 0,
+          child: Opacity(
+            opacity: t,
+            child: Transform.scale(
+              scale: 0.9 + 0.1 * t,
+              child: child,
+            ),
+          ),
+        );
+      },
+    );
+
+    _current = entry;
+    insert(entry);
+    // final overlayState = Overlay.of(context, rootOverlay: true);
+    // overlayState.insert(entry);
+    controller.forward();
+
+    Future.delayed(duration, () async {
+      await controller.reverse();
+      if (entry.mounted) {
+        entry.remove();
+      }
+      controller.dispose();
+    });
   }
 }
 
