@@ -68,10 +68,11 @@ class NOverlayManager {
 
   static OverlayEntry? _current;
 
+  /// 展示动画
   static void showAnimation({
     BuildContext? context,
     Duration duration = const Duration(seconds: 2),
-    required Widget child,
+    required Widget Function(VoidCallback onHide) bulder,
   }) {
     final contextNew = context ?? _globalContext;
     // 移除旧的
@@ -96,6 +97,15 @@ class NOverlayManager {
       });
     });
 
+    onHide() async {
+      if (!entry.mounted) {
+        return;
+      }
+      await controller.reverse();
+      entry.remove();
+      controller.dispose();
+    }
+
     entry = OverlayEntry(
       builder: (_) {
         final t = CurvedAnimation(
@@ -111,7 +121,7 @@ class NOverlayManager {
             opacity: t,
             child: Transform.scale(
               scale: 0.9 + 0.1 * t,
-              child: child,
+              child: bulder(onHide),
             ),
           ),
         );
@@ -123,14 +133,111 @@ class NOverlayManager {
     // final overlayState = Overlay.of(context, rootOverlay: true);
     // overlayState.insert(entry);
     controller.forward();
+    Future.delayed(duration, onHide);
+  }
 
-    Future.delayed(duration, () async {
-      await controller.reverse();
-      if (entry.mounted) {
-        entry.remove();
-      }
-      controller.dispose();
+  /// sheet
+  static void sheet({
+    BuildContext? context,
+    Duration duration = const Duration(seconds: 2),
+    double height = 500,
+    double radius = 16,
+    bool onBarrier = true,
+    required Widget Function(VoidCallback onHide) bulder,
+  }) {
+    final contextNew = context ?? _globalContext;
+    removeAll();
+
+    final controller = AnimationController(
+      vsync: Navigator.of(contextNew!),
+      duration: const Duration(milliseconds: 350),
+    );
+
+    late OverlayEntry entry;
+    controller.addListener(() {
+      Future.microtask(() {
+        if (entry.mounted) {
+          entry.markNeedsBuild();
+        }
+      });
     });
+
+    onHide() async {
+      if (!entry.mounted) {
+        return;
+      }
+      await controller.reverse();
+      entry.remove();
+      controller.dispose();
+    }
+
+    entry = OverlayEntry(
+      builder: (_) {
+        final t = CurvedAnimation(
+          parent: controller,
+          curve: Curves.easeOut,
+        ).value;
+
+        final offsetY = (1 - t) * height;
+        return Stack(
+          children: [
+            // 1️⃣ 背景遮罩
+            GestureDetector(
+              onTap: onBarrier ? onHide : null,
+              child: Opacity(
+                opacity: 0.4 * t,
+                child: Container(color: Colors.black),
+              ),
+            ),
+            AnimatedBuilder(
+              animation: controller,
+              child: Material(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(radius),
+                ),
+                clipBehavior: Clip.antiAlias,
+                // color: Colors.white,
+                child: RepaintBoundary(
+                  child: bulder(onHide),
+                ),
+              ),
+              builder: (_, cachedChild) {
+                return AnimatedPositioned(
+                  duration: controller.duration ?? Duration.zero,
+                  left: 0,
+                  right: 0,
+                  bottom: -offsetY,
+                  height: height,
+                  child: cachedChild!,
+                );
+              },
+            ),
+            // AnimatedPositioned(
+            //   duration: controller.duration ?? Duration.zero,
+            //   left: 0,
+            //   right: 0,
+            //   bottom: -offsetY,
+            //   height: height,
+            //   child: Material(
+            //     borderRadius: BorderRadius.vertical(
+            //       top: Radius.circular(radius),
+            //     ),
+            //     clipBehavior: Clip.antiAlias,
+            //     // color: Colors.white,
+            //     child: RepaintBoundary(
+            //       child: bulder(onHide),
+            //     ),
+            //   ),
+            // ),
+          ],
+        );
+      },
+    );
+
+    _current = entry;
+    insert(entry);
+    controller.forward();
+    // Future.delayed(duration, onHide);
   }
 }
 

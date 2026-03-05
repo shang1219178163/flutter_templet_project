@@ -238,6 +238,7 @@ import 'package:flutter_templet_project/pages/demo/OcrPhotoDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OffstageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowDemo.dart';
+import 'package:flutter_templet_project/pages/demo/OverlayAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
@@ -897,6 +898,7 @@ class AppRouter {
   static const String gradientPlaygroundPage = '/gradientPlaygroundPage';
   static const String redPacketRainDemo = '/redPacketRainDemo';
   static const String keyboardShortcutsDemo = '/keyboardShortcutsDemo';
+  static const String overlayAnimationDemo = '/overlayAnimationDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2636,6 +2638,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.keyboardShortcutsDemo,
       page: () => KeyboardShortcutsDemo(),
+    ),
+    GetPage(
+      name: AppRouter.overlayAnimationDemo,
+      page: () => OverlayAnimationDemo(),
     ),
   ];
 }

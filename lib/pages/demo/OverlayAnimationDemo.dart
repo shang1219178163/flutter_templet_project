@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_overlay_bottom_sheet.dart';
+import 'package:flutter_templet_project/basicWidget/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay_manager.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:tuple/tuple.dart';
@@ -60,7 +62,7 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
               Container(
                 height: 500,
                 width: double.infinity,
-                color: ColorExt.random,
+                // color: ColorExt.random,
                 padding: EdgeInsets.all(8),
                 child: Wrap(
                   spacing: 8,
@@ -69,25 +71,40 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                     ElevatedButton(
                       onPressed: () {
                         NOverlayManager.showAnimation(
+                          bulder: (onHide) => buildContent(),
+                        );
+                      },
+                      child: Text("showAnimation"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        NOverlayManager.sheet(
+                          bulder: (onHide) => buildContent(),
+                        );
+                      },
+                      child: Text("sheet"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        NOverlayBottomSheet.show(
+                          context,
+                          child: buildContent(),
+                        );
+                      },
+                      child: Text("NOverlayBottomSheet"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        NOverlayDialog.show(
+                          context,
+                          // margin: EdgeInsets.symmetric(horizontal: 30),
                           child: Container(
-                            height: 500,
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: ColorExt.random,
-                              border: Border.all(color: Colors.blue),
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                debugPrint("showAnimation");
-                              },
-                              child: Text("showAnimation"),
-                            ),
+                            margin: EdgeInsets.symmetric(horizontal: 30),
+                            child: buildContentDialog(),
                           ),
                         );
                       },
-                      child: Text("NOverlayManager"),
+                      child: Text("NOverlayDialog"),
                     ),
                   ],
                 ),
@@ -133,7 +150,49 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
     );
   }
 
-  void onPressed() {
-    debugPrint("onPressed");
+  Widget buildContent() {
+    return Container(
+      height: 500,
+      width: double.infinity,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        // color: ColorExt.random,
+        color: Colors.yellow,
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      child: ElevatedButton(
+        onPressed: () {
+          debugPrint("showAnimation");
+        },
+        child: Text("showAnimation"),
+      ),
+    );
+  }
+
+  Widget buildContentDialog() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          // height: 500,
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            // color: ColorExt.random,
+            color: Colors.yellow,
+            border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              debugPrint("buildContentDialog");
+            },
+            child: Text("buildContentDialog"),
+          ),
+        )
+      ],
+    );
   }
 }
