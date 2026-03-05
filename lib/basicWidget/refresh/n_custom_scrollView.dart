@@ -23,6 +23,7 @@ class NCustomScrollView<T> extends StatefulWidget {
     this.placeholder = const NPlaceholder(),
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
+    this.onlyHeader = false,
     required this.onRequest,
     required this.itemBuilder,
     this.separatorBuilder,
@@ -41,6 +42,9 @@ class NCustomScrollView<T> extends StatefulWidget {
   final Decoration contentDecoration;
 
   final EdgeInsets contentPadding;
+
+  /// 列表为空时 header 是否可以显示
+  final bool onlyHeader;
 
   /// 请求方法
   final RequestListCallback<T> onRequest;
@@ -76,15 +80,32 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   List<T> items = <T>[];
 
   @override
+  void dispose() {
+    widget.controller?.detach(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller?.attach(this);
+  }
+
+  @override
   void didUpdateWidget(covariant NCustomScrollView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.title != oldWidget.title ||
         widget.placeholder != oldWidget.placeholder ||
         widget.contentDecoration != oldWidget.contentDecoration ||
         widget.contentPadding != oldWidget.contentPadding ||
+        widget.onlyHeader != oldWidget.onlyHeader ||
         widget.onRequest != oldWidget.onRequest ||
         widget.itemBuilder != oldWidget.itemBuilder ||
         widget.separatorBuilder != oldWidget.separatorBuilder) {
+      if (widget.controller != null && oldWidget.controller != widget.controller) {
+        oldWidget.controller?.detach(this);
+        widget.controller?.attach(this);
+      }
       setState(() {});
     }
   }
@@ -92,7 +113,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (items.isEmpty) {
+    if (items.isEmpty && !widget.onlyHeader) {
       return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
     }
 
