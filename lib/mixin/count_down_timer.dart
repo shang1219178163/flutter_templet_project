@@ -8,7 +8,11 @@ mixin CountDownTimer<T extends StatefulWidget> on State<T>, WidgetsBindingObserv
   DateTime? _endTime;
   Timer? _timer;
 
-  int get limitSecond => 60;
+  int _limitSecond = 60;
+  int get limitSecond => _limitSecond;
+  set limitSecond(int value) {
+    _limitSecond = value;
+  }
 
   final isCountingDownVN = ValueNotifier(false);
   late final countdownVN = ValueNotifier(limitSecond);
@@ -36,29 +40,34 @@ mixin CountDownTimer<T extends StatefulWidget> on State<T>, WidgetsBindingObserv
   }
 
   /// 开始倒计时
-  void startCountdown() {
+  void startCountdown({int? second, ValueChanged<int>? onSecond, VoidCallback? onFinished}) {
     isCountingDownVN.value = true;
+    if (second != null) {
+      _limitSecond = second;
+    }
     countdownVN.value = limitSecond;
 
     _endTime = DateTime.now().add(Duration(seconds: limitSecond));
-    _updateRemaining(); // 立即计算一次（避免 UI 延迟）
+    _updateRemaining(onSecond: onSecond, onFinished: onFinished); // 立即计算一次（避免 UI 延迟）
     _timer?.cancel();
     // 周期短一点以保证恢复后能尽快反映（但 setState 只有在秒数变化才触发）
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) => _updateRemaining());
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (_) => _updateRemaining(onSecond: onSecond, onFinished: onFinished),
+    );
   }
 
-  void _updateRemaining() {
+  void _updateRemaining({ValueChanged<int>? onSecond, VoidCallback? onFinished}) {
     if (_endTime == null) {
       return;
     }
     final secondsLeft = _endTime!.difference(DateTime.now()).inSeconds.clamp(0, limitSecond);
-    DLog.d(["secondsLeft: $secondsLeft"]);
+    // DLog.d(["secondsLeft: $secondsLeft"]);
+    countdownVN.value = secondsLeft;
     if (secondsLeft <= 0) {
       isCountingDownVN.value = false;
       _timer?.cancel();
       _endTime = null;
-    } else {
-      countdownVN.value = secondsLeft;
     }
   }
 }
