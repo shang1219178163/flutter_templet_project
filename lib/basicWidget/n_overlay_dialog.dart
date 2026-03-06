@@ -8,78 +8,23 @@
 
 import 'package:flutter/material.dart';
 
+/// Dialog & Sheet & Drawer & Toast
 class NOverlayDialog {
   NOverlayDialog._();
 
   static OverlayEntry? _entry;
   static AnimationController? _controller;
 
-  static bool get _isShowing => _entry != null;
+  static bool get isShowing => _entry != null;
 
-  /// 显示 Dialog
-  static void show(
-    BuildContext context, {
-    EdgeInsets margin = const EdgeInsets.all(0),
-    required Widget child,
-    bool dismissOnTapBarrier = true,
-  }) {
-    if (_isShowing) {
-      dismiss(immediately: true);
-    }
-
-    final overlay = Overlay.of(context, rootOverlay: true);
-
-    _controller = AnimationController(
-      vsync: overlay,
-      duration: const Duration(milliseconds: 200),
-    );
-
-    final animation = CurvedAnimation(
-      parent: _controller!,
-      curve: Curves.easeOut,
-      reverseCurve: Curves.easeIn,
-    );
-
-    _entry = OverlayEntry(
-      builder: (_) {
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            // ===== Barrier =====
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: dismissOnTapBarrier ? dismiss : null,
-              child: FadeTransition(
-                opacity: animation,
-                child: Container(
-                  color: Colors.black.withOpacity(0.3),
-                ),
-              ),
-            ),
-
-            // ===== Dialog =====
-            _DialogContainer(
-              animation: animation,
-              child: child,
-            ),
-          ],
-        );
-      },
-    );
-
-    overlay.insert(_entry!);
-    _controller!.forward();
-  }
-
-  /// 隐藏 Dialog
+  /// 隐藏
   static Future<void> dismiss({bool immediately = false}) async {
-    if (!_isShowing) {
+    if (!isShowing) {
       return;
     }
 
     final controller = _controller;
     final entry = _entry;
-
     _controller = null;
     _entry = null;
 
@@ -93,49 +38,158 @@ class NOverlayDialog {
     entry?.remove();
     controller.dispose();
   }
-}
 
-/// ===============================
-/// Dialog 外壳（系统 showDialog 等价）
-/// ===============================
-class _DialogContainer extends StatelessWidget {
-  const _DialogContainer({
-    required this.animation,
-    required this.child,
-  });
+  /// 显示 BottomSheet
+  static void show(
+    BuildContext context, {
+    required Widget child,
+    Alignment from = Alignment.bottomCenter,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+    bool barrierDismissible = true,
+    Color barrierColor = const Color(0x80000000),
+    VoidCallback? onBarrier,
+    bool hideBarrier = false,
+    Duration? autoDismissDuration,
+  }) {
+    if (isShowing) {
+      dismiss(immediately: true);
+    }
 
-  final Animation<double> animation;
-  final Widget child;
+    final overlay = Overlay.of(context, rootOverlay: true);
+    _controller = AnimationController(
+      vsync: overlay,
+      duration: const Duration(milliseconds: 300),
+    );
 
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: animation,
-      child: child, // ⭐ child 缓存，不随动画 rebuild
-      builder: (_, cachedChild) {
-        return FadeTransition(
-          opacity: animation,
-          child: ScaleTransition(
-            scale: Tween<double>(
-              begin: 0.9,
-              end: 1.0,
-            ).animate(animation),
-            child: Material(
-              type: MaterialType.transparency,
-              child: Center(
-                child: cachedChild,
-                // child: Material(
-                //   elevation: 24,
-                //   color: Colors.white,
-                //   borderRadius: BorderRadius.circular(12),
-                //   clipBehavior: Clip.antiAlias,
-                //   child: cachedChild,
-                // ),
+    final animation = CurvedAnimation(
+      parent: _controller!,
+      curve: Curves.easeOut,
+      reverseCurve: Curves.easeIn,
+    );
+
+    Widget content = child;
+    // ⭐ 中心弹窗：Fade
+    if (from == Alignment.center) {
+      content = FadeTransition(
+        opacity: animation.drive(
+          CurveTween(curve: Curves.easeOut),
+        ),
+        child: ScaleTransition(
+          scale: Tween<double>(begin: 0.9, end: 1.0).animate(animation),
+          child: content,
+        ),
+      );
+    }
+
+    // ⭐ 其余方向：Slide
+    content = FadeTransition(
+      opacity: animation,
+      child: SlideTransition(
+        position: animation.drive(
+          Tween<Offset>(
+            begin: Offset(from.x.sign, from.y.sign),
+            end: Offset.zero,
+          ).chain(
+            CurveTween(curve: curve),
+          ),
+        ),
+        child: content,
+      ),
+    );
+
+    content = Align(
+      alignment: from,
+      child: content,
+    );
+
+    _entry = OverlayEntry(
+      builder: (context) {
+        if (hideBarrier) {
+          return content;
+        }
+
+        return Stack(
+          children: [
+            // ===== Barrier =====
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: barrierDismissible ? dismiss : onBarrier,
+              child: FadeTransition(
+                opacity: animation,
+                child: Container(
+                  color: barrierColor,
+                ),
               ),
             ),
-          ),
+            content,
+          ],
         );
       },
+    );
+
+    overlay.insert(_entry!);
+    _controller?.forward();
+    if (autoDismissDuration != null) {
+      Future.delayed(autoDismissDuration, dismiss);
+    }
+  }
+
+  /// 显示
+  static void sheet(
+    BuildContext context, {
+    required Widget child,
+    Alignment from = Alignment.bottomCenter,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+    bool hideBarrier = false,
+    Duration? autoDismissDuration,
+  }) {
+    return show(
+      context,
+      child: child,
+      from: from,
+      duration: duration,
+      curve: curve,
+      hideBarrier: hideBarrier,
+      autoDismissDuration: autoDismissDuration,
+    );
+  }
+
+  /// 显示 BottomSheet
+  static void toast(
+    BuildContext context, {
+    Widget? child,
+    String message = "",
+    EdgeInsets margin = const EdgeInsets.only(bottom: 34),
+    Alignment from = Alignment.center,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+    bool hideBarrier = true,
+    Duration? autoDismissDuration = const Duration(milliseconds: 2000),
+  }) {
+    final childDefault = Material(
+      color: Colors.black.withOpacity(0.7),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Text(
+          message,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+    return show(
+      context,
+      child: Padding(
+        padding: margin,
+        child: child ?? childDefault,
+      ),
+      from: from,
+      duration: duration,
+      curve: curve,
+      hideBarrier: hideBarrier,
+      autoDismissDuration: autoDismissDuration,
     );
   }
 }
