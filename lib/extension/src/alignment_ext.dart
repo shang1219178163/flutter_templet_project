@@ -13,12 +13,12 @@ import 'package:flutter/cupertino.dart';
 extension AlignmentExt on Alignment {
   /// 九个方位变量集合
   static const allCases = <Alignment>[
-    Alignment.centerLeft,
-    Alignment.center,
-    Alignment.centerRight,
     Alignment.topLeft,
     Alignment.topCenter,
     Alignment.topRight,
+    Alignment.centerLeft,
+    Alignment.center,
+    Alignment.centerRight,
     Alignment.bottomLeft,
     Alignment.bottomCenter,
     Alignment.bottomRight,
@@ -50,12 +50,7 @@ extension AlignmentExt on Alignment {
       Alignment.bottomCenter,
     ].contains(this)) {
       result = isGreed == true ? max / min : 0.5;
-    } else if ([
-      Alignment.topLeft,
-      Alignment.topRight,
-      Alignment.bottomLeft,
-      Alignment.bottomRight
-    ].contains(this)) {
+    } else if ([Alignment.topLeft, Alignment.topRight, Alignment.bottomLeft, Alignment.bottomRight].contains(this)) {
       if (isDiagonal) {
         final tmp = math.sqrt(math.pow(max, 2) + math.pow(min, 2)).ceil();
         // result = isGreed == true ? tmp/min : max/min;
@@ -70,5 +65,65 @@ extension AlignmentExt on Alignment {
       result = isGreed == true ? 1 : max / min * 0.5;
     }
     return result;
+  }
+
+  /// 显示 BottomSheet
+  static ({Widget child, AnimationController controller}) animation({
+    required TickerProvider vsync,
+    required Widget child,
+    Alignment from = Alignment.bottomCenter,
+    bool align = false,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+  }) {
+    final controller = AnimationController(
+      vsync: vsync,
+      duration: duration,
+    );
+
+    final animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeOut,
+      reverseCurve: Curves.easeIn,
+    );
+
+    var content = child;
+    // ⭐ 中心弹窗：Fade
+    if (from == Alignment.center) {
+      content = FadeTransition(
+        opacity: animation.drive(
+          CurveTween(curve: Curves.easeOut),
+        ),
+        child: ScaleTransition(
+          scale: Tween<double>(begin: 0.9, end: 1.0).animate(animation),
+          child: content,
+        ),
+      );
+    }
+
+    // ⭐ 其余方向：Slide
+    content = FadeTransition(
+      opacity: animation,
+      child: SlideTransition(
+        position: animation.drive(
+          Tween<Offset>(
+            begin: Offset(from.x.sign, from.y.sign),
+            end: Offset.zero,
+          ).chain(
+            CurveTween(curve: curve),
+          ),
+        ),
+        child: content,
+      ),
+    );
+
+    if (align) {
+      content = Align(
+        alignment: from,
+        child: content,
+      );
+    }
+    // controller.forward();
+    return (child: content, controller: controller);
   }
 }

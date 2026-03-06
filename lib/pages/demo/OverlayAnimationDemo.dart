@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_overlay_bottom_sheet.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay_manager.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -57,62 +56,146 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
-          Column(
-            children: [
-              Container(
-                height: 500,
-                width: double.infinity,
-                // color: ColorExt.random,
-                padding: EdgeInsets.all(8),
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        NOverlayManager.showAnimation(
-                          bulder: (onHide) => buildContent(),
-                        );
+          Container(
+            // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                buildWrap(
+                  onChanged: (v) {
+                    NOverlayDialog.show(
+                      context,
+                      from: v,
+                      barrierColor: Colors.black12,
+                      // barrierDismissible: false,
+                      onBarrier: () {
+                        DLog.d('NOverlayDialog onBarrier');
                       },
-                      child: Text("showAnimation"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        NOverlayManager.sheet(
-                          bulder: (onHide) => buildContent(),
-                        );
-                      },
-                      child: Text("sheet"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        NOverlayBottomSheet.show(
-                          context,
-                          child: buildContent(),
-                        );
-                      },
-                      child: Text("NOverlayBottomSheet"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        NOverlayDialog.show(
-                          context,
-                          // margin: EdgeInsets.symmetric(horizontal: 30),
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 30),
-                            child: buildContentDialog(),
+                      child: GestureDetector(
+                        onTap: () {
+                          NOverlayDialog.dismiss();
+                          DLog.d('NOverlayDialog onBarrier');
+                        },
+                        child: Container(
+                          width: 300,
+                          height: 300,
+                          child: buildContent(
+                            title: v.toString(),
+                            onTap: () {
+                              NOverlayDialog.dismiss();
+                              DLog.d('NOverlayDialog onBarrier');
+                            },
                           ),
-                        );
-                      },
-                      child: Text("NOverlayDialog"),
-                    ),
-                  ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            NOverlayDialog.sheet(
+                              context,
+                              child: buildContent(
+                                height: 400,
+                                margin: EdgeInsets.symmetric(horizontal: 30),
+                                onTap: () {
+                                  NOverlayDialog.dismiss();
+                                },
+                              ),
+                            );
+                          },
+                          child: Text("NOverlayDialog.sheet"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            NOverlayDialog.toast(
+                              context,
+                              hideBarrier: true,
+                              from: Alignment.center,
+                              message: "This is a Toast!",
+                            );
+                          },
+                          child: Text("NOverlayDialog.toast"),
+                        ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     NOverlayManager.showAnimation(
+                        //       bulder: (onHide) => buildContent(),
+                        //     );
+                        //   },
+                        //   child: Text("NOverlayManager"),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     NOverlayManager.sheet(
+                        //       bulder: (onHide) => buildContent(),
+                        //     );
+                        //   },
+                        //   child: Text("NOverlayManager - sheet"),
+                        // ),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ]
+            .map(
+              (e) => SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8.0),
+                  child: e,
                 ),
               ),
-            ],
-          ),
-        ].map((e) => SliverToBoxAdapter(child: e)).toList(),
+            )
+            .toList(),
       ),
+    );
+  }
+
+  Widget buildWrap({required ValueChanged<Alignment> onChanged}) {
+    final list = AlignmentExt.allCases;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final spacing = 8.0;
+        final rowCount = 3.0;
+        final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
+
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          // crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            ...list.map(
+              (e) {
+                final i = list.indexOf(e);
+                final btnTitle = [e.toString().split(".").last, "(${e.x}, ${e.y})"].join("\n");
+                return GestureDetector(
+                  onTap: () => onChanged(e),
+                  child: Container(
+                    width: itemWidth.truncateToDouble(),
+                    height: itemWidth * 0.618,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                    ),
+                    child: Text(btnTitle),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -150,49 +233,26 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
     );
   }
 
-  Widget buildContent() {
+  Widget buildContent({double? height, EdgeInsetsGeometry? margin, String? title, VoidCallback? onTap}) {
+    final btnTitle = title ?? "buildContent";
     return Container(
-      height: 500,
+      height: height,
       width: double.infinity,
+      margin: margin,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        // color: ColorExt.random,
-        color: Colors.yellow,
+        color: ColorExt.random,
+        // color: Colors.yellow,
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: ElevatedButton(
         onPressed: () {
-          debugPrint("showAnimation");
+          debugPrint(btnTitle);
+          onTap?.call();
         },
-        child: Text("showAnimation"),
+        child: Text(btnTitle),
       ),
-    );
-  }
-
-  Widget buildContentDialog() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          // height: 500,
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            // color: ColorExt.random,
-            color: Colors.yellow,
-            border: Border.all(color: Colors.blue),
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-          child: ElevatedButton(
-            onPressed: () {
-              debugPrint("buildContentDialog");
-            },
-            child: Text("buildContentDialog"),
-          ),
-        )
-      ],
     );
   }
 }

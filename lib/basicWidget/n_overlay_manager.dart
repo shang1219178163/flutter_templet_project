@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 /// Overlay 管理器
+@Deprecated("已弃用,请使用 NOverlayDialog")
 class NOverlayManager {
   NOverlayManager._internal();
 
@@ -154,13 +155,13 @@ class NOverlayManager {
     );
 
     late OverlayEntry entry;
-    controller.addListener(() {
-      Future.microtask(() {
-        if (entry.mounted) {
-          entry.markNeedsBuild();
-        }
-      });
-    });
+    // controller.addListener(() {
+    //   Future.microtask(() {
+    //     if (entry.mounted) {
+    //       entry.markNeedsBuild();
+    //     }
+    //   });
+    // });
 
     onHide() async {
       if (!entry.mounted) {
