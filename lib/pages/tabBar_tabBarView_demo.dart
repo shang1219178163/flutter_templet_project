@@ -328,6 +328,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.gridPaperDemo, "gridPaperDemo"),
   Tuple2(AppRouter.menuDemo, "MenuDemo"),
   Tuple2(AppRouter.pageViewDemo, "PageViewDemo"),
+  Tuple2(AppRouter.pageViewVerticalDemo, "pageViewVerticalDemo"),
   Tuple2(AppRouter.pageViewDemoOne, "pageViewDemoOne"),
   Tuple2(AppRouter.pageViewDemoThree, "PageViewDemoThree"),
   Tuple2(AppRouter.pickerDemo, "pickerDemo"),
@@ -554,6 +555,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.gradientPlaygroundPage, "渐变色"),
   Tuple2(AppRouter.imageBlendModeDemo, "图片渲染模式"),
   Tuple2(AppRouter.containerDemo, "containerDemo"),
+  Tuple2(AppRouter.containerDemoNew, "containerDemoNew"),
   Tuple2(AppRouter.animatedContainerDemo, "animatedContainerDemo"),
   Tuple2(AppRouter.scrollPhysicsPage, "滚动行为"),
   Tuple2(AppRouter.trackingScrollDemo, "滚动行为"),
@@ -712,6 +714,8 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.musicPlayerPage, "musicPlayerPage"),
   Tuple2(AppRouter.articleDetailPage, "articleDetailPage"),
   Tuple2(AppRouter.overlayAnimationDemo, "overlayAnimationDemo"),
+  Tuple2(AppRouter.streamControllerDemo, "streamControllerDemo"),
+  Tuple2(AppRouter.nFlexSeparatedDemo, "nFlexSeparatedDemo"),
 ];
 
 var others = <Tuple2<String, String>>[

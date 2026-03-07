@@ -82,6 +82,7 @@ import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConcurrentExecutorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ContainerDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
@@ -204,6 +205,7 @@ import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFingerViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NFlexSeparatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
@@ -250,6 +252,7 @@ import 'package:flutter_templet_project/pages/demo/PageTopBackgroudImageDemo.dar
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
+import 'package:flutter_templet_project/pages/demo/PageViewVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
@@ -303,6 +306,7 @@ import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/StreamControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
@@ -489,6 +493,7 @@ class AppRouter {
   static const String gridPaperDemo = '/GridPaperDemo';
 
   static const String pageViewDemo = '/PageViewDemo';
+  static const String pageViewVerticalDemo = '/pageViewVerticalDemo';
   static const String pageViewDemoThree = '/pageViewDemoThree';
 
   static const String snackBarDemo = '/SnackBarDemo';
@@ -506,6 +511,7 @@ class AppRouter {
   static const String slidableDemo = '/SlidaableDemo';
   static const String settingsPage = '/AppSettingsPage';
   static const String containerDemo = '/containerDemo';
+  static const String containerDemoNew = '/containerDemoNew';
   static const String animatedContainerDemo = '/animatedContainerDemo';
   static const String draggableDemo = '/DraggableDemo';
   static const String forgetPasswordPage = '/ForgetPasswordPage';
@@ -899,6 +905,8 @@ class AppRouter {
   static const String redPacketRainDemo = '/redPacketRainDemo';
   static const String keyboardShortcutsDemo = '/keyboardShortcutsDemo';
   static const String overlayAnimationDemo = '/overlayAnimationDemo';
+  static const String streamControllerDemo = '/streamControllerDemo';
+  static const String nFlexSeparatedDemo = '/nFlexSeparatedDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -1089,6 +1097,12 @@ class AppRouter {
       name: AppRouter.pageViewDemo,
       page: () => PageViewDemo(),
     ),
+
+    GetPage(
+      name: AppRouter.pageViewVerticalDemo,
+      page: () => PageViewVerticalDemo(),
+    ),
+
     GetPage(
       name: AppRouter.pageViewDemoThree,
       page: () => PageViewDemoThree(),
@@ -1142,6 +1156,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.containerDemo,
       page: () => ContainerDemo(),
+    ),
+    GetPage(
+      name: AppRouter.containerDemoNew,
+      page: () => ContainerDemoNew(),
     ),
     GetPage(
       name: AppRouter.animatedContainerDemo,
@@ -2642,6 +2660,14 @@ class AppRouter {
     GetPage(
       name: AppRouter.overlayAnimationDemo,
       page: () => OverlayAnimationDemo(),
+    ),
+    GetPage(
+      name: AppRouter.streamControllerDemo,
+      page: () => StreamControllerDemo(),
+    ),
+    GetPage(
+      name: AppRouter.nFlexSeparatedDemo,
+      page: () => NFlexSeparatedDemo(),
     ),
   ];
 }

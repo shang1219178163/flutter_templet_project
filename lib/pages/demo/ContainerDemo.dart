@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_flex_separated.dart';
 import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
@@ -21,6 +22,8 @@ class ContainerDemo extends StatefulWidget {
 class _ContainerDemoState extends State<ContainerDemo> {
   bool isSliver = true;
 
+  late final themeData = Theme.of(context);
+
   @override
   void initState() {
     super.initState();
@@ -30,7 +33,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: themeData.scaffoldBackgroundColor,
         image: DecorationImage(
           image: AssetImage(Assets.imagesBgLoginTopLight),
           fit: BoxFit.contain,
@@ -61,49 +64,31 @@ class _ContainerDemoState extends State<ContainerDemo> {
           slivers: [
             buildSection(),
             buildSection1(),
-            // buildSection2(),
             buildGradientBorder(),
-            buildSection3(),
-          ].map((e) => e.toSliverToBoxAdapter()).toList(),
+            buildSectionEnDecorationImage(),
+            NSectionBox(
+              title: "NInnerShadow",
+              child: buildInnerShadow(),
+            ),
+          ]
+              .map((e) => SliverToBoxAdapter(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue),
+                          ),
+                          child: e,
+                        ),
+                        Divider(height: 16),
+                      ],
+                    ),
+                  ))
+              .toList(),
         ),
       ),
-    );
-  }
-
-  buildBodyColumn() {
-    var children = <Widget>[
-      // ...testContainer(),
-      buildSection(),
-      buildSection1(),
-      buildSection2(),
-    ];
-
-    return Column(
-      children: children
-          .map((e) => Builder(builder: (context) {
-                return Expanded(
-                  child: e,
-                );
-              }))
-          .toList(),
-    );
-  }
-
-  buildBodyCustom() {
-    var children = <Widget>[
-      // ...testContainer(),
-      buildSection(),
-      buildSection1(),
-      buildSection2(),
-      buildSection3(),
-    ];
-
-    return CustomScrollView(
-      slivers: children
-          .map((e) => SliverToBoxAdapter(
-                child: e,
-              ))
-          .toList(),
     );
   }
 
@@ -118,6 +103,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
+            border: Border.all(color: Colors.blue),
             gradient: LinearGradient(
               colors: [Colors.green, Colors.yellow],
               begin: Alignment.topCenter,
@@ -177,289 +163,27 @@ class _ContainerDemoState extends State<ContainerDemo> {
     );
   }
 
-  Widget buildSection2() {
+  Widget buildSectionEnDecorationImage() {
     const msg = "静夜思 * 李白 • 床前明月光, 疑是地上霜, 举头望明月, 低头思故乡.";
+
     return Container(
+      height: 100,
       decoration: BoxDecoration(
-        color: Colors.yellow,
-        border: Border.all(width: 10, color: Colors.blue),
+        border: Border.all(color: Colors.blue),
+        image: EnDecorationImage(
+          image: "img_update.png".toAssetImage(),
+          alignment: Alignment.topRight,
+          colorFilter: ColorFilter.mode(Colors.green, BlendMode.dstATop),
+          // destinationOffset: Offset(-16, -12),
+        ),
       ),
+      // transform: Matrix4.rotationZ(.2),
+      alignment: Alignment.centerRight, //卡片内文字居中
       child: Text(
         msg,
-        style: TextStyle(fontSize: 20, color: Colors.deepPurple),
+        style: TextStyle(color: Colors.red),
       ),
     );
-  }
-
-  Widget buildSection3() {
-    final children = List.generate(
-        4,
-        (index) => Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                // border: Border.all(color: Colors.blue),
-              ),
-              child: NText("选项_$index"),
-            )).toList();
-
-    Widget separated = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: VerticalDivider(
-        color: Colors.red,
-        width: 1,
-        indent: 0,
-        endIndent: 0,
-      ),
-    );
-    return Container(
-      // color: Colors.green,
-      child: Column(
-        children: [
-          NSectionBox(
-            title: "ListView.separated",
-            child: Container(
-              height: 20,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-              ),
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, i) => children[i],
-                separatorBuilder: (_, i) => separated,
-                itemCount: children.length,
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "NFlexSeparated - separatedBuilder",
-            child: Container(
-              height: 30,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-              ),
-              child: NFlexSeparated(
-                direction: Axis.horizontal,
-                spacing: 60,
-                separatedBuilder: (i) {
-                  final spacing = (i + 1) * 16.0;
-                  return Container(
-                    width: spacing,
-                    color: Colors.yellow,
-                    alignment: Alignment.center,
-                    child: NText(
-                      spacing.toInt().toString(),
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  );
-                  // return separated;
-                },
-                children: children,
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "NFlexSeparated - spacing: 16",
-            child: Container(
-              height: 30,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-              ),
-              alignment: Alignment.center,
-              child: NFlexSeparated(
-                direction: Axis.horizontal,
-                spacing: 16,
-                // separatedBuilder: (i) {
-                //   return Container(color: Colors.cyan, width: 12);
-                //   // return separated;
-                // },
-                children: children,
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "NFlexSeparated - vertical - separatedBuilder",
-            child: IntrinsicWidth(
-              child: NFlexSeparated(
-                direction: Axis.vertical,
-                spacing: 60,
-                separatedBuilder: (i) {
-                  final spacing = (i + 1) * 16.0;
-                  return Container(
-                    height: spacing,
-                    color: Colors.yellow,
-                    alignment: Alignment.center,
-                    child: NText(
-                      spacing.toInt().toString(),
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  );
-                  // return separated;
-                },
-                children: children,
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "NFlexSeparated - vertical - spacing: 16",
-            child: IntrinsicWidth(
-              child: NFlexSeparated(
-                direction: Axis.vertical,
-                separatedBuilder: (i) {
-                  final spacing = 16.0;
-                  return Container(
-                    height: spacing,
-                    color: Colors.yellow,
-                    alignment: Alignment.center,
-                    child: NText(
-                      spacing.toInt().toString(),
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  );
-                  // return separated;
-                },
-                children: children,
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "NFlexSeparated - horizontal",
-            child: Container(
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-              ),
-              child: IntrinsicHeight(
-                child: buildFlexSeparated(direction: Axis.horizontal),
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "NFlexSeparated - vertical",
-            child: Container(
-              height: 400,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-              ),
-              child: IntrinsicWidth(
-                child: buildFlexSeparated(direction: Axis.vertical),
-              ),
-            ),
-          ),
-          NSectionBox(
-            title: "NInnerShadow",
-            child: buildInnerShadow(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 带分隔的 Flex
-  Widget buildFlexSeparated({
-    required Axis direction,
-    Alignment? textAlignment = Alignment.center,
-    double spacing = 0,
-    Widget Function(int index)? separatedBuilder,
-  }) {
-    return NFlexSeparated(
-      direction: direction,
-      // crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 12,
-      separatedBuilder: separatedBuilder ??
-          (i) {
-            final spacing = 16.0 * (i + 1);
-            return Container(
-              width: direction == Axis.horizontal ? spacing : null,
-              height: direction == Axis.horizontal ? null : spacing,
-              color: Colors.yellow,
-              alignment: Alignment.center,
-              child: NText(
-                spacing.toInt().toString(),
-                style: TextStyle(fontSize: 13),
-              ),
-            );
-          },
-      children: [
-        Flexible(
-          flex: 1,
-          child: Container(
-            color: Colors.red,
-            alignment: textAlignment,
-            child: Text(
-              "flex: 1",
-              style: TextStyle(fontSize: 13),
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 2,
-          child: Container(
-            color: Colors.green,
-            alignment: textAlignment,
-            child: Text(
-              "flex: 2",
-              style: TextStyle(fontSize: 13),
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 3,
-          child: Container(
-            color: Colors.blue,
-            alignment: textAlignment,
-            child: Text(
-              "flex: 3",
-              style: TextStyle(fontSize: 18),
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Container(
-            color: Colors.purple,
-            alignment: textAlignment,
-            child: Text(
-              "flex: 1",
-              style: TextStyle(fontSize: 13),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  List<Widget> testContainer() {
-    return [
-      Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: 'img_update.png'.toAssetImage(),
-          repeat: ImageRepeat.repeat,
-          alignment: Alignment.topLeft,
-        )),
-        child: Container(
-          constraints: BoxConstraints.expand(),
-          child: OutlinedButton(
-            onPressed: () {
-              debugPrint("ImageRepeat.repeat");
-            },
-            child: Text(
-              'ImageRepeat.repeat',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-            ),
-          ),
-        ),
-      ),
-      Container(
-        color: Colors.green,
-        child: Text('Container'),
-      ),
-      Container(
-        constraints: BoxConstraints.expand(),
-        color: Colors.yellow,
-        child: Text('Container1'),
-      ),
-    ];
   }
 
   Widget buildGradientBorder() {
@@ -493,7 +217,6 @@ class _ContainerDemoState extends State<ContainerDemo> {
 
   Widget buildInnerShadow() {
     return Container(
-      padding: const EdgeInsets.all(12),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7),

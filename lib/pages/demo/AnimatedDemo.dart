@@ -9,9 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_color_flash_anim.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
-
-import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 
 class AnimatedDemo extends StatefulWidget {
   String? title;
@@ -40,11 +39,11 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildPageView(context),
+      body: _buildPageView(),
     );
   }
 
-  Widget _buildPageView(BuildContext context) {
+  Widget _buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
       pageSnapping: true,
@@ -55,6 +54,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         });
       },
       children: <Widget>[
+        _buildTweenAnimationBuilder(),
         buildColorFlashAnim(),
         _buildPausePlayIcon(),
         _buildAnimatedSizeIcon(),
@@ -356,6 +356,64 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTweenAnimationBuilder() {
+    final duration = const Duration(milliseconds: 1300);
+    return Center(
+      child: TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0.3, end: 1.0),
+        duration: duration,
+        builder: (_, value, child) {
+          return AnimatedOpacity(
+            duration: duration,
+            opacity: value,
+            child: Transform.rotate(
+              angle: value * 2 * 3.1415926, // 360°
+              child: Transform.scale(
+                scale: value,
+                child: child,
+              ),
+            ),
+          );
+        },
+        child: OutlinedButton(
+          onPressed: () {
+            debugPrint([widget, 'TweenAnimationBuilder'].join(", "));
+          },
+          child: Text('TweenAnimationBuilder'),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNTweenAnimationBuilder() {
+    final duration = const Duration(milliseconds: 1300);
+    return Center(
+      child: TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0.3, end: 1.0),
+        duration: duration,
+        builder: (_, value, child) {
+          return AnimatedOpacity(
+            duration: duration,
+            opacity: value,
+            child: Transform.rotate(
+              angle: value * 2 * 3.1415926, // 360°
+              child: Transform.scale(
+                scale: value,
+                child: child,
+              ),
+            ),
+          );
+        },
+        child: OutlinedButton(
+          onPressed: () {
+            debugPrint([widget, 'TweenAnimationBuilder'].join(", "));
+          },
+          child: Text('TweenAnimationBuilder'),
+        ),
       ),
     );
   }
