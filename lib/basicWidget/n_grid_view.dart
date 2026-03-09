@@ -12,9 +12,12 @@ import 'package:flutter/material.dart';
 class NGridView extends StatelessWidget {
   const NGridView({
     super.key,
+    this.scrollDirection = Axis.vertical,
     this.crossAxisCount = 4,
     this.crossAxisSpacing = 9,
     this.mainAxisSpacing = 16,
+    this.cacheExtent,
+    this.visibleHeightRatio,
     this.radius = 4,
     this.itemWidth,
     this.itemHeight,
@@ -24,7 +27,9 @@ class NGridView extends StatelessWidget {
     this.itemBuilder,
   });
 
-  /// 每页列数
+  final Axis scrollDirection;
+
+  /// 每行列数
   final int crossAxisCount;
 
   /// 子项间距
@@ -32,6 +37,11 @@ class NGridView extends StatelessWidget {
 
   /// 子项垂直间距
   final double mainAxisSpacing;
+
+  final double? cacheExtent;
+
+  /// 可视高度: 宽度的倍数
+  final double? visibleHeightRatio;
 
   /// 子项宽度, 为空则自动利用最大宽度
   final double? itemWidth;
@@ -57,15 +67,13 @@ class NGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth.truncateToDouble();
         var spacingNew = crossAxisSpacing;
-        var itemWidthNew =
-            (constraints.maxWidth - spacingNew * (crossAxisCount - 1)) /
-                crossAxisCount;
+        var itemWidthNew = (maxWidth - spacingNew * (crossAxisCount - 1)) / crossAxisCount;
         if (itemWidth != null && itemWidth! > 0 == true) {
           itemWidthNew = itemWidth!.truncateToDouble();
-          spacingNew = (constraints.maxWidth - itemWidthNew * crossAxisCount) /
-              (crossAxisCount - 1).truncateToDouble();
+          spacingNew = (maxWidth - itemWidthNew * crossAxisCount) / (crossAxisCount - 1).truncateToDouble();
         }
 
         Widget buildItem({required Widget child}) {
@@ -80,16 +88,51 @@ class NGridView extends StatelessWidget {
               );
         }
 
-        return Wrap(
-          spacing: spacingNew, //适配折叠屏
-          runSpacing: mainAxisSpacing,
-          alignment: WrapAlignment.start,
-          runAlignment: WrapAlignment.start,
-          children: [
-            ...children.map((e) => buildItem(child: e)).toList(),
-            if (addItem != null) buildItem(child: addItem!),
-            if (deleteItem != null) buildItem(child: deleteItem!),
-          ],
+        if (visibleHeightRatio == null) {
+          return Wrap(
+            spacing: spacingNew, //适配折叠屏
+            runSpacing: mainAxisSpacing,
+            alignment: WrapAlignment.start,
+            runAlignment: WrapAlignment.start,
+            children: [
+              ...children.map((e) => buildItem(child: e)).toList(),
+              if (addItem != null) buildItem(child: addItem!),
+              if (deleteItem != null) buildItem(child: deleteItem!),
+            ],
+          );
+        }
+
+        return Container(
+          width: maxWidth,
+          height: maxWidth * visibleHeightRatio!,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+          ),
+          child: MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            removeBottom: true,
+            removeLeft: true,
+            removeRight: true,
+            child: GridView.custom(
+              physics: ClampingScrollPhysics(),
+              scrollDirection: scrollDirection,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: crossAxisSpacing,
+                mainAxisSpacing: mainAxisSpacing,
+              ),
+              childrenDelegate: SliverChildBuilderDelegate(
+                (context, i) {
+                  final e = children[i];
+                  return buildItem(child: e);
+                },
+                childCount: children.length,
+              ),
+              cacheExtent: cacheExtent,
+            ),
+          ),
         );
       },
     );
