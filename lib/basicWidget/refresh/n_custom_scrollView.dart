@@ -20,6 +20,7 @@ class NCustomScrollView<T> extends StatefulWidget {
     super.key,
     this.title,
     this.controller,
+    this.scrollController,
     this.placeholder = const NPlaceholder(),
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
@@ -36,6 +37,8 @@ class NCustomScrollView<T> extends StatefulWidget {
 
   /// 控制器
   final NRefreshController<T>? controller;
+
+  final ScrollController? scrollController;
 
   final Widget? placeholder;
 
@@ -95,6 +98,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   void didUpdateWidget(covariant NCustomScrollView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.title != oldWidget.title ||
+        widget.scrollController != oldWidget.scrollController ||
         widget.placeholder != oldWidget.placeholder ||
         widget.contentDecoration != oldWidget.contentDecoration ||
         widget.contentPadding != oldWidget.contentPadding ||
@@ -123,6 +127,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       onLoad: onLoad,
       childBuilder: (_, physics) {
         return CustomScrollView(
+          controller: widget.scrollController,
           physics: physics,
           slivers: [
             ...(widget.headerBuilder?.call(items.length) ?? []),
