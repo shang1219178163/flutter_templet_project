@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_fe_app/value/app_font_family.dart';
-
-import 'en_decoration_image.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
 
 /// 带 logo 的 card 组件
 class NLogoCard extends StatelessWidget {
@@ -48,14 +46,15 @@ class NLogoCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          header ?? Text(
-            name,
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: AppFontFamily.dingTalk.value,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          header ??
+              Text(
+                name,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: AppFontFamily.dingTalk.value,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
           const SizedBox(height: 4),
           child,
         ],
