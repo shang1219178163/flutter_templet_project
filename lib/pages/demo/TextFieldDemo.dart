@@ -11,6 +11,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/AreaCodePicker/PhoneAreaCodeBtn.dart';
+import 'package:flutter_templet_project/basicWidget/AreaCodePicker/area_code_popup.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
@@ -66,6 +68,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
     "TextField 的 readOnly 为 true 时,仍会唤起键盘? 可以设置 enabled 为 false 解决."
   ];
 
+  final valueVN = ValueNotifier<AreaCodeEntity?>(null);
+
   @override
   void initState() {
     super.initState();
@@ -98,7 +102,17 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
       bottomSheet: Container(
         child: Row(
           children: <Widget>[
-            Expanded(child: TextField()),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(left: 12, right: 8),
+                child: TextField(
+                  decoration: InputDecoration(
+                    isCollapsed: true,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  ),
+                ),
+              ),
+            ),
             ElevatedButton(
               onPressed: () {},
               child: Text('发送'),
@@ -115,6 +129,44 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              NSectionBox(
+                title: "NationalCode",
+                child: Container(
+                  decoration: BoxDecoration(),
+                  margin: const EdgeInsets.only(left: 16, right: 16),
+                  child: Row(
+                    children: [
+                      PhoneAreaCodeBtn<AreaCodeEntity>(
+                        onTap: () {
+                          AreaCodePopup.show(
+                            context,
+                            onChange: (AreaCodeEntity e) {
+                              DLog.d(e.toJson());
+                              valueVN.value = e;
+                            },
+                          );
+                        },
+                        valueVN: valueVN,
+                        nameCb: (e) => e?.phoneCode != null ? "+${e?.phoneCode}" : "请选择",
+                        padding: const EdgeInsets.only(left: 0, right: 0, top: 2),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          keyboardType: TextInputType.phone,
+                          decoration: const InputDecoration(
+                            isCollapsed: true,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            hintText: '请输入手机号',
+                            hintStyle: TextStyle(color: Colors.black26),
+                            border: InputBorder.none,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               NSectionBox(
                 title: "CupertinoTextField",
                 child: CupertinoTextField(

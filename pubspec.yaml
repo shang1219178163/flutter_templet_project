@@ -196,6 +196,7 @@ dependencies:
   azlistview: ^2.0.0
   common_utils: ^2.0.0
   lpinyin: ^2.0.0
+  pinyin: ^3.3.0
   github_language_colors:
     git:
       url: git@github.com:Sky24n/github_language_colors.git
