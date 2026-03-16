@@ -99,26 +99,40 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
               ],
             ),
       body: buildColumn(),
-      bottomSheet: Container(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(left: 12, right: 8),
-                child: TextField(
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  ),
+      bottomSheet: buildScaffoldBottomSheet(),
+    );
+  }
+
+  Widget buildScaffoldBottomSheet() {
+    return Container(
+      padding: EdgeInsets.only(left: 12, right: 12),
+      decoration: BoxDecoration(
+        color: Colors.green,
+        border: Border.all(color: Colors.blue),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(right: 8),
+              child: TextField(
+                decoration: InputDecoration(
+                  isCollapsed: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('发送'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              // minimumSize: Size(50, 18),
             ),
-          ],
-        ),
+            onPressed: () {},
+            child: Text('发送'),
+          ),
+        ],
       ),
     );
   }
