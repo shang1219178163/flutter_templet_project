@@ -11,8 +11,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/AreaCodePicker/AreaCodePopup.dart';
 import 'package:flutter_templet_project/basicWidget/AreaCodePicker/PhoneAreaCodeBtn.dart';
+import 'package:flutter_templet_project/basicWidget/AreaCodePicker/PhoneAreaCodePopup.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
@@ -312,11 +312,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                     // ),
                     suffixIcon: _unameController.text.isNotEmpty
                         ? IconButton(
-                            icon: Icon(
-                              Icons.cancel,
-                              color: Colors.grey,
-                              size: 18,
-                            ),
+                            icon: Icon(Icons.cancel, color: Colors.grey, size: 18),
                             onPressed: () {
                               _unameController.clear();
                               //   _unameController.text = '';

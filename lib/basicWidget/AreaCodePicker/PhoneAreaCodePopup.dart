@@ -33,7 +33,7 @@ class PhoneAreaCodePopup extends StatefulWidget {
       isScrollControlled: true,
       builder: (context) {
         return PhoneAreaCodePopup(
-          list: areaCodeList!,
+          list: areaCodeList ?? [],
           onChange: onChange,
         );
       },
