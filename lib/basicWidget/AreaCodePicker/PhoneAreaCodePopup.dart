@@ -46,7 +46,7 @@ class PhoneAreaCodePopup extends StatefulWidget {
 }
 
 class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
-  late List<AreaInfo> models;
+  late List<AreaCodeEntity> models;
 
   @override
   void initState() {
@@ -55,21 +55,17 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
     //排列添加models
     models = List.generate(widget.list.length, (index) {
       //获取索引表
-      AreaCodeEntity areaCode = widget.list[index];
+      final model = widget.list[index];
       ////获取中文首个字的拼音的第一个字母
-      String chineseName = areaCode.chineseName!;
-      String pinyin = PinyinHelper.getShortPinyin(chineseName);
-      String name = pinyin.isEmpty ? '#' : pinyin.substring(0, 1).toUpperCase();
+      final chineseName = model.chineseName ?? "";
+      final pinyin = PinyinHelper.getShortPinyin(chineseName);
+      final name = pinyin.isEmpty ? '#' : pinyin.substring(0, 1).toUpperCase();
 
-      return AreaInfo(
-        area: widget.list[index],
-        tagIndex: name,
-      );
+      model.tag = name;
+      return model;
     });
 
     SuspensionUtil.sortListBySuspensionTag(models);
-    final indexBarData = SuspensionUtil.getTagIndexList(models);
-    debugPrint("$indexBarData");
   }
 
   @override
@@ -116,7 +112,7 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
-                    widget.onChange(models[index].area);
+                    widget.onChange(models[index]);
                   },
                   child: Container(
                     alignment: Alignment.centerLeft,
@@ -134,12 +130,12 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${models[index].area.chineseName}',
+                          '${models[index].chineseName}',
                           textAlign: TextAlign.start,
                           style: TextStyle(fontSize: 14, color: themeProvider.titleColor).copyWith(height: 1),
                         ),
                         Text(
-                          '+${models[index].area.phoneCode}',
+                          '+${models[index].phoneCode}',
                           textAlign: TextAlign.start,
                           style: TextStyle(fontSize: 14, color: themeProvider.titleColor).copyWith(height: 1),
                         ),
@@ -156,23 +152,7 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
   }
 }
 
-class AreaInfo extends ISuspensionBean {
-  AreaInfo({
-    required this.area,
-    required this.tagIndex,
-  });
-
-  final AreaCodeEntity area;
-
-  final String tagIndex;
-
-  @override
-  String getSuspensionTag() {
-    return tagIndex;
-  }
-}
-
-class AreaCodeEntity {
+class AreaCodeEntity extends ISuspensionBean {
   AreaCodeEntity({
     this.englishName,
     this.chineseName,
@@ -188,11 +168,19 @@ class AreaCodeEntity {
 
   String? phoneCode;
 
+  String? tag;
+
+  @override
+  String getSuspensionTag() {
+    return tag ?? "#";
+  }
+
   AreaCodeEntity.fromJson(Map<String, dynamic> json) {
     englishName = json['english_name'];
     chineseName = json['chinese_name'];
     countryCode = json['country_code'];
     phoneCode = json['phone_code'];
+    tag = json['tag'];
   }
 
   Map<String, dynamic> toJson() {
@@ -201,6 +189,7 @@ class AreaCodeEntity {
     map['chinese_name'] = chineseName;
     map['country_code'] = countryCode;
     map['phone_code'] = phoneCode;
+    map['tag'] = tag;
     return map;
   }
 }
