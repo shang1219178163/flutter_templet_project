@@ -45,6 +45,8 @@ PODS:
     - FlutterMacOS
   - record_macos (1.1.0):
     - FlutterMacOS
+  - screen_brightness_macos (0.1.0):
+    - FlutterMacOS
   - share_plus (0.0.1):
     - FlutterMacOS
   - shared_preferences_foundation (0.0.1):
@@ -91,6 +93,7 @@ DEPENDENCIES:
   - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
   - photo_manager (from `Flutter/ephemeral/.symlinks/plugins/photo_manager/darwin`)
   - record_macos (from `Flutter/ephemeral/.symlinks/plugins/record_macos/macos`)
+  - screen_brightness_macos (from `Flutter/ephemeral/.symlinks/plugins/screen_brightness_macos/macos`)
   - share_plus (from `Flutter/ephemeral/.symlinks/plugins/share_plus/macos`)
   - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `Flutter/ephemeral/.symlinks/plugins/sign_in_with_apple/macos`)
@@ -147,6 +150,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/photo_manager/darwin
   record_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/record_macos/macos
+  screen_brightness_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/screen_brightness_macos/macos
   share_plus:
     :path: Flutter/ephemeral/.symlinks/plugins/share_plus/macos
   shared_preferences_foundation:
@@ -190,6 +195,7 @@ SPEC CHECKSUMS:
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   photo_manager: 647b6f5c5057632e2d00e2921c6ce3437ded57a9
   record_macos: 4440ca269ad3b870ebb1965297a365d558f0c520
+  screen_brightness_macos: 2d6d3af2165592d9a55ffcd95b7550970e41ebda
   share_plus: 1fa619de8392a4398bfaf176d441853922614e89
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: a9e97e744e8edc36aefc2723111f652102a7a727

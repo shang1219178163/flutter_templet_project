@@ -11,8 +11,7 @@ class SliverMainAxisGroupDemo extends StatefulWidget {
   final String? title;
 
   @override
-  State<SliverMainAxisGroupDemo> createState() =>
-      _SliverMainAxisGroupDemoState();
+  State<SliverMainAxisGroupDemo> createState() => _SliverMainAxisGroupDemoState();
 }
 
 class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
@@ -21,18 +20,6 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              // Feedback.forLongPress(context);
-              Feedback.forTap(context);
-            },
-            child: Text(
-              "done",
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        ],
       ),
       body: buildBoy(),
     );
@@ -49,7 +36,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
               ),
               SliverPadding(
                 padding: const EdgeInsets.all(8.0),
-                sliver: _buldSliverList(5),
+                sliver: buldSliverList(5),
               ),
             ],
           ),
@@ -64,19 +51,19 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
                     maxExtent: 100,
                     sliver: SliverPadding(
                       padding: const EdgeInsets.all(8.0),
-                      sliver: _buldSliverList(10),
+                      sliver: buldSliverList(10),
                     ),
                   ),
                   SliverCrossAxisExpanded(
                     flex: 2,
                     sliver: SliverPadding(
                       padding: const EdgeInsets.all(8.0),
-                      sliver: _buldSliverList(20),
+                      sliver: buldSliverList(20),
                     ),
                   ),
                   SliverPadding(
                     padding: const EdgeInsets.all(8.0),
-                    sliver: _buldSliverList(15),
+                    sliver: buldSliverList(15),
                   ),
                 ],
               ),
@@ -92,8 +79,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
       pinned: true,
       max: height,
       min: height,
-      builder:
-          (BuildContext context, double shrinkOffset, bool overlapsContent) {
+      builder: (context, shrinkOffset, overlapsContent) {
         return Container(
           height: height,
           color: Colors.purple[100],
@@ -110,21 +96,21 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
       delegate: NSliverPersistentHeaderDelegate(
         max: 30,
         min: 30,
-        builder:
-            (BuildContext context, double shrinkOffset, bool overlapsContent) {
+        builder: (context, shrinkOffset, overlapsContent) {
           return Container(
-              height: 30,
-              color: Colors.purple[100],
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text('Section 1'),
-              ));
+            height: 30,
+            color: Colors.purple[100],
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: child,
+            ),
+          );
         },
       ),
     );
   }
 
-  Widget _buldSliverList(int itemCount) {
+  Widget buldSliverList(int itemCount) {
     return DecoratedSliver(
       decoration: BoxDecoration(
         color: Colors.purple[50],

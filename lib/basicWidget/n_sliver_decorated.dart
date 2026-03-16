@@ -22,6 +22,7 @@ import 'package:flutter/rendering.dart';
 // )
 
 /// Sliver组件 装饰器
+@Deprecated("已弃用,请使用 DecoratedSliver")
 class NSliverDecorated extends SingleChildRenderObjectWidget {
   const NSliverDecorated({
     super.key,
