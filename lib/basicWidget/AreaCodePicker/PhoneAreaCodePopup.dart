@@ -4,17 +4,17 @@ import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:pinyin/pinyin.dart';
+import 'package:lpinyin/lpinyin.dart';
 import 'package:provider/provider.dart';
 
-class AreaCodePopup extends StatefulWidget {
-  const AreaCodePopup({
+class PhoneAreaCodePopup extends StatefulWidget {
+  const PhoneAreaCodePopup({
     super.key,
-    required this.areaList,
+    required this.list,
     required this.onChange,
   });
 
-  final List<AreaCodeEntity> areaList;
+  final List<AreaCodeEntity> list;
 
   final ValueChanged<AreaCodeEntity> onChange;
 
@@ -32,8 +32,8 @@ class AreaCodePopup extends StatefulWidget {
     showModalBottomSheet(
       isScrollControlled: true,
       builder: (context) {
-        return AreaCodePopup(
-          areaList: areaCodeList!,
+        return PhoneAreaCodePopup(
+          list: areaCodeList!,
           onChange: onChange,
         );
       },
@@ -42,10 +42,10 @@ class AreaCodePopup extends StatefulWidget {
   }
 
   @override
-  State<AreaCodePopup> createState() => _AreaCodePopupState();
+  State<PhoneAreaCodePopup> createState() => _PhoneAreaCodePopupState();
 }
 
-class _AreaCodePopupState extends State<AreaCodePopup> {
+class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
   late List<AreaInfo> models;
 
   @override
@@ -53,21 +53,23 @@ class _AreaCodePopupState extends State<AreaCodePopup> {
     super.initState();
 
     //排列添加models
-    models = List.generate(widget.areaList.length, (index) {
+    models = List.generate(widget.list.length, (index) {
       //获取索引表
-      AreaCodeEntity areaCode = widget.areaList[index];
+      AreaCodeEntity areaCode = widget.list[index];
       ////获取中文首个字的拼音的第一个字母
       String chineseName = areaCode.chineseName!;
       String pinyin = PinyinHelper.getShortPinyin(chineseName);
       String name = pinyin.isEmpty ? '#' : pinyin.substring(0, 1).toUpperCase();
 
       return AreaInfo(
-        area: widget.areaList[index],
+        area: widget.list[index],
         tagIndex: name,
       );
     });
 
     SuspensionUtil.sortListBySuspensionTag(models);
+    final indexBarData = SuspensionUtil.getTagIndexList(models);
+    debugPrint("$indexBarData");
   }
 
   @override
@@ -78,7 +80,6 @@ class _AreaCodePopupState extends State<AreaCodePopup> {
       // backgroundColor: themeProvider.color242434OrWhite,
       body: Column(
         children: [
-          // const SizedBox(height: 36),
           Theme(
             data: Theme.of(context).copyWith(
               appBarTheme: AppBarTheme(
@@ -103,12 +104,13 @@ class _AreaCodePopupState extends State<AreaCodePopup> {
           Divider(),
           Expanded(
             child: AzListView(
+              data: models,
               itemCount: models.length,
               physics: const BouncingScrollPhysics(),
               susPosition: const Offset(0, 40),
               indexBarData: SuspensionUtil.getTagIndexList(models),
               indexBarOptions: IndexBarOptions(
-                textStyle: TextStyle(color: AppColor.cancelColor, fontSize: 10),
+                textStyle: TextStyle(color: AppColor.cancelColor, fontSize: 12),
               ),
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -146,7 +148,6 @@ class _AreaCodePopupState extends State<AreaCodePopup> {
                   ),
                 );
               },
-              data: models,
             ),
           ),
         ],

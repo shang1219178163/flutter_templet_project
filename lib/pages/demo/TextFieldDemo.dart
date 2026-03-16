@@ -11,8 +11,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/AreaCodePicker/AreaCodePopup.dart';
 import 'package:flutter_templet_project/basicWidget/AreaCodePicker/PhoneAreaCodeBtn.dart';
-import 'package:flutter_templet_project/basicWidget/AreaCodePicker/area_code_popup.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
@@ -138,7 +138,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                     children: [
                       PhoneAreaCodeBtn<AreaCodeEntity>(
                         onTap: () {
-                          AreaCodePopup.show(
+                          PhoneAreaCodePopup.show(
                             context,
                             onChange: (AreaCodeEntity e) {
                               DLog.d(e.toJson());
