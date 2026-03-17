@@ -40,9 +40,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
         buildListView(),
         sectionHeader(child: Text('SliverList - SliverChildListDelegate')),
         SliverList(
-          delegate: SliverChildListDelegate(
-            list,
-          ),
+          delegate: SliverChildListDelegate(list),
         ),
         sectionHeader(child: Text('SliverList - SliverChildBuilderDelegate')),
         SliverList(
