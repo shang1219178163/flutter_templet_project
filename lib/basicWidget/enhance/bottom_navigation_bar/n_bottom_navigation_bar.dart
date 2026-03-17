@@ -8,7 +8,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
-/// 官方 BottomNavigationBar 不支持 onDoubleTap
+/// 修改: 官方 BottomNavigationBar 不支持 onDoubleTap,新增 final ValueChanged<int>? onDoubleTap;
+
 class NBottomNavigationBar extends StatefulWidget {
   /// Creates a bottom navigation bar which is typically used as a
   /// [Scaffold]'s [Scaffold.bottomNavigationBar] argument.
@@ -274,8 +275,7 @@ class NBottomNavigationBar extends StatefulWidget {
   /// To opt-in the new theming logic set the flag to `false`
   final bool useLegacyColorScheme;
 
-  final Widget Function(int index, bool selected, Widget icon, Widget label)?
-      tileBuilder;
+  final Widget Function(int index, bool selected, Widget icon, Widget label)? tileBuilder;
 
   @override
   State<NBottomNavigationBar> createState() => _NBottomNavigationBarState();
@@ -330,8 +330,7 @@ class _NBottomNavigationTile extends StatelessWidget {
   final MouseCursor mouseCursor;
   final bool enableFeedback;
   final BottomNavigationBarLandscapeLayout layout;
-  final Widget Function(int index, bool selected, Widget icon, Widget label)?
-      tileBuilder;
+  final Widget Function(int index, bool selected, Widget icon, Widget label)? tileBuilder;
   // final Widget Function(Widget tileIcon, bool selected)? tileIconBuilder;
   // final Widget Function(Widget tileLabel, bool selected)? tileLabelBuilder;
 
@@ -350,12 +349,10 @@ class _NBottomNavigationTile extends StatelessWidget {
 
     // The amount that the selected icon is bigger than the unselected icons,
     // (or zero if the selected icon is not bigger than the unselected icons).
-    final double selectedIconDiff =
-        math.max(selectedIconSize - unselectedIconSize, 0);
+    final double selectedIconDiff = math.max(selectedIconSize - unselectedIconSize, 0);
     // The amount that the unselected icons are bigger than the selected icon,
     // (or zero if the unselected icons are not any bigger than the selected icon).
-    final double unselectedIconDiff =
-        math.max(unselectedIconSize - selectedIconSize, 0);
+    final double unselectedIconDiff = math.max(unselectedIconSize - selectedIconSize, 0);
 
     // The effective tool tip message to be shown on the BottomNavigationBarItem.
     final effectiveTooltip = item.tooltip == '' ? null : item.tooltip;
@@ -495,7 +492,7 @@ class _Tile extends StatelessWidget {
     required this.layout,
     required this.icon,
     required this.label,
-    required this.children,  
+    required this.children,
   });
 
   final BottomNavigationBarLandscapeLayout layout;
@@ -658,8 +655,7 @@ class _Label extends StatelessWidget {
   }
 }
 
-class _NBottomNavigationBarState extends State<NBottomNavigationBar>
-    with TickerProviderStateMixin {
+class _NBottomNavigationBarState extends State<NBottomNavigationBar> with TickerProviderStateMixin {
   List<AnimationController> _controllers = <AnimationController>[];
   late List<CurvedAnimation> _animations;
 
@@ -670,8 +666,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
   // animation is complete.
   Color? _backgroundColor;
 
-  static final Animatable<double> _flexTween =
-      Tween<double>(begin: 1.0, end: 1.5);
+  static final Animatable<double> _flexTween = Tween<double>(begin: 1.0, end: 1.5);
 
   void _resetState() {
     for (final controller in _controllers) {
@@ -682,15 +677,13 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
     }
     _circles.clear();
 
-    _controllers =
-        List<AnimationController>.generate(widget.items.length, (int index) {
+    _controllers = List<AnimationController>.generate(widget.items.length, (int index) {
       return AnimationController(
         duration: kThemeAnimationDuration,
         vsync: this,
       )..addListener(_rebuild);
     });
-    _animations =
-        List<CurvedAnimation>.generate(widget.items.length, (int index) {
+    _animations = List<CurvedAnimation>.generate(widget.items.length, (int index) {
       return CurvedAnimation(
         parent: _controllers[index],
         curve: Curves.fastOutSlowIn,
@@ -710,9 +703,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
   BottomNavigationBarType get _effectiveType {
     return widget.type ??
         BottomNavigationBarTheme.of(context).type ??
-        (widget.items.length <= 3
-            ? BottomNavigationBarType.fixed
-            : BottomNavigationBarType.shifting);
+        (widget.items.length <= 3 ? BottomNavigationBarType.fixed : BottomNavigationBarType.shifting);
   }
 
   // Computes the default value for the [showUnselected] parameter.
@@ -752,8 +743,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
     super.dispose();
   }
 
-  double _evaluateFlex(Animation<double> animation) =>
-      _flexTween.evaluate(animation);
+  double _evaluateFlex(Animation<double> animation) => _flexTween.evaluate(animation);
 
   void _pushCircle(int index) {
     if (widget.items[index].backgroundColor != null) {
@@ -803,8 +793,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
       _controllers[oldWidget.currentIndex].reverse();
       _controllers[widget.currentIndex].forward();
     } else {
-      if (_backgroundColor !=
-          widget.items[widget.currentIndex].backgroundColor) {
+      if (_backgroundColor != widget.items[widget.currentIndex].backgroundColor) {
         _backgroundColor = widget.items[widget.currentIndex].backgroundColor;
       }
     }
@@ -815,27 +804,22 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
   static TextStyle _effectiveTextStyle(TextStyle? textStyle, double fontSize) {
     textStyle ??= const TextStyle();
     // Prefer the font size on textStyle if present.
-    return textStyle.fontSize == null
-        ? textStyle.copyWith(fontSize: fontSize)
-        : textStyle;
+    return textStyle.fontSize == null ? textStyle.copyWith(fontSize: fontSize) : textStyle;
   }
 
   // If [IconThemeData] is provided, it should be used.
   // Otherwise, the [IconThemeData]'s color should be selectedItemColor
   // or unselectedItemColor.
-  static IconThemeData _effectiveIconTheme(
-      IconThemeData? iconTheme, Color? itemColor) {
+  static IconThemeData _effectiveIconTheme(IconThemeData? iconTheme, Color? itemColor) {
     // Prefer the iconTheme over itemColor if present.
     return iconTheme ?? IconThemeData(color: itemColor);
   }
 
   List<Widget> _createTiles(BottomNavigationBarLandscapeLayout layout) {
-    final localizations =
-        MaterialLocalizations.of(context);
+    final localizations = MaterialLocalizations.of(context);
 
     final themeData = Theme.of(context);
-    final bottomTheme =
-        BottomNavigationBarTheme.of(context);
+    final bottomTheme = BottomNavigationBarTheme.of(context);
 
     final Color themeColor;
     switch (themeData.brightness) {
@@ -855,38 +839,24 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
       widget.unselectedFontSize,
     );
 
-    final effectiveSelectedIconTheme = _effectiveIconTheme(
-        widget.selectedIconTheme ?? bottomTheme.selectedIconTheme,
-        widget.selectedItemColor ??
-            bottomTheme.selectedItemColor ??
-            themeColor);
+    final effectiveSelectedIconTheme = _effectiveIconTheme(widget.selectedIconTheme ?? bottomTheme.selectedIconTheme,
+        widget.selectedItemColor ?? bottomTheme.selectedItemColor ?? themeColor);
 
     final effectiveUnselectedIconTheme = _effectiveIconTheme(
         widget.unselectedIconTheme ?? bottomTheme.unselectedIconTheme,
-        widget.unselectedItemColor ??
-            bottomTheme.unselectedItemColor ??
-            themeData.unselectedWidgetColor);
+        widget.unselectedItemColor ?? bottomTheme.unselectedItemColor ?? themeData.unselectedWidgetColor);
 
     final ColorTween colorTween;
     switch (_effectiveType) {
       case BottomNavigationBarType.fixed:
         colorTween = ColorTween(
-          begin: widget.unselectedItemColor ??
-              bottomTheme.unselectedItemColor ??
-              themeData.unselectedWidgetColor,
-          end: widget.selectedItemColor ??
-              bottomTheme.selectedItemColor ??
-              widget.fixedColor ??
-              themeColor,
+          begin: widget.unselectedItemColor ?? bottomTheme.unselectedItemColor ?? themeData.unselectedWidgetColor,
+          end: widget.selectedItemColor ?? bottomTheme.selectedItemColor ?? widget.fixedColor ?? themeColor,
         );
       case BottomNavigationBarType.shifting:
         colorTween = ColorTween(
-          begin: widget.unselectedItemColor ??
-              bottomTheme.unselectedItemColor ??
-              themeData.colorScheme.surface,
-          end: widget.selectedItemColor ??
-              bottomTheme.selectedItemColor ??
-              themeData.colorScheme.surface,
+          begin: widget.unselectedItemColor ?? bottomTheme.unselectedItemColor ?? themeData.colorScheme.surface,
+          end: widget.selectedItemColor ?? bottomTheme.selectedItemColor ?? themeData.colorScheme.surface,
         );
     }
 
@@ -950,11 +920,9 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
         if (i == widget.currentIndex) WidgetState.selected,
       };
 
-      final effectiveMouseCursor =
-          WidgetStateProperty.resolveAs<MouseCursor?>(
-                  widget.mouseCursor, states) ??
-              bottomTheme.mouseCursor?.resolve(states) ??
-              WidgetStateMouseCursor.clickable.resolve(states);
+      final effectiveMouseCursor = WidgetStateProperty.resolveAs<MouseCursor?>(widget.mouseCursor, states) ??
+          bottomTheme.mouseCursor?.resolve(states) ??
+          WidgetStateMouseCursor.clickable.resolve(states);
 
       tiles.add(_NBottomNavigationTile(
         _effectiveType,
@@ -970,27 +938,20 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
             : effectiveUnselectedIconTheme,
         selectedLabelStyle: effectiveSelectedLabelStyle,
         unselectedLabelStyle: effectiveUnselectedLabelStyle,
-        enableFeedback:
-            widget.enableFeedback ?? bottomTheme.enableFeedback ?? true,
+        enableFeedback: widget.enableFeedback ?? bottomTheme.enableFeedback ?? true,
         onTap: () {
           widget.onTap?.call(i);
         },
         onDoubleTap: () {
           widget.onDoubleTap?.call(i);
         },
-        labelColorTween:
-            widget.useLegacyColorScheme ? colorTween : labelColorTween,
-        iconColorTween:
-            widget.useLegacyColorScheme ? colorTween : iconColorTween,
+        labelColorTween: widget.useLegacyColorScheme ? colorTween : labelColorTween,
+        iconColorTween: widget.useLegacyColorScheme ? colorTween : iconColorTween,
         flex: _evaluateFlex(_animations[i]),
         selected: i == widget.currentIndex,
-        showSelectedLabels:
-            widget.showSelectedLabels ?? bottomTheme.showSelectedLabels ?? true,
-        showUnselectedLabels: widget.showUnselectedLabels ??
-            bottomTheme.showUnselectedLabels ??
-            _defaultShowUnselected,
-        indexLabel: localizations.tabLabel(
-            tabIndex: i + 1, tabCount: widget.items.length),
+        showSelectedLabels: widget.showSelectedLabels ?? bottomTheme.showSelectedLabels ?? true,
+        showUnselectedLabels: widget.showUnselectedLabels ?? bottomTheme.showUnselectedLabels ?? _defaultShowUnselected,
+        indexLabel: localizations.tabLabel(tabIndex: i + 1, tabCount: widget.items.length),
         mouseCursor: effectiveMouseCursor,
         layout: layout,
         tileBuilder: widget.tileBuilder,
@@ -1006,13 +967,9 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
     assert(debugCheckHasMediaQuery(context));
     assert(debugCheckHasOverlay(context));
 
-    final bottomTheme =
-        BottomNavigationBarTheme.of(context);
-    final layout = widget.landscapeLayout ??
-        bottomTheme.landscapeLayout ??
-        BottomNavigationBarLandscapeLayout.spread;
-    final additionalBottomPadding =
-        MediaQuery.viewPaddingOf(context).bottom;
+    final bottomTheme = BottomNavigationBarTheme.of(context);
+    final layout = widget.landscapeLayout ?? bottomTheme.landscapeLayout ?? BottomNavigationBarLandscapeLayout.spread;
+    final additionalBottomPadding = MediaQuery.viewPaddingOf(context).bottom;
 
     Color? backgroundColor;
     switch (_effectiveType) {
@@ -1029,8 +986,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
         elevation: widget.elevation ?? bottomTheme.elevation ?? 8.0,
         color: backgroundColor,
         child: ConstrainedBox(
-          constraints: BoxConstraints(
-              minHeight: kBottomNavigationBarHeight + additionalBottomPadding),
+          constraints: BoxConstraints(minHeight: kBottomNavigationBarHeight + additionalBottomPadding),
           child: CustomPaint(
             painter: _RadialPainter(
               circles: _circles.toList(),
@@ -1127,20 +1083,15 @@ class _Circle {
     double weightSum(Iterable<Animation<double>> animations) {
       // We're adding flex values instead of animation values to produce correct
       // ratios.
-      return animations
-          .map<double>(state._evaluateFlex)
-          .fold<double>(0.0, (double sum, double value) => sum + value);
+      return animations.map<double>(state._evaluateFlex).fold<double>(0.0, (double sum, double value) => sum + value);
     }
 
     final allWeights = weightSum(state._animations);
     // These weights sum to the start edge of the indexed item.
-    final leadingWeights =
-        weightSum(state._animations.sublist(0, index));
+    final leadingWeights = weightSum(state._animations.sublist(0, index));
 
     // Add half of its flex value in order to get to the center.
-    return (leadingWeights +
-            state._evaluateFlex(state._animations[index]) / 2.0) /
-        allWeights;
+    return (leadingWeights + state._evaluateFlex(state._animations[index]) / 2.0) / allWeights;
   }
 
   void dispose() {
@@ -1200,8 +1151,7 @@ class _RadialPainter extends CustomPainter {
         case TextDirection.ltr:
           leftFraction = circle.horizontalLeadingOffset;
       }
-      final center =
-          Offset(leftFraction * size.width, size.height / 2.0);
+      final center = Offset(leftFraction * size.width, size.height / 2.0);
       final radiusTween = Tween<double>(
         begin: 0.0,
         end: _maxRadius(center, size),

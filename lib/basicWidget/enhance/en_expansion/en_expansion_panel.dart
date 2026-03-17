@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/// 修改: 新增 final Radius? radius;属性
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_expansion/en_mergeable_material.dart';
 

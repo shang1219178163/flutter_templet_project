@@ -10,6 +10,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 
+/// 修改:新增  final Radius radius; final double height;
+
 // Extracted from https://developer.apple.com/design/resources/.
 
 // Minimum padding from edges of the segmented control to edges of

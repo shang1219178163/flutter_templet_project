@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/n_sliding_segmented_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliding_segmented_control.dart';
 
 /// 分段按钮的切换页面
 class NSlidingSegmentedPageView extends StatefulWidget {
@@ -33,23 +33,19 @@ class NSlidingSegmentedPageView extends StatefulWidget {
   final int selectedIndex;
 
   /// 头部所在构造器
-  final Widget Function(NSlidingSegmentedControl segmentedControl)?
-      segmentedBuilder;
+  final Widget Function(NSlidingSegmentedControl segmentedControl)? segmentedBuilder;
 
   /// 分段按钮和页面之间的位置
   final IndexedWidgetBuilder? middleBuilder;
 
   @override
-  State<NSlidingSegmentedPageView> createState() =>
-      _NSlidingSegmentedPageViewState();
+  State<NSlidingSegmentedPageView> createState() => _NSlidingSegmentedPageViewState();
 }
 
 class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
-  late final selectedIndexVN =
-      ValueNotifier(widget.selectedIndex.clamp(0, widget.items.length));
+  late final selectedIndexVN = ValueNotifier(widget.selectedIndex.clamp(0, widget.items.length));
 
-  late var pageController =
-      PageController(initialPage: widget.selectedIndex, keepPage: true);
+  late var pageController = PageController(initialPage: widget.selectedIndex, keepPage: true);
 
   @override
   void dispose() {
@@ -64,10 +60,8 @@ class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
         oldWidget.selectedIndex != widget.selectedIndex ||
         oldWidget.segmentedBuilder != widget.segmentedBuilder ||
         oldWidget.middleBuilder != widget.middleBuilder) {
-      selectedIndexVN.value =
-          widget.selectedIndex.clamp(0, widget.items.length);
-      pageController =
-          PageController(initialPage: widget.selectedIndex, keepPage: true);
+      selectedIndexVN.value = widget.selectedIndex.clamp(0, widget.items.length);
+      pageController = PageController(initialPage: widget.selectedIndex, keepPage: true);
       setState(() {});
     }
   }
@@ -81,14 +75,10 @@ class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
             valueListenable: selectedIndexVN,
             builder: (context, index, child) {
               final segmentedControl = NSlidingSegmentedControl(
-                items: widget.items
-                    .map((e) => (title: e.title, icon: e.icon))
-                    .toList(),
+                items: widget.items.map((e) => (title: e.title, icon: e.icon)).toList(),
                 selectedIndex: index,
                 onChanged: (int page) {
-                  pageController.animateToPage(page,
-                      duration: Duration(milliseconds: 350),
-                      curve: Curves.ease);
+                  pageController.animateToPage(page, duration: Duration(milliseconds: 350), curve: Curves.ease);
                   // pageController.jumpToPage(index);
                 },
               );
@@ -96,8 +86,7 @@ class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
               return widget.segmentedBuilder?.call(segmentedControl) ??
                   Container(
                     // padding: EdgeInsets.symmetric(horizontal: 48, vertical: 14),
-                    padding: EdgeInsets.only(
-                        left: 48, right: 48, top: 12, bottom: 16),
+                    padding: EdgeInsets.only(left: 48, right: 48, top: 12, bottom: 16),
                     decoration: BoxDecoration(
                         // color: Colors.green,
                         // border: Border.all(color: Colors.blue),

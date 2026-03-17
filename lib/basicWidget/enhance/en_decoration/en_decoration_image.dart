@@ -17,6 +17,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+/// 修改: 新增 destinationOffset 属性
+
 /// An image for a box decoration.
 ///
 /// The image is painted using [paintImage], which describes the meanings of the

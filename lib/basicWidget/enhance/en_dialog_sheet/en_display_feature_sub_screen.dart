@@ -7,10 +7,7 @@ import 'dart:ui' show DisplayFeature, DisplayFeatureState;
 
 import 'package:flutter/material.dart';
 
-// import 'basic.dart';
-// import 'debug.dart';
-// import 'framework.dart';
-// import 'media_query.dart';
+/// 修改: 新增 final double? right;
 
 /// Positions [child] such that it avoids overlapping any [DisplayFeature] that
 /// splits the screen into sub-screens.
@@ -96,19 +93,15 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
         debugCheckHasDirectionality(
           context,
           why: 'to determine which sub-screen DisplayFeatureSubScreen uses',
-          alternative:
-              "Alternatively, consider specifying the 'anchorPoint' argument on the DisplayFeatureSubScreen.",
+          alternative: "Alternatively, consider specifying the 'anchorPoint' argument on the DisplayFeatureSubScreen.",
         ));
     final mediaQuery = MediaQuery.of(context);
     final parentSize = mediaQuery.size;
     final wantedBounds = Offset.zero & parentSize;
-    final resolvedAnchorPoint =
-        _capOffset(anchorPoint ?? _fallbackAnchorPoint(context), parentSize);
+    final resolvedAnchorPoint = _capOffset(anchorPoint ?? _fallbackAnchorPoint(context), parentSize);
 
-    final subScreens =
-        subScreensInBounds(wantedBounds, avoidBounds(mediaQuery));
-    final closestSubScreen =
-        _closestToAnchorPoint(subScreens, resolvedAnchorPoint);
+    final subScreens = subScreensInBounds(wantedBounds, avoidBounds(mediaQuery));
+    final closestSubScreen = _closestToAnchorPoint(subScreens, resolvedAnchorPoint);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -140,21 +133,16 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
   /// not 0 or the `state` is [DisplayFeatureState.postureHalfOpened].
   static Iterable<Rect> avoidBounds(MediaQueryData mediaQuery) {
     return mediaQuery.displayFeatures
-        .where((DisplayFeature d) =>
-            d.bounds.shortestSide > 0 ||
-            d.state == DisplayFeatureState.postureHalfOpened)
+        .where((DisplayFeature d) => d.bounds.shortestSide > 0 || d.state == DisplayFeatureState.postureHalfOpened)
         .map((DisplayFeature d) => d.bounds);
   }
 
   /// Returns the closest sub-screen to the [anchorPoint].
-  static Rect _closestToAnchorPoint(
-      Iterable<Rect> subScreens, Offset anchorPoint) {
+  static Rect _closestToAnchorPoint(Iterable<Rect> subScreens, Offset anchorPoint) {
     var closestScreen = subScreens.first;
-    var closestDistance =
-        _distanceFromPointToRect(anchorPoint, closestScreen);
+    var closestDistance = _distanceFromPointToRect(anchorPoint, closestScreen);
     for (final screen in subScreens) {
-      final subScreenDistance =
-          _distanceFromPointToRect(anchorPoint, screen);
+      final subScreenDistance = _distanceFromPointToRect(anchorPoint, screen);
       if (subScreenDistance < closestDistance) {
         closestScreen = screen;
         closestDistance = subScreenDistance;
@@ -206,8 +194,7 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
 
   /// Returns sub-screens resulted by dividing [wantedBounds] along items of
   /// [avoidBounds] that are at least as tall or as wide.
-  static Iterable<Rect> subScreensInBounds(
-      Rect wantedBounds, Iterable<Rect> avoidBounds) {
+  static Iterable<Rect> subScreensInBounds(Rect wantedBounds, Iterable<Rect> avoidBounds) {
     Iterable<Rect> subScreens = <Rect>[wantedBounds];
     for (final bounds in avoidBounds) {
       final newSubScreens = <Rect>[];
@@ -262,10 +249,7 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
   }
 
   static Offset _capOffset(Offset offset, Size maximum) {
-    if (offset.dx >= 0 &&
-        offset.dx <= maximum.width &&
-        offset.dy >= 0 &&
-        offset.dy <= maximum.height) {
+    if (offset.dx >= 0 && offset.dx <= maximum.width && offset.dy >= 0 && offset.dy <= maximum.height) {
       return offset;
     } else {
       return Offset(

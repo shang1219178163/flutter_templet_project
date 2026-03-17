@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+/// 修改: 新增 final Radius? radius;属性
+
 /// Displays a list of [MergeableMaterialItem] children. The list contains
 /// [MaterialSlice] items whose boundaries are either "merged" with adjacent
 /// items or separated by a [MaterialGap]. The [children] are distributed along
@@ -627,8 +629,7 @@ class _CustomMergeableMaterialListBody extends ListBody {
 
   @override
   void updateRenderObject(BuildContext context, RenderListBody renderObject) {
-    final materialRenderListBody =
-        renderObject as _RenderCustomMergeableMaterialListBody;
+    final materialRenderListBody = renderObject as _RenderCustomMergeableMaterialListBody;
     materialRenderListBody
       ..axisDirection = _getDirection(context)
       ..elevation = elevation;
