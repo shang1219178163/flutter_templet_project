@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/cupertino_sliver_refresh_control_ext.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
@@ -27,7 +28,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
 
   Widget buildBody() {
     List<Color> colors = Colors.primaries.sublist(5, 10);
-    var list = colors.map((e) => _buildItem(color: e)).toList();
+    var list = colors.map((e) => buildItem(color: e)).toList();
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -35,38 +36,38 @@ class _SliverListDemoState extends State<SliverListDemo> {
           builder: CupertinoSliverRefreshControlExt.customRefreshIndicator,
           onRefresh: onRefresh,
         ),
-        sectionHeader(title: 'SliverList - NSliverDecorated'),
+        sectionHeader(child: Text('SliverList - NSliverDecorated')),
         buildListView(),
-        sectionHeader(title: 'SliverList - SliverChildListDelegate'),
+        sectionHeader(child: Text('SliverList - SliverChildListDelegate')),
         SliverList(
           delegate: SliverChildListDelegate(
             list,
           ),
         ),
-        sectionHeader(title: 'SliverList - SliverChildBuilderDelegate'),
+        sectionHeader(child: Text('SliverList - SliverChildBuilderDelegate')),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildItem(color: colors[index]);
+            return buildItem(color: colors[index]);
           }, childCount: colors.length),
         ),
-        sectionHeader(title: 'SliverFixedExtentList - SliverChildBuilderDelegate'),
+        sectionHeader(child: Text('SliverFixedExtentList - SliverChildBuilderDelegate')),
         SliverFixedExtentList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              return _buildItem(color: colors[index]);
+              return buildItem(color: colors[index]);
             },
             childCount: colors.length,
           ),
           itemExtent: 50,
         ),
-        sectionHeader(title: 'SliverPrototypeExtentList - SliverChildBuilderDelegate'),
+        sectionHeader(child: Text('SliverPrototypeExtentList - SliverChildBuilderDelegate')),
         SliverPrototypeExtentList(
           prototypeItem: Container(
             height: 50,
           ),
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              return _buildItem(color: colors[index]);
+              return buildItem(color: colors[index]);
             },
             childCount: colors.length,
           ),
@@ -75,16 +76,16 @@ class _SliverListDemoState extends State<SliverListDemo> {
     );
   }
 
-  sectionHeader({required String title}) {
+  sectionHeader({required Text child, double height = 30}) {
     return SliverToBoxAdapter(
       child: Container(
         margin: EdgeInsets.only(top: 20, bottom: 20, left: 20),
-        child: Text(title),
+        child: child,
       ),
     );
   }
 
-  Widget _buildItem({required Color color}) {
+  Widget buildItem({required Color color}) {
     return Container(
       height: 50,
       color: color,
