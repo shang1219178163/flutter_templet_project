@@ -9,6 +9,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
+/// NSliverListSection 对应的数据模型
+class NSliverSectionModel<T> {
+  NSliverSectionModel({
+    required this.name,
+    this.items = const [],
+    this.data,
+  });
+
+  final String name;
+  final List<T> items;
+
+  final dynamic data;
+}
+
+/// 分组列表
+class NSliverSectionListView<T> extends StatelessWidget {
+  const NSliverSectionListView({
+    super.key,
+    required this.items,
+    required this.sectionBuilder,
+    this.header,
+    this.footer,
+  });
+
+  final List<NSliverSectionModel<T>> items;
+
+  final Widget Function(NSliverSectionModel<T> model) sectionBuilder;
+
+  final Widget? header;
+
+  final Widget? footer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scrollbar(
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: header ?? SizedBox(),
+          ),
+          ...items.map(sectionBuilder),
+          SliverToBoxAdapter(
+            child: footer ?? SizedBox(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 /// 基于 SliverList 的分组组件
 class NSliverSection<T> extends StatefulWidget {
   const NSliverSection({
@@ -30,8 +80,7 @@ class NSliverSection<T> extends StatefulWidget {
   final double headerHeight;
 
   /// header 构建器
-  final Widget Function(
-      BuildContext context, double offset, bool overlapsContent)? headerBuilder;
+  final Widget Function(BuildContext context, double offset, bool overlapsContent)? headerBuilder;
 
   /// 子项构建器
   final NullableIndexedWidgetBuilder itembuilder;
@@ -52,8 +101,7 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
           min: widget.headerHeight,
           max: widget.headerHeight,
           builder: (context, double shrinkOffset, bool overlapsContent) {
-            final header = widget.headerBuilder
-                    ?.call(context, shrinkOffset, overlapsContent) ??
+            final header = widget.headerBuilder?.call(context, shrinkOffset, overlapsContent) ??
                 Container(
                   alignment: Alignment.centerLeft,
                   color: Colors.black.withOpacity(0.15),
@@ -63,7 +111,7 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
                     style: const TextStyle(fontSize: 16),
                   ),
                 );
-            return InkWell(
+            return GestureDetector(
               onTap: () {
                 isExpand = !isExpand;
                 setState(() {});
@@ -81,15 +129,4 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
       ],
     );
   }
-}
-
-/// NSliverListSection 对应的数据模型
-class NSliverSectionModel<T> {
-  NSliverSectionModel({
-    required this.name,
-    this.items = const [],
-  });
-
-  final String name;
-  final List<T> items;
 }
