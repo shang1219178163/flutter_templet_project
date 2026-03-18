@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
+import 'package:flutter_templet_project/basicWidget/n_swiper_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/mixin/assets_json_mixin.dart';
 
 class PageViewDemo extends StatefulWidget {
   const PageViewDemo({Key? key}) : super(key: key);
@@ -9,30 +12,22 @@ class PageViewDemo extends StatefulWidget {
   _PageViewDemoState createState() => _PageViewDemoState();
 }
 
-class _PageViewDemoState extends State<PageViewDemo> {
+class _PageViewDemoState extends State<PageViewDemo> with AssetsJsonMixin {
   ValueNotifier<double> scrollerOffset = ValueNotifier(0.0);
   PageController? controller;
 
-  var titles = ["PageViewTabBarWidget", "2", "3"];
-
-  final title = "新版本 v${2.1}";
-  final message = """
-1、支持立体声蓝牙耳机，同时改善配对性能;
-2、提供屏幕虚拟键盘;
-3、更简洁更流畅，使用起来更快;
-4、修复一些软件在使用时自动退出bug;
-""";
-
-  final rightTitles = ["默认", "done"];
+  @override
+  String get assetsLoadPath => "assets/data/motto.txt";
 
   @override
   void initState() {
+    super.initState();
     controller = PageController();
     controller?.addListener(() {
       scrollerOffset.value = controller!.offset;
     });
 
-    super.initState();
+    DLog.d(['scrollerOffset']);
   }
 
   @override
@@ -40,25 +35,14 @@ class _PageViewDemoState extends State<PageViewDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: rightTitles
-            .map((e) => TextButton(
-                  onPressed: () {
-                    _actionTap(value: e);
-                  },
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
       ),
       body: buildBody(),
     );
   }
 
-  buildBody({
+  Widget buildBody({
     EdgeInsets margin = const EdgeInsets.all(15),
-    EdgeInsets padding = const EdgeInsets.all(15),
+    EdgeInsets padding = const EdgeInsets.all(10),
   }) {
     return LayoutBuilder(builder: (context, constraints) {
       final pageViewWidth = constraints.maxWidth - margin.left - margin.right - padding.left - padding.right;
@@ -67,6 +51,8 @@ class _PageViewDemoState extends State<PageViewDemo> {
         padding: padding,
         child: Column(
           children: [
+            buildSwiper(),
+            SizedBox(height: 10),
             Expanded(child: buildPageView()),
             SizedBox(height: 10),
             Container(
@@ -79,6 +65,60 @@ class _PageViewDemoState extends State<PageViewDemo> {
     });
   }
 
+  Widget buildSwiper() {
+    var items = assetsContent.split("\n").where((e) => e.isNotEmpty).toList();
+    if (items.isEmpty) {
+      return Container(
+        height: 40,
+        child: Placeholder(),
+      );
+    }
+    return Container(
+      height: 40,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        // border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      child: NSwiperView(
+        scrollDirection: Axis.vertical,
+        itemCount: items.length,
+        duration: const Duration(seconds: 3),
+        itemBuilder: (context, i) {
+          DLog.d([i]);
+          final e = "$i.${items[i]}";
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              color: Colors.pinkAccent,
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.notifications_active_outlined, size: 20, color: Colors.white),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    e,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      height: 1.1,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    maxLines: 2,
+                  ),
+                ),
+                Icon(Icons.arrow_forward_ios, size: 20, color: Colors.white),
+              ],
+            ),
+          );
+        },
+        initIndex: 1,
+      ),
+    );
+  }
+
   Widget buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
@@ -87,14 +127,14 @@ class _PageViewDemoState extends State<PageViewDemo> {
       onPageChanged: (index) {
         debugPrint('当前为第$index页');
       },
-      children: List.generate(
-          3,
-          (index) => Container(
-                decoration: BoxDecoration(
-                  color: ColorExt.random,
-                ),
-                child: Center(child: Text('第$index页')),
-              )).toList(),
+      children: List.generate(3, (index) {
+        return Container(
+          decoration: BoxDecoration(
+            color: ColorExt.random,
+          ),
+          child: Center(child: Text('第$index页')),
+        );
+      }).toList(),
     );
   }
 
@@ -112,53 +152,22 @@ class _PageViewDemoState extends State<PageViewDemo> {
           ),
         ),
         ValueListenableBuilder<double>(
-            valueListenable: scrollerOffset,
-            builder: (context, value, child) {
-              return Positioned(
-                  left: (value * factor / width) * itemWidth,
-                  child: Container(
-                    height: 4,
-                    width: itemWidth,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFBE965A),
-                      borderRadius: BorderRadius.circular(1),
-                    ),
-                  ));
-            }),
+          valueListenable: scrollerOffset,
+          builder: (context, value, child) {
+            return Positioned(
+              left: (value * factor / width) * itemWidth,
+              child: Container(
+                height: 4,
+                width: itemWidth,
+                decoration: BoxDecoration(
+                  color: Color(0xFFBE965A),
+                  borderRadius: BorderRadius.circular(1),
+                ),
+              ),
+            );
+          },
+        ),
       ],
     );
-  }
-
-  void _actionTap({required String value}) {
-    switch (value) {
-      case "自定义":
-        {}
-        break;
-      default:
-        {
-          CupertinoActionSheet(
-            title: Text(title),
-            message: Text(message),
-            actions: titles
-                .map(
-                  (e) => CupertinoActionSheetAction(
-                    onPressed: () {
-                      DLog.d(e);
-                      Navigator.pop(context);
-                    },
-                    child: Text(e),
-                  ),
-                )
-                .toList(),
-            cancelButton: CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('取消'),
-            ),
-          ).toShowCupertinoModalPopup(context: context);
-        }
-        break;
-    }
   }
 }
