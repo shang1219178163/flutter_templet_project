@@ -67,11 +67,10 @@ class _NSwiperViewState extends State<NSwiperView> {
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         scrollDirection: widget.scrollDirection,
-        itemBuilder: widget.itemBuilder,
-        // itemBuilder: (context, index) {
-        //   int realIndex = index % widget.itemCount;
-        //   return widget.itemBuilder(context, realIndex);
-        // },
+        itemBuilder: (context, index) {
+          int realIndex = index % widget.itemCount;
+          return widget.itemBuilder(context, realIndex);
+        },
       ),
     );
   }

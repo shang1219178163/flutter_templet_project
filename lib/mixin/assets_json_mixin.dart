@@ -8,7 +8,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 本地文本文件读取
 mixin AssetsJsonMixin<T extends StatefulWidget> on State<T> {
