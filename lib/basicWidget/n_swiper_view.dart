@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 class NSwiperView extends StatefulWidget {
   const NSwiperView({
     super.key,
+    this.physics = const NeverScrollableScrollPhysics(),
     this.scrollDirection = Axis.vertical,
     required this.itemBuilder,
     required this.initIndex,
     required this.itemCount,
     this.duration = const Duration(seconds: 5),
   });
+
+  final ScrollPhysics? physics;
 
   final Axis scrollDirection;
 
@@ -65,7 +68,7 @@ class _NSwiperViewState extends State<NSwiperView> {
       behavior: const ScrollBehavior().copyWith(overscroll: false),
       child: PageView.builder(
         controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
+        physics: widget.physics,
         scrollDirection: widget.scrollDirection,
         itemBuilder: (context, index) {
           int realIndex = index % widget.itemCount;

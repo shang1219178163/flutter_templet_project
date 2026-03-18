@@ -86,31 +86,35 @@ class _PageViewDemoState extends State<PageViewDemo> with AssetsJsonMixin {
         itemCount: items.length,
         duration: const Duration(seconds: 3),
         itemBuilder: (context, i) {
-          DLog.d([i]);
           final e = "$i.${items[i]}";
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            decoration: BoxDecoration(
-              color: Colors.pinkAccent,
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.notifications_active_outlined, size: 20, color: Colors.white),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    e,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      height: 1.1,
-                      fontStyle: FontStyle.italic,
+          return GestureDetector(
+            onTap: () {
+              DLog.d([i, e]);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              decoration: BoxDecoration(
+                color: Colors.pinkAccent,
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.notifications_active_outlined, size: 20, color: Colors.white),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      e,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        height: 1.1,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      maxLines: 2,
                     ),
-                    maxLines: 2,
                   ),
-                ),
-                Icon(Icons.arrow_forward_ios, size: 20, color: Colors.white),
-              ],
+                  Icon(Icons.arrow_forward_ios, size: 20, color: Colors.white),
+                ],
+              ),
             ),
           );
         },
@@ -138,7 +142,11 @@ class _PageViewDemoState extends State<PageViewDemo> with AssetsJsonMixin {
     );
   }
 
-  Widget pageIndicator({required int pageCount, required double pageViewWidth, double factor = 0.3}) {
+  Widget pageIndicator({
+    required int pageCount,
+    required double pageViewWidth,
+    double factor = 0.3,
+  }) {
     var width = pageViewWidth * factor;
     var itemWidth = width / pageCount;
     return Stack(
@@ -154,8 +162,9 @@ class _PageViewDemoState extends State<PageViewDemo> with AssetsJsonMixin {
         ValueListenableBuilder<double>(
           valueListenable: scrollerOffset,
           builder: (context, value, child) {
+            final left = (value * factor / width) * itemWidth;
             return Positioned(
-              left: (value * factor / width) * itemWidth,
+              left: left,
               child: Container(
                 height: 4,
                 width: itemWidth,
