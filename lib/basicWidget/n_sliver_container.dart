@@ -9,6 +9,7 @@ class NSliverContainer extends StatelessWidget {
     this.margin,
     this.padding,
     this.decoration,
+    this.foregroundPadding,
     this.foregroundDecoration,
     this.opacity,
     this.ignoring,
@@ -19,6 +20,7 @@ class NSliverContainer extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   final Decoration? decoration;
+  final EdgeInsetsGeometry? foregroundPadding;
   final Decoration? foregroundDecoration;
 
   final double? opacity;
@@ -43,6 +45,13 @@ class NSliverContainer extends StatelessWidget {
       current = DecoratedSliver(
         decoration: foregroundDecoration!,
         position: DecorationPosition.foreground,
+        sliver: current,
+      );
+    }
+
+    if (foregroundPadding != null) {
+      current = SliverPadding(
+        padding: foregroundPadding!,
         sliver: current,
       );
     }

@@ -138,6 +138,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         border: Border.all(color: Colors.blue),
       ),
+      foregroundPadding: const EdgeInsets.all(8),
       foregroundDecoration: BoxDecoration(
         color: Colors.green.withOpacity(0.6),
         borderRadius: const BorderRadius.all(Radius.circular(24)),
