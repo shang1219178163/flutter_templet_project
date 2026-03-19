@@ -21,26 +21,23 @@ import 'package:flutter/rendering.dart';
 //   ),
 // )
 
-@Deprecated("已弃用,请使用 DecoratedSliver")
+@Deprecated("已弃用,请使用 NSliverDecorated, DecoratedSliver")
 class NSliverDecoration extends SingleChildRenderObjectWidget {
   const NSliverDecoration({
     super.key,
-    this.foregroundDecoration,
     required this.decoration,
-    this.position = DecorationPosition.background,
+    this.foregroundDecoration,
     Widget? sliver,
   }) : super(child: sliver);
 
-  final Decoration? foregroundDecoration;
   final Decoration decoration;
-
-  final DecorationPosition position;
+  final Decoration? foregroundDecoration;
 
   @override
   _NRenderSliverDecorated createRenderObject(BuildContext context) {
     return _NRenderSliverDecorated(
       decoration: decoration,
-      position: position,
+      foregroundDecoration: foregroundDecoration,
       configuration: createLocalImageConfiguration(context),
     );
   }
@@ -49,32 +46,43 @@ class NSliverDecoration extends SingleChildRenderObjectWidget {
   void updateRenderObject(BuildContext context, _NRenderSliverDecorated renderObject) {
     renderObject
       ..decoration = decoration
-      ..configuration = createLocalImageConfiguration(context)
-      ..position = position;
+      .._foregroundDecoration = foregroundDecoration
+      ..configuration = createLocalImageConfiguration(context);
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    final label = position.name;
-    properties.add(EnumProperty<DecorationPosition>('position', position, level: DiagnosticLevel.hidden));
-    properties.add(DiagnosticsProperty<Decoration>(label, decoration));
+    properties.add(DiagnosticsProperty<Decoration>('decoration', decoration));
+    properties.add(DiagnosticsProperty<Decoration>("foregroundDecoration", foregroundDecoration));
   }
 }
 
 class _NRenderSliverDecorated extends RenderProxySliver {
   _NRenderSliverDecorated({
     required Decoration decoration,
-    DecorationPosition position = DecorationPosition.background,
+    Decoration? foregroundDecoration,
     ImageConfiguration configuration = ImageConfiguration.empty,
     RenderSliver? sliver,
   })  : _decoration = decoration,
-        _position = position,
+        _foregroundDecoration = foregroundDecoration,
         _configuration = configuration {
     child = sliver;
   }
 
   BoxPainter? _painter;
+
+  Decoration? _foregroundDecoration;
+  Decoration? get foregroundDecoration => _foregroundDecoration;
+  set foregroundDecoration(Decoration? value) {
+    if (value == _foregroundDecoration) {
+      return;
+    }
+    _painter?.dispose();
+    _painter = null;
+    _foregroundDecoration = value;
+    markNeedsPaint();
+  }
 
   Decoration _decoration;
   Decoration get decoration => _decoration;
@@ -85,16 +93,6 @@ class _NRenderSliverDecorated extends RenderProxySliver {
     _painter?.dispose();
     _painter = null;
     _decoration = value;
-    markNeedsPaint();
-  }
-
-  DecorationPosition _position;
-  DecorationPosition get position => _position;
-  set position(DecorationPosition value) {
-    if (value == _position) {
-      return;
-    }
-    _position = value;
     markNeedsPaint();
   }
 
@@ -125,48 +123,51 @@ class _NRenderSliverDecorated extends RenderProxySliver {
         var clipRect = borderRadius
             .resolve(configuration.textDirection)
             .toRRect(Rect.fromLTRB(0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
-        context.pushClipRRect(
-          needsCompositing,
-          offset,
-          clipRect.outerRect,
-          clipRect,
-          super.paint,
-        );
+        context.pushClipRRect(needsCompositing, offset, clipRect.outerRect, clipRect, super.paint);
       }
     }
-    _painter ??= _decoration.createBoxPainter(markNeedsPaint);
+    _painter ??= decoration.createBoxPainter(markNeedsPaint);
     final filledConfiguration = configuration.copyWith(size: size);
-    if (position == DecorationPosition.background) {
-      int? debugSaveCount;
-      assert(() {
-        debugSaveCount = context.canvas.getSaveCount();
-        return true;
-      }());
-      _painter!.paint(context.canvas, offset, filledConfiguration);
-      assert(() {
-        if (debugSaveCount != context.canvas.getSaveCount()) {
-          throw FlutterError.fromParts(<DiagnosticsNode>[
-            ErrorSummary('${_decoration.runtimeType} painter had mismatching save and restore calls.'),
-            ErrorDescription(
-              'Before painting the decoration, the canvas save count was $debugSaveCount. '
-              'After painting it, the canvas save count was ${context.canvas.getSaveCount()}. '
-              'Every call to save() or saveLayer() must be matched by a call to restore().',
-            ),
-            DiagnosticsProperty<Decoration>('The decoration was', decoration,
-                style: DiagnosticsTreeStyle.errorProperty),
-            DiagnosticsProperty<BoxPainter>('The painter was', _painter, style: DiagnosticsTreeStyle.errorProperty),
-          ]);
-        }
-        return true;
-      }());
-      if (decoration.isComplex) {
-        context.setIsComplexHint();
+    // if (position == DecorationPosition.background) {
+    int? debugSaveCount;
+    assert(() {
+      debugSaveCount = context.canvas.getSaveCount();
+      return true;
+    }());
+    _painter!.paint(context.canvas, offset, filledConfiguration);
+    assert(() {
+      if (debugSaveCount != context.canvas.getSaveCount()) {
+        throw FlutterError.fromParts(<DiagnosticsNode>[
+          ErrorSummary('${_decoration.runtimeType} painter had mismatching save and restore calls.'),
+          ErrorDescription(
+            'Before painting the decoration, the canvas save count was $debugSaveCount. '
+            'After painting it, the canvas save count was ${context.canvas.getSaveCount()}. '
+            'Every call to save() or saveLayer() must be matched by a call to restore().',
+          ),
+          DiagnosticsProperty<Decoration>('The decoration was', decoration, style: DiagnosticsTreeStyle.errorProperty),
+          DiagnosticsProperty<BoxPainter>('The painter was', _painter, style: DiagnosticsTreeStyle.errorProperty),
+        ]);
       }
+      return true;
+    }());
+    if (decoration.isComplex) {
+      context.setIsComplexHint();
     }
+    // }
     super.paint(context, offset);
-    if (position == DecorationPosition.foreground) {
+    if (foregroundDecoration != null) {
+      if (foregroundDecoration is BoxDecoration) {
+        var borderRadius = (foregroundDecoration! as BoxDecoration).borderRadius;
+        if (borderRadius != null) {
+          var clipRect = borderRadius
+              .resolve(configuration.textDirection)
+              .toRRect(Rect.fromLTRB(0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
+          context.pushClipRRect(needsCompositing, offset, clipRect.outerRect, clipRect, super.paint);
+        }
+      }
+      _painter = foregroundDecoration!.createBoxPainter(markNeedsPaint);
       _painter!.paint(context.canvas, offset, filledConfiguration);
-      if (decoration.isComplex) {
+      if (foregroundDecoration!.isComplex) {
         context.setIsComplexHint();
       }
     }
@@ -176,6 +177,7 @@ class _NRenderSliverDecorated extends RenderProxySliver {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(_decoration.toDiagnosticsNode(name: 'decoration'));
+    properties.add(DiagnosticsProperty<Decoration>('foregroundDecoration', foregroundDecoration, defaultValue: null));
     properties.add(DiagnosticsProperty<ImageConfiguration>('configuration', configuration));
   }
 }

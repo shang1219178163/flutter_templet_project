@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_container.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 13.3
 class SliverMainAxisGroupDemo extends StatefulWidget {
@@ -29,45 +32,24 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
     return Scrollbar(
       child: CustomScrollView(
         slivers: [
-          SliverMainAxisGroup(
-            slivers: [
-              buildSliverHeader(
-                child: Text('Section 1'),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.all(8.0),
-                sliver: buldSliverList(5),
-              ),
-            ],
-          ),
-          SliverMainAxisGroup(
-            slivers: [
-              buildSliverHeader(
-                child: Text('Section 2'),
-              ),
-              SliverCrossAxisGroup(
-                slivers: [
-                  SliverConstrainedCrossAxis(
-                    maxExtent: 100,
-                    sliver: SliverPadding(
-                      padding: const EdgeInsets.all(8.0),
-                      sliver: buldSliverList(10),
-                    ),
-                  ),
-                  SliverCrossAxisExpanded(
-                    flex: 2,
-                    sliver: SliverPadding(
-                      padding: const EdgeInsets.all(8.0),
-                      sliver: buldSliverList(20),
-                    ),
-                  ),
-                  SliverPadding(
-                    padding: const EdgeInsets.all(8.0),
-                    sliver: buldSliverList(15),
-                  ),
-                ],
-              ),
-            ],
+          buildGroup(name: 'Section', child: buildContainer()),
+          buildGroup(name: 'Section 0', child: buildSliverContainer()),
+          buildGroup(name: 'Section 1', child: buldSliverList(itemCount: 5)),
+          buildGroup(
+            name: 'Section 2',
+            child: SliverCrossAxisGroup(
+              slivers: [
+                SliverConstrainedCrossAxis(
+                  maxExtent: 100,
+                  sliver: buldSliverList(itemCount: 10),
+                ),
+                SliverCrossAxisExpanded(
+                  flex: 2,
+                  sliver: buldSliverList(itemCount: 20),
+                ),
+                buldSliverList(itemCount: 15),
+              ],
+            ),
           ),
         ],
       ),
@@ -110,23 +92,111 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
     );
   }
 
-  Widget buldSliverList(int itemCount) {
-    return DecoratedSliver(
+  Widget buildGroup({required String name, required Widget child, Widget? header, Widget? footer}) {
+    return SliverMainAxisGroup(
+      slivers: [
+        header ?? buildSliverHeader(child: Text(name)),
+        child,
+        if (footer != null) footer,
+      ],
+    );
+  }
+
+  Widget buildContainer() {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+          color: Colors.purple[50],
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        // foregroundPadding: const EdgeInsets.all(8.0),
+        foregroundDecoration: BoxDecoration(
+          color: Colors.green.withOpacity(0.6),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          image: DecorationImage(image: AssetImage(Assets.imagesBgJiguang)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("NSliverContainer"),
+            Text("NSliverContainer1"),
+            Text("NSliverContainer2"),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildSliverContainer() {
+    return NSliverContainer(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.purple[50],
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
-      sliver: SliverList.separated(
-        itemBuilder: (_, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text('Item $index'),
-          );
-        },
-        separatorBuilder: (_, __) {
-          return const Divider(indent: 8, endIndent: 8);
-        },
-        itemCount: itemCount,
+      // foregroundPadding: const EdgeInsets.all(8.0),
+      foregroundDecoration: BoxDecoration(
+        color: Colors.green.withOpacity(0.6),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        image: DecorationImage(image: AssetImage(Assets.imagesBgJiguang)),
+      ),
+      // opacity: 0.5,
+      // offstage: false,
+      sliver: SliverPadding(
+        padding: const EdgeInsets.all(0.0),
+        sliver: SliverList.list(
+          children: [
+            Text("NSliverContainer"),
+            Text("NSliverContainer1"),
+            Text("NSliverContainer2"),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buldSliverList({required int itemCount}) {
+    return SliverPadding(
+      padding: const EdgeInsets.all(8.0),
+      sliver: DecoratedSliver(
+        decoration: BoxDecoration(
+          color: Colors.purple[50],
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        sliver: SliverPadding(
+          padding: const EdgeInsets.all(8),
+          sliver: DecoratedSliver(
+            position: DecorationPosition.foreground,
+            decoration: BoxDecoration(
+              color: Colors.green.withOpacity(0.6),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              image: DecorationImage(image: AssetImage(Assets.imagesBgBeach)),
+            ),
+            sliver: SliverPadding(
+              padding: const EdgeInsets.all(8),
+              sliver: SliverList.separated(
+                itemBuilder: (_, int index) {
+                  return Container(
+                    // margin: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: ColorExt.random,
+                    ),
+                    child: Text('Item $index'),
+                  );
+                },
+                separatorBuilder: (_, __) {
+                  return const Divider(indent: 8, endIndent: 8);
+                },
+                itemCount: itemCount,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
