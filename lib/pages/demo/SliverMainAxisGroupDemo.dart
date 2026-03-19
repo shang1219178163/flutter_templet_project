@@ -112,10 +112,9 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
           color: Colors.purple[50],
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
-        // foregroundPadding: const EdgeInsets.all(8.0),
         foregroundDecoration: BoxDecoration(
           color: Colors.green.withOpacity(0.6),
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          borderRadius: const BorderRadius.all(Radius.circular(24)),
           image: DecorationImage(image: AssetImage(Assets.imagesBgJiguang)),
         ),
         child: Column(
@@ -137,15 +136,19 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
       decoration: BoxDecoration(
         color: Colors.purple[50],
         borderRadius: const BorderRadius.all(Radius.circular(8)),
+        border: Border.all(color: Colors.blue),
       ),
-      // foregroundPadding: const EdgeInsets.all(8.0),
       foregroundDecoration: BoxDecoration(
         color: Colors.green.withOpacity(0.6),
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-        image: DecorationImage(image: AssetImage(Assets.imagesBgJiguang)),
+        borderRadius: const BorderRadius.all(Radius.circular(24)),
+        border: Border.all(color: Colors.blue),
+        image: DecorationImage(
+          image: AssetImage(Assets.imagesBgJiguang),
+          fit: BoxFit.fill,
+        ),
       ),
-      // opacity: 0.5,
-      // offstage: false,
+      // opacity: 0.3,
+      // offstage: true,
       sliver: SliverPadding(
         padding: const EdgeInsets.all(0.0),
         sliver: SliverList.list(
@@ -166,6 +169,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
         decoration: BoxDecoration(
           color: Colors.purple[50],
           borderRadius: const BorderRadius.all(Radius.circular(8)),
+          // border: Border.all(color: Colors.blue),
         ),
         sliver: SliverPadding(
           padding: const EdgeInsets.all(8),
@@ -173,11 +177,12 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
             position: DecorationPosition.foreground,
             decoration: BoxDecoration(
               color: Colors.green.withOpacity(0.6),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              borderRadius: const BorderRadius.all(Radius.circular(24)),
               image: DecorationImage(image: AssetImage(Assets.imagesBgBeach)),
+              // border: Border.all(color: Colors.blue),
             ),
             sliver: SliverPadding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(0.8),
               sliver: SliverList.separated(
                 itemBuilder: (_, int index) {
                   return Container(

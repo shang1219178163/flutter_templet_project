@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 /// sliver 族 Container
 class NSliverContainer extends StatelessWidget {
   const NSliverContainer({
     super.key,
     required this.sliver,
-    this.padding,
     this.margin,
+    this.padding,
     this.decoration,
     this.foregroundDecoration,
     this.opacity,
@@ -14,8 +15,9 @@ class NSliverContainer extends StatelessWidget {
     this.offstage,
   });
 
-  final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+
   final Decoration? decoration;
   final Decoration? foregroundDecoration;
 
@@ -27,61 +29,73 @@ class NSliverContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget child = sliver;
+    Widget current = sliver;
 
     /// padding
     if (padding != null) {
-      child = SliverPadding(
+      current = SliverPadding(
         padding: padding!,
-        sliver: child,
+        sliver: current,
       );
     }
 
     if (foregroundDecoration != null) {
-      child = DecoratedSliver(
+      current = DecoratedSliver(
         decoration: foregroundDecoration!,
         position: DecorationPosition.foreground,
-        sliver: child,
+        sliver: current,
       );
     }
 
     /// decoration
     if (decoration != null) {
-      child = DecoratedSliver(
+      current = DecoratedSliver(
         decoration: decoration!,
-        sliver: child,
+        sliver: current,
       );
     }
 
     /// margin（最外层）
     if (margin != null) {
-      child = SliverPadding(
+      current = SliverPadding(
         padding: margin!,
-        sliver: child,
+        sliver: current,
       );
     }
 
     if (opacity != null) {
-      child = SliverOpacity(
+      current = SliverOpacity(
         opacity: opacity!,
-        sliver: child,
+        sliver: current,
       );
     }
 
     if (ignoring != null) {
-      child = SliverIgnorePointer(
+      current = SliverIgnorePointer(
         ignoring: ignoring!,
-        sliver: child,
+        sliver: current,
       );
     }
 
     if (offstage != null) {
-      child = SliverOffstage(
+      current = SliverOffstage(
         offstage: offstage!,
-        sliver: child,
+        sliver: current,
       );
     }
 
-    return child;
+    return current;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin, defaultValue: null));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding, defaultValue: null));
+    properties.add(DiagnosticsProperty<Decoration>('bg', decoration, defaultValue: null));
+    properties.add(DiagnosticsProperty<Decoration>('fg', foregroundDecoration, defaultValue: null));
+    properties.add(DiagnosticsProperty<double>('opacity', opacity, defaultValue: null));
+    properties.add(DiagnosticsProperty<bool>('ignoring', ignoring, defaultValue: null));
+    properties.add(DiagnosticsProperty<bool>('offstage', offstage, defaultValue: null));
   }
 }
