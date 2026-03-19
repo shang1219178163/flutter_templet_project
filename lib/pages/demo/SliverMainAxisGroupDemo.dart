@@ -145,7 +145,6 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
         border: Border.all(color: Colors.blue),
         image: DecorationImage(
           image: AssetImage(Assets.imagesBgJiguang),
-          fit: BoxFit.fill,
         ),
       ),
       // opacity: 0.3,
