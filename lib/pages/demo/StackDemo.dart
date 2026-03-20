@@ -13,12 +13,21 @@ class StackDemo extends StatefulWidget {
   _StackDemoState createState() => _StackDemoState();
 }
 
-class _StackDemoState extends State<StackDemo> {
+class _StackDemoState extends State<StackDemo> with SingleTickerProviderStateMixin {
+  var items = AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
+  late final tabController = TabController(initialIndex: 3, length: items.length, vsync: this);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
+        bottom: TabBar(
+          controller: tabController,
+          isScrollable: true,
+          tabs: items.map((e) => Tab(text: e)).toList(),
+          onTap: (v) {},
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -67,7 +76,7 @@ class _StackDemoState extends State<StackDemo> {
               },
               child: Text("StackPopupController"),
             ),
-            buildSection2()
+            buildSection2(),
           ],
         ),
       ),

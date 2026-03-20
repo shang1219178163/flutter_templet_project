@@ -97,10 +97,12 @@ class _TransformDemoState extends State<TransformDemo> {
         NSectionBox(
           title: "Transform.scale",
           child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.red),
-              child: Transform.scale(
-                  scale: 1.5, //放大到1.5倍
-                  child: Text("Hello world"))),
+            decoration: BoxDecoration(color: Colors.red),
+            child: Transform.scale(
+              scale: 1.5, //放大到1.5倍
+              child: Text("Hello world"),
+            ),
+          ),
         ),
         NSectionBox(
           title: "RotatedBox",
