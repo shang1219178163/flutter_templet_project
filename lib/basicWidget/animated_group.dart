@@ -47,8 +47,7 @@ class AnimatedGroup extends StatefulWidget {
 }
 
 /// 混合动画 State
-class AnimatedGroupState extends State<AnimatedGroup>
-    with TickerProviderStateMixin {
+class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMixin {
   AnimationController? _controller;
 
   /// 仅限于无法满足功能时使用(透传对象, 方便二次开发)
@@ -58,11 +57,8 @@ class AnimatedGroupState extends State<AnimatedGroup>
 
   @override
   void initState() {
-    _controller = widget.controller ??
-        AnimationController(duration: widget.duration, vsync: this);
-    _animations = widget.animations
-        .map((e) => e.tween.animate(_buildAnim(e.begin, e.end)))
-        .toList();
+    _controller = widget.controller ?? AnimationController(duration: widget.duration, vsync: this);
+    _animations = widget.animations.map((e) => e.tween.animate(_buildAnim(e.begin, e.end))).toList();
 
     super.initState();
   }
@@ -89,8 +85,10 @@ class AnimatedGroupState extends State<AnimatedGroup>
   /// isRemovedOnCompletion 是否单程动画
   ///
   /// isReverse 是否逆转动画
-  palyeAnimations(
-      {bool isRemovedOnCompletion = true, bool isReverse = false}) async {
+  palyeAnimations({
+    bool isRemovedOnCompletion = true,
+    bool isReverse = false,
+  }) async {
     try {
       if (!isReverse) {
         await _controller?.forward().orCancel;
@@ -143,110 +141,3 @@ class AnimatedGroupItemModel {
   /// 动画结束时间 (0 - 1.0)
   double end;
 }
-
-// example
-//
-// class AnimatedGroupDemo extends StatefulWidget {
-//
-//   final String? title;
-//
-//   AnimatedGroupDemo({ Key? key, this.title}) : super(key: key);
-//
-//
-//   @override
-//   _AnimatedGroupDemoState createState() => _AnimatedGroupDemoState();
-// }
-//
-// class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
-//
-//   GlobalKey<AnimatedGroupState> _globalKey = GlobalKey();
-//
-//   final _animations = <AnimatedGroupItemModel>[
-//     AnimatedGroupItemModel(
-//         tween: Tween<double>(begin: .0, end: 300.0,),
-//         begin: 0.0,
-//         end: 0.6
-//     ),
-//     AnimatedGroupItemModel(
-//         tween: ColorTween(begin: Colors.green, end: Colors.red,),
-//         begin: 0.0,
-//         end: 0.6
-//     ),
-//     AnimatedGroupItemModel(
-//         tween: Tween<EdgeInsets>(
-//           begin: const EdgeInsets.only(left: .0),
-//           end: const EdgeInsets.only(left: 100.0),
-//         ),
-//         begin: 0.6,
-//         end: 1.0
-//     ),
-//   ];
-//
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//   }
-//
-//   @override
-//   void dispose() {
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title ?? "$widget"),
-//       ),
-//       body: Center(
-//         child: Column(
-//           children: [
-//             ElevatedButton(
-//               child: Text("start animation"),
-//               onPressed: (){
-//                 _globalKey.currentState?.palyeAnimations(isRemovedOnCompletion: false);
-//               },
-//             ),
-//             Container(
-//               width: 300,
-//               height: 300,
-//               child: AnimatedGroup(
-//                 key: _globalKey,
-//                 duration: Duration(milliseconds: 2000),
-//                 animations: _animations,
-//                 child: Text("AnimatedGroupWidget 混合动画", style: TextStyle(color: Colors.white, backgroundColor: Colors.green),),
-//                 builder: (BuildContext context, Widget? child, List<Animation<dynamic>> animations) {
-//                   final aHeight = animations[0];
-//                   final aColor = animations[1];
-//                   final aPadding = animations[2];
-//
-//                   return Stack(
-//                     children: [
-//                       Container(
-//                         alignment: Alignment.bottomCenter,
-//                         padding: aPadding.value,
-//                         child: Container(
-//                           color: aColor.value,
-//                           width: 50.0,
-//                           height: aHeight.value,
-//                         ),
-//                       ),
-//                       Center(child: child!)
-//                     ],
-//                   );
-//                 },
-//               ),
-//               decoration: BoxDecoration(
-//                   color: Colors.black.withOpacity(0.1),
-//                   border: Border.all(
-//                     color: Colors.black.withOpacity(0.5),
-//                   )
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

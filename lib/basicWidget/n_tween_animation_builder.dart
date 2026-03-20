@@ -8,22 +8,25 @@
 
 import 'package:flutter/material.dart';
 
-class NTweenAnimationBuilder extends StatelessWidget {
+class NTweenAnimationBuilder<T> extends StatelessWidget {
   const NTweenAnimationBuilder({
     super.key,
-    this.begin = 0.3,
-    this.end = 1.0,
+    required this.begin,
+    required this.end,
     this.duration = const Duration(milliseconds: 300),
-    required this.needScale,
-    required this.needFade,
-    required this.needRotation,
+    this.onEnd,
+    this.needScale = false,
+    this.needFade = false,
+    this.needRotation = false,
     required this.child,
   });
 
-  final double begin;
-  final double end;
+  final T begin;
+  final T end;
 
   final Duration duration;
+  final VoidCallback? onEnd;
+
   final bool needScale;
   final bool needFade;
   final bool needRotation;
@@ -31,27 +34,28 @@ class NTweenAnimationBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TweenAnimationBuilder<double>(
+    return TweenAnimationBuilder<T>(
       tween: Tween(begin: begin, end: end),
       duration: duration,
+      onEnd: onEnd,
       child: child,
       builder: (_, value, child) {
         Widget content = child ?? const SizedBox();
-        if (needScale) {
+        if (needScale && value is double) {
           content = Transform.scale(
             scale: value,
             child: content,
           );
         }
 
-        if (needRotation) {
+        if (needRotation && value is double) {
           content = Transform.rotate(
             angle: value * 2 * 3.1415926, // 360°
             child: content,
           );
         }
 
-        if (needFade) {
+        if (needFade && value is double) {
           return AnimatedOpacity(
             duration: duration,
             opacity: value,
