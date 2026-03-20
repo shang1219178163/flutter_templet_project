@@ -95,7 +95,7 @@ import 'package:flutter_templet_project/pages/demo/DashLineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DataTableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DateRangePickerDialogDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DateTimeDemo.dart';
-import 'package:flutter_templet_project/pages/demo/DecoratedBoxTransitionDemo.dart';
+import 'package:flutter_templet_project/pages/demo/transition/DecoratedBoxTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
@@ -308,6 +308,7 @@ import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
+import 'package:flutter_templet_project/pages/demo/transition/SuffixTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
@@ -907,6 +908,7 @@ class AppRouter {
   static const String overlayAnimationDemo = '/overlayAnimationDemo';
   static const String streamControllerDemo = '/streamControllerDemo';
   static const String nFlexSeparatedDemo = '/nFlexSeparatedDemo';
+  static const String suffixTransitionDemo = '/suffixTransitionDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2668,6 +2670,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.nFlexSeparatedDemo,
       page: () => NFlexSeparatedDemo(),
+    ),
+    GetPage(
+      name: AppRouter.suffixTransitionDemo,
+      page: () => SuffixTransitionDemo(),
     ),
   ];
 }
