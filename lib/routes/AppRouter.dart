@@ -95,7 +95,6 @@ import 'package:flutter_templet_project/pages/demo/DashLineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DataTableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DateRangePickerDialogDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DateTimeDemo.dart';
-import 'package:flutter_templet_project/pages/demo/transition/DecoratedBoxTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
@@ -2387,10 +2386,6 @@ class AppRouter {
     GetPage(
       name: AppRouter.segmentVerticalDemo,
       page: () => SegmentVerticalDemo(),
-    ),
-    GetPage(
-      name: AppRouter.decoratedBoxTransitionDemo,
-      page: () => DecoratedBoxTransitionDemo(),
     ),
     GetPage(
       name: AppRouter.aeReportPage,
