@@ -260,6 +260,8 @@ dependencies:
 
   flutter_form_builder: 9.5.0
   flutter_context_menu: ^0.4.1
+
+  flutter_background_service: ^5.1.0
 #  User:
 #    hosted:
 #      name: syn_mine_pages
