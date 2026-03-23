@@ -28,26 +28,18 @@ class EasyNotifier {
     }
   }
 
+  void notify() {
+    for (final entry in _listeners) {
+      entry.call();
+    }
+  }
+
   void dispose() {
     _listeners.clear();
   }
-
-  void notify() {
-    if (_listeners.isEmpty) {
-      return;
-    }
-
-    for (final entry in _listeners) {
-      try {
-        entry.call();
-      } catch (e) {
-        debugPrint(e.toString());
-      }
-    }
-  }
 }
 
-class EasyController {
+class EasyNotifierController {
   final notifier = EasyNotifier();
 
   ///刷新控件
