@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/end_bounce_scroll_physics.dart';
-import 'package:flutter_templet_project/model/footbal_category_item.dart';
+import 'package:flutter_templet_project/model/category_item.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';

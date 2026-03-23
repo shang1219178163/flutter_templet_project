@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/model/footbal_category_item.dart';
+import 'package:flutter_templet_project/model/category_item.dart';
 
 class BallCategoryProvider with ChangeNotifier {
   // 私有变量存储状态
