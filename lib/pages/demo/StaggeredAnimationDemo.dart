@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class StaggeredAnimationDemo extends StatefulWidget {
   const StaggeredAnimationDemo({
@@ -51,6 +52,9 @@ class _StaggeredAnimationDemoState extends State<StaggeredAnimationDemo> with Si
             ),
             StaggeredAnimationWidget(
               controller: controller,
+              child: Text(
+                '混合动画',
+              ),
             ),
           ],
         ),
@@ -61,7 +65,6 @@ class _StaggeredAnimationDemoState extends State<StaggeredAnimationDemo> with Si
 
 class StaggeredAnimationWidget extends StatelessWidget {
   final Animation<double> controller;
-  final Animation<double> opacity;
   final Animation<double> width;
   final Animation<double> height;
   final Animation<Color?> color;
@@ -70,19 +73,17 @@ class StaggeredAnimationWidget extends StatelessWidget {
   final Animation<double> elevation;
   final Animation<TextStyle>? style;
 
+  final Animation<double>? opacity;
+  final Animation<Offset>? slide;
+  final Animation<double>? scale;
+  final Animation<double>? rotation;
+  final Widget child;
+
   StaggeredAnimationWidget({
     Key? key,
+    required this.child,
     required this.controller,
-  })  : opacity = Tween<double>(
-          begin: 0.0,
-          end: 1.0,
-        ).animate(
-          CurvedAnimation(
-            parent: controller,
-            curve: Interval(0.0, 0.2, curve: Curves.easeIn),
-          ),
-        ),
-        width = Tween<double>(
+  })  : width = Tween<double>(
           begin: 100.0,
           end: 200.0,
         ).animate(
@@ -92,7 +93,7 @@ class StaggeredAnimationWidget extends StatelessWidget {
           ),
         ),
         height = Tween<double>(
-          begin: 50.0,
+          begin: 100.0,
           end: 200.0,
         ).animate(
           CurvedAnimation(
@@ -139,7 +140,7 @@ class StaggeredAnimationWidget extends StatelessWidget {
         style = TextStyleTween(
           begin: TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: 16,
           ),
           end: TextStyle(
             color: Colors.red,
@@ -152,15 +153,53 @@ class StaggeredAnimationWidget extends StatelessWidget {
             curve: Interval(0.6, 0.9, curve: Curves.linear),
           ),
         ),
+        slide = Tween<Offset>(
+          begin: Offset(-1.0, 0.0),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.2, 0.5, curve: Curves.easeOut),
+          ),
+        ),
+        scale = Tween<double>(
+          begin: 0.5,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.4, 0.7, curve: Curves.easeIn),
+          ),
+        ),
+        rotation = Tween<double>(
+          begin: 0.0,
+          end: 2 * 3.14159, // 360度
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.6, 1.0, curve: Curves.easeIn),
+          ),
+        ),
+        opacity = Tween<double>(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: controller,
+            curve: Interval(0.0, 0.2, curve: Curves.easeIn),
+          ),
+        ),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: controller,
+      child: child,
       builder: (context, child) {
-        return Container(
+        Widget content = Container(
           padding: padding.value,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             color: color.value,
             borderRadius: borderRadius.value,
@@ -174,21 +213,48 @@ class StaggeredAnimationWidget extends StatelessWidget {
           ),
           width: width.value,
           height: height.value,
-          child: Opacity(
-            opacity: opacity.value,
-            child: Center(
-              child: Text(
-                'Flutter',
-                style: style?.value ??
-                    TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ),
+          child: DefaultTextStyle(
+            style: style?.value ??
+                TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+            child: child!,
           ),
         );
+        if (opacity != null) {
+          content = Opacity(
+            opacity: opacity!.value,
+            child: content,
+          );
+        }
+
+        if (slide != null) {
+          content = Transform.translate(
+            offset: slide!.value * 100,
+            child: content,
+          );
+        }
+
+        if ([
+          scale,
+          rotation,
+        ].where((e) => e != null).isNotEmpty) {
+          final matrix4 = Matrix4.identity();
+          if (scale != null) {
+            matrix4.scale(scale!.value);
+          }
+          if (rotation != null) {
+            matrix4.rotateZ(rotation!.value);
+          }
+          content = Transform(
+            transform: matrix4,
+            alignment: Alignment.center,
+            child: content,
+          );
+        }
+        return content;
       },
     );
   }
