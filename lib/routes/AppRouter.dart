@@ -303,6 +303,7 @@ import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
+import 'package:flutter_templet_project/pages/demo/StaggeredAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
@@ -908,6 +909,7 @@ class AppRouter {
   static const String streamControllerDemo = '/streamControllerDemo';
   static const String nFlexSeparatedDemo = '/nFlexSeparatedDemo';
   static const String suffixTransitionDemo = '/suffixTransitionDemo';
+  static const String staggeredAnimationDemo = '/staggeredAnimationDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2669,6 +2671,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.suffixTransitionDemo,
       page: () => SuffixTransitionDemo(),
+    ),
+    GetPage(
+      name: AppRouter.staggeredAnimationDemo,
+      page: () => StaggeredAnimationDemo(),
     ),
   ];
 }
