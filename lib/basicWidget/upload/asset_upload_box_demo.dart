@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/n_fade_page_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// AssetUploadBox演示demo
@@ -213,7 +213,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     FocusScope.of(context).unfocus();
     Navigator.push(
       context,
-      FadePageRoute(
+      NFadePageRoute(
         builder: (context) => NImagePreview(urls: urls, index: index),
       ),
     );

@@ -3,11 +3,11 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/n_fade_page_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_button.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -417,7 +417,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     FocusScope.of(context).unfocus();
     Navigator.push(
       context,
-      FadePageRoute(
+      NFadePageRoute(
         builder: (context) => NImagePreview(urls: urls, index: index),
       ),
     );
