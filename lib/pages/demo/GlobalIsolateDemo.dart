@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/global_isolate.dart';
+import 'package:flutter_templet_project/util/BackgroundService/global_isolate.dart';
 
 class GlobalIsolateDemo extends StatefulWidget {
   GlobalIsolateDemo({Key? key, this.title}) : super(key: key);
