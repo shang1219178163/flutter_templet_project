@@ -10,6 +10,7 @@ export 'src/button_ext.dart';
 export 'src/change_notifier_ext.dart';
 export 'src/clipboard_ext.dart';
 export 'src/color_ext.dart';
+export 'src/curve_ext.dart';
 export 'src/date_time_ext.dart';
 export 'src/decoration_ext.dart';
 export 'src/dialog_ext.dart';
