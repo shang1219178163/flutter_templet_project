@@ -20,7 +20,6 @@ class _NFlipCardState extends State<NFlipCard> {
 
   @override
   void didUpdateWidget(covariant NFlipCard oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     if (oldWidget.fontBuilder?.call(toggle) != widget.fontBuilder?.call(toggle) ||
         oldWidget.backBuilder?.call(toggle) != widget.backBuilder?.call(toggle)) {
