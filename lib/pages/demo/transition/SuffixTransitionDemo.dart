@@ -1,10 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_animation_controller_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_flip_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/pages/demo/transition/widget/CurvedAnimationWidget.dart';
-import 'package:flutter_templet_project/pages/demo/transition/widget/TweenTransitionWidget.dart';
 
 /// 后缀为 Transition 的组件实例
 class SuffixTransitionDemo extends StatefulWidget {
@@ -67,23 +66,29 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
       begin: Offset.zero,
       end: const Offset(1.5, 0.0),
     );
-    return TweenTransitionWidget(
-      tween: tween,
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
       builder: (_, child, animController) {
         final animation = tween.animate(animController);
 
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SlideTransition(
-                position: animation,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: FlutterLogo(size: 150.0),
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SlideTransition(
+                  position: animation,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlutterLogo(size: 150.0),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -95,23 +100,29 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
       begin: 0.5,
       end: 1,
     );
-    return TweenTransitionWidget(
-      tween: tween,
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
       builder: (_, child, animController) {
         final animation = tween.animate(animController);
 
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ScaleTransition(
-                scale: animation,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: FlutterLogo(size: 150.0),
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ScaleTransition(
+                  scale: animation,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlutterLogo(size: 150.0),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -119,21 +130,31 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   }
 
   Widget buildPageRotationTransition() {
-    return CurvedAnimationWidget(
-      curve: Curves.elasticOut,
-      builder: (_, child, animation) {
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RotationTransition(
-                turns: animation,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: FlutterLogo(size: 150.0),
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
+      builder: (_, child, animController) {
+        final animation = CurvedAnimation(
+          parent: animController,
+          curve: Curves.elasticOut,
+        );
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RotationTransition(
+                  turns: animation,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlutterLogo(size: 150.0),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -141,20 +162,30 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   }
 
   Widget buildPageSizeTransition() {
-    return CurvedAnimationWidget(
-      curve: Curves.fastOutSlowIn,
-      builder: (_, child, animation) {
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizeTransition(
-                sizeFactor: animation,
-                axis: Axis.horizontal,
-                axisAlignment: -1,
-                child: FlutterLogo(size: 150),
-              ),
-            ],
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
+      builder: (_, child, animController) {
+        final animation = CurvedAnimation(
+          parent: animController,
+          curve: Curves.fastOutSlowIn,
+        );
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizeTransition(
+                  sizeFactor: animation,
+                  axis: Axis.horizontal,
+                  axisAlignment: -1,
+                  child: FlutterLogo(size: 150),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -162,21 +193,31 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   }
 
   Widget buildPageFadeTransition() {
-    return CurvedAnimationWidget(
-      curve: Curves.easeIn,
-      builder: (_, child, animation) {
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FadeTransition(
-                opacity: animation,
-                child: const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: FlutterLogo(size: 150),
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
+      builder: (_, child, animController) {
+        final animation = CurvedAnimation(
+          parent: animController,
+          curve: Curves.easeIn,
+        );
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FadeTransition(
+                  opacity: animation,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: FlutterLogo(size: 150),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -188,23 +229,29 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
       begin: Alignment.bottomLeft,
       end: Alignment.center,
     );
-    return TweenTransitionWidget(
-      tween: tween,
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
       builder: (_, child, animController) {
         final animation = tween.animate(animController);
 
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AlignTransition(
-                alignment: animation,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: FlutterLogo(size: 150.0),
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AlignTransition(
+                  alignment: animation,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlutterLogo(size: 150.0),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -233,21 +280,27 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
             biggest,
           ),
         );
-        return TweenTransitionWidget(
-          tween: tween,
+        return NAnimationControllerBuilder(
+          duration: const Duration(milliseconds: 2000),
           builder: (_, child, animController) {
             final animation = tween.animate(animController);
 
-            return Stack(
-              children: <Widget>[
-                PositionedTransition(
-                  rect: animation,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: FlutterLogo(size: 150.0),
+            return GestureDetector(
+              onTap: () {
+                animController.reset();
+                animController.forward();
+              },
+              child: Stack(
+                children: <Widget>[
+                  PositionedTransition(
+                    rect: animation,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: FlutterLogo(size: 150.0),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         );
@@ -271,22 +324,28 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
             smallLogo,
           ),
         );
-        return TweenTransitionWidget(
-          tween: tween,
+        return NAnimationControllerBuilder(
+          duration: const Duration(milliseconds: 2000),
           builder: (_, child, animController) {
             final animation = tween.animate(animController);
 
-            return Stack(
-              children: <Widget>[
-                RelativePositionedTransition(
-                  size: biggest,
-                  rect: animation,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: FlutterLogo(size: 150.0),
+            return GestureDetector(
+              onTap: () {
+                animController.reset();
+                animController.forward();
+              },
+              child: Stack(
+                children: <Widget>[
+                  RelativePositionedTransition(
+                    size: biggest,
+                    rect: animation,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: FlutterLogo(size: 150.0),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         );
@@ -321,23 +380,29 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         ],
       ),
     );
-    return TweenTransitionWidget(
-      tween: tween,
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
       builder: (_, child, animController) {
         final animation = tween.animate(animController);
 
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DecoratedBoxTransition(
-                decoration: animation,
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const FlutterLogo(size: 150.0),
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DecoratedBoxTransition(
+                  decoration: animation,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: const FlutterLogo(size: 150.0),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -357,8 +422,8 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         fontWeight: FontWeight.w100,
       ),
     );
-    return TweenTransitionWidget(
-      tween: tween,
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
       builder: (_, child, animController) {
         final curvedAnimation = CurvedAnimation(
           parent: animController,
@@ -366,15 +431,21 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         );
         final animation = tween.animate(curvedAnimation);
 
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DefaultTextStyleTransition(
-                style: animation,
-                child: const Text('Flutter'),
-              ),
-            ],
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DefaultTextStyleTransition(
+                  style: animation,
+                  child: const Text('Flutter'),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -382,26 +453,36 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   }
 
   Widget buildPageMatrixTransition() {
-    return CurvedAnimationWidget(
-      curve: Curves.linear,
-      builder: (_, child, animation) {
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MatrixTransition(
-                animation: animation,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: FlutterLogo(size: 150.0),
+    return NAnimationControllerBuilder(
+      duration: const Duration(milliseconds: 2000),
+      builder: (_, child, animController) {
+        final animation = CurvedAnimation(
+          parent: animController,
+          curve: Curves.easeIn,
+        );
+        return GestureDetector(
+          onTap: () {
+            animController.reset();
+            animController.forward();
+          },
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MatrixTransition(
+                  animation: animation,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlutterLogo(size: 150.0),
+                  ),
+                  onTransform: (double value) {
+                    return Matrix4.identity()
+                      ..setEntry(3, 2, 0.004)
+                      ..rotateY(pi * 2.0 * value);
+                  },
                 ),
-                onTransform: (double value) {
-                  return Matrix4.identity()
-                    ..setEntry(3, 2, 0.004)
-                    ..rotateY(pi * 2.0 * value);
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
