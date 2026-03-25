@@ -30,7 +30,7 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
     super.build(context);
 
     items = <Tuple2<Tab, Widget>>[
-      Tuple2(Tab(text: "选项1"), buildPage()),
+      Tuple2(Tab(text: "NOverlayDialog"), buildPage()),
       Tuple2(Tab(text: "选项2"), buildPage1()),
       Tuple2(Tab(text: "选项2"), buildPage2()),
     ];
@@ -41,6 +41,7 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
+            isScrollable: true,
             tabs: items.map((e) => e.item1).toList(),
           ),
           title: Text('$widget'),
@@ -123,22 +124,21 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                           },
                           child: Text("NOverlayDialog.toast"),
                         ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     NOverlayManager.showAnimation(
-                        //       bulder: (onHide) => buildContent(),
-                        //     );
-                        //   },
-                        //   child: Text("NOverlayManager"),
-                        // ),
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     NOverlayManager.sheet(
-                        //       bulder: (onHide) => buildContent(),
-                        //     );
-                        //   },
-                        //   child: Text("NOverlayManager - sheet"),
-                        // ),
+                        ElevatedButton(
+                          onPressed: () {
+                            NOverlayDialog.drawer(
+                              context,
+                              child: buildContent(
+                                title: "NOverlayManager.drawer",
+                                radius: 0,
+                                onTap: () {
+                                  NOverlayDialog.dismiss();
+                                },
+                              ),
+                            );
+                          },
+                          child: Text("NOverlayManager.drawer"),
+                        ),
                       ],
                     );
                   },
@@ -233,18 +233,25 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
     );
   }
 
-  Widget buildContent({double? height, EdgeInsetsGeometry? margin, String? title, VoidCallback? onTap}) {
+  Widget buildContent({
+    double? width,
+    double? height,
+    EdgeInsetsGeometry? margin,
+    double? radius,
+    String? title,
+    VoidCallback? onTap,
+  }) {
     final btnTitle = title ?? "buildContent";
     return Container(
+      width: width,
       height: height,
-      width: double.infinity,
       margin: margin,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: ColorExt.random,
         // color: Colors.yellow,
         border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderRadius: BorderRadius.all(Radius.circular(radius ?? 16)),
       ),
       child: ElevatedButton(
         onPressed: () {

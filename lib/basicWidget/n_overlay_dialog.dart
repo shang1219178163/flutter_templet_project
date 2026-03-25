@@ -80,23 +80,23 @@ class NOverlayDialog {
           child: content,
         ),
       );
-    }
-
-    // ⭐ 其余方向：Slide
-    content = FadeTransition(
-      opacity: animation,
-      child: SlideTransition(
-        position: animation.drive(
-          Tween<Offset>(
-            begin: Offset(from.x.sign, from.y.sign),
-            end: Offset.zero,
-          ).chain(
-            CurveTween(curve: curve),
+    } else {
+      // ⭐ 其余方向：Slide
+      content = FadeTransition(
+        opacity: animation,
+        child: SlideTransition(
+          position: animation.drive(
+            Tween<Offset>(
+              begin: Offset(from.x.sign, from.y.sign),
+              end: Offset.zero,
+            ).chain(
+              CurveTween(curve: curve),
+            ),
           ),
+          child: content,
         ),
-        child: content,
-      ),
-    );
+      );
+    }
 
     content = Align(
       alignment: from,
@@ -148,6 +148,30 @@ class NOverlayDialog {
     return show(
       context,
       child: child,
+      from: from,
+      duration: duration,
+      curve: curve,
+      hideBarrier: hideBarrier,
+      autoDismissDuration: autoDismissDuration,
+    );
+  }
+
+  static void drawer(
+    BuildContext context, {
+    double widthFactor = 0.8,
+    required Widget child,
+    Alignment from = Alignment.centerRight,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+    bool hideBarrier = false,
+    Duration? autoDismissDuration,
+  }) {
+    return show(
+      context,
+      child: FractionallySizedBox(
+        widthFactor: widthFactor,
+        child: child,
+      ),
       from: from,
       duration: duration,
       curve: curve,
