@@ -1,8 +1,26 @@
+//
+//  NFlipCard.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2026/3/25 12:06.
+//  Copyright © 2026/3/25 shang. All rights reserved.
+//
+
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
+/// 翻转组件
 class NFlipCard extends StatefulWidget {
-  const NFlipCard({super.key, this.fontBuilder, this.backBuilder});
+  const NFlipCard({
+    super.key,
+    this.axis = Axis.vertical,
+    this.fontBuilder,
+    this.backBuilder,
+  });
 
+  /// 翻转方向
+  final Axis axis;
   final Widget Function(VoidCallback onToggle)? fontBuilder;
   final Widget Function(VoidCallback onToggle)? backBuilder;
 
@@ -21,7 +39,8 @@ class _NFlipCardState extends State<NFlipCard> {
   @override
   void didUpdateWidget(covariant NFlipCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.fontBuilder?.call(toggle) != widget.fontBuilder?.call(toggle) ||
+    if (oldWidget.axis != widget.axis ||
+        oldWidget.fontBuilder?.call(toggle) != widget.fontBuilder?.call(toggle) ||
         oldWidget.backBuilder?.call(toggle) != widget.backBuilder?.call(toggle)) {
       setState(() {});
     }
@@ -33,19 +52,28 @@ class _NFlipCardState extends State<NFlipCard> {
       tween: Tween(begin: 0, end: _flipped ? 1 : 0),
       duration: const Duration(milliseconds: 500),
       builder: (context, value, child) {
-        final angle = value * 3.1415926; // 0 → π
+        final angle = value * math.pi; // 0 → π
+        final isBack = angle > math.pi / 2;
 
-        final isBack = angle > 3.1415926 / 2;
+        final transformFront = Matrix4.identity()..setEntry(3, 2, 0.001) // 🔥 透视
+            ;
+        final transformBack = Matrix4.identity();
+
+        if (widget.axis == Axis.horizontal) {
+          transformFront.rotateY(angle);
+          transformBack.rotateY(math.pi);
+        } else {
+          transformFront.rotateX(angle);
+          transformBack.rotateX(math.pi);
+        }
 
         return Transform(
           alignment: Alignment.center,
-          transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001) // 🔥 透视
-            ..rotateY(angle),
+          transform: transformFront,
           child: isBack
               ? Transform(
                   alignment: Alignment.center,
-                  transform: Matrix4.identity()..rotateY(3.1415926),
+                  transform: transformBack,
                   child: buildBack(),
                 )
               : buildFront(),

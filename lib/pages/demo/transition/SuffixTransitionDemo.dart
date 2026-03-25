@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_animation_controller_builder.dart';
+import 'package:flutter_templet_project/basicWidget/n_cupertino_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_flip_card.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
+import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 后缀为 Transition 的组件实例
@@ -479,50 +482,73 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   }
 
   Widget buildFlipCard() {
+    var isHorizal = true;
     return Container(
       decoration: BoxDecoration(
         color: Colors.transparent,
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(0)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          NFlipCard(
-            fontBuilder: (onToggle) {
-              return GestureDetector(
-                onTap: onToggle,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.yellow),
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
+          StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              final axis = isHorizal ? Axis.horizontal : Axis.vertical;
+              return Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: NPair(
+                      icon: Text("$axis"),
+                      child: NCupertinoSwitch(
+                        value: isHorizal,
+                        onChanged: (v) {
+                          isHorizal = !isHorizal;
+                          setState(() {});
+                        },
+                      ),
+                    ),
                   ),
-                  child: Image(
-                    image: AssetImage(Assets.imagesBgMk11),
-                    width: 300,
-                    height: 400,
-                    fit: BoxFit.contain,
+                  NFlipCard(
+                    axis: isHorizal ? Axis.horizontal : Axis.vertical,
+                    fontBuilder: (onToggle) {
+                      return GestureDetector(
+                        onTap: onToggle,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.yellow),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
+                          child: Image(
+                            image: AssetImage(Assets.imagesBgMk11),
+                            width: 300,
+                            height: 400,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      );
+                    },
+                    backBuilder: (onToggle) {
+                      return GestureDetector(
+                        onTap: onToggle,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
+                          child: Image(
+                            image: AssetImage(Assets.imagesBgNfs),
+                            width: 380,
+                            height: 300,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                ),
-              );
-            },
-            backBuilder: (onToggle) {
-              return GestureDetector(
-                onTap: onToggle,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
-                  ),
-                  child: Image(
-                    image: AssetImage(Assets.imagesBgNfs),
-                    width: 380,
-                    height: 300,
-                    fit: BoxFit.contain,
-                  ),
-                ),
+                ],
               );
             },
           ),
