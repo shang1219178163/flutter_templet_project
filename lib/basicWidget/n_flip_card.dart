@@ -30,31 +30,28 @@ class _NFlipCardState extends State<NFlipCard> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: toggle,
-      child: TweenAnimationBuilder<double>(
-        tween: Tween(begin: 0, end: _flipped ? 1 : 0),
-        duration: const Duration(milliseconds: 500),
-        builder: (context, value, child) {
-          final angle = value * 3.1415926; // 0 → π
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: _flipped ? 1 : 0),
+      duration: const Duration(milliseconds: 500),
+      builder: (context, value, child) {
+        final angle = value * 3.1415926; // 0 → π
 
-          final isBack = angle > 3.1415926 / 2;
+        final isBack = angle > 3.1415926 / 2;
 
-          return Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001) // 🔥 透视
-              ..rotateY(angle),
-            child: isBack
-                ? Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.identity()..rotateY(3.1415926),
-                    child: buildBack(),
-                  )
-                : buildFront(),
-          );
-        },
-      ),
+        return Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.identity()
+            ..setEntry(3, 2, 0.001) // 🔥 透视
+            ..rotateY(angle),
+          child: isBack
+              ? Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()..rotateY(3.1415926),
+                  child: buildBack(),
+                )
+              : buildFront(),
+        );
+      },
     );
   }
 

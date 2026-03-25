@@ -490,19 +490,39 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         children: [
           NFlipCard(
             fontBuilder: (onToggle) {
-              return Image(
-                image: AssetImage(Assets.imagesBgMk11),
-                width: 300,
-                height: 400,
-                fit: BoxFit.contain,
+              return GestureDetector(
+                onTap: onToggle,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.yellow),
+                    borderRadius: BorderRadius.all(Radius.circular(0)),
+                  ),
+                  child: Image(
+                    image: AssetImage(Assets.imagesBgMk11),
+                    width: 300,
+                    height: 400,
+                    fit: BoxFit.contain,
+                  ),
+                ),
               );
             },
             backBuilder: (onToggle) {
-              return Image(
-                image: AssetImage(Assets.imagesBgNfs),
-                width: 380,
-                height: 300,
-                fit: BoxFit.contain,
+              return GestureDetector(
+                onTap: onToggle,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.all(Radius.circular(0)),
+                  ),
+                  child: Image(
+                    image: AssetImage(Assets.imagesBgNfs),
+                    width: 380,
+                    height: 300,
+                    fit: BoxFit.contain,
+                  ),
+                ),
               );
             },
           ),
