@@ -73,8 +73,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
 
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -107,8 +106,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
 
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -139,8 +137,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         );
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -171,8 +168,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         );
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -202,8 +198,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         );
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -236,8 +231,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
 
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -287,8 +281,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
 
             return GestureDetector(
               onTap: () {
-                animController.reset();
-                animController.forward();
+                animController.toggle();
               },
               child: Stack(
                 children: <Widget>[
@@ -331,8 +324,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
 
             return GestureDetector(
               onTap: () {
-                animController.reset();
-                animController.forward();
+                animController.toggle();
               },
               child: Stack(
                 children: <Widget>[
@@ -387,8 +379,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
 
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -433,8 +424,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
 
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(
@@ -462,8 +452,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         );
         return GestureDetector(
           onTap: () {
-            animController.reset();
-            animController.forward();
+            animController.toggle();
           },
           child: Center(
             child: Row(

@@ -65,7 +65,6 @@ class _NAnimationControllerBuilderState<T> extends State<NAnimationControllerBui
 
   @override
   void dispose() {
-    controller.removeStatusListener(statusLtr);
     controller.dispose();
     super.dispose();
   }
@@ -78,18 +77,7 @@ class _NAnimationControllerBuilderState<T> extends State<NAnimationControllerBui
   }
 
   initData() {
-    controller.removeStatusListener(statusLtr);
-    controller.addStatusListener(statusLtr);
     controller.forward();
-  }
-
-  statusLtr(status) {
-    if (status == AnimationStatus.completed) {
-      controller.reverse();
-    }
-    if (status == AnimationStatus.dismissed) {
-      controller.forward();
-    }
   }
 
   @override
