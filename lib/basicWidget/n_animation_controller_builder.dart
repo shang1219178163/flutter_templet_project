@@ -99,8 +99,8 @@ class _NAnimationControllerBuilderState<T> extends State<NAnimationControllerBui
         upperBound: widget.upperBound,
         animationBehavior: widget.animationBehavior,
       );
-      initData();
       setState(() {});
+      initData();
     }
   }
 
