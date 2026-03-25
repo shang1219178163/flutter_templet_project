@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 class NTweenAnimationBuilder<T> extends StatelessWidget {
   const NTweenAnimationBuilder({
     super.key,
-    required this.begin,
-    required this.end,
+    required this.tween,
     this.duration = const Duration(milliseconds: 300),
+    this.curve = Curves.linear,
     this.onEnd,
     this.needScale = false,
     this.needFade = false,
@@ -21,10 +21,10 @@ class NTweenAnimationBuilder<T> extends StatelessWidget {
     required this.child,
   });
 
-  final T begin;
-  final T end;
+  final Tween<T> tween;
 
   final Duration duration;
+  final Curve curve;
   final VoidCallback? onEnd;
 
   final bool needScale;
@@ -35,7 +35,7 @@ class NTweenAnimationBuilder<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<T>(
-      tween: Tween(begin: begin, end: end),
+      tween: tween,
       duration: duration,
       onEnd: onEnd,
       child: child,

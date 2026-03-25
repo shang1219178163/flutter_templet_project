@@ -216,7 +216,6 @@ import 'package:flutter_templet_project/pages/demo/NTabBarPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTabBarViewCustomDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTransformViewDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NTweenTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
@@ -2428,10 +2427,6 @@ class AppRouter {
     GetPage(
       name: AppRouter.nestedNavigatorDemo,
       page: () => NestedNavigatorDemo(),
-    ),
-    GetPage(
-      name: AppRouter.nTweenTransitionDemo,
-      page: () => NTweenTransitionDemo(),
     ),
     GetPage(
       name: AppRouter.hapticFeedbackDemo,

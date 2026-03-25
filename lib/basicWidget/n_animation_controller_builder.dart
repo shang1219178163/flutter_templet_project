@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 
-/// NAnimationControllerBuilder 带动画控制器
+/// NAnimationControllerBuilder 带动画控制器的 AnimatedBuilder
 class NAnimationControllerBuilder<T> extends StatefulWidget {
   const NAnimationControllerBuilder({
     super.key,

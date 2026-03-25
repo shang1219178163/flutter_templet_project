@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_transition_builder.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
@@ -106,7 +105,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                   ),
                 ),
               ),
-              NTransitionBuilder(
+              _NTransitionBuilder(
                 duration: duration,
                 builder: (context, controller, Animation<double> animation) {
                   return SizeTransition(
@@ -132,5 +131,70 @@ class IMSoundRecordingPage extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+typedef AnimationWidgeBuilder<T> = Widget Function(
+    BuildContext context, AnimationController controller, Animation<T> animation);
+
+/// Transition 动画封装
+class _NTransitionBuilder extends StatefulWidget {
+  _NTransitionBuilder({
+    Key? key,
+    this.duration = const Duration(milliseconds: 350),
+    required this.builder,
+  }) : super(key: key);
+
+  /// 动画时间
+  final Duration? duration;
+
+  final AnimationWidgeBuilder<double> builder;
+
+  @override
+  _NTransitionBuilderState createState() => _NTransitionBuilderState();
+}
+
+class _NTransitionBuilderState extends State<_NTransitionBuilder> with SingleTickerProviderStateMixin {
+  late final _duration = widget.duration ?? Duration(milliseconds: 350);
+
+  late final controller = AnimationController(
+    vsync: this,
+    duration: _duration,
+    reverseDuration: _duration,
+  );
+
+  late final Animation<double> animation = CurvedAnimation(
+    parent: controller,
+    curve: Curves.easeIn,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      startAnimation();
+    });
+  }
+
+  @override
+  void dispose() {
+    startAnimation(reverse: true);
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.builder(context, controller, animation);
+  }
+
+  /// 开始动画
+  startAnimation({bool reverse = false}) async {
+    if (!reverse) {
+      await controller.forward(from: controller.lowerBound);
+    } else {
+      await controller.reverse(from: controller.upperBound);
+    }
   }
 }
