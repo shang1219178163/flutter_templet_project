@@ -28,7 +28,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   var initialIndex = 0;
 
   late var items = <({Tab tab, Widget child})>[
-    (tab: Tab(text: "FlipCard\n（左右翻转）"), child: buildFlipCard()),
+    (tab: Tab(text: "FlipCard\n（翻转）"), child: buildFlipCard()),
     (tab: Tab(text: "SlideTransition\n（位移）"), child: buildPageSlideTransition()),
     (tab: Tab(text: "ScaleTransition\n（缩放）"), child: buildPageScaleTransition()),
     (tab: Tab(text: "RotationTransition\n（旋转）"), child: buildPageRotationTransition()),
@@ -463,15 +463,15 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 MatrixTransition(
                   animation: animation,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: FlutterLogo(size: 150.0),
-                  ),
                   onTransform: (double value) {
                     return Matrix4.identity()
                       ..setEntry(3, 2, 0.004)
                       ..rotateY(pi * 2.0 * value);
                   },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: FlutterLogo(size: 150.0),
+                  ),
                 ),
               ],
             ),
