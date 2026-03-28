@@ -31,7 +31,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   var initialIndex = 0;
 
   late var items = <({Tab tab, Widget child})>[
-    (tab: Tab(text: "AnimToast\n（通知池）"), child: buildAnimatedToast()),
+    (tab: Tab(text: "QueueToast\n（Toast池）"), child: buildQueueToast()),
     (tab: Tab(text: "FlipCard\n（翻转）"), child: buildFlipCard()),
     (tab: Tab(text: "SlideTransition\n（位移）"), child: buildPageSlideTransition()),
     (tab: Tab(text: "ScaleTransition\n（缩放）"), child: buildPageScaleTransition()),
@@ -561,7 +561,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
     );
   }
 
-  Widget buildAnimatedToast() {
+  Widget buildQueueToast() {
     final items = <({String name, VoidCallback event})>[
       (
         name: "通知动画",
