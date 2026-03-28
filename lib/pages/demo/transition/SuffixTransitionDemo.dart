@@ -1,11 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/goal_anim_widget.dart';
 import 'package:flutter_templet_project/basicWidget/n_animation_controller_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_cupertino_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_flip_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 后缀为 Transition 的组件实例
@@ -28,6 +31,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   var initialIndex = 0;
 
   late var items = <({Tab tab, Widget child})>[
+    (tab: Tab(text: "AnimToast\n（通知池）"), child: buildAnimatedToast()),
     (tab: Tab(text: "FlipCard\n（翻转）"), child: buildFlipCard()),
     (tab: Tab(text: "SlideTransition\n（位移）"), child: buildPageSlideTransition()),
     (tab: Tab(text: "ScaleTransition\n（缩放）"), child: buildPageScaleTransition()),
@@ -554,6 +558,93 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildAnimatedToast() {
+    final items = <({String name, VoidCallback event})>[
+      (
+        name: "通知动画",
+        event: () {
+          final id = IntExt.random(max: 10000, min: 9000);
+          final map = {
+            "id": id,
+          };
+          NQueueToast.show(
+            data: map,
+            idCb: (map) => map["id"] ?? 0,
+            maxCount: 9,
+            onTap: (id) {
+              DLog.d(id);
+            },
+            bottom: 0,
+            // height: 80,
+            // spacing: 20,
+            horizalSpacing: 50,
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: ColorExt.random,
+                // border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+              child: Row(
+                children: [
+                  FlutterLogo(size: 48),
+                  Text("$id"),
+                ],
+              ),
+            ),
+          );
+        },
+      )
+    ];
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildWrap(items: items, itemHeiht: 40),
+        ],
+      ),
+    );
+  }
+
+  Widget buildWrap({required List<({String name, VoidCallback event})> items, double? itemHeiht}) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final spacing = 8.0;
+        final rowCount = 4.0;
+        final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
+
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          // crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            ...items.map(
+              (e) {
+                final btnTitle = e.name;
+                return GestureDetector(
+                  onTap: e.event,
+                  child: Container(
+                    width: itemWidth.truncateToDouble(),
+                    height: itemHeiht ?? itemWidth,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: Text(btnTitle),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
