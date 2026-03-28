@@ -48,7 +48,8 @@ class NQueueToast {
     return false;
   }
 
-  static final List<_NQueueToastModel> _goalEntries = [];
+  /// 数据列表
+  static final List<_NQueueToastModel> _models = [];
 
   /// 展示进球动画
   ///
@@ -72,22 +73,22 @@ class NQueueToast {
     final overlayState = Overlay.of(navigatorKey.currentContext!);
 
     // 若已经显示，则忽略
-    final matchShowing = _goalEntries.any((e) => idCb(e.data) == idCb(data));
+    final matchShowing = _models.any((e) => idCb(e.data) == idCb(data));
     final needShow = predicate?.call(data) ?? true;
     if (matchShowing || !needShow) {
       return;
     }
 
     if (maxCount != null) {
-      if (_goalEntries.length >= maxCount) {
-        remove(idCb(_goalEntries.last.data));
+      if (_models.length >= maxCount) {
+        remove(idCb(_models.last.data));
       }
     }
 
     final key = GlobalKey<_NQueueToastItemState>();
     final entry = OverlayEntry(
       builder: (context) {
-        int index = _goalEntries.indexWhere((e) => idCb(e.data) == idCb(data));
+        int index = _models.indexWhere((e) => idCb(e.data) == idCb(data));
         return _NQueueToastItem(
           key: key,
           index: index,
@@ -106,7 +107,7 @@ class NQueueToast {
       },
     );
 
-    _goalEntries.insert(0, _NQueueToastModel(data: data, idCb: idCb, entry: entry, key: key));
+    _models.insert(0, _NQueueToastModel(data: data, idCb: idCb, entry: entry, key: key));
     overlayState.insert(entry);
     _rebuildAll();
   }
@@ -116,28 +117,28 @@ class NQueueToast {
       return;
     }
 
-    final index = _goalEntries.indexWhere((e) => e.idCb(e.data) == id);
+    final index = _models.indexWhere((e) => e.idCb(e.data) == id);
     if (index != -1) {
-      final e = _goalEntries[index];
+      final e = _models[index];
       e.entry.remove();
       e.key.currentState?.dismissWithAnimation(); // 右滑;
-      _goalEntries.removeAt(index);
+      _models.removeAt(index);
       _rebuildAll();
     }
   }
 
   static void _rebuildAll() {
-    for (final e in _goalEntries) {
+    for (final e in _models) {
       e.entry.markNeedsBuild();
     }
   }
 
   static int indexOf(Map<String, dynamic> data) {
-    return _goalEntries.indexWhere((e) => e.idCb(e.data) == e.idCb(data));
+    return _models.indexWhere((e) => e.idCb(e.data) == e.idCb(data));
   }
 
   static void removeAll({Duration stagger = const Duration(milliseconds: 60)}) {
-    final entries = List<_NQueueToastModel>.from(_goalEntries);
+    final entries = List<_NQueueToastModel>.from(_models);
 
     for (int i = 0; i < entries.length; i++) {
       final e = entries[i];

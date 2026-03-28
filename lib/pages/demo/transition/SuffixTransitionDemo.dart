@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/goal_anim_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_queue_toast.dart';
 import 'package:flutter_templet_project/basicWidget/n_animation_controller_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_cupertino_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_flip_card.dart';
