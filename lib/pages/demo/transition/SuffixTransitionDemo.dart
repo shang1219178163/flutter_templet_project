@@ -581,6 +581,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
             // height: 80,
             // spacing: 20,
             horizalSpacing: 50,
+            isReverse: true,
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(

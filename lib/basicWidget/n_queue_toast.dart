@@ -70,6 +70,7 @@ class NQueueToast {
     double height = 56,
     double spacing = 12,
     double horizalSpacing = 30,
+    bool isReverse = false,
     required Widget child,
   }) {
     final overlayState = Overlay.of(navigatorKey.currentContext!);
@@ -104,6 +105,7 @@ class NQueueToast {
           height: height,
           spacing: spacing,
           horizalSpacing: horizalSpacing,
+          isReverse: isReverse,
           child: child,
         );
       },
@@ -177,6 +179,7 @@ class _NQueueToastItem extends StatefulWidget {
     this.height = 56,
     this.spacing = 12,
     this.horizalSpacing = 30,
+    this.isReverse = false,
     required this.child,
   });
 
@@ -197,6 +200,10 @@ class _NQueueToastItem extends StatefulWidget {
 
   /// 水平边距
   final double horizalSpacing;
+
+  /// 进入方向是否相反,默认自右向左
+  final bool isReverse;
+
   final Widget child;
 
   @override
@@ -216,7 +223,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
   );
 
   late final offsetAnimation = Tween<Offset>(
-    begin: const Offset(1.0, 0.0),
+    begin: Offset((widget.isReverse ? -1 : 1) * 1.0, 0.0),
     end: const Offset(0, 0.0),
   ).animate(CurvedAnimation(
     parent: animController,
