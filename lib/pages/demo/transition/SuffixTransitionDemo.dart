@@ -567,13 +567,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         name: "通知动画",
         event: () {
           final id = IntExt.random(max: 10000, min: 9000);
-          final map = {
+          final map = <String, dynamic>{
             "id": id,
           };
           NQueueToast.show(
             data: map,
-            idCb: (map) => map["id"] ?? 0,
-            maxCount: 9,
+            id: id,
+            maxCount: 6,
             onTap: (id) {
               DLog.d(id);
             },

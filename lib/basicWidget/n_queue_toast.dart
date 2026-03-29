@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
+// import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 队列 Toast 动画
 class NQueueToast {
@@ -50,6 +51,7 @@ class NQueueToast {
 
   /// 数据列表
   static final List<_NQueueToastModel> _models = [];
+  static List<_NQueueToastModel> get models => _models;
 
   /// 展示进球动画
   ///
@@ -60,7 +62,7 @@ class NQueueToast {
   /// onTap 点击事件
   static show({
     required Map<String, dynamic> data,
-    required int Function(Map<String, dynamic> e) idCb,
+    required int id,
     bool Function(Map<String, dynamic> e)? predicate,
     int? maxCount,
     void Function(int id)? onTap,
@@ -73,7 +75,7 @@ class NQueueToast {
     final overlayState = Overlay.of(navigatorKey.currentContext!);
 
     // 若已经显示，则忽略
-    final matchShowing = _models.any((e) => idCb(e.data) == idCb(data));
+    final matchShowing = _models.any((e) => e.id == id);
     final needShow = predicate?.call(data) ?? true;
     if (matchShowing || !needShow) {
       return;
@@ -81,19 +83,19 @@ class NQueueToast {
 
     if (maxCount != null) {
       if (_models.length >= maxCount) {
-        remove(idCb(_models.last.data));
+        remove(_models.last.id);
       }
     }
 
     final key = GlobalKey<_NQueueToastItemState>();
     final entry = OverlayEntry(
       builder: (context) {
-        int index = _models.indexWhere((e) => idCb(e.data) == idCb(data));
+        int index = _models.indexWhere((e) => e.id == id);
         return _NQueueToastItem(
           key: key,
           index: index,
           data: data,
-          idCb: idCb,
+          id: id,
           onTap: onTap,
           onDismiss: (int? id) {
             remove(id);
@@ -107,7 +109,7 @@ class NQueueToast {
       },
     );
 
-    _models.insert(0, _NQueueToastModel(data: data, idCb: idCb, entry: entry, key: key));
+    _models.insert(0, _NQueueToastModel(data: data, id: id, entry: entry, key: key));
     overlayState.insert(entry);
     _rebuildAll();
   }
@@ -117,10 +119,10 @@ class NQueueToast {
       return;
     }
 
-    final index = _models.indexWhere((e) => e.idCb(e.data) == id);
+    final index = _models.indexWhere((e) => e.id == id);
     if (index != -1) {
       final e = _models[index];
-      e.entry.remove();
+      // e.entry.remove();
       e.key.currentState?.dismissWithAnimation(); // 右滑;
       _models.removeAt(index);
       _rebuildAll();
@@ -133,8 +135,8 @@ class NQueueToast {
     }
   }
 
-  static int indexOf(Map<String, dynamic> data) {
-    return _models.indexWhere((e) => e.idCb(e.data) == e.idCb(data));
+  static int indexOf(int id) {
+    return _models.indexWhere((e) => e.id == id);
   }
 
   static void removeAll({Duration stagger = const Duration(milliseconds: 60)}) {
@@ -152,13 +154,13 @@ class NQueueToast {
 class _NQueueToastModel {
   _NQueueToastModel({
     required this.data,
-    required this.idCb,
+    required this.id,
     required this.entry,
     required this.key,
   });
 
   final Map<String, dynamic> data;
-  final int Function(Map<String, dynamic> e) idCb;
+  final int id;
   final OverlayEntry entry;
   final GlobalKey<_NQueueToastItemState> key;
 }
@@ -167,7 +169,7 @@ class _NQueueToastItem extends StatefulWidget {
   const _NQueueToastItem({
     super.key,
     required this.data,
-    required this.idCb,
+    required this.id,
     required this.index,
     required this.onDismiss,
     this.onTap,
@@ -180,7 +182,7 @@ class _NQueueToastItem extends StatefulWidget {
 
   final int index;
   final Map<String, dynamic> data;
-  final int Function(Map<String, dynamic> e) idCb;
+  final int id;
   final ValueChanged<int?> onDismiss;
   final void Function(int id)? onTap;
 
@@ -255,7 +257,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
         return;
       }
       await animController.reverse();
-      widget.onDismiss(widget.idCb(widget.data));
+      widget.onDismiss(widget.id);
     });
   }
 
@@ -281,7 +283,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
 
     reboundController!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        widget.onDismiss(widget.idCb(widget.data));
+        widget.onDismiss(widget.id);
       }
     });
 
@@ -333,7 +335,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
 
   void onTapDown(TapDownDetails details) {
     _hideSubscription?.cancel();
-    _hoverHeight = widget.bottom + NQueueToast.indexOf(widget.data) * (widget.height + widget.spacing);
+    _hoverHeight = widget.bottom + NQueueToast.indexOf(widget.id) * (widget.height + widget.spacing);
   }
 
   void onTapUp(TapUpDetails details) {
@@ -347,7 +349,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
     }
 
     await animController.reverse();
-    widget.onDismiss(widget.idCb(widget.data));
+    widget.onDismiss(widget.id);
   }
 
   @override
@@ -355,14 +357,17 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
     animController.dispose();
     reboundController?.dispose();
     _hideSubscription?.cancel();
-    widget.onDismiss(widget.idCb(widget.data));
+    widget.onDismiss(widget.id);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bottom =
-        _hoverHeight ?? widget.bottom + (NQueueToast.indexOf(widget.data) + 1) * (widget.height + widget.spacing);
+    var bottom =
+        _hoverHeight ?? widget.bottom + (NQueueToast.indexOf(widget.id) + 1) * (widget.height + widget.spacing);
+    if (!animController.isForwardOrCompleted) {
+      bottom = NQueueToast.models.length * (widget.height + widget.spacing);
+    }
     return AnimatedPositioned(
       bottom: bottom,
       left: 0,
@@ -374,7 +379,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
           child: Transform.translate(
             offset: Offset(dragOffsetX, 0),
             child: GestureDetector(
-              onTap: () => widget.onTap?.call(widget.idCb(widget.data)),
+              onTap: () => widget.onTap?.call(widget.id),
               onHorizontalDragUpdate: onHorizontalDragUpdate,
               onHorizontalDragEnd: onHorizontalDragEnd,
               onTapDown: onTapDown,
