@@ -573,7 +573,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
           NQueueToast.show(
             data: map,
             id: id,
-            maxCount: 6,
+            maxCount: 9,
             onTap: (id) {
               DLog.d(id);
             },
@@ -581,7 +581,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
             // height: 80,
             // spacing: 20,
             horizalSpacing: 50,
-            isReverse: true,
+            // isReverse: true,
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
