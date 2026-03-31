@@ -12,15 +12,15 @@ import 'package:get/get_navigation/src/routes/observers/route_observer.dart';
 extension RouteExt on Route<dynamic> {}
 
 extension RouteSettingsExt on RouteSettings {
+  /// arguments 转 Map<String, dynamic>
+  Map<String, dynamic> get args => arguments as Map<String, dynamic>? ?? <String, dynamic>{};
+
   static RouteSettings fromJson(Map<String, dynamic> json) {
     return RouteSettings(
       name: json["name"],
       arguments: json["arguments"],
     );
   }
-
-  /// arguments 转 Map<String, dynamic>
-  Map<String, dynamic> get argumentsMap => arguments as Map<String, dynamic>? ?? <String, dynamic>{};
 
   /// json
   Map<String, dynamic> toJson() {
