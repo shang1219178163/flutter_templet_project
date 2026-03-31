@@ -372,6 +372,7 @@ import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
 import 'package:flutter_templet_project/pages/demo/tag_sort/tag_sort_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
+import 'package:flutter_templet_project/pages/demo/transition/TweenSequenceDemo.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/first_page.dart';
@@ -908,6 +909,9 @@ class AppRouter {
   static const String streamControllerDemo = '/streamControllerDemo';
   static const String nFlexSeparatedDemo = '/nFlexSeparatedDemo';
   static const String suffixTransitionDemo = '/suffixTransitionDemo';
+  static const String tweenSequenceDemo = '/tweenSequenceDemo';
+
+
   static const String staggeredAnimationDemo = '/staggeredAnimationDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
@@ -2667,6 +2671,11 @@ class AppRouter {
       name: AppRouter.suffixTransitionDemo,
       page: () => SuffixTransitionDemo(),
     ),
+    GetPage(
+      name: AppRouter.tweenSequenceDemo,
+      page: () => TweenSequenceDemo(),
+    ),
+
     GetPage(
       name: AppRouter.staggeredAnimationDemo,
       page: () => StaggeredAnimationDemo(),

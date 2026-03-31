@@ -10,6 +10,8 @@ import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
+import 'package:flutter_templet_project/pages/demo/swiper_card_demo.dart';
+import 'package:flutter_templet_project/pages/demo/transition/HorizalSwiperCardDemo.dart';
 
 /// 后缀为 Transition 的组件实例
 class SuffixTransitionDemo extends StatefulWidget {
@@ -33,6 +35,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   late var items = <({Tab tab, Widget child})>[
     (tab: Tab(text: "QueueToast\n（Toast池）"), child: buildQueueToast()),
     (tab: Tab(text: "FlipCard\n（翻转）"), child: buildFlipCard()),
+    (tab: Tab(text: "HorizalSwiperCard"), child: HorizalSwiperCardDemo()),
     (tab: Tab(text: "SlideTransition\n（位移）"), child: buildPageSlideTransition()),
     (tab: Tab(text: "ScaleTransition\n（缩放）"), child: buildPageScaleTransition()),
     (tab: Tab(text: "RotationTransition\n（旋转）"), child: buildPageRotationTransition()),
@@ -88,8 +91,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 SlideTransition(
                   position: animation,
-                  child: const Padding(
+                  child: Container(
                     padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
                     child: FlutterLogo(size: 150.0),
                   ),
                 ),
@@ -121,8 +129,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 ScaleTransition(
                   scale: animation,
-                  child: const Padding(
+                  child: Container(
                     padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
                     child: FlutterLogo(size: 150.0),
                   ),
                 ),
@@ -152,8 +165,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 RotationTransition(
                   turns: animation,
-                  child: const Padding(
+                  child: Container(
                     padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
                     child: FlutterLogo(size: 150.0),
                   ),
                 ),
@@ -175,7 +193,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         );
         return GestureDetector(
           onTap: () {
-            animController.toggle();
+            animController.forward(from: 0);
           },
           child: Center(
             child: Row(
@@ -185,7 +203,14 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
                   sizeFactor: animation,
                   axis: Axis.horizontal,
                   axisAlignment: -1,
-                  child: FlutterLogo(size: 150),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
+                    child: FlutterLogo(size: 150),
+                  ),
                 ),
               ],
             ),
@@ -213,8 +238,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 FadeTransition(
                   opacity: animation,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
+                  child: Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
                     child: FlutterLogo(size: 150),
                   ),
                 ),
@@ -246,8 +276,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 AlignTransition(
                   alignment: animation,
-                  child: const Padding(
+                  child: Container(
                     padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
                     child: FlutterLogo(size: 150.0),
                   ),
                 ),
@@ -294,8 +329,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
                 children: <Widget>[
                   PositionedTransition(
                     rect: animation,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8),
+                    child: Container(
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                      ),
                       child: FlutterLogo(size: 150.0),
                     ),
                   ),
@@ -338,8 +378,13 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
                   RelativePositionedTransition(
                     size: biggest,
                     rect: animation,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8),
+                    child: Container(
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                      ),
                       child: FlutterLogo(size: 150.0),
                     ),
                   ),
@@ -355,12 +400,12 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   Widget buildPageDecoratedBoxTransition() {
     final tween = DecorationTween(
       begin: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.all(Radius.circular(60)),
+        color: Colors.red,
+        borderRadius: BorderRadius.all(Radius.circular(0)),
         boxShadow: [
           BoxShadow(
             offset: Offset(1, 1),
-            color: Colors.blue,
+            color: Colors.red,
             blurRadius: 5,
             spreadRadius: 2,
           )

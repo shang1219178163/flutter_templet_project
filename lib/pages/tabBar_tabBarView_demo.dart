@@ -717,6 +717,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.streamControllerDemo, "streamControllerDemo"),
   Tuple2(AppRouter.nFlexSeparatedDemo, "nFlexSeparatedDemo"),
   Tuple2(AppRouter.suffixTransitionDemo, "suffixTransitionDemo"),
+  Tuple2(AppRouter.tweenSequenceDemo, "tweenSequenceDemo"),
   Tuple2(AppRouter.staggeredAnimationDemo, "staggeredAnimationDemo"),
 ];
 
