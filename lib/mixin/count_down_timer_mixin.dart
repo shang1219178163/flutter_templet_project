@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 倒计时
-mixin CountDownTimer<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {
+mixin CountDownTimerMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {
   DateTime? _endTime;
   Timer? _timer;
 
@@ -21,6 +21,8 @@ mixin CountDownTimer<T extends StatefulWidget> on State<T>, WidgetsBindingObserv
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _timer?.cancel();
+    isCountingDownVN.dispose(); // ✅ 必须
+    countdownVN.dispose(); // ✅ 必须
     super.dispose();
   }
 
@@ -86,7 +88,7 @@ class TimerButton extends StatefulWidget {
 }
 
 /// 倒计时
-class TimerButtonState extends State<TimerButton> with WidgetsBindingObserver, CountDownTimer {
+class TimerButtonState extends State<TimerButton> with WidgetsBindingObserver, CountDownTimerMixin {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
