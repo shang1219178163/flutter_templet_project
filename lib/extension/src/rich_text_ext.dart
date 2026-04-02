@@ -57,45 +57,6 @@ extension RichTextExt on RichText {
       return TextSpan(text: e, style: style);
     }).toList();
   }
-
-  /// List<TextSpan> by [String text], [Map<String, String> linkMap], prefix = "《", suffix = "》"
-  // static List<TextSpan> createTextSpans({
-  //   required String text,
-  //   Map<String, String>? linkMap,
-  //   String prefix = "《",
-  //   String suffix = "》",
-  //   TextStyle? style,
-  //   TextStyle? linkStyle,
-  //   required void Function(String key, String? value) onTap,
-  // }) {
-  //   assert(text.isNotEmpty && prefix.isNotEmpty && suffix.isNotEmpty);
-  //
-  //   linkMap?.forEach((key, value) {
-  //     assert(
-  //         key.startsWith(prefix) && key.endsWith(suffix) && text.contains(key));
-  //   });
-  //
-  //   final origin = '$prefix[^$prefix$suffix]+$suffix';
-  //   final reg = RegExp(origin, multiLine: true).allMatches(text);
-  //   var matchTitles = reg.map((e) => e.group(0)).whereType<String>().toList();
-  //
-  //   final titles = linkMap?.keys ?? matchTitles;
-  //   final list = text.split(RegExp('$prefix|$suffix'));
-  //
-  //   var textSpans = list
-  //       .map((e) => !titles.contains("$prefix$e$suffix")
-  //           ? TextSpan(text: e, style: style)
-  //           : TextSpan(
-  //               text: "$prefix$e$suffix",
-  //               style: linkStyle ?? TextStyle(color: Colors.blue),
-  //               recognizer: TapGestureRecognizer()
-  //                 ..onTap = () {
-  //                   onTap("$prefix$e$suffix", linkMap?["$prefix$e$suffix"]);
-  //                 },
-  //             ))
-  //       .toList();
-  //   return textSpans;
-  // }
 }
 
 extension TextSpanExt on TextSpan {
