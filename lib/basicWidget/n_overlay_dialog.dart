@@ -136,7 +136,7 @@ class NOverlayDialog {
     }
   }
 
-  /// 显示
+  /// sheet
   static void sheet(
     BuildContext context, {
     required Widget child,
@@ -157,6 +157,7 @@ class NOverlayDialog {
     );
   }
 
+  /// drawer
   static void drawer(
     BuildContext context, {
     double widthFactor = 0.8,
@@ -218,7 +219,7 @@ class NOverlayDialog {
     );
   }
 
-  /// 显示 loadding
+  /// loadding
   static void loadding(
     BuildContext context, {
     Widget? indicator,
@@ -228,7 +229,7 @@ class NOverlayDialog {
     Alignment from = Alignment.center,
     Duration duration = const Duration(milliseconds: 300),
     Curve curve = Curves.easeOutCubic,
-    bool hideBarrier = true,
+    bool hideBarrier = false,
     Duration? autoDismissDuration,
   }) {
     final childDefault = Material(
@@ -239,7 +240,7 @@ class NOverlayDialog {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            indicator ?? CupertinoActivityIndicator(radius: 16, color: Colors.white),
+            if (indicator != null) indicator,
             if (child != null) child,
           ],
         ),
@@ -254,6 +255,8 @@ class NOverlayDialog {
       from: from,
       duration: duration,
       curve: curve,
+      barrierColor: Colors.transparent,
+      barrierDismissible: false,
       hideBarrier: hideBarrier,
       autoDismissDuration: autoDismissDuration,
     );
