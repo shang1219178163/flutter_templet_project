@@ -6,6 +6,7 @@
 //  Copyright © 2026/3/4 shang. All rights reserved.
 //
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// Dialog & Sheet & Drawer & Toast
@@ -180,7 +181,7 @@ class NOverlayDialog {
     );
   }
 
-  /// 显示 BottomSheet
+  /// 显示 toast
   static void toast(
     BuildContext context, {
     Widget? child,
@@ -208,6 +209,47 @@ class NOverlayDialog {
       child: Padding(
         padding: margin,
         child: child ?? childDefault,
+      ),
+      from: from,
+      duration: duration,
+      curve: curve,
+      hideBarrier: hideBarrier,
+      autoDismissDuration: autoDismissDuration,
+    );
+  }
+
+  /// 显示 loadding
+  static void loadding(
+    BuildContext context, {
+    Widget? indicator,
+    Widget? child,
+    String message = "",
+    EdgeInsets margin = const EdgeInsets.only(bottom: 34),
+    Alignment from = Alignment.center,
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+    bool hideBarrier = true,
+    Duration? autoDismissDuration,
+  }) {
+    final childDefault = Material(
+      color: Colors.black.withOpacity(0.7),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            indicator ?? CupertinoActivityIndicator(radius: 16, color: Colors.white),
+            if (child != null) child,
+          ],
+        ),
+      ),
+    );
+    return show(
+      context,
+      child: Padding(
+        padding: margin,
+        child: childDefault,
       ),
       from: from,
       duration: duration,
