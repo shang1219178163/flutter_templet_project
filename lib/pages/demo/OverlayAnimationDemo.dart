@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay_manager.dart';
@@ -115,17 +116,6 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            NOverlayDialog.toast(
-                              context,
-                              hideBarrier: true,
-                              from: Alignment.center,
-                              message: "This is a Toast!",
-                            );
-                          },
-                          child: Text("NOverlayDialog.toast"),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
                             NOverlayDialog.drawer(
                               context,
                               child: buildContent(
@@ -138,6 +128,49 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                             );
                           },
                           child: Text("NOverlayManager.drawer"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            NOverlayDialog.toast(
+                              context,
+                              hideBarrier: true,
+                              from: Alignment.center,
+                              message: "This is a Toast!",
+                            );
+                          },
+                          child: Text("NOverlayDialog.toast"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            NOverlayDialog.toast(
+                              context,
+                              hideBarrier: true,
+                              from: Alignment.center,
+                              message: "This is a Toast!",
+                              autoDismissDuration: null,
+                              child: Material(
+                                color: Colors.black.withOpacity(0.7),
+                                borderRadius: BorderRadius.all(Radius.circular(8)),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CupertinoActivityIndicator(radius: 16, color: Colors.white),
+                                      Container(
+                                        padding: const EdgeInsets.only(top: 8.0),
+                                        child: ElevatedButton(
+                                          onPressed: NOverlayDialog.dismiss,
+                                          child: Text('dismiss'),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text("NOverlayDialog.loading"),
                         ),
                       ],
                     );
