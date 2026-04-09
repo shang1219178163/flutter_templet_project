@@ -57,7 +57,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
               ),
             ),
             NSectionBox(
-              title: "PatientFilterSectionBar",
+              title: "NDropMenuFilterSectionBar",
               child: NDropMenuFilterSectionBar(
                 onChanged: (e) {
                   DLog.d(jsonEncode(e.toJson()));

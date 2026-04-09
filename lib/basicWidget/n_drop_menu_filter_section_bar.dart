@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_drop_menu_filter_bar.dart'
 import 'package:flutter_templet_project/model/section_detail_model.dart';
 
 /// 搜索框加分组选择
-class NDropMenuFilterSectionBar extends NDropMenuFilterBar {
+class NDropMenuFilterSectionBar extends NDropMenuFilterBar<SectionDetailModel> {
   NDropMenuFilterSectionBar({
     super.key,
     super.margin,
@@ -25,18 +25,13 @@ class NDropMenuFilterSectionBar extends NDropMenuFilterBar {
     super.radius,
     BoxConstraints? constraints,
   }) : super(
-          values: List.generate(
-              19, (i) => SectionDetailModel(id: i.toString(), name: "分组_$i")),
+          values: List.generate(19, (i) => SectionDetailModel(id: i.toString(), name: "分组_$i")),
           cbName: (e) => e?.name ?? "",
-          equal: (a, b) => a.code == b?.code,
+          equal: (a, b) => (a.id == b?.id),
           onItemName: onItemName ?? (name) => "$name${"\t\t" * 3}",
-          // onChanged: onChanged,
-          onChanged: (e) {
-            onChanged(e as SectionDetailModel);
-          },
+          onChanged: onChanged,
           placeholder: placeholder,
           searchPlaceholder: searchPlaceholder,
-          constraints:
-              constraints ?? BoxConstraints(maxHeight: 300, maxWidth: 200),
+          constraints: constraints ?? BoxConstraints(maxHeight: 300, maxWidth: 200),
         );
 }

@@ -192,10 +192,10 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                         return Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Icon(Icons.check, color: iconColor),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(right: 8.0),
+                            //   child: Icon(Icons.check, color: iconColor),
+                            // ),
                             Flexible(
                               child: NText(
                                 name,
