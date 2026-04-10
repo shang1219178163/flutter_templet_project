@@ -34,6 +34,10 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
               title: "OverlayPortal",
               child: buildOverlayPortal(),
             ),
+            // NSectionBox(
+            //   title: "OverlayPortal.overlayChildLayoutBuilder",
+            //   child: buildOverlayChildLayoutBuilder(),
+            // ),
           ],
         ),
       ),
@@ -66,4 +70,32 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
       ),
     );
   }
+
+  // /// Flutter3.38
+  // Widget buildOverlayChildLayoutBuilder() {
+  //   return Center(
+  //     child: OverlayPortal.overlayChildLayoutBuilder(
+  //       controller: _controller,
+  //       /// ****可以配置 root****
+  //       overlayLocation: OverlayChildLocation.rootOverlay,
+  //       child: ElevatedButton(
+  //         onPressed: () => _controller.toggle(),
+  //         child: const Text('点我显示浮层'),
+  //       ),
+  //       overlayChildBuilder: (context, info) {
+  //         return Material(
+  //           elevation: 6,
+  //           color: Colors.white,
+  //           shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(8),
+  //           ),
+  //           child: Container(
+  //             padding: const EdgeInsets.all(16),
+  //             child: const Text('这是一个浮层'),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }
