@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/pages/demo/form/UserRegistrationForm.dart';
 import 'package:get/get.dart';
 
 /// 表单组件测试
@@ -94,17 +95,6 @@ class _FormDemoState extends State<FormDemo> {
           ? null
           : AppBar(
               title: Text("$widget"),
-              actions: [
-                'done',
-              ]
-                  .map((e) => TextButton(
-                        onPressed: onPressed,
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ))
-                  .toList(),
             ),
       body: buildBody(),
     );
@@ -149,36 +139,12 @@ class _FormDemoState extends State<FormDemo> {
             //     ],
             //   );
             // }).toList(),
-            NText(
-              text,
-              fontSize: 14,
-              maxLines: 100,
-            ),
-            ValueListenableBuilder(
-                valueListenable: resultVN,
-                builder: (context, value, child) {
-                  return NText(
-                    value,
-                    fontSize: 14,
-                    maxLines: 100,
-                  );
-                }),
-            Divider(
-              height: 1,
-            ),
-            Text.rich(
-              TextSpan(
-                children: RichTextExt.createTextSpans(
-                  text: text,
-                  textTaps: delimiters,
-                  onLink: (textTap) {
-                    DLog.d("textTap: $textTap");
-                  },
-                ),
-              ),
-              maxLines: 100,
-              overflow: TextOverflow.ellipsis,
-            ),
+
+            // Container(
+            //   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            //   child: UserRegistrationForm(),
+            // ),
+            buildRichText(),
           ],
         ),
       ),
@@ -311,6 +277,45 @@ class _FormDemoState extends State<FormDemo> {
           () {
             FocusScope.of(context).unfocus();
           },
+    );
+  }
+
+  Widget buildRichText() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Column(
+        children: [
+          NText(
+            text,
+            fontSize: 14,
+            maxLines: 100,
+          ),
+          ValueListenableBuilder(
+            valueListenable: resultVN,
+            builder: (context, value, child) {
+              return NText(
+                value,
+                fontSize: 14,
+                maxLines: 100,
+              );
+            },
+          ),
+          Divider(height: 1),
+          Text.rich(
+            TextSpan(
+              children: RichTextExt.createTextSpans(
+                text: text,
+                textTaps: delimiters,
+                onLink: (textTap) {
+                  DLog.d("textTap: $textTap");
+                },
+              ),
+            ),
+            maxLines: 100,
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
     );
   }
 }

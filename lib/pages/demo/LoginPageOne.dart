@@ -177,7 +177,13 @@ class _LoginPageOneState extends State<LoginPageOne> {
                       )
                     : null),
             validator: (v) {
-              return !accountExp.hasMatch(v!) ? '账号由6到12位数字与小写字母组成' : null;
+              if (v.isNotEmpty != true) {
+                return '用户名不能为空';
+              }
+              if (!accountExp.hasMatch(v!)) {
+                return '账号由6到12位数字与小写字母组成';
+              }
+              return null;
             },
             onEditingComplete: () => FocusScope.of(context).requestFocus(focusNode2),
             onChanged: (v) {
