@@ -16,17 +16,31 @@ class NSliverContainer extends StatelessWidget {
     this.offstage,
   });
 
+  /// 外边距
   final EdgeInsetsGeometry? margin;
+
+  /// 内边距
   final EdgeInsetsGeometry? padding;
 
+  /// 背景装饰器
   final Decoration? decoration;
+
+  /// 前景装饰器内间距
   final EdgeInsetsGeometry? foregroundPadding;
+
+  /// 前景装饰器
   final Decoration? foregroundDecoration;
 
+  /// 透明度
   final double? opacity;
+
+  /// 是否忽略事件
   final bool? ignoring;
+
+  /// 是否 offstage
   final bool? offstage;
 
+  /// 子组件
   final Widget sliver;
 
   @override
