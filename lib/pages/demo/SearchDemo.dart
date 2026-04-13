@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/n_search_history.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -14,31 +16,52 @@ class SearchDemo extends StatefulWidget {
 }
 
 class _SearchDemoState extends State<SearchDemo> {
+  final items = List.generate(20, (i) => "标签$i");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => debugPrint(e),
-                  ))
-              .toList(),
-        ),
-        body: buildBody());
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
+    );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       children: [
         buildSearchAnchor(),
+        NSectionBox(
+          child: ElevatedButton(
+            onPressed: () {
+              final random = IntExt.random(min: 1, max: 999);
+              final e = "标签$random";
+              items.insert(0, e);
+              if (items.length > 20) {
+                items.removeLast();
+              }
+              setState(() {});
+            },
+            child: Text("新增"),
+          ),
+        ),
+        buildHistory(),
       ],
+    );
+  }
+
+  Widget buildHistory() {
+    return NSearchHistory(
+      items: items,
+      onSelected: (String v) {
+        DLog.d(v);
+      },
+      onClear: () {
+        DLog.d("onClear");
+        items.clear();
+        setState(() {});
+      },
     );
   }
 
