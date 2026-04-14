@@ -59,10 +59,6 @@ class NCancelAndConfirmBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildCancelAndConfirmBar();
-  }
-
-  buildCancelAndConfirmBar() {
     return Card(
       margin: EdgeInsets.zero,
       // color: Colors.transparent,

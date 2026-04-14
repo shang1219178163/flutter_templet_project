@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
@@ -39,19 +38,19 @@ mixin DialogMixin {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            left: 20.w,
+            left: 20,
           ),
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 18.sp,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
               // color: fontColor,
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(right: 4.w),
+          padding: EdgeInsets.only(right: 4),
           child: IconButton(
             onPressed: onCancel ??
                 () {
@@ -59,7 +58,7 @@ mixin DialogMixin {
                 },
             icon: Icon(
               Icons.clear,
-              size: 20.w,
+              size: 20,
               // color: Color(0xff231815),
             ),
           ),
@@ -116,11 +115,11 @@ mixin DialogMixin {
         mainAxisSize: MainAxisSize.min,
         children: [
           header ?? defaultHeader,
+          content ?? defaultContent,
           Divider(
-            height: 1.w,
+            height: 1,
             color: divderColor,
           ),
-          content ?? defaultContent,
           footer ?? defaultFooter,
         ],
       ),
@@ -135,12 +134,13 @@ mixin DialogMixin {
               ToolUtil.removeInputFocus();
             },
         child: Container(
-            padding: contentOffset,
-            color: barrierColor ?? Colors.black.withOpacity(0.05),
-            child: Align(
-              alignment: alignment,
-              child: child,
-            )),
+          padding: contentOffset,
+          color: barrierColor ?? Colors.black.withOpacity(0.05),
+          child: Align(
+            alignment: alignment,
+            child: child,
+          ),
+        ),
       ),
     );
 
@@ -186,12 +186,12 @@ mixin DialogMixin {
     final titleWidget = title == null
         ? const SizedBox()
         : Padding(
-            padding: EdgeInsets.only(top: 24.h, bottom: 8.h),
+            padding: EdgeInsets.only(top: 24, bottom: 8),
             child: Text(
               title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -200,10 +200,10 @@ mixin DialogMixin {
     presentDialog(
       scrollController: scrollController,
       context: context,
-      radius: Radius.circular(12.w),
+      radius: Radius.circular(12),
       contentOffset: contentOffset,
       header: header ?? titleWidget,
-      contentMinHeight: 50.h,
+      contentMinHeight: 50,
       contentChildBuilder: (context, setState) {
         return Container(
           // color: ColorExt.random,
@@ -213,21 +213,21 @@ mixin DialogMixin {
             message ?? "",
             textAlign: TextAlign.start,
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
         );
       },
       footer: NCancelAndConfirmBar(
-        height: 45.w,
+        height: 45,
         divider: buttonBarDivider,
         hasCancelButton: hasCancelButton,
         cancelBgColor: cancelBgColor,
         confirmBgColor: confirmBgColor,
         cancelTextStyle: cancellTextStyle,
         confirmTextStyle: confirmTextStyle,
-        bottomRadius: Radius.circular(12.w),
+        bottomRadius: Radius.circular(12),
         onCancel: onCancel ??
             () {
               Navigator.of(context).pop();

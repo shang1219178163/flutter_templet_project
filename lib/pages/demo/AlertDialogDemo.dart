@@ -40,6 +40,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     (e: "DialogMixin - presentDialogAlert", action: onPresentDialogAlert),
     (e: "DialogMixin - presentCupertinoAlert", action: onPresentCupertinoAlert),
     (e: "showCupertinoTextFieldDialog", action: showCupertinoTextFieldDialog),
+    (e: "deleteAlert", action: showDeleteAlert),
   ];
 
   final title = "新版本 v${2.1}";
@@ -462,7 +463,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     ).toShowCupertinoDialog(context: context);
   }
 
-  showCupertinoTextFieldDialog() {
+  Widget showCupertinoTextFieldDialog() {
     final controller = TextEditingController();
     controller.text = "";
     return CupertinoTheme(
@@ -553,7 +554,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
   }
 
   //多选/单选
-  showChioceListAlertDialog({bool isMutiple = false}) {
+  void showChioceListAlertDialog({bool isMutiple = false}) {
     CupertinoAlertDialog(
       title: Text("ChioceList ${isMutiple ? '多选' : '单选'}"),
       content: ChioceList(
@@ -576,7 +577,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     // .toShowDialog(context);
   }
 
-  showChioceWrapAlertDialog({bool isMutiple = false}) {
+  void showChioceWrapAlertDialog({bool isMutiple = false}) {
     CupertinoAlertDialog(
       title: Text("ChioceWrap ${isMutiple ? '多选' : '单选'}"),
       content: ChioceWrap(
@@ -699,7 +700,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     );
   }
 
-  showUserPrivacy() {
+  void showUserPrivacy() {
     var linkMap = {
       '《用户协议》': 'https://flutter.dev',
       '《隐私政策》': 'https://flutter.dev',
@@ -756,6 +757,18 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
             },
           );
         });
+  }
+
+  void showDeleteAlert() {
+    DeleteAlert().show(
+      context,
+      scrollController: ScrollController(),
+      title: "提示",
+      message: "切换模板种类会清空已选中的药品，是否确认切换?",
+      onConfirm: () async {
+        Navigator.of(context).pop();
+      },
+    );
   }
 }
 
