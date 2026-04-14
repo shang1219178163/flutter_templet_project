@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/basicWidget/n_search_history.dart';
+import 'package:flutter_templet_project/basicWidget/search/n_search_history.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/search/n_search_page.dart';
+import 'package:flutter_templet_project/model/user_model.dart';
 
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -34,6 +36,12 @@ class _SearchDemoState extends State<SearchDemo> {
         buildSearchAnchor(),
         NSectionBox(
           child: ElevatedButton(
+            onPressed: jumpSearchPage,
+            child: Text("NSearchPage组件"),
+          ),
+        ),
+        NSectionBox(
+          child: ElevatedButton(
             onPressed: () {
               final random = IntExt.random(min: 1, max: 999);
               final e = "标签$random";
@@ -43,11 +51,59 @@ class _SearchDemoState extends State<SearchDemo> {
               }
               setState(() {});
             },
-            child: Text("新增"),
+            child: Text("新增标签"),
           ),
         ),
         buildHistory(),
       ],
+    );
+  }
+
+  void jumpSearchPage() {
+    final allList = List.generate(100, (i) {
+      final age = IntExt.random(min: 60, max: 150);
+      final result = UserModel(id: i.toString(), name: "用户$i", age: age);
+      return result;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return NSearchPage<UserModel>(
+            hint: '搜索用户',
+            cacheKey: "SearchHistory",
+            search: (keyword) {
+              final filters = allList.where((e) {
+                final result = (e.name ?? '').contains(keyword);
+                return result;
+              }).toList();
+              return filters;
+            },
+            builder: (context, results) {
+              return ListView.separated(
+                itemBuilder: (_, index) {
+                  final item = results[index];
+
+                  final bgColor = index % 2 == 0 ? Colors.yellow : Colors.green;
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: bgColor.withOpacity(0.2),
+                    ),
+                    child: ListTile(
+                      title: Text(item.name ?? "-"),
+                      subtitle: Text(item.age?.toString() ?? ""),
+                    ),
+                  );
+                },
+                separatorBuilder: (_, index) {
+                  return Divider();
+                },
+                itemCount: results.length,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
