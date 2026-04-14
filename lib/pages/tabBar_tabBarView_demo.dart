@@ -719,6 +719,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.suffixTransitionDemo, "suffixTransitionDemo"),
   Tuple2(AppRouter.tweenSequenceDemo, "tweenSequenceDemo"),
   Tuple2(AppRouter.staggeredAnimationDemo, "staggeredAnimationDemo"),
+  Tuple2(AppRouter.ratingsStarPage, "ratingsStarPage"),
 ];
 
 var others = <Tuple2<String, String>>[

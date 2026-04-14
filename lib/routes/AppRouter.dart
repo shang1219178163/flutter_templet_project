@@ -263,6 +263,7 @@ import 'package:flutter_templet_project/pages/demo/ProgressHudDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RatingsStar/RatingsStarPage.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemoOne.dart';
@@ -910,9 +911,8 @@ class AppRouter {
   static const String nFlexSeparatedDemo = '/nFlexSeparatedDemo';
   static const String suffixTransitionDemo = '/suffixTransitionDemo';
   static const String tweenSequenceDemo = '/tweenSequenceDemo';
-
-
   static const String staggeredAnimationDemo = '/staggeredAnimationDemo';
+  static const String ratingsStarPage = '/ratingsStarPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2679,6 +2679,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.staggeredAnimationDemo,
       page: () => StaggeredAnimationDemo(),
+    ),
+    GetPage(
+      name: AppRouter.ratingsStarPage,
+      page: () => RatingsStarPage(),
     ),
   ];
 }

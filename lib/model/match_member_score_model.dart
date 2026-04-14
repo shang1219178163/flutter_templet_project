@@ -4,7 +4,7 @@
 //  Created by JsonToModel on 2026-01-19 15:53.
 //
 
-import "package:flutter_templet_project/enum/ratings_level_enum.dart";
+import "package:flutter_templet_project/pages/demo/RatingsStar/ratings_level_enum.dart";
 
 /// 比赛成员评分
 class MatchMemberScoreDataModel {

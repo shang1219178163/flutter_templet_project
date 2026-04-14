@@ -1029,6 +1029,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.1"
+  flutter_rating_stars:
+    dependency: "direct main"
+    description:
+      name: flutter_rating_stars
+      sha256: "09dfa831aac2e5128fe70c5a8bd63ff4463180d5ff8545f7379c5b209d22ce1d"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   flutter_screen_wake:
     dependency: "direct main"
     description:
