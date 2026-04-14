@@ -111,6 +111,7 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
           color: searchList.isNotEmpty ? null : appBarBgColor,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: searchList.isNotEmpty
