@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
+/// fade 进入,下拉拖动退出
 class NDraggablePopupRoute<T> extends PopupRoute<T> {
   NDraggablePopupRoute({
     required this.builder,
