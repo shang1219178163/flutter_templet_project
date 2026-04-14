@@ -18,6 +18,8 @@ class AssetUploadButton extends StatefulWidget {
     required this.model,
     this.urlBlock,
     this.onDelete,
+    this.width,
+    this.height,
     this.radius = 8,
     this.imgBuilder,
     this.urlConvert,
@@ -32,6 +34,12 @@ class AssetUploadButton extends StatefulWidget {
 
   /// 返回删除元素的 id
   final VoidCallback? onDelete;
+
+  /// If non-null, requires the child to have exactly this width.
+  final double? width;
+
+  /// If non-null, requires the child to have exactly this height.
+  final double? height;
 
   /// 圆角 默认8
   final double radius;
@@ -91,6 +99,8 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
             url: imgUrl,
             fit: BoxFit.cover,
             radius: widget.radius,
+            width: widget.width,
+            height: widget.height,
           );
     }
 
@@ -98,6 +108,8 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       img = Image.file(
         File(widget.model.file?.path ?? ""),
         fit: BoxFit.cover,
+        width: widget.width,
+        height: widget.height,
       );
     }
 
