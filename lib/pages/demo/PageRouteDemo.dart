@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_fade_page_route.dart';
+import 'package:flutter_templet_project/basicWidget/route/n_fade_page_route.dart';
 import 'package:get/get.dart';
 
 class PageRouteDemo extends StatefulWidget {

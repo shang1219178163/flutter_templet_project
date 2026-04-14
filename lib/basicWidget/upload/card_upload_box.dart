@@ -3,7 +3,7 @@ import 'dart:ffi';
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_fade_page_route.dart';
+import 'package:flutter_templet_project/basicWidget/route/n_fade_page_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_button.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
