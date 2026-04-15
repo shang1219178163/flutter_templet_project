@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_floating_draggable.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay_manager.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -156,6 +157,18 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                           },
                           child: Text("NOverlayDialog.loading"),
                         ),
+                        ElevatedButton(
+                          onPressed: () {
+                            NOverlayDialog.show(
+                              context,
+                              hideBarrier: true, // 悬浮一般不需要遮罩
+                              child: NFloatingDraggable(
+                                child: buildFloatingWidget(),
+                              ),
+                            );
+                          },
+                          child: const Text('显示悬浮组件'),
+                        ),
                       ],
                     );
                   },
@@ -276,6 +289,38 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
           onTap?.call();
         },
         child: Text(btnTitle),
+      ),
+    );
+  }
+
+  Widget buildFloatingWidget() {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        width: 80,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(40),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 8,
+            ),
+          ],
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(40),
+          onTap: () {
+            debugPrint('点击悬浮球');
+          },
+          child: const Center(
+            child: Text(
+              '拖我',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
       ),
     );
   }
