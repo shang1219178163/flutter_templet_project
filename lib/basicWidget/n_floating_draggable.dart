@@ -14,6 +14,7 @@ class NFloatingDraggable extends StatefulWidget {
     super.key,
     this.offset = const Offset(8, 100),
     this.margin = const EdgeInsets.symmetric(horizontal: 8, vertical: 100),
+    this.onFinish,
     required this.child,
   });
 
@@ -25,6 +26,9 @@ class NFloatingDraggable extends StatefulWidget {
 
   /// 悬浮组件
   final Widget child;
+
+  /// 松手后位置
+  final ValueChanged<Offset>? onFinish;
 
   @override
   State<NFloatingDraggable> createState() => _NFloatingDraggableState();
@@ -96,6 +100,7 @@ class _NFloatingDraggableState extends State<NFloatingDraggable> {
 
     final targetY = offset.dy.clamp(minY, maxY);
     offset = Offset(targetX, targetY);
+    widget.onFinish?.call(offset);
     setState(() {});
   }
 
