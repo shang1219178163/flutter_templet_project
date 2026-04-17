@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class ContainerDemoNew extends StatefulWidget {
   const ContainerDemoNew({
@@ -23,7 +23,7 @@ class _ContainerDemoNewState extends State<ContainerDemoNew> with AutomaticKeepA
   late var items = <(Tab, Widget)>[
     (Tab(text: "选项1"), buildPage()),
     (Tab(text: "选项2"), buildPage1()),
-    (Tab(text: "选项2"), buildPage2()),
+    (Tab(text: "选项3"), buildPage2()),
   ];
 
   bool isSliver = true;
@@ -102,11 +102,12 @@ class _ContainerDemoNewState extends State<ContainerDemoNew> with AutomaticKeepA
       child: CustomScrollView(
         slivers: <Widget>[
           Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 height: 500,
                 color: ColorExt.random,
-              )
+              ),
             ],
           ),
         ].map((e) => SliverToBoxAdapter(child: e)).toList(),
