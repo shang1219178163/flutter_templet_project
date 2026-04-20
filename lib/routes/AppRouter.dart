@@ -155,6 +155,7 @@ import 'package:flutter_templet_project/pages/demo/HudProgressDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ImChatBubbleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IndexedStackDemo.dart';
@@ -747,6 +748,7 @@ class AppRouter {
   static const String dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
   static const String slidableDemoOne = '/slidableDemoOne';
   static const String imChatPage = '/imChatPage';
+  static const String imChatBubbleDemo = '/imChatBubbleDemo';
   static const String soundPlayDemo = '/soundPlayDemo';
   static const String wPopupMenuDemo = '/wPopupMenuDemo';
   static const String expandTextDemo = '/expandTextDemo';
@@ -2034,6 +2036,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.imChatPage,
       page: () => ImChatPage(),
+    ),
+    GetPage(
+      name: AppRouter.imChatBubbleDemo,
+      page: () => ImChatBubbleDemo(),
     ),
     GetPage(
       name: AppRouter.soundPlayDemo,

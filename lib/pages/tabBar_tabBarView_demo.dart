@@ -629,6 +629,7 @@ var customs = [
   Tuple2(AppRouter.nTreeDemo, "树形组件"),
   Tuple2(AppRouter.dialogChoiceChipDemo, "选择弹窗"),
   Tuple2(AppRouter.imChatPage, "聊天列表"),
+  Tuple2(AppRouter.imChatBubbleDemo, "聊天气泡"),
   Tuple2(AppRouter.expandTextDemo, "可折叠文字"),
   Tuple2(AppRouter.uploadFileDemo, "上传demo"),
   Tuple2(AppRouter.fileUploadBoxDemo, "上传文件demo"),
