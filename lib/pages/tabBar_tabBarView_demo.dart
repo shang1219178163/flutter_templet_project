@@ -630,6 +630,7 @@ var customs = [
   Tuple2(AppRouter.dialogChoiceChipDemo, "选择弹窗"),
   Tuple2(AppRouter.imChatPage, "聊天列表"),
   Tuple2(AppRouter.imChatBubbleDemo, "聊天气泡"),
+  Tuple2(AppRouter.livestreamEffectPage, "直播间效果"),
   Tuple2(AppRouter.expandTextDemo, "可折叠文字"),
   Tuple2(AppRouter.uploadFileDemo, "上传demo"),
   Tuple2(AppRouter.fileUploadBoxDemo, "上传文件demo"),
@@ -721,6 +722,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.tweenSequenceDemo, "tweenSequenceDemo"),
   Tuple2(AppRouter.staggeredAnimationDemo, "staggeredAnimationDemo"),
   Tuple2(AppRouter.ratingsStarPage, "ratingsStarPage"),
+  Tuple2(AppRouter.overlayEntryPage, "overlayEntryPage"),
 ];
 
 var others = <Tuple2<String, String>>[
