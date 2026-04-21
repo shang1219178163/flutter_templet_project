@@ -9,7 +9,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 复用 toast
 class NReuseToast {
@@ -102,13 +101,25 @@ class _ReuseToastEntry {
     this.data,
   });
 
+  /// tag 类型,同值复用
   final String tag;
+
+  /// height 高度
   double height;
+
+  /// spacing 间距
   double spacing;
+
+  /// message 展示内容
   String message;
+
+  /// child 展示内容
   Widget? child;
+
+  /// data 补充参数
   Map<String, dynamic>? data;
 
+  /// 视图
   OverlayEntry? entry;
   Timer? _timer;
 
