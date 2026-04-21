@@ -35,12 +35,12 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
   final scrollController = ScrollController();
 
   final items = <String>[
-    Assets.messageEffectBasketball,
     Assets.messageEffectBeer,
+    Assets.messageEffectFootball,
+    Assets.messageEffectBasketball,
     Assets.messageEffectCar,
     Assets.messageEffectFireworks,
     Assets.messageEffectFirst,
-    Assets.messageEffectFootball,
   ];
 
   late var selectedIndex = 0;
@@ -184,6 +184,12 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
           text,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontFamily: 'PingFang SC',
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );
@@ -203,7 +209,7 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
           Container(
             height: 40,
             margin: EdgeInsets.only(right: 8),
-            padding: EdgeInsets.only(left: 24, right: 28, top: 10),
+            padding: EdgeInsets.only(left: 24, right: 28 + 10, top: 10),
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(color: Colors.blue),
@@ -232,28 +238,30 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.white,
-                backgroundColor: Colors.green,
+                fontFamily: 'PingFang SC',
+                fontWeight: FontWeight.w500,
+                // backgroundColor: Colors.green,
               ),
             ),
           ),
-          Positioned(
-            top: 4,
-            left: 0,
-            child: Image(
-              image: AssetImage(Assets.assetsIconGoldMedal),
-              width: 24,
-              height: 32,
-            ),
-          ),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: Image(
-              image: AssetImage(Assets.assetsIconTrophy),
-              width: 28,
-              height: 36,
-            ),
-          ),
+          // Positioned(
+          //   top: 4,
+          //   left: 0,
+          //   child: Image(
+          //     image: AssetImage(Assets.assetsIconGoldMedal),
+          //     width: 24,
+          //     height: 32,
+          //   ),
+          // ),
+          // Positioned(
+          //   top: 0,
+          //   right: 0,
+          //   child: Image(
+          //     image: AssetImage(Assets.assetsIconTrophy),
+          //     width: 28,
+          //     height: 36,
+          //   ),
+          // ),
         ],
       ),
     );
