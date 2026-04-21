@@ -32,6 +32,7 @@ class NReuseToast {
     required String tag,
     required String message,
     Widget? child,
+    int? max,
     double initialTop = 120,
     EdgeInsets? margin = const EdgeInsets.symmetric(horizontal: 20),
     double height = 40,
@@ -42,6 +43,7 @@ class NReuseToast {
   }) {
     final overlay = Overlay.of(context, rootOverlay: true);
     final targetIndex = entries.lastIndexWhere((e) => e.tag == tag);
+    debugPrint(["show", tag, targetIndex, child.hashCode].join(","));
     if (targetIndex != -1) {
       _entries[targetIndex].update(
         height: height,
@@ -53,6 +55,10 @@ class NReuseToast {
         onFinish: onFinish,
       );
       return;
+    }
+
+    if (max != null && entries.length == max) {
+      removeIndex(0);
     }
 
     final toastEntry = _ReuseToastEntry(
@@ -87,6 +93,11 @@ class NReuseToast {
     }
 
     final item = _entries.removeAt(targetIndex);
+    item.entry?.remove();
+  }
+
+  static void removeIndex(int index) {
+    final item = _entries.removeAt(index);
     item.entry?.remove();
   }
 }
@@ -165,7 +176,7 @@ class _ReuseToastEntry {
     required Duration duration,
     VoidCallback? onFinish,
   }) {
-    debugPrint([runtimeType, "update", message].join(","));
+    debugPrint([runtimeType, "update", tag, message].join(","));
     this.height = height;
     this.spacing = spacing;
     this.message = message;

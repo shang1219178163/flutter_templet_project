@@ -74,11 +74,13 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      final num = IntExt.random(max: 200);
+                      countVN.value++;
+                      final num = countVN.value;
                       // 不同类型
                       NReuseToast.show(
                         context: context,
                         tag: "error $num",
+                        max: 5,
                         message: "新的 toast",
                         child: buildGiftCard(count: num),
                       );
