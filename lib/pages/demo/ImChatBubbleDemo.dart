@@ -25,22 +25,22 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
 
   final scrollController = ScrollController();
 
-  final bgChatBubbles = [
-    Assets.imagesBgChatBubble1,
-    Assets.imagesBgChatBubble2,
-    Assets.imagesBgChatBubble3,
-    Assets.imagesBgChatBubble4,
-    Assets.imagesBgChatBubble5,
-    Assets.imagesBgChatBubble6,
-    Assets.imagesBgChatBubble7,
-    Assets.imagesBgChatBubble8,
-    Assets.imagesBgChatBubble9,
-    Assets.imagesBgChatBubble10,
+  final items = <String>[
+    Assets.messageBubble1,
+    Assets.messageBubble2,
+    Assets.messageBubble3,
+    Assets.messageBubble4,
+    Assets.messageBubble5,
+    Assets.messageBubble6,
+    Assets.messageBubble7,
+    Assets.messageBubble8,
+    Assets.messageBubble9,
+    Assets.messageBubble10,
   ];
 
-  late var bgChatBubbleIndex = 0;
+  late var selectedIndex = 0;
 
-  String get bgChatBubble => bgChatBubbles[bgChatBubbleIndex];
+  String get current => items[selectedIndex];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
   }
 
   Widget buildBody() {
-    var imageUrl = "https://cdn.kbisai.com/kanbisai/goods/bubble/zu_qiu.png";
+    // var imageUrl = "https://cdn.kbisai.com/kanbisai/goods/bubble/zu_qiu.png";
     // imageUrl = "https://cdn.kbisai.com/kanbisai/goods/bubble/lan_qiu.png";
 
     var text = "聊天气泡的“拉伸”本质是背景形状可伸缩（capInsets / 9-slice）+ 内容自适应";
@@ -117,7 +117,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
       ),
       itemsMargin: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       // itemsBackgroudColor: Colors.green,
-      items: bgChatBubbles,
+      items: items,
       itemBuilder: (e) {
         return Container(
           decoration: BoxDecoration(
@@ -130,7 +130,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
       },
       itemFooter: Divider(),
       onChanged: (index) {
-        bgChatBubbleIndex = index;
+        selectedIndex = index;
         setState(() {});
       },
     );
@@ -184,7 +184,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
       decoration: BoxDecoration(
         // border: Border.all(color: Colors.blue),
         image: DecorationImage(
-          image: AssetImage(bgChatBubble),
+          image: AssetImage(current),
           // ⭐关键3：中心点必须在“纯色区域”
           centerSlice: centerSlice,
           fit: BoxFit.fill,
@@ -204,7 +204,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
     return buildMessage(
       isMe: isMe,
       child: NChatBubble(
-        imagePath: bgChatBubble,
+        imagePath: current,
         metrics: NChatBubbleMetrics(
           imageSize: const Size(58, 44),
           safeInset: const EdgeInsets.fromLTRB(23, 19, 19, 11),
