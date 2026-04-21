@@ -179,6 +179,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewSeparatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
+import 'package:flutter_templet_project/pages/demo/LivestreamEffectPage.dart';
 import 'package:flutter_templet_project/pages/demo/LocalAuthDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
@@ -243,6 +244,7 @@ import 'package:flutter_templet_project/pages/demo/OverflowDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/OverlayEntryPage.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
@@ -749,6 +751,7 @@ class AppRouter {
   static const String slidableDemoOne = '/slidableDemoOne';
   static const String imChatPage = '/imChatPage';
   static const String imChatBubbleDemo = '/imChatBubbleDemo';
+  static const String livestreamEffectPage = '/livestreamEffectPage';
   static const String soundPlayDemo = '/soundPlayDemo';
   static const String wPopupMenuDemo = '/wPopupMenuDemo';
   static const String expandTextDemo = '/expandTextDemo';
@@ -915,6 +918,7 @@ class AppRouter {
   static const String tweenSequenceDemo = '/tweenSequenceDemo';
   static const String staggeredAnimationDemo = '/staggeredAnimationDemo';
   static const String ratingsStarPage = '/ratingsStarPage';
+  static const String overlayEntryPage = '/overlayEntryPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2042,6 +2046,11 @@ class AppRouter {
       page: () => ImChatBubbleDemo(),
     ),
     GetPage(
+      name: AppRouter.livestreamEffectPage,
+      page: () => LivestreamEffectPage(),
+    ),
+
+    GetPage(
       name: AppRouter.soundPlayDemo,
       page: () => SoundPlayDemo(),
     ),
@@ -2689,6 +2698,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.ratingsStarPage,
       page: () => RatingsStarPage(),
+    ),
+    GetPage(
+      name: AppRouter.overlayEntryPage,
+      page: () => OverlayEntryPage(),
     ),
   ];
 }
