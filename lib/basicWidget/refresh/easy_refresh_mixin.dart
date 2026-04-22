@@ -135,7 +135,7 @@ mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W> implements NRef
   @override
   Future<void> onLoad() async {
     if (indicator == IndicatorResult.noMore) {
-      refreshController.finishLoad();
+      refreshController.finishLoad(indicator);
       return;
     }
 

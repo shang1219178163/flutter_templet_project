@@ -124,7 +124,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
     return EasyRefresh.builder(
       controller: refreshController,
       onRefresh: onRefresh,
-      onLoad: onLoad,
+      onLoad: indicator == IndicatorResult.noMore ? null : onLoad,
       childBuilder: (_, physics) {
         return CustomScrollView(
           controller: widget.scrollController,
