@@ -109,7 +109,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
     Widget child = EasyRefresh(
       controller: refreshController,
       onRefresh: onRefresh,
-      onLoad: indicator == IndicatorResult.noMore ? null : () => onLoad(),
+      onLoad: indicator == IndicatorResult.noMore ? null : onLoad,
       child: ListView.separated(
         key: PageStorageKey(widget.title ?? hashCode),
         itemCount: itemCount,
@@ -141,7 +141,6 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
     }
     return child;
   }
-
 }
 
 // class NRefreshListViewController<E> {

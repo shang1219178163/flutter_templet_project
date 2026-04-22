@@ -203,7 +203,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
       controller: refreshController,
       triggerAxis: Axis.vertical,
       onRefresh: widget.disableOnReresh ? null : () => onRefresh(),
-      onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore ? null : () => onLoad(),
+      onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore ? null : onLoad,
       child: widget.child ??
           buildListView(
             controller: scrollController,
