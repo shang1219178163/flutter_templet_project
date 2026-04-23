@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class PageViewDemoThree extends StatefulWidget {
@@ -67,21 +68,22 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => debugPrint(e),
-                  ))
-              .toList(),
-        ),
-        body: buildBody());
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
+      ),
+      body: buildBody(),
+    );
   }
 
   buildBody() {
@@ -93,9 +95,58 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: 238,
+            height: 228,
+            decoration: BoxDecoration(
+              color: Color(0xffF3F3F3),
+              // border: Border.all(color: Colors.blue),
+            ),
             child: NCollectionView(
-              items: items,
+              length: items.length,
+              // spacing: 0,
+              // runSpacing: 0,
+              contentPadding: EdgeInsets.only(left: 4, right: 4, top: 16, bottom: 16),
+              itemBuilder: (_, index) {
+                final e = items[index];
+                return InkWell(
+                  onTap: () {
+                    DLog.d("index: $index");
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 54,
+                          height: 54,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(14)),
+                            // border: Border.all(),
+                          ),
+                          child: Image(
+                            image: AssetImage(e.item2),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 8),
+                          child: Text(
+                            e.item1,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.fontColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
