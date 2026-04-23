@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_floating_draggable.dart';
-import 'package:flutter_templet_project/basicWidget/n_overlay_dialog.dart';
-import 'package:flutter_templet_project/basicWidget/n_overlay_manager.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:tuple/tuple.dart';
 

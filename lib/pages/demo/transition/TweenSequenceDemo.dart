@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
-import 'package:flutter_templet_project/basicWidget/n_overlay_dialog.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/tween/NShakeTween.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
