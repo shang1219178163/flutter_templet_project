@@ -14,6 +14,7 @@ class NIndicator extends StatelessWidget {
     super.key,
     required this.length,
     required this.indexListenable,
+    this.radius = 4,
     this.spacing = 8,
     this.color,
     this.colorActive,
@@ -24,6 +25,7 @@ class NIndicator extends StatelessWidget {
 
   /// 索引监听
   final ValueNotifier<int> indexListenable;
+  final double radius;
   final double spacing;
   final Color? color;
   final Color? colorActive;
@@ -49,7 +51,7 @@ class NIndicator extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.only(right: spacing),
                 child: CircleAvatar(
-                  radius: 4,
+                  radius: radius,
                   backgroundColor: bgColor,
                 ),
               );

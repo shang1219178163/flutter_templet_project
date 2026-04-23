@@ -17,9 +17,11 @@ class NCollectionView extends StatefulWidget {
     this.numPerRow = 4,
     required this.itemBuilder,
     this.spacing = 8.0,
-    this.runSpacing = 16.0,
-    this.contentPadding,
+    this.runSpacing = 8.0,
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 12),
     this.indicatorBottom = 8,
+    this.indicatorColor,
+    this.indicatorColorActive,
   });
 
   final int length;
@@ -42,6 +44,8 @@ class NCollectionView extends StatefulWidget {
 
   /// 指示器距离底部距离
   final double indicatorBottom;
+  final Color? indicatorColor;
+  final Color? indicatorColorActive;
 
   @override
   _NCollectionViewStateNew createState() => _NCollectionViewStateNew();
@@ -79,7 +83,7 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
           },
           itemBuilder: (BuildContext context, int pageIndex) {
             return Container(
-              padding: widget.contentPadding ?? EdgeInsets.only(left: 4, right: 4, top: 20, bottom: 16),
+              padding: widget.contentPadding,
               // alignment: Alignment.center,
               // decoration: BoxDecoration(
               // color: Color(0xffF3F3F3),
@@ -124,6 +128,8 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
             child: NIndicator(
               length: array.length,
               indexListenable: indexVN,
+              color: widget.indicatorColor,
+              colorActive: widget.indicatorColorActive,
             ),
           ),
       ],
