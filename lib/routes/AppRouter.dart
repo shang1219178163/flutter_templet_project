@@ -312,6 +312,7 @@ import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
+import 'package:flutter_templet_project/pages/demo/inputAccessoryViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/transition/SuffixTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
@@ -919,6 +920,7 @@ class AppRouter {
   static const String staggeredAnimationDemo = '/staggeredAnimationDemo';
   static const String ratingsStarPage = '/ratingsStarPage';
   static const String overlayEntryPage = '/overlayEntryPage';
+  static const String inputAccessoryViewDemo = '/InputAccessoryViewDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2702,6 +2704,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.overlayEntryPage,
       page: () => OverlayEntryPage(),
+    ),
+    GetPage(
+      name: AppRouter.inputAccessoryViewDemo,
+      page: () => InputAccessoryViewDemo(),
     ),
   ];
 }
