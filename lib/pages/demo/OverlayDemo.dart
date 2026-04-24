@@ -3,10 +3,12 @@ import 'package:flutter_templet_project/basicWidget/drop_menu/drop_menu.dart';
 import 'package:flutter_templet_project/basicWidget/drop_menu/overlay_toast.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_popup_container.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_bottom_sheet.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
@@ -276,6 +278,26 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 ],
               ),
             ),
+            NSectionBox(
+              title: "NOverlayDialog.sheet 自适应高度",
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      NOverlayDialog.sheet(
+                        context,
+                        child: NPopupContainer(
+                          // maxHeight: 300,
+                          // isScrollControlled: true,
+                          child: buildBottom(),
+                        ),
+                      );
+                    },
+                    child: Text('NOverlayDialog'),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 100),
           ],
         ),
@@ -397,6 +419,37 @@ class _OverlayDemoState extends State<OverlayDemo> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildBottom() {
+    return Container(
+      padding: EdgeInsets.only(left: 12, right: 12, top: 20, bottom: 34),
+      decoration: BoxDecoration(
+        color: Colors.green,
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      child: NGridView(
+        children: [
+          ...List.generate(
+            16,
+            (i) {
+              return Container(
+                height: 45,
+                width: 100,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: ColorExt.random,
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                child: Text("$i"),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

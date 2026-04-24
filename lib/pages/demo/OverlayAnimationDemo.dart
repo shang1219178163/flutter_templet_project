@@ -162,6 +162,7 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                               context,
                               hideBarrier: true, // 悬浮一般不需要遮罩
                               child: NFloatingDraggable(
+                                margin: EdgeInsets.symmetric(horizontal: -30, vertical: 100),
                                 child: buildFloatingWidget(),
                               ),
                             );
