@@ -20,9 +20,8 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
+          currentPageIndex = index;
+          setState(() {});
         },
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
@@ -38,6 +37,16 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
             selectedIcon: Icon(Icons.bookmark),
             icon: Icon(Icons.bookmark_border),
             label: 'Saved',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.notifications),
+            icon: Icon(Icons.notifications),
+            label: 'notifications',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.settings),
+            icon: Icon(Icons.settings),
+            label: 'settings',
           ),
         ],
       ),
@@ -56,6 +65,16 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
           color: Colors.blue,
           alignment: Alignment.center,
           child: const Text('Page 3'),
+        ),
+        Container(
+          color: Colors.yellow.withOpacity(0.5),
+          alignment: Alignment.center,
+          child: const Text('Page 4'),
+        ),
+        Container(
+          color: Colors.deepOrangeAccent,
+          alignment: Alignment.center,
+          child: const Text('Page 5'),
         ),
       ][currentPageIndex],
     );
