@@ -78,7 +78,7 @@ class _InputAccessoryViewDemoState extends State<InputAccessoryViewDemo> {
         child: Column(
           children: [
             Text("$widget"),
-            buildText(
+            buildTextField(
               focusNode: focusNode,
               controller: textController,
               onChanged: (v) {
@@ -91,7 +91,7 @@ class _InputAccessoryViewDemoState extends State<InputAccessoryViewDemo> {
     );
   }
 
-  Widget buildText({
+  Widget buildTextField({
     required FocusNode? focusNode,
     TextEditingController? controller,
     required ValueChanged<int> onChanged,
@@ -147,7 +147,7 @@ class _InputAccessoryViewDemoState extends State<InputAccessoryViewDemo> {
           // ),
           Container(
             width: 300,
-            child: buildText(
+            child: buildTextField(
               focusNode: focusNode,
               controller: controller,
               onChanged: onChanged,

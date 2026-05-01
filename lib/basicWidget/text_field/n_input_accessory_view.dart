@@ -57,15 +57,17 @@ class NInputAccessoryView extends StatelessWidget {
     int? maxLines,
     int? maxLength,
   }) {
+    focusNode?.requestFocus();
     NOverlayManagerNew.show(
       context,
       autoDismiss: false,
       builder: (c) {
         var bottom = MediaQuery.of(c).viewInsets.bottom;
+        // DLog.d("bottom: $bottom");
         return Positioned(
           left: 0,
           right: 0,
-          bottom: 0,
+          bottom: bottom,
           child: NInputAccessoryView(
             focusNode: focusNode,
             controller: controller,
@@ -89,9 +91,6 @@ class NInputAccessoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bottom = MediaQuery.of(context).viewInsets.bottom;
-    debugPrint("NInputAccessoryView build: $bottom");
-
     final textField = TextField(
       focusNode: focusNode,
       controller: controller,

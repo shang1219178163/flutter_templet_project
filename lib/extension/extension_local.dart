@@ -29,6 +29,7 @@ export 'src/generic_comparable_ext.dart';
 export 'src/geometry_ext.dart';
 export 'src/getx_ext.dart';
 export 'src/image_ext.dart';
+export 'src/input_border.dart';
 export 'src/list_ext.dart';
 export 'src/map_ext.dart';
 export 'src/media_query_ext.dart';

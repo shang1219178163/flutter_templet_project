@@ -41,3 +41,6 @@ typedef BarItemRecord = ({
   Widget page,
   ValueNotifier<int>? unreadVN,
 });
+
+/// 更新构建,避免组件大量的属性
+typedef ValueUpdateBuilder<T> = T Function(T v);

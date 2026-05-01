@@ -34,9 +34,11 @@ class NReuseToast {
     Widget? child,
     int? max,
     double initialTop = 120,
+    double left = 0,
     EdgeInsets? margin = const EdgeInsets.symmetric(horizontal: 20),
     double height = 40,
     double spacing = 12,
+    Color? barrierColor,
     Map<String, dynamic>? data,
     Duration duration = const Duration(seconds: 2),
     VoidCallback? onFinish,
@@ -74,6 +76,8 @@ class NReuseToast {
         var top = initialTop + (entries.indexWhere((e) => e.tag == tag) + 1) * (height + spacing);
         return toastEntry.build(
           top: top,
+          left: left,
+          barrierColor: barrierColor,
           alignment: Alignment.centerLeft,
         );
       },
@@ -137,12 +141,14 @@ class _ReuseToastEntry {
   /// 🔥 UI 构建
   Widget build({
     required double top,
+    required double left,
+    Color? barrierColor,
     Alignment alignment = Alignment.center,
   }) {
     return AnimatedPositioned(
       duration: Duration(milliseconds: 300),
       top: top,
-      left: 0,
+      left: left,
       right: 0,
       child: Container(
         margin: EdgeInsets.only(left: spacing),
@@ -153,7 +159,7 @@ class _ReuseToastEntry {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.7),
+                  color: barrierColor ?? Colors.black.withOpacity(0.7),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(

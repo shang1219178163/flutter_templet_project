@@ -17,14 +17,24 @@ class NSendGiftButton extends StatefulWidget {
   const NSendGiftButton({
     super.key,
     this.items = const [188, 66, 10, 5, 1],
-    required this.onChanged,
+    required this.textController,
+    required this.onGiftCountCustom,
+    required this.onSendChanged,
+    this.onDropHide,
   });
 
   ///礼物数量列表
   final List<int> items;
 
+  final TextEditingController textController;
+
+  /// 礼物数量自定义
+  final VoidCallback onGiftCountCustom;
+
+  final VoidCallback? onDropHide;
+
   /// 确定的礼物数量
-  final ValueChanged<int> onChanged;
+  final ValueChanged<int> onSendChanged;
 
   @override
   State<NSendGiftButton> createState() => _NSendGiftButtonState();
@@ -35,15 +45,30 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
 
   final giftCountVN = ValueNotifier(1);
 
-  final focusNode = FocusNode();
-  final textController = TextEditingController();
+  late final textController = widget.textController;
+
+  @override
+  void dispose() {
+    textController.removeListener(onLtr);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    textController.addListener(onLtr);
+  }
+
+  onLtr() {
+    final count = int.tryParse(textController.text);
+    if (count == null) {
+      return;
+    }
+    giftCountVN.value = count;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return buildGift();
-  }
-
-  Widget buildGift() {
     return NTargetFollower(
       controller: targetFollowerController,
       targetAnchor: Alignment.topRight,
@@ -51,11 +76,12 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
       target: buildGiftButton(
         countVN: giftCountVN,
         onMore: () {
-          DLog.d("onMore");
+          // DLog.d("onMore");
           targetFollowerController.toggle();
         },
         onSend: () {
-          DLog.d("onSend");
+          // DLog.d("onSend");
+          widget.onSendChanged(giftCountVN.value);
           targetFollowerController.hide();
         },
       ),
@@ -67,13 +93,13 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
           onTapOutside: (tap) {
             debugPrint('On Tap Outside!!');
             onHide();
+            widget.onDropHide?.call();
           },
           child: buildDropMenu(
-            focusNode: focusNode,
             controller: textController,
             onChanged: (int value) {
-              DLog.d("onSend $value");
-              widget.onChanged(value);
+              // DLog.d("onSend $value");
+              // widget.onChanged(value);
               targetFollowerController.toggle();
               giftCountVN.value = value;
             },
@@ -89,7 +115,7 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
     VoidCallback? onSend,
   }) {
     return Container(
-      width: 140,
+      // width: 140,
       height: 30,
       padding: const EdgeInsets.only(left: 18),
       decoration: ShapeDecoration(
@@ -114,21 +140,22 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
                     return GestureDetector(
                       onTap: onMore,
                       child: Container(
-                        constraints: BoxConstraints(
-                          minWidth: 26,
-                        ),
+                        // constraints: BoxConstraints(
+                        //   minWidth: 26,
+                        // ),
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          border: Border.all(color: Colors.blue),
-                          borderRadius: BorderRadius.all(Radius.circular(0)),
-                        ),
-                        child: Text(
-                          '$value',
-                          style: TextStyle(
-                            color: Color(0xFF303034),
-                            fontSize: 12,
-                            fontFamily: 'PingFang SC',
+                        // decoration: BoxDecoration(
+                        //   color: Colors.green,
+                        //   border: Border.all(color: Colors.blue),
+                        //   borderRadius: BorderRadius.all(Radius.circular(0)),
+                        // ),
+                        child: FittedBox(
+                          child: Text(
+                            '$value',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'PingFang SC',
+                            ),
                           ),
                         ),
                       ),
@@ -142,7 +169,7 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
                     height: 24,
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     decoration: BoxDecoration(),
-                    child: Image(
+                    child: const Image(
                       image: AssetImage(Assets.imagesIconArrowUp),
                       width: 24,
                       height: 24,
@@ -162,13 +189,13 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
                   borderRadius: BorderRadius.circular(99),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 '赠送',
                 style: TextStyle(
-                  color: Color(0xFFFAFAFA),
+                  color: Colors.white,
                   fontSize: 12,
                   fontFamily: 'PingFang SC',
-                  height: 0,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
@@ -184,24 +211,14 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
     required ValueChanged<int> onChanged,
   }) {
     final items = widget.items;
-    void onInput(String v) {
-      DLog.d(v);
-      final num = int.tryParse(v) ?? 0;
-      if (num <= 0) {
-        return;
-      }
-      onChanged(num);
-    }
 
     return Container(
       width: 120,
       height: 200 + 12,
       padding: EdgeInsets.symmetric(horizontal: 11),
       decoration: BoxDecoration(
-        // color: Colors.green,
-        // border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.all(Radius.circular(0)),
-      ),
+          // border: Border.all(color: Colors.blue),
+          ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -218,26 +235,10 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 8),
-                TextField(
+                buildTextField(
                   focusNode: focusNode,
                   controller: controller,
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(3),
-                  ],
-                  decoration: InputDecoration(
-                    constraints: BoxConstraints(
-                      maxHeight: 32,
-                    ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 2),
-                    hintText: "自定义",
-                    hintStyle: TextStyle(color: Color(0xFFA7A7AE), fontSize: 14),
-                    filled: true,
-                    fillColor: Colors.white,
-                  ),
-                  onChanged: (v) => onInput.debounce.call(v),
+                  onChanged: onChanged,
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
@@ -245,7 +246,7 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
                   children: items.map((e) {
                     return GestureDetector(
                       onTap: () {
-                        DLog.d(e);
+                        // DLog.d(e);
                         onChanged(e);
                       },
                       child: Container(
@@ -259,7 +260,7 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
                         ),
                         child: Text(
                           e.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.red,
                             fontSize: 14,
                             fontFamily: 'PingFang SC',
@@ -276,8 +277,59 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
             image: AssetImage(Assets.imagesIconArrowDownFilled),
             width: 12,
             height: 6,
+            fit: BoxFit.contain,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildTextField({
+    FocusNode? focusNode,
+    TextEditingController? controller,
+    required ValueChanged<int> onChanged,
+  }) {
+    void onInput(String v) {
+      final num = int.tryParse(v) ?? 0;
+      if (num <= 0) {
+        return;
+      }
+      onChanged(num);
+    }
+
+    return TextField(
+      readOnly: true,
+      onTap: widget.onGiftCountCustom,
+      controller: controller,
+      textAlign: TextAlign.center,
+      maxLines: 1,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(3),
+      ],
+      decoration: InputDecoration(
+        constraints: BoxConstraints(
+          maxHeight: 32,
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 2),
+        hintText: "自定义",
+        filled: true,
+        fillColor: Colors.white,
+        border: buildBorder(),
+        enabledBorder: buildBorder(),
+        focusedBorder: buildBorder(),
+        disabledBorder: buildBorder(),
+      ),
+      onChanged: (v) => onInput.debounce.call(v),
+    );
+  }
+
+  InputBorder buildBorder({Color color = const Color(0xffDEDEDE), double radius = 4}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(radius)),
+      borderSide: BorderSide(
+        color: color, //边线颜色为白色
+        width: 1, //边线宽度为1
       ),
     );
   }

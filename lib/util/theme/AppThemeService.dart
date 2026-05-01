@@ -264,7 +264,7 @@ class AppThemeService {
           hoverColor: AppColor.bgColor,
           hintStyle: TextStyle(
             fontSize: 14,
-            color: Colors.white.withOpacity(0.4),
+            color: Colors.black.withOpacity(0.4),
             fontWeight: FontWeight.w400,
           ),
           labelStyle: TextStyle(

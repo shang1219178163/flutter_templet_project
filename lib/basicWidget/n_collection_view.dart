@@ -13,6 +13,7 @@ class NCollectionView extends StatefulWidget {
   const NCollectionView({
     super.key,
     required this.length,
+    this.page = 0,
     this.rowNum = 2,
     this.numPerRow = 4,
     required this.itemBuilder,
@@ -25,6 +26,8 @@ class NCollectionView extends StatefulWidget {
   });
 
   final int length;
+
+  final int page;
 
   ///每页行数
   final int rowNum;
@@ -52,9 +55,9 @@ class NCollectionView extends StatefulWidget {
 }
 
 class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerProviderStateMixin {
-  final indexVN = ValueNotifier(0);
+  late final indexVN = ValueNotifier(widget.page);
 
-  late final pageController = PageController(initialPage: indexVN.value, keepPage: true);
+  late var pageController = PageController(initialPage: indexVN.value, keepPage: true);
 
   @override
   void dispose() {
@@ -74,6 +77,7 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
     return Stack(
       children: [
         PageView.builder(
+          key: PageStorageKey("$runtimeType"),
           controller: pageController,
           itemCount: pageCount,
           pageSnapping: true,

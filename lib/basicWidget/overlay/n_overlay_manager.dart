@@ -54,12 +54,12 @@ class NOverlayManager {
   static void show({
     Duration duration = const Duration(seconds: 2),
     bool autoDismiss = true,
-    required Widget child,
+    required WidgetBuilder builder,
   }) {
     // 1️⃣ 先清空已有 Toast
     removeAll();
 
-    final entry = OverlayEntry(builder: (_) => child);
+    final entry = OverlayEntry(builder: builder);
     insert(entry);
     // 2️⃣ 自动移除
     if (autoDismiss) {
@@ -76,11 +76,6 @@ class NOverlayManager {
     required Widget Function(VoidCallback onHide) bulder,
   }) {
     final contextNew = context ?? _globalContext;
-    // 移除旧的
-    // ✅ 安全移除旧的
-    // if (_current != null && _current!.mounted) {
-    //   _current!.remove();
-    // }
     removeAll();
 
     final controller = AnimationController(
@@ -89,7 +84,6 @@ class NOverlayManager {
     );
 
     late OverlayEntry entry;
-
     controller.addListener(() {
       Future.microtask(() {
         if (entry.mounted) {

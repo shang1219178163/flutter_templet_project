@@ -179,7 +179,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewSeparatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
-import 'package:flutter_templet_project/pages/demo/LivestreamEffectPage.dart';
+import 'package:flutter_templet_project/pages/demo/LiveStream/LivestreamEffectPage.dart';
 import 'package:flutter_templet_project/pages/demo/LocalAuthDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
