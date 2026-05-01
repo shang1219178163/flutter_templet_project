@@ -26,6 +26,7 @@ class NInputAccessoryView extends StatelessWidget {
     this.maxLength,
     this.inputFormatters,
     this.textFieldBuilder,
+    this.onTapOutside,
     required this.onConfirm,
   });
 
@@ -43,6 +44,8 @@ class NInputAccessoryView extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   final TextField Function(TextField v)? textFieldBuilder;
+
+  final TapRegionCallback? onTapOutside;
 
   final ValueChanged<String> onConfirm;
 
@@ -63,7 +66,7 @@ class NInputAccessoryView extends StatelessWidget {
       autoDismiss: false,
       builder: (c) {
         var bottom = MediaQuery.of(c).viewInsets.bottom;
-        // DLog.d("bottom: $bottom");
+        DLog.d("bottom: $bottom");
         return Positioned(
           left: 0,
           right: 0,
@@ -92,6 +95,13 @@ class NInputAccessoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textField = TextField(
+      onTapOutside: (e) {
+        if (onTapOutside != null) {
+          onTapOutside?.call(e);
+          return;
+        }
+        NInputAccessoryView.dismiss();
+      },
       focusNode: focusNode,
       controller: controller,
       inputFormatters: inputFormatters,
@@ -116,8 +126,9 @@ class NInputAccessoryView extends StatelessWidget {
       // margin: EdgeInsets.only(bottom: bottom),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.blue),
-        // border: Border(top: BorderSide(color: AppColor.lineColor, width: 0.5)),
+        color: Colors.white,
+        // border: Border.all(color: Colors.blue),
+        border: Border(top: BorderSide(color: AppColor.lineColor, width: 0.5)),
       ),
       child: Row(
         children: [

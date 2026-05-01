@@ -54,90 +54,20 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
       if (focusNode.hasFocus) {
         DLog.d("viewInsets: ${View.of(context).viewInsets}");
 
-        keyboardAccessoryController.show(
-          context,
-          buildToolbar(
-            focusNode: focusNode,
-            controller: textController,
-            onChanged: (v) {
-              DLog.d(v);
-            },
-          ),
-        );
+        showInputAccessoryView();
       } else {
-        keyboardAccessoryController.hide();
+        // keyboardAccessoryController.hide();
       }
     });
   }
 
-  Widget buildTextField({
-    required FocusNode? focusNode,
-    TextEditingController? controller,
-    required ValueChanged<int> onChanged,
-  }) {
-    void onInput(String v) {
-      DLog.d(v);
-      final num = int.tryParse(v) ?? 0;
-      if (num <= 0) {
-        return;
-      }
-      onChanged(num);
-    }
-
-    return TextField(
-      focusNode: focusNode,
-      controller: controller,
-      // textAlign: TextAlign.center,
-      maxLines: 1,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-        LengthLimitingTextInputFormatter(3),
-      ],
-      decoration: InputDecoration(
-        constraints: BoxConstraints(
-          maxHeight: 32,
-        ),
-        contentPadding: EdgeInsets.symmetric(vertical: 2),
-        hintText: "自定义",
-        hintStyle: TextStyle(color: Color(0xFFA7A7AE), fontSize: 14),
-        filled: true,
-        fillColor: Colors.white,
-      ),
-      onChanged: (v) => onInput.debounce.call(v),
-    );
-  }
-
-  Widget buildToolbar({
-    FocusNode? focusNode,
-    TextEditingController? controller,
-    required ValueChanged<int> onChanged,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.green,
-        border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.all(Radius.circular(0)),
-      ),
-      child: Row(
-        children: [
-          // TextButton(
-          //   onPressed: () => focusNode.unfocus(),
-          //   child: const Text("完成"),
-          // ),
-          Container(
-            width: 300,
-            child: buildTextField(
-              focusNode: focusNode,
-              controller: controller,
-              onChanged: onChanged,
-            ),
-          ),
-          const Spacer(),
-          IconButton(
-            icon: const Icon(Icons.keyboard_hide),
-            onPressed: () => focusNode?.unfocus(),
-          ),
-        ],
+  void showInputAccessoryView() {
+    keyboardAccessoryController.show(
+      context,
+      NInputAccessoryView(
+        focusNode: focusNode,
+        controller: textController,
+        onConfirm: (v) {},
       ),
     );
   }
@@ -172,34 +102,55 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12).copyWith(bottom: 34),
       decoration: BoxDecoration(
-          // color: Colors.green,
-          // border: Border.all(color: Colors.blue),
-          // borderRadius: BorderRadius.all(Radius.circular(0)),
-          ),
+        // color: Colors.green,
+        border: Border.all(color: Colors.blue),
+        // borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () {
-              focusNode.requestFocus();
-              keyboardAccessoryController.show(
-                context,
-                buildToolbar(
-                  focusNode: focusNode,
-                  controller: textController,
-                  onChanged: (v) {
-                    DLog.d(v);
-                  },
-                ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         focusNode.requestFocus();
+          //         // showInputAccessoryView();
+          //       },
+          //       child: Text("唤起键盘"),
+          //     ),
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         focusNode.unfocus();
+          //       },
+          //       child: Text("收起键盘"),
+          //     ),
+          //   ],
+          // ),
+          TextField(
+            readOnly: true,
+            focusNode: focusNode,
+            decoration: InputDecoration(
+              isDense: true,
+              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 11),
+              hintText: '点击唤起InputAccessoryView',
+            ),
+            onTap: () {
+              NInputAccessoryView.show(
+                context: context,
+                focusNode: focusNode,
+                controller: textController,
+                keyboardType: TextInputType.number,
+                hintText: "请输入礼物数量",
+                maxLength: 3,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
               );
             },
-            child: Text("键盘"),
           ),
-          // TextField(
-          //   focusNode: focusNode,
-          // ),
-          // Spacer(),
+
           ValueListenableBuilder(
             valueListenable: _selectedItemVN,
             builder: (context, value, child) {
@@ -246,12 +197,10 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
           ),
 
           Spacer(),
-          // buildGift(),
           NSendGiftButton(
             textController: textController,
             onGiftCountCustom: () async {
               DLog.d("onGiftCountCustom");
-              focusNode.requestFocus();
 
               NInputAccessoryView.show(
                 context: context,
@@ -264,17 +213,9 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
                   FilteringTextInputFormatter.digitsOnly,
                 ],
               );
-
-              // await Future.delayed(const Duration(milliseconds: 150));
-              // var bottom = View.of(context).viewInsets.bottom;
-              // DLog.d("bottom: ${[
-              //   MediaQuery.of(context).viewInsets.bottom,
-              //   View.of(context).viewInsets.bottom,
-              //   ScreenManager.viewInsets.bottom,
-              // ]}");
             },
             onDropHide: () {
-              NInputAccessoryView.dismiss();
+              // NInputAccessoryView.dismiss();
             },
             onSendChanged: (v) {
               NOverlayDialog.toast(context, message: "赠送$v个礼物");

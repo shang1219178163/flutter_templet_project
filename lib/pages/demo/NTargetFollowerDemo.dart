@@ -113,10 +113,10 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                                 debugPrint("${DateTime.now()} followerBuilder:");
                                 return TapRegion(
                                   onTapInside: (tap) {
-                                    debugPrint('On Tap Inside!!');
+                                    debugPrint('$runtimeType On Tap Inside!');
                                   },
                                   onTapOutside: (tap) {
-                                    debugPrint('On Tap Outside!!');
+                                    debugPrint('$runtimeType On Tap Outside!');
                                     onHide();
                                   },
                                   child: NLongPressMenu(

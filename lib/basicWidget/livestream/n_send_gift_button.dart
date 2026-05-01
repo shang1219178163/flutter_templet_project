@@ -88,10 +88,10 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
       followerBuilder: (context, onHide) {
         return TapRegion(
           onTapInside: (tap) {
-            // debugPrint('On Tap Inside!!');
+            // debugPrint('$runtimeType On Tap Inside!');
           },
           onTapOutside: (tap) {
-            debugPrint('On Tap Outside!!');
+            debugPrint('$runtimeType On Tap Outside!');
             onHide();
             widget.onDropHide?.call();
           },
