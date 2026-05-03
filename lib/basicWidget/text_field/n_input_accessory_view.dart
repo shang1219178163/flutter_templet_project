@@ -6,6 +6,8 @@
 //  Copyright © 2026/4/29 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/elevated_btn.dart';
@@ -54,23 +56,53 @@ class NInputAccessoryView extends StatelessWidget {
     required BuildContext context,
     FocusNode? focusNode,
     required TextEditingController controller,
+    ValueNotifier<double>? keyboardVN,
     TextInputType? keyboardType,
     String? hintText = "请输入",
     List<TextInputFormatter>? inputFormatters,
     int? maxLines,
     int? maxLength,
+    double? keyboardHeight,
   }) {
     focusNode?.requestFocus();
+    if (keyboardVN == null) {
+      NOverlayManagerNew.show(
+        context,
+        autoDismiss: false,
+        builder: (c) {
+          var bottom = keyboardHeight ?? MediaQuery.of(c).viewInsets.bottom;
+          DLog.d("bottom: $bottom");
+
+          return Positioned(
+            left: 0,
+            right: 0,
+            bottom: bottom,
+            child: NInputAccessoryView(
+              focusNode: focusNode,
+              controller: controller,
+              keyboardType: keyboardType,
+              hintText: hintText,
+              maxLines: maxLines,
+              maxLength: maxLength,
+              inputFormatters: inputFormatters,
+              onConfirm: (v) {
+                NInputAccessoryView.dismiss();
+              },
+            ),
+          );
+        },
+      );
+      return;
+    }
     NOverlayManagerNew.show(
       context,
       autoDismiss: false,
       builder: (c) {
-        var bottom = MediaQuery.of(c).viewInsets.bottom;
+        var bottom = keyboardHeight ?? MediaQuery.of(c).viewInsets.bottom;
         DLog.d("bottom: $bottom");
-        return Positioned(
-          left: 0,
-          right: 0,
-          bottom: bottom,
+
+        return ValueListenableBuilder(
+          valueListenable: keyboardVN,
           child: NInputAccessoryView(
             focusNode: focusNode,
             controller: controller,
@@ -80,9 +112,18 @@ class NInputAccessoryView extends StatelessWidget {
             maxLength: maxLength,
             inputFormatters: inputFormatters,
             onConfirm: (v) {
-              dismiss();
+              NInputAccessoryView.dismiss();
             },
           ),
+          builder: (context, value, child) {
+            return AnimatedPositioned(
+              duration: Duration(milliseconds: 100),
+              left: 0,
+              right: 0,
+              bottom: max(keyboardVN.value, bottom),
+              child: child!,
+            );
+          },
         );
       },
     );
