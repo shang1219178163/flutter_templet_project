@@ -95,7 +95,7 @@ class ToolUtil {
     }
   }
 
-  static toPage(String page) {
+  static toNamed(String page) {
     if (Get.currentRoute != page) {
       Get.toNamed(page);
     }

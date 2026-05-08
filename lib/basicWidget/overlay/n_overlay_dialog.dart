@@ -40,7 +40,7 @@ class NOverlayDialog {
   }
 
   /// 显示 BottomSheet
-  static void show(
+  static OverlayEntry show(
     BuildContext context, {
     required Widget child,
     Alignment from = Alignment.bottomCenter,
@@ -51,6 +51,8 @@ class NOverlayDialog {
     VoidCallback? onBarrier,
     bool hideBarrier = false,
     Duration? autoDismissDuration,
+    OverlayEntry? below,
+    OverlayEntry? above,
   }) {
     if (isShowing) {
       dismiss(immediately: true);
@@ -128,15 +130,16 @@ class NOverlayDialog {
       },
     );
 
-    overlay.insert(_entry!);
+    overlay.insert(_entry!, below: below, above: above);
     _controller?.forward();
     if (autoDismissDuration != null) {
       Future.delayed(autoDismissDuration, dismiss);
     }
+    return _entry!;
   }
 
   /// sheet
-  static void sheet(
+  static OverlayEntry sheet(
     BuildContext context, {
     required Widget child,
     Alignment from = Alignment.bottomCenter,
@@ -157,7 +160,7 @@ class NOverlayDialog {
   }
 
   /// drawer
-  static void drawer(
+  static OverlayEntry drawer(
     BuildContext context, {
     double widthFactor = 0.8,
     required Widget child,
@@ -182,7 +185,7 @@ class NOverlayDialog {
   }
 
   /// 显示 toast
-  static void toast(
+  static OverlayEntry toast(
     BuildContext context, {
     Widget? child,
     String message = "",
@@ -219,7 +222,7 @@ class NOverlayDialog {
   }
 
   /// loadding
-  static void loadding(
+  static OverlayEntry loadding(
     BuildContext context, {
     Widget? indicator,
     Widget? child,

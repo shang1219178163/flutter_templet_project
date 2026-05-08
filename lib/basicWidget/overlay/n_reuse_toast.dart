@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 /// 复用 toast
 class NReuseToast {
   /// 缓存
-  static final List<_ReuseToastEntry> _entries = [];
-  static List<_ReuseToastEntry> get entries => _entries;
+  static final List<NReuseToastEntry> _entries = [];
+  static List<NReuseToastEntry> get entries => _entries;
 
   /// 展示
   ///
@@ -63,7 +63,7 @@ class NReuseToast {
       removeIndex(0);
     }
 
-    final toastEntry = _ReuseToastEntry(
+    final toastEntry = NReuseToastEntry(
       tag: tag,
       height: height,
       spacing: spacing,
@@ -104,10 +104,16 @@ class NReuseToast {
     final item = _entries.removeAt(index);
     item.entry?.remove();
   }
+
+  static void clear() {
+    for (var i = 0; i < _entries.length; i++) {
+      removeIndex(i);
+    }
+  }
 }
 
-class _ReuseToastEntry {
-  _ReuseToastEntry({
+class NReuseToastEntry {
+  NReuseToastEntry({
     required this.tag,
     required this.height,
     required this.spacing,

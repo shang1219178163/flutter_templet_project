@@ -28,7 +28,7 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
-import 'package:flutter_templet_project/util/screen_manager.dart';
+import 'package:flutter_templet_project/util/n_screen_manager.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
