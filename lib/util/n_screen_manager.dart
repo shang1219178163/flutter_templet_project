@@ -3,13 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 /// 全局屏幕工具类，不依赖 BuildContext
-class ScreenManager {
-  ScreenManager._() {
+class NScreenManager {
+  NScreenManager._() {
     _init();
   }
-  static final ScreenManager _instance = ScreenManager._();
-  factory ScreenManager() => _instance;
-  static ScreenManager get instance => _instance;
+  static final NScreenManager _instance = NScreenManager._();
+  factory NScreenManager() => _instance;
+  static NScreenManager get instance => _instance;
 
   _init() {
     _updateScreenSize();
@@ -61,6 +61,15 @@ class ScreenManager {
 
   /// 横屏
   static bool get isLandscape => !isPortrait;
+
+  /// 全屏视频(横屏)播放时, 左右边距
+  static double videoLandscapeSpacing({double aspectRatio = 16 / 9}) {
+    final videoWidth = screenSize.height * aspectRatio;
+    final landscapeSpacing = (screenSize.width - videoWidth) * 0.5;
+    final result = isPortrait ? 0.0 : landscapeSpacing;
+    // DLog.d([isPortrait, result].join(", "));
+    return result;
+  }
 
   static Size? _size;
 
