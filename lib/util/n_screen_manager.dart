@@ -1,3 +1,11 @@
+//
+//  NScreenManager.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2026/5/8 16:03.
+//  Copyright © 2026/5/8 shang. All rights reserved.
+//
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';

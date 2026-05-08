@@ -1,5 +1,5 @@
 //
-//  OverlayStateManager.dart
+//  NOverlayZIndexManager.dart
 //  projects
 //
 //  Created by shang on 2026/5/6 11:27.
@@ -15,8 +15,13 @@ class NOverlayZIndexItem {
     this.key,
   });
 
+  /// 视图
   final OverlayEntry entry;
+
+  /// z 轴层次
   final int zIndex;
+
+  /// 唯一 key
   final String? key;
 }
 
@@ -80,8 +85,11 @@ class NOverlayZIndexManager {
     return _insertOverlay(context: context, item: item, index: insertIndex);
   }
 
-  NOverlayZIndexItem _insertOverlay(
-      {required BuildContext context, required NOverlayZIndexItem item, required int index}) {
+  NOverlayZIndexItem _insertOverlay({
+    required BuildContext context,
+    required NOverlayZIndexItem item,
+    required int index,
+  }) {
     final overlayState = Overlay.of(context, rootOverlay: true);
 
     NOverlayZIndexItem? below;
