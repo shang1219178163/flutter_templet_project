@@ -27,7 +27,7 @@ extension RichTextExt on RichText {
     TextStyle? linkStyle,
     String prefix = "_&t",
     String suffix = "_&t",
-    void Function(String textTap)? onLink,
+    void Function(String v)? onLink,
   }) {
     final pattern = textTaps.map((d) => RegExp.escape(d)).join('|');
     final regExp = RegExp(pattern, multiLine: true, caseSensitive: false);

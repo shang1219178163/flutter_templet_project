@@ -306,8 +306,8 @@ class _FormDemoState extends State<FormDemo> {
               children: RichTextExt.createTextSpans(
                 text: text,
                 textTaps: delimiters,
-                onLink: (textTap) {
-                  DLog.d("textTap: $textTap");
+                onLink: (v) {
+                  DLog.d("textTap: $v");
                 },
               ),
             ),
