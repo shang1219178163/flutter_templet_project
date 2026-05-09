@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
+import 'package:flutter_templet_project/basicWidget/n_chat_bubble.dart';
 import 'package:flutter_templet_project/basicWidget/n_flex_separated.dart';
 import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
@@ -66,14 +67,11 @@ class _ContainerDemoState extends State<ContainerDemo> {
             buildSection(),
             buildSection1(),
             buildGradientBorder(),
+            buildSectionDecorationImage(),
             buildSectionEnDecorationImage(),
             NSectionBox(
               title: "NInnerShadow",
               child: buildInnerShadow(),
-            ),
-            NSectionBox(
-              title: "聊天气泡",
-              child: chatBubble(),
             ),
           ]
               .map((e) => SliverToBoxAdapter(
@@ -168,25 +166,53 @@ class _ContainerDemoState extends State<ContainerDemo> {
     );
   }
 
+  Widget buildSectionDecorationImage() {
+    const msg = "静夜思 * 李白 • 床前明月光, 疑是地上霜, 举头望明月, 低头思故乡.";
+
+    return NSectionBox(
+      title: "DecorationImage - Alignment(0.9, -3)",
+      child: Container(
+        height: 100,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue),
+          image: DecorationImage(
+            image: AssetImage(Assets.assetsIconGoldMedal),
+            alignment: Alignment(0.9, -3),
+            colorFilter: ColorFilter.mode(Colors.green, BlendMode.dstATop),
+          ),
+        ),
+        // transform: Matrix4.rotationZ(.2),
+        alignment: Alignment.centerRight, //卡片内文字居中
+        child: Text(
+          msg,
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
+    );
+  }
+
   Widget buildSectionEnDecorationImage() {
     const msg = "静夜思 * 李白 • 床前明月光, 疑是地上霜, 举头望明月, 低头思故乡.";
 
-    return Container(
-      height: 100,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.blue),
-        image: EnDecorationImage(
-          image: "img_update.png".toAssetImage(),
-          alignment: Alignment.topRight,
-          colorFilter: ColorFilter.mode(Colors.green, BlendMode.dstATop),
-          // destinationOffset: Offset(-16, -12),
+    return NSectionBox(
+      title: "EnDecorationImage \nAlignment.topRight + Offset(-12, -12)",
+      child: Container(
+        height: 100,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue),
+          image: EnDecorationImage(
+            image: AssetImage(Assets.assetsIconGoldMedal),
+            alignment: Alignment.topRight,
+            colorFilter: ColorFilter.mode(Colors.green, BlendMode.dstATop),
+            destinationOffset: Offset(-12, -12),
+          ),
         ),
-      ),
-      // transform: Matrix4.rotationZ(.2),
-      alignment: Alignment.centerRight, //卡片内文字居中
-      child: Text(
-        msg,
-        style: TextStyle(color: Colors.red),
+        // transform: Matrix4.rotationZ(.2),
+        alignment: Alignment.centerRight, //卡片内文字居中
+        child: Text(
+          msg,
+          style: TextStyle(color: Colors.red),
+        ),
       ),
     );
   }
@@ -259,37 +285,6 @@ class _ContainerDemoState extends State<ContainerDemo> {
             child: NText('进入诊室', color: Colors.white, fontWeight: FontWeight.w500),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget chatBubble() {
-    var imageUrl = "https://cdn.kbisai.com/kanbisai/goods/bubble/zu_qiu.png";
-    // imageUrl = "https://cdn.kbisai.com/kanbisai/goods/bubble/lan_qiu.png";
-
-    var text = "聊天气泡的“拉伸”本质是背景形状可伸缩（capInsets / 9-slice）+ 内容自适应";
-    text += "可以，直接教你一套工程级“反推 centerSlice”方法，等价于 iOS 的 capInsets，而且可以做到一次算准、长期复用。";
-
-    final padding = const EdgeInsets.symmetric(horizontal: 54, vertical: 54);
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 300, minHeight: 100),
-      padding: padding,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Colors.yellow,
-        border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.circular(8),
-        image: DecorationImage(
-          // image: AssetImage(Assets.imagesBgChatBubble),
-          image: CachedNetworkImageProvider(imageUrl),
-          centerSlice: Rect.fromLTWH(padding.left, padding.top, 1, 1),
-          fit: BoxFit.fill,
-        ),
-      ),
-      child: Text(
-        text,
-        maxLines: 9,
-        overflow: TextOverflow.ellipsis,
       ),
     );
   }

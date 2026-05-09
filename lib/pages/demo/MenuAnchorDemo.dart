@@ -139,8 +139,8 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
                     View.of(context).viewInsets.bottom.toStringAsFixed(1),
                   ].join(": ")),
                   Text([
-                    'ScreenManager.viewInsets.bottom',
-                    (ScreenManager.viewInsets.bottom / 3.0).toStringAsFixed(1),
+                    'NScreenManager.viewInsets.bottom',
+                    (NScreenManager.viewInsets.bottom / 3.0).toStringAsFixed(1),
                   ].join(": ")),
                   Text([
                     'keyboardHeightVN.value',

@@ -90,7 +90,7 @@ Future<void> main() async {
     initDebugInfo(),
   ]);
 
-  ScreenManager();
+  NScreenManager();
   setCustomErrorPage();
   NFileRegistry.registerDefaults();
 
