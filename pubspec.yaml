@@ -185,7 +185,7 @@ dependencies:
 
   flutter_screen_wake: ^1.0.2
   screen_brightness: ^2.1.7
-  volume_controller: ^3.4.0
+#  volume_controller: ^3.4.0
   pip: ^0.0.3
 
   #微信登录+支付+分享
@@ -220,9 +220,6 @@ dependencies:
   google_mlkit_face_detection: ^0.13.1
   google_mlkit_translation: ^0.13.0
   google_mlkit_language_id: ^0.13.0
-
-#  ffmpeg_kit_flutter_full: ^5.1.0
-
 
   expressions: ^0.2.5+2
 

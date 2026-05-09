@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/indicator/n_line_progress_indicator.dart';
-import 'package:volume_controller/volume_controller.dart';
+// import 'package:volume_controller/volume_controller.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
 /// 横屏音量和屏幕亮度管理
@@ -47,18 +47,18 @@ mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
   Future<void> _initValues() async {
     // final currentBrightness = await FlutterScreenWake.brightness;
     final currentBrightness = await ScreenBrightness.instance.system;
-    final currentVolume = await VolumeController.instance.getVolume();
-    VolumeController.instance.showSystemUI = false;
+    // final currentVolume = await VolumeController.instance.getVolume();
+    // VolumeController.instance.showSystemUI = false;
 
     _brightness = currentBrightness;
-    _volume = currentVolume;
+    // _volume = currentVolume;
     brightnessVN.value = _brightness;
     volumeVN.value = _volume;
 
     showVolumeOrBrightnessProgressVN.value = false;
     setState(() {});
 
-    debugPrint("_initValues: currentBrightness:${currentBrightness}, currentVolume:$currentVolume");
+    // debugPrint("_initValues: currentBrightness:${currentBrightness}, currentVolume:$currentVolume");
   }
 
   Future<void> onPanStartForVolumeAndBrightness(DragStartDetails details) async {
