@@ -48,11 +48,14 @@ class TapTrack {
 class TapTrackWidget extends StatelessWidget {
   const TapTrackWidget({
     super.key,
-    required this.child,
     required this.data,
+    this.behavior = HitTestBehavior.translucent,
+    required this.child,
   });
 
   final Map<String, dynamic> data;
+
+  final HitTestBehavior behavior;
 
   final Widget child;
 
@@ -60,7 +63,7 @@ class TapTrackWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MetaData(
       metaData: data,
-      behavior: HitTestBehavior.translucent,
+      behavior: behavior,
       child: child,
     );
   }
