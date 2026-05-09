@@ -7,7 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/service/click_track.dart';
 import 'package:flutter_templet_project/service/tap_track.dart';
 import 'package:get/get.dart';
 
@@ -58,21 +60,42 @@ class _TrackEventPageState extends State<TrackEventPage> {
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Column(
             children: [
-              buildWrap<(String, VoidCallback)>(
-                items: items,
-                itemBuilder: (e) {
-                  return TapTrackWidget(
-                    params: {
-                      "event": e.$1,
-                      "goodsId": 1001,
-                    },
-                    child: ElevatedButton(
-                      onPressed: e.$2,
-                      child: Text(e.$1),
-                    ),
-                  );
-                },
-              )
+              NSectionBox(
+                title: 'ClickTrack',
+                child: buildWrap<(String, VoidCallback)>(
+                  items: items,
+                  itemBuilder: (e) {
+                    return ClickTrackWidget(
+                      data: {
+                        "event": e.$1,
+                        "goodsId": 1001,
+                      },
+                      child: ElevatedButton(
+                        onPressed: e.$2,
+                        child: Text(e.$1),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              NSectionBox(
+                title: 'TapTrack',
+                child: buildWrap<(String, VoidCallback)>(
+                  items: items,
+                  itemBuilder: (e) {
+                    return TapTrackWidget(
+                      data: {
+                        "event": e.$1,
+                        "goodsId": 1001,
+                      },
+                      child: ElevatedButton(
+                        onPressed: e.$2,
+                        child: Text(e.$1),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
