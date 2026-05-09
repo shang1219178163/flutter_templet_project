@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/service/track_data_manager.dart';
+import 'package:flutter_templet_project/service/tap_track.dart';
 import 'package:get/get.dart';
 
 /// 事件追踪测试
@@ -61,7 +61,7 @@ class _TrackEventPageState extends State<TrackEventPage> {
               buildWrap<(String, VoidCallback)>(
                 items: items,
                 itemBuilder: (e) {
-                  return TrackWidget(
+                  return TapTrackWidget(
                     params: {
                       "event": e.$1,
                       "goodsId": 1001,

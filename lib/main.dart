@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:http_proxy/http_proxy.dart';
-import 'package:flutter_templet_project/service/track_data_manager.dart';
+import 'package:flutter_templet_project/service/tap_track.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
@@ -62,7 +62,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // 全局埋点
-  TrackDataManager.init(
+  TapTrackManager.init(
     onReport: (params) {
       debugPrint("main 埋点: ${params}");
     },

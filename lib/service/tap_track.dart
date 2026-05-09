@@ -10,9 +10,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-/// 全局埋点(需要配合 TrackWidget 使用)
-class TrackDataManager {
-  /// 埋点初始化
+/// 全局埋点(需要配合 TapTrackWidget 使用)
+class TapTrackManager {
+  /// tap track init
   static void init({required ValueChanged<Map<String, dynamic>> onReport}) {
     GestureBinding.instance.pointerRouter.addGlobalRoute((event) {
       return _handlePointer(event: event, onReport: onReport);
@@ -26,7 +26,7 @@ class TrackDataManager {
     if (event is! PointerDownEvent) {
       return;
     }
-    // debugPrint("全局 PointerDown: ${event.position}");
+    // debugPrint("_handlePointer PointerDown: ${event.position}");
 
     final result = HitTestResult();
     WidgetsBinding.instance.hitTestInView(
@@ -40,7 +40,7 @@ class TrackDataManager {
       if (target is RenderObject) {
         final element = _findElement(target);
         if (element != null) {
-          final inherited = element.dependOnInheritedWidgetOfExactType<_TrackInherited>();
+          final inherited = element.dependOnInheritedWidgetOfExactType<_TapTrackInherited>();
           if (inherited != null) {
             onReport(inherited.params);
             break;
@@ -66,8 +66,8 @@ class TrackDataManager {
 }
 
 /// 日志追踪组件
-class TrackWidget extends StatelessWidget {
-  const TrackWidget({
+class TapTrackWidget extends StatelessWidget {
+  const TapTrackWidget({
     super.key,
     required this.child,
     required this.params,
@@ -79,15 +79,15 @@ class TrackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _TrackInherited(
+    return _TapTrackInherited(
       params: params,
       child: child,
     );
   }
 }
 
-class _TrackInherited extends InheritedWidget {
-  const _TrackInherited({
+class _TapTrackInherited extends InheritedWidget {
+  const _TapTrackInherited({
     required this.params,
     required super.child,
   });
@@ -95,7 +95,7 @@ class _TrackInherited extends InheritedWidget {
   final Map<String, dynamic> params;
 
   @override
-  bool updateShouldNotify(covariant _TrackInherited oldWidget) {
+  bool updateShouldNotify(covariant _TapTrackInherited oldWidget) {
     return !mapEquals(oldWidget.params, params);
   }
 }
