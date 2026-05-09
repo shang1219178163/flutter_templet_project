@@ -1,25 +1,30 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_chat_bubble.dart';
 import 'package:flutter_templet_project/basicWidget/n_cross_notice.dart';
 import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/model/im_msg_list_root_model.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/util/CacheImageProvider.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 
 class ImChatPage extends StatefulWidget {
   ImChatPage({Key? key, this.title}) : super(key: key);
@@ -76,6 +81,8 @@ class _ImChatPageState extends State<ImChatPage>
 
   final isKeyboardVisibleVN = ValueNotifier(false);
 
+  String bubblePath = "";
+
   @override
   void dispose() {
     // _controller.dispose();
@@ -103,6 +110,7 @@ class _ImChatPageState extends State<ImChatPage>
   }
 
   initData() {
+    bubblePath = Assets.messageBubble1;
     dataList.value = getMsgsModel();
   }
 
@@ -111,25 +119,23 @@ class _ImChatPageState extends State<ImChatPage>
     // _controller.forward();
     return Scaffold(
       // backgroundColor: Colors.black12,
-      appBar: hideApp
-          ? null
-          : AppBar(
-              flexibleSpace: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.lightBlue, Colors.green], // 渐变的颜色
-                    begin: Alignment.centerLeft, // 渐变的起始位置
-                    end: Alignment.centerRight, // 渐变的结束位置
-                  ),
-                ),
-              ),
-              title: Text(widget.title ?? "$widget"),
-              elevation: 0,
-              scrolledUnderElevation: 0,
-              centerTitle: true,
-              // bottom: buildAppbarBottom(),
-              actions: buildRightItems(),
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.lightBlue, Colors.green], // 渐变的颜色
+              begin: Alignment.centerLeft, // 渐变的起始位置
+              end: Alignment.centerRight, // 渐变的结束位置
             ),
+          ),
+        ),
+        title: Text(widget.title ?? "$widget"),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        // bottom: buildAppbarBottom(),
+        actions: buildRightItems(),
+      ),
       body: buildBody(),
       // body: buildListView(),
       // bottomSheet: buildInputBar(),
@@ -151,9 +157,13 @@ class _ImChatPageState extends State<ImChatPage>
         }
       ),
       (
-        name: "其他",
+        name: "设置",
         action: () {
-          DLog.d("其他");
+          final args = {
+            "onBubble": onBubble,
+          };
+          DLog.d("args");
+          Get.toNamed(AppRouter.imChatSettingPage, arguments: args);
         }
       ),
     ];
@@ -195,6 +205,11 @@ class _ImChatPageState extends State<ImChatPage>
         },
       ),
     );
+  }
+
+  void onBubble(String v) {
+    bubblePath = v;
+    setState(() {});
   }
 
   Widget buildBody() {
@@ -331,18 +346,19 @@ class _ImChatPageState extends State<ImChatPage>
             // mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  right: 8,
-                ),
+                padding: const EdgeInsets.only(right: 8),
                 child: Opacity(
                   opacity: !isOwner ? 1 : 0,
                   child: InkWell(
                     onTap: () {},
-                    child: NNetworkImage(
-                      url: imgUrl,
-                      width: imgSize,
-                      height: imgSize,
-                      radius: 5,
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.grey,
+                      backgroundImage: CachedNetworkImageProvider(
+                        imgUrl,
+                        maxWidth: 20,
+                        maxHeight: 20,
+                      ),
                     ),
                   ),
                 ),
@@ -378,16 +394,17 @@ class _ImChatPageState extends State<ImChatPage>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 8,
-                ),
+                padding: const EdgeInsets.only(left: 8),
                 child: Opacity(
                   opacity: isOwner ? 1 : 0,
-                  child: NNetworkImage(
-                    url: imgUrl,
-                    width: imgSize,
-                    height: imgSize,
-                    radius: 5,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: CachedNetworkImageProvider(
+                      imgUrl,
+                      maxWidth: 20,
+                      maxHeight: 20,
+                    ),
                   ),
                 ),
               ),
@@ -537,23 +554,53 @@ class _ImChatPageState extends State<ImChatPage>
     // final contentBgColor = isOwner == true ? primary : bgColor;
     // final contentFontColor = isOwner == true ? Colors.white : fontColor;
 
+    if (bubblePath.isEmpty) {
+      return Container(
+        decoration: BoxDecoration(
+          color: contentBgColor,
+          borderRadius: borderRadius,
+          // border: Border.all(color: Colors.red),
+        ),
+        margin: isOwner ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
+        constraints: const BoxConstraints(minHeight: 37),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+          child: NText(
+            text,
+            fontSize: 14,
+            color: contentFontColor,
+            maxLines: 100,
+          ),
+        ),
+      );
+    }
+
+    contentFontColor = Colors.black;
+    Widget child = NChatBubble(
+      imagePath: bubblePath,
+      metrics: const NChatBubbleMetrics(
+        imageSize: Size(58, 44),
+        safeInset: EdgeInsets.fromLTRB(23, 22, 19, 11 + 6),
+      ),
+      child: NText(
+        text,
+        fontSize: 14,
+        color: contentFontColor,
+        maxLines: 100,
+      ),
+    );
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+      // padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
       decoration: BoxDecoration(
-        color: contentBgColor,
+        // color: contentBgColor,
         borderRadius: borderRadius,
         // border: Border.all(color: Colors.red),
       ),
       margin: isOwner ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
       constraints: const BoxConstraints(minHeight: 37),
       // constraints: BoxConstraints().loosen(),
-      child: NText(
-        text,
-        // textAlign: TextAlign.right,
-        fontSize: 16,
-        color: contentFontColor,
-        maxLines: 100,
-      ),
+      child: child,
     );
   }
 

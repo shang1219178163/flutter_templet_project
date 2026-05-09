@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
-class ImChatBubbleDemo extends StatefulWidget {
-  const ImChatBubbleDemo({
+class ImChatBubbleChange extends StatefulWidget {
+  const ImChatBubbleChange({
     super.key,
     this.arguments,
   });
@@ -17,11 +17,15 @@ class ImChatBubbleDemo extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<ImChatBubbleDemo> createState() => _ImChatBubbleDemoState();
+  State<ImChatBubbleChange> createState() => _ImChatBubbleChangeState();
 }
 
-class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
+class _ImChatBubbleChangeState extends State<ImChatBubbleChange> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+
+  late final args = Get.arguments ?? widget.arguments ?? <String, dynamic>{};
+
+  late final onBubble = args["onBubble"] as ValueChanged<String>?;
 
   final scrollController = ScrollController();
 
@@ -70,7 +74,13 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
         controller: scrollController,
         child: Column(
           children: [
-            buildExpandMenu(),
+            buildExpandMenu(
+              onChanged: (i) {
+                final v = items[i];
+                onBubble?.call(v);
+                DLog.d([v, onBubble]);
+              },
+            ),
             NSectionBox(
               title: "NChatBubble",
               child: Column(
@@ -106,7 +116,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
   }
 
   /// 颜色扩展菜单
-  Widget buildExpandMenu() {
+  Widget buildExpandMenu({ValueChanged<int>? onChanged}) {
     return NExpandChoice<String>(
       title: '气泡主题',
       rowCount: 5,
@@ -131,6 +141,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
       itemFooter: Divider(),
       onChanged: (index) {
         selectedIndex = index;
+        onChanged?.call(index);
         setState(() {});
       },
     );
@@ -165,7 +176,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
   }) {
     final imageSize = Size(58, 44);
     final constraints = BoxConstraints(minWidth: imageSize.width, minHeight: imageSize.height);
-    final safeInset = const EdgeInsets.symmetric(horizontal: 24, vertical: 18);
+    final safeInset = const EdgeInsets.symmetric(horizontal: 24, vertical: 20);
     final centerSlice = Rect.fromLTWH(safeInset.left, safeInset.top, 1, 1);
 
     final padding = EdgeInsets.only(
@@ -207,7 +218,7 @@ class _ImChatBubbleDemoState extends State<ImChatBubbleDemo> {
         imagePath: current,
         metrics: NChatBubbleMetrics(
           imageSize: const Size(58, 44),
-          safeInset: const EdgeInsets.fromLTRB(23, 19, 19, 11),
+          safeInset: const EdgeInsets.fromLTRB(23, 20, 19, 11),
         ),
         child: Text(text),
       ),
