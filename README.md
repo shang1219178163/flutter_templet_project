@@ -426,3 +426,8 @@ flutter pub upgrade --dry-run
 flutter pub outdated
 
 flutter pub upgrade --major-versions
+
+
+## 三、Flutter pub package 认证文件路径 pub-credentials.json
+
+/Users/shang/Library/Application Support/dart/pub-credentials.json
