@@ -13,7 +13,7 @@ analyzer:
 #    - non-nullable
 
 environment:
-  sdk: '>=3.5.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -278,6 +278,7 @@ dependency_overrides:
 #  intl: 0.17.0
   http: 1.0.0
   meta: ^1.12.0
+  collection: ^1.19.0
   scrollable_positioned_list: ^0.3.8
   fluttertoast: ^9.0.0
 
@@ -294,6 +295,12 @@ dependency_overrides:
       url: https://github.com/andychucs/flutter_inappwebview.git
       ref: master
       path: flutter_inappwebview_ios
+
+  flutter_image_compress_common:
+    git:
+      url: git@github.com:fluttercandies/flutter_image_compress.git
+      ref: b69a5cb932e9c577bf3d8cf912e38cbec8eeaced
+      path: packages/flutter_image_compress_common
 
 # User:
 #   path: ../User
