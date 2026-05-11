@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/basicWidget/n_animation_controller_build
 import 'package:flutter_templet_project/basicWidget/n_cupertino_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_flip_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
-import 'package:flutter_templet_project/basicWidget/n_queue_toast.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_queue_toast.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/transition/HorizalSwiperCardDemo.dart';

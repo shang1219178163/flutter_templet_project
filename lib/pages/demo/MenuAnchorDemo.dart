@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor_for_image.dart
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_manager_new.dart';
 import 'package:flutter_templet_project/basicWidget/text_field/n_input_accessory_view.dart';
+import 'package:flutter_templet_project/basicWidget/text_field/n_input_accessory_view_new.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
@@ -159,7 +160,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
             minLines: 1,
             maxLines: 3,
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
+              // FilteringTextInputFormatter.digitsOnly,
             ],
             decoration: InputDecoration(
               isDense: true,
@@ -167,10 +168,6 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
               hintText: '点击唤起InputAccessoryView',
             ),
             onTap: () async {
-              DLog.d("onTap");
-              focusNode.requestFocus();
-              SystemChannels.textInput.invokeMethod('TextInput.show');
-
               showInputAccessory();
             },
             onTapOutside: (e) {
@@ -180,9 +177,6 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
           SizedBox(height: 10),
           ElevatedButton(
             onPressed: () async {
-              focusNode.requestFocus();
-              await Future.delayed(Duration(milliseconds: 50));
-              SystemChannels.textInput.invokeMethod('TextInput.show');
               showInputAccessory();
             },
             child: Text("拉起键盘"),
@@ -300,13 +294,14 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
   }
 
   void showInputAccessory() {
-    return NInputAccessoryView.show(
+    DLog.d("showInputAccessory");
+    return NInputAccessoryViewNew.show(
       context: context,
       focusNode: focusNode,
       controller: textController,
-      keyboardVN: keyboardHeightVN,
+      // keyboardVN: keyboardHeightVN,
       keyboardType: TextInputType.number,
-      hintText: "请输入礼物数量",
+      hintText: "请输入",
       // maxLength: 3,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
