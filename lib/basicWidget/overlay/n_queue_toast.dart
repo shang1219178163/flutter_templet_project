@@ -70,6 +70,8 @@ class NQueueToast {
     double spacing = 12,
     double horizalSpacing = 30,
     bool isReverse = false,
+    OverlayEntry? below,
+    OverlayEntry? above,
     required Widget child,
   }) {
     final overlayState = Overlay.of(navigatorKey.currentContext!);
@@ -111,7 +113,7 @@ class NQueueToast {
     );
 
     _models.insert(0, _NQueueToastModel(data: data, id: id, entry: entry, key: key));
-    overlayState.insert(entry);
+    overlayState.insert(entry, below: below, above: above);
     _rebuildAll();
   }
 
