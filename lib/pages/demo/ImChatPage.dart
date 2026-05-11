@@ -218,7 +218,7 @@ class _ImChatPageState extends State<ImChatPage>
         children: [
           buildWarning(),
           buildTips1(tips: "患者暂未购买问诊服务"),
-          buildTips2(tips: "患者暂未购买问诊服务"),
+          // buildTips2(tips: "患者暂未购买问诊服务"),
           Expanded(
             // flex: 1,
             child: buildListView(),
@@ -313,6 +313,22 @@ class _ImChatPageState extends State<ImChatPage>
     final contentBgColor = isOwner ? context.primaryColor : AppColor.bgColor;
     final contentFontColor = Colors.white;
 
+    Widget buildAvatar({required String imgUrl, VoidCallback? onTap}) {
+      return GestureDetector(
+        onTap: onTap,
+        child: CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.grey,
+          backgroundImage: CachedNetworkImageProvider(
+            imgUrl,
+            maxWidth: 20 * 3,
+            maxHeight: 20 * 3,
+            scale: 3.0,
+          ),
+        ),
+      );
+    }
+
     var contentWidget = contentChild ??
         Container(
           color: contentBgColor,
@@ -348,17 +364,11 @@ class _ImChatPageState extends State<ImChatPage>
                 padding: const EdgeInsets.only(right: 8),
                 child: Opacity(
                   opacity: !isOwner ? 1 : 0,
-                  child: InkWell(
-                    onTap: () {},
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.grey,
-                      backgroundImage: CachedNetworkImageProvider(
-                        imgUrl,
-                        maxWidth: 20,
-                        maxHeight: 20,
-                      ),
-                    ),
+                  child: buildAvatar(
+                    imgUrl: imgUrl,
+                    onTap: () {
+                      DLog.d(name);
+                    },
                   ),
                 ),
               ),
@@ -396,14 +406,11 @@ class _ImChatPageState extends State<ImChatPage>
                 padding: const EdgeInsets.only(left: 8),
                 child: Opacity(
                   opacity: isOwner ? 1 : 0,
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: CachedNetworkImageProvider(
-                      imgUrl,
-                      maxWidth: 20,
-                      maxHeight: 20,
-                    ),
+                  child: buildAvatar(
+                    imgUrl: imgUrl,
+                    onTap: () {
+                      DLog.d(name);
+                    },
                   ),
                 ),
               ),
@@ -417,7 +424,7 @@ class _ImChatPageState extends State<ImChatPage>
   Widget buildContentChild({
     required int modelIndex,
     required bool isOwner,
-    required String text,
+    String? text,
   }) {
     final contentBgColor = Colors.green;
     final contentFontColor = Colors.white;

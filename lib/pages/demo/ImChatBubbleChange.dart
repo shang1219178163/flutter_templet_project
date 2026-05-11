@@ -75,8 +75,8 @@ class _ImChatBubbleChangeState extends State<ImChatBubbleChange> {
             buildExpandMenu(
               onChanged: (i) {
                 final v = items[i];
+                DLog.d(v);
                 onBubble?.call(v);
-                DLog.d([v, onBubble]);
               },
             ),
             NSectionBox(
