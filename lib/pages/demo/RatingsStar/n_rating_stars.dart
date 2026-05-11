@@ -8,9 +8,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_templet_project/generated/assets.dart';
 
 class NRatingStars extends StatefulWidget {
   const NRatingStars({

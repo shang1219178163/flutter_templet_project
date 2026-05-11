@@ -61,8 +61,8 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
       try {
         assert(key == this);
 
-        final String cacheKey = _cacheKeyFromImage(key.url);
-        final File cacheFile = await _childFile(cacheKey);
+        final cacheKey = _cacheKeyFromImage(key.url);
+        final cacheFile = await _childFile(cacheKey);
 
         // 先尝试从缓存加载
         if (cacheFile.existsSync()) {

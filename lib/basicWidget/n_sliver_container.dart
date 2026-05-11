@@ -45,7 +45,7 @@ class NSliverContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget current = sliver;
+    var current = sliver;
 
     /// padding
     if (padding != null) {

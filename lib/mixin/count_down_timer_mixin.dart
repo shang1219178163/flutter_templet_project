@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 倒计时
 mixin CountDownTimerMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {

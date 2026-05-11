@@ -5,7 +5,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 二维视图
 class TwoDimensionalGridViewDemo extends StatefulWidget {

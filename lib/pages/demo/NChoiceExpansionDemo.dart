@@ -5,11 +5,10 @@ import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NChoiceExpansionDemo extends StatefulWidget {
   NChoiceExpansionDemo({

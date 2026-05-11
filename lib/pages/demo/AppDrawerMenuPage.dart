@@ -4,6 +4,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/cell_model.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

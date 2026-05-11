@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/AppVideoPlayerService.dart';
 import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/indicator/n_line_progress_indicator.dart';
 import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/indicator/volume_and_brightness_mixin.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:video_player/video_player.dart';
 
 /// 播放器

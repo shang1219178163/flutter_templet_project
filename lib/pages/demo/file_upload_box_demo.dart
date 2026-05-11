@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// 文件选择demo

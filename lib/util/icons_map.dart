@@ -160,8 +160,7 @@ Map<String, IconData> kIConDic = {
   'Icons.four_g_plus_mobiledata': Icons.four_g_plus_mobiledata,
   'Icons.four_g_plus_mobiledata_sharp': Icons.four_g_plus_mobiledata_sharp,
   'Icons.four_g_plus_mobiledata_rounded': Icons.four_g_plus_mobiledata_rounded,
-  'Icons.four_g_plus_mobiledata_outlined':
-      Icons.four_g_plus_mobiledata_outlined,
+  'Icons.four_g_plus_mobiledata_outlined': Icons.four_g_plus_mobiledata_outlined,
   'Icons.four_k': Icons.four_k,
   'Icons.four_k_sharp': Icons.four_k_sharp,
   'Icons.four_k_rounded': Icons.four_k_rounded,
@@ -297,8 +296,7 @@ Map<String, IconData> kIConDic = {
   'Icons.account_balance_wallet': Icons.account_balance_wallet,
   'Icons.account_balance_wallet_sharp': Icons.account_balance_wallet_sharp,
   'Icons.account_balance_wallet_rounded': Icons.account_balance_wallet_rounded,
-  'Icons.account_balance_wallet_outlined':
-      Icons.account_balance_wallet_outlined,
+  'Icons.account_balance_wallet_outlined': Icons.account_balance_wallet_outlined,
   'Icons.account_box': Icons.account_box,
   'Icons.account_box_sharp': Icons.account_box_sharp,
   'Icons.account_box_rounded': Icons.account_box_rounded,
@@ -466,52 +464,32 @@ Map<String, IconData> kIConDic = {
   'Icons.airline_seat_flat_outlined': Icons.airline_seat_flat_outlined,
   'Icons.airline_seat_flat_angled': Icons.airline_seat_flat_angled,
   'Icons.airline_seat_flat_angled_sharp': Icons.airline_seat_flat_angled_sharp,
-  'Icons.airline_seat_flat_angled_rounded':
-      Icons.airline_seat_flat_angled_rounded,
-  'Icons.airline_seat_flat_angled_outlined':
-      Icons.airline_seat_flat_angled_outlined,
+  'Icons.airline_seat_flat_angled_rounded': Icons.airline_seat_flat_angled_rounded,
+  'Icons.airline_seat_flat_angled_outlined': Icons.airline_seat_flat_angled_outlined,
   'Icons.airline_seat_individual_suite': Icons.airline_seat_individual_suite,
-  'Icons.airline_seat_individual_suite_sharp':
-      Icons.airline_seat_individual_suite_sharp,
-  'Icons.airline_seat_individual_suite_rounded':
-      Icons.airline_seat_individual_suite_rounded,
-  'Icons.airline_seat_individual_suite_outlined':
-      Icons.airline_seat_individual_suite_outlined,
+  'Icons.airline_seat_individual_suite_sharp': Icons.airline_seat_individual_suite_sharp,
+  'Icons.airline_seat_individual_suite_rounded': Icons.airline_seat_individual_suite_rounded,
+  'Icons.airline_seat_individual_suite_outlined': Icons.airline_seat_individual_suite_outlined,
   'Icons.airline_seat_legroom_extra': Icons.airline_seat_legroom_extra,
-  'Icons.airline_seat_legroom_extra_sharp':
-      Icons.airline_seat_legroom_extra_sharp,
-  'Icons.airline_seat_legroom_extra_rounded':
-      Icons.airline_seat_legroom_extra_rounded,
-  'Icons.airline_seat_legroom_extra_outlined':
-      Icons.airline_seat_legroom_extra_outlined,
+  'Icons.airline_seat_legroom_extra_sharp': Icons.airline_seat_legroom_extra_sharp,
+  'Icons.airline_seat_legroom_extra_rounded': Icons.airline_seat_legroom_extra_rounded,
+  'Icons.airline_seat_legroom_extra_outlined': Icons.airline_seat_legroom_extra_outlined,
   'Icons.airline_seat_legroom_normal': Icons.airline_seat_legroom_normal,
-  'Icons.airline_seat_legroom_normal_sharp':
-      Icons.airline_seat_legroom_normal_sharp,
-  'Icons.airline_seat_legroom_normal_rounded':
-      Icons.airline_seat_legroom_normal_rounded,
-  'Icons.airline_seat_legroom_normal_outlined':
-      Icons.airline_seat_legroom_normal_outlined,
+  'Icons.airline_seat_legroom_normal_sharp': Icons.airline_seat_legroom_normal_sharp,
+  'Icons.airline_seat_legroom_normal_rounded': Icons.airline_seat_legroom_normal_rounded,
+  'Icons.airline_seat_legroom_normal_outlined': Icons.airline_seat_legroom_normal_outlined,
   'Icons.airline_seat_legroom_reduced': Icons.airline_seat_legroom_reduced,
-  'Icons.airline_seat_legroom_reduced_sharp':
-      Icons.airline_seat_legroom_reduced_sharp,
-  'Icons.airline_seat_legroom_reduced_rounded':
-      Icons.airline_seat_legroom_reduced_rounded,
-  'Icons.airline_seat_legroom_reduced_outlined':
-      Icons.airline_seat_legroom_reduced_outlined,
+  'Icons.airline_seat_legroom_reduced_sharp': Icons.airline_seat_legroom_reduced_sharp,
+  'Icons.airline_seat_legroom_reduced_rounded': Icons.airline_seat_legroom_reduced_rounded,
+  'Icons.airline_seat_legroom_reduced_outlined': Icons.airline_seat_legroom_reduced_outlined,
   'Icons.airline_seat_recline_extra': Icons.airline_seat_recline_extra,
-  'Icons.airline_seat_recline_extra_sharp':
-      Icons.airline_seat_recline_extra_sharp,
-  'Icons.airline_seat_recline_extra_rounded':
-      Icons.airline_seat_recline_extra_rounded,
-  'Icons.airline_seat_recline_extra_outlined':
-      Icons.airline_seat_recline_extra_outlined,
+  'Icons.airline_seat_recline_extra_sharp': Icons.airline_seat_recline_extra_sharp,
+  'Icons.airline_seat_recline_extra_rounded': Icons.airline_seat_recline_extra_rounded,
+  'Icons.airline_seat_recline_extra_outlined': Icons.airline_seat_recline_extra_outlined,
   'Icons.airline_seat_recline_normal': Icons.airline_seat_recline_normal,
-  'Icons.airline_seat_recline_normal_sharp':
-      Icons.airline_seat_recline_normal_sharp,
-  'Icons.airline_seat_recline_normal_rounded':
-      Icons.airline_seat_recline_normal_rounded,
-  'Icons.airline_seat_recline_normal_outlined':
-      Icons.airline_seat_recline_normal_outlined,
+  'Icons.airline_seat_recline_normal_sharp': Icons.airline_seat_recline_normal_sharp,
+  'Icons.airline_seat_recline_normal_rounded': Icons.airline_seat_recline_normal_rounded,
+  'Icons.airline_seat_recline_normal_outlined': Icons.airline_seat_recline_normal_outlined,
   'Icons.airline_stops': Icons.airline_stops,
   'Icons.airline_stops_sharp': Icons.airline_stops_sharp,
   'Icons.airline_stops_rounded': Icons.airline_stops_rounded,
@@ -570,10 +548,8 @@ Map<String, IconData> kIConDic = {
   'Icons.album_outlined': Icons.album_outlined,
   'Icons.align_horizontal_center': Icons.align_horizontal_center,
   'Icons.align_horizontal_center_sharp': Icons.align_horizontal_center_sharp,
-  'Icons.align_horizontal_center_rounded':
-      Icons.align_horizontal_center_rounded,
-  'Icons.align_horizontal_center_outlined':
-      Icons.align_horizontal_center_outlined,
+  'Icons.align_horizontal_center_rounded': Icons.align_horizontal_center_rounded,
+  'Icons.align_horizontal_center_outlined': Icons.align_horizontal_center_outlined,
   'Icons.align_horizontal_left': Icons.align_horizontal_left,
   'Icons.align_horizontal_left_sharp': Icons.align_horizontal_left_sharp,
   'Icons.align_horizontal_left_rounded': Icons.align_horizontal_left_rounded,
@@ -581,8 +557,7 @@ Map<String, IconData> kIConDic = {
   'Icons.align_horizontal_right': Icons.align_horizontal_right,
   'Icons.align_horizontal_right_sharp': Icons.align_horizontal_right_sharp,
   'Icons.align_horizontal_right_rounded': Icons.align_horizontal_right_rounded,
-  'Icons.align_horizontal_right_outlined':
-      Icons.align_horizontal_right_outlined,
+  'Icons.align_horizontal_right_outlined': Icons.align_horizontal_right_outlined,
   'Icons.align_vertical_bottom': Icons.align_vertical_bottom,
   'Icons.align_vertical_bottom_sharp': Icons.align_vertical_bottom_sharp,
   'Icons.align_vertical_bottom_rounded': Icons.align_vertical_bottom_rounded,
@@ -734,16 +709,15 @@ Map<String, IconData> kIConDic = {
   'Icons.arrow_drop_down_circle': Icons.arrow_drop_down_circle,
   'Icons.arrow_drop_down_circle_sharp': Icons.arrow_drop_down_circle_sharp,
   'Icons.arrow_drop_down_circle_rounded': Icons.arrow_drop_down_circle_rounded,
-  'Icons.arrow_drop_down_circle_outlined':
-      Icons.arrow_drop_down_circle_outlined,
+  'Icons.arrow_drop_down_circle_outlined': Icons.arrow_drop_down_circle_outlined,
   'Icons.arrow_drop_up': Icons.arrow_drop_up,
   'Icons.arrow_drop_up_sharp': Icons.arrow_drop_up_sharp,
   'Icons.arrow_drop_up_rounded': Icons.arrow_drop_up_rounded,
   'Icons.arrow_drop_up_outlined': Icons.arrow_drop_up_outlined,
-  'Icons.arrow_forward': Icons.arrow_forward,
-  'Icons.arrow_forward_sharp': Icons.arrow_forward_sharp,
-  'Icons.arrow_forward_rounded': Icons.arrow_forward_rounded,
-  'Icons.arrow_forward_outlined': Icons.arrow_forward_outlined,
+  // 'Icons.arrow_forward': Icons.arrow_forward,
+  // 'Icons.arrow_forward_sharp': Icons.arrow_forward_sharp,
+  // 'Icons.arrow_forward_rounded': Icons.arrow_forward_rounded,
+  // 'Icons.arrow_forward_outlined': Icons.arrow_forward_outlined,
   'Icons.arrow_forward_ios': Icons.arrow_forward_ios,
   'Icons.arrow_forward_ios_sharp': Icons.arrow_forward_ios_sharp,
   'Icons.arrow_forward_ios_rounded': Icons.arrow_forward_ios_rounded,
@@ -1610,10 +1584,8 @@ Map<String, IconData> kIConDic = {
   'Icons.check_box_outlined': Icons.check_box_outlined,
   'Icons.check_box_outline_blank': Icons.check_box_outline_blank,
   'Icons.check_box_outline_blank_sharp': Icons.check_box_outline_blank_sharp,
-  'Icons.check_box_outline_blank_rounded':
-      Icons.check_box_outline_blank_rounded,
-  'Icons.check_box_outline_blank_outlined':
-      Icons.check_box_outline_blank_outlined,
+  'Icons.check_box_outline_blank_rounded': Icons.check_box_outline_blank_rounded,
+  'Icons.check_box_outline_blank_outlined': Icons.check_box_outline_blank_outlined,
   'Icons.check_circle': Icons.check_circle,
   'Icons.check_circle_sharp': Icons.check_circle_sharp,
   'Icons.check_circle_rounded': Icons.check_circle_rounded,
@@ -1700,10 +1672,8 @@ Map<String, IconData> kIConDic = {
   'Icons.closed_caption_outlined': Icons.closed_caption_outlined,
   'Icons.closed_caption_disabled': Icons.closed_caption_disabled,
   'Icons.closed_caption_disabled_sharp': Icons.closed_caption_disabled_sharp,
-  'Icons.closed_caption_disabled_rounded':
-      Icons.closed_caption_disabled_rounded,
-  'Icons.closed_caption_disabled_outlined':
-      Icons.closed_caption_disabled_outlined,
+  'Icons.closed_caption_disabled_rounded': Icons.closed_caption_disabled_rounded,
+  'Icons.closed_caption_disabled_outlined': Icons.closed_caption_disabled_outlined,
   'Icons.closed_caption_off': Icons.closed_caption_off,
   'Icons.closed_caption_off_sharp': Icons.closed_caption_off_sharp,
   'Icons.closed_caption_off_rounded': Icons.closed_caption_off_rounded,
@@ -1835,10 +1805,8 @@ Map<String, IconData> kIConDic = {
   'Icons.confirmation_number_outlined': Icons.confirmation_number_outlined,
   'Icons.connect_without_contact': Icons.connect_without_contact,
   'Icons.connect_without_contact_sharp': Icons.connect_without_contact_sharp,
-  'Icons.connect_without_contact_rounded':
-      Icons.connect_without_contact_rounded,
-  'Icons.connect_without_contact_outlined':
-      Icons.connect_without_contact_outlined,
+  'Icons.connect_without_contact_rounded': Icons.connect_without_contact_rounded,
+  'Icons.connect_without_contact_outlined': Icons.connect_without_contact_outlined,
   'Icons.connected_tv': Icons.connected_tv,
   'Icons.connected_tv_sharp': Icons.connected_tv_sharp,
   'Icons.connected_tv_rounded': Icons.connected_tv_rounded,
@@ -1917,10 +1885,8 @@ Map<String, IconData> kIConDic = {
   'Icons.control_point_outlined': Icons.control_point_outlined,
   'Icons.control_point_duplicate': Icons.control_point_duplicate,
   'Icons.control_point_duplicate_sharp': Icons.control_point_duplicate_sharp,
-  'Icons.control_point_duplicate_rounded':
-      Icons.control_point_duplicate_rounded,
-  'Icons.control_point_duplicate_outlined':
-      Icons.control_point_duplicate_outlined,
+  'Icons.control_point_duplicate_rounded': Icons.control_point_duplicate_rounded,
+  'Icons.control_point_duplicate_outlined': Icons.control_point_duplicate_outlined,
   'Icons.conveyor_belt': Icons.conveyor_belt,
   'Icons.cookie': Icons.cookie,
   'Icons.cookie_sharp': Icons.cookie_sharp,
@@ -2212,10 +2178,8 @@ Map<String, IconData> kIConDic = {
   'Icons.desk_outlined': Icons.desk_outlined,
   'Icons.desktop_access_disabled': Icons.desktop_access_disabled,
   'Icons.desktop_access_disabled_sharp': Icons.desktop_access_disabled_sharp,
-  'Icons.desktop_access_disabled_rounded':
-      Icons.desktop_access_disabled_rounded,
-  'Icons.desktop_access_disabled_outlined':
-      Icons.desktop_access_disabled_outlined,
+  'Icons.desktop_access_disabled_rounded': Icons.desktop_access_disabled_rounded,
+  'Icons.desktop_access_disabled_outlined': Icons.desktop_access_disabled_outlined,
   'Icons.desktop_mac': Icons.desktop_mac,
   'Icons.desktop_mac_sharp': Icons.desktop_mac_sharp,
   'Icons.desktop_mac_rounded': Icons.desktop_mac_rounded,
@@ -2304,8 +2268,7 @@ Map<String, IconData> kIConDic = {
   'Icons.directions_boat_filled': Icons.directions_boat_filled,
   'Icons.directions_boat_filled_sharp': Icons.directions_boat_filled_sharp,
   'Icons.directions_boat_filled_rounded': Icons.directions_boat_filled_rounded,
-  'Icons.directions_boat_filled_outlined':
-      Icons.directions_boat_filled_outlined,
+  'Icons.directions_boat_filled_outlined': Icons.directions_boat_filled_outlined,
   'Icons.directions_bus': Icons.directions_bus,
   'Icons.directions_bus_sharp': Icons.directions_bus_sharp,
   'Icons.directions_bus_rounded': Icons.directions_bus_rounded,
@@ -2335,12 +2298,9 @@ Map<String, IconData> kIConDic = {
   'Icons.directions_railway_rounded': Icons.directions_railway_rounded,
   'Icons.directions_railway_outlined': Icons.directions_railway_outlined,
   'Icons.directions_railway_filled': Icons.directions_railway_filled,
-  'Icons.directions_railway_filled_sharp':
-      Icons.directions_railway_filled_sharp,
-  'Icons.directions_railway_filled_rounded':
-      Icons.directions_railway_filled_rounded,
-  'Icons.directions_railway_filled_outlined':
-      Icons.directions_railway_filled_outlined,
+  'Icons.directions_railway_filled_sharp': Icons.directions_railway_filled_sharp,
+  'Icons.directions_railway_filled_rounded': Icons.directions_railway_filled_rounded,
+  'Icons.directions_railway_filled_outlined': Icons.directions_railway_filled_outlined,
   'Icons.directions_run': Icons.directions_run,
   'Icons.directions_run_sharp': Icons.directions_run_sharp,
   'Icons.directions_run_rounded': Icons.directions_run_rounded,
@@ -2351,10 +2311,8 @@ Map<String, IconData> kIConDic = {
   'Icons.directions_subway_outlined': Icons.directions_subway_outlined,
   'Icons.directions_subway_filled': Icons.directions_subway_filled,
   'Icons.directions_subway_filled_sharp': Icons.directions_subway_filled_sharp,
-  'Icons.directions_subway_filled_rounded':
-      Icons.directions_subway_filled_rounded,
-  'Icons.directions_subway_filled_outlined':
-      Icons.directions_subway_filled_outlined,
+  'Icons.directions_subway_filled_rounded': Icons.directions_subway_filled_rounded,
+  'Icons.directions_subway_filled_outlined': Icons.directions_subway_filled_outlined,
   'Icons.directions_train': Icons.directions_train,
   'Icons.directions_train_sharp': Icons.directions_train_sharp,
   'Icons.directions_train_rounded': Icons.directions_train_rounded,
@@ -2364,12 +2322,9 @@ Map<String, IconData> kIConDic = {
   'Icons.directions_transit_rounded': Icons.directions_transit_rounded,
   'Icons.directions_transit_outlined': Icons.directions_transit_outlined,
   'Icons.directions_transit_filled': Icons.directions_transit_filled,
-  'Icons.directions_transit_filled_sharp':
-      Icons.directions_transit_filled_sharp,
-  'Icons.directions_transit_filled_rounded':
-      Icons.directions_transit_filled_rounded,
-  'Icons.directions_transit_filled_outlined':
-      Icons.directions_transit_filled_outlined,
+  'Icons.directions_transit_filled_sharp': Icons.directions_transit_filled_sharp,
+  'Icons.directions_transit_filled_rounded': Icons.directions_transit_filled_rounded,
+  'Icons.directions_transit_filled_outlined': Icons.directions_transit_filled_outlined,
   'Icons.directions_walk': Icons.directions_walk,
   'Icons.directions_walk_sharp': Icons.directions_walk_sharp,
   'Icons.directions_walk_rounded': Icons.directions_walk_rounded,
@@ -2454,14 +2409,10 @@ Map<String, IconData> kIConDic = {
   'Icons.do_not_disturb_on_sharp': Icons.do_not_disturb_on_sharp,
   'Icons.do_not_disturb_on_rounded': Icons.do_not_disturb_on_rounded,
   'Icons.do_not_disturb_on_outlined': Icons.do_not_disturb_on_outlined,
-  'Icons.do_not_disturb_on_total_silence':
-      Icons.do_not_disturb_on_total_silence,
-  'Icons.do_not_disturb_on_total_silence_sharp':
-      Icons.do_not_disturb_on_total_silence_sharp,
-  'Icons.do_not_disturb_on_total_silence_rounded':
-      Icons.do_not_disturb_on_total_silence_rounded,
-  'Icons.do_not_disturb_on_total_silence_outlined':
-      Icons.do_not_disturb_on_total_silence_outlined,
+  'Icons.do_not_disturb_on_total_silence': Icons.do_not_disturb_on_total_silence,
+  'Icons.do_not_disturb_on_total_silence_sharp': Icons.do_not_disturb_on_total_silence_sharp,
+  'Icons.do_not_disturb_on_total_silence_rounded': Icons.do_not_disturb_on_total_silence_rounded,
+  'Icons.do_not_disturb_on_total_silence_outlined': Icons.do_not_disturb_on_total_silence_outlined,
   'Icons.do_not_step': Icons.do_not_step,
   'Icons.do_not_step_sharp': Icons.do_not_step_sharp,
   'Icons.do_not_step_rounded': Icons.do_not_step_rounded,
@@ -2584,12 +2535,9 @@ Map<String, IconData> kIConDic = {
   'Icons.drive_file_move_rtl_rounded': Icons.drive_file_move_rtl_rounded,
   'Icons.drive_file_move_rtl_outlined': Icons.drive_file_move_rtl_outlined,
   'Icons.drive_file_rename_outline': Icons.drive_file_rename_outline,
-  'Icons.drive_file_rename_outline_sharp':
-      Icons.drive_file_rename_outline_sharp,
-  'Icons.drive_file_rename_outline_rounded':
-      Icons.drive_file_rename_outline_rounded,
-  'Icons.drive_file_rename_outline_outlined':
-      Icons.drive_file_rename_outline_outlined,
+  'Icons.drive_file_rename_outline_sharp': Icons.drive_file_rename_outline_sharp,
+  'Icons.drive_file_rename_outline_rounded': Icons.drive_file_rename_outline_rounded,
+  'Icons.drive_file_rename_outline_outlined': Icons.drive_file_rename_outline_outlined,
   'Icons.drive_folder_upload': Icons.drive_folder_upload,
   'Icons.drive_folder_upload_sharp': Icons.drive_folder_upload_sharp,
   'Icons.drive_folder_upload_rounded': Icons.drive_folder_upload_rounded,
@@ -2802,10 +2750,8 @@ Map<String, IconData> kIConDic = {
   'Icons.engineering_outlined': Icons.engineering_outlined,
   'Icons.enhance_photo_translate': Icons.enhance_photo_translate,
   'Icons.enhance_photo_translate_sharp': Icons.enhance_photo_translate_sharp,
-  'Icons.enhance_photo_translate_rounded':
-      Icons.enhance_photo_translate_rounded,
-  'Icons.enhance_photo_translate_outlined':
-      Icons.enhance_photo_translate_outlined,
+  'Icons.enhance_photo_translate_rounded': Icons.enhance_photo_translate_rounded,
+  'Icons.enhance_photo_translate_outlined': Icons.enhance_photo_translate_outlined,
   'Icons.enhanced_encryption': Icons.enhanced_encryption,
   'Icons.enhanced_encryption_sharp': Icons.enhanced_encryption_sharp,
   'Icons.enhanced_encryption_rounded': Icons.enhanced_encryption_rounded,
@@ -2964,10 +2910,8 @@ Map<String, IconData> kIConDic = {
   'Icons.face_6_outlined': Icons.face_6_outlined,
   'Icons.face_retouching_natural': Icons.face_retouching_natural,
   'Icons.face_retouching_natural_sharp': Icons.face_retouching_natural_sharp,
-  'Icons.face_retouching_natural_rounded':
-      Icons.face_retouching_natural_rounded,
-  'Icons.face_retouching_natural_outlined':
-      Icons.face_retouching_natural_outlined,
+  'Icons.face_retouching_natural_rounded': Icons.face_retouching_natural_rounded,
+  'Icons.face_retouching_natural_outlined': Icons.face_retouching_natural_outlined,
   'Icons.face_retouching_off': Icons.face_retouching_off,
   'Icons.face_retouching_off_sharp': Icons.face_retouching_off_sharp,
   'Icons.face_retouching_off_rounded': Icons.face_retouching_off_rounded,
@@ -3435,13 +3379,11 @@ Map<String, IconData> kIConDic = {
   'Icons.format_indent_decrease': Icons.format_indent_decrease,
   'Icons.format_indent_decrease_sharp': Icons.format_indent_decrease_sharp,
   'Icons.format_indent_decrease_rounded': Icons.format_indent_decrease_rounded,
-  'Icons.format_indent_decrease_outlined':
-      Icons.format_indent_decrease_outlined,
+  'Icons.format_indent_decrease_outlined': Icons.format_indent_decrease_outlined,
   'Icons.format_indent_increase': Icons.format_indent_increase,
   'Icons.format_indent_increase_sharp': Icons.format_indent_increase_sharp,
   'Icons.format_indent_increase_rounded': Icons.format_indent_increase_rounded,
-  'Icons.format_indent_increase_outlined':
-      Icons.format_indent_increase_outlined,
+  'Icons.format_indent_increase_outlined': Icons.format_indent_increase_outlined,
   'Icons.format_italic': Icons.format_italic,
   'Icons.format_italic_sharp': Icons.format_italic_sharp,
   'Icons.format_italic_rounded': Icons.format_italic_rounded,
@@ -3461,10 +3403,8 @@ Map<String, IconData> kIConDic = {
   'Icons.format_list_numbered_outlined': Icons.format_list_numbered_outlined,
   'Icons.format_list_numbered_rtl': Icons.format_list_numbered_rtl,
   'Icons.format_list_numbered_rtl_sharp': Icons.format_list_numbered_rtl_sharp,
-  'Icons.format_list_numbered_rtl_rounded':
-      Icons.format_list_numbered_rtl_rounded,
-  'Icons.format_list_numbered_rtl_outlined':
-      Icons.format_list_numbered_rtl_outlined,
+  'Icons.format_list_numbered_rtl_rounded': Icons.format_list_numbered_rtl_rounded,
+  'Icons.format_list_numbered_rtl_outlined': Icons.format_list_numbered_rtl_outlined,
   'Icons.format_overline': Icons.format_overline,
   'Icons.format_overline_sharp': Icons.format_overline_sharp,
   'Icons.format_overline_rounded': Icons.format_overline_rounded,
@@ -3490,19 +3430,13 @@ Map<String, IconData> kIConDic = {
   'Icons.format_strikethrough_rounded': Icons.format_strikethrough_rounded,
   'Icons.format_strikethrough_outlined': Icons.format_strikethrough_outlined,
   'Icons.format_textdirection_l_to_r': Icons.format_textdirection_l_to_r,
-  'Icons.format_textdirection_l_to_r_sharp':
-      Icons.format_textdirection_l_to_r_sharp,
-  'Icons.format_textdirection_l_to_r_rounded':
-      Icons.format_textdirection_l_to_r_rounded,
-  'Icons.format_textdirection_l_to_r_outlined':
-      Icons.format_textdirection_l_to_r_outlined,
+  'Icons.format_textdirection_l_to_r_sharp': Icons.format_textdirection_l_to_r_sharp,
+  'Icons.format_textdirection_l_to_r_rounded': Icons.format_textdirection_l_to_r_rounded,
+  'Icons.format_textdirection_l_to_r_outlined': Icons.format_textdirection_l_to_r_outlined,
   'Icons.format_textdirection_r_to_l': Icons.format_textdirection_r_to_l,
-  'Icons.format_textdirection_r_to_l_sharp':
-      Icons.format_textdirection_r_to_l_sharp,
-  'Icons.format_textdirection_r_to_l_rounded':
-      Icons.format_textdirection_r_to_l_rounded,
-  'Icons.format_textdirection_r_to_l_outlined':
-      Icons.format_textdirection_r_to_l_outlined,
+  'Icons.format_textdirection_r_to_l_sharp': Icons.format_textdirection_r_to_l_sharp,
+  'Icons.format_textdirection_r_to_l_rounded': Icons.format_textdirection_r_to_l_rounded,
+  'Icons.format_textdirection_r_to_l_outlined': Icons.format_textdirection_r_to_l_outlined,
   'Icons.format_underline': Icons.format_underline,
   'Icons.format_underline_sharp': Icons.format_underline_sharp,
   'Icons.format_underline_rounded': Icons.format_underline_rounded,
@@ -4083,10 +4017,8 @@ Map<String, IconData> kIConDic = {
   'Icons.incomplete_circle_outlined': Icons.incomplete_circle_outlined,
   'Icons.indeterminate_check_box': Icons.indeterminate_check_box,
   'Icons.indeterminate_check_box_sharp': Icons.indeterminate_check_box_sharp,
-  'Icons.indeterminate_check_box_rounded':
-      Icons.indeterminate_check_box_rounded,
-  'Icons.indeterminate_check_box_outlined':
-      Icons.indeterminate_check_box_outlined,
+  'Icons.indeterminate_check_box_rounded': Icons.indeterminate_check_box_rounded,
+  'Icons.indeterminate_check_box_outlined': Icons.indeterminate_check_box_outlined,
   'Icons.info': Icons.info,
   'Icons.info_sharp': Icons.info_sharp,
   'Icons.info_rounded': Icons.info_rounded,
@@ -4147,10 +4079,8 @@ Map<String, IconData> kIConDic = {
   'Icons.install_mobile_outlined': Icons.install_mobile_outlined,
   'Icons.integration_instructions': Icons.integration_instructions,
   'Icons.integration_instructions_sharp': Icons.integration_instructions_sharp,
-  'Icons.integration_instructions_rounded':
-      Icons.integration_instructions_rounded,
-  'Icons.integration_instructions_outlined':
-      Icons.integration_instructions_outlined,
+  'Icons.integration_instructions_rounded': Icons.integration_instructions_rounded,
+  'Icons.integration_instructions_outlined': Icons.integration_instructions_outlined,
   'Icons.interests': Icons.interests,
   'Icons.interests_sharp': Icons.interests_sharp,
   'Icons.interests_rounded': Icons.interests_rounded,
@@ -4272,32 +4202,21 @@ Map<String, IconData> kIConDic = {
   'Icons.keyboard_control_key_rounded': Icons.keyboard_control_key_rounded,
   'Icons.keyboard_control_key_outlined': Icons.keyboard_control_key_outlined,
   'Icons.keyboard_double_arrow_down': Icons.keyboard_double_arrow_down,
-  'Icons.keyboard_double_arrow_down_sharp':
-      Icons.keyboard_double_arrow_down_sharp,
-  'Icons.keyboard_double_arrow_down_rounded':
-      Icons.keyboard_double_arrow_down_rounded,
-  'Icons.keyboard_double_arrow_down_outlined':
-      Icons.keyboard_double_arrow_down_outlined,
+  'Icons.keyboard_double_arrow_down_sharp': Icons.keyboard_double_arrow_down_sharp,
+  'Icons.keyboard_double_arrow_down_rounded': Icons.keyboard_double_arrow_down_rounded,
+  'Icons.keyboard_double_arrow_down_outlined': Icons.keyboard_double_arrow_down_outlined,
   'Icons.keyboard_double_arrow_left': Icons.keyboard_double_arrow_left,
-  'Icons.keyboard_double_arrow_left_sharp':
-      Icons.keyboard_double_arrow_left_sharp,
-  'Icons.keyboard_double_arrow_left_rounded':
-      Icons.keyboard_double_arrow_left_rounded,
-  'Icons.keyboard_double_arrow_left_outlined':
-      Icons.keyboard_double_arrow_left_outlined,
+  'Icons.keyboard_double_arrow_left_sharp': Icons.keyboard_double_arrow_left_sharp,
+  'Icons.keyboard_double_arrow_left_rounded': Icons.keyboard_double_arrow_left_rounded,
+  'Icons.keyboard_double_arrow_left_outlined': Icons.keyboard_double_arrow_left_outlined,
   'Icons.keyboard_double_arrow_right': Icons.keyboard_double_arrow_right,
-  'Icons.keyboard_double_arrow_right_sharp':
-      Icons.keyboard_double_arrow_right_sharp,
-  'Icons.keyboard_double_arrow_right_rounded':
-      Icons.keyboard_double_arrow_right_rounded,
-  'Icons.keyboard_double_arrow_right_outlined':
-      Icons.keyboard_double_arrow_right_outlined,
+  'Icons.keyboard_double_arrow_right_sharp': Icons.keyboard_double_arrow_right_sharp,
+  'Icons.keyboard_double_arrow_right_rounded': Icons.keyboard_double_arrow_right_rounded,
+  'Icons.keyboard_double_arrow_right_outlined': Icons.keyboard_double_arrow_right_outlined,
   'Icons.keyboard_double_arrow_up': Icons.keyboard_double_arrow_up,
   'Icons.keyboard_double_arrow_up_sharp': Icons.keyboard_double_arrow_up_sharp,
-  'Icons.keyboard_double_arrow_up_rounded':
-      Icons.keyboard_double_arrow_up_rounded,
-  'Icons.keyboard_double_arrow_up_outlined':
-      Icons.keyboard_double_arrow_up_outlined,
+  'Icons.keyboard_double_arrow_up_rounded': Icons.keyboard_double_arrow_up_rounded,
+  'Icons.keyboard_double_arrow_up_outlined': Icons.keyboard_double_arrow_up_outlined,
   'Icons.keyboard_hide': Icons.keyboard_hide,
   'Icons.keyboard_hide_sharp': Icons.keyboard_hide_sharp,
   'Icons.keyboard_hide_rounded': Icons.keyboard_hide_rounded,
@@ -4340,8 +4259,7 @@ Map<String, IconData> kIConDic = {
   'Icons.label_important_outlined': Icons.label_important_outlined,
   'Icons.label_important_outline': Icons.label_important_outline,
   'Icons.label_important_outline_sharp': Icons.label_important_outline_sharp,
-  'Icons.label_important_outline_rounded':
-      Icons.label_important_outline_rounded,
+  'Icons.label_important_outline_rounded': Icons.label_important_outline_rounded,
   'Icons.label_off': Icons.label_off,
   'Icons.label_off_sharp': Icons.label_off_sharp,
   'Icons.label_off_rounded': Icons.label_off_rounded,
@@ -4542,10 +4460,8 @@ Map<String, IconData> kIConDic = {
   'Icons.local_car_wash_outlined': Icons.local_car_wash_outlined,
   'Icons.local_convenience_store': Icons.local_convenience_store,
   'Icons.local_convenience_store_sharp': Icons.local_convenience_store_sharp,
-  'Icons.local_convenience_store_rounded':
-      Icons.local_convenience_store_rounded,
-  'Icons.local_convenience_store_outlined':
-      Icons.local_convenience_store_outlined,
+  'Icons.local_convenience_store_rounded': Icons.local_convenience_store_rounded,
+  'Icons.local_convenience_store_outlined': Icons.local_convenience_store_outlined,
   'Icons.local_dining': Icons.local_dining,
   'Icons.local_dining_sharp': Icons.local_dining_sharp,
   'Icons.local_dining_rounded': Icons.local_dining_rounded,
@@ -4985,8 +4901,7 @@ Map<String, IconData> kIConDic = {
   'Icons.miscellaneous_services': Icons.miscellaneous_services,
   'Icons.miscellaneous_services_sharp': Icons.miscellaneous_services_sharp,
   'Icons.miscellaneous_services_rounded': Icons.miscellaneous_services_rounded,
-  'Icons.miscellaneous_services_outlined':
-      Icons.miscellaneous_services_outlined,
+  'Icons.miscellaneous_services_outlined': Icons.miscellaneous_services_outlined,
   'Icons.missed_video_call': Icons.missed_video_call,
   'Icons.missed_video_call_sharp': Icons.missed_video_call_sharp,
   'Icons.missed_video_call_rounded': Icons.missed_video_call_rounded,
@@ -5365,12 +5280,9 @@ Map<String, IconData> kIConDic = {
   'Icons.no_encryption_rounded': Icons.no_encryption_rounded,
   'Icons.no_encryption_outlined': Icons.no_encryption_outlined,
   'Icons.no_encryption_gmailerrorred': Icons.no_encryption_gmailerrorred,
-  'Icons.no_encryption_gmailerrorred_sharp':
-      Icons.no_encryption_gmailerrorred_sharp,
-  'Icons.no_encryption_gmailerrorred_rounded':
-      Icons.no_encryption_gmailerrorred_rounded,
-  'Icons.no_encryption_gmailerrorred_outlined':
-      Icons.no_encryption_gmailerrorred_outlined,
+  'Icons.no_encryption_gmailerrorred_sharp': Icons.no_encryption_gmailerrorred_sharp,
+  'Icons.no_encryption_gmailerrorred_rounded': Icons.no_encryption_gmailerrorred_rounded,
+  'Icons.no_encryption_gmailerrorred_outlined': Icons.no_encryption_gmailerrorred_outlined,
   'Icons.no_flash': Icons.no_flash,
   'Icons.no_flash_sharp': Icons.no_flash_sharp,
   'Icons.no_flash_rounded': Icons.no_flash_rounded,
@@ -5471,8 +5383,7 @@ Map<String, IconData> kIConDic = {
   'Icons.notification_important': Icons.notification_important,
   'Icons.notification_important_sharp': Icons.notification_important_sharp,
   'Icons.notification_important_rounded': Icons.notification_important_rounded,
-  'Icons.notification_important_outlined':
-      Icons.notification_important_outlined,
+  'Icons.notification_important_outlined': Icons.notification_important_outlined,
   'Icons.notifications': Icons.notifications,
   'Icons.notifications_sharp': Icons.notifications_sharp,
   'Icons.notifications_rounded': Icons.notifications_rounded,
@@ -5640,44 +5551,33 @@ Map<String, IconData> kIConDic = {
   'Icons.panorama_horizontal_rounded': Icons.panorama_horizontal_rounded,
   'Icons.panorama_horizontal_outlined': Icons.panorama_horizontal_outlined,
   'Icons.panorama_horizontal_select': Icons.panorama_horizontal_select,
-  'Icons.panorama_horizontal_select_sharp':
-      Icons.panorama_horizontal_select_sharp,
-  'Icons.panorama_horizontal_select_rounded':
-      Icons.panorama_horizontal_select_rounded,
-  'Icons.panorama_horizontal_select_outlined':
-      Icons.panorama_horizontal_select_outlined,
+  'Icons.panorama_horizontal_select_sharp': Icons.panorama_horizontal_select_sharp,
+  'Icons.panorama_horizontal_select_rounded': Icons.panorama_horizontal_select_rounded,
+  'Icons.panorama_horizontal_select_outlined': Icons.panorama_horizontal_select_outlined,
   'Icons.panorama_photosphere': Icons.panorama_photosphere,
   'Icons.panorama_photosphere_sharp': Icons.panorama_photosphere_sharp,
   'Icons.panorama_photosphere_rounded': Icons.panorama_photosphere_rounded,
   'Icons.panorama_photosphere_outlined': Icons.panorama_photosphere_outlined,
   'Icons.panorama_photosphere_select': Icons.panorama_photosphere_select,
-  'Icons.panorama_photosphere_select_sharp':
-      Icons.panorama_photosphere_select_sharp,
-  'Icons.panorama_photosphere_select_rounded':
-      Icons.panorama_photosphere_select_rounded,
-  'Icons.panorama_photosphere_select_outlined':
-      Icons.panorama_photosphere_select_outlined,
+  'Icons.panorama_photosphere_select_sharp': Icons.panorama_photosphere_select_sharp,
+  'Icons.panorama_photosphere_select_rounded': Icons.panorama_photosphere_select_rounded,
+  'Icons.panorama_photosphere_select_outlined': Icons.panorama_photosphere_select_outlined,
   'Icons.panorama_vertical': Icons.panorama_vertical,
   'Icons.panorama_vertical_sharp': Icons.panorama_vertical_sharp,
   'Icons.panorama_vertical_rounded': Icons.panorama_vertical_rounded,
   'Icons.panorama_vertical_outlined': Icons.panorama_vertical_outlined,
   'Icons.panorama_vertical_select': Icons.panorama_vertical_select,
   'Icons.panorama_vertical_select_sharp': Icons.panorama_vertical_select_sharp,
-  'Icons.panorama_vertical_select_rounded':
-      Icons.panorama_vertical_select_rounded,
-  'Icons.panorama_vertical_select_outlined':
-      Icons.panorama_vertical_select_outlined,
+  'Icons.panorama_vertical_select_rounded': Icons.panorama_vertical_select_rounded,
+  'Icons.panorama_vertical_select_outlined': Icons.panorama_vertical_select_outlined,
   'Icons.panorama_wide_angle': Icons.panorama_wide_angle,
   'Icons.panorama_wide_angle_sharp': Icons.panorama_wide_angle_sharp,
   'Icons.panorama_wide_angle_rounded': Icons.panorama_wide_angle_rounded,
   'Icons.panorama_wide_angle_outlined': Icons.panorama_wide_angle_outlined,
   'Icons.panorama_wide_angle_select': Icons.panorama_wide_angle_select,
-  'Icons.panorama_wide_angle_select_sharp':
-      Icons.panorama_wide_angle_select_sharp,
-  'Icons.panorama_wide_angle_select_rounded':
-      Icons.panorama_wide_angle_select_rounded,
-  'Icons.panorama_wide_angle_select_outlined':
-      Icons.panorama_wide_angle_select_outlined,
+  'Icons.panorama_wide_angle_select_sharp': Icons.panorama_wide_angle_select_sharp,
+  'Icons.panorama_wide_angle_select_rounded': Icons.panorama_wide_angle_select_rounded,
+  'Icons.panorama_wide_angle_select_outlined': Icons.panorama_wide_angle_select_outlined,
   'Icons.paragliding': Icons.paragliding,
   'Icons.paragliding_sharp': Icons.paragliding_sharp,
   'Icons.paragliding_rounded': Icons.paragliding_rounded,
@@ -5788,10 +5688,8 @@ Map<String, IconData> kIConDic = {
   'Icons.perm_device_info_outlined': Icons.perm_device_info_outlined,
   'Icons.perm_device_information': Icons.perm_device_information,
   'Icons.perm_device_information_sharp': Icons.perm_device_information_sharp,
-  'Icons.perm_device_information_rounded':
-      Icons.perm_device_information_rounded,
-  'Icons.perm_device_information_outlined':
-      Icons.perm_device_information_outlined,
+  'Icons.perm_device_information_rounded': Icons.perm_device_information_rounded,
+  'Icons.perm_device_information_outlined': Icons.perm_device_information_outlined,
   'Icons.perm_identity': Icons.perm_identity,
   'Icons.perm_identity_sharp': Icons.perm_identity_sharp,
   'Icons.perm_identity_rounded': Icons.perm_identity_rounded,
@@ -5902,10 +5800,8 @@ Map<String, IconData> kIConDic = {
   'Icons.phone_android_outlined': Icons.phone_android_outlined,
   'Icons.phone_bluetooth_speaker': Icons.phone_bluetooth_speaker,
   'Icons.phone_bluetooth_speaker_sharp': Icons.phone_bluetooth_speaker_sharp,
-  'Icons.phone_bluetooth_speaker_rounded':
-      Icons.phone_bluetooth_speaker_rounded,
-  'Icons.phone_bluetooth_speaker_outlined':
-      Icons.phone_bluetooth_speaker_outlined,
+  'Icons.phone_bluetooth_speaker_rounded': Icons.phone_bluetooth_speaker_rounded,
+  'Icons.phone_bluetooth_speaker_outlined': Icons.phone_bluetooth_speaker_outlined,
   'Icons.phone_callback': Icons.phone_callback,
   'Icons.phone_callback_sharp': Icons.phone_callback_sharp,
   'Icons.phone_callback_rounded': Icons.phone_callback_rounded,
@@ -5996,22 +5892,16 @@ Map<String, IconData> kIConDic = {
   'Icons.photo_library_outlined': Icons.photo_library_outlined,
   'Icons.photo_size_select_actual': Icons.photo_size_select_actual,
   'Icons.photo_size_select_actual_sharp': Icons.photo_size_select_actual_sharp,
-  'Icons.photo_size_select_actual_rounded':
-      Icons.photo_size_select_actual_rounded,
-  'Icons.photo_size_select_actual_outlined':
-      Icons.photo_size_select_actual_outlined,
+  'Icons.photo_size_select_actual_rounded': Icons.photo_size_select_actual_rounded,
+  'Icons.photo_size_select_actual_outlined': Icons.photo_size_select_actual_outlined,
   'Icons.photo_size_select_large': Icons.photo_size_select_large,
   'Icons.photo_size_select_large_sharp': Icons.photo_size_select_large_sharp,
-  'Icons.photo_size_select_large_rounded':
-      Icons.photo_size_select_large_rounded,
-  'Icons.photo_size_select_large_outlined':
-      Icons.photo_size_select_large_outlined,
+  'Icons.photo_size_select_large_rounded': Icons.photo_size_select_large_rounded,
+  'Icons.photo_size_select_large_outlined': Icons.photo_size_select_large_outlined,
   'Icons.photo_size_select_small': Icons.photo_size_select_small,
   'Icons.photo_size_select_small_sharp': Icons.photo_size_select_small_sharp,
-  'Icons.photo_size_select_small_rounded':
-      Icons.photo_size_select_small_rounded,
-  'Icons.photo_size_select_small_outlined':
-      Icons.photo_size_select_small_outlined,
+  'Icons.photo_size_select_small_rounded': Icons.photo_size_select_small_rounded,
+  'Icons.photo_size_select_small_outlined': Icons.photo_size_select_small_outlined,
   'Icons.php': Icons.php,
   'Icons.php_sharp': Icons.php_sharp,
   'Icons.php_rounded': Icons.php_rounded,
@@ -6035,8 +5925,7 @@ Map<String, IconData> kIConDic = {
   'Icons.picture_in_picture_alt': Icons.picture_in_picture_alt,
   'Icons.picture_in_picture_alt_sharp': Icons.picture_in_picture_alt_sharp,
   'Icons.picture_in_picture_alt_rounded': Icons.picture_in_picture_alt_rounded,
-  'Icons.picture_in_picture_alt_outlined':
-      Icons.picture_in_picture_alt_outlined,
+  'Icons.picture_in_picture_alt_outlined': Icons.picture_in_picture_alt_outlined,
   'Icons.pie_chart': Icons.pie_chart,
   'Icons.pie_chart_sharp': Icons.pie_chart_sharp,
   'Icons.pie_chart_rounded': Icons.pie_chart_rounded,
@@ -6121,12 +6010,9 @@ Map<String, IconData> kIConDic = {
   'Icons.playlist_add_check_rounded': Icons.playlist_add_check_rounded,
   'Icons.playlist_add_check_outlined': Icons.playlist_add_check_outlined,
   'Icons.playlist_add_check_circle': Icons.playlist_add_check_circle,
-  'Icons.playlist_add_check_circle_sharp':
-      Icons.playlist_add_check_circle_sharp,
-  'Icons.playlist_add_check_circle_rounded':
-      Icons.playlist_add_check_circle_rounded,
-  'Icons.playlist_add_check_circle_outlined':
-      Icons.playlist_add_check_circle_outlined,
+  'Icons.playlist_add_check_circle_sharp': Icons.playlist_add_check_circle_sharp,
+  'Icons.playlist_add_check_circle_rounded': Icons.playlist_add_check_circle_rounded,
+  'Icons.playlist_add_check_circle_outlined': Icons.playlist_add_check_circle_outlined,
   'Icons.playlist_add_circle': Icons.playlist_add_circle,
   'Icons.playlist_add_circle_sharp': Icons.playlist_add_circle_sharp,
   'Icons.playlist_add_circle_rounded': Icons.playlist_add_circle_rounded,
@@ -6205,10 +6091,8 @@ Map<String, IconData> kIConDic = {
   'Icons.power_settings_new_outlined': Icons.power_settings_new_outlined,
   'Icons.precision_manufacturing': Icons.precision_manufacturing,
   'Icons.precision_manufacturing_sharp': Icons.precision_manufacturing_sharp,
-  'Icons.precision_manufacturing_rounded':
-      Icons.precision_manufacturing_rounded,
-  'Icons.precision_manufacturing_outlined':
-      Icons.precision_manufacturing_outlined,
+  'Icons.precision_manufacturing_rounded': Icons.precision_manufacturing_rounded,
+  'Icons.precision_manufacturing_outlined': Icons.precision_manufacturing_outlined,
   'Icons.pregnant_woman': Icons.pregnant_woman,
   'Icons.pregnant_woman_sharp': Icons.pregnant_woman_sharp,
   'Icons.pregnant_woman_rounded': Icons.pregnant_woman_rounded,
@@ -6250,12 +6134,9 @@ Map<String, IconData> kIConDic = {
   'Icons.private_connectivity_rounded': Icons.private_connectivity_rounded,
   'Icons.private_connectivity_outlined': Icons.private_connectivity_outlined,
   'Icons.production_quantity_limits': Icons.production_quantity_limits,
-  'Icons.production_quantity_limits_sharp':
-      Icons.production_quantity_limits_sharp,
-  'Icons.production_quantity_limits_rounded':
-      Icons.production_quantity_limits_rounded,
-  'Icons.production_quantity_limits_outlined':
-      Icons.production_quantity_limits_outlined,
+  'Icons.production_quantity_limits_sharp': Icons.production_quantity_limits_sharp,
+  'Icons.production_quantity_limits_rounded': Icons.production_quantity_limits_rounded,
+  'Icons.production_quantity_limits_outlined': Icons.production_quantity_limits_outlined,
   'Icons.propane': Icons.propane,
   'Icons.propane_sharp': Icons.propane_sharp,
   'Icons.propane_rounded': Icons.propane_rounded,
@@ -6287,8 +6168,7 @@ Map<String, IconData> kIConDic = {
   'Icons.published_with_changes': Icons.published_with_changes,
   'Icons.published_with_changes_sharp': Icons.published_with_changes_sharp,
   'Icons.published_with_changes_rounded': Icons.published_with_changes_rounded,
-  'Icons.published_with_changes_outlined':
-      Icons.published_with_changes_outlined,
+  'Icons.published_with_changes_outlined': Icons.published_with_changes_outlined,
   'Icons.punch_clock': Icons.punch_clock,
   'Icons.punch_clock_sharp': Icons.punch_clock_sharp,
   'Icons.punch_clock_rounded': Icons.punch_clock_rounded,
@@ -6384,8 +6264,7 @@ Map<String, IconData> kIConDic = {
   'Icons.radio_button_unchecked': Icons.radio_button_unchecked,
   'Icons.radio_button_unchecked_sharp': Icons.radio_button_unchecked_sharp,
   'Icons.radio_button_unchecked_rounded': Icons.radio_button_unchecked_rounded,
-  'Icons.radio_button_unchecked_outlined':
-      Icons.radio_button_unchecked_outlined,
+  'Icons.radio_button_unchecked_outlined': Icons.radio_button_unchecked_outlined,
   'Icons.railway_alert': Icons.railway_alert,
   'Icons.railway_alert_sharp': Icons.railway_alert_sharp,
   'Icons.railway_alert_rounded': Icons.railway_alert_rounded,
@@ -6897,10 +6776,8 @@ Map<String, IconData> kIConDic = {
   'Icons.security_update_good_outlined': Icons.security_update_good_outlined,
   'Icons.security_update_warning': Icons.security_update_warning,
   'Icons.security_update_warning_sharp': Icons.security_update_warning_sharp,
-  'Icons.security_update_warning_rounded':
-      Icons.security_update_warning_rounded,
-  'Icons.security_update_warning_outlined':
-      Icons.security_update_warning_outlined,
+  'Icons.security_update_warning_rounded': Icons.security_update_warning_rounded,
+  'Icons.security_update_warning_outlined': Icons.security_update_warning_outlined,
   'Icons.segment': Icons.segment,
   'Icons.segment_sharp': Icons.segment_sharp,
   'Icons.segment_rounded': Icons.segment_rounded,
@@ -6956,8 +6833,7 @@ Map<String, IconData> kIConDic = {
   'Icons.sentiment_dissatisfied': Icons.sentiment_dissatisfied,
   'Icons.sentiment_dissatisfied_sharp': Icons.sentiment_dissatisfied_sharp,
   'Icons.sentiment_dissatisfied_rounded': Icons.sentiment_dissatisfied_rounded,
-  'Icons.sentiment_dissatisfied_outlined':
-      Icons.sentiment_dissatisfied_outlined,
+  'Icons.sentiment_dissatisfied_outlined': Icons.sentiment_dissatisfied_outlined,
   'Icons.sentiment_neutral': Icons.sentiment_neutral,
   'Icons.sentiment_neutral_sharp': Icons.sentiment_neutral_sharp,
   'Icons.sentiment_neutral_rounded': Icons.sentiment_neutral_rounded,
@@ -6968,23 +6844,16 @@ Map<String, IconData> kIConDic = {
   'Icons.sentiment_satisfied_outlined': Icons.sentiment_satisfied_outlined,
   'Icons.sentiment_satisfied_alt': Icons.sentiment_satisfied_alt,
   'Icons.sentiment_satisfied_alt_sharp': Icons.sentiment_satisfied_alt_sharp,
-  'Icons.sentiment_satisfied_alt_rounded':
-      Icons.sentiment_satisfied_alt_rounded,
-  'Icons.sentiment_satisfied_alt_outlined':
-      Icons.sentiment_satisfied_alt_outlined,
+  'Icons.sentiment_satisfied_alt_rounded': Icons.sentiment_satisfied_alt_rounded,
+  'Icons.sentiment_satisfied_alt_outlined': Icons.sentiment_satisfied_alt_outlined,
   'Icons.sentiment_very_dissatisfied': Icons.sentiment_very_dissatisfied,
-  'Icons.sentiment_very_dissatisfied_sharp':
-      Icons.sentiment_very_dissatisfied_sharp,
-  'Icons.sentiment_very_dissatisfied_rounded':
-      Icons.sentiment_very_dissatisfied_rounded,
-  'Icons.sentiment_very_dissatisfied_outlined':
-      Icons.sentiment_very_dissatisfied_outlined,
+  'Icons.sentiment_very_dissatisfied_sharp': Icons.sentiment_very_dissatisfied_sharp,
+  'Icons.sentiment_very_dissatisfied_rounded': Icons.sentiment_very_dissatisfied_rounded,
+  'Icons.sentiment_very_dissatisfied_outlined': Icons.sentiment_very_dissatisfied_outlined,
   'Icons.sentiment_very_satisfied': Icons.sentiment_very_satisfied,
   'Icons.sentiment_very_satisfied_sharp': Icons.sentiment_very_satisfied_sharp,
-  'Icons.sentiment_very_satisfied_rounded':
-      Icons.sentiment_very_satisfied_rounded,
-  'Icons.sentiment_very_satisfied_outlined':
-      Icons.sentiment_very_satisfied_outlined,
+  'Icons.sentiment_very_satisfied_rounded': Icons.sentiment_very_satisfied_rounded,
+  'Icons.sentiment_very_satisfied_outlined': Icons.sentiment_very_satisfied_outlined,
   'Icons.set_meal': Icons.set_meal,
   'Icons.set_meal_sharp': Icons.set_meal_sharp,
   'Icons.set_meal_rounded': Icons.set_meal_rounded,
@@ -6996,18 +6865,15 @@ Map<String, IconData> kIConDic = {
   'Icons.settings_accessibility': Icons.settings_accessibility,
   'Icons.settings_accessibility_sharp': Icons.settings_accessibility_sharp,
   'Icons.settings_accessibility_rounded': Icons.settings_accessibility_rounded,
-  'Icons.settings_accessibility_outlined':
-      Icons.settings_accessibility_outlined,
+  'Icons.settings_accessibility_outlined': Icons.settings_accessibility_outlined,
   'Icons.settings_applications': Icons.settings_applications,
   'Icons.settings_applications_sharp': Icons.settings_applications_sharp,
   'Icons.settings_applications_rounded': Icons.settings_applications_rounded,
   'Icons.settings_applications_outlined': Icons.settings_applications_outlined,
   'Icons.settings_backup_restore': Icons.settings_backup_restore,
   'Icons.settings_backup_restore_sharp': Icons.settings_backup_restore_sharp,
-  'Icons.settings_backup_restore_rounded':
-      Icons.settings_backup_restore_rounded,
-  'Icons.settings_backup_restore_outlined':
-      Icons.settings_backup_restore_outlined,
+  'Icons.settings_backup_restore_rounded': Icons.settings_backup_restore_rounded,
+  'Icons.settings_backup_restore_outlined': Icons.settings_backup_restore_outlined,
   'Icons.settings_bluetooth': Icons.settings_bluetooth,
   'Icons.settings_bluetooth_sharp': Icons.settings_bluetooth_sharp,
   'Icons.settings_bluetooth_rounded': Icons.settings_bluetooth_rounded,
@@ -7031,20 +6897,15 @@ Map<String, IconData> kIConDic = {
   'Icons.settings_input_antenna': Icons.settings_input_antenna,
   'Icons.settings_input_antenna_sharp': Icons.settings_input_antenna_sharp,
   'Icons.settings_input_antenna_rounded': Icons.settings_input_antenna_rounded,
-  'Icons.settings_input_antenna_outlined':
-      Icons.settings_input_antenna_outlined,
+  'Icons.settings_input_antenna_outlined': Icons.settings_input_antenna_outlined,
   'Icons.settings_input_component': Icons.settings_input_component,
   'Icons.settings_input_component_sharp': Icons.settings_input_component_sharp,
-  'Icons.settings_input_component_rounded':
-      Icons.settings_input_component_rounded,
-  'Icons.settings_input_component_outlined':
-      Icons.settings_input_component_outlined,
+  'Icons.settings_input_component_rounded': Icons.settings_input_component_rounded,
+  'Icons.settings_input_component_outlined': Icons.settings_input_component_outlined,
   'Icons.settings_input_composite': Icons.settings_input_composite,
   'Icons.settings_input_composite_sharp': Icons.settings_input_composite_sharp,
-  'Icons.settings_input_composite_rounded':
-      Icons.settings_input_composite_rounded,
-  'Icons.settings_input_composite_outlined':
-      Icons.settings_input_composite_outlined,
+  'Icons.settings_input_composite_rounded': Icons.settings_input_composite_rounded,
+  'Icons.settings_input_composite_outlined': Icons.settings_input_composite_outlined,
   'Icons.settings_input_hdmi': Icons.settings_input_hdmi,
   'Icons.settings_input_hdmi_sharp': Icons.settings_input_hdmi_sharp,
   'Icons.settings_input_hdmi_rounded': Icons.settings_input_hdmi_rounded,
@@ -7075,10 +6936,8 @@ Map<String, IconData> kIConDic = {
   'Icons.settings_suggest_outlined': Icons.settings_suggest_outlined,
   'Icons.settings_system_daydream': Icons.settings_system_daydream,
   'Icons.settings_system_daydream_sharp': Icons.settings_system_daydream_sharp,
-  'Icons.settings_system_daydream_rounded':
-      Icons.settings_system_daydream_rounded,
-  'Icons.settings_system_daydream_outlined':
-      Icons.settings_system_daydream_outlined,
+  'Icons.settings_system_daydream_rounded': Icons.settings_system_daydream_rounded,
+  'Icons.settings_system_daydream_outlined': Icons.settings_system_daydream_outlined,
   'Icons.settings_voice': Icons.settings_voice,
   'Icons.settings_voice_sharp': Icons.settings_voice_sharp,
   'Icons.settings_voice_rounded': Icons.settings_voice_rounded,
@@ -7091,10 +6950,10 @@ Map<String, IconData> kIConDic = {
   'Icons.shape_line_sharp': Icons.shape_line_sharp,
   'Icons.shape_line_rounded': Icons.shape_line_rounded,
   'Icons.shape_line_outlined': Icons.shape_line_outlined,
-  'Icons.share': Icons.share,
-  'Icons.share_sharp': Icons.share_sharp,
-  'Icons.share_rounded': Icons.share_rounded,
-  'Icons.share_outlined': Icons.share_outlined,
+  // 'Icons.share': Icons.share,
+  // 'Icons.share_sharp': Icons.share_sharp,
+  // 'Icons.share_rounded': Icons.share_rounded,
+  // 'Icons.share_outlined': Icons.share_outlined,
   'Icons.share_arrival_time': Icons.share_arrival_time,
   'Icons.share_arrival_time_sharp': Icons.share_arrival_time_sharp,
   'Icons.share_arrival_time_rounded': Icons.share_arrival_time_rounded,
@@ -7143,8 +7002,7 @@ Map<String, IconData> kIConDic = {
   'Icons.shopping_cart_checkout': Icons.shopping_cart_checkout,
   'Icons.shopping_cart_checkout_sharp': Icons.shopping_cart_checkout_sharp,
   'Icons.shopping_cart_checkout_rounded': Icons.shopping_cart_checkout_rounded,
-  'Icons.shopping_cart_checkout_outlined':
-      Icons.shopping_cart_checkout_outlined,
+  'Icons.shopping_cart_checkout_outlined': Icons.shopping_cart_checkout_outlined,
   'Icons.short_text': Icons.short_text,
   'Icons.short_text_sharp': Icons.short_text_sharp,
   'Icons.short_text_rounded': Icons.short_text_rounded,
@@ -7194,31 +7052,21 @@ Map<String, IconData> kIConDic = {
   'Icons.signal_cellular_alt_rounded': Icons.signal_cellular_alt_rounded,
   'Icons.signal_cellular_alt_outlined': Icons.signal_cellular_alt_outlined,
   'Icons.signal_cellular_alt_1_bar': Icons.signal_cellular_alt_1_bar,
-  'Icons.signal_cellular_alt_1_bar_sharp':
-      Icons.signal_cellular_alt_1_bar_sharp,
-  'Icons.signal_cellular_alt_1_bar_rounded':
-      Icons.signal_cellular_alt_1_bar_rounded,
-  'Icons.signal_cellular_alt_1_bar_outlined':
-      Icons.signal_cellular_alt_1_bar_outlined,
+  'Icons.signal_cellular_alt_1_bar_sharp': Icons.signal_cellular_alt_1_bar_sharp,
+  'Icons.signal_cellular_alt_1_bar_rounded': Icons.signal_cellular_alt_1_bar_rounded,
+  'Icons.signal_cellular_alt_1_bar_outlined': Icons.signal_cellular_alt_1_bar_outlined,
   'Icons.signal_cellular_alt_2_bar': Icons.signal_cellular_alt_2_bar,
-  'Icons.signal_cellular_alt_2_bar_sharp':
-      Icons.signal_cellular_alt_2_bar_sharp,
-  'Icons.signal_cellular_alt_2_bar_rounded':
-      Icons.signal_cellular_alt_2_bar_rounded,
-  'Icons.signal_cellular_alt_2_bar_outlined':
-      Icons.signal_cellular_alt_2_bar_outlined,
-  'Icons.signal_cellular_connected_no_internet_0_bar':
-      Icons.signal_cellular_connected_no_internet_0_bar,
-  'Icons.signal_cellular_connected_no_internet_0_bar_sharp':
-      Icons.signal_cellular_connected_no_internet_0_bar_sharp,
+  'Icons.signal_cellular_alt_2_bar_sharp': Icons.signal_cellular_alt_2_bar_sharp,
+  'Icons.signal_cellular_alt_2_bar_rounded': Icons.signal_cellular_alt_2_bar_rounded,
+  'Icons.signal_cellular_alt_2_bar_outlined': Icons.signal_cellular_alt_2_bar_outlined,
+  'Icons.signal_cellular_connected_no_internet_0_bar': Icons.signal_cellular_connected_no_internet_0_bar,
+  'Icons.signal_cellular_connected_no_internet_0_bar_sharp': Icons.signal_cellular_connected_no_internet_0_bar_sharp,
   'Icons.signal_cellular_connected_no_internet_0_bar_rounded':
       Icons.signal_cellular_connected_no_internet_0_bar_rounded,
   'Icons.signal_cellular_connected_no_internet_0_bar_outlined':
       Icons.signal_cellular_connected_no_internet_0_bar_outlined,
-  'Icons.signal_cellular_connected_no_internet_4_bar':
-      Icons.signal_cellular_connected_no_internet_4_bar,
-  'Icons.signal_cellular_connected_no_internet_4_bar_sharp':
-      Icons.signal_cellular_connected_no_internet_4_bar_sharp,
+  'Icons.signal_cellular_connected_no_internet_4_bar': Icons.signal_cellular_connected_no_internet_4_bar,
+  'Icons.signal_cellular_connected_no_internet_4_bar_sharp': Icons.signal_cellular_connected_no_internet_4_bar_sharp,
   'Icons.signal_cellular_connected_no_internet_4_bar_rounded':
       Icons.signal_cellular_connected_no_internet_4_bar_rounded,
   'Icons.signal_cellular_connected_no_internet_4_bar_outlined':
@@ -7226,13 +7074,11 @@ Map<String, IconData> kIConDic = {
   'Icons.signal_cellular_no_sim': Icons.signal_cellular_no_sim,
   'Icons.signal_cellular_no_sim_sharp': Icons.signal_cellular_no_sim_sharp,
   'Icons.signal_cellular_no_sim_rounded': Icons.signal_cellular_no_sim_rounded,
-  'Icons.signal_cellular_no_sim_outlined':
-      Icons.signal_cellular_no_sim_outlined,
+  'Icons.signal_cellular_no_sim_outlined': Icons.signal_cellular_no_sim_outlined,
   'Icons.signal_cellular_nodata': Icons.signal_cellular_nodata,
   'Icons.signal_cellular_nodata_sharp': Icons.signal_cellular_nodata_sharp,
   'Icons.signal_cellular_nodata_rounded': Icons.signal_cellular_nodata_rounded,
-  'Icons.signal_cellular_nodata_outlined':
-      Icons.signal_cellular_nodata_outlined,
+  'Icons.signal_cellular_nodata_outlined': Icons.signal_cellular_nodata_outlined,
   'Icons.signal_cellular_null': Icons.signal_cellular_null,
   'Icons.signal_cellular_null_sharp': Icons.signal_cellular_null_sharp,
   'Icons.signal_cellular_null_rounded': Icons.signal_cellular_null_rounded,
@@ -7252,33 +7098,24 @@ Map<String, IconData> kIConDic = {
   'Icons.signal_wifi_4_bar_lock': Icons.signal_wifi_4_bar_lock,
   'Icons.signal_wifi_4_bar_lock_sharp': Icons.signal_wifi_4_bar_lock_sharp,
   'Icons.signal_wifi_4_bar_lock_rounded': Icons.signal_wifi_4_bar_lock_rounded,
-  'Icons.signal_wifi_4_bar_lock_outlined':
-      Icons.signal_wifi_4_bar_lock_outlined,
+  'Icons.signal_wifi_4_bar_lock_outlined': Icons.signal_wifi_4_bar_lock_outlined,
   'Icons.signal_wifi_bad': Icons.signal_wifi_bad,
   'Icons.signal_wifi_bad_sharp': Icons.signal_wifi_bad_sharp,
   'Icons.signal_wifi_bad_rounded': Icons.signal_wifi_bad_rounded,
   'Icons.signal_wifi_bad_outlined': Icons.signal_wifi_bad_outlined,
-  'Icons.signal_wifi_connected_no_internet_4':
-      Icons.signal_wifi_connected_no_internet_4,
-  'Icons.signal_wifi_connected_no_internet_4_sharp':
-      Icons.signal_wifi_connected_no_internet_4_sharp,
-  'Icons.signal_wifi_connected_no_internet_4_rounded':
-      Icons.signal_wifi_connected_no_internet_4_rounded,
-  'Icons.signal_wifi_connected_no_internet_4_outlined':
-      Icons.signal_wifi_connected_no_internet_4_outlined,
+  'Icons.signal_wifi_connected_no_internet_4': Icons.signal_wifi_connected_no_internet_4,
+  'Icons.signal_wifi_connected_no_internet_4_sharp': Icons.signal_wifi_connected_no_internet_4_sharp,
+  'Icons.signal_wifi_connected_no_internet_4_rounded': Icons.signal_wifi_connected_no_internet_4_rounded,
+  'Icons.signal_wifi_connected_no_internet_4_outlined': Icons.signal_wifi_connected_no_internet_4_outlined,
   'Icons.signal_wifi_off': Icons.signal_wifi_off,
   'Icons.signal_wifi_off_sharp': Icons.signal_wifi_off_sharp,
   'Icons.signal_wifi_off_rounded': Icons.signal_wifi_off_rounded,
   'Icons.signal_wifi_off_outlined': Icons.signal_wifi_off_outlined,
   'Icons.signal_wifi_statusbar_4_bar': Icons.signal_wifi_statusbar_4_bar,
-  'Icons.signal_wifi_statusbar_4_bar_sharp':
-      Icons.signal_wifi_statusbar_4_bar_sharp,
-  'Icons.signal_wifi_statusbar_4_bar_rounded':
-      Icons.signal_wifi_statusbar_4_bar_rounded,
-  'Icons.signal_wifi_statusbar_4_bar_outlined':
-      Icons.signal_wifi_statusbar_4_bar_outlined,
-  'Icons.signal_wifi_statusbar_connected_no_internet_4':
-      Icons.signal_wifi_statusbar_connected_no_internet_4,
+  'Icons.signal_wifi_statusbar_4_bar_sharp': Icons.signal_wifi_statusbar_4_bar_sharp,
+  'Icons.signal_wifi_statusbar_4_bar_rounded': Icons.signal_wifi_statusbar_4_bar_rounded,
+  'Icons.signal_wifi_statusbar_4_bar_outlined': Icons.signal_wifi_statusbar_4_bar_outlined,
+  'Icons.signal_wifi_statusbar_connected_no_internet_4': Icons.signal_wifi_statusbar_connected_no_internet_4,
   'Icons.signal_wifi_statusbar_connected_no_internet_4_sharp':
       Icons.signal_wifi_statusbar_connected_no_internet_4_sharp,
   'Icons.signal_wifi_statusbar_connected_no_internet_4_rounded':
@@ -7286,12 +7123,9 @@ Map<String, IconData> kIConDic = {
   'Icons.signal_wifi_statusbar_connected_no_internet_4_outlined':
       Icons.signal_wifi_statusbar_connected_no_internet_4_outlined,
   'Icons.signal_wifi_statusbar_null': Icons.signal_wifi_statusbar_null,
-  'Icons.signal_wifi_statusbar_null_sharp':
-      Icons.signal_wifi_statusbar_null_sharp,
-  'Icons.signal_wifi_statusbar_null_rounded':
-      Icons.signal_wifi_statusbar_null_rounded,
-  'Icons.signal_wifi_statusbar_null_outlined':
-      Icons.signal_wifi_statusbar_null_outlined,
+  'Icons.signal_wifi_statusbar_null_sharp': Icons.signal_wifi_statusbar_null_sharp,
+  'Icons.signal_wifi_statusbar_null_rounded': Icons.signal_wifi_statusbar_null_rounded,
+  'Icons.signal_wifi_statusbar_null_outlined': Icons.signal_wifi_statusbar_null_outlined,
   'Icons.signpost': Icons.signpost,
   'Icons.signpost_sharp': Icons.signpost_sharp,
   'Icons.signpost_rounded': Icons.signpost_rounded,
@@ -7656,8 +7490,7 @@ Map<String, IconData> kIConDic = {
   'Icons.stay_current_landscape': Icons.stay_current_landscape,
   'Icons.stay_current_landscape_sharp': Icons.stay_current_landscape_sharp,
   'Icons.stay_current_landscape_rounded': Icons.stay_current_landscape_rounded,
-  'Icons.stay_current_landscape_outlined':
-      Icons.stay_current_landscape_outlined,
+  'Icons.stay_current_landscape_outlined': Icons.stay_current_landscape_outlined,
   'Icons.stay_current_portrait': Icons.stay_current_portrait,
   'Icons.stay_current_portrait_sharp': Icons.stay_current_portrait_sharp,
   'Icons.stay_current_portrait_rounded': Icons.stay_current_portrait_rounded,
@@ -7665,8 +7498,7 @@ Map<String, IconData> kIConDic = {
   'Icons.stay_primary_landscape': Icons.stay_primary_landscape,
   'Icons.stay_primary_landscape_sharp': Icons.stay_primary_landscape_sharp,
   'Icons.stay_primary_landscape_rounded': Icons.stay_primary_landscape_rounded,
-  'Icons.stay_primary_landscape_outlined':
-      Icons.stay_primary_landscape_outlined,
+  'Icons.stay_primary_landscape_outlined': Icons.stay_primary_landscape_outlined,
   'Icons.stay_primary_portrait': Icons.stay_primary_portrait,
   'Icons.stay_primary_portrait_sharp': Icons.stay_primary_portrait_sharp,
   'Icons.stay_primary_portrait_rounded': Icons.stay_primary_portrait_rounded,
@@ -7737,16 +7569,12 @@ Map<String, IconData> kIConDic = {
   'Icons.style_outlined': Icons.style_outlined,
   'Icons.subdirectory_arrow_left': Icons.subdirectory_arrow_left,
   'Icons.subdirectory_arrow_left_sharp': Icons.subdirectory_arrow_left_sharp,
-  'Icons.subdirectory_arrow_left_rounded':
-      Icons.subdirectory_arrow_left_rounded,
-  'Icons.subdirectory_arrow_left_outlined':
-      Icons.subdirectory_arrow_left_outlined,
+  'Icons.subdirectory_arrow_left_rounded': Icons.subdirectory_arrow_left_rounded,
+  'Icons.subdirectory_arrow_left_outlined': Icons.subdirectory_arrow_left_outlined,
   'Icons.subdirectory_arrow_right': Icons.subdirectory_arrow_right,
   'Icons.subdirectory_arrow_right_sharp': Icons.subdirectory_arrow_right_sharp,
-  'Icons.subdirectory_arrow_right_rounded':
-      Icons.subdirectory_arrow_right_rounded,
-  'Icons.subdirectory_arrow_right_outlined':
-      Icons.subdirectory_arrow_right_outlined,
+  'Icons.subdirectory_arrow_right_rounded': Icons.subdirectory_arrow_right_rounded,
+  'Icons.subdirectory_arrow_right_outlined': Icons.subdirectory_arrow_right_outlined,
   'Icons.subject': Icons.subject,
   'Icons.subject_sharp': Icons.subject_sharp,
   'Icons.subject_rounded': Icons.subject_rounded,
@@ -7784,8 +7612,7 @@ Map<String, IconData> kIConDic = {
   'Icons.supervised_user_circle': Icons.supervised_user_circle,
   'Icons.supervised_user_circle_sharp': Icons.supervised_user_circle_sharp,
   'Icons.supervised_user_circle_rounded': Icons.supervised_user_circle_rounded,
-  'Icons.supervised_user_circle_outlined':
-      Icons.supervised_user_circle_outlined,
+  'Icons.supervised_user_circle_outlined': Icons.supervised_user_circle_outlined,
   'Icons.supervisor_account': Icons.supervisor_account,
   'Icons.supervisor_account_sharp': Icons.supervisor_account_sharp,
   'Icons.supervisor_account_rounded': Icons.supervisor_account_rounded,
@@ -7817,8 +7644,7 @@ Map<String, IconData> kIConDic = {
   'Icons.swap_horizontal_circle': Icons.swap_horizontal_circle,
   'Icons.swap_horizontal_circle_sharp': Icons.swap_horizontal_circle_sharp,
   'Icons.swap_horizontal_circle_rounded': Icons.swap_horizontal_circle_rounded,
-  'Icons.swap_horizontal_circle_outlined':
-      Icons.swap_horizontal_circle_outlined,
+  'Icons.swap_horizontal_circle_outlined': Icons.swap_horizontal_circle_outlined,
   'Icons.swap_vert': Icons.swap_vert,
   'Icons.swap_vert_sharp': Icons.swap_vert_sharp,
   'Icons.swap_vert_rounded': Icons.swap_vert_rounded,
@@ -7874,15 +7700,11 @@ Map<String, IconData> kIConDic = {
   'Icons.switch_access_shortcut': Icons.switch_access_shortcut,
   'Icons.switch_access_shortcut_sharp': Icons.switch_access_shortcut_sharp,
   'Icons.switch_access_shortcut_rounded': Icons.switch_access_shortcut_rounded,
-  'Icons.switch_access_shortcut_outlined':
-      Icons.switch_access_shortcut_outlined,
+  'Icons.switch_access_shortcut_outlined': Icons.switch_access_shortcut_outlined,
   'Icons.switch_access_shortcut_add': Icons.switch_access_shortcut_add,
-  'Icons.switch_access_shortcut_add_sharp':
-      Icons.switch_access_shortcut_add_sharp,
-  'Icons.switch_access_shortcut_add_rounded':
-      Icons.switch_access_shortcut_add_rounded,
-  'Icons.switch_access_shortcut_add_outlined':
-      Icons.switch_access_shortcut_add_outlined,
+  'Icons.switch_access_shortcut_add_sharp': Icons.switch_access_shortcut_add_sharp,
+  'Icons.switch_access_shortcut_add_rounded': Icons.switch_access_shortcut_add_rounded,
+  'Icons.switch_access_shortcut_add_outlined': Icons.switch_access_shortcut_add_outlined,
   'Icons.switch_account': Icons.switch_account,
   'Icons.switch_account_sharp': Icons.switch_account_sharp,
   'Icons.switch_account_rounded': Icons.switch_account_rounded,
@@ -7930,22 +7752,15 @@ Map<String, IconData> kIConDic = {
   'Icons.system_security_update': Icons.system_security_update,
   'Icons.system_security_update_sharp': Icons.system_security_update_sharp,
   'Icons.system_security_update_rounded': Icons.system_security_update_rounded,
-  'Icons.system_security_update_outlined':
-      Icons.system_security_update_outlined,
+  'Icons.system_security_update_outlined': Icons.system_security_update_outlined,
   'Icons.system_security_update_good': Icons.system_security_update_good,
-  'Icons.system_security_update_good_sharp':
-      Icons.system_security_update_good_sharp,
-  'Icons.system_security_update_good_rounded':
-      Icons.system_security_update_good_rounded,
-  'Icons.system_security_update_good_outlined':
-      Icons.system_security_update_good_outlined,
+  'Icons.system_security_update_good_sharp': Icons.system_security_update_good_sharp,
+  'Icons.system_security_update_good_rounded': Icons.system_security_update_good_rounded,
+  'Icons.system_security_update_good_outlined': Icons.system_security_update_good_outlined,
   'Icons.system_security_update_warning': Icons.system_security_update_warning,
-  'Icons.system_security_update_warning_sharp':
-      Icons.system_security_update_warning_sharp,
-  'Icons.system_security_update_warning_rounded':
-      Icons.system_security_update_warning_rounded,
-  'Icons.system_security_update_warning_outlined':
-      Icons.system_security_update_warning_outlined,
+  'Icons.system_security_update_warning_sharp': Icons.system_security_update_warning_sharp,
+  'Icons.system_security_update_warning_rounded': Icons.system_security_update_warning_rounded,
+  'Icons.system_security_update_warning_outlined': Icons.system_security_update_warning_outlined,
   'Icons.system_update': Icons.system_update,
   'Icons.system_update_sharp': Icons.system_update_sharp,
   'Icons.system_update_rounded': Icons.system_update_rounded,
@@ -8076,10 +7891,8 @@ Map<String, IconData> kIConDic = {
   'Icons.text_rotate_vertical_outlined': Icons.text_rotate_vertical_outlined,
   'Icons.text_rotation_angledown': Icons.text_rotation_angledown,
   'Icons.text_rotation_angledown_sharp': Icons.text_rotation_angledown_sharp,
-  'Icons.text_rotation_angledown_rounded':
-      Icons.text_rotation_angledown_rounded,
-  'Icons.text_rotation_angledown_outlined':
-      Icons.text_rotation_angledown_outlined,
+  'Icons.text_rotation_angledown_rounded': Icons.text_rotation_angledown_rounded,
+  'Icons.text_rotation_angledown_outlined': Icons.text_rotation_angledown_outlined,
   'Icons.text_rotation_angleup': Icons.text_rotation_angleup,
   'Icons.text_rotation_angleup_sharp': Icons.text_rotation_angleup_sharp,
   'Icons.text_rotation_angleup_rounded': Icons.text_rotation_angleup_rounded,
@@ -8273,12 +8086,9 @@ Map<String, IconData> kIConDic = {
   'Icons.transcribe_rounded': Icons.transcribe_rounded,
   'Icons.transcribe_outlined': Icons.transcribe_outlined,
   'Icons.transfer_within_a_station': Icons.transfer_within_a_station,
-  'Icons.transfer_within_a_station_sharp':
-      Icons.transfer_within_a_station_sharp,
-  'Icons.transfer_within_a_station_rounded':
-      Icons.transfer_within_a_station_rounded,
-  'Icons.transfer_within_a_station_outlined':
-      Icons.transfer_within_a_station_outlined,
+  'Icons.transfer_within_a_station_sharp': Icons.transfer_within_a_station_sharp,
+  'Icons.transfer_within_a_station_rounded': Icons.transfer_within_a_station_rounded,
+  'Icons.transfer_within_a_station_outlined': Icons.transfer_within_a_station_outlined,
   'Icons.transform': Icons.transform,
   'Icons.transform_sharp': Icons.transform_sharp,
   'Icons.transform_rounded': Icons.transform_rounded,
@@ -8511,8 +8321,7 @@ Map<String, IconData> kIConDic = {
   'Icons.vertical_shades_closed': Icons.vertical_shades_closed,
   'Icons.vertical_shades_closed_sharp': Icons.vertical_shades_closed_sharp,
   'Icons.vertical_shades_closed_rounded': Icons.vertical_shades_closed_rounded,
-  'Icons.vertical_shades_closed_outlined':
-      Icons.vertical_shades_closed_outlined,
+  'Icons.vertical_shades_closed_outlined': Icons.vertical_shades_closed_outlined,
   'Icons.vertical_split': Icons.vertical_split,
   'Icons.vertical_split_sharp': Icons.vertical_split_sharp,
   'Icons.vertical_split_rounded': Icons.vertical_split_rounded,
@@ -8947,12 +8756,9 @@ Map<String, IconData> kIConDic = {
   'Icons.wifi_tethering_error_sharp': Icons.wifi_tethering_error_sharp,
   'Icons.wifi_tethering_error_rounded': Icons.wifi_tethering_error_rounded,
   'Icons.wifi_tethering_error_outlined': Icons.wifi_tethering_error_outlined,
-  'Icons.wifi_tethering_error_rounded_sharp':
-      Icons.wifi_tethering_error_rounded_sharp,
-  'Icons.wifi_tethering_error_rounded_rounded':
-      Icons.wifi_tethering_error_rounded_rounded,
-  'Icons.wifi_tethering_error_rounded_outlined':
-      Icons.wifi_tethering_error_rounded_outlined,
+  'Icons.wifi_tethering_error_rounded_sharp': Icons.wifi_tethering_error_rounded_sharp,
+  'Icons.wifi_tethering_error_rounded_rounded': Icons.wifi_tethering_error_rounded_rounded,
+  'Icons.wifi_tethering_error_rounded_outlined': Icons.wifi_tethering_error_rounded_outlined,
   'Icons.wifi_tethering_off': Icons.wifi_tethering_off,
   'Icons.wifi_tethering_off_sharp': Icons.wifi_tethering_off_sharp,
   'Icons.wifi_tethering_off_rounded': Icons.wifi_tethering_off_rounded,

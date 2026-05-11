@@ -7,7 +7,6 @@
 //
 
 import 'dart:math';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 // import 'package:flutter/cupertino.dart';
 

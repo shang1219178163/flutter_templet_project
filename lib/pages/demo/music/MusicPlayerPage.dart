@@ -1,9 +1,7 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
-
 import 'package:flutter_templet_project/pages/demo/music/MusicLyricScrollWidget.dart';
 import 'package:flutter_templet_project/vendor/audioplayers/audio_player_manager.dart';
 
@@ -207,10 +205,10 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
   // 解析 LRC 歌词文件
   List<LyricLine> parseLrc(String lrcContent) {
     final lines = lrcContent.split('\n');
-    final List<LyricLine> lyrics = [];
-    final RegExp regExp = RegExp(r'\[(\d+):(\d+\.?\d*)\]');
+    final lyrics = <LyricLine>[];
+    final regExp = RegExp(r'\[(\d+):(\d+\.?\d*)\]');
 
-    for (int i = 0; i < lines.length; i++) {
+    for (var i = 0; i < lines.length; i++) {
       final line = lines[i];
       final matches = regExp.allMatches(line);
 

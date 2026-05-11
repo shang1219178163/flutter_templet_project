@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_search_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/NCustomScrollBehavior.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 电商首页

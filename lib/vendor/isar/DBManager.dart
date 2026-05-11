@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/foundation.dart';
-
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
@@ -15,7 +15,6 @@ import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_g
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 数据库管理类
 class DBManager {

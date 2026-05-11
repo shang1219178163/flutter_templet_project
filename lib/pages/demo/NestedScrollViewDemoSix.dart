@@ -5,8 +5,8 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_page_one.dart';
 import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NestedScrollViewDemoSix extends StatefulWidget {
   const NestedScrollViewDemoSix({
@@ -96,7 +96,7 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
         //     ((constraints.maxHeight - collapseHeight) / (expandedHeight - collapseHeight)).clamp(0.0, 1.0);
 
         final fixedHeight = statusBarHeight + tabBarHeight;
-        double opacity = ((top - fixedHeight - kToolbarHeight) / (expandedHeight - fixedHeight)).clamp(0, 1.0);
+        var opacity = ((top - fixedHeight - kToolbarHeight) / (expandedHeight - fixedHeight)).clamp(0.0, 1.0);
 
         final desc = [statusBarHeight, collapseHeight, top, opacity].map((e) => e.toStringAsFixed(1)).join("_");
 

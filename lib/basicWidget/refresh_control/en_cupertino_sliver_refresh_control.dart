@@ -15,7 +15,6 @@ import 'package:flutter/foundation.dart' show clampDouble;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 const double _kActivityIndicatorRadius = 14.0;
 const double _kActivityIndicatorMargin = 16.0;
@@ -105,13 +104,13 @@ class _RenderEnCupertinoSliverRefresh extends RenderSliver with RenderObjectWith
 
   @override
   void performLayout() {
-    final SliverConstraints constraints = this.constraints;
+    final constraints = this.constraints;
     // Only pulling to refresh from the top is currently supported.
     assert(constraints.axisDirection == AxisDirection.down);
     assert(constraints.growthDirection == GrowthDirection.forward);
 
     // The new layout extent this sliver should now have.
-    final double layoutExtent = (_hasLayoutExtent ? 1.0 : 0.0) * _refreshIndicatorExtent;
+    final layoutExtent = (_hasLayoutExtent ? 1.0 : 0.0) * _refreshIndicatorExtent;
     // If the new layoutExtent instructive changed, the SliverGeometry's
     // layoutExtent will take that value (on the next performLayout run). Shift
     // the scroll offset first so it doesn't make the scroll position suddenly jump.
@@ -127,8 +126,8 @@ class _RenderEnCupertinoSliverRefresh extends RenderSliver with RenderObjectWith
       return;
     }
 
-    final bool active = constraints.overlap < 0.0 || layoutExtent > 0.0;
-    final double overscrolledExtent = constraints.overlap < 0.0 ? constraints.overlap.abs() : 0.0;
+    final active = constraints.overlap < 0.0 || layoutExtent > 0.0;
+    final overscrolledExtent = constraints.overlap < 0.0 ? constraints.overlap.abs() : 0.0;
     // Layout the child giving it the space of the currently dragged overscroll
     // which may or may not include a sliver layout extent space that it will
     // keep after the user lets go during the refresh process.
@@ -165,7 +164,7 @@ class _RenderEnCupertinoSliverRefresh extends RenderSliver with RenderObjectWith
       geometry = SliverGeometry.zero;
     }
 
-    final bool isDragging = constraints.userScrollDirection != ScrollDirection.idle;
+    final isDragging = constraints.userScrollDirection != ScrollDirection.idle;
     if (_wasDragging && !isDragging) {
       debugPrint(["👉 用户刚刚松手"].join(", "));
     } else {
@@ -364,7 +363,7 @@ class EnCupertinoSliverRefreshControl extends StatefulWidget {
   /// state that gets passed into the [builder] function. Used for testing.
   @visibleForTesting
   static EnRefreshIndicatorMode state(BuildContext context) {
-    final _EnCupertinoSliverRefreshControlState state =
+    final state =
         context.findAncestorStateOfType<_EnCupertinoSliverRefreshControlState>()!;
     return state.refreshState;
   }
@@ -383,7 +382,7 @@ class EnCupertinoSliverRefreshControl extends StatefulWidget {
     double refreshTriggerPullDistance,
     double refreshIndicatorExtent,
   ) {
-    final double percentageComplete = clampDouble(pulledExtent / refreshTriggerPullDistance, 0.0, 1.0);
+    final percentageComplete = clampDouble(pulledExtent / refreshTriggerPullDistance, 0.0, 1.0);
 
     // Place the indicator at the top of the sliver that opens up. We're using a
     // Stack/Positioned widget because the CupertinoActivityIndicator does some

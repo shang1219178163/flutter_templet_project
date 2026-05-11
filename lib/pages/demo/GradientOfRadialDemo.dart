@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:tuple/tuple.dart';
 
 class GradientOfRadialDemo extends StatefulWidget {
   const GradientOfRadialDemo({Key? key, this.title}) : super(key: key);

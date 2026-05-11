@@ -99,7 +99,7 @@ class EnDecorationImage extends DecorationImage {
 
   @override
   String toString() {
-    final List<String> properties = <String>[
+    final properties = <String>[
       '$image',
       if (colorFilter != null) '$colorFilter',
       if (fit != null &&
@@ -209,7 +209,7 @@ class _DecorationImagePainter implements DecorationImagePainter {
   @override
   void paint(Canvas canvas, Rect rect, Path? clipPath, ImageConfiguration configuration,
       {double blend = 1.0, BlendMode blendMode = BlendMode.srcOver}) {
-    bool flipHorizontally = false;
+    var flipHorizontally = false;
     if (_details.matchTextDirection) {
       assert(() {
         // We check this first so that the assert will fire immediately, not just
@@ -234,9 +234,9 @@ class _DecorationImagePainter implements DecorationImagePainter {
       }
     }
 
-    final ImageStream newImageStream = _details.image.resolve(configuration);
+    final newImageStream = _details.image.resolve(configuration);
     if (newImageStream.key != _imageStream?.key) {
-      final ImageStreamListener listener = ImageStreamListener(
+      final listener = ImageStreamListener(
         _handleImage,
         onError: _details.onError,
       );
@@ -424,8 +424,8 @@ void _paintImage({
   if (rect.isEmpty) {
     return;
   }
-  Size outputSize = rect.size;
-  Size inputSize = Size(image.width.toDouble(), image.height.toDouble());
+  var outputSize = rect.size;
+  var inputSize = Size(image.width.toDouble(), image.height.toDouble());
   Offset? sliceBorder;
   if (centerSlice != null) {
     sliceBorder = inputSize / scale - centerSlice.size as Offset;
@@ -434,9 +434,9 @@ void _paintImage({
   }
   fit ??= centerSlice == null ? BoxFit.scaleDown : BoxFit.fill;
   assert(centerSlice == null || (fit != BoxFit.none && fit != BoxFit.cover));
-  final FittedSizes fittedSizes = applyBoxFit(fit, inputSize / scale, outputSize);
-  final Size sourceSize = fittedSizes.source * scale;
-  Size destinationSize = fittedSizes.destination;
+  final fittedSizes = applyBoxFit(fit, inputSize / scale, outputSize);
+  final sourceSize = fittedSizes.source * scale;
+  var destinationSize = fittedSizes.destination;
   if (centerSlice != null) {
     outputSize += sliceBorder!;
     destinationSize += sliceBorder;
@@ -451,7 +451,7 @@ void _paintImage({
     // output rect with the image.
     repeat = ImageRepeat.noRepeat;
   }
-  final Paint paint = Paint()..isAntiAlias = isAntiAlias;
+  final paint = Paint()..isAntiAlias = isAntiAlias;
   if (colorFilter != null) {
     paint.colorFilter = colorFilter;
   }
@@ -459,15 +459,15 @@ void _paintImage({
   paint.filterQuality = filterQuality;
   paint.invertColors = invertColors;
   paint.blendMode = blendMode;
-  final double halfWidthDelta = (outputSize.width - destinationSize.width) / 2.0;
-  final double halfHeightDelta = (outputSize.height - destinationSize.height) / 2.0;
-  final double dx = halfWidthDelta + (flipHorizontally ? -alignment.x : alignment.x) * halfWidthDelta;
-  final double dy = halfHeightDelta + alignment.y * halfHeightDelta;
-  final Offset destinationPosition = rect.topLeft.translate(dx + destinationOffset.dx, dy + destinationOffset.dy);
-  final Rect destinationRect = destinationPosition & destinationSize;
+  final halfWidthDelta = (outputSize.width - destinationSize.width) / 2.0;
+  final halfHeightDelta = (outputSize.height - destinationSize.height) / 2.0;
+  final dx = halfWidthDelta + (flipHorizontally ? -alignment.x : alignment.x) * halfWidthDelta;
+  final dy = halfHeightDelta + alignment.y * halfHeightDelta;
+  final destinationPosition = rect.topLeft.translate(dx + destinationOffset.dx, dy + destinationOffset.dy);
+  final destinationRect = destinationPosition & destinationSize;
 
   // Set to true if we added a saveLayer to the canvas to invert/flip the image.
-  bool invertedCanvas = false;
+  var invertedCanvas = false;
   // Output size and destination rect are fully calculated.
 
   // Implement debug-mode and profile-mode features:
@@ -482,11 +482,11 @@ void _paintImage({
     // Furthermore, for the memory check below we just assume that all images
     // are decoded for the view with the highest device pixel ratio and use that
     // as an upper bound for the display size of the image.
-    final double maxDevicePixelRatio = PaintingBinding.instance.platformDispatcher.views.fold(
+    final maxDevicePixelRatio = PaintingBinding.instance.platformDispatcher.views.fold(
       0.0,
       (double previousValue, ui.FlutterView view) => math.max(previousValue, view.devicePixelRatio),
     );
-    final ImageSizeInfo sizeInfo = ImageSizeInfo(
+    final sizeInfo = ImageSizeInfo(
       // Some ImageProvider implementations may not have given this.
       source: debugImageLabel ?? '<Unknown Image(${image.width}×${image.height})>',
       imageSize: Size(image.width.toDouble(), image.height.toDouble()),
@@ -495,9 +495,9 @@ void _paintImage({
     assert(() {
       if (debugInvertOversizedImages &&
           sizeInfo.decodedSizeInBytes > sizeInfo.displaySizeInBytes + debugImageOverheadAllowance) {
-        final int overheadInKilobytes = (sizeInfo.decodedSizeInBytes - sizeInfo.displaySizeInBytes) ~/ 1024;
-        final int outputWidth = sizeInfo.displaySize.width.toInt();
-        final int outputHeight = sizeInfo.displaySize.height.toInt();
+        final overheadInKilobytes = (sizeInfo.decodedSizeInBytes - sizeInfo.displaySizeInBytes) ~/ 1024;
+        final outputWidth = sizeInfo.displaySize.width.toInt();
+        final outputHeight = sizeInfo.displaySize.height.toInt();
         FlutterError.reportError(FlutterErrorDetails(
           exception: 'Image $debugImageLabel has a display size of '
               '$outputWidth×$outputHeight but a decode size of '
@@ -538,7 +538,7 @@ void _paintImage({
             ]),
         );
         // Flip the canvas vertically.
-        final double dy = -(rect.top + rect.height / 2.0);
+        final dy = -(rect.top + rect.height / 2.0);
         canvas.translate(0.0, -dy);
         canvas.scale(1.0, -1.0);
         canvas.translate(0.0, dy);
@@ -548,7 +548,7 @@ void _paintImage({
     }());
     // Avoid emitting events that are the same as those emitted in the last frame.
     if (!_lastFrameImageSizeInfo.contains(sizeInfo)) {
-      final ImageSizeInfo? existingSizeInfo = _pendingImageSizeInfo[sizeInfo.source];
+      final existingSizeInfo = _pendingImageSizeInfo[sizeInfo.source];
       if (existingSizeInfo == null || existingSizeInfo.displaySizeInBytes < sizeInfo.displaySizeInBytes) {
         _pendingImageSizeInfo[sizeInfo.source!] = sizeInfo;
       }
@@ -570,7 +570,7 @@ void _paintImage({
     }
   }
 
-  final bool needSave = centerSlice != null || repeat != ImageRepeat.noRepeat || flipHorizontally;
+  final needSave = centerSlice != null || repeat != ImageRepeat.noRepeat || flipHorizontally;
   if (needSave) {
     canvas.save();
   }
@@ -578,20 +578,20 @@ void _paintImage({
     canvas.clipRect(rect);
   }
   if (flipHorizontally) {
-    final double dx = -(rect.left + rect.width / 2.0);
+    final dx = -(rect.left + rect.width / 2.0);
     canvas.translate(-dx, 0.0);
     canvas.scale(-1.0, 1.0);
     canvas.translate(dx, 0.0);
   }
   if (centerSlice == null) {
-    final Rect sourceRect = alignment.inscribe(
+    final sourceRect = alignment.inscribe(
       sourceSize,
       Offset.zero & inputSize,
     );
     if (repeat == ImageRepeat.noRepeat) {
       canvas.drawImageRect(image, sourceRect, destinationRect, paint);
     } else {
-      for (final Rect tileRect in _generateImageTileRects(rect, destinationRect, repeat)) {
+      for (final tileRect in _generateImageTileRects(rect, destinationRect, repeat)) {
         canvas.drawImageRect(image, sourceRect, tileRect, paint);
       }
     }
@@ -600,7 +600,7 @@ void _paintImage({
     if (repeat == ImageRepeat.noRepeat) {
       canvas.drawImageNine(image, _scaleRect(centerSlice, scale), _scaleRect(destinationRect, scale), paint);
     } else {
-      for (final Rect tileRect in _generateImageTileRects(rect, destinationRect, repeat)) {
+      for (final tileRect in _generateImageTileRects(rect, destinationRect, repeat)) {
         canvas.drawImageNine(image, _scaleRect(centerSlice, scale), _scaleRect(tileRect, scale), paint);
       }
     }
@@ -615,12 +615,12 @@ void _paintImage({
 }
 
 Iterable<Rect> _generateImageTileRects(Rect outputRect, Rect fundamentalRect, ImageRepeat repeat) {
-  int startX = 0;
-  int startY = 0;
-  int stopX = 0;
-  int stopY = 0;
-  final double strideX = fundamentalRect.width;
-  final double strideY = fundamentalRect.height;
+  var startX = 0;
+  var startY = 0;
+  var stopX = 0;
+  var stopY = 0;
+  final strideX = fundamentalRect.width;
+  final strideY = fundamentalRect.height;
 
   if (repeat == ImageRepeat.repeat || repeat == ImageRepeat.repeatX) {
     startX = ((outputRect.left - fundamentalRect.left) / strideX).floor();

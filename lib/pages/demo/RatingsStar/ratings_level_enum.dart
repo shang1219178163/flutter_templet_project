@@ -70,11 +70,11 @@ class RatingsInfoModel {
   final RatingsLevelEnum ratingEnum; // 投票枚举
 
   static RatingsInfoModel calculateRating({required Map<int, int> starMap}) {
-    int totalCount = 0;
-    int totalScore = 0;
+    var totalCount = 0;
+    var totalScore = 0;
 
     // 统一补齐 1～5 星，保证结构稳定
-    final Map<int, int> normalized = {
+    final normalized = <int, int>{
       for (int i = 1; i <= 5; i++) i: starMap[i] ?? 0,
     };
 
@@ -90,7 +90,7 @@ class RatingsInfoModel {
     final averageScoreNew = double.parse(averageScore.toStringAsFixed(1)); // 四舍五入
     // DLog.d(["averageScore", starMap, "$totalCount/$totalScore", averageScore, averageScoreNew]);
 
-    final Map<int, double> starPercents = {
+    final starPercents = <int, double>{
       for (final e in normalized.entries)
         e.key: totalCount == 0
             ? 0

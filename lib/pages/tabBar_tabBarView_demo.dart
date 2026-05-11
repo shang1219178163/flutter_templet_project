@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/RouteNameSearchPage.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -725,8 +726,6 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.overlayEntryPage, "overlayEntryPage"),
   Tuple2(AppRouter.inputAccessoryViewDemo, "inputAccessoryViewDemo"),
   Tuple2(AppRouter.trackEventPage, "trackEventPage"),
-
-
 ];
 
 var others = <Tuple2<String, String>>[

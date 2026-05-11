@@ -3,15 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_filter_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 筛选框重构

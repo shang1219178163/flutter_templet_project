@@ -8,6 +8,7 @@
 
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 class ApiCreateConvert extends ConvertProtocol {
   @override
@@ -66,6 +67,7 @@ $copyRights
 
 import '../base_request_api.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 
 class $className extends BaseRequestAPI {

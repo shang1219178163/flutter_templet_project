@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// appBar 主题随滚动改变组件
 class NAppBarThemChange extends StatefulWidget {

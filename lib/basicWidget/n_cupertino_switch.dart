@@ -141,8 +141,8 @@ class NCupertinoSwitch extends StatelessWidget {
         child: CupertinoSwitch(
           value: value,
           onChanged: onChanged,
-          activeColor: activeColor,
-          trackColor: trackColor,
+          activeTrackColor: activeColor,
+          inactiveTrackColor: trackColor,
           thumbColor: thumbColor,
           applyTheme: applyTheme,
           focusColor: focusColor,

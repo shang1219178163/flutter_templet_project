@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/count_down_timer_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/CirclePainter.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:tuple/tuple.dart';
 

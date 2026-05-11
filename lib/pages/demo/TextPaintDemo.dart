@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text_one.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 class TextPaintDemo extends StatefulWidget {

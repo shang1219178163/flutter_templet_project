@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/overlay/n_overlay.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_bottom_sheet.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:get/get.dart';
@@ -332,7 +333,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 ShaderMask(
                   shaderCallback: (Rect bounds) {
                     return const LinearGradient(
-                      colors: [Color(0xFFFE44554), Color(0xFFF6040FF)],
+                      colors: [Color(0xfffe44554), Color(0xfff6040ff)],
                     ).createShader(bounds);
                   },
                   child: Row(

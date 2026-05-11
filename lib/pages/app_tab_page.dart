@@ -26,6 +26,7 @@ import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';

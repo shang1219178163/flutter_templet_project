@@ -4,9 +4,7 @@ import 'package:flutter_templet_project/basicWidget/placehorlder/activity_indica
 import 'package:flutter_templet_project/basicWidget/placehorlder/list_footer_no_more_placehorlder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/NLoadMoreControl.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/NRefreshControl.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/AppRes.dart';
 
 class SliverRefreshControlDemo extends StatefulWidget {
   const SliverRefreshControlDemo({

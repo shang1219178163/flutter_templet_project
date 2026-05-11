@@ -40,7 +40,7 @@ class NTweenAnimationBuilder<T> extends StatelessWidget {
       onEnd: onEnd,
       child: child,
       builder: (_, value, child) {
-        Widget content = child ?? const SizedBox();
+        var content = child ?? const SizedBox();
         if (needScale && value is double) {
           content = Transform.scale(
             scale: value,

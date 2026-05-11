@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/indicator/n_line_progress_indicator.dart';
 // import 'package:volume_controller/volume_controller.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 

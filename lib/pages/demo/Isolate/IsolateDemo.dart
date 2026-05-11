@@ -1,10 +1,5 @@
-import 'dart:convert';
-import 'dart:isolate';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/model/category_item.dart';
 import 'package:flutter_templet_project/pages/demo/Isolate/page/IsolateSimpleWidget.dart';
 import 'package:tuple/tuple.dart';
 

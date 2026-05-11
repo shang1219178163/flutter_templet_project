@@ -45,7 +45,7 @@ class NPopupContainer extends StatelessWidget {
 
     final topControlColorDefault = (isDark ? const Color(0xFFEEEEEE) : const Color(0xFFFFFFFF)).withOpacity(0.3);
 
-    Widget content = child;
+    var content = child;
     if (isScrollControlled) {
       content = Scrollbar(
         child: SingleChildScrollView(

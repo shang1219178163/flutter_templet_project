@@ -225,6 +225,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 自定义 
 class ${name}Theme extends ThemeExtension<${name}Theme> {

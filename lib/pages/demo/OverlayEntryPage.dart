@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_reuse_toast.dart';
 import 'package:get/get.dart';
 

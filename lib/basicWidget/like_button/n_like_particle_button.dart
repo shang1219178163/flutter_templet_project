@@ -58,11 +58,11 @@ class _NLikeParticleButtonState extends State<NLikeParticleButton> with SingleTi
   void _emitParticles(Offset center) {
     _particles.clear();
 
-    const int count = 24;
-    const double baseSpeed = 220;
+    const count = 24;
+    const baseSpeed = 220.0;
     // const Offset center = Offset(60, 60); // CustomPaint 正中心
 
-    for (int i = 0; i < count; i++) {
+    for (var i = 0; i < count; i++) {
       final angle = 2 * pi * i / count;
       final direction = Offset(cos(angle), sin(angle));
 

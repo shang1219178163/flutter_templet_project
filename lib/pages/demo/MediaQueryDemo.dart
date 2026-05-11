@@ -7,11 +7,10 @@
 //
 
 import 'package:flutter/material.dart';
-
-import 'package:flutter_templet_project/util/n_screen_manager.dart';
-
-import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/n_screen_manager.dart';
+import 'package:tuple/tuple.dart';
 
 class MediaQueryDemo extends StatefulWidget {
   const MediaQueryDemo({Key? key, this.title}) : super(key: key);

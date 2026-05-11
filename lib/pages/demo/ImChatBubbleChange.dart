@@ -1,12 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_chat_bubble.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_choice.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:get/get.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:get/get.dart';
 
 class ImChatBubbleChange extends StatefulWidget {
   const ImChatBubbleChange({

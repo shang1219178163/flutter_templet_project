@@ -6,8 +6,8 @@
 //  Copyright © 2024/6/13 shang. All rights reserved.
 //
 
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 extension SystemChromeExt on SystemChrome {
   /// 改变设备方向
@@ -51,7 +51,7 @@ extension SystemChromeExt on SystemChrome {
   /// 横竖切换
   static toggleOrientation() {
     final current = WidgetsBinding.instance.platformDispatcher.views.first;
-    Size screenSize = current.physicalSize / current.devicePixelRatio;
+    var screenSize = current.physicalSize / current.devicePixelRatio;
     final isPortrait = screenSize.height > screenSize.width;
     if (isPortrait) {
       setOrientationLandscape();

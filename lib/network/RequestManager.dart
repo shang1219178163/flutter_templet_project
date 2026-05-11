@@ -19,8 +19,6 @@ import 'package:flutter_templet_project/network/interceptors/validate_intercepto
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
-
 import 'package:get/get.dart' as get_navigation;
 
 class RequestManager extends BaseRequestAPI {

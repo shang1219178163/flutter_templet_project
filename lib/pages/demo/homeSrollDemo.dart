@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/basicWidget/x_horizontal_scroll_widget.dart';
-
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:tuple/tuple.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class HomeSrollDemo extends StatefulWidget {
   final String? title;

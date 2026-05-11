@@ -84,7 +84,7 @@ class _SoundPlayDemoState extends State<SoundPlayDemo> {
     if (_mPlayer == null) {
       return;
     }
-    await _mPlayer!.startPlayer(
+    await _mPlayer.startPlayer(
         fromURI: _exampleAudioFilePathMP3,
         codec: Codec.mp3,
         whenFinished: () {
@@ -100,7 +100,7 @@ class _SoundPlayDemoState extends State<SoundPlayDemo> {
     if (_mPlayer == null) {
       return;
     }
-    await _mPlayer?.stopPlayer();
+    await _mPlayer.stopPlayer();
   }
 
   // --------------------- UI -------------------

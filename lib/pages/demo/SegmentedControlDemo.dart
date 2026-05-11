@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliding_segmented_control.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class SegmentedControlDemo extends StatefulWidget {

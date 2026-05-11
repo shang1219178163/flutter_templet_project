@@ -8,6 +8,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 当前 api 环境
 enum AppEnvironment {
@@ -79,6 +80,7 @@ class RequestConfig {
     /// 从  --dart-define=app_env=beta 读取运行环境
     final env = const String.fromEnvironment("app_env");
     current = AppEnvironment.fromName(env);
+    DLog.d("appEnv: $current");
   }
 
   /// 网络请求域名

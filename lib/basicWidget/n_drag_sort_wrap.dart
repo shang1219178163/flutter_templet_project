@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 拖拽排序
 /// 拖拽排序
@@ -60,8 +59,8 @@ class _NDragSortWrapState<T extends Object> extends State<NDragSortWrap<T>> {
 
   Widget _buildDraggableItem(BuildContext context, int index) {
     final item = _list[index];
-    final enbaleItem = widget.enableBuilder?.call(context, item) ?? true;
-    if (!enbaleItem) {
+    final enableItem = widget.enableBuilder?.call(context, item) ?? true;
+    if (!enableItem) {
       return Material(
         color: Colors.transparent,
         child: widget.itemBuilder(context, item, true),

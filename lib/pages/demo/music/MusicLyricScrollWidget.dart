@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class LyricScrollWidget extends StatefulWidget {
@@ -57,7 +55,7 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
 
   // 根据时间查找当前歌词索引
   int _findCurrentLyricIndex(Duration position) {
-    for (int i = 0; i < widget.lyrics.length; i++) {
+    for (var i = 0; i < widget.lyrics.length; i++) {
       if (position >= widget.lyrics[i].startTime && position < widget.lyrics[i].endTime) {
         return i;
       }

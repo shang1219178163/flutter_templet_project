@@ -15,7 +15,6 @@ export 'src/date_time_ext.dart';
 export 'src/decoration_ext.dart';
 export 'src/dialog_ext.dart';
 export 'src/divider_ext.dart';
-export 'src/dlog.dart';
 export 'src/duration_ext.dart';
 export 'src/edge_insets_ext.dart';
 export 'src/editable_text_ext.dart';

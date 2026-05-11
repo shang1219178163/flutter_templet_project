@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 abstract class NetConnectivityListener {
   void onNetStateChaneged(bool onLine);
@@ -65,7 +64,7 @@ class ConnectivityService {
   }
 
   void cancel() {
-    _listener?.cancel();
+    _listener.cancel();
   }
 
   addListener(NetConnectivityListener? listener) {

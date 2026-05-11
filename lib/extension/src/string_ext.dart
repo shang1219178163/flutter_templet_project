@@ -149,14 +149,14 @@ extension StringExt on String {
 
   /// 脱敏
   String maskNumber({int start = 3, int end = 4, String replace = "*"}) {
-    String number = this;
+    var number = this;
     if (number.length <= (start + end)) {
       return number;
     }
 
-    String firstThree = number.substring(0, start);
-    String lastFour = number.substring(number.length - end);
-    int starCount = number.length - (start + end);
+    var firstThree = number.substring(0, start);
+    var lastFour = number.substring(number.length - end);
+    var starCount = number.length - (start + end);
 
     final result = '$firstThree${replace * starCount}$lastFour';
     return result;

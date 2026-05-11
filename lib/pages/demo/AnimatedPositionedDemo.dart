@@ -293,11 +293,11 @@ class _GridPainter extends CustomPainter {
       ..strokeWidth = 0.5;
 
     // 绘制网格线
-    for (double x = 0; x <= size.width; x += 50) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    for (var x = 0; x <= size.width; x += 50) {
+      canvas.drawLine(Offset(x.toDouble(), 0), Offset(x.toDouble(), size.height), paint);
     }
-    for (double y = 0; y <= size.height; y += 50) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    for (var y = 0; y <= size.height; y += 50) {
+      canvas.drawLine(Offset(0, y.toDouble()), Offset(size.width, y.toDouble()), paint);
     }
   }
 

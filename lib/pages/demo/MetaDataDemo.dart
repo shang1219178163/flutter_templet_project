@@ -11,6 +11,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 class MetaDataDemoNew extends StatelessWidget {

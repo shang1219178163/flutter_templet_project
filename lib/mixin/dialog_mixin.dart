@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 mixin DialogMixin {
   /// 项目通用弹窗封装

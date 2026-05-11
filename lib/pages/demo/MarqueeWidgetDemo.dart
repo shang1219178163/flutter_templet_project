@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_marquee_widget.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 // typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);

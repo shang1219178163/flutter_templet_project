@@ -7,8 +7,8 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/cupertino_sliver_refresh_control_ext.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/match_member_score_model.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 class CompareToPage extends StatefulWidget {

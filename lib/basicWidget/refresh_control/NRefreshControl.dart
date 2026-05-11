@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 typedef RefreshBuilder = Widget Function(BuildContext context, bool isLoading);
 

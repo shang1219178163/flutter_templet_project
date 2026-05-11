@@ -6,7 +6,7 @@
 //  Copyright © 10/15/21 shang. All rights reserved.
 //
 
-import 'package:flutter/material.dart';import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter/material.dart';
 
 //
 

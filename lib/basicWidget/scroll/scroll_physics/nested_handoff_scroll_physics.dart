@@ -19,8 +19,8 @@ class NestedHandoffScrollPhysics extends ScrollPhysics {
 
   @override
   double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
-    final bool atTop = position.pixels <= position.minScrollExtent;
-    final bool atBottom = position.pixels >= position.maxScrollExtent;
+    final atTop = position.pixels <= position.minScrollExtent;
+    final atBottom = position.pixels >= position.maxScrollExtent;
 
     // ① 在顶部，继续下拉 → 交给父 ScrollView（B）
     if (atTop && offset > 0) {

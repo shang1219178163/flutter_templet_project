@@ -21,7 +21,7 @@ class PlatformAwareTextField extends StatelessWidget {
     final themeData = Theme.of(context);
     final formNavigationService = FormNavigationService.of(context);
     // 获取当前平台风格
-    final bool isDesktop = [
+    final isDesktop = [
       TargetPlatform.windows,
       TargetPlatform.linux,
       TargetPlatform.macOS,

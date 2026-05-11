@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:isolate';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/category_item.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 class IsolateSimpleWidget extends StatefulWidget {
   const IsolateSimpleWidget({

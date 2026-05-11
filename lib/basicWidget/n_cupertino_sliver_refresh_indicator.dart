@@ -43,10 +43,10 @@ class NCupertinoSliverRefreshIndicator extends StatelessWidget {
     double refreshTriggerPullDistance,
     double refreshIndicatorExtent,
   ) {
-    const double _kActivityIndicatorRadius = 14.0;
-    const double _kActivityIndicatorMargin = 16.0;
+    const _kActivityIndicatorRadius = 14.0;
+    const _kActivityIndicatorMargin = 16.0;
 
-    final double percentageComplete = clampDouble(pulledExtent / refreshTriggerPullDistance, 0.0, 1.0);
+    final percentageComplete = clampDouble(pulledExtent / refreshTriggerPullDistance, 0.0, 1.0);
 
     // Place the indicator at the top of the sliver that opens up. We're using a
     // Stack/Positioned widget because the CupertinoActivityIndicator does some

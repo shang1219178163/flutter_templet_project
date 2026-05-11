@@ -1,17 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_queue_toast.dart';
 import 'package:flutter_templet_project/basicWidget/n_animation_controller_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_cupertino_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_flip_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
-import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
+import 'package:flutter_templet_project/basicWidget/n_queue_toast.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/extension/src/num_ext.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/pages/demo/swiper_card_demo.dart';
 import 'package:flutter_templet_project/pages/demo/transition/HorizalSwiperCardDemo.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 后缀为 Transition 的组件实例
 class SuffixTransitionDemo extends StatefulWidget {
@@ -295,11 +293,11 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   }
 
   Widget buildPagePositionedTransition() {
-    const double smallLogo = 100;
-    const double bigLogo = 200;
+    const smallLogo = 100.0;
+    const bigLogo = 200.0;
     return LayoutBuilder(
       builder: (context, constraints) {
-        final Size biggest = constraints.biggest;
+        final biggest = constraints.biggest;
 
         final tween = RelativeRectTween(
           begin: RelativeRect.fromSize(
@@ -349,11 +347,11 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
   }
 
   Widget buildPageRelativePositionedTransition() {
-    const double smallLogo = 100;
-    const double bigLogo = 200;
+    const smallLogo = 100.0;
+    const bigLogo = 200.0;
     return LayoutBuilder(
       builder: (context, constraints) {
-        final Size biggest = constraints.biggest;
+        final biggest = constraints.biggest;
 
         final tween = RectTween(
           begin: const Rect.fromLTWH(0, 0, bigLogo, bigLogo),

@@ -155,6 +155,8 @@ analyzer:
     # 具体来说，T?x;并且希望断言x已被设置为类型t的有效值。一个常见的错误是使用x!这几乎总是不正确的，因为如果T是可空类型，x可以有效地将null作为类型T的值。
 linter:
   rules:
+    - always_use_package_imports: true
+    - directives_ordering: true
     - avoid_shadowing_type_parameters # 避免隐藏类型参数。
     - empty_catches # 避免catch代码块，是空的。
     - package_prefixed_library_names # 用包名和点分隔的路径前缀库名。

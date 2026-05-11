@@ -156,7 +156,7 @@ class _NChromeTabState extends State<NChromeTab> {
       children: widget.items.map(
         (e) {
           final i = widget.items.indexOf(e);
-          Widget child = buildItem(i: i);
+          var child = buildItem(i: i);
           if (widget.tabAlignment == TabAlignment.fill) {
             child = Expanded(child: child);
           }

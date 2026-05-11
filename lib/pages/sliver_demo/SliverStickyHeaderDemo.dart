@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:get/get.dart';
 
 /// 分组
 class SliverStickyHeaderDemo extends StatefulWidget {

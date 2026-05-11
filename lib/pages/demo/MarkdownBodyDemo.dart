@@ -21,9 +21,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 第三方库 flutter_markdown
 class MarkdownBodyDemo extends StatefulWidget {

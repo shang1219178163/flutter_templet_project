@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
 /// 悬浮 TabBarPage

@@ -71,7 +71,7 @@ class _NSwiperViewState extends State<NSwiperView> {
         physics: widget.physics,
         scrollDirection: widget.scrollDirection,
         itemBuilder: (context, index) {
-          int realIndex = index % widget.itemCount;
+          var realIndex = index % widget.itemCount;
           return widget.itemBuilder(context, realIndex);
         },
       ),

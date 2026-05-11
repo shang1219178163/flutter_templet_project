@@ -8,9 +8,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
-
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 生成器测试
 class IteratorDemo extends StatefulWidget {

@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/mixin/app_lifecycle_state_mixin.dart';
 import 'package:flutter_templet_project/model/NPerson.dart';
 import 'package:flutter_templet_project/util/Codable.dart';
 import 'package:flutter_templet_project/util/Singleton.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';

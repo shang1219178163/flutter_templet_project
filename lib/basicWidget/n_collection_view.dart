@@ -68,7 +68,7 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
   @override
   Widget build(BuildContext context) {
     ///每页数
-    int numPerPage = widget.rowNum * widget.numPerRow;
+    var numPerPage = widget.rowNum * widget.numPerRow;
     final num = widget.length ~/ numPerPage;
     final pageCount = widget.length % numPerPage == 0 ? num : num + 1;
     final array = List.generate(pageCount, (i) => i).toList();

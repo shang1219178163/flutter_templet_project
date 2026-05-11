@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 class NestedScrollViewDemoFive extends StatefulWidget {
   const NestedScrollViewDemoFive({Key? key, this.title}) : super(key: key);
@@ -188,7 +189,7 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
       child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         var top = constraints.maxHeight;
         final fixedHeight = statusBarHeight + tabBarHeight;
-        double opacity = ((top - fixedHeight - kToolbarHeight) / (expandedHeight - fixedHeight)).clamp(0, 1.0);
+        var opacity = ((top - fixedHeight - kToolbarHeight) / (expandedHeight - fixedHeight)).clamp(0.0, 1.0);
 
         return Container(
           constraints: constraints,

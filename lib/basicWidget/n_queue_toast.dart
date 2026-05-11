@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
-// import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 队列 Toast 动画
 class NQueueToast {
@@ -31,7 +30,7 @@ class NQueueToast {
     required Map<String, dynamic> v,
     bool Function(String? routeName)? test,
   }) {
-    for (var ltr in _listeners) {
+    for (final ltr in _listeners) {
       if (test != null) {
         if (test(routeName)) {
           final result = ltr(routeName, v);
@@ -91,7 +90,7 @@ class NQueueToast {
     final key = GlobalKey<_NQueueToastItemState>();
     final entry = OverlayEntry(
       builder: (context) {
-        int index = _models.indexWhere((e) => e.id == id);
+        var index = _models.indexWhere((e) => e.id == id);
         return _NQueueToastItem(
           key: key,
           index: index,
@@ -144,7 +143,7 @@ class NQueueToast {
   static void removeAll({Duration stagger = const Duration(milliseconds: 60)}) {
     final entries = List<_NQueueToastModel>.from(_models);
 
-    for (int i = 0; i < entries.length; i++) {
+    for (var i = 0; i < entries.length; i++) {
       final e = entries[i];
       Future.delayed(stagger * i, () {
         e.key.currentState?.dismissWithAnimation();
@@ -328,7 +327,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
   }
 
   void onHorizontalDragEnd(DragEndDetails details) {
-    const double threshold = 100;
+    const threshold = 100;
 
     if (dragOffsetX > threshold) {
       dismissWithSlideOut(toRight: true); // 右滑

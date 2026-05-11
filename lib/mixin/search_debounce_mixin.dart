@@ -9,8 +9,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
 /// 搜索栏防抖

@@ -9,7 +9,6 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 extension EdgeInsetsExt on EdgeInsets {
   /// 负值转 0

@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/StackPopup/StackPopup.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_stack.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 class StackDemo extends StatefulWidget {
   final String? title;

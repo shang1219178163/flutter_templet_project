@@ -70,7 +70,7 @@ class NOverlayDialog {
       reverseCurve: Curves.easeIn,
     );
 
-    Widget content = child;
+    var content = child;
     // ⭐ 中心弹窗：Fade
     if (from == Alignment.center) {
       content = FadeTransition(

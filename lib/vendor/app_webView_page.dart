@@ -16,13 +16,12 @@ import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 基于 flutter_inappwebview 的 全局 webview 页面封装
 class AppWebViewPage extends StatefulWidget {

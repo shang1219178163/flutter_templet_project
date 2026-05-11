@@ -10,9 +10,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/search_controller_mixin.dart';
 import 'package:flutter_templet_project/util/debounce_text_controller.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class StreamBuilderDemo extends StatefulWidget {

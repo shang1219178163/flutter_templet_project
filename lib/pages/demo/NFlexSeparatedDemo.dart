@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_flex_separated.dart';
-import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:get/get.dart';

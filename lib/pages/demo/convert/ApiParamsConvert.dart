@@ -9,8 +9,8 @@
 import 'dart:convert';
 
 import 'package:flutter_templet_project/model/api_property_model.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 请求参数转换
 class ApiParamsConvert extends ConvertProtocol {
@@ -221,6 +221,7 @@ $copyRights
 
 import '../base_request_api.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 
 class $className extends BaseRequestAPI {

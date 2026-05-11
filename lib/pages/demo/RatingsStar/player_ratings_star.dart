@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/model/match_member_score_model.dart';
@@ -57,7 +56,7 @@ class _PlayerRatingsStarState extends State<PlayerRatingsStar> {
   @override
   Widget build(BuildContext context) {
     /// 已打分
-    final bool hadStar = myScore > 0;
+    final hadStar = myScore > 0;
     final starTitle = hadStar ? "已评分" : "为TA本场表现打分";
 
     final ratingsModel = RatingsInfoModel.calculateRating(starMap: starMap);
@@ -95,7 +94,7 @@ class _PlayerRatingsStarState extends State<PlayerRatingsStar> {
                         child: Text(
                           '看比赛评分',
                           style: TextStyle(
-                            color: Color(0xFFE4455),
+                            color: Color(0x0ffe4455),
                             fontSize: 13,
                             fontFamily: 'PingFang SC',
                             fontWeight: FontWeight.w500,

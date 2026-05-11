@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class GridViewDemo extends StatefulWidget {

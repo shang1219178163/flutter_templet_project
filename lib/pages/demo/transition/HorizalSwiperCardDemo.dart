@@ -108,7 +108,7 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
   List<Widget> _buildCards() {
     final cards = <Widget>[];
 
-    for (int i = currentIndex; i < currentIndex + 3; i++) {
+    for (var i = currentIndex; i < currentIndex + 3; i++) {
       if (i >= items.length) {
         break;
       }

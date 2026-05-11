@@ -22,7 +22,7 @@ class PhoneAreaCodePopup extends StatefulWidget {
 
   static Future show(BuildContext context, {required ValueChanged<AreaCodeEntity> onChange}) async {
     //读取json
-    const String jsonPath = 'assets/data/area_code.json';
+    const jsonPath = 'assets/data/area_code.json';
     final content = await DefaultAssetBundle.of(context).loadString(jsonPath);
     areaCodeList ??= jsonDecode(content).map<AreaCodeEntity>((e) => AreaCodeEntity.fromJson(e)).toList();
     if (!context.mounted) {

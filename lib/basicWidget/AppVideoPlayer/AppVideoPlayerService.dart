@@ -6,7 +6,7 @@
 //  Copyright © 2025/12/12 shang. All rights reserved.
 //
 
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:quiver/collection.dart';
 import 'package:video_player/video_player.dart';
 

@@ -293,8 +293,8 @@ class ScoreTimesModel {
 
   /// 等级
   Map<int, int> get ratingsMap {
-    final Map<int, int> result = toJson().map(
-      (key, value) => MapEntry(int.parse(key), value),
+    final result = toJson().map(
+      (key, value) => MapEntry<int, int>(int.parse(key), value),
     );
     return result;
   }

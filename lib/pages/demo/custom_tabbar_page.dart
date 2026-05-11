@@ -6,10 +6,9 @@ import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_outline_tabbar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_tab_outline_item.dart';
-
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class CustomTabbarPage extends StatefulWidget {
   const CustomTabbarPage({

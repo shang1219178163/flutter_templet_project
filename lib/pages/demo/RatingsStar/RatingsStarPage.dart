@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/match_member_score_model.dart';
 import 'package:flutter_templet_project/pages/demo/RatingsStar/player_ratings_star.dart';
 import 'package:get/get.dart';
@@ -55,7 +54,7 @@ class _RatingsStarPageState extends State<RatingsStarPage> {
     ValueChanged<PlayerScoreItemModel>? onStarChanged;
 
     /// 1-5星个数统计
-    final Map<int, int> starMap = item.scoreTimes!.ratingsMap;
+    final starMap = item.scoreTimes!.ratingsMap;
 
     return Scrollbar(
       controller: scrollController,

@@ -69,7 +69,7 @@ class NOverlayZIndexManager {
     }
 
     /// 1️⃣ 先找插入位置（有序）
-    int insertIndex = _items.indexWhere((e) => e.zIndex > zIndex);
+    var insertIndex = _items.indexWhere((e) => e.zIndex > zIndex);
     if (insertIndex == -1) {
       insertIndex = _items.length;
     }

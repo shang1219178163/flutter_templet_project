@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/tag_sort/NewsCatalogModel.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 class NewsHomeProvider extends ChangeNotifier {
   NewsHomeProvider._() {

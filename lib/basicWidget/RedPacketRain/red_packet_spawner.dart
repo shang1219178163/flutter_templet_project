@@ -11,10 +11,10 @@ class WeChatRedPacketSpawner implements RedPacketSpawner {
 
   @override
   RedPacketModel spawn() {
-    double size = 36 + _random.nextDouble() * 18;
-    double bias = (_random.nextDouble() - 0.5) * 0.6;
-    double x = (0.5 + bias).clamp(0.05, 0.95);
-    int milliseconds = 5600 + _random.nextInt(1400);
+    var size = 36 + _random.nextDouble() * 18;
+    var bias = (_random.nextDouble() - 0.5) * 0.6;
+    var x = (0.5 + bias).clamp(0.05, 0.95);
+    var milliseconds = 5600 + _random.nextInt(1400);
 
     size = 55;
     // milliseconds = 5600;
