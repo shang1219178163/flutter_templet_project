@@ -64,6 +64,8 @@ class NInputAccessoryView extends StatelessWidget {
     double? keyboardHeight,
   }) {
     focusNode?.requestFocus();
+    SystemChannels.textInput.invokeMethod('TextInput.show');
+
     if (keyboardVN == null) {
       NOverlayManagerNew.show(
         context,

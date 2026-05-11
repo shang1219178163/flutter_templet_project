@@ -42,6 +42,8 @@ class NReuseToast {
     Map<String, dynamic>? data,
     Duration duration = const Duration(seconds: 2),
     VoidCallback? onFinish,
+    OverlayEntry? below,
+    OverlayEntry? above,
   }) {
     final overlay = Overlay.of(context, rootOverlay: true);
     final targetIndex = entries.lastIndexWhere((e) => e.tag == tag);
@@ -83,7 +85,7 @@ class NReuseToast {
       },
     );
 
-    overlay.insert(toastEntry.entry!);
+    overlay.insert(toastEntry.entry!, below: below, above: above);
     _entries.add(toastEntry);
 
     toastEntry.startTimer(duration: duration, onFinish: onFinish);

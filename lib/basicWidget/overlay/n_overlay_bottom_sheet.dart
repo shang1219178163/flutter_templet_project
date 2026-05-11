@@ -44,6 +44,8 @@ class NOverlayBottomSheet {
     double? heightFactor,
     double raius = 15,
     bool dismissOnTapBarrier = true,
+    OverlayEntry? below,
+    OverlayEntry? above,
     required Widget child,
   }) {
     if (isShowing) {
@@ -107,7 +109,7 @@ class NOverlayBottomSheet {
       },
     );
 
-    overlay.insert(_entry!);
+    overlay.insert(_entry!, below: below, above: above);
     _controller!.forward();
   }
 }

@@ -67,6 +67,13 @@ extension VoidCallbackExt on VoidCallback {
     debounceFn(() => this());
   }
 
+  /// 防抖
+  void debounce100() {
+    const duration = Duration(milliseconds: 100);
+    var debounceFn = getDebounceFn(duration: duration);
+    debounceFn(() => this());
+  }
+
   /// 认证
   ///
   /// onAuth 返回认证状态

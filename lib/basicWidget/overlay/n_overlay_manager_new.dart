@@ -38,6 +38,8 @@ class NOverlayManagerNew {
     BuildContext context, {
     Duration duration = const Duration(seconds: 2),
     bool autoDismiss = true,
+    OverlayEntry? below,
+    OverlayEntry? above,
     required WidgetBuilder builder,
   }) {
     // 1️⃣ 先清空已有 Toast
@@ -47,7 +49,7 @@ class NOverlayManagerNew {
     final entry = OverlayEntry(builder: builder);
 
     _entries.add(entry);
-    overlay.insert(entry);
+    overlay.insert(entry, below: below, above: above);
 
     // 2️⃣ 自动移除
     if (autoDismiss) {

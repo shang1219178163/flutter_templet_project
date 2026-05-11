@@ -9,6 +9,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/src/function_ext.dart';
 
 /// 全局屏幕工具类，不依赖 BuildContext
 class NScreenManager {
@@ -25,9 +26,9 @@ class NScreenManager {
     PlatformDispatcher.instance.onMetricsChanged = () {
       _updateScreenSize();
       for (final listener in _listeners) {
-        listener(size);
+        listener();
       }
-    };
+    }.debounce;
   }
 
   /// 当前主 View
@@ -93,15 +94,15 @@ class NScreenManager {
   /// 屏幕方向
   static Orientation get orientation => width > height ? Orientation.landscape : Orientation.portrait;
 
-  static final List<void Function(Size size)> _listeners = [];
+  static final List<void Function()> _listeners = [];
 
   /// 添加监听器（页面级别订阅）
-  static void addListener(void Function(Size size) listener) {
+  static void addListener(void Function() listener) {
     _listeners.add(listener);
   }
 
   /// 移除监听器（避免内存泄漏）
-  static void removeListener(void Function(Size size) listener) {
+  static void removeListener(void Function() listener) {
     _listeners.remove(listener);
   }
 
