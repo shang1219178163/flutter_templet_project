@@ -211,7 +211,6 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                 NReuseToast.show(
                   context: context,
                   tag: "success",
-                  message: "更新内容",
                   child: child,
                 );
               },
@@ -263,7 +262,6 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                 NReuseToast.show(
                   context: context,
                   tag: "success",
-                  message: "第一次",
                   child: giftCard,
                 );
               },
@@ -284,7 +282,6 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                 NReuseToast.show(
                   context: context,
                   tag: "success",
-                  message: "更新内容 ${countVN.value}",
                   child: giftCard,
                 );
               },
@@ -305,9 +302,8 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                 // 不同类型
                 NReuseToast.show(
                   context: context,
-                  tag: "error $num",
+                  tag: "tag ${countVN.value}",
                   max: 5,
-                  message: "新的 toast",
                   child: giftCard,
                 );
               },

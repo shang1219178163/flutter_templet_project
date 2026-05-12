@@ -108,7 +108,6 @@ class LivestreamEnterEffectTest extends StatelessWidget {
               context: context,
               tag: '篮球',
               left: 200,
-              message: "更新内容",
               child: child,
             );
           },
