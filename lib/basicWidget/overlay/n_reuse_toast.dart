@@ -36,6 +36,7 @@ class NReuseToast {
     double initialTop = 120,
     double left = 10,
     Offset beginOffset = const Offset(-1, 0),
+    Alignment alignment = Alignment.centerRight,
     EdgeInsets? margin = const EdgeInsets.symmetric(horizontal: 20),
     double height = 40,
     double spacing = 12,
@@ -48,7 +49,7 @@ class NReuseToast {
   }) {
     final overlay = Overlay.of(context, rootOverlay: true);
     final targetIndex = entries.lastIndexWhere((e) => e.tag == tag);
-    debugPrint(["show", tag, targetIndex, child.hashCode].join(","));
+    // debugPrint(["show", tag, targetIndex, child.hashCode].join(","));
     if (targetIndex != -1) {
       _entries[targetIndex].update(
         height: height,
@@ -79,7 +80,7 @@ class NReuseToast {
           top: top,
           left: left,
           barrierColor: barrierColor,
-          alignment: Alignment.centerLeft,
+          alignment: alignment,
           beginOffset: beginOffset,
         );
       },
@@ -148,7 +149,7 @@ class NReuseToastEntry {
     required double left,
     Duration duration = const Duration(milliseconds: 300),
     Color? barrierColor,
-    Alignment alignment = Alignment.center,
+    Alignment alignment = Alignment.centerLeft,
     Offset beginOffset = const Offset(-1, 0),
   }) {
     return NOverlaySlideCard(
@@ -157,6 +158,7 @@ class NReuseToastEntry {
       top: top,
       left: left,
       right: 0,
+      alignment: alignment,
       beginOffset: beginOffset,
       child: (dismiss) {
         _onDismiss = dismiss;

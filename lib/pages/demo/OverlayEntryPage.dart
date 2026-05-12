@@ -31,8 +31,9 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
 
   bool isLeft = true;
 
-  double get leftSpacing => isLeft ? 10 : 130;
+  double get leftSpacing => 0;
   Offset get beginOffset => isLeft ? Offset(-1, 0) : Offset(1, 0);
+  Alignment get alignment => isLeft ? Alignment.centerLeft : Alignment.centerRight;
 
   @override
   void dispose() {
@@ -101,6 +102,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               initialTop: top,
               left: leftSpacing,
               beginOffset: beginOffset,
+              alignment: alignment,
               tag: "success",
               child: buildGiftCard(count: countVN.value),
             );
@@ -118,6 +120,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               initialTop: top,
               left: leftSpacing,
               beginOffset: beginOffset,
+              alignment: alignment,
               tag: "success",
               child: buildGiftCard(count: countVN.value),
             );
@@ -136,6 +139,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               initialTop: top,
               left: leftSpacing,
               beginOffset: beginOffset,
+              alignment: alignment,
               tag: "tag $num",
               max: 9,
               child: buildGiftCard(count: num),
@@ -154,13 +158,16 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
     final giftUrl = "https://p6-passport.byteacctimg.com/img/mosaic-legacy/3795/3033762272~100x100.awebp";
     final giftCount = count;
 
-    return LiveStreamGiftSendCard(
-      avatar: avatar,
-      name: nickName,
-      giftName: goodsName,
-      giftUrl: giftUrl,
-      giftColor: Color(0xFFE13508),
-      giftCount: giftCount,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: LiveStreamGiftSendCard(
+        avatar: avatar,
+        name: nickName,
+        giftName: goodsName,
+        giftUrl: giftUrl,
+        giftColor: Color(0xFFE13508),
+        giftCount: giftCount,
+      ),
     );
   }
 

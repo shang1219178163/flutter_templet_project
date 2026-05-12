@@ -31,19 +31,10 @@ class LiveStreamGiftSendCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final num = "×$giftCount";
-
-    var width = 210.0;
-    if (giftCount >= 10 && giftCount <= 99) {
-      width = 230;
-    } else if (giftCount >= 100) {
-      width = 250;
-    }
-
     final giftColorNew = giftColor ?? const Color(0xFFE13508);
     return Container(
       height: 40,
-      width: width,
+      constraints: const BoxConstraints(minWidth: 210, maxWidth: 270),
       decoration: ShapeDecoration(
         gradient: LinearGradient(
           colors: [
@@ -56,19 +47,22 @@ class LiveStreamGiftSendCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(width: 4),
+          const SizedBox(width: 2),
           ClipOval(
             child: CachedNetworkImage(
               imageUrl: avatar,
-              width: 32,
-              height: 32,
-              fit: BoxFit.contain,
+              width: 34,
+              height: 34,
+              fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(width: 13),
-          Flexible(
+          const SizedBox(width: 8),
+          Container(
+            width: 90,
+            padding: EdgeInsets.only(top: 2),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   name,
@@ -91,11 +85,11 @@ class LiveStreamGiftSendCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 13),
+          const SizedBox(width: 8),
           CachedNetworkImage(
             imageUrl: giftUrl,
-            width: 32,
-            height: 32,
+            width: 40,
+            height: 40,
           ),
           const SizedBox(width: 8),
           FittedBox(
@@ -116,7 +110,7 @@ class LiveStreamGiftSendCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: 2),
         ],
       ),
     );
