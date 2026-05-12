@@ -20,6 +20,7 @@ class NOverlaySlideCard extends StatefulWidget {
     required this.child,
     this.duration = const Duration(milliseconds: 300),
     this.beginOffset = const Offset(1, 0),
+    this.curve = Curves.linear,
   });
 
   final AlignmentGeometry? alignment;
@@ -36,6 +37,8 @@ class NOverlaySlideCard extends StatefulWidget {
 
   /// 动画时间
   final Duration duration;
+
+  final Curve curve;
 
   /// 初始偏移
   final Offset beginOffset;
@@ -91,7 +94,7 @@ class NOverlaySlideCardState extends State<NOverlaySlideCard> {
         opacity: opacity,
         child: AnimatedSlide(
           duration: widget.duration,
-          curve: Curves.easeOutCubic,
+          curve: widget.curve,
           offset: offset,
           child: Container(
             height: widget.height,
