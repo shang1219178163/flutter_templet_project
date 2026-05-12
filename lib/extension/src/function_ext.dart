@@ -69,9 +69,17 @@ extension VoidCallbackExt on VoidCallback {
 
   /// 防抖
   void debounce100() {
-    const duration = Duration(milliseconds: 100);
-    var debounceFn = getDebounceFn(duration: duration);
-    debounceFn(() => this());
+    debounce(duration: Duration(milliseconds: 100));
+  }
+
+  /// 防抖
+  void debounce150() {
+    debounce(duration: Duration(milliseconds: 150));
+  }
+
+  /// 防抖
+  void debounce200() {
+    debounce(duration: Duration(milliseconds: 200));
   }
 
   /// 认证
@@ -100,5 +108,21 @@ extension ValueChangedExt<T> on ValueChanged<T> {
   }) {
     var debounceFn = getDebounceFn(duration: duration);
     debounceFn(() => this.call(value));
+  }
+
+  /// 去重
+  ValueChanged<T> distinct() {
+    T? previous;
+    var hasValue = false;
+
+    return (value) {
+      if (hasValue && previous == value) {
+        return;
+      }
+
+      hasValue = true;
+      previous = value;
+      this(value);
+    };
   }
 }

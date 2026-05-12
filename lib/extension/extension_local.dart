@@ -48,6 +48,7 @@ export 'src/service_protocol_info_ext.dart';
 export 'src/set_ext.dart';
 export 'src/snack_bar_ext.dart';
 export 'src/stack_ext.dart';
+export 'src/stream_ext.dart';
 export 'src/string_ext.dart';
 export 'src/system_channels_ext.dart';
 export 'src/system_chrome_ext.dart';

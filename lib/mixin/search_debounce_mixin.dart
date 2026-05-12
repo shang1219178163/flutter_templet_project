@@ -9,14 +9,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 搜索栏防抖
-mixin SearchDebounceMixin<T extends StatefulWidget> on State<T> {
+mixin SearchDebounceMixin<T extends StatefulWidget, E> on State<T> {
   /// searchStreamController
-  StreamController<String> _searchStreamController = StreamController<String>();
-  StreamController<String> get searchStreamController => _searchStreamController;
-  set searchStreamController(StreamController<String> value) {
+  StreamController<E> _searchStreamController = StreamController<E>();
+  StreamController<E> get searchStreamController => _searchStreamController;
+  set searchStreamController(StreamController<E> value) {
     _searchStreamController = value;
   }
 
@@ -40,10 +40,10 @@ mixin SearchDebounceMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// 加入新值
-  void sink(String v) {
+  void searchStreamSink(E v) {
     searchStreamController.add(v);
   }
 
   /// 搜索去重回调
-  void onSearchChanged(String v) => throw UnimplementedError("❌$this onSearchChanged");
+  void onSearchStreamChanged(E v) => throw UnimplementedError("❌$this onSearchChanged");
 }
