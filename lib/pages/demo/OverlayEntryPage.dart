@@ -137,7 +137,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               left: leftSpacing,
               beginOffset: beginOffset,
               tag: "tag $num",
-              max: 5,
+              max: 9,
               child: buildGiftCard(count: num),
             );
           },

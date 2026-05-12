@@ -217,7 +217,9 @@ class NReuseToastEntry {
 
   void startTimer({required Duration duration, VoidCallback? onFinish}) {
     _timer = Timer(duration, () async {
-      // await _onDismiss?.call();
+      if (entry == NReuseToast.entries.first.entry) {
+        await _onDismiss?.call();
+      }
       NReuseToast.remove(tag);
       onFinish?.call();
     });
