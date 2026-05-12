@@ -32,10 +32,22 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
   final heightRatio = 420.0 / 932.0;
   late final top = NScreenManager.screenSize.height * heightRatio;
 
+  /// 是否从左滑入
   bool isLeft = true;
 
+  /// 是否滑动
+  bool isSlide = true;
+
+  /// 卡片水平外间距
   double get leftSpacing => 0;
+
+  /// 卡片初始位置
   Offset get beginOffset => isLeft ? Offset(-1, 0) : Offset(1, 0);
+
+  /// 卡片水平滑动动画时间
+  Duration get slideDuration => isSlide ? const Duration(milliseconds: 300) : Duration.zero;
+
+  /// 卡片水平对齐方式
   Alignment get alignment => isLeft ? Alignment.centerLeft : Alignment.centerRight;
 
   @override
@@ -62,16 +74,42 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
       child: SingleChildScrollView(
         controller: scrollController,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 12),
           child: Column(
             children: [
-              SwitchListTile(
-                title: Text(isLeft ? "Slide in left" : "Slide in right"),
-                value: isLeft,
-                onChanged: (v) {
-                  isLeft = v;
-                  setState(() {});
-                },
+              NSectionBox(
+                title: "NReuseToast 弹窗",
+                child: Column(
+                  children: [
+                    SwitchListTile(
+                      dense: true,
+                      title: Text(isLeft ? "Slide in left" : "Slide in right"),
+                      subtitle: Text("卡片横向滑入方向"),
+                      value: isLeft,
+                      onChanged: (v) {
+                        isLeft = v;
+                        setState(() {});
+                      },
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                      ),
+                      child: SwitchListTile(
+                        dense: true,
+                        title: Text(isSlide ? "0.3秒滑动" : "禁用滑动"),
+                        subtitle: Text("卡片横向滑入动画时间"),
+                        value: isSlide,
+                        onChanged: (v) {
+                          isSlide = v;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
               NSectionBox(
                 title: "直播礼物卡片",
@@ -106,6 +144,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               left: leftSpacing,
               beginOffset: beginOffset,
               alignment: alignment,
+              slideDuration: slideDuration,
               tag: "success",
               child: buildGiftCard(count: countVN.value),
             );
@@ -122,6 +161,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               left: leftSpacing,
               beginOffset: beginOffset,
               alignment: alignment,
+              slideDuration: slideDuration,
               tag: "success",
               child: buildGiftCard(count: countVN.value),
             );
@@ -139,7 +179,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               left: leftSpacing,
               beginOffset: beginOffset,
               alignment: alignment,
-              duration: Duration(seconds: 5),
+              slideDuration: slideDuration,
               tag: "tag $num",
               max: 9,
               child: buildGiftCard(count: num),
