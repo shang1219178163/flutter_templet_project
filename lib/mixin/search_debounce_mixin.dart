@@ -36,7 +36,7 @@ mixin SearchDebounceMixin<T extends StatefulWidget, E> on State<T> {
   @override
   void initState() {
     super.initState();
-    searchStreamController.stream.debounceTime(searchDebounceTime).distinct().listen(onSearchChanged);
+    searchStreamController.stream.debounceTime(searchDebounceTime).distinct().listen(onSearchStreamChanged);
   }
 
   /// 加入新值
