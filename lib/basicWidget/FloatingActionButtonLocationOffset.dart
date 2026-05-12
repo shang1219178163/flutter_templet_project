@@ -12,19 +12,16 @@ import 'package:flutter/material.dart';
 class FloatingActionButtonLocationOffset extends FloatingActionButtonLocation {
   FloatingActionButtonLocationOffset({
     required this.location,
-    this.offsetX = 0,
-    this.offsetY = 0,
+    this.offset = Offset.zero,
   });
 
-  FloatingActionButtonLocation location;
+  final FloatingActionButtonLocation location;
 
-  double offsetX;
-
-  double offsetY;
+  final Offset offset;
 
   @override
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
-    var offset = location.getOffset(scaffoldGeometry);
-    return Offset(offset.dx + offsetX, offset.dy + offsetY);
+    var position = location.getOffset(scaffoldGeometry);
+    return position + offset;
   }
 }

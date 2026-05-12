@@ -86,7 +86,7 @@ class _EmojiPageState extends State<EmojiPage> {
               }),
       floatingActionButtonLocation: FloatingActionButtonLocationOffset(
         location: FloatingActionButtonLocation.endFloat,
-        // offsetY: -40,
+        // offset: Offset(0, -40),
       ),
       floatingActionButton: widget.onSend == null
           ? null
@@ -137,7 +137,10 @@ class _EmojiPageState extends State<EmojiPage> {
                         widget.onSend?.call(currentVN.value);
                       },
                       backgroundColor: context.primaryColor,
-                      label: Text("发送"),
+                      label: Text(
+                        "发送",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],
