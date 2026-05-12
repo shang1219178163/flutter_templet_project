@@ -29,6 +29,9 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
 
   final countVN = ValueNotifier(0);
 
+  final heightRatio = 420.0 / 932.0;
+  late final top = NScreenManager.screenSize.height * heightRatio;
+
   bool isLeft = true;
 
   double get leftSpacing => 0;
@@ -88,15 +91,15 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
   }
 
   Widget buildLivestreamBox() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Wrap(
+      alignment: WrapAlignment.start,
+      spacing: 8,
+      runSpacing: 8,
       children: [
         ElevatedButton(
           onPressed: () {
             countVN.value = 90;
 
-            const heightRatio = 420.0 / 932.0;
-            var top = NScreenManager.screenSize.height * heightRatio;
             NReuseToast.show(
               context: context,
               initialTop: top,
@@ -113,8 +116,6 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
           onPressed: () {
             countVN.value++;
 
-            const heightRatio = 420.0 / 932.0;
-            var top = NScreenManager.screenSize.height * heightRatio;
             NReuseToast.show(
               context: context,
               initialTop: top,
@@ -132,20 +133,38 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
             countVN.value++;
             final num = countVN.value;
             // 不同类型
-            const heightRatio = 420.0 / 932.0;
-            var top = NScreenManager.screenSize.height * heightRatio;
             NReuseToast.show(
               context: context,
               initialTop: top,
               left: leftSpacing,
               beginOffset: beginOffset,
               alignment: alignment,
+              duration: Duration(seconds: 5),
               tag: "tag $num",
               max: 9,
               child: buildGiftCard(count: num),
             );
           },
           child: Text("新的 toast"),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            countVN.value++;
+            final num = countVN.value;
+            // 不同类型
+            NReuseToast.show(
+              context: context,
+              initialTop: top,
+              left: leftSpacing,
+              beginOffset: beginOffset,
+              alignment: Alignment.center,
+              slideDuration: Duration.zero,
+              tag: "tag $num",
+              max: 6,
+              child: buildGiftCard(count: num),
+            );
+          },
+          child: Text("无动画"),
         ),
       ],
     );

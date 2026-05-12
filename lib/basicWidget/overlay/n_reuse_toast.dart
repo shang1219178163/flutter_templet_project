@@ -42,6 +42,7 @@ class NReuseToast {
     double spacing = 12,
     Map<String, dynamic>? data,
     Duration duration = const Duration(seconds: 2),
+    Duration slideDuration = const Duration(milliseconds: 300),
     VoidCallback? onFinish,
     OverlayEntry? below,
     OverlayEntry? above,
@@ -80,6 +81,7 @@ class NReuseToast {
           left: left,
           alignment: alignment,
           beginOffset: beginOffset,
+          duration: slideDuration,
         );
       },
     );
