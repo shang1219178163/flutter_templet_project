@@ -10,7 +10,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_boder_text.dart';
 
-
 /// 直播间礼物发送动画卡片
 class LiveStreamGiftSendCard extends StatelessWidget {
   const LiveStreamGiftSendCard({
@@ -106,13 +105,13 @@ class LiveStreamGiftSendCard extends StatelessWidget {
                 NBoderText(
                   text: "×",
                   fontSize: 20,
-                  fontFamily: AppFontFamily.dingTalk.value,
+                  fontStyle: FontStyle.italic,
                 ),
                 NBoderText(
                   text: "$giftCount",
                   fontSize: 26,
-                  fontFamily: AppFontFamily.dingTalk.value,
                   fontWeight: FontWeight.w900,
+                  fontStyle: FontStyle.italic,
                 ),
               ],
             ),

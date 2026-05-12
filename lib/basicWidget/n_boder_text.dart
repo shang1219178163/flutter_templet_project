@@ -15,6 +15,7 @@ class NBoderText extends StatelessWidget {
     required this.text,
     this.fontSize = 20,
     this.fontFamily = 'DDINPRO',
+    this.fontStyle,
     this.fontWeight = FontWeight.w700,
     this.maxLines = 1,
     this.overflow = TextOverflow.ellipsis,
@@ -28,6 +29,7 @@ class NBoderText extends StatelessWidget {
   final double fontSize;
   final FontWeight? fontWeight;
   final String? fontFamily;
+  final FontStyle? fontStyle;
   final int? maxLines;
   final TextOverflow? overflow;
   final Color? textColor;
@@ -42,6 +44,7 @@ class NBoderText extends StatelessWidget {
       fontSize: fontSize,
       fontWeight: fontWeight,
       fontFamily: fontFamily,
+      fontStyle: fontStyle,
       height: 0.9,
       // backgroundColor: Colors.green,
     );
@@ -61,6 +64,7 @@ class NBoderText extends StatelessWidget {
       fontSize: fontSize,
       fontWeight: fontWeight,
       fontFamily: fontFamily,
+      fontStyle: fontStyle,
       height: 0.9,
       foreground: Paint()
         ..style = PaintingStyle.stroke
