@@ -97,9 +97,7 @@ class NReuseToast {
     if (targetIndex == -1) {
       return;
     }
-
-    final item = _entries.removeAt(targetIndex);
-    item.entry?.remove();
+    removeIndex(targetIndex);
   }
 
   static void removeIndex(int index) {
@@ -142,6 +140,8 @@ class NReuseToastEntry {
   OverlayEntry? entry;
   Timer? _timer;
 
+  Future<void> Function()? _onDismiss;
+
   /// 🔥 UI 构建
   Widget build({
     required double top,
@@ -158,7 +158,10 @@ class NReuseToastEntry {
       left: left,
       right: 0,
       beginOffset: beginOffset,
-      child: (_) => child,
+      child: (dismiss) {
+        _onDismiss = dismiss;
+        return child;
+      },
     );
     // return AnimatedPositioned(
     //   duration: duration,
@@ -213,7 +216,8 @@ class NReuseToastEntry {
   }
 
   void startTimer({required Duration duration, VoidCallback? onFinish}) {
-    _timer = Timer(duration, () {
+    _timer = Timer(duration, () async {
+      // await _onDismiss?.call();
       NReuseToast.remove(tag);
       onFinish?.call();
     });
