@@ -36,11 +36,10 @@ class NReuseToast {
     double initialTop = 120,
     double left = 10,
     Offset beginOffset = const Offset(-1, 0),
-    Alignment alignment = Alignment.centerRight,
+    Alignment alignment = Alignment.centerLeft,
     EdgeInsets? margin = const EdgeInsets.symmetric(horizontal: 20),
     double height = 40,
     double spacing = 12,
-    Color? barrierColor,
     Map<String, dynamic>? data,
     Duration duration = const Duration(seconds: 2),
     VoidCallback? onFinish,
@@ -79,7 +78,6 @@ class NReuseToast {
         return toastEntry.build(
           top: top,
           left: left,
-          barrierColor: barrierColor,
           alignment: alignment,
           beginOffset: beginOffset,
         );
@@ -148,7 +146,6 @@ class NReuseToastEntry {
     required double top,
     required double left,
     Duration duration = const Duration(milliseconds: 300),
-    Color? barrierColor,
     Alignment alignment = Alignment.centerLeft,
     Offset beginOffset = const Offset(-1, 0),
   }) {
@@ -183,7 +180,7 @@ class NReuseToastEntry {
     //             Container(
     //               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
     //               decoration: BoxDecoration(
-    //                 color: barrierColor ?? Colors.black.withOpacity(0.7),
+    //                 color: Colors.black.withOpacity(0.7),
     //                 borderRadius: BorderRadius.circular(8),
     //               ),
     //               child: Text(
