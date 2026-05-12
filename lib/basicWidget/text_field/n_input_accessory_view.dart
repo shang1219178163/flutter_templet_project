@@ -67,9 +67,6 @@ class NInputAccessoryView extends StatefulWidget {
       context,
       autoDismiss: false,
       builder: (c) {
-        // var bottom = keyboardHeight ?? MediaQuery.of(c).viewInsets.bottom;
-        // DLog.d("bottom: $bottom");
-        // DLog.d("NInputAccessoryViewNew");
         return NInputAccessoryView(
           focusNode: focusNode,
           controller: controller,

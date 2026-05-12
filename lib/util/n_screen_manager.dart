@@ -10,7 +10,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/src/function_ext.dart';
-import 'package:flutter_templet_project/mixin/debounce_stream_mixin.dart';
 
 /// 全局屏幕工具类，不依赖 BuildContext
 class NScreenManager {
