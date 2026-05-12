@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/mixin/debounce_stream_mixin.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class TestFunction extends StatefulWidget {
@@ -21,7 +22,17 @@ class TestFunction extends StatefulWidget {
   _TestFunctionState createState() => _TestFunctionState();
 }
 
-class _TestFunctionState extends State<TestFunction> {
+class _TestFunctionState extends State<TestFunction> with DebounceStreamMixin<TestFunction, int> {
+  @override
+  Stream<int> get debounceStream {
+    return debounceStreamController.stream.distinct();
+  }
+
+  @override
+  void onDebounceStreamChanged(int v) {
+    DLog.d(v);
+  }
+
   late final items = <({String name, VoidCallback action})>[
     (name: "apply", action: onApply),
     (name: "防抖", action: onDebounce),
@@ -50,7 +61,7 @@ class _TestFunctionState extends State<TestFunction> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scrollbar(
@@ -74,6 +85,16 @@ class _TestFunctionState extends State<TestFunction> {
                     DLog.d("OutlinedButton - onUnauth");
                   }),
                   child: NText("testVoidCallback.auth"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    final items = [0, 1, 1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 7, 8, 8, 9];
+                    for (final e in items) {
+                      // onValueChanged(e);
+                      debounceStreamSink(e);
+                    }
+                  },
+                  child: Text("去重"),
                 ),
               ],
             ),
@@ -166,6 +187,10 @@ class _TestFunctionState extends State<TestFunction> {
   void onDebounceOne() {
     testVoidCallbackOne.debounce();
   }
+
+  late final ValueChanged<int> onValueChanged = ((v) {
+    DLog.d(v);
+  }).distinct();
 
   Future<void> onExecution() async {
     // await tes().codeExecution();
