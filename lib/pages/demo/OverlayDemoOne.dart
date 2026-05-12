@@ -31,7 +31,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: scrollController,
       child: SingleChildScrollView(
@@ -42,7 +42,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
               onPressed: () {
                 clickShow();
               },
-              child: Text("show"),
+              child: Text("draggable overlay"),
             )
           ],
         ),
