@@ -10,6 +10,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/src/function_ext.dart';
+import 'package:flutter_templet_project/mixin/debounce_stream_mixin.dart';
 
 /// 全局屏幕工具类，不依赖 BuildContext
 class NScreenManager {
@@ -28,7 +29,7 @@ class NScreenManager {
       for (final listener in _listeners) {
         listener();
       }
-    }.debounce;
+    }.debounce100;
   }
 
   /// 当前主 View
@@ -46,6 +47,9 @@ class NScreenManager {
   static ViewPadding get padding => current.padding;
   static ViewPadding get viewInsets => current.viewInsets;
   static ViewPadding get viewPadding => current.viewPadding;
+
+  /// 键盘
+  static double get keyboardHeight => (current.viewInsets.bottom / current.devicePixelRatio).truncateToDouble();
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
   static double get safeAreaTop => current.viewPadding.top;
@@ -108,20 +112,57 @@ class NScreenManager {
 
   /// 内部更新
   void _updateScreenSize() {
-    final view = PlatformDispatcher.instance.views.first;
-    _size = view.physicalSize / view.devicePixelRatio;
+    _size = screenSize;
   }
 
-  @override
-  String toString() {
-    final map = {
+  Map<String, dynamic> toJson() {
+    return {
       "size": size,
       "devicePixelRatio": devicePixelRatio,
       "physicalSize": physicalSize,
       "orientation": orientation,
       "_listeners": _listeners.map((e) => e.toString()).toList(),
     };
+  }
 
-    return "ScreenManager: $map";
+  @override
+  String toString() {
+    return "NScreenManager: ${toJson()}";
+  }
+}
+
+/// 键盘高度改变mixin
+mixin KeyboardHeightChangedMixin<T extends StatefulWidget> on State<T> {
+  // /// 键盘高低
+  // final keyboardHeightVN = ValueNotifier(0.0);
+
+  /// 键盘高低
+  ValueNotifier<double> _keyboardHeightVN = ValueNotifier(0.0);
+  ValueNotifier<double> get keyboardHeightVN => _keyboardHeightVN;
+  set keyboardHeightVN(ValueNotifier<double> value) {
+    _keyboardHeightVN = value;
+  }
+
+  @override
+  void dispose() {
+    NScreenManager.removeListener(_onLtr);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    NScreenManager.addListener(_onLtr);
+  }
+
+  _onLtr() {
+    final view = WidgetsBinding.instance.platformDispatcher.views.first;
+    final bottom = (view.viewInsets.bottom / view.devicePixelRatio).truncateToDouble();
+    if (bottom > 0 && bottom <= 300) {
+      debugPrint(['$runtimeType onMetricsChanged 无效数据', keyboardHeightVN.value, bottom].join(", "));
+      return;
+    }
+    // debugPrint(['>>> $runtimeType onMetricsChanged', keyboardHeightVN.value, bottom].join(", "));
+    keyboardHeightVN.value = bottom;
   }
 }

@@ -23,7 +23,7 @@ class MenuAnchorDemo extends StatefulWidget {
   State<MenuAnchorDemo> createState() => _MenuAnchorDemoState();
 }
 
-class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
+class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChangedMixin {
   final _selectedItemVN = ValueNotifier<SomeItemType>(SomeItemType.none);
 
   String defaultValue = "-";
@@ -38,6 +38,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
   final textController = TextEditingController();
   final keyboardAccessoryController = KeyboardAccessoryController();
 
+  @override
   final keyboardHeightVN = ValueNotifier(0.0);
 
   @override
@@ -53,25 +54,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
     initData();
   }
 
-  initData() {
-    focusNode.addListener(() {
-      // DLog.d(["focusNode.hasFocus", focusNode.hasFocus, ScreenManager.viewInsets]);
-      // if (focusNode.hasFocus) {
-      //   DLog.d("viewInsets: ${View.of(context).viewInsets}");
-      //
-      //   showInputAccessoryView();
-      // } else {
-      //   // keyboardAccessoryController.hide();
-      // }
-    });
-
-    WidgetsBinding.instance.platformDispatcher.onMetricsChanged = () {
-      final view = WidgetsBinding.instance.platformDispatcher.views.first;
-      final bottom = (view.viewInsets.bottom / view.devicePixelRatio).truncateToDouble();
-      keyboardHeightVN.value = bottom;
-      DLog.d([' onMetricsChanged', focusNode.hasFocus, bottom].join(", "));
-    }.debounce;
-  }
+  initData() {}
 
   void showInputAccessoryView() {
     keyboardAccessoryController.show(
@@ -128,27 +111,33 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
               keyboardHeightVN,
             ]),
             builder: (context, Widget? child) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text([
-                    'MediaQuery.of(context).viewInsets.bottom',
-                    MediaQuery.of(context).viewInsets.bottom.toStringAsFixed(1),
-                  ].join(": ")),
-                  Text([
-                    'View.of(context).viewInsets.bottom',
-                    View.of(context).viewInsets.bottom.toStringAsFixed(1),
-                  ].join(": ")),
-                  Text([
-                    'NScreenManager.viewInsets.bottom',
-                    (NScreenManager.viewInsets.bottom / 3.0).toStringAsFixed(1),
-                  ].join(": ")),
-                  Text([
-                    'keyboardHeightVN.value',
-                    keyboardHeightVN.value,
-                  ].join(": ")),
-                ],
+              final isHide = keyboardHeightVN.value == 0.0;
+              return Container(
+                decoration: BoxDecoration(
+                  color: isHide ? Colors.white : ColorExt.random,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text([
+                      'MediaQuery.of(context).viewInsets.bottom',
+                      MediaQuery.of(context).viewInsets.bottom.toStringAsFixed(1),
+                    ].join(": ")),
+                    Text([
+                      'View.of(context).viewInsets.bottom',
+                      View.of(context).viewInsets.bottom.toStringAsFixed(1),
+                    ].join(": ")),
+                    Text([
+                      'NScreenManager.viewInsets.bottom',
+                      (NScreenManager.viewInsets.bottom / 3.0).toStringAsFixed(1),
+                    ].join(": ")),
+                    Text([
+                      'keyboardHeightVN.value',
+                      keyboardHeightVN.value,
+                    ].join(": ")),
+                  ],
+                ),
               );
             },
           ),
@@ -181,8 +170,8 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
             },
             child: Text("拉起键盘"),
           ),
-          SizedBox(height: 10),
 
+          SizedBox(height: 10),
           Row(
             children: [
               NMenuAnchor<SomeItemType>(
@@ -294,7 +283,6 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
   }
 
   void showInputAccessory() {
-    DLog.d("showInputAccessory");
     return NInputAccessoryViewNew.show(
       context: context,
       focusNode: focusNode,
