@@ -88,7 +88,24 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               NSectionBox(
                 title: "NOverlayZIndexManager",
                 child: buildWrap(
-                  onChanged: showOverlayZIndex,
+                  onChanged: (v) {
+                    showOverlayZIndex(i: v, beginOffset: beginOffset);
+                  },
+                ),
+              ),
+              NSectionBox(
+                title: "NOverlayZIndexManager bottom",
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        showOverlayBottom(
+                          beginOffset: Offset(0, 1),
+                        );
+                      },
+                      child: Text("bottom"),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -290,21 +307,21 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
     );
   }
 
-  void showOverlayZIndex(int v) {
-    DLog.d(v);
+  void showOverlayZIndex({required int i, required Offset beginOffset}) {
+    DLog.d(i);
 
     late OverlayEntry entry;
     entry = OverlayEntry(
       builder: (_) {
         return AnimatedPositioned(
           duration: Duration(milliseconds: 300),
-          top: 400 + v * 50,
-          left: v * 10,
-          right: v * 10,
+          top: 400 + i * 50,
+          left: i * 10,
+          right: i * 10,
           child: NOverlayAnimatedSlide(
             beginOffset: beginOffset,
             child: (onDismiss) => buildCard(
-              message: "$v 这是一条测试数据!",
+              message: "$i 这是一条测试数据!",
               onTap: () async {
                 await onDismiss();
                 NOverlayZIndexManager.instance.removeWhere((e) => e.entry == entry);
@@ -317,22 +334,68 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
 
     NOverlayZIndexManager.instance.show(
       context: context,
-      zIndex: v * 100,
+      zIndex: i * 100,
       // key: key,
       entry: entry,
     );
   }
 
-  Widget buildCard({required String message, VoidCallback? onTap}) {
+  void showOverlayBottom({required Offset beginOffset}) {
+    late OverlayEntry entry;
+    entry = OverlayEntry(
+      builder: (_) {
+        final bottom = NScreenManager.safeAreaBottom / NScreenManager.devicePixelRatio + kBottomNavigationBarHeight;
+        // DLog.d([bottom, kBottomNavigationBarHeight, NScreenManager.safeAreaHeight]);
+        return AnimatedPositioned(
+          duration: Duration(milliseconds: 300),
+          left: 0,
+          right: 0,
+          bottom: bottom + 8,
+          child: NOverlayAnimatedSlide(
+            beginOffset: beginOffset,
+            child: (onDismiss) => Align(
+              alignment: Alignment.center,
+              child: buildCard(
+                width: 200,
+                height: 45,
+                color: Colors.black54,
+                message: "这是一条测试数据!",
+                onTap: () async {
+                  await onDismiss();
+                  NOverlayZIndexManager.instance.removeWhere((e) => e.entry == entry);
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    NOverlayZIndexManager.instance.show(
+      context: context,
+      zIndex: 999,
+      // key: key,
+      entry: entry,
+    );
+  }
+
+  Widget buildCard({
+    double? width,
+    double? height = 60,
+    Color? color,
+    required String message,
+    VoidCallback? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 60,
+        width: width,
+        height: height,
         margin: EdgeInsets.symmetric(horizontal: 30),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: ColorExt.random,
+          color: color ?? ColorExt.random,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(

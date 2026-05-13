@@ -21,10 +21,8 @@ class NScreenManager {
   static NScreenManager get instance => _instance;
 
   _init() {
-    _updateScreenSize();
     // 监听屏幕尺寸变化（如横竖屏切换、多窗口变化）
     PlatformDispatcher.instance.onMetricsChanged = () {
-      _updateScreenSize();
       for (final listener in _listeners) {
         listener();
       }
@@ -34,21 +32,23 @@ class NScreenManager {
   /// 当前主 View
   static FlutterView get current => PlatformDispatcher.instance.views.first;
 
+  static Size? _screenSize;
+
   /// 屏幕宽高
-  static Size get screenSize => current.physicalSize / current.devicePixelRatio;
+  static Size get screenSize => _screenSize ?? current.physicalSize / current.devicePixelRatio;
 
   /// 像素比
   static double get devicePixelRatio => current.devicePixelRatio;
 
-  /// 屏幕物理像素大小
-  static Size get physicalSize => current.physicalSize;
+  static EdgeInsets get padding => EdgeInsets.fromViewPadding(current.padding, devicePixelRatio);
+  static EdgeInsets get viewInsets => EdgeInsets.fromViewPadding(current.viewInsets, devicePixelRatio);
+  static EdgeInsets get viewPadding => EdgeInsets.fromViewPadding(current.viewPadding, devicePixelRatio);
 
-  static ViewPadding get padding => current.padding;
-  static ViewPadding get viewInsets => current.viewInsets;
-  static ViewPadding get viewPadding => current.viewPadding;
+  static EdgeInsets get systemGestureInsets =>
+      EdgeInsets.fromViewPadding(current.systemGestureInsets, devicePixelRatio);
 
   /// 键盘
-  static double get keyboardHeight => (current.viewInsets.bottom / current.devicePixelRatio).truncateToDouble();
+  static double get keyboardHeight => viewInsets.bottom;
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
   static double get safeAreaTop => current.viewPadding.top;
@@ -57,7 +57,7 @@ class NScreenManager {
   static double get safeAreaBottom => current.viewPadding.bottom;
 
   /// 安全区高度(去除电池栏高度和 iphone底部34)
-  static double get safeAreaHeight => screenSize.height - current.viewPadding.top - current.viewPadding.bottom;
+  static double get safeAreaHeight => screenSize.height - safeAreaTop - safeAreaBottom;
 
   /// 状态栏高度
   static double get statusBarHeight => safeAreaTop;
@@ -66,13 +66,12 @@ class NScreenManager {
   static double get appBarHeight => kToolbarHeight;
 
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
-  static double get viewBottom => current.viewInsets.bottom;
+  static double get viewBottom => viewInsets.bottom;
 
   /// 竖屏
   static bool get isPortrait => current.physicalSize.height > current.physicalSize.width;
 
-  /// 横屏
-  static bool get isLandscape => !isPortrait;
+  static Orientation get orientation => !isPortrait ? Orientation.landscape : Orientation.portrait;
 
   /// 全屏视频(横屏)播放时, 左右边距
   static double videoLandscapeSpacing({double aspectRatio = 16 / 9}) {
@@ -83,19 +82,7 @@ class NScreenManager {
     return result;
   }
 
-  static Size? _size;
-
-  /// 屏幕逻辑像素大小
-  static Size get size => _size ?? screenSize;
-
-  /// 屏幕宽度
-  static double get width => size.width;
-
-  /// 屏幕高度
-  static double get height => size.height;
-
   /// 屏幕方向
-  static Orientation get orientation => width > height ? Orientation.landscape : Orientation.portrait;
 
   static final List<void Function()> _listeners = [];
 
@@ -109,16 +96,10 @@ class NScreenManager {
     _listeners.remove(listener);
   }
 
-  /// 内部更新
-  void _updateScreenSize() {
-    _size = screenSize;
-  }
-
   Map<String, dynamic> toJson() {
     return {
-      "size": size,
+      "screenSize": screenSize,
       "devicePixelRatio": devicePixelRatio,
-      "physicalSize": physicalSize,
       "orientation": orientation,
       "_listeners": _listeners.map((e) => e.toString()).toList(),
     };
