@@ -19,6 +19,7 @@ class NPopupAdaptiveContainer extends StatelessWidget {
     this.maxHeight = 500,
     this.minHeight = 200,
     this.heightFactor,
+    this.backgroundColor,
     this.raius = 15,
     required this.child,
   });
@@ -31,12 +32,13 @@ class NPopupAdaptiveContainer extends StatelessWidget {
   final double maxHeight;
   final double minHeight;
   final double? heightFactor;
+  final Color? backgroundColor;
   final double raius;
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDark ? const Color(0xff181829) : Colors.white;
+    final backgroundColorNew = backgroundColor ?? (isDark ? const Color(0xff181829) : Colors.white);
     final barrierColor = isDark ? Colors.black.withOpacity(0.7) : Colors.black.withOpacity(0.1);
     // final borderColor = isDark ? Colors.black : Colors.white;
 
@@ -50,7 +52,7 @@ class NPopupAdaptiveContainer extends StatelessWidget {
       content = Scrollbar(
         child: SingleChildScrollView(
           child: Material(
-            color: backgroundColor,
+            color: backgroundColorNew,
             child: content,
           ),
         ),

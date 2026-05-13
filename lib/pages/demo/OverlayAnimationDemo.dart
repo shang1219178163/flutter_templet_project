@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_floating_draggable.dart';
+import 'package:flutter_templet_project/basicWidget/n_popup_adaptive_container.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -104,12 +105,15 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                           onPressed: () {
                             NOverlayDialog.sheet(
                               context,
-                              child: buildContent(
-                                height: 400,
-                                margin: EdgeInsets.symmetric(horizontal: 30),
-                                onTap: () {
-                                  NOverlayDialog.dismiss();
-                                },
+                              child: NPopupAdaptiveContainer(
+                                backgroundColor: Colors.transparent,
+                                child: buildContent(
+                                  // height: 400,
+                                  margin: EdgeInsets.symmetric(horizontal: 30),
+                                  onTap: () {
+                                    NOverlayDialog.dismiss();
+                                  },
+                                ),
                               ),
                             );
                           },
