@@ -9,14 +9,10 @@
 import 'package:flutter/widgets.dart';
 
 /// OverlayEntry 动画卡片
-class NOverlaySlideCard extends StatefulWidget {
-  const NOverlaySlideCard({
+class NOverlayAnimatedSlide extends StatefulWidget {
+  const NOverlayAnimatedSlide({
     super.key,
     this.alignment = Alignment.centerLeft,
-    required this.height,
-    required this.top,
-    this.left = 0,
-    this.right = 0,
     required this.child,
     this.duration = const Duration(milliseconds: 300),
     this.beginOffset = const Offset(1, 0),
@@ -24,14 +20,6 @@ class NOverlaySlideCard extends StatefulWidget {
   });
 
   final AlignmentGeometry? alignment;
-
-  final double height;
-
-  final double top;
-
-  final double left;
-
-  final double right;
 
   final Widget Function(Future<void> Function() onDismiss) child;
 
@@ -44,10 +32,10 @@ class NOverlaySlideCard extends StatefulWidget {
   final Offset beginOffset;
 
   @override
-  State<NOverlaySlideCard> createState() => NOverlaySlideCardState();
+  State<NOverlayAnimatedSlide> createState() => NOverlayAnimatedSlideState();
 }
 
-class NOverlaySlideCardState extends State<NOverlaySlideCard> {
+class NOverlayAnimatedSlideState extends State<NOverlayAnimatedSlide> {
   /// 初始在屏幕外
   Offset offset = Offset.zero;
 
@@ -84,23 +72,16 @@ class NOverlaySlideCardState extends State<NOverlaySlideCard> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
+    return AnimatedOpacity(
       duration: widget.duration,
-      top: widget.top,
-      left: widget.left,
-      right: widget.right,
-      child: AnimatedOpacity(
+      opacity: opacity,
+      child: AnimatedSlide(
         duration: widget.duration,
-        opacity: opacity,
-        child: AnimatedSlide(
-          duration: widget.duration,
-          curve: widget.curve,
-          offset: offset,
-          child: Container(
-            height: widget.height,
-            alignment: widget.alignment,
-            child: widget.child(dismiss),
-          ),
+        curve: widget.curve,
+        offset: offset,
+        child: Container(
+          alignment: widget.alignment,
+          child: widget.child(dismiss),
         ),
       ),
     );

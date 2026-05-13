@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_chat_bubble.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_choice.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/basicWidget/overlay/n_reuse_toast.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_queue_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/LiveStream/LiveStreamEnterEffectCard.dart';
 import 'package:flutter_templet_project/pages/demo/LiveStream/LiveStreamGiftSendCard.dart';
@@ -208,7 +208,7 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                 );
                 // child = buildChatBubble(isMe: isMe, text: textShort);
 
-                NReuseToast.show(
+                NQueueCard.show(
                   context: context,
                   tag: "success",
                   child: child,
@@ -259,7 +259,7 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                   giftCount: countVN.value,
                 );
 
-                NReuseToast.show(
+                NQueueCard.show(
                   context: context,
                   tag: "success",
                   child: giftCard,
@@ -279,7 +279,7 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                   giftName: giftName,
                   giftCount: countVN.value,
                 );
-                NReuseToast.show(
+                NQueueCard.show(
                   context: context,
                   tag: "success",
                   child: giftCard,
@@ -300,7 +300,7 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
                 );
 
                 // 不同类型
-                NReuseToast.show(
+                NQueueCard.show(
                   context: context,
                   tag: "tag ${countVN.value}",
                   max: 5,

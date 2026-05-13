@@ -8,7 +8,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/overlay/n_reuse_toast.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_queue_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 直播间进场特效卡片
@@ -104,7 +104,7 @@ class LivestreamEnterEffectTest extends StatelessWidget {
         );
         return GestureDetector(
           onTap: () {
-            NReuseToast.show(
+            NQueueCard.show(
               context: context,
               tag: '篮球',
               left: 200,
