@@ -147,6 +147,8 @@ class NOverlayDialog {
     Curve curve = Curves.easeOutCubic,
     bool hideBarrier = false,
     Duration? autoDismissDuration,
+    OverlayEntry? below,
+    OverlayEntry? above,
   }) {
     return show(
       context,
@@ -156,6 +158,8 @@ class NOverlayDialog {
       curve: curve,
       hideBarrier: hideBarrier,
       autoDismissDuration: autoDismissDuration,
+      above: above,
+      below: below,
     );
   }
 
@@ -169,6 +173,8 @@ class NOverlayDialog {
     Curve curve = Curves.easeOutCubic,
     bool hideBarrier = false,
     Duration? autoDismissDuration,
+    OverlayEntry? below,
+    OverlayEntry? above,
   }) {
     return show(
       context,
@@ -181,6 +187,8 @@ class NOverlayDialog {
       curve: curve,
       hideBarrier: hideBarrier,
       autoDismissDuration: autoDismissDuration,
+      above: above,
+      below: below,
     );
   }
 
@@ -195,6 +203,8 @@ class NOverlayDialog {
     Curve curve = Curves.easeOutCubic,
     bool hideBarrier = true,
     Duration? autoDismissDuration = const Duration(milliseconds: 2000),
+    OverlayEntry? below,
+    OverlayEntry? above,
   }) {
     final childDefault = Material(
       color: Colors.black.withOpacity(0.7),
@@ -218,11 +228,13 @@ class NOverlayDialog {
       curve: curve,
       hideBarrier: hideBarrier,
       autoDismissDuration: autoDismissDuration,
+      above: above,
+      below: below,
     );
   }
 
   /// loadding
-  static OverlayEntry loadding(
+  static OverlayEntry loading(
     BuildContext context, {
     Widget? indicator,
     Widget? child,

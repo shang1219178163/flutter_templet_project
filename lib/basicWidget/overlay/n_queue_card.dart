@@ -38,7 +38,6 @@ class NQueueCard {
     double right = 10,
     Offset beginOffset = const Offset(-1, 0),
     Alignment alignment = Alignment.centerLeft,
-    EdgeInsets? margin = const EdgeInsets.symmetric(horizontal: 20),
     double height = 40,
     double spacing = 12,
     Map<String, dynamic>? data,

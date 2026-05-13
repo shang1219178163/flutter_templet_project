@@ -143,7 +143,7 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            NOverlayDialog.loadding(
+                            NOverlayDialog.loading(
                               context,
                               indicator: CupertinoActivityIndicator(radius: 16, color: Colors.white),
                               child: Container(
