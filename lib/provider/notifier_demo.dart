@@ -19,18 +19,18 @@ class CartModel extends ChangeNotifier {
   // 只读的购物车内容(getter)
   UnmodifiableListView<OrderModel> get items => UnmodifiableListView(_items);
 
-  // double get totalPrice => _items.map((e) => e.price).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
+  // (假设每件都是42块)
   double get totalPrice {
     if (_items.isEmpty) {
       return 0;
     }
-    return _items.map((e) => e.price).reduce((value, e) => value + e).roundToDouble();
+    return _items.map((e) => e.price).reduce((v, e) => v + e).roundToDouble();
   }
 
   /// 加入物品到购物车
   void add(OrderModel item) {
     _items.add(item);
-    notifyListeners(); // <==***This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
   }
 
   /// 删除商品
@@ -39,7 +39,7 @@ class CartModel extends ChangeNotifier {
       return;
     }
     _items.removeAt(index);
-    notifyListeners(); // <==***This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
   }
 
   /// 删除最后商品
@@ -48,13 +48,13 @@ class CartModel extends ChangeNotifier {
       return;
     }
     _items.removeLast();
-    notifyListeners(); // <==***This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
   }
 
   /// 清空购物车
   void removeAll() {
     _items.clear();
-    notifyListeners(); // <==***This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
   }
 
   @override
@@ -67,12 +67,11 @@ class CartModel extends ChangeNotifier {
 class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
   ValueNotifierOrderModels() : super(<OrderModel>[]); // 构造函数要提供value的初始值
 
-  // double get totalPrice => value.map((e) => e.price).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
   double get totalPrice {
     if (value.isEmpty) {
       return 0;
     }
-    return value.map((e) => e.price).reduce((value, element) => value + element).roundToDouble();
+    return value.map((e) => e.price).reduce((v, e) => v + e).roundToDouble();
   }
 
   void add(OrderModel item) {
@@ -161,7 +160,12 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
 
 /// ValueNotifier<int>
 class ValueNotifierNum extends ValueNotifier<num> {
-  ValueNotifierNum({this.initValue = 0, this.minValue = 0, this.maxValue = 100000, this.block}) : super(initValue);
+  ValueNotifierNum({
+    this.initValue = 0,
+    this.minValue = 0,
+    this.maxValue = 100000,
+    this.block,
+  }) : super(initValue);
 
   num initValue;
 
@@ -173,12 +177,12 @@ class ValueNotifierNum extends ValueNotifier<num> {
 
   void add(num val) {
     if (val < 0 && value <= minValue) {
-      if (block != null) block!(minValue, maxValue);
+      block?.call(minValue, maxValue);
       return;
     }
 
     if (val > 0 && value >= maxValue) {
-      if (block != null) block!(minValue, maxValue);
+      block?.call(minValue, maxValue);
       return;
     }
     value += val;
@@ -203,6 +207,7 @@ class CartModelNew extends ValueNotifierList<OrderModel> {
     if (value.isEmpty) {
       return 0;
     }
-    return value.map((e) => e.price).reduce((value, element) => value + element).roundToDouble();
+    final result = value.map((e) => e.price).reduce((v, e) => v + e).roundToDouble();
+    return result;
   }
 }
