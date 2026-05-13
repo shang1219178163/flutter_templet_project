@@ -128,7 +128,7 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
           break;
         case GoodsCategoryEnum.enter_effect:
           {
-            imagePath = widget.model.thumbUrl ?? widget.model.animationUrl ?? "";
+            // imagePath = widget.model.thumbUrl ?? widget.model.animationUrl ?? "";
             child = NChatBubble(
               imagePath: imagePath,
               metrics: const NChatBubbleMetrics(

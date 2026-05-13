@@ -6,6 +6,7 @@
 //  Copyright © 2026/4/20 shang. All rights reserved.
 //
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 /// 图片背景气泡组件
@@ -23,6 +24,8 @@ class NChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider imageProvider =
+        imagePath.startsWith("http") ? CachedNetworkImageProvider(imagePath) : AssetImage(imagePath);
     return Container(
       // margin: const EdgeInsets.only(top: 10),
       // ⭐关键1：给足最小高度（防止单行塌陷）
@@ -32,7 +35,7 @@ class NChatBubble extends StatelessWidget {
       decoration: BoxDecoration(
         // border: Border.all(color: Colors.blue),
         image: DecorationImage(
-          image: AssetImage(imagePath),
+          image: imageProvider,
           // ⭐关键3：中心点必须在“纯色区域”
           centerSlice: metrics.centerSlice,
           scale: 3, //必须加
