@@ -327,6 +327,7 @@ flutter:
     - assets/images/
     - assets/images/curve/
     - assets/images/message/
+    - assets/images/shop/
     - assets/media/
     - lib/pages/demo/
 

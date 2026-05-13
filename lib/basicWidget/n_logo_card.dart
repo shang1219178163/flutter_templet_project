@@ -51,7 +51,6 @@ class NLogoCard extends StatelessWidget {
                 name,
                 style: TextStyle(
                   fontSize: 16,
-                  fontFamily: AppFontFamily.dingTalk.value,
                   fontWeight: FontWeight.w500,
                 ),
               ),

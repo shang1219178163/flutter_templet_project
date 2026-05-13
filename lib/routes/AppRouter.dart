@@ -366,6 +366,7 @@ import 'package:flutter_templet_project/pages/demo/n_collection_nav_widget_demo.
 import 'package:flutter_templet_project/pages/demo/n_horizontal_scroll_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/navgation_bar_demo.dart';
 import 'package:flutter_templet_project/pages/demo/operator_demo.dart';
+import 'package:flutter_templet_project/pages/demo/point_shop/point_shop.dart';
 import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
 import 'package:flutter_templet_project/pages/demo/scroll_physics_page.dart';
 import 'package:flutter_templet_project/pages/demo/secure_keyboard_demo.dart';
@@ -927,6 +928,7 @@ class AppRouter {
   static const String overlayEntryPage = '/overlayEntryPage';
   static const String inputAccessoryViewDemo = '/InputAccessoryViewDemo';
   static const String trackEventPage = '/trackEventPage';
+  static const String pointShop = '/pointShop';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2728,6 +2730,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.trackEventPage,
       page: () => TrackEventPage(),
+    ),
+    GetPage(
+      name: AppRouter.pointShop,
+      page: () => PointShop(),
     ),
   ];
 }

@@ -1,0 +1,367 @@
+{
+  "code": 0,
+  "msg": "操作成功",
+  "data": {
+    "balance": 0,
+    "categoryGoodsList": [
+      {
+        "categoryId": 1,
+        "categoryName": "直播礼物",
+        "categoryCode": "gift",
+        "goodsList": [
+          {
+            "goodsId": 100,
+            "goodsName": "送花",
+            "price": 18,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/song_hua.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/song_hua.png",
+            "description": "花一送，单就中，今晚一路红到底！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 101,
+            "goodsName": "金牌专家",
+            "price": 288,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/jin_pai_zhuan_jia.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/jin_pai_zhuan_jia.png",
+            "description": "跟着专家走，吃肉不吃土！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 102,
+            "goodsName": "圈粉了",
+            "price": 5,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/quan_fen_le.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/quan_fen_le.png",
+            "description": "这一单直接封神，圈粉全场！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 103,
+            "goodsName": "收麻了",
+            "price": 588,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/shou_ma_le.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/shou_ma_le.png",
+            "description": "收麻了兄弟们，根本停不下来！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 104,
+            "goodsName": "爱心",
+            "price": 1,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/ai_xin.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/ai_xin.png",
+            "description": "爱心刷起来，红单跟上来！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 105,
+            "goodsName": "小诸葛",
+            "price": 388,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/xiao_zhu_ge.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/xiao_zhu_ge.png",
+            "description": "小诸葛一出手，稳稳带你走！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 106,
+            "goodsName": "棒棒哒",
+            "price": 3,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/bang_bang_da.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/bang_bang_da.png",
+            "description": "这波太顶了，直接棒棒哒！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 107,
+            "goodsName": "爆红",
+            "price": 188,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/bao_hong.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/bao_hong.png",
+            "description": "状态爆红，连红节奏拉满！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 108,
+            "goodsName": "稳",
+            "price": 38,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/wen.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/wen.png",
+            "description": "稳住别慌，这把继续收！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 109,
+            "goodsName": "大火锅",
+            "price": 58,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/da_huo_guo.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/da_huo_guo.png",
+            "description": "火锅开起来，狠狠干一桌！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 110,
+            "goodsName": "大啤酒",
+            "price": 10,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/da_pi_jiu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/da_pi_jiu.png",
+            "description": "啤酒一干，红单不断！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          },
+          {
+            "goodsId": 111,
+            "goodsName": "确实牛",
+            "price": 98,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/que_shi_niu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/gift/que_shi_niu.png",
+            "description": "这波确实牛，直接狠狠干穿！",
+            "goodsStatus": null,
+            "isDefault": 0,
+            "attributes": []
+          }
+        ]
+      },
+      {
+        "categoryId": 2,
+        "categoryName": "聊天气泡",
+        "categoryCode": "bubble",
+        "goodsList": [
+          {
+            "goodsId": 1010,
+            "goodsName": "足球",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/zuqiu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_zuqiu.png",
+            "description": " ",
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1020,
+            "goodsName": "篮球",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/lanqiu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_lanqiu.png",
+            "description": " ",
+            "goodsStatus": "equipped",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1030,
+            "goodsName": "赛车",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/saiche.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_saiche.png",
+            "description": " ",
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1031,
+            "goodsName": "电竞",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/dianjing.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_dianjing.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1032,
+            "goodsName": "干杯",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/ganbei.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_ganbei.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1033,
+            "goodsName": "冠军",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/guanjun.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_guanjun.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1034,
+            "goodsName": "礼花",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/lihua.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_lihua.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1035,
+            "goodsName": "乒乓",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/pingpang.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_pingpang.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1036,
+            "goodsName": "拳击",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/quanji.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_quanji.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          },
+          {
+            "goodsId": 1037,
+            "goodsName": "网球",
+            "price": 999,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/icon/wangqiu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/bubble/preview/preview_wangqiu.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效",
+              "可装扮至所有会话"
+            ]
+          }
+        ]
+      },
+      {
+        "categoryId": 3,
+        "categoryName": "入场特效",
+        "categoryCode": "enter_effect",
+        "goodsList": [
+          {
+            "goodsId": 2000,
+            "goodsName": "足球",
+            "price": 2888,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/icon/zuqiu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/preview/preview_zuqiu.png",
+            "description": " ",
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效"
+            ]
+          },
+          {
+            "goodsId": 2010,
+            "goodsName": "篮球",
+            "price": 2888,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/icon/lanqiu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/preview/preview_lanqiu.png",
+            "description": " ",
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效"
+            ]
+          },
+          {
+            "goodsId": 2020,
+            "goodsName": "跑车",
+            "price": 2888,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/icon/paoche.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/preview/preview_paoche.png",
+            "description": " ",
+            "goodsStatus": "equipped",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效"
+            ]
+          },
+          {
+            "goodsId": 2030,
+            "goodsName": "啤酒",
+            "price": 2888,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/icon/pijiu.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/preview/preview_pijiu.png",
+            "description": " ",
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效"
+            ]
+          },
+          {
+            "goodsId": 2031,
+            "goodsName": "烟花",
+            "price": 2888,
+            "thumbUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/icon/yanhua.png",
+            "animationUrl": "https://cdn.kbisai.com/kanbisai/goods/enter_effect/preview/preview_yanhua.png",
+            "description": null,
+            "goodsStatus": "not_owned",
+            "isDefault": 0,
+            "attributes": [
+              "永久有效"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

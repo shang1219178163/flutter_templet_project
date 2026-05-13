@@ -88,8 +88,10 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
               NSectionBox(
                 title: "NOverlayZIndexManager",
                 child: buildWrap(
-                  onChanged: (v) {
-                    showOverlayZIndex(i: v, beginOffset: beginOffset);
+                  items: List.generate(8, (i) => i),
+                  itemHeight: 35,
+                  onChanged: (i) {
+                    showOverlayZIndex(i: i, beginOffset: beginOffset);
                   },
                 ),
               ),
@@ -97,13 +99,16 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
                 title: "NOverlayZIndexManager bottom",
                 child: Column(
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        showOverlayBottom(
-                          beginOffset: Offset(0, 1),
-                        );
+                    buildWrap(
+                      items: AlignmentExt.allCases,
+                      cbName: (e) => "$e".split(".").last,
+                      rowCount: 3,
+                      itemHeight: 35,
+                      onChanged: (i) {
+                        final v = AlignmentExt.allCases[i];
+                        final beginOffset = Offset(v.x, v.y);
+                        showOverlayZIndex(i: i, beginOffset: beginOffset);
                       },
-                      child: Text("bottom"),
                     ),
                   ],
                 ),
@@ -264,13 +269,16 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
     );
   }
 
-  Widget buildWrap({required ValueChanged<int> onChanged}) {
-    final list = List.generate(8, (i) => i);
-
+  Widget buildWrap<T>({
+    required List<T> items,
+    String Function(T e)? cbName,
+    required ValueChanged<int> onChanged,
+    int rowCount = 4,
+    double? itemHeight,
+  }) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final spacing = 8.0;
-        final rowCount = 4.0;
         final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
 
         return Wrap(
@@ -278,15 +286,15 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
           runSpacing: spacing,
           // crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            ...list.map(
+            ...items.map(
               (e) {
-                final i = list.indexOf(e);
-                final btnTitle = "card $e";
+                final i = items.indexOf(e);
+                final btnTitle = cbName?.call(e) ?? "Card $e";
                 return GestureDetector(
                   onTap: () => onChanged(i),
                   child: Container(
                     width: itemWidth.truncateToDouble(),
-                    height: itemWidth * 0.6,
+                    height: itemHeight ?? itemWidth * 0.6,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -295,7 +303,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
                     ),
                     child: Text(
                       btnTitle,
-                      style: TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.blue, fontSize: 12),
                     ),
                   ),
                 );

@@ -13,6 +13,7 @@ class ElevatedBtn extends StatelessWidget {
     this.disabledFgColorDark,
     this.disabledBgColorDark,
     this.title = "ElevatedBtn",
+    this.titleColor,
     this.child,
     this.onPressed,
   });
@@ -34,6 +35,7 @@ class ElevatedBtn extends StatelessWidget {
   final Color? disabledBgColorDark;
 
   final String title;
+  final Color? titleColor;
 
   final Widget? child;
 
@@ -66,6 +68,7 @@ class ElevatedBtn extends StatelessWidget {
         minimumSize: const Size(40, 20),
         elevation: 0,
         foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
         disabledBackgroundColor: disabledBackgroundColor,
         disabledForegroundColor: disabledForegroundColor,
       ),
@@ -84,8 +87,8 @@ class ElevatedBtn extends StatelessWidget {
           child: child ??
               Text(
                 title,
-                style: const TextStyle(
-                  // color: Colors.white,
+                style: TextStyle(
+                  color: titleColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
