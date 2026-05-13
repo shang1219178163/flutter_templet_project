@@ -571,6 +571,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.testFunction, "方法动态化"),
   Tuple2(AppRouter.pageViewAndBarDemo, "pageViewAndBarDemo"),
   Tuple2(AppRouter.mediaQueryScreeenDemo, "屏幕尺寸研究"),
+  Tuple2(AppRouter.mediaQueryVsScreenManager, "屏幕尺寸对比"),
   Tuple2(AppRouter.neomorphismHomePage, "拟物风格"),
   Tuple2(AppRouter.refreshListView, "refreshListView"),
   Tuple2(AppRouter.globalIsolateDemo, "globalIsolateDemo"),

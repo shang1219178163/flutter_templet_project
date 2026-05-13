@@ -193,6 +193,7 @@ import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MediaQueryVsScreenManager.dart';
 import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
@@ -447,6 +448,8 @@ class AppRouter {
   static const String developToolList = '/developToolList';
 
   static const String mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
+  static const String mediaQueryVsScreenManager = '/mediaQueryVsScreenManager';
+
   static const String autoLayoutDemo = '/AutoLayoutDemo';
   static const String appBarDemo = '/appBarDemo';
   static const String textDemo = '/textDemo';
@@ -982,6 +985,11 @@ class AppRouter {
       name: AppRouter.mediaQueryScreeenDemo,
       page: () => MediaQueryScreeenDemo(),
     ),
+    GetPage(
+      name: AppRouter.mediaQueryVsScreenManager,
+      page: () => MediaQueryVsScreenManager(),
+    ),
+
     GetPage(
       name: AppRouter.autoLayoutDemo,
       page: () => AutoLayoutDemo(),
