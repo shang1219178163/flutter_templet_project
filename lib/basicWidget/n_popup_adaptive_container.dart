@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 弹窗自适应内容组件
-class NPopupContainer extends StatelessWidget {
-  const NPopupContainer({
+class NPopupAdaptiveContainer extends StatelessWidget {
+  const NPopupAdaptiveContainer({
     super.key,
     this.topControl,
     this.topControlColor,

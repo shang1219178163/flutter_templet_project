@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/drop_menu/drop_menu.dart';
 import 'package:flutter_templet_project/basicWidget/drop_menu/overlay_toast.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
-import 'package:flutter_templet_project/basicWidget/n_popup_container.dart';
+import 'package:flutter_templet_project/basicWidget/n_popup_adaptive_container.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay.dart';
@@ -287,7 +287,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                     onPressed: () {
                       NOverlayDialog.sheet(
                         context,
-                        child: NPopupContainer(
+                        child: NPopupAdaptiveContainer(
                           // maxHeight: 300,
                           // isScrollControlled: true,
                           child: buildBottom(),

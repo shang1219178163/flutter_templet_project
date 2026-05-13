@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_popup_container.dart';
+import 'package:flutter_templet_project/basicWidget/n_popup_adaptive_container.dart';
 
 /// OverlayEntry 封装为 BottomSheet,避免路由事件
 class NOverlayBottomSheet {
@@ -84,7 +84,7 @@ class NOverlayBottomSheet {
             // ===== BottomSheet =====
             AnimatedBuilder(
               animation: animation,
-              child: NPopupContainer(
+              child: NPopupAdaptiveContainer(
                 topControl: topControl,
                 topControlColor: topControlColor,
                 isScrollControlled: isScrollControlled,

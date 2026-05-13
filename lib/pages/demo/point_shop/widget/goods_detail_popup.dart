@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/elevated_btn.dart';
 import 'package:flutter_templet_project/basicWidget/n_chat_bubble.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/basicWidget/n_popup_container.dart';
+import 'package:flutter_templet_project/basicWidget/n_popup_adaptive_container.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_category_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_status_enum.dart';
@@ -48,7 +48,7 @@ class GoodsDetailPopup extends StatefulWidget {
     // DLog.d(model.toJson());
     return NOverlayDialog.sheet(
       context ?? ToolUtil.globalContext,
-      child: NPopupContainer(
+      child: NPopupAdaptiveContainer(
         // maxHeight: 300,
         // isScrollControlled: true,
         child: GoodsDetailPopup(
