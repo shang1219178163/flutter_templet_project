@@ -1,7 +1,7 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/easy_refresh_mixin.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 
 /// 列表
 class NRefreshListView<T> extends StatefulWidget {
