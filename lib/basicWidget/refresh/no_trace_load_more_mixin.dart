@@ -24,19 +24,19 @@ mixin NoTraceLoadMoreMixin on NEasyRefreshMixin {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
+    scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
+    scrollController.removeListener(_onScroll);
+    scrollController.dispose();
     super.dispose();
   }
 
   void _onScroll() {
     final _hasMore = indicator != IndicatorResult.noMore;
-    final position = _scrollController.position;
+    final position = scrollController.position;
     if (position.pixels >= position.maxScrollExtent - 200 && !_isLoading && _hasMore) {
       _isLoading = true;
       onLoad().then((v) {
