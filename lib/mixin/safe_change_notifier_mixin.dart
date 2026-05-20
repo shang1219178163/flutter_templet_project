@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
 
 /// ChangeNotifier
 mixin SafeChangeNotifierMixin on ChangeNotifier {
@@ -16,6 +17,15 @@ mixin SafeChangeNotifierMixin on ChangeNotifier {
     if (!_mounted) {
       return;
     }
-    super.notifyListeners();
+    // super.notifyListeners();
+    if (SchedulerBinding.instance.schedulerPhase != SchedulerPhase.idle) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (_mounted) {
+          super.notifyListeners();
+        }
+      });
+    } else {
+      super.notifyListeners();
+    }
   }
 }
