@@ -34,18 +34,39 @@ extension DurationExt on Duration {
   int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
   int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
 
+  /// 碎片
+  List<({int value, String unit})> segments({
+    String dayUnit = "天",
+    String hourUnit = "时",
+    String minuteUnit = "分",
+    String secondUnit = "秒",
+  }) {
+    final days = inDays;
+    final hours = inHours % 24;
+    final minutes = inMinutes % 60;
+    final seconds = inSeconds % 60;
+    return [
+      (value: days, unit: dayUnit),
+      (value: hours, unit: hourUnit),
+      (value: minutes, unit: minuteUnit),
+      (value: seconds, unit: secondUnit),
+    ];
+  }
+
   /// 格式化显示
   String toStringFormat({DurationFormatEnum format = DurationFormatEnum.HMMSS}) {
     var microseconds = inMicroseconds;
     var sign = "";
     var negative = microseconds < 0;
 
+    var days = microseconds ~/ Duration.microsecondsPerDay;
     var hours = microseconds ~/ Duration.microsecondsPerHour;
     microseconds = microseconds.remainder(Duration.microsecondsPerHour);
 
     // Correcting for being negative after first division, instead of before,
     // to avoid negating min-int, -(2^31-1), of a native int64.
     if (negative) {
+      days = 0 - hours;
       hours = 0 - hours; // Not using `-hours` to avoid creating -0.0 on web.
       microseconds = 0 - microseconds;
       sign = "-";

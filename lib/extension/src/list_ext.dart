@@ -102,7 +102,21 @@ extension IterableExt<E> on Iterable<E> {
       var end = (i + by) < count ? (i + by) : count - 1;
       result.add(onItem(i, end, toList()));
     }
+    return result;
+  }
 
+  /// 按Key分组
+  ///
+  /// C? cache; 复用变量,比如 DateFormat
+  Map<K, List<E>> groupByKey<K>({
+    required K Function(E e) keyCb,
+  }) {
+    final result = <K, List<E>>{};
+    for (final e in this) {
+      final key = keyCb(e);
+      result.putIfAbsent(key, () => []);
+      result[key]!.add(e);
+    }
     return result;
   }
 }
