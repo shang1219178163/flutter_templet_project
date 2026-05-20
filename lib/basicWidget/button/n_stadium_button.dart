@@ -1,5 +1,22 @@
 import 'package:flutter/material.dart';
 
+// /// 比赛轮次按钮
+// class GameRoundButton extends NStadiumButton {
+//   GameRoundButton({
+//     super.key,
+//     required super.title,
+//     super.color = AppColors.color00946D,
+//   }) : super(
+//     leading: Container(
+//       margin: const EdgeInsets.only(left: 6, right: 2),
+//       child: const Image(
+//         image: AssetImage(Assets.worldCupIconWorldCupTrophy),
+//         width: 12,
+//       ),
+//     ),
+//   );
+// }
+
 /// 椭圆按钮
 class NStadiumButton extends StatelessWidget {
   const NStadiumButton({

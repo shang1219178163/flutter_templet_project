@@ -67,6 +67,7 @@ class _NSlidingSegmentedControlState<T> extends State<NSlidingSegmentedControl<T
   void didUpdateWidget(covariant NSlidingSegmentedControl<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.items != widget.items ||
+        oldWidget.itemBuilder != widget.itemBuilder ||
         oldWidget.selectedIndex != widget.selectedIndex ||
         oldWidget.textColor != widget.textColor ||
         oldWidget.thumbTextColor != widget.thumbTextColor ||
@@ -114,9 +115,7 @@ class _NSlidingSegmentedControlState<T> extends State<NSlidingSegmentedControl<T
         key: (v) => v,
         value: (val) {
           final e = val;
-
           final isSelecetd = current == e;
-
           final color = isSelecetd ? (thumbTextColor ?? Colors.white) : (textColor ?? Color(0xff737373));
 
           return itemBuilder?.call(val, isSelecetd) ??

@@ -19,7 +19,7 @@ class SegmentedPageViewDemo extends StatefulWidget {
 }
 
 class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
-  bool get hideApp => !"$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 
@@ -84,7 +84,7 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
         );
   }
 
-  buildSlidingSegmentedControl({
+  Widget buildSlidingSegmentedControl({
     Widget Function(NSlidingSegmentedControl segmentedControl)? segmentedBuilder,
   }) {
     return Column(
@@ -105,6 +105,7 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
                   final color = isSelecetd ? Colors.white : Color(0xff737373);
                   final icon = isSelecetd ? e.icon : e.icon;
 
+                  return Text(e.title);
                   return Container(
                     height: 32,
                     alignment: Alignment.center,

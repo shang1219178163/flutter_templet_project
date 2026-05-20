@@ -22,12 +22,7 @@ class NSlidingSegmentedPageView extends StatefulWidget {
   /// title 分段组件每项标题
   /// icon 分段组件每项本地图片路径
   /// child 分段组件每项页面
-  final List<
-      ({
-        String title,
-        String icon,
-        Widget child,
-      })> items;
+  final List<({String title, String icon, Widget child})> items;
 
   /// 默认索引
   final int selectedIndex;
