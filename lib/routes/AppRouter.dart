@@ -85,6 +85,7 @@ import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CountDownPage.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomRefreshIndicatorDemo.dart';
@@ -623,6 +624,7 @@ class AppRouter {
   static const String scribbleDemo = '/scribbleDemo';
   static const String aestheticDialogsDemo = '/aestheticDialogsDemo';
   static const String customTimerDemo = '/customTimerDemo';
+  static const String countDownPage = '/countDownPage';
   static const String skeletonDemo = '/skeletonDemo';
 
   static const String flutterFFiTest = '/flutterFFiTest';
@@ -1556,6 +1558,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.customTimerDemo,
       page: () => CustomTimerDemo(),
+    ),
+    GetPage(
+      name: AppRouter.countDownPage,
+      page: () => CountDownPage(),
     ),
     GetPage(
       name: AppRouter.flutterFFiTest,

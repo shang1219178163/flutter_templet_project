@@ -660,6 +660,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.scribbleDemo, "scribble 画板"),
   Tuple2(AppRouter.aestheticDialogsDemo, "aestheticDialogs 对话框"),
   Tuple2(AppRouter.customTimerDemo, "自定义计时器"),
+  Tuple2(AppRouter.countDownPage, "倒计时"),
   Tuple2(AppRouter.skeletonDemo, "骨架屏"),
   Tuple2(AppRouter.smartDialogPageDemo, "弹窗"),
   Tuple2(AppRouter.ratingBarDemo, "星评"),
