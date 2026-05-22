@@ -34,6 +34,9 @@ mixin NRefreshable<T> {
   int get pageSize;
   set pageSize(int value);
 
+  bool get isLoading;
+  set isLoading(bool value);
+
   IndicatorResult get indicator;
   set indicator(IndicatorResult value);
 
@@ -78,7 +81,8 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
   @override
   var indicator = IndicatorResult.success;
 
-  var isLoading = false;
+  @override
+  bool isLoading = false;
 
   bool get hasMore => indicator != IndicatorResult.noMore;
 

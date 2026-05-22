@@ -131,8 +131,8 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller ||
         widget.placeholder != oldWidget.placeholder ||
-    widget.page != oldWidget.page ||
-    widget.pageSize != oldWidget.pageSize ||
+        widget.page != oldWidget.page ||
+        widget.pageSize != oldWidget.pageSize ||
         widget.onRequest != oldWidget.onRequest) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
@@ -146,9 +146,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   Future<void> initData() async {
     await onRefresh();
     isFirstLoad = false;
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override
