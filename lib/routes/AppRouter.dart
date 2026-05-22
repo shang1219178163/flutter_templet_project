@@ -135,8 +135,9 @@ import 'package:flutter_templet_project/pages/demo/FootballTeamPage.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FractionallySizedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
-import 'package:flutter_templet_project/pages/demo/GameMathPage.dart';
-import 'package:flutter_templet_project/pages/demo/GameMathPageNew.dart';
+import 'package:flutter_templet_project/pages/demo/GameMatchHorizalPage.dart';
+import 'package:flutter_templet_project/pages/demo/GameMatchPage.dart';
+import 'package:flutter_templet_project/pages/demo/GameMatchPageNew.dart';
 import 'package:flutter_templet_project/pages/demo/GestureDetectorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxRouteCreatePage.dart';
@@ -890,6 +891,7 @@ class AppRouter {
   static const String concurrentExecutorDemo = '/concurrentExecutorDemo';
   static const String gameMathPage = '/gameMathPage';
   static const String gameMathPageNew = '/gameMathPageNew';
+  static const String gameMatchHorizalPage = '/gameMatchHorizalPage';
   static const String localAuthDemo = '/localAuthDemo';
   static const String deviceBrightnessAndVolumeControllerDemo = '/deviceBrightnessAndVolumeControllerDemo';
   static const String clickNotificationDemo = '/clickNotificationDemo';
@@ -2572,11 +2574,15 @@ class AppRouter {
     ),
     GetPage(
       name: AppRouter.gameMathPage,
-      page: () => GameMathPage(),
+      page: () => GameMatchPage(),
     ),
     GetPage(
       name: AppRouter.gameMathPageNew,
-      page: () => GameMathPageNew(),
+      page: () => GameMatchPageNew(),
+    ),
+    GetPage(
+      name: AppRouter.gameMatchHorizalPage,
+      page: () => GameMatchHorizalPage(),
     ),
 
     GetPage(

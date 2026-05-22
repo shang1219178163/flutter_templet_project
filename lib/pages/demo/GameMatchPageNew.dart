@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:get/get.dart';
 
-class GameMathPageNew extends StatefulWidget {
-  const GameMathPageNew({
+class GameMatchPageNew extends StatefulWidget {
+  const GameMatchPageNew({
     super.key,
     this.arguments,
   });
@@ -11,10 +11,10 @@ class GameMathPageNew extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<GameMathPageNew> createState() => _GameMathPageNewState();
+  State<GameMatchPageNew> createState() => _GameMatchPageNewState();
 }
 
-class _GameMathPageNewState extends State<GameMathPageNew> {
+class _GameMatchPageNewState extends State<GameMatchPageNew> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
@@ -25,7 +25,7 @@ class _GameMathPageNewState extends State<GameMathPageNew> {
   late final id = arguments["id"];
 
   @override
-  void didUpdateWidget(covariant GameMathPageNew oldWidget) {
+  void didUpdateWidget(covariant GameMatchPageNew oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 

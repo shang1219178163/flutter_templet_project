@@ -694,6 +694,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.concurrentExecutorDemo, "concurrentExecutorDemo"),
   Tuple2(AppRouter.gameMathPage, "gameMathPage"),
   Tuple2(AppRouter.gameMathPageNew, "GameMathPageNew"),
+  Tuple2(AppRouter.gameMatchHorizalPage, "gameMatchHorizalPage"),
   Tuple2(AppRouter.clickNotificationDemo, "clickNotificationDemo"),
   Tuple2(AppRouter.colorFilterDemo, "colorFilterDemo"),
   Tuple2(AppRouter.pageTopBackgroudImageDemo, "pageTopBackgroudImageDemo"),

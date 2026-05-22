@@ -10,8 +10,8 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
-class GameMathPage extends StatefulWidget {
-  const GameMathPage({
+class GameMatchPage extends StatefulWidget {
+  const GameMatchPage({
     super.key,
     this.arguments,
   });
@@ -19,10 +19,10 @@ class GameMathPage extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<GameMathPage> createState() => _GameMathPageState();
+  State<GameMatchPage> createState() => _GameMatchPageState();
 }
 
-class _GameMathPageState extends State<GameMathPage> {
+class _GameMatchPageState extends State<GameMatchPage> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
@@ -33,7 +33,7 @@ class _GameMathPageState extends State<GameMathPage> {
   late final id = arguments["id"];
 
   @override
-  void didUpdateWidget(covariant GameMathPage oldWidget) {
+  void didUpdateWidget(covariant GameMatchPage oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
