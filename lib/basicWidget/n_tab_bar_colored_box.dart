@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
 
 /// TabBar 设置颜色
 class NTabBarColoredBox extends StatelessWidget implements PreferredSizeWidget {
@@ -130,24 +130,18 @@ class NTabBar extends StatelessWidget {
           controller: tabController,
           isScrollable: isScrollable,
           padding: padding,
-          indicatorPadding:
-              indicatorPadding ?? const EdgeInsets.symmetric(horizontal: 20),
-          indicator: NTabBarIndicatorFixed(
+          indicatorPadding: indicatorPadding ?? const EdgeInsets.symmetric(horizontal: 20),
+          indicator: NTabIndicatorFixed(
             width: 24,
             height: 2,
             color: indicatorColor ?? Theme.of(context).primaryColor,
             radius: 0,
           ),
-          labelPadding: labelPadding ??
-              const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
+          labelPadding: labelPadding ?? const EdgeInsets.symmetric(horizontal: 20),
           labelColor: labelColor,
-          labelStyle: labelStyle ??
-              TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          labelStyle: labelStyle ?? TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           unselectedLabelColor: unselectedLabelColor,
-          unselectedLabelStyle: unselectedLabelStyle ??
-              TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+          unselectedLabelStyle: unselectedLabelStyle ?? TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
         ),
       ),
     );

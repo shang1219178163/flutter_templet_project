@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
@@ -129,7 +129,7 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
           ),
-          indicator: NTabBarIndicatorFixed(
+          indicator: NTabIndicatorFixed(
             width: 32.w,
             height: 2.h,
             color: primary,

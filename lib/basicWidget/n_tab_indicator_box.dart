@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 
-class NTabBarFixedWidthIndicator extends Decoration {
+class NTabIndicatorFixedWidth extends Decoration {
   final Color? color;
   final Gradient? gradient;
   final double width;
@@ -16,7 +16,7 @@ class NTabBarFixedWidthIndicator extends Decoration {
   final double topMargin;
   final double borderRadius;
 
-  const NTabBarFixedWidthIndicator({
+  const NTabIndicatorFixedWidth({
     this.color,
     this.gradient,
     required this.width,

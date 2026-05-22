@@ -9,8 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_back_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_logo_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_bar_fixed_width_indicator.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_category_enum.dart';
@@ -161,7 +160,7 @@ class _PointShopState extends State<PointShop> with TickerProviderStateMixin {
         tabs: categorys.map((e) => Tab(text: e.categoryName ?? "-")).toList(),
         // labelPadding: const EdgeInsets.symmetric(horizontal: 2),
         // indicatorPadding: const EdgeInsets.only(bottom: 8),
-        indicator: NTabBarIndicatorFixed(
+        indicator: NTabIndicatorFixed(
           color: Colors.pink,
           width: 20,
           height: 3,

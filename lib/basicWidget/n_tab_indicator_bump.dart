@@ -8,7 +8,9 @@
 
 import 'package:flutter/material.dart';
 
-class NTabBarFixedWidthIndicator extends Decoration {
+import 'package:flutter/material.dart';
+
+class NTabIndicatorBump extends Decoration {
   final Color? color;
   final Gradient? gradient;
   final double width;
@@ -16,7 +18,7 @@ class NTabBarFixedWidthIndicator extends Decoration {
   final double topMargin;
   final double borderRadius;
 
-  const NTabBarFixedWidthIndicator({
+  const NTabIndicatorBump({
     this.color,
     this.gradient,
     required this.width,
@@ -57,16 +59,16 @@ class _RoundedPainter extends BoxPainter {
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    final startX = offset.dx + (configuration.size!.width - width) / 2;
-    final endX = startX + width;
-    final topY = configuration.size!.height - height - topMargin;
+    final double startX = offset.dx + (configuration.size!.width - width) / 2;
+    final double endX = startX + width;
+    final double topY = configuration.size!.height - height - topMargin;
 
-    final indicatorRect = RRect.fromRectAndRadius(
+    final RRect indicatorRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(startX, topY, width, height),
       Radius.circular(borderRadius),
     );
 
-    final paint = Paint()..style = PaintingStyle.fill;
+    final Paint paint = Paint()..style = PaintingStyle.fill;
 
     if (gradient != null) {
       paint.shader = gradient!.createShader(indicatorRect.outerRect);
@@ -75,5 +77,36 @@ class _RoundedPainter extends BoxPainter {
     }
 
     canvas.drawRRect(indicatorRect, paint);
+
+    final bumpPaint = Paint()..style = PaintingStyle.fill;
+
+    // indicator height
+    final double H = height;
+
+    final double bumpHeight = H * 2;
+    final double bumpWidth = bumpHeight * 1.4;
+
+    // 居中
+    final double bumpX = startX + (width - bumpWidth) / 2;
+
+    // 下半部分压住 indicator
+    final double bumpY = topY - H;
+
+    final Rect ovalRect = Rect.fromLTWH(
+      bumpX,
+      bumpY,
+      bumpWidth,
+      bumpHeight,
+    );
+
+    if (gradient != null) {
+      bumpPaint.shader = gradient!.createShader(
+        Rect.fromLTWH(bumpX, bumpY, bumpWidth, bumpHeight),
+      );
+    } else {
+      bumpPaint.color = color ?? Colors.transparent;
+    }
+
+    canvas.drawOval(ovalRect, bumpPaint);
   }
 }

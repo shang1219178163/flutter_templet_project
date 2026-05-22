@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_bar_fixed_width_indicator.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_indicator_box.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
@@ -184,7 +184,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                         tabs: tabList.map((v) => Tab(text: v)).toList(),
 
                         // dividerColor: Colors.transparent,
-                        indicator: const NTabBarFixedWidthIndicator(
+                        indicator: const NTabIndicatorFixedWidth(
                           width: 16,
                           gradient: LinearGradient(
                             colors: [Color(0xffE44554), Color(0xff6040FF)], //

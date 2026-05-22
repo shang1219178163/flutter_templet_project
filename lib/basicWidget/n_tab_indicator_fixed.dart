@@ -8,11 +8,11 @@
 
 import 'package:flutter/material.dart';
 
-class NTabBarIndicatorFixed extends Decoration {
+class NTabIndicatorFixed extends Decoration {
   /// Create an underline style selected tab indicator.
   ///
   /// The [borderSide] and [insets] arguments must not be null.
-  const NTabBarIndicatorFixed({
+  const NTabIndicatorFixed({
     this.width = 20,
     this.height = 4.0,
     this.borderSide = const BorderSide(width: 0.0, color: Colors.redAccent),
@@ -57,8 +57,8 @@ class NTabBarIndicatorFixed extends Decoration {
 
   @override
   Decoration? lerpFrom(Decoration? a, double t) {
-    if (a is NTabBarIndicatorFixed) {
-      return NTabBarIndicatorFixed(
+    if (a is NTabIndicatorFixed) {
+      return NTabIndicatorFixed(
         borderSide: BorderSide.lerp(a.borderSide, borderSide, t),
         insets: EdgeInsetsGeometry.lerp(a.insets, insets, t)!,
       );
@@ -68,8 +68,8 @@ class NTabBarIndicatorFixed extends Decoration {
 
   @override
   Decoration? lerpTo(Decoration? b, double t) {
-    if (b is NTabBarIndicatorFixed) {
-      return NTabBarIndicatorFixed(
+    if (b is NTabIndicatorFixed) {
+      return NTabIndicatorFixed(
         borderSide: BorderSide.lerp(borderSide, b.borderSide, t),
         insets: EdgeInsetsGeometry.lerp(insets, b.insets, t)!,
       );
@@ -86,8 +86,7 @@ class NTabBarIndicatorFixed extends Decoration {
   Rect _indicatorRectFor(Rect rect, TextDirection textDirection) {
     final indicator = insets.resolve(textDirection).deflateRect(rect);
     return Rect.fromLTWH(
-      indicator.left +
-          (indicator.width - width - padding.left - padding.right) * 0.5,
+      indicator.left + (indicator.width - width - padding.left - padding.right) * 0.5,
       indicator.height - height - padding.top - padding.bottom - margin.bottom,
       width + padding.left + padding.right,
       height + padding.top + padding.bottom,
@@ -101,10 +100,9 @@ class NTabBarIndicatorFixed extends Decoration {
 }
 
 class _UnderlinePainter extends BoxPainter {
-  _UnderlinePainter(this.decoration, VoidCallback? onChanged)
-      : super(onChanged);
+  _UnderlinePainter(this.decoration, VoidCallback? onChanged) : super(onChanged);
 
-  final NTabBarIndicatorFixed decoration;
+  final NTabIndicatorFixed decoration;
 
   ///决定控制器边角形状的方法
   @override
@@ -112,12 +110,9 @@ class _UnderlinePainter extends BoxPainter {
     assert(configuration.size != null);
     final rect = offset & configuration.size!;
     final textDirection = configuration.textDirection!;
-    final indicator = decoration
-        ._indicatorRectFor(rect, textDirection)
-        .deflate(decoration.borderSide.width / 2.0);
+    final indicator = decoration._indicatorRectFor(rect, textDirection).deflate(decoration.borderSide.width / 2.0);
     // 定义绘制的样式
-    final rRect =
-        RRect.fromRectAndRadius(indicator, Radius.circular(decoration.radius));
+    final rRect = RRect.fromRectAndRadius(indicator, Radius.circular(decoration.radius));
     final paint = decoration.borderSide.toPaint()
       ..style = PaintingStyle.fill
       ..color = decoration.color;
@@ -125,8 +120,7 @@ class _UnderlinePainter extends BoxPainter {
     final path = Path()..addRRect(rRect.shift(Offset(1, 1)));
     // 绘制阴影
     if (decoration.shadowColor != null) {
-      canvas.drawShadow(
-          path, decoration.shadowColor!, decoration.shadowElevation, false);
+      canvas.drawShadow(path, decoration.shadowColor!, decoration.shadowElevation, false);
     }
     // 绘制圆角矩形
     canvas.drawRRect(rRect, paint);
