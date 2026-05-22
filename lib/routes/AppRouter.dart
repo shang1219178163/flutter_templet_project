@@ -889,8 +889,8 @@ class AppRouter {
   static const String backgroundTaskDemo = '/backgroundTaskDemo';
   static const String colorSchemeDemo = '/colorSchemeDemo';
   static const String concurrentExecutorDemo = '/concurrentExecutorDemo';
-  static const String gameMathPage = '/gameMathPage';
-  static const String gameMathPageNew = '/gameMathPageNew';
+  static const String gameMatchPage = '/gameMatchPage';
+  static const String gameMatchPageNew = '/gameMatchPageNew';
   static const String gameMatchHorizalPage = '/gameMatchHorizalPage';
   static const String localAuthDemo = '/localAuthDemo';
   static const String deviceBrightnessAndVolumeControllerDemo = '/deviceBrightnessAndVolumeControllerDemo';
@@ -2573,11 +2573,11 @@ class AppRouter {
       page: () => ConcurrentExecutorDemo(),
     ),
     GetPage(
-      name: AppRouter.gameMathPage,
+      name: AppRouter.gameMatchPage,
       page: () => GameMatchPage(),
     ),
     GetPage(
-      name: AppRouter.gameMathPageNew,
+      name: AppRouter.gameMatchPageNew,
       page: () => GameMatchPageNew(),
     ),
     GetPage(
