@@ -22,16 +22,16 @@ mixin NoTraceLoadMoreMixin on NEasyRefreshMixin {
   }
 
   @override
-  void initState() {
-    super.initState();
-    scrollController.addListener(_onScroll);
-  }
-
-  @override
   void dispose() {
     scrollController.removeListener(_onScroll);
     scrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(_onScroll);
   }
 
   void _onScroll() {
