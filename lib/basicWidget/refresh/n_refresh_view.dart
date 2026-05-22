@@ -61,44 +61,29 @@ import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin
 class NRefreshView<T> extends StatefulWidget {
   const NRefreshView({
     super.key,
-    this.listViewKey,
     this.controller,
-    this.child,
-    this.placeholder,
     required this.onRequest,
+    required this.placeholder,
+    required this.child,
+    this.page = 1,
     this.pageSize = 20,
-    this.pageInitial = 1,
     this.disableOnReresh = false,
     this.disableOnLoad = false,
-    this.needRemovePadding = false,
-    required this.itemBuilder,
-    this.headerBuilder,
-    this.footerBuilder,
-    this.separatorBuilder,
-    this.cachedChild,
-    this.refreshController,
-    this.tag,
   });
-
-  /// 列表 key
-  final Key? listViewKey;
 
   /// 控制器
   final NRefreshController<T>? controller;
 
   /// 子视图(为空 默认 带刷新组件的 ListView)
-  final Widget? child;
+  final Widget child;
 
-  /// 刷新页面不变的部分,
-  final Widget? cachedChild;
+  final Widget placeholder;
 
-  final Widget? placeholder;
+  /// 页面初始索引
+  final int page;
 
   /// 每页数量
   final int pageSize;
-
-  /// 页面初始索引
-  final int pageInitial;
 
   /// 禁用下拉刷新
   final bool disableOnReresh;
@@ -106,35 +91,15 @@ class NRefreshView<T> extends StatefulWidget {
   /// 禁用上拉加载
   final bool disableOnLoad;
 
-  /// 使用使用 MediaQuery.removePadding
-  final bool needRemovePadding;
-
   /// 请求方法
   final RequestListCallback<T> onRequest;
-
-  /// ListView 的 itemBuilder
-  final ValueIndexedWidgetBuilder<T> itemBuilder;
-
-  /// ListView 的 separatorBuilder
-  final IndexedWidgetBuilder? separatorBuilder;
-
-  /// 列表表头
-  final Widget Function(int count)? headerBuilder;
-
-  /// 列表表尾
-  final Widget Function(int count)? footerBuilder;
-
-  /// 刷新控制器
-  final EasyRefreshController? refreshController;
-
-  final String? tag;
 
   @override
   NRefreshViewState<T> createState() => NRefreshViewState<T>();
 }
 
 class NRefreshViewState<T> extends State<NRefreshView<T>>
-    with AutomaticKeepAliveClientMixin, NEasyRefreshMixin<NRefreshView<T>, T> {
+    with AutomaticKeepAliveClientMixin, NRefreshMixin<T>, NEasyRefreshMixin<NRefreshView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
@@ -142,9 +107,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 
   @override
   late RequestListCallback<T> onRequest = widget.onRequest;
-
-  @override
-  List<T> items = <T>[];
 
   /// 首次加载
   var isFirstLoad = true;
@@ -159,6 +121,8 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   void initState() {
     super.initState();
     widget.controller?.attach(this);
+    page = widget.page;
+    pageSize = widget.pageSize;
     initData();
   }
 
@@ -167,16 +131,15 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller ||
         widget.placeholder != oldWidget.placeholder ||
-        widget.onRequest != oldWidget.onRequest ||
-        widget.itemBuilder != oldWidget.itemBuilder ||
-        widget.separatorBuilder != oldWidget.separatorBuilder ||
-        widget.cachedChild != oldWidget.cachedChild ||
-        widget.tag != widget.tag) {
+    widget.page != oldWidget.page ||
+    widget.pageSize != oldWidget.pageSize ||
+        widget.onRequest != oldWidget.onRequest) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
-      onRefresh();
+      page = widget.page;
+      pageSize = widget.pageSize;
     }
   }
 
@@ -202,105 +165,9 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     return EasyRefresh(
       controller: refreshController,
       triggerAxis: Axis.vertical,
-      onRefresh: widget.disableOnReresh ? null : () => onRefresh(),
+      onRefresh: widget.disableOnReresh ? null : onRefresh,
       onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore ? null : onLoad,
-      child: widget.child ??
-          buildListView(
-            controller: scrollController,
-            needRemovePadding: widget.needRemovePadding,
-            items: items,
-          ),
+      child: widget.child,
     );
-  }
-
-  Widget buildListView({
-    ScrollController? controller,
-    bool needRemovePadding = false,
-    required List<T> items,
-  }) {
-    final itemCount = items.length + 2;
-
-    Widget child = Scrollbar(
-      controller: controller,
-      child: ListView.separated(
-        key: widget.listViewKey,
-        controller: controller,
-        itemCount: itemCount,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return widget.headerBuilder?.call(items.length) ?? const SizedBox();
-          }
-
-          if (index == itemCount - 1) {
-            return widget.footerBuilder?.call(items.length) ?? const SizedBox();
-          }
-
-          final i = index - 1;
-          return widget.itemBuilder(context, i, items[i]);
-        },
-        separatorBuilder: widget.separatorBuilder ??
-            (context, index) {
-              return const Divider(color: Color(0xffe4e4e4), height: 0.5);
-            },
-      ),
-    );
-    if (needRemovePadding) {
-      child = MediaQuery.removePadding(
-        removeTop: true,
-        removeBottom: true,
-        context: context,
-        child: child,
-      );
-    }
-    return child;
   }
 }
-
-/// NRefreshListView 组件控制器,将 NRefreshListViewState 的私有属性或者方法暴漏出去
-// class NRefreshViewController<E> {
-//   NRefreshViewState<E>? _anchor;
-//
-//   void _attach(NRefreshViewState<E> anchor) {
-//     _anchor = anchor;
-//   }
-//
-//   void _detach(NRefreshViewState<E> anchor) {
-//     if (_anchor == anchor) {
-//       _anchor = null;
-//     }
-//   }
-//
-//   List<E> get items {
-//     assert(_anchor != null);
-//     return _anchor!.items;
-//   }
-//
-//   void onRefresh() {
-//     assert(_anchor != null);
-//     _anchor!.onRefresh();
-//   }
-//
-//   /// 更新列表
-//   ///
-//   /// - test 过滤条件
-//   void onUpdate(bool Function(E element)? test) {
-//     assert(_anchor != null);
-//     if (test != null) {
-//       _anchor!.items = _anchor!.items.where(test).toList();
-//       return;
-//     }
-//     _anchor!.items = [..._anchor!.items];
-//   }
-//
-//   /// 页码减一
-//   void turnPrePage() {
-//     assert(_anchor != null);
-//     _anchor!.page--;
-//   }
-//
-//   /// 页码加一
-//   void turnNextPage() {
-//     assert(_anchor != null);
-//     _anchor!.page++;
-//   }
-// }

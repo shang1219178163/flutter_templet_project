@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
@@ -156,7 +156,7 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
 
   Widget buildSubPage() {
     final primary = context.primaryColor;
-    return NRefreshView<E>(
+    return NRefreshListView<E>(
       controller: refreshViewController,
       pageSize: 30,
       onRequest: (bool isRefresh, int page, int pageSize, last) async {

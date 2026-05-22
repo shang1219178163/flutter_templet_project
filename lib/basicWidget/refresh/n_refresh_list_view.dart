@@ -12,6 +12,8 @@ class NRefreshListView<T> extends StatefulWidget {
     this.title,
     this.placeholder = const NPlaceholder(),
     this.needRemovePadding = false,
+    this.page = 1,
+    this.pageSize = 20,
     required this.onRequest,
     required this.itemBuilder,
     this.separatorBuilder,
@@ -30,6 +32,12 @@ class NRefreshListView<T> extends StatefulWidget {
 
   /// 使用使用 MediaQuery.removePadding
   final bool needRemovePadding;
+
+  /// 页面初始索引
+  final int page;
+
+  /// 每页数量
+  final int pageSize;
 
   /// 请求方法
   final RequestListCallback<T> onRequest;
@@ -50,7 +58,7 @@ class NRefreshListView<T> extends StatefulWidget {
 }
 
 class NRefreshListViewState<T> extends State<NRefreshListView<T>>
-    with AutomaticKeepAliveClientMixin, NEasyRefreshMixin<NRefreshListView<T>, T> {
+    with AutomaticKeepAliveClientMixin, NRefreshMixin<T>, NEasyRefreshMixin<NRefreshListView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
@@ -58,9 +66,6 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
 
   @override
   late RequestListCallback<T> onRequest = widget.onRequest;
-
-  @override
-  List<T> items = <T>[];
 
   @override
   void dispose() {
@@ -86,6 +91,8 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
     if (widget.title != oldWidget.title ||
         widget.placeholder != oldWidget.placeholder ||
         widget.needRemovePadding != oldWidget.needRemovePadding ||
+        widget.page != oldWidget.page ||
+        widget.pageSize != oldWidget.pageSize ||
         widget.onRequest != oldWidget.onRequest ||
         widget.itemBuilder != oldWidget.itemBuilder ||
         widget.separatorBuilder != oldWidget.separatorBuilder) {
@@ -93,6 +100,8 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
+      page = widget.page;
+      pageSize = widget.pageSize;
       onRefresh();
     }
   }
@@ -142,49 +151,3 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
     return child;
   }
 }
-
-// class NRefreshListViewController<E> {
-//   NRefreshListViewState<E>? _anchor;
-//
-//   void _attach(NRefreshListViewState<E> anchor) {
-//     _anchor = anchor;
-//   }
-//
-//   void _detach(NRefreshListViewState<E> anchor) {
-//     if (_anchor == anchor) {
-//       _anchor = null;
-//     }
-//   }
-//
-//   List<E> get items {
-//     assert(_anchor != null);
-//     return _anchor!.items;
-//   }
-//
-//   void onRefresh() {
-//     assert(_anchor != null);
-//     _anchor!.onRefresh();
-//   }
-//
-//   /// 页码减一
-//   void turnPrePage() {
-//     assert(_anchor != null);
-//     _anchor!.page--;
-//   }
-//
-//   /// 页码加一
-//   void turnNextPage() {
-//     assert(_anchor != null);
-//     _anchor!.page++;
-//   }
-//
-//   void changeItems(List<E> list) {
-//     assert(_anchor != null);
-//     _anchor!.changeItems(list);
-//   }
-//
-//   void updateUI() {
-//     assert(_anchor != null);
-//     _anchor!.updateUI();
-//   }
-// }

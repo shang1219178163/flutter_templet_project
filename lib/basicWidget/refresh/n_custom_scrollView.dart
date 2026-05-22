@@ -69,7 +69,7 @@ class NCustomScrollView<T> extends StatefulWidget {
 }
 
 class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
-    with AutomaticKeepAliveClientMixin, NEasyRefreshMixin<NCustomScrollView<T>, T> {
+    with AutomaticKeepAliveClientMixin, NRefreshMixin<T>, NEasyRefreshMixin<NCustomScrollView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
@@ -77,9 +77,6 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
 
   @override
   late RequestListCallback<T> onRequest = widget.onRequest;
-
-  @override
-  List<T> items = <T>[];
 
   @override
   void dispose() {

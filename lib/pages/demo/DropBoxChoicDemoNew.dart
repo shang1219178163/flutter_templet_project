@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
@@ -212,7 +212,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
   }
 
   Widget buildListView() {
-    return NRefreshView<UserModel>(
+    return NRefreshListView<UserModel>(
       controller: refreshViewController,
       // tag: "${tabIndex.value}",
       onRequest: (bool isRefresh, int page, int pageSize, last) async {

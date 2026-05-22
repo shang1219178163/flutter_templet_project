@@ -49,15 +49,11 @@ mixin NRefreshable<T> {
 }
 
 /// EasyRefresh刷新 mixin
-mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W> implements NRefreshable<T> {
-  late final refreshController = EasyRefreshController(
+mixin NRefreshMixin<T> implements NRefreshable<T> {
+  var refreshController = EasyRefreshController(
     controlFinishRefresh: true,
     controlFinishLoad: true,
   );
-
-  // late RequestListCallback<T> onRequest = throw UnimplementedError('onRequest Unimplemented');
-
-  // late List<T> items = throw UnimplementedError('items Unimplemented');
 
   /// 请求方式
   late RequestListCallback<T> _onRequest;
@@ -66,23 +62,12 @@ mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W> implements NRef
     _onRequest = value;
   }
 
-  // 数据列表
-  List<T> _items = [];
+  /// 数据列表
   @override
-  List<T> get items => _items;
-  @override
-  set items(List<T> value) {
-    _items = value;
-  }
+  List<T> items = [];
 
-  // 数据列表
-  List<T> _firstPageItems = [];
   @override
-  List<T> get firstPageItems => _firstPageItems;
-  @override
-  set firstPageItems(List<T> value) {
-    _firstPageItems = value;
-  }
+  List<T> firstPageItems = [];
 
   @override
   int page = 1;
@@ -93,6 +78,80 @@ mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W> implements NRef
   @override
   var indicator = IndicatorResult.success;
 
+  var isLoading = false;
+
+  bool get hasMore => indicator != IndicatorResult.noMore;
+
+  @override
+  Future<void> onRefresh() async {
+    try {
+      if (isLoading) {
+        return;
+      }
+      isLoading = true;
+
+      page = 1;
+      final list = await onRequest(true, page, pageSize, <T>[]);
+      items.replaceRange(0, items.length, list);
+      page++;
+
+      final noMore = list.length < pageSize;
+      if (noMore) {
+        indicator = IndicatorResult.noMore;
+      }
+      refreshController.finishRefresh();
+      refreshController.resetFooter();
+    } catch (e) {
+      refreshController.finishRefresh(IndicatorResult.fail);
+    } finally {
+      isLoading = false;
+      updateUI();
+    }
+  }
+
+  @override
+  Future<void> onLoad() async {
+    if (indicator == IndicatorResult.noMore) {
+      refreshController.finishLoad(indicator);
+      return;
+    }
+
+    try {
+      if (isLoading) {
+        return;
+      }
+      isLoading = true;
+
+      final start = (items.length - pageSize).clamp(0, pageSize);
+      final prePages = items.sublist(start);
+      final list = await onRequest(false, page, pageSize, prePages);
+      items.addAll(list);
+      page++;
+
+      final noMore = list.length < pageSize;
+      if (noMore) {
+        indicator = IndicatorResult.noMore;
+      }
+      refreshController.finishLoad(indicator);
+    } catch (e) {
+      refreshController.finishLoad(IndicatorResult.fail);
+    } finally {
+      isLoading = false;
+      updateUI();
+    }
+  }
+
+  @override
+  void updateItems(List<T> list) {
+    items = [...list];
+  }
+
+  @override
+  void updateUI() => throw UnimplementedError('updateUI');
+}
+
+/// EasyRefresh刷新 mixin, StatefulWidget 使用
+mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W>, NRefreshMixin<T> {
   @override
   void dispose() {
     refreshController.dispose();
@@ -112,55 +171,9 @@ mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W> implements NRef
   }
 
   @override
-  Future<void> onRefresh() async {
-    try {
-      page = 1;
-
-      final list = firstPageItems.isNotEmpty ? firstPageItems : await onRequest(true, page, pageSize, <T>[]);
-      items.replaceRange(0, items.length, list);
-      page++;
-
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
-      refreshController.finishRefresh();
-      refreshController.resetFooter();
-    } catch (e) {
-      refreshController.finishRefresh(IndicatorResult.fail);
-    }
-    setState(() {});
-  }
-
-  @override
-  Future<void> onLoad() async {
-    if (indicator == IndicatorResult.noMore) {
-      refreshController.finishLoad(indicator);
-      return;
-    }
-
-    try {
-      final start = (items.length - pageSize).clamp(0, pageSize);
-      final prePages = items.sublist(start);
-      final list = await onRequest(false, page, pageSize, prePages);
-      items.addAll(list);
-      page++;
-
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
-      refreshController.finishLoad(indicator);
-    } catch (e) {
-      refreshController.finishLoad(IndicatorResult.fail);
-    }
-    setState(() {});
-  }
-
-  @override
   void updateItems(List<T> list) {
     items.replaceRange(0, items.length, list);
-    setState(() {});
+    updateUI();
   }
 
   @override

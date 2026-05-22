@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_selected_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
-import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_view.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -116,9 +116,9 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
           child: ValueListenableBuilder(
               valueListenable: isEditVN,
               builder: (context, isEdit, child) {
-                return NRefreshView<UserModel>(
+                return NRefreshListView<UserModel>(
                   controller: refreshViewController,
-                  pageSize: 10,
+                  page: 10,
                   onRequest: (bool isRefresh, int page, int pageSize, last) async {
                     return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
                   },

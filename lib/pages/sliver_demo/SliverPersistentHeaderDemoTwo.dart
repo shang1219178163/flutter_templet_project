@@ -90,6 +90,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
       body: NCustomScrollView<String>(
         onRequest: (bool isRefresh, int page, int pageSize, pres) async {
           final length = isRefresh ? 0 : pres.length;
+          await Future.delayed(Duration(milliseconds: 1000));
           final list = List<String>.generate(pageSize, (i) => "item${length + i}");
           return list;
         },
