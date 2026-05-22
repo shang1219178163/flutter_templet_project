@@ -346,58 +346,59 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     final array1New = array1.flatMap();
     debugPrint('array1New:$array1New');
 
-    return;
-    double? z;
-    double? z1;
-    final list = [z, z1];
-    debugPrint('z1:$list');
-
-    List<String>? items;
-    final zz = items?[0];
-    debugPrint('zz:$zz');
-
-    try {
-      List<String>? listNew = [];
-      // debugPrint('first: ${listNew.first}');
-
-      listNew = ["a", "b", "c"];
-      for (var i = 0; i < listNew.length; i++) {
-        final e = listNew[i];
-        debugPrint('e: $e');
-      }
-      for (var i = listNew.length - 1; i >= 0; i--) {
-        final e = listNew[i];
-        debugPrint('倒叙e: $e');
-      }
-    } catch (exception) {
-      debugPrint(exception.toString());
-    }
-
-    final arr = [];
-    final arrNew = arr.take(1);
-    debugPrint('arrNew: ${arrNew.isEmpty}');
-
-    String? maxline;
-    // maxline = map["aa'a'a"];
-    final flag = (maxline?.isNotEmpty == true);
-    debugPrint('flag: $flag');
-    maxline = "1";
-    final flag1 = (maxline.isNotEmpty == true);
-    debugPrint('flag1: $flag1');
-
-    final randomItems = List.generate(9, (index) {
-      final sufix = 3.generateChars(
-        chars: "0123456789",
-      );
-      return "选项$sufix";
-    });
-    DLog.d("randomItems.sorted(): ${randomItems.sorted()}");
+    // return;
+    // double? z;
+    // double? z1;
+    // final list = [z, z1];
+    // debugPrint('z1:$list');
+    //
+    // List<String>? items;
+    // final zz = items?[0];
+    // debugPrint('zz:$zz');
+    //
+    // try {
+    //   List<String>? listNew = [];
+    //   // debugPrint('first: ${listNew.first}');
+    //
+    //   listNew = ["a", "b", "c"];
+    //   for (var i = 0; i < listNew.length; i++) {
+    //     final e = listNew[i];
+    //     debugPrint('e: $e');
+    //   }
+    //   for (var i = listNew.length - 1; i >= 0; i--) {
+    //     final e = listNew[i];
+    //     debugPrint('倒叙e: $e');
+    //   }
+    // } catch (exception) {
+    //   debugPrint(exception.toString());
+    // }
+    //
+    // final arr = [];
+    // final arrNew = arr.take(1);
+    // debugPrint('arrNew: ${arrNew.isEmpty}');
+    //
+    // String? maxline;
+    // // maxline = map["aa'a'a"];
+    // final flag = (maxline?.isNotEmpty == true);
+    // debugPrint('flag: $flag');
+    // maxline = "1";
+    // final flag1 = (maxline.isNotEmpty == true);
+    // debugPrint('flag1: $flag1');
+    //
+    // final randomItems = List.generate(9, (index) {
+    //   final sufix = 3.generateChars(
+    //     chars: "0123456789",
+    //   );
+    //   return "选项$sufix";
+    // });
+    // DLog.d("randomItems.sorted(): ${randomItems.sorted()}");
 
     final strides = List.generate(20, (index) => "选项$index").splitStride(
       by: 4,
       onItem: (start, end, items) {
-        debugPrint("splitStride onItem $start $end: ${items[start]}, ${items[end]}");
-        return items.getRange(start, end);
+        final result = items.getRange(start, end);
+        DLog.d(["splitStride", "onItem", start, end, items[start], items[end], result]);
+        return result;
       },
     );
     DLog.d("strides: $strides");
