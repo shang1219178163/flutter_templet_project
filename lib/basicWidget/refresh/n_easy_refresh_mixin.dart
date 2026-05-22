@@ -91,7 +91,7 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
       isLoading = true;
 
       page = 1;
-      final list = await onRequest(true, page, pageSize, <T>[]);
+      final list = firstPageItems.isNotEmpty ? firstPageItems : await onRequest(true, page, pageSize, <T>[]);
       items.replaceRange(0, items.length, list);
       page++;
 
