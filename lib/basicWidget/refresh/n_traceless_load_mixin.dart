@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin
 /// 无痕加载更多
 mixin NTracelessLoadMixin<W extends StatefulWidget, T> on State<W> {
   /// ScrollController 绑定到滚动视图
-  late ScrollController _scrollController = ScrollController();
+  late ScrollController _scrollController;
   ScrollController get scrollController => _scrollController;
   set scrollController(ScrollController value) {
     _scrollController = value;
@@ -56,7 +56,7 @@ mixin NTracelessLoadMixin<W extends StatefulWidget, T> on State<W> {
 /// 无痕加载更多
 mixin NTracelessEasyRefreshLoadMixin on NEasyRefreshMixin {
   /// ScrollController 绑定到滚动视图
-  late ScrollController _scrollController = ScrollController();
+  late ScrollController _scrollController;
   ScrollController get scrollController => _scrollController;
   set scrollController(ScrollController value) {
     _scrollController = value;
