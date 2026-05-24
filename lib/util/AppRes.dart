@@ -51,8 +51,6 @@ class _RImage {
     "https://cdn.pixabay.com/photo/2016/09/04/08/13/harbour-crane-1643476_1280.jpg",
     "https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg",
     "https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg",
-    'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
-    'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
     'https://seopic.699pic.com/photo/50053/2696.jpg_wh1200.jpg',
     'https://www.10wallpaper.com/wallpaper/1366x768/1207/balls_3d-Abstract_design_wallpaper_1366x768.jpg',
     'https://www.10wallpaper.com/wallpaper/1366x768/1803/Colorful_fibre_optics_abstract_spotlight_1366x768.jpg',
