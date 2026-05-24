@@ -11,6 +11,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 字符串转文件
@@ -77,6 +78,16 @@ class NConvertViewState extends State<NConvertView> {
     super.initState();
 
     widget.controller?._attach(this);
+  }
+
+  @override
+  void didUpdateWidget(covariant NConvertView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?._detach(this);
+      widget.controller?._attach(this);
+      setState(() {});
+    }
   }
 
   @override
@@ -227,7 +238,7 @@ class NConvertViewState extends State<NConvertView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
+        Flexible(
           child: SizedBox(
             width: maxWidth,
             child: widget.start ??
@@ -269,13 +280,14 @@ class NConvertViewState extends State<NConvertView> {
       valueListenable: outVN,
       builder: (context, value, child) {
         final text = selectable ? SelectableText(value) : NText(value);
+        if (value.isEmpty) {
+          return SizedBox();
+        }
 
         return widget.end ??
             Container(
-              height: double.infinity,
               padding: const EdgeInsets.only(left: 4, top: 2, bottom: 2),
               decoration: BoxDecoration(
-                color: Colors.transparent,
                 border: Border.all(color: const Color(0xffe4e4e4), width: 1),
                 borderRadius: BorderRadius.circular(4),
               ),
