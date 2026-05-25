@@ -16,4 +16,7 @@ abstract interface class MatchStatusEnumInterface {
 
   /// 描述
   String get desc;
+
+  /// 状态描述
+  String get statusDesc;
 }
