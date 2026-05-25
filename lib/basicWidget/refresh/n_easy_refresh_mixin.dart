@@ -96,7 +96,8 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
 
       page = 1;
       final list = firstPageItems.isNotEmpty ? firstPageItems : await onRequest(true, page, pageSize, <T>[]);
-      items.replaceRange(0, items.length, list);
+      // items.replaceRange(0, items.length, list);
+      items = [...list];
       page++;
 
       final noMore = list.length < pageSize;
@@ -129,7 +130,8 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
       final start = (items.length - pageSize).clamp(0, pageSize);
       final prePages = items.sublist(start);
       final list = await onRequest(false, page, pageSize, prePages);
-      items.addAll(list);
+      // items.addAll(list);
+      items = [...items, ...list];
       page++;
 
       final noMore = list.length < pageSize;
