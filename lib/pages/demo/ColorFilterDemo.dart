@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_color_choice.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:get/get.dart';
 
@@ -37,6 +38,8 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
     9: Color(0xFFF56C6C).withOpacity(0.3),
     10: Color(0xFFD28E5D).withOpacity(0.3),
   };
+
+  final selectedColorVN = ValueNotifier<Color>(Colors.red);
 
   @override
   void didUpdateWidget(covariant ColorFilterDemo oldWidget) {
@@ -81,32 +84,93 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
             //     ),
             //   );
             // }),
-            ...BlendMode.values.map((e) {
-              // final predictionLevel = predictionLevels[e];
-              // final predictionLevelBgColor = predictionLevelMap[predictionLevel] ?? Color(0xFF707796).withOpacity(0.3);
+            NColorChoice(
+              selectedColorVN: selectedColorVN,
+            ),
 
-              return Container(
-                height: 80,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/bg_predict.png"),
-                    colorFilter: ColorFilter.mode(
-                      Color(0xFF49CFB7),
-                      e,
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: Text("$e"),
-              );
-            }),
+            buildWrap(
+              items: BlendMode.values,
+              rowCount: 5,
+              onChanged: (v) {},
+              itemBuilder: (e) {
+                final name = e.toString().split(".").last;
+                return ValueListenableBuilder(
+                  valueListenable: selectedColorVN,
+                  builder: (context, color, child) {
+                    return Container(
+                      // height: 80,
+                      // width: 120,
+                      // width: double.infinity,
+                      decoration: BoxDecoration(
+                        // borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          // image: AssetImage("assets/images/bg_predict.png"),
+                          image: AssetImage("assets/images/ic_mark_top_right.png"),
+                          colorFilter: ColorFilter.mode(color, e),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      child: Text(name),
+                    );
+                  },
+                );
+              },
+            ),
 
             buildColorOpacity(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildWrap<T>({
+    required List<T> items,
+    String Function(T e)? cbName,
+    required ValueChanged<int> onChanged,
+    int rowCount = 4,
+    double? itemHeight,
+    Widget Function(T e)? itemBuilder,
+  }) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final spacing = 8.0;
+        final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
+
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          // crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            ...items.map(
+              (e) {
+                final i = items.indexOf(e);
+                final btnTitle = cbName?.call(e) ?? "Card $e";
+                return GestureDetector(
+                  onTap: () => onChanged(i),
+                  child: SizedBox(
+                    width: itemWidth.truncateToDouble(),
+                    height: itemHeight ?? itemWidth * 0.6,
+                    child: itemBuilder?.call(e) ??
+                        Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                          ),
+                          child: Text(
+                            btnTitle,
+                            style: TextStyle(color: Colors.blue, fontSize: 12),
+                          ),
+                        ),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
