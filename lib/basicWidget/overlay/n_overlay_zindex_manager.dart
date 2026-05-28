@@ -12,7 +12,7 @@ class NOverlayZIndexItem {
   NOverlayZIndexItem({
     required this.entry,
     required this.zIndex,
-    this.key,
+    this.tag,
   });
 
   /// 视图
@@ -22,7 +22,15 @@ class NOverlayZIndexItem {
   final int zIndex;
 
   /// 唯一 key
-  final String? key;
+  final String? tag;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['entry'] = entry.hashCode;
+    map['zIndex'] = zIndex;
+    map['tag'] = tag;
+    return map;
+  }
 }
 
 /// 全局 Overlay 层次 ZIndex 管理
@@ -37,6 +45,11 @@ class NOverlayZIndexManager {
   final List<NOverlayZIndexItem> _items = [];
   List<NOverlayZIndexItem> get items => _items;
 
+  bool checkExist({required String tag}) {
+    final isNotEmpty = items.where((e) => e.tag == tag).isNotEmpty;
+    return isNotEmpty;
+  }
+
   void clear() {
     for (var i = 0; i < items.length; i++) {
       items[i].entry.remove();
@@ -49,20 +62,20 @@ class NOverlayZIndexManager {
     required BuildContext context,
     required OverlayEntry entry,
     required int zIndex,
-    String? key,
+    String? tag,
   }) {
     // context ??= AppNavigator.navigatorKey.currentContext!;
 
     /// ✅ 1. 已存在 → 更新
-    if (key != null) {
-      final existIndex = _items.indexWhere((e) => e.key == key);
+    if (tag != null) {
+      final existIndex = _items.indexWhere((e) => e.tag == tag);
       if (existIndex != -1) {
         final existItem = _items[existIndex];
         existItem.entry.markNeedsBuild();
 
         // 👉 zIndex 变化才移动
         // if (existItem.zIndex != zIndex) {
-        //   updateZIndex(key: key, newZIndex: zIndex);
+        //   updateZIndex(tag: tag, newZIndex: zIndex);
         // }
         return existItem;
       }
@@ -78,7 +91,7 @@ class NOverlayZIndexManager {
     final item = NOverlayZIndexItem(
       entry: entry,
       zIndex: zIndex,
-      key: key,
+      tag: tag,
     );
 
     _items.insert(insertIndex, item);
@@ -132,9 +145,9 @@ class NOverlayZIndexManager {
     item.entry.remove();
   }
 
-  /// 根据 key 删除
-  void removeByKey(String key) {
-    final targets = _items.where((e) => e.key == key).toList();
+  /// 根据 tag 删除
+  void removeByTag(String tag) {
+    final targets = _items.where((e) => e.tag == tag).toList();
     for (final item in targets) {
       item.entry.remove();
       _items.remove(item);
@@ -142,16 +155,16 @@ class NOverlayZIndexManager {
   }
 
   /// 更新 UI（不动层级）
-  void markNeedsBuild(String key) {
-    final item = _items.where((e) => e.key == key).firstOrNull;
+  void markNeedsBuild(String tag) {
+    final item = _items.where((e) => e.tag == tag).firstOrNull;
     item?.entry.markNeedsBuild();
   }
 
   /// 修改 zIndex（关键：移动位置）
-  void updateZIndex({required BuildContext context, required String key, required int newZIndex}) {
+  void updateZIndex({required BuildContext context, required String tag, required int newZIndex}) {
     final overlayState = Overlay.of(context, rootOverlay: true);
 
-    final index = _items.indexWhere((e) => e.key == key);
+    final index = _items.indexWhere((e) => e.tag == tag);
     if (index == -1) {
       return;
     }
@@ -163,7 +176,7 @@ class NOverlayZIndexManager {
     }
 
     final item = _items.removeAt(index);
-    final itemNew = NOverlayZIndexItem(entry: item.entry, zIndex: newZIndex, key: key);
+    final itemNew = NOverlayZIndexItem(entry: item.entry, zIndex: newZIndex, tag: tag);
     _items.insert(insertIndex, itemNew);
 
     /// ⚠️ 关键：用 rearrange，而不是 insert
