@@ -751,6 +751,7 @@ var others = <Tuple2<String, String>>[
   Tuple2(AppRouter.autoLayoutDemo, "自适应布局研究"),
   Tuple2(AppRouter.weatherInfoPage, "天气信息"),
   Tuple2(AppRouter.pointShop, "积分商城"),
+  Tuple2(AppRouter.horizalStepPage, "步骤指示器"),
 ];
 
 var forms = <Tuple2<String, String>>[

@@ -152,6 +152,7 @@ import 'package:flutter_templet_project/pages/demo/HeroDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HitTestBehaviorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
+import 'package:flutter_templet_project/pages/demo/HorizalStepPage.dart';
 import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HudProgressDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
@@ -933,6 +934,7 @@ class AppRouter {
   static const String inputAccessoryViewDemo = '/InputAccessoryViewDemo';
   static const String trackEventPage = '/trackEventPage';
   static const String pointShop = '/pointShop';
+  static const String horizalStepPage = '/horizalStepPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2746,6 +2748,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.pointShop,
       page: () => PointShop(),
+    ),
+    GetPage(
+      name: AppRouter.horizalStepPage,
+      page: () => HorizalStepPage(),
     ),
   ];
 }
