@@ -119,6 +119,22 @@ extension IterableExt<E> on Iterable<E> {
     }
     return result;
   }
+
+  /// [keepLast]
+  /// false: 保留第一个（默认）
+  /// true: 保留最后一个
+  List<E> distinctBy<K>({required K Function(E e) keySelector, bool keepLast = false}) {
+    if (!keepLast) {
+      final seen = <K>{};
+      return where((e) => seen.add(keySelector(e))).toList();
+    }
+
+    final map = <K, E>{};
+    for (final e in this) {
+      map[keySelector(e)] = e;
+    }
+    return map.values.toList();
+  }
 }
 
 extension IterableNullableItemExt<E> on Iterable<E?> {
