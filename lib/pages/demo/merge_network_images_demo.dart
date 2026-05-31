@@ -8,6 +8,7 @@ import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:flutter_templet_project/util/AppRes.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
   final String? title;
@@ -29,21 +30,21 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   List<MaterialDetailConfig> detailList = <MaterialDetailConfig>[
     MaterialDetailConfig(
       id: 1,
-      message: 'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
+      message: AppRes.image.urls[0],
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 2,
-      message: 'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
+      message: AppRes.image.urls[1],
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 3,
-      message: 'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
+      message: AppRes.image.urls[2],
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),

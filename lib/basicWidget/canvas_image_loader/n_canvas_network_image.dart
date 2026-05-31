@@ -1,9 +1,9 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_templet_project/basicWidget/canvas_image_loader/n_canvas_image_loader.dart';
+import 'package:flutter_templet_project/basicWidget/canvas_image_loader/n_image_painter.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/canvas_image_loader/n_canvas_image_loader.dart';
-import 'package:flutter_templet_project/util/canvas_image_loader/n_image_painter.dart';
 
 /// Canvas 加载网图
 class NCanvasNetworkImage extends StatefulWidget {
@@ -64,7 +64,14 @@ class _NCanvasNetworkImageState extends State<NCanvasNetworkImage> {
   }
 
   Future<void> _load() async {
-    image = await NCanvasImageLoader.load(widget.url, placeholder: widget.placeholder);
+    image = await NCanvasImageLoader.load(
+      widget.url,
+      placeholder: widget.placeholder,
+      configuration: ImageConfiguration(
+        size: Size(widget.width, widget.height),
+        devicePixelRatio: 3,
+      ),
+    );
     if (mounted) {
       setState(() {});
     }
