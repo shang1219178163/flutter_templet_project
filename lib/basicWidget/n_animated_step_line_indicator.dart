@@ -39,7 +39,12 @@ class NAnimatedStepLineIndicator extends StatelessWidget {
           height: resolvedHeight,
           child: CustomPaint(
             painter: _StepIndicatorPainter(
-                currentIndex: value, count: count, itemWidth: itemWidth, spacing: spacing, color: color),
+              currentIndex: value,
+              count: count,
+              itemWidth: itemWidth,
+              spacing: spacing,
+              color: color,
+            ),
           ),
         );
       },
