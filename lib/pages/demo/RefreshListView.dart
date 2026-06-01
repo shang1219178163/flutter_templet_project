@@ -137,8 +137,8 @@ class _RefreshListViewState extends State<RefreshListView> {
                       // controller: controller,
                       value: controller.text,
                       // scrollPhysics: const ClampingScrollPhysics(),//避免触发下拉刷新
-                      minLines: 10,
-                      maxLines: 10,
+                      minLines: 3,
+                      maxLines: 6,
                       onChanged: (v) {
                         DLog.d("index: $index: $v");
                       },
@@ -194,27 +194,3 @@ class EmptyHeader extends Header {
     );
   }
 }
-// class EmptyHeader extends CustomHeader {
-//
-//   const EmptyHeader({
-//     required super.triggerOffset,
-//     required super.clamping,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(title ?? "$this"),
-//         actions: ['done',].map((e) => TextButton(
-//           child: Text(e,
-//             style: TextStyle(color: Colors.white),
-//           ),
-//           onPressed: () => debugPrint(e),
-//         )).toList(),
-//       ),
-//       body: Text(arguments.toString());
-//     );
-//   }
-// }

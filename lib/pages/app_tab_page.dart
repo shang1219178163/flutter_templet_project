@@ -9,7 +9,6 @@
 import 'dart:async';
 
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +25,7 @@ import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
+import 'package:flutter_templet_project/util/EasyRefreshUtil.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -262,57 +262,8 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
 
   /// 上拉刷新,下拉加载全局配置
   configRefresh() {
-    EasyRefresh.defaultHeaderBuilder = () => ClassicHeader(
-          triggerOffset: 50,
-          showMessage: false,
-          dragText: "下拉刷新",
-          armedText: "释放刷新",
-          readyText: "正在刷新...",
-          processingText: "正在刷新...",
-          processedText: "刷新完成",
-          noMoreText: "我可是有底线的 ~",
-          failedText: "刷新失败",
-          messageText: '更新时间 %T',
-          spacing: 0,
-          textBuilder: (context, state, text) {
-            return const SizedBox();
-          },
-          messageBuilder: (context, state, text, dateTime) {
-            return const SizedBox();
-          },
-          pullIconBuilder: (context, state, animation) {
-            return const SizedBox(
-              child: CupertinoActivityIndicator(radius: 10),
-            );
-          },
-          infiniteOffset: null,
-        );
-
-    EasyRefresh.defaultFooterBuilder = () => ClassicFooter(
-          triggerOffset: 50,
-          showMessage: false,
-          dragText: "上拉加载",
-          armedText: "释放加载",
-          readyText: "加载中...",
-          processingText: "加载中...",
-          processedText: "加载完成",
-          noMoreText: "我可是有底线的 ~",
-          failedText: "加载失败",
-          // noMoreIcon: SizedBox(),
-          spacing: 0,
-          textBuilder: (context, state, text) {
-            return const SizedBox();
-          },
-          messageBuilder: (context, state, text, dateTime) {
-            return const SizedBox();
-          },
-          pullIconBuilder: (context, state, animation) {
-            return const SizedBox(
-              child: CupertinoActivityIndicator(radius: 10),
-            );
-          },
-          infiniteOffset: null,
-        );
+    EasyRefresh.defaultHeaderBuilder = () => EasyRefreshUtil.refreshHeader();
+    EasyRefresh.defaultFooterBuilder = () => EasyRefreshUtil.refreshFooter();
   }
 
   Widget buildUpdateAlert(BuildContext context) {

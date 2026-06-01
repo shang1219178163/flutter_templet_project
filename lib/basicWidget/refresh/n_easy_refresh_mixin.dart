@@ -90,6 +90,7 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
   Future<void> onRefresh() async {
     try {
       if (isLoading) {
+        refreshController.finishRefresh();
         return;
       }
       isLoading = true;
@@ -100,10 +101,7 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
       items = [...list];
       page++;
 
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
+      indicator = list.length < pageSize ? IndicatorResult.noMore : IndicatorResult.success;
       refreshController.finishRefresh();
       refreshController.resetFooter();
     } catch (e) {
@@ -123,6 +121,7 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
 
     try {
       if (isLoading) {
+        refreshController.finishLoad(indicator);
         return;
       }
       isLoading = true;
@@ -134,10 +133,7 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
       items = [...items, ...list];
       page++;
 
-      final noMore = list.length < pageSize;
-      if (noMore) {
-        indicator = IndicatorResult.noMore;
-      }
+      indicator = list.length < pageSize ? IndicatorResult.noMore : IndicatorResult.success;
       refreshController.finishLoad(indicator);
     } catch (e) {
       refreshController.finishLoad(IndicatorResult.fail);

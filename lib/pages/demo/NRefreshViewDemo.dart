@@ -68,21 +68,22 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
               title: Text("$widget"),
               actions: [
                 ValueListenableBuilder(
-                    valueListenable: isEditVN,
-                    builder: (context, isEdit, child) {
-                      final title = isEdit ? "取消" : "选择";
-                      return TextButton(
-                        onPressed: () {
-                          isEditVN.value = !isEditVN.value;
-                        },
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                  valueListenable: isEditVN,
+                  builder: (context, isEdit, child) {
+                    final title = isEdit ? "取消" : "选择";
+                    return TextButton(
+                      onPressed: () {
+                        isEditVN.value = !isEditVN.value;
+                      },
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
       body: buildBody(),
@@ -93,94 +94,95 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
     return Column(
       children: [
         ValueListenableBuilder(
-            valueListenable: selectedList,
-            builder: (context, list, child) {
-              final items = list
-                  .map((e) => {
-                        // "id": e.id,
-                        "name": e.name,
-                        // "isSelected": e.isSelected,
-                      })
-                  .toList();
-              DLog.d(items);
+          valueListenable: selectedList,
+          builder: (context, list, child) {
+            if (list.isEmpty) {
+              return SizedBox();
+            }
+            final items = list
+                .map((e) => {
+                      // "id": e.id,
+                      "name": e.name,
+                      // "isSelected": e.isSelected,
+                    })
+                .toList();
 
-              final count = list.length;
-              var desc = "已选择 $count";
-              desc = items.join(",");
-              return NText(
-                "已选择 $desc",
-                maxLines: 100,
-              );
-            }),
+            final count = list.length;
+            var desc = "已选择 $count";
+            desc = items.join(",");
+            return NText("已选择 $desc", maxLines: 100);
+          },
+        ),
         Expanded(
           child: ValueListenableBuilder(
-              valueListenable: isEditVN,
-              builder: (context, isEdit, child) {
-                return NRefreshListView<UserModel>(
-                  controller: refreshViewController,
-                  page: 10,
-                  onRequest: (bool isRefresh, int page, int pageSize, last) async {
-                    return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
-                  },
-                  itemBuilder: (BuildContext context, int index, e) {
-                    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-                      void onTap() {
-                        DLog.d("onSelected: ${e.toJson()}");
+            valueListenable: isEditVN,
+            builder: (context, isEdit, child) {
+              return NRefreshListView<UserModel>(
+                controller: refreshViewController,
+                page: 10,
+                onRequest: (bool isRefresh, int page, int pageSize, last) async {
+                  return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
+                },
+                itemBuilder: (BuildContext context, int index, e) {
+                  return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                    void onTap() {
+                      DLog.d("onSelected: ${e.toJson()}");
+                    }
+
+                    void onToggle() {
+                      e.isSelected = !e.isSelected;
+                      DLog.d("onSelected: ${e.isSelected}");
+                      setState(() {});
+
+                      if (e.isSelected) {
+                        selectedList.value.add(e);
+                      } else {
+                        selectedList.value.remove(e);
                       }
+                      selectedList.value = [...selectedList.value];
+                    }
 
-                      void onToggle() {
-                        e.isSelected = !e.isSelected;
-                        DLog.d("onSelected: ${e.isSelected}");
-                        setState(() {});
+                    final title = [e.name, e.id, e.isSelected].join(",");
+                    final subtitle = "一个特立独行的灵魂";
 
-                        if (e.isSelected) {
-                          selectedList.value.add(e);
-                        } else {
-                          selectedList.value.remove(e);
-                        }
-                        selectedList.value = [...selectedList.value];
-                      }
-
-                      final title = [e.name, e.id, e.isSelected].join(",");
-                      final subtitle = "一个特立独行的灵魂";
-
-                      final child = ListTile(
-                        dense: true,
-                        onTap: !isEdit ? onTap : onToggle,
-                        leading: NNetworkImage(
-                          url: "",
-                          placeholder: AssetImage("img_placeholder_patient.png".toPath()),
-                          width: 40,
-                          height: 40,
+                    final child = ListTile(
+                      dense: true,
+                      onTap: !isEdit ? onTap : onToggle,
+                      leading: NNetworkImage(
+                        url: "",
+                        placeholder: AssetImage("img_placeholder_patient.png".toPath()),
+                        width: 40,
+                        height: 40,
+                      ),
+                      title: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: e.isSelected ? context.primaryColor : null,
                         ),
-                        title: Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: e.isSelected ? context.primaryColor : null,
-                          ),
+                      ),
+                      subtitle: Text(
+                        subtitle,
+                        style: TextStyle(
+                          fontSize: 12,
                         ),
-                        subtitle: Text(
-                          subtitle,
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      );
+                      ),
+                    );
 
-                      if (!isEdit) {
-                        return child;
-                      }
+                    if (!isEdit) {
+                      return child;
+                    }
 
-                      return NSelectedCell(
-                        isSelected: e.isSelected,
-                        onToggle: onToggle,
-                        child: child,
-                      );
-                    });
-                  },
-                );
-              }),
+                    return NSelectedCell(
+                      isSelected: e.isSelected,
+                      onToggle: onToggle,
+                      child: child,
+                    );
+                  });
+                },
+              );
+            },
+          ),
         ),
       ],
     );

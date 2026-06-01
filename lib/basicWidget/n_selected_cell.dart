@@ -40,16 +40,15 @@ class _NSelectedCellState extends State<NSelectedCell> {
   @override
   Widget build(BuildContext context) {
     // final icon = widget.isSelected ? Icons.check_circle : Icons.check;
-    final icon =
-        widget.isSelected ? widget.selectedIcon : widget.unselectedIcon;
+    final icon = widget.isSelected ? widget.selectedIcon : widget.unselectedIcon;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
+      // decoration: const BoxDecoration(
+      //   color: Colors.white,
+      // ),
       child: Row(
         children: [
-          InkWell(
+          GestureDetector(
             onTap: widget.onToggle,
             child: Padding(
               padding: const EdgeInsets.only(

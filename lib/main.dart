@@ -52,7 +52,7 @@ import 'package:route_stack_manager/route_stack_manager.dart';
 //       myErrorsHandler.onError(details);
 //       exit(1);
 //     };
-//     runApp(MyApp());
+//     runApp(MyApp());ClassicFooter
 //   }, (Object error, StackTrace stack) {
 //     myErrorsHandler.onError(error, stack);
 //     exit(1);
