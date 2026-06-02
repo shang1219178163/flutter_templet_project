@@ -1,4 +1,5 @@
 ## flutter pub run flutter_launcher_icons
+# 请通过预览APP导出（取消勾选 Alpha 通道）,确保 logo.png 没有透明通道
 #flutter_launcher_icons:
 #  image_path: "assets/images/logo.png"
 #
