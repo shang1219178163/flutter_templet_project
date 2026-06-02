@@ -3,8 +3,14 @@
 # 遇到不会解决的规则，可以在该网站找到解决方式：https://dart-lang.github.io/linter/lints/
 
 analyzer:
-#  exclude:
-#    - lib/pages/material_tab/widgets/extended_scaffold.dart
+  exclude:
+    - "build/**"
+    - ".dart_tool/**"
+    - "ios/**"
+    - "android/**"
+    - "windows/**"
+    - "web/**"
+    - "assets/images/**"
 
   errors:
     undefined_identifier: ignore # 忽略未知标识符
