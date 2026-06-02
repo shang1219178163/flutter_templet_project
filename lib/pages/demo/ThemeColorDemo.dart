@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:tuple/tuple.dart';
 
@@ -296,13 +298,27 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
               .replaceAll('MaterialAccentColor(primary value:', '')
               .replaceAll('))', ')');
 
+          Color bgColor = e.item2;
+          Color textColor = Colors.green;
+          textColor = bgColor.textColor();
+          // double relativeLuminance = bgColor.computeLuminance();
+          // final edgeLuminance = (relativeLuminance + 0.05) * (relativeLuminance + 0.05);
+          // textColor = edgeLuminance > 0.5 ? Colors.black : Colors.white;
+
+          final desc = [
+            // relativeLuminance.toStringAsFixed(2),
+            // edgeLuminance.toStringAsFixed(2),
+            e.item1,
+            name,
+          ].join("\n");
+          //
           return Container(
             width: itemWidth,
             padding: EdgeInsets.all(8),
             color: e.item2,
             child: Text(
-              "${e.item1}\n($name)",
-              style: TextStyle(color: Colors.green, fontSize: 14),
+              desc,
+              style: TextStyle(color: textColor, fontSize: 14),
             ),
           );
         }).toList(),

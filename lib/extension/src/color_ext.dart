@@ -96,6 +96,31 @@ extension ColorExt on Color {
     );
   }
 
+  /// 是否为纯黑色（包含透明度）
+  bool get isPureBlack {
+    return r == 0 && g == 0 && b == 0 && a == 0;
+  }
+
+  /// 是否为纯白色
+  bool get isPureWhite {
+    return r == 255 && g == 255 && b == 255 && a == 0;
+  }
+
+  /// 当前背景色上显示的文字颜色
+  Color textColor({
+    Color textColorLight = Colors.black,
+    Color textColorDark = Colors.white,
+  }) {
+    var brightness = ThemeData.estimateBrightnessForColor(this);
+    var textColor = brightness == Brightness.dark ? textColorDark : textColorLight;
+    if (isPureWhite) {
+      textColor = textColorDark;
+    } else if (isPureBlack) {
+      textColor = textColorLight;
+    }
+    return textColor;
+  }
+
   // /// 颜色名称描述
   // String get toRadixString {
   //   final result = "#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}";

@@ -84,7 +84,8 @@ class _SystemColorPageState extends State<SystemColorPage> {
         .toString()
         .replaceAll('MaterialColor(primary value:', '')
         .replaceAll('MaterialAccentColor(primary value:', '')
-        .replaceAll('))', ')');
+        .replaceAll('))', ')')
+        .replaceAll(",", "\n");
 
     return ListTile(
       leading: Container(
@@ -92,8 +93,14 @@ class _SystemColorPageState extends State<SystemColorPage> {
         width: 40,
         height: 40,
       ),
-      title: Text("$str"),
-      subtitle: Text(subtitle),
+      title: Text(
+        "$str",
+        style: TextStyle(color: Colors.black87, fontSize: 14),
+      ),
+      subtitle: Text(
+        subtitle,
+        style: TextStyle(color: Colors.black54, fontSize: 12),
+      ),
       onTap: () {
         DLog.d(str);
         final value = "$str".split('.').last;
