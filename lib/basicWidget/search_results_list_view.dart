@@ -26,7 +26,7 @@ class SearchResultsListView extends StatefulWidget {
     this.searchCallback,
     required this.tap,
   }) : super(key: key) {
-    editingController = editingController ?? TextEditingController();
+    editingController ??= TextEditingController();
   }
 
   @override
@@ -76,11 +76,10 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
   TextField _buildTextField(BuildContext context) {
     return TextField(
       onChanged: _textfieldChanged,
-      //   onChanged: (value) {
-      //   DLog.d(value);
-      // },
       controller: widget.editingController,
       decoration: InputDecoration(
+        isCollapsed: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         icon: Icon(Icons.search),
         // labelText: "Search",
         hintText: widget.hintText,
