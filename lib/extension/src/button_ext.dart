@@ -8,6 +8,36 @@
 
 import 'package:flutter/material.dart';
 
+extension ButtonStyleButtonExt on OutlinedButton {
+  /// 获取默认按钮样式
+  static ButtonStyle defaultStyleOf(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
+
+    return ElevatedButton.styleFrom(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      disabledBackgroundColor: colorScheme.onSurface.withOpacity(0.12),
+      disabledForegroundColor: colorScheme.onSurface.withOpacity(0.38),
+      shadowColor: theme.shadowColor,
+      elevation: 2,
+      textStyle: theme.textTheme.labelLarge,
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      minimumSize: const Size(64, 36),
+      maximumSize: Size.infinite,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
+      enabledMouseCursor: SystemMouseCursors.click,
+      disabledMouseCursor: SystemMouseCursors.basic,
+      visualDensity: theme.visualDensity,
+      tapTargetSize: theme.materialTapTargetSize,
+      animationDuration: kThemeChangeDuration,
+      enableFeedback: true,
+      alignment: Alignment.center,
+      splashFactory: InkRipple.splashFactory,
+    );
+  }
+}
+
 extension OutlinedButtonExt on OutlinedButton {
   /// 自定义方法
   OutlinedButton copy({

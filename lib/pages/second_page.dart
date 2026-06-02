@@ -2,6 +2,7 @@ import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_stadium_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/count_down_timer_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/CirclePainter.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
@@ -746,6 +748,61 @@ class _SecondPageState extends State<SecondPage> {
                       );
                     },
                   ),
+                  NStadiumButton(
+                    title: 'NStadiumButton',
+                    color: Colors.lightGreen,
+                    titlePadding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    leading: Container(
+                      margin: const EdgeInsets.only(left: 6, right: 4),
+                      child: Image(
+                        image: AssetImage(Assets.imagesAvatarLion),
+                        height: 35,
+                      ),
+                    ),
+                    onPressed: () {
+                      DLog.d('NStadiumButton');
+
+                      final defaultStyle = ButtonStyleButtonExt.defaultStyleOf(context);
+                      DLog.d('defaultStyle: $defaultStyle');
+                    },
+                  ),
+
+                  () {
+                    final defaultStyle = ButtonStyleButtonExt.defaultStyleOf(context);
+                    final textStyle = defaultStyle.textStyle?.resolve({WidgetState.pressed});
+                    final foregroundColor = defaultStyle.foregroundColor?.resolve({WidgetState.pressed});
+                    final backgroundColor = defaultStyle.backgroundColor?.resolve({WidgetState.pressed});
+
+                    // final theme = Theme.of(context);
+                    // final foregroundColor = theme.colorScheme.primary;
+                    // final backgroundColor = theme.colorScheme.onPrimary;
+
+                    final colors = <Color?>[
+                      // textStyle?.color,
+                      backgroundColor,
+                      foregroundColor,
+                    ];
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.yellow,
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ...colors.map((e) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: e,
+                              ),
+                              child: Text("111111"),
+                            );
+                          }),
+                        ],
+                      ),
+                    );
+                  }(),
                 ],
               ),
             ),
