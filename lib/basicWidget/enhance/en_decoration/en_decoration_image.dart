@@ -28,6 +28,7 @@ class EnDecorationImage extends DecorationImage {
   /// Creates an image to show in a [BoxDecoration].
   const EnDecorationImage({
     required super.image,
+    this.placeholder,
     super.onError,
     super.colorFilter,
     super.fit,
@@ -45,6 +46,9 @@ class EnDecorationImage extends DecorationImage {
 
   /// only translate dx, dy.
   final Offset destinationOffset;
+
+  /// image's placeholder. must be local image.
+  final ImageProvider? placeholder;
 
   /// Creates a [DecorationImagePainter] for this [EnDecorationImage].
   ///
@@ -66,6 +70,7 @@ class EnDecorationImage extends DecorationImage {
     }
     return other is EnDecorationImage &&
         other.image == image &&
+        other.placeholder == placeholder &&
         other.colorFilter == colorFilter &&
         other.fit == fit &&
         other.alignment == alignment &&
@@ -83,6 +88,7 @@ class EnDecorationImage extends DecorationImage {
   @override
   int get hashCode => Object.hash(
         image,
+        placeholder,
         colorFilter,
         fit,
         alignment,
@@ -101,6 +107,7 @@ class EnDecorationImage extends DecorationImage {
   String toString() {
     final properties = <String>[
       '$image',
+      '$placeholder',
       if (colorFilter != null) '$colorFilter',
       if (fit != null &&
           !(fit == BoxFit.fill && centerSlice != null) &&
@@ -206,6 +213,18 @@ class _DecorationImagePainter implements DecorationImagePainter {
   ImageStream? _imageStream;
   ImageInfo? _image;
 
+  ImageStream? _placeholderStream;
+  ImageInfo? _placeholderImage;
+
+  late final _imageListener = ImageStreamListener(
+    _handleImage,
+    onError: _details.onError,
+  );
+
+  late final _placeholderListener = ImageStreamListener(
+    _handlePlaceholder,
+  );
+
   @override
   void paint(Canvas canvas, Rect rect, Path? clipPath, ImageConfiguration configuration,
       {double blend = 1.0, BlendMode blendMode = BlendMode.srcOver}) {
@@ -234,17 +253,23 @@ class _DecorationImagePainter implements DecorationImagePainter {
       }
     }
 
+    if (_details.placeholder != null) {
+      final placeholderStream = _details.placeholder!.resolve(configuration);
+      if (placeholderStream.key != _placeholderStream?.key) {
+        _placeholderStream?.removeListener(_placeholderListener);
+        _placeholderStream = placeholderStream;
+        _placeholderStream?.addListener(_placeholderListener);
+      }
+    }
+
     final newImageStream = _details.image.resolve(configuration);
     if (newImageStream.key != _imageStream?.key) {
-      final listener = ImageStreamListener(
-        _handleImage,
-        onError: _details.onError,
-      );
-      _imageStream?.removeListener(listener);
+      _imageStream?.removeListener(_imageListener);
       _imageStream = newImageStream;
-      _imageStream!.addListener(listener);
+      _imageStream!.addListener(_imageListener);
     }
-    if (_image == null) {
+    final imageInfo = _image ?? _placeholderImage;
+    if (imageInfo == null) {
       return;
     }
 
@@ -256,9 +281,9 @@ class _DecorationImagePainter implements DecorationImagePainter {
     _paintImage(
       canvas: canvas,
       rect: rect,
-      image: _image!.image,
-      debugImageLabel: _image!.debugLabel,
-      scale: _details.scale * _image!.scale,
+      image: imageInfo.image,
+      debugImageLabel: imageInfo.debugLabel,
+      scale: _details.scale * imageInfo.scale,
       colorFilter: _details.colorFilter,
       fit: _details.fit,
       alignment: _details.alignment.resolve(configuration.textDirection),
@@ -270,7 +295,6 @@ class _DecorationImagePainter implements DecorationImagePainter {
       invertColors: _details.invertColors,
       isAntiAlias: _details.isAntiAlias,
       blendMode: blendMode,
-      destinationOffset: _details.destinationOffset,
     );
 
     if (clipPath != null) {
@@ -293,17 +317,29 @@ class _DecorationImagePainter implements DecorationImagePainter {
     }
   }
 
+  void _handlePlaceholder(ImageInfo value, bool synchronousCall) {
+    if (_placeholderImage == value) {
+      return;
+    }
+    _placeholderImage?.dispose();
+    _placeholderImage = value;
+    if (!synchronousCall) {
+      _onChanged();
+    }
+  }
+
   @override
   void dispose() {
     if (kFlutterMemoryAllocationsEnabled) {
       FlutterMemoryAllocations.instance.dispatchObjectDisposed(object: this);
     }
-    _imageStream?.removeListener(ImageStreamListener(
-      _handleImage,
-      onError: _details.onError,
-    ));
+    _imageStream?.removeListener(_imageListener);
     _image?.dispose();
     _image = null;
+
+    _placeholderStream?.removeListener(_placeholderListener);
+    _placeholderImage?.dispose();
+    _placeholderStream = null;
   }
 
   @override
@@ -655,6 +691,8 @@ class _BlendedDecorationImage implements EnDecorationImage {
 
   @override
   ImageProvider get image => b?.image ?? a!.image;
+  @override
+  ImageProvider? get placeholder => b?.placeholder ?? a!.placeholder;
   @override
   ImageErrorListener? get onError => b?.onError ?? a!.onError;
   @override
