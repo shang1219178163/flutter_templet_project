@@ -44,11 +44,11 @@ class EnDecorationImage extends DecorationImage {
     this.destinationOffset = Offset.zero,
   });
 
-  /// only translate dx, dy.
-  final Offset destinationOffset;
-
   /// image's placeholder. must be local image.
   final ImageProvider? placeholder;
+
+  /// only translate dx, dy.
+  final Offset destinationOffset;
 
   /// Creates a [DecorationImagePainter] for this [EnDecorationImage].
   ///
