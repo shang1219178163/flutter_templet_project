@@ -178,41 +178,20 @@ extension BuildContextExt on BuildContext {
     final img = Image.memory(pngBytes);
     return img;
   }
+
+  /// 查询 state StatefulWidget 对应的 state
+  T? lookUpState<T>(bool Function(Element e) test) {
+    T? state;
+    visitAncestorElements((Element element) {
+      if (element is! StatefulElement) {
+        return true;
+      }
+      if (!test(element)) {
+        return true;
+      }
+      state = element.state as T;
+      return false;
+    });
+    return state;
+  }
 }
-
-// extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
-//   /// 扩展属性 Theme.of(context)
-//   ThemeData get theme => context.theme;
-//
-//   /// 扩展属性 Theme.of(context)
-//   Color get primaryColor => theme.primaryColor;
-//
-//   /// 扩展属性 MediaQuery.of(context)
-//   MediaQueryData get mediaQuery => context.mediaQuery;
-//
-//   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
-//   double get safeAreaTop => context.safeAreaTop;
-//
-//   /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
-//   double get safeAreaBottom => context.safeAreaBottom;
-//
-//   /// 安全区高度(去除电池栏高度和 iphone底部34)
-//   double get safeAreaHeight => context.safeAreaHeight;
-//
-//   /// 扩展属性 MediaQuery.of(context).size
-//   Size get screenSize => context.screenSize;
-//
-//   /// 扩展属性 MediaQuery.of(.devicePixelRatio
-//   double get devicePixelRatio => context.devicePixelRatio;
-// }
-
-// extension GlobalKeyExt on GlobalKey{
-//
-//   double? minX({Offset offset = Offset.zero}) => currentContext?.minX(offset: offset);
-//   double? minY({Offset offset = Offset.zero}) => currentContext?.minY(offset: offset);
-//   double? midX({Offset offset = Offset.zero}) => currentContext?.midX(offset: offset);
-//   double? midY({Offset offset = Offset.zero}) => currentContext?.midY(offset: offset);
-//   double? maxX({Offset offset = Offset.zero}) => currentContext?.maxX(offset: offset);
-//   double? maxY({Offset offset = Offset.zero}) => currentContext?.maxY(offset: offset);
-//
-// }
