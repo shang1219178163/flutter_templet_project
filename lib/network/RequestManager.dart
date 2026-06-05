@@ -20,6 +20,7 @@ import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart' as get_navigation;
+import 'dart:io';
 
 class RequestManager extends BaseRequestAPI {
   // 私有构造器
@@ -60,7 +61,8 @@ class RequestManager extends BaseRequestAPI {
       'token': token,
       'Content-Type': 'application/json',
       'Connection': "keep-alive",
-      'terminal': '*',
+      'platform': Platform.operatingSystem,
+      'terminal': 'app',
     };
     dio.options = options;
 
