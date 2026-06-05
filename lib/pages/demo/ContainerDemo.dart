@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/util/CacheImageProvider.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class ContainerDemo extends StatefulWidget {
@@ -62,6 +64,23 @@ class _ContainerDemoState extends State<ContainerDemo> {
         // body: isSliver ? buildBodyCustom() : buildBodyColumn(),
         body: CustomScrollView(
           slivers: [
+            NSectionBox(
+              title: "EnDecorationImage - placeholder",
+              child: Container(
+                height: 200,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  image: EnDecorationImage(
+                    image: CachedNetworkImageProvider(
+                      AppRes.image.urls[6],
+                      cacheKey: "${DateTime.now()}",
+                    ),
+                    placeholder: AssetImage(Assets.assetsImagesFlutter),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
             buildSection(),
             buildSection1(),
             buildGradientBorder(),
