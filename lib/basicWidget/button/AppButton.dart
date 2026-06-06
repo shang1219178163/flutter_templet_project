@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/button/AppButtonTheme.dart';
 
-enum AppButtonStyle { filled, filledTonal, outlined, text }
+enum AppButtonType { filled, filledTonal, outlined, text }
 
 class AppButton extends StatelessWidget {
   const AppButton({
     super.key,
-    this.style = AppButtonStyle.filled,
+    this.type = AppButtonType.filled,
+    this.style,
     this.fgColor,
     this.bgColor,
     this.fgColorDisabled,
@@ -28,7 +29,9 @@ class AppButton extends StatelessWidget {
   });
 
   /// 按钮样式 filled, filledTonal, outlined, text
-  final AppButtonStyle style;
+  final AppButtonType type;
+
+  final ButtonStyle? style;
 
   /// 前景色
   final Color? fgColor;
@@ -97,8 +100,8 @@ class AppButton extends StatelessWidget {
     );
 
     var buttonStyleNew = buttonStyle;
-    switch (style) {
-      case AppButtonStyle.filledTonal:
+    switch (type) {
+      case AppButtonType.filledTonal:
         {
           final bgColor = isDark ? Colors.cyan : appButtonTheme?.bgColor?.withOpacity(0.1) ?? primary.withOpacity(0.1);
           final bgColorDisabled = isDark
@@ -119,7 +122,7 @@ class AppButton extends StatelessWidget {
           );
         }
         break;
-      case AppButtonStyle.outlined:
+      case AppButtonType.outlined:
         {
           final bgColor = isDark ? Colors.transparent : appButtonTheme?.fgColor ?? onPrimary;
           final bgColorDisabled = isDark
@@ -141,7 +144,7 @@ class AppButton extends StatelessWidget {
           );
         }
         break;
-      case AppButtonStyle.text:
+      case AppButtonType.text:
         {
           final bgColor = isDark ? onPrimary : onPrimary;
           final bgColorDisabled = isDark ? onPrimary : onPrimary;
@@ -180,7 +183,7 @@ class AppButton extends StatelessWidget {
         break;
     }
     return ElevatedButton(
-      style: buttonStyleNew,
+      style: buttonStyleNew.merge(style),
       onPressed: onPressed,
       onLongPress: onLongPress,
       onHover: onHover,
@@ -209,7 +212,8 @@ class AppButton extends StatelessWidget {
 class AppButtonNew extends StatelessWidget {
   const AppButtonNew({
     super.key,
-    this.style = AppButtonStyle.filled,
+    this.type = AppButtonType.filled,
+    this.style,
     this.radius = 4,
     required this.onPressed,
     required this.child,
@@ -224,7 +228,9 @@ class AppButtonNew extends StatelessWidget {
   });
 
   /// 按钮样式 filled, filledTonal, outlined, text
-  final AppButtonStyle style;
+  final AppButtonType type;
+
+  final ButtonStyle? style;
 
   /// 大于等于999 为椭圆
   final double radius;
@@ -263,11 +269,11 @@ class AppButtonNew extends StatelessWidget {
           : ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(radius),
             ),
-    );
+    ).merge(style);
 
     Widget button = SizedBox();
-    switch (style) {
-      case AppButtonStyle.filledTonal:
+    switch (type) {
+      case AppButtonType.filledTonal:
         {
           button = FilledButton(
             style: buttonStyle,
@@ -283,7 +289,7 @@ class AppButtonNew extends StatelessWidget {
           );
         }
         break;
-      case AppButtonStyle.outlined:
+      case AppButtonType.outlined:
         {
           button = OutlinedButton(
             style: buttonStyle,
@@ -299,7 +305,7 @@ class AppButtonNew extends StatelessWidget {
           );
         }
         break;
-      case AppButtonStyle.text:
+      case AppButtonType.text:
         {
           button = TextButton(
             style: buttonStyle,
