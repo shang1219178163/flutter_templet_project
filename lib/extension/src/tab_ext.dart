@@ -43,8 +43,7 @@ extension TabBarExt on TabBar {
       isScrollable: isScrollable ?? this.isScrollable,
       padding: padding ?? this.padding,
       indicatorColor: indicatorColor ?? this.indicatorColor,
-      automaticIndicatorColorAdjustment: automaticIndicatorColorAdjustment ??
-          this.automaticIndicatorColorAdjustment,
+      automaticIndicatorColorAdjustment: automaticIndicatorColorAdjustment ?? this.automaticIndicatorColorAdjustment,
       indicatorWeight: indicatorWeight ?? this.indicatorWeight,
       indicatorPadding: indicatorPadding ?? this.indicatorPadding,
       indicator: indicator ?? this.indicator,
@@ -78,8 +77,7 @@ extension TabBarExt on TabBar {
       isScrollable: tabBar.isScrollable,
       padding: tabBar.padding ?? padding,
       indicatorColor: tabBar.indicatorColor ?? indicatorColor,
-      automaticIndicatorColorAdjustment:
-          tabBar.automaticIndicatorColorAdjustment,
+      automaticIndicatorColorAdjustment: tabBar.automaticIndicatorColorAdjustment,
       indicatorWeight: tabBar.indicatorWeight,
       indicatorPadding: tabBar.indicatorPadding,
       indicator: tabBar.indicator ?? indicator,
@@ -98,6 +96,23 @@ extension TabBarExt on TabBar {
       physics: tabBar.physics ?? physics,
       splashFactory: tabBar.splashFactory ?? splashFactory,
       splashBorderRadius: tabBar.splashBorderRadius ?? splashBorderRadius,
+    );
+  }
+}
+
+extension TabControllerExt on TabController {
+  /// 更新 TabController
+  static void updateTabController({
+    required TabController tabController,
+    required TickerProvider vsync,
+    required int length,
+  }) {
+    final newIndex = tabController.index.clamp(0, length - 1);
+    tabController.dispose();
+    tabController = TabController(
+      length: length,
+      vsync: vsync,
+      initialIndex: newIndex,
     );
   }
 }

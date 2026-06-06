@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class AppColor {
   static const Color white = Color(0xFFFFFFFF);
 
-// ///主色调
+  ///主色调
   static const Color primary = Colors.blueAccent;
 
   /// 默认字体颜色 #1A1A1A
@@ -36,4 +36,17 @@ class AppColor {
 
   /// 阴影 #B5B5B5
   static const Color shadowColor = Color(0x08000000);
+
+  // static const Color primary = Color(0xFF1565C0);
+  // static const Color primaryLight = Color(0xFF1E88E5);
+  // static const Color primaryDark = Color(0xFF0D47A1);
+  // static const Color secondary = Color(0xFFFF6F00);
+  // static const Color surface = Color(0xFFF5F5F5);
+  // static const Color background = Color(0xFFFFFFFF);
+  // static const Color textPrimary = Color(0xFF212121);
+  // static const Color textSecondary = Color(0xFF757575);
+  // static const Color textHint = Color(0xFFBDBDBD);
+  // static const Color error = Color(0xFFD32F2F);
+  // static const Color success = Color(0xFF2E7D32);
+  // static const Color divider = Color(0xFFE4E4E4);
 }

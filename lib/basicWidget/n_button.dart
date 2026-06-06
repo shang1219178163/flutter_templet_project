@@ -156,10 +156,7 @@ class NButton extends StatelessWidget {
         );
     final gradientDisableNew = theTheme?.gradientDisable ??
         LinearGradient(
-          colors: [
-            const Color(0xffF3F3F3),
-            const Color(0xffF3F3F3),
-          ],
+          colors: [const Color(0xffF3F3F3), const Color(0xffF3F3F3)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         );

@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart'
 
 class WidgetThemeConvert extends ConvertProtocol {
   @override
-  String get name => "组件生成对应的 Theme 文件";
+  String get name => "组件 Theme 类";
 
   @override
   String exampleTemplet() {
