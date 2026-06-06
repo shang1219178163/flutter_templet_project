@@ -18,11 +18,6 @@ class _TextThemeDemoState extends State<TextThemeDemo> {
 
   final scrollController = ScrollController();
 
-  Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
-
-  /// id
-  late final id = arguments["id"];
-
   @override
   void didUpdateWidget(covariant TextThemeDemo oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -41,21 +36,52 @@ class _TextThemeDemoState extends State<TextThemeDemo> {
   }
 
   Widget buildBody() {
+    final themeData = Theme.of(context);
+    final isDark = themeData.brightness == Brightness.dark;
+
+    final textTheme = themeData.textTheme;
+
+    final items = [
+      (name: "displayLarge", value: textTheme.displayLarge),
+      (name: "displayMedium", value: textTheme.displayMedium),
+      (name: "displaySmall", value: textTheme.displaySmall),
+      (name: "headlineLarge", value: textTheme.headlineLarge),
+      (name: "headlineMedium", value: textTheme.headlineMedium),
+      (name: "headlineSmall", value: textTheme.headlineSmall),
+      (name: "titleLarge", value: textTheme.titleLarge),
+      (name: "titleMedium", value: textTheme.titleMedium),
+      (name: "titleSmall", value: textTheme.titleSmall),
+      (name: "bodyLarge", value: textTheme.bodyLarge),
+      (name: "bodyMedium", value: textTheme.bodyMedium),
+      (name: "bodySmall", value: textTheme.bodySmall),
+      (name: "labelLarge", value: textTheme.labelLarge),
+      (name: "labelMedium", value: textTheme.labelMedium),
+      (name: "labelSmall", value: textTheme.labelSmall),
+    ];
+
     return Scrollbar(
       controller: scrollController,
       child: SingleChildScrollView(
         controller: scrollController,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text("标题大", style: textTheme.titleLarge),
-            Text("标题中", style: textTheme.titleMedium),
-            Text("标题小", style: textTheme.titleSmall),
-            const SizedBox(height: 20),
-            Text("正文大", style: textTheme.bodyLarge),
-            Text("正文中", style: textTheme.bodyMedium),
-            Text("正文小", style: textTheme.bodySmall),
-            const SizedBox(height: 20),
-            Text("标签文字", style: textTheme.labelLarge),
+            ...items.map((e) {
+              final desc = [
+                e.name,
+                e.value?.fontSize,
+                e.value?.fontWeight,
+              ].join("_");
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // border: Border.all(color: Colors.blue),
+                  // borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                child: Text(desc),
+              );
+            }),
           ],
         ),
       ),

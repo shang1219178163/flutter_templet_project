@@ -327,6 +327,7 @@ import 'package:flutter_templet_project/pages/demo/TextFieldLoginDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldTabDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextPaintDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextThemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeMaterial3Page.dart';
@@ -935,6 +936,7 @@ class AppRouter {
   static const String trackEventPage = '/trackEventPage';
   static const String pointShop = '/pointShop';
   static const String horizalStepPage = '/horizalStepPage';
+  static const String textThemeDemo = '/textThemeDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2752,6 +2754,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.horizalStepPage,
       page: () => HorizalStepPage(),
+    ),
+    GetPage(
+      name: AppRouter.textThemeDemo,
+      page: () => TextThemeDemo(),
     ),
   ];
 }
