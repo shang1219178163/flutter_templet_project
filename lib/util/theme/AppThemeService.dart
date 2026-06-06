@@ -83,7 +83,10 @@ class AppThemeService {
 
   void toggleTheme() {
     final result = Get.isDarkMode ? lightTheme : darkTheme;
+    final themeMode = Get.isDarkMode ? ThemeMode.light : ThemeMode.dark;
+    // DLog.d(result.brightness);
     Get.changeTheme(result);
+    Get.changeThemeMode(themeMode);
     _cacheTheme(result: result);
   }
 
