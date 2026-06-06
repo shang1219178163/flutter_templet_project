@@ -92,7 +92,7 @@ class AppButton extends StatelessWidget {
       shape: radius >= 999
           ? StadiumBorder()
           : ContinuousRectangleBorder(
-              borderRadius: BorderRadius.circular(9),
+              borderRadius: BorderRadius.circular(radius),
             ),
     );
 
@@ -191,6 +191,172 @@ class AppButton extends StatelessWidget {
       iconAlignment: iconAlignment,
       child: child,
     );
+  }
+
+  WidgetStateProperty<T?>? stateValue<T>({
+    required T value,
+    required T disabledValue,
+  }) {
+    return WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) {
+        return disabledValue;
+      }
+      return value;
+    });
+  }
+}
+
+class AppButtonTwo extends StatelessWidget {
+  const AppButtonTwo({
+    super.key,
+    this.style = AppButtonStyle.filled,
+    this.fgColor,
+    this.bgColor,
+    this.fgColorDisabled,
+    this.bgColorDisabled,
+    // this.outlinedColor,
+    // this.outlinedColorDisabled,
+    this.radius = 4,
+    required this.onPressed,
+    required this.child,
+    this.onLongPress,
+    this.onHover,
+    this.onFocusChange,
+    this.focusNode,
+    this.autofocus = false,
+    this.clipBehavior,
+    this.isSemanticButton,
+    this.iconAlignment = IconAlignment.start,
+  });
+
+  /// 按钮样式 filled, filledTonal, outlined, text
+  final AppButtonStyle style;
+
+  /// 前景色
+  final Color? fgColor;
+
+  /// 背景色
+  final Color? bgColor;
+
+  /// 前景色 禁用状态
+  final Color? fgColorDisabled;
+
+  /// 背景色 禁用状态
+  final Color? bgColorDisabled;
+
+  // /// 边框颜色
+  // final Color? outlinedColor;
+  //
+  // /// 边框颜色 禁用状态
+  // final Color? outlinedColorDisabled;
+
+  /// 大于等于999 为椭圆
+  final double radius;
+
+  final VoidCallback? onPressed;
+
+  final VoidCallback? onLongPress;
+
+  final ValueChanged<bool>? onHover;
+
+  final ValueChanged<bool>? onFocusChange;
+
+  final Clip? clipBehavior;
+
+  final FocusNode? focusNode;
+
+  final bool autofocus;
+
+  final bool? isSemanticButton;
+
+  final IconAlignment iconAlignment;
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final buttonStyle = ElevatedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      minimumSize: Size(40, 18),
+      textStyle: const TextStyle(
+        fontSize: 14,
+      ),
+      shape: radius >= 999
+          ? StadiumBorder()
+          : ContinuousRectangleBorder(
+              borderRadius: BorderRadius.circular(radius),
+            ),
+    );
+
+    Widget button = SizedBox();
+    switch (style) {
+      case AppButtonStyle.filledTonal:
+        {
+          button = FilledButton(
+            style: buttonStyle,
+            onPressed: onPressed,
+            onLongPress: onLongPress,
+            onHover: onHover,
+            onFocusChange: onFocusChange,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            clipBehavior: clipBehavior,
+            iconAlignment: iconAlignment,
+            child: child,
+          );
+        }
+        break;
+      case AppButtonStyle.outlined:
+        {
+          button = OutlinedButton(
+            style: buttonStyle,
+            onPressed: onPressed,
+            onLongPress: onLongPress,
+            onHover: onHover,
+            onFocusChange: onFocusChange,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            clipBehavior: clipBehavior,
+            iconAlignment: iconAlignment,
+            child: child,
+          );
+        }
+        break;
+      case AppButtonStyle.text:
+        {
+          button = TextButton(
+            style: buttonStyle,
+            onPressed: onPressed,
+            onLongPress: onLongPress,
+            onHover: onHover,
+            onFocusChange: onFocusChange,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            clipBehavior: clipBehavior,
+            iconAlignment: iconAlignment,
+            child: child,
+          );
+        }
+        break;
+      default:
+        {
+          button = ElevatedButton(
+            style: buttonStyle,
+            onPressed: onPressed,
+            onLongPress: onLongPress,
+            onHover: onHover,
+            onFocusChange: onFocusChange,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            clipBehavior: clipBehavior,
+            iconAlignment: iconAlignment,
+            child: child,
+          );
+        }
+        break;
+    }
+    return button;
   }
 
   WidgetStateProperty<T?>? stateValue<T>({

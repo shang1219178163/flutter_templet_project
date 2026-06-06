@@ -69,24 +69,6 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
       child: Column(
         children: [
           buildButtonWidgetState(),
-
-          NSectionBox(
-            title: "elevatedButtonThemeStyle",
-            child: buildButtonTheme(buttonStyle: elevatedButtonThemeStyle),
-          ),
-          // NSectionBox(
-          //   title: "filledButtonThemeStyle",
-          //   child: buildButtonTheme(buttonStyle: filledButtonThemeStyle),
-          // ),
-          // NSectionBox(
-          //   title: "outlinedButtonThemeStyle",
-          //   child: buildButtonTheme(buttonStyle: outlinedButtonThemeStyle),
-          // ),
-          // NSectionBox(
-          //   title: "textButtonThemeStyle",
-          //   child: buildButtonTheme(buttonStyle: textButtonThemeStyle),
-          // ),
-
           NSectionBox(
             title: "Button",
             child: buildSystemButton(
@@ -198,6 +180,18 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
             title: "AppButton - disable",
             child: buildAppButton(onPressed: null),
           ),
+          NSectionBox(
+            title: "AppButtonTwo",
+            child: buildAppButtonTwo(
+              onPressed: () {
+                DLog.d("buildSystemButton");
+              },
+            ),
+          ),
+          NSectionBox(
+            title: "AppButtonTwo - disable",
+            child: buildAppButtonTwo(onPressed: null),
+          ),
         ],
       ),
     );
@@ -302,6 +296,38 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
             onPressed: onPressed,
           ),
           AppButton(
+            style: AppButtonStyle.text,
+            child: Text("Text"),
+            onPressed: onPressed,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildAppButtonTwo({required VoidCallback? onPressed}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          AppButtonTwo(
+            style: AppButtonStyle.outlined,
+            child: Text("Outlined"),
+            onPressed: onPressed,
+          ),
+          AppButtonTwo(
+            style: AppButtonStyle.filled,
+            child: Text("Filled"),
+            onPressed: onPressed,
+          ),
+          AppButtonTwo(
+            style: AppButtonStyle.filledTonal,
+            child: Text("Tonal"),
+            onPressed: onPressed,
+          ),
+          AppButtonTwo(
             style: AppButtonStyle.text,
             child: Text("Text"),
             onPressed: onPressed,
