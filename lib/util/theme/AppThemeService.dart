@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/button/AppButtonTheme.dart';
 import 'package:flutter_templet_project/basicWidget/n_seed_color_box.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
@@ -299,8 +300,16 @@ class AppThemeService {
             ),
           ),
         ),
-
-        extensions: appThemeDataExtensions(),
+        // extensions: appThemeDataExtensions(),
+        extensions: [
+          ...?appThemeDataExtensions(),
+          AppButtonTheme(
+            bgColor: Colors.green,
+            bgColorDisabled: Colors.black.withOpacity(0.1),
+            fgColor: Colors.white,
+            fgColorDisabled: Colors.grey,
+          ),
+        ],
       );
 
   // ThemeData? darkThemeData;
@@ -486,6 +495,14 @@ class AppThemeService {
             ),
           ),
         ),
+        extensions: [
+          AppButtonTheme(
+            bgColor: Colors.green,
+            bgColorDisabled: Color(0xFF1F1F1F),
+            fgColor: Color(0xFF0a3723),
+            fgColorDisabled: Color(0xFF6c6c6c),
+          ),
+        ],
       );
 
   /// 初始化配置

@@ -7,6 +7,10 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/button/AppButton.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class ButtonStyleDemo extends StatefulWidget {
   const ButtonStyleDemo({Key? key, this.title}) : super(key: key);
@@ -21,31 +25,189 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    onPressed: () => debugPrint(e.toString()),
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ))
-              .toList(),
-        ),
-        body: Column(
-          children: [_buildButton()],
-        ));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          IconButton(
+            icon: Icon(AppThemeService().isDark ? Icons.light_mode : Icons.dark_mode),
+            color: Colors.white,
+            onPressed: () {
+              AppThemeService().toggleTheme();
+            },
+          ),
+        ],
+      ),
+      body: buildBody(),
+    );
   }
 
-  _buildButton() {
+  Widget buildBody() {
+    final buttonStyle = OutlinedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      minimumSize: Size(40, 18),
+      // foregroundColor: Colors.blue,
+      // backgroundColor: Colors.white,
+      disabledForegroundColor: Colors.grey,
+      textStyle: const TextStyle(
+        fontSize: 14,
+        // fontWeight: FontWeight.w600,
+      ),
+      shape: StadiumBorder(),
+      side: const BorderSide(color: Colors.blue, width: 1),
+    );
+
+    final themeData = Theme.of(context);
+    final elevatedButtonThemeStyle = themeData.elevatedButtonTheme.style;
+    final filledButtonThemeStyle = themeData.filledButtonTheme.style;
+    final outlinedButtonThemeStyle = themeData.outlinedButtonTheme.style;
+    final textButtonThemeStyle = themeData.textButtonTheme.style;
+    final primary = themeData.colorScheme.primary;
+    final onPrimary = themeData.colorScheme.onPrimary;
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          buildButtonWidgetState(),
+
+          NSectionBox(
+            title: "elevatedButtonThemeStyle",
+            child: buildButtonTheme(buttonStyle: elevatedButtonThemeStyle),
+          ),
+          // NSectionBox(
+          //   title: "filledButtonThemeStyle",
+          //   child: buildButtonTheme(buttonStyle: filledButtonThemeStyle),
+          // ),
+          // NSectionBox(
+          //   title: "outlinedButtonThemeStyle",
+          //   child: buildButtonTheme(buttonStyle: outlinedButtonThemeStyle),
+          // ),
+          // NSectionBox(
+          //   title: "textButtonThemeStyle",
+          //   child: buildButtonTheme(buttonStyle: textButtonThemeStyle),
+          // ),
+
+          NSectionBox(
+            title: "Button",
+            child: buildSystemButton(
+              onPressed: () {
+                DLog.d("buildSystemButton");
+              },
+            ),
+          ),
+          NSectionBox(
+            title: "Button - disable",
+            child: buildSystemButton(onPressed: null),
+          ),
+
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          //   child: Wrap(
+          //     spacing: 8,
+          //     runSpacing: 8,
+          //     children: [
+          //       OutlinedButton(
+          //         style: OutlinedButton.styleFrom(
+          //           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          //           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          //           minimumSize: Size(40, 18),
+          //         ),
+          //         onPressed: null,
+          //         child: Text("Outlined"),
+          //       ),
+          //       OutlinedButton(
+          //         style: buttonStyle,
+          //         onPressed: () {
+          //           DLog.d("Outlined");
+          //         },
+          //         child: Text("Outlined"),
+          //       ),
+          //       OutlinedButton(
+          //         style: buttonStyle.copyWith(
+          //           foregroundColor: WidgetStateProperty.all(Colors.white),
+          //           backgroundColor: WidgetStateProperty.all(Colors.blue),
+          //         ),
+          //         onPressed: null,
+          //         child: Text("Elevated"),
+          //       ),
+          //       OutlinedButton(
+          //         style: buttonStyle.copyWith(
+          //           foregroundColor: WidgetStateProperty.all(Colors.blue),
+          //           backgroundColor: WidgetStateProperty.all(Colors.blue.withOpacity(0.1)),
+          //           side: WidgetStateProperty.all(
+          //             BorderSide(color: Colors.transparent, width: 1),
+          //           ),
+          //         ),
+          //         onPressed: null,
+          //         child: Text("Tonal"),
+          //       ),
+          //       OutlinedButton(
+          //         style: buttonStyle.copyWith(
+          //           side: WidgetStateProperty.all(
+          //             BorderSide(color: Colors.transparent, width: 1),
+          //           ),
+          //         ),
+          //         onPressed: () {
+          //           DLog.d("Text");
+          //         },
+          //         child: Text("Text"),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          NSectionBox(
+            title: "primary/onPrimary",
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                ...[
+                  ("primary", primary),
+                  ("onPrimary", onPrimary),
+                  ("grey.shade300", Colors.grey.shade300),
+                  ("grey.shade600", Colors.grey.shade600),
+                  ("Color(0xFF1F1F1F)", Color(0xFF1F1F1F)),
+                  ("Color(0xFF6D6D6D)", Color(0xFF6D6D6D)),
+                ].map((e) {
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: e.$2,
+                      // border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
+                    child: Text(
+                      e.$1.toString().split(".").last,
+                      // style: TextStyle(color: color),
+                    ),
+                  );
+                })
+              ],
+            ),
+          ),
+          Divider(),
+          NSectionBox(
+            title: "AppButton",
+            child: buildAppButton(
+              onPressed: () {
+                DLog.d("buildSystemButton");
+              },
+            ),
+          ),
+          NSectionBox(
+            title: "AppButton - disable",
+            child: buildAppButton(onPressed: null),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildButtonWidgetState() {
     return TextButton(
       onPressed: () {},
       style: ButtonStyle(
-        foregroundColor: WidgetStateProperty.resolveWith<Color>(
-            (Set<WidgetState> states) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
           debugPrint("states:$states");
           if (states.contains(WidgetState.pressed)) {
             return Colors.pink;
@@ -54,8 +216,97 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
         }),
       ),
       child: Text(
-        'Change My Color',
+        'state Color',
         style: TextStyle(fontSize: 15),
+      ),
+    );
+  }
+
+  Widget buildButtonTheme({required ButtonStyle? buttonStyle}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          ...WidgetState.values.map((e) {
+            final bgColor = buttonStyle?.backgroundColor?.resolve({e});
+            final color = buttonStyle?.foregroundColor?.resolve({e});
+
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+              decoration: BoxDecoration(
+                color: bgColor,
+                // border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              child: Text(
+                e.name.split(".").last,
+                style: TextStyle(color: color),
+              ),
+            );
+          })
+        ],
+      ),
+    );
+  }
+
+  Widget buildSystemButton({required VoidCallback? onPressed}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          OutlinedButton(
+            child: Text("Outlined"),
+            onPressed: onPressed,
+          ),
+          ElevatedButton(
+            child: Text("Elevated"),
+            onPressed: onPressed,
+          ),
+          FilledButton.tonal(
+            child: Text("tonal"),
+            onPressed: onPressed,
+          ),
+          TextButton(
+            child: Text("Text"),
+            onPressed: onPressed,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildAppButton({required VoidCallback? onPressed}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          AppButton(
+            style: AppButtonStyle.outlined,
+            child: Text("Outlined"),
+            onPressed: onPressed,
+          ),
+          AppButton(
+            style: AppButtonStyle.filled,
+            child: Text("Filled"),
+            onPressed: onPressed,
+          ),
+          AppButton(
+            style: AppButtonStyle.filledTonal,
+            child: Text("Tonal"),
+            onPressed: onPressed,
+          ),
+          AppButton(
+            style: AppButtonStyle.text,
+            child: Text("Text"),
+            onPressed: onPressed,
+          ),
+        ],
       ),
     );
   }
