@@ -210,12 +210,6 @@ class AppButtonTwo extends StatelessWidget {
   const AppButtonTwo({
     super.key,
     this.style = AppButtonStyle.filled,
-    this.fgColor,
-    this.bgColor,
-    this.fgColorDisabled,
-    this.bgColorDisabled,
-    // this.outlinedColor,
-    // this.outlinedColorDisabled,
     this.radius = 4,
     required this.onPressed,
     required this.child,
@@ -231,24 +225,6 @@ class AppButtonTwo extends StatelessWidget {
 
   /// 按钮样式 filled, filledTonal, outlined, text
   final AppButtonStyle style;
-
-  /// 前景色
-  final Color? fgColor;
-
-  /// 背景色
-  final Color? bgColor;
-
-  /// 前景色 禁用状态
-  final Color? fgColorDisabled;
-
-  /// 背景色 禁用状态
-  final Color? bgColorDisabled;
-
-  // /// 边框颜色
-  // final Color? outlinedColor;
-  //
-  // /// 边框颜色 禁用状态
-  // final Color? outlinedColorDisabled;
 
   /// 大于等于999 为椭圆
   final double radius;
@@ -357,17 +333,5 @@ class AppButtonTwo extends StatelessWidget {
         break;
     }
     return button;
-  }
-
-  WidgetStateProperty<T?>? stateValue<T>({
-    required T value,
-    required T disabledValue,
-  }) {
-    return WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.disabled)) {
-        return disabledValue;
-      }
-      return value;
-    });
   }
 }
