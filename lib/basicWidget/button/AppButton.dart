@@ -206,8 +206,8 @@ class AppButton extends StatelessWidget {
   }
 }
 
-class AppButtonTwo extends StatelessWidget {
-  const AppButtonTwo({
+class AppButtonNew extends StatelessWidget {
+  const AppButtonNew({
     super.key,
     this.style = AppButtonStyle.filled,
     this.radius = 4,

@@ -181,16 +181,16 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
             child: buildAppButton(onPressed: null),
           ),
           NSectionBox(
-            title: "AppButtonTwo",
-            child: buildAppButtonTwo(
+            title: "AppButtonNew",
+            child: buildAppButtonNew(
               onPressed: () {
-                DLog.d("buildSystemButton");
+                DLog.d("AppButtonNew");
               },
             ),
           ),
           NSectionBox(
-            title: "AppButtonTwo - disable",
-            child: buildAppButtonTwo(onPressed: null),
+            title: "AppButtonNew - disable",
+            child: buildAppButtonNew(onPressed: null),
           ),
         ],
       ),
@@ -305,29 +305,29 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
     );
   }
 
-  Widget buildAppButtonTwo({required VoidCallback? onPressed}) {
+  Widget buildAppButtonNew({required VoidCallback? onPressed}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Wrap(
         spacing: 8,
         runSpacing: 8,
         children: [
-          AppButtonTwo(
+          AppButtonNew(
             style: AppButtonStyle.outlined,
             child: Text("Outlined"),
             onPressed: onPressed,
           ),
-          AppButtonTwo(
+          AppButtonNew(
             style: AppButtonStyle.filled,
             child: Text("Filled"),
             onPressed: onPressed,
           ),
-          AppButtonTwo(
+          AppButtonNew(
             style: AppButtonStyle.filledTonal,
             child: Text("Tonal"),
             onPressed: onPressed,
           ),
-          AppButtonTwo(
+          AppButtonNew(
             style: AppButtonStyle.text,
             child: Text("Text"),
             onPressed: onPressed,
