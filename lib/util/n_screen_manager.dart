@@ -35,10 +35,8 @@ class NScreenManager {
   /// 由当前视图构建 [MediaQueryData]。
   static MediaQueryData get mediaQueryData => MediaQueryData.fromView(current);
 
-  static Size? _screenSize;
-
-  /// 屏幕宽高
-  static Size get screenSize => _screenSize ?? mediaQueryData.size;
+  // /// 屏幕宽高
+  static Size get screenSize => mediaQueryData.size;
 
   /// 像素比
   static double get devicePixelRatio => mediaQueryData.devicePixelRatio;
@@ -51,6 +49,9 @@ class NScreenManager {
 
   /// 键盘
   static double get keyboardHeight => viewInsets.bottom;
+
+  /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
+  static double get viewBottom => viewInsets.bottom;
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
   static double get safeAreaTop => mediaQueryData.viewPadding.top;
@@ -66,9 +67,6 @@ class NScreenManager {
 
   /// appbar 高度
   static double get appBarHeight => kToolbarHeight;
-
-  /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
-  static double get viewBottom => viewInsets.bottom;
 
   static Orientation get orientation => mediaQueryData.orientation;
 
