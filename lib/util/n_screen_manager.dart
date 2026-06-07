@@ -32,29 +32,31 @@ class NScreenManager {
   /// 当前主 View
   static FlutterView get current => PlatformDispatcher.instance.views.first;
 
+  /// 由当前视图构建 [MediaQueryData]。
+  static MediaQueryData get mediaQueryData => MediaQueryData.fromView(current);
+
   static Size? _screenSize;
 
   /// 屏幕宽高
-  static Size get screenSize => _screenSize ?? current.physicalSize / current.devicePixelRatio;
+  static Size get screenSize => _screenSize ?? mediaQueryData.size;
 
   /// 像素比
-  static double get devicePixelRatio => current.devicePixelRatio;
+  static double get devicePixelRatio => mediaQueryData.devicePixelRatio;
 
-  static EdgeInsets get padding => EdgeInsets.fromViewPadding(current.padding, devicePixelRatio);
-  static EdgeInsets get viewInsets => EdgeInsets.fromViewPadding(current.viewInsets, devicePixelRatio);
-  static EdgeInsets get viewPadding => EdgeInsets.fromViewPadding(current.viewPadding, devicePixelRatio);
+  static EdgeInsets get padding => mediaQueryData.padding;
+  static EdgeInsets get viewInsets => mediaQueryData.viewInsets;
+  static EdgeInsets get viewPadding => mediaQueryData.viewPadding;
 
-  static EdgeInsets get systemGestureInsets =>
-      EdgeInsets.fromViewPadding(current.systemGestureInsets, devicePixelRatio);
+  static EdgeInsets get systemGestureInsets => mediaQueryData.systemGestureInsets;
 
   /// 键盘
   static double get keyboardHeight => viewInsets.bottom;
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
-  static double get safeAreaTop => current.viewPadding.top;
+  static double get safeAreaTop => mediaQueryData.viewPadding.top;
 
   /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
-  static double get safeAreaBottom => current.viewPadding.bottom;
+  static double get safeAreaBottom => mediaQueryData.viewPadding.bottom;
 
   /// 安全区高度(去除电池栏高度和 iphone底部34)
   static double get safeAreaHeight => screenSize.height - safeAreaTop - safeAreaBottom;
@@ -68,10 +70,10 @@ class NScreenManager {
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   static double get viewBottom => viewInsets.bottom;
 
-  /// 竖屏
-  static bool get isPortrait => current.physicalSize.height > current.physicalSize.width;
+  static Orientation get orientation => mediaQueryData.orientation;
 
-  static Orientation get orientation => !isPortrait ? Orientation.landscape : Orientation.portrait;
+  /// 竖屏
+  static bool get isPortrait => mediaQueryData.orientation == Orientation.portrait;
 
   /// 全屏视频(横屏)播放时, 左右边距
   static double videoLandscapeSpacing({double aspectRatio = 16 / 9}) {
@@ -136,8 +138,9 @@ mixin KeyboardHeightChangedMixin<T extends StatefulWidget> on State<T> {
   }
 
   _onLtr() {
-    final view = WidgetsBinding.instance.platformDispatcher.views.first;
-    final bottom = (view.viewInsets.bottom / view.devicePixelRatio).truncateToDouble();
+    final current = WidgetsBinding.instance.platformDispatcher.views.first;
+    final mediaQueryData = MediaQueryData.fromView(current);
+    final bottom = mediaQueryData.viewInsets.bottom.truncateToDouble();
     if (bottom > 0 && bottom <= 300) {
       debugPrint(['$runtimeType onMetricsChanged 无效数据', keyboardHeightVN.value, bottom].join(", "));
       return;

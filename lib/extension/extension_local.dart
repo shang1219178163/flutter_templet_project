@@ -22,6 +22,7 @@ export 'src/enum_ext.dart';
 export 'src/file_ext.dart';
 export 'src/flex_ext.dart';
 export 'src/floating_action_button_location_ext.dart';
+export 'src/flutter_view_ext.dart';
 export 'src/function_ext.dart';
 export 'src/future_ext.dart';
 export 'src/generic_comparable_ext.dart';
