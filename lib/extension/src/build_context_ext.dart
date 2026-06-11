@@ -81,13 +81,6 @@ extension BuildContextExt on BuildContext {
   /// 扩展属性 Theme.of(context)
   ThemeData get themeData => Theme.of(this);
 
-  // /// 扩展属性 Theme.of(context).primaryColor
-  // Color get primaryColor => themeData.primaryColor;
-
-  // Color get scaffoldBackgroundColor => themeData.scaffoldBackgroundColor;
-
-  // Color get dialogBackgroundColor => themeData.dialogBackgroundColor;
-
   /// 扩展属性 Theme.of(this).colorScheme
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
