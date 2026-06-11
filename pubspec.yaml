@@ -281,6 +281,7 @@ dependency_overrides:
   fluttertoast: ^9.0.0
 
   url_launcher_ios: 6.3.2
+  flutter_linkify: ^6.0.0 #链接识别
   # https://github.com/hnvn/flutter_image_cropper/issues/594  Error: The method 'toARGB32' isn't defined for the class 'Color'.
   image_cropper_platform_interface: 7.1.0
   image_cropper: 9.0.0
