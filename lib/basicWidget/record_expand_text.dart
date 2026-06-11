@@ -173,7 +173,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
                         image: toggleImage,
                         width: 21,
                         height: 8,
-                        color: context.primaryColor,
+                        color: context.themeData.primaryColor,
                       ),
                     ),
                   ),

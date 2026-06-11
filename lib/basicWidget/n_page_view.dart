@@ -166,7 +166,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     }
 
     return Material(
-      color: isThemeBg ? context.primaryColor : null,
+      color: isThemeBg ? context.themeData.primaryColor : null,
       child: tabBar,
     );
   }

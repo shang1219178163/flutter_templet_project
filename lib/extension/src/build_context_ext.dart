@@ -79,14 +79,14 @@ extension BuildContextExt on BuildContext {
   }
 
   /// 扩展属性 Theme.of(context)
-  ThemeData get theme => Theme.of(this);
+  ThemeData get themeData => Theme.of(this);
 
-  /// 扩展属性 Theme.of(context).primaryColor
-  Color get primaryColor => theme.primaryColor;
+  // /// 扩展属性 Theme.of(context).primaryColor
+  // Color get primaryColor => themeData.primaryColor;
 
-  Color get scaffoldBackgroundColor => theme.scaffoldBackgroundColor;
+  Color get scaffoldBackgroundColor => themeData.scaffoldBackgroundColor;
 
-  Color get dialogBackgroundColor => theme.dialogBackgroundColor;
+  Color get dialogBackgroundColor => themeData.dialogBackgroundColor;
 
   /// 扩展属性 Theme.of(this).colorScheme
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
@@ -119,8 +119,6 @@ extension BuildContextExt on BuildContext {
 
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   double get viewBottom => mediaQueryData.viewInsets.bottom;
-
-  // double get paddingBottom => mediaQueryData.padding.bottom;
 
   /// 确认显示
   Future<void> scrollableEnsureVisible({

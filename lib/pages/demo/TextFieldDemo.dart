@@ -337,7 +337,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                           )
                         : null,
                     border: buildFocusedBorder(),
-                    focusedBorder: buildFocusedBorder(color: context.primaryColor),
+                    focusedBorder: buildFocusedBorder(color: context.themeData.primaryColor),
                     enabledBorder: buildFocusedBorder(),
                   ),
                   validator: (v) {
@@ -382,7 +382,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                       },
                     ),
                     border: buildFocusedBorder(),
-                    focusedBorder: buildFocusedBorder(color: context.primaryColor),
+                    focusedBorder: buildFocusedBorder(color: context.themeData.primaryColor),
                     enabledBorder: buildFocusedBorder(),
                   ),
                   validator: (v) {

@@ -158,7 +158,7 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                         title,
                         style: TextStyle(
                           fontSize: 14,
-                          color: e.isSelected ? context.primaryColor : null,
+                          color: e.isSelected ? context.themeData.primaryColor : null,
                         ),
                       ),
                       subtitle: Text(

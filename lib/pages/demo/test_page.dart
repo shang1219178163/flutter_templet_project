@@ -103,7 +103,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     return TabBar(
       controller: tabController,
       isScrollable: true,
-      // labelColor: context.primaryColor,
+      // labelColor: context.themeData.primaryColor,
       // unselectedLabelColor: Theme.of(context).colorScheme.primary,
       tabs: List.generate(6, (index) {
         return Tab(

@@ -88,7 +88,7 @@ class AeTextfiled extends StatelessWidget {
           maxLines: maxLines,
           textAlign: textAlign,
           autofocus: autofocus,
-          cursorColor: context.primaryColor,
+          cursorColor: context.themeData.primaryColor,
           decoration: InputDecoration(
             isCollapsed: true,
             contentPadding: EdgeInsets.only(
@@ -104,7 +104,7 @@ class AeTextfiled extends StatelessWidget {
             border: const OutlineInputBorder(borderSide: BorderSide.none),
             enabledBorder: buildBorder(),
             focusedBorder: buildBorder(
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
             ),
             counter: hasMaxLengthLimit && !isCounterInner ? counter : null,
           ),

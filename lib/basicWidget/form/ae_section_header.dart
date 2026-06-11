@@ -57,7 +57,7 @@ class AeSectionHeader extends StatelessWidget {
                 height: 14,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
-                  color: context.primaryColor,
+                  color: context.themeData.primaryColor,
                 ),
                 margin: const EdgeInsets.only(right: 6),
               ),

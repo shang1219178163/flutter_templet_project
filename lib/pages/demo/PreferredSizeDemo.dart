@@ -56,7 +56,7 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
 
   Widget buildTabBar() {
     return Material(
-      color: context.primaryColor,
+      color: context.themeData.primaryColor,
       child: TabBar(
         controller: tabController,
         isScrollable: true,
@@ -141,7 +141,7 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
 
   Widget buildTabBar() {
     return Material(
-      color: context.primaryColor,
+      color: context.themeData.primaryColor,
       child: TabBar(
         controller: tabController,
         isScrollable: true,

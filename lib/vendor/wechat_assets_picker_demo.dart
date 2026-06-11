@@ -97,7 +97,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
         pickerConfig: AssetPickerConfig(
           maxAssets: maxCount,
           selectedAssets: selectedAssets,
-          themeColor: context.primaryColor,
+          themeColor: context.themeData.primaryColor,
         ));
     debugPrint(result.toString());
     selectedAssets = result ?? [];

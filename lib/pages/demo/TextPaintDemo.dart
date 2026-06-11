@@ -186,7 +186,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
             // return Text(
             //   isExpand ? "收起" : "展开",
             //   style: TextStyle(
-            //     color: context.primaryColor,
+            //     color: context.themeData.primaryColor,
             //   ),
             // );
 
@@ -227,7 +227,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
                               height: 25,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  // color: context.primaryColor.withOpacity(0.3),
+                                  // color: context.themeData.primaryColor.withOpacity(0.3),
                                   // gradient: isExpand ? null : LinearGradient(
                                   //   colors: [
                                   //     Colors.red.withOpacity(0.5),

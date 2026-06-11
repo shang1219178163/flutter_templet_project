@@ -76,7 +76,7 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
             ),
             child: NText(
               e.e,
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
             ),
           ),
         );

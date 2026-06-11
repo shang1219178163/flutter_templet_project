@@ -179,7 +179,7 @@ class AeInputItem extends StatelessWidget {
           textAlign: textAlign,
           style: style,
           autofocus: autofocus,
-          cursorColor: context.primaryColor,
+          cursorColor: context.themeData.primaryColor,
           decoration: InputDecoration(
             isCollapsed: true,
             contentPadding: EdgeInsets.only(
@@ -195,7 +195,7 @@ class AeInputItem extends StatelessWidget {
             border: const OutlineInputBorder(borderSide: BorderSide.none),
             enabledBorder: buildBorder(),
             focusedBorder: buildBorder(
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
             ),
             counter: showCounter && !isCounterInner ? counter : null,
           ),

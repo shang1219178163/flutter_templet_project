@@ -67,7 +67,7 @@ class _TransformDemoState extends State<TransformDemo> {
             child: Container(
               width: 50,
               height: 50,
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
               child: Text("rotate"),
             ),
           ),

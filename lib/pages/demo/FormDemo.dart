@@ -194,7 +194,7 @@ class _FormDemoState extends State<FormDemo> {
     ValueChanged<String>? onChanged,
     VoidCallback? onEditingComplete,
   }) {
-    Color? borderColor = context.primaryColor;
+    Color? borderColor = context.themeData.primaryColor;
     // borderColor = Color(0xffe4e4e4);
 
     final focusedBorder = OutlineInputBorder(

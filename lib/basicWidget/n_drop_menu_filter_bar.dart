@@ -81,7 +81,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = context.primaryColor;
+    final primary = context.themeData.primaryColor;
     final controller = TextEditingController(text: search);
 
     return Container(

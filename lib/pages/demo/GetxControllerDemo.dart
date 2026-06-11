@@ -127,7 +127,7 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
             ),
             child: NText(
               e.e,
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
             ),
           ),
         );

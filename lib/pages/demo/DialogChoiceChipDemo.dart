@@ -570,7 +570,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         selected: e.isSelected == true,
-                        selectedColor: context.primaryColor,
+                        selectedColor: context.themeData.primaryColor,
                         onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {

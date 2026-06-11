@@ -130,7 +130,7 @@ class DialogTagSelect with DialogMixin {
                   // padding: EdgeInsets.only(left: 15, right: 15),
                   // selected: (e == selectTagModel),
                   selected: e.isSelected == true,
-                  selectedColor: context.primaryColor,
+                  selectedColor: context.themeData.primaryColor,
                   backgroundColor: Colors.white,
                   onSelected: (bool selected) {
                     final chooseCount = tags.where((e) => e.isSelected == true).toList().length;

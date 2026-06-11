@@ -178,7 +178,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                         image: "img_sound_overlay_bg_recording.png".toAssetImage(),
                         fit: BoxFit.scaleDown,
                         colorFilter: ColorFilter.mode(
-                          isCancel ? Colors.red : context.primaryColor,
+                          isCancel ? Colors.red : context.themeData.primaryColor,
                           BlendMode.srcIn,
                         ),
                       ),

@@ -86,9 +86,9 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne> with SingleTi
                 bottom: ColoredTabBar(
                   width: double.maxFinite,
                   // backgroudColor: Colors.white,
-                  // labelColor: context.primaryColor,
+                  // labelColor: context.themeData.primaryColor,
                   labelColor: Colors.white,
-                  backgroudColor: context.primaryColor,
+                  backgroudColor: context.themeData.primaryColor,
                   child: TabBar(
                     tabs: items.map((String name) => Tab(text: name)).toList(),
                     controller: tabController,

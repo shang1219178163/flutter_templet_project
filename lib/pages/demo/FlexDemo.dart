@@ -262,7 +262,7 @@ class _FlexDemoState extends State<FlexDemo> {
             child: NText(
               tips,
               fontSize: 13,
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
             ),
           ),
           Expanded(

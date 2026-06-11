@@ -234,8 +234,8 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
-                    context.primaryColor.withOpacity(.35),
-                    context.primaryColor.withOpacity(.7),
+                    context.themeData.primaryColor.withOpacity(.35),
+                    context.themeData.primaryColor.withOpacity(.7),
                   ],
                 ),
               ),

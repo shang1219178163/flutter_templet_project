@@ -161,14 +161,14 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
               horizontal: 10,
             ),
             decoration: BoxDecoration(
-              color: isSelected ? context.primaryColor.withOpacity(0.1) : AppColor.bgColor,
+              color: isSelected ? context.themeData.primaryColor.withOpacity(0.1) : AppColor.bgColor,
               borderRadius: const BorderRadius.all(Radius.circular(4)),
-              border: Border.all(width: 0.5, color: isSelected ? context.primaryColor : AppColor.bgColor),
+              border: Border.all(width: 0.5, color: isSelected ? context.themeData.primaryColor : AppColor.bgColor),
             ),
             child: NText(
               title,
               fontSize: 14,
-              color: isSelected ? context.primaryColor : weChatSubTitleColor,
+              color: isSelected ? context.themeData.primaryColor : weChatSubTitleColor,
               fontWeight: FontWeight.w400,
             ),
           ),

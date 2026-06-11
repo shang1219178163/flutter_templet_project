@@ -140,7 +140,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
           currentIndex: currentIndex,
           selectedFontSize: 11, // 选中字体大小
           unselectedFontSize: 11, // 未选中字体大小
-          selectedItemColor: context.primaryColor,
+          selectedItemColor: context.themeData.primaryColor,
           onTap: (index) => onTapBar(index),
           items: items
               .map(
@@ -170,7 +170,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
                 ),
                 constraints: BoxConstraints(maxHeight: 40),
                 alignment: Alignment.center,
-                child: Icon(Icons.color_lens, color: context.primaryColor, size: 40),
+                child: Icon(Icons.color_lens, color: context.themeData.primaryColor, size: 40),
               );
             }
             return Column(

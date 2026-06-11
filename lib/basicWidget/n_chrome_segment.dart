@@ -175,7 +175,7 @@ class _NChromeSegmentState extends State<NChromeSegment> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: isSelected ? context.primaryColor : AppColor.fontColor737373,
+                    color: isSelected ? context.themeData.primaryColor : AppColor.fontColor737373,
                   ),
                 ),
               ),

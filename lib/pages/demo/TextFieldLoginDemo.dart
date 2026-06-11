@@ -17,7 +17,7 @@ class TextFieldLoginDemo extends StatefulWidget {
 class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
-  late final Color primaryColor = context.primaryColor;
+  late final Color primaryColor = context.themeData.primaryColor;
 
   late final FocusNode _focusNode = FocusNode();
 
@@ -173,7 +173,7 @@ class LoginInput extends StatefulWidget {
 }
 
 class _LoginInputState extends State<LoginInput> {
-  late final Color primaryColor = context.primaryColor;
+  late final Color primaryColor = context.themeData.primaryColor;
 
   final _focusNode = FocusNode();
 

@@ -148,7 +148,7 @@ class _NSlidingSegmentedControlState<T> extends State<NSlidingSegmentedControl<T
         setState(() {});
       },
       backgroundColor: backgroundColor ?? Color(0xfff3F3F3),
-      thumbColor: thumbColor ?? context.primaryColor,
+      thumbColor: thumbColor ?? context.themeData.primaryColor,
       radius: radius ?? Radius.circular(16),
       padding: padding ?? EdgeInsets.all(2),
     );

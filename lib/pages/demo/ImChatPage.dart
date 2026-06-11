@@ -310,7 +310,7 @@ class _ImChatPageState extends State<ImChatPage>
     final name = model.nickName ?? "";
     final timeStr = model.timeDes ?? "";
 
-    final contentBgColor = isOwner ? context.primaryColor : AppColor.bgColor;
+    final contentBgColor = isOwner ? context.themeData.primaryColor : AppColor.bgColor;
     final contentFontColor = Colors.white;
 
     Widget buildAvatar({required String imgUrl, VoidCallback? onTap}) {
@@ -390,7 +390,7 @@ class _ImChatPageState extends State<ImChatPage>
                     contentWidget,
                     if (showDebugInfo)
                       Container(
-                        color: context.primaryColor,
+                        color: context.themeData.primaryColor,
                         padding: const EdgeInsets.only(left: 4, bottom: 4),
                         child: NText(
                           model.sequence ?? "",
@@ -828,7 +828,7 @@ class _ImChatPageState extends State<ImChatPage>
             child: NText(
               tips ?? "这是一个提示",
               fontSize: 13,
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
             ),
           ),
           Expanded(

@@ -232,7 +232,7 @@ class FlutterPickerUtil {
       cancelButton: buildTextButton(title: "取消"),
       commitButton: buildTextButton(
         title: '确定',
-        textColor: Get.context?.primaryColor,
+        textColor: Get.context?.themeData.primaryColor,
       ),
       title: Text(
         title,

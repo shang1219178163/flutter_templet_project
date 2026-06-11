@@ -122,7 +122,7 @@ class GetBottomSheet {
     Widget? footer,
   }) {
     final context = Get.context;
-    final primary = context?.primaryColor ?? Colors.transparent;
+    final primary = context?.themeData.primaryColor ?? Colors.transparent;
 
     return showCustom(
       addUnconstrainedBox: false,
@@ -273,7 +273,7 @@ class GetDialog {
     Widget? footer,
   }) {
     final context = Get.context;
-    final primary = context?.primaryColor ?? Colors.transparent;
+    final primary = context?.themeData.primaryColor ?? Colors.transparent;
 
     return showCustom(
       constraints: constraints,

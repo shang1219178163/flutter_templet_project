@@ -142,7 +142,7 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
             ),
             child: NText(
               e.e,
-              color: context.primaryColor,
+              color: context.themeData.primaryColor,
             ),
           ),
         );

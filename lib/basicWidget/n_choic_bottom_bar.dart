@@ -61,7 +61,7 @@ class NChoicBottomBar extends StatelessWidget {
                             height: double.maxFinite,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: context.primaryColor,
+                              color: context.themeData.primaryColor,
                             ),
                             child: NText(
                               "新增",

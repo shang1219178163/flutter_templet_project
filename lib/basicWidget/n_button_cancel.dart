@@ -53,7 +53,7 @@ class NButtonCancel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = bgColor ?? context.primaryColor;
+    final primary = bgColor ?? context.themeData.primaryColor;
 
     if (!enable) {
       return InkWell(

@@ -22,11 +22,11 @@ class OrderItem extends StatelessWidget {
     final icon = model.isSelected
         ? Icon(
             Icons.check_box,
-            color: context.primaryColor,
+            color: context.themeData.primaryColor,
           )
         : Icon(
             Icons.check_box_outline_blank,
-            color: context.primaryColor,
+            color: context.themeData.primaryColor,
           );
 
     return Container(
@@ -43,7 +43,7 @@ class OrderItem extends StatelessWidget {
         title: Text(
           model.title,
           style: TextStyle(
-            color: model.isSelected ? context.primaryColor : null,
+            color: model.isSelected ? context.themeData.primaryColor : null,
           ),
         ),
         trailing: Row(

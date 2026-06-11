@@ -168,7 +168,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           minimumSize: Size(50, 18),
           textStyle: TextStyle(
-            color: context.primaryColor,
+            color: context.themeData.primaryColor,
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
           )),

@@ -155,10 +155,10 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
         controller: tabController,
         isScrollable: true,
         tabs: items.map((e) => Tab(key: PageStorageKey<String>(e.name), text: e.name)).toList(),
-        labelColor: context.primaryColor,
+        labelColor: context.themeData.primaryColor,
         // indicatorSize: TabBarIndicatorSize.label,
         // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-        indicatorColor: context.primaryColor,
+        indicatorColor: context.themeData.primaryColor,
         onTap: (index) => items[index].action(),
       ),
     );

@@ -99,7 +99,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               ),
               child: NText(
                 "查看详情",
-                color: context.primaryColor,
+                color: context.themeData.primaryColor,
                 fontSize: 14,
                 maxLines: 1,
               ),

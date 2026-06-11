@@ -159,7 +159,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
             valueListenable: isHighlight,
             builder: (context, value, child) {
               return NFilterButton(
-                color: value == true ? context.primaryColor : AppColor.fontColor,
+                color: value == true ? context.themeData.primaryColor : AppColor.fontColor,
                 onPressed: () {
                   patientFilterController.anchor?.onFilterInit();
                   filterController?.onToggle();

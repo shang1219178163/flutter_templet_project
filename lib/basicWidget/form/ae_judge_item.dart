@@ -86,7 +86,7 @@ class AeJudgeItem extends StatelessWidget {
       items: dataList,
       selectedItem: selectVN,
       itemNameCb: (e) => e.title,
-      primaryColor: context.primaryColor,
+      primaryColor: context.themeData.primaryColor,
       backgroundColor: Colors.white,
       selectedColor: Colors.white,
       numPerRow: numPerRow,
@@ -96,7 +96,7 @@ class AeJudgeItem extends StatelessWidget {
         fontSize: 14,
       ),
       styleSelected: TextStyle(
-        color: context.primaryColor,
+        color: context.themeData.primaryColor,
         fontSize: 14,
       ),
       canChanged: (val, onSelect) {

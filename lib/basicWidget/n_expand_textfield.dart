@@ -131,7 +131,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
                       image: toggleImage,
                       width: 21,
                       height: 8,
-                      color: context.primaryColor,
+                      color: context.themeData.primaryColor,
                     ),
                   ),
                 ),
