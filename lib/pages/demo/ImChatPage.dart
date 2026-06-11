@@ -194,7 +194,7 @@ class _ImChatPageState extends State<ImChatPage>
             width: double.maxFinite,
             height: 48,
             decoration: BoxDecoration(
-              color: context.scaffoldBackgroundColor,
+              color: context.themeData.scaffoldBackgroundColor,
               // border: Border.all(color: Colors.blue),
               borderRadius: BorderRadius.all(Radius.circular(0.w)),
             ),

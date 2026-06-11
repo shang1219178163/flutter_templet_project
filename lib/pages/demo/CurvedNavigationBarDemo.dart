@@ -49,7 +49,7 @@ class _CurvedNavigationBarDemoState extends State<CurvedNavigationBarDemo> {
               title: Text("$widget"),
             ),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: context.scaffoldBackgroundColor,
+        backgroundColor: context.themeData.scaffoldBackgroundColor,
         items: <Widget>[
           Icon(Icons.add, size: 30),
           Icon(Icons.list, size: 30),
