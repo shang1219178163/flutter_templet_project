@@ -160,7 +160,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
-              color: context.colorScheme.onSurface,
+              color: context.themeData.colorScheme.onSurface,
             ),
           ),
           subtitle: Text(

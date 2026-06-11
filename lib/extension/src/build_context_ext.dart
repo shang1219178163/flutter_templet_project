@@ -33,7 +33,6 @@ extension BuildContextExt on BuildContext {
     if (renderBox == null || renderBoxSize == null || origin() == null) {
       return null;
     }
-
     return Rect.fromLTWH(
       origin()?.dx ?? 0,
       origin()?.dy ?? 0,
@@ -82,13 +81,10 @@ extension BuildContextExt on BuildContext {
   ThemeData get themeData => Theme.of(this);
 
   /// 扩展属性 Theme.of(this).colorScheme
-  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+  ColorScheme get colorScheme => themeData.colorScheme;
 
   /// 扩展属性 MediaQuery.of(context)
   MediaQueryData get mediaQueryData => MediaQuery.of(this);
-
-  /// 扩展属性 MediaQuery.of(this).devicePixelRatio
-  double get devicePixelRatio => mediaQueryData.devicePixelRatio;
 
   /// 扩展属性 MediaQuery.of(context).size
   Size get screenSize => mediaQueryData.size;
@@ -136,7 +132,7 @@ extension BuildContextExt on BuildContext {
   /// 截图(组件必须是 RepaintBoundary)
   Future<ui.Image?> toImage({double? pixelRatio}) async {
     var boundary = findRenderObject() as RenderRepaintBoundary?;
-    var image = await boundary?.toImage(pixelRatio: pixelRatio ?? devicePixelRatio);
+    var image = await boundary?.toImage(pixelRatio: pixelRatio ?? mediaQueryData.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
