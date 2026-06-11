@@ -43,7 +43,8 @@ class _LinkifyPageState extends State<LinkifyPage> {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
-              buildLinkify(),
+              buildLinkify(selectable: true),
+              buildLinkify(selectable: false),
             ],
           ),
         ),
@@ -51,7 +52,7 @@ class _LinkifyPageState extends State<LinkifyPage> {
     );
   }
 
-  Widget buildLinkify() {
+  Widget buildLinkify({required bool selectable}) {
     final text = [
       "还在问朋友比赛谁赢了?下载[春秋直播]，从此你才是消息最灵通的那位!",
       "专属邀请链接:https://invite.kbisai.com?inviteCode=4M3FQA",
@@ -62,25 +63,50 @@ class _LinkifyPageState extends State<LinkifyPage> {
       fontSize: 16,
       color: Colors.black87,
     );
-    final child = SelectableLinkify(
+
+    final linkStyle = style.copyWith(
+      decorationColor: style.color,
+      decoration: TextDecoration.underline,
+    );
+
+    if (selectable) {
+      final child = SelectableLinkify(
+        text: text,
+        style: style,
+        linkStyle: linkStyle,
+        // TextSpan(children: spans, style: style),
+        // textAlign: textAlign,
+        // textDirection: textDirection,
+        // maxLines: maxLines,
+        // textScaler: TextScaler.noScaling,
+        options: const LinkifyOptions(humanize: false),
+        onOpen: (link) async {
+          await launchUrl(Uri.parse(link.url));
+        },
+        onTap: () {
+          NFullscreenTextLinkify.show(context, message: text);
+        },
+        contextMenuBuilder: NFullscreenTextLinkify.editableTextContextMenu,
+      );
+      return child;
+    }
+
+    final child = Linkify(
       text: text,
       style: style,
-      linkStyle: style.copyWith(
-        decorationColor: style.color,
-        decoration: TextDecoration.underline,
-      ),
-      // TextSpan(children: spans, style: style),
+      linkStyle: linkStyle,
       // textAlign: textAlign,
       // textDirection: textDirection,
+      // locale: locale,
+      // softWrap: softWrap,
+      // overflow: overflow,
       // maxLines: maxLines,
+      // text: TextSpan(children: spans, style: style),
       // textScaler: TextScaler.noScaling,
+      options: const LinkifyOptions(humanize: false),
       onOpen: (link) async {
         await launchUrl(Uri.parse(link.url));
       },
-      onTap: () {
-        NFullscreenTextLinkify.show(context, message: text);
-      },
-      contextMenuBuilder: NFullscreenTextLinkify.editableTextContextMenu,
     );
     return child;
   }
