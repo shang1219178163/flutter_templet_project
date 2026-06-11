@@ -118,7 +118,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
   }
 
   Widget buildPersistentHeader({required String bgUrl}) {
-    var min = context.paddingTop;
+    var min = context.mediaQueryData.padding.top;
     var max = 250.0;
 
     return NSliverPersistentHeaderBuilder(

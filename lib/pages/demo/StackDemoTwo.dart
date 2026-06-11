@@ -32,7 +32,7 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
 
   final globalKey = GlobalKey(debugLabel: "tab");
 
-  late MediaQueryData mediaQuery = context.mediaQuery;
+  late MediaQueryData mediaQuery = context.mediaQueryData;
   late Size screenSize = context.screenSize;
 
   @override

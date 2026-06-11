@@ -28,7 +28,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
 
   final focusNode = FocusNode();
 
-  late MediaQueryData mediaQuery = context.mediaQuery;
+  late MediaQueryData mediaQuery = context.mediaQueryData;
   late Size screenSize = context.screenSize;
 
   @override

@@ -92,23 +92,24 @@ extension BuildContextExt on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
   /// 扩展属性 MediaQuery.of(context)
-  MediaQueryData get mediaQuery => MediaQuery.of(this);
+  MediaQueryData get mediaQueryData => MediaQuery.of(this);
 
   /// 扩展属性 MediaQuery.of(this).devicePixelRatio
-  double get devicePixelRatio => mediaQuery.devicePixelRatio;
+  double get devicePixelRatio => mediaQueryData.devicePixelRatio;
 
   /// 扩展属性 MediaQuery.of(context).size
-  Size get screenSize => mediaQuery.size;
+  Size get screenSize => mediaQueryData.size;
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
-  double get safeAreaTop => mediaQuery.viewPadding.top;
+  double get safeAreaTop => mediaQueryData.viewPadding.top;
 
   /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
   // double get safeAreaBottom => mediaQuery.viewPadding.bottom;
-  double get safeAreaBottom => Platform.isIOS ? 34 : mediaQuery.padding.bottom + 10;
+  double get safeAreaBottom => Platform.isIOS ? 34 : mediaQueryData.padding.bottom + 10;
 
   /// 安全区高度(去除电池栏高度和 iphone底部34)
-  double get safeAreaHeight => mediaQuery.size.height - mediaQuery.viewPadding.top - mediaQuery.viewPadding.bottom;
+  double get safeAreaHeight =>
+      mediaQueryData.size.height - mediaQueryData.viewPadding.top - mediaQueryData.viewPadding.bottom;
 
   /// 状态栏高度
   double get statusBarHeight => safeAreaTop;
@@ -117,10 +118,10 @@ extension BuildContextExt on BuildContext {
   double get appBarHeight => kToolbarHeight;
 
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
-  double get viewBottom => mediaQuery.viewInsets.bottom;
+  double get viewBottom => mediaQueryData.viewInsets.bottom;
 
-  double get paddingTop => mediaQuery.padding.top;
-  double get paddingBottom => mediaQuery.padding.bottom;
+  // double get paddingTop => mediaQueryData.padding.top;
+  double get paddingBottom => mediaQueryData.padding.bottom;
 
   /// 确认显示
   Future<void> scrollableEnsureVisible({

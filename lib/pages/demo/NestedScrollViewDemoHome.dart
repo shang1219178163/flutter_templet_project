@@ -155,7 +155,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
         ];
       },
       body: Container(
-        margin: EdgeInsets.only(top: collapsedHeight + context.paddingTop),
+        margin: EdgeInsets.only(top: collapsedHeight + context.mediaQueryData.padding.top),
         child: body,
       ),
     );
@@ -174,7 +174,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        margin: EdgeInsets.only(top: context.paddingTop),
+        margin: EdgeInsets.only(top: context.mediaQueryData.padding.top),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,7 +226,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                 child: SingleChildScrollView(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    margin: EdgeInsets.only(top: context.paddingTop),
+                    margin: EdgeInsets.only(top: context.mediaQueryData.padding.top),
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -640,7 +640,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
   /// 待办事项
   Widget buildScheduleBox() {
     return Container(
-      height: context.screenSize.height - context.paddingTop - 40,
+      height: context.screenSize.height - context.mediaQueryData.padding.top - 40,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: [
