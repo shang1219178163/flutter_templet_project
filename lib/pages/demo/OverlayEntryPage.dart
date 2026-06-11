@@ -352,7 +352,8 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
     late OverlayEntry entry;
     entry = OverlayEntry(
       builder: (_) {
-        final bottom = NScreenManager.safeAreaBottom / NScreenManager.devicePixelRatio + kBottomNavigationBarHeight;
+        final bottom =
+            NScreenManager.safeAreaBottom / NScreenManager.mediaQueryData.devicePixelRatio + kBottomNavigationBarHeight;
         // DLog.d([bottom, kBottomNavigationBarHeight, NScreenManager.safeAreaHeight]);
         return AnimatedPositioned(
           duration: Duration(milliseconds: 300),

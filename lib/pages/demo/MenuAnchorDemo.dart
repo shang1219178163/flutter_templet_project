@@ -129,7 +129,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
                     ].join(": ")),
                     Text([
                       'NScreenManager.viewInsets.bottom',
-                      (NScreenManager.viewInsets.bottom / 3.0).toStringAsFixed(1),
+                      (NScreenManager.mediaQueryData.viewInsets.bottom / 3.0).toStringAsFixed(1),
                     ].join(": ")),
                     Text([
                       'keyboardHeightVN.value',

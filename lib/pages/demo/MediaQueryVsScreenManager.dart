@@ -62,7 +62,7 @@ class _MediaQueryVsScreenManagerState extends State<MediaQueryVsScreenManager> w
           controller: textEditingController,
           onConfirm: (String value) {
             DLog.d([
-              NScreenManager.viewInsets,
+              NScreenManager.mediaQueryData.viewInsets,
               "viewInsets: ${MediaQuery.of(context).viewInsets.bottom}",
               "viewInsets: ${MediaQuery.viewInsetsOf(context).bottom}",
             ]);
@@ -112,42 +112,42 @@ class _MediaQueryVsScreenManagerState extends State<MediaQueryVsScreenManager> w
         name: "devicePixelRatio",
         value: mediaQueryData.devicePixelRatio,
         extra: NScreenManager.current.devicePixelRatio,
-        extraNew: NScreenManager.devicePixelRatio,
+        extraNew: NScreenManager.mediaQueryData.devicePixelRatio,
         desc: "单位逻辑像素的物理像素数量，即设备像素比。",
       ),
       DeviceScreenProperty(
         name: "viewInsets",
         value: mediaQueryData.viewInsets,
         extra: NScreenManager.current.viewInsets,
-        extraNew: NScreenManager.viewInsets,
+        extraNew: NScreenManager.mediaQueryData.viewInsets,
         desc: "被系统遮挡的部分，通常指键盘，弹出键盘，viewInsets.bottom表示键盘的高度。",
       ),
       DeviceScreenProperty(
         name: "padding",
         value: mediaQueryData.padding,
         extra: NScreenManager.current.padding,
-        extraNew: NScreenManager.padding,
+        extraNew: NScreenManager.mediaQueryData.padding,
         desc: "被系统遮挡的部分，通常指“刘海屏”或者系统状态栏。",
       ),
       DeviceScreenProperty(
         name: "viewPadding",
         value: mediaQueryData.viewPadding,
         extra: NScreenManager.current.viewPadding,
-        extraNew: NScreenManager.viewPadding,
+        extraNew: NScreenManager.mediaQueryData.viewPadding,
         desc: "被系统遮挡的部分，通常指“刘海屏”或者系统状态栏，此值独立于padding和viewInsets，它们的值从MediaQuery控件边界的边缘开始测量。在移动设备上，通常是全屏。",
       ),
       DeviceScreenProperty(
         name: "systemGestureInsets",
         value: mediaQueryData.systemGestureInsets,
         extra: NScreenManager.current.systemGestureInsets,
-        extraNew: NScreenManager.systemGestureInsets,
+        extraNew: NScreenManager.mediaQueryData.systemGestureInsets,
         desc: "显示屏边缘上系统“消耗”的区域输入事件，并阻止将这些事件传递给应用。比如在Android Q手势滑动用于页面导航（ios也一样），比如左滑退出当前页面。",
       ),
       DeviceScreenProperty(
         name: "orientation",
         value: mediaQueryData.orientation,
-        extra: NScreenManager.orientation,
-        extraNew: NScreenManager.orientation,
+        extra: NScreenManager.mediaQueryData.orientation,
+        extraNew: NScreenManager.mediaQueryData.orientation,
         desc: "是横屏还是竖屏。",
       ),
     ];

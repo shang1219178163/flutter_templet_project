@@ -174,6 +174,7 @@ import 'package:flutter_templet_project/pages/demo/JsonToModel.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/KeyboardShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LayoutBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/LinkifyPage.dart';
 import 'package:flutter_templet_project/pages/demo/ListBodyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListDismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
@@ -895,7 +896,7 @@ class AppRouter {
   static const String gameMatchPageNew = '/gameMatchPageNew';
   static const String gameMatchHorizalPage = '/gameMatchHorizalPage';
   static const String localAuthDemo = '/localAuthDemo';
-  static const String deviceBrightnessAndVolumeControllerDemo = '/deviceBrightnessAndVolumeControllerDemo';
+  static const String deviceBrightnessAndVolumeDemo = '/deviceBrightnessAndVolumeDemo';
   static const String clickNotificationDemo = '/clickNotificationDemo';
 
   static const String colorFilterDemo = '/colorFilterDemo';
@@ -937,6 +938,7 @@ class AppRouter {
   static const String pointShop = '/pointShop';
   static const String horizalStepPage = '/horizalStepPage';
   static const String textThemeDemo = '/textThemeDemo';
+  static const String linkifyPage = '/linkifyPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2594,7 +2596,7 @@ class AppRouter {
       page: () => LocalAuthDemo(),
     ),
     GetPage(
-      name: AppRouter.deviceBrightnessAndVolumeControllerDemo,
+      name: AppRouter.deviceBrightnessAndVolumeDemo,
       page: () => DeviceBrightnessAndVolumeControllerDemo(),
     ),
     GetPage(
@@ -2758,6 +2760,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.textThemeDemo,
       page: () => TextThemeDemo(),
+    ),
+    GetPage(
+      name: AppRouter.linkifyPage,
+      page: () => LinkifyPage(),
     ),
   ];
 }
