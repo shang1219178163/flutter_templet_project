@@ -120,8 +120,7 @@ extension BuildContextExt on BuildContext {
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   double get viewBottom => mediaQueryData.viewInsets.bottom;
 
-  // double get paddingTop => mediaQueryData.padding.top;
-  double get paddingBottom => mediaQueryData.padding.bottom;
+  // double get paddingBottom => mediaQueryData.padding.bottom;
 
   /// 确认显示
   Future<void> scrollableEnsureVisible({
