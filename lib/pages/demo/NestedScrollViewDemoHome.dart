@@ -640,7 +640,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
   /// 待办事项
   Widget buildScheduleBox() {
     return Container(
-      height: context.screenHeight - context.paddingTop - 40,
+      height: context.screenSize.height - context.paddingTop - 40,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: [

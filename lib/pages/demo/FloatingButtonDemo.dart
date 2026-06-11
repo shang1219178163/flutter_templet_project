@@ -49,7 +49,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
   @override
   FloatingButtonConfig get floatingButtonConfig {
     return super.floatingButtonConfig.copyWith(
-          globalPosition: Offset(context.screenWidth, context.screenHeight - kBottomNavigationBarHeight - 68),
+          globalPosition: Offset(context.screenSize.width, context.screenSize.height - kBottomNavigationBarHeight - 68),
           buttonSize: Size(52, 68),
           button: (onToggle) => GestureDetector(onTap: onToggle, child: buildFirst(childSize: Size(52, 68))),
           expandedButtonSize: Size(200, 90),

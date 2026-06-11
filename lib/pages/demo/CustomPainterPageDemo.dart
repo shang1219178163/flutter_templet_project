@@ -66,7 +66,7 @@ class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
 
   Widget buildBody() {
     final spacing = 16.0;
-    final itemWidth = (context.screenWidth - spacing * 4) / 3.0.truncateToDouble();
+    final itemWidth = (context.screenSize.width - spacing * 4) / 3.0.truncateToDouble();
     return Scrollbar(
       controller: scrollController,
       child: SingleChildScrollView(

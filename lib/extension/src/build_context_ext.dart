@@ -119,8 +119,6 @@ extension BuildContextExt on BuildContext {
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   double get viewBottom => mediaQuery.viewInsets.bottom;
 
-  double get screenWidth => screenSize.width;
-  double get screenHeight => screenSize.height;
   double get paddingTop => mediaQuery.padding.top;
   double get paddingBottom => mediaQuery.padding.bottom;
 
