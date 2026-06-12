@@ -24,25 +24,25 @@ class NAlertDialog extends StatelessWidget {
             (actions != null || cancelButton != null || confirmButton != null)),
         super(key: key);
 
-  Widget? header;
+  final Widget? header;
 
-  Widget? content;
+  final Widget? content;
 
-  Widget? footer;
+  final Widget? footer;
 
-  EdgeInsets margin;
+  final EdgeInsets margin;
 
-  List<Widget>? actions;
+  final List<Widget>? actions;
 
-  Widget? cancelButton;
+  final Widget? cancelButton;
 
-  Widget? confirmButton;
+  final Widget? confirmButton;
 
-  Color? dividerColor;
+  final Color? dividerColor;
 
   @override
   Widget build(BuildContext context) {
-    dividerColor ??= Theme.of(context).dividerColor;
+    final effectiveDividerColor = dividerColor ?? Theme.of(context).dividerColor;
 
     return Container(
       margin: margin,
@@ -58,7 +58,7 @@ class NAlertDialog extends StatelessWidget {
           if (footer != null) footer!,
           Container(
             height: 0.5,
-            color: dividerColor,
+            color: effectiveDividerColor,
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -75,7 +75,7 @@ class NAlertDialog extends StatelessWidget {
                       child: cancelButton!,
                     ),
                   Container(
-                      height: 55, child: VerticalDivider(color: dividerColor)),
+                      height: 55, child: VerticalDivider(color: effectiveDividerColor)),
                   if (confirmButton != null)
                     Expanded(
                       child: confirmButton!,

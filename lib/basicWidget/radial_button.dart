@@ -25,14 +25,14 @@ class RadialButton extends StatefulWidget {
     this.center = Alignment.center,
   }) : super(key: key);
 
-  Text text;
+  final Text text;
   // List<Color> colors;
   // List<double>? stops;
 
-  EdgeInsets? margin;
-  EdgeInsets? padding;
-  Alignment center;
-  GestureTapCallback? onTap;
+  final EdgeInsets? margin;
+  final EdgeInsets? padding;
+  final Alignment center;
+  final GestureTapCallback? onTap;
 
   @override
   _RadialButtonState createState() => _RadialButtonState();

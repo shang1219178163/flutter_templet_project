@@ -39,14 +39,14 @@ class NeumorphismButton extends StatelessWidget {
           onClick: onClick,
         );
 
-  double? width;
-  double? height;
-  EdgeInsetsGeometry? padding;
+  final double? width;
+  final double? height;
+  final EdgeInsetsGeometry? padding;
 
-  double borderRadius;
+  final double borderRadius;
 
-  Widget child;
-  GestureTapCallback? onClick;
+  final Widget child;
+  final GestureTapCallback? onClick;
 
   @override
   Widget build(BuildContext context) {

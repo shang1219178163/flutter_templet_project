@@ -14,33 +14,33 @@ typedef AnimatedGroupBuilder = Widget Function(
 
 class AnimatedGroup extends StatefulWidget {
   /// 混合动画
-  AnimatedGroup({
-    Key? key,
+  const AnimatedGroup({
+    super.key,
     this.data,
     required this.animations,
     required this.builder,
     this.controller,
     this.duration = const Duration(milliseconds: 2000),
     this.child,
-  }) : super(key: key);
+  });
 
   /// 扩展字段(比如字符串可方便断点调试)
-  dynamic data;
+  final dynamic data;
 
   /// 混合动画数组
-  List<AnimatedGroupItemModel> animations;
+  final List<AnimatedGroupItemModel> animations;
 
   /// 混合动画回调
-  AnimatedGroupBuilder builder;
+  final AnimatedGroupBuilder builder;
 
   /// 控制器
-  AnimationController? controller;
+  final AnimationController? controller;
 
   /// AnimationController 控制的 duration 属性
-  Duration? duration;
+  final Duration duration;
 
   /// 不需要多次构建的部分
-  Widget? child;
+  final Widget? child;
 
   @override
   AnimatedGroupState createState() => AnimatedGroupState();
@@ -122,7 +122,7 @@ class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMi
 /// 混合动画单个动画模型
 class AnimatedGroupItemModel {
   /// 混合动画单个动画模型
-  AnimatedGroupItemModel({
+  const AnimatedGroupItemModel({
     this.data,
     required this.tween,
     required this.begin,
@@ -130,14 +130,14 @@ class AnimatedGroupItemModel {
   });
 
   /// 扩展字段(比如字符串可方便断点调试)
-  dynamic data;
+  final dynamic data;
 
   /// 动画 Tween
-  Tween tween;
+  final Tween<dynamic> tween;
 
   /// 动画开始时间 (0 - 1.0)
-  double begin;
+  final double begin;
 
   /// 动画结束时间 (0 - 1.0)
-  double end;
+  final double end;
 }

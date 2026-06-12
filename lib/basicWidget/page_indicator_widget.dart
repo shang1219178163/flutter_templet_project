@@ -18,27 +18,27 @@ class PageIndicatorWidget extends StatelessWidget {
       : super(key: key);
 
   /// 当前页面索引
-  ValueNotifier<int> currentPage;
+  final ValueNotifier<int> currentPage;
 
-  EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? margin;
 
   /// item数量
-  int itemCount;
+  final int itemCount;
 
   /// 每个item尺寸(最好用固定宽度除以个数,避免总宽度溢出)
-  Size itemSize;
+  final Size itemSize;
 
   /// 自定义每个 item
-  PageIndicatorItemWidgetBuilder? itemBuilder;
+  final PageIndicatorItemWidgetBuilder? itemBuilder;
 
   /// 默认颜色
-  Color? normalColor;
+  final Color? normalColor;
 
   /// 选中颜色
-  Color? selectedColor;
+  final Color? selectedColor;
 
   /// 单页隐藏
-  bool hidesForSinglePage;
+  final bool hidesForSinglePage;
 
   @override
   Widget build(BuildContext context) {

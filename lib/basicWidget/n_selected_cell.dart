@@ -25,7 +25,7 @@ class NSelectedCell extends StatefulWidget {
     required this.child,
   });
 
-  bool isSelected;
+  final bool isSelected;
 
   final VoidCallback onToggle;
   final Widget selectedIcon;

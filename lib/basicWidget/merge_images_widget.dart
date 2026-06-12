@@ -8,21 +8,21 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 合并多张图片为长图
 class MergeImagesWidget extends StatefulWidget {
-  List<MergeImageModel> models;
-  Widget Function(MergeImageModel model)? imageBuilder;
+  final List<MergeImageModel> models;
+  final Widget Function(MergeImageModel model)? imageBuilder;
   // double width;
   /// 二维码图片
   // Container Function()? QRCodeBuiler;
-  Widget? Function(String qrCodeUrl)? qrCodeBuilder;
-  String qrCodeUrl;
+  final Widget? Function(String qrCodeUrl)? qrCodeBuilder;
+  final String qrCodeUrl;
   // double? QRCodeWidth;
   // double? QRCodeHeight;
-  int qrCodeRight;
-  int qrCodeBottom;
+  final int qrCodeRight;
+  final int qrCodeBottom;
   // void Function()? QRCodeTap;
 
-  MergeImagesWidget({
-    Key? key,
+  const MergeImagesWidget({
+    super.key,
     required this.models,
     this.imageBuilder,
     // required this.width,
@@ -34,7 +34,7 @@ class MergeImagesWidget extends StatefulWidget {
     this.qrCodeRight = 28,
     this.qrCodeBottom = 24,
     // this.QRCodeTap,
-  }) : super(key: key);
+  });
 
   @override
   MergeImagesWidgetState createState() => MergeImagesWidgetState();

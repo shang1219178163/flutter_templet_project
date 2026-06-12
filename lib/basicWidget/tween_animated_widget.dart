@@ -13,13 +13,13 @@ class TweenAnimatedWidget<T extends Object?> extends StatefulWidget {
     required this.builder,
   }) : super(key: key);
 
-  Duration? duration;
+  final Duration? duration;
 
-  Tween<T> tween;
+  final Tween<T> tween;
 
-  Widget? child;
+  final Widget? child;
 
-  TweenAnimatedBuilder<T> builder;
+  final TweenAnimatedBuilder<T> builder;
 
   @override
   _TweenAnimatedWidgetState<T> createState() => _TweenAnimatedWidgetState<T>();

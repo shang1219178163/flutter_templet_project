@@ -39,9 +39,9 @@ class _NSliverPageState extends State<NSliverPage> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final collapsedHeight = widget.collapsedHeight ?? kToolbarHeight;
-    final expandedHeight = widget.expandedHeight ?? 300.0;
-    final tabBarHeight = widget.tabBarHeight ?? kToolbarHeight;
+    final collapsedHeight = widget.collapsedHeight;
+    final expandedHeight = widget.expandedHeight;
+    final tabBarHeight = widget.tabBarHeight;
 
     final tabDefault = TabBar(
       controller: tabController,

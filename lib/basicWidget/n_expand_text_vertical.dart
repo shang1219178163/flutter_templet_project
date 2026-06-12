@@ -37,7 +37,7 @@ class NExpandTextVertical extends StatefulWidget {
   final bool disableExpand;
 
   /// 会看来回变化
-  late bool isExpand;
+  final bool isExpand;
   final Widget? tailing;
   final double tailingWidth;
 
@@ -47,6 +47,7 @@ class NExpandTextVertical extends StatefulWidget {
 
 class NExpandTextVerticalState extends State<NExpandTextVertical> {
   final weChatTitleColor = Color(0xff1A1A1A);
+  late bool isExpand = widget.isExpand;
 
   @override
   void didUpdateWidget(covariant NExpandTextVertical oldWidget) {
@@ -57,6 +58,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
         widget.disableExpand != oldWidget.disableExpand ||
         widget.tailing != oldWidget.tailing ||
         widget.tailingWidth != oldWidget.tailingWidth) {
+      isExpand = widget.isExpand;
       setState(() {});
     }
   }
@@ -125,7 +127,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
           builder: (BuildContext context, StateSetter setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
-            final arrowImageName = widget.isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+            final arrowImageName = isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
 
             final arrowImage = Image(
               image: arrowImageName.toAssetImage(),
@@ -138,7 +140,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
             // gradientColor = Colors.green;
 
             onToggle() {
-              widget.isExpand = !widget.isExpand;
+              isExpand = !isExpand;
               setState(() {});
             }
 
@@ -148,7 +150,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
                   child: NText(
                     text,
                     fontSize: 16,
-                    maxLines: widget.isExpand ? null : widget.expandMinLine,
+                    maxLines: isExpand ? null : widget.expandMinLine,
                     // maxLines: null,
                     overflow: TextOverflow.clip,
                     fontWeight: FontWeight.w400,
@@ -173,7 +175,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
                     children: [
                       textContent,
                       Offstage(
-                        offstage: !widget.isExpand,
+                        offstage: !isExpand,
                         child: InkWell(
                           onTap: onToggle,
                           child: Container(
@@ -190,7 +192,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
                     left: 0,
                     right: 0,
                     child: Visibility(
-                      visible: !widget.isExpand,
+                      visible: !isExpand,
                       child: InkWell(
                         onTap: onToggle,
                         child: Container(
@@ -246,7 +248,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
                   left: 0,
                   right: 0,
                   child: Visibility(
-                    visible: isBeyond && !widget.isExpand,
+                    visible: isBeyond && !isExpand,
                     child: Container(
                       width: double.infinity,
                       height: 25,

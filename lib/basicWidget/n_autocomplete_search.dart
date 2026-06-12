@@ -104,7 +104,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
                                 child: Text.rich(
                                   TextSpan(
                                     children: RichTextExt.createTextSpans(
-                                      text: name ?? "",
+                                      text: name,
                                       textTaps: [query],
                                       linkStyle: TextStyle(
                                         color: Colors.blue,

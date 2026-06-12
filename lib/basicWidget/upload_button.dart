@@ -13,15 +13,22 @@ class UploadButton extends StatefulWidget {
     Key? key,
     required this.onPressed,
     this.image,
-    this.deteleImage,
+    Image? deteleImage,
     this.onDetele,
     this.deteleWidth = 30,
     this.deteleHeight = 30,
     this.color,
-  }) : super(key: key);
+  })  : deteleImage = deteleImage ??
+            Image.asset(
+              "assets/images/icon_delete.png",
+              fit: BoxFit.fill,
+              width: 30,
+              height: 30,
+            ),
+        super(key: key);
 
   final Image? image;
-  late Image? deteleImage;
+  final Image? deteleImage;
   final double deteleWidth;
   final double deteleHeight;
   final VoidCallback onPressed;
@@ -34,17 +41,6 @@ class UploadButton extends StatefulWidget {
 }
 
 class _UploadButtonState extends State<UploadButton> {
-  @override
-  void initState() {
-    widget.deteleImage ??= Image.asset(
-      "assets/images/icon_delete.png",
-      fit: BoxFit.fill,
-      width: 30,
-      height: 30,
-    );
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return buildBody();

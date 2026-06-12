@@ -2,32 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchResultsListView extends StatefulWidget {
-  Map<String, dynamic> map;
-  String? hintText;
-  bool? isSort;
-  TextEditingController? editingController;
-
-  Widget Function(String key)? leadingBuilder;
-  Widget Function(BuildContext context, int index, List searchResults)? itemBuilder;
-  IndexedWidgetBuilder? separatorBuilder;
-
-  void Function(String value)? searchCallback;
-  void Function(dynamic obj) tap;
-
   SearchResultsListView({
     Key? key,
     this.map = const {},
     this.hintText = "搜索",
     this.isSort = true,
-    this.editingController,
+    TextEditingController? editingController,
     this.leadingBuilder,
     this.itemBuilder,
     this.separatorBuilder,
     this.searchCallback,
     required this.tap,
-  }) : super(key: key) {
-    editingController ??= TextEditingController();
-  }
+  })  : editingController = editingController ?? TextEditingController(),
+        super(key: key);
+
+  final Map<String, dynamic> map;
+  final String? hintText;
+  final bool? isSort;
+  final TextEditingController editingController;
+
+  final Widget Function(String key)? leadingBuilder;
+  final Widget Function(BuildContext context, int index, List searchResults)? itemBuilder;
+  final IndexedWidgetBuilder? separatorBuilder;
+
+  final void Function(String value)? searchCallback;
+  final void Function(dynamic obj) tap;
 
   @override
   _SearchResultsListViewState createState() => _SearchResultsListViewState();
@@ -41,13 +40,16 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
   void initState() {
     keys = List.from(widget.map.keys);
     searchResults = List.from(widget.map.keys);
-
-    widget.searchCallback = (value) {
-      widget.editingController?.text = value;
-      _textfieldChanged(value);
-    };
-
     super.initState();
+  }
+
+  void _handleSearchCallback(String value) {
+    if (widget.searchCallback != null) {
+      widget.searchCallback!(value);
+      return;
+    }
+    widget.editingController.text = value;
+    _textfieldChanged(value);
   }
 
   @override
@@ -131,12 +133,7 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
       onTap: () {
         final value = "$str".split('.').last;
         widget.tap(widget.map[str]);
-        if (widget.searchCallback == null) {
-          widget.editingController?.text = value;
-          _textfieldChanged(value);
-          return;
-        }
-        widget.searchCallback?.call(value);
+        _handleSearchCallback(value);
       },
     );
   }

@@ -84,6 +84,6 @@ class NImage extends StatelessWidget {
       default:
         debugPrint('$this unknown type: ${source.runtimeType}: $source');
     }
-    return placeholderImage ?? const SizedBox.shrink();
+    return placeholderImage;
   }
 }

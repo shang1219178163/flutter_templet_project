@@ -86,17 +86,17 @@ class SteperNode extends StatelessWidget {
   }) : super(key: key);
 
   /// {@macro timelines.direction}
-  Axis direction;
+  final Axis direction;
 
-  Color color;
-  double indicatorSize;
-  Widget? indicator;
-  double indent;
-  double endIndent;
-  Widget? startConnector;
-  Widget? endConnector;
-  bool? drawStartConnector;
-  bool? drawEndConnector;
+  final Color color;
+  final double indicatorSize;
+  final Widget? indicator;
+  final double indent;
+  final double endIndent;
+  final Widget? startConnector;
+  final Widget? endConnector;
+  final bool? drawStartConnector;
+  final bool? drawEndConnector;
 
   @override
   Widget build(BuildContext context) {

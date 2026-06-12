@@ -20,18 +20,18 @@ class NFooter extends StatelessWidget {
     this.footer,
   }) : super(key: key);
 
-  String title;
-  TextStyle? style;
-  EdgeInsets padding;
-  double btnHeight;
-  double radius;
-  VoidCallback? onPressed;
-  Color? color;
-  Color? btnColor;
-  double? btnElevation;
-  Widget? header;
-  Widget? footer;
-  Widget? child;
+  final String title;
+  final TextStyle? style;
+  final EdgeInsets padding;
+  final double btnHeight;
+  final double radius;
+  final VoidCallback? onPressed;
+  final Color? color;
+  final Color? btnColor;
+  final double? btnElevation;
+  final Widget? header;
+  final Widget? footer;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class NFooter extends StatelessWidget {
       //   Widget? footer,
       // }
       ) {
-    btnColor ??= Theme.of(context).primaryColor;
+    final effectiveBtnColor = btnColor ?? Theme.of(context).primaryColor;
     return Container(
       color: color,
       padding: padding,
@@ -63,8 +63,8 @@ class NFooter extends StatelessWidget {
           if (header != null) header!,
           MaterialButton(
             height: btnHeight,
-            color: btnColor,
-            disabledColor: btnColor?.withOpacity(0.5),
+            color: effectiveBtnColor,
+            disabledColor: effectiveBtnColor.withOpacity(0.5),
             elevation: btnElevation,
             onPressed: onPressed ??
                 () {

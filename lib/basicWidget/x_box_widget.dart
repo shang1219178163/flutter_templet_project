@@ -36,55 +36,55 @@ class XBoxWidget extends StatelessWidget {
   }) : super(key: key);
 
   /// 标题
-  String? title;
+  final String? title;
 
   /// 高斯模糊
-  double? width;
+  final double? width;
 
   /// 高斯模糊
-  double? height;
+  final double? height;
 
   /// 透明度 0 - 1
-  double? opacity;
+  final double? opacity;
 
   /// 高斯模糊
-  double blur;
+  final double blur;
 
   /// 背景高斯模糊
-  double bgBlur;
+  final double bgBlur;
 
   /// 外间距
-  EdgeInsets margin;
+  final EdgeInsets margin;
 
   /// 内间距
-  EdgeInsets padding;
+  final EdgeInsets padding;
 
   ///四个位置圆角
-  BorderRadius? borderRadius;
+  final BorderRadius? borderRadius;
 
   /// 描边
-  BoxBorder? border;
+  final BoxBorder? border;
 
   /// 组件背景
-  String? bgUrl;
+  final String? bgUrl;
 
   /// 组件背景 fit 模式,默认 BoxFit.cover
-  BoxFit? imageFit;
+  final BoxFit? imageFit;
 
   /// 组件背景颜色
-  Color? bgColor;
+  final Color? bgColor;
 
   /// 渐变色背景色
-  Gradient? bgGradient;
+  final Gradient? bgGradient;
 
   /// 组件子组件
-  Widget child;
+  final Widget child;
 
   /// 阴影
-  List<BoxShadow>? boxShadow;
+  final List<BoxShadow>? boxShadow;
 
   /// 隐藏高斯模糊(测试属性)
-  bool? hideBlur;
+  final bool? hideBlur;
 
   @override
   Widget build(BuildContext context) {

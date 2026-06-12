@@ -19,7 +19,7 @@ enum NLineSegmentStyle {
 class NLineSegmentView<T> extends StatefulWidget {
   final Map<T, Widget> children;
 
-  T? groupValue;
+  final T? groupValue;
 
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
@@ -35,7 +35,7 @@ class NLineSegmentView<T> extends StatefulWidget {
 
   final Radius radius;
 
-  void Function(T value) onValueChanged;
+  final void Function(T value) onValueChanged;
 
   NLineSegmentView({
     Key? key,
@@ -58,6 +58,8 @@ class NLineSegmentView<T> extends StatefulWidget {
 }
 
 class _NLineSegmentViewState extends State<NLineSegmentView> {
+  late T? groupValue = widget.groupValue;
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -88,9 +90,9 @@ class _NLineSegmentViewState extends State<NLineSegmentView> {
                           onPressed: () {
                             // DLog.d(e);
                             setState(() {
-                              widget.groupValue = widget.children.values.toList().indexOf(e);
+                              groupValue = widget.children.values.toList().indexOf(e) as T;
                             });
-                            widget.onValueChanged(widget.groupValue);
+                            widget.onValueChanged(groupValue as T);
                           },
                           child: e,
                         ),
@@ -104,8 +106,8 @@ class _NLineSegmentViewState extends State<NLineSegmentView> {
             duration: Duration(milliseconds: 200),
             top: widget.style == NLineSegmentStyle.top ? 0 : widget.height - widget.lineHeight,
             left: widget.lineWidth != null
-                ? widget.groupValue * itemWidth + (itemWidth - widget.lineWidth!) * 0.5
-                : widget.groupValue * itemWidth,
+                ? (groupValue as num) * itemWidth + (itemWidth - widget.lineWidth!) * 0.5
+                : (groupValue as num) * itemWidth,
             child: Container(
               height: widget.lineHeight,
               width: widget.lineWidth ?? itemWidth,

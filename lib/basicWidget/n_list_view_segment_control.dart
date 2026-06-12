@@ -142,7 +142,7 @@ class FoldMenu extends StatefulWidget {
       : assert(children.length > foldCount, 'children 个数必须大于 foldCount'),
         super(key: key);
 
-  late bool isVisible;
+  final bool isVisible;
 
   final Widget? indicator;
 
@@ -150,9 +150,9 @@ class FoldMenu extends StatefulWidget {
 
   final int foldCount;
 
-  List<Tuple2<List<String>, int>> children;
+  final List<Tuple2<List<String>, int>> children;
 
-  void Function(int row, int index, List<int> indexs) onValueChanged;
+  final void Function(int row, int index, List<int> indexs) onValueChanged;
 
   @override
   _FoldMenuState createState() => _FoldMenuState();

@@ -45,10 +45,10 @@ class AssetUploadButton extends StatefulWidget {
   final double radius;
 
   /// 网络图片url转为组件
-  Widget Function(String url)? imgBuilder;
+  final Widget Function(String url)? imgBuilder;
 
   /// 上传网络返回值转为 url
-  String Function(Map<String, dynamic> res)? urlConvert;
+  final String Function(Map<String, dynamic> res)? urlConvert;
 
   /// 显示文件大小
   final bool showFileSize;

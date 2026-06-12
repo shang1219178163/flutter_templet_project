@@ -28,7 +28,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
   final double gap;
   final Radius radius;
   final bool isSwiper;
-  List<BoxShadow>? boxShadow;
+  final List<BoxShadow>? boxShadow;
 
   final void Function(Tuple4<String, String, String, bool> e) onTap;
 
@@ -357,20 +357,20 @@ class HorizontalScrollWidget extends StatelessWidget {
     this.isVideo = true,
   }) : super(key: key);
 
-  String? title;
-  List<Tuple4<String, String, String, bool>> items;
+  final String? title;
+  final List<Tuple4<String, String, String, bool>> items;
 
-  double width;
-  double height;
+  final double width;
+  final double height;
 
-  double gap;
+  final double gap;
 
-  bool isSwiper;
-  double showCount;
+  final bool isSwiper;
+  final double showCount;
 
-  Radius radius;
+  final Radius radius;
 
-  bool isVideo;
+  final bool isVideo;
 
   /// 获取 item 宽
   // double get itemWidth => itemMap['${this.showCount}'] ?? 225;

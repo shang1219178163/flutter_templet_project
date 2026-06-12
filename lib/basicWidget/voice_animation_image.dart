@@ -14,8 +14,8 @@ class VoiceAnimationImage extends StatefulWidget {
   final List<String> assetList;
   final double width;
   final double height;
-  int interval = 200;
-  bool isPlaying = false;
+  final int interval;
+  final bool isPlaying;
 
   @override
   State<StatefulWidget> createState() => VoiceAnimationImageState();
@@ -39,7 +39,7 @@ class VoiceAnimationImageState extends State<VoiceAnimationImage>
     super.initState();
 
     final imageCount = widget.assetList.length;
-    final maxTime = interval * imageCount;
+    final maxTime = widget.interval * imageCount;
 
     // 启动动画controller
     _controller = AnimationController(

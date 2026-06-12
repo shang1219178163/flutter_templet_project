@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class HorizontalCell extends StatelessWidget {
-  HorizontalCell({
-    Key? key,
+  const HorizontalCell({
+    super.key,
     required this.title,
     this.titleRight,
     this.subtitle,
@@ -27,52 +27,52 @@ class HorizontalCell extends StatelessWidget {
     this.decoration,
     this.separator,
     this.useIntrinsicHeight = true,
-  }) : super(key: key);
+  });
 
   /// 主标题
-  Text title;
+  final Text title;
 
   /// 主标题-右标题
-  Text? titleRight;
+  final Text? titleRight;
 
   /// 副标题
-  Text? subtitle;
+  final Text? subtitle;
 
   /// 副标题-右标题
-  Text? subtitleRight;
+  final Text? subtitleRight;
 
   /// 主副标题中间的Widget
-  Widget titleSpace;
+  final Widget titleSpace;
 
   /// 总体为 left + mid + right + arrow;
-  Widget? left;
+  final Widget? left;
 
   /// 总体为 left + mid + right + arrow;
-  Widget? mid;
+  final Widget? mid;
 
   /// 总体为 left + mid + right + arrow;
-  Widget? right;
+  final Widget? right;
 
   /// 总体为 left + mid + right + arrow;
-  Widget? arrow;
+  final Widget? arrow;
 
   /// 内容高度;
-  double? height;
+  final double? height;
 
   /// 内容外边距;
-  EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? margin;
 
   /// 内容内边距;
-  EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// 内容装饰器;
-  Decoration? decoration;
+  final Decoration? decoration;
 
   /// 内容下边的线条;
-  Widget? separator;
+  final Widget? separator;
 
   /// mid 是否使用 IntrinsicHeight;
-  bool useIntrinsicHeight;
+  final bool useIntrinsicHeight;
 
   @override
   Widget build(BuildContext context) {
