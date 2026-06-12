@@ -193,14 +193,17 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     }
 
     return items
-        .map((e) => TableRow(
+        .map((e) {
+          final tupleList = asTupleList(e);
+          return TableRow(
               children: List.generate(
                   tupleLength(e),
                   (index) => Container(
                         padding: EdgeInsets.all(8),
-                        child: Text(e.toList()[index]),
+                        child: Text(tupleList[index].toString()),
                       )).toList(),
-            ))
+            );
+        })
         .toList();
   }
 
@@ -328,6 +331,28 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
 
 bool isTuple(dynamic obj) {
   return obj is Tuple2 || obj is Tuple3 || obj is Tuple4 || obj is Tuple5 || obj is Tuple6 || obj is Tuple7;
+}
+
+List<dynamic> asTupleList(dynamic obj) {
+  if (obj is Tuple2) {
+    return obj.toList();
+  }
+  if (obj is Tuple3) {
+    return obj.toList();
+  }
+  if (obj is Tuple4) {
+    return obj.toList();
+  }
+  if (obj is Tuple5) {
+    return obj.toList();
+  }
+  if (obj is Tuple6) {
+    return obj.toList();
+  }
+  if (obj is Tuple7) {
+    return obj.toList();
+  }
+  return [];
 }
 
 int tupleLength(dynamic obj) {

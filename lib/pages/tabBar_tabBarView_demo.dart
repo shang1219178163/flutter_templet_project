@@ -551,7 +551,6 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.isolateDemo, "isolateDemo"),
   Tuple2(AppRouter.overlayDemo, "overlay弹窗"),
   Tuple2(AppRouter.overlayDemoOne, "overlay弹窗1"),
-  Tuple2(AppRouter.overlayMixinDemo, "overlayMixinDemo"),
   Tuple2(AppRouter.boxConstraintsDemo, "boxConstraints"),
   Tuple2(AppRouter.gradientDemo, "渐变色"),
   Tuple2(AppRouter.gradientPlaygroundPage, "渐变色"),
@@ -611,7 +610,6 @@ var animateds = <Tuple2<String, String>>[
 var customs = [
   Tuple2(AppRouter.datePickerPage, "DatePickerPage"),
   Tuple2(AppRouter.dateTimeDemo, "dateTimeDemo"),
-  Tuple2(AppRouter.hudProgressDemo, "HudProgressDemo"),
   Tuple2(AppRouter.localNotifationDemo, "localNotifationDemo"),
   Tuple2(AppRouter.locationPopView, "locationPopView"),
   Tuple2(AppRouter.numberStepperDemo, "商品计数器"),

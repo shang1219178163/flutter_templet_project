@@ -105,13 +105,15 @@ class XBoxWidget extends StatelessWidget {
           )
         : null;
 
+    var effectiveMargin = margin;
+
     if (boxShadow != null && boxShadow!.isNotEmpty && width != null && height != null) {
       var shadow = boxShadow![0];
 
       /// 留出阴影空间
-      margin = margin.mergeShadow(shadow: shadow);
+      effectiveMargin = effectiveMargin.mergeShadow(shadow: shadow);
     }
-    margin = margin.positive;
+    effectiveMargin = effectiveMargin.positive;
 
     // if (this.title != null && this.title!.contains('图文导航')) {
     //   bgBlur = 5;//add test
@@ -146,7 +148,7 @@ class XBoxWidget extends StatelessWidget {
         child: Container(
             width: width,
             height: height,
-            margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+            margin: effectiveMargin.isNonNegative ? effectiveMargin : EdgeInsets.zero,
             decoration: decoration,
             child: ClipRRect(
               borderRadius: borderRadius ?? BorderRadius.zero,

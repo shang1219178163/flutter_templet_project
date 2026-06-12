@@ -80,19 +80,28 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             //请求完成
             if (snapshot.connectionState == ConnectionState.done) {
-              Response response = snapshot.data;
               //发生错误
-              if (snapshot.hasError) {
+              if (snapshot.data == null || snapshot.hasError) {
                 return Text(snapshot.error.toString());
               }
+
+              final response = snapshot.data as Response<dynamic>;
+
               //请求成功，通过项目信息构建用于显示项目名称的ListView
+              final data = response.data as List<dynamic>? ?? <dynamic>[];
               return ListView(
-                children: response.data
-                    .map<Widget>((e) => ListTile(
-                          title: Text(e["full_name"]),
-                          subtitle: Text(e["url"]),
-                        ))
-                    .toList(),
+                children: data.map<Widget>((e) {
+                  final map = Map<String, dynamic>.from(e);
+                  final fullName = map["full_name"] as String;
+                  final url = map["url"] as String;
+                  return ListTile(
+                    title: Text(fullName),
+                    subtitle: Text(
+                      url,
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  );
+                }).toList(),
               );
             }
             //请求未完成时弹出loading
@@ -110,14 +119,14 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             //请求完成
             if (snapshot.connectionState == ConnectionState.done) {
-              Response response = snapshot.data;
+              final response = snapshot.data as Response<String>;
               //发生错误
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               }
 
               ///字符串转json
-              List<dynamic> list = jsonDecode(response.data);
+              var list = jsonDecode(response.data ?? '') as List<dynamic>;
 
               ///json转模型
               var models = list.map<Repository>((e) => Repository.fromJson(e)).toList();
@@ -147,7 +156,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             //请求完成
             if (snapshot.connectionState == ConnectionState.done) {
-              Response response = snapshot.data;
+              final response = snapshot.data as Response<dynamic>;
               //发生错误
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
@@ -156,7 +165,8 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
               ///字符串转json
               // List<dynamic> list = jsonDecode(response.data);
               ///json转模型
-              List<Repository> models = response.data.map<Repository>((e) => Repository.fromJson(e)).toList();
+              final data = response.data as List<dynamic>? ?? <dynamic>[];
+              var models = data.map<Repository>((e) => Repository.fromJson(e as Map<String, dynamic>)).toList();
 
               ///界面显示
               return ListView(

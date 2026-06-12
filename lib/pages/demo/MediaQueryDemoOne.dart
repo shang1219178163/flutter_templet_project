@@ -77,14 +77,14 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
     }
 
     return items.map((e) {
-      final array = e.toList();
+      final array = asTupleList(e);
 
       return TableRow(
         children: List.generate(
             array.length,
             (index) => Container(
                   padding: EdgeInsets.all(8),
-                  child: Text(array.toList()[index]),
+                  child: Text(array[index].toString()),
                 )).toList(),
       );
     }).toList();
@@ -107,4 +107,26 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
 
 bool isTuple(dynamic obj) {
   return obj is Tuple2 || obj is Tuple3 || obj is Tuple4 || obj is Tuple5 || obj is Tuple6 || obj is Tuple7;
+}
+
+List<dynamic> asTupleList(dynamic obj) {
+  if (obj is Tuple2) {
+    return obj.toList();
+  }
+  if (obj is Tuple3) {
+    return obj.toList();
+  }
+  if (obj is Tuple4) {
+    return obj.toList();
+  }
+  if (obj is Tuple5) {
+    return obj.toList();
+  }
+  if (obj is Tuple6) {
+    return obj.toList();
+  }
+  if (obj is Tuple7) {
+    return obj.toList();
+  }
+  return [];
 }

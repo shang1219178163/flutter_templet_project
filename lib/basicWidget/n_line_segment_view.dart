@@ -54,10 +54,10 @@ class NLineSegmentView<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _NLineSegmentViewState createState() => _NLineSegmentViewState();
+  _NLineSegmentViewState<T> createState() => _NLineSegmentViewState<T>();
 }
 
-class _NLineSegmentViewState extends State<NLineSegmentView> {
+class _NLineSegmentViewState<T> extends State<NLineSegmentView<T>> {
   late T? groupValue = widget.groupValue;
 
   @override
@@ -106,8 +106,8 @@ class _NLineSegmentViewState extends State<NLineSegmentView> {
             duration: Duration(milliseconds: 200),
             top: widget.style == NLineSegmentStyle.top ? 0 : widget.height - widget.lineHeight,
             left: widget.lineWidth != null
-                ? (groupValue as num) * itemWidth + (itemWidth - widget.lineWidth!) * 0.5
-                : (groupValue as num) * itemWidth,
+                ? (groupValue as num? ?? 0) * itemWidth + (itemWidth - widget.lineWidth!) * 0.5
+                : (groupValue as num? ?? 0) * itemWidth,
             child: Container(
               height: widget.lineHeight,
               width: widget.lineWidth ?? itemWidth,

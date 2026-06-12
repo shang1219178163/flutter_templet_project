@@ -9,7 +9,6 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 
 /// 基于 CustomScrollView 的下拉刷新,上拉加载更多的滚动列表
@@ -140,7 +139,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       return SliverToBoxAdapter(child: Center(child: widget.placeholder));
     }
 
-    return NSliverDecorated(
+    return DecoratedSliver(
       decoration: widget.contentDecoration,
       sliver: SliverPadding(
         padding: widget.contentPadding,

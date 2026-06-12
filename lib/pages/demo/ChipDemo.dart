@@ -26,9 +26,9 @@ class ChipDemo extends StatefulWidget {
 }
 
 class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
-  final tuples = List.generate(9, (i) => (i, "选择$i")).toList();
+  final tuples = List.generate(9, (i) => (i, "选择$i")).toList() as List<(int, String)>;
 
-  final tuplesNew = List.generate(9, (i) => Tuple2(i, "选择$i")).toList();
+  final tuplesNew = List.generate(9, (i) => Tuple2(i, "选择$i")).toList() as List<Tuple2<int, String>>;
 
   @override
   Widget build(BuildContext context) {
@@ -337,7 +337,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
       child: NTagBoxNew<(int, String)>(
           keywords: "初步诊断",
           items: tuples,
-          titleCb: ((int, String) e) => e.$2,
+          titleCb: (e) => e.$2,
           canDelete: (e, onDelete) {
             final index = tuples.indexOf(e);
             if (index % 2 != 0) {
@@ -356,7 +356,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
             tuples.add((id, "选择$id"));
           },
           onChanged: (items) {
-            final titles = items.map(((int, String) e) => e.$2).toList();
+            final titles = items.map((e) => e.$2).toList();
             debugPrint(titles.join(","));
           }),
     );

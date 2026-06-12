@@ -43,7 +43,7 @@ class _GlobalIsolateDemoState extends State<GlobalIsolateDemo> {
         params: {"a": a},
         work: (Map<String, dynamic> params) async {
           sleep(Duration(seconds: 2));
-          var a = params["a"];
+          var a = params["a"] as int;
           return {
             "result1": "1 - ${a++}",
             "result2": "2 - ${a++}",

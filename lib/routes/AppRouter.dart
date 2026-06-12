@@ -21,7 +21,6 @@ import 'package:flutter_templet_project/pages/ScrollablePositionedListDemo.dart'
 import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
 import 'package:flutter_templet_project/pages/app_settings_page.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
-import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/APPForgetPwdPage.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
@@ -154,7 +153,6 @@ import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HorizalStepPage.dart';
 import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
-import 'package:flutter_templet_project/pages/demo/HudProgressDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
@@ -251,7 +249,6 @@ import 'package:flutter_templet_project/pages/demo/OverlayAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayEntryPage.dart';
-import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
@@ -549,7 +546,6 @@ class AppRouter {
   static const String sliverRefreshControlDemo = '/sliverRefreshControlDemo';
   static const String sliverFamilyPageViewDemo = '/sliverFamilyPageViewDemo';
 
-  static const String hudProgressDemo = '/HudProgressDemo';
   static const String reorderableListViewDemo = '/ReorderableListViewDemo';
   static const String expandIconDemoNew = '/ExpandIconDemoNew';
   static const String expandIconDemo = '/ExpandIconDemo';
@@ -1256,10 +1252,6 @@ class AppRouter {
       page: () => SliverAppBarDemo(),
     ),
     GetPage(
-      name: AppRouter.hudProgressDemo,
-      page: () => HudProgressDemo(),
-    ),
-    GetPage(
       name: AppRouter.reorderableListViewDemo,
       page: () => ReorderableListViewDemo(),
     ),
@@ -1700,11 +1692,6 @@ class AppRouter {
       name: AppRouter.overlayDemoOne,
       page: () => OverlayDemoOne(),
     ),
-    GetPage(
-      name: AppRouter.overlayMixinDemo,
-      page: () => OverlayMixinDemo(),
-    ),
-
     GetPage(
       name: AppRouter.decorationDemo,
       page: () => DecorationDemo(),
@@ -2269,7 +2256,7 @@ class AppRouter {
     ),
     GetPage(
       name: AppRouter.apiConvertPage,
-      page: () => APIConvertPage(),
+      page: () => ConvertFlle(),
     ),
     GetPage(
       name: AppRouter.selectListPage,

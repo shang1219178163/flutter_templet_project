@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_decorated.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/cupertino_sliver_refresh_control_ext.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -91,7 +90,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
 
   Widget buildListView() {
     final primaries = Colors.primaries.sublist(0, 5);
-    return NSliverDecorated(
+    return DecoratedSliver(
       // position: DecorationPosition.foreground,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.red),

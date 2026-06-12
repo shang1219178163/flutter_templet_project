@@ -30,14 +30,13 @@ class LiveStreamEnterEffectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ImageProvider<Object> imageProvider = imagePath.startsWith("http")
-        ? CachedNetworkImageProvider(imagePath)
-        : AssetImage(imagePath);
     return Container(
       padding: const EdgeInsets.only(left: 24, right: 35, top: 11, bottom: 11),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: imageProvider,
+          image: imagePath.startsWith("http")
+              ? CachedNetworkImageProvider(imagePath)
+              : AssetImage(imagePath),
           fit: BoxFit.fill,
           scale: scale ?? 3.0,
         ),

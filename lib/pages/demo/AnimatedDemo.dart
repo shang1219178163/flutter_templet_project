@@ -32,12 +32,13 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
 
   double size = 100;
   final isLoading = ValueNotifier(true);
+  String? pageTitle;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
+        title: Text(pageTitle ?? widget.title ?? "$widget"),
       ),
       body: _buildPageView(),
     );
@@ -50,7 +51,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
       onPageChanged: (index) {
         debugPrint('当前为第$index页');
         setState(() {
-          widget.title = '当前为第$index页';
+          pageTitle = '当前为第$index页';
         });
       },
       children: <Widget>[

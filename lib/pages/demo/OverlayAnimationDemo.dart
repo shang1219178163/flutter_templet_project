@@ -106,7 +106,7 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                             NOverlayDialog.sheet(
                               context,
                               child: NPopupAdaptiveContainer(
-                                backgroundColor: Colors.transparent,
+                                backgroundColor: Colors.transparent.withOpacity(0),
                                 child: buildContent(
                                   // height: 400,
                                   margin: EdgeInsets.symmetric(horizontal: 30),
@@ -163,6 +163,10 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            if (NOverlayDialog.isShowing) {
+                              NOverlayDialog.dismiss();
+                              return;
+                            }
                             NOverlayDialog.show(
                               context,
                               hideBarrier: true, // 悬浮一般不需要遮罩
