@@ -75,6 +75,8 @@ Future<void> main() async {
     },
   );
 
+  // 编译环境标识，通过 --dart-define=app_env 注入
+  // ignore: do_not_use_environment
   final appEnv = const String.fromEnvironment("app_env");
   DLog.d("appEnv: $appEnv");
 

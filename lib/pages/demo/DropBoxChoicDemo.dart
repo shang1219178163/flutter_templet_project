@@ -469,7 +469,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        initiallyExpanded: disable ? false : isExpand,
+        initiallyExpanded: !disable && isExpand,
         onExpansionChanged: onExpansionChanged,
         children: children,
       ),

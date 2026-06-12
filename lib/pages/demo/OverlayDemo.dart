@@ -333,7 +333,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 ShaderMask(
                   shaderCallback: (Rect bounds) {
                     return const LinearGradient(
-                      colors: [Color(0xfffe44554), Color(0xfff6040ff)],
+                      colors: [Color(0xFFFE4455), Color(0xFFF6040F)],
                     ).createShader(bounds);
                   },
                   child: Row(

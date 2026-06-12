@@ -382,12 +382,12 @@ class ValueNotifierModel {
     required this.notifier,
   });
 
-  ValueNotifierModel.fromJson(Map json) {
+  ValueNotifierModel.fromJson(Map<String, dynamic> json) {
     if (json.isEmpty) {
       return;
     }
-    notifier = json["notifier"];
-    name = json["name"].stringValue;
+    notifier = json["notifier"] as ValueNotifier?;
+    name = json["name"] as String? ?? "";
   }
 
   Map<String, dynamic> toJson() {

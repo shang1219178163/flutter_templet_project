@@ -35,8 +35,10 @@ class _CarModelsPageState extends State<CarModelsPage> {
   }
 
   void _handleList(List<ContactInfo> list) {
-    if (list.isEmpty) return;
-    for (int i = 0, length = list.length; i < length; i++) {
+    if (list.isEmpty) {
+      return;
+    }
+    for (var i = 0, length = list.length; i < length; i++) {
       var pinyin = PinyinHelper.getPinyinE(list[i].name);
       var tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;

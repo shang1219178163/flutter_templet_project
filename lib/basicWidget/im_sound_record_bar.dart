@@ -65,7 +65,9 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
         // debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
         final temp = e.globalPosition.dy < screenSize.height - bottomBarHeight;
-        if (cancelVN.value == temp) return;
+        if (cancelVN.value == temp) {
+          return;
+        }
         cancelVN.value = temp;
         setState(() {});
       },

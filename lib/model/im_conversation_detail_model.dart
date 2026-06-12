@@ -173,14 +173,14 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
     draftTimestamp = json['draftTimestamp'];
     if (json['markList'] != null) {
       markList = List.empty(growable: true);
-      json['markList'].forEach((v) {
-        markList?.add(v);
+      (json['markList'] as List).forEach((v) {
+        markList?.add(v as int?);
       });
     }
     if (json['conversationGroupList'] != null) {
       conversationGroupList = List.empty(growable: true);
-      json['conversationGroupList'].forEach((v) {
-        conversationGroupList?.add(v);
+      (json['conversationGroupList'] as List).forEach((v) {
+        conversationGroupList?.add(v as String?);
       });
     }
 
@@ -235,7 +235,9 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
 
   @override
   bool operator ==(Object other) {
-    if (other is! ImConversationDetailModel) return false;
+    if (other is! ImConversationDetailModel) {
+      return false;
+    }
     return isarId == other.isarId;
   }
 

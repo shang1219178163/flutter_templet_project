@@ -526,9 +526,9 @@ class _PointShopState extends State<PointShop> with TickerProviderStateMixin {
     // final api = GoodsListApi();
     // final map = await api.fetch();
     final str = await rootBundle.loadString(Assets.dataShopGoods);
-    final map = jsonDecode(str);
+    final map = jsonDecode(str) as Map<String, dynamic>;
     if (map['code'] != 0 || map["data"] == null) {
-      ToastUtil.show(map['msg']);
+      ToastUtil.show(map['msg'] as String? ?? '');
       return null;
     }
     final rootModel = ShopGoodsRootModel.fromJson(map);

@@ -741,7 +741,7 @@ class ProjectGreyButton extends StatelessWidget {
                 height: 12,
               ),
           child: NText(
-            text: text,
+            text,
             color: Color(0xffFFFFFF).withOpacity(0.5),
             fontSize: 14,
           ),

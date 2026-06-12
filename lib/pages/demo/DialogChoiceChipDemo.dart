@@ -21,7 +21,7 @@ class DialogChoiceChipDemo extends StatefulWidget {
 class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   List<int> nums = List<int>.generate(49, (index) => index);
 
-  late final funcMap = <String, Function>{
+  late final funcMap = <String, VoidCallback>{
     "NChoicBox 弹窗": showPopViewBox,
     "方法弹窗": clickUpdateTags,
     "方法弹窗(RichText)": clickUpdateTagsOne,

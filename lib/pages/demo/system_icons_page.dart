@@ -24,8 +24,8 @@ class SystemIconsPage extends StatefulWidget {
 class _SystemIconsPageState extends State<SystemIconsPage> {
   TextEditingController editingController = TextEditingController();
 
-  var list = List.from(kIConMap.keys);
-  var searchResults = List.from(kIConMap.keys);
+  final List<String> list = List<String>.from(kIConMap.keys);
+  List<String> searchResults = List<String>.from(kIConMap.keys);
 
   bool isGrid = false;
 
@@ -118,7 +118,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
             final item = searchResults[index];
             return ListTile(
               leading: Icon(kIConMap[item]),
-              title: Text("$item"),
+              title: Text(item),
               // subtitle: Text(array[0]),
               onTap: () {
                 DLog.d(item);
@@ -157,7 +157,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
           ),
           child: GridTile(
             footer: Text(
-              "$item",
+              item,
             ),
             child: Icon(kIConMap[item]),
           ),

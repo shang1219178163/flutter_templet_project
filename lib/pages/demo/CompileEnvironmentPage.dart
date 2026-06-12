@@ -73,6 +73,7 @@ class _CompileEnvironmentPageState extends State<CompileEnvironmentPage> {
           ...list.map((e) {
             return GestureDetector(
               onTap: () {
+                // ignore: do_not_use_environment -- 演示编译环境读取
                 final appEnv = const String.fromEnvironment("app_env");
                 DLog.d([appEnv, appEnv.length.toString()]);
               },

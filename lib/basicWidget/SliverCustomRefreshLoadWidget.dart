@@ -114,7 +114,9 @@ class _SliverCustomRefreshLoadWidgetState extends State<SliverCustomRefreshLoadW
     setState(() => _isLoadingMore = true);
     await widget.onLoadMore?.call();
     await Future.delayed(const Duration(milliseconds: 400));
-    if (mounted) setState(() => _isLoadingMore = false);
+    if (mounted) {
+      setState(() => _isLoadingMore = false);
+    }
   }
 
   void _reset() {

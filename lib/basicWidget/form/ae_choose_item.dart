@@ -159,7 +159,7 @@ class AeChooseItem<T> extends StatelessWidget {
 
             final name = convertCb(e);
 
-            final isSame = selectVN.value != null ? selectVN.value!.map((e) => convertCb(e)).contains(name) : false;
+            final isSame = selectVN.value?.map((e) => convertCb(e)).contains(name) ?? false;
             final textColor = isSame ? Colors.blue : Colors.black87;
             final checkColor = isSame ? Colors.blue : Colors.transparent;
 

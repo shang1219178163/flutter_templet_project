@@ -129,7 +129,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
     const seedColor = Color(0xffE91025);
 
     /// 背景色设置
-    backgroundBuilder(context, states, child) {
+    Widget backgroundBuilder(BuildContext context, Set<WidgetState> states, Widget? child) {
       final colors = states.contains(WidgetState.disabled)
           ? [Colors.grey.shade300, Colors.grey.shade300]
           : [Colors.red, Colors.purple];
@@ -230,7 +230,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
     const seedColor = Colors.blue;
 
     /// 背景色设置
-    backgroundBuilder(context, states, child) {
+    Widget backgroundBuilder(BuildContext context, Set<WidgetState> states, Widget? child) {
       final colors =
           states.contains(WidgetState.disabled) ? [Colors.grey.shade300, Colors.grey.shade300] : [seedColor, seedColor];
 
@@ -255,7 +255,9 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
           padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 8)),
           minimumSize: WidgetStateProperty.all(const Size(30, 30)),
           backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) return Colors.grey.shade300;
+            if (states.contains(WidgetState.disabled)) {
+              return Colors.grey.shade300;
+            }
             // if (states.contains(WidgetState.pressed)) return seedColor.shade700;
             return seedColor;
           }),

@@ -99,7 +99,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
   }
 
   /// 外观设置
-  buildDecoration({required Widget child, hasShell = true}) {
+  Widget buildDecoration({required Widget child, bool hasShell = true}) {
     if (!hasShell) {
       return child;
     }

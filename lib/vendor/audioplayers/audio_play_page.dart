@@ -116,7 +116,7 @@ class MediaRecordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var timestamp = (timeLong ?? 0) * 1000;
     final duration = Duration(milliseconds: timestamp);
-    final timeLongDesc = duration.toTimeNew();
+    final timeLongDesc = duration.toStringFormat();
 
     return Container(
       padding: const EdgeInsets.all(12),

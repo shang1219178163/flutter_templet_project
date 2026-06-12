@@ -63,8 +63,8 @@ class BallCategoryProvider with ChangeNotifier {
       // 解析 JSON 数据
       final Map<String, dynamic> jsonData = jsonDecode(res);
 
-      final data = jsonData["data"];
-      final code = jsonData["code"];
+      final data = jsonData["data"] as Map<String, dynamic>;
+      final code = jsonData["code"] as int;
 
       if (code != 0) {
         _error = "网络错误，请稍后再试";

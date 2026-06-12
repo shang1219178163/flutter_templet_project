@@ -12,8 +12,8 @@ class AppstoreAppDetailRootModel {
     resultCount = json['resultCount'];
     if (json['results'] != null) {
       results = <AppstoreAppDetailModel>[];
-      json['results'].forEach((v) {
-        results!.add(AppstoreAppDetailModel.fromJson(v));
+      (json['results'] as List).forEach((v) {
+        results!.add(AppstoreAppDetailModel.fromJson(v as Map<String, dynamic>));
       });
     }
   }
@@ -150,10 +150,10 @@ class AppstoreAppDetailModel {
     releaseNotes = json['releaseNotes'];
     artistId = json['artistId'];
     artistName = json['artistName'];
-    genres = json['genres'].cast<String>();
+    genres = (json['genres'] as List).cast<String>();
     price = json['price'];
     description = json['description'];
-    genreIds = json['genreIds'].cast<String>();
+    genreIds = (json['genreIds'] as List).cast<String>();
     isVppDeviceBasedLicensingEnabled = json['isVppDeviceBasedLicensingEnabled'];
     bundleId = json['bundleId'];
     trackId = json['trackId'];
@@ -173,7 +173,7 @@ class AppstoreAppDetailModel {
     trackViewUrl = json['trackViewUrl'];
     trackContentRating = json['trackContentRating'];
     trackCensoredName = json['trackCensoredName'];
-    languageCodesISO2A = json['languageCodesISO2A'].cast<String>();
+    languageCodesISO2A = (json['languageCodesISO2A'] as List).cast<String>();
     version = json['version'];
     wrapperType = json['wrapperType'];
     userRatingCount = json['userRatingCount'];

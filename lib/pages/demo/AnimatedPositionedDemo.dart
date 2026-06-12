@@ -75,8 +75,8 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
 
                     // 主要的 AnimatedPositioned 组件
                     AnimatedPositioned(
-                      left: currentPreset['left'].toDouble(),
-                      top: currentPreset['top'].toDouble(),
+                      left: (currentPreset['left'] as num).toDouble(),
+                      top: (currentPreset['top'] as num).toDouble(),
                       width: 60,
                       height: 60,
                       duration: Duration(milliseconds: (_animationDuration * 1000).round()),
@@ -139,7 +139,7 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: currentPreset['color'].withOpacity(0.1),
+              color: (currentPreset['color'] as Color).withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

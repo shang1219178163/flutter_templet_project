@@ -69,9 +69,9 @@ class IsolateSimpleWidgetState extends State<IsolateSimpleWidget> {
   Future<List<CategoryItem>> fetchData() async {
     final res = await rootBundle.loadString('assets/data/football.json');
 //     final Map<String, dynamic> map = jsonDecode(res);
-    final map = await compute(jsonDecode, res);
-    final data = map["data"];
-    final code = map["code"];
+    final map = await compute(jsonDecode, res) as Map<String, dynamic>;
+    final data = map["data"] as Map<String, dynamic>;
+    final code = map["code"] as int;
     if (code != 0) {
       return Future.value([]);
     }

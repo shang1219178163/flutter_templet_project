@@ -24,7 +24,9 @@ class PhoneAreaCodePopup extends StatefulWidget {
     //读取json
     const jsonPath = 'assets/data/area_code.json';
     final content = await DefaultAssetBundle.of(context).loadString(jsonPath);
-    areaCodeList ??= jsonDecode(content).map<AreaCodeEntity>((e) => AreaCodeEntity.fromJson(e)).toList();
+    areaCodeList ??= (jsonDecode(content) as List)
+        .map<AreaCodeEntity>((e) => AreaCodeEntity.fromJson(e as Map<String, dynamic>))
+        .toList();
     if (!context.mounted) {
       return;
     }

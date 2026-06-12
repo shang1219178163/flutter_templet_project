@@ -371,7 +371,7 @@ class AttrCarouseItem {
   // 适用地域 100000--全国  选择省只有省的regioncode
   List<String>? region;
 
-  static AttrCarouseItem fromJson(json) {
+  static AttrCarouseItem fromJson(Map<String, dynamic> json) {
     return AttrCarouseItem(
         contentType: json['contentType'] as int?,
         detailName: json['detailName'] as String?,

@@ -121,9 +121,9 @@ class VideoService {
     // debugPrint("savePath: ${savePath}");
     ToastUtil.hideLoading();
 
-    final result = await ImageGallerySaverPlus.saveFile(savePath);
+    final result = Map<String, dynamic>.from(await ImageGallerySaverPlus.saveFile(savePath) as Map);
     debugPrint("saveFile: $result $url");
-    final isSuccess = result["isSuccess"];
+    final isSuccess = result['isSuccess'] as bool? ?? false;
     final message = isSuccess ? "已保存到相册" : "操作失败";
     if (isSuccess && showToast) {
       ToastUtil.show(

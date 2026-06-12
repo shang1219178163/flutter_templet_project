@@ -22,7 +22,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
 
   Timer? _timer;
 
-  var items = [
+  final List<Tuple4<String, String, String, bool>> items = [
     Tuple4(
       'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
       '海尔｜无边界客厅' * 6,
@@ -49,9 +49,9 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     ),
   ];
 
-  get itemWidgets => items.map((e) => Text(e.item2)).toList();
+  List<Widget> get itemWidgets => items.map((e) => Text(e.item2)).toList();
 
-  get itemCount => itemWidgets.length + (itemWidgets.length - 1) + 2;
+  int get itemCount => itemWidgets.length + (itemWidgets.length - 1) + 2;
 
   @override
   void initState() {

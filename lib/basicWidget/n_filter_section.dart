@@ -159,7 +159,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        initiallyExpanded: disable ? false : isExpand,
+        initiallyExpanded: !disable && isExpand,
         onExpansionChanged: onExpansionChanged,
         children: children ?? <Widget>[Container()],
       ),

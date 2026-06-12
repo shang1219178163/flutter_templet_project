@@ -93,8 +93,8 @@ class _CompareToPageState extends State<CompareToPage> {
               DLog.d(v);
               sortSelected = v;
               players.sort((a, b) {
-                final aValue = a.toJson()[v];
-                final bValue = b.toJson()[v];
+                final aValue = a.toJson()[v] as Comparable<dynamic>;
+                final bValue = b.toJson()[v] as Comparable<dynamic>;
                 return bValue.compareTo(aValue);
               });
               setState(() {});

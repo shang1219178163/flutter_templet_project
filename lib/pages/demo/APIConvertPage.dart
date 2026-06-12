@@ -16,6 +16,7 @@ class APIConvertPage extends StatefulWidget {
   State<APIConvertPage> createState() => _APIConvertPageState();
 }
 
+// ignore: deprecated_member_use_from_same_package -- 已弃用页面，保留兼容
 class _APIConvertPageState extends State<APIConvertPage> {
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();

@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/api/tag_list_api.dart';
 
 /// 网络选择盒子
-class PickerDrugBox extends NPickRequestListBox {
+class PickerDrugBox extends NPickRequestListBox<TagDetailModel> {
   PickerDrugBox({
     super.key,
     super.title,
@@ -27,7 +27,11 @@ class PickerDrugBox extends NPickRequestListBox {
             );
 
             var tuple = await api.fetchModels<TagDetailModel>(
-              onValue: (respone) => respone["result"]?["content"],
+              onValue: (response) {
+                final result = response['result'] as Map<String, dynamic>?;
+                final content = result?['content'] as List?;
+                return content?.cast<Map<String, dynamic>>() ?? <Map<String, dynamic>>[];
+              },
               onModel: (e) => TagDetailModel.fromJson(e),
             );
 
@@ -35,7 +39,7 @@ class PickerDrugBox extends NPickRequestListBox {
             // YLog.d("$widget requestList: ${list.length}");
             return list;
           },
-          cbName: (e) => e.name,
+          cbName: (e) => e.name ?? '',
           selected: (items, b) {
             return false;
 

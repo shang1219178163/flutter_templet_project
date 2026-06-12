@@ -8,9 +8,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 
-typedef AfterLayoutWidgetBuilder = Widget Function(
-    BuildContext context, Widget? child, Size? size);
+typedef AfterLayoutWidgetBuilder = Widget Function(BuildContext context, Widget? child, Size? size);
 
 /// 获取布局尺寸
 class AfterLayoutBuilder extends StatefulWidget {
@@ -28,7 +28,7 @@ class AfterLayoutBuilder extends StatefulWidget {
   _AfterLayoutBuilderState createState() => _AfterLayoutBuilderState();
 }
 
-class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> {
+class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> with SafeSetStateMixin {
   Size? _currentSize;
 
   @override
@@ -39,7 +39,7 @@ class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> {
         return;
       }
       _currentSize = context.size;
-      if (mounted) setState(() {});
+      setState(() {});
     });
     super.initState();
   }

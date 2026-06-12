@@ -403,8 +403,8 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
     final document = html_parser.parse(htmlContent);
     final elements = document.querySelectorAll('video');
     final videoModels = elements.map((el) {
-      var sourceAttributes = el.nodes.firstOrNull?.attributes ?? {};
-      var attributes = el.attributes;
+      var sourceAttributes = Map<String, String>.from(el.nodes.firstOrNull?.attributes ?? {});
+      var attributes = Map<String, String>.from(el.attributes);
 
       // 创建字典并将 <video> 标签的属性添加进去
       var videoAttributes = <String, dynamic>{

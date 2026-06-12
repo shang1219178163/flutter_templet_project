@@ -170,8 +170,8 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
 
   ///创建子项
   Widget buildItem(
-    context,
-    index,
+    BuildContext context,
+    int index,
     double itemWidth,
   ) {
     final url = items[index];

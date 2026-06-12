@@ -298,7 +298,7 @@ class _LoginInputState extends State<LoginInput> {
       controller: _textEditingController,
       focusNode: _focusNode,
       onChanged: widget.onChanged,
-      obscureText: widget.isPwd ? isCloseEye : false,
+      obscureText: widget.isPwd && isCloseEye,
       keyboardType: widget.isPwd ? TextInputType.visiblePassword : widget.keyboardType,
       autofocus: !isCloseEye,
       cursorColor: primaryColor,

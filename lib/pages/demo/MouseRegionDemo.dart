@@ -44,25 +44,26 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
   }
 
   bool _isVisible = false;
+  String? demoTitle;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
+        title: Text(demoTitle ?? widget.title ?? "$widget"),
         actions: [
           MouseRegion(
               onEnter: (PointerEvent details) {
                 setState(() {
                   setState(() => DLog.d(details));
-                  widget.title = "onEnter";
+                  demoTitle = "onEnter";
                   _isVisible = true;
                 });
               },
               onExit: (PointerEvent details) {
                 setState(() {
                   setState(() => DLog.d(details));
-                  widget.title = "onExit";
+                  demoTitle = "onExit";
                   // _isVisible = false;
                 });
               },

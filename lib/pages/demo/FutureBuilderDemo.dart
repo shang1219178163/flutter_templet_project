@@ -70,8 +70,9 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
             // 请求成功，显示数据
             // return Text("Contents: ${snapshot.data}");
 
-            final response = snapshot.data;
-            var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
+            final response = snapshot.data as Response<dynamic>;
+            final data = response.data as List<dynamic>? ?? <dynamic>[];
+            var items = data.map((e) => GitRepoModel.fromJson(e as Map<String, dynamic>)).toList();
             final itemsNew = List<GitRepoModel>.from(items);
             return buildList(list: itemsNew);
           } else {

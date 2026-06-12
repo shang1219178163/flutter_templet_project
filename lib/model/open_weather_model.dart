@@ -46,7 +46,7 @@ class OpenWeatherRoot {
   OpenWeatherRoot.fromJson(Map<String, dynamic> json) {
     coord = json['coord'] != null ? OpenWeatherCoord.fromJson(json['coord']) : null;
     if (json['weather'] != null) {
-      final array = json['weather'].map((e) => OpenWeather.fromJson(e));
+      final array = (json['weather'] as List).map((e) => OpenWeather.fromJson(e as Map<String, dynamic>));
       weather = List<OpenWeather>.from(array);
     }
     base = json['base'];

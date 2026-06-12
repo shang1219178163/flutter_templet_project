@@ -178,10 +178,11 @@ class NAccountSheetNewController<E extends MapEntry<String, dynamic>> {
     required String pwd,
   }) async {
     assert(_anchor != null);
-    final map = await FileManager().readJson(fileName: CacheKey.accountList.name) ?? {};
+    final map = (await FileManager().readJson(fileName: CacheKey.accountList.name) as Map<String, dynamic>?) ??
+        <String, dynamic>{};
     map[account] = pwd;
 
-    final accounts = map.entries.map((e) => (account: e.key, pwd: e.value) as E).toList();
+    final accounts = map.entries.map((e) => MapEntry(e.key, e.value) as E).toList();
     updateItems(accounts);
     _anchor?.updateCurrent(MapEntry(account, pwd));
   }

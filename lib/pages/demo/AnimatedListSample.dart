@@ -108,12 +108,11 @@ class ListModel<E> {
     required this.listKey,
     required this.removedItemBuilder,
     Iterable<E>? initialItems,
-  })  : assert(removedItemBuilder != null),
-        _items = List<E>.from(initialItems ?? <E>[]);
+  }) : _items = List<E>.from(initialItems ?? <E>[]);
 
   ///
   final GlobalKey<AnimatedListState> listKey;
-  final dynamic removedItemBuilder;
+  final Widget Function(E item, BuildContext context, Animation<double> animation) removedItemBuilder;
   final List<E> _items;
 
   ///

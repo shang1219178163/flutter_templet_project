@@ -26,8 +26,9 @@ class NScanPhotoDemo extends StatefulWidget {
 }
 
 class _NScanPhotoDemoState extends State<NScanPhotoDemo> with PhotoPickerMixin {
-  late final arguments =
-      widget.arguments ?? Get.arguments ?? <String, dynamic>{};
+  late final Map<String, dynamic> arguments = Map<String, dynamic>.from(
+    (widget.arguments ?? Get.arguments ?? <String, dynamic>{}) as Map,
+  );
   late File? file = arguments["image"] as File?;
   late VoidCallback? onScanStop = arguments["onScanStop"] as VoidCallback?;
 

@@ -253,7 +253,9 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
   }
 
   void _measureHeaderHeight({int overlapHeight = 30}) {
-    if (!mounted || _headerKey.currentContext == null) return;
+    if (!mounted || _headerKey.currentContext == null) {
+      return;
+    }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final context = _headerKey.currentContext;

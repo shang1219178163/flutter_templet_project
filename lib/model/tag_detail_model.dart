@@ -37,8 +37,8 @@ class TagsRootModel {
     code = json['code'];
     if (json['result'] != null) {
       result = <TagDetailModel>[];
-      json['result'].forEach((v) {
-        result!.add(TagDetailModel.fromJson(v));
+      (json['result'] as List).forEach((v) {
+        result!.add(TagDetailModel.fromJson(v as Map<String, dynamic>));
       });
     }
     application = json['application'];

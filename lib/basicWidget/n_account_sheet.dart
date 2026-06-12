@@ -81,7 +81,7 @@ class _NAccountSheetState extends State<NAccountSheet> {
     if (map.isNotEmpty && items.isNotEmpty) {
       return;
     }
-    final mapNew = await FileManager().readJson(fileName: cacheKey);
+    final mapNew = await FileManager().readJson(fileName: cacheKey) as Map<String, dynamic>?;
     if (mapNew == null) {
       return;
     }

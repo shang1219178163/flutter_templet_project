@@ -78,6 +78,7 @@ class RequestConfig {
 
   static void initFromEnvironment() {
     /// 从  --dart-define=app_env=beta 读取运行环境
+    // ignore: do_not_use_environment -- 编译环境配置
     final env = const String.fromEnvironment("app_env");
     current = AppEnvironment.fromName(env);
     DLog.d("appEnv: $current");

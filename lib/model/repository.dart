@@ -240,7 +240,7 @@ class Repository {
     allowForking = json['allow_forking'];
     isTemplate = json['is_template'];
     topics =
-        json['topics'] != null ? json['topics'].cast<String>() : <String>[];
+        json['topics'] != null ? (json['topics'] as List).cast<String>() : <String>[];
     visibility = json['visibility'];
     forks = json['forks'];
     openIssues = json['open_issues'];

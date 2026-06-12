@@ -20,7 +20,9 @@ class BottomBouncingScrollPhysics extends ScrollPhysics {
     assert(offset != 0.0);
     assert(position.minScrollExtent <= position.maxScrollExtent);
 
-    if (!position.outOfRange) return offset;
+    if (!position.outOfRange) {
+      return offset;
+    }
 
     //final double overscrollPastStart = math.max(position.minScrollExtent - position.pixels, 0.0);
     final double overscrollPastEnd =
@@ -45,7 +47,9 @@ class BottomBouncingScrollPhysics extends ScrollPhysics {
     var total = 0.0;
     if (extentOutside > 0) {
       final deltaToLimit = extentOutside / gamma;
-      if (absDelta < deltaToLimit) return absDelta * gamma;
+      if (absDelta < deltaToLimit) {
+        return absDelta * gamma;
+      }
       total += extentOutside;
       absDelta -= deltaToLimit;
     }

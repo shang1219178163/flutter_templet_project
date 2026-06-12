@@ -153,7 +153,7 @@ class _TestFunctionState extends State<TestFunction> with DebounceStreamMixin<Te
     );
   }
 
-  Function closure() {
+  int Function() closure() {
     var i = 0;
     return () {
       return ++i;

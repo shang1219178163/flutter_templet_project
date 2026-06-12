@@ -93,7 +93,7 @@ class NExpansionMenuState extends State<NExpansionMenu> {
             ),
           ],
         ),
-        initiallyExpanded: widget.disable ? false : widget.isExpand,
+        initiallyExpanded: !widget.disable && widget.isExpand,
         onExpansionChanged: widget.onExpansionChanged,
         children: widget.children ??
             <Widget>[

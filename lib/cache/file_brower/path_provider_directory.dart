@@ -85,7 +85,7 @@ class PathProviderDirectory {
   });
 
   final String name;
-  final Function func;
+  final Future<Object?> Function() func;
   final String desc;
 
   /// 自定义

@@ -145,7 +145,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final duration = Duration(milliseconds: 146 * 1000);
     DLog.d("duration: $duration");
 
-    DLog.d("toTimeNew: ${duration.toTimeNew()}");
+    DLog.d("toStringFormat: ${duration.toStringFormat()}");
     DLog.d("toTime: ${duration.toStringFormat()}");
 
     DLog.d("list: ${[

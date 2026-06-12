@@ -61,7 +61,9 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
         final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
-        if (cancelVN.value == temp) return;
+        if (cancelVN.value == temp) {
+          return;
+        }
         cancelVN.value = temp;
         setState(() {});
       },
@@ -101,7 +103,9 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
         final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
-        if (cancelVN.value == temp) return;
+        if (cancelVN.value == temp) {
+          return;
+        }
         cancelVN.value = temp;
         setState(() {});
       },

@@ -21,7 +21,9 @@ class ImChatBubbleChange extends StatefulWidget {
 class _ImChatBubbleChangeState extends State<ImChatBubbleChange> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
-  late final args = Get.arguments ?? widget.arguments ?? <String, dynamic>{};
+  late final Map<String, dynamic> args = Map<String, dynamic>.from(
+    (Get.arguments ?? widget.arguments ?? <String, dynamic>{}) as Map,
+  );
 
   late final onBubble = args["onBubble"] as ValueChanged<String>?;
 

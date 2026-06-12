@@ -173,8 +173,8 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(currentPosition.toTimeNew()),
-                    Text(totalDuration.toTimeNew()),
+                    Text(currentPosition.toStringFormat()),
+                    Text(totalDuration.toStringFormat()),
                   ],
                 ),
               ),

@@ -186,7 +186,11 @@ class OptionModel {
     return OptionModel(
       name: json['name'],
       desc: json['desc'],
-      children: List<OptionModel>.from((json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
+      children: List<OptionModel>.from(
+        ((json["children"] as List<dynamic>?) ?? <dynamic>[]).map(
+          (e) => OptionModel.fromJson(e as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 

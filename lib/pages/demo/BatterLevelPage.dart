@@ -21,7 +21,9 @@ class _BatterLevelPageState extends State<BatterLevelPage> {
         title: Text(widget.title ?? "$widget"),
         leading: GestureDetector(
           onTap: () {
-            if (!Navigator.canPop(context)) Navigator.pop(context);
+            if (!Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
           },
           child: Icon(Icons.arrow_back),
         ),

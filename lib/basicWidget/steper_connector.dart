@@ -239,8 +239,12 @@ class NNTimelineTile extends StatelessWidget {
   final double? crossAxisExtent;
 
   double _getEffectiveNodePosition(BuildContext context) {
-    if (nodeAlign == TimelineNodeAlign.start) return 0.0;
-    if (nodeAlign == TimelineNodeAlign.end) return 1.0;
+    if (nodeAlign == TimelineNodeAlign.start) {
+      return 0.0;
+    }
+    if (nodeAlign == TimelineNodeAlign.end) {
+      return 1.0;
+    }
     var nodePosition = this.nodePosition;
     nodePosition ??= (node is TimelineTileNode)
         ? (node as TimelineTileNode).getEffectivePosition(context)
