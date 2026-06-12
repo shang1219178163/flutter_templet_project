@@ -14,10 +14,11 @@ analyzer:
     - "assets/images/**"
 
   errors:
-    undefined_identifier: ignore # 忽略未知标识符
-    undefined_prefixed_name: ignore # 忽略未知前缀名称
-    undefined_class: ignore # 忽略未知类
-    undefined_function: ignore # 忽略未知函数
+    deprecated_member_use: ignore
+    undefined_identifier: error # 未知标识符（屏蔽 import 后应能高亮 DLog 等未定义符号）
+    undefined_prefixed_name: error # 未知前缀名称
+    undefined_class: error # 未知类
+    undefined_function: error # 未知函数
     unused_element: ignore  # 忽略未使用的变量、方法、类等
     unused_local_variable: ignore
     unused_field: ignore
