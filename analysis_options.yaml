@@ -8,6 +8,7 @@ analyzer:
     - ".dart_tool/**"
     - "ios/**"
     - "android/**"
+    - "macos/**"
     - "windows/**"
     - "web/**"
     - "assets/images/**"
