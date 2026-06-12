@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
@@ -85,14 +84,17 @@ class _DialogCenterState extends State<DialogCenter> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final isDark = themeData.brightness == Brightness.dark;
+    final backgroundColor = isDark ? Color(0xFF242434) : Colors.white;
+
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      backgroundColor: themeProvider.color242434OrWhite,
+      backgroundColor: backgroundColor,
       child: Container(
         decoration: BoxDecoration(
-          // color: themeProvider.color242434OrWhite,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -135,7 +137,6 @@ class _DialogCenterState extends State<DialogCenter> {
                               '取消',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: themeProvider.subtitleColor,
                               ),
                             ),
                       ),

@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:fluwx/fluwx.dart';
@@ -116,19 +116,12 @@ class FluwxUtil {
     Uint8List? binary,
     WeChatScene scene = WeChatScene.session,
   }) async {
-    WeChatImage? image;
-    if (filePath != null) {
-      image = WeChatImage.file(File(filePath));
-    } else if (binary != null) {
-      image = WeChatImage.binary(binary);
-    } else if (url != null) {
-      image = WeChatImage.network(url);
-    } else if (asset != null) {
-      image = WeChatImage.asset(asset);
-    } else {
-      throw Exception("缺少图片资源信息");
-    }
-
+    final image = await _buildImageToShare(
+      filePath: filePath,
+      url: url,
+      asset: asset,
+      binary: binary,
+    );
     final shareImageModel = WeChatShareImageModel(
       image,
       title: title,
@@ -136,6 +129,53 @@ class FluwxUtil {
       scene: scene,
     );
     return fluwx.share(shareImageModel);
+  }
+
+  Future<WeChatImageToShare> _buildImageToShare({
+    String? filePath,
+    String? url,
+    String? asset,
+    Uint8List? binary,
+  }) async {
+    if (binary != null) {
+      return WeChatImageToShare(uint8List: binary);
+    }
+    if (asset != null) {
+      final data = await rootBundle.load(asset);
+      return WeChatImageToShare(uint8List: data.buffer.asUint8List());
+    }
+    if (filePath != null) {
+      if (Platform.isAndroid) {
+        return WeChatImageToShare(localImagePath: filePath);
+      }
+      final bytes = await File(filePath).readAsBytes();
+      return WeChatImageToShare(uint8List: bytes);
+    }
+    if (url != null) {
+      final bytes = await _fetchImageBytes(url);
+      if (bytes == null) {
+        throw Exception('网络图片加载失败: $url');
+      }
+      return WeChatImageToShare(uint8List: bytes);
+    }
+    throw Exception('缺少图片资源信息');
+  }
+
+  Future<Uint8List?> _fetchImageBytes(String imageUrl) async {
+    try {
+      final Response<List<int>> response = await Dio().get<List<int>>(
+        imageUrl,
+        options: Options(responseType: ResponseType.bytes),
+      );
+      if (response.statusCode == 200 && response.data != null) {
+        return Uint8List.fromList(response.data!);
+      }
+      debugPrint('图片加载失败: ${response.statusCode}');
+      return null;
+    } catch (err) {
+      debugPrint('图片加载异常: $err');
+      return null;
+    }
   }
 
   /// 分享文本
@@ -179,6 +219,8 @@ class FluwxUtil {
   /// 分享链接
   /// url=链接
   /// thumbFile=缩略图本地路径
+  /// networkThumb=缩略图网络地址
+  /// assetThumb=缩略图资源路径
   /// scene=分享场景，1好友会话，2朋友圈，3收藏
   Future<bool> shareUrl({
     required String url,
@@ -189,7 +231,7 @@ class FluwxUtil {
     String? networkThumb,
     String? assetThumb,
     WeChatScene scene = WeChatScene.session,
-  }) {
+  }) async {
     desc = desc ?? "";
     title = title ?? "";
     if (desc.length > 54) {
@@ -198,24 +240,37 @@ class FluwxUtil {
     if (title.length > 20) {
       title = "${title.substring(0, 20)}...";
     }
-
-    // WeChatImage? image;
-    // if (thumbFile != null) {
-    //   image = WeChatImage.file(File(thumbFile));
-    // } else if (thumbBytes != null) {
-    //   image = WeChatImage.binary(thumbBytes);
-    // } else if (networkThumb?.isNotEmpty == true) {
-    //   image = WeChatImage.network(Uri.encodeFull(networkThumb!));
-    // } else if (assetThumb?.isNotEmpty == true) {
-    //   image = WeChatImage.asset(assetThumb!, suffix: ".png");
-    // }
-    var model = WeChatShareWebPageModel(
+    var resolvedThumbBytes = thumbBytes;
+    resolvedThumbBytes ??= await _buildThumbBytes(
+      thumbFile: thumbFile,
+      networkThumb: networkThumb,
+      assetThumb: assetThumb,
+    );
+    final model = WeChatShareWebPageModel(
       url,
-      thumbData: thumbBytes,
+      thumbData: resolvedThumbBytes,
       title: title,
       description: desc,
       scene: scene,
     );
     return fluwx.share(model);
+  }
+
+  Future<Uint8List?> _buildThumbBytes({
+    String? thumbFile,
+    String? networkThumb,
+    String? assetThumb,
+  }) async {
+    if (thumbFile != null) {
+      return File(thumbFile).readAsBytes();
+    }
+    if (networkThumb?.isNotEmpty == true) {
+      return _fetchImageBytes(networkThumb!);
+    }
+    if (assetThumb?.isNotEmpty == true) {
+      final ByteData data = await rootBundle.load(assetThumb!);
+      return data.buffer.asUint8List();
+    }
+    return null;
   }
 }

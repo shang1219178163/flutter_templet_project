@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/route/n_fade_page_route.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_button.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
@@ -334,7 +335,7 @@ class CardUploadBoxState extends State<CardUploadBox> {
       setState(() {});
     } catch (err) {
       debugPrint("err:$err");
-      ToastHelper.showErrorToast('请检查相册/相机可用权限');
+      ToastUtil.show('请检查相册/相机可用权限');
     }
   }
 
@@ -380,7 +381,7 @@ class CardUploadBoxState extends State<CardUploadBox> {
       setState(() {});
     } catch (e) {
       debugPrint("❌onTakePhoto: $e");
-      ToastHelper.showErrorToast('请检查相册/相机可用权限');
+      ToastUtil.show('请检查相册/相机可用权限');
     }
   }
 

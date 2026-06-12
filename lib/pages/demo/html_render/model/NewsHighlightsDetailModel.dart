@@ -4,6 +4,7 @@
 //  Created by JsonToModel on 2025-12-04 16:33.
 //
 
+import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/AppVideoPlayerService.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 足球集锦详情模型

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -263,7 +264,7 @@ class AudioPlayerUtil {
   /// 获取当前播放音频
   AudioPlayerModel? get currentAudio {
     if (null == _player.currentIndex) {
-      returnnull;
+      return null;
     }
     return _audioInformationList[_player.currentIndex!];
   }

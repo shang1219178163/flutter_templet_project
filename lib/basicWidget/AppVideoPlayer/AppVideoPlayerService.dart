@@ -6,28 +6,54 @@
 //  Copyright © 2025/12/12 shang. All rights reserved.
 //
 
+import 'dart:convert';
+
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:quiver/collection.dart';
 import 'package:video_player/video_player.dart';
 
 /// 视频播放控制器全局管理(安卓不支持多控制器,不可控不可测的视频解码错误)
+/// 视频播放控制器全局管理
 class AppVideoPlayerService {
   AppVideoPlayerService._();
   static final AppVideoPlayerService _instance = AppVideoPlayerService._();
   factory AppVideoPlayerService() => _instance;
   static AppVideoPlayerService get instance => _instance;
 
-  /// 播放器字典
   LruMap<String, VideoPlayerController> get controllerMap => _controllerMap;
-  // final _controllerMap = <String, VideoPlayerController>{};
-  final _controllerMap = LruMap<String, VideoPlayerController>(maximumSize: 10);
+  final _controllerMap = LruMap<String, VideoPlayerController>(maximumSize: 2);
+
+  final playerVN = ValueNotifier<VideoPlayerController?>(null);
+
+  String get controllerMapJson {
+    final result = <String, dynamic>{};
+    for (final entry in controllerMap.entries) {
+      final newEntry = MapEntry(entry.key, [
+        entry.value.hashCode,
+        entry.value.dataSource,
+      ]);
+      result[newEntry.key] = newEntry.value;
+    }
+    final mapJson = jsonEncode(result);
+    return mapJson;
+
+    final map = controllerMap.map(
+      (k, v) => MapEntry(k, [v.hashCode, v.dataSource]),
+    );
+    final mapJsonNew = jsonEncode(map);
+    return mapJsonNew;
+  }
 
   /// 有缓存控制器
   bool hasCtrl({required String url}) => _controllerMap[url] != null;
 
+  /// 获取缓存控制器
+  VideoPlayerController? getCacheCtrl({required String url}) => _controllerMap[url];
+
   /// 是网络视频
   static bool isVideo(String? url) {
-    if (url?.isNotEmpty != true) {
+    if (url?.startsWith("http") != true) {
       return false;
     }
 
@@ -45,66 +71,59 @@ class AppVideoPlayerService {
   /// 获取 VideoPlayerController
   Future<VideoPlayerController?> getController(String url, {bool isLog = false}) async {
     assert(url.startsWith("http"), "必须是视频链接,请检查链接是否合法");
-    final vc = _controllerMap[url];
-    if (vc != null) {
-      current = vc;
-      if (isLog) {
-        DLog.d(["缓存: ${vc.hashCode}"]);
-      }
-      return vc;
-    }
-
     final videoUri = Uri.tryParse(url);
     if (videoUri == null) {
       return null;
     }
 
-    final ctrl = VideoPlayerController.networkUrl(
-      videoUri,
-      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-    );
-    await ctrl.initialize();
-    _controllerMap[url] = ctrl;
-    if (isLog) {
-      DLog.d(["新建: ${_controllerMap[url].hashCode}"]);
+    if (playerVN.value?.dataSource == "$videoUri") {
+      DLog.d(["缓存对象", playerVN.value.hashCode, videoUri]);
+      return playerVN.value;
     }
-    return ctrl;
+
+    if (playerVN.value?.value.isPlaying == true) {
+      await playerVN.value?.pause();
+    }
+    await playerVN.value?.dispose();
+    final videoController = VideoPlayerController.networkUrl(
+      videoUri,
+      videoPlayerOptions: VideoPlayerOptions(
+        mixWithOthers: true,
+      ),
+    );
+    await videoController.initialize();
+    // await Future.delayed(const Duration(milliseconds: 300));
+    playerVN.value = videoController;
+    DLog.d(["新建对象", playerVN.value.hashCode, videoUri]);
+    return videoController;
   }
 
   /// 播放
   Future<void> play({required String url, bool onlyOne = true}) async {
-    await getController(url);
-    for (final e in _controllerMap.entries) {
-      if (e.key == url) {
-        if (!e.value.value.isPlaying) {
-          e.value.play();
-        } else {
-          e.value.pause();
-        }
-      } else {
-        if (onlyOne) {
-          e.value.pause();
-        }
-      }
+    if (playerVN.value?.dataSource != url) {
+      await getController(url);
+    }
+    if (playerVN.value?.value.isPlaying == true) {
+      playerVN.value?.pause();
+    } else {
+      playerVN.value?.play();
     }
   }
 
   /// 暂停所有视频
-  void pauseAll() {
+  Future<void> pauseAll() async {
+    playerVN.value?.pause();
     for (final e in _controllerMap.entries) {
-      e.value.pause();
+      await e.value.pause();
     }
   }
 
-  void dispose(String url) {
-    _controllerMap[url]?.dispose();
-    _controllerMap.remove(url);
-  }
-
-  void disposeAll() {
-    for (final c in _controllerMap.values) {
-      c.dispose();
-    }
+  void clearVideoPlayerControlers() {
     _controllerMap.clear();
+  }
+
+  @override
+  String toString() {
+    return "$runtimeType $controllerMapJson";
   }
 }

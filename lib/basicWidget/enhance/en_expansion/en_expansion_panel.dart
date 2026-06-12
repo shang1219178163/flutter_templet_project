@@ -264,8 +264,8 @@ class _EnExpansionPanelListState extends State<EnExpansionPanelList> {
             .add(MaterialGap(key: _SaltedKey<BuildContext, int>(context, index * 2 - 1), size: widget.materialGapSize));
       }
 
-      final EnExpansionPanel child = widget.children[index];
-      final Widget headerWidget = child.headerBuilder(
+      final child = widget.children[index];
+      final headerWidget = child.headerBuilder(
         context,
         _isChildExpanded(index),
       );

@@ -13,7 +13,7 @@ class DialogCenterSingleButton extends DialogCenterAlert {
     VoidCallback? onPressed,
   }) : super(
           buttonBar: TextButton(
-            onPressed: onPressed ?? DialogCenter.dismiss,
+            onPressed: onPressed ?? DialogCenterAlert.dismiss,
             style: TextButton.styleFrom(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
