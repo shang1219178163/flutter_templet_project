@@ -261,7 +261,7 @@ class _DecorationImagePainter implements DecorationImagePainter {
       _placeholderImage?.dispose();
       _placeholderImage = null;
     } else if (_details.placeholder != null) {
-      final ImageStream placeholderStream = _details.placeholder!.resolve(configuration);
+      final placeholderStream = _details.placeholder!.resolve(configuration);
       if (placeholderStream.key != _placeholderStream?.key) {
         _placeholderStream?.removeListener(_placeholderListener);
         _placeholderStream = placeholderStream;

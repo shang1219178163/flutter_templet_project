@@ -90,7 +90,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
     final firstRound = rounds.first;
     final blockHeight = cardHeight * 2 + teamGap + matchGap;
 
-    for (int i = 0; i < firstRound.length; i++) {
+    for (var i = 0; i < firstRound.length; i++) {
       final match = firstRound[i];
 
       final topCenter = i * blockHeight + cardHeight / 2;
@@ -105,7 +105,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
     ///
     /// 后续轮
     ///
-    for (int round = 1; round < rounds.length; round++) {
+    for (var round = 1; round < rounds.length; round++) {
       final currentRound = rounds[round];
 
       ///
@@ -121,7 +121,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
         continue;
       }
 
-      for (int i = 0; i < currentRound.length; i++) {
+      for (var i = 0; i < currentRound.length; i++) {
         final current = currentRound[i];
         final topChild = rounds[round - 1][i * 2];
         final bottomChild = rounds[round - 1][i * 2 + 1];
@@ -138,10 +138,10 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
   List<Widget> _buildTeamCards() {
     final widgets = <Widget>[];
 
-    for (int round = 0; round < rounds.length; round++) {
+    for (var round = 0; round < rounds.length; round++) {
       final matches = rounds[round];
 
-      for (int index = 0; index < matches.length; index++) {
+      for (var index = 0; index < matches.length; index++) {
         final match = matches[index];
         final left = leftPadding + round * roundWidth;
 
@@ -268,10 +268,10 @@ class BracketPainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    for (int round = 0; round < rounds.length - 1; round++) {
+    for (var round = 0; round < rounds.length - 1; round++) {
       final matches = rounds[round];
 
-      for (int index = 0; index < matches.length; index++) {
+      for (var index = 0; index < matches.length; index++) {
         final match = matches[index];
         final startX = leftPadding + round * roundWidth + cardWidth;
         final middleX = startX + 24;
@@ -450,14 +450,14 @@ List<List<BracketMatch>> buildMockBracket() {
   ];
 
   final round1 = <BracketMatch>[];
-  for (int i = 0; i < teams.length; i += 2) {
+  for (var i = 0; i < teams.length; i += 2) {
     round1.add(BracketMatch(topTeam: teams[i], bottomTeam: teams[i + 1]));
   }
 
   final totalRounds = (log(teams.length) / log(2)).ceil();
   final result = <List<BracketMatch>>[];
   result.add(round1);
-  int count = round1.length ~/ 2;
+  var count = round1.length ~/ 2;
   while (count > 0) {
     result.add(List.generate(count, (_) => BracketMatch()));
     count ~/= 2;

@@ -113,7 +113,7 @@ class GoodsEnterEffectItem extends StatelessWidget {
   }
 
   Widget buildEnterLive() {
-    Color bgColor = Colors.transparent;
+    var bgColor = Colors.transparent;
     switch (model.goodsId) {
       case 2000:
         bgColor = Color(0xFFE4FDCC);

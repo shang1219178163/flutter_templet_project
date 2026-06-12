@@ -1,20 +1,15 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:encrypt/encrypt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_back_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_logo_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_category_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/model/PointGoodsRootModel.dart';
-import 'package:flutter_templet_project/pages/demo/point_shop/model/ShopGoodsCategoryModel.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_chat_bubble_item.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_detail_popup.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_enter_effect_item.dart';

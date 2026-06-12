@@ -57,10 +57,10 @@ class AppButtonTheme extends ThemeExtension<AppButtonTheme> {
       AppButtonTheme(
         fgColor: fgColor ?? this.fgColor,
         bgColor: bgColor ?? this.bgColor,
-        fgColorDisabled: fgDisabledColor ?? this.fgColorDisabled,
-        bgColorDisabled: bgDisabledColor ?? this.bgColorDisabled,
+        fgColorDisabled: fgDisabledColor ?? fgColorDisabled,
+        bgColorDisabled: bgDisabledColor ?? bgColorDisabled,
         outlinedColor: outlinedColor ?? this.outlinedColor,
-        outlinedColorDisabled: outlinedDisabledColor ?? this.outlinedColorDisabled,
+        outlinedColorDisabled: outlinedDisabledColor ?? outlinedColorDisabled,
       );
 
   @override

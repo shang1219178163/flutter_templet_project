@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 extension ButtonStyleButtonExt on OutlinedButton {
   /// 获取默认按钮样式
   static ButtonStyle defaultStyleOf(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme colorScheme = theme.colorScheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return ElevatedButton.styleFrom(
       backgroundColor: colorScheme.primary,

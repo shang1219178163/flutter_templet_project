@@ -8,6 +8,8 @@
 
 //Cronet https://juejin.cn/post/7358647510518497307
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
@@ -20,7 +22,6 @@ import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart' as get_navigation;
-import 'dart:io';
 
 class RequestManager extends BaseRequestAPI {
   // 私有构造器

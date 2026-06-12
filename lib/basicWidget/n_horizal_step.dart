@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_animated_step_line_indicator.dart';
-import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/dlog.dart';
 
 class NHorizalStep<E> extends StatefulWidget {
   const NHorizalStep({
@@ -65,7 +63,7 @@ class _NHorizalStepState<E> extends State<NHorizalStep<E>> {
                       final subtitle = i * 1010;
 
                       final isSelected = i == selectedIndex;
-                      Color color = seedColor;
+                      var color = seedColor;
                       Color unselecedColor = Colors.grey;
                       final currColor = isSelected ? color : unselecedColor;
                       final diverColor = i <= selectedIndex ? color : unselecedColor;

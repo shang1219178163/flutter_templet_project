@@ -163,7 +163,7 @@ class FluwxUtil {
 
   Future<Uint8List?> _fetchImageBytes(String imageUrl) async {
     try {
-      final Response<List<int>> response = await Dio().get<List<int>>(
+      final response = await Dio().get<List<int>>(
         imageUrl,
         options: Options(responseType: ResponseType.bytes),
       );
@@ -268,7 +268,7 @@ class FluwxUtil {
       return _fetchImageBytes(networkThumb!);
     }
     if (assetThumb?.isNotEmpty == true) {
-      final ByteData data = await rootBundle.load(assetThumb!);
+      final data = await rootBundle.load(assetThumb!);
       return data.buffer.asUint8List();
     }
     return null;

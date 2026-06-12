@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 
 class NTabIndicatorBump extends Decoration {
   final Color? color;
@@ -59,16 +58,16 @@ class _RoundedPainter extends BoxPainter {
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    final double startX = offset.dx + (configuration.size!.width - width) / 2;
-    final double endX = startX + width;
-    final double topY = configuration.size!.height - height - topMargin;
+    final startX = offset.dx + (configuration.size!.width - width) / 2;
+    final endX = startX + width;
+    final topY = configuration.size!.height - height - topMargin;
 
-    final RRect indicatorRect = RRect.fromRectAndRadius(
+    final indicatorRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(startX, topY, width, height),
       Radius.circular(borderRadius),
     );
 
-    final Paint paint = Paint()..style = PaintingStyle.fill;
+    final paint = Paint()..style = PaintingStyle.fill;
 
     if (gradient != null) {
       paint.shader = gradient!.createShader(indicatorRect.outerRect);
@@ -81,18 +80,18 @@ class _RoundedPainter extends BoxPainter {
     final bumpPaint = Paint()..style = PaintingStyle.fill;
 
     // indicator height
-    final double H = height;
+    final H = height;
 
-    final double bumpHeight = H * 2;
-    final double bumpWidth = bumpHeight * 1.4;
+    final bumpHeight = H * 2;
+    final bumpWidth = bumpHeight * 1.4;
 
     // 居中
-    final double bumpX = startX + (width - bumpWidth) / 2;
+    final bumpX = startX + (width - bumpWidth) / 2;
 
     // 下半部分压住 indicator
-    final double bumpY = topY - H;
+    final bumpY = topY - H;
 
-    final Rect ovalRect = Rect.fromLTWH(
+    final ovalRect = Rect.fromLTWH(
       bumpX,
       bumpY,
       bumpWidth,

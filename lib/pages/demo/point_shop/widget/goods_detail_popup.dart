@@ -11,17 +11,16 @@ import 'package:flutter_templet_project/basicWidget/elevated_btn.dart';
 import 'package:flutter_templet_project/basicWidget/n_chat_bubble.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_adaptive_container.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_category_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_status_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/model/ShopGoodsDetailModel.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_tags.dart';
-import 'package:flutter_templet_project/util/bottom_sheet_util.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 
 /// 商品购买弹窗内容组件
 class GoodsDetailPopup extends StatefulWidget {

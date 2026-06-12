@@ -253,20 +253,20 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
         runSpacing: 8,
         children: [
           OutlinedButton(
-            child: Text("Outlined"),
             onPressed: onPressed,
+            child: Text("Outlined"),
           ),
           ElevatedButton(
-            child: Text("Elevated"),
             onPressed: onPressed,
+            child: Text("Elevated"),
           ),
           FilledButton.tonal(
-            child: Text("tonal"),
             onPressed: onPressed,
+            child: Text("tonal"),
           ),
           TextButton(
-            child: Text("Text"),
             onPressed: onPressed,
+            child: Text("Text"),
           ),
         ],
       ),
@@ -282,23 +282,23 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
         children: [
           AppButton(
             type: AppButtonType.outlined,
-            child: Text("Outlined"),
             onPressed: onPressed,
+            child: Text("Outlined"),
           ),
           AppButton(
             type: AppButtonType.filled,
-            child: Text("Filled"),
             onPressed: onPressed,
+            child: Text("Filled"),
           ),
           AppButton(
             type: AppButtonType.filledTonal,
-            child: Text("Tonal"),
             onPressed: onPressed,
+            child: Text("Tonal"),
           ),
           AppButton(
             type: AppButtonType.text,
-            child: Text("Text"),
             onPressed: onPressed,
+            child: Text("Text"),
           ),
         ],
       ),
@@ -314,23 +314,23 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
         children: [
           AppButtonNew(
             type: AppButtonType.outlined,
-            child: Text("Outlined"),
             onPressed: onPressed,
+            child: Text("Outlined"),
           ),
           AppButtonNew(
             type: AppButtonType.filled,
-            child: Text("Filled"),
             onPressed: onPressed,
+            child: Text("Filled"),
           ),
           AppButtonNew(
             type: AppButtonType.filledTonal,
-            child: Text("Tonal"),
             onPressed: onPressed,
+            child: Text("Tonal"),
           ),
           AppButtonNew(
             type: AppButtonType.text,
-            child: Text("Text"),
             onPressed: onPressed,
+            child: Text("Text"),
           ),
         ],
       ),

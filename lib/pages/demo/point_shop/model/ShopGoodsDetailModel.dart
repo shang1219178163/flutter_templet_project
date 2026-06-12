@@ -6,15 +6,12 @@
 //  Copyright © 2026/4/21 shang. All rights reserved.
 //
 
-import 'dart:ui';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_templet_project/generated/assets.dart';
+import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_category_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_status_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/model/ShopGoodsGiftExtra.dart';
-import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_category_enum.dart';
 
 /// 熊猫币商品详情
 class ShopGoodsDetailModel {

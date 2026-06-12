@@ -37,7 +37,7 @@ class BottomSheetUtil {
       ),
       elevation: 0,
       builder: (context) {
-        Widget content = child;
+        var content = child;
         if (isScrollable) {
           content = Scrollbar(
             child: SingleChildScrollView(

@@ -11,7 +11,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 字符串转文件
