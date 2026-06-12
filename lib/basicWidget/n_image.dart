@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/CacheImageProvider.dart';
 
 /// 通用图片加载组件
@@ -15,8 +16,8 @@ class NImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
-    this.placeholder,
-    this.errorPlaceholder,
+    this.placeholder = const AssetImage(Assets.imagesIconNewsPlaceholder),
+    this.errorPlaceholder = const AssetImage(Assets.imagesIconNewsPlaceholder),
     this.errorWidget,
     this.useCache = true,
     this.borderRadius,
@@ -24,12 +25,6 @@ class NImage extends StatelessWidget {
     this.colorBlendMode,
     this.showLoadingProgress = false,
   });
-
-  /// 默认占位图资源路径
-  static const String defaultPlaceholderAsset = 'assets/images/img_placeholder.png';
-
-  /// 默认错误占位图资源路径
-  static const String defaultErrorAsset = 'assets/images/img_placeholder_empty.png';
 
   /// 图片来源，支持 String / File / Uint8List / ImageProvider
   final Object? source;
@@ -39,7 +34,7 @@ class NImage extends StatelessWidget {
   final BoxFit fit;
 
   /// 加载中占位图，默认 [defaultPlaceholderAsset]
-  final ImageProvider? placeholder;
+  final ImageProvider placeholder;
 
   /// 加载失败占位图，默认 [defaultErrorAsset]
   final ImageProvider? errorPlaceholder;
@@ -112,7 +107,7 @@ class NImage extends StatelessWidget {
 
   Widget buildPlaceholderWidget() {
     return buildImageFromProvider(
-      placeholder ?? const AssetImage(defaultPlaceholderAsset),
+      placeholder,
       isPlaceholder: true,
     );
   }
@@ -122,7 +117,7 @@ class NImage extends StatelessWidget {
       return SizedBox(width: width, height: height, child: errorWidget);
     }
     return buildImageFromProvider(
-      errorPlaceholder ?? placeholder ?? const AssetImage(defaultErrorAsset),
+      errorPlaceholder ?? placeholder,
       isPlaceholder: true,
     );
   }
@@ -138,19 +133,14 @@ class NImage extends StatelessWidget {
       color: color,
       colorBlendMode: colorBlendMode,
       errorBuilder: (_, __, ___) => errorView,
-      frameBuilder: (
-        BuildContext context,
-        Widget child,
-        int? frame,
-        bool wasSynchronouslyLoaded,
-      ) {
+      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded || frame != null) {
           return child;
         }
         return placeholderWidget;
       },
       loadingBuilder: showLoadingProgress
-          ? (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+          ? (context, child, loadingProgress) {
               if (loadingProgress == null) {
                 return child;
               }
@@ -170,7 +160,7 @@ class NImage extends StatelessWidget {
                 ],
               );
             }
-          : (context, Widget child, ImageChunkEvent? loadingProgress) {
+          : (context, child, loadingProgress) {
               if (loadingProgress == null) {
                 return child;
               }
