@@ -2,8 +2,12 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/util/CacheImageProvider.dart';
 
+/// 通用图片加载组件
+///
+/// 支持 [String]、[File]、[Uint8List]、[ImageProvider] 等多种图片来源，
+/// 网络图片默认走磁盘缓存，加载中与失败时分别展示占位图与错误占位图。
 class NImage extends StatelessWidget {
   const NImage({
     super.key,
@@ -11,79 +15,195 @@ class NImage extends StatelessWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
-    this.placeholder = const AssetImage("assets/images/img_placeholder.png"),
+    this.placeholder,
+    this.errorPlaceholder,
+    this.errorWidget,
+    this.useCache = true,
+    this.borderRadius,
+    this.color,
+    this.colorBlendMode,
+    this.showLoadingProgress = false,
   });
 
-  final dynamic source; // 这个是传入的图片来源，可以是 String、Uint8List 或 File
+  /// 默认占位图资源路径
+  static const String defaultPlaceholderAsset = 'assets/images/img_placeholder.png';
+
+  /// 默认错误占位图资源路径
+  static const String defaultErrorAsset = 'assets/images/img_placeholder_empty.png';
+
+  /// 图片来源，支持 String / File / Uint8List / ImageProvider
+  final Object? source;
+
   final double? width;
   final double? height;
   final BoxFit fit;
-  final AssetImage placeholder;
+
+  /// 加载中占位图，默认 [defaultPlaceholderAsset]
+  final ImageProvider? placeholder;
+
+  /// 加载失败占位图，默认 [defaultErrorAsset]
+  final ImageProvider? errorPlaceholder;
+
+  /// 自定义错误占位组件，优先级高于 [errorPlaceholder]
+  final Widget? errorWidget;
+
+  /// 网络图片是否启用磁盘缓存
+  final bool useCache;
+
+  final BorderRadius? borderRadius;
+  final Color? color;
+  final BlendMode? colorBlendMode;
+
+  /// 是否展示网络加载进度条，默认仅显示占位图
+  final bool showLoadingProgress;
 
   @override
   Widget build(BuildContext context) {
-    final placeholderImage = Image(
-      image: placeholder,
+    final imageProvider = resolveImageProvider(
+      source,
+      useCache: useCache,
+    );
+    if (imageProvider == null) {
+      return buildPlaceholderWidget();
+    }
+    return buildImageWidget(imageProvider);
+  }
+
+  /// 将多种图片来源解析为 [ImageProvider]
+  static ImageProvider? resolveImageProvider(
+    Object? source, {
+    bool useCache = true,
+  }) {
+    if (source == null) {
+      return null;
+    }
+    if (source is ImageProvider) {
+      return source;
+    }
+    if (source is Uint8List) {
+      return MemoryImage(source);
+    }
+    if (source is File) {
+      return FileImage(source);
+    }
+    if (source is String) {
+      final sourceNew = source.trim();
+      if (sourceNew.isEmpty) {
+        return null;
+      }
+      if (sourceNew.startsWith('http://') || sourceNew.startsWith('https://')) {
+        if (useCache) {
+          return CacheImageProvider(sourceNew);
+        }
+        return NetworkImage(sourceNew);
+      }
+      if (sourceNew.startsWith('assets/')) {
+        return AssetImage(sourceNew);
+      }
+      final localFile = File(sourceNew);
+      if (localFile.existsSync()) {
+        return FileImage(localFile);
+      }
+      return null;
+    }
+    debugPrint('NImage 不支持的图片来源类型: ${source.runtimeType} -> $source');
+    return null;
+  }
+
+  Widget buildPlaceholderWidget() {
+    return buildImageFromProvider(
+      placeholder ?? const AssetImage(defaultPlaceholderAsset),
+      isPlaceholder: true,
+    );
+  }
+
+  Widget buildErrorWidget() {
+    if (errorWidget != null) {
+      return SizedBox(width: width, height: height, child: errorWidget);
+    }
+    return buildImageFromProvider(
+      errorPlaceholder ?? placeholder ?? const AssetImage(defaultErrorAsset),
+      isPlaceholder: true,
+    );
+  }
+
+  Widget buildImageWidget(ImageProvider imageProvider) {
+    final placeholderWidget = buildPlaceholderWidget();
+    final errorView = buildErrorWidget();
+    Widget image = Image(
+      image: imageProvider,
       width: width,
       height: height,
       fit: fit,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      errorBuilder: (_, __, ___) => errorView,
+      frameBuilder: (
+        BuildContext context,
+        Widget child,
+        int? frame,
+        bool wasSynchronouslyLoaded,
+      ) {
+        if (wasSynchronouslyLoaded || frame != null) {
+          return child;
+        }
+        return placeholderWidget;
+      },
+      loadingBuilder: showLoadingProgress
+          ? (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              final expectedTotalBytes = loadingProgress.expectedTotalBytes;
+              final progressValue = expectedTotalBytes == null || expectedTotalBytes == 0
+                  ? 0.0
+                  : loadingProgress.cumulativeBytesLoaded / expectedTotalBytes;
+              return Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  placeholderWidget,
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(value: progressValue),
+                  ),
+                ],
+              );
+            }
+          : (context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return placeholderWidget;
+            },
     );
-
-    errorBuilder(_, stack, error) {
-      return const Icon(Icons.error);
+    if (borderRadius != null) {
+      image = ClipRRect(
+        borderRadius: borderRadius!,
+        child: image,
+      );
     }
+    return image;
+  }
 
-    switch (source.runtimeType) {
-      case String:
-        {
-          final sourceNew = source as String;
-          if (sourceNew.startsWith('http')) {
-            return NNetworkImage(
-              url: sourceNew,
-              width: width,
-              height: height,
-              fit: fit,
-            );
-          }
-
-          if (sourceNew.startsWith('assets/')) {
-            return Image.asset(
-              sourceNew,
-              width: width,
-              height: height,
-              fit: fit,
-              errorBuilder: errorBuilder,
-            );
-          }
-
-          final file = File(sourceNew);
-          if (file.existsSync()) {
-            return Image.file(
-              file,
-              width: width,
-              height: height,
-              cacheWidth: width == null ? null : width!.toInt() * 3,
-              cacheHeight: height == null ? null : height!.toInt() * 3,
-              fit: fit,
-              errorBuilder: errorBuilder,
-            );
-          }
-        }
-        break;
-      case Uint8List:
-        {
-          return Image.memory(
-            source,
-            width: width,
-            height: height,
-            fit: fit,
-            errorBuilder: errorBuilder,
-          );
-        }
-        break;
-      default:
-        debugPrint('$this unknown type: ${source.runtimeType}: $source');
+  Widget buildImageFromProvider(
+    ImageProvider provider, {
+    required bool isPlaceholder,
+  }) {
+    Widget image = Image(
+      image: provider,
+      width: width,
+      height: height,
+      fit: fit,
+      color: isPlaceholder ? null : color,
+      colorBlendMode: isPlaceholder ? null : colorBlendMode,
+    );
+    if (borderRadius != null) {
+      image = ClipRRect(
+        borderRadius: borderRadius!,
+        child: image,
+      );
     }
-    return placeholderImage;
+    return image;
   }
 }
