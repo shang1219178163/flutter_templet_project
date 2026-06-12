@@ -119,13 +119,6 @@ class _TestFunctionState extends State<TestFunction> with DebounceStreamMixin<Te
     final funcOne = repeat(onChanged: (val) {
       debugPrint("onChanged: $val");
     });
-
-    funcOne();
-    funcOne();
-    funcOne();
-    funcOne();
-    funcOne();
-    funcOne();
   }
 
   fc(int n, int m, {operation = "add"}) {
