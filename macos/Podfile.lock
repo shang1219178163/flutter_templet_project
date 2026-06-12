@@ -44,7 +44,7 @@ PODS:
   - photo_manager (3.9.0):
     - Flutter
     - FlutterMacOS
-  - record_macos (1.2.0):
+  - record_macos (1.2.1):
     - FlutterMacOS
   - screen_brightness_macos (0.1.0):
     - FlutterMacOS
@@ -64,6 +64,8 @@ PODS:
     - FlutterMacOS
   - video_player_avfoundation (0.0.1):
     - Flutter
+    - FlutterMacOS
+  - volume_controller (0.0.1):
     - FlutterMacOS
   - wakelock_plus (0.0.1):
     - FlutterMacOS
@@ -100,6 +102,7 @@ DEPENDENCIES:
   - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
   - video_compress (from `Flutter/ephemeral/.symlinks/plugins/video_compress/macos`)
   - video_player_avfoundation (from `Flutter/ephemeral/.symlinks/plugins/video_player_avfoundation/darwin`)
+  - volume_controller (from `Flutter/ephemeral/.symlinks/plugins/volume_controller/macos`)
   - wakelock_plus (from `Flutter/ephemeral/.symlinks/plugins/wakelock_plus/macos`)
   - webview_flutter_wkwebview (from `Flutter/ephemeral/.symlinks/plugins/webview_flutter_wkwebview/darwin`)
 
@@ -164,6 +167,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/video_compress/macos
   video_player_avfoundation:
     :path: Flutter/ephemeral/.symlinks/plugins/video_player_avfoundation/darwin
+  volume_controller:
+    :path: Flutter/ephemeral/.symlinks/plugins/volume_controller/macos
   wakelock_plus:
     :path: Flutter/ephemeral/.symlinks/plugins/wakelock_plus/macos
   webview_flutter_wkwebview:
@@ -190,8 +195,8 @@ SPEC CHECKSUMS:
   package_info_plus: 12f1c5c2cfe8727ca46cbd0b26677728972d9a5b
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   photo_manager: d8a1055c2d3ee24fc300461c66e0defdec58b3d6
-  record_macos: 4680f37daeebf52162e715efb7ff682f0a5ce4fd
-  screen_brightness_macos: 2d6d3af2165592d9a55ffcd95b7550970e41ebda
+  record_macos: ccd7864c9922136e50c2937b21384f0b175922f2
+  screen_brightness_macos: 8cc84c365ae2910833b7232f90b6027d4e67c31e
   share_plus: 1fa619de8392a4398bfaf176d441853922614e89
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: a9e97e744e8edc36aefc2723111f652102a7a727
@@ -199,6 +204,7 @@ SPEC CHECKSUMS:
   url_launcher_macos: c82c93949963e55b228a30115bd219499a6fe404
   video_compress: c896234f100791b5fef7f049afa38f6d2ef7b42f
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
+  volume_controller: 90a5978956cf18ebb7739bf5382fc1b0cfef66d0
   wakelock_plus: 9d63063ffb7af1c215209769067c57103bde719d
   webview_flutter_wkwebview: a4af96a051138e28e29f60101d094683b9f82188
 

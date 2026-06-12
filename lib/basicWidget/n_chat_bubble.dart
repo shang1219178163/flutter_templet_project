@@ -24,8 +24,9 @@ class NChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var imageProvider =
-        imagePath.startsWith("http") ? CachedNetworkImageProvider(imagePath) : AssetImage(imagePath);
+    final ImageProvider<Object> imageProvider = imagePath.startsWith("http")
+        ? CachedNetworkImageProvider(imagePath)
+        : AssetImage(imagePath);
     return Container(
       // margin: const EdgeInsets.only(top: 10),
       // ⭐关键1：给足最小高度（防止单行塌陷）

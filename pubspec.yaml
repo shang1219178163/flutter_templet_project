@@ -278,7 +278,9 @@ dependency_overrides:
   meta: ^1.12.0
   collection: ^1.19.0
   scrollable_positioned_list: ^0.3.8
-  fluttertoast: ^9.0.0
+  fluttertoast: 9.0.0
+  # Flutter 3.27 不支持 FlutterSceneLifeCycleDelegate，锁定兼容版本
+  screen_brightness_ios: 2.1.2
 
   url_launcher_ios: 6.3.2
   flutter_linkify: ^6.0.0 #链接识别

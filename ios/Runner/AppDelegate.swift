@@ -1,8 +1,10 @@
 import UIKit
 import Flutter
+import MediaPlayer
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
+    private var volumeView: MPVolumeView?
     
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? ) -> Bool {
         if #available(iOS 10.0, *) {

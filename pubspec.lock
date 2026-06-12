@@ -1188,10 +1188,10 @@ packages:
     dependency: "direct overridden"
     description:
       name: fluttertoast
-      sha256: "7903c9d5339173497bfecbc23bc4212f5a87e0edfac2e1693fb74465ea67da7e"
+      sha256: "144ddd74d49c865eba47abe31cbc746c7b311c82d6c32e571fd73c4264b740e2"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "9.1.0"
+    version: "9.0.0"
   fluwx:
     dependency: "direct main"
     description:
@@ -2251,13 +2251,13 @@ packages:
     source: hosted
     version: "2.1.5"
   screen_brightness_ios:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: screen_brightness_ios
-      sha256: "0792d8f98852558f831b4b75241c46047b884598b3f4d982b37dc2dd43e2b2e1"
+      sha256: "2493953340ecfe8f4f13f61db50ce72533a55b0bbd58ba1402893feecf3727f5"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.3"
+    version: "2.1.2"
   screen_brightness_macos:
     dependency: transitive
     description:
