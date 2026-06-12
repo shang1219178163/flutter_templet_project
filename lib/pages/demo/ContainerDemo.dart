@@ -9,7 +9,6 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
-import 'package:flutter_templet_project/util/CacheImageProvider.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class ContainerDemo extends StatefulWidget {
