@@ -146,8 +146,6 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
             );
           }
           break;
-        default:
-          break;
       }
 
       return child;

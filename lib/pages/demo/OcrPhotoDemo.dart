@@ -185,12 +185,13 @@ class _OCRNetImageCardState extends State<OCRNetImageCard> with AutomaticKeepAli
   Future<String> recognition({required String url}) async {
     final file = await AssetCacheService().saveNetworkImage(url: url);
     final res = await OcrTextRecognitionManager().processImage(file);
-    final text = (res.result ?? "").split("\n").join(" ");
+    final text = res.result.split("\n").join(" ");
     return Future(() => text);
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final avatar = widget.avatar ?? "";
     return Container(
       constraints: BoxConstraints(

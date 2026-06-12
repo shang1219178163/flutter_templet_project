@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/service/connectivity_service.dart';
 class NetStateListenerDemo extends StatefulWidget {
   NetStateListenerDemo({Key? key, this.title}) : super(key: key);
 
-  String? title;
+  final String? title;
 
   @override
   _NetStateListenerDemoState createState() => _NetStateListenerDemoState();

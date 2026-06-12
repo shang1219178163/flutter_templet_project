@@ -114,7 +114,7 @@ class _QrcodePageState extends State<QrcodePage> {
                 ),
               ),
               child: NText(
-                name ?? "-",
+                name,
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

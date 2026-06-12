@@ -3,9 +3,6 @@
 // found in the LICENSE file.
 
 /// @docImport 'package:flutter/material.dart';
-///
-/// @docImport 'app.dart';
-/// @docImport 'nav_bar.dart';
 library;
 
 import 'dart:math';

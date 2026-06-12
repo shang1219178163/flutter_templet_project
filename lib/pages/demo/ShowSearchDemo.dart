@@ -41,7 +41,7 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
                   list: filters,
                   select: '',
                   onSelected: (String query) {
-                    filters = list.where((e) => query.isEmpty ? e != null : e.contains(query.trim())).toList();
+                    filters = list.where((e) => query.isEmpty || e.contains(query.trim())).toList();
                     setState(() {});
                   },
                 ),

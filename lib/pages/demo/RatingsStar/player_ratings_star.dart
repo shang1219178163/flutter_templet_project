@@ -32,7 +32,7 @@ class PlayerRatingsStar extends StatefulWidget {
 class _PlayerRatingsStarState extends State<PlayerRatingsStar> {
   late final themeProvider = context.read<ThemeProvider>();
 
-  late var starMap = widget.starMap ?? <int, int>{5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
+  late var starMap = widget.starMap;
 
   late var myScore = widget.myScore;
 

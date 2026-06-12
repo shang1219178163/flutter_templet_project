@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/hud/ToastDialog.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class HudProgressDemo extends StatelessWidget {
-  var titles = List.generate(10, (index) => "item$index");
+  final List<String> titles = List.generate(10, (index) => "item$index");
 
   final String? title;
 

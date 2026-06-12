@@ -16,27 +16,10 @@ class RootModel<T extends Coding> {
 
   RootModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
-
-    switch (result) {
-      case String:
-      case bool:
-      case int:
-      case double:
-        {
-          result = json['result'] as T?;
-        }
-        break;
-      case List:
-        {}
-        break;
-      case Map:
-        {}
-        break;
-      default:
-        break;
+    final dynamic resultValue = json['result'];
+    if (resultValue is String || resultValue is bool || resultValue is int || resultValue is double) {
+      result = resultValue as T?;
     }
-    // result = json['result'] != null ? DoctorListResultModel.fromJson(json['result']) : null;
-
     application = json['application'];
     traceId = json['traceId'];
     message = json['message'];

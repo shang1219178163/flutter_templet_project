@@ -311,13 +311,12 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
 class RadioListChooseNewWidget extends StatefulWidget {
   RadioListChooseNewWidget({Key? key}) : super(key: key);
 
-  Object? selectedIndex = 0;
-
   @override
   _RadioListChooseNewWidgetState createState() => _RadioListChooseNewWidgetState();
 }
 
 class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
+  Object? selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -330,22 +329,22 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
             onChanged: (value) {
               _changeValue(value);
             },
-            groupValue: widget.selectedIndex,
+            groupValue: selectedIndex,
             title: Text("一级标题"),
             subtitle: Text("二级标题"),
             secondary: Icon(Icons.camera),
-            selected: widget.selectedIndex == 0,
+            selected: selectedIndex == 0,
           ),
           RadioListTile(
             value: 1,
             onChanged: (value) {
               _changeValue(value);
             },
-            groupValue: widget.selectedIndex,
+            groupValue: selectedIndex,
             title: Text("一级标题"),
             subtitle: Text("二级标题"),
             secondary: Icon(Icons.palette),
-            selected: widget.selectedIndex == 1,
+            selected: selectedIndex == 1,
           ),
         ],
       ),
@@ -354,14 +353,14 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
 
   void _changeValue(Object? value) {
     setState(() {
-      widget.selectedIndex = value;
+      selectedIndex = value;
     });
   }
 }
 
 ///单选菜单
 class RadioTileSexWidget extends StatefulWidget {
-  Object selectedIndex = 0;
+  final Object selectedIndex;
 
   RadioTileSexWidget({
     Key? key,
@@ -373,10 +372,7 @@ class RadioTileSexWidget extends StatefulWidget {
 }
 
 class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  late Object selectedIndex = widget.selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -390,7 +386,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
             children: <Widget>[
               Radio(
                 value: 0,
-                groupValue: widget.selectedIndex,
+                groupValue: selectedIndex,
                 onChanged: (value) {
                   _changeValue(value);
                 },
@@ -399,7 +395,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
               SizedBox(width: 20),
               Radio(
                 value: 1,
-                groupValue: widget.selectedIndex,
+                groupValue: selectedIndex,
                 onChanged: (value) {
                   _changeValue(value);
                 },
@@ -409,7 +405,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[Text("你选择的是${widget.selectedIndex == 1 ? "男" : "女"}")],
+            children: <Widget>[Text("你选择的是${selectedIndex == 1 ? "男" : "女"}")],
           )
         ],
       ),
@@ -421,9 +417,9 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
       return;
     }
     setState(() {
-      widget.selectedIndex = value;
+      selectedIndex = value;
     });
-    DLog.d(widget.selectedIndex);
+    DLog.d(selectedIndex);
   }
 }
 

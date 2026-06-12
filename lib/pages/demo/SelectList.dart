@@ -70,11 +70,11 @@ class SelectList extends StatefulWidget {
     required this.onSelected,
   });
 
-  bool isMultiple;
+  final bool isMultiple;
 
-  List<UserModel> models;
+  final List<UserModel> models;
 
-  ValueChanged<List<UserModel>> onSelected;
+  final ValueChanged<List<UserModel>> onSelected;
 
   @override
   State<SelectList> createState() => _SelectListState();

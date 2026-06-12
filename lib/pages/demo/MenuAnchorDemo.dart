@@ -204,7 +204,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
               ValueListenableBuilder(
                 valueListenable: _selectedItemVN,
                 builder: (context, value, child) {
-                  return Text(value.name ?? defaultValue);
+                  return Text(value.name);
                 },
               ),
             ],

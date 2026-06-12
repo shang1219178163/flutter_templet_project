@@ -41,7 +41,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
 
   final users = List.generate(10, (i) {
     final model = UserModel(
-      id: i.toString() ?? "",
+      id: i.toString(),
       name: "订单$i",
     );
     model.isSelected = true;

@@ -200,7 +200,7 @@ class PredictionItem extends StatelessWidget {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: title.trimLeft() ?? "-",
+                                          text: title.trimLeft(),
                                           style: TextStyle(fontSize: 16, color: Colors.white),
                                         ),
                                       ],

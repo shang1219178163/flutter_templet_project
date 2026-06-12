@@ -388,7 +388,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         height: 475,
         child: NPickUsersBox(
           title: "人员选择",
-          items: items ?? [],
+          items: items,
           onChanged: (list) {
             DLog.d("list: ${list.map((e) => e.toJson().filter((k, v) => v != null))}");
           },
@@ -485,13 +485,14 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
 class DatePickerDemo extends StatefulWidget {
   DatePickerDemo({
     Key? key,
-    this.dateTime,
+    DateTime? dateTime,
     this.callback,
-  }) : super(key: key);
+  })  : dateTime = dateTime ?? DateTime.now(),
+        super(key: key);
 
-  DateTime? dateTime = DateTime.now();
+  final DateTime? dateTime;
 
-  void Function(DateTime dateTime)? callback;
+  final void Function(DateTime dateTime)? callback;
 
   @override
   _DatePickerDemoState createState() => _DatePickerDemoState();

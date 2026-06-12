@@ -98,7 +98,6 @@ class _ImChatPageState extends State<ImChatPage>
     initData();
   }
 
-  @override
   void onKeyboardChanged(bool visible) {
     // TODO deal with keyboard visibility change.
     debugPrint("onKeyboardChanged:${visible ? "展开键盘" : "收起键盘"}");

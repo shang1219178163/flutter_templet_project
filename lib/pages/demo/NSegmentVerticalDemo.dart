@@ -150,7 +150,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
     var bgColor = isSelected ? AppColor.white : AppColor.bgColorF9F9F9;
     // bgColor = isSelected ? white : Colors.green;
 
-    var name = model.selectableName ?? "";
+    var name = model.selectableName;
 
     return ColoredBox(
       color: AppColor.white,

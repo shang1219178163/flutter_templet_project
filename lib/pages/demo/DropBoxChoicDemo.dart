@@ -231,8 +231,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         isSingle: isSingle,
         models: orders,
         cbID: (e) => e.id.toString(),
-        cbName: (e) => e.name ?? "",
-        cbSelected: (e) => selectedOrders.map((e) => e.id ?? "").toList().contains(e.id),
+        cbName: (e) => e.name,
+        cbSelected: (e) => selectedOrders.map((e) => e.id.toString()).toList().contains(e.id),
         onChanged: (value) {
           // debugPrint("selectedModels: $value");
           selectedOrdersTmp = value;

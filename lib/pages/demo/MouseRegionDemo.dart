@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class MouseRegionDemo extends StatefulWidget {
-  String? title;
+  final String? title;
 
   MouseRegionDemo({Key? key, this.title}) : super(key: key);
 

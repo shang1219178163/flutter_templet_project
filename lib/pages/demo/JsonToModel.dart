@@ -431,8 +431,8 @@ class _JsonToModelState extends State<JsonToModel> {
         classSuffix: _suffixController.text,
       );
 
-      final fileName = (_prefixController.text ?? "").toUpperCase() +
-          (_nameController.text ?? "") +
+      final fileName = _prefixController.text.toUpperCase() +
+          _nameController.text +
           (_suffixController.text.capitalizeFirst ?? "");
       // debugPrint("fileName: $fileName");
 

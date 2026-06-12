@@ -51,7 +51,7 @@ class LocalImagePage extends StatelessWidget {
     );
   }
 
-  List<String> imageNames = <String>[
+  final List<String> imageNames = <String>[
     "avatar.png",
     "icon_appbar_back.png",
     "icon_appbar_back_white.png",

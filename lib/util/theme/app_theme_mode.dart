@@ -49,8 +49,6 @@ enum AppThemeMode {
           result = AppThemeMode.light;
         }
         break;
-      default:
-        break;
     }
     return result;
   }

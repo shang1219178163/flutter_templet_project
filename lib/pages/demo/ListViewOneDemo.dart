@@ -244,13 +244,13 @@ class MarqueeSimpleWidget extends StatelessWidget {
   final int itemCount;
 
   /// 内容 builder
-  MarqueeWidgetBuilder itemBuilder;
+  final MarqueeWidgetBuilder itemBuilder;
 
   /// 边界 builder
-  MarqueeWidgetBuilder? edgeBuilder;
+  final MarqueeWidgetBuilder? edgeBuilder;
 
   /// 间距 builder
-  MarqueeWidgetBuilder? gapBuilder;
+  final MarqueeWidgetBuilder? gapBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -314,11 +314,11 @@ class MarqueeWidget extends StatefulWidget {
 
   final String? title;
 
-  int itemCount;
+  final int itemCount;
 
-  double itemSpacing;
+  final double itemSpacing;
 
-  MarqueeWidgetBuilder itemBuilder;
+  final MarqueeWidgetBuilder itemBuilder;
 
   @override
   _MarqueeWidgetState createState() => _MarqueeWidgetState();

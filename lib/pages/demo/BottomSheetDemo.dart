@@ -319,7 +319,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
 
   void onGetDialog() {
     final result = getFileContent();
-    final title = result.title ?? "onGetDialog";
+    final title = result.title;
     final content = result.content;
 
     GetDialog.showCustom(

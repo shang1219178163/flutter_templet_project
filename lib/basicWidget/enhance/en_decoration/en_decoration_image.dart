@@ -5,8 +5,6 @@
 /// @docImport 'package:flutter/rendering.dart';
 /// @docImport 'package:flutter/widgets.dart';
 ///
-/// @docImport 'box_decoration.dart';
-/// @docImport 'image_resolution.dart';
 library;
 
 import 'dart:developer' as developer;

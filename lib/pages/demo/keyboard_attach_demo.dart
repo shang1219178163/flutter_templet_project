@@ -25,7 +25,6 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
   Widget get safeAreaBottom =>
       SizedBox(height: max(MediaQuery.of(context).viewInsets.bottom, MediaQuery.of(context).viewPadding.bottom));
 
-  @override
   void onKeyboardChanged(bool visible) {
     // TODO deal with keyboard visibility change.
     debugPrint("onKeyboardChanged:${visible ? "展开键盘" : "收起键盘"}");

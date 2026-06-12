@@ -93,7 +93,7 @@ class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   divider: SizedBox(),
                   child: NText(
-                    e.formula ?? "",
+                    e.formula,
                     fontSize: 12,
                   ),
                 ),
@@ -103,7 +103,7 @@ class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   divider: SizedBox(),
                   child: NText(
-                    e.params.toString() ?? "",
+                    e.params.toString(),
                     fontSize: 12,
                   ),
                 ),

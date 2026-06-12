@@ -72,7 +72,9 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
             return await decode(immutableBuffer);
           } catch (e) {
             // 缓存文件损坏，删除后重新下载
-            await cacheFile.delete().catchError((_) => {});
+            try {
+              await cacheFile.delete();
+            } catch (_) {}
           }
         }
 
@@ -92,7 +94,9 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
         final codec = await decode(buffer);
 
         // 解码成功后写入缓存
-        await cacheFile.writeAsBytes(bytes).catchError((_) => {});
+        try {
+          await cacheFile.writeAsBytes(bytes);
+        } catch (_) {}
 
         return codec;
       } catch (e) {

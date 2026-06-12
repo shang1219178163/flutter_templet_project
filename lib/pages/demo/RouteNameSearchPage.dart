@@ -60,7 +60,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
           ...buildHeader(),
           NAutocompleteSearch(
             displayStringForOption: (option) {
-              return option.name ?? "";
+              return option.name;
             },
             optionsBuilder: (TextEditingValue textEditingValue) {
               final query = textEditingValue.text;

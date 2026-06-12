@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class AnimatedDemo extends StatefulWidget {
-  String? title;
+  final String? title;
 
   AnimatedDemo({Key? key, this.title}) : super(key: key);
 

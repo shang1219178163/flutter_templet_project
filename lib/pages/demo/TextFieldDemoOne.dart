@@ -56,9 +56,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
       var hasFocus = focusNode.hasFocus;
 
       ///当前 focusNode 是否添加了兼听
-      var hasListeners = focusNode.hasListeners;
-
-      debugPrint("focusNode 兼听 hasFocus:$hasFocus  hasListeners:$hasListeners");
+      debugPrint("focusNode 兼听 hasFocus:$hasFocus");
     });
 
     /// WidgetsBinding 它能监听到第一帧绘制完成，第一帧绘制完成标志着已经Build完成

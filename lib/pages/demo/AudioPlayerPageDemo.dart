@@ -57,7 +57,7 @@ class _AudioPlayPageDemoState extends State<AudioPlayPageDemo> {
               onPressed: () {
                 final url = "https://ylgcp-1259562304.cos.ap-beijing"
                     ".myqcloud.com/beta/message/trtc/D0zNeI1Rsl+5JZsZ3IHEod32B4WQQrcfbphUzLFudOxa++Iw-pX4FdRVa0h6VOyilruxBp+j9beno1-GVHUA/1400349613_1365667410.m3u8";
-                final desc = (url ?? "").split("/").last;
+                final desc = url.split("/").last;
                 MediaPlayerController().toAudioPlayer(
                   url: url,
                   desc: desc,
