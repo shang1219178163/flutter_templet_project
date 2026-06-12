@@ -44,7 +44,9 @@ class EnDecorationImage extends DecorationImage {
     this.destinationOffset = Offset.zero,
   });
 
-  /// image's placeholder. must be local image.
+  /// A placeholder image to display while the target [image] is loading.
+  ///
+  /// This is typically an [AssetImage] when the target [image] is a [NetworkImage].
   final ImageProvider? placeholder;
 
   /// only translate dx, dy.
@@ -253,8 +255,13 @@ class _DecorationImagePainter implements DecorationImagePainter {
       }
     }
 
-    if (_details.placeholder != null) {
-      final placeholderStream = _details.placeholder!.resolve(configuration);
+    if (_image != null) {
+      _placeholderStream?.removeListener(_placeholderListener);
+      _placeholderStream = null;
+      _placeholderImage?.dispose();
+      _placeholderImage = null;
+    } else if (_details.placeholder != null) {
+      final ImageStream placeholderStream = _details.placeholder!.resolve(configuration);
       if (placeholderStream.key != _placeholderStream?.key) {
         _placeholderStream?.removeListener(_placeholderListener);
         _placeholderStream = placeholderStream;
@@ -318,6 +325,10 @@ class _DecorationImagePainter implements DecorationImagePainter {
   }
 
   void _handlePlaceholder(ImageInfo value, bool synchronousCall) {
+    if (_image != null) {
+      value.dispose();
+      return;
+    }
     if (_placeholderImage == value) {
       return;
     }
