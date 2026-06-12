@@ -7,6 +7,7 @@
 //
 
 import 'dart:io';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/AppVideoPlayerService.dart';
@@ -51,7 +52,7 @@ class AppVideoPlayer extends StatefulWidget {
 }
 
 class _AppVideoPlayerState extends State<AppVideoPlayer>
-    with WidgetsBindingObserver, AutomaticKeepAliveClientMixin, VolumeAndBrightnessMixin {
+    with WidgetsBindingObserver, AutomaticKeepAliveClientMixin, VolumeIOSMixin, VolumeAndBrightnessMixin {
   VideoPlayerController? _videoController;
   ChewieController? _chewieController;
 

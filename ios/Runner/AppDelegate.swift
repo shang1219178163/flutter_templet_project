@@ -9,17 +9,38 @@ import Flutter
             UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
         }
         GeneratedPluginRegistrant.register(with: self)
-    
-        if let vc = window?.rootViewController as? FlutterViewController {
-            let batteryChannel = FlutterMethodChannel(name: "samples.flutter.io/battery", binaryMessenger: vc.binaryMessenger)
-            batteryChannel.setMethodCallHandler { (call, result) in
-                if call.method == "getBatteryLevel" {
-                    self.receiveBatteryLevel(result)
-                } else {
-                    result(FlutterMethodNotImplemented)
-                }
+
+        guard let rootViewController = window?.rootViewController as? FlutterViewController else {
+            return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+        }
+        
+        let batteryChannel = FlutterMethodChannel(name: "samples.flutter.io/battery",
+                                                  binaryMessenger: rootViewController.binaryMessenger)
+        batteryChannel.setMethodCallHandler { (call, result) in
+            if call.method == "getBatteryLevel" {
+                self.receiveBatteryLevel(result)
+            } else {
+                result(FlutterMethodNotImplemented)
             }
         }
+        
+        
+        let volumeChannel = FlutterMethodChannel(name: "flutter.device/volume",
+                                                 binaryMessenger: rootViewController.binaryMessenger)
+        volumeChannel.setMethodCallHandler { [weak self] call, result in
+            guard let self = self else { return }
+            if call.method == "setVolume" {
+                guard let args = call.arguments as? [String: Any],
+                      let value = args["value"] as? Double else {
+                    result(false)
+                    return
+                }
+                self.setSystemVolume(Float(value))
+                result(true)
+            }
+        }
+
+    
 
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -34,4 +55,22 @@ import Flutter
         }
         result(Int(device.batteryLevel * 100));
     }
+    
+     /// 无HUD设置音量
+     private func setSystemVolume(_ value: Float) {
+       DispatchQueue.main.async {
+         if self.volumeView == nil {
+           self.volumeView = MPVolumeView(frame: CGRect(x: -1000, y: -1000, width: 0, height: 0))
+           if let window = self.window {
+             window.addSubview(self.volumeView!)
+           }
+         }
+
+         guard let slider = self.volumeView?.subviews.compactMap({ $0 as? UISlider }).first else {
+           return
+         }
+
+         slider.value = value
+       }
+     }
 }

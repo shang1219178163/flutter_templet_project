@@ -7,12 +7,14 @@
 //
 
 import 'package:flutter/material.dart';
-// import 'package:volume_controller/volume_controller.dart';
+import 'package:flutter/services.dart';
 import 'package:screen_brightness/screen_brightness.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 /// 横屏音量和屏幕亮度管理
-mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
-  late var mediaQuery = MediaQuery.of(context);
+mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W>, VolumeIOSMixin {
+  late final themeData = Theme.of(context);
+  late var mediaQueryData = MediaQuery.of(context);
 
   final showBrightnessProgressVN = ValueNotifier(false);
   final showVolumeOrBrightnessProgressVN = ValueNotifier(false);
@@ -44,15 +46,12 @@ mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
   }
 
   Future<void> _initValues() async {
-    // final currentBrightness = await FlutterScreenWake.brightness;
     final currentBrightness = await ScreenBrightness.instance.system;
-    // final currentVolume = await VolumeController.instance.getVolume();
-    // VolumeController.instance.showSystemUI = false;
+    final currentVolume = await VolumeController.instance.getVolume();
+    VolumeController.instance.showSystemUI = false;
 
-    _brightness = currentBrightness;
-    // _volume = currentVolume;
-    brightnessVN.value = _brightness;
-    volumeVN.value = _volume;
+    brightnessVN.value = _brightness = currentBrightness;
+    volumeVN.value = _volume = currentVolume;
 
     showVolumeOrBrightnessProgressVN.value = false;
     setState(() {});
@@ -60,8 +59,21 @@ mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
     // debugPrint("_initValues: currentBrightness:${currentBrightness}, currentVolume:$currentVolume");
   }
 
+  /// 设置音量
+  Future<void> setVolume(double value) async {
+    try {
+      if (themeData.platform == TargetPlatform.iOS) {
+        _setVolumeIOS(value);
+      } else {
+        VolumeController.instance.setVolume(value);
+      }
+    } catch (e) {
+      debugPrint([runtimeType, e].join(", "));
+    }
+  }
+
   Future<void> onPanStartForVolumeAndBrightness(DragStartDetails details) async {
-    mediaQuery = MediaQuery.of(context);
+    mediaQueryData = MediaQuery.of(context);
     // if (mediaQuery.orientation != Orientation.landscape) {
     //   return;
     // }
@@ -69,7 +81,7 @@ mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
     _startPosition = details.localPosition;
     debugPrint("_onPanStart: ${details.localPosition}");
 
-    final isLeft = details.localPosition.dx < mediaQuery.size.width * 0.5;
+    final isLeft = details.localPosition.dx < mediaQueryData.size.width * 0.5;
     // showBrightnessIndicator(isLeft: isLeft);
     showBrightnessProgressVN.value = isLeft;
 
@@ -94,7 +106,7 @@ mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
       debugPrint("调节进度: $dx");
     } else {
       // 纵向滑动，区分左右屏幕：左边控制亮度，右边控制音量
-      final screenWidth = mediaQuery.size.width;
+      final screenWidth = mediaQueryData.size.width;
       if (_startPosition!.dx < screenWidth / 2) {
         // 左半屏调节亮度
         // final delta = -dy / (400 * 2); // 调节灵敏度
@@ -116,7 +128,7 @@ mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
         _volume = (_volume + delta).clamp(0.0, 1.0);
         volumeVN.value = _volume;
         debugPrint("音量: ${[_volume, (_volume + delta), delta, dy].map((e) => e.toStringAsFixed(2)).toList().asMap()}");
-        VolumeController.instance.setVolume(_volume);
+        setVolume(_volume);
         debugPrint("音量: $_volume");
       }
     }
@@ -167,4 +179,17 @@ mixin VolumeAndBrightnessMixin<W extends StatefulWidget, T> on State<W> {
   //   );
   //   Overlay.of(context).insert(_overlayEntry!);
   // }
+}
+
+mixin VolumeIOSMixin {
+  final _volumeChannel = const MethodChannel('flutter.device/volume');
+
+  /// 设置IOS音量
+  Future<void> _setVolumeIOS(double value) async {
+    try {
+      await _volumeChannel.invokeMethod('setVolume', {'value': value});
+    } catch (e) {
+      debugPrint([runtimeType, e].join(", "));
+    }
+  }
 }
