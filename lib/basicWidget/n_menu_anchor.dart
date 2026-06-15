@@ -93,7 +93,7 @@ class NMenuAnchor<E> extends StatelessWidget {
             leadingIcon: leadingIconBuilder?.call(isSelected) ??
                 Icon(
                   Icons.check,
-                  color: isSelected ? context.themeData.primaryColor : Colors.transparent,
+                  color: isSelected ? context.themeData.colorScheme.primary : Colors.transparent,
                 ),
             onPressed: () {
               onItem(e);

@@ -58,7 +58,7 @@ class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateM
               title: "CupertinoActivityIndicator",
               child: CupertinoActivityIndicator(
                 radius: 24,
-                color: context.themeData.primaryColor,
+                color: context.themeData.colorScheme.primary,
               ),
             ),
             NSectionBox(

@@ -318,7 +318,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
     required bool isSelected,
     required String Function(T e) titleCb,
   }) {
-    var primaryColor = context.themeData.primaryColor;
+    var primaryColor = context.themeData.colorScheme.primary;
 
     final textColor = isSelected ? primaryColor : const Color(0xff737373);
     final borderColor = isSelected ? primaryColor : Colors.transparent;

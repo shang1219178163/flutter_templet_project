@@ -104,7 +104,7 @@ class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
                 padding: EdgeInsets.only(top: 12),
                 child: NText(
                   "先跳过，稍后再提交",
-                  color: context.themeData.primaryColor,
+                  color: context.themeData.colorScheme.primary,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),

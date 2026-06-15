@@ -66,7 +66,7 @@ class _NAppBarThemChangeState extends State<NAppBarThemChange> {
       // ),
       appBarTheme: AppBarTheme.of(context).copyWith(
         systemOverlayStyle: NSystemOverlayStyle.transparent,
-        backgroundColor: context.themeData.primaryColor,
+        backgroundColor: context.themeData.colorScheme.primary,
       ),
     );
   }

@@ -22,7 +22,7 @@ class TodoItem extends StatelessWidget {
     final icon = model.isFinished
         ? Icon(
             Icons.check_box,
-            color: context.themeData.primaryColor,
+            color: context.themeData.colorScheme.primary,
           )
         : Icon(
             Icons.check_box_outline_blank,

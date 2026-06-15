@@ -137,7 +137,7 @@ class _AnimatedModalBarrierDemoState extends State<AnimatedModalBarrierDemo> wit
             ),
             child: NText(
               e.e,
-              color: context.themeData.primaryColor,
+              color: context.themeData.colorScheme.primary,
             ),
           ),
         );

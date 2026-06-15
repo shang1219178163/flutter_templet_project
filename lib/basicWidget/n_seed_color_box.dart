@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class NSeedColorBox extends StatefulWidget {
   const NSeedColorBox({
     super.key,
-    required this.colorOptions,
-    this.index,
+    required this.items,
+    this.index = 0,
     this.brightness = Brightness.light,
     this.onColorChanged,
     this.onBrightnessChanged,
   });
 
-  final List<Color> colorOptions;
-  final int? index;
+  final List<Color> items;
+  final int index;
   final Brightness brightness;
 
   final ValueChanged<Color>? onColorChanged;
@@ -22,14 +22,19 @@ class NSeedColorBox extends StatefulWidget {
 }
 
 class _NSeedColorBoxState extends State<NSeedColorBox> {
-  late List<Color> colorOptions = widget.colorOptions;
-  late int index = widget.index ?? 0;
-  late Color seedColor = widget.colorOptions[index];
+  late List<Color> items = widget.items;
+  late int index = widget.index;
+  late Color seedColor = widget.items[index];
   late Brightness brightness = widget.brightness;
 
   @override
   void didUpdateWidget(covariant NSeedColorBox oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.index != widget.index) {
+      index = widget.index;
+      seedColor = widget.items[index];
+      setState(() {});
+    }
   }
 
   @override
@@ -67,25 +72,29 @@ class _NSeedColorBoxState extends State<NSeedColorBox> {
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: colorOptions.map((color) {
+              children: items.map((color) {
+                final i = items.indexOf(color);
+                final isSelected = i == index;
+                final borderColor = isSelected ? color : color.withValues(alpha: 0);
                 return GestureDetector(
                   onTap: () {
-                    seedColor = color;
-                    setState(() {});
+                    index == i;
                     widget.onColorChanged?.call(color);
+                    setState(() {});
                   },
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    padding: EdgeInsets.all(3),
                     decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(8),
-                      border: seedColor.value == color.value
-                          ? Border.all(
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 3,
-                            )
-                          : null,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: borderColor, width: 2),
+                    ),
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                   ),
                 );
@@ -133,7 +142,7 @@ mixin SeedColorMixin<T extends StatefulWidget> on State<T> {
             child: Column(
               children: [
                 NSeedColorBox(
-                  colorOptions: [
+                  items: [
                     ...Colors.primaries,
                     ...Colors.accents,
                   ],

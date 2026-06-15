@@ -141,7 +141,7 @@ class _NTagBoxNewState<E> extends State<NTagBoxNew> {
         ),
         onSelected: onSelected,
         selected: true,
-        selectedColor: context.themeData.primaryColor,
+        selectedColor: context.themeData.colorScheme.primary,
         label: Text(titleCb(e)),
       ),
     );

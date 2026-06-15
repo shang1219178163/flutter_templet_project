@@ -56,7 +56,7 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
 
   Widget buildTabBar() {
     return Material(
-      color: context.themeData.primaryColor,
+      color: context.themeData.colorScheme.primary,
       child: TabBar(
         controller: tabController,
         isScrollable: true,

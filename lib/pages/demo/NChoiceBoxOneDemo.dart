@@ -140,11 +140,11 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
       items: rpItems,
       selectedItem: rpItemCurrent,
       itemNameCb: (e) => e.item1,
-      primaryColor: context.themeData.primaryColor,
+      primaryColor: context.themeData.colorScheme.primary,
       backgroundColor: Colors.white,
       selectedColor: Colors.white,
       styleSelected: TextStyle(
-        color: context.themeData.primaryColor,
+        color: context.themeData.colorScheme.primary,
         fontSize: 15,
       ),
       // numPerRow: 0,

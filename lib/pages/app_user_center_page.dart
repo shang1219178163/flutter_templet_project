@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -50,6 +51,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.bgColorF7F7F7,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white), //修改返回按钮颜色
         centerTitle: true,
@@ -87,10 +89,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
         children: <Widget>[
           buildTop(),
           buildMid(),
-          SizedBox(
-            height: 15,
-          ),
-          // Container(height: 15, color: Get.isDarkMode ? Colors.black45 : Color(0xfff2f2f2)),
+          SizedBox(height: 15),
           buildBom(),
         ],
       ),
@@ -101,7 +100,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
   Widget buildTop() {
     return Container(
       height: 160,
-      color: Theme.of(context).primaryColor,
+      color: context.themeData.colorScheme.primary,
       child: Column(
         children: <Widget>[
           SizedBox(height: 10),
@@ -201,7 +200,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
                       icon: Icon(
                         e.item2,
                         size: 25,
-                        color: Colors.lightBlue,
+                        color: context.themeData.colorScheme.primary,
                       ),
                       direction: Axis.vertical,
                       child: Text(
@@ -233,7 +232,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
                       ListTile(
                         leading: Icon(
                           e.item2,
-                          color: Theme.of(context).primaryColor,
+                          color: context.themeData.colorScheme.primary,
                         ),
                         title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
                         trailing: Icon(Icons.chevron_right),

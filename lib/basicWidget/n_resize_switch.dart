@@ -61,7 +61,7 @@ class _NResizeSwitchState extends State<NResizeSwitch> {
         fit: BoxFit.fill,
         child: widget.child ??
             CupertinoSwitch(
-              activeTrackColor: context.themeData.primaryColor,
+              activeTrackColor: context.themeData.colorScheme.primary,
               value: switchValue,
               onChanged: (value) {
                 switchValue = value;

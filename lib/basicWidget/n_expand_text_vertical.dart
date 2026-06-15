@@ -133,7 +133,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
               image: arrowImageName.toAssetImage(),
               width: 21,
               height: 8,
-              color: context.themeData.primaryColor,
+              color: context.themeData.colorScheme.primary,
             );
 
             var gradientColor = const Color(0xffFFFFFF);

@@ -234,7 +234,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                     child: Icon(
                                       Icons.add_circle_outline,
-                                      color: context.themeData.primaryColor,
+                                      color: context.themeData.colorScheme.primary,
                                       size: 20,
                                     ),
                                   ),

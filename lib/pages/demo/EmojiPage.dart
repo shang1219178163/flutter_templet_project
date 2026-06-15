@@ -136,7 +136,7 @@ class _EmojiPageState extends State<EmojiPage> {
                         debugPrint("currentVN.value:${currentVN.value}");
                         widget.onSend?.call(currentVN.value);
                       },
-                      backgroundColor: context.themeData.primaryColor,
+                      backgroundColor: context.themeData.colorScheme.primary,
                       label: Text(
                         "发送",
                         style: TextStyle(color: Colors.white),

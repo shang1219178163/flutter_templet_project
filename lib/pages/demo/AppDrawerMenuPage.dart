@@ -67,7 +67,10 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
                             return ListTile(
                               dense: false,
                               contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                              leading: Icon(e.icon),
+                              leading: Icon(
+                                e.icon,
+                                color: context.themeData.colorScheme.primary,
+                              ),
                               title: Text(e.title, style: TextStyle(fontSize: 16.0)),
                               trailing: Switch(
                                 onChanged: (bool value) {
@@ -97,7 +100,10 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
                       ListTile(
                         dense: true,
                         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        leading: Icon(e.icon),
+                        leading: Icon(
+                          e.icon,
+                          color: context.themeData.colorScheme.primary,
+                        ),
                         title: Text(e.title, style: TextStyle(fontSize: 16.0)),
                         trailing: Icon(Icons.chevron_right),
                         // horizontalTitleGap: 0,
@@ -165,7 +171,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
     ];
   }
 
-  buildFooter() {
+  List<Widget> buildFooter() {
     return [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -201,13 +207,14 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
     ];
   }
 
-  buildGrayMode() {
+  Widget buildGrayMode() {
     var filteredProvider = Provider.of<ColorFilteredProvider>(context);
     return ListTile(
       dense: false,
       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       leading: Icon(
         Icons.change_circle_outlined,
+        color: context.themeData.colorScheme.primary,
       ),
       title: Text("灰色滤镜", style: TextStyle(fontSize: 16.0)),
       trailing: Switch(

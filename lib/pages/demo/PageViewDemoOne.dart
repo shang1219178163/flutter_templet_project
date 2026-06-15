@@ -107,7 +107,7 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
     required ValueChanged<int>? onTap,
     Color? color = Colors.blue,
   }) {
-    Color? primary = color ?? context.themeData.primaryColor;
+    Color? primary = color ?? context.themeData.colorScheme.primary;
     return PreferredSize(
       preferredSize: Size(double.maxFinite, 30.h),
       child: SizedBox(

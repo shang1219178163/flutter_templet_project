@@ -348,7 +348,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             DLog.d(current);
           },
           backgroundColor: Color(0xfff3F3F3),
-          thumbColor: context.themeData.primaryColor,
+          thumbColor: context.themeData.colorScheme.primary,
           radius: Radius.circular(16),
           padding: EdgeInsets.all(2),
         ),
@@ -461,7 +461,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             setState(() {});
           },
           backgroundColor: backgroundColor ?? Color(0xfff3F3F3),
-          thumbColor: thumbColor ?? context.themeData.primaryColor,
+          thumbColor: thumbColor ?? context.themeData.colorScheme.primary,
           radius: radius ?? Radius.circular(16),
           padding: padding ?? EdgeInsets.all(2),
         ),

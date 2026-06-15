@@ -155,7 +155,7 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
   }
 
   Widget buildSubPage() {
-    final primary = context.themeData.primaryColor;
+    final primary = context.themeData.colorScheme.primary;
     return NRefreshListView<E>(
       controller: refreshViewController,
       pageSize: 30,

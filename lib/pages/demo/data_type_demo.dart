@@ -153,7 +153,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
             ),
             child: NText(
               e.e,
-              color: context.themeData.primaryColor,
+              color: context.themeData.colorScheme.primary,
             ),
           ),
         );

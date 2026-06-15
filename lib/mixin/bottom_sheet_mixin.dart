@@ -206,7 +206,7 @@ mixin BottomSheetMixin {
                 },
             child: Text(
               "取消",
-              style: TextStyle(color: context.themeData.primaryColor),
+              style: TextStyle(color: context.themeData.colorScheme.primary),
             )),
         middle: Text(
           title,
@@ -220,7 +220,7 @@ mixin BottomSheetMixin {
                 },
             child: Text(
               "确定",
-              style: TextStyle(color: context.themeData.primaryColor),
+              style: TextStyle(color: context.themeData.colorScheme.primary),
             )),
       ),
     );

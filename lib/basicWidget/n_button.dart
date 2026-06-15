@@ -133,7 +133,7 @@ class NButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theTheme = Theme.of(context).extension<NButtonTheme>();
 
-    final primaryNew = primary ?? theTheme?.primary ?? context.themeData.primaryColor;
+    final primaryNew = primary ?? theTheme?.primary ?? context.themeData.colorScheme.primary;
     final heightNew = height ?? theTheme?.height ?? 44;
     final constraintsNew = constraints ??
         theTheme?.constraints ??
@@ -270,7 +270,7 @@ class _NButtonTonal extends NButton {
 
     final theTheme = Theme.of(context).extension<NButtonTheme>();
 
-    final primaryNew = primary ?? theTheme?.primary ?? context.themeData.primaryColor;
+    final primaryNew = primary ?? theTheme?.primary ?? context.themeData.colorScheme.primary;
     final heightNew = height ?? theTheme?.height ?? 44;
     final marginNew = margin ?? theTheme?.margin;
     final paddingNew = padding ?? theTheme?.padding;
@@ -360,7 +360,7 @@ class _NButtonText extends NButton {
 
     final theTheme = Theme.of(context).extension<NButtonTheme>();
 
-    final primaryNew = primary ?? theTheme?.primary ?? context.themeData.primaryColor;
+    final primaryNew = primary ?? theTheme?.primary ?? context.themeData.colorScheme.primary;
     final heightNew = height ?? theTheme?.height;
     final marginNew = margin ?? theTheme?.margin;
     final paddingNew = padding ?? theTheme?.padding;

@@ -86,7 +86,7 @@ class _AppLocaleChangePageState extends State<AppLocaleChangePage> {
             title: Text(e.languageCode),
             trailing: Icon(
               Icons.check,
-              color: isSelected ? context.themeData.primaryColor : Colors.transparent,
+              color: isSelected ? context.themeData.colorScheme.primary : Colors.transparent,
             ),
           );
         },

@@ -257,7 +257,7 @@ class _NTextFieldState extends State<NTextField> {
       image: widget.suffixImage ?? AssetImage("assets/images/icon_scan.png"),
       width: 16,
       height: 16,
-      color: context.themeData.primaryColor,
+      color: context.themeData.colorScheme.primary,
       fit: BoxFit.fill,
     );
     final suffixPadding = const EdgeInsets.only(left: 4, right: 8);
@@ -309,7 +309,8 @@ class _NTextFieldState extends State<NTextField> {
       enabledBorder: widget.readOnly ? null : widget.enabledBorder ?? buildEnabledBorder(radius: widget.radius),
       focusedBorder: widget.readOnly
           ? null
-          : widget.focusedBorder ?? buildEnabledBorder(color: context.themeData.primaryColor, radius: widget.radius),
+          : widget.focusedBorder ??
+              buildEnabledBorder(color: context.themeData.colorScheme.primary, radius: widget.radius),
       hintText: widget.hintText,
       hintStyle: widget.hintStyle,
       isCollapsed: widget.isCollapsed ?? false,
@@ -334,7 +335,7 @@ class _NTextFieldState extends State<NTextField> {
       readOnly: widget.readOnly,
       minLines: widget.minLines,
       maxLines: widget.maxLines,
-      cursorColor: context.themeData.primaryColor,
+      cursorColor: context.themeData.colorScheme.primary,
       focusNode: _focusNode,
       // focusNode: focusChanged,
       onChanged: widget.onChanged,

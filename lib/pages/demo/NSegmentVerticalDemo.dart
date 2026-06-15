@@ -177,7 +177,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                       name,
                       style: TextStyle(
                         fontSize: 14,
-                        color: isSelected ? context.themeData.primaryColor : AppColor.fontColor737373,
+                        color: isSelected ? context.themeData.colorScheme.primary : AppColor.fontColor737373,
                         fontWeight: FontWeight.w500,
                       ),
                       maxLines: 1,

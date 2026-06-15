@@ -157,7 +157,7 @@ class NSearchTextField extends StatelessWidget {
         );
 
     return DefaultSelectionStyle(
-      cursorColor: context.themeData.primaryColor,
+      cursorColor: context.themeData.colorScheme.primary,
       child: CupertinoTextField(
         focusNode: focusNode,
         controller: controllerNew,
@@ -184,7 +184,7 @@ class NSearchTextField extends StatelessWidget {
 
     // if (textAlign == TextAlign.start) {
     //   return DefaultSelectionStyle(
-    //     cursorColor: context.themeData.primaryColor,
+    //     cursorColor:  context.themeData.colorScheme.primary,
     //     child: CupertinoSearchTextField(
     //       controller: controllerNew,
     //       placeholder: placeholder ?? theme?.placeholder,

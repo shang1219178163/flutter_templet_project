@@ -54,7 +54,7 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
           child: ValueListenableBuilder<double>(
               valueListenable: _progressVN,
               builder: (context, value, child) {
-                final indicatorColor = value >= 1.0 ? Colors.transparent : context.themeData.primaryColor;
+                final indicatorColor = value >= 1.0 ? Colors.transparent : context.themeData.colorScheme.primary;
 
                 return LinearProgressIndicator(
                   value: value,

@@ -94,7 +94,7 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
                 child: TabBar(
                   controller: tabController,
                   tabAlignment: TabAlignment.center,
-                  labelColor: context.themeData.primaryColor,
+                  labelColor: context.themeData.colorScheme.primary,
                   labelPadding: const EdgeInsets.only(left: 8, right: 8),
                   labelStyle: TextStyle(
                     fontWeight: FontWeight.w500,

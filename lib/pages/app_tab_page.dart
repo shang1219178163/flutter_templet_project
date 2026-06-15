@@ -126,6 +126,8 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
 
   @override
   Widget build(BuildContext context) {
+    final primary = context.themeData.colorScheme.primary;
+
     final page = Scaffold(
       key: kScaffoldKey,
       drawer: AppDrawerMenuPage(),
@@ -140,7 +142,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
           currentIndex: currentIndex,
           selectedFontSize: 11, // 选中字体大小
           unselectedFontSize: 11, // 未选中字体大小
-          selectedItemColor: context.themeData.primaryColor,
+          selectedItemColor: primary,
           onTap: (index) => onTapBar(index),
           items: items
               .map(
@@ -166,11 +168,11 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
               final e = items[index];
               return Container(
                 decoration: ShapeDecoration(
-                  shape: CircleBorder(side: BorderSide(color: Colors.blue)),
+                  shape: CircleBorder(side: BorderSide(color: primary)),
                 ),
                 constraints: BoxConstraints(maxHeight: 40),
                 alignment: Alignment.center,
-                child: Icon(Icons.color_lens, color: context.themeData.primaryColor, size: 40),
+                child: Icon(Icons.color_lens, color: primary, size: 40),
               );
             }
             return Column(

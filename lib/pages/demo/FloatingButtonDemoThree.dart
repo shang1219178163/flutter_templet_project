@@ -259,8 +259,8 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
-                    context.themeData.primaryColor.withOpacity(.35),
-                    context.themeData.primaryColor.withOpacity(.7),
+                    context.themeData.colorScheme.primary.withOpacity(.35),
+                    context.themeData.colorScheme.primary.withOpacity(.7),
                   ],
                 ),
               ),

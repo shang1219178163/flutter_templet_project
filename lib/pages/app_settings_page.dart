@@ -9,6 +9,7 @@
 // 设置
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NSystemThemeTab.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
@@ -63,29 +64,30 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Column(
-        children: items
-            .map((e) => Container(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        dense: true,
-                        leading: Icon(
-                          e.item2,
-                        ),
-                        title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
-                        trailing: Icon(Icons.chevron_right),
-                        onTap: e.item3,
-                      ),
-                      if (e != items.last)
-                        Divider(
-                          height: 1,
-                          indent: 0,
-                          endIndent: 0,
-                        ),
-                    ],
+        children: items.map((e) {
+          return Container(
+            child: Column(
+              children: [
+                ListTile(
+                  dense: true,
+                  leading: Icon(
+                    e.item2,
+                    color: context.themeData.colorScheme.primary,
                   ),
-                ))
-            .toList(),
+                  title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
+                  trailing: Icon(Icons.chevron_right),
+                  onTap: e.item3,
+                ),
+                if (e != items.last)
+                  Divider(
+                    height: 1,
+                    indent: 0,
+                    endIndent: 0,
+                  ),
+              ],
+            ),
+          );
+        }).toList(),
       ),
     );
   }

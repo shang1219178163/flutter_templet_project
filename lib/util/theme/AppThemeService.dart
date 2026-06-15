@@ -572,7 +572,7 @@ class AppThemeService {
     ValueChanged<Brightness>? onBrightnessChanged,
     bool dismiss = true,
   }) {
-    final colors = [
+    final colors = <Color>[
       Colors.blue,
       Colors.red,
       Colors.green,
@@ -586,6 +586,9 @@ class AppThemeService {
       Colors.lime,
       Colors.amber,
     ];
+    final primary = Theme.of(context).colorScheme.primary;
+    final currIndex = colors.indexOf(primary).clamp(0, colors.length - 1);
+    DLog.d(currIndex);
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -600,7 +603,8 @@ class AppThemeService {
             child: Column(
               children: [
                 NSeedColorBox(
-                  colorOptions: colors,
+                  items: colors,
+                  index: currIndex,
                   onColorChanged: (v) async {
                     if (dismiss) {
                       Navigator.of(context).pop();

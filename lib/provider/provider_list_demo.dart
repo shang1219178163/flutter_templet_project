@@ -187,7 +187,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
                   },
                   icon: Icon(
                     Icons.add_circle_outline,
-                    color: context.themeData.primaryColor,
+                    color: context.themeData.colorScheme.primary,
                   )),
               IconButton(
                   onPressed: () {
@@ -195,7 +195,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
                   },
                   icon: Icon(
                     Icons.remove_circle_outline,
-                    color: context.themeData.primaryColor,
+                    color: context.themeData.colorScheme.primary,
                   )),
               // SizedBox(width: 8,),
               // Text("${e.name}当前值: ${e.notifier?.value}"),

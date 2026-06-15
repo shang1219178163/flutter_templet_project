@@ -60,7 +60,7 @@ class NButtonConfirm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primary = bgColor ?? context.themeData.primaryColor;
+    final primary = bgColor ?? context.themeData.colorScheme.primary;
 
     if (!enable) {
       return InkWell(

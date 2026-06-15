@@ -383,7 +383,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
       ),
       // hasCancelButton: false,
       // cancellBgColor: context.dialogBackgroundColor,
-      confirmBgColor: context.themeData.primaryColor,
+      confirmBgColor: context.themeData.colorScheme.primary,
       onCancel: () {
         Navigator.of(context).pop();
       },
