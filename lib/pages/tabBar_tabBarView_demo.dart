@@ -87,7 +87,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           ),
           IconButton(
             onPressed: () => debugPrint("aa"),
-            icon: Icon(Icons.ac_unit, color: context.colorScheme.primary),
+            icon: Icon(Icons.ac_unit, color: context.colorScheme.onPrimary),
           )
         ],
         bottom: TabBar(
@@ -183,7 +183,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
             "已完成",
             style: TextStyle(
               fontSize: 13,
-              color: Colors.blue,
+              color: context.themeData.colorScheme.primary,
             ),
           ),
         );

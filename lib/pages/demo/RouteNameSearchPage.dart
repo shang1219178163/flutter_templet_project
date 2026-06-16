@@ -142,27 +142,28 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
         tilePadding: EdgeInsets.symmetric(horizontal: 10),
         leading: Icon(
           Icons.ac_unit,
-          color: selectedColor.value,
+          color: context.themeData.colorScheme.primary,
         ),
         title: Text(
           '配置',
-          style: TextStyle(color: selectedColor.value),
+          style: TextStyle(
+            color: context.themeData.colorScheme.primary,
+          ),
         ),
         initiallyExpanded: false,
         children: <Widget>[
           Column(
-            children: _params
-                .map((e) => ListTile(
-                      title: Text(e.name),
-                      trailing: Switch(
-                        onChanged: (bool value) {
-                          e.isOpen = value;
-                          setState(() {});
-                        },
-                        value: e.isOpen,
-                      ),
-                    ))
-                .toList(),
+            children: _params.map((e) {
+              return SwitchListTile(
+                activeColor: context.colorScheme.primary,
+                title: Text(e.name),
+                value: e.isOpen,
+                onChanged: (bool value) {
+                  e.isOpen = value;
+                  setState(() {});
+                },
+              );
+            }).toList(),
           ),
         ],
       ),

@@ -76,19 +76,37 @@ class AppThemeService {
   SystemUiOverlayStyle get overlayStyle => isDark ? overlayStyleLight : overlayStyleDark;
 
   void changeTheme(ThemeData theme) {
-    // Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
     DLog.d("changeTheme $theme");
-    Get.changeTheme(theme);
+    seedColor = theme.colorScheme.primary;
+    brightness = theme.brightness;
+    syncThemesToGet();
     _cacheTheme(result: theme);
   }
 
+  /// 应用种子色并同步浅色/深色两套主题到 GetX
+  void applySeedColor(Color color) {
+    seedColor = color;
+    syncThemesToGet();
+    _cacheTheme(result: isDark ? darkTheme : lightTheme);
+  }
+
+  /// 同步浅色/深色主题到 GetX 控制器
+  ///
+  /// Get.changeTheme 在 darkTheme 未初始化时只会更新 theme，
+  /// 暗色模式下 MaterialApp 仍使用 widget.darkTheme，导致改色不生效。
+  void syncThemesToGet() {
+    final controller = Get.rootController;
+    controller.theme = lightTheme;
+    controller.darkTheme = darkTheme;
+    controller.update();
+  }
+
   void toggleTheme() {
-    final result = Get.isDarkMode ? lightTheme : darkTheme;
-    final themeMode = Get.isDarkMode ? ThemeMode.light : ThemeMode.dark;
-    // DLog.d(result.brightness);
-    Get.changeTheme(result);
+    themeMode = Get.isDarkMode ? ThemeMode.light : ThemeMode.dark;
+    brightness = themeMode == ThemeMode.dark ? Brightness.dark : Brightness.light;
+    syncThemesToGet();
     Get.changeThemeMode(themeMode);
-    _cacheTheme(result: result);
+    _cacheTheme(result: isDark ? darkTheme : lightTheme);
   }
 
   ThemeData get lightTheme => ThemeData(
@@ -259,6 +277,27 @@ class AppThemeService {
           thumbColor: seedColor,
           overlayColor: Colors.grey,
           overlayShape: SliderComponentShape.noOverlay,
+        ),
+        switchTheme: SwitchThemeData(
+          thumbColor: WidgetStateProperty.resolveWith(
+            (states) {
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.onPrimary;
+              }
+              return colorScheme.outline;
+            },
+          ),
+          trackColor: WidgetStateProperty.resolveWith(
+            (states) {
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.primary;
+              }
+              return colorScheme.surfaceContainerHighest;
+            },
+          ),
+          trackOutlineColor: const WidgetStatePropertyAll(
+            Colors.transparent,
+          ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           // isCollapsed: true,
@@ -610,13 +649,9 @@ class AppThemeService {
                       Navigator.of(context).pop();
                     }
                     onColorChanged?.call(v);
-                    seedColor = v;
-                    final themeNew = Get.isDarkMode
-                        ? darkTheme.copyWith(colorScheme: ColorScheme.dark(primary: seedColor))
-                        : lightTheme.copyWith(colorScheme: ColorScheme.light(primary: seedColor));
-                    changeTheme(themeNew);
+                    applySeedColor(v);
                   },
-                  brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
+                  brightness: isDark ? Brightness.dark : Brightness.light,
                   onBrightnessChanged: (v) async {
                     if (dismiss) {
                       Navigator.of(context).pop();

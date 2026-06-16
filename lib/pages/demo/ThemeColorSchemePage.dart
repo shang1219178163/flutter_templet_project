@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_seed_color_box.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:get/get.dart';
 
@@ -71,10 +72,7 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
         children: [
           // 配色方案展示
           buildColorSchemeDisplay(colorScheme),
-          OutlinedButton(
-            onPressed: () {},
-            child: Text("OutlinedButton"),
-          ),
+          buildCustomMatchColors(),
         ],
       ),
     );
@@ -127,8 +125,8 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
             buildColorItem('onSurfaceVariant', colorScheme.onSurfaceVariant, colorScheme.surfaceVariant),
 
             // 背景颜色
-            buildColorItem('background', colorScheme.background, colorScheme.onBackground),
-            buildColorItem('onBackground', colorScheme.onBackground, colorScheme.background),
+            // buildColorItem('background', colorScheme.background, colorScheme.onBackground),
+            // buildColorItem('onBackground', colorScheme.onBackground, colorScheme.background),
 
             // 错误颜色
             buildColorItem('error', colorScheme.error, colorScheme.onError),
@@ -193,6 +191,76 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildCustomMatchColors() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardColor = isDark ? Colors.black : Color(0xFFF2F4ED);
+    return Card(
+      color: cardColor,
+      elevation: 2,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '自定义配色对比',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                buildItem(
+                  color: Color(0xFF121212),
+                  textColor: context.themeData.colorScheme.primary,
+                ),
+                buildItem(
+                  color: Color(0xFF181818),
+                  textColor: context.themeData.colorScheme.primary,
+                ),
+                buildItem(
+                  color: Color(0xFF242424),
+                  textColor: context.themeData.colorScheme.primary,
+                ),
+                buildItem(
+                  color: Color(0xFFF6F6F6),
+                  textColor: context.themeData.colorScheme.primary,
+                ),
+                buildItem(
+                  color: Color(0xFFFFFFFF),
+                  textColor: context.themeData.colorScheme.primary,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildItem({required Color color, required Color textColor}) {
+    final desc = color.toHex();
+    return Container(
+      margin: EdgeInsets.only(bottom: 8),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+        color: color,
+        // border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      child: Text(
+        desc,
+        style: TextStyle(color: textColor),
       ),
     );
   }
