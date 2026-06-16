@@ -26,9 +26,9 @@ class ChipDemo extends StatefulWidget {
 }
 
 class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
-  final tuples = List.generate(9, (i) => (i, "选择$i")).toList() as List<(int, String)>;
+  final tuples = List.generate(9, (i) => (i, "选择$i"));
 
-  final tuplesNew = List.generate(9, (i) => Tuple2(i, "选择$i")).toList() as List<Tuple2<int, String>>;
+  final tuplesNew = List.generate(9, (i) => Tuple2(i, "选择$i"));
 
   @override
   Widget build(BuildContext context) {

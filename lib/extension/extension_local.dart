@@ -45,6 +45,7 @@ export 'src/regexp_ext.dart';
 export 'src/rich_text_ext.dart';
 export 'src/route_ext.dart';
 export 'src/scroll_controller_ext.dart';
+export 'src/selectable_region_ext.dart';
 export 'src/service_protocol_info_ext.dart';
 export 'src/set_ext.dart';
 export 'src/snack_bar_ext.dart';
