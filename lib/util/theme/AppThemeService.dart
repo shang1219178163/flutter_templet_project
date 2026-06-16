@@ -588,7 +588,7 @@ class AppThemeService {
     ];
     final primary = Theme.of(context).colorScheme.primary;
     final currIndex = colors.indexOf(primary).clamp(0, colors.length - 1);
-    DLog.d(currIndex);
+    // DLog.d(currIndex);
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -611,7 +611,10 @@ class AppThemeService {
                     }
                     onColorChanged?.call(v);
                     seedColor = v;
-                    changeTheme(lightTheme);
+                    final themeNew = Get.isDarkMode
+                        ? darkTheme.copyWith(colorScheme: ColorScheme.dark(primary: seedColor))
+                        : lightTheme.copyWith(colorScheme: ColorScheme.light(primary: seedColor));
+                    changeTheme(themeNew);
                   },
                   brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
                   onBrightnessChanged: (v) async {

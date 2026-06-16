@@ -80,6 +80,9 @@ extension BuildContextExt on BuildContext {
   /// 扩展属性 Theme.of(context)
   ThemeData get themeData => Theme.of(this);
 
+  /// 扩展属性 是否 Brightness.dark
+  bool get isDark => themeData.brightness == Brightness.dark;
+
   /// 扩展属性 Theme.of(this).colorScheme
   ColorScheme get colorScheme => themeData.colorScheme;
 

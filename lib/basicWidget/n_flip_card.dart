@@ -40,14 +40,17 @@ class _NFlipCardState extends State<NFlipCard> {
   void didUpdateWidget(covariant NFlipCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.axis != widget.axis ||
-        oldWidget.fontBuilder?.call(toggle) != widget.fontBuilder?.call(toggle) ||
-        oldWidget.backBuilder?.call(toggle) != widget.backBuilder?.call(toggle)) {
+        oldWidget.fontBuilder != widget.fontBuilder ||
+        oldWidget.backBuilder != widget.backBuilder) {
       setState(() {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final front = buildFront();
+    final back = buildBack();
+
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0, end: _flipped ? 1 : 0),
       duration: const Duration(milliseconds: 500),
@@ -74,9 +77,9 @@ class _NFlipCardState extends State<NFlipCard> {
               ? Transform(
                   alignment: Alignment.center,
                   transform: transformBack,
-                  child: buildBack(),
+                  child: back,
                 )
-              : buildFront(),
+              : front,
         );
       },
     );

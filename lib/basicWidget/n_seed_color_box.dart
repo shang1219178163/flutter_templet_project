@@ -50,7 +50,7 @@ class _NSeedColorBoxState extends State<NSeedColorBox> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '选择种子颜色',
+                  '选择主题颜色',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
