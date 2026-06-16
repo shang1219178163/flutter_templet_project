@@ -40,9 +40,8 @@ extension RichTextExt on RichText {
     final list = textNew.split(RegExp('$prefix|$suffix'));
     return list.map((e) {
       if (e.isNotEmpty) {
-        final isEquel = textTaps.contains(e) ||
-            textTaps.contains(e.toLowerCase()) ||
-            textTaps.contains(e.toUpperCase());
+        final isEquel =
+            textTaps.contains(e) || textTaps.contains(e.toLowerCase()) || textTaps.contains(e.toUpperCase());
         if (isEquel) {
           return TextSpan(
             text: e,
@@ -56,6 +55,36 @@ extension RichTextExt on RichText {
       }
       return TextSpan(text: e, style: style);
     }).toList();
+  }
+
+  /// 根据正则表达式创建 TextSpan
+  ///
+  /// text 整个段落
+  /// regExp 正则表达式
+  /// style 段落样式
+  /// linkStyle 高亮样式
+  /// prefix 切割符号,避免和文章包含字符串重复
+  /// suffix 切割符号,避免和文章包含字符串重复
+  /// onLink 高亮部分点击事件
+  static List<TextSpan> createTextSpansByRegExp({
+    required String text,
+    required RegExp regExp,
+    TextStyle? style,
+    TextStyle? linkStyle,
+    String prefix = "_&t",
+    String suffix = "_&t",
+    void Function(String v)? onLink,
+  }) {
+    final links = regExp.allMatches(text).map((e) => e.group(0)).where((e) => e != null).map((e) => e!).toList();
+    return RichTextExt.createTextSpans(
+      text: text,
+      textTaps: links,
+      style: style,
+      linkStyle: linkStyle,
+      prefix: prefix,
+      suffix: suffix,
+      onLink: onLink,
+    );
   }
 }
 
