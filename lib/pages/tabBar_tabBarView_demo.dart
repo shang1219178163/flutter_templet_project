@@ -87,7 +87,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           ),
           IconButton(
             onPressed: () => debugPrint("aa"),
-            icon: Icon(Icons.ac_unit),
+            icon: Icon(Icons.ac_unit, color: context.colorScheme.primary),
           )
         ],
         bottom: TabBar(
@@ -524,6 +524,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.compileEnvironmentPage, "compileEnvironmentPage"),
   Tuple2(AppRouter.appLifecycleObserverDemo, "appLifecycleObserverDemo"),
   Tuple2(AppRouter.themeColorDemo, "themeColor"),
+  Tuple2(AppRouter.themeColorSchemePage, "themeColorSchemePage"),
   Tuple2(AppRouter.emojiPage, "emoji"),
   Tuple2(AppRouter.operatorDemo, "特殊操作符"),
   Tuple2(AppRouter.mediaQueryDemo, "mediaQuery"),

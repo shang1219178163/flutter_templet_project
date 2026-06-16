@@ -328,6 +328,7 @@ import 'package:flutter_templet_project/pages/demo/TextPaintDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextThemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ThemeColorSchemePage.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeMaterial3Page.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
@@ -445,6 +446,7 @@ class AppRouter {
 
   static const String appLifecycleObserverDemo = '/appLifecycleObserverDemo';
   static const String themeColorDemo = '/themeColorDemo';
+  static const String themeColorSchemePage = '/themeColorSchemePage';
 
   static const String launchPage = '/APPLaunchPage';
   static const String emojiPage = '/emojiPage';
@@ -962,6 +964,11 @@ class AppRouter {
       name: AppRouter.themeColorDemo,
       page: () => ThemeColorDemo(),
     ),
+    GetPage(
+      name: AppRouter.themeColorSchemePage,
+      page: () => ThemeColorSchemePage(),
+    ),
+
     GetPage(
       name: AppRouter.emojiPage,
       page: () => EmojiPage(),
