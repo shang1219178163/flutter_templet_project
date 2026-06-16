@@ -723,12 +723,7 @@ class _SecondPageState extends State<SecondPage> {
                     ),
                     child: Text("MaterialButton"),
                   ),
-                  TimerButton(
-                    onRequest: () async {
-                      await Future.delayed(Duration(milliseconds: 1));
-                      return true;
-                    },
-                  ),
+
                   NScaleButton(
                     builder: (AnimationController controller) {
                       return ElevatedButton(
@@ -766,7 +761,12 @@ class _SecondPageState extends State<SecondPage> {
                       DLog.d('defaultStyle: $defaultStyle');
                     },
                   ),
-
+                  TimerButton(
+                    onRequest: () async {
+                      await Future.delayed(Duration(milliseconds: 1));
+                      return true;
+                    },
+                  ),
                   () {
                     final defaultStyle = ButtonStyleButtonExt.defaultStyleOf(context);
                     final textStyle = defaultStyle.textStyle?.resolve({WidgetState.pressed});
