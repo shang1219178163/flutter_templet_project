@@ -105,14 +105,12 @@ class _NOriginSheetState extends State<NOriginSheet> {
             },
             child: currentWidget,
           ),
-          const SizedBox(
-            width: 4,
-          ),
+          const SizedBox(width: 4),
           Opacity(
             opacity: currentEnv == AppEnvironment.dev ? 1 : 0,
             child: InkWell(
                 onTap: () {
-                  // YLog.d("edit");
+                  // DLog.d("edit");
 
                   showAlertTextField(onChanged: (String value) {
                     DLog.d("showAlertTextField $value");
@@ -177,10 +175,10 @@ class _NOriginSheetState extends State<NOriginSheet> {
             isCollapsed: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             onChanged: (String value) {
-              // YLog.d("onChanged $value");
+              // DLog.d("onChanged $value");
             },
             onSubmitted: (String value) {
-              // YLog.d("onSubmitted $value");
+              // DLog.d("onSubmitted $value");
             },
           ),
       actions: ["取消", "确定"]
@@ -209,11 +207,11 @@ class _NOriginSheetState extends State<NOriginSheet> {
     required AppEnvironment env,
     required String origin,
   }) {
-    RequestConfig.current = env;
-    CacheService().env = env;
     if (env == AppEnvironment.dev) {
       CacheService().devOrigin = origin;
     }
+    RequestConfig.current = env;
+    CacheService().env = env;
     setState(() {});
 
     widget.onChanged?.call(env, origin);

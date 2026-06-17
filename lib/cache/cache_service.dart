@@ -381,14 +381,17 @@ extension CacheServiceExt on CacheService {
     if (val == null) {
       return;
     }
-    final result = val.toString();
+    final result = jsonEncode(val.toJson());
     CacheService().setString(CacheKey.requestEnv.name, result);
   }
 
   /// 获取登录环境
   AppEnvironment? get env {
     final result = CacheService().getString(CacheKey.requestEnv.name);
-    final val = AppEnvironment.fromString(result);
+    if (result?.isNotEmpty != true) {
+      return null;
+    }
+    final val = AppEnvironment.fromJson(jsonDecode(result!));
     return val;
   }
 

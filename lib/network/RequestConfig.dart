@@ -6,6 +6,8 @@
 //  Copyright © 2024/1/6 shang. All rights reserved.
 //
 
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -13,19 +15,19 @@ import 'package:flutter_templet_project/util/dlog.dart';
 /// 当前 api 环境
 enum AppEnvironment {
   /// 开发环境
-  dev('https://*.cn'),
+  dev('https://dev.*.cn'),
 
   /// 预测试环境
-  beta('https://*.cn'),
+  beta('https://beta.*.cn'),
 
   /// 测试环境
-  test('https://*.cn'),
+  test('https://test.*.cn'),
 
   /// 预发布环境
-  pre('https://*.cn'),
+  pre('https://pre.*.cn'),
 
   /// 生产环境
-  prod('https://*.cn');
+  prod('https://prod.*.cn');
 
   const AppEnvironment(
     this.origin,
@@ -34,41 +36,40 @@ enum AppEnvironment {
   /// 当前枚举对应的域名
   final String origin;
 
-  /// 字符串转类型
-  static AppEnvironment? fromString(String? val) {
-    if (val == null || !val.contains(",")) {
-      return null;
-    }
-
-    final list = val.split(",");
-    if (list.length != 2) {
-      return null;
-    }
-
-    final first = list[0];
-    final isEnumType = AppEnvironment.values.map((e) => e.name).contains(first);
-    if (!isEnumType) {
-      return null;
-    }
-    return AppEnvironment.values.firstWhere((e) => e.name == first);
+  /// name 转枚举
+  static AppEnvironment fromName(String value) {
+    final defaultValue = kDebugMode ? AppEnvironment.test : AppEnvironment.prod;
+    final result = AppEnvironment.values.where((e) => e.name == value).firstOrNull ?? defaultValue;
+    return result;
   }
 
-  /// name 转枚举
-  static AppEnvironment fromName(String name) {
-    for (final e in AppEnvironment.values) {
-      if (e.name == name) {
-        return e;
-      }
+  /// JSON -> Enum
+  static AppEnvironment? fromJson(Map<String, dynamic> json) {
+    assert(json['name'] is String, "json 必须包含 String 类型的 name");
+    final name = json['name'] as String? ?? "";
+    if (name.isEmpty) {
+      return null;
     }
-    return kDebugMode ? AppEnvironment.test : AppEnvironment.prod;
+    final result = AppEnvironment.values.where((e) => e.name == name).firstOrNull;
+    if ([AppEnvironment.dev].contains(result)) {
+      CacheService().devOrigin = json['origin'];
+    }
+    return result;
+  }
+
+  /// Enum -> JSON
+  Map<String, dynamic> toJson() {
+    var originNew = origin;
+    if ([AppEnvironment.dev].contains(this)) {
+      //dev 需要修改 origin
+      originNew = CacheService().devOrigin ?? origin;
+    }
+    return {'name': name, 'origin': originNew};
   }
 
   @override
   String toString() {
-    if (this == AppEnvironment.dev) {
-      return "$name,${CacheService().devOrigin ?? origin}";
-    }
-    return "$name,$origin";
+    return "$runtimeType: ${jsonEncode(toJson())}";
   }
 }
 
