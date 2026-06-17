@@ -25,7 +25,7 @@ class NOriginSheet extends StatefulWidget {
   });
 
   /// 改变回调
-  final void Function(AppEnvironment env, String origin)? onChanged;
+  final void Function(AppEnv env, String origin)? onChanged;
 
   @override
   State<NOriginSheet> createState() => _NOriginSheetState();
@@ -34,7 +34,7 @@ class NOriginSheet extends StatefulWidget {
 class _NOriginSheetState extends State<NOriginSheet> {
   final textController = TextEditingController();
 
-  AppEnvironment get currentEnv {
+  AppEnv get currentEnv {
     final env = CacheService().env;
     final result = env ?? RequestConfig.current;
     return result;
@@ -47,11 +47,11 @@ class _NOriginSheetState extends State<NOriginSheet> {
 
   /// 域名选择
   Widget buildOriginSheet() {
-    if (currentEnv == AppEnvironment.prod && kReleaseMode) {
+    if (currentEnv == AppEnv.prod && kReleaseMode) {
       return const SizedBox();
     }
 
-    const list = AppEnvironment.values;
+    const list = AppEnv.values;
 
     // final currentWidget = Column(
     //   children: [
@@ -63,9 +63,7 @@ class _NOriginSheetState extends State<NOriginSheet> {
 
     final currentWidget = Column(
       children: "$currentEnv".split(",").map((e) {
-        return Text(
-          e,
-        );
+        return Text(e);
       }).toList(),
     );
 
@@ -107,20 +105,17 @@ class _NOriginSheetState extends State<NOriginSheet> {
           ),
           const SizedBox(width: 4),
           Opacity(
-            opacity: currentEnv == AppEnvironment.dev ? 1 : 0,
+            opacity: currentEnv == AppEnv.dev ? 1 : 0,
             child: InkWell(
                 onTap: () {
                   // DLog.d("edit");
 
                   showAlertTextField(onChanged: (String value) {
                     DLog.d("showAlertTextField $value");
-                    onUpdate(env: AppEnvironment.dev, origin: value);
+                    onUpdate(env: AppEnv.dev, origin: value);
                   });
                 },
-                child: Icon(
-                  Icons.edit,
-                  color: Colors.red,
-                )),
+                child: Icon(Icons.edit, color: Colors.red)),
           ),
         ],
       ),
@@ -204,10 +199,10 @@ class _NOriginSheetState extends State<NOriginSheet> {
   }
 
   onUpdate({
-    required AppEnvironment env,
+    required AppEnv env,
     required String origin,
   }) {
-    if (env == AppEnvironment.dev) {
+    if (env == AppEnv.dev) {
       CacheService().devOrigin = origin;
     }
     RequestConfig.current = env;

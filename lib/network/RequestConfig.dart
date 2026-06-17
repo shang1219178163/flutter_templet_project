@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 当前 api 环境
-enum AppEnvironment {
+enum AppEnv {
   /// 开发环境
   dev('https://dev.*.cn'),
 
@@ -29,7 +29,7 @@ enum AppEnvironment {
   /// 生产环境
   prod('https://prod.*.cn');
 
-  const AppEnvironment(
+  const AppEnv(
     this.origin,
   );
 
@@ -37,21 +37,21 @@ enum AppEnvironment {
   final String origin;
 
   /// name 转枚举
-  static AppEnvironment fromName(String value) {
-    final defaultValue = kDebugMode ? AppEnvironment.test : AppEnvironment.prod;
-    final result = AppEnvironment.values.where((e) => e.name == value).firstOrNull ?? defaultValue;
+  static AppEnv fromName(String value) {
+    final defaultValue = kDebugMode ? AppEnv.test : AppEnv.prod;
+    final result = AppEnv.values.where((e) => e.name == value).firstOrNull ?? defaultValue;
     return result;
   }
 
   /// JSON -> Enum
-  static AppEnvironment? fromJson(Map<String, dynamic> json) {
+  static AppEnv? fromJson(Map<String, dynamic> json) {
     assert(json['name'] is String, "json 必须包含 String 类型的 name");
     final name = json['name'] as String? ?? "";
     if (name.isEmpty) {
       return null;
     }
-    final result = AppEnvironment.values.where((e) => e.name == name).firstOrNull;
-    if ([AppEnvironment.dev].contains(result)) {
+    final result = AppEnv.values.where((e) => e.name == name).firstOrNull;
+    if ([AppEnv.dev].contains(result)) {
       CacheService().devOrigin = json['origin'];
     }
     return result;
@@ -60,7 +60,7 @@ enum AppEnvironment {
   /// Enum -> JSON
   Map<String, dynamic> toJson() {
     var originNew = origin;
-    if ([AppEnvironment.dev].contains(this)) {
+    if ([AppEnv.dev].contains(this)) {
       //dev 需要修改 origin
       originNew = CacheService().devOrigin ?? origin;
     }
@@ -75,13 +75,13 @@ enum AppEnvironment {
 
 ///request config
 class RequestConfig {
-  static AppEnvironment current = AppEnvironment.dev;
+  static AppEnv current = AppEnv.dev;
 
   static void initFromEnvironment() {
     /// 从  --dart-define=app_env=beta 读取运行环境
     // ignore: do_not_use_environment -- 编译环境配置
     final env = const String.fromEnvironment("app_env");
-    current = AppEnvironment.fromName(env);
+    current = AppEnv.fromName(env);
     DLog.d("appEnv: $current");
   }
 
@@ -90,7 +90,7 @@ class RequestConfig {
     final env = CacheService().env;
     if (env != null) {
       current = env;
-      if (env == AppEnvironment.dev) {
+      if (env == AppEnv.dev) {
         return CacheService().devOrigin ?? current.origin;
       }
     }

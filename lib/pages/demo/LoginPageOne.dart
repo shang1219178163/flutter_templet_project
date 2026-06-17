@@ -267,7 +267,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
   final accountSheetController = NAccountSheetController();
 
   Widget buildAccountSheet() {
-    if (RequestConfig.current == AppEnvironment.prod) {
+    if (RequestConfig.current == AppEnv.prod) {
       return const SizedBox();
     }
     return NAccountSheet(
