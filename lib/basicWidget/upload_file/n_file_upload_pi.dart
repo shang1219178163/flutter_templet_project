@@ -60,7 +60,7 @@ class NFileUploadPI extends NFileUploadHandle {
                 ],
               ),
               builder: (context, name) {
-                // YLog.d("buildUploading ${fileName}: ${_percentVN.value}");
+                // DLog.d("buildUploading ${fileName}: ${_percentVN.value}");
                 final percent = percentVN.value;
                 // if (percent >= 1) {
                 //   return const SizedBox();

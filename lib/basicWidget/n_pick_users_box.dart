@@ -36,7 +36,7 @@ class NPickUsersBox extends NPickRequestListBox<UserModel> {
             // );
 
             // var list = tuple.result ?? <UserModel>[];
-            // YLog.d("$widget requestList: ${list.length}");
+            // DLog.d("$widget requestList: ${list.length}");
             if (isRefresh) {
               return List.generate(pageSize, (index) {
                 return UserModel(

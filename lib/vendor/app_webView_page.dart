@@ -287,7 +287,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
       },
       onProgressChanged: (controller, progress) {
         progressVN.value = progress / 100;
-        // YLog.d("progress: $progress");
+        // DLog.d("progress: $progress");
       },
       onUpdateVisitedHistory: (controller, url, isReload) async {
         // fullScreenLandscape = null;
@@ -397,7 +397,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
     // Iterable<RegExpMatch> matches = videoTagExp.allMatches(htmlContent);
     // // 将匹配到的内容存入数组
     // List<String> videoTags = matches.map((match) => match.group(0)!).toList();
-    // YLog.d({"videoTags": videoTags});
+    // DLog.d({"videoTags": videoTags});
 
     // 解析 HTML 字符串
     final document = html_parser.parse(htmlContent);

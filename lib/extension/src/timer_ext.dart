@@ -31,11 +31,11 @@ extension TimerExt on Timer {
       }
       if (count <= 0) {
         t.cancel();
-        // YLog.d("Timer 结束");
+        // DLog.d("Timer 结束");
         onTimerEnd?.call();
         return;
       }
-      // YLog.d("重试 $count");
+      // DLog.d("重试 $count");
       onFunction();
     });
   }

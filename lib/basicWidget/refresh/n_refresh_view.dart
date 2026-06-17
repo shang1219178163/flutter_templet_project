@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin
 //
 //         return InkWell(
 //           onTap: () {
-//             YLog.d("${e.toJson()}");
+//             DLog.d("${e.toJson()}");
 //           },
 //           child: PatientSchemeCell(
 //             model: e,

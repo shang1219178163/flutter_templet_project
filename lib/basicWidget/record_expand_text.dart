@@ -110,7 +110,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
         // final numberOfLines = textPainter.computeLineMetrics().length;
         // debugPrint("numberOfLines:${numberOfLines}");
         var isBeyond = textPainter.didExceedMaxLines;
-        // YLog.d([
+        // DLog.d([
         //   text.length,
         //   constraints.maxWidth - tailingWidth,
         //   textPainter.height,

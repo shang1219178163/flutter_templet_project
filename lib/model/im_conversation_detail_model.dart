@@ -87,7 +87,7 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
   //     }
   //     lastMessage = V2TimMessage.fromJson(lastMessageJson);
   //   } catch (e) {
-  //     YLog.d("❌ $this lastMessage $e");
+  //     DLog.d("❌ $this lastMessage $e");
   //   }
   //   return lastMessage;
   // }
@@ -100,7 +100,7 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
   //         List<Map<String, dynamic>>.from(jsonDecode(groupAtInfoListString ?? "") ?? []);
   //     groupAtInfoList = groupAtInfoListJson.map((e) => V2TimGroupAtInfo.fromJson(e)).toList();
   //   } catch (e) {
-  //     YLog.d("❌ $this groupAtInfoList $e");
+  //     DLog.d("❌ $this groupAtInfoList $e");
   //   }
   //   return groupAtInfoList;
   // }
@@ -116,7 +116,7 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
   //   //   final List<Map<String, dynamic>> groupAtInfoListJson = jsonDecode(groupAtInfoListString ?? "") ?? [];
   //   //   groupAtInfoList = groupAtInfoListJson.map((e) => V2TimGroupAtInfo.fromJson(e)).toList();
   //   // } catch (e) {
-  //   //   YLog.d("$this toV2TimConversation $e");
+  //   //   DLog.d("$this toV2TimConversation $e");
   //   // }
   //
   //   return V2TimConversation(

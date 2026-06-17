@@ -65,7 +65,7 @@ class _SecureKeyboardDemoState extends State<SecureKeyboardDemo> {
             Text("$widget"),
             Listener(
               onPointerDown: (event) async {
-                // YLog.d("onPointerDown: $event");
+                // DLog.d("onPointerDown: $event");
                 await Future.delayed(const Duration(milliseconds: 350));
                 focusNodeAccount.requestFocus();
               },
@@ -84,7 +84,7 @@ class _SecureKeyboardDemoState extends State<SecureKeyboardDemo> {
             const SizedBox(height: 8),
             Listener(
               onPointerDown: (event) async {
-                // YLog.d("onPointerDown: $event");
+                // DLog.d("onPointerDown: $event");
                 await Future.delayed(const Duration(milliseconds: 350));
                 focusNodePwd.requestFocus();
               },

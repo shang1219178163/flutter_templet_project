@@ -171,7 +171,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
         return canChange;
       },
       // onChanged: (val) {
-      //   YLog.d("onChanged: ${val.title},${val.value}");
+      //   DLog.d("onChanged: ${val.title},${val.value}");
       //   // rpItemCurrent.value = val;
       // },
     );

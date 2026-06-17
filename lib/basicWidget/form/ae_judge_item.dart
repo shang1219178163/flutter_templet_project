@@ -101,12 +101,12 @@ class AeJudgeItem extends StatelessWidget {
       ),
       canChanged: (val, onSelect) {
         final result = (selectVN.value != val);
-        // YLog.d("canChanged: $result");
+        // DLog.d("canChanged: $result");
         return result;
       },
       onChanged: (e) {
         isYes.value = e.value;
-        // YLog.d("${hashCode} onChanged keyName: $keyName");
+        // DLog.d("${hashCode} onChanged keyName: $keyName");
         onChanged?.call(keyName, e.value);
       },
     );

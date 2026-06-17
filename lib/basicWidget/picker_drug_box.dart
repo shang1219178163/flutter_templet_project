@@ -6,7 +6,6 @@
 //  Copyright © 2024/9/3 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/basicWidget/n_pick_request_list_box.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/api/tag_list_api.dart';
@@ -36,7 +35,7 @@ class PickerDrugBox extends NPickRequestListBox<TagDetailModel> {
             );
 
             final list = tuple.result;
-            // YLog.d("$widget requestList: ${list.length}");
+            // DLog.d("$widget requestList: ${list.length}");
             return list;
           },
           cbName: (e) => e.name ?? '',

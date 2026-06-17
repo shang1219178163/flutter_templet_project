@@ -170,7 +170,7 @@ class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
         final name = widget.cbName(model);
 
         void onTapItem() {
-          // YLog.d("${jsonEncode(model.toJson())}");
+          // DLog.d("${jsonEncode(model.toJson())}");
           selecetdModel = model;
           final modelNew = widget.onSelectedTap?.call(model) ?? model;
           widget.items.add(modelNew);

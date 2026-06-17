@@ -29,14 +29,14 @@
 // //
 // // @override
 // // void onLocationChanged(LocationDetailModel locationModel) {
-// //   YLog.d("$this onLocationChanged: $location");
+// //   DLog.d("$this onLocationChanged: $location");
 // //   locationModel = model;
 // //   return model.cityCode?.isNotEmpty == true;
 // // }
 // //
 // // @override
 // // void onLocationFailed(Map<String, Object> result) {
-// //   YLog.d("$this onLocationFailed: $location");
+// //   DLog.d("$this onLocationFailed: $location");
 // //     ...
 // // }
 //

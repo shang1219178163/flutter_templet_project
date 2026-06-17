@@ -136,7 +136,7 @@ class _NChromeSegmentState extends State<NChromeSegment> {
       }
     }
 
-    // YLog.d("buildTab: ${{
+    // DLog.d("buildTab: ${{
     //   "eIndex": eIndex,
     //   "isSelected": isSelected,
     //   "topLeftRadius": topLeftRadius,
