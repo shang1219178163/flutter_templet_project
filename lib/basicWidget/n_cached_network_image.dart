@@ -6,7 +6,7 @@ class NCachedNetworkImage extends StatelessWidget {
   const NCachedNetworkImage({
     super.key,
     required this.imageUrl,
-    this.placeholder,
+    this.placeholder = const AssetImage("assets/images/img_placeholder.png"),
     required this.width,
     required this.height,
     this.fit = BoxFit.cover,
@@ -15,7 +15,7 @@ class NCachedNetworkImage extends StatelessWidget {
   });
 
   final String imageUrl;
-  final AssetImage? placeholder;
+  final AssetImage placeholder;
   final double? width;
   final double? height;
   final BoxFit? fit;
@@ -25,7 +25,7 @@ class NCachedNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final placeholderWidget = Image(
-      image: placeholder ?? const AssetImage("assets/images/img_placeholder.png"),
+      image: placeholder,
       fit: fit,
       width: width,
       height: height,
