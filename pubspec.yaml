@@ -332,6 +332,7 @@ flutter:
     - assets/images/curve/
     - assets/images/message/
     - assets/images/shop/
+    - assets/images/points/
     - assets/media/
     - lib/pages/demo/
 
