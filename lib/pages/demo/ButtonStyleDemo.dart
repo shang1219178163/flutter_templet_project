@@ -312,22 +312,22 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
         spacing: 8,
         runSpacing: 8,
         children: [
-          AppButtonNew(
+          AppButton(
             type: AppButtonType.outlined,
             onPressed: onPressed,
             child: Text("Outlined"),
           ),
-          AppButtonNew(
+          AppButton(
             type: AppButtonType.filled,
             onPressed: onPressed,
             child: Text("Filled"),
           ),
-          AppButtonNew(
+          AppButton(
             type: AppButtonType.filledTonal,
             onPressed: onPressed,
             child: Text("Tonal"),
           ),
-          AppButtonNew(
+          AppButton(
             type: AppButtonType.text,
             onPressed: onPressed,
             child: Text("Text"),
