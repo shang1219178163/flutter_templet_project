@@ -39,6 +39,7 @@ import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedToggleSwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnnotatedRegionPage.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreatePage.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppLaunchPage.dart';
@@ -436,7 +437,7 @@ import 'package:flutter_templet_project/vendor/wechat_assets_picker_demo.dart';
 import 'package:get/get.dart';
 
 class AppRouter {
-  static const String unknown = '/AppUnknownPage';
+  static const String unknown = '/unknownPage';
   static const String sandboxFileDirectory = '/sandboxFileDirectory';
 
   static const String appTabPage = '/AppTabPage';
@@ -937,6 +938,7 @@ class AppRouter {
   static const String horizalStepPage = '/horizalStepPage';
   static const String textThemeDemo = '/textThemeDemo';
   static const String linkifyPage = '/linkifyPage';
+  static const String annotatedRegion = '/AnnotatedRegion';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2758,6 +2760,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.linkifyPage,
       page: () => LinkifyPage(),
+    ),
+    GetPage(
+      name: AppRouter.annotatedRegion,
+      page: () => AnnotatedRegionPage(),
     ),
   ];
 }
