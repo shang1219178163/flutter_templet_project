@@ -9,26 +9,44 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-/// yyyyMMddHHmmss
-const String DATE_FORMAT_INT = 'yyyyMMddHHmmss';
+// /// yyyyMMddHHmmss
+// const String DATE_FORMAT_INT = 'yyyyMMddHHmmss';
+//
+// /// yyyy-dd-MM HH:mm:ss
+// const String DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
+//
+// /// yyyy-MM-dd
+// const String DATE_FORMAT_DAY = 'yyyy-MM-dd';
+//
+// /// yyyy-dd-MM 00:00:00
+// const String DATE_FORMAT_DAY_START = 'yyyy-MM-dd 00:00:00';
+//
+// /// yyyy-dd-MM 23:59:59
+// const String DATE_FORMAT_DAY_END = 'yyyy-MM-dd 23:59:59';
+//
+// /// HH:mm:
+// const String DATE_FORMAT_H_M = 'HH:mm';
+//
+// /// HH:mm:ss
+// const String DATE_FORMAT_H_M_S = 'HH:mm:ss';
 
-/// yyyy-dd-MM HH:mm:ss
-const String DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
+/// 时间样式
+abstract class DateTimeFmt {
+  /// yyyyMMddHHmmss
+  static const yyyyMMddHHmmss = "yyyyMMddHHmmss";
 
-/// yyyy-MM-dd
-const String DATE_FORMAT_DAY = 'yyyy-MM-dd';
+  /// yyyy-MM-dd HH:mm:ss
+  static const yyyyMMdd = "yyyyMMdd";
 
-/// yyyy-dd-MM 00:00:00
-const String DATE_FORMAT_DAY_START = 'yyyy-MM-dd 00:00:00';
+  /// yyyy-MM-dd 23:59:59
+  static const yyyyMMdd235959 = "yyyyMMdd235959";
 
-/// yyyy-dd-MM 23:59:59
-const String DATE_FORMAT_DAY_END = 'yyyy-MM-dd 23:59:59';
+  /// HH:mm
+  static const hhmm = "HHmm";
 
-/// HH:mm:
-const String DATE_FORMAT_H_M = 'HH:mm';
-
-/// HH:mm:ss
-const String DATE_FORMAT_H_M_S = 'HH:mm:ss';
+  /// HH:mm:ss
+  static const hhmmss = "HHmmss";
+}
 
 extension DateTimeExt on DateTime {
   /// 时间戳(秒)
@@ -64,7 +82,7 @@ extension DateTimeExt on DateTime {
   /// 字符串 转 时间戳(秒)
   static int? timestampFromDateStr({
     required String? dateStr,
-    String format = DATE_FORMAT,
+    String format = DateTimeFmt.yyyyMMddHHmmss,
     bool isUtc = false,
   }) {
     final date = dateFromString(dateStr: dateStr, format: format, isUtc: isUtc);
@@ -75,7 +93,7 @@ extension DateTimeExt on DateTime {
   /// DateTime 转 字符串
   static String? stringFromDate({
     required DateTime? date,
-    String format = DATE_FORMAT,
+    String format = DateTimeFmt.yyyyMMddHHmmss,
   }) {
     try {
       if (date == null) {
@@ -94,7 +112,7 @@ extension DateTimeExt on DateTime {
   /// 字符串 转 DateTime
   static DateTime? dateFromString({
     required String? dateStr,
-    String format = DATE_FORMAT,
+    String format = DateTimeFmt.yyyyMMddHHmmss,
     bool isUtc = false,
   }) {
     try {
@@ -119,7 +137,7 @@ extension DateTimeExt on DateTime {
   ///结果： 2019?08?04  02?08?02
   static String? stringFromTimestamp({
     required int? timestamp,
-    String format = DATE_FORMAT,
+    String format = DateTimeFmt.yyyyMMddHHmmss,
     bool isUtc = false,
   }) {
     if (timestamp == null) {
@@ -213,7 +231,7 @@ extension DateTimeExt on DateTime {
   }
 
   ///获取当前月的第一天
-  String monthFisrtDayStr({String format = DATE_FORMAT}) {
+  String monthFisrtDayStr({String format = DateTimeFmt.yyyyMMddHHmmss}) {
     var dateTime = monthFisrtDay();
     var result = DateTimeExt.stringFromDate(date: dateTime, format: format);
     return result ?? "";
@@ -230,7 +248,7 @@ extension DateTimeExt on DateTime {
 
   ///获取当前月的最后一天。
   String monthLastDayStr({
-    String format = DATE_FORMAT,
+    String format = DateTimeFmt.yyyyMMddHHmmss,
   }) {
     var dateTime = monthLastDay();
     var result = DateTimeExt.stringFromDate(date: dateTime, format: format);
@@ -238,7 +256,7 @@ extension DateTimeExt on DateTime {
   }
 
   ///获取当前日历月份的第一天
-  String calenderMonthPageFisrtDayStr({String format = DATE_FORMAT}) {
+  String calenderMonthPageFisrtDayStr({String format = DateTimeFmt.yyyyMMddHHmmss}) {
     var dateTime = this;
     if (dateTime.weekday != 7) {
       final monthFisrtDay = DateTime(year, month, 1);
@@ -252,7 +270,7 @@ extension DateTimeExt on DateTime {
 
   ///获取当前日历月份页的最后一天
   String calenderMonthPageLastDayStr({
-    String format = DATE_FORMAT,
+    String format = DateTimeFmt.yyyyMMddHHmmss,
   }) {
     final day = monthLastDay();
 
@@ -311,52 +329,6 @@ extension DateTimeIntExt on int {
       value = value ~/ 1000;
       return value.toInt();
     }
-
     return value;
-  }
-}
-
-/// 时间样式
-enum DateFormatEnum {
-  /// yyyyMMddHHmmss
-  yyyyMMddHHmmss(name: "yyyyMMddHHmmss", fmt: "yyyy-MM-dd HH:mm:ss"),
-
-  /// yyyy-MM-dd HH:mm:ss
-  yyyyMMdd(name: "yyyyMMdd", fmt: "yyyy-MM-d"),
-
-  /// yyyy-MM-dd 00:00:00
-  yyyyMMdd000000(name: "yyyyMMdd000000", fmt: "yyyy-MM-dd 00:00:00"),
-
-  /// yyyy-MM-dd 23:59:59
-  yyyyMMdd235959(name: "yyyyMMdd235959", fmt: "yyyy-MM-dd 23:59:59"),
-
-  /// HH:mm:
-  HHmm(name: "HHmm", fmt: "HH:mm"),
-
-  /// HH:mm:ss
-  HHmmss(name: "HHmmss", fmt: "HH:mm:ss");
-
-  const DateFormatEnum({required this.name, required this.fmt});
-
-  /// name
-  final String name;
-
-  /// 格式
-  final String fmt;
-
-  /// 日期格式化
-  String? formatDate({required DateTime? date}) {
-    return DateTimeExt.stringFromDate(date: date);
-  }
-
-  /// 日期时间二次格式化
-  String? formatDateString({required String? dateStr}) {
-    final date = DateTimeExt.dateFromString(dateStr: dateStr);
-    return DateTimeExt.stringFromDate(date: date);
-  }
-
-  /// 时间戳格式化
-  String? formatTimestamp({required int? timestamp}) {
-    return DateTimeExt.stringFromTimestamp(timestamp: timestamp);
   }
 }

@@ -169,8 +169,8 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
               // No need to call `setState()` here
               _focusedDay = focusedDay;
 
-              final first = _focusedDay.calenderMonthPageFisrtDayStr(format: DATE_FORMAT_DAY);
-              final last = _focusedDay.calenderMonthPageLastDayStr(format: DATE_FORMAT_DAY_END);
+              final first = _focusedDay.calenderMonthPageFisrtDayStr(format: DateTimeFmt.yyyyMMdd);
+              final last = _focusedDay.calenderMonthPageLastDayStr(format: DateTimeFmt.yyyyMMdd235959);
               debugPrint("onPageChanged: calenderMonthPage $first, $last");
             },
           ),

@@ -7,6 +7,7 @@
 //
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -54,7 +55,7 @@ class _NWebViewPageState extends State<NWebViewPage> {
     configWebview();
   }
 
-  configWebview() {
+  void configWebview() {
     // #docregion platform_features
     late final PlatformWebViewControllerCreationParams params;
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
@@ -120,7 +121,7 @@ Page resource error:
         ),
       )
       ..addJavaScriptChannel(
-        'Toaster',
+        'Toast',
         onMessageReceived: (JavaScriptMessage message) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message.message)),
@@ -132,12 +133,19 @@ Page resource error:
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
+      (controller.platform as AndroidWebViewController).setMediaPlaybackRequiresUserGesture(false);
     }
     // #enddocregion platform_features
 
     _controller = controller;
+  }
+
+  @override
+  void didUpdateWidget(covariant NWebViewPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.url != widget.url) {
+      configWebview();
+    }
   }
 
   @override

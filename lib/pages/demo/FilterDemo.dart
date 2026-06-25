@@ -25,62 +25,84 @@ class _FilterDemoState extends State<FilterDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    onPressed: () => debugPrint(e),
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ))
-              .toList(),
-        ),
-        body: Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Text("01" * 1299),
-            Positioned(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      debugPrint("ElevatedButton");
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Text("ImageFilter 显示在组件上边, \nBackdropFilter 显示在组件下边"),
-                    ),
-                  ),
-                  // buildImageFilter(),
-                  // buildBackdropFilter(),
-                  // buildCombine(),
-                  NFilter(
-                    foregroundFilter: ui.ImageFilter.blur(
-                      sigmaX: 2,
-                      sigmaY: 2,
-                    ),
-                    filter: ui.ImageFilter.blur(
-                      sigmaX: 2,
-                      sigmaY: 2,
-                    ),
-                    child: Image(
-                      image: '404.png'.toAssetImage(),
-                      fit: BoxFit.cover,
-                      width: 200.0,
-                      height: 120.0,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
+    );
   }
+
+  Widget buildBody() {
+    return Column(
+      children: [
+        Flexible(
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Text("01" * 1299),
+              Positioned(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        debugPrint("ElevatedButton");
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 6),
+                        child: Text("ImageFilter 显示在组件上边, \nBackdropFilter 显示在组件下边"),
+                      ),
+                    ),
+                    // buildImageFilter(),
+                    // buildBackdropFilter(),
+                    // buildCombine(),
+                    NFilter(
+                      foregroundFilter: ui.ImageFilter.blur(
+                        sigmaX: 2,
+                        sigmaY: 2,
+                      ),
+                      filter: ui.ImageFilter.blur(
+                        sigmaX: 2,
+                        sigmaY: 2,
+                      ),
+                      child: Image(
+                        image: '404.png'.toAssetImage(),
+                        fit: BoxFit.cover,
+                        width: 200.0,
+                        height: 120.0,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        // Flexible(child: buildBackdropGroup()),
+      ],
+    );
+  }
+
+  // /// 共享背景滤镜层将提高多个滤镜的性能
+  // Widget buildBackdropGroup() {
+  //   return BackdropGroup(
+  //     child: ListView.builder(
+  //       itemCount: 20,
+  //       itemBuilder: (BuildContext context, int index) {
+  //         return ClipRect(
+  //           child: BackdropFilter.grouped(
+  //             filter: ui.ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+  //             child: Container(
+  //               color: Colors.black.withOpacity(0.2),
+  //               height: 200,
+  //               child: const Text('Blur item'),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   Widget buildImageFilter() {
     return ImageFiltered(
@@ -148,30 +170,4 @@ class _FilterDemoState extends State<FilterDemo> {
       ),
     );
   }
-
-  // _buildNNSlider() {
-  //   return NSlider(
-  //     max: 100,
-  //     leading: IconButton(
-  //       icon: Icon(Icons.download),
-  //       onPressed: () {
-  //         debugPrint("Downloading");
-  //       },
-  //     ),
-  //     onChangeEnd: (double value) {
-  //       debugPrint('NNSlider onChangeEnd: $value');
-  //     },
-  //     trailingBuilder: (context, value) {
-  //       // final result = (value/100).toStringAsFixed(2);
-  //       final result = "${value.toStringAsFixed(0)}%";
-
-  //       return TextButton(
-  //         onPressed: () {
-  //           debugPrint("Downloading");
-  //         },
-  //         child: Text(result),
-  //       );
-  //     },
-  //   );
-  // }
 }

@@ -371,7 +371,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
   ///获取分组key
   String getSection(int day) {
     final date = DateTime.now().add(Duration(days: day));
-    final dateStr = DateTimeExt.stringFromDate(date: date, format: DateFormatEnum.yyyyMMdd.name);
+    final dateStr = DateTimeExt.stringFromDate(date: date, format: DateTimeFmt.yyyyMMdd);
     return dateStr ?? "other";
   }
 

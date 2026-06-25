@@ -107,7 +107,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
       onConfirm: (date) {
         startDate = DateTimeExt.stringFromDate(
           date: date,
-          format: DATE_FORMAT_DAY_START,
+          format: DateTimeFmt.yyyyMMdd,
         );
         widget.onStart?.call(startDate ?? "");
         setState(() {});
@@ -123,7 +123,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
       onConfirm: (date) {
         endDate = DateTimeExt.stringFromDate(
           date: date,
-          format: DATE_FORMAT_DAY_END,
+          format: DateTimeFmt.yyyyMMdd235959,
         );
         widget.onEnd?.call(endDate ?? "");
         setState(() {});
