@@ -45,23 +45,6 @@ enum CacheKey {
   final bool needLogin;
 }
 
-enum CacheNewKey {
-  aaa(needLogin: true, desc: "用户id"),
-  bbb(needLogin: true, desc: "标签缓存"),
-  ccc(needLogin: false, desc: "账号列表");
-
-  const CacheNewKey({
-    required this.desc,
-    required this.needLogin,
-  });
-
-  /// 当前枚举对应的 描述文字
-  final String desc;
-
-  /// 仅登录可用
-  final bool needLogin;
-}
-
 class CacheService {
   CacheService._() {
     init();

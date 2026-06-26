@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // /// yyyyMMddHHmmss
@@ -317,18 +318,18 @@ extension DateTimeExt on DateTime {
   // }
 }
 
-extension DateTimeIntExt on int {
-  /// 转为秒时间戳
-  int toTimeStamp() {
-    var value = this;
-    if (value < 0) {
-      return 0;
-    }
-
-    if ("$value".length == 13) {
-      value = value ~/ 1000;
-      return value.toInt();
-    }
-    return value;
-  }
-}
+// extension DateTimeIntExt on int {
+//   /// 转为秒时间戳
+//   int toTimeStamp() {
+//     var value = this;
+//     if (value < 0) {
+//       return 0;
+//     }
+//
+//     if ("$value".length == 13) {
+//       value = value ~/ 1000;
+//       return value.toInt();
+//     }
+//     return value;
+//   }
+// }

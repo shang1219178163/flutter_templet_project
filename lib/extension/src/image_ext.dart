@@ -62,6 +62,7 @@ extension ImageProviderExt on ImageProvider {
   /// return Future<ImageInfo>
   Future<ImageInfo> getImageInfo({
     ImageConfiguration configuration = const ImageConfiguration(),
+    ValueChanged<double>? onProgress,
   }) async {
     final completer = Completer<ImageInfo>();
     resolve(configuration).addListener(
@@ -70,6 +71,13 @@ extension ImageProviderExt on ImageProvider {
           // imageInfo.image.dispose();
           completer.complete(imageInfo);
           evict();
+        },
+        onChunk: (event) {
+          if (event.expectedTotalBytes == null) {
+            return;
+          }
+          final progress = event.cumulativeBytesLoaded / event.expectedTotalBytes!.clamp(0.0, 1.0);
+          onProgress?.call(progress);
         },
         onError: (Object exception, StackTrace? stackTrace) {
           completer.completeError(exception, stackTrace);

@@ -11,22 +11,24 @@ class NCanvasImageLoader {
     required AssetImage placeholder,
     ImageConfiguration configuration = const ImageConfiguration(),
   }) async {
+    final placeholderImage = _loadImage(placeholder, configuration: configuration);
     try {
       if (url == null || url.startsWith("http") != true) {
-        return _loadImage(placeholder, configuration: configuration);
+        return placeholderImage;
       }
 
       final provider = CachedNetworkImageProvider(url);
       final image = await _loadImage(provider, configuration: configuration);
       return image;
     } catch (e) {
-      return _loadImage(placeholder, configuration: configuration);
+      return placeholderImage;
     }
   }
 
   static Future<ui.Image> _loadImage(
     ImageProvider provider, {
     ImageConfiguration configuration = const ImageConfiguration(),
+    ValueChanged<double>? onProgress,
   }) async {
     final completer = Completer<ui.Image>();
 
@@ -37,6 +39,13 @@ class NCanvasImageLoader {
       (ImageInfo info, _) {
         completer.complete(info.image);
         stream.removeListener(listener);
+      },
+      onChunk: (event) {
+        if (event.expectedTotalBytes == null) {
+          return;
+        }
+        final progress = event.cumulativeBytesLoaded / event.expectedTotalBytes!.clamp(0.0, 1.0);
+        onProgress?.call(progress);
       },
       onError: (e, _) {
         completer.completeError(e);
