@@ -186,7 +186,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
   }
 
   Future<void> onNSlidePopupRoute() async {
-    final route = NSlidePopupRoute(
+    final route = NPopupRoute(
       from: alignment,
       builder: (_) {
         return buildPopupView(alignment: alignment, argsDismiss: {"b": "88"});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// 最新滑入弹窗
-class NSlidePopupRoute<T> extends PopupRoute<T> {
-  NSlidePopupRoute({
+/// 最新滑入弹窗(支持任意方向)
+class NPopupRoute<T> extends PopupRoute<T> {
+  NPopupRoute({
     super.settings,
     required this.builder,
     this.from = Alignment.bottomCenter,
@@ -48,7 +48,7 @@ class NSlidePopupRoute<T> extends PopupRoute<T> {
     RouteSettings? routeSettings,
   }) {
     return Navigator.of(context, rootNavigator: useRootNavigator).push(
-      NSlidePopupRoute<T>(
+      NPopupRoute<T>(
         builder: builder,
         from: from,
         duration: duration,
