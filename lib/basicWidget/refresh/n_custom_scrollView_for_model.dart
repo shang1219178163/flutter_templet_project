@@ -1,5 +1,5 @@
 //
-//  NCustomScrollView.dart
+//  NCustomScrollViewOne.dart
 //  projects
 //
 //  Created by shang on 2026/1/28 14:41.
@@ -7,35 +7,37 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
+import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 
-/// 基于 CustomScrollView 的下拉刷新,上拉加载更多的滚动列表
+/// 基于 CustomScrollView 的下拉刷新详情展示
 /// 可以配合 NestedScrollView 添加吸顶组件使用
-class NCustomScrollView<T> extends StatefulWidget {
-  const NCustomScrollView({
+class NCustomScrollViewForModel<T> extends StatefulWidget {
+  const NCustomScrollViewForModel({
     super.key,
     this.controller,
     this.scrollController,
     this.placeholder = const NPlaceholder(),
+    this.skeletonScreen = const NSkeletonScreen(),
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
     this.onlyHeader = false,
     required this.onRequest,
-    required this.itemBuilder,
-    this.separatorBuilder,
+    required this.builder,
     this.headerBuilder,
     this.footerBuilder,
-    this.builder,
   });
 
   /// 刷新控制器
-  final NListRefreshController<T>? controller;
+  final NRefreshController<T>? controller;
 
   final ScrollController? scrollController;
 
   final Widget? placeholder;
+
+  final Widget? skeletonScreen;
 
   final Decoration contentDecoration;
 
@@ -45,38 +47,38 @@ class NCustomScrollView<T> extends StatefulWidget {
   final bool onlyHeader;
 
   /// 请求方法
-  final RequestListCallback<T> onRequest;
+  final RequestModelCallback<T> onRequest;
 
-  /// ListView 的 itemBuilder
-  final ValueIndexedWidgetBuilder<T> itemBuilder;
+  final Widget Function(BuildContext context, T? model) builder;
 
-  final IndexedWidgetBuilder? separatorBuilder;
+  /// 表头
+  final List<Widget> Function(BuildContext context, T? m)? headerBuilder;
 
-  /// 列表表头
-  final List<Widget> Function(int count)? headerBuilder;
-
-  /// 列表表尾
-  final List<Widget> Function(int count)? footerBuilder;
-
-  final Widget Function(List<T> items)? builder;
+  /// 表尾
+  final List<Widget> Function(BuildContext context, T? m)? footerBuilder;
 
   @override
-  State<NCustomScrollView<T>> createState() => _NCustomScrollViewState<T>();
+  State<NCustomScrollViewForModel<T>> createState() => _NCustomScrollViewForModelState<T>();
 }
 
-class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
-    with AutomaticKeepAliveClientMixin, NListRefreshMixin<T>, NListRefreshStateMixin<NCustomScrollView<T>, T> {
+class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel<T>>
+    with AutomaticKeepAliveClientMixin, NModelRefreshMixin<T>, NRefreshStateMixin<NCustomScrollViewForModel<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
-  final scrollController = ScrollController();
+  late var scrollController = widget.scrollController ?? ScrollController();
 
   @override
-  late RequestListCallback<T> onRequest = widget.onRequest;
+  late RequestModelCallback<T> onRequest = widget.onRequest;
+
+  /// 首次加载
+  var isFirstLoad = true;
 
   @override
   void dispose() {
     widget.controller?.detach(this);
+    refreshController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -84,23 +86,32 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   void initState() {
     super.initState();
     widget.controller?.attach(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (item == null) {
+        await onRefresh();
+        isFirstLoad = false;
+      }
+    });
   }
 
   @override
-  void didUpdateWidget(covariant NCustomScrollView<T> oldWidget) {
+  void didUpdateWidget(covariant NCustomScrollViewForModel<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.scrollController != oldWidget.scrollController ||
+    if (widget.controller != oldWidget.controller ||
+        widget.scrollController != oldWidget.scrollController ||
         widget.placeholder != oldWidget.placeholder ||
         widget.contentDecoration != oldWidget.contentDecoration ||
         widget.contentPadding != oldWidget.contentPadding ||
         widget.onlyHeader != oldWidget.onlyHeader ||
-        widget.onRequest != oldWidget.onRequest ||
-        widget.itemBuilder != oldWidget.itemBuilder ||
-        widget.separatorBuilder != oldWidget.separatorBuilder) {
+        widget.onRequest != oldWidget.onRequest) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
+      if (widget.scrollController != null) {
+        scrollController = widget.scrollController!;
+      }
+      onRequest = widget.onRequest;
       setState(() {});
     }
   }
@@ -108,22 +119,28 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (items.isEmpty && !widget.onlyHeader) {
+
+    if (isFirstLoad && widget.skeletonScreen != null) {
+      return widget.skeletonScreen!;
+    }
+
+    if (item == null && !widget.onlyHeader) {
       return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
     }
 
     return EasyRefresh.builder(
       controller: refreshController,
+      scrollController: scrollController,
       onRefresh: onRefresh,
-      onLoad: indicator == IndicatorResult.noMore ? null : onLoad,
+      onLoad: null,
       childBuilder: (_, physics) {
         return CustomScrollView(
-          controller: widget.scrollController,
+          controller: scrollController,
           physics: physics,
           slivers: [
-            ...(widget.headerBuilder?.call(items.length) ?? []),
+            ...(widget.headerBuilder?.call(context, item) ?? []),
             buildContent(),
-            ...(widget.footerBuilder?.call(items.length) ?? []),
+            ...(widget.footerBuilder?.call(context, item) ?? []),
           ],
         );
       },
@@ -131,24 +148,16 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   }
 
   Widget buildContent() {
-    if (items.isEmpty) {
-      return SliverToBoxAdapter(child: Center(child: widget.placeholder));
+    if (item == null) {
+      return SliverToBoxAdapter(child: widget.placeholder);
     }
 
     return DecoratedSliver(
       decoration: widget.contentDecoration,
       sliver: SliverPadding(
         padding: widget.contentPadding,
-        sliver: widget.builder?.call(items) ?? buildSliverList(),
+        sliver: widget.builder(context, item),
       ),
-    );
-  }
-
-  Widget buildSliverList() {
-    return SliverList.separated(
-      itemBuilder: (_, i) => widget.itemBuilder(context, i, items[i]),
-      separatorBuilder: (_, i) => widget.separatorBuilder?.call(context, i) ?? const SizedBox(),
-      itemCount: items.length,
     );
   }
 

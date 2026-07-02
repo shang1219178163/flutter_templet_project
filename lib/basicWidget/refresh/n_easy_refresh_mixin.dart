@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 /// 带数据的自定义 itemBuilder
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T data);
 
+/// 请求模型回调
+typedef RequestModelCallback<T> = Future<T> Function();
+
 /// 请求列表回调
 typedef RequestListCallback<T> = Future<List<T>> Function(
   bool isRefresh,
@@ -20,7 +23,23 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
   List<T> pres,
 );
 
-mixin NRefreshable<T> {
+abstract interface class NRefreshable {
+  bool get isLoading;
+  set isLoading(bool value);
+
+  IndicatorResult get indicator;
+  set indicator(IndicatorResult value);
+
+  Future<void> onRefresh();
+
+  Future<void> onLoad();
+
+  /// 更新UI
+  void updateUI();
+}
+
+/// 列表页使用 mixin
+mixin NListRefreshable<T> on NRefreshable {
   // 预置列表(弹窗类, 先请求第一页数据再显示页面)
   List<T> get firstPageItems;
   set firstPageItems(List<T> value);
@@ -34,25 +53,12 @@ mixin NRefreshable<T> {
   int get pageSize;
   set pageSize(int value);
 
-  bool get isLoading;
-  set isLoading(bool value);
-
-  IndicatorResult get indicator;
-  set indicator(IndicatorResult value);
-
-  Future<void> onRefresh();
-
-  Future<void> onLoad();
-
   /// 更新数据源
   void updateItems(List<T> list);
-
-  /// 更新UI
-  void updateUI();
 }
 
-/// EasyRefresh刷新 mixin
-mixin NRefreshMixin<T> implements NRefreshable<T> {
+/// EasyRefresh刷新 mixin, 可以给控制器使用
+mixin NListRefreshMixin<T> implements NListRefreshable<T> {
   var refreshController = EasyRefreshController(
     controlFinishRefresh: true,
     controlFinishLoad: true,
@@ -152,8 +158,8 @@ mixin NRefreshMixin<T> implements NRefreshable<T> {
   void updateUI() => throw UnimplementedError('updateUI');
 }
 
-/// EasyRefresh刷新 mixin, StatefulWidget 使用
-mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W>, NRefreshMixin<T> {
+/// EasyRefresh刷新 mixin, StatefulWidget 列表页使用
+mixin NListRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NListRefreshMixin<T> {
   @override
   void dispose() {
     refreshController.dispose();
@@ -184,14 +190,15 @@ mixin NEasyRefreshMixin<W extends StatefulWidget, T> on State<W>, NRefreshMixin<
   }
 }
 
-class NRefreshController<T> {
-  NRefreshable<T>? _anchor;
+/// 列表刷新控制器,配和 NListRefreshable 使用
+class NListRefreshController<T> {
+  NListRefreshable<T>? _anchor;
 
-  void attach(NRefreshable<T> anchor) {
+  void attach(NListRefreshable<T> anchor) {
     _anchor = anchor;
   }
 
-  void detach(NRefreshable<T> anchor) {
+  void detach(NListRefreshable<T> anchor) {
     if (_anchor == anchor) {
       _anchor = null;
     }
@@ -222,6 +229,135 @@ class NRefreshController<T> {
   void updateItems(List<T> list) {
     assert(_anchor != null);
     _anchor!.updateItems(list);
+  }
+
+  void updateUI() {
+    assert(_anchor != null);
+    _anchor!.updateUI();
+  }
+}
+
+/******************************* after for model *******************************/
+
+/// 详情页使用
+mixin NModelRefreshable<T> on NRefreshable {
+  T? get item;
+  set item(T? value);
+
+  /// 更新数据源
+  void updateItem(T v);
+}
+
+/// EasyRefresh刷新 mixin, 可以给控制器使用
+mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
+  var refreshController = EasyRefreshController(
+    controlFinishRefresh: true,
+    controlFinishLoad: true,
+  );
+
+  /// 请求方式
+  late RequestModelCallback<T> _onRequest;
+  RequestModelCallback<T> get onRequest => _onRequest;
+  set onRequest(RequestModelCallback<T> value) {
+    _onRequest = value;
+  }
+
+  /// 数据列表
+  @override
+  T? item;
+
+  @override
+  var indicator = IndicatorResult.success;
+
+  @override
+  bool isLoading = false;
+
+  @override
+  Future<void> onRefresh() async {
+    try {
+      if (isLoading) {
+        refreshController.finishRefresh();
+        return;
+      }
+      isLoading = true;
+
+      item = await onRequest();
+      indicator = item == null ? IndicatorResult.fail : IndicatorResult.success;
+      refreshController.finishRefresh(indicator);
+      refreshController.resetFooter();
+    } catch (e) {
+      refreshController.finishRefresh(IndicatorResult.fail);
+    } finally {
+      isLoading = false;
+      updateUI();
+    }
+  }
+
+  @override
+  Future<void> onLoad() => throw UnimplementedError('onLoad');
+
+  @override
+  void updateItem(T v) {
+    item = v;
+    updateUI();
+  }
+
+  @override
+  void updateUI() => throw UnimplementedError('updateUI');
+}
+
+/// EasyRefresh刷新 mixin, StatefulWidget 详情页使用
+mixin NRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRefreshMixin<T> {
+  @override
+  void dispose() {
+    refreshController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (item == null) {
+        onRefresh();
+      }
+    });
+  }
+
+  @override
+  void updateUI() {
+    setState(() {});
+  }
+}
+
+/// 列表刷新控制器,配和 NModelRefreshable 使用
+class NRefreshController<T> {
+  NModelRefreshable<T>? _anchor;
+
+  void attach(NModelRefreshable<T> anchor) {
+    _anchor = anchor;
+  }
+
+  void detach(NModelRefreshable<T> anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
+  }
+
+  T? get item {
+    assert(_anchor != null);
+    return _anchor!.item;
+  }
+
+  Future<void> onRefresh() {
+    assert(_anchor != null);
+    return _anchor!.onRefresh();
+  }
+
+  void updateItem(T v) {
+    assert(_anchor != null);
+    _anchor!.updateItem(v);
   }
 
   void updateUI() {

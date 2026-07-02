@@ -54,7 +54,7 @@ mixin NTracelessLoadMixin<W extends StatefulWidget, T> on State<W> {
 }
 
 /// 无痕加载更多
-mixin NTracelessEasyRefreshLoadMixin on NEasyRefreshMixin {
+mixin NTracelessEasyRefreshLoadMixin on NListRefreshStateMixin {
   /// ScrollController 绑定到滚动视图
   late ScrollController _scrollController;
   ScrollController get scrollController => _scrollController;

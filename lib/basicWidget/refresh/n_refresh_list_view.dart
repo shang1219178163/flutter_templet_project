@@ -3,7 +3,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 
-/// 列表
+/// 使用示例:
+//   buildBody() {
+//     return NRefreshListView<DepartmentPageDetailModel>(
+//       pageSize: 2,
+//       onRequest: (bool isRefresh, int page, int pageSize, last) async {
+//         return await requestList(pageNo: page, pageSize: pageSize);
+//       },
+//       itemBuilder: (BuildContext context, int index, e) {
+//         return InkWell(
+//           onTap: () {
+//             DLog.d("${e.toJson()}");
+//           },
+//           child: PatientSchemeCell(model: e, index: index),
+//         );
+//       },
+//     );
+//   }
+//
+//   /// 列表数据请求
+//   Future<List<DepartmentPageDetailModel>> requestList({
+//     required int pageNo,
+//     int pageSize = 20,
+//   }) async {
+//     var api = SchemePageApi(
+//       ownerId: arguments['userId'] ?? '',
+//       pageNo: pageNo,
+//       pageSize: pageSize,
+//     );
+//
+//     Map<String, dynamic>? response = await api.startRequest();
+//     if (response['code'] != 'OK') {
+//       return [];
+//     }
+//
+//     final rootModel = DepartmentPageRootModel.fromJson(response ?? {});
+//     var list = rootModel.result?.content ?? [];
+//     return list;
+//   }
+// }
+
+/// 刷新组件,对标 NCustomScrollView
 class NRefreshListView<T> extends StatefulWidget {
   const NRefreshListView({
     super.key,
@@ -22,7 +62,7 @@ class NRefreshListView<T> extends StatefulWidget {
   });
 
   /// 控制器
-  final NRefreshController<T>? controller;
+  final NListRefreshController<T>? controller;
 
   final ScrollPhysics? physics;
 
@@ -58,7 +98,7 @@ class NRefreshListView<T> extends StatefulWidget {
 }
 
 class NRefreshListViewState<T> extends State<NRefreshListView<T>>
-    with AutomaticKeepAliveClientMixin, NRefreshMixin<T>, NEasyRefreshMixin<NRefreshListView<T>, T> {
+    with AutomaticKeepAliveClientMixin, NListRefreshMixin<T>, NListRefreshStateMixin<NRefreshListView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
@@ -69,6 +109,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
 
   @override
   void dispose() {
+    widget.controller?.detach(this);
     refreshController.dispose();
     super.dispose();
   }
@@ -76,7 +117,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   @override
   void initState() {
     super.initState();
-
+    widget.controller?.attach(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // DLog.d([widget.title, widget.key, hashCode]);
       if (items.isEmpty) {
@@ -149,5 +190,10 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
       );
     }
     return child;
+  }
+
+  @override
+  void updateUI() {
+    setState(() {});
   }
 }
