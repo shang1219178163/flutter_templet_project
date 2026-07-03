@@ -634,6 +634,7 @@ var customs = [
   Tuple2(AppRouter.dialogChoiceChipDemo, "选择弹窗"),
   Tuple2(AppRouter.imChatPage, "聊天列表"),
   Tuple2(AppRouter.imChatBubbleChange, "聊天气泡"),
+  Tuple2(AppRouter.imConversationPage, "聊天会话"),
   Tuple2(AppRouter.livestreamEffectPage, "直播间效果"),
   Tuple2(AppRouter.expandTextDemo, "可折叠文字"),
   Tuple2(AppRouter.uploadFileDemo, "上传demo"),

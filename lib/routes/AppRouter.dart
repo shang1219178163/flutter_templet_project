@@ -159,6 +159,7 @@ import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImChatBubbleChange.dart';
 import 'package:flutter_templet_project/pages/demo/ImChatSettingPage.dart';
+import 'package:flutter_templet_project/pages/demo/ImConversationPage.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IndexedStackDemo.dart';
@@ -763,6 +764,7 @@ class AppRouter {
   static const String imChatPage = '/imChatPage';
   static const String imChatSettingPage = '/imChatSettingPage';
   static const String imChatBubbleChange = '/ImChatBubbleChange';
+  static const String imConversationPage = '/ImConversationPage';
   static const String livestreamEffectPage = '/livestreamEffectPage';
   static const String soundPlayDemo = '/soundPlayDemo';
   static const String wPopupMenuDemo = '/wPopupMenuDemo';
@@ -2070,10 +2072,13 @@ class AppRouter {
       name: AppRouter.imChatSettingPage,
       page: () => ImChatSettingPage(),
     ),
-
     GetPage(
       name: AppRouter.imChatBubbleChange,
       page: () => ImChatBubbleChange(),
+    ),
+    GetPage(
+      name: AppRouter.imConversationPage,
+      page: () => ImConversationPage(),
     ),
     GetPage(
       name: AppRouter.livestreamEffectPage,
