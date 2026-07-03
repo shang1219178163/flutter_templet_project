@@ -8,6 +8,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
+import 'package:flutter_templet_project/basicWidget/refresh/n_custom_scrollView_for_model.dart';
+import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 
 class SliverPersistentHeaderDemoOne extends StatelessWidget {
   SliverPersistentHeaderDemoOne({Key? key}) : super(key: key);
@@ -24,15 +26,49 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       appBar: AppBar(
         title: Text("$this"),
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          _buildSliverList(list: data),
-          _buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
-          _buildSliverList(list: data1),
-          _buildPersistentHeader("section1"),
-          _buildSliverList(list: data2),
-        ],
-      ),
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    return NCustomScrollViewForModel<User>(
+      onRequest: () async {
+        await Future.delayed(Duration(milliseconds: 1000));
+        return User(name: "name");
+      },
+      builder: (_, model) {
+        return SliverMainAxisGroup(
+          slivers: [
+            _buildSliverList(list: data),
+            _buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
+            _buildSliverList(list: data1),
+            _buildPersistentHeader("section1"),
+            _buildSliverList(list: data2),
+          ],
+        );
+      },
+      headerBuilder: (_, m) {
+        return SliverMainAxisGroup(
+            slivers: [
+          ElevatedButton(onPressed: () {}, child: Text("表头")),
+        ].map((e) => SliverToBoxAdapter(child: e)).toList());
+      },
+      // footerBuilder: (_, m) {
+      //   return SliverMainAxisGroup(
+      //       slivers: [
+      //     ElevatedButton(onPressed: () {}, child: Text("表尾")),
+      //   ].map((e) => SliverToBoxAdapter(child: e)).toList());
+      // },
+    );
+
+    return CustomScrollView(
+      slivers: <Widget>[
+        _buildSliverList(list: data),
+        _buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
+        _buildSliverList(list: data1),
+        _buildPersistentHeader("section1"),
+        _buildSliverList(list: data2),
+      ],
     );
   }
 
@@ -76,8 +112,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   }
 
   // 颜色转换为文字
-  String colorString(Color color) =>
-      "#${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
+  String colorString(Color color) => "#${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
 
   Widget _buildPersistentHeader(String title) {
     return NSliverPersistentHeaderBuilder(
@@ -85,8 +120,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       floating: true,
       min: 40,
       max: 120,
-      builder:
-          (BuildContext context, double shrinkOffset, bool overlapsContent) {
+      builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
         return Container(
           alignment: Alignment.center,
           color: Colors.orangeAccent,
