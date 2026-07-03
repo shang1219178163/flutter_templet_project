@@ -94,6 +94,16 @@ class _ClickTrackInherited extends InheritedWidget {
 
   final Map<String, dynamic> data;
 
+  static _ClickTrackInherited? of(BuildContext context) {
+    final scope = context.dependOnInheritedWidgetOfExactType<_ClickTrackInherited>();
+    return scope;
+  }
+
+  static _ClickTrackInherited? read(BuildContext context) {
+    final scope = context.getInheritedWidgetOfExactType<_ClickTrackInherited>();
+    return scope;
+  }
+
   @override
   bool updateShouldNotify(covariant _ClickTrackInherited oldWidget) {
     return !mapEquals(oldWidget.data, data);
