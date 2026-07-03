@@ -57,7 +57,7 @@ mixin NListRefreshable<T> on NRefreshable {
   void updateItems(List<T> list);
 }
 
-/// EasyRefresh刷新 mixin, 可以给控制器使用
+/// EasyRefresh刷新 mixin, 控制器可用
 mixin NListRefreshMixin<T> implements NListRefreshable<T> {
   var refreshController = EasyRefreshController(
     controlFinishRefresh: true,
@@ -248,7 +248,7 @@ mixin NModelRefreshable<T> on NRefreshable {
   void updateItem(T v);
 }
 
-/// EasyRefresh刷新 mixin, 可以给控制器使用
+/// EasyRefresh刷新 mixin, 控制器可用
 mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
   var refreshController = EasyRefreshController(
     controlFinishRefresh: true,

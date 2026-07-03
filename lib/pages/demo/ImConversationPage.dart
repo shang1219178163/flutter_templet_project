@@ -40,7 +40,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
 
   final _scrollController = ScrollController();
 
-  final refreshViewController = NRefreshController<ImConversationDetailModel>();
+  final refreshViewController = NListRefreshController<ImConversationDetailModel>();
 
   // 创建一个随机数生成器
   Random random = Random();

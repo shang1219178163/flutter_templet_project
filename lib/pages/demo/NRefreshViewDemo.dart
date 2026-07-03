@@ -36,7 +36,7 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
   /// userId --- 用户id
   late Map<String, dynamic> arguments = widget.arguments ?? Get.arguments;
 
-  final refreshViewController = NRefreshController<UserModel>();
+  final refreshViewController = NListRefreshController<UserModel>();
 
   var dataList = ValueNotifier(<UserModel>[]);
 

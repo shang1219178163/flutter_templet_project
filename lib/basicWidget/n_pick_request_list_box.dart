@@ -69,7 +69,7 @@ class NPickRequestListBox<E> extends StatefulWidget {
 }
 
 class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
-  final refreshViewController = NRefreshController<E>();
+  final refreshViewController = NListRefreshController<E>();
 
   var search = "";
 

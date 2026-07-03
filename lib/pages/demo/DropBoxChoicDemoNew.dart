@@ -26,7 +26,7 @@ class DropBoxChoicDemoNew extends StatefulWidget {
 }
 
 class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
-  final refreshViewController = NRefreshController<UserModel>();
+  final refreshViewController = NListRefreshController<UserModel>();
 
   final items = List.generate(9, (i) => i).toList();
 
