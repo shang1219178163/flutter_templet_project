@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_user_privacy.dart';
 import 'package:flutter_templet_project/basicWidget/route/n_draggable_popup_route.dart';
-import 'package:flutter_templet_project/basicWidget/route/n_slide_popup_route.dart';
+import 'package:flutter_templet_project/basicWidget/route/n_popup_route.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
