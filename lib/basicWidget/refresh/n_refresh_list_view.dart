@@ -133,17 +133,19 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
         widget.placeholder != oldWidget.placeholder ||
         widget.needRemovePadding != oldWidget.needRemovePadding ||
         widget.page != oldWidget.page ||
-        widget.pageSize != oldWidget.pageSize ||
-        widget.onRequest != oldWidget.onRequest ||
-        widget.itemBuilder != oldWidget.itemBuilder ||
-        widget.separatorBuilder != oldWidget.separatorBuilder) {
+        widget.pageSize != oldWidget.pageSize) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
-      page = widget.page;
-      pageSize = widget.pageSize;
-      onRefresh();
+
+      onRequest = widget.onRequest;
+      final shouldReload = widget.page != oldWidget.page || widget.pageSize != oldWidget.pageSize;
+      if (shouldReload) {
+        page = widget.page;
+        pageSize = widget.pageSize;
+        onRefresh();
+      }
     }
   }
 

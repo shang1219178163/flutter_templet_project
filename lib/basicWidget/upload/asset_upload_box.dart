@@ -15,7 +15,7 @@ import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
 /// 上传图片单元(基于 wechat_assets_picker)
 class AssetUploadBox extends StatefulWidget {
-  AssetUploadBox({
+  const AssetUploadBox({
     super.key,
     this.controller,
     required this.items,
@@ -24,6 +24,9 @@ class AssetUploadBox extends StatefulWidget {
     this.rowCount = 4,
     this.spacing = 3,
     this.runSpacing = 3,
+    this.itemWidth,
+    this.itemHeight,
+    this.radius = 8,
     this.canTakePhoto = false,
     this.canEdit = true,
     this.imgBuilder,
@@ -63,6 +66,13 @@ class AssetUploadBox extends StatefulWidget {
 
   /// 垂直间距
   final double runSpacing;
+
+  final double? itemWidth;
+
+  final double? itemHeight;
+
+  /// 圆角 默认8
+  final double radius;
 
   /// 可以 拍摄图片
   final bool canTakePhoto;
@@ -159,7 +169,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
                 child: Column(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
                       child: SizedBox(
                         width: itemWidth,
                         height: itemWidth,
@@ -181,6 +191,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
                           },
                           child: AssetUploadButton(
                             model: e,
+                            radius: widget.radius,
                             urlBlock: (url) {
                               // e.url = url;
                               // debugPrint("e: ${e.data?.name}_${e.url}");
@@ -268,11 +279,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
               selectedAssets: selectedEntitys,
               maxAssets: maxCount,
               specialItemPosition: SpecialItemPosition.prepend,
-              specialItemBuilder: (
-                context,
-                AssetPathEntity? path,
-                int length,
-              ) {
+              specialItemBuilder: (context, AssetPathEntity? path, int length) {
                 if (path?.isAll != true) {
                   return null;
                 }

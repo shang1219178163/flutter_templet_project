@@ -39,6 +39,11 @@ class NOverlayDialog {
     controller.dispose();
   }
 
+  /// 刷新当前 Overlay，不销毁 Entry
+  static void build() {
+    _entry?.markNeedsBuild();
+  }
+
   /// 显示 BottomSheet
   static OverlayEntry show(
     BuildContext context, {

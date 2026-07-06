@@ -34,6 +34,7 @@ class NFileUploadBox extends StatefulWidget {
     required this.items,
     this.itemWidth,
     this.itemHeight,
+    this.radius = 8,
     this.title = "上传文件",
     this.description = "支持格式/单个文件大小限制/最大数量",
     required this.onChanged,
@@ -56,6 +57,9 @@ class NFileUploadBox extends StatefulWidget {
   final List<NFileUploadModel> items;
   final double? itemWidth;
   final double? itemHeight;
+
+  /// 圆角 默认8
+  final double radius;
   final String title;
   final String description;
 
@@ -200,6 +204,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
                     showFileSize: widget.showFileSize) ??
                 NFileUploadItem(
                   model: e,
+                  radius: widget.radius,
                   canEdit: widget.canEdit,
                   urlBlock: urlBlock,
                   onDelete: widget.canEdit == false ? null : deleteItem,
@@ -234,7 +239,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
         decoration: BoxDecoration(
           // color: bgColor,
           border: Border.all(color: AppColor.lineColor),
-          borderRadius: BorderRadius.all(Radius.circular(4)),
+          borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
         ),
         child: NPair(
           icon: Image(

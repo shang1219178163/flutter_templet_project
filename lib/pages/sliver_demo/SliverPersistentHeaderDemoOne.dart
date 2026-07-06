@@ -48,10 +48,9 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
         );
       },
       headerBuilder: (_, m) {
-        return SliverMainAxisGroup(
-            slivers: [
+        return [
           ElevatedButton(onPressed: () {}, child: Text("表头")),
-        ].map((e) => SliverToBoxAdapter(child: e)).toList());
+        ].map((e) => SliverToBoxAdapter(child: e)).toList();
       },
       // footerBuilder: (_, m) {
       //   return SliverMainAxisGroup(

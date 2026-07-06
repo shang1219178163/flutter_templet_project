@@ -7,6 +7,7 @@
 //
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -61,6 +62,8 @@ class NOverlayManager {
 
     final entry = OverlayEntry(builder: builder);
     insert(entry);
+    _entries.add(entry);
+
     // 2️⃣ 自动移除
     if (autoDismiss) {
       Future.delayed(duration, removeAll);

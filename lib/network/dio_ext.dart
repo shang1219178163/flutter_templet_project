@@ -10,7 +10,10 @@ extension RequestOptionsExt on RequestOptions {
     var paramsStr = "";
     try {
       if (data is FormData) {
-        // DLog.d(requestOptions.data);
+        final formData = data as FormData;
+        var list = [...formData.fields];
+        list.add(MapEntry("files.keys", formData.files.map((e) => e.key).join(", ")));
+        paramsStr = jsonEncode(Map.fromEntries(list));
       } else {
         paramsStr = jsonEncode(data ?? queryParameters);
       }

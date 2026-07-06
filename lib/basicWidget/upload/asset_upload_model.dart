@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 
+import 'package:flutter/cupertino.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 /// 图片选择器
@@ -11,7 +11,8 @@ class AssetUploadModel {
     this.file,
     this.time,
     this.isTakePicture,
-    this.extraInfoMap,
+    this.extraMap,
+    this.errorMap,
   });
 
   /// 证件占位图
@@ -32,10 +33,16 @@ class AssetUploadModel {
   bool? isTakePicture;
 
   /// 额外信息
-  Map<String, dynamic>? extraInfoMap;
+  Map<String, dynamic>? extraMap;
+
+  /// 错误日志
+  Map<String, dynamic>? errorMap;
 
   /// url 有效
   bool get urlValid => url?.startsWith("http") == true;
+
+  /// 可以再次上传
+  bool get againUpload => url?.startsWith("http") != true && entity != null;
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
@@ -45,7 +52,8 @@ class AssetUploadModel {
     data['file'] = file;
     data['time'] = time;
     data['isTakePicture'] = isTakePicture;
-    data['extraInfoMap'] = extraInfoMap;
+    data['extraMap'] = extraMap;
+    data['errorMap'] = errorMap;
     return data;
   }
 
@@ -53,7 +61,7 @@ class AssetUploadModel {
     entity = null;
     url = null;
     file = null;
-    extraInfoMap = null;
+    extraMap = null;
     time = null;
   }
 

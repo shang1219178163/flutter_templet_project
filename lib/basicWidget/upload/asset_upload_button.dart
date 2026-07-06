@@ -13,8 +13,8 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 /// 上传图片单元(基于 wechat_assets_picker)
 class AssetUploadButton extends StatefulWidget {
-  AssetUploadButton({
-    Key? key,
+  const AssetUploadButton({
+    super.key,
     required this.model,
     this.urlBlock,
     this.onDelete,
@@ -25,7 +25,7 @@ class AssetUploadButton extends StatefulWidget {
     this.urlConvert,
     // this.isFinished = false,
     this.showFileSize = false,
-  }) : super(key: key);
+  });
 
   final AssetUploadModel model;
 
@@ -64,7 +64,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
   var _isLoading = false;
 
   /// 请求成功或失败
-  final _successVN = ValueNotifier(true);
+  final _successVN = ValueNotifier<bool?>(null);
 
   /// 上传进度
   final _percentVN = ValueNotifier(0.0);
@@ -130,7 +130,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
         )
         // .toColoredBox()
         ,
-        if (widget.model.url?.startsWith("http") != true)
+        if (widget.model.url?.startsWith("http") != true && widget.model.entity != null)
           Positioned(
             top: 0,
             right: 0,
@@ -297,7 +297,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       return;
     }
     _isLoading = true;
-    _successVN.value = true;
+    _successVN.value = null;
 
     entityFile.then((file) {
       if (file == null) {
@@ -333,15 +333,16 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
     }).then((value) {
       final url = value;
       if (url == null || url.isEmpty) {
-        _successVN.value = false;
         throw "上传失败 ${widget.model.file?.path}";
       }
+      widget.model.url = url;
+      widget.model.errorMap = null;
       _percentVN.value = 1;
       _successVN.value = true;
-      widget.model.url = url;
     }).catchError((err) {
       debugPrint("err: $err");
       widget.model.url = "";
+      widget.model.errorMap = {"eror": "$err"};
       _successVN.value = false;
     }).whenComplete(() {
       _isLoading = false;
