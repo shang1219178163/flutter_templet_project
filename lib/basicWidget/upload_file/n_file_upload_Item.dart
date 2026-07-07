@@ -307,11 +307,10 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
     }).then((value) {
       final url = value;
       if (url == null || url.isEmpty) {
-        _successVN.value = false;
         throw "上传失败 ${widget.model.assetFile?.path}";
       }
-      _successVN.value = true;
       widget.model.url = url;
+      _successVN.value = true;
     }).catchError((err) {
       debugPrint("err: $err");
       widget.model.url = "";

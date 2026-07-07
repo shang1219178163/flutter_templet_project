@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -84,13 +83,28 @@ class AssetUploadBox extends StatefulWidget {
   final Widget Function(String url)? imgBuilder;
 
   /// 图片点击事件
-  final Void Function(List<String> urls, int index)? onTap;
+  final void Function(List<String> urls, int index)? onTap;
 
   /// 显示文件大小
   final bool showFileSize;
 
   /// 是否只拍照
   final bool hasTakePhoto;
+
+  /// 展示图片预览相册
+  static Future<void> jumpImagePreview({
+    required BuildContext context,
+    required List<String> urls,
+    required int index,
+  }) async {
+    FocusScope.of(context).unfocus();
+    await Navigator.push(
+      context,
+      NFadePageRoute(
+        builder: (context) => NImagePreview(urls: urls, index: index),
+      ),
+    );
+  }
 
   @override
   AssetUploadBoxState createState() => AssetUploadBoxState();
@@ -187,7 +201,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
                               return;
                             }
 
-                            jumpImagePreview(urls: urls, index: index);
+                            AssetUploadBox.jumpImagePreview(context: context, urls: urls, index: index);
                           },
                           child: AssetUploadButton(
                             model: e,
@@ -413,21 +427,6 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     } catch (e) {
       debugPrint("❌onTakePhoto: $e");
     }
-  }
-
-  /// 展示图片预览相册
-  jumpImagePreview({
-    required List<String> urls,
-    required int index,
-  }) {
-    // ToolUtil.imagePreview(urls, index);
-    FocusScope.of(context).unfocus();
-    Navigator.push(
-      context,
-      NFadePageRoute(
-        builder: (context) => NImagePreview(urls: urls, index: index),
-      ),
-    );
   }
 
   showToast({required String message}) {
