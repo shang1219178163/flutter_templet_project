@@ -20,12 +20,10 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   double min;
   double max;
 
-  Widget Function(BuildContext context, double offset, bool overlapsContent)
-      builder;
+  Widget Function(BuildContext context, double offset, bool overlapsContent) builder;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return builder(context, shrinkOffset, overlapsContent);
   }
 
@@ -39,27 +37,20 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant NSliverPersistentHeaderDelegate oldDelegate) {
-    return min != oldDelegate.min ||
-        max != oldDelegate.max ||
-        builder != oldDelegate.builder;
+    return min != oldDelegate.min || max != oldDelegate.max || builder != oldDelegate.builder;
   }
 }
 
 /// 自定义 SliverPersistentHeader
 class NSliverPersistentHeaderBuilder extends SliverPersistentHeader {
   NSliverPersistentHeaderBuilder({
-    Key? key,
+    super.key,
     double max = 48,
     double min = 48,
-    bool pinned = false,
-    bool floating = false,
-    required Widget Function(
-            BuildContext context, double shrinkOffset, bool overlapsContent)
-        builder,
+    super.pinned,
+    super.floating,
+    required Widget Function(BuildContext context, double shrinkOffset, bool overlapsContent) builder,
   }) : super(
-          key: key,
-          pinned: pinned,
-          floating: floating,
           delegate: NSliverPersistentHeaderDelegate(
             max: max,
             min: min,

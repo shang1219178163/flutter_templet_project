@@ -4,6 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_slidable_tabbar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/model/n_tabbar_data_model.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab_bar.dart';
+import 'package:flutter_templet_project/basicWidget/tab/n_filled_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_outline_tabbar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_tab_outline_item.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -22,7 +23,7 @@ class CustomTabbarPage extends StatefulWidget {
   State<CustomTabbarPage> createState() => _CustomTabbarPageState();
 }
 
-class _CustomTabbarPageState extends State<CustomTabbarPage> {
+class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProviderStateMixin {
   late final theme = Theme.of(context);
   late final tabBarTheme = theme.tabBarTheme;
 
@@ -34,7 +35,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
 
   final indexVN = ValueNotifier(1);
 
-  final items = [
+  final items = <NTabbarDataModel>[
     NTabbarDataModel(
       title: "全部预测",
       value: "all",
@@ -70,26 +71,14 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
     ),
   ];
 
-  late final itemsNew = [
-    NTabbarDataModel(
-      title: "全部预测",
-      value: "all",
-      bg: AssetImage("assets/images/bg_tab_left.png"),
-    ),
-    NTabbarDataModel(
-      title: "足球预测",
-      value: "football",
-      bg: AssetImage("assets/images/bg_tab_center.png"),
-    ),
-    NTabbarDataModel(
-      title: "篮球预测",
-      value: "basketball",
-      bg: AssetImage("assets/images/bg_tab_right.png"),
-    ),
-  ];
-
   final titles = List.generate(9, (i) => "选项$i");
   final titleIndexVN = ValueNotifier(1);
+
+  late final tabController = TabController(
+    initialIndex: 0,
+    length: items.length,
+    vsync: this,
+  );
 
   @override
   void didUpdateWidget(covariant CustomTabbarPage oldWidget) {
@@ -123,26 +112,64 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                 return Text(str);
               },
             ),
-            Row(
-              children: [
-                ...items.map((e) {
-                  final hideSeperator = e == items.last;
-                  return Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(right: hideSeperator ? 0 : 8),
-                      child: OutlinedButton(
-                        onPressed: () {
-                          final i = items.indexOf(e);
-                          // chromeTabController.jumpTo(i);
-                          indexVN.value = i;
-                          titleIndexVN.value = i;
-                        },
-                        child: Text(e.title),
-                      ),
-                    ),
-                  );
-                }),
-              ],
+            ValueListenableBuilder(
+              valueListenable: indexVN,
+              builder: (context, value, child) {
+                return Row(
+                  children: [
+                    ...items.map((e) {
+                      final hideSeperator = e == items.last;
+                      final i = items.indexOf(e);
+                      final isSelected = i == indexVN.value;
+                      final foregroundColor = isSelected ? theme.colorScheme.primary : AppColor.fontColor999999;
+                      return Expanded(
+                        child: Container(
+                          padding: EdgeInsets.only(right: hideSeperator ? 0 : 8),
+                          child: OutlinedButton(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              minimumSize: const Size(50, 26),
+                              foregroundColor: foregroundColor,
+                              side: BorderSide(color: foregroundColor, width: 1),
+                            ),
+                            onPressed: () {
+                              final i = items.indexOf(e);
+                              // chromeTabController.jumpTo(i);
+                              indexVN.value = i;
+                              titleIndexVN.value = i;
+                            },
+                            child: Text(e.title),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                );
+              },
+            ),
+            NSectionBox(
+              hide: false,
+              title: "NFilledTab",
+              child: NFilledTabBar<NTabbarDataModel>(
+                items: items,
+                nameCb: (e) => e.title,
+                controller: tabController,
+                labelStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+                unselectedLabelStyle: TextStyle(
+                  color: Colors.black.withOpacity(0.7),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+                onChanged: (int v) {
+                  DLog.d(v);
+                  indexVN.value = v;
+                },
+              ),
             ),
             Container(
               decoration: BoxDecoration(
@@ -154,7 +181,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12).copyWith(bottom: 0),
                 divider: SizedBox(),
                 child: NChromeTabBar(
-                  items: itemsNew,
+                  items: items,
                   indexVN: indexVN,
                   // onChanged: (v) {},
                   bgColor: AppColor.bgColorF7F7F7,

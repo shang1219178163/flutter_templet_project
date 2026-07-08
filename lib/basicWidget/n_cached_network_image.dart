@@ -51,6 +51,7 @@ class NCachedNetworkImage extends StatelessWidget {
     );
 
     return CachedNetworkImage(
+      cacheKey: imageUrl,
       imageUrl: imageUrl,
       fit: fit,
       width: width,
