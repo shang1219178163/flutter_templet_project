@@ -464,7 +464,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
     ).toShowCupertinoDialog(context: context);
   }
 
-  Widget showCupertinoTextFieldDialog() {
+  Future showCupertinoTextFieldDialog() {
     final controller = TextEditingController();
     controller.text = "";
     return CupertinoTheme(
