@@ -61,3 +61,4 @@ export 'src/timer_ext.dart';
 export 'src/type_util.dart';
 export 'src/uri_ext.dart';
 export 'src/widget_ext.dart';
+export 'src/widget_state_property.dart';

@@ -93,14 +93,14 @@ extension WidgetExt on Widget {
         child: this,
       );
 
-  toShowCupertinoDialog({
+  Future<T?> toShowCupertinoDialog<T>({
     required BuildContext context,
     String? barrierLabel,
     bool useRootNavigator = true,
     bool barrierDismissible = false,
     RouteSettings? routeSettings,
   }) =>
-      showCupertinoDialog(
+      showCupertinoDialog<T>(
         context: context,
         builder: (context) => this,
         barrierLabel: barrierLabel,
@@ -110,7 +110,7 @@ extension WidgetExt on Widget {
       );
 
   ///showCupertinoModalPopup
-  toShowCupertinoModalPopup({
+  Future<T?> toShowCupertinoModalPopup<T>({
     required BuildContext context,
     ImageFilter? filter,
     Color barrierColor = kCupertinoModalBarrierColor,
@@ -119,7 +119,7 @@ extension WidgetExt on Widget {
     bool semanticsDismissible = false,
     RouteSettings? routeSettings,
   }) =>
-      showCupertinoModalPopup(
+      showCupertinoModalPopup<T>(
         context: context,
         builder: (context) => this,
         filter: filter,
@@ -130,7 +130,7 @@ extension WidgetExt on Widget {
       );
 
   ///弹窗
-  toShowGeneralDialog({
+  Future<T?> toShowGeneralDialog<T>({
     required BuildContext context,
     bool barrierDismissible = false,
     String? barrierLabel = 'barrierLabel',
@@ -143,7 +143,7 @@ extension WidgetExt on Widget {
     VoidCallback? onBarrier,
     Alignment alignment = Alignment.center,
   }) =>
-      showGeneralDialog(
+      showGeneralDialog<T>(
         context: context,
         barrierDismissible: barrierDismissible,
         barrierLabel: barrierLabel,
@@ -167,7 +167,7 @@ extension WidgetExt on Widget {
       );
 
   ///正面弹窗
-  toShowDialog({
+  Future<T?> toShowDialog<T>({
     required BuildContext context,
     bool barrierDismissible = true,
     Color? barrierColor = Colors.black54,
@@ -176,7 +176,7 @@ extension WidgetExt on Widget {
     bool useRootNavigator = true,
     RouteSettings? routeSettings,
   }) =>
-      showDialog(
+      showDialog<T>(
         context: context,
         builder: (context) => this,
         barrierColor: barrierColor,
@@ -187,7 +187,7 @@ extension WidgetExt on Widget {
       );
 
   ///底部弹窗
-  toShowModalBottomSheet({
+  Future<T?> toShowModalBottomSheet<T>({
     required BuildContext context,
     Color? backgroundColor,
     double? elevation,
@@ -208,7 +208,7 @@ extension WidgetExt on Widget {
     Offset? anchorPoint,
     AnimationStyle? sheetAnimationStyle,
   }) =>
-      showModalBottomSheet(
+      showModalBottomSheet<T>(
         context: context,
         builder: (context) => this,
         backgroundColor: backgroundColor,
@@ -231,7 +231,7 @@ extension WidgetExt on Widget {
       );
 
   /// 加拟物风格
-  toNeumorphism({
+  Widget toNeumorphism({
     double borderRadius = 10.0,
     Offset offset = const Offset(5, 5),
     double blurRadius = 10,
@@ -262,10 +262,7 @@ extension WidgetExt on Widget {
   SliverToBoxAdapter toSliverToBoxAdapter({
     Key? key,
   }) =>
-      SliverToBoxAdapter(
-        key: key,
-        child: this,
-      );
+      SliverToBoxAdapter(key: key, child: this);
 
   /// 转为 SliverFillRemaining
   SliverFillRemaining toSliverFillRemaining({
