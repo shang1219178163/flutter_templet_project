@@ -86,6 +86,23 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
   Widget build(BuildContext context) {
     late final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final labelStyle = widget.labelStyle ??
+        theme.tabBarTheme.labelStyle ??
+        TextStyle(
+          color: theme.tabBarTheme.labelColor ?? Colors.white,
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'PingFang SC',
+        );
+
+    final unselectedLabelStyle = widget.unselectedLabelStyle ??
+        theme.tabBarTheme.unselectedLabelStyle ??
+        TextStyle(
+          color: theme.tabBarTheme.unselectedLabelColor,
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'PingFang SC',
+        );
 
     final height = widget.height ?? 36.0;
     return Container(
@@ -106,7 +123,7 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
               indicatorSize: Size.fromWidth(constraints.maxWidth / widget.items.length),
               iconBuilder: (int i) {
                 final isSelected = i == value;
-                final textStyle = isSelected ? widget.labelStyle : widget.unselectedLabelStyle;
+                final textStyle = isSelected ? labelStyle : unselectedLabelStyle;
 
                 final e = widget.items[i];
 
@@ -117,11 +134,7 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
                     child: Text(
                       widget.nameCb(e),
                       maxLines: 1,
-                      style: textStyle ??
-                          TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      style: textStyle,
                     ),
                   ),
                 );
@@ -136,12 +149,14 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
               styleBuilder: (i) {
                 final e = widget.items[i];
 
+                final indicatorGradient = widget.gradientCb?.call(e) ??
+                    LinearGradient(
+                      colors: [Colors.blue, theme.colorScheme.primary],
+                    );
+
                 return ToggleStyle(
                   borderRadius: BorderRadius.circular(widget.radius ?? 8),
-                  indicatorGradient: widget.gradientCb?.call(e) ??
-                      const LinearGradient(
-                        colors: [Colors.red, Colors.purple],
-                      ),
+                  indicatorGradient: indicatorGradient,
                 );
               },
               onChanged: (i) {

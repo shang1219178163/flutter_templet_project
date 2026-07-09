@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_slidable_tabbar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/model/n_tabbar_data_model.dart';
-import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab_bar.dart';
+import 'package:flutter_templet_project/basicWidget/tab/n_chrome_tab_bar_old.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_filled_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_outline_tabbar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_tab_outline_item.dart';
@@ -108,63 +108,33 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
             ValueListenableBuilder(
               valueListenable: indexVN,
               builder: (context, i, child) {
-                final str = ["index: $i", "${items[i]}"].join("\n");
+                final str = ["index: $i", ...items[i].toJson().entries.map((e) => "${e.key}: ${e.value}")].join("\n");
                 return Text(str);
-              },
-            ),
-            ValueListenableBuilder(
-              valueListenable: indexVN,
-              builder: (context, value, child) {
-                return Row(
-                  children: [
-                    ...items.map((e) {
-                      final hideSeperator = e == items.last;
-                      final i = items.indexOf(e);
-                      final isSelected = i == indexVN.value;
-                      final foregroundColor = isSelected ? theme.colorScheme.primary : AppColor.fontColor999999;
-                      return Expanded(
-                        child: Container(
-                          padding: EdgeInsets.only(right: hideSeperator ? 0 : 8),
-                          child: OutlinedButton(
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              minimumSize: const Size(50, 26),
-                              foregroundColor: foregroundColor,
-                              side: BorderSide(color: foregroundColor, width: 1),
-                            ),
-                            onPressed: () {
-                              final i = items.indexOf(e);
-                              // chromeTabController.jumpTo(i);
-                              indexVN.value = i;
-                              titleIndexVN.value = i;
-                            },
-                            child: Text(e.title),
-                          ),
-                        ),
-                      );
-                    }),
-                  ],
-                );
               },
             ),
             NSectionBox(
               hide: false,
-              title: "NFilledTab",
+              title: "buildOutline",
+              child: buildOutline(),
+            ),
+            NSectionBox(
+              hide: false,
+              title: "NFilledTabBar",
               child: NFilledTabBar<NTabbarDataModel>(
                 items: items,
                 nameCb: (e) => e.title,
                 controller: tabController,
-                labelStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-                unselectedLabelStyle: TextStyle(
-                  color: Colors.black.withOpacity(0.7),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
+                // labelStyle: TextStyle(
+                //   color: Colors.white,
+                //   fontSize: 14,
+                //   fontWeight: FontWeight.w600,
+                // ),
+                // unselectedLabelStyle: TextStyle(
+                //   color: Colors.black.withOpacity(0.7),
+                //   fontSize: 14,
+                //   fontWeight: FontWeight.w600,
+                // ),
+                // backgroundColor: ,
                 onChanged: (int v) {
                   DLog.d(v);
                   indexVN.value = v;
@@ -177,10 +147,10 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
               ),
               child: NSectionBox(
                 hide: true,
-                title: "NChromeTabBar - itemsNew",
+                title: "NChromeTabBarOld - itemsNew",
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12).copyWith(bottom: 0),
                 divider: SizedBox(),
-                child: NChromeTabBar(
+                child: NChromeTabBarOld(
                   items: items,
                   indexVN: indexVN,
                   // onChanged: (v) {},
@@ -191,8 +161,8 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
             ),
             NSectionBox(
               hide: true,
-              title: "NChromeTabBar - items",
-              child: NChromeTabBar(
+              title: "NChromeTabBarOld - items",
+              child: NChromeTabBarOld(
                 items: items,
                 indexVN: indexVN,
                 // onChanged: (v) {},
@@ -200,9 +170,9 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
               ),
             ),
             NSectionBox(
-              title: "NChromeTab",
+              title: "NChromeTabBar",
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
-              child: NChromeTab(
+              child: NChromeTabBar(
                 controller: chromeTabController,
                 items: titles,
                 indexVN: indexVN,
@@ -214,9 +184,9 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
               ),
             ),
             NSectionBox(
-              title: "NChromeTab - itemBuilder",
+              title: "NChromeTabBar - itemBuilder",
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12).copyWith(bottom: 0),
-              child: NChromeTab(
+              child: NChromeTabBar(
                 controller: chromeTabController,
                 items: items.map((e) => e.title).toList(),
                 indexVN: indexVN,
@@ -226,9 +196,9 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
               ),
             ),
             NSectionBox(
-              title: "NChromeTab - isScrollable",
+              title: "NChromeTabBar - isScrollable",
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
-              child: NChromeTab(
+              child: NChromeTabBar(
                 controller: chromeTabController,
                 items: items.map((e) => e.title).toList(),
                 indexVN: indexVN,
@@ -309,6 +279,96 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
           }).toList(),
         ),
       ),
+    );
+  }
+
+  Widget buildOutline() {
+    return ValueListenableBuilder(
+      valueListenable: indexVN,
+      builder: (context, value, child) {
+        return Row(
+          children: [
+            ...items.map((e) {
+              final hideSeperator = e == items.last;
+              final i = items.indexOf(e);
+              final isSelected = i == indexVN.value;
+              final foregroundColor = isSelected ? theme.colorScheme.primary : AppColor.fontColor999999;
+              final gradient = isSelected
+                  ? LinearGradient(colors: [Colors.red, Colors.purple])
+                  : LinearGradient(colors: [Colors.grey, Colors.grey]);
+
+              var style = OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                minimumSize: const Size(50, 26),
+                foregroundColor: foregroundColor,
+                side: BorderSide(color: foregroundColor, width: 1),
+                backgroundBuilder: (context, Set<MaterialState> states, Widget? child) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                      gradient: gradient,
+                    ),
+                    child: child,
+                  );
+                },
+              );
+
+              style = ButtonStyle(
+                foregroundColor: WidgetStatePropertyAll(foregroundColor),
+                side: WidgetStatePropertyAll(BorderSide(color: foregroundColor)),
+                padding: const WidgetStatePropertyAll(
+                  EdgeInsets.symmetric(horizontal: 13, vertical: 4),
+                ),
+                minimumSize: const WidgetStatePropertyAll(Size(50, 26)),
+                backgroundBuilder: (context, states, child) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: gradient,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: child,
+                  );
+                },
+              );
+              return Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(right: hideSeperator ? 0 : 8),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: const Size(50, 26),
+                      foregroundColor: foregroundColor,
+                      side: BorderSide(color: foregroundColor, width: 1),
+                      backgroundBuilder: (context, Set<MaterialState> states, Widget? child) {
+                        return DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            gradient: gradient,
+                          ),
+                          child: child,
+                        );
+                      },
+                    ),
+                    onPressed: () {
+                      final i = items.indexOf(e);
+                      // chromeTabController.jumpTo(i);
+                      indexVN.value = i;
+                      titleIndexVN.value = i;
+                    },
+                    child: Text(e.title),
+                  ),
+                ),
+              );
+            }),
+          ],
+        );
+      },
     );
   }
 

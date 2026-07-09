@@ -7,12 +7,13 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/tab/model/n_tabbar_data_model.dart';
 
 /// Chrome 浏览器风格 tabbar
 class NChromeTabBar extends StatefulWidget {
   const NChromeTabBar({
     super.key,
+    this.controller,
+    this.isScrollable = false,
     this.height = 44,
     this.itemPadding,
     this.selectedBgColor,
@@ -20,23 +21,28 @@ class NChromeTabBar extends StatefulWidget {
     required this.items,
     required this.indexVN,
     this.onChanged,
-    this.selectedLabelStyle,
+    this.labelStyle,
     this.unselectedLabelStyle,
+    this.tabAlignment,
     this.itemBuilder,
   });
 
-  final List<NTabbarDataModel> items;
+  final NChromeTabController? controller;
+
+  final List<String> items;
   final ValueNotifier<int> indexVN;
 
   final ValueChanged<int>? onChanged;
 
+  final bool isScrollable;
   final double? height;
   final EdgeInsets? itemPadding;
   final Color? bgColor;
   final Color? selectedBgColor;
 
-  final TextStyle? selectedLabelStyle;
+  final TextStyle? labelStyle;
   final TextStyle? unselectedLabelStyle;
+  final TabAlignment? tabAlignment;
 
   /// 默认无法满足时自定义
   final IndexedWidgetBuilder? itemBuilder;
@@ -52,7 +58,7 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
   late final tabBarTheme = theme.tabBarTheme;
 
   TextStyle get textStyle =>
-      widget.selectedLabelStyle ??
+      widget.labelStyle ??
       tabBarTheme.labelStyle ??
       TextStyle(
         fontSize: 16,
@@ -71,6 +77,7 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
 
   @override
   void dispose() {
+    widget.controller?.detach(this);
     widget.indexVN.removeListener(onIndexLtr);
     super.dispose();
   }
@@ -78,56 +85,104 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
   @override
   void initState() {
     super.initState();
+    widget.controller?.attach(this);
     widget.indexVN.addListener(onIndexLtr);
   }
 
   onIndexLtr() {
     currIndex = widget.indexVN.value;
-    if (mounted) {
-      setState(() {});
-    }
+    setState(() {});
   }
 
   @override
   void didUpdateWidget(covariant NChromeTabBar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.items != widget.items ||
+    if (oldWidget.controller != widget.controller ||
+        oldWidget.items != widget.items ||
         oldWidget.indexVN != widget.indexVN ||
+        oldWidget.isScrollable != widget.isScrollable ||
+        oldWidget.tabAlignment != widget.tabAlignment ||
         oldWidget.height != widget.height ||
         oldWidget.itemPadding != widget.itemPadding ||
         oldWidget.bgColor != widget.bgColor ||
         oldWidget.selectedBgColor != widget.selectedBgColor ||
-        oldWidget.selectedLabelStyle != widget.selectedLabelStyle ||
-        oldWidget.unselectedLabelStyle != widget.unselectedLabelStyle ||
-        oldWidget.itemBuilder != widget.itemBuilder) {
+        oldWidget.labelStyle != widget.labelStyle ||
+        oldWidget.unselectedLabelStyle != widget.unselectedLabelStyle) {
+      if (widget.controller != null && oldWidget.controller != widget.controller) {
+        oldWidget.controller?.detach(this);
+        widget.controller?.attach(this);
+      }
       setState(() {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget contentWidget = SizedBox();
+    if (widget.isScrollable) {
+      contentWidget = buildScroll();
+    } else {
+      contentWidget = buildRow();
+    }
+
     return Container(
       height: widget.height,
       decoration: BoxDecoration(
         color: widget.bgColor,
       ),
+      child: contentWidget,
+    );
+  }
+
+  Widget buildScroll() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
       child: Row(
-        children: [
-          ...widget.items.map(
-            (e) {
-              final i = widget.items.indexOf(e);
-              final isSelected = widget.indexVN.value == i;
-              return Expanded(child: buildItem(i: i));
-            },
-          ),
-        ],
+        children: widget.items.map(
+          (e) {
+            final i = widget.items.indexOf(e);
+            return buildItem(i: i);
+          },
+        ).toList(),
       ),
+    );
+  }
+
+  Widget buildRow() {
+    final alignmentMap = {
+      TabAlignment.start: MainAxisAlignment.start,
+      TabAlignment.center: MainAxisAlignment.center,
+      TabAlignment.startOffset: MainAxisAlignment.end,
+    };
+
+    return Row(
+      mainAxisAlignment: alignmentMap[widget.tabAlignment] ?? MainAxisAlignment.start,
+      children: widget.items.map(
+        (e) {
+          final i = widget.items.indexOf(e);
+          var child = buildItem(i: i);
+          if (widget.tabAlignment == TabAlignment.fill) {
+            child = Expanded(child: child);
+          }
+          return child;
+        },
+      ).toList(),
     );
   }
 
   Widget buildItem({required int i}) {
     final e = widget.items[i];
     final isSelected = widget.indexVN.value == i;
+
+    // final bgColor = widget.selectedBgColor;
+    // final colorFilter = bgColor == null ? null : ColorFilter.mode(bgColor, BlendMode.srcIn);
+    // final image = isSelected
+    //     ? DecorationImage(
+    //         image: e.bg!,
+    //         fit: BoxFit.fill,
+    //         colorFilter: colorFilter,
+    //       )
+    //     : null;
 
     return GestureDetector(
       onTap: () {
@@ -136,40 +191,21 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
       child: widget.itemBuilder?.call(context, i) ??
           Container(
             padding: widget.itemPadding,
-            child: Stack(
+            // decoration: BoxDecoration(
+            //   border: Border.all(color: Colors.blue),
+            //   image: image,
+            // ),
+            child: Container(
               alignment: Alignment.center,
-              children: [
-                if (isSelected)
-                  Positioned(
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    child: Image(
-                      image: e.bg!,
-                      fit: BoxFit.fill,
-                      color: e.bgColor ?? widget.selectedBgColor,
-                    ),
-                  ),
-                GestureDetector(
-                  onTap: () {
-                    jumpTo(i);
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    // decoration: BoxDecoration(
-                    //   color: Colors.transparent,
-                    //   border: Border.all(color: Colors.blue),
-                    // ),
-                    child: widget.itemBuilder?.call(context, i) ??
-                        Text(
-                          e.title,
-                          maxLines: 1,
-                          style: isSelected ? (e.style ?? textStyle) : unselectedTextStyle,
-                        ),
-                  ),
-                ),
-              ],
+              // decoration: BoxDecoration(
+              //   color: Colors.transparent,
+              //   border: Border.all(color: Colors.blue),
+              // ),
+              child: Text(
+                e,
+                maxLines: 1,
+                style: isSelected ? textStyle : unselectedTextStyle,
+              ),
             ),
           ),
     );
@@ -184,5 +220,24 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
     currIndex = i;
     widget.indexVN.value = i;
     widget.onChanged?.call(widget.indexVN.value);
+  }
+}
+
+class NChromeTabController<T extends _NChromeTabBarState> {
+  T? _anchor;
+
+  void attach(T anchor) {
+    _anchor = anchor;
+  }
+
+  void detach(T anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
+  }
+
+  void jumpTo(int i) {
+    assert(_anchor != null);
+    _anchor!.jumpTo(i);
   }
 }
