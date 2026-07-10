@@ -65,13 +65,13 @@ class AssetPickerManager {
       if (result.isEmpty) {
         return currentModels;
       }
-      final String oldIds = selectedEntities.map((entity) => entity.id).join(',');
-      final String newIds = result.map((entity) => entity.id).join(',');
+      final oldIds = selectedEntities.map((entity) => entity.id).join(',');
+      final newIds = result.map((entity) => entity.id).join(',');
       if (oldIds == newIds) {
         return currentModels;
       }
       return result.map((entity) {
-        for (final AssetUploadModel model in currentModels) {
+        for (final model in currentModels) {
           if (model.entity?.id == entity.id) {
             return model;
           }

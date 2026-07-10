@@ -8,6 +8,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_button.d
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
+import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
@@ -32,6 +33,7 @@ class AssetUploadBox extends StatefulWidget {
     this.onTap,
     this.showFileSize = false,
     this.hasTakePhoto = false,
+    this.onPickRequest,
     this.onStart,
     this.onCancel,
   });
@@ -85,6 +87,9 @@ class AssetUploadBox extends StatefulWidget {
   /// 图片点击事件
   final void Function(List<String> urls, int index)? onTap;
 
+  /// 自定义选图（提供时替代内置 onPicker）
+  final Future<void> Function(int maxCount)? onPickRequest;
+
   /// 显示文件大小
   final bool showFileSize;
 
@@ -93,13 +98,14 @@ class AssetUploadBox extends StatefulWidget {
 
   /// 展示图片预览相册
   static Future<void> jumpImagePreview({
-    required BuildContext context,
+    BuildContext? context,
     required List<String> urls,
     required int index,
   }) async {
-    FocusScope.of(context).unfocus();
+    final contextNew = context ?? ToolUtil.navigator.context;
+    FocusScope.of(contextNew).unfocus();
     await Navigator.push(
-      context,
+      contextNew,
       NFadePageRoute(
         builder: (context) => NImagePreview(urls: urls, index: index),
       ),
@@ -238,9 +244,14 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
           ).toList(),
           if (items.length < maxCount)
             InkWell(
-              onTap: () {
+              onTap: () async {
                 if (!canEdit) {
                   debugPrint("无图片编辑权限");
+                  return;
+                }
+
+                if (widget.onPickRequest != null) {
+                  await widget.onPickRequest!(maxCount);
                   return;
                 }
                 onPicker(maxCount: maxCount);

@@ -24,10 +24,18 @@ class NCachedNetworkImage extends StatelessWidget {
   final Color? color;
   final BlendMode? colorBlendMode;
 
+  static ValueChanged<Object> onErrorListener = (error) {
+    debugPrint('CachedNetworkImage 图片加载失败：$error');
+  };
+
   @override
   Widget build(BuildContext context) {
     final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
     final placeholderWidget = buildPlaceholder();
+
+    if (!imageUrl.startsWith("http")) {
+      return placeholderWidget;
+    }
 
     return CachedNetworkImage(
       cacheKey: imageUrl,

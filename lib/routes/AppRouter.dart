@@ -355,6 +355,7 @@ import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/custom_tabbar_page.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
+import 'package:flutter_templet_project/pages/demo/discuss_list_page.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/file_upload_box_demo.dart';
@@ -761,6 +762,7 @@ class AppRouter {
   static const String dropBoxChoicDemoNew = '/dropBoxChoicDemoNew';
   static const String dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
   static const String slidableDemoOne = '/slidableDemoOne';
+  static const String discussListPage = '/discussListPage';
   static const String imChatPage = '/imChatPage';
   static const String imChatSettingPage = '/imChatSettingPage';
   static const String imChatBubbleChange = '/ImChatBubbleChange';
@@ -2064,6 +2066,11 @@ class AppRouter {
       name: AppRouter.slidableDemoOne,
       page: () => SlidableDemoOne(),
     ),
+    GetPage(
+      name: AppRouter.discussListPage,
+      page: () => DiscussListPage(),
+    ),
+
     GetPage(
       name: AppRouter.imChatPage,
       page: () => ImChatPage(),

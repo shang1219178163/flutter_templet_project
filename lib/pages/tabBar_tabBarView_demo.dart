@@ -632,6 +632,7 @@ var customs = [
   Tuple2(AppRouter.nSkeletonDemo, "骨架图"),
   Tuple2(AppRouter.nTreeDemo, "树形组件"),
   Tuple2(AppRouter.dialogChoiceChipDemo, "选择弹窗"),
+  Tuple2(AppRouter.discussListPage, "评论列表"),
   Tuple2(AppRouter.imChatPage, "聊天列表"),
   Tuple2(AppRouter.imChatBubbleChange, "聊天气泡"),
   Tuple2(AppRouter.imConversationPage, "聊天会话"),

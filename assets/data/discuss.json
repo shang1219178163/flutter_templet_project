@@ -1,0 +1,235 @@
+{
+  "code": 0,
+  "msg": "操作成功",
+  "data": {
+    "page": {
+      "total": 6,
+      "items": [
+        {
+          "commentId": 66,
+          "customerInfo": {
+            "customerId": 352,
+            "nickname": "昵称_522",
+            "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+          },
+          "content": "999",
+          "imageUrls": [
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260709/8ece5343-0a20-47b6-a79c-1480c8e2892c.png"
+          ],
+          "likeCount": 0,
+          "replyCount": 0,
+          "isLike": false,
+          "canDelete": false,
+          "createTime": "2026-07-09 18:51:03",
+          "showTime": "23小时前",
+          "replyList": []
+        },
+        {
+          "commentId": 65,
+          "customerInfo": {
+            "customerId": 352,
+            "nickname": "昵称_522",
+            "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+          },
+          "content": "1111",
+          "imageUrls": [
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260709/c9a01bd7-bbc9-4a49-82ce-9a0801eaf9d0.png",
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260709/7ed2f67d-a3dc-4e76-ae17-4a026907cc24.png"
+          ],
+          "likeCount": 0,
+          "replyCount": 0,
+          "isLike": false,
+          "canDelete": false,
+          "createTime": "2026-07-09 18:50:47",
+          "showTime": "23小时前",
+          "replyList": []
+        },
+
+        {
+          "commentId": 47,
+          "customerInfo": {
+            "customerId": 351,
+            "nickname": "昵称_4224",
+            "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar8.png"
+          },
+          "content": "测试一下闽宁你明明叽叽叽叽家里啦咯啦咯弄弄你没民工工资@",
+          "imageUrls": [
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260709/a32ce7d7-204f-49d0-a69d-87f42d230441.png",
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260709/1ad61f4e-bd68-4d00-92e1-e3ed542c3cf8.png"
+          ],
+          "likeCount": 3,
+          "replyCount": 16,
+          "isLike": true,
+          "canDelete": false,
+          "createTime": "2026-07-09 10:29:21",
+          "showTime": "1天前",
+          "replyList": [
+            {
+              "commentId": 142,
+              "parentId": 0,
+              "customerId": 351,
+              "customerInfo": {
+                "customerId": 351,
+                "nickname": "昵称_4224",
+                "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar8.png"
+              },
+              "replyToCustomerInfo": {
+                "customerId": 351,
+                "nickname": "昵称_4224",
+                "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar8.png"
+              },
+              "content": "供你🤪😎😎好好好",
+              "imageUrls": [
+                "https://cdn.kbisai.com/kanbisai-test/comment/20260709/0e4566e4-3a7d-40ae-8530-94b420ef55f8.png",
+                "https://cdn.kbisai.com/kanbisai-test/comment/20260709/8b9aa66f-4e9f-4a66-a684-58925b8962af.png",
+                "https://cdn.kbisai.com/kanbisai-test/comment/20260709/838229d2-605c-414c-aadc-981089234fc2.png"
+              ],
+              "likeCount": 0,
+              "isLike": false,
+              "canDelete": false,
+              "createTime": "2026-07-09 10:29:50",
+              "showTime": "1天前",
+              "replyList": [],
+              "parentContent": null,
+              "parentImageUrls": null
+            }
+          ]
+        },
+        {
+          "commentId": 36,
+          "customerInfo": {
+            "customerId": 352,
+            "nickname": "昵称_522",
+            "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+          },
+          "content": "q大大方方的999",
+          "imageUrls": [
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260708/823227f4-4161-414d-b2da-e4c65c7ba6ef.png",
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260708/b3bf69c2-673e-4b8a-bbe3-f90a584d82de.png"
+          ],
+          "likeCount": 1,
+          "replyCount": 11,
+          "isLike": false,
+          "canDelete": false,
+          "createTime": "2026-07-08 15:09:49",
+          "showTime": "2天前",
+          "replyList": [
+            {
+              "commentId": 93,
+              "parentId": 0,
+              "customerId": 352,
+              "customerInfo": {
+                "customerId": 352,
+                "nickname": "昵称_522",
+                "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+              },
+              "replyToCustomerInfo": {
+                "customerId": 352,
+                "nickname": "昵称_522",
+                "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+              },
+              "content": "11122222",
+              "imageUrls": [],
+              "likeCount": 0,
+              "isLike": false,
+              "canDelete": false,
+              "createTime": "2026-07-08 15:10:14",
+              "showTime": "2天前",
+              "replyList": [],
+              "parentContent": null,
+              "parentImageUrls": null
+            }
+          ]
+        },
+        {
+          "commentId": 30,
+          "customerInfo": {
+            "customerId": 352,
+            "nickname": "昵称_522",
+            "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+          },
+          "content": "adasddwer2342342342",
+          "imageUrls": [
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260707/45263801-6c0a-40e6-9f00-aab78e604337.png",
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260707/46778a43-fd13-4fce-bd99-7250147a89fd.png"
+          ],
+          "likeCount": 0,
+          "replyCount": 6,
+          "isLike": false,
+          "canDelete": false,
+          "createTime": "2026-07-07 18:28:14",
+          "showTime": "2天前",
+          "replyList": [
+            {
+              "commentId": 91,
+              "parentId": 0,
+              "customerId": 352,
+              "customerInfo": {
+                "customerId": 352,
+                "nickname": "昵称_522",
+                "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+              },
+              "replyToCustomerInfo": {
+                "customerId": 352,
+                "nickname": "昵称_522",
+                "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+              },
+              "content": "q大大方方的",
+              "imageUrls": [],
+              "likeCount": 0,
+              "isLike": false,
+              "canDelete": false,
+              "createTime": "2026-07-08 14:12:20",
+              "showTime": "2天前",
+              "replyList": [],
+              "parentContent": null,
+              "parentImageUrls": null
+            }
+          ]
+        },
+        {
+          "commentId": 29,
+          "customerInfo": {
+            "customerId": 352,
+            "nickname": "昵称_522",
+            "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+          },
+          "content": "adasddwer234234234234234234234234234234234234234234234234234234234234234",
+          "imageUrls": [
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260707/45263801-6c0a-40e6-9f00-aab78e604337.png",
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260707/79d92930-8e8a-424a-a812-4ad9e681d954.png",
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260707/46778a43-fd13-4fce-bd99-7250147a89fd.png"
+          ],
+          "likeCount": 0,
+          "replyCount": 0,
+          "isLike": false,
+          "canDelete": false,
+          "createTime": "2026-07-07 18:24:13",
+          "showTime": "2天前",
+          "replyList": []
+        },
+        {
+          "commentId": 28,
+          "customerInfo": {
+            "customerId": 352,
+            "nickname": "昵称_522",
+            "avatar": "http://ydxk-rome.oss-cn-shenzhen.aliyuncs.com/avatar/avatar4.png"
+          },
+          "content": "543534534535weqeqweqwe999999",
+          "imageUrls": [
+            "https://cdn.kbisai.com/kanbisai-test/comment/20260707/45263801-6c0a-40e6-9f00-aab78e604337.png"
+          ],
+          "likeCount": 0,
+          "replyCount": 0,
+          "isLike": false,
+          "canDelete": false,
+          "createTime": "2026-07-07 17:49:56",
+          "showTime": "3天前",
+          "replyList": []
+        }
+      ]
+    },
+    "hasFeatured": false,
+    "totalCommentCount": 47
+  }
+}

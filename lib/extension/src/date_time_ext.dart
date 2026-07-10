@@ -318,6 +318,58 @@ extension DateTimeExt on DateTime {
   // }
 }
 
+extension DateTimeStringExt on String {
+  /// 时间描述
+  ///
+  /// <1分钟：刚刚
+  /// <1小时：xx分钟前
+  /// <24小时：xx小时前
+  /// 24~72小时：xx天前
+  /// >=72小时：yyyy-MM-dd HH:mm
+  String get timeDescription {
+    if (trim().isEmpty) {
+      return '';
+    }
+    try {
+      final createTime = DateTime.parse(replaceFirst(' ', 'T'));
+      final now = DateTime.now();
+      final diff = now.difference(createTime);
+
+      if (diff.isNegative) {
+        return this;
+      }
+
+      // 小于1分钟
+      if (diff.inMinutes < 1) {
+        return '刚刚';
+      }
+
+      // 小于1小时
+      if (diff.inHours < 1) {
+        return '${diff.inMinutes}分钟前';
+      }
+
+      // 小于24小时
+      if (diff.inHours < 24) {
+        return '${diff.inHours}小时前';
+      }
+
+      // 小于72小时
+      if (diff.inHours < 72) {
+        return '${diff.inDays}天前';
+      }
+
+      // 超过72小时
+      String two(int n) => n.toString().padLeft(2, '0');
+
+      return '${createTime.year}-${two(createTime.month)}-${two(createTime.day)} '
+          '${two(createTime.hour)}:${two(createTime.minute)}';
+    } catch (_) {
+      return this;
+    }
+  }
+}
+
 // extension DateTimeIntExt on int {
 //   /// 转为秒时间戳
 //   int toTimeStamp() {

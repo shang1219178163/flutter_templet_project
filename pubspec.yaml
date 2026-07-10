@@ -333,6 +333,8 @@ flutter:
     - assets/images/message/
     - assets/images/shop/
     - assets/images/points/
+    - assets/images/discuss/
+    - assets/images/input_bar/
     - assets/media/
     - lib/pages/demo/
 

@@ -22,6 +22,8 @@ class ToolUtil {
   // 创建一个全局的GlobalKey
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
+  static NavigatorState get navigator => navigatorKey.currentState!;
+
   // 全局获取context
   static get globalContext => navigatorKey.currentState!.overlay!.context;
 

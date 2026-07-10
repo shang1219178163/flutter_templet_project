@@ -234,7 +234,7 @@ extension ListExt<T, E> on List<E> {
       for (final d in descriptors) {
         final va = d.selector(a);
         final vb = d.selector(b);
-        final int comparison = va.compareTo(vb);
+        final comparison = va.compareTo(vb);
         if (comparison != 0) {
           return d.ascending ? comparison : -comparison;
         }

@@ -1,6 +1,6 @@
 //
 //  NOverlayManager.dart
-//  flutter_templet_project
+//  projects
 //
 //  Created by shang on 2026/2/26 17:21.
 //  Copyright © 2026/2/26 shang. All rights reserved.
@@ -9,7 +9,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_templet_project/util/tool_util.dart';
 
 /// Overlay 管理器
 @Deprecated("已弃用,请使用 NOverlayDialog")
@@ -18,224 +18,79 @@ class NOverlayManager {
 
   static final NOverlayManager instance = NOverlayManager._internal();
 
-  static final _globalContext = Get.context;
-
   /// 当前 OverlayEntry 列表
   static final List<OverlayEntry> _entries = [];
-  static List<OverlayEntry> get entries => _entries;
-
-  /// 当前弹窗
-  static OverlayEntry? get last {
-    if (_entries.isEmpty) {
-      return null;
-    }
-    return _entries.last;
-  }
 
   /// 当前是否有 Toast 显示
-  static bool get isLoading => _entries.isNotEmpty;
+  static bool get isShowing => _entries.isNotEmpty;
 
-  static void insert(OverlayEntry entry, {OverlayEntry? below, OverlayEntry? above}) {
-    final overlay = Overlay.of(_globalContext!, rootOverlay: true);
-    _entries.add(entry);
-    overlay.insert(entry, below: below, above: above);
+  // Timer? _autoHideTimer;
+
+  /// 刷新当前 Overlay，不销毁 Entry
+  static void rebuild() {
+    for (final OverlayEntry entry in _entries) {
+      entry.markNeedsBuild();
+    }
   }
 
   /// 移除所有 Toast
-  static void removeAll() {
+  static void clear() {
+    // _autoHideTimer?.cancel();
+    // _autoHideTimer = null;
+
     for (final entry in _entries) {
-      if (entry.mounted) {
-        entry.remove();
-      }
+      entry.remove();
     }
     _entries.clear();
   }
 
   /// 显示 Toast
-  static void show({
+  static void show(
+    BuildContext context, {
     Duration duration = const Duration(seconds: 2),
     bool autoDismiss = true,
     required WidgetBuilder builder,
   }) {
     // 1️⃣ 先清空已有 Toast
-    removeAll();
+    clear();
 
+    final overlay = Overlay.of(context, rootOverlay: true);
     final entry = OverlayEntry(builder: builder);
-    insert(entry);
+
     _entries.add(entry);
+    overlay.insert(entry);
 
     // 2️⃣ 自动移除
     if (autoDismiss) {
-      Future.delayed(duration, removeAll);
+      Future.delayed(duration, clear);
+      // _autoHideTimer?.cancel();
+      // _autoHideTimer = Timer(duration, hideAll);
     }
   }
 
-  static OverlayEntry? _current;
-
-  /// 展示动画
-  static void showAnimation({
+  /// toast
+  static void toast({
     BuildContext? context,
-    Duration duration = const Duration(seconds: 2),
-    required Widget Function(VoidCallback onHide) bulder,
+    Duration duration = const Duration(milliseconds: 1500),
+    bool autoDismiss = true,
+    double offset = 0,
+    Color? backgroudColor = const Color(0x99000000),
+    Color? color = const Color(0xFFFFFFFF),
+    required String message,
+    WidgetBuilder? builder,
   }) {
-    final contextNew = context ?? _globalContext;
-    removeAll();
-
-    final controller = AnimationController(
-      vsync: Navigator.of(contextNew!),
-      duration: const Duration(milliseconds: 350),
+    NOverlayManager.show(
+      context ?? ToolUtil.navigator.context,
+      builder: builder ??
+          (_) {
+            return NOverlayContent(
+              message: message,
+              offset: offset,
+              color: color,
+              backgroudColor: backgroudColor,
+            );
+          },
     );
-
-    late OverlayEntry entry;
-    controller.addListener(() {
-      Future.microtask(() {
-        if (entry.mounted) {
-          entry.markNeedsBuild();
-        }
-      });
-    });
-
-    onHide() async {
-      if (!entry.mounted) {
-        return;
-      }
-      await controller.reverse();
-      entry.remove();
-      controller.dispose();
-    }
-
-    entry = OverlayEntry(
-      builder: (_) {
-        final t = CurvedAnimation(
-          parent: controller,
-          curve: Curves.easeOut,
-        ).value;
-
-        return Positioned(
-          bottom: 100 * t,
-          left: 0,
-          right: 0,
-          child: Opacity(
-            opacity: t,
-            child: Transform.scale(
-              scale: 0.9 + 0.1 * t,
-              child: bulder(onHide),
-            ),
-          ),
-        );
-      },
-    );
-
-    _current = entry;
-    insert(entry);
-    // final overlayState = Overlay.of(context, rootOverlay: true);
-    // overlayState.insert(entry);
-    controller.forward();
-    Future.delayed(duration, onHide);
-  }
-
-  /// sheet
-  static void sheet({
-    BuildContext? context,
-    Duration duration = const Duration(seconds: 2),
-    double height = 500,
-    double radius = 16,
-    bool onBarrier = true,
-    required Widget Function(VoidCallback onHide) bulder,
-  }) {
-    final contextNew = context ?? _globalContext;
-    removeAll();
-
-    final controller = AnimationController(
-      vsync: Navigator.of(contextNew!),
-      duration: const Duration(milliseconds: 350),
-    );
-
-    late OverlayEntry entry;
-    // controller.addListener(() {
-    //   Future.microtask(() {
-    //     if (entry.mounted) {
-    //       entry.markNeedsBuild();
-    //     }
-    //   });
-    // });
-
-    onHide() async {
-      if (!entry.mounted) {
-        return;
-      }
-      await controller.reverse();
-      entry.remove();
-      controller.dispose();
-    }
-
-    entry = OverlayEntry(
-      builder: (_) {
-        final t = CurvedAnimation(
-          parent: controller,
-          curve: Curves.easeOut,
-        ).value;
-
-        final offsetY = (1 - t) * height;
-        return Stack(
-          children: [
-            // 1️⃣ 背景遮罩
-            GestureDetector(
-              onTap: onBarrier ? onHide : null,
-              child: Opacity(
-                opacity: 0.4 * t,
-                child: Container(color: Colors.black),
-              ),
-            ),
-            AnimatedBuilder(
-              animation: controller,
-              child: Material(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(radius),
-                ),
-                clipBehavior: Clip.antiAlias,
-                // color: Colors.white,
-                child: RepaintBoundary(
-                  child: bulder(onHide),
-                ),
-              ),
-              builder: (_, cachedChild) {
-                return AnimatedPositioned(
-                  duration: controller.duration ?? Duration.zero,
-                  left: 0,
-                  right: 0,
-                  bottom: -offsetY,
-                  height: height,
-                  child: cachedChild!,
-                );
-              },
-            ),
-            // AnimatedPositioned(
-            //   duration: controller.duration ?? Duration.zero,
-            //   left: 0,
-            //   right: 0,
-            //   bottom: -offsetY,
-            //   height: height,
-            //   child: Material(
-            //     borderRadius: BorderRadius.vertical(
-            //       top: Radius.circular(radius),
-            //     ),
-            //     clipBehavior: Clip.antiAlias,
-            //     // color: Colors.white,
-            //     child: RepaintBoundary(
-            //       child: bulder(onHide),
-            //     ),
-            //   ),
-            // ),
-          ],
-        );
-      },
-    );
-
-    _current = entry;
-    insert(entry);
-    controller.forward();
-    // Future.delayed(duration, onHide);
   }
 }
 
