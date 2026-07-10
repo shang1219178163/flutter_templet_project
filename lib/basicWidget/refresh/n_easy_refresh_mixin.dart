@@ -47,6 +47,11 @@ mixin NListRefreshable<T> on NRefreshable {
   List<T> get items;
   set items(List<T> value);
 
+  /// 刷新时重置到的起始页码
+  int get pageInitial;
+  set pageInitial(int value);
+
+  /// 当前页码
   int get page;
   set page(int value);
 
@@ -71,24 +76,64 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
     _onRequest = value;
   }
 
+  /// 请求方式
+  late List<T> _firstPageItems;
+  @override
+  List<T> get firstPageItems => _firstPageItems;
+  @override
+  set firstPageItems(List<T> value) {
+    _firstPageItems = value;
+  }
+
   /// 数据列表
+  List<T> _items = [];
   @override
-  List<T> items = [];
+  List<T> get items => _items;
+  @override
+  set items(List<T> value) {
+    _items = value;
+  }
 
+  int _page = 1;
   @override
-  List<T> firstPageItems = [];
+  int get page => _page;
+  @override
+  set page(int value) {
+    _page = value;
+  }
 
+  /// 刷新时重置到的起始页码，默认 1
+  int _pageInitial = 1;
   @override
-  int page = 1;
+  int get pageInitial => _pageInitial;
+  @override
+  set pageInitial(int value) {
+    _pageInitial = value;
+  }
 
+  int _pageSize = 20;
   @override
-  int pageSize = 20;
+  int get pageSize => _pageSize;
+  @override
+  set pageSize(int value) {
+    _pageSize = value;
+  }
 
+  IndicatorResult _indicator = IndicatorResult.success;
   @override
-  var indicator = IndicatorResult.success;
+  IndicatorResult get indicator => _indicator;
+  @override
+  set indicator(IndicatorResult value) {
+    _indicator = value;
+  }
 
+  bool _isLoading = false;
   @override
-  bool isLoading = false;
+  bool get isLoading => _isLoading;
+  @override
+  set isLoading(bool value) {
+    _isLoading = value;
+  }
 
   bool get hasMore => indicator != IndicatorResult.noMore;
 
@@ -101,7 +146,7 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
       }
       isLoading = true;
 
-      page = 1;
+      page = pageInitial;
       final list = firstPageItems.isNotEmpty ? firstPageItems : await onRequest(true, page, pageSize, <T>[]);
       // items.replaceRange(0, items.length, list);
       items = [...list];
@@ -169,9 +214,7 @@ mixin NListRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NListRefr
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // DLog.d([widget.title, widget.key, hashCode]);
       if (items.isEmpty) {
         onRefresh();
       }
@@ -317,7 +360,6 @@ mixin NRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRefresh
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (item == null) {
         onRefresh();

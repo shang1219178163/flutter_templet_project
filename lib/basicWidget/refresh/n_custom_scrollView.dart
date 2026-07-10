@@ -22,6 +22,10 @@ class NCustomScrollView<T> extends StatefulWidget {
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
     this.onlyHeader = false,
+    this.page = 1,
+    this.pageInitial = 1,
+    this.pageSize = 20,
+    this.firstPageItems = const [],
     required this.onRequest,
     required this.itemBuilder,
     this.separatorBuilder,
@@ -43,6 +47,17 @@ class NCustomScrollView<T> extends StatefulWidget {
 
   /// 列表为空时 header 是否可以显示
   final bool onlyHeader;
+
+  /// 页面初始索引
+  final int page;
+
+  /// 下拉刷新时重置到的页码
+  final int pageInitial;
+
+  /// 每页数量
+  final int pageSize;
+
+  final List<T> firstPageItems;
 
   /// 请求方法
   final RequestListCallback<T> onRequest;
@@ -71,8 +86,11 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
 
   final scrollController = ScrollController();
 
-  @override
-  late RequestListCallback<T> onRequest = widget.onRequest;
+  // @override
+  // late RequestListCallback<T> onRequest = widget.onRequest;
+  //
+  // @override
+  // late List<T> firstPageItems = widget.firstPageItems;
 
   @override
   void dispose() {
@@ -82,24 +100,45 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
 
   @override
   void initState() {
+    initData();
     super.initState();
     widget.controller?.attach(this);
+  }
+
+  initData() {
+    page = widget.page;
+    pageSize = widget.pageSize;
+    pageInitial = widget.pageInitial;
+    firstPageItems = widget.firstPageItems;
   }
 
   @override
   void didUpdateWidget(covariant NCustomScrollView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.scrollController != oldWidget.scrollController ||
-        widget.placeholder != oldWidget.placeholder ||
-        widget.contentDecoration != oldWidget.contentDecoration ||
-        widget.contentPadding != oldWidget.contentPadding ||
-        widget.onlyHeader != oldWidget.onlyHeader ||
-        widget.onRequest != oldWidget.onRequest ||
-        widget.itemBuilder != oldWidget.itemBuilder ||
-        widget.separatorBuilder != oldWidget.separatorBuilder) {
+    if (oldWidget.controller != widget.controller ||
+        oldWidget.scrollController != widget.scrollController ||
+        oldWidget.placeholder != widget.placeholder ||
+        oldWidget.contentDecoration != widget.contentDecoration ||
+        oldWidget.contentPadding != widget.contentPadding ||
+        oldWidget.onlyHeader != widget.onlyHeader ||
+        widget.page != oldWidget.page ||
+        widget.pageInitial != oldWidget.pageInitial ||
+        widget.pageSize != oldWidget.pageSize ||
+        oldWidget.firstPageItems != widget.firstPageItems) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
+      }
+
+      onRequest = widget.onRequest;
+      final shouldReload = widget.page != oldWidget.page ||
+          widget.pageSize != oldWidget.pageSize ||
+          widget.pageInitial != oldWidget.pageInitial ||
+          oldWidget.firstPageItems != widget.firstPageItems;
+      if (shouldReload) {
+        initData();
+        onRefresh();
+        return;
       }
       setState(() {});
     }

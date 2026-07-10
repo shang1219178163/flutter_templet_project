@@ -87,7 +87,7 @@ mixin NTracelessEasyRefreshLoadMixin on NListRefreshStateMixin {
     final position = scrollController.position;
     if (position.pixels >= position.maxScrollExtent - triggerDistance && !_isLoading && hasNextPage) {
       _isLoading = true;
-      onLoad().then((v) {
+      onLoad().whenComplete(() {
         _isLoading = false;
       });
     }

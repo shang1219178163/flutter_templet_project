@@ -52,6 +52,9 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   @override
   bool get wantKeepAlive => true;
 
+  @override
+  bool get autoRefreshOnInit => false;
+
   final scrollController = ScrollController();
 
   @override
@@ -83,12 +86,17 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
+      onRequest = widget.onRequest;
     }
   }
 
   Future<void> initData() async {
     await onRefresh();
-    isFirstLoad = false;
+    if (mounted) {
+      setState(() {
+        isFirstLoad = false;
+      });
+    }
   }
 
   @override

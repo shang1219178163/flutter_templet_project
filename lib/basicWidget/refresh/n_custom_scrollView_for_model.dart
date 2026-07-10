@@ -66,10 +66,10 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   bool get wantKeepAlive => true;
 
-  late var scrollController = widget.scrollController ?? ScrollController();
+  ScrollController get scrollController => widget.scrollController ?? ScrollController();
 
-  @override
-  late RequestModelCallback<T> onRequest = widget.onRequest;
+  // @override
+  // late RequestModelCallback<T> onRequest = widget.onRequest;
 
   /// 首次加载
   var isFirstLoad = true;
@@ -77,8 +77,9 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   void dispose() {
     widget.controller?.detach(this);
-    refreshController.dispose();
-    scrollController.dispose();
+    if (widget.scrollController == null) {
+      scrollController.dispose();
+    }
     super.dispose();
   }
 
@@ -107,9 +108,6 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
-      }
-      if (widget.scrollController != null) {
-        scrollController = widget.scrollController!;
       }
       onRequest = widget.onRequest;
       setState(() {});

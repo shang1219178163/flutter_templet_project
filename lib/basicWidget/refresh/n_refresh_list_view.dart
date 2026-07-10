@@ -53,7 +53,9 @@ class NRefreshListView<T> extends StatefulWidget {
     this.placeholder = const NPlaceholder(),
     this.needRemovePadding = false,
     this.page = 1,
+    this.pageInitial = 1,
     this.pageSize = 20,
+    this.firstPageItems = const [],
     required this.onRequest,
     required this.itemBuilder,
     this.separatorBuilder,
@@ -73,11 +75,16 @@ class NRefreshListView<T> extends StatefulWidget {
   /// 使用使用 MediaQuery.removePadding
   final bool needRemovePadding;
 
-  /// 页面初始索引
+  /// 页面索引
   final int page;
+
+  /// 下拉刷新时重置到的页码
+  final int pageInitial;
 
   /// 每页数量
   final int pageSize;
+
+  final List<T> firstPageItems;
 
   /// 请求方法
   final RequestListCallback<T> onRequest;
@@ -104,26 +111,30 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
 
   final scrollController = ScrollController();
 
-  @override
-  late RequestListCallback<T> onRequest = widget.onRequest;
+  // @override
+  // late RequestListCallback<T> onRequest = widget.onRequest;
+
+  // @override
+  // late List<T> firstPageItems = widget.firstPageItems;
 
   @override
   void dispose() {
     widget.controller?.detach(this);
-    refreshController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
+    initData();
     super.initState();
     widget.controller?.attach(this);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // DLog.d([widget.title, widget.key, hashCode]);
-      if (items.isEmpty) {
-        onRefresh();
-      }
-    });
+  }
+
+  initData() {
+    page = widget.page;
+    pageSize = widget.pageSize;
+    pageInitial = widget.pageInitial;
+    firstPageItems = widget.firstPageItems;
   }
 
   @override
@@ -133,19 +144,25 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
         widget.placeholder != oldWidget.placeholder ||
         widget.needRemovePadding != oldWidget.needRemovePadding ||
         widget.page != oldWidget.page ||
-        widget.pageSize != oldWidget.pageSize) {
+        widget.pageInitial != oldWidget.pageInitial ||
+        widget.pageSize != oldWidget.pageSize ||
+        oldWidget.firstPageItems != widget.firstPageItems) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
 
       onRequest = widget.onRequest;
-      final shouldReload = widget.page != oldWidget.page || widget.pageSize != oldWidget.pageSize;
+      final shouldReload = widget.page != oldWidget.page ||
+          widget.pageSize != oldWidget.pageSize ||
+          widget.pageInitial != oldWidget.pageInitial ||
+          oldWidget.firstPageItems != widget.firstPageItems;
       if (shouldReload) {
-        page = widget.page;
-        pageSize = widget.pageSize;
+        initData();
         onRefresh();
+        return;
       }
+      setState(() {});
     }
   }
 
@@ -164,6 +181,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
       onLoad: indicator == IndicatorResult.noMore ? null : onLoad,
       child: ListView.separated(
         key: PageStorageKey(widget.title ?? hashCode),
+        physics: widget.physics,
         itemCount: itemCount,
         itemBuilder: (context, index) {
           if (index == 0) {
