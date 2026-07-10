@@ -70,14 +70,14 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
   );
 
   /// 请求方式
-  late RequestListCallback<T> _onRequest;
+  late RequestListCallback<T> _onRequest = throw UnimplementedError("onRequest");
   RequestListCallback<T> get onRequest => _onRequest;
   set onRequest(RequestListCallback<T> value) {
     _onRequest = value;
   }
 
   /// 请求方式
-  late List<T> _firstPageItems;
+  List<T> _firstPageItems = [];
   @override
   List<T> get firstPageItems => _firstPageItems;
   @override
@@ -252,21 +252,23 @@ class NListRefreshController<T> {
     return _anchor!.items;
   }
 
-  void onRefresh() {
+  Future<void> onRefresh() {
     assert(_anchor != null);
-    _anchor!.onRefresh();
+    return _anchor!.onRefresh();
   }
 
   /// 页码减一
-  void turnPrePage() {
+  Future<void> turnPrePage() {
     assert(_anchor != null);
     _anchor!.page--;
+    return _anchor!.onLoad();
   }
 
   /// 页码加一
-  void turnNextPage() {
+  Future<void> turnNextPage() {
     assert(_anchor != null);
     _anchor!.page++;
+    return _anchor!.onLoad();
   }
 
   void updateItems(List<T> list) {

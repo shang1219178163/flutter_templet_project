@@ -131,6 +131,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   }
 
   initData() {
+    onRequest = widget.onRequest;
     page = widget.page;
     pageSize = widget.pageSize;
     pageInitial = widget.pageInitial;

@@ -106,6 +106,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   }
 
   initData() {
+    onRequest = widget.onRequest;
     page = widget.page;
     pageSize = widget.pageSize;
     pageInitial = widget.pageInitial;
@@ -130,7 +131,6 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
         widget.controller?.attach(this);
       }
 
-      onRequest = widget.onRequest;
       final shouldReload = widget.page != oldWidget.page ||
           widget.pageSize != oldWidget.pageSize ||
           widget.pageInitial != oldWidget.pageInitial ||
