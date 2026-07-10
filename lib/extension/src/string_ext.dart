@@ -7,6 +7,7 @@
 //
 
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 extension StringExt on String {
@@ -141,10 +142,20 @@ extension StringExt on String {
 
   ///反驼峰命名法
   String toUncamlCase([String separator = "_"]) {
-    return replaceAllMapped(
-      RegExp(r'[A-Z]'),
-      (m) => '_${m.group(0)!.toLowerCase()}',
-    ).replaceFirst('_', '');
+    final reg = RegExp(r'[A-Z]');
+    final buffer = StringBuffer();
+    for (var i = 0; i < length; i++) {
+      final char = this[i];
+      if (reg.hasMatch(char)) {
+        if (i != 0) {
+          buffer.write(separator);
+        }
+        buffer.write(char.toLowerCase());
+      } else {
+        buffer.write(char);
+      }
+    }
+    return buffer.toString();
   }
 
   /// 脱敏
