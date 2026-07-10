@@ -10,6 +10,12 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
+/// 属性排序器
+typedef SortDescriptor<T> = ({
+  Comparable<Object> Function(T e) selector,
+  bool ascending,
+});
+
 extension IterableExt<E> on Iterable<E> {
   /// 获取随机元素
   E? get random {
@@ -213,6 +219,28 @@ extension ListExt<T, E> on List<E> {
   List<E> sorted([int Function(E a, E b)? compare]) {
     sort(compare);
     return this;
+  }
+
+  /// 同 sortByMultiple
+  List<E> sortedByMultiple(List<SortDescriptor<E>> descriptors) {
+    sortByMultiple(descriptors);
+    return this;
+  }
+
+  /// 多参数排序，按 [descriptors] 顺序依次比较；返回新列表，不修改原集合
+  /// [ascending] 为 true 升序，false 降序
+  void sortByMultiple(List<SortDescriptor<E>> descriptors) {
+    sort((E a, E b) {
+      for (final d in descriptors) {
+        final va = d.selector(a);
+        final vb = d.selector(b);
+        final int comparison = va.compareTo(vb);
+        if (comparison != 0) {
+          return d.ascending ? comparison : -comparison;
+        }
+      }
+      return 0;
+    });
   }
 
   /// 数组降维
