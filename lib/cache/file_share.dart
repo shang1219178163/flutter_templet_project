@@ -34,6 +34,6 @@ class FileShare {
     if (file == null) {
       return;
     }
-    Share.shareXFiles([XFile(file.path)]);
+    SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
   }
 }

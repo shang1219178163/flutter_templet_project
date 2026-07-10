@@ -89,6 +89,6 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
   }
 
   onShare() async {
-    Share.shareXFiles([XFile(widget.path)]);
+    SharePlus.instance.share(ShareParams(files: [XFile(widget.path)]));
   }
 }

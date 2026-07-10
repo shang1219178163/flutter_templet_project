@@ -176,7 +176,7 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
       title: title,
       confirmTitle: Platform.isIOS ? "分享" : "下载",
       onConfirm: () {
-        Share.shareXFiles([XFile(path)]);
+        SharePlus.instance.share(ShareParams(files: [XFile(path)]));
       },
       content: contentWidget,
     );

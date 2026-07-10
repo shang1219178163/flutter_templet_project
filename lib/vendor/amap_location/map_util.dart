@@ -41,8 +41,8 @@ class MapUtil {
 
     var list = <({String name, String url})>[];
     for (final e in items) {
-      var canLaunchUrl = await canLaunch(e.url);
-      if (canLaunchUrl) {
+      final canOpen = await canLaunchUrl(Uri.parse(e.url));
+      if (canOpen) {
         list.add(e);
       }
     }
@@ -53,12 +53,13 @@ class MapUtil {
   static Future<bool> jumpAMap(longitude, latitude) async {
     var url = '${Platform.isAndroid ? 'android' : 'ios'}'
         'amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2';
-    var canLaunchUrl = await canLaunch(url);
-    if (!canLaunchUrl) {
+    final uri = Uri.parse(url);
+    final canOpen = await canLaunchUrl(uri);
+    if (!canOpen) {
       ToastUtil.show('未检测到高德地图~');
       return false;
     }
-    await launch(url);
+    await launchUrl(uri);
     return true;
   }
 
@@ -66,38 +67,41 @@ class MapUtil {
   static Future<bool> jumpTencentMap(longitude, latitude) async {
     var url =
         'qqmap://map/routeplan?type=drive&fromcoord=CurrentLocation&tocoord=$latitude,$longitude&referer=IXHBZ-QIZE4-ZQ6UP-DJYEO-HC2K2-EZBXJ';
-    var canLaunchUrl = await canLaunch(url);
-    if (!canLaunchUrl) {
+    final uri = Uri.parse(url);
+    final canOpen = await canLaunchUrl(uri);
+    if (!canOpen) {
       ToastUtil.show('未检测到腾讯地图~');
       return false;
     }
-    await launch(url);
-    return canLaunchUrl;
+    await launchUrl(uri);
+    return canOpen;
   }
 
   /// 百度地图
   static Future<bool> jumpBaiduMap(longitude, latitude) async {
     var url =
         'baidumap://map/direction?destination=$latitude,$longitude&coord_type=bd09ll&mode=driving';
-    var canLaunchUrl = await canLaunch(url);
-    if (!canLaunchUrl) {
+    final uri = Uri.parse(url);
+    final canOpen = await canLaunchUrl(uri);
+    if (!canOpen) {
       ToastUtil.show('未检测到百度地图~');
       return false;
     }
-    await launch(url);
-    return canLaunchUrl;
+    await launchUrl(uri);
+    return canOpen;
   }
 
   /// 苹果地图
   static Future<bool> jumpAppleMap(longitude, latitude) async {
     var url = 'http://maps.apple.com/?&daddr=$latitude,$longitude';
-    var canLaunchUrl = await canLaunch(url);
-    if (!canLaunchUrl) {
+    final uri = Uri.parse(url);
+    final canOpen = await canLaunchUrl(uri);
+    if (!canOpen) {
       ToastUtil.show('打开失败~');
       return false;
     }
-    await launch(url);
-    return canLaunchUrl;
+    await launchUrl(uri);
+    return canOpen;
   }
 }
 

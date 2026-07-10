@@ -103,6 +103,6 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
     debugPrint("tmpPath: $tmpPath");
     ToastUtil.hideLoading();
 
-    Share.shareXFiles([XFile(tmpPath)]);
+    SharePlus.instance.share(ShareParams(files: [XFile(tmpPath)]));
   }
 }
