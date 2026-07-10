@@ -31,16 +31,11 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return true;
-      },
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
         body: buildBody(),
-      ),
     );
   }
 
@@ -56,7 +51,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
                 // onToggle();
               },
               bgChild: Container(
-                color: Colors.green.withOpacity(0.5),
+                color: Colors.green.withValues(alpha: 0.5),
                 height: 200,
                 width: double.infinity,
               ),
@@ -234,8 +229,8 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
-                    context.themeData.colorScheme.primary.withOpacity(.35),
-                    context.themeData.colorScheme.primary.withOpacity(.7),
+                    context.themeData.colorScheme.primary.withValues(alpha: .35),
+                    context.themeData.colorScheme.primary.withValues(alpha: .7),
                   ],
                 ),
               ),

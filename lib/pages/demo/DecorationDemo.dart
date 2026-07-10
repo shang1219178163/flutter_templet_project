@@ -63,7 +63,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
       ),
       boxShadows: [
         BoxShadow(
-          color: Colors.red.withOpacity(0.5),
+          color: Colors.red.withValues(alpha: 0.5),
           spreadRadius: 5,
           blurRadius: 7,
           offset: Offset(0, 3), // changes position of shadow
@@ -95,7 +95,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.red.withOpacity(0.5),
+              color: Colors.red.withValues(alpha: 0.5),
               spreadRadius: 5,
               blurRadius: 7,
               offset: Offset(0, 3), // changes position of shadow

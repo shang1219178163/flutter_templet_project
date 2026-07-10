@@ -130,7 +130,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                 //   fontWeight: FontWeight.w600,
                 // ),
                 // unselectedLabelStyle: TextStyle(
-                //   color: Colors.black.withOpacity(0.7),
+                //   color: Colors.black.withValues(alpha: 0.7),
                 //   fontSize: 14,
                 //   fontWeight: FontWeight.w600,
                 // ),
@@ -303,7 +303,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                 minimumSize: const Size(50, 26),
                 foregroundColor: foregroundColor,
                 side: BorderSide(color: foregroundColor, width: 1),
-                backgroundBuilder: (context, Set<MaterialState> states, Widget? child) {
+                backgroundBuilder: (context, Set<WidgetState> states, Widget? child) {
                   return DecoratedBox(
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -343,7 +343,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                       minimumSize: const Size(50, 26),
                       foregroundColor: foregroundColor,
                       side: BorderSide(color: foregroundColor, width: 1),
-                      backgroundBuilder: (context, Set<MaterialState> states, Widget? child) {
+                      backgroundBuilder: (context, Set<WidgetState> states, Widget? child) {
                         return DecoratedBox(
                           decoration: BoxDecoration(
                             color: Colors.transparent,

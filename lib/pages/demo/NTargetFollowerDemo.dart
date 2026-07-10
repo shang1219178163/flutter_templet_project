@@ -163,7 +163,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
       // width: 200,
       // height: 100,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withValues(alpha: 0.6),
         // border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(0)),
       ),

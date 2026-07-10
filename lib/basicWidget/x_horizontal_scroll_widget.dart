@@ -88,7 +88,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
           boxShadow: boxShadow,
           //  boxShadow: [
           //     BoxShadow(
-          //       color: Colors.grey.withOpacity(0.5),
+          //       color: Colors.grey.withValues(alpha: 0.5),
           //       spreadRadius: 5,
           //       blurRadius: 7,
           //       offset: Offset(0, 3), // changes position of shadow
@@ -512,7 +512,7 @@ class HorizontalScrollWidget extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(8)),
       boxShadow: [
         BoxShadow(
-          color: Colors.red.withOpacity(0.5),
+          color: Colors.red.withValues(alpha: 0.5),
           // spreadRadius: 5,
           blurRadius: 5,
           offset: Offset(0, 3), // changes position of shadow

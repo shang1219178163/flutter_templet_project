@@ -194,7 +194,7 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
         return Container(
           constraints: constraints,
           decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.5),
+            color: Colors.green.withValues(alpha: 0.5),
             border: Border.all(color: Colors.blue),
             borderRadius: BorderRadius.all(Radius.circular(0)),
             image: DecorationImage(

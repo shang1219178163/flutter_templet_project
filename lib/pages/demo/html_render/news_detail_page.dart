@@ -268,7 +268,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    color: themeProvider.isDark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.05),
+                    color: themeProvider.isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -333,7 +333,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    color: themeProvider.isDark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.05),
+                    color: themeProvider.isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

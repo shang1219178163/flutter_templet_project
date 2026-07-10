@@ -27,7 +27,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black.withOpacity(0.1),
+      // backgroundColor: Colors.black.withValues(alpha: 0.1),
       appBar: AppBar(
         title: Text("$widget"),
         actions: [
@@ -51,10 +51,10 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
               Container(
                 width: 300,
                 height: 200,
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 child: CustomPaint(
                   painter: NTicketDividerPainter(
-                    // borderColor: Colors.black.withOpacity(0.5),
+                    // borderColor: Colors.black.withValues(alpha: 0.5),
                     borderColor: Colors.red,
                     borderStrokeWidth: 1,
                     bgColor: Colors.transparent,
@@ -87,7 +87,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
                 width: constraints.maxWidth,
                 child: CustomPaint(
                   painter: NTicketDividerPainter(
-                    // borderColor: Colors.black.withOpacity(0.5),
+                    // borderColor: Colors.black.withValues(alpha: 0.5),
                     borderColor: Colors.blue,
                     borderStrokeWidth: 1,
                     bgColor: Colors.red,
@@ -96,7 +96,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
                   child: StatefulBuilder(builder: (context, setState) {
                     return Container(
                       padding: const EdgeInsets.all(16),
-                      // color: Colors.green.withOpacity(0.7),
+                      // color: Colors.green.withValues(alpha: 0.7),
                       decoration: BoxDecoration(
                         // color: Colors.white,
                         // border: Border.all(color: Colors.blue),
@@ -105,7 +105,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
                           BoxShadow(
                             offset: Offset(0, 8.w),
                             blurRadius: 8.w,
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withValues(alpha: 0.3),
                           )
                         ],
                       ),
@@ -301,9 +301,9 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               border: Border.all(
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
               ),
             ),
             child: Padding(

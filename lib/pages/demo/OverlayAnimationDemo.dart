@@ -106,7 +106,7 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                             NOverlayDialog.sheet(
                               context,
                               child: NPopupAdaptiveContainer(
-                                backgroundColor: Colors.transparent.withOpacity(0),
+                                backgroundColor: Colors.transparent.withValues(alpha: 0),
                                 child: buildContent(
                                   // height: 400,
                                   margin: EdgeInsets.symmetric(horizontal: 30),

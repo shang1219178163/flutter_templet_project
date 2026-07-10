@@ -60,7 +60,7 @@ class _ListViewSeparatedDemoState extends State<ListViewSeparatedDemo> {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.1),
+        color: Colors.red.withValues(alpha: 0.1),
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(0)),
       ),
@@ -72,7 +72,7 @@ class _ListViewSeparatedDemoState extends State<ListViewSeparatedDemo> {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.1),
+        color: Colors.red.withValues(alpha: 0.1),
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(0)),
       ),

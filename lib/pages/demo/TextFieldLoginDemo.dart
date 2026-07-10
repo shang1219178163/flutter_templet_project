@@ -111,7 +111,7 @@ class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     minimumSize: Size(50, 18),
                     shape: const StadiumBorder(),
-                    disabledBackgroundColor: primaryColor.withOpacity(0.5),
+                    disabledBackgroundColor: primaryColor.withValues(alpha: 0.5),
                     disabledForegroundColor: Colors.white,
                   ),
                   onPressed: !value ? null : () {},
@@ -365,7 +365,7 @@ class _LoginInputState extends State<LoginInput> {
               ),
               child: Icon(
                 Icons.cancel,
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 size: 16,
               ),
             ),

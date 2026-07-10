@@ -51,7 +51,7 @@ class CircleSectorProgressIndicator extends StatelessWidget {
                 child: Container(
                   width: width,
                   height: height,
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: 0.6),
                 ),
               ),
               Positioned(

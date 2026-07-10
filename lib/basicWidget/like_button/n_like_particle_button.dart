@@ -156,7 +156,7 @@ class _ParticlePainter extends CustomPainter {
       if (p.life <= 0) {
         continue;
       }
-      paint.color = p.color.withOpacity(p.life);
+      paint.color = p.color.withValues(alpha: p.life);
       canvas.drawCircle(p.position, p.radius, paint);
     }
   }

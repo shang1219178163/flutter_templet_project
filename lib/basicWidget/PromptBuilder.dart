@@ -67,7 +67,7 @@ class PromptBuilder {
             Positioned.fill(
                 child: ColorFiltered(
               colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.7), BlendMode.srcOut),
+                  Colors.black.withValues(alpha: 0.7), BlendMode.srcOut),
               child: Stack(
                 children: [
                   // 透明色填充背景，作为蒙版

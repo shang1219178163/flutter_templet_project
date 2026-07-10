@@ -271,7 +271,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: color.withOpacity(0.9),
+                    color: color.withValues(alpha: 0.9),
                     spreadRadius: -10,
                     blurRadius: 20,
                     offset: const Offset(0, 20), // changes position of shadow
@@ -415,7 +415,7 @@ class _CandidateCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: CupertinoColors.systemGrey.withOpacity(0.2),
+            color: CupertinoColors.systemGrey.withValues(alpha: 0.2),
             spreadRadius: 3,
             blurRadius: 7,
             offset: const Offset(0, 3),

@@ -147,7 +147,7 @@ class NChoiceBoxState<T> extends State<NChoiceBox<T>> {
         // labelPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 0),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         selected: e.isSelected == true,
-        selectedColor: widget.itemSelectedColor ?? primary.withOpacity(0.1),
+        selectedColor: widget.itemSelectedColor ?? primary.withValues(alpha: 0.1),
         backgroundColor:
             e.isSelected == true ? widget.itemColor : Color(0xffF3F3F3),
         shape: RoundedRectangleBorder(

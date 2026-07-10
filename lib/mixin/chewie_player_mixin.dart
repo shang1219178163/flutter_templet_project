@@ -38,7 +38,7 @@ mixin ChewiePlayerMixin on ChangeNotifier {
         showControls: true,
         autoInitialize: true,
         customControls: CupertinoControls(
-          backgroundColor: Colors.black.withOpacity(0.8),
+          backgroundColor: Colors.black.withValues(alpha: 0.8),
           iconColor: Colors.white,
         ),
       );

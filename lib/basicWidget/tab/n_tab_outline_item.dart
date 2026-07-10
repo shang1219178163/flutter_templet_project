@@ -39,7 +39,7 @@ class NTabOutlineItem extends StatelessWidget {
     final unselectedLabelColor = unselectedFontColor ?? tabBarTheme.unselectedLabelColor ?? Colors.black54;
 
     final borderColor = isSelected ? labelColor : Colors.transparent;
-    final bgColor = isSelected ? borderColor.withOpacity(0.05) : Colors.black.withOpacity(0.05);
+    final bgColor = isSelected ? borderColor.withValues(alpha: 0.05) : Colors.black.withValues(alpha: 0.05);
 
     final textStyle = isSelected
         ? TextStyle(

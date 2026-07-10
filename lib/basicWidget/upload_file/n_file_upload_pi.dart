@@ -70,7 +70,7 @@ class NFileUploadPI extends NFileUploadHandle {
 
                 final desc = showPercent ? percent.toStringAsPercent(2) : "上传中";
 
-                final indicatorColor = percent < 1 ? AppColor.primary.withOpacity(0.5) : Colors.transparent;
+                final indicatorColor = percent < 1 ? AppColor.primary.withValues(alpha: 0.5) : Colors.transparent;
 
                 // return Padding(
                 //   padding: const EdgeInsets.only(bottom: 8.0),
@@ -82,7 +82,7 @@ class NFileUploadPI extends NFileUploadHandle {
                 //         child: LinearProgressIndicator(
                 //           value: percentVN.value,
                 //           minHeight: 20,
-                //           color: primary.withOpacity(0.35),
+                //           color: primary.withValues(alpha: 0.35),
                 //           backgroundColor: Colors.transparent,
                 //         ),
                 //       ),
@@ -176,7 +176,7 @@ class NFileUploadPI extends NFileUploadHandle {
         width: double.infinity,
         height: 36,
         decoration: BoxDecoration(
-          color: AppColor.primary.withOpacity(0.1),
+          color: AppColor.primary.withValues(alpha: 0.1),
           border: Border.all(color: AppColor.primary),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),

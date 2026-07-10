@@ -93,9 +93,9 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
     final isDark = theme.brightness == Brightness.dark;
     final inverseColor = isDark ? Colors.white : Colors.black;
 
-    final bgColor = inverseColor.withOpacity(0.1);
+    final bgColor = inverseColor.withValues(alpha: 0.1);
     final titleColor = inverseColor;
-    final subtitleColor = titleColor.withOpacity(0.7);
+    final subtitleColor = titleColor.withValues(alpha: 0.7);
 
     final actionColor = Color(0xFF999999);
 
@@ -292,7 +292,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
           alignment: Alignment.center,
           duration: Duration(milliseconds: 150),
           decoration: BoxDecoration(
-            // color: isDragging ? Colors.green.withOpacity(0.6) : Colors.green,
+            // color: isDragging ? Colors.green.withValues(alpha: 0.6) : Colors.green,
             color: bgColor,
             borderRadius: BorderRadius.circular(2),
           ),

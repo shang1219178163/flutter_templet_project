@@ -113,7 +113,7 @@ class CloudPainter extends CustomPainter {
     // 绘制云
     for (final cloud in clouds) {
       final cloudPaint = Paint()
-        ..color = Colors.white.withOpacity(cloud.opacity)
+        ..color = Colors.white.withValues(alpha: cloud.opacity)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15);
 
       final centerX = cloud.x + cloud.width / 2;
@@ -163,7 +163,7 @@ class CloudPainter extends CustomPainter {
 
       // 绘制云朵投下的柔和阴影
       final shadowPaint = Paint()
-        ..color = Colors.black.withOpacity(0.03)
+        ..color = Colors.black.withValues(alpha: 0.03)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 20);
 
       canvas.drawOval(
@@ -175,7 +175,7 @@ class CloudPainter extends CustomPainter {
 
     // 绘制远处的更淡的云层以增加深度感
     final distantCloudPaint = Paint()
-      ..color = Colors.white.withOpacity(0.2)
+      ..color = Colors.white.withValues(alpha: 0.2)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 25);
 
     // 绘制几个远处的大型云团
@@ -194,7 +194,7 @@ class CloudPainter extends CustomPainter {
     // 绘制一些阳光穿透云层的效果
     if (clouds.isNotEmpty) {
       final sunlightPaint = Paint()
-        ..color = Colors.yellow.withOpacity(0.1)
+        ..color = Colors.yellow.withValues(alpha: 0.1)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 30);
 
       canvas.drawCircle(

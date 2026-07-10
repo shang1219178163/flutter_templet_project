@@ -135,7 +135,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           // border: Border.all(color: color),
           borderRadius: BorderRadius.all(Radius.circular(8.w)),
         ),

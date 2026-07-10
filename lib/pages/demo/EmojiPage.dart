@@ -239,7 +239,7 @@ class _EmojiPageState extends State<EmojiPage> {
         BoxShadow(
           offset: Offset(0, 4),
           blurRadius: 4,
-          color: Color(0xff999999).withOpacity(0.2),
+          color: Color(0xff999999).withValues(alpha: 0.2),
           // color: Colors.red,
         ),
       ]),

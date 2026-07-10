@@ -92,7 +92,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
         boxShadow: [
           BoxShadow(
               offset: Offset(10, 10),
-              color: Color(0xFF4D70A6).withOpacity(0.2),
+              color: Color(0xFF4D70A6).withValues(alpha: 0.2),
               blurRadius: 16),
           BoxShadow(
               offset: Offset(-10, -10),
@@ -151,7 +151,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
                 /*boxShadow: [
                         BoxShadow(
                             offset: Offset(5, 5),
-                            color: Color(0xFF4D70A6).withOpacity(0.2),
+                            color: Color(0xFF4D70A6).withValues(alpha: 0.2),
                             blurRadius: 16),
                         BoxShadow(
                             offset: Offset(-10, -10),

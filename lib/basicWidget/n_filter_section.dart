@@ -144,7 +144,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
         trailing: buildExpandMenuTrailing(
           isExpand: isExpand,
           color: color,
-          borderColor: color.withOpacity(0.2),
+          borderColor: color.withValues(alpha: 0.2),
           hide: disable,
         ),
         collapsedTextColor: AppColor.fontColor,

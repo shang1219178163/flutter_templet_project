@@ -142,7 +142,7 @@ class _NImagePreviewState extends State<NImagePreview> {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.w),
               decoration: ShapeDecoration(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 shape: StadiumBorder(),
               ),
               child: NText(desc, fontSize: 16, color: textColor),
@@ -220,7 +220,7 @@ class _NImagePreviewState extends State<NImagePreview> {
       padding: padding,
       child: CircleAvatar(
         radius: radius,
-        backgroundColor: Colors.black.withOpacity(0.3),
+        backgroundColor: Colors.black.withValues(alpha: 0.3),
         child: IconButton(
           padding: EdgeInsets.zero,
           constraints: BoxConstraints(),
@@ -245,7 +245,7 @@ class _NImagePreviewState extends State<NImagePreview> {
           vertical: 6,
         ),
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.4),
+          color: Colors.black.withValues(alpha: 0.4),
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         child: child,
@@ -302,14 +302,14 @@ class _NImagePreviewState extends State<NImagePreview> {
                   height: 24,
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: ShapeDecoration(
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withValues(alpha: 0.3),
                     shape: StadiumBorder(),
                   ),
                   child: NImageIndicator(
                     itemCount: widget.urls.length,
                     controller: pageController,
-                    indicatorColor: Colors.white.withOpacity(0.9),
-                    indicatorOtherColor: Colors.white.withOpacity(0.3),
+                    indicatorColor: Colors.white.withValues(alpha: 0.9),
+                    indicatorOtherColor: Colors.white.withValues(alpha: 0.3),
                   ),
                 );
               }

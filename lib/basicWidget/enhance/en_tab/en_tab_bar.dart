@@ -901,7 +901,7 @@ class _EnTabBarState extends State<EnTabBar> {
     // TODO(xu-baolin): Remove automatic adjustment to white color indicator
     // with a better long-term solution.
     // https://github.com/flutter/flutter/pull/68171#pullrequestreview-517753917
-    if (widget.automaticIndicatorColorAdjustment && color.value == Material.of(context).color?.value) {
+    if (widget.automaticIndicatorColorAdjustment && color == Material.of(context).color) {
       color = Colors.white;
     }
 

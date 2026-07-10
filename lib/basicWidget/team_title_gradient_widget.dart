@@ -47,8 +47,8 @@ class TeamTitleGradientWidget extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              color.withOpacity(0.2),
-              color.withOpacity(0),
+              color.withValues(alpha: 0.2),
+              color.withValues(alpha: 0),
             ],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -67,8 +67,8 @@ class TeamTitleGradientWidget extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            color.withOpacity(0.2),
-            color.withOpacity(0),
+            color.withValues(alpha: 0.2),
+            color.withValues(alpha: 0),
           ],
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,

@@ -104,7 +104,7 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
             final header = widget.headerBuilder?.call(context, shrinkOffset, overlapsContent) ??
                 Container(
                   alignment: Alignment.centerLeft,
-                  color: Colors.black.withOpacity(0.15),
+                  color: Colors.black.withValues(alpha: 0.15),
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     widget.model.name,

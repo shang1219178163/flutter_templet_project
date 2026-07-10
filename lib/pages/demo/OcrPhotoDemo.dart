@@ -204,7 +204,7 @@ class _OCRNetImageCardState extends State<OCRNetImageCard> with AutomaticKeepAli
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: CupertinoColors.systemGrey.withOpacity(0.2),
+            color: CupertinoColors.systemGrey.withValues(alpha: 0.2),
             spreadRadius: 3,
             blurRadius: 7,
             offset: const Offset(0, 3),

@@ -225,7 +225,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
     return NFilterDropBox(
       controller: filterController,
       sections: sections,
-      barrierColor: AppColor.bgColor000000.withOpacity(0.52),
+      barrierColor: AppColor.bgColor000000.withValues(alpha: 0.52),
       onVisible: (visible) {
         widget.onClose?.call();
       },
@@ -322,7 +322,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
 
     final textColor = isSelected ? primaryColor : const Color(0xff737373);
     final borderColor = isSelected ? primaryColor : Colors.transparent;
-    final bgColor = textColor.withOpacity(0.1);
+    final bgColor = textColor.withValues(alpha: 0.1);
 
     final title = titleCb(e);
 

@@ -153,8 +153,8 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
 
     Widget buildBtn() {
       final lightGradient = LinearGradient(colors: [
-        Color(0xFFE91025).withOpacity(0.1),
-        Color(0xFFE91025).withOpacity(0.1),
+        Color(0xFFE91025).withValues(alpha: 0.1),
+        Color(0xFFE91025).withValues(alpha: 0.1),
       ]);
 
       final gradient = LinearGradient(colors: [
@@ -172,7 +172,7 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
         return ElevatedBtn(
           radius: 8,
           gradient: lightGradient,
-          // disabledBgColor: Color(0xFFE91025).withOpacity(0.1),
+          // disabledBgColor: Color(0xFFE91025).withValues(alpha: 0.1),
           // disabledFgColor: Colors.white,
           title: btnTitle,
           titleColor: Color(0xFFE91025),
@@ -190,7 +190,7 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
               child = ElevatedBtn(
                 radius: 8,
                 gradient: lightGradient,
-                // disabledBgColor: Color(0xFFE91025).withOpacity(0.1),
+                // disabledBgColor: Color(0xFFE91025).withValues(alpha: 0.1),
                 // disabledFgColor: Colors.white,
                 title: "熊猫币不足 去赚熊猫币",
                 titleColor: Color(0xFFE91025),
@@ -232,7 +232,7 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
                 Color(0xFFE91025),
                 Color(0xFFE91025),
               ]),
-              disabledBgColor: Color(0xFFE91025).withOpacity(0.1),
+              disabledBgColor: Color(0xFFE91025).withValues(alpha: 0.1),
               disabledFgColor: Colors.white,
               title: widget.categoryEnum.ownedDesc,
               titleColor: Colors.white,
@@ -260,7 +260,7 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
             child = ElevatedBtn(
               radius: 8,
               gradient: LinearGradient(colors: [Color(0xFFE91025), Color(0xFFE91025)]),
-              disabledBgColor: Color(0xFFE91025).withOpacity(0.1),
+              disabledBgColor: Color(0xFFE91025).withValues(alpha: 0.1),
               disabledFgColor: Color(0xFFE91025),
               title: "已装扮",
               // titleColor: Color(0xFFE91025),
@@ -295,7 +295,7 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
                 gradient: LinearGradient(
                   begin: const Alignment(0.00, -1.00),
                   end: const Alignment(0, 1),
-                  colors: [const Color(0xFFFDE7E9), const Color(0xFFFDE7E9).withOpacity(0.0)],
+                  colors: [const Color(0xFFFDE7E9), const Color(0xFFFDE7E9).withValues(alpha: 0.0)],
                 ),
               ),
               child: Container(

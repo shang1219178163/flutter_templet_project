@@ -256,7 +256,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
         return PopScope(
           canPop: _canPopNotifier.value,
           child: child!,
-          onPopInvoked: (didPop) {
+          onPopInvokedWithResult: (didPop, result) {
             if (didPop) {
               return;
             }

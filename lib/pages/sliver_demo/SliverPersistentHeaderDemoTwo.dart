@@ -154,7 +154,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
               ),
               // 带有渐变的遮罩层
               Container(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
               ),
               if (progress >= 0.5)
                 AnimatedOpacity(

@@ -93,7 +93,7 @@ class NButtonCancel extends StatelessWidget {
         padding: padding,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: primary.withOpacity(0.1),
+          color: primary.withValues(alpha: 0.1),
           borderRadius: borderRadius,
         ),
         child: child ??

@@ -212,7 +212,7 @@ class NOverlayDialog {
     OverlayEntry? above,
   }) {
     final childDefault = Material(
-      color: Colors.black.withOpacity(0.7),
+      color: Colors.black.withValues(alpha: 0.7),
       borderRadius: BorderRadius.all(Radius.circular(8)),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -252,7 +252,7 @@ class NOverlayDialog {
     Duration? autoDismissDuration,
   }) {
     final childDefault = Material(
-      color: Colors.black.withOpacity(0.7),
+      color: Colors.black.withValues(alpha: 0.7),
       borderRadius: BorderRadius.all(Radius.circular(8)),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),

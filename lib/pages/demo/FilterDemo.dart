@@ -93,7 +93,7 @@ class _FilterDemoState extends State<FilterDemo> {
   //           child: BackdropFilter.grouped(
   //             filter: ui.ImageFilter.blur(sigmaX: 40, sigmaY: 40),
   //             child: Container(
-  //               color: Colors.black.withOpacity(0.2),
+  //               color: Colors.black.withValues(alpha: 0.2),
   //               height: 200,
   //               child: const Text('Blur item'),
   //             ),
@@ -131,7 +131,7 @@ class _FilterDemoState extends State<FilterDemo> {
           alignment: Alignment.center,
           width: 200.0,
           height: 120.0,
-          color: Colors.lightBlue.withOpacity(0.3),
+          color: Colors.lightBlue.withValues(alpha: 0.3),
           child: const Text(
             'BackdropFilter',
             style: TextStyle(fontSize: 24),

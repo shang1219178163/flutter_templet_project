@@ -244,7 +244,7 @@ class _FlexDemoState extends State<FlexDemo> {
       height: 44,
       alignment: Alignment.center,
       padding: const EdgeInsets.only(left: 17, right: 7),
-      color: Color(0xffEDEDED).withOpacity(0.5),
+      color: Color(0xffEDEDED).withValues(alpha: 0.5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

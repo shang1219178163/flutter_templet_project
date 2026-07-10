@@ -178,7 +178,7 @@ class MediaRecordCard extends StatelessWidget {
       height: 80,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: const Color(0xff00B578).withOpacity(0.1),
+        color: const Color(0xff00B578).withValues(alpha: 0.1),
         borderRadius: const BorderRadius.all(Radius.circular(4)),
       ),
       child: Image(

@@ -40,7 +40,7 @@ extension StackExt on Stack {
                 tileMode: tileMode,
               ),
               child: Container(
-                color: Colors.black.withOpacity(0),
+                color: Colors.black.withValues(alpha: 0),
               ),
             ),
           ),

@@ -369,7 +369,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withValues(alpha: 0.5),
             border: Border.all(color: Colors.blue),
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
@@ -411,7 +411,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withValues(alpha: 0.1),
           child: Center(
             child: Image(
               image: "icon_skipping.gif".toAssetImage(),

@@ -151,7 +151,7 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
         decoration: BoxDecoration(
           color: widget.barrierColor ??
               Theme.of(context).bottomSheetTheme.modalBarrierColor ??
-              Colors.black.withOpacity(0.2),
+              Colors.black.withValues(alpha: 0.2),
         ),
         child: InkWell(
           onTap: () {

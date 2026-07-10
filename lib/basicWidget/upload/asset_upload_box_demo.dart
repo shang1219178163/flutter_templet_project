@@ -188,7 +188,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
               width: itemWidth - 10,
               height: itemWidth - 10,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 // border: Border.all(width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),

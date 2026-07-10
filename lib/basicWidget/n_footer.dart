@@ -64,7 +64,7 @@ class NFooter extends StatelessWidget {
           MaterialButton(
             height: btnHeight,
             color: effectiveBtnColor,
-            disabledColor: effectiveBtnColor.withOpacity(0.5),
+            disabledColor: effectiveBtnColor.withValues(alpha: 0.5),
             elevation: btnElevation,
             onPressed: onPressed ??
                 () {

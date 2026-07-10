@@ -351,7 +351,7 @@ class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
               spacing: 2.0,
               customSeparatorBuilder: (context, local, global) {
                 final opacity = ((global.position - local.position).abs() - 0.5).clamp(0.0, 1.0);
-                return VerticalDivider(indent: 10.0, endIndent: 10.0, color: Colors.white38.withOpacity(opacity));
+                return VerticalDivider(indent: 10.0, endIndent: 10.0, color: Colors.white38.withValues(alpha: opacity));
               },
               customIconBuilder: (context, local, global) {
                 final text = const ['not', 'only', 'icons'][local.index];
@@ -644,7 +644,7 @@ class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
               styleBuilder: (i) {
                 final color = colorBuilder(i);
                 return ToggleStyle(
-                  backgroundColor: color.withOpacity(0.3),
+                  backgroundColor: color.withValues(alpha: 0.3),
                   indicatorColor: color,
                 );
               },
@@ -909,7 +909,7 @@ class _CrazySwitchState extends State<CrazySwitch> {
             borderRadius: BorderRadius.circular(50.0),
             boxShadow: [
               BoxShadow(
-                color: color.withOpacity(0.7),
+                color: color.withValues(alpha: 0.7),
                 blurRadius: 12.0,
                 offset: const Offset(0.0, 8.0),
               ),
@@ -966,7 +966,7 @@ class _LoadSwitchState extends State<LoadSwitch> {
               padding: const EdgeInsets.all(borderWidth / 2),
               child: CircularProgressIndicator(
                 strokeWidth: borderWidth,
-                color: Colors.blue.withOpacity(global.loadingAnimationValue),
+                color: Colors.blue.withValues(alpha: global.loadingAnimationValue),
               ),
             ),
           ],

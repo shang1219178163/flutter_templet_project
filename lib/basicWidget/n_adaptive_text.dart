@@ -31,7 +31,7 @@ class NAdaptiveText extends StatelessWidget {
         padding: padding,
         decoration: decoration ??
             BoxDecoration(
-              color: Colors.black.withOpacity(.65),
+              color: Colors.black.withValues(alpha: .65),
               borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
         child: child ??

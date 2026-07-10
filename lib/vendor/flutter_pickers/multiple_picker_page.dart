@@ -269,7 +269,7 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
       decoration: BoxDecoration(
         border: Border.symmetric(
             horizontal:
-                BorderSide(color: Colors.cyan.withOpacity(0.3), width: 0.7)),
+                BorderSide(color: Colors.cyan.withValues(alpha: 0.3), width: 0.7)),
       ),
     );
 

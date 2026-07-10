@@ -349,7 +349,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                 filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
                 child: Container(
                   height: 220,
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                 ),
               ),
             ),
@@ -404,7 +404,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
@@ -590,7 +590,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
               Container(
                 width: 0.5,
                 height: 26,
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
                 margin: const EdgeInsets.symmetric(horizontal: 16),
               ),
               Column(
@@ -636,7 +636,7 @@ class LoadingView extends StatelessWidget {
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: isDark ? Colors.white.withOpacity(0.06) : Colors.white,
+            color: isDark ? Colors.white.withValues(alpha: 0.06) : Colors.white,
             borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
           child: CupertinoActivityIndicator(

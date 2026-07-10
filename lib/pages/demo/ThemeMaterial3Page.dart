@@ -181,7 +181,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
           backgroundColor: WidgetStateProperty.all(seedColor),
           backgroundBuilder: backgroundBuilder,
           foregroundColor: WidgetStateProperty.all(Colors.white),
-          shadowColor: WidgetStateProperty.all(seedColor.withOpacity(0.1)),
+          shadowColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.1)),
           elevation: WidgetStateProperty.all(2),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -199,7 +199,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),
-          overlayColor: WidgetStateProperty.all(seedColor.withOpacity(0.05)),
+          overlayColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.05)),
         ),
       ),
 
@@ -208,7 +208,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
         style: ButtonStyle(
           padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 8)),
           foregroundColor: WidgetStateProperty.all(seedColor),
-          overlayColor: WidgetStateProperty.all(seedColor.withOpacity(0.08)),
+          overlayColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.08)),
           textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
         ),
       ),
@@ -220,7 +220,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
           padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 8)),
           iconSize: WidgetStateProperty.all(24),
           foregroundColor: WidgetStateProperty.all(seedColor),
-          overlayColor: WidgetStateProperty.all(seedColor.withOpacity(0.1)),
+          overlayColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.1)),
         ),
       ),
     );
@@ -280,7 +280,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
           backgroundColor: WidgetStateProperty.all(seedColor),
           backgroundBuilder: backgroundBuilder,
           foregroundColor: WidgetStateProperty.all(Colors.white),
-          shadowColor: WidgetStateProperty.all(seedColor.withOpacity(0.1)),
+          shadowColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.1)),
           elevation: WidgetStateProperty.all(2),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -298,7 +298,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),
-          overlayColor: WidgetStateProperty.all(seedColor.withOpacity(0.05)),
+          overlayColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.05)),
         ),
       ),
 
@@ -307,7 +307,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
         style: ButtonStyle(
           padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 8)),
           foregroundColor: WidgetStateProperty.all(seedColor),
-          overlayColor: WidgetStateProperty.all(seedColor.withOpacity(0.08)),
+          overlayColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.08)),
           textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
         ),
       ),
@@ -325,7 +325,7 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
             }
             return seedColor; // 默认状态
           }),
-          overlayColor: WidgetStateProperty.all(seedColor.withOpacity(0.1)),
+          overlayColor: WidgetStateProperty.all(seedColor.withValues(alpha: 0.1)),
         ),
       ),
     );

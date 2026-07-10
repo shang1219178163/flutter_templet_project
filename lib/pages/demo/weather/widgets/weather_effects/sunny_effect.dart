@@ -62,7 +62,7 @@ class SunPainter extends CustomPainter {
     for (var i = 0; i < 3; i++) {
       final glowRadius = radius + (i * radius * 0.5);
       final paint = Paint()
-        ..color = Colors.yellow.withOpacity(0.3 - (i * 0.1))
+        ..color = Colors.yellow.withValues(alpha: 0.3 - (i * 0.1))
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(Offset(centerX, centerY), glowRadius, paint);
@@ -77,7 +77,7 @@ class SunPainter extends CustomPainter {
 
     // 绘制阳光射线
     final rayPaint = Paint()
-      ..color = Colors.yellow.withOpacity(0.7)
+      ..color = Colors.yellow.withValues(alpha: 0.7)
       ..strokeWidth = 3.0
       ..style = PaintingStyle.stroke;
 
@@ -108,8 +108,8 @@ class SunPainter extends CustomPainter {
     final flarePaint = Paint()
       ..shader = RadialGradient(
         colors: [
-          Colors.white.withOpacity(lensFlareOpacity),
-          Colors.white.withOpacity(0),
+          Colors.white.withValues(alpha: lensFlareOpacity),
+          Colors.white.withValues(alpha: 0),
         ],
       ).createShader(Rect.fromCircle(
         center: Offset(centerX, centerY),

@@ -87,7 +87,7 @@ class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
               padding: segmentPadding,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: iconColor?.withOpacity(0.08),
+                color: iconColor?.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.all(Radius.circular(segmentRadius)),
               ),
               child: Row(

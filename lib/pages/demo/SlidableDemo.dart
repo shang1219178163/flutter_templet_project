@@ -220,7 +220,7 @@
 //               return IconSlideAction(
 //                 caption: 'Archive',
 //                 color: renderingMode == SlidableRenderingMode.slide
-//                     ? Colors.blue.withOpacity(animation!.value)
+//                     ? Colors.blue.withValues(alpha: animation!.value)
 //                     : (renderingMode == SlidableRenderingMode.dismiss
 //                     ? Colors.blue
 //                     : Colors.green),
@@ -256,7 +256,7 @@
 //               return IconSlideAction(
 //                 caption: 'Share',
 //                 color: renderingMode == SlidableRenderingMode.slide
-//                     ? Colors.indigo.withOpacity(animation!.value)
+//                     ? Colors.indigo.withValues(alpha: animation!.value)
 //                     : Colors.indigo,
 //                 icon: Icons.share,
 //                 onTap: () => _showSnackBar(context, 'Share'),
@@ -270,7 +270,7 @@
 //               return IconSlideAction(
 //                 caption: 'More',
 //                 color: renderingMode == SlidableRenderingMode.slide
-//                     ? Colors.grey.shade200.withOpacity(animation!.value)
+//                     ? Colors.grey.shade200.withValues(alpha: animation!.value)
 //                     : Colors.grey.shade200,
 //                 icon: Icons.more_horiz,
 //                 onTap: () => _showSnackBar(context, 'More'),
@@ -280,7 +280,7 @@
 //               return IconSlideAction(
 //                 caption: 'Delete',
 //                 color: renderingMode == SlidableRenderingMode.slide
-//                     ? Colors.red.withOpacity(animation!.value)
+//                     ? Colors.red.withValues(alpha: animation!.value)
 //                     : Colors.red,
 //                 icon: Icons.delete,
 //                 onTap: () => _showSnackBar(context, 'Delete'),

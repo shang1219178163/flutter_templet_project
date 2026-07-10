@@ -91,7 +91,7 @@ class NButtonConfirm extends StatelessWidget {
     final gradientNew = gradient ??
         LinearGradient(
           colors: [
-            primary.withOpacity(0.8),
+            primary.withValues(alpha: 0.8),
             primary,
             // Color(0xff359EEB),
             // Color(0xff007DBF),
@@ -103,7 +103,7 @@ class NButtonConfirm extends StatelessWidget {
     final boxShadowNew = boxShadow ??
         [
           BoxShadow(
-            color: primary.withOpacity(0.32),
+            color: primary.withValues(alpha: 0.32),
             offset: const Offset(0, 5),
             blurRadius: 10,
           ),

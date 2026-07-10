@@ -39,13 +39,13 @@ class NPopupAdaptiveContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final backgroundColorNew = backgroundColor ?? (isDark ? const Color(0xff181829) : Colors.white);
-    final barrierColor = isDark ? Colors.black.withOpacity(0.7) : Colors.black.withOpacity(0.1);
+    final barrierColor = isDark ? Colors.black.withValues(alpha: 0.7) : Colors.black.withValues(alpha: 0.1);
     // final borderColor = isDark ? Colors.black : Colors.white;
 
     final titleColor = AppColor.fontColor;
     final subtitleColor = AppColor.fontColor333333;
 
-    final topControlColorDefault = (isDark ? const Color(0xFFEEEEEE) : const Color(0xFFFFFFFF)).withOpacity(0.3);
+    final topControlColorDefault = (isDark ? const Color(0xFFEEEEEE) : const Color(0xFFFFFFFF)).withValues(alpha: 0.3);
 
     var content = child;
     if (isScrollControlled) {

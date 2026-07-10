@@ -59,7 +59,7 @@ class _NSlidableTabbarState extends State<NSlidableTabbar> with TickerProviderSt
         indicatorSize: TabBarIndicatorSize.tab,
         labelPadding: const EdgeInsets.symmetric(horizontal: 0),
         indicator: BoxDecoration(
-          color: widget.color.withOpacity(0.1),
+          color: widget.color.withValues(alpha: 0.1),
           border: Border.all(color: widget.color, width: 0.5),
           borderRadius: BorderRadius.all(Radius.circular(radius)),
         ),

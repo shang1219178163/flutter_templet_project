@@ -132,7 +132,7 @@ mixin OverlayMixin<T extends StatefulWidget> on State<T> {
       isReplace: isReplace,
       maintainState: maintainState,
       child: Material(
-        color: Colors.black.withOpacity(0.1),
+        color: Colors.black.withValues(alpha: 0.1),
         child: InkWell(
           onTap: !barrierDismissible ? null : onHide,
           child: NSlideTransitionBuilder(

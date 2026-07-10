@@ -166,7 +166,7 @@ class _CompareToPageState extends State<CompareToPage> {
     return Container(
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        // color: Colors.black.withOpacity(0.15),
+        // color: Colors.black.withValues(alpha: 0.15),
         // border: Border.all(color: Colors.blue),
         image: DecorationImage(
           image: AssetImage('assets/images/bg_football_pitch.png'),

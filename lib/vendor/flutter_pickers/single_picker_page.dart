@@ -195,7 +195,7 @@ class _SinglePickerPageState extends State<SinglePickerPage> {
 
     /// item 覆盖样式
     Widget itemOverlay = CupertinoPickerDefaultSelectionOverlay(
-        background: Colors.indigoAccent.withOpacity(0.2));
+        background: Colors.indigoAccent.withValues(alpha: 0.2));
 
     var pickerStyle = PickerStyle(
       menu: _headMenuView,

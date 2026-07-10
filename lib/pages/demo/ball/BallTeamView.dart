@@ -123,8 +123,8 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
                               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                               decoration: isSelected
                                   ? BoxDecoration(
-                                      color: AppColor.cancelColor.withOpacity(0.1),
-                                      border: Border.all(color: AppColor.cancelColor.withOpacity(0.5)),
+                                      color: AppColor.cancelColor.withValues(alpha: 0.1),
+                                      border: Border.all(color: AppColor.cancelColor.withValues(alpha: 0.5)),
                                       borderRadius: BorderRadius.circular(6))
                                   : BoxDecoration(
                                       border: Border.all(color: themeProvider.borderColor),

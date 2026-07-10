@@ -98,7 +98,7 @@ class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
                   size: Size(200, 200), // 指定绘制区域大小
                   painter: ArcPainter(
                     startPoint: Offset(100, 100),
-                    backgroundColor: Colors.green.withOpacity(0.3),
+                    backgroundColor: Colors.green.withValues(alpha: 0.3),
                   ),
                 ),
               ),

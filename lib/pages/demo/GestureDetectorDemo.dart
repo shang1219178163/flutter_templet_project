@@ -168,7 +168,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
           return Material(
             type: MaterialType.transparency,
             child: Container(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withValues(alpha: 0.5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,

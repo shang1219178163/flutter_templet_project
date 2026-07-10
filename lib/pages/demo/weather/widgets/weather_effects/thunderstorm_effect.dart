@@ -201,8 +201,8 @@ class ThunderstormPainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          Colors.blueGrey.shade900.withOpacity(ambientDarkness),
-          Colors.blueGrey.shade700.withOpacity(ambientDarkness),
+          Colors.blueGrey.shade900.withValues(alpha: ambientDarkness),
+          Colors.blueGrey.shade700.withValues(alpha: ambientDarkness),
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
 
@@ -211,7 +211,7 @@ class ThunderstormPainter extends CustomPainter {
     // 绘制云层
     for (final cloud in clouds) {
       final cloudPaint = Paint()
-        ..color = Colors.grey.shade800.withOpacity(cloud.opacity)
+        ..color = Colors.grey.shade800.withValues(alpha: cloud.opacity)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15);
 
       final centerX = cloud.x + cloud.width / 2;
@@ -255,7 +255,7 @@ class ThunderstormPainter extends CustomPainter {
 
     // 绘制雨滴
     final rainPaint = Paint()
-      ..color = Colors.white.withOpacity(0.6)
+      ..color = Colors.white.withValues(alpha: 0.6)
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round;
 
@@ -265,7 +265,7 @@ class ThunderstormPainter extends CustomPainter {
         Offset(drop.x, drop.y),
         Offset(drop.x, drop.y + drop.length),
         Paint()
-          ..color = Colors.white.withOpacity(drop.opacity)
+          ..color = Colors.white.withValues(alpha: drop.opacity)
           ..strokeWidth = 1.5
           ..strokeCap = StrokeCap.round,
       );
@@ -275,7 +275,7 @@ class ThunderstormPainter extends CustomPainter {
     if (showLightning) {
       // 全屏闪光
       final flashPaint = Paint()
-        ..color = Colors.white.withOpacity(0.1)
+        ..color = Colors.white.withValues(alpha: 0.1)
         ..style = PaintingStyle.fill;
 
       canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), flashPaint);
@@ -284,7 +284,7 @@ class ThunderstormPainter extends CustomPainter {
       for (final lightning in lightnings) {
         if (lightning.opacity > 0) {
           final lightningPaint = Paint()
-            ..color = Colors.white.withOpacity(lightning.opacity)
+            ..color = Colors.white.withValues(alpha: lightning.opacity)
             ..strokeWidth = lightning.width
             ..strokeCap = StrokeCap.round
             ..style = PaintingStyle.stroke
@@ -303,7 +303,7 @@ class ThunderstormPainter extends CustomPainter {
 
             // 绘制闪电光晕效果
             final glowPaint = Paint()
-              ..color = Colors.white.withOpacity(lightning.opacity * 0.3)
+              ..color = Colors.white.withValues(alpha: lightning.opacity * 0.3)
               ..strokeWidth = lightning.width * 3
               ..strokeCap = StrokeCap.round
               ..style = PaintingStyle.stroke
@@ -349,8 +349,8 @@ class ThunderstormPainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          Colors.white.withOpacity(0.1),
-          Colors.white.withOpacity(0.2),
+          Colors.white.withValues(alpha: 0.1),
+          Colors.white.withValues(alpha: 0.2),
         ],
       ).createShader(reflectionRect);
 
@@ -366,7 +366,7 @@ class ThunderstormPainter extends CustomPainter {
           Offset(drop.x, size.height * 0.85),
           splashRadius,
           Paint()
-            ..color = Colors.white.withOpacity(splashOpacity)
+            ..color = Colors.white.withValues(alpha: splashOpacity)
             ..style = PaintingStyle.stroke
             ..strokeWidth = 0.8,
         );

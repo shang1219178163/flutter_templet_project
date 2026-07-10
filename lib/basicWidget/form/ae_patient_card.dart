@@ -103,7 +103,7 @@ class AePatientCard extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(0)),
                     boxShadow: [
                       BoxShadow(
-                        color: Color(0xff5A5A5A).withOpacity(0.08),
+                        color: Color(0xff5A5A5A).withValues(alpha: 0.08),
                         blurRadius: 12,
                         offset: Offset(6, 12),
                       )
@@ -143,7 +143,7 @@ class AePatientCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       decoration: BoxDecoration(
-        color: textColor.withOpacity(0.1),
+        color: textColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
       child: NText(

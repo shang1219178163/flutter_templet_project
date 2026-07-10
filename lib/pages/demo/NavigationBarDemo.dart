@@ -67,7 +67,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
           child: const Text('Page 3'),
         ),
         Container(
-          color: Colors.yellow.withOpacity(0.5),
+          color: Colors.yellow.withValues(alpha: 0.5),
           alignment: Alignment.center,
           child: const Text('Page 4'),
         ),

@@ -148,7 +148,7 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton> wi
       height: widget.width! * .26,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(.3),
+        color: Colors.black.withValues(alpha: .3),
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(widget.radius),
           bottomLeft: Radius.circular(widget.radius),

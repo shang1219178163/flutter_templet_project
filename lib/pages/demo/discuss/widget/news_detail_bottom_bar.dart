@@ -19,7 +19,7 @@ class NewsDetailBottomBar extends StatelessWidget {
     final themeProvider = context.watch<ThemeProvider>();
     final bottomSafePadding = MediaQuery.of(context).padding.bottom;
     final barBackgroundColor = themeProvider.isDark ? themeProvider.color242434OrWhite : Colors.white;
-    final fieldBackgroundColor = themeProvider.isDark ? Colors.white.withOpacity(0.08) : const Color(0xFFF3F4F8);
+    final fieldBackgroundColor = themeProvider.isDark ? Colors.white.withValues(alpha: 0.08) : const Color(0xFFF3F4F8);
 
     final countDesc = count > 99 ? "99+" : "$count";
     return Container(

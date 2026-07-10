@@ -303,7 +303,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
           child: Container(
             height: barHeight,
             width: maxWidth,
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
           ),
         ),
         ValueListenableBuilder<double>(

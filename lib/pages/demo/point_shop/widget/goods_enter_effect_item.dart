@@ -27,7 +27,7 @@ class GoodsEnterEffectItem extends StatelessWidget {
     var isSelected = model.goodsStatus == GoodsStatusEnum.equipped.name;
     // isSelected = true; //add test
     final borderColor = isSelected ? Color(0xFFE91025) : Colors.transparent;
-    final bgColor = isSelected ? (themeProvider.isDark ? Colors.white.withOpacity(0.1) : Color(0xFFFEF7E5)) : color;
+    final bgColor = isSelected ? (themeProvider.isDark ? Colors.white.withValues(alpha: 0.1) : Color(0xFFFEF7E5)) : color;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
@@ -139,7 +139,7 @@ class GoodsEnterEffectItem extends StatelessWidget {
           end: Alignment.centerRight,
           colors: [
             bgColor,
-            bgColor.withOpacity(0.0),
+            bgColor.withValues(alpha: 0.0),
           ],
         ),
       ),

@@ -113,7 +113,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         foregroundDecoration: BoxDecoration(
-          color: Colors.green.withOpacity(0.6),
+          color: Colors.green.withValues(alpha: 0.6),
           borderRadius: const BorderRadius.all(Radius.circular(24)),
           image: DecorationImage(image: AssetImage(Assets.imagesBgJiguang)),
         ),
@@ -140,7 +140,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
       ),
       foregroundPadding: const EdgeInsets.all(8),
       foregroundDecoration: BoxDecoration(
-        color: Colors.green.withOpacity(0.6),
+        color: Colors.green.withValues(alpha: 0.6),
         borderRadius: const BorderRadius.all(Radius.circular(24)),
         border: Border.all(color: Colors.blue),
         image: DecorationImage(
@@ -176,7 +176,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
           sliver: DecoratedSliver(
             position: DecorationPosition.foreground,
             decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.6),
+              color: Colors.green.withValues(alpha: 0.6),
               borderRadius: const BorderRadius.all(Radius.circular(24)),
               image: DecorationImage(image: AssetImage(Assets.imagesBgBeach)),
               // border: Border.all(color: Colors.blue),

@@ -74,7 +74,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
             .toList(),
       ),
       body: Container(
-          color: Colors.green.withOpacity(0.3),
+          color: Colors.green.withValues(alpha: 0.3),
           margin: EdgeInsets.all(16),
           child: Stack(children: [
             Text("01" * 399),

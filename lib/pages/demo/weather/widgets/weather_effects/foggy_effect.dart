@@ -164,7 +164,7 @@ class NewFogPainter extends CustomPainter {
 
     for (final cloud in fogClouds) {
       final fogPaint = Paint()
-        ..color = Colors.white.withOpacity(cloud.opacity)
+        ..color = Colors.white.withValues(alpha: cloud.opacity)
         ..maskFilter = MaskFilter.blur(
           BlurStyle.normal,
           20 + (1 - cloud.opacity) * 40, // 透明度越低，模糊程度越高
@@ -189,7 +189,7 @@ class NewFogPainter extends CustomPainter {
             height: cloud.size.height * 0.6,
           ),
           Paint()
-            ..color = Colors.white.withOpacity(cloud.opacity * 0.7)
+            ..color = Colors.white.withValues(alpha: cloud.opacity * 0.7)
             ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15),
         );
       }
@@ -199,7 +199,7 @@ class NewFogPainter extends CustomPainter {
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.width, size.height * 0.3),
       Paint()
-        ..color = Colors.white.withOpacity(0.2)
+        ..color = Colors.white.withValues(alpha: 0.2)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 30),
     );
 
@@ -209,7 +209,7 @@ class NewFogPainter extends CustomPainter {
 
   void _drawSilhouettes(Canvas canvas, Size size) {
     final silhouettePaint = Paint()
-      ..color = Colors.blueGrey.shade800.withOpacity(0.15)
+      ..color = Colors.blueGrey.shade800.withValues(alpha: 0.15)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
 
     // 使用随机种子，确保每次重建时形状相同
@@ -249,9 +249,9 @@ class NewFogPainter extends CustomPainter {
           end: Alignment.bottomCenter,
           stops: const [0.1, 0.4, 0.8],
           colors: [
-            Colors.white.withOpacity(0.2),
-            Colors.white.withOpacity(0.1),
-            Colors.white.withOpacity(0.05),
+            Colors.white.withValues(alpha: 0.2),
+            Colors.white.withValues(alpha: 0.1),
+            Colors.white.withValues(alpha: 0.05),
           ],
         ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 40),
@@ -268,8 +268,8 @@ class NewFogPainter extends CustomPainter {
       Paint()
         ..shader = RadialGradient(
           colors: [
-            Colors.yellow.shade100.withOpacity(0.12),
-            Colors.white.withOpacity(0),
+            Colors.yellow.shade100.withValues(alpha: 0.12),
+            Colors.white.withValues(alpha: 0),
           ],
         ).createShader(
           Rect.fromCircle(

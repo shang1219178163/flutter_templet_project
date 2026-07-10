@@ -350,7 +350,7 @@ class _ImChatPageState extends State<ImChatPage>
               padding: const EdgeInsets.only(left: 4, bottom: 12),
               child: NText(
                 timeStr,
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
               ),

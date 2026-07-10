@@ -65,7 +65,7 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     decoration: e,
-                    backgroundColor: Colors.blue.withOpacity(0.12),
+                    backgroundColor: Colors.blue.withValues(alpha: 0.12),
                   ),
                 ),
               );

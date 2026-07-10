@@ -264,7 +264,7 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
           if (opacity > 0.0) {
             var titleStyle = theme.primaryTextTheme.titleLarge!;
             titleStyle = titleStyle.copyWith(
-              color: titleStyle.color!.withOpacity(opacity),
+              color: titleStyle.color!.withValues(alpha: opacity),
             );
             final effectiveCenterTitle = _getEffectiveCenterTitle(theme);
             final padding = widget.titlePadding ??

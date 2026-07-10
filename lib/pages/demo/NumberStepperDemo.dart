@@ -102,7 +102,7 @@ class NumberStepperDemo extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.04),
+                color: Colors.black.withValues(alpha: 0.04),
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Padding(

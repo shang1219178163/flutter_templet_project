@@ -180,7 +180,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
                         _position!.inMilliseconds < _duration!.inMilliseconds)
                     ? _position!.inMilliseconds / _duration!.inMilliseconds
                     : 0.0,
-                backgroundColor: const Color(0xFF5D6D7E).withOpacity(0.16), // 背景颜色
+                backgroundColor: const Color(0xFF5D6D7E).withValues(alpha: 0.16), // 背景颜色
                 valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF5D6D7E)), // 进度条颜色
               ),
             ),

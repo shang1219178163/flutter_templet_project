@@ -104,7 +104,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
           end: Alignment.bottomCenter,
           colors: [
             Colors.blue,
-            Colors.white.withOpacity(0.0),
+            Colors.white.withValues(alpha: 0.0),
           ],
         ),
       ),

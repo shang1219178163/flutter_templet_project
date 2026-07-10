@@ -239,7 +239,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               fillColor: Colors.green,
-                              hintStyle: TextStyle(color: fontColor.withOpacity(0.2)),
+                              hintStyle: TextStyle(color: fontColor.withValues(alpha: 0.2)),
                               isCollapsed: true,
                               contentPadding: EdgeInsets.zero,
                               counterText: '',
@@ -323,7 +323,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                 //   begin: Alignment.topCenter,
                 //   end: Alignment.bottomCenter,
                 //   colors: [
-                //     Color(0xFFF9F9F9).withOpacity(0.01),
+                //     Color(0xFFF9F9F9).withValues(alpha: 0.01),
                 //     Color(0xFFF9F9F9),
                 //   ],
                 // )

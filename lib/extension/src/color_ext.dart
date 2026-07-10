@@ -74,7 +74,7 @@ extension ColorExt on Color {
     if (result == null) {
       return null;
     }
-    return Color(result).withOpacity(alpha);
+    return Color(result).withValues(alpha: alpha);
   }
 
   ///rgba 颜色字符串转 Color
@@ -127,19 +127,24 @@ extension ColorExt on Color {
   //   return result;
   // }
 
+  /// ARGB 整型色值
+  int get argbInt {
+    return ((a * 255).round() << 24) |
+        ((r * 255).round() << 16) |
+        ((g * 255).round() << 8) |
+        (b * 255).round();
+  }
+
   String toHex({String prefix = '#'}) {
-    return '$prefix'
-        '${alpha.toRadixString(16).padLeft(2, '0')}'
-        '${red.toRadixString(16).padLeft(2, '0')}'
-        '${green.toRadixString(16).padLeft(2, '0')}'
-        '${blue.toRadixString(16).padLeft(2, '0')}';
+    final argb = argbInt;
+    return '$prefix${argb.toRadixString(16).padLeft(8, '0').toUpperCase()}';
   }
 
   ///转渐进色
   Gradient? toGradient() => LinearGradient(colors: [this, this], stops: const [0.0, 1]);
 
   Color randomOpacity() {
-    return withOpacity(Random().nextInt(100) / 100);
+    return withValues(alpha: Random().nextInt(100) / 100);
   }
 
   /// 颜色名称描述

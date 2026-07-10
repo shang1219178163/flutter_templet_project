@@ -37,8 +37,8 @@ class NScrollBar extends StatelessWidget {
 
     final isVertical = scrollDirection == Axis.vertical;
 
-    var bgColor = Colors.black.withOpacity(0.12);
-    // bgColor = Colors.green.withOpacity(0.8);
+    var bgColor = Colors.black.withValues(alpha: 0.12);
+    // bgColor = Colors.green.withValues(alpha: 0.8);
 
     final indicatorBgNew = indicatorBg ??
         BoxDecoration(

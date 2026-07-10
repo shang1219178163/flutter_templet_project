@@ -40,7 +40,7 @@ class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProv
 
   late ColorTween tween = widget.tween ??
       ColorTween(
-        begin: Colors.red.withOpacity(0.0),
+        begin: Colors.red.withValues(alpha: 0.0),
         end: Colors.red,
       );
 

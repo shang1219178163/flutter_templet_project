@@ -98,7 +98,7 @@ class _NHorizalStepState<E> extends State<NHorizalStep<E>> {
                                       children: [
                                         Expanded(
                                           child: buildDivider(
-                                            color: isFirst ? diverColor.withOpacity(0.0) : diverColor,
+                                            color: isFirst ? diverColor.withValues(alpha: 0.0) : diverColor,
                                             colorEnd: diverColor,
                                             thickness: diverHeight,
                                           ),

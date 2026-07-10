@@ -488,7 +488,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
               child: Text(
                 "取消",
                 style: TextStyle(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: 0.6),
                   fontSize: 14,
                 ),
               ),

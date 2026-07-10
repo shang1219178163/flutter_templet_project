@@ -53,9 +53,9 @@ class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
               width: 300.0,
               height: 300.0,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 border: Border.all(
-                  color: Colors.black.withOpacity(0.5),
+                  color: Colors.black.withValues(alpha: 0.5),
                 ),
               ),
               //调用我们定义的交错动画Widget

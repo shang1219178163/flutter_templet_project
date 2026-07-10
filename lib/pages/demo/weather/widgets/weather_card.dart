@@ -33,7 +33,7 @@ class WeatherCard extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   weatherType.cardColor,
-                  weatherType.cardColor.withOpacity(0.7),
+                  weatherType.cardColor.withValues(alpha: 0.7),
                 ],
               ),
             ),
@@ -126,7 +126,7 @@ class WeatherCard extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   weatherType.cardColor,
-                  weatherType.cardColor.withOpacity(0.7),
+                  weatherType.cardColor.withValues(alpha: 0.7),
                 ],
               ),
             ),

@@ -147,7 +147,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
     return [
       DrawerHeader(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.7),
           // image: DecorationImage(
           //   image: "img_flutter_3_10.webp".toAssetImage(),
           // ),

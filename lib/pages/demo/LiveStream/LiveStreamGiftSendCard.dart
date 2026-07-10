@@ -58,7 +58,7 @@ class LiveStreamGiftSendCard extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             giftColorNew,
-            giftColorNew.withOpacity(0.0),
+            giftColorNew.withValues(alpha: 0.0),
           ],
         ),
         shape: const StadiumBorder(),

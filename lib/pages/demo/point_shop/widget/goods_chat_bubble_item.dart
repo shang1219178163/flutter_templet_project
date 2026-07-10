@@ -25,7 +25,7 @@ class GoodsChatBubbleItem extends StatelessWidget {
     var isSelected = model.goodsStatus == GoodsStatusEnum.equipped.name;
     // isSelected = true;//add test
     final borderColor = isSelected ? Color(0xFFE91025) : Colors.transparent;
-    final bgColor = isSelected ? (themeProvider.isDark ? Colors.white.withOpacity(0.1) : Color(0xFFFFF4EC)) : color;
+    final bgColor = isSelected ? (themeProvider.isDark ? Colors.white.withValues(alpha: 0.1) : Color(0xFFFFF4EC)) : color;
 
     final thumbUrl = model.animationUrl ?? model.thumbUrl ?? "";
     final name = model.goodsName ?? "";

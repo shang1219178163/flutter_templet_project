@@ -13,11 +13,7 @@ class FloatingButtonDemoOne extends StatefulWidget {
 class _FloatingButtonDemoOneState extends State<FloatingButtonDemoOne> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return true;
-      },
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: [
@@ -33,7 +29,6 @@ class _FloatingButtonDemoOneState extends State<FloatingButtonDemoOne> {
               .toList(),
         ),
         body: buildBody(),
-      ),
     );
   }
 
@@ -44,7 +39,7 @@ class _FloatingButtonDemoOneState extends State<FloatingButtonDemoOne> {
       padding: EdgeInsets.only(left: 20, top: 30, right: 40, bottom: 50),
       childSize: Size(80, 80),
       bgChild: Container(
-        color: Colors.black.withOpacity(0.1), //Color.fromRGBO(242, 243, 248, 1),
+        color: Colors.black.withValues(alpha: 0.1), //Color.fromRGBO(242, 243, 248, 1),
       ),
       child: Container(
         width: 80,

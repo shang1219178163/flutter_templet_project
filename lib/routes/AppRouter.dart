@@ -74,6 +74,7 @@ import 'package:flutter_templet_project/pages/demo/ClickNotificationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorFilterDemo.dart';
+import 'package:flutter_templet_project/pages/demo/color_opacity_compare_demo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CompareToPage.dart';
@@ -903,6 +904,7 @@ class AppRouter {
   static const String clickNotificationDemo = '/clickNotificationDemo';
 
   static const String colorFilterDemo = '/colorFilterDemo';
+  static const String colorOpacityCompareDemo = '/colorOpacityCompareDemo';
   static const String pageTopBackgroudImageDemo = '/pageTopBackgroudImageDemo';
   static const String fingerViewDemo = '/fingerViewDemo';
   static const String dividerDemo = '/dividerDemo';
@@ -2614,6 +2616,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.colorFilterDemo,
       page: () => ColorFilterDemo(),
+    ),
+    GetPage(
+      name: AppRouter.colorOpacityCompareDemo,
+      page: () => const ColorOpacityCompareDemo(),
     ),
     GetPage(
       name: AppRouter.pageTopBackgroudImageDemo,

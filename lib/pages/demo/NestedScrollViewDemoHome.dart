@@ -300,7 +300,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
       height: 58,
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
       decoration: BoxDecoration(
-        color: Color(0xffFFFFFF).withOpacity(0.16),
+        color: Color(0xffFFFFFF).withValues(alpha: 0.16),
         // border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
@@ -353,7 +353,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
             projectCustomName,
             maxLines: 1,
             fontSize: 14,
-            color: Color(0xffFFFFFF).withOpacity(.8),
+            color: Color(0xffFFFFFF).withValues(alpha: .8),
           ),
         ],
       ),
@@ -533,7 +533,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.white.withOpacity(.8),
+              Colors.white.withValues(alpha: .8),
               Colors.white,
             ],
           ),
@@ -727,7 +727,7 @@ class ProjectGreyButton extends StatelessWidget {
         //   vertical: 1.5,
         // ),
         decoration: BoxDecoration(
-            // color: Colors.black.withOpacity(0.16),
+            // color: Colors.black.withValues(alpha: 0.16),
             // border: Border.all(color: Colors.blue),
             // borderRadius: const BorderRadius.all(Radius.circular(12)),
             ),
@@ -742,7 +742,7 @@ class ProjectGreyButton extends StatelessWidget {
               ),
           child: NText(
             text,
-            color: Color(0xffFFFFFF).withOpacity(0.5),
+            color: Color(0xffFFFFFF).withValues(alpha: 0.5),
             fontSize: 14,
           ),
         ),

@@ -27,16 +27,16 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
 
   final predictionLevels = List.generate(11, (i) => i);
   final predictionLevelMap = {
-    1: Color(0xFF707796).withOpacity(0.3),
-    2: Color(0xFF90643E).withOpacity(0.3),
-    3: Color(0xFF5D6DB6).withOpacity(0.3),
-    4: Color(0xFFF2A236).withOpacity(0.3),
-    5: Color(0xFF6C96E7).withOpacity(0.3),
-    6: Color(0xFF49CFB7).withOpacity(0.3),
-    7: Color(0xFF6C71E7).withOpacity(0.3),
-    8: Color(0xFF9747FF).withOpacity(0.3),
-    9: Color(0xFFF56C6C).withOpacity(0.3),
-    10: Color(0xFFD28E5D).withOpacity(0.3),
+    1: Color(0xFF707796).withValues(alpha: 0.3),
+    2: Color(0xFF90643E).withValues(alpha: 0.3),
+    3: Color(0xFF5D6DB6).withValues(alpha: 0.3),
+    4: Color(0xFFF2A236).withValues(alpha: 0.3),
+    5: Color(0xFF6C96E7).withValues(alpha: 0.3),
+    6: Color(0xFF49CFB7).withValues(alpha: 0.3),
+    7: Color(0xFF6C71E7).withValues(alpha: 0.3),
+    8: Color(0xFF9747FF).withValues(alpha: 0.3),
+    9: Color(0xFFF56C6C).withValues(alpha: 0.3),
+    10: Color(0xFFD28E5D).withValues(alpha: 0.3),
   };
 
   final selectedColorVN = ValueNotifier<Color>(Colors.red);
@@ -67,7 +67,7 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
           children: [
             // ...predictionLevels.map((i) {
             //   final predictionLevel = predictionLevels[i];
-            //   final predictionLevelBgColor = predictionLevelMap[predictionLevel] ?? Color(0xFF707796).withOpacity(0.3);
+            //   final predictionLevelBgColor = predictionLevelMap[predictionLevel] ?? Color(0xFF707796).withValues(alpha: 0.3);
             //
             //   return Container(
             //     height: 80,
@@ -182,7 +182,7 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
 
         final list = List.generate(20, (i) => i * 5).map((e) {
           var v = e / 100.0;
-          final color = Colors.white.withOpacity(v);
+          final color = Colors.white.withValues(alpha: v);
           return "${color.toHex()}, $v";
         }).toList();
         return Wrap(

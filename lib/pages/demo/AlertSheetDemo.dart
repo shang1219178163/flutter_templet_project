@@ -43,7 +43,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black.withOpacity(0.05),
+        backgroundColor: Colors.black.withValues(alpha: 0.05),
         appBar: AppBar(
           title: Text("$widget"),
         ),

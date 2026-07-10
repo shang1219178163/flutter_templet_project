@@ -135,7 +135,7 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
       tabBuilder: (context, tab) {
         return Container(
           decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.5),
+            color: Colors.green.withValues(alpha: 0.5),
           ),
           child: TabBar(
             controller: tabController,

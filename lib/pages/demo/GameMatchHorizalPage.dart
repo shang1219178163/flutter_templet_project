@@ -335,7 +335,7 @@ class TeamCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected ? const Color(0xff008a64) : Colors.white,
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(blurRadius: 8, color: Colors.black.withOpacity(0.08))],
+          boxShadow: [BoxShadow(blurRadius: 8, color: Colors.black.withValues(alpha: 0.08))],
         ),
         child: Row(
           children: [

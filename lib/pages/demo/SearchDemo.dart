@@ -87,7 +87,7 @@ class _SearchDemoState extends State<SearchDemo> {
                   final bgColor = index % 2 == 0 ? Colors.yellow : Colors.green;
                   return Container(
                     decoration: BoxDecoration(
-                      color: bgColor.withOpacity(0.2),
+                      color: bgColor.withValues(alpha: 0.2),
                     ),
                     child: ListTile(
                       title: Text(item.name ?? "-"),

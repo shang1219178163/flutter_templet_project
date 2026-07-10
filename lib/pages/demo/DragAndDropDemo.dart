@@ -115,7 +115,7 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                   ),
                   child: Row(
                     children: [

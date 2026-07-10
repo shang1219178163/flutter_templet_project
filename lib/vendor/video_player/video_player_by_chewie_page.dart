@@ -182,7 +182,7 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
       padding: padding,
       child: CircleAvatar(
         radius: radius,
-        backgroundColor: Colors.black.withOpacity(0.3),
+        backgroundColor: Colors.black.withValues(alpha: 0.3),
         child: IconButton(
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(),

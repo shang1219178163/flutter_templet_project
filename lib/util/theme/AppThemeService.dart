@@ -209,7 +209,7 @@ class AppThemeService {
         ),
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: seedColor,
-          selectionColor: seedColor.withOpacity(0.3),
+          selectionColor: seedColor.withValues(alpha: 0.3),
           selectionHandleColor: seedColor,
         ),
         textTheme: ThemeData.dark().textTheme.apply(
@@ -258,7 +258,7 @@ class AppThemeService {
           elevation: 8,
           modalBackgroundColor: Colors.white,
           modalElevation: 12,
-          shadowColor: Colors.black.withOpacity(0.2),
+          shadowColor: Colors.black.withValues(alpha: 0.2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
           ),
@@ -308,12 +308,12 @@ class AppThemeService {
           hoverColor: AppColor.bgColor,
           hintStyle: TextStyle(
             fontSize: 14,
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withValues(alpha: 0.4),
             fontWeight: FontWeight.w400,
           ),
           labelStyle: TextStyle(
             fontSize: 14,
-            color: Colors.red.withOpacity(0.9),
+            color: Colors.red.withValues(alpha: 0.9),
             fontWeight: FontWeight.w400,
           ),
           prefixIconColor: Color(0xFF7C7C85),
@@ -321,21 +321,21 @@ class AppThemeService {
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
               width: 1,
-              color: const Color(0xFFA79AF8).withOpacity(0.1),
+              color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
               width: 1,
-              color: const Color(0xFFA79AF8).withOpacity(0.1),
+              color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
               width: 1,
-              color: const Color(0xFFA79AF8).withOpacity(0.1),
+              color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
             ),
           ),
         ),
@@ -344,7 +344,7 @@ class AppThemeService {
           ...?appThemeDataExtensions(),
           AppButtonTheme(
             bgColor: Colors.green,
-            bgColorDisabled: Colors.black.withOpacity(0.1),
+            bgColorDisabled: Colors.black.withValues(alpha: 0.1),
             fgColor: Colors.white,
             fgColorDisabled: Colors.grey,
           ),
@@ -428,7 +428,7 @@ class AppThemeService {
         ),
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: seedColor,
-          selectionColor: seedColor.withOpacity(0.3),
+          selectionColor: seedColor.withValues(alpha: 0.3),
           selectionHandleColor: seedColor,
         ),
         textTheme: ThemeData.dark().textTheme.apply(
@@ -474,7 +474,7 @@ class AppThemeService {
           backgroundColor: Color(0xFF212121),
           surfaceTintColor: Color(0xFF424242),
           modalBackgroundColor: Color(0xFF212121),
-          shadowColor: Colors.black.withOpacity(0.7),
+          shadowColor: Colors.black.withValues(alpha: 0.7),
           elevation: 8,
           modalElevation: 12,
           shape: RoundedRectangleBorder(
@@ -500,15 +500,15 @@ class AppThemeService {
           // isCollapsed: true,
           // contentPadding: const EdgeInsets.symmetric(vertical: 11),
           filled: true,
-          fillColor: Colors.black.withOpacity(0.5),
+          fillColor: Colors.black.withValues(alpha: 0.5),
           hintStyle: TextStyle(
             fontSize: 14,
-            color: Colors.white.withOpacity(0.4),
+            color: Colors.white.withValues(alpha: 0.4),
             fontWeight: FontWeight.w400,
           ),
           labelStyle: TextStyle(
             fontSize: 14,
-            color: Colors.red.withOpacity(0.9),
+            color: Colors.red.withValues(alpha: 0.9),
             fontWeight: FontWeight.w400,
           ),
           prefixIconColor: Color(0xFF7C7C85),
@@ -516,21 +516,21 @@ class AppThemeService {
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
               width: 1,
-              color: const Color(0xFFA79AF8).withOpacity(0.1),
+              color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
               width: 1,
-              color: const Color(0xFFA79AF8).withOpacity(0.1),
+              color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(
               width: 1,
-              color: const Color(0xFFA79AF8).withOpacity(0.1),
+              color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
             ),
           ),
         ),
@@ -548,7 +548,7 @@ class AppThemeService {
   Iterable<ThemeExtension<dynamic>>? appThemeDataExtensions() {
     final appTheme = NAppTheme(
       primary: const Color(0xFF00B451),
-      primary2: const Color(0xFF00B451).withOpacity(0.8),
+      primary2: const Color(0xFF00B451).withValues(alpha: 0.8),
       bgColor: const Color(0xFFF3F3F3),
       fontColor: const Color(0xFF1A1A1A),
       titleStyle: const TextStyle(
@@ -718,15 +718,15 @@ class AppThemeService {
     isCollapsed: true,
     contentPadding: const EdgeInsets.symmetric(vertical: 11),
     filled: true,
-    fillColor: Colors.white.withOpacity(0.05),
+    fillColor: Colors.white.withValues(alpha: 0.05),
     hintStyle: TextStyle(
       fontSize: 14,
-      color: Colors.white.withOpacity(0.4),
+      color: Colors.white.withValues(alpha: 0.4),
       fontWeight: FontWeight.w400,
     ),
     labelStyle: TextStyle(
       fontSize: 14,
-      color: Colors.red.withOpacity(0.9),
+      color: Colors.red.withValues(alpha: 0.9),
       fontWeight: FontWeight.w400,
     ),
     prefixIconColor: Color(0xFF7C7C85),
@@ -734,21 +734,21 @@ class AppThemeService {
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(
         width: 1,
-        color: const Color(0xFFA79AF8).withOpacity(0.1),
+        color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
       ),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(
         width: 1,
-        color: const Color(0xFFA79AF8).withOpacity(0.1),
+        color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
       ),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(
         width: 1,
-        color: const Color(0xFFA79AF8).withOpacity(0.1),
+        color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
       ),
     ),
   );

@@ -79,7 +79,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       bg: AssetImage('assets/images/bg_horizontal_scroll.png'),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
+          color: Colors.grey.withValues(alpha: 0.5),
           // spreadRadius: 3,
           blurRadius: 7,
           offset: Offset(0, 3), // changes position of shadow
@@ -128,7 +128,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       // ),
       boxShadows: [
         BoxShadow(
-          color: Colors.red.withOpacity(0.5),
+          color: Colors.red.withValues(alpha: 0.5),
           // spreadRadius: 5,
           blurRadius: 7,
           offset: Offset(0, 3), // changes position of shadow

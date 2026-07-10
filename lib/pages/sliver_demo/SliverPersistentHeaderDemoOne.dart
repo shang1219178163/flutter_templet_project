@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_custom_scrollView_for_model.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 
 class SliverPersistentHeaderDemoOne extends StatelessWidget {
@@ -86,7 +87,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   // 构建颜色列表item
   Widget _buildColorItem(Color color, int index) {
     var text = colorString(color);
-    text = [color.value.toRadixString(16)].join("/");
+    text = [color.argbInt.toRadixString(16)].join("/");
     return Card(
       child: Container(
         alignment: Alignment.center,
@@ -111,7 +112,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   }
 
   // 颜色转换为文字
-  String colorString(Color color) => "#${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
+  String colorString(Color color) => "#${color.argbInt.toRadixString(16).padLeft(8, '0').toUpperCase()}";
 
   Widget _buildPersistentHeader(String title) {
     return NSliverPersistentHeaderBuilder(

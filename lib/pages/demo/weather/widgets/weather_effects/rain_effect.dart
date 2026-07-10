@@ -99,7 +99,7 @@ class RainPainter extends CustomPainter {
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.3)],
+        colors: [Colors.white.withValues(alpha: 0.1), Colors.white.withValues(alpha: 0.3)],
       ).createShader(reflectionRect);
 
     canvas.drawRect(reflectionRect, reflectionPaint);
@@ -107,7 +107,7 @@ class RainPainter extends CustomPainter {
     // 绘制雨滴
     for (final drop in raindrops) {
       final paint = Paint()
-        ..color = Colors.white.withOpacity(drop.opacity)
+        ..color = Colors.white.withValues(alpha: drop.opacity)
         ..strokeWidth = 1.5
         ..strokeCap = StrokeCap.round;
 
@@ -121,7 +121,7 @@ class RainPainter extends CustomPainter {
       // 如果雨滴到达反射区域，绘制反射效果
       if (drop.y + drop.length >= size.height * 0.85) {
         final reflectionPaint = Paint()
-          ..color = Colors.white.withOpacity(drop.opacity * 0.5)
+          ..color = Colors.white.withValues(alpha: drop.opacity * 0.5)
           ..strokeWidth = 1.5
           ..strokeCap = StrokeCap.round;
 

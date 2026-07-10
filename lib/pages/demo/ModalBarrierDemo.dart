@@ -21,7 +21,7 @@ class _ModalBarrierDemoState extends State<ModalBarrierDemo> {
             // height: 100,
             // width: 100,
             // child: ModalBarrier(
-            //   color: Colors.black.withOpacity(.4),
+            //   color: Colors.black.withValues(alpha: .4),
             // ),
             child: _buildModalBarrier(),
           ),

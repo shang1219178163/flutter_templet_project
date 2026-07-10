@@ -101,7 +101,7 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
     return Container(
       width: 100,
       height: 100,
-      color: ColorExt.random.withOpacity(opacity),
+      color: ColorExt.random.withValues(alpha: opacity),
       child: Text(title),
     );
   }

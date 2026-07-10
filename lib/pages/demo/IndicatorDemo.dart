@@ -139,7 +139,7 @@ class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateM
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
                 child: FractionallySizedBox(

@@ -115,7 +115,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
                 colors: [
                   Colors.transparent,
                   Colors.transparent,
-                  (widget.fillColor ?? Color(0xFFFFFFFF)).withOpacity(opacity),
+                  (widget.fillColor ?? Color(0xFFFFFFFF)).withValues(alpha: opacity),
                   (widget.fillColor ?? Color(0xFFFFFFFF)),
                 ],
                 child: textChild,

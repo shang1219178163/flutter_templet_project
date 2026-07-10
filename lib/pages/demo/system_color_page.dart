@@ -115,19 +115,19 @@ class _SystemColorPageState extends State<SystemColorPage> {
 }
 
 Map<String, dynamic> kColorDic = {
-  "A基础: Colors.blue54 == Colors.blue.withOpacity(0.54)": Colors.transparent,
+  "A基础: Colors.blue54 == Colors.blue.withValues(alpha: 0.54)": Colors.transparent,
   "A基础: Colors.[white70, ..., white10], 只在暗黑模式有效果": Colors.white,
 
   "Colors.transparent": Colors.transparent,
 
   "Colors.black": Colors.black,
   "Colors.black54": Colors.black54,
-  "Colors.black.withOpacity(0.54)": Colors.black.withOpacity(0.54),
+  "Colors.black.withValues(alpha: 0.54)": Colors.black.withValues(alpha: 0.54),
 
   "Colors.blue": Colors.blue,
   "Colors.blue[500]": Colors.blue[500],
   "Colors.blue.shade500": Colors.blue.shade500,
-  "Colors.blue.withOpacity(0.5)": Colors.blue.withOpacity(0.5),
+  "Colors.blue.withValues(alpha: 0.5)": Colors.blue.withValues(alpha: 0.5),
 
   "Colors.blue.shade50": Colors.blue.shade50,
   "Colors.blue.shade100": Colors.blue.shade100,

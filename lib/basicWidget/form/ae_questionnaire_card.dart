@@ -43,7 +43,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColor.cancelColor.withOpacity(0.1),
+                color: AppColor.cancelColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: NText(

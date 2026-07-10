@@ -208,9 +208,9 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
                               colors: [
                                 // Color(0x99FFFFFF),
                                 // white,
-                                gradientColor.withOpacity(1),
-                                gradientColor.withOpacity(0.7),
-                                gradientColor.withOpacity(0.01),
+                                gradientColor.withValues(alpha: 1),
+                                gradientColor.withValues(alpha: 0.7),
+                                gradientColor.withValues(alpha: 0.01),
                               ].reversed.toList(),
                             ),
                           ),

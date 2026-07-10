@@ -255,7 +255,7 @@ class _CustomSlideDemoState extends State {
           child: Container(
             width: slideWidth,
             height: slideHeight,
-            color: Colors.blue.withOpacity(0.2),
+            color: Colors.blue.withValues(alpha: 0.2),
             child: GestureDetector(
               onPanStart: showIndicator,
               onPanUpdate: updateIndicator,

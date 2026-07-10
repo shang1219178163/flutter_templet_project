@@ -101,7 +101,7 @@ class TicketPainter extends CustomPainter {
       ..color = borderColor;
 
     final paintDottedLine = Paint()
-      ..color = borderColor.withOpacity(0.5)
+      ..color = borderColor.withValues(alpha: 0.5)
       ..strokeWidth = dottedStrokeWidth;
 
     var path = Path();

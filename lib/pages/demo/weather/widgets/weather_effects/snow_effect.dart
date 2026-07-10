@@ -111,14 +111,14 @@ class SnowPainter extends CustomPainter {
     // 绘制雪地
     final groundRect =
         Rect.fromLTWH(0, size.height * 0.85, size.width, size.height * 0.15);
-    final groundPaint = Paint()..color = Colors.white.withOpacity(0.8);
+    final groundPaint = Paint()..color = Colors.white.withValues(alpha: 0.8);
 
     canvas.drawRect(groundRect, groundPaint);
 
     // 绘制雪花
     for (final snowflake in snowflakes) {
       final paint = Paint()
-        ..color = Colors.white.withOpacity(snowflake.opacity);
+        ..color = Colors.white.withValues(alpha: snowflake.opacity);
 
       canvas.drawCircle(
           Offset(snowflake.x, snowflake.y), snowflake.size, paint);
@@ -136,7 +136,7 @@ class SnowPainter extends CustomPainter {
               snowflake.y + sin(angle) * lineLength,
             ),
             Paint()
-              ..color = Colors.white.withOpacity(snowflake.opacity * 0.7)
+              ..color = Colors.white.withValues(alpha: snowflake.opacity * 0.7)
               ..strokeWidth = 0.8,
           );
         }

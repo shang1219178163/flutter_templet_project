@@ -76,7 +76,7 @@ class _ToastWidgetState extends State<ToastWidget>
       EdgeInsets padding = const EdgeInsets.all(12)}) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(.65),
+        color: Colors.black.withValues(alpha: .65),
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       margin: margin,

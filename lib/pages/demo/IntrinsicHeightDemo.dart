@@ -230,14 +230,14 @@ class PredictionItem extends StatelessWidget {
                     children: [
                       Text(
                         '发布时间 ${createTimeStr}',
-                        style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.6)),
+                        style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.6)),
                       ),
                       const Spacer(),
                       Text(
                         '${viewCount}人感兴趣',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white.withOpacity(0.6),
+                          color: Colors.white.withValues(alpha: 0.6),
                         ),
                       )
                     ],
@@ -274,7 +274,7 @@ class PredictionItem extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         // border: Border.all(color: Colors.blue),
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(4),
       ),
       child: isReversed
@@ -322,7 +322,7 @@ class SchemeMatchItem extends StatelessWidget {
       margin: EdgeInsets.only(bottom: isLast ? 0 : 4),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         // border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),

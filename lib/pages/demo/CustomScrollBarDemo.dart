@@ -196,7 +196,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
           borderRadius: BorderRadius.all(Radius.circular(10)),
           boxShadow: [
             BoxShadow(
-              color: Colors.red.withOpacity(0.5),
+              color: Colors.red.withValues(alpha: 0.5),
               // spreadRadius: 5,
               blurRadius: 5,
               offset: Offset(0, 3), // changes position of shadow
@@ -251,7 +251,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
           child: Container(
             height: barHeight,
             width: maxWidth,
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
           ),
         ),
         ValueListenableBuilder<double>(

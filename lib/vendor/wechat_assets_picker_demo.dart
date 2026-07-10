@@ -81,7 +81,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
               width: itemWidth,
               height: itemWidth,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 // border: Border.all(width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
@@ -258,7 +258,7 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
               width: itemWidth,
               height: itemWidth,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 // border: Border.all(width: 10),
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
@@ -266,7 +266,7 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
                   Icon(
                     Icons.add,
                     size: itemWidth / 3,
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withValues(alpha: 0.3),
                   ),
             ),
           )

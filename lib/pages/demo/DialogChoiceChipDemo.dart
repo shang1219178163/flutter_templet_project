@@ -193,7 +193,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
         transitionDuration: Duration(milliseconds: 200),
         pageBuilder: (context, animation, secondaryAnimation) {
           return Dialog(
-            backgroundColor: Colors.black.withOpacity(0.01),
+            backgroundColor: Colors.black.withValues(alpha: 0.01),
             insetPadding: EdgeInsets.zero,
             child: InkWell(
               onTap: () {
@@ -204,14 +204,14 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             ),
           );
           return Material(
-            color: Colors.black.withOpacity(0.01),
+            color: Colors.black.withValues(alpha: 0.01),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pop();
                 // AppUti.removeInputFocus();
               },
               child: Container(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   child: Align(
                     alignment: alignment,
                     child: box,
@@ -605,7 +605,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
         transitionDuration: Duration(milliseconds: 200),
         pageBuilder: (context, animation, secondaryAnimation) {
           return Material(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             child: InkWell(
               onTap: () {
                 debugPrint("barrier dismiss");
@@ -679,7 +679,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
         transitionDuration: Duration(milliseconds: 200),
         pageBuilder: (context, animation, secondaryAnimation) {
           return Material(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.symmetric(horizontal: 50),
@@ -753,7 +753,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
               icon: Icon(
                 Icons.clear,
                 size: 20,
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
               ),
             ),
           ),

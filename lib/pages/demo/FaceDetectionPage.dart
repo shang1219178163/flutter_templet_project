@@ -62,7 +62,7 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
                 onTap: _pickImage,
                 child: Icon(
                   Icons.image,
-                  color: Colors.grey.withOpacity(0.5),
+                  color: Colors.grey.withValues(alpha: 0.5),
                   size: 100,
                 ),
               ),

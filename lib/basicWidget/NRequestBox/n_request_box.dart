@@ -284,7 +284,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     VoidCallback? onConfirm,
   }) {
     return Container(
-      color: Colors.black.withOpacity(0.4),
+      color: Colors.black.withValues(alpha: 0.4),
       padding: EdgeInsets.only(
         bottom: bottom,
       ),
@@ -342,7 +342,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     VoidCallback? onConfirm,
   }) {
     return Container(
-      color: Colors.black.withOpacity(0.4),
+      color: Colors.black.withValues(alpha: 0.4),
       alignment: Alignment.topCenter,
       child: FractionallySizedBox(
         heightFactor: 0.5,

@@ -128,25 +128,25 @@ class ThemeProvider extends ChangeNotifier {
   Color get scaffoldBackgroundColor => isDark ? Color(0xFF181829) : Color(0xFFF6F6F6);
 
   /// 背景色
-  Color get itemBgColor => isDark ? Colors.white.withOpacity(0.05) : Colors.white;
+  Color get itemBgColor => isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white;
 
   /// 标题
-  Color get titleColor => isDark ? Colors.white.withOpacity(0.9) : Color(0xFF313135);
+  Color get titleColor => isDark ? Colors.white.withValues(alpha: 0.9) : Color(0xFF313135);
 
   /// 副标题
-  Color get subtitleColor => isDark ? Colors.white.withOpacity(0.6) : Color(0xFF7C7C85);
+  Color get subtitleColor => isDark ? Colors.white.withValues(alpha: 0.6) : Color(0xFF7C7C85);
 
   /// 输入框占位颜色
-  Color get placeholderColor => isDark ? Colors.white.withOpacity(0.4) : Color(0xFFA7A7AE);
+  Color get placeholderColor => isDark ? Colors.white.withValues(alpha: 0.4) : Color(0xFFA7A7AE);
 
   /// 箭头颜色
-  Color get arrowColor => isDark ? Colors.white.withOpacity(0.5) : Color(0xFFA7A7AE);
+  Color get arrowColor => isDark ? Colors.white.withValues(alpha: 0.5) : Color(0xFFA7A7AE);
 
   /// 分割线颜色
-  Color get lineColor => isDark ? Colors.white.withOpacity(0.05) : Color(0xFFDEDEDE);
+  Color get lineColor => isDark ? Colors.white.withValues(alpha: 0.05) : Color(0xFFDEDEDE);
 
   /// 边框线
-  Color get borderColor => isDark ? Colors.white.withOpacity(0.04) : Colors.transparent;
+  Color get borderColor => isDark ? Colors.white.withValues(alpha: 0.04) : Colors.transparent;
 
   /// 兼容老样式
   Color get color181829OrF6F6F6 => isDark ? Color(0xFF181829) : Color(0xFFF6F6F6);

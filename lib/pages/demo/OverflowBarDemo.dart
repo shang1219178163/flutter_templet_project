@@ -32,7 +32,7 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.all(16),
-      color: Colors.black.withOpacity(0.15),
+      color: Colors.black.withValues(alpha: 0.15),
       child: Material(
         color: Colors.white,
         elevation: 24,

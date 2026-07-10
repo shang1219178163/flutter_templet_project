@@ -115,7 +115,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
 
     final textColor = e.isSelected ? widget.itemSelectedColor : AppColor.fontColor;
 
-    final bgColor = e.isSelected ? widget.itemSelectedColor.withOpacity(0.08) : widget.itemColor;
+    final bgColor = e.isSelected ? widget.itemSelectedColor.withValues(alpha: 0.08) : widget.itemColor;
 
     final borderColor = e.isSelected ? widget.itemSelectedColor : Colors.transparent;
 

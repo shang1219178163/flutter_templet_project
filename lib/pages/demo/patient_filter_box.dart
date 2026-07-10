@@ -167,7 +167,7 @@
 //         widget.onCancel?.call();
 //       },
 //       child: Container(
-//         color: Colors.black.withOpacity(0.4),
+//         color: Colors.black.withValues(alpha: 0.4),
 //         padding: EdgeInsets.only(
 //           bottom: context.appBarHeight + 51,
 //         ),
@@ -482,7 +482,7 @@
 //         trailing: buildExpandMenuTrailing(
 //           isExpand: isExpand,
 //           color: color,
-//           borderColor: color.withOpacity(0.2),
+//           borderColor: color.withValues(alpha: 0.2),
 //           hide: disable,
 //         ),
 //         collapsedTextColor: fontColor,

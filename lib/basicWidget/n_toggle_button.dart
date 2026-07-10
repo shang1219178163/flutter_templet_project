@@ -113,7 +113,7 @@ class _ToggleButtonState<T> extends State<ToggleButton<T>> {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: backgroundColor ?? Colors.white.withOpacity(0.1),
+        color: backgroundColor ?? Colors.white.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: Stack(

@@ -33,8 +33,8 @@ class _ReorderableListViewDemoState extends State<ReorderableListViewDemo> {
 
   Widget _buildList() {
     final colorScheme = Theme.of(context).colorScheme;
-    final oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final evenItemColor = colorScheme.primary.withOpacity(0.15);
+    final oddItemColor = colorScheme.primary.withValues(alpha: 0.05);
+    final evenItemColor = colorScheme.primary.withValues(alpha: 0.15);
 
     return ReorderableListView(
       // padding: EdgeInsets.symmetric(horizontal: 40),

@@ -203,7 +203,7 @@ class StaggeredAnimationWidget extends StatelessWidget {
             borderRadius: borderRadius.value,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 blurRadius: elevation.value,
                 offset: Offset(0, elevation.value / 2),
               ),

@@ -51,8 +51,8 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
                               colors: [
                                 // Colors.red,
                                 // Colors.green,
-                                mainColor.withOpacity(0.3),
-                                mainColor.withOpacity(0.0),
+                                mainColor.withValues(alpha: 0.3),
+                                mainColor.withValues(alpha: 0.0),
                               ],
                             ),
                           ),
@@ -72,8 +72,8 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
                               colors: [
                                 // Colors.red,
                                 // Colors.green,
-                                mainColor.withOpacity(0.3),
-                                mainColor.withOpacity(0.0),
+                                mainColor.withValues(alpha: 0.3),
+                                mainColor.withValues(alpha: 0.0),
                               ],
                             ),
                           ),
@@ -100,8 +100,8 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
                       colors: [
                         // Colors.red,
                         // Colors.green,
-                        mainColor.withOpacity(0.3),
-                        mainColor.withOpacity(0.0),
+                        mainColor.withValues(alpha: 0.3),
+                        mainColor.withValues(alpha: 0.0),
                       ],
                     ),
                   ),

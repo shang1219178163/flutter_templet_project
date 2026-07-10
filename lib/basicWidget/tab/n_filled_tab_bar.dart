@@ -142,7 +142,7 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
               iconAnimationType: AnimationType.onHover,
               style: ToggleStyle(
                 borderRadius: BorderRadius.circular(widget.radius ?? 8),
-                // backgroundColor: Colors.white.withOpacity(0.05),
+                // backgroundColor: Colors.white.withValues(alpha: 0.05),
                 backgroundColor: widget.backgroundColor,
                 borderColor: Colors.transparent,
               ),

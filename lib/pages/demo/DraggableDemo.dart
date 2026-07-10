@@ -234,7 +234,7 @@ class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateM
         duration: Duration(milliseconds: 150),
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: isDragging ? Colors.green.withOpacity(0.6) : Colors.green,
+          color: isDragging ? Colors.green.withValues(alpha: 0.6) : Colors.green,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(

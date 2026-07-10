@@ -21,7 +21,7 @@ class UserHeader extends StatelessWidget {
       alignment: Alignment.center,
       decoration: decoration ??
           BoxDecoration(
-            color: Colors.yellow.withOpacity(0.3),
+            color: Colors.yellow.withValues(alpha: 0.3),
             image: DecorationImage(
               image: AssetImage("assets/images/bg_purple.png"),
               fit: BoxFit.fill,
@@ -52,7 +52,7 @@ class UserHeader extends StatelessWidget {
                 minHeight: 10,
                 borderRadius: BorderRadius.circular(5),
                 backgroundColor: Colors.black12,
-                color: Colors.white.withOpacity(0.5),
+                color: Colors.white.withValues(alpha: 0.5),
                 value: 0.5,
               ),
             ),

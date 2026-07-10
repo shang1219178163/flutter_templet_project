@@ -258,7 +258,7 @@ class _BoxDemoState extends State<BoxDemo> {
         maxWidth: width + 20,
         maxHeight: width + 20,
         child: Container(
-          color: Colors.yellow.withOpacity(0.5),
+          color: Colors.yellow.withValues(alpha: 0.5),
         ),
       ),
     );

@@ -181,7 +181,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
   }) {
     final textColor = isSelected ? primaryColor : Color(0xff737373);
     final borderColor = isSelected ? primaryColor : Colors.transparent;
-    final bgColor = textColor.withOpacity(0.1);
+    final bgColor = textColor.withValues(alpha: 0.1);
 
     final title = titleCb(e);
 

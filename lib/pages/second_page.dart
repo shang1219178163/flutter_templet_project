@@ -208,7 +208,7 @@ class _SecondPageState extends State<SecondPage> {
                   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   minimumSize: Size(50, 18),
-                  // backgroundColor: Colors.green.withOpacity(0.1),
+                  // backgroundColor: Colors.green.withValues(alpha: 0.1),
                   // foregroundColor: Colors.green,
                 ),
                 tooltip: '这是一个图标按钮',
@@ -265,7 +265,7 @@ class _SecondPageState extends State<SecondPage> {
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       minimumSize: Size(50, 18),
-                      backgroundColor: Colors.green.withOpacity(0.1),
+                      backgroundColor: Colors.green.withValues(alpha: 0.1),
                       foregroundColor: Colors.green,
                     ),
                     onPressed: () => DLog.d('TextButton'),
@@ -704,7 +704,7 @@ class _SecondPageState extends State<SecondPage> {
                     textColor: Colors.white,
                     disabledTextColor: Colors.white,
                     color: Colors.blue,
-                    disabledColor: Colors.grey.withOpacity(0.5),
+                    disabledColor: Colors.grey.withValues(alpha: 0.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4.0)),
                     ),
@@ -716,8 +716,8 @@ class _SecondPageState extends State<SecondPage> {
                     disabledElevation: 0,
                     textColor: Colors.white,
                     disabledTextColor: Colors.white,
-                    color: Colors.blue.withOpacity(0.5),
-                    disabledColor: Colors.grey.withOpacity(0.5),
+                    color: Colors.blue.withValues(alpha: 0.5),
+                    disabledColor: Colors.grey.withValues(alpha: 0.5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4.0)),
                     ),
@@ -1223,7 +1223,7 @@ class _SecondPageState extends State<SecondPage> {
               LinearGradient(
                 colors: <Color>[
                   context.themeData.colorScheme.primary,
-                  context.themeData.colorScheme.primary.withOpacity(0.5),
+                  context.themeData.colorScheme.primary.withValues(alpha: 0.5),
                 ],
               ),
         ),
@@ -1250,7 +1250,7 @@ class _SecondPageState extends State<SecondPage> {
               // height: constraints.maxHeight,
               colors: [
                 const Color(0xFFFA709A),
-                const Color(0xFFFA709A).withOpacity(0.3),
+                const Color(0xFFFA709A).withValues(alpha: 0.3),
               ]),
           child: Center(child: Text("GradientBoundPainter")),
         ),

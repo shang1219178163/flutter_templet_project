@@ -137,7 +137,7 @@ class NLongPressMenuOne extends StatelessWidget {
               //   ((rowCount - 1) * crossAxisCount - 1)
               // ]);
 
-              final borderSideColor = isLastRow ? Colors.transparent : const Color(0xffE5E5E5).withOpacity(0.2);
+              final borderSideColor = isLastRow ? Colors.transparent : const Color(0xffE5E5E5).withValues(alpha: 0.2);
 
               final child = Container(
                 width: itemWidthNew,

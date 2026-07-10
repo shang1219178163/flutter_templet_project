@@ -383,8 +383,8 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                   colors: [
                     Colors.transparent,
                     Colors.transparent,
-                    Colors.grey.withOpacity(.7),
-                    Colors.grey.withOpacity(.7)
+                    Colors.grey.withValues(alpha: .7),
+                    Colors.grey.withValues(alpha: .7)
                   ],
                   stops: [0, .5, .5, 1],
                 ).createShader(bounds);

@@ -154,7 +154,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
         boxShadow: [
           BoxShadow(
               offset: Offset(10, 10),
-              color: Color(0xFF4D70A6).withOpacity(0.2),
+              color: Color(0xFF4D70A6).withValues(alpha: 0.2),
               blurRadius: 16),
           BoxShadow(
               offset: Offset(-10, -10),
@@ -181,7 +181,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
           child: Icon(
             FontAwesomeIcons.apple,
             size: 40,
-            color: Color(0xFF4D70A6).withOpacity(0.5),
+            color: Color(0xFF4D70A6).withValues(alpha: 0.5),
           ),
         ),
         Positioned(
@@ -190,7 +190,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
           child: Icon(
             FontAwesomeIcons.ccMastercard,
             size: 40,
-            color: Color(0xFF4D70A6).withOpacity(0.5),
+            color: Color(0xFF4D70A6).withValues(alpha: 0.5),
           ),
         ),
         Positioned(
@@ -233,7 +233,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
         Text(
           "Foce ID before payment",
           style: TextStyle(
-            color: Color(0xFF4D70A6).withOpacity(.7),
+            color: Color(0xFF4D70A6).withValues(alpha: .7),
             fontSize: 14,
           ),
         ),
@@ -268,14 +268,14 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
-                      color: Color(0xFF4D70A6).withOpacity(.7)),
+                      color: Color(0xFF4D70A6).withValues(alpha: .7)),
                 ),
                 Text(
                   cost,
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF4D70A6).withOpacity(.7)),
+                      color: Color(0xFF4D70A6).withValues(alpha: .7)),
                 ),
               ],
             ),
@@ -302,7 +302,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
     return Stack(
       children: <Widget>[
         InnerShadow(
-          color: Color(0xFF4D70A6).withOpacity(.2),
+          color: Color(0xFF4D70A6).withValues(alpha: .2),
           offset: Offset(5, 5),
           blur: 2,
           child: Container(

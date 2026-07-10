@@ -391,7 +391,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
           child: Container(
             height: indicatorItemHeight,
             width: indicatorItemWidth.toDouble() * pageCount,
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
           ),
         ),
         ValueListenableBuilder<double>(

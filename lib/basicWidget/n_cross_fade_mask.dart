@@ -83,9 +83,9 @@ class NCrossFadeMask<T> extends StatelessWidget {
                       begin: Alignment.topCenter, // CSS 90deg 相当于从左到右
                       end: Alignment.bottomCenter,
                       colors: [
-                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withOpacity(0),
-                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withOpacity(0),
-                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withOpacity(0),
+                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withValues(alpha: 0),
+                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withValues(alpha: 0),
+                        (isDark ? Color(0xff242434) : const Color(0xffF9F9F9)).withValues(alpha: 0),
                       ],
                       stops: [0, 0.6, 1.0],
                     ),
@@ -108,8 +108,8 @@ class NCrossFadeMask<T> extends StatelessWidget {
                         begin: Alignment.topCenter, // CSS 90deg 相当于从左到右
                         end: Alignment.bottomCenter,
                         colors: [
-                          (isDark ? Color(0xff28283B) : Color(0xffF9F9F9)).withOpacity(0),
-                          (isDark ? Color(0xff28283B) : Color(0xffF9F9F9)).withOpacity(1.0),
+                          (isDark ? Color(0xff28283B) : Color(0xffF9F9F9)).withValues(alpha: 0),
+                          (isDark ? Color(0xff28283B) : Color(0xffF9F9F9)).withValues(alpha: 1.0),
                         ],
                       ),
                     ),

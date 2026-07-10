@@ -399,7 +399,7 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
                   height: widget.height,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF86571).withOpacity(0.95),
+                    color: const Color(0xFFF86571).withValues(alpha: 0.95),
                     // borderRadius: const BorderRadius.all(Radius.circular(4)),
                   ),
                   child: widget.child,

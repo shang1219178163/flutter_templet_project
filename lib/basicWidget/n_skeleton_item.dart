@@ -23,7 +23,7 @@ class NSkeletonItem extends StatelessWidget {
     // final backgroundColor = themeData.colorScheme.surfaceVariant;
     final foregroundColor = themeData.colorScheme.surface;
 
-    final backgroundColor = Colors.black.withOpacity(0.05);
+    final backgroundColor = Colors.black.withValues(alpha: 0.05);
 
     if (direction == Axis.vertical) {
       return Card(

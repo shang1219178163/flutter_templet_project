@@ -115,7 +115,7 @@ class _NPopViewBoxState extends State<NPopViewBox> {
               icon: Icon(
                 Icons.clear,
                 size: 20,
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withValues(alpha: 0.5),
               ),
             ),
           ),

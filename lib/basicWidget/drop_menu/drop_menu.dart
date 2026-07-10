@@ -66,7 +66,7 @@ class DropMenu {
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                       boxShadow: [
                         BoxShadow(
-                          color: inverseColor.withOpacity(0.12),
+                          color: inverseColor.withValues(alpha: 0.12),
                           offset: Offset(0, 0),
                           blurRadius: 6,
                           spreadRadius: 0,

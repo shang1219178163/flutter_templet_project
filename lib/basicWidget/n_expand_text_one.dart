@@ -108,7 +108,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
                                 // vertical: 8,
                                 ),
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.05),
+                              color: Colors.black.withValues(alpha: 0.05),
                             ),
                             child: Text(
                               widget.data,
@@ -123,10 +123,10 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
                                 height: 25,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    // color:  context.themeData.colorScheme.primary.withOpacity(0.3),
+                                    // color:  context.themeData.colorScheme.primary.withValues(alpha: 0.3),
                                     // gradient: isExpand ? null : LinearGradient(
                                     //   colors: [
-                                    //     Colors.red.withOpacity(0.5),
+                                    //     Colors.red.withValues(alpha: 0.5),
                                     //     Colors.red,
                                     //   ],
                                     //   begin: Alignment.topCenter,
@@ -158,7 +158,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              Color(0x99FFFFFF).withOpacity(0.6),
+                              Color(0x99FFFFFF).withValues(alpha: 0.6),
                               Colors.white,
                             ],
                             begin: Alignment.topCenter,

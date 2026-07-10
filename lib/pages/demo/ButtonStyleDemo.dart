@@ -115,7 +115,7 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
           //       OutlinedButton(
           //         style: buttonStyle.copyWith(
           //           foregroundColor: WidgetStateProperty.all(Colors.blue),
-          //           backgroundColor: WidgetStateProperty.all(Colors.blue.withOpacity(0.1)),
+          //           backgroundColor: WidgetStateProperty.all(Colors.blue.withValues(alpha: 0.1)),
           //           side: WidgetStateProperty.all(
           //             BorderSide(color: Colors.transparent, width: 1),
           //           ),
