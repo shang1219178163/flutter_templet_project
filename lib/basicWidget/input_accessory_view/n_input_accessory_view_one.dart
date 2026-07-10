@@ -286,8 +286,8 @@ class NInputAccessoryViewOne extends StatefulWidget {
 class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
   late FocusNode focusNode = widget.focusNode ?? FocusNode();
   var inputType = InputType.text;
-  final AssetUploadBoxController uploadController = AssetUploadBoxController();
-  late List<AssetUploadModel> selectedModels = <AssetUploadModel>[];
+  final uploadController = AssetUploadBoxController();
+  var selectedModels = <AssetUploadModel>[];
   List<String> urls = <String>[];
 
   @override

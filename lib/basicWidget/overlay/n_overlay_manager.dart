@@ -28,7 +28,7 @@ class NOverlayManager {
 
   /// 刷新当前 Overlay，不销毁 Entry
   static void rebuild() {
-    for (final OverlayEntry entry in _entries) {
+    for (final entry in _entries) {
       entry.markNeedsBuild();
     }
   }
