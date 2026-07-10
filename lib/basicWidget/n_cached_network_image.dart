@@ -26,29 +26,8 @@ class NCachedNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final placeholderWidget = Image(
-    //   image: placeholder,
-    //   fit: fit,
-    //   width: width,
-    //   height: height,
-    //   color: color,
-    //   colorBlendMode: colorBlendMode,
-    // );
-
     final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
-    final colorFilter = color == null ? null : ColorFilter.mode(color!, blendModeNew);
-    final placeholderWidget = Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius ?? 0),
-        image: DecorationImage(
-          image: placeholder,
-          fit: fit,
-          colorFilter: colorFilter,
-        ),
-      ),
-    );
+    final placeholderWidget = buildPlaceholder();
 
     return CachedNetworkImage(
       cacheKey: imageUrl,
@@ -62,6 +41,12 @@ class NCachedNetworkImage extends StatelessWidget {
       colorBlendMode: blendModeNew,
       placeholder: (_, url) => placeholderWidget,
       errorWidget: (_, url, e) => placeholderWidget,
+      // progressIndicatorBuilder: (context, url, progress) {
+      //   // return CircularProgressIndicator(value: progress.progress);
+      //   return buildPlaceholder(
+      //     child: CircularProgressIndicator(value: progress.progress),
+      //   );
+      // },
       imageBuilder: (context, imageProvider) {
         return DecoratedBox(
           decoration: BoxDecoration(
@@ -73,6 +58,27 @@ class NCachedNetworkImage extends StatelessWidget {
           ),
         );
       },
+      errorListener: (error) {
+        debugPrint('$runtimeType 图片加载失败：$error');
+      },
+    );
+  }
+
+  Widget buildPlaceholder({Widget? child}) {
+    final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
+    final colorFilter = color == null ? null : ColorFilter.mode(color!, blendModeNew);
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius ?? 0),
+        image: DecorationImage(
+          image: placeholder,
+          fit: BoxFit.contain,
+          colorFilter: colorFilter,
+        ),
+      ),
+      child: child,
     );
   }
 }
