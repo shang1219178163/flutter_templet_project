@@ -30,6 +30,9 @@ class ChatInputEmoji extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final surface = theme.colorScheme.surface;
+    final onSurface = theme.colorScheme.onSurface;
     return Stack(
       children: [
         SizedBox(
@@ -43,30 +46,36 @@ class ChatInputEmoji extends StatelessWidget {
               crossAxisSpacing: crossAxisSpacing,
               childAspectRatio: childAspectRatio,
             ),
-            childrenDelegate: SliverChildBuilderDelegate((context, position) {
-              return _getEmojiItemContainer(position);
-            }, childCount: EmojiMapping.emojis.length),
+            childrenDelegate: SliverChildBuilderDelegate(
+              (context, position) {
+                return buildEmojiItem(position);
+              },
+              childCount: EmojiMapping.emojis.length,
+            ),
           ),
         ),
         Positioned(
           right: 20,
-          width: 36,
           bottom: 20,
-          height: 36,
           child: InkWell(
             onTap: () {
               deleteOnTap?.call();
             },
             child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                // boxShadow: ChatUIKitTheme.of(context).color.isDark ? ChatUIKitShadow.darkSmall : ChatUIKitShadow.lightSmall,
-                borderRadius: BorderRadius.circular(24),
+              padding: const EdgeInsets.all(4),
+              decoration: ShapeDecoration(
+                color: surface,
+                shape: StadiumBorder(),
+                shadows: [
+                  BoxShadow(
+                    color: onSurface.withValues(alpha: 0.1),
+                    blurRadius: 8,
+                    spreadRadius: 4,
+                    offset: Offset(0, 0),
+                  ),
+                ],
               ),
-              child: Icon(
-                Icons.arrow_back,
-                size: 40,
-              ),
+              child: Icon(Icons.arrow_back, size: 24),
             ),
           ),
         ),
@@ -74,21 +83,24 @@ class ChatInputEmoji extends StatelessWidget {
     );
   }
 
-  _getEmojiItemContainer(int index) {
-    var emoji = EmojiMapping.emojiImages[index];
-    return ChatExpression(emoji, bigSizeRatio, emojiClicked);
+  Widget buildEmojiItem(int index) {
+    return ChatExpression(
+      EmojiMapping.emojis[index],
+      bigSizeRatio,
+      emojiClicked,
+    );
   }
 }
 
 class ChatExpression extends StatelessWidget {
-  final String emojiImage;
+  final String emoji;
 
   final double bigSizeRatio;
 
   final EmojiClick? emojiClicked;
 
   const ChatExpression(
-    this.emojiImage,
+    this.emoji,
     this.bigSizeRatio,
     this.emojiClicked, {
     super.key,
@@ -96,21 +108,17 @@ class ChatExpression extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Widget icon = Text(
-    //   emoji,
-    //   style: const TextStyle(fontSize: 30),
-    // );
-    Widget icon = Icon(Icons.emoji_emotions_outlined, size: 26);
-    return TextButton(
-      style: ButtonStyle(
-        padding: WidgetStateProperty.all(
-          EdgeInsets.all(bigSizeRatio),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        emojiClicked?.call(emoji);
+      },
+      child: Center(
+        child: Text(
+          emoji,
+          style: TextStyle(fontSize: 26 - bigSizeRatio * 10),
         ),
       ),
-      onPressed: () {
-        emojiClicked?.call(EmojiMapping.replaceImageToEmoji(emojiImage));
-      },
-      child: icon,
     );
   }
 }

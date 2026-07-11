@@ -127,7 +127,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
   Widget buildLeftNav(List<CategoryItem> leftNavItems) {
     return Container(
       width: 88,
-      color: themeProvider.color181829OrF6F6F6,
+      color: themeProvider.color242434OrF6F6F6,
       child: Consumer<BallCategoryProvider>(builder: (context, provider, child) {
         return ListView.builder(
           controller: _leftNavScrollController,
@@ -154,7 +154,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
                     height: 44,
                     // padding: const EdgeInsets.symmetric(vertical: 14.0),
                     decoration: BoxDecoration(
-                        color: isSelected ? themeProvider.color242434OrWhite : themeProvider.color181829OrF6F6F6,
+                        color: isSelected ? themeProvider.color242434OrWhite : themeProvider.color242434OrF6F6F6,
                         borderRadius: !isSelected
                             ? _selectedLeftNavIndex != 0
                                 ? BorderRadius.only(

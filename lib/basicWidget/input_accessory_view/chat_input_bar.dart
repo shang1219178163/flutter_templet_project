@@ -18,16 +18,12 @@ class EmojiInputView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
     return AnimatedContainer(
       onEnd: () {},
       curve: Curves.easeIn,
       duration: const Duration(milliseconds: 300),
       height: _inputType == InputType.emoji ? 280 : 0,
       child: Container(
-        color: isDark ? const Color(0xff21213d) : Colors.white,
         child: ChatInputEmoji(
           deleteOnTap: () {
             var selection = textEditingController.selection;

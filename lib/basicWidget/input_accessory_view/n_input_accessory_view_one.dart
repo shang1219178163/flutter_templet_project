@@ -350,7 +350,7 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
   Widget build(BuildContext context) {
     late final themeProvider = context.read<ThemeProvider>();
 
-    final color23242FOrWhite = themeProvider.isDark ? Color(0xFF23242F) : Colors.white;
+    final color242434OrF6F6F6 = themeProvider.color242434OrF6F6F6;
 
     final textField = TextField(
       focusNode: widget.focusNode,
@@ -366,21 +366,23 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
         counterText: '',
         contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6).copyWith(bottom: 8),
         hintText: widget.hintText,
+        fillColor: color242434OrF6F6F6,
+        filled: true,
       ),
     );
     final Widget textFieldNew = widget.textFieldBuilder?.call(textField) ?? textField;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 13),
       decoration: BoxDecoration(
-        color: color23242FOrWhite,
-        border: Border.all(color: Colors.blue),
+        color: themeProvider.color242434OrWhite,
+        // border: Border.all(color: Colors.blue),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             decoration: BoxDecoration(
-              color: themeProvider.color181829OrF6F6F6,
+              color: color242434OrF6F6F6,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(

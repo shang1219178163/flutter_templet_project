@@ -127,7 +127,7 @@ class _ToggleButtonState<T> extends State<ToggleButton<T>> {
             height: height - 2,
             child: Container(
               decoration: BoxDecoration(
-                color: sliderColor ?? themeProvider.color181829OrF6F6F6,
+                color: sliderColor ?? themeProvider.color242434OrF6F6F6,
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
             ),

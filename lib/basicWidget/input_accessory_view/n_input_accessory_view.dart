@@ -135,7 +135,7 @@ class NInputAccessoryView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 4, right: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: themeProvider.color181829OrF6F6F6,
+                  color: themeProvider.color242434OrF6F6F6,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: textFieldNew,

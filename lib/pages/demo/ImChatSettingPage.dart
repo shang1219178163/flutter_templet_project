@@ -38,7 +38,7 @@ class _ImChatSettingPageState extends State<ImChatSettingPage> {
     final themeProvider = context.read<ThemeProvider>();
 
     return Scaffold(
-      backgroundColor: themeProvider.color181829OrF6F6F6,
+      backgroundColor: themeProvider.color242434OrF6F6F6,
       appBar: AppBar(
         title: Text("聊天设置"),
       ),

@@ -411,13 +411,13 @@ class DiscussListItem extends StatelessWidget {
                 image: AssetImage(Assets.discussIcArrow),
                 width: 9,
                 height: 8,
+                color: themeProvider.color181829OrF6F6F6,
               ),
             ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              // color: themeProvider.color181829OrF6F6F6,
-              color: Color(0xFFF6F6F6),
+              color: themeProvider.color181829OrF6F6F6,
               border: border,
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
