@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_d
 import 'package:flutter_templet_project/basicWidget/refresh/n_custom_scrollView.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/model/NewsDiscussRootModel.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/provider/discuss_provider.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/widget/discuss_list_item.dart';
@@ -154,13 +155,16 @@ class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryV
       ),
       message: accessorySession.inputText,
       imageUrls: accessorySession.selectedUrls,
+      showTime: DateTime.now().toString().timeDescription,
     );
 
     NInputAccessoryViewOne.clearContent();
+    final items = [...refreshController.items];
     final targetIndex = discussProvider.ascending ? discussProvider.messages.length : 0;
-    discussProvider.messages.insert(targetIndex, model);
-    refreshController.updateItems(discussProvider.messages);
+
+    items.insert(targetIndex, model);
     discussProvider.total += 1;
+    refreshController.updateItems(items);
     refreshController.updateUI();
   }
 }
