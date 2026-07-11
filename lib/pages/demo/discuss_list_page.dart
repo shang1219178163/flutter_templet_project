@@ -23,7 +23,6 @@ import 'package:flutter_templet_project/pages/demo/discuss/widget/news_detail_bo
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class DiscussListPage extends StatefulWidget {
   const DiscussListPage({
@@ -42,7 +41,13 @@ class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryV
 
   final refreshController = NListRefreshController<NewsDiscussDetailModel>();
 
-  late final discussProvider = context.read<NewsDiscussProvider>();
+  final discussProvider = NewsDiscussProvider();
+
+  @override
+  void dispose() {
+    discussProvider.dispose();
+    super.dispose();
+  }
 
   @override
   void didUpdateWidget(covariant DiscussListPage oldWidget) {
@@ -51,21 +56,14 @@ class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryV
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => NewsDiscussProvider()),
-      ],
-      builder: (context, child) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("$widget"),
-          ),
-          body: buildBody(),
-          bottomNavigationBar: NewsDetailBottomBar(
-            onTap: () => showInputView(onSend: onSend),
-          ),
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("$widget"),
+      ),
+      body: buildBody(),
+      bottomNavigationBar: NewsDetailBottomBar(
+        onTap: () => showInputView(onSend: onSend),
+      ),
     );
   }
 

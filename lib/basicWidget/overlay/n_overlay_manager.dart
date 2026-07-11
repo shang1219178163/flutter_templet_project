@@ -20,6 +20,7 @@ class NOverlayManager {
 
   /// 当前 OverlayEntry 列表
   static final List<OverlayEntry> _entries = [];
+  static List<OverlayEntry> get entries => _entries;
 
   /// 当前是否有 Toast 显示
   static bool get isShowing => _entries.isNotEmpty;

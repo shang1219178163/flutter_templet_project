@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/elevated_btn.dart';
 import 'package:flutter_templet_project/basicWidget/input_accessory_view/asset_picker_manager/asset_picker_manager.dart';
 import 'package:flutter_templet_project/basicWidget/input_accessory_view/chat_input_bar.dart';
-import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_manager.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
@@ -120,41 +120,42 @@ class NInputAccessoryViewOne extends StatefulWidget {
   final List<AssetUploadModel> selectedModels;
 
   static void _onKeyboardMetricsChanged() {
-    if (NOverlayManager.isShowing) {
-      NOverlayManager.rebuild();
+    if (NOverlayDialog.isShowing) {
+      NOverlayDialog.build();
     }
   }
 
   static Widget _buildOverlayEntry(BuildContext ctx) {
     final bottom = NScreenManager.mediaQueryData.viewInsets.bottom;
-    return Positioned(
-      left: 0,
-      right: 0,
-      bottom: bottom,
-      child: Offstage(
-        offstage: !accessorySession.visible,
-        child: TapRegion(
-          onTapOutside: (PointerDownEvent event) {
-            accessorySession.inputText = accessorySession.controller?.text ?? '';
-            accessorySession.focusNode?.unfocus();
-            dismiss();
-          },
-          child: NInputAccessoryViewOne(
-            key: const ValueKey<String>('n_input_accessory_view_one'),
-            focusNode: accessorySession.focusNode,
-            controller: accessorySession.controller!,
-            keyboardType: accessorySession.keyboardType,
-            hintText: accessorySession.hintText,
-            maxLines: accessorySession.maxLines,
-            maxLength: accessorySession.maxLength,
-            inputFormatters: accessorySession.inputFormatters,
-            onConfirm: () {
-              accessorySession.onConfirm?.call();
+    return Padding(
+      padding: EdgeInsets.only(bottom: bottom),
+      child: SizedBox(
+        width: MediaQuery.sizeOf(ctx).width,
+        child: Offstage(
+          offstage: !accessorySession.visible,
+          child: TapRegion(
+            onTapOutside: (PointerDownEvent event) {
+              accessorySession.inputText = accessorySession.controller?.text ?? '';
+              accessorySession.focusNode?.unfocus();
               dismiss();
             },
-            onPhoto: accessorySession.onPhoto,
-            onEmoji: accessorySession.onEmoji,
-            selectedModels: accessorySession.selectedModels,
+            child: NInputAccessoryViewOne(
+              key: const ValueKey<String>('n_input_accessory_view_one'),
+              focusNode: accessorySession.focusNode,
+              controller: accessorySession.controller!,
+              keyboardType: accessorySession.keyboardType,
+              hintText: accessorySession.hintText,
+              maxLines: accessorySession.maxLines,
+              maxLength: accessorySession.maxLength,
+              inputFormatters: accessorySession.inputFormatters,
+              onConfirm: () {
+                accessorySession.onConfirm?.call();
+                dismiss();
+              },
+              onPhoto: accessorySession.onPhoto,
+              onEmoji: accessorySession.onEmoji,
+              selectedModels: accessorySession.selectedModels,
+            ),
           ),
         ),
       ),
@@ -166,16 +167,18 @@ class NInputAccessoryViewOne extends StatefulWidget {
     if (accessorySession.focusNode == null || accessorySession.controller == null) {
       return;
     }
-    if (NOverlayManager.isShowing) {
-      NOverlayManager.rebuild();
+    if (NOverlayDialog.isShowing) {
+      NOverlayDialog.build();
       return;
     }
     NScreenManager.addListener(_onKeyboardMetricsChanged);
     final contextNew = context ?? ToolUtil.navigator.context;
     accessorySession.isShowing = true;
-    NOverlayManager.show(
+    NOverlayDialog.show(
       contextNew,
-      autoDismiss: false,
+      hideBarrier: true,
+      barrierDismissible: false,
+      from: Alignment.bottomCenter,
       builder: _buildOverlayEntry,
     );
   }
@@ -188,7 +191,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
     accessorySession.isPickingAssets = true;
     accessorySession.visible = false;
     NScreenManager.removeListener(_onKeyboardMetricsChanged);
-    NOverlayManager.clear();
+    NOverlayDialog.dismiss(immediately: true);
     await WidgetsBinding.instance.endOfFrame;
     try {
       final pickedModels = await AssetPickerManager.pickAssets(
@@ -209,7 +212,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
   static Future<void> hide() async {
     accessorySession.visible = false;
     NScreenManager.removeListener(_onKeyboardMetricsChanged);
-    NOverlayManager.clear();
+    NOverlayDialog.dismiss(immediately: true);
     await WidgetsBinding.instance.endOfFrame;
   }
 
@@ -236,7 +239,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
     List<AssetUploadModel>? selectedModels,
     bool visible = true,
   }) {
-    if (!NOverlayManager.isShowing) {
+    if (!NOverlayDialog.isShowing) {
       accessorySession.isShowing = false;
     }
     accessorySession.update(
@@ -266,7 +269,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
     accessorySession.isShowing = false;
     accessorySession.visible = true;
     NScreenManager.removeListener(_onKeyboardMetricsChanged);
-    NOverlayManager.clear();
+    NOverlayDialog.dismiss(immediately: true);
   }
 
   /// 清除输入内容和已选图片
@@ -274,8 +277,8 @@ class NInputAccessoryViewOne extends StatefulWidget {
     accessorySession.inputText = '';
     accessorySession.selectedModels = <AssetUploadModel>[];
     accessorySession.controller?.clear();
-    if (NOverlayManager.isShowing) {
-      NOverlayManager.rebuild();
+    if (NOverlayDialog.isShowing) {
+      NOverlayDialog.build();
     }
   }
 

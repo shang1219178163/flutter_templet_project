@@ -57,6 +57,8 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
   }
 
   Widget buildPage() {
+    final theme = Theme.of(context);
+    final backgroundColor = theme.colorScheme.surface;
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -105,14 +107,20 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
                           onPressed: () {
                             NOverlayDialog.sheet(
                               context,
-                              child: NPopupAdaptiveContainer(
-                                backgroundColor: Colors.transparent.withValues(alpha: 0),
-                                child: buildContent(
-                                  // height: 400,
-                                  margin: EdgeInsets.symmetric(horizontal: 30),
-                                  onTap: () {
-                                    NOverlayDialog.dismiss();
-                                  },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: backgroundColor,
+                                  // border: Border.all(color: Colors.blue),
+                                ),
+                                child: NPopupAdaptiveContainer(
+                                  minHeight: 300,
+                                  child: buildContent(
+                                    // height: 400,
+                                    margin: EdgeInsets.symmetric(horizontal: 30),
+                                    onTap: () {
+                                      NOverlayDialog.dismiss();
+                                    },
+                                  ),
                                 ),
                               ),
                             );

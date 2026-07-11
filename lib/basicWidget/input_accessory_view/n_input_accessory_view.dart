@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/elevated_btn.dart';
-import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_manager.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
@@ -59,27 +59,30 @@ class NInputAccessoryView extends StatelessWidget {
     int? maxLength,
   }) {
     final contextNew = context ?? ToolUtil.navigator.context;
-    NOverlayManager.show(
+    NOverlayDialog.show(
       contextNew,
-      autoDismiss: false,
-      builder: (c) {
+      hideBarrier: true,
+      barrierDismissible: false,
+      from: Alignment.bottomCenter,
+      builder: (BuildContext c) {
         final bottom = MediaQuery.of(c).viewInsets.bottom;
-        DLog.d("NOverlayManager.show $bottom");
-        return Positioned(
-          left: 0,
-          right: 0,
-          bottom: bottom,
-          child: NInputAccessoryView(
-            focusNode: focusNode,
-            controller: controller,
-            keyboardType: keyboardType,
-            hintText: hintText,
-            maxLines: maxLines,
-            maxLength: maxLength,
-            inputFormatters: inputFormatters,
-            onConfirm: (v) {
-              dismiss();
-            },
+        DLog.d("NOverlayDialog.show $bottom");
+        return Padding(
+          padding: EdgeInsets.only(bottom: bottom),
+          child: SizedBox(
+            width: MediaQuery.sizeOf(c).width,
+            child: NInputAccessoryView(
+              focusNode: focusNode,
+              controller: controller,
+              keyboardType: keyboardType,
+              hintText: hintText,
+              maxLines: maxLines,
+              maxLength: maxLength,
+              inputFormatters: inputFormatters,
+              onConfirm: (v) {
+                dismiss();
+              },
+            ),
           ),
         );
       },
@@ -87,7 +90,7 @@ class NInputAccessoryView extends StatelessWidget {
   }
 
   static void dismiss() {
-    NOverlayManager.clear();
+    NOverlayDialog.dismiss(immediately: true);
   }
 
   @override

@@ -47,7 +47,8 @@ class NOverlayDialog {
   /// 显示 BottomSheet
   static OverlayEntry show(
     BuildContext context, {
-    required Widget child,
+    Widget? child,
+    WidgetBuilder? builder,
     Alignment from = Alignment.bottomCenter,
     Duration duration = const Duration(milliseconds: 300),
     Curve curve = Curves.easeOutCubic,
@@ -59,6 +60,7 @@ class NOverlayDialog {
     OverlayEntry? below,
     OverlayEntry? above,
   }) {
+    assert(child != null || builder != null, 'child 或 builder 必须提供一个');
     if (isShowing) {
       dismiss(immediately: true);
     }
@@ -75,43 +77,46 @@ class NOverlayDialog {
       reverseCurve: Curves.easeIn,
     );
 
-    var content = child;
-    // ⭐ 中心弹窗：Fade
-    if (from == Alignment.center) {
-      content = FadeTransition(
-        opacity: animation.drive(
-          CurveTween(curve: Curves.easeOut),
-        ),
-        child: ScaleTransition(
-          scale: Tween<double>(begin: 0.9, end: 1.0).animate(animation),
-          child: content,
-        ),
-      );
-    } else {
-      // ⭐ 其余方向：Slide
-      content = FadeTransition(
-        opacity: animation,
-        child: SlideTransition(
-          position: animation.drive(
-            Tween<Offset>(
-              begin: Offset(from.x.sign, from.y.sign),
-              end: Offset.zero,
-            ).chain(
-              CurveTween(curve: curve),
-            ),
+    Widget wrapContent(Widget inner) {
+      var content = inner;
+      // ⭐ 中心弹窗：Fade
+      if (from == Alignment.center) {
+        content = FadeTransition(
+          opacity: animation.drive(
+            CurveTween(curve: Curves.easeOut),
           ),
-          child: content,
-        ),
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.9, end: 1.0).animate(animation),
+            child: content,
+          ),
+        );
+      } else {
+        // ⭐ 其余方向：Slide
+        content = FadeTransition(
+          opacity: animation,
+          child: SlideTransition(
+            position: animation.drive(
+              Tween<Offset>(
+                begin: Offset(from.x.sign, from.y.sign),
+                end: Offset.zero,
+              ).chain(
+                CurveTween(curve: curve),
+              ),
+            ),
+            child: content,
+          ),
+        );
+      }
+      return Align(
+        alignment: from,
+        child: content,
       );
     }
 
-    content = Align(
-      alignment: from,
-      child: content,
-    );
-
     _entry = OverlayEntry(
-      builder: (context) {
+      builder: (overlayContext) {
+        final inner = builder?.call(overlayContext) ?? child!;
+        final content = wrapContent(inner);
         if (hideBarrier) {
           return content;
         }
