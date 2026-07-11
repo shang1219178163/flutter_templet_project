@@ -44,7 +44,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   /// 文字间距
   double textOffset = 5;
 
-  var tuples = <Tuple4<String, int, int, ValueChanged<int>>>[];
+  var tuples = <Tuple4<String, int, int, void Function(int)>>[];
 
   // List<Function> get notifiers => tuples.map((e) => e.item4).toList();
   /// viewModel
@@ -137,7 +137,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
                     color: Theme.of(context).primaryColor,
                     readOnly: false,
                     onChanged: (value) {
-                      e.item4.call(value);
+                      e.item4(value);
                     },
                   ),
                 ],

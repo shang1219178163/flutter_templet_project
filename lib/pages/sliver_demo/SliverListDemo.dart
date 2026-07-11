@@ -34,7 +34,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
           builder: CupertinoSliverRefreshControlExt.customRefreshIndicator,
           onRefresh: onRefresh,
         ),
-        sectionHeader(child: Text('SliverList - NSliverDecorated')),
+        sectionHeader(child: Text('SliverList - DecoratedSliver')),
         buildListView(),
         sectionHeader(child: Text('SliverList - SliverChildListDelegate')),
         SliverList(
@@ -104,7 +104,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
           end: Alignment.bottomCenter,
           colors: [
             Colors.blue,
-            Colors.white.withValues(alpha: 0.0),
+            Colors.white.withOpacity(0.0),
           ],
         ),
       ),

@@ -15,7 +15,7 @@ class GlobalIsolateDemo extends StatefulWidget {
 class _GlobalIsolateDemoState extends State<GlobalIsolateDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+    final arguments = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -39,17 +39,18 @@ class _GlobalIsolateDemoState extends State<GlobalIsolateDemo> {
     // await GlobalIsolate.init();
     var a = 10;
 
-    final result = await GlobalIsolate.isolateDo(
-        params: {"a": a},
-        work: (Map<String, dynamic> params) async {
-          sleep(Duration(seconds: 2));
-          var a = params["a"] as int;
-          return {
-            "result1": "1 - ${a++}",
-            "result2": "2 - ${a++}",
-            "result3": "3 - ${a++}",
-          };
-        });
+    final result = (await GlobalIsolate.isolateDo(
+          params: {"a": a},
+          work: (Map<String, dynamic> params) async {
+            sleep(const Duration(seconds: 2));
+            final base = params["a"] as int;
+            return {
+              "result1": "1 - $base",
+              "result2": "2 - ${base + 1}",
+              "result3": "3 - ${base + 2}",
+            };
+          },
+        )) as Map<String, String>;
     debugPrint("result: $result");
   }
 }

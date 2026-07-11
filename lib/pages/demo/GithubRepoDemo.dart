@@ -74,38 +74,29 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
   Widget buildBody() {
     return Container(
       alignment: Alignment.center,
-      child: FutureBuilder(
-          future: _dio.get("https://api.github.com/orgs/flutterchina/repos"),
-          // future: RequestClient.get("https://api.github.com/orgs/flutterchina/repos"),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //请求完成
+      child: FutureBuilder<Response<List<dynamic>>>(
+          future: _dio.get<List<dynamic>>("https://api.github.com/orgs/flutterchina/repos"),
+          builder: (BuildContext context, AsyncSnapshot<Response<List<dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              //发生错误
-              if (snapshot.data == null || snapshot.hasError) {
+              if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               }
-
-              final response = snapshot.data as Response<dynamic>;
-
-              //请求成功，通过项目信息构建用于显示项目名称的ListView
-              final data = response.data as List<dynamic>? ?? <dynamic>[];
+              final response = snapshot.data;
+              if (response == null) {
+                return const Text('无数据');
+              }
+              final repos = response.data ?? <dynamic>[];
               return ListView(
-                children: data.map<Widget>((e) {
-                  final map = Map<String, dynamic>.from(e);
-                  final fullName = map["full_name"] as String;
-                  final url = map["url"] as String;
+                children: repos.map<Widget>((dynamic item) {
+                  final repo = item as Map<String, dynamic>;
                   return ListTile(
-                    title: Text(fullName),
-                    subtitle: Text(
-                      url,
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
-                    ),
+                    title: Text('${repo['full_name'] ?? ''}'),
+                    subtitle: Text('${repo['url'] ?? ''}'),
                   );
                 }).toList(),
               );
             }
-            //请求未完成时弹出loading
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }),
     );
   }
@@ -113,36 +104,31 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
   Widget _buildBodyByModel() {
     return Container(
       alignment: Alignment.center,
-      child: FutureBuilder(
+      child: FutureBuilder<Response<String>>(
           future: _dio.get<String>("https://api.github.com/orgs/flutterchina/repos"),
-          // future: RequestClient.get("https://api.github.com/orgs/flutterchina/repos"),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //请求完成
+          builder: (BuildContext context, AsyncSnapshot<Response<String>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              final response = snapshot.data as Response<String>;
-              //发生错误
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               }
-
-              ///字符串转json
-              var list = jsonDecode(response.data ?? '') as List<dynamic>;
-
-              ///json转模型
-              var models = list.map<Repository>((e) => Repository.fromJson(e)).toList();
-
-              ///界面显示
+              final response = snapshot.data;
+              if (response?.data == null) {
+                return const Text('无数据');
+              }
+              final list = jsonDecode(response!.data!) as List<dynamic>;
+              final models = list
+                  .map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>))
+                  .toList();
               return ListView(
                 children: models
-                    .map<Widget>((e) => ListTile(
+                    .map<Widget>((Repository e) => ListTile(
                           title: Text(e.name ?? "_"),
                           subtitle: Text(e.url ?? "_"),
                         ))
                     .toList(),
               );
             }
-            //请求未完成时弹出loading
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }),
     );
   }
@@ -150,36 +136,31 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
   Widget _buildBodyByModel1() {
     return Container(
       alignment: Alignment.center,
-      child: FutureBuilder(
-          future: _dio.get("https://api.github.com/orgs/flutterchina/repos"),
-          // future: RequestClient.get("https://api.github.com/orgs/flutterchina/repos"),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //请求完成
+      child: FutureBuilder<Response<List<dynamic>>>(
+          future: _dio.get<List<dynamic>>("https://api.github.com/orgs/flutterchina/repos"),
+          builder: (BuildContext context, AsyncSnapshot<Response<List<dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              final response = snapshot.data as Response<dynamic>;
-              //发生错误
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               }
-
-              ///字符串转json
-              // List<dynamic> list = jsonDecode(response.data);
-              ///json转模型
-              final data = response.data as List<dynamic>? ?? <dynamic>[];
-              var models = data.map<Repository>((e) => Repository.fromJson(e as Map<String, dynamic>)).toList();
-
-              ///界面显示
+              final response = snapshot.data;
+              if (response?.data == null) {
+                return const Text('无数据');
+              }
+              final data = response!.data ?? <dynamic>[];
+              final models = data
+                  .map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>))
+                  .toList();
               return ListView(
                 children: models
-                    .map<Widget>((e) => ListTile(
+                    .map<Widget>((Repository e) => ListTile(
                           title: Text(e.name ?? "_"),
                           subtitle: Text(e.url ?? "_"),
                         ))
                     .toList(),
               );
             }
-            //请求未完成时弹出loading
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }),
     );
   }

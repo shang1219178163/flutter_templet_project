@@ -187,24 +187,23 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     );
   }
 
-  List<TableRow> _renderTuples({List items = const []}) {
+  List<TableRow> _renderTuples({List<Object?> items = const []}) {
     if (items.isEmpty || !isTuple(items[0])) {
       return [];
     }
 
-    return items
-        .map((e) {
-          final tupleList = asTupleList(e);
-          return TableRow(
-              children: List.generate(
-                  tupleLength(e),
-                  (index) => Container(
-                        padding: EdgeInsets.all(8),
-                        child: Text(tupleList[index].toString()),
-                      )).toList(),
-            );
-        })
-        .toList();
+    return items.map((e) {
+      final array = tupleToList(e);
+
+      return TableRow(
+        children: List.generate(
+            array.length,
+            (index) => Container(
+                  padding: EdgeInsets.all(8),
+                  child: Text('${array[index]}'),
+                )).toList(),
+      );
+    }).toList();
   }
 
   Widget buildOtherPropertys() {
@@ -329,11 +328,11 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
   ];
 }
 
-bool isTuple(dynamic obj) {
+bool isTuple(Object? obj) {
   return obj is Tuple2 || obj is Tuple3 || obj is Tuple4 || obj is Tuple5 || obj is Tuple6 || obj is Tuple7;
 }
 
-List<dynamic> asTupleList(dynamic obj) {
+List<dynamic> tupleToList(Object? obj) {
   if (obj is Tuple2) {
     return obj.toList();
   }
@@ -353,26 +352,4 @@ List<dynamic> asTupleList(dynamic obj) {
     return obj.toList();
   }
   return [];
-}
-
-int tupleLength(dynamic obj) {
-  if (obj is Tuple2) {
-    return 2;
-  }
-  if (obj is Tuple3) {
-    return 3;
-  }
-  if (obj is Tuple4) {
-    return 4;
-  }
-  if (obj is Tuple5) {
-    return 5;
-  }
-  if (obj is Tuple6) {
-    return 6;
-  }
-  if (obj is Tuple7) {
-    return 7;
-  }
-  return 0;
 }
