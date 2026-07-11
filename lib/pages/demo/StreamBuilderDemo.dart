@@ -10,9 +10,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/mixin/search_controller_mixin.dart';
 import 'package:flutter_templet_project/util/debounce_text_controller.dart';
-import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class StreamBuilderDemo extends StatefulWidget {
@@ -24,7 +22,7 @@ class StreamBuilderDemo extends StatefulWidget {
   _StreamBuilderDemoState createState() => _StreamBuilderDemoState();
 }
 
-class _StreamBuilderDemoState extends State<StreamBuilderDemo> with SearchControllerMixin {
+class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
   // final textController = TextEditingController();
   // late final debounceTextController = DebounceTextController(
   //   controller: textController,
@@ -125,15 +123,6 @@ UI 事件：onPressed, TextField.onChanged → 都是 Stream。
         ],
       ),
     );
-  }
-
-  @override
-  TextEditingController get searchController => textController;
-
-  @override
-  void onSearchChanged(String v) {
-    DLog.d(v);
-    searchVN.value = v;
   }
 }
 

@@ -76,7 +76,7 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
       likeNumberStr = widget.likeNumberZeroStr ?? "";
     }
 
-    final isLike = like ?? false;
+    final isLike = like;
     final likeIcon = isLike == true ? Assets.discussIcLikeHighlighted : Assets.discussIcLike;
 
     return NPair(

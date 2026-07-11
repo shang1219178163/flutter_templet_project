@@ -121,8 +121,8 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
             // 表面颜色
             buildColorItem('surface', colorScheme.surface, colorScheme.onSurface),
             buildColorItem('onSurface', colorScheme.onSurface, colorScheme.surface),
-            buildColorItem('surfaceVariant', colorScheme.surfaceVariant, colorScheme.onSurfaceVariant),
-            buildColorItem('onSurfaceVariant', colorScheme.onSurfaceVariant, colorScheme.surfaceVariant),
+            buildColorItem('surfaceContainerHighest', colorScheme.surfaceContainerHighest, colorScheme.onSurfaceVariant),
+            buildColorItem('onSurfaceVariant', colorScheme.onSurfaceVariant, colorScheme.surfaceContainerHighest),
 
             // 背景颜色
             // buildColorItem('background', colorScheme.background, colorScheme.onBackground),
@@ -135,8 +135,8 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
             buildColorItem('onErrorContainer', colorScheme.onErrorContainer, colorScheme.errorContainer),
 
             // 轮廓颜色
-            buildColorItem('outline', colorScheme.outline, colorScheme.background),
-            buildColorItem('outlineVariant', colorScheme.outlineVariant, colorScheme.background),
+            buildColorItem('outline', colorScheme.outline, colorScheme.surface),
+            buildColorItem('outlineVariant', colorScheme.outlineVariant, colorScheme.surface),
 
             // 反转表面颜色
             buildColorItem('inverseSurface', colorScheme.inverseSurface, colorScheme.onInverseSurface),
@@ -157,8 +157,8 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
   }
 
   Widget buildColorItem(String name, Color bgColor, Color textColor) {
-    final bgColorHex = '#${bgColor.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
-    final textColorHex = '#${textColor.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
+    final bgColorHex = '#${bgColor.argbInt.toRadixString(16).padLeft(8, '0').toUpperCase()}';
+    final textColorHex = '#${textColor.argbInt.toRadixString(16).padLeft(8, '0').toUpperCase()}';
     final desc = [bgColorHex, textColorHex].join(", ");
 
     return Container(

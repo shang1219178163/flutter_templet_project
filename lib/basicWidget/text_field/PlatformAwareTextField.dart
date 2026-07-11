@@ -29,13 +29,13 @@ class PlatformAwareTextField extends StatelessWidget {
 
     return Focus(
       // 使用Focus来自定义键盘动作
-      onKey: (node, event) {
+      onKeyEvent: (node, event) {
         // **桌面/Web端专属逻辑**
-        if (isDesktop && event is RawKeyDownEvent) {
+        if (isDesktop && event is KeyDownEvent) {
           final logicalKey = event.logicalKey;
           // Tab键：移动到下一个字段
           if (logicalKey == LogicalKeyboardKey.tab) {
-            if (!event.isShiftPressed) {
+            if (!HardwareKeyboard.instance.isShiftPressed) {
               // 调用全局导航服务，移动到下一个焦点
               formNavigationService?.focusNext();
               return KeyEventResult.handled; // 阻止默认Tab行为

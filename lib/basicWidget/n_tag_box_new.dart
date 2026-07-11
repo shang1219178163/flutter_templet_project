@@ -36,16 +36,15 @@ class NTagBoxNew<E> extends StatefulWidget {
   final List<E> items;
 
   /// 标题回调
-  // final String Function(E e) titleCb;
-  final String Function(dynamic e) titleCb;
+  final String Function(E e) titleCb;
 
   /// 删除拦截
-  final bool Function(dynamic value, Function(E e))? canDelete;
+  final bool Function(E value, void Function(E e) onDelete)? canDelete;
 
   final VoidCallback onAdd;
-  // final void Function(List<E> value) onChanged;/// 勿删!!!
-  /// 更新会掉
-  final void Function(List<dynamic> value) onChanged;
+
+  /// 更新回调
+  final void Function(List<E> value) onChanged;
 
   final Radius radius;
   final Color tagColor;
@@ -53,10 +52,10 @@ class NTagBoxNew<E> extends StatefulWidget {
   final int max;
 
   @override
-  State<NTagBoxNew> createState() => _NTagBoxNewState<E>();
+  State<NTagBoxNew<E>> createState() => _NTagBoxNewState<E>();
 }
 
-class _NTagBoxNewState<E> extends State<NTagBoxNew> {
+class _NTagBoxNewState<E> extends State<NTagBoxNew<E>> {
   @override
   Widget build(BuildContext context) {
     return buildTags();
@@ -86,11 +85,11 @@ class _NTagBoxNewState<E> extends State<NTagBoxNew> {
             e: e,
             titleCb: widget.titleCb,
             onSelected: (_) {},
-            onDelete: (e) {
-              if (widget.canDelete?.call(e, onDelete) != true) {
+            onDelete: (item) {
+              if (widget.canDelete?.call(item, deleteItem) != true) {
                 return;
               }
-              onDelete(e);
+              deleteItem(item);
             },
             primaryColor: widget.tagColor,
           );
@@ -111,7 +110,7 @@ class _NTagBoxNewState<E> extends State<NTagBoxNew> {
     );
   }
 
-  onDelete(dynamic e) {
+  deleteItem(E e) {
     widget.items.remove(e);
     widget.onChanged.call(widget.items);
     setState(() {});

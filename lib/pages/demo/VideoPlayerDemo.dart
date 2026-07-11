@@ -50,8 +50,8 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
     // or the internet.
     var url =
         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
-    _controller = VideoPlayerController.network(
-      url,
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(url),
     );
     //_controller = VideoPlayerController.file(File(url));
 

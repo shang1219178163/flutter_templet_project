@@ -52,9 +52,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   @override
   bool get wantKeepAlive => true;
 
-  @override
-  bool get autoRefreshOnInit => false;
-
   final scrollController = ScrollController();
 
   @override

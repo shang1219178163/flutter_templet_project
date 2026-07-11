@@ -71,20 +71,20 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
     );
   }
 
-  List<TableRow> _renderTuples({List items = const []}) {
+  List<TableRow> _renderTuples({List<Object?> items = const []}) {
     if (items.isEmpty || !isTuple(items[0])) {
       return [];
     }
 
     return items.map((e) {
-      final array = asTupleList(e);
+      final array = tupleToList(e);
 
       return TableRow(
         children: List.generate(
             array.length,
             (index) => Container(
                   padding: EdgeInsets.all(8),
-                  child: Text(array[index].toString()),
+                  child: Text('${array[index]}'),
                 )).toList(),
       );
     }).toList();
@@ -105,11 +105,11 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
   ];
 }
 
-bool isTuple(dynamic obj) {
+bool isTuple(Object? obj) {
   return obj is Tuple2 || obj is Tuple3 || obj is Tuple4 || obj is Tuple5 || obj is Tuple6 || obj is Tuple7;
 }
 
-List<dynamic> asTupleList(dynamic obj) {
+List<dynamic> tupleToList(Object? obj) {
   if (obj is Tuple2) {
     return obj.toList();
   }
