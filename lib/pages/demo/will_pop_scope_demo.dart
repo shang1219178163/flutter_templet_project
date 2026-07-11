@@ -22,11 +22,26 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
   /// onWillPop 返回值
   bool enable = true;
 
-  /// onWillPop 事项为空
-  bool onWillPopNull = false;
-
   @override
   Widget build(BuildContext context) {
+    return PopScope(
+      canPop: enable,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop || enable) {
+          return;
+        }
+        DLog.d(["onPopInvokedWithResult", didPop, result].join(", "));
+        final shouldPop = await showAlert();
+        DLog.d("shouldPop: $shouldPop");
+        if (shouldPop) {
+          Navigator.of(context).pop({"desc": runtimeType});
+        }
+      },
+      child: buildPage(context),
+    );
+  }
+
+  Widget buildWillPopScope(BuildContext context) {
     return WillPopScope(
       // onWillPop: null,// 为 null 可返回
       onWillPop: enable
@@ -39,30 +54,29 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
     );
   }
 
-  Future<void> showAlert() async {
+  Future<bool> showAlert({String message = ""}) async {
     // 弹出确认对话框
     var shouldPop = await showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            title: Text("确认"),
-            content: Text("你确定要离开这个页面吗？"),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text("取消"),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text("确定"),
-              ),
-            ],
-          ),
+          builder: (context) {
+            return AlertDialog(
+              title: Text("确认"),
+              content: Text("你确定要离开这个页面吗？$message"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text("取消"),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text("确定"),
+                ),
+              ],
+            );
+          },
         ) ??
         false;
-    DLog.d("shouldPop: $shouldPop");
-    if (shouldPop) {
-      Navigator.of(context).pop();
-    }
+    return shouldPop;
   }
 
   Widget buildPage(BuildContext context) {
@@ -78,42 +92,17 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            buildSwitch(
-              name: 'onWillPop 返回：',
+            SwitchListTile(
+              title: Text('直接返回'),
               value: enable,
               onChanged: (bool val) {
                 enable = val;
                 setState(() {});
               },
             ),
-            buildSwitch(
-              name: 'onWillPop 参数为空：',
-              value: onWillPopNull,
-              onChanged: (bool val) {
-                onWillPopNull = val;
-                setState(() {});
-              },
-            ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget buildSwitch({
-    required String name,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Text(name),
-        Switch(
-          value: value,
-          onChanged: onChanged,
-        )
-      ],
     );
   }
 }

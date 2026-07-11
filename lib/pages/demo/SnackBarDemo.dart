@@ -49,16 +49,12 @@ class SnackBarDemoState extends State<SnackBarDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        // await Future.delayed(new Duration(seconds: 1));
-        // scaffoldMessenger.removeCurrentMaterialBanner();
-
-        await Future.delayed(Duration(milliseconds: 100), () async {
-          clearSnackBars();
-        });
-        debugPrint("WillPopScope");
-        return true;
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          Future.delayed(const Duration(milliseconds: 100), clearSnackBars);
+          debugPrint("PopScope");
+        }
       },
       child: Scaffold(
         persistentFooterButtons: footerItems.map((e) => TextButton(onPressed: e.action, child: Text(e.title))).toList(),

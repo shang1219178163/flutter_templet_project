@@ -38,16 +38,16 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: !isShowingMaterial,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
+        }
         if (isShowingMaterial) {
           showSnackBar(buildSnackBarTip());
         }
-        // await Future.delayed(Duration(milliseconds: 1300), () async {
-        //   clearMaterialBanners();
-        // });
-        debugPrint("WillPopScope");
-        return !isShowingMaterial;
+        debugPrint("PopScope");
       },
       child: Scaffold(
         persistentFooterButtons: ["one", "two"]

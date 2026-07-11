@@ -71,14 +71,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (_navigatorKey.currentState?.canPop() ?? false) {
-          _navigatorKey.currentState?.maybePop();
-          return false;
-        } else {
-          return true;
+    return PopScope(
+      canPop: !(_navigatorKey.currentState?.canPop() ?? false),
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
         }
+        _navigatorKey.currentState?.maybePop();
       },
       child: Column(
         children: [
