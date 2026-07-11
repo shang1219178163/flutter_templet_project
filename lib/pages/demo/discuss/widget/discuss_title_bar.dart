@@ -20,15 +20,12 @@ class DiscussTitleBar extends StatefulWidget {
   final Widget? trailing;
   final bool isHot;
 
-  static const double barHeight = 44;
-
   @override
   State<DiscussTitleBar> createState() => _DiscussTitleBarState();
 }
 
 class _DiscussTitleBarState extends State<DiscussTitleBar>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-
   late final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
   late final themeProvider = context.read<ThemeProvider>();
 
@@ -70,45 +67,40 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
       fontFamily: "PingFang SC",
     );
 
-
-    return SizedBox(
-      height: DiscussTitleBar.barHeight,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: themeProvider.color242434OrWhite,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 4),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (widget.hasIndicator)
-                Container(
-                  width: 2,
-                  height: 18,
-                  margin: const EdgeInsets.only(right: 10),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
-                    color: AppColor.cancelColor,
-                  ),
-                ),
-              Expanded(
-                child: Container(
-                  // decoration: BoxDecoration(
-                  //   color: Colors.transparent,
-                  //   border: Border.all(color: Colors.blue),
-                  //   borderRadius: BorderRadius.all(Radius.circular(0)),
-                  // ),
-                  child: Text(
-                    widget.title,
-                    style: widget.style ?? style,
-                  ),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: themeProvider.color242434OrWhite,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 4),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (widget.hasIndicator)
+              Container(
+                width: 2,
+                height: 18,
+                margin: const EdgeInsets.only(right: 10),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
+                  color: AppColor.cancelColor,
                 ),
               ),
-              if (widget.trailing != null)
-               widget.trailing!,
-            ],
-          ),
+            Expanded(
+              child: Container(
+                // decoration: BoxDecoration(
+                //   color: Colors.transparent,
+                //   border: Border.all(color: Colors.blue),
+                //   borderRadius: BorderRadius.all(Radius.circular(0)),
+                // ),
+                child: Text(
+                  widget.title,
+                  style: widget.style ?? style,
+                ),
+              ),
+            ),
+            if (widget.trailing != null) widget.trailing!,
+          ],
         ),
       ),
     );

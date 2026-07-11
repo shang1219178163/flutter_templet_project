@@ -105,10 +105,8 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
         );
 
     final height = widget.height ?? 36.0;
-    return Container(
+    return SizedBox(
       height: height,
-      width: double.infinity,
-      // margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: LayoutBuilder(builder: (context, constraints) {
         return ListenableBuilder(
           listenable: tabController!,

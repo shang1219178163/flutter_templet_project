@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/input_accessory_view/n_input
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_custom_scrollView.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
+import 'package:flutter_templet_project/basicWidget/tab/n_filled_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/model/NewsDiscussRootModel.dart';
@@ -37,15 +38,25 @@ class DiscussListPage extends StatefulWidget {
   State<DiscussListPage> createState() => _DiscussListPageState();
 }
 
-class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryViewOneMixin {
+class _DiscussListPageState extends State<DiscussListPage>
+    with SingleTickerProviderStateMixin, NInputAccessoryViewOneMixin {
+  static const double _tabBarTrailingWidth = 120;
+
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final refreshController = NListRefreshController<NewsDiscussDetailModel>();
 
   final discussProvider = NewsDiscussProvider();
 
+  late final tabController = TabController(length: discussProvider.tabItems.length, vsync: this);
+
+  late final theme = Theme.of(context);
+  late final colorScheme = theme.colorScheme;
+  late final isDark = theme.brightness == Brightness.dark;
+
   @override
   void dispose() {
+    tabController.dispose();
     discussProvider.dispose();
     super.dispose();
   }
@@ -93,18 +104,38 @@ class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryV
         return [
           NSliverPersistentHeaderBuilder(
             key: const ValueKey("热门评论"),
-            pinned: false,
-            floating: false,
+            pinned: true,
             min: 48,
             max: 48,
             builder: (context, shrinkOffset, overlapsContent) {
-              return DiscussTitleBar(
-                title: "热门评论 ${length}",
-                style: const TextStyle(
-                  color: AppColor.cancelColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "PingFang SC",
+              return Container(
+                height: 48,
+                child: DiscussTitleBar(
+                  title: "热门评论 ${length}",
+                  style: const TextStyle(
+                    color: AppColor.cancelColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "PingFang SC",
+                  ),
+                  trailing: SizedBox(
+                    width: 120,
+                    child: NFilledTabBar(
+                      height: 36,
+                      items: discussProvider.tabItems,
+                      nameCb: (e) => e.desc,
+                      controller: tabController,
+                      gradientCb: (e) => LinearGradient(
+                        colors: [colorScheme.primary, colorScheme.secondary],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      onChanged: (v) {
+                        discussProvider.tabIndexVN.value = v;
+                        sortItems();
+                      },
+                    ),
+                  ),
                 ),
               );
             },
@@ -141,6 +172,29 @@ class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryV
     );
   }
 
+  void sortItems() {
+    final items = [...refreshController.items];
+    items.sort((a, b) {
+      final aTime = a.createTime;
+      final bTime = b.createTime;
+      if (aTime == null && bTime == null) {
+        return (b.commentId ?? 0).compareTo(a.commentId ?? 0);
+      }
+      if (aTime == null) {
+        return 1;
+      }
+      if (bTime == null) {
+        return -1;
+      }
+      if (discussProvider.ascending) {
+        return aTime.compareTo(bTime);
+      }
+      return bTime.compareTo(aTime);
+    });
+    refreshController.updateItems(items);
+    refreshController.updateUI();
+  }
+
   Future<void> onSend(InputAccessoryViewSession accessorySession) async {
     DLog.d([
       "发送评论",
@@ -155,6 +209,7 @@ class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryV
       ),
       message: accessorySession.inputText,
       imageUrls: accessorySession.selectedUrls,
+      createTime: DateTimeExt.stringFromDate(date: DateTime.now()),
       showTime: DateTime.now().toString().timeDescription,
     );
 
@@ -165,6 +220,5 @@ class _DiscussListPageState extends State<DiscussListPage> with NInputAccessoryV
     items.insert(targetIndex, model);
     discussProvider.total += 1;
     refreshController.updateItems(items);
-    refreshController.updateUI();
   }
 }
