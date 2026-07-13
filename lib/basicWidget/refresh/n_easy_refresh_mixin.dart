@@ -34,6 +34,10 @@ abstract interface class NRefreshable {
 
   Future<void> onLoad();
 
+  void finishRefresh([IndicatorResult result = IndicatorResult.success, bool force = false]);
+
+  void finishLoad([IndicatorResult result = IndicatorResult.success, bool force = false]);
+
   /// 更新UI
   void updateUI();
 }
@@ -195,6 +199,16 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
   }
 
   @override
+  void finishRefresh([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    refreshController.finishRefresh(result, force);
+  }
+
+  @override
+  void finishLoad([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    refreshController.finishLoad(result, force);
+  }
+
+  @override
   void updateItems(List<T> list) {
     items = [...list];
   }
@@ -271,6 +285,16 @@ class NListRefreshController<T> {
     return _anchor!.onLoad();
   }
 
+  void finishRefresh([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    assert(_anchor != null);
+    _anchor!.finishRefresh(result, force);
+  }
+
+  void finishLoad([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    assert(_anchor != null);
+    _anchor!.finishLoad(result, force);
+  }
+
   void updateItems(List<T> list) {
     assert(_anchor != null);
     _anchor!.updateItems(list);
@@ -342,6 +366,16 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
   Future<void> onLoad() => throw UnimplementedError('onLoad');
 
   @override
+  void finishRefresh([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    refreshController.finishRefresh(result, force);
+  }
+
+  @override
+  void finishLoad([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    refreshController.finishLoad(result, force);
+  }
+
+  @override
   void updateItem(T v) {
     item = v;
     updateUI();
@@ -397,6 +431,16 @@ class NRefreshController<T> {
   Future<void> onRefresh() {
     assert(_anchor != null);
     return _anchor!.onRefresh();
+  }
+
+  void finishRefresh([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    assert(_anchor != null);
+    _anchor!.finishRefresh(result, force);
+  }
+
+  void finishLoad([IndicatorResult result = IndicatorResult.success, bool force = false]) {
+    assert(_anchor != null);
+    _anchor!.finishLoad(result, force);
   }
 
   void updateItem(T v) {
