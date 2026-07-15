@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 extension WidgetStatePropertyExt on WidgetStateProperty {
   /// 可用值,不可用值
-  WidgetStateProperty<T?>? stateValue<T>({
+  static WidgetStateProperty<T?>? stateValue<T>({
     required T value,
     required T disabledValue,
   }) {
