@@ -49,6 +49,8 @@ class NRefreshListView<T> extends StatefulWidget {
     super.key,
     this.controller,
     this.physics,
+    this.notRefresh = false,
+    this.notLoad = false,
     this.title,
     this.placeholder = const NPlaceholder(),
     this.needRemovePadding = false,
@@ -69,6 +71,12 @@ class NRefreshListView<T> extends StatefulWidget {
   final ScrollPhysics? physics;
 
   final String? title;
+
+  /// 禁用刷新
+  final bool notRefresh;
+
+  /// 禁用加载
+  final bool notLoad;
 
   final Widget? placeholder;
 
@@ -141,22 +149,25 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   @override
   void didUpdateWidget(covariant NRefreshListView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.title != oldWidget.title ||
-        widget.placeholder != oldWidget.placeholder ||
-        widget.needRemovePadding != oldWidget.needRemovePadding ||
-        widget.page != oldWidget.page ||
-        widget.pageInitial != oldWidget.pageInitial ||
-        widget.pageSize != oldWidget.pageSize ||
+    if (oldWidget.title != widget.title ||
+        oldWidget.controller != widget.controller ||
+        oldWidget.notRefresh != widget.notRefresh ||
+        oldWidget.notLoad != widget.notLoad ||
+        oldWidget.placeholder != widget.placeholder ||
+        oldWidget.needRemovePadding != widget.needRemovePadding ||
+        oldWidget.page != widget.page ||
+        oldWidget.pageInitial != widget.pageInitial ||
+        oldWidget.pageSize != widget.pageSize ||
         oldWidget.firstPageItems != widget.firstPageItems) {
-      if (widget.controller != null && oldWidget.controller != widget.controller) {
+      if (widget.controller != null && widget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
 
       onRequest = widget.onRequest;
-      final shouldReload = widget.page != oldWidget.page ||
-          widget.pageSize != oldWidget.pageSize ||
-          widget.pageInitial != oldWidget.pageInitial ||
+      final shouldReload = oldWidget.page != widget.page ||
+          oldWidget.pageSize != widget.pageSize ||
+          oldWidget.pageInitial != widget.pageInitial ||
           oldWidget.firstPageItems != widget.firstPageItems;
       if (shouldReload) {
         initData();
@@ -178,8 +189,10 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
 
     Widget child = EasyRefresh(
       controller: refreshController,
-      onRefresh: onRefresh,
-      onLoad: indicator == IndicatorResult.noMore ? null : onLoad,
+      onRefresh: widget.notRefresh ? null : onRefresh,
+      onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
+      notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
+      notLoadFooter: widget.notLoad ? const NotLoadFooter(clamping: true) : null,
       child: ListView.separated(
         key: PageStorageKey(widget.title ?? hashCode),
         physics: widget.physics,

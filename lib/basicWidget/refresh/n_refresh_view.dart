@@ -16,16 +16,22 @@ class NRefreshView<T> extends StatefulWidget {
   const NRefreshView({
     super.key,
     this.controller,
+    this.notRefresh = false,
+    this.notLoad = false,
     required this.onRequest,
     required this.placeholder,
     this.skeletonScreen = const NSkeletonScreen(),
     required this.child,
-    this.disableOnReresh = false,
-    this.disableOnLoad = false,
   });
 
   /// 控制器
   final NRefreshController<T>? controller;
+
+  /// 禁用刷新
+  final bool notRefresh;
+
+  /// 禁用加载
+  final bool notLoad;
 
   /// 子视图(为空 默认 带刷新组件的 ListView)
   final Widget child;
@@ -33,12 +39,6 @@ class NRefreshView<T> extends StatefulWidget {
   final Widget placeholder;
 
   final Widget? skeletonScreen;
-
-  /// 禁用下拉刷新
-  final bool disableOnReresh;
-
-  /// 禁用上拉加载
-  final bool disableOnLoad;
 
   /// 请求方法
   final RequestModelCallback<T> onRequest;
@@ -76,9 +76,11 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   @override
   void didUpdateWidget(covariant NRefreshView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller ||
-        widget.placeholder != oldWidget.placeholder ||
-        widget.onRequest != oldWidget.onRequest) {
+    if (oldWidget.controller != widget.controller ||
+        oldWidget.notRefresh != widget.notRefresh ||
+        oldWidget.notLoad != widget.notLoad ||
+        oldWidget.placeholder != widget.placeholder ||
+        oldWidget.onRequest != widget.onRequest) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
@@ -110,8 +112,9 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     return EasyRefresh(
       controller: refreshController,
       triggerAxis: Axis.vertical,
-      onRefresh: widget.disableOnReresh ? null : onRefresh,
-      onLoad: widget.disableOnLoad || indicator == IndicatorResult.noMore ? null : onLoad,
+      onRefresh: widget.notRefresh ? null : onRefresh,
+      onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
+      notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
       child: widget.child,
     );
   }

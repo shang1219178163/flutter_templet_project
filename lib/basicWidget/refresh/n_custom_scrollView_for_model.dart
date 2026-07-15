@@ -19,6 +19,8 @@ class NCustomScrollViewForModel<T> extends StatefulWidget {
     super.key,
     this.controller,
     this.scrollController,
+    this.notRefresh = false,
+    this.notLoad = false,
     this.placeholder = const NPlaceholder(),
     this.skeletonScreen = const NSkeletonScreen(),
     this.contentDecoration = const BoxDecoration(),
@@ -34,6 +36,12 @@ class NCustomScrollViewForModel<T> extends StatefulWidget {
   final NRefreshController<T>? controller;
 
   final ScrollController? scrollController;
+
+  /// 禁用刷新
+  final bool notRefresh;
+
+  /// 禁用加载
+  final bool notLoad;
 
   final Widget? placeholder;
 
@@ -104,13 +112,15 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   void didUpdateWidget(covariant NCustomScrollViewForModel<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller ||
-        widget.scrollController != oldWidget.scrollController ||
-        widget.placeholder != oldWidget.placeholder ||
-        widget.contentDecoration != oldWidget.contentDecoration ||
-        widget.contentPadding != oldWidget.contentPadding ||
-        widget.onlyHeader != oldWidget.onlyHeader ||
-        widget.onRequest != oldWidget.onRequest) {
+    if (oldWidget.controller != widget.controller ||
+        oldWidget.scrollController != widget.scrollController ||
+        oldWidget.notRefresh != widget.notRefresh ||
+        oldWidget.notLoad != widget.notLoad ||
+        oldWidget.placeholder != widget.placeholder ||
+        oldWidget.contentDecoration != widget.contentDecoration ||
+        oldWidget.contentPadding != widget.contentPadding ||
+        oldWidget.onlyHeader != widget.onlyHeader ||
+        oldWidget.onRequest != widget.onRequest) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
@@ -135,8 +145,10 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
     return EasyRefresh.builder(
       controller: refreshController,
       scrollController: scrollController,
-      onRefresh: onRefresh,
-      onLoad: null,
+      onRefresh: widget.notRefresh ? null : onRefresh,
+      onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
+      notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
+      notLoadFooter: widget.notLoad ? const NotLoadFooter(clamping: true) : null,
       childBuilder: (_, physics) {
         return CustomScrollView(
           controller: scrollController,

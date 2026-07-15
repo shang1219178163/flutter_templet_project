@@ -18,6 +18,8 @@ class NCustomScrollView<T> extends StatefulWidget {
     super.key,
     this.controller,
     this.scrollController,
+    this.notRefresh = false,
+    this.notLoad = false,
     this.placeholder = const NPlaceholder(),
     this.contentDecoration = const BoxDecoration(),
     this.contentPadding = const EdgeInsets.all(0),
@@ -38,6 +40,12 @@ class NCustomScrollView<T> extends StatefulWidget {
   final NListRefreshController<T>? controller;
 
   final ScrollController? scrollController;
+
+  /// 禁用刷新
+  final bool notRefresh;
+
+  /// 禁用加载
+  final bool notLoad;
 
   final Widget? placeholder;
 
@@ -118,22 +126,24 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller ||
         oldWidget.scrollController != widget.scrollController ||
+        oldWidget.notRefresh != widget.notRefresh ||
+        oldWidget.notLoad != widget.notLoad ||
         oldWidget.placeholder != widget.placeholder ||
         oldWidget.contentDecoration != widget.contentDecoration ||
         oldWidget.contentPadding != widget.contentPadding ||
         oldWidget.onlyHeader != widget.onlyHeader ||
-        widget.page != oldWidget.page ||
-        widget.pageInitial != oldWidget.pageInitial ||
-        widget.pageSize != oldWidget.pageSize ||
+        oldWidget.page != widget.page ||
+        oldWidget.pageInitial != widget.pageInitial ||
+        oldWidget.pageSize != widget.pageSize ||
         oldWidget.firstPageItems != widget.firstPageItems) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
         widget.controller?.attach(this);
       }
 
-      final shouldReload = widget.page != oldWidget.page ||
-          widget.pageSize != oldWidget.pageSize ||
-          widget.pageInitial != oldWidget.pageInitial ||
+      final shouldReload = oldWidget.page != widget.page ||
+          oldWidget.pageSize != widget.pageSize ||
+          oldWidget.pageInitial != widget.pageInitial ||
           oldWidget.firstPageItems != widget.firstPageItems;
       if (shouldReload) {
         initData();
@@ -153,8 +163,10 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
 
     return EasyRefresh.builder(
       controller: refreshController,
-      onRefresh: onRefresh,
-      onLoad: indicator == IndicatorResult.noMore ? null : onLoad,
+      onRefresh: widget.notRefresh ? null : onRefresh,
+      onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
+      notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
+      notLoadFooter: widget.notLoad ? const NotLoadFooter(clamping: true) : null,
       childBuilder: (_, physics) {
         return CustomScrollView(
           controller: widget.scrollController,
