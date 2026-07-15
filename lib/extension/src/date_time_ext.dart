@@ -331,12 +331,12 @@ extension DateTimeStringExt on String {
       return '';
     }
     try {
-      final createTime = DateTime.parse(replaceFirst(' ', 'T'));
+      final date = DateTime.parse(replaceFirst(' ', 'T'));
       final now = DateTime.now();
-      final diff = now.difference(createTime);
+      final diff = now.difference(date);
 
       if (diff.isNegative) {
-        return this;
+        return '刚刚';
       }
 
       // 小于1分钟
@@ -355,33 +355,17 @@ extension DateTimeStringExt on String {
       }
 
       // 小于72小时
-      if (diff.inHours < 72) {
+      if (diff.inHours < 7 * 24) {
         return '${diff.inDays}天前';
       }
 
       // 超过72小时
       String two(int n) => n.toString().padLeft(2, '0');
 
-      return '${createTime.year}-${two(createTime.month)}-${two(createTime.day)} '
-          '${two(createTime.hour)}:${two(createTime.minute)}';
+      return '${date.year}-${two(date.month)}-${two(date.day)} '
+          '${two(date.hour)}:${two(date.minute)}';
     } catch (_) {
       return this;
     }
   }
 }
-
-// extension DateTimeIntExt on int {
-//   /// 转为秒时间戳
-//   int toTimeStamp() {
-//     var value = this;
-//     if (value < 0) {
-//       return 0;
-//     }
-//
-//     if ("$value".length == 13) {
-//       value = value ~/ 1000;
-//       return value.toInt();
-//     }
-//     return value;
-//   }
-// }
