@@ -127,18 +127,21 @@ class NInputAccessoryViewOne extends StatefulWidget {
 
   static Widget _buildOverlayEntry(BuildContext ctx) {
     final bottom = NScreenManager.mediaQueryData.viewInsets.bottom;
-    return Padding(
+
+    onHideKeyBorad() {
+      accessorySession.inputText = accessorySession.controller?.text ?? '';
+      accessorySession.focusNode?.unfocus();
+      dismiss();
+    }
+
+    final child = Padding(
       padding: EdgeInsets.only(bottom: bottom),
       child: SizedBox(
         width: MediaQuery.sizeOf(ctx).width,
         child: Offstage(
           offstage: !accessorySession.visible,
           child: TapRegion(
-            onTapOutside: (PointerDownEvent event) {
-              accessorySession.inputText = accessorySession.controller?.text ?? '';
-              accessorySession.focusNode?.unfocus();
-              dismiss();
-            },
+            onTapOutside: (event) => onHideKeyBorad(),
             child: NInputAccessoryViewOne(
               key: const ValueKey<String>('n_input_accessory_view_one'),
               focusNode: accessorySession.focusNode,
@@ -159,6 +162,20 @@ class NInputAccessoryViewOne extends StatefulWidget {
           ),
         ),
       ),
+    );
+
+    return Stack(
+      children: [
+        if (accessorySession.visible)
+          Positioned.fill(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onHideKeyBorad,
+              child: const ColoredBox(color: Colors.transparent),
+            ),
+          ),
+        child,
+      ],
     );
   }
 
