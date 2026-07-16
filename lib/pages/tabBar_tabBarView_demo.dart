@@ -630,6 +630,7 @@ var customs = [
   Tuple2(AppRouter.collectionNavWidgetDemo, "图文导航"),
   Tuple2(AppRouter.boxWidgetDemo, "boxWidgetDemo"),
   Tuple2(AppRouter.nSkeletonDemo, "骨架图"),
+  Tuple2(AppRouter.shimmerDemo, "微光效果 NShimmer"),
   Tuple2(AppRouter.nTreeDemo, "树形组件"),
   Tuple2(AppRouter.dialogChoiceChipDemo, "选择弹窗"),
   Tuple2(AppRouter.discussListPage, "评论列表"),

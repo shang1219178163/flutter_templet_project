@@ -219,6 +219,7 @@ import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSegmentVerticalDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NShimmerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTabBarPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTabBarViewCustomDemo.dart';
@@ -945,6 +946,7 @@ class AppRouter {
   static const String textThemeDemo = '/textThemeDemo';
   static const String linkifyPage = '/linkifyPage';
   static const String annotatedRegion = '/AnnotatedRegion';
+  static const String shimmerDemo = '/shimmerDemo';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2782,6 +2784,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.annotatedRegion,
       page: () => AnnotatedRegionPage(),
+    ),
+    GetPage(
+      name: AppRouter.shimmerDemo,
+      page: () => NShimmerDemo(),
     ),
   ];
 }
