@@ -37,17 +37,10 @@ class ImageService {
         targetPath = '${assetDir.path}/$fileNameNew';
       }
 
-      var format = CompressFormat.jpeg;
       final filePathLowerCase = filePath.toLowerCase();
-      if (filePathLowerCase.endsWith(".jpeg") || filePathLowerCase.endsWith(".jpg")) {
-        format = CompressFormat.jpeg;
-      } else if (filePathLowerCase.endsWith(".png")) {
-        format = CompressFormat.png;
-      } else if (filePathLowerCase.endsWith(".heic")) {
-        format = CompressFormat.heic;
-      } else if (filePathLowerCase.endsWith(".webp")) {
-        format = CompressFormat.webp;
-      } else {
+      final extType = filePathLowerCase.split(".").last;
+      final format = CompressFormat.values.where((e) => e.name == extType).firstOrNull;
+      if (format == null) {
         return file;
       }
 
