@@ -8,7 +8,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/button/AppButton.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
@@ -181,16 +183,58 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
             child: buildAppButton(onPressed: null),
           ),
           NSectionBox(
-            title: "AppButtonNew",
+            title: "NButton",
             child: buildAppButtonNew(
               onPressed: () {
-                DLog.d("AppButtonNew");
+                DLog.d("NButton");
               },
             ),
           ),
           NSectionBox(
-            title: "AppButtonNew - disable",
+            title: "NButton - disable",
             child: buildAppButtonNew(onPressed: null),
+          ),
+          NSectionBox(
+            title: "NButton - gradient",
+            child: buildAppButtonNew(
+              gradient: LinearGradient(colors: [Colors.blue, Colors.green]),
+              disabledGradient: LinearGradient(colors: [Colors.black12, Colors.black12]),
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'PingFang SC',
+              ),
+              disabledTextStyle: TextStyle(
+                color: Colors.black38,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'PingFang SC',
+              ),
+              onPressed: () {
+                DLog.d("NButton");
+              },
+            ),
+          ),
+          NSectionBox(
+            title: "NButton - gradient - disable",
+            child: buildAppButtonNew(
+              gradient: LinearGradient(colors: [Colors.blue, Colors.green]),
+              disabledGradient: LinearGradient(colors: [Colors.black12, Colors.black12]),
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'PingFang SC',
+              ),
+              disabledTextStyle: TextStyle(
+                color: Colors.black38,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'PingFang SC',
+              ),
+              onPressed: null,
+            ),
           ),
         ],
       ),
@@ -280,58 +324,55 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
         spacing: 8,
         runSpacing: 8,
         children: [
-          AppButton(
-            type: AppButtonType.outlined,
-            onPressed: onPressed,
-            child: Text("Outlined"),
-          ),
-          AppButton(
-            type: AppButtonType.filled,
-            onPressed: onPressed,
-            child: Text("Filled"),
-          ),
-          AppButton(
-            type: AppButtonType.filledTonal,
-            onPressed: onPressed,
-            child: Text("Tonal"),
-          ),
-          AppButton(
-            type: AppButtonType.text,
-            onPressed: onPressed,
-            child: Text("Text"),
-          ),
+          ...AppButtonType.values.map((e) {
+            final name = e.name.toCapitalize();
+            return AppButton(
+              type: e,
+              onPressed: onPressed,
+              // icon: Icon(Icons.arrow_forward),
+              // iconAlignment: IconAlignment.end,
+              child: Text(name),
+            );
+          }),
         ],
       ),
     );
   }
 
-  Widget buildAppButtonNew({required VoidCallback? onPressed}) {
+  Widget buildAppButtonNew({
+    Gradient? gradient,
+    Gradient? disabledGradient,
+    TextStyle? textStyle,
+    TextStyle? disabledTextStyle,
+    required VoidCallback? onPressed,
+  }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Wrap(
         spacing: 8,
         runSpacing: 8,
         children: [
-          AppButton(
-            type: AppButtonType.outlined,
-            onPressed: onPressed,
-            child: Text("Outlined"),
-          ),
-          AppButton(
-            type: AppButtonType.filled,
-            onPressed: onPressed,
-            child: Text("Filled"),
-          ),
-          AppButton(
-            type: AppButtonType.filledTonal,
-            onPressed: onPressed,
-            child: Text("Tonal"),
-          ),
-          AppButton(
-            type: AppButtonType.text,
-            onPressed: onPressed,
-            child: Text("Text"),
-          ),
+          ...NButtonType.values.map((e) {
+            final name = e.name.toCapitalize();
+            final isIconType = e == NButtonType.icon;
+
+            return NButton(
+              type: e,
+              gradient: gradient,
+              disabledGradient: disabledGradient,
+              textStyle: [NButtonType.text, NButtonType.outlined].contains(e) ? null : textStyle,
+              disabledTextStyle: disabledTextStyle,
+              onPressed: onPressed,
+              // icon: Icon(Icons.arrow_forward),
+              // iconAlignment: IconAlignment.end,
+              icon: isIconType ? const Icon(Icons.notifications_active, size: 18) : null,
+              child: isIconType ? null : Text(name),
+              // fixedSize: isIconType ? const Size(30, 30) : const Size(100, 40),
+              // minimumSize: isIconType ? const Size(30, 30) : const Size(30, 40),
+              // maximumSize: isIconType ? const Size(30, 30) : const Size(100, 40),
+              constraints: BoxConstraints(maxHeight: 30),
+            );
+          }),
         ],
       ),
     );
