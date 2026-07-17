@@ -92,8 +92,6 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   @override
   bool get wantKeepAlive => true;
 
-  final scrollController = ScrollController();
-
   // @override
   // late RequestListCallback<T> onRequest = widget.onRequest;
   //
@@ -163,6 +161,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
 
     return EasyRefresh.builder(
       controller: refreshController,
+      scrollController: widget.scrollController,
       onRefresh: widget.notRefresh ? null : onRefresh,
       onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
       notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,

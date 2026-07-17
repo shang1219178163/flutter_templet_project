@@ -74,8 +74,6 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   bool get wantKeepAlive => true;
 
-  ScrollController get scrollController => widget.scrollController ?? ScrollController();
-
   // @override
   // late RequestModelCallback<T> onRequest = widget.onRequest;
 
@@ -85,9 +83,6 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   void dispose() {
     widget.controller?.detach(this);
-    if (widget.scrollController == null) {
-      scrollController.dispose();
-    }
     super.dispose();
   }
 
@@ -144,14 +139,14 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
 
     return EasyRefresh.builder(
       controller: refreshController,
-      scrollController: scrollController,
+      scrollController: widget.scrollController,
       onRefresh: widget.notRefresh ? null : onRefresh,
       onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
       notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
       notLoadFooter: widget.notLoad ? const NotLoadFooter(clamping: true) : null,
       childBuilder: (_, physics) {
         return CustomScrollView(
-          controller: scrollController,
+          controller: widget.scrollController,
           physics: physics,
           slivers: [
             ...(widget.headerBuilder?.call(context, item) ?? []),

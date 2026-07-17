@@ -16,6 +16,7 @@ class NRefreshView<T> extends StatefulWidget {
   const NRefreshView({
     super.key,
     this.controller,
+    this.scrollController,
     this.notRefresh = false,
     this.notLoad = false,
     required this.onRequest,
@@ -26,6 +27,8 @@ class NRefreshView<T> extends StatefulWidget {
 
   /// 控制器
   final NRefreshController<T>? controller;
+
+  final ScrollController? scrollController;
 
   /// 禁用刷新
   final bool notRefresh;
@@ -111,6 +114,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 
     return EasyRefresh(
       controller: refreshController,
+      scrollController: widget.scrollController,
       triggerAxis: Axis.vertical,
       onRefresh: widget.notRefresh ? null : onRefresh,
       onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,

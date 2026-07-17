@@ -48,6 +48,7 @@ class NRefreshListView<T> extends StatefulWidget {
   const NRefreshListView({
     super.key,
     this.controller,
+    this.scrollController,
     this.physics,
     this.notRefresh = false,
     this.notLoad = false,
@@ -67,6 +68,8 @@ class NRefreshListView<T> extends StatefulWidget {
 
   /// 控制器
   final NListRefreshController<T>? controller;
+
+  final ScrollController? scrollController;
 
   final ScrollPhysics? physics;
 
@@ -116,8 +119,6 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
     with AutomaticKeepAliveClientMixin, NListRefreshMixin<T>, NListRefreshStateMixin<NRefreshListView<T>, T> {
   @override
   bool get wantKeepAlive => true;
-
-  final scrollController = ScrollController();
 
   // @override
   // late RequestListCallback<T> onRequest = widget.onRequest;
@@ -189,12 +190,14 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
 
     Widget child = EasyRefresh(
       controller: refreshController,
+      scrollController: widget.scrollController,
       onRefresh: widget.notRefresh ? null : onRefresh,
       onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
       notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
       notLoadFooter: widget.notLoad ? const NotLoadFooter(clamping: true) : null,
       child: ListView.separated(
         key: PageStorageKey(widget.title ?? hashCode),
+        controller: widget.scrollController,
         physics: widget.physics,
         itemCount: itemCount,
         itemBuilder: (context, index) {
