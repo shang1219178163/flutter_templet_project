@@ -6,59 +6,131 @@ class NCachedNetworkImage extends StatelessWidget {
   const NCachedNetworkImage({
     super.key,
     required this.imageUrl,
-    this.placeholder = const AssetImage("assets/images/img_placeholder.png"),
-    required this.width,
-    required this.height,
+    this.placeholderImage = const AssetImage("assets/images/img_placeholder.png"),
+    this.placeholder,
+    this.errorWidget,
+    this.progressIndicatorBuilder,
+    this.imageBuilder,
+    this.width,
+    this.height,
     this.radius = 0,
     this.fit = BoxFit.cover,
     this.color,
     this.colorBlendMode,
+    this.fadeOutDuration = const Duration(milliseconds: 1000),
+    this.fadeOutCurve = Curves.easeOut,
+    this.fadeInDuration = const Duration(milliseconds: 500),
+    this.fadeInCurve = Curves.easeIn,
+    this.alignment = Alignment.center,
+    this.repeat = ImageRepeat.noRepeat,
+    this.matchTextDirection = false,
+    this.useOldImageOnUrlChange = false,
+    this.filterQuality = FilterQuality.low,
+    this.placeholderFadeInDuration,
+    this.memCacheWidth,
+    this.memCacheHeight,
+    this.cacheKey,
+    this.maxWidthDiskCache,
+    this.maxHeightDiskCache,
+    this.httpHeaders,
+    this.errorListener,
   });
 
   final String imageUrl;
-  final AssetImage placeholder;
+  final AssetImage placeholderImage;
+
+  /// Widget 占位（CachedNetworkImage 风格，可选）
+  final PlaceholderWidgetBuilder? placeholder;
+  final LoadingErrorWidgetBuilder? errorWidget;
+  final ProgressIndicatorBuilder? progressIndicatorBuilder;
+  final ImageWidgetBuilder? imageBuilder;
   final double? width;
   final double? height;
-  final double? radius;
+  final double radius;
   final BoxFit? fit;
   final Color? color;
   final BlendMode? colorBlendMode;
+  final Duration fadeOutDuration;
+  final Curve fadeOutCurve;
+  final Duration fadeInDuration;
+  final Curve fadeInCurve;
+  final Alignment alignment;
+  final ImageRepeat repeat;
+  final bool matchTextDirection;
+  final bool useOldImageOnUrlChange;
+  final FilterQuality filterQuality;
+  final Duration? placeholderFadeInDuration;
+  final int? memCacheWidth;
+  final int? memCacheHeight;
+  final String? cacheKey;
+  final int? maxWidthDiskCache;
+  final int? maxHeightDiskCache;
+  final Map<String, String>? httpHeaders;
+  final ValueChanged<Object>? errorListener;
 
   static ValueChanged<Object> onErrorListener = (error) {
     debugPrint('CachedNetworkImage 图片加载失败：$error');
   };
 
+  /// 合法 http(s) 网络图 URL；非法返回 null，避免 CachedNetworkImageProvider("") 抛错
+  static String? getImageUrl(String? url) {
+    final value = (url ?? '').trim();
+    if (!value.startsWith('http://') && !value.startsWith('https://')) {
+      return null;
+    }
+    return value;
+  }
+
+  /// 校验链接是否无效
+  static bool validUrl(String? url) => getImageUrl(url) != null;
+
   @override
   Widget build(BuildContext context) {
     final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
-    final placeholderWidget = buildPlaceholder();
-
-    if (!imageUrl.startsWith("http")) {
-      return placeholderWidget;
+    final colorFilter = color == null ? null : ColorFilter.mode(color!, blendModeNew);
+    final placeholderWidget = buildPlaceholder(colorFilter: colorFilter);
+    final url = getImageUrl(imageUrl);
+    if (url == null) {
+      // 原有逻辑：非法 URL 展示默认占位
+      return SizedBox(
+        width: width,
+        height: height,
+        child: errorWidget?.call(context, imageUrl, ArgumentError('Invalid image url')) ??
+            placeholder?.call(context, imageUrl) ??
+            placeholderWidget,
+      );
     }
 
     return CachedNetworkImage(
-      cacheKey: imageUrl,
-      imageUrl: imageUrl,
-      fit: fit,
+      imageUrl: url,
+      httpHeaders: httpHeaders,
+      cacheKey: cacheKey ?? url,
       width: width,
       height: height,
-      memCacheWidth: (width?.toInt() ?? 0) * 3,
-      memCacheHeight: (height?.toInt() ?? 0) * 3,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      matchTextDirection: matchTextDirection,
       color: color,
-      colorBlendMode: blendModeNew,
-      placeholder: (_, url) => placeholderWidget,
-      errorWidget: (_, url, e) => placeholderWidget,
-      // progressIndicatorBuilder: (context, url, progress) {
-      //   // return CircularProgressIndicator(value: progress.progress);
-      //   return buildPlaceholder(
-      //     child: CircularProgressIndicator(value: progress.progress),
-      //   );
-      // },
+      colorBlendMode: color == null ? colorBlendMode : blendModeNew,
+      filterQuality: filterQuality,
+      fadeInDuration: fadeInDuration,
+      fadeInCurve: fadeInCurve,
+      fadeOutDuration: fadeOutDuration,
+      fadeOutCurve: fadeOutCurve,
+      placeholderFadeInDuration: placeholderFadeInDuration,
+      useOldImageOnUrlChange: useOldImageOnUrlChange,
+      memCacheWidth: resolvePositiveMemCache(memCacheWidth) ?? resolveMemCacheSize(width),
+      memCacheHeight: resolvePositiveMemCache(memCacheHeight) ?? resolveMemCacheSize(height),
+      maxWidthDiskCache: maxWidthDiskCache,
+      maxHeightDiskCache: maxHeightDiskCache,
+      placeholder: placeholder ?? ((_, __) => placeholderWidget),
+      progressIndicatorBuilder: progressIndicatorBuilder,
+      errorWidget: errorWidget ?? ((_, __, ___) => placeholderWidget),
       imageBuilder: (context, imageProvider) {
         return DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius ?? 0),
+            borderRadius: BorderRadius.circular(radius),
             image: DecorationImage(
               image: imageProvider,
               fit: fit,
@@ -72,16 +144,29 @@ class NCachedNetworkImage extends StatelessWidget {
     );
   }
 
-  Widget buildPlaceholder({Widget? child}) {
-    final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
-    final colorFilter = color == null ? null : ColorFilter.mode(color!, blendModeNew);
+  /// memCache 尺寸须 > 0，否则会触发 dart:ui painting 断言
+  int? resolveMemCacheSize(double? size, {int scale = 3}) {
+    if (size == null || !size.isFinite || size <= 0) {
+      return null;
+    }
+    return size.toInt() * scale;
+  }
+
+  int? resolvePositiveMemCache(int? value) {
+    if (value == null || value <= 0) {
+      return null;
+    }
+    return value;
+  }
+
+  Widget buildPlaceholder({required ColorFilter? colorFilter, Widget? child}) {
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius ?? 0),
+        borderRadius: BorderRadius.circular(radius),
         image: DecorationImage(
-          image: placeholder,
+          image: placeholderImage,
           fit: BoxFit.contain,
           colorFilter: colorFilter,
         ),

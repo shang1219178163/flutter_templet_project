@@ -344,7 +344,7 @@ extension StringNullableExt on String? {
   }
 
   /// url 有效
-  bool get urlValid => this?.startsWith("http") == true;
+  bool get validUrl => this?.trim().startsWith("http") == true;
 
   /// 最大截取数量
   String? ellipsis({int max = 6}) {
