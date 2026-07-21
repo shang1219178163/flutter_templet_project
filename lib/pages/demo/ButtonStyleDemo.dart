@@ -370,7 +370,7 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
               // fixedSize: isIconType ? const Size(30, 30) : const Size(100, 40),
               // minimumSize: isIconType ? const Size(30, 30) : const Size(30, 40),
               // maximumSize: isIconType ? const Size(30, 30) : const Size(100, 40),
-              constraints: BoxConstraints(maxHeight: 30),
+              constraints: BoxConstraints(minHeight: 40, maxHeight: 40),
             );
           }),
         ],
