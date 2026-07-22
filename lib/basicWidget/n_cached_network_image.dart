@@ -93,8 +93,8 @@ class NCachedNetworkImage extends StatelessWidget {
     if (url == null) {
       // 原有逻辑：非法 URL 展示默认占位
       return SizedBox(
-        width: width ?? double.infinity,
-        height: height ?? double.infinity,
+        width: finiteSize(width),
+        height: finiteSize(height),
         child: errorWidget?.call(context, imageUrl, ArgumentError('Invalid image url')) ??
             placeholder?.call(context, imageUrl) ??
             placeholderWidget,
@@ -105,8 +105,8 @@ class NCachedNetworkImage extends StatelessWidget {
       imageUrl: url,
       httpHeaders: httpHeaders,
       cacheKey: cacheKey ?? url,
-      width: width,
-      height: height,
+      width: finiteSize(width),
+      height: finiteSize(height),
       fit: fit,
       alignment: alignment,
       repeat: repeat,
@@ -120,53 +120,63 @@ class NCachedNetworkImage extends StatelessWidget {
       fadeOutCurve: fadeOutCurve,
       placeholderFadeInDuration: placeholderFadeInDuration,
       useOldImageOnUrlChange: useOldImageOnUrlChange,
-      memCacheWidth: resolvePositiveMemCache(memCacheWidth) ?? resolveMemCacheSize(width),
-      memCacheHeight: resolvePositiveMemCache(memCacheHeight) ?? resolveMemCacheSize(height),
+      memCacheWidth: finiteSize(memCacheWidth?.toDouble())?.toInt() ?? resolveMemCacheSize(width),
+      memCacheHeight: finiteSize(memCacheHeight?.toDouble())?.toInt() ?? resolveMemCacheSize(height),
       maxWidthDiskCache: maxWidthDiskCache,
       maxHeightDiskCache: maxHeightDiskCache,
       placeholder: placeholder ?? ((_, __) => placeholderWidget),
       progressIndicatorBuilder: progressIndicatorBuilder,
       errorWidget: errorWidget ?? ((_, __, ___) => placeholderWidget),
-      imageBuilder: (context, imageProvider) {
-        return SizedBox(
-          width: width ?? double.infinity,
-          height: height ?? double.infinity,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
+      // 用 Image 而非无 child 的 DecoratedBox：Image 有固有宽高，在 Html 无限高约束下也能 layout
+      imageBuilder: imageBuilder ??
+          ((context, imageProvider) {
+            final image = Image(
+              image: imageProvider,
+              width: finiteSize(width),
+              height: finiteSize(height),
+              fit: fit,
+              alignment: alignment,
+              repeat: repeat,
+              matchTextDirection: matchTextDirection,
+              filterQuality: filterQuality,
+              color: color,
+              colorBlendMode: color == null ? colorBlendMode : blendModeNew,
+            );
+            if (radius <= 0) {
+              return image;
+            }
+            return ClipRRect(
               borderRadius: BorderRadius.circular(radius),
-              image: DecorationImage(
-                image: imageProvider,
-                fit: fit,
-              ),
-            ),
-          ),
-        );
-      },
+              child: image,
+            );
+          }),
       errorListener: (error) {
         debugPrint('$runtimeType 图片加载失败：$error');
       },
     );
   }
 
-  /// memCache 尺寸须 > 0，否则会触发 dart:ui painting 断言
-  int? resolveMemCacheSize(double? value, {int scale = 3}) {
-    if (value == null || !value.isFinite || value <= 0) {
-      return null;
-    }
-    return value.toInt() * scale;
-  }
-
-  int? resolvePositiveMemCache(int? value) {
-    if (value == null || value <= 0) {
+  /// 过滤 infinity/NaN，避免在 unbounded 约束里撑爆 layout
+  double? finiteSize(double? value) {
+    if (value == null || !value.isFinite || value < 0) {
       return null;
     }
     return value;
   }
 
+  /// memCache 尺寸须 > 0，否则会触发 dart:ui painting 断言
+  int? resolveMemCacheSize(double? value, {int scale = 3}) {
+    final val = finiteSize(value);
+    if (val == null) {
+      return null;
+    }
+    return val.toInt() * scale;
+  }
+
   Widget buildPlaceholder({required ColorFilter? colorFilter, Widget? child}) {
     return Container(
-      width: width ?? double.infinity,
-      height: height ?? double.infinity,
+      width: finiteSize(width),
+      height: finiteSize(height),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         image: DecorationImage(
