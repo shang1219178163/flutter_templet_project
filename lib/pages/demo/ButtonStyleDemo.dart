@@ -60,6 +60,7 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
     );
 
     final themeData = Theme.of(context);
+    final isDark = themeData.brightness == Brightness.dark;
     final elevatedButtonThemeStyle = themeData.elevatedButtonTheme.style;
     final filledButtonThemeStyle = themeData.filledButtonTheme.style;
     final outlinedButtonThemeStyle = themeData.outlinedButtonTheme.style;
@@ -192,7 +193,15 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
           ),
           NSectionBox(
             title: "NButton - disable",
-            child: buildAppButtonNew(onPressed: null),
+            child: buildAppButtonNew(
+              disabledTextStyle: TextStyle(
+                color: isDark ? Colors.white38 : Colors.black38,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'PingFang SC',
+              ),
+              onPressed: null,
+            ),
           ),
           NSectionBox(
             title: "NButton - gradient",
@@ -222,13 +231,13 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
               gradient: LinearGradient(colors: [Colors.blue, Colors.green]),
               disabledGradient: LinearGradient(colors: [Colors.black12, Colors.black12]),
               textStyle: TextStyle(
-                color: Colors.white,
+                color: isDark ? Colors.white38 : Colors.white,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'PingFang SC',
               ),
               disabledTextStyle: TextStyle(
-                color: Colors.black38,
+                color: isDark ? Colors.white38 : Colors.black38,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'PingFang SC',

@@ -93,8 +93,8 @@ class NCachedNetworkImage extends StatelessWidget {
     if (url == null) {
       // 原有逻辑：非法 URL 展示默认占位
       return SizedBox(
-        width: width,
-        height: height,
+        width: width ?? double.infinity,
+        height: height ?? double.infinity,
         child: errorWidget?.call(context, imageUrl, ArgumentError('Invalid image url')) ??
             placeholder?.call(context, imageUrl) ??
             placeholderWidget,
@@ -128,12 +128,16 @@ class NCachedNetworkImage extends StatelessWidget {
       progressIndicatorBuilder: progressIndicatorBuilder,
       errorWidget: errorWidget ?? ((_, __, ___) => placeholderWidget),
       imageBuilder: (context, imageProvider) {
-        return DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius),
-            image: DecorationImage(
-              image: imageProvider,
-              fit: fit,
+        return SizedBox(
+          width: width ?? double.infinity,
+          height: height ?? double.infinity,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius),
+              image: DecorationImage(
+                image: imageProvider,
+                fit: fit,
+              ),
             ),
           ),
         );
@@ -145,11 +149,11 @@ class NCachedNetworkImage extends StatelessWidget {
   }
 
   /// memCache 尺寸须 > 0，否则会触发 dart:ui painting 断言
-  int? resolveMemCacheSize(double? size, {int scale = 3}) {
-    if (size == null || !size.isFinite || size <= 0) {
+  int? resolveMemCacheSize(double? value, {int scale = 3}) {
+    if (value == null || !value.isFinite || value <= 0) {
       return null;
     }
-    return size.toInt() * scale;
+    return value.toInt() * scale;
   }
 
   int? resolvePositiveMemCache(int? value) {
@@ -161,8 +165,8 @@ class NCachedNetworkImage extends StatelessWidget {
 
   Widget buildPlaceholder({required ColorFilter? colorFilter, Widget? child}) {
     return Container(
-      width: width,
-      height: height,
+      width: width ?? double.infinity,
+      height: height ?? double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         image: DecorationImage(
