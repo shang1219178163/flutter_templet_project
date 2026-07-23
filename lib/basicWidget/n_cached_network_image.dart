@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 /// 网络图片
 class NCachedNetworkImage extends StatelessWidget {
@@ -14,7 +14,7 @@ class NCachedNetworkImage extends StatelessWidget {
     this.width,
     this.height,
     this.radius = 0,
-    this.fit = BoxFit.cover,
+    this.fit = BoxFit.contain,
     this.color,
     this.colorBlendMode,
     this.fadeOutDuration = const Duration(milliseconds: 1000),
@@ -37,6 +37,8 @@ class NCachedNetworkImage extends StatelessWidget {
   });
 
   final String imageUrl;
+
+  /// 本地占位图（原有用法）
   final AssetImage placeholderImage;
 
   /// Widget 占位（CachedNetworkImage 风格，可选）
@@ -86,27 +88,27 @@ class NCachedNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final widthNew = resolveSize(width);
+    final heightNew = resolveSize(height);
     final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
-    final colorFilter = color == null ? null : ColorFilter.mode(color!, blendModeNew);
-    final placeholderWidget = buildPlaceholder(colorFilter: colorFilter);
+    final placeholderWidget = buildPlaceholder(width: widthNew, height: heightNew);
     final url = getImageUrl(imageUrl);
     if (url == null) {
       // 原有逻辑：非法 URL 展示默认占位
       return SizedBox(
-        width: finiteSize(width),
-        height: finiteSize(height),
+        width: widthNew,
+        height: heightNew,
         child: errorWidget?.call(context, imageUrl, ArgumentError('Invalid image url')) ??
             placeholder?.call(context, imageUrl) ??
             placeholderWidget,
       );
     }
-
     return CachedNetworkImage(
       imageUrl: url,
       httpHeaders: httpHeaders,
       cacheKey: cacheKey ?? url,
-      width: finiteSize(width),
-      height: finiteSize(height),
+      width: widthNew,
+      height: heightNew,
       fit: fit,
       alignment: alignment,
       repeat: repeat,
@@ -120,20 +122,20 @@ class NCachedNetworkImage extends StatelessWidget {
       fadeOutCurve: fadeOutCurve,
       placeholderFadeInDuration: placeholderFadeInDuration,
       useOldImageOnUrlChange: useOldImageOnUrlChange,
-      memCacheWidth: finiteSize(memCacheWidth?.toDouble())?.toInt() ?? resolveMemCacheSize(width),
-      memCacheHeight: finiteSize(memCacheHeight?.toDouble())?.toInt() ?? resolveMemCacheSize(height),
+      memCacheWidth: resolveMemCache(memCacheWidth) ?? resolveMemCache(widthNew, scale: 3),
+      memCacheHeight: resolveMemCache(memCacheHeight) ?? resolveMemCache(heightNew, scale: 3),
       maxWidthDiskCache: maxWidthDiskCache,
       maxHeightDiskCache: maxHeightDiskCache,
       placeholder: placeholder ?? ((_, __) => placeholderWidget),
       progressIndicatorBuilder: progressIndicatorBuilder,
       errorWidget: errorWidget ?? ((_, __, ___) => placeholderWidget),
-      // 用 Image 而非无 child 的 DecoratedBox：Image 有固有宽高，在 Html 无限高约束下也能 layout
+      // 用 Image 保证固有尺寸；圆角用 ClipRRect（避免无 child DecoratedBox 宽高为 0）
       imageBuilder: imageBuilder ??
           ((context, imageProvider) {
             final image = Image(
               image: imageProvider,
-              width: finiteSize(width),
-              height: finiteSize(height),
+              width: widthNew,
+              height: heightNew,
               fit: fit,
               alignment: alignment,
               repeat: repeat,
@@ -150,33 +152,39 @@ class NCachedNetworkImage extends StatelessWidget {
               child: image,
             );
           }),
-      errorListener: (error) {
-        debugPrint('$runtimeType 图片加载失败：$error');
-      },
+      errorListener: errorListener ??
+          ((error) {
+            debugPrint('$runtimeType 图片加载失败：$error');
+          }),
     );
   }
 
-  /// 过滤 infinity/NaN，避免在 unbounded 约束里撑爆 layout
-  double? finiteSize(double? value) {
-    if (value == null || !value.isFinite || value < 0) {
+  /// 合法布局尺寸；null/NaN/<=0/infinity 均视为无效（infinity 请在调用处用 LayoutBuilder 解析）
+  double? resolveSize(double? value) {
+    if (value == null || !value.isFinite || value <= 0) {
       return null;
     }
     return value;
   }
 
-  /// memCache 尺寸须 > 0，否则会触发 dart:ui painting 断言
-  int? resolveMemCacheSize(double? value, {int scale = 3}) {
-    final val = finiteSize(value);
-    if (val == null) {
+  /// memCache 像素，须 > 0
+  int? resolveMemCache(num? value, {int scale = 1}) {
+    if (value == null) {
       return null;
     }
-    return val.toInt() * scale;
+    final v = value.toDouble();
+    if (!v.isFinite || v <= 0) {
+      return null;
+    }
+    return v.toInt() * scale;
   }
 
-  Widget buildPlaceholder({required ColorFilter? colorFilter, Widget? child}) {
+  Widget buildPlaceholder({double? width, double? height, Widget? child}) {
+    final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
+    final colorFilter = color == null ? null : ColorFilter.mode(color!, blendModeNew);
     return Container(
-      width: finiteSize(width),
-      height: finiteSize(height),
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         image: DecorationImage(

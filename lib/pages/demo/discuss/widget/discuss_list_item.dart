@@ -372,7 +372,7 @@ class DiscussListItem extends StatelessWidget {
         width: 32,
         height: 32,
         fit: BoxFit.cover,
-        placeholder: const AssetImage(Assets.imagesAvatarMale),
+        placeholderImage: const AssetImage(Assets.imagesAvatarMale),
       ),
     );
   }
