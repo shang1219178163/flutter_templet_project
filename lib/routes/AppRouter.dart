@@ -389,6 +389,7 @@ import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
 import 'package:flutter_templet_project/pages/demo/track_event_page.dart';
 import 'package:flutter_templet_project/pages/demo/transition/SuffixTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/transition/TweenSequenceDemo.dart';
+import 'package:flutter_templet_project/pages/demo/w3_theme_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/first_page.dart';
@@ -947,6 +948,7 @@ class AppRouter {
   static const String linkifyPage = '/linkifyPage';
   static const String annotatedRegion = '/AnnotatedRegion';
   static const String shimmerDemo = '/shimmerDemo';
+  static const String w3ThemeColorPage = '/w3ThemeColorPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2788,6 +2790,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.shimmerDemo,
       page: () => NShimmerDemo(),
+    ),
+    GetPage(
+      name: AppRouter.w3ThemeColorPage,
+      page: () => W3ThemeColorPage(),
     ),
   ];
 }

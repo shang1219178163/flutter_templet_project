@@ -535,6 +535,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.pageLifecycleFuncTest, "页面生命方法测试"),
   Tuple2(AppRouter.systemIconsPage, "flutter 系统 Icons"),
   Tuple2(AppRouter.systemColorPage, "flutter 系统 颜色"),
+  Tuple2(AppRouter.w3ThemeColorPage, "W3 主题色"),
   Tuple2(AppRouter.systemCurvesPage, "flutter Curves动画效果"),
   Tuple2(AppRouter.localImagePage, "本地图片"),
   Tuple2(AppRouter.providerRoute, "providerRoute"),
