@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_button_confirm.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button_confirm.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';

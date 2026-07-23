@@ -9,8 +9,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_button_cancel.dart';
-import 'package:flutter_templet_project/basicWidget/n_button_confirm.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button_cancel.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button_confirm.dart';
 
 /// 页面底部取消确定菜单
 class NFooterButtonBar extends StatelessWidget {

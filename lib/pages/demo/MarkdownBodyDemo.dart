@@ -19,7 +19,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_templet_project/basicWidget/n_button.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -90,7 +90,7 @@ class _MarkdownBodyDemoState extends State<MarkdownBodyDemo> with AssetResourceM
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            NButton(
+            NButtonOld(
               title: "开始",
               onPressed: onStart,
             ),

@@ -12,7 +12,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_button.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -93,7 +93,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
           ...[
             Row(
               children: [
-                NButton(
+                NButtonOld(
                   height: 40,
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   title: "写入图像",
@@ -106,7 +106,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                     );
                   },
                 ),
-                NButton(
+                NButtonOld(
                   height: 40,
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   title: "图像缓存",
@@ -115,7 +115,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                     Get.to(() => FileBrowserPage(directory: directory, contentBuilder: fileContent));
                   },
                 ),
-                NButton(
+                NButtonOld(
                   height: 40,
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   title: "网络图像缓存",
@@ -137,7 +137,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                   )
                   .toList(),
             ),
-            NButton(
+            NButtonOld(
               constraints: BoxConstraints(maxHeight: 35),
               title: "DocumentsDirectory",
               onPressed: () async {

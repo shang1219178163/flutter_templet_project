@@ -1,5 +1,5 @@
 //
-//  NButton.dart
+//  NButtonOld.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/12/28 11:56.
@@ -13,8 +13,9 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 主题色背景确定按钮
-class NButton extends StatelessWidget {
-  const NButton({
+@Deprecated("已弃用")
+class NButtonOld extends StatelessWidget {
+  const NButtonOld({
     super.key,
     this.primary,
     this.enable = true,
@@ -36,7 +37,7 @@ class NButton extends StatelessWidget {
     this.child,
   });
 
-  factory NButton.tonal({
+  factory NButtonOld.tonal({
     Key? key,
     Color? primary,
     String title,
@@ -55,9 +56,9 @@ class NButton extends StatelessWidget {
     required VoidCallback? onPressed,
     ValueChanged<String>? onTitle,
     Widget? child,
-  }) = _NButtonTonal;
+  }) = _NButtonOldTonal;
 
-  factory NButton.text({
+  factory NButtonOld.text({
     Key? key,
     Color? primary,
     String title,
@@ -74,7 +75,7 @@ class NButton extends StatelessWidget {
     required VoidCallback? onPressed,
     ValueChanged<String>? onTitle,
     Widget? child,
-  }) = _NButtonText;
+  }) = _NButtonOldText;
 
   /// 主题色
   final Color? primary;
@@ -223,8 +224,8 @@ class NButton extends StatelessWidget {
 }
 
 /// 主题浅色背景
-class _NButtonTonal extends NButton {
-  const _NButtonTonal({
+class _NButtonOldTonal extends NButtonOld {
+  const _NButtonOldTonal({
     super.key,
     super.primary,
     super.enable,
@@ -248,7 +249,7 @@ class _NButtonTonal extends NButton {
   @override
   Widget build(BuildContext context) {
     if (!enable) {
-      return NButton(
+      return NButtonOld(
         key: key,
         enable: enable,
         title: title,
@@ -315,8 +316,8 @@ class _NButtonTonal extends NButton {
 }
 
 /// 纯文字
-class _NButtonText extends NButton {
-  const _NButtonText({
+class _NButtonOldText extends NButtonOld {
+  const _NButtonOldText({
     super.key,
     super.primary,
     super.enable,
@@ -338,7 +339,7 @@ class _NButtonText extends NButton {
   @override
   Widget build(BuildContext context) {
     if (!enable) {
-      return NButton(
+      return NButtonOld(
         key: key,
         enable: enable,
         title: title,

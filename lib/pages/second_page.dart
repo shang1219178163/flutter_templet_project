@@ -2,8 +2,8 @@ import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
 import 'package:flutter_templet_project/basicWidget/button/n_stadium_button.dart';
-import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
@@ -37,7 +37,6 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
@@ -820,43 +819,43 @@ class _SecondPageState extends State<SecondPage> {
 
       return Wrap(spacing: spacing, runSpacing: spacing, crossAxisAlignment: WrapCrossAlignment.center, children: [
         ...[
-          NButton(
+          NButtonOld(
             title: "NButton",
             onPressed: () {
               DLog.d("NButton");
             },
           ),
-          NButton(
+          NButtonOld(
             title: "NButton: 禁用",
             enable: false,
             onPressed: () {},
           ),
-          NButton(
+          NButtonOld(
             title: "NButton: red",
             primary: Colors.red,
             onPressed: () {},
           ),
-          NButton.tonal(
+          NButtonOld.tonal(
             title: "NButton.tonal",
             // primary: Colors.red,
             // border: Border.all(color: Colors.transparent),
             onPressed: () {},
           ),
-          NButton.tonal(
+          NButtonOld.tonal(
             title: "NButton.tonal",
             primary: Colors.red,
             // border: Border.all(color: Colors.transparent),
             onPressed: () {},
           ),
-          NButton.tonal(
+          NButtonOld.tonal(
             primary: Colors.white,
             title: "NButton.tonal",
-            style: TextStyle(color: Colors.black87),
+            // style: TextStyle(color: Colors.black87),
             border: Border.all(color: Color(0xffe4e4e4)),
             onPressed: () {},
           ),
-          NButton.tonal(
-            primary: Colors.black87,
+          NButtonOld.tonal(
+            // primary: Colors.black87,
             title: "NButton.tonal1",
             border: Border.all(color: Colors.transparent),
             backgroudColor: Color(0xffF3F3F3),
@@ -867,16 +866,22 @@ class _SecondPageState extends State<SecondPage> {
             // ),
             onPressed: () {},
           ),
-          NButton.tonal(
-            primary: Colors.black87,
+          NButtonOld.tonal(
+            // primary: Colors.black87,
             title: "tonal",
             border: Border.all(color: Colors.transparent),
             backgroudColor: Colors.transparent,
             onPressed: () {},
           ),
-          NButton.text(
+          NButtonOld.text(
             // primary: Colors.red,
             title: "NButton.text",
+            onPressed: () {},
+          ),
+          NButtonOld.text(
+            // primary: Colors.red,
+            width: 26,
+            child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
             onPressed: () {},
           ),
         ]
@@ -886,12 +891,6 @@ class _SecondPageState extends State<SecondPage> {
                   child: e,
                 ))
             .toList(),
-        NButton.text(
-          // primary: Colors.red,
-          width: 26,
-          child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
-          onPressed: () {},
-        ),
       ]);
     });
   }
