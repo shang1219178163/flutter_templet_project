@@ -81,6 +81,7 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
   Widget buildColorSchemeDisplay(ColorScheme colorScheme) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cardColor = isDark ? Colors.black : Color(0xFFF2F4ED);
+    final goldColor = Color(0xFFFFD700);
     return Card(
       color: cardColor,
       elevation: 2,
@@ -110,7 +111,7 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
             buildColorItem('secondary', colorScheme.secondary, colorScheme.onSecondary),
             buildColorItem('onSecondary', colorScheme.onSecondary, colorScheme.secondary),
             buildColorItem('secondaryContainer', colorScheme.secondaryContainer, colorScheme.onSecondaryContainer),
-            buildColorItem('onSecondaryContainer', colorScheme.onSecondaryContainer, colorScheme.secondaryContainer),
+            buildColorItem('onSecondaryContainer', colorScheme.onSecondaryContainer, goldColor),
 
             // 三级颜色
             buildColorItem('tertiary', colorScheme.tertiary, colorScheme.onTertiary),
@@ -121,7 +122,8 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
             // 表面颜色
             buildColorItem('surface', colorScheme.surface, colorScheme.onSurface),
             buildColorItem('onSurface', colorScheme.onSurface, colorScheme.surface),
-            buildColorItem('surfaceContainerHighest', colorScheme.surfaceContainerHighest, colorScheme.onSurfaceVariant),
+            buildColorItem(
+                'surfaceContainerHighest', colorScheme.surfaceContainerHighest, colorScheme.onSurfaceVariant),
             buildColorItem('onSurfaceVariant', colorScheme.onSurfaceVariant, colorScheme.surfaceContainerHighest),
 
             // 背景颜色
@@ -143,7 +145,7 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
             buildColorItem('onInverseSurface', colorScheme.onInverseSurface, colorScheme.inverseSurface),
 
             // 主要颜色反转
-            buildColorItem('inversePrimary', colorScheme.inversePrimary, colorScheme.primary),
+            buildColorItem('inversePrimary', colorScheme.inversePrimary, goldColor),
 
             // 阴影颜色
             buildColorItem('shadow', colorScheme.shadow, Colors.white),
