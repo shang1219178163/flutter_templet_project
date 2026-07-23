@@ -19,6 +19,14 @@ import 'package:flutter_templet_project/extension/src/object_ext.dart';
 // };
 
 extension ScrollControllerExt on ScrollController {
+  static final _debugLabelMap = Expando<String>('ScrollController debug labels');
+
+  /// 附加调试信息
+  String? get debugLabel => _debugLabelMap[this];
+  set debugLabel(String? value) {
+    _debugLabelMap[this] = value;
+  }
+
   /// 跳转到对应位子
   Future<void> jumpTo(
     double value, {
