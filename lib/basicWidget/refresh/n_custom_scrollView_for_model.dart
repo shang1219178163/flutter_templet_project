@@ -107,22 +107,11 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   void didUpdateWidget(covariant NCustomScrollViewForModel<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.controller != widget.controller ||
-        oldWidget.scrollController != widget.scrollController ||
-        oldWidget.notRefresh != widget.notRefresh ||
-        oldWidget.notLoad != widget.notLoad ||
-        oldWidget.placeholder != widget.placeholder ||
-        oldWidget.contentDecoration != widget.contentDecoration ||
-        oldWidget.contentPadding != widget.contentPadding ||
-        oldWidget.onlyHeader != widget.onlyHeader ||
-        oldWidget.onRequest != widget.onRequest) {
-      if (widget.controller != null && oldWidget.controller != widget.controller) {
-        oldWidget.controller?.detach(this);
-        widget.controller?.attach(this);
-      }
-      initData();
-      setState(() {});
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.detach(this);
+      widget.controller?.attach(this);
     }
+    onRequest = widget.onRequest;
   }
 
   @override

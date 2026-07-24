@@ -1,4 +1,5 @@
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
@@ -150,32 +151,18 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   @override
   void didUpdateWidget(covariant NRefreshListView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.title != widget.title ||
-        oldWidget.controller != widget.controller ||
-        oldWidget.notRefresh != widget.notRefresh ||
-        oldWidget.notLoad != widget.notLoad ||
-        oldWidget.placeholder != widget.placeholder ||
-        oldWidget.needRemovePadding != widget.needRemovePadding ||
-        oldWidget.page != widget.page ||
-        oldWidget.pageInitial != widget.pageInitial ||
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.detach(this);
+      widget.controller?.attach(this);
+    }
+    onRequest = widget.onRequest;
+    final shouldReload = oldWidget.page != widget.page ||
         oldWidget.pageSize != widget.pageSize ||
-        oldWidget.firstPageItems != widget.firstPageItems) {
-      if (widget.controller != null && widget.controller != widget.controller) {
-        oldWidget.controller?.detach(this);
-        widget.controller?.attach(this);
-      }
-
-      onRequest = widget.onRequest;
-      final shouldReload = oldWidget.page != widget.page ||
-          oldWidget.pageSize != widget.pageSize ||
-          oldWidget.pageInitial != widget.pageInitial ||
-          oldWidget.firstPageItems != widget.firstPageItems;
-      if (shouldReload) {
-        initData();
-        onRefresh();
-        return;
-      }
-      setState(() {});
+        oldWidget.pageInitial != widget.pageInitial ||
+        !listEquals(oldWidget.firstPageItems, widget.firstPageItems);
+    if (shouldReload) {
+      initData();
+      onRefresh();
     }
   }
 

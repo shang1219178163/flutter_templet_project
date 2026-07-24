@@ -7,6 +7,7 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
@@ -122,33 +123,18 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   @override
   void didUpdateWidget(covariant NCustomScrollView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.controller != widget.controller ||
-        oldWidget.scrollController != widget.scrollController ||
-        oldWidget.notRefresh != widget.notRefresh ||
-        oldWidget.notLoad != widget.notLoad ||
-        oldWidget.placeholder != widget.placeholder ||
-        oldWidget.contentDecoration != widget.contentDecoration ||
-        oldWidget.contentPadding != widget.contentPadding ||
-        oldWidget.onlyHeader != widget.onlyHeader ||
-        oldWidget.page != widget.page ||
-        oldWidget.pageInitial != widget.pageInitial ||
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.detach(this);
+      widget.controller?.attach(this);
+    }
+    onRequest = widget.onRequest;
+    final shouldReload = oldWidget.page != widget.page ||
         oldWidget.pageSize != widget.pageSize ||
-        oldWidget.firstPageItems != widget.firstPageItems) {
-      if (widget.controller != null && oldWidget.controller != widget.controller) {
-        oldWidget.controller?.detach(this);
-        widget.controller?.attach(this);
-      }
-
-      final shouldReload = oldWidget.page != widget.page ||
-          oldWidget.pageSize != widget.pageSize ||
-          oldWidget.pageInitial != widget.pageInitial ||
-          oldWidget.firstPageItems != widget.firstPageItems;
-      if (shouldReload) {
-        initData();
-        onRefresh();
-        return;
-      }
-      setState(() {});
+        oldWidget.pageInitial != widget.pageInitial ||
+        !listEquals(oldWidget.firstPageItems, widget.firstPageItems);
+    if (shouldReload) {
+      initData();
+      onRefresh();
     }
   }
 

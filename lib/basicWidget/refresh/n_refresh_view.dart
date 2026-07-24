@@ -57,9 +57,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 
   final scrollController = ScrollController();
 
-  @override
-  late RequestModelCallback<T> onRequest = widget.onRequest;
-
   /// 首次加载
   var isFirstLoad = true;
 
@@ -73,31 +70,25 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   void initState() {
     super.initState();
     widget.controller?.attach(this);
+    onRequest = widget.onRequest;
     initData();
   }
 
   @override
   void didUpdateWidget(covariant NRefreshView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.controller != widget.controller ||
-        oldWidget.notRefresh != widget.notRefresh ||
-        oldWidget.notLoad != widget.notLoad ||
-        oldWidget.placeholder != widget.placeholder ||
-        oldWidget.onRequest != widget.onRequest) {
-      if (widget.controller != null && oldWidget.controller != widget.controller) {
-        oldWidget.controller?.detach(this);
-        widget.controller?.attach(this);
-      }
-      onRequest = widget.onRequest;
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?.detach(this);
+      widget.controller?.attach(this);
     }
+    onRequest = widget.onRequest;
   }
 
   Future<void> initData() async {
     await onRefresh();
     if (mounted) {
-      setState(() {
-        isFirstLoad = false;
-      });
+      isFirstLoad = false;
+      setState(() {});
     }
   }
 
