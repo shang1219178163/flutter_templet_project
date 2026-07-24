@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_box_decoration/en_box_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow.dart';
 
@@ -37,7 +38,7 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
     final primary = themeData.colorScheme.primary;
     final isDark = themeData.brightness == Brightness.dark;
 
-    final shadowColor = Color(0xffff0000);
+    final shadowColor = Colors.red;
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +46,7 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16).copyWith(bottom: 34),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -167,29 +168,29 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                 ),
               ),
               NSectionBox(
-                title: "NInnerShadowNew",
+                title: "EnBoxDecoration",
                 child: DefaultTextStyle(
                   style: TextStyle(fontSize: 12, color: Colors.black),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: buildInnerShadowNew(
-                          color: shadowColor,
-                          blur: 50,
-                          borderRadius: BorderRadius.circular(12),
-                          child: Text("NInnerShadowBox - 30"),
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: buildInnerShadowNew(
-                          color: shadowColor,
-                          blur: 12,
-                          borderRadius: BorderRadius.circular(12),
-                          child: Text("NInnerShadowBox - 8"),
-                        ),
+                  child: buildEnBoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: shadowColor,
+                        blurRadius: 10,
+                        spreadRadius: 5,
                       ),
                     ],
+                    innerBoxShadow: [
+                      BoxShadow(
+                        color: Colors.blue,
+                        blurRadius: 10,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                    child: Text([
+                      "EnBoxDecoration",
+                      "boxShadow color: Colors.red",
+                      "innerBoxShadow color: Colors.blue",
+                    ].join("\n")),
                   ),
                 ),
               ),
@@ -230,34 +231,22 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
     );
   }
 
-  Widget buildInnerShadowNew({
-    required Color color,
-    double blur = 8,
-    Offset offset = const Offset(0, 0),
-    BorderRadius borderRadius = BorderRadius.zero,
-    double blurExtent = 4,
+  Widget buildEnBoxDecoration({
+    required List<BoxShadow>? boxShadow,
+    required List<BoxShadow>? innerBoxShadow,
+    double radius = 8,
     Widget? child,
   }) {
-    return NInnerShadow(
-      boxShadow: [
-        BoxShadow(
-          color: color,
-          offset: offset,
-          blurRadius: blur,
-          spreadRadius: 0,
-        ),
-      ],
-      blurExtent: blurExtent,
-      borderRadius: borderRadius,
-      child: Container(
-        height: 100.0,
-        // decoration: BoxDecoration(
-        //   // color: Colors.white,
-        //   borderRadius: BorderRadius.circular(20),
-        // ),
-        alignment: Alignment.center,
-        child: child,
+    return Container(
+      height: 100.0,
+      alignment: Alignment.center,
+      decoration: EnBoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(radius),
+        boxShadow: boxShadow,
+        innerBoxShadow: innerBoxShadow,
       ),
+      child: child,
     );
   }
 }

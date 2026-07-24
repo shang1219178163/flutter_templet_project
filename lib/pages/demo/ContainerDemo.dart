@@ -310,6 +310,11 @@ class _ContainerDemoState extends State<ContainerDemo> {
             offset: Offset(0, 0),
             color: Colors.blue,
           ),
+          // BoxShadow(
+          //   blurRadius: 8,
+          //   offset: Offset(0, 0),
+          //   color: Colors.green,
+          // ),
         ],
       ),
       child: Container(
