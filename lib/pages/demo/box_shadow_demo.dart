@@ -127,11 +127,18 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                     children: [
                       Expanded(
                         child: buildInnerShadow(
-                          shadow: BoxShadow(
-                            color: shadowColor,
-                            blurRadius: 30,
-                            spreadRadius: 5,
-                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: shadowColor,
+                              blurRadius: 30,
+                              spreadRadius: 5,
+                            ),
+                            BoxShadow(
+                              color: Colors.blue,
+                              blurRadius: 20,
+                              spreadRadius: 5,
+                            ),
+                          ],
                           borderRadius: BorderRadius.circular(12),
                           child: Text("NInnerShadowBox - 30"),
                         ),
@@ -139,11 +146,18 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                       SizedBox(width: 20),
                       Expanded(
                         child: buildInnerShadow(
-                          shadow: BoxShadow(
-                            color: shadowColor,
-                            blurRadius: 15,
-                            spreadRadius: 5,
-                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: shadowColor,
+                              blurRadius: 15,
+                              spreadRadius: 5,
+                            ),
+                            BoxShadow(
+                              color: Colors.blue,
+                              blurRadius: 5,
+                              spreadRadius: 5,
+                            ),
+                          ],
                           borderRadius: BorderRadius.circular(12),
                           child: Text("NInnerShadowBox - 8"),
                         ),
@@ -199,21 +213,17 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
   }
 
   Widget buildInnerShadow({
-    required BoxShadow shadow,
+    List<BoxShadow>? boxShadow,
     BorderRadius borderRadius = BorderRadius.zero,
     double blurExtent = 4,
     Widget? child,
   }) {
     return NInnerShadow(
-      shadow: shadow,
+      boxShadow: boxShadow,
       blurExtent: blurExtent,
       borderRadius: borderRadius,
       child: Container(
         height: 100.0,
-        // decoration: BoxDecoration(
-        //   // color: Colors.white,
-        //   borderRadius: BorderRadius.circular(20),
-        // ),
         alignment: Alignment.center,
         child: child,
       ),
@@ -229,12 +239,14 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
     Widget? child,
   }) {
     return NInnerShadow(
-      shadow: BoxShadow(
-        color: color,
-        offset: offset,
-        blurRadius: blur,
-        spreadRadius: 0,
-      ),
+      boxShadow: [
+        BoxShadow(
+          color: color,
+          offset: offset,
+          blurRadius: blur,
+          spreadRadius: 0,
+        ),
+      ],
       blurExtent: blurExtent,
       borderRadius: borderRadius,
       child: Container(

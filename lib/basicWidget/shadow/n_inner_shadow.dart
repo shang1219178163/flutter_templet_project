@@ -6,18 +6,19 @@
 //  Copyright © 2026/7/24 shang. All rights reserved.
 //
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class NInnerShadow extends StatelessWidget {
   const NInnerShadow({
     super.key,
-    required this.shadow,
+    this.boxShadow,
     this.borderRadius = BorderRadius.zero,
     this.blurExtent = 4.0,
     required this.child,
   });
 
-  final BoxShadow shadow;
+  final List<BoxShadow>? boxShadow;
   final BorderRadius borderRadius;
   final Widget child;
 
@@ -35,7 +36,7 @@ class NInnerShadow extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       foregroundPainter: _InnerShadowPainter(
-        shadow: shadow,
+        boxShadow: boxShadow,
         borderRadius: borderRadius,
         blurExtent: blurExtent,
       ),
@@ -46,12 +47,12 @@ class NInnerShadow extends StatelessWidget {
 
 class _InnerShadowPainter extends CustomPainter {
   const _InnerShadowPainter({
-    required this.shadow,
+    this.boxShadow,
     this.blurExtent = 3.0,
     this.borderRadius = BorderRadius.zero,
   });
 
-  final BoxShadow shadow;
+  final List<BoxShadow>? boxShadow;
 
   /// Multiplier used to expand the outer rect to avoid clipping
   /// the blurred shadow.
@@ -67,24 +68,41 @@ class _InnerShadowPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    /// Gaussian blur sigma.
-    final blurSigma = shadow.blurSigma;
-    final offset = shadow.offset;
-    final spreadRadius = shadow.spreadRadius;
-
+    final shadows = boxShadow;
+    if (shadows == null || shadows.isEmpty) {
+      return;
+    }
     // 当前组件的绘制区域，从 (0, 0) 到 (width, height)
     final rect = Offset.zero & size;
-    final padding = blurSigma * blurExtent;
-
     // 创建组件内部区域（圆角矩形）
     // 后续会使用它作为裁剪区域，确保阴影只显示在组件内部
     final clipRRect = borderRadius.toRRect(rect);
     final inner = Path()..addRRect(clipRRect);
+    // 只允许绘制到组件内部
+    canvas.save();
+    canvas.clipPath(inner);
+    for (final shadow in shadows) {
+      paintShadow(canvas: canvas, rect: rect, clipRRect: clipRRect, shadow: shadow);
+    }
+    // 恢复 Canvas 状态
+    // 撤销 clipPath() 的影响，避免影响后续绘制内容。
+    canvas.restore();
+  }
 
+  void paintShadow({
+    required Canvas canvas,
+    required Rect rect,
+    required RRect clipRRect,
+    required BoxShadow shadow,
+  }) {
+    /// Gaussian blur sigma.
+    final blurSigma = shadow.blurSigma;
+    final offset = shadow.offset;
+    final spreadRadius = shadow.spreadRadius;
+    final padding = blurSigma * blurExtent;
     // spreadRadius > 0：缩小空洞，阴影向内扩散（覆盖更多内部区域）
     // spreadRadius < 0：扩大空洞，阴影向内收缩
     final holeRRect = clipRRect.deflate(spreadRadius);
-
     // 创建外部路径
     //
     // PathFillType.evenOdd 表示偶奇填充规则：
@@ -96,30 +114,21 @@ class _InnerShadowPainter extends CustomPainter {
       ..fillType = PathFillType.evenOdd
       ..addRect(rect.inflate(padding))
       ..addRRect(holeRRect);
-
-    // 保存当前 Canvas 状态（裁剪、变换等）
     canvas.save();
-
-    // 只允许绘制到组件内部
-    canvas.clipPath(inner);
-
     // 平移整个阴影
     //
     // offset 决定光源方向：
     // Offset(2,2) -> 左上亮，右下暗
     // Offset(-2,-2)-> 右下亮，左上暗
     canvas.translate(offset.dx, offset.dy);
-
     // 绘制环形路径
     canvas.drawPath(outer, shadow.toPaint());
-
-    // 恢复 Canvas 状态
-    // 撤销 clipPath() 和 translate() 的影响，
-    // 避免影响后续绘制内容。
     canvas.restore();
   }
 
   @override
   bool shouldRepaint(covariant _InnerShadowPainter oldDelegate) =>
-      shadow != oldDelegate.shadow || borderRadius != oldDelegate.borderRadius || blurExtent != oldDelegate.blurExtent;
+      !listEquals(boxShadow, oldDelegate.boxShadow) ||
+      borderRadius != oldDelegate.borderRadius ||
+      blurExtent != oldDelegate.blurExtent;
 }
