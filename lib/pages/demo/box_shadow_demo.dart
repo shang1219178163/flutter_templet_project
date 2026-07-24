@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow.dart';
+import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow_new.dart';
 
 class BoxShadowDemo extends StatefulWidget {
   const BoxShadowDemo({Key? key, this.title}) : super(key: key);
@@ -120,7 +121,7 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                 ),
               ),
               NSectionBox(
-                title: "NInnerShadowBox",
+                title: "NInnerShadow",
                 child: DefaultTextStyle(
                   style: TextStyle(fontSize: 12, color: Colors.black),
                   child: Row(
@@ -138,6 +139,33 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                         child: buildInnerShadow(
                           color: shadowColor,
                           blur: 8,
+                          borderRadius: BorderRadius.circular(12),
+                          child: Text("NInnerShadowBox - 8"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              NSectionBox(
+                title: "NInnerShadowNew",
+                child: DefaultTextStyle(
+                  style: TextStyle(fontSize: 12, color: Colors.black),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildInnerShadowNew(
+                          color: shadowColor,
+                          blur: 50,
+                          borderRadius: BorderRadius.circular(12),
+                          child: Text("NInnerShadowBox - 30"),
+                        ),
+                      ),
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: buildInnerShadowNew(
+                          color: shadowColor,
+                          blur: 12,
                           borderRadius: BorderRadius.circular(12),
                           child: Text("NInnerShadowBox - 8"),
                         ),
@@ -178,6 +206,34 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
       blurExtent: blurExtent,
       offset: offset,
       color: color,
+      borderRadius: borderRadius,
+      child: Container(
+        height: 100.0,
+        // decoration: BoxDecoration(
+        //   // color: Colors.white,
+        //   borderRadius: BorderRadius.circular(20),
+        // ),
+        alignment: Alignment.center,
+        child: child,
+      ),
+    );
+  }
+
+  Widget buildInnerShadowNew({
+    required Color color,
+    double blur = 8,
+    Offset offset = const Offset(0, 0),
+    BorderRadius borderRadius = BorderRadius.zero,
+    double blurExtent = 4,
+    Widget? child,
+  }) {
+    return NInnerShadowNew(
+      shadow: BoxShadow(
+        color: color,
+        offset: offset,
+        blurRadius: blur,
+      ),
+      blurExtent: blurExtent,
       borderRadius: borderRadius,
       child: Container(
         height: 100.0,
