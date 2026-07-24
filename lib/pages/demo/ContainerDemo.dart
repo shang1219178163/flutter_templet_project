@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_box_decoration/en_box_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow.dart';
@@ -88,6 +89,10 @@ class _ContainerDemoState extends State<ContainerDemo> {
             NSectionBox(
               title: "NInnerShadow",
               child: buildInnerShadow(),
+            ),
+            NSectionBox(
+              title: "EnBoxDecoration",
+              child: buildEnBoxDecoration(),
             ),
           ]
               .map((e) => SliverToBoxAdapter(
@@ -281,6 +286,40 @@ class _ContainerDemoState extends State<ContainerDemo> {
         // ),
         alignment: Alignment.center,
         child: Text("NInnerShadowBox"),
+      ),
+    );
+  }
+
+  Widget buildEnBoxDecoration() {
+    return Container(
+      decoration: EnBoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+        // shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 16,
+            offset: Offset(0, 0),
+            color: Colors.red,
+          ),
+        ],
+        innerBoxShadow: [
+          BoxShadow(
+            blurRadius: 16,
+            offset: Offset(0, 0),
+            color: Colors.blue,
+          ),
+        ],
+      ),
+      child: Container(
+        height: 100.0,
+        // decoration: BoxDecoration(
+        //   // color: Colors.white,
+        //   borderRadius: BorderRadius.circular(20),
+        // ),
+        alignment: Alignment.center,
+        child: Text("EnBoxDecoration"),
       ),
     );
   }

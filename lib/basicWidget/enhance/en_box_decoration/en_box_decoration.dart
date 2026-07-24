@@ -83,6 +83,7 @@ class EnBoxDecoration extends Decoration {
     this.border,
     this.borderRadius,
     this.boxShadow,
+    this.innerBoxShadow,
     this.gradient,
     this.backgroundBlendMode,
     this.shape = BoxShape.rectangle,
@@ -94,22 +95,24 @@ class EnBoxDecoration extends Decoration {
 
   /// Creates a copy of this object but with the given fields replaced with the
   /// new values.
-  BoxDecoration copyWith({
+  EnBoxDecoration copyWith({
     Color? color,
     DecorationImage? image,
     BoxBorder? border,
     BorderRadiusGeometry? borderRadius,
     List<BoxShadow>? boxShadow,
+    List<BoxShadow>? innerBoxShadow,
     Gradient? gradient,
     BlendMode? backgroundBlendMode,
     BoxShape? shape,
   }) {
-    return BoxDecoration(
+    return EnBoxDecoration(
       color: color ?? this.color,
       image: image ?? this.image,
       border: border ?? this.border,
       borderRadius: borderRadius ?? this.borderRadius,
       boxShadow: boxShadow ?? this.boxShadow,
+      innerBoxShadow: innerBoxShadow ?? this.innerBoxShadow,
       gradient: gradient ?? this.gradient,
       backgroundBlendMode: backgroundBlendMode ?? this.backgroundBlendMode,
       shape: shape ?? this.shape,
@@ -170,6 +173,11 @@ class EnBoxDecoration extends Decoration {
   ///  * [PhysicalModel], a widget for showing shadows.
   final List<BoxShadow>? boxShadow;
 
+  /// A list of inset shadows cast inside the box.
+  ///
+  /// The shadow follows the [shape] and [borderRadius] of the box.
+  final List<BoxShadow>? innerBoxShadow;
+
   /// A gradient to use when filling the box.
   ///
   /// If this is specified, [color] has no effect.
@@ -227,13 +235,14 @@ class EnBoxDecoration extends Decoration {
       border: BoxBorder.lerp(null, border, factor),
       borderRadius: BorderRadiusGeometry.lerp(null, borderRadius, factor),
       boxShadow: BoxShadow.lerpList(null, boxShadow, factor),
+      innerBoxShadow: BoxShadow.lerpList(null, innerBoxShadow, factor),
       gradient: gradient?.scale(factor),
       shape: shape,
     );
   }
 
   @override
-  bool get isComplex => boxShadow != null;
+  bool get isComplex => boxShadow != null || innerBoxShadow != null;
 
   @override
   Decoration? lerpFrom(Decoration? a, double t) => switch (a) {
@@ -294,6 +303,7 @@ class EnBoxDecoration extends Decoration {
       border: BoxBorder.lerp(a.border, b.border, t),
       borderRadius: BorderRadiusGeometry.lerp(a.borderRadius, b.borderRadius, t),
       boxShadow: BoxShadow.lerpList(a.boxShadow, b.boxShadow, t),
+      innerBoxShadow: BoxShadow.lerpList(a.innerBoxShadow, b.innerBoxShadow, t),
       gradient: Gradient.lerp(a.gradient, b.gradient, t),
       shape: t < 0.5 ? a.shape : b.shape,
     );
@@ -307,12 +317,13 @@ class EnBoxDecoration extends Decoration {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is BoxDecoration &&
+    return other is EnBoxDecoration &&
         other.color == color &&
         other.image == image &&
         other.border == border &&
         other.borderRadius == borderRadius &&
         listEquals<BoxShadow>(other.boxShadow, boxShadow) &&
+        listEquals<BoxShadow>(other.innerBoxShadow, innerBoxShadow) &&
         other.gradient == gradient &&
         other.backgroundBlendMode == backgroundBlendMode &&
         other.shape == shape;
@@ -325,6 +336,7 @@ class EnBoxDecoration extends Decoration {
         border,
         borderRadius,
         boxShadow == null ? null : Object.hashAll(boxShadow!),
+        innerBoxShadow == null ? null : Object.hashAll(innerBoxShadow!),
         gradient,
         backgroundBlendMode,
         shape,
@@ -342,6 +354,8 @@ class EnBoxDecoration extends Decoration {
     properties.add(DiagnosticsProperty<BoxBorder>('border', border, defaultValue: null));
     properties.add(DiagnosticsProperty<BorderRadiusGeometry>('borderRadius', borderRadius, defaultValue: null));
     properties.add(IterableProperty<BoxShadow>('boxShadow', boxShadow,
+        defaultValue: null, style: DiagnosticsTreeStyle.whitespace));
+    properties.add(IterableProperty<BoxShadow>('innerBoxShadow', innerBoxShadow,
         defaultValue: null, style: DiagnosticsTreeStyle.whitespace));
     properties.add(DiagnosticsProperty<Gradient>('gradient', gradient, defaultValue: null));
     properties.add(EnumProperty<BoxShape>('shape', shape, defaultValue: BoxShape.rectangle));
@@ -421,9 +435,9 @@ class _BoxDecorationPainter extends BoxPainter {
     if (_decoration.boxShadow == null) {
       return;
     }
-    for (final BoxShadow boxShadow in _decoration.boxShadow!) {
-      final Paint paint = boxShadow.toPaint();
-      final Rect bounds = rect.shift(boxShadow.offset).inflate(boxShadow.spreadRadius);
+    for (final boxShadow in _decoration.boxShadow!) {
+      final paint = boxShadow.toPaint();
+      final bounds = rect.shift(boxShadow.offset).inflate(boxShadow.spreadRadius);
       assert(() {
         if (debugDisableShadows && boxShadow.blurStyle == BlurStyle.outer) {
           canvas.save();
@@ -439,6 +453,45 @@ class _BoxDecorationPainter extends BoxPainter {
         return true;
       }());
     }
+  }
+
+  void _paintInnerShadows(Canvas canvas, Rect rect, TextDirection? textDirection) {
+    final shadows = _decoration.innerBoxShadow;
+    if (shadows == null || shadows.isEmpty) {
+      return;
+    }
+    late final Rect paintRect;
+    late final BorderRadius borderRadius;
+    switch (_decoration.shape) {
+      case BoxShape.circle:
+        final radius = rect.shortestSide / 2.0;
+        paintRect = Rect.fromCircle(center: rect.center, radius: radius);
+        borderRadius = BorderRadius.circular(radius);
+      case BoxShape.rectangle:
+        paintRect = rect;
+        borderRadius = _decoration.borderRadius?.resolve(textDirection) ?? BorderRadius.zero;
+    }
+    const blurExtent = 3.0;
+    final clipRRect = borderRadius.toRRect(paintRect);
+    final inner = Path()..addRRect(clipRRect);
+    canvas.save();
+    canvas.clipPath(inner);
+    for (final shadow in shadows) {
+      final blurSigma = shadow.blurSigma;
+      final offset = shadow.offset;
+      final spreadRadius = shadow.spreadRadius;
+      final padding = blurSigma * blurExtent;
+      final holeRRect = clipRRect.deflate(spreadRadius);
+      final outer = Path()
+        ..fillType = PathFillType.evenOdd
+        ..addRect(paintRect.inflate(padding))
+        ..addRRect(holeRRect);
+      canvas.save();
+      canvas.translate(offset.dx, offset.dy);
+      canvas.drawPath(outer, shadow.toPaint());
+      canvas.restore();
+    }
+    canvas.restore();
   }
 
   void _paintBackgroundColor(Canvas canvas, Rect rect, TextDirection? textDirection) {
@@ -539,6 +592,7 @@ class _BoxDecorationPainter extends BoxPainter {
     _paintShadows(canvas, rect, textDirection);
     _paintBackgroundColor(canvas, rect, textDirection);
     _paintBackgroundImage(canvas, rect, configuration);
+    _paintInnerShadows(canvas, rect, textDirection);
     _decoration.border?.paint(
       canvas,
       rect,
