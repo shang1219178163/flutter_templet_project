@@ -456,10 +456,10 @@ class AppThemeService {
         selectionColor: seedColor.withValues(alpha: 0.3),
         selectionHandleColor: seedColor,
       ),
-      textTheme: ThemeData.dark().textTheme.apply(
-            bodyColor: Colors.white, // 普通文字颜色
-            displayColor: Colors.white, // 标题文字颜色
-          ),
+      // textTheme: ThemeData.dark().textTheme.apply(
+      //       bodyColor: Colors.white, // 普通文字颜色
+      //       displayColor: Colors.white, // 标题文字颜色
+      //     ),
       // textTheme: const TextTheme(
       //   displayLarge: TextStyle(color: Colors.white, fontSize: 96.0, fontWeight: FontWeight.w300),
       //   displayMedium: TextStyle(color: Colors.white, fontSize: 60.0, fontWeight: FontWeight.w300),

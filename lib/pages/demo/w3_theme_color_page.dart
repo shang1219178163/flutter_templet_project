@@ -9,8 +9,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/enum/w3_theme_color.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 /// W3 Schools 主题色列表
 class W3ThemeColorPage extends StatefulWidget {
@@ -29,6 +32,7 @@ class _W3ThemeColorPageState extends State<W3ThemeColorPage> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
+  final boundaryKey = GlobalKey();
 
   final items = W3ThemeColor.values;
 
@@ -39,6 +43,13 @@ class _W3ThemeColorPageState extends State<W3ThemeColorPage> {
           ? null
           : AppBar(
               title: Text("$widget"),
+              actions: [
+                IconButton(
+                  tooltip: "截屏",
+                  onPressed: captureScreenshot,
+                  icon: const Icon(Icons.crop),
+                ),
+              ],
             ),
       body: buildBody(),
     );
@@ -47,21 +58,22 @@ class _W3ThemeColorPageState extends State<W3ThemeColorPage> {
   Widget buildBody() {
     return Scrollbar(
       controller: scrollController,
-      child: ListView.separated(
+      child: SingleChildScrollView(
         controller: scrollController,
-        itemCount: items.length,
-        separatorBuilder: (_, __) => const Divider(height: 1),
-        itemBuilder: (context, index) {
-          return buildColorItem(items[index]);
-        },
+        child: RepaintBoundary(
+          key: boundaryKey,
+          child: Column(
+            children: [
+              ...items.map(buildColorItem),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   Widget buildColorItem(W3ThemeColor item) {
     final color = item.color;
-    final isLight = color.computeLuminance() > 0.55;
-    final onColor = isLight ? Colors.black87 : Colors.white;
     return Container(
       decoration: BoxDecoration(
         color: color,
@@ -89,12 +101,28 @@ class _W3ThemeColorPageState extends State<W3ThemeColorPage> {
 
   Future<void> copy(String val) async {
     await Clipboard.setData(ClipboardData(text: val));
-    DLog.d("已复制名称 ${val}");
+    DLog.d("已复制名称 $val");
     if (!mounted) {
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("已复制 ${val}"), duration: const Duration(seconds: 1)),
+      SnackBar(content: Text("已复制 $val"), duration: const Duration(seconds: 1)),
     );
+  }
+
+  Future<void> captureScreenshot() async {
+    final bytes = await boundaryKey.currentContext?.toImageUint8List(pixelRatio: 3);
+    if (bytes == null) {
+      ToastUtil.show("截屏失败，请稍后重试");
+      return;
+    }
+    final result = await ImageGallerySaverPlus.saveImage(
+      bytes,
+      quality: 100,
+      name: "w3_theme_color_${DateTime.now().millisecondsSinceEpoch}",
+    );
+    DLog.d("截屏结果: $result");
+    final isSuccess = result is Map && (result['isSuccess'] as bool? ?? false);
+    ToastUtil.show(isSuccess ? "已保存到相册" : "保存失败");
   }
 }
