@@ -264,10 +264,12 @@ class _ContainerDemoState extends State<ContainerDemo> {
 
   Widget buildInnerShadow() {
     return NInnerShadow(
-      blur: 16,
+      shadow: BoxShadow(
+        blurRadius: 16,
+        offset: Offset(0, 0),
+        color: Colors.red,
+      ),
       blurExtent: 4,
-      offset: Offset(0, 0),
-      color: Colors.red,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         height: 100.0,

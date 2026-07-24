@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow.dart';
-import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow_new.dart';
 
 class BoxShadowDemo extends StatefulWidget {
   const BoxShadowDemo({Key? key, this.title}) : super(key: key);
@@ -128,8 +127,11 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                     children: [
                       Expanded(
                         child: buildInnerShadow(
-                          color: shadowColor,
-                          blur: 30,
+                          shadow: BoxShadow(
+                            color: shadowColor,
+                            blurRadius: 30,
+                            spreadRadius: 5,
+                          ),
                           borderRadius: BorderRadius.circular(12),
                           child: Text("NInnerShadowBox - 30"),
                         ),
@@ -137,8 +139,11 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                       SizedBox(width: 20),
                       Expanded(
                         child: buildInnerShadow(
-                          color: shadowColor,
-                          blur: 8,
+                          shadow: BoxShadow(
+                            color: shadowColor,
+                            blurRadius: 15,
+                            spreadRadius: 5,
+                          ),
                           borderRadius: BorderRadius.circular(12),
                           child: Text("NInnerShadowBox - 8"),
                         ),
@@ -194,18 +199,14 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
   }
 
   Widget buildInnerShadow({
-    required Color color,
-    double blur = 8,
-    Offset offset = const Offset(0, 0),
+    required BoxShadow shadow,
     BorderRadius borderRadius = BorderRadius.zero,
     double blurExtent = 4,
     Widget? child,
   }) {
     return NInnerShadow(
-      blur: blur,
+      shadow: shadow,
       blurExtent: blurExtent,
-      offset: offset,
-      color: color,
       borderRadius: borderRadius,
       child: Container(
         height: 100.0,
@@ -227,11 +228,12 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
     double blurExtent = 4,
     Widget? child,
   }) {
-    return NInnerShadowNew(
+    return NInnerShadow(
       shadow: BoxShadow(
         color: color,
         offset: offset,
         blurRadius: blur,
+        spreadRadius: 0,
       ),
       blurExtent: blurExtent,
       borderRadius: borderRadius,

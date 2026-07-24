@@ -11,19 +11,15 @@ import 'package:flutter/material.dart';
 class NInnerShadow extends StatelessWidget {
   const NInnerShadow({
     super.key,
-    required this.child,
-    this.color = Colors.black26,
-    this.blur = 10,
-    this.offset = const Offset(2, 2),
+    required this.shadow,
     this.borderRadius = BorderRadius.zero,
     this.blurExtent = 4.0,
+    required this.child,
   });
 
-  final Widget child;
-  final Color color;
-  final double blur;
-  final Offset offset;
+  final BoxShadow shadow;
   final BorderRadius borderRadius;
+  final Widget child;
 
   /// Multiplier used to expand the outer rect to avoid clipping
   /// the blurred shadow.
@@ -39,9 +35,7 @@ class NInnerShadow extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       foregroundPainter: _InnerShadowPainter(
-        color: color,
-        blur: blur,
-        offset: offset,
+        shadow: shadow,
         borderRadius: borderRadius,
         blurExtent: blurExtent,
       ),
@@ -52,21 +46,12 @@ class NInnerShadow extends StatelessWidget {
 
 class _InnerShadowPainter extends CustomPainter {
   const _InnerShadowPainter({
-    required this.color,
-    required this.blur,
-    required this.offset,
-    required this.borderRadius,
-    this.blurExtent = 4.0,
+    required this.shadow,
+    this.blurExtent = 3.0,
+    this.borderRadius = BorderRadius.zero,
   });
 
-  final Color color;
-
-  /// Gaussian blur sigma.
-  final double blur;
-
-  final Offset offset;
-
-  final BorderRadius borderRadius;
+  final BoxShadow shadow;
 
   /// Multiplier used to expand the outer rect to avoid clipping
   /// the blurred shadow.
@@ -78,15 +63,27 @@ class _InnerShadowPainter extends CustomPainter {
   /// Usually 3.0~4.0 is sufficient.
   final double blurExtent;
 
+  final BorderRadius borderRadius;
+
   @override
   void paint(Canvas canvas, Size size) {
+    /// Gaussian blur sigma.
+    final blurSigma = shadow.blurSigma;
+    final offset = shadow.offset;
+    final spreadRadius = shadow.spreadRadius;
+
     // 当前组件的绘制区域，从 (0, 0) 到 (width, height)
     final rect = Offset.zero & size;
-    final padding = blur * blurExtent;
+    final padding = blurSigma * blurExtent;
 
     // 创建组件内部区域（圆角矩形）
     // 后续会使用它作为裁剪区域，确保阴影只显示在组件内部
-    final inner = Path()..addRRect(borderRadius.toRRect(rect));
+    final clipRRect = borderRadius.toRRect(rect);
+    final inner = Path()..addRRect(clipRRect);
+
+    // spreadRadius > 0：缩小空洞，阴影向内扩散（覆盖更多内部区域）
+    // spreadRadius < 0：扩大空洞，阴影向内收缩
+    final holeRRect = clipRRect.deflate(spreadRadius);
 
     // 创建外部路径
     //
@@ -97,8 +94,8 @@ class _InnerShadowPainter extends CustomPainter {
     // 防止高斯模糊向外扩散时被裁剪。
     final outer = Path()
       ..fillType = PathFillType.evenOdd
-      ..addRect(rect.inflate(blur * padding))
-      ..addRRect(borderRadius.toRRect(rect));
+      ..addRect(rect.inflate(padding))
+      ..addRRect(holeRRect);
 
     // 保存当前 Canvas 状态（裁剪、变换等）
     canvas.save();
@@ -114,19 +111,7 @@ class _InnerShadowPainter extends CustomPainter {
     canvas.translate(offset.dx, offset.dy);
 
     // 绘制环形路径
-    canvas.drawPath(
-      outer,
-      Paint()
-        ..color = color
-        // 添加高斯模糊，使边缘变得柔和
-        //
-        // blur 参数实际上是 Gaussian Sigma，
-        // 数值越大，阴影越柔和。
-        ..maskFilter = MaskFilter.blur(
-          BlurStyle.normal,
-          blur,
-        ),
-    );
+    canvas.drawPath(outer, shadow.toPaint());
 
     // 恢复 Canvas 状态
     // 撤销 clipPath() 和 translate() 的影响，
@@ -136,9 +121,5 @@ class _InnerShadowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _InnerShadowPainter oldDelegate) =>
-      color != oldDelegate.color ||
-      blur != oldDelegate.blur ||
-      offset != oldDelegate.offset ||
-      borderRadius != oldDelegate.borderRadius ||
-      blurExtent != oldDelegate.blurExtent;
+      shadow != oldDelegate.shadow || borderRadius != oldDelegate.borderRadius || blurExtent != oldDelegate.blurExtent;
 }
