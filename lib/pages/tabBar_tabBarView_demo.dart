@@ -593,6 +593,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.deviceBrightnessAndVolumeDemo, "deviceBrightnessAndVolumeDemo"),
   Tuple2(AppRouter.linkifyPage, "linkifyPage"),
   Tuple2(AppRouter.annotatedRegion, "annotatedRegion"),
+  Tuple2(AppRouter.rebuildChainPage, "rebuildChain"),
 ];
 
 var animateds = <Tuple2<String, String>>[

@@ -273,6 +273,7 @@ import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingsStar/RatingsStarPage.dart';
+import 'package:flutter_templet_project/pages/demo/RebuildChainPage.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemoOne.dart';
@@ -949,6 +950,7 @@ class AppRouter {
   static const String annotatedRegion = '/AnnotatedRegion';
   static const String shimmerDemo = '/shimmerDemo';
   static const String w3ThemeColorPage = '/w3ThemeColorPage';
+  static const String rebuildChainPage = '/rebuildChainPage';
 
   static const String INITIAL = AppRouter.appTabPage;
   // static const String INITIAL = AppRouter.developToolList;
@@ -2794,6 +2796,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.w3ThemeColorPage,
       page: () => W3ThemeColorPage(),
+    ),
+    GetPage(
+      name: AppRouter.rebuildChainPage,
+      page: () => RebuildChainPage(),
     ),
   ];
 }
