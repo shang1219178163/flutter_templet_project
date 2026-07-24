@@ -171,27 +171,7 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
                 title: "EnBoxDecoration",
                 child: DefaultTextStyle(
                   style: TextStyle(fontSize: 12, color: Colors.black),
-                  child: buildEnBoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: shadowColor,
-                        blurRadius: 10,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                    innerBoxShadow: [
-                      BoxShadow(
-                        color: Colors.blue,
-                        blurRadius: 10,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                    child: Text([
-                      "EnBoxDecoration",
-                      "boxShadow color: Colors.red",
-                      "innerBoxShadow color: Colors.blue",
-                    ].join("\n")),
-                  ),
+                  child: buildEnBoxDecoration(),
                 ),
               ),
             ],
@@ -231,22 +211,33 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
     );
   }
 
-  Widget buildEnBoxDecoration({
-    required List<BoxShadow>? boxShadow,
-    required List<BoxShadow>? innerBoxShadow,
-    double radius = 8,
-    Widget? child,
-  }) {
+  Widget buildEnBoxDecoration() {
     return Container(
       height: 100.0,
       alignment: Alignment.center,
       decoration: EnBoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(radius),
-        boxShadow: boxShadow,
-        innerBoxShadow: innerBoxShadow,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.red,
+            blurRadius: 10,
+            spreadRadius: 5,
+          ),
+        ],
+        innerBoxShadow: [
+          BoxShadow(
+            color: Colors.blue,
+            blurRadius: 10,
+            spreadRadius: 5,
+          ),
+        ],
       ),
-      child: child,
+      child: Text([
+        "EnBoxDecoration",
+        "boxShadow color: Colors.red",
+        "innerBoxShadow color: Colors.blue",
+      ].join("\n")),
     );
   }
 }
