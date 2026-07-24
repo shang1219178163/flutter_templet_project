@@ -3,13 +3,11 @@ import 'dart:ui' as ui;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
-import 'package:flutter_templet_project/basicWidget/n_inner_shadow.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
-import 'package:flutter_templet_project/util/dlog.dart';
 
 class ContainerDemo extends StatefulWidget {
   final String? title;
@@ -24,6 +22,8 @@ class _ContainerDemoState extends State<ContainerDemo> {
   bool isSliver = true;
 
   late final themeData = Theme.of(context);
+  late final primary = themeData.colorScheme.primary;
+  late final isDark = themeData.brightness == Brightness.dark;
 
   @override
   void initState() {
@@ -263,44 +263,20 @@ class _ContainerDemoState extends State<ContainerDemo> {
   }
 
   Widget buildInnerShadow() {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
-        gradient: const LinearGradient(
-          colors: [Color(0x99F9F9F9), Colors.white],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        border: const Border(top: BorderSide(color: Colors.white)),
-      ),
-      child: GestureDetector(
-        onTap: () {
-          DLog.d("onTap");
-        },
-        child: NInnerShadow(
-          borderRadius: BorderRadius.circular(8),
-          shadows: [
-            // BoxShadow(
-            //   color: Color.fromRGBO(255, 254, 233, 0.50),
-            //   offset: Offset(0, 5),
-            //   blurRadius: 16,
-            // ),
-          ],
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(vertical: 11),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              gradient: const LinearGradient(
-                colors: [Color(0xFFFED47A), Color(0xFFFCBF67), Color(0xFFF29E4E), Color(0xFFE99676)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-            ),
-            child: NText('进入诊室', color: Colors.white, fontWeight: FontWeight.w500),
-          ),
-        ),
+    return NInnerShadow(
+      blur: 16,
+      blurExtent: 4,
+      offset: Offset(0, 0),
+      color: Colors.red,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        height: 100.0,
+        // decoration: BoxDecoration(
+        //   // color: Colors.white,
+        //   borderRadius: BorderRadius.circular(20),
+        // ),
+        alignment: Alignment.center,
+        child: Text("NInnerShadowBox"),
       ),
     );
   }
