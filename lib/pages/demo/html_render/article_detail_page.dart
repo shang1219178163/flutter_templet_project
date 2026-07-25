@@ -454,8 +454,8 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
           height: 22,
           width: 3,
           margin: EdgeInsets.only(right: 12),
-          decoration: const BoxDecoration(
-            color: Colors.red,
+          decoration: BoxDecoration(
+            color: themeProvider.primary,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(3),
               bottomRight: Radius.circular(3),
@@ -468,7 +468,6 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
             ),
           ),
         ),

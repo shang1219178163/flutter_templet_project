@@ -124,6 +124,8 @@ class ThemeProvider extends ChangeNotifier {
   /// isDark ? overlayStyleLight : overlayStyleDark;
   SystemUiOverlayStyle get overlayStyle => isDark ? overlayStyleLight : overlayStyleDark;
 
+  Color get primary => AppThemeService().seedColor;
+
   /// 页面背景色(isDark ? Color(0xFF181829) : Color(0xFFF6F6F6))
   Color get scaffoldBackgroundColor => isDark ? Color(0xFF181829) : Color(0xFFF6F6F6);
 
