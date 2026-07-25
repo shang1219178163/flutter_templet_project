@@ -235,7 +235,6 @@ class AppThemeService {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           splashFactory: NoSplash.splashFactory,
-          backgroundColor: seedColor,
         ).merge(buildButtonStyle()),
       ),
       textSelectionTheme: TextSelectionThemeData(
