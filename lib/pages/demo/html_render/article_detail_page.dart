@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/end_bounce_scroll_physics.dart';
-import 'package:flutter_templet_project/pages/demo/html_render/model/NewsDetailModel.dart';
+import 'package:flutter_templet_project/pages/demo/html_render/model/article_detail_model.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +21,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     with TickerProviderStateMixin, WidgetsBindingObserver, RouteAware {
   late final themeProvider = context.read<ThemeProvider>();
 
-  NewsDetailModel? detail;
+  ArticleDetailModel? detail;
 
   @override
   void dispose() {
@@ -42,7 +42,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     final str = await rootBundle.loadString("assets/data/article_json.json");
     final map = jsonDecode(str) as Map<String, dynamic>;
     final data = map["data"] as Map<String, dynamic>? ?? <String, dynamic>{};
-    detail = NewsDetailModel.fromJson(data);
+    detail = ArticleDetailModel.fromJson(data);
 
     final html = detail?.context ?? "";
     final match = RegExp(r"source: '([^']+)'").firstMatch(html);
@@ -55,13 +55,13 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
 
   @override
   void didPushNext() {
-    // final provider = context.read<NewsDetailProvider>();
+    // final provider = context.read<ArticleDetailProvider>();
     // provider.pauseVideo(); // 暂停播放
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // final provider = context.read<NewsDetailProvider>();
+    // final provider = context.read<ArticleDetailProvider>();
     // if (state == AppLifecycleState.inactive || state == AppLifecycleState.paused) {
     //   provider.pauseVideo();
     // }

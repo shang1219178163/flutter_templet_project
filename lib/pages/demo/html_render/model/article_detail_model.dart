@@ -1,22 +1,22 @@
-import 'package:flutter_templet_project/pages/demo/html_render/model/NewsRelevantMatch.dart';
-import 'package:flutter_templet_project/pages/demo/html_render/model/NewsSportItemModel.dart';
+import 'package:flutter_templet_project/pages/demo/html_render/model/article_relevant_match.dart';
+import 'package:flutter_templet_project/pages/demo/html_render/model/article_sport_item_model.dart';
 
-class NewsListDataModel {
-  NewsListDataModel({
+class ArticleListDataModel {
+  ArticleListDataModel({
     this.total,
     this.items,
   });
 
   int? total;
 
-  List<NewsDetailModel>? items;
+  List<ArticleDetailModel>? items;
 
-  NewsListDataModel.fromJson(Map<String, dynamic> json) {
+  ArticleListDataModel.fromJson(Map<String, dynamic> json) {
     total = json['total'];
     final values = json['data'] ?? json['items'] ?? [];
     if (values != null) {
       final array = List<Map<String, dynamic>>.from(values);
-      items = array.map((e) => NewsDetailModel.fromJson(e)).toList();
+      items = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
     }
   }
 
@@ -29,8 +29,8 @@ class NewsListDataModel {
 }
 
 /// 资讯详情
-class NewsDetailModel {
-  NewsDetailModel({
+class ArticleDetailModel {
+  ArticleDetailModel({
     this.id,
     this.sportId,
     this.top,
@@ -74,13 +74,13 @@ class NewsDetailModel {
   String? context;
 
   /// 相关资讯
-  List<NewsDetailModel>? relevantArticles;
+  List<ArticleDetailModel>? relevantArticles;
 
   /// 相关数据信息(资讯详情中,相关比赛,赛事,球队,球员的数据结构)
-  List<NewsSportItemModel>? sportItems;
+  List<ArticleSportItemModel>? sportItems;
 
   /// 相关比赛信息(资讯详情中,相关比赛,赛事,球队,球员的数据结构_1)
-  List<NewsRelevantMatch>? relevantMatch;
+  List<ArticleRelevantMatch>? relevantMatch;
 
   bool? isVideo;
 
@@ -97,7 +97,7 @@ class NewsDetailModel {
     return tag;
   }
 
-  NewsDetailModel.fromJson(Map<String, dynamic> json) {
+  ArticleDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sportId = json['sportId'];
     top = json['top'];
@@ -110,15 +110,15 @@ class NewsDetailModel {
     context = json['context'];
     if (json['relevantArticles'] != null) {
       final array = List<Map<String, dynamic>>.from(json['relevantArticles'] ?? []);
-      relevantArticles = array.map((e) => NewsDetailModel.fromJson(e)).toList();
+      relevantArticles = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
     }
     if (json['sportItems'] != null) {
       final array = List<Map<String, dynamic>>.from(json['sportItems'] ?? []);
-      sportItems = array.map((e) => NewsSportItemModel.fromJson(e)).toList();
+      sportItems = array.map((e) => ArticleSportItemModel.fromJson(e)).toList();
     }
     if (json['relevantMatch'] != null) {
       final array = List<Map<String, dynamic>>.from(json['relevantMatch'] ?? []);
-      relevantMatch = array.map((e) => NewsRelevantMatch.fromJson(e)).toList();
+      relevantMatch = array.map((e) => ArticleRelevantMatch.fromJson(e)).toList();
     }
     isVideo = json['isVideo'];
     videoTime = json['videoTime'];

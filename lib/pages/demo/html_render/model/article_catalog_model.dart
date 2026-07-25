@@ -1,19 +1,19 @@
 //
-//  NewsRootModel.dart
+//  article_catalog_model.dart
 //
 //  Created by JsonToModel on 2025-12-02 10:40.
 //
 
 import 'package:flutter_templet_project/basicWidget/n_tag_sort_widget.dart';
-// import 'package:flutter_templet_project/pages/demo/html_render/NewsDetailModel.dart';
-import 'package:flutter_templet_project/pages/demo/html_render/model/NewsDetailModel.dart';
+// import 'package:flutter_templet_project/pages/demo/html_render/article_detail_model.dart';
+import 'package:flutter_templet_project/pages/demo/html_render/model/article_detail_model.dart';
 // import 'package:social_fe_app/widget/n_tag_sort_widget.dart';
 
-export 'NewsDetailModel.dart';
+export 'article_detail_model.dart';
 
 /// 新闻分类
-class NewsCatalogModel with NTagSortMixin {
-  NewsCatalogModel({
+class ArticleCatalogModel with NTagSortMixin {
+  ArticleCatalogModel({
     this.id,
     this.names,
     this.mine,
@@ -33,7 +33,7 @@ class NewsCatalogModel with NTagSortMixin {
   int? pageNum;
 
   /// 当前分类资讯列表
-  List<NewsDetailModel>? items;
+  List<ArticleDetailModel>? items;
 
   @override
   String get tagName => names ?? '';
@@ -44,14 +44,14 @@ class NewsCatalogModel with NTagSortMixin {
   @override
   int tagOrder = 0;
 
-  NewsCatalogModel.fromJson(Map<String, dynamic> json) {
+  ArticleCatalogModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     names = json['names'];
     mine = json['mine'];
     pageNum = json['pageNum'];
     if (json['items'] != null) {
       final array = List<Map<String, dynamic>>.from(json['items'] ?? []);
-      items = array.map((e) => NewsDetailModel.fromJson(e)).toList();
+      items = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
     }
     tagOrder = json['tagOrder'] ?? 0; // 直接读取 mixin 字段
     tagEnable = json['tagEnable'] ?? true;

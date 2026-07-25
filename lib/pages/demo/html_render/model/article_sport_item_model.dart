@@ -1,7 +1,7 @@
 
 
-class NewsSportItemModel {
-  NewsSportItemModel({
+class ArticleSportItemModel {
+  ArticleSportItemModel({
     this.id,
     this.type,
     this.sportId,
@@ -26,7 +26,7 @@ class NewsSportItemModel {
 
   }
 
-  NewsSportItemModel.fromJson(Map<String, dynamic> json) {
+  ArticleSportItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
     sportId = json['sportId'];

@@ -1,5 +1,5 @@
-class NewsMatchTeam {
-  NewsMatchTeam({
+class ArticleMatchTeam {
+  ArticleMatchTeam({
     this.id,
     this.logo,
     this.names,
@@ -11,7 +11,7 @@ class NewsMatchTeam {
   String? names;
   int? sportId;
 
-  NewsMatchTeam.fromJson(Map<String, dynamic> json) {
+  ArticleMatchTeam.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     logo = json['logo'];
     names = json['names'];

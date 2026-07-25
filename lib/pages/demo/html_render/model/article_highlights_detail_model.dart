@@ -8,8 +8,8 @@ import 'package:flutter_templet_project/basicWidget/AppVideoPlayer/AppVideoPlaye
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 足球集锦详情模型
-class NewsHighlightsDetailModel {
-  NewsHighlightsDetailModel({
+class ArticleHighlightsDetailModel {
+  ArticleHighlightsDetailModel({
     this.id,
     this.duration,
     this.title,
@@ -41,7 +41,7 @@ class NewsHighlightsDetailModel {
     return result;
   }
 
-  NewsHighlightsDetailModel.fromJson(Map<String, dynamic> json) {
+  ArticleHighlightsDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     duration = json['duration'];
     title = json['title'];
