@@ -600,6 +600,8 @@ class NButton extends StatelessWidget {
             maxHeight: maximumSize?.height ?? double.infinity,
           ),
       child: FloatingActionButton.extended(
+        // NButton 可在同页多次出现，禁用默认 Hero 避免 tag 冲突
+        heroTag: null,
         onPressed: onPressed,
         focusNode: focusNode,
         autofocus: autofocus,

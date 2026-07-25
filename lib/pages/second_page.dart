@@ -391,6 +391,7 @@ class _SecondPageState extends State<SecondPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FloatingActionButton.extended(
+                    heroTag: 'second_page_fab_extend_no_icon',
                     extendedIconLabelSpacing: 0,
                     elevation: 0,
                     // isExtended: false,
@@ -404,6 +405,7 @@ class _SecondPageState extends State<SecondPage> {
                     label: Text('EXTEND'.toLowerCase()),
                   ),
                   FloatingActionButton(
+                    heroTag: 'second_page_fab_mini',
                     mini: true,
                     elevation: 0,
                     backgroundColor: const Color(0xff03dac6),
@@ -414,6 +416,7 @@ class _SecondPageState extends State<SecondPage> {
                     child: Icon(Icons.open_with),
                   ),
                   FloatingActionButton.extended(
+                    heroTag: 'second_page_fab_extend',
                     elevation: 0,
                     // isExtended: false,
                     extendedPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
@@ -1023,6 +1026,7 @@ class _SecondPageState extends State<SecondPage> {
       Tuple2(
         "FloatingActionButton",
         FloatingActionButton(
+          heroTag: 'second_page_tuple_fab_mini',
           mini: true,
           backgroundColor: const Color(0xff03dac6),
           foregroundColor: Colors.black,
@@ -1035,6 +1039,7 @@ class _SecondPageState extends State<SecondPage> {
       Tuple2(
         "FloatingActionButton",
         FloatingActionButton.extended(
+          heroTag: 'second_page_tuple_fab_extend',
           backgroundColor: const Color(0xff03dac6),
           foregroundColor: Colors.black,
           onPressed: () {
