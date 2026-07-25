@@ -75,8 +75,9 @@ class AppThemeService {
       return baseScheme.copyWith(
         primary: seedColor,
         onPrimary: Colors.white,
-        // secondary: AppColors.color00946D.withValues(alpha: 0.2),
-        // onSecondary: Colors.color00946D,
+        // fromSeed 的 secondary/tertiary 对蓝色种子常偏紫，对齐品牌主色避免 Tab/强调色发紫
+        secondary: seedColor,
+        onSecondary: Colors.white,
         secondaryContainer: seedColor.withValues(alpha: 0.2),
         onSecondaryContainer: seedColor,
         error: Colors.red,
@@ -90,7 +91,8 @@ class AppThemeService {
     return baseScheme.copyWith(
       primary: seedColor,
       onPrimary: Colors.white,
-      // secondary: AppColors.color00946D,
+      secondary: seedColor,
+      onSecondary: Colors.white,
       secondaryContainer: seedColor.withValues(alpha: 0.2),
       onSecondaryContainer: seedColor,
       error: Colors.red,
@@ -158,7 +160,13 @@ class AppThemeService {
       splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
       highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
       // primaryColor: seedColor, //主色调为青色
-      // indicatorColor: Colors.white,
+      // AppBar 上的 Tab 指示器：M2 默认会落到 fromSeed 的 secondary（蓝色种子常为紫色）
+      indicatorColor: Colors.white,
+      tabBarTheme: TabBarThemeData(
+        indicatorColor: Colors.white,
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white.withValues(alpha: 0.7),
+      ),
       // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
       // textTheme: ThemeData.light().textTheme.copyWith(
       //     button: TextStyle(color: Colors.red)
@@ -394,7 +402,13 @@ class AppThemeService {
       splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
       highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
       // primaryColor: Colors.greenAccent, //主色调为青色
-      // indicatorColor: Colors.white,
+      // AppBar 上的 Tab 指示器：避免 fromSeed secondary 偏紫
+      indicatorColor: Colors.white,
+      tabBarTheme: TabBarThemeData(
+        indicatorColor: Colors.white,
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white.withValues(alpha: 0.7),
+      ),
       // accentColor: Colors.tealAccent[200]!,
       // brightness: Brightness.dark,//设置明暗模式为暗色
       // accentColor: Colors.grey[900]!,//(按钮）Widget前景色为黑色
