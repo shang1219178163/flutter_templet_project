@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/end_bounce_scroll_physics.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/html_render/model/article_detail_model.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
@@ -73,16 +74,16 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
       backgroundColor: themeProvider.color242434OrWhite,
       appBar: AppBar(
         backgroundColor: themeProvider.color242434OrWhite,
-        leadingWidth: 44,
-        title: const Text(
+        iconTheme: IconThemeData(color: themeProvider.titleColor),
+        title: Text(
           "资讯",
-          style: TextStyle(fontSize: 16, color: Colors.black),
+          style: TextStyle(fontSize: 16, color: themeProvider.titleColor),
         ),
         actions: [
           if (kDebugMode)
             IconButton(
               onPressed: _initData,
-              icon: Icon(Icons.print),
+              icon: Icon(Icons.print, color: themeProvider.titleColor),
             ),
         ],
       ),
@@ -166,73 +167,24 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
         ),
       },
       extensions: [
-        // TagExtension(
-        //   tagsToExtend: {"div"},
-        //   builder: (exContext) {
-        //     final element = exContext.element!;
-        //     final children = element.children;
-        //     // 如果 div 内有 img 标签
-        //     for (final child in children) {
-        //       if (child.localName == 'img') {
-        //         final url = child.attributes['src'] ?? "";
-        //         return ClipRRect(
-        //           borderRadius: BorderRadius.circular(4),
-        //           child: CachedNetworkImage(
-        //             width: double.infinity,
-        //             imageUrl: url,
-        //             fit: BoxFit.fitWidth,
-        //             placeholder: (_, __) => Image.asset(
-        //               Assets.imagesIconNewsDetailPlaceholder,
-        //               width: double.infinity,
-        //               fit: BoxFit.fitWidth,
-        //             ),
-        //             errorWidget: (_, __, ___) => Image.asset(
-        //               Assets.imagesIconNewsDetailPlaceholder,
-        //               width: double.infinity,
-        //               fit: BoxFit.fitWidth,
-        //             ),
-        //           ),
-        //         );
-        //       }
-        //     }
-        //
-        //     // 如果 div 是视频封面类型
-        //     final style = element.attributes['style'] ?? "";
-        //     if (style.contains('background-image')) {
-        //       final bgImage = style.split('url(')[1].split(')')[0].trim().replaceAll('"', '');
-        //       // final inner = element.innerHtml;
-        //       // final videoSource = inner.contains("source: '") ? inner.split("source: '")[1].split("'")[0] : "";
-        //
-        //       if (provider.playController?.videoPlayerController.value.aspectRatio == null) {
-        //         return AspectRatio(
-        //           aspectRatio: 16 / 9,
-        //           child: Center(
-        //             child: CircularProgressIndicator(
-        //               color: themeProvider.titleColor,
-        //             ),
-        //           ),
-        //         );
-        //       }
-        //
-        //       // 可以加视频播放按钮等
-        //       return LayoutBuilder(
-        //         builder: (context, constraints) {
-        //           final screenWidth = constraints.maxWidth;
-        //           final aspectRatio = provider.playController!.videoPlayerController.value.aspectRatio;
-        //           final height = screenWidth / aspectRatio;
-        //
-        //           if (provider.playController == null) return const SizedBox.shrink();
-        //           return SizedBox(
-        //             width: screenWidth,
-        //             height: height,
-        //             child: Chewie(controller: provider.playController!),
-        //           );
-        //         },
-        //       );
-        //     }
-        //     return const SizedBox.shrink();
-        //   },
-        // ),
+        TagExtension(
+          tagsToExtend: {"img"},
+          builder: (exContext) {
+            final element = exContext.element;
+            if (element == null) {
+              return const SizedBox.shrink();
+            }
+            final url = element.attributes['src'] ?? '';
+            final styleSize = resolveImageStyleSize(element.attributes['style']);
+            final aspectRatio = resolveImageAspectRatio(element.attributes['data-href']);
+            return buildHtmlImage(
+              url: url,
+              width: styleSize.$1,
+              height: styleSize.$2,
+              aspectRatio: aspectRatio,
+            );
+          },
+        ),
         TagExtension(
           tagsToExtend: {"blockquote"},
           builder: (exContext) {
@@ -240,12 +192,93 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
             if (element == null) {
               return const SizedBox();
             }
-
             final text = exContext.element!.text;
             return buildTitleBar(text: text);
           },
         ),
       ],
+    );
+  }
+
+  /// 从 style（如 width: 20px;height: 20px;）解析展示宽高
+  (double?, double?) resolveImageStyleSize(String? style) {
+    if (style == null || style.isEmpty) {
+      return (null, null);
+    }
+    final widthMatch = RegExp(r'width\s*:\s*([\d.]+)px', caseSensitive: false).firstMatch(style);
+    final heightMatch = RegExp(r'height\s*:\s*([\d.]+)px', caseSensitive: false).firstMatch(style);
+    final width = widthMatch == null ? null : double.tryParse(widthMatch.group(1)!);
+    final height = heightMatch == null ? null : double.tryParse(heightMatch.group(1)!);
+    return (width, height);
+  }
+
+  /// 从 data-href（如 1500|1688|image/png 或 16|16|png|icon）解析宽高比；无有效宽高则返回 null
+  double? resolveImageAspectRatio(String? dataHref) {
+    if (dataHref == null || dataHref.isEmpty) {
+      return null;
+    }
+    final parts = dataHref.split('|');
+    if (parts.length < 2) {
+      return null;
+    }
+    final width = double.tryParse(parts[0]) ?? 0;
+    final height = double.tryParse(parts[1]) ?? 0;
+    if (width <= 0 || height <= 0) {
+      return null;
+    }
+    return width / height;
+  }
+
+  /// 优先使用 style 固定宽高；否则有 data-href 宽高比时按比例占位；都没有则不做占位约束
+  Widget buildHtmlImage({
+    required String url,
+    double? width,
+    double? height,
+    double? aspectRatio,
+  }) {
+    final hasFixedSize = width != null && height != null && width > 0 && height > 0;
+    final placeholder = Image.asset(
+      Assets.imagesIconNewsDetailPlaceholder,
+      fit: BoxFit.cover,
+      width: hasFixedSize ? width : double.infinity,
+      height: hasFixedSize ? height : double.infinity,
+    );
+    if (hasFixedSize) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(2),
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: url.isEmpty
+              ? placeholder
+              : CachedNetworkImage(
+                  imageUrl: url,
+                  width: width,
+                  height: height,
+                  fit: BoxFit.contain,
+                  placeholder: (_, __) => placeholder,
+                  errorWidget: (_, __, ___) => placeholder,
+                ),
+        ),
+      );
+    }
+    final image = url.isEmpty
+        ? placeholder
+        : CachedNetworkImage(
+            imageUrl: url,
+            width: double.infinity,
+            fit: aspectRatio == null ? BoxFit.fitWidth : BoxFit.contain,
+            placeholder: aspectRatio == null ? null : (_, __) => placeholder,
+            errorWidget: aspectRatio == null ? null : (_, __, ___) => placeholder,
+          );
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(4),
+      child: aspectRatio == null
+          ? image
+          : AspectRatio(
+              aspectRatio: aspectRatio,
+              child: image,
+            ),
     );
   }
 
