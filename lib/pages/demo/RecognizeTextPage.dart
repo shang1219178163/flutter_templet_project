@@ -82,7 +82,7 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
   final service = RecognizeTextService();
   final currentPage = ValueNotifier(0);
 
-  PageController pageController = PageController(viewportFraction: pageViewportFraction);
+  var pageController = PageController(viewportFraction: pageViewportFraction);
 
   final items = <RecognizeTextItem>[];
   var currentIndex = 0;

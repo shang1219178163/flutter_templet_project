@@ -53,13 +53,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
         slivers: [
           ...buildHeader(),
           NAutocompleteSearch(
-            displayStringForOption: (option) {
-              final desc = option.desc;
-              if (desc != null && desc.isNotEmpty) {
-                return '${option.name}  $desc';
-              }
-              return option.name;
-            },
+            displayStringForOption: (option) => option.name,
             optionsBuilder: (TextEditingValue textEditingValue) {
               final query = textEditingValue.text.trim().toLowerCase();
               if (query.isEmpty) {
