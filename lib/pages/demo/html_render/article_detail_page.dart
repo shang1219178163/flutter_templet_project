@@ -260,7 +260,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     if (hasFixedSize) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(2),
-        child: buildNetworkFitWidthImage(
+        child: buildNetworkImageFitWidth(
           url: url,
           width: width,
           height: height,
@@ -275,12 +275,12 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
           builder: (context, constraints) {
             final maxWidth = constraints.maxWidth;
             if (!maxWidth.isFinite || maxWidth <= 0) {
-              return buildNetworkFitWidthImage(url: url);
+              return buildNetworkImageFitWidth(url: url);
             }
             final boxHeight = maxWidth / aspectRatio;
             return ClipRRect(
               borderRadius: BorderRadius.circular(4),
-              child: buildNetworkFitWidthImage(
+              child: buildNetworkImageFitWidth(
                 url: url,
                 width: maxWidth,
                 height: boxHeight,
@@ -294,11 +294,11 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     }
     return ClipRRect(
       borderRadius: BorderRadius.circular(4),
-      child: buildNetworkFitWidthImage(url: url),
+      child: buildNetworkImageFitWidth(url: url),
     );
   }
 
-  Widget buildNetworkFitWidthImage({
+  Widget buildNetworkImageFitWidth({
     required String url,
     double? width,
     double? height,
@@ -389,7 +389,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
               const SizedBox(width: 12),
               ClipRRect(
                 borderRadius: BorderRadius.circular(4),
-                child: buildNetworkFitWidthImage(
+                child: buildNetworkImageFitWidth(
                   url: item.thumb!,
                   width: 110,
                   height: 74,
@@ -434,7 +434,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 4),
-                            child: buildNetworkFitWidthImage(
+                            child: buildNetworkImageFitWidth(
                               url: teamLeft?.logo ?? "",
                               width: 15,
                               height: 15,
@@ -468,7 +468,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 4),
-                            child: buildNetworkFitWidthImage(
+                            child: buildNetworkImageFitWidth(
                               url: teamRight?.logo ?? "",
                               width: 15,
                               height: 15,
@@ -502,7 +502,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 4),
-                        child: buildNetworkFitWidthImage(
+                        child: buildNetworkImageFitWidth(
                           url: e.logo ?? "",
                           width: 15,
                           height: 15,
