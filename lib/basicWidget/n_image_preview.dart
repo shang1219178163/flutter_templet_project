@@ -6,11 +6,13 @@
 //  Copyright © 2024/1/19 shang. All rights reserved.
 //
 
+import 'dart:io';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/n_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_indicator.dart';
-import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
@@ -165,7 +167,7 @@ class _NImagePreviewState extends State<NImagePreview> {
 
                   final path = urlMaps[index]["path"] as String?;
                   if (path == null) {
-                    getCachedImageFilePath(url).then((p) async {
+                    resolvePreviewFilePath(url).then((p) async {
                       if (p == null) {
                         return;
                       }
@@ -181,8 +183,8 @@ class _NImagePreviewState extends State<NImagePreview> {
                     ),
                     child: RotatedBox(
                       quarterTurns: quarterTurns,
-                      child: NNetworkImage(
-                        url: url,
+                      child: NImage(
+                        source: url,
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -376,5 +378,14 @@ class _NImagePreviewState extends State<NImagePreview> {
   void onDownload() {
     final url = widget.urls[currentIndex.value];
     ImageService().saveImage(url: url);
+  }
+
+  /// 解析预览图本地路径（支持网络缓存路径与本地文件路径）
+  Future<String?> resolvePreviewFilePath(String url) async {
+    final localFile = File(url);
+    if (localFile.existsSync()) {
+      return url;
+    }
+    return getCachedImageFilePath(url);
   }
 }
