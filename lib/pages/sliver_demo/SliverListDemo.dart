@@ -72,7 +72,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
     );
   }
 
-  sectionHeader({required Text child, double height = 30}) {
+  Widget sectionHeader({required Text child, double height = 30}) {
     return SliverToBoxAdapter(
       child: Container(
         margin: EdgeInsets.only(top: 20, bottom: 20, left: 20),

@@ -14,7 +14,7 @@ class NInnerShadow extends StatelessWidget {
     super.key,
     this.boxShadow,
     this.borderRadius = BorderRadius.zero,
-    this.blurExtent = 4.0,
+    this.blurExtent = 3.0,
     required this.child,
   });
 

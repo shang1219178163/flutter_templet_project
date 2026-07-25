@@ -88,16 +88,4 @@ enum W3ThemeColor {
   /// 颜色值
   final Color color;
 
-  /// 根据名称解析
-  static W3ThemeColor? fromName(String? name) {
-    if (name == null || name.isEmpty) {
-      return null;
-    }
-    for (final e in W3ThemeColor.values) {
-      if (e.name == name) {
-        return e;
-      }
-    }
-    return null;
-  }
 }
