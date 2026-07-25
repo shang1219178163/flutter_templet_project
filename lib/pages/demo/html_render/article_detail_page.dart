@@ -258,22 +258,13 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
   }) {
     final hasFixedSize = width != null && height != null && width > 0 && height > 0;
     if (hasFixedSize) {
-      final placeholder = buildImagePlaceholder(width: width, height: height);
       return ClipRRect(
         borderRadius: BorderRadius.circular(2),
-        child: SizedBox(
+        child: buildNetworkFitWidthImage(
+          url: url,
           width: width,
           height: height,
-          child: url.isEmpty
-              ? placeholder
-              : CachedNetworkImage(
-                  imageUrl: url,
-                  width: width,
-                  height: height,
-                  fit: BoxFit.contain,
-                  placeholder: (_, __) => placeholder,
-                  errorWidget: (_, __, ___) => placeholder,
-                ),
+          fit: BoxFit.contain,
         ),
       );
     }
@@ -287,23 +278,14 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
               return buildNetworkFitWidthImage(url: url);
             }
             final boxHeight = maxWidth / aspectRatio;
-            final placeholder = buildImagePlaceholder(width: maxWidth, height: boxHeight);
             return ClipRRect(
               borderRadius: BorderRadius.circular(4),
-              child: SizedBox(
+              child: buildNetworkFitWidthImage(
+                url: url,
                 width: maxWidth,
                 height: boxHeight,
-                child: url.isEmpty
-                    ? placeholder
-                    : CachedNetworkImage(
-                        imageUrl: url,
-                        width: maxWidth,
-                        height: boxHeight,
-                        fit: BoxFit.fitWidth,
-                        alignment: Alignment.topCenter,
-                        placeholder: (_, __) => placeholder,
-                        errorWidget: (_, __, ___) => placeholder,
-                      ),
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.topCenter,
               ),
             );
           },
@@ -316,14 +298,28 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     );
   }
 
-  Widget buildNetworkFitWidthImage({required String url}) {
+  Widget buildNetworkFitWidthImage({
+    required String url,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.fitWidth,
+    Alignment alignment = Alignment.center,
+    Widget? placeholder,
+    Widget? errorWidget,
+  }) {
+    final imageWidth = width ?? double.infinity;
+    final fallback = placeholder ?? buildImagePlaceholder(width: width, height: height);
     if (url.isEmpty) {
-      return buildImagePlaceholder(width: double.infinity);
+      return errorWidget ?? fallback;
     }
     return CachedNetworkImage(
       imageUrl: url,
-      width: double.infinity,
-      fit: BoxFit.fitWidth,
+      width: imageWidth,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      placeholder: (_, __) => fallback,
+      errorWidget: (_, __, ___) => errorWidget ?? fallback,
     );
   }
 
@@ -393,13 +389,11 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
               const SizedBox(width: 12),
               ClipRRect(
                 borderRadius: BorderRadius.circular(4),
-                child: CachedNetworkImage(
-                  imageUrl: item.thumb!,
+                child: buildNetworkFitWidthImage(
+                  url: item.thumb!,
                   width: 110,
                   height: 74,
                   fit: BoxFit.cover,
-                  placeholder: (_, __) => buildImagePlaceholder(width: 110, height: 74),
-                  errorWidget: (_, __, ___) => buildImagePlaceholder(width: 110, height: 74),
                 ),
               ),
             ],
@@ -440,11 +434,13 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 4),
-                            child: CachedNetworkImage(
-                              imageUrl: teamLeft?.logo ?? "",
+                            child: buildNetworkFitWidthImage(
+                              url: teamLeft?.logo ?? "",
                               width: 15,
                               height: 15,
-                              errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                              fit: BoxFit.cover,
+                              placeholder: const SizedBox.shrink(),
+                              errorWidget: const SizedBox.shrink(),
                             ),
                           ),
                           Text(
@@ -472,11 +468,13 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 4),
-                            child: CachedNetworkImage(
-                              imageUrl: teamRight?.logo ?? "",
+                            child: buildNetworkFitWidthImage(
+                              url: teamRight?.logo ?? "",
                               width: 15,
                               height: 15,
-                              errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                              fit: BoxFit.cover,
+                              placeholder: const SizedBox.shrink(),
+                              errorWidget: const SizedBox.shrink(),
                             ),
                           ),
                         ],
@@ -504,11 +502,13 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 4),
-                        child: CachedNetworkImage(
-                          imageUrl: e.logo ?? "",
+                        child: buildNetworkFitWidthImage(
+                          url: e.logo ?? "",
                           width: 15,
                           height: 15,
-                          errorWidget: (_, __, ___) => const SizedBox.shrink(),
+                          fit: BoxFit.cover,
+                          placeholder: const SizedBox.shrink(),
+                          errorWidget: const SizedBox.shrink(),
                         ),
                       ),
                       Text(
