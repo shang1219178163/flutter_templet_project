@@ -275,6 +275,7 @@ import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingsStar/RatingsStarPage.dart';
 import 'package:flutter_templet_project/pages/demo/RebuildChainPage.dart';
+import 'package:flutter_templet_project/pages/demo/RecognizeTextPage.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemoOne.dart';
@@ -883,6 +884,7 @@ class AppRouter {
   static const String nestedScrollViewDemoSix = '/nestedScrollViewDemoSix';
   static const String irregularClipperDemo = '/irregularClipperDemo';
   static const String ocrPhotoDemo = '/ocrPhotoDemo';
+  static const String recognizeTextPage = '/recognizeTextPage';
   static const String translationTextPage = '/translationTextPage';
   static const String floatingButtonDemo = '/floatingButtonDemo';
   static const String floatingButtonDemoOne = '/floatingButtonDemoOne';
@@ -2543,6 +2545,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.ocrPhotoDemo,
       page: () => OcrPhotoDemo(),
+    ),
+    GetPage(
+      name: AppRouter.recognizeTextPage,
+      page: () => RecognizeTextPage(),
     ),
     GetPage(
       name: AppRouter.translationTextPage,

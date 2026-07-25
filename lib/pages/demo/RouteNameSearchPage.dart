@@ -25,8 +25,6 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
     ParamModel(name: "fieldViewBuilder", isOpen: false),
   ];
 
-  var _tuples = <OptionModel>[];
-
   final textFieldVN = ValueNotifier("");
 
   /// 高亮样式
@@ -35,15 +33,11 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
     fontWeight: FontWeight.bold,
   );
 
-  @override
-  void initState() {
-    super.initState();
-
-    _tuples = tuples
-        .map((e) => OptionModel(
-              name: e.item1,
-              children: e.item2.map((e) => OptionModel(name: e.item1, desc: e.item2)).toList(),
-            ))
+  /// 每次从 tuples 读取，避免热重载后仍用旧缓存
+  List<OptionModel> get _routeOptions {
+    return tuples
+        .expand((e) => e.item2)
+        .map((e) => OptionModel(name: e.item1, desc: e.item2))
         .toList();
   }
 
@@ -60,14 +54,22 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
           ...buildHeader(),
           NAutocompleteSearch(
             displayStringForOption: (option) {
+              final desc = option.desc;
+              if (desc != null && desc.isNotEmpty) {
+                return '${option.name}  $desc';
+              }
               return option.name;
             },
             optionsBuilder: (TextEditingValue textEditingValue) {
-              final query = textEditingValue.text;
-
-              final items = _tuples.expand((e) => e.children).toList();
-              final result = items.where((e) => e.name.toLowerCase().contains(query.toLowerCase())).toList();
-              return result;
+              final query = textEditingValue.text.trim().toLowerCase();
+              if (query.isEmpty) {
+                return const <OptionModel>[];
+              }
+              return _routeOptions.where((e) {
+                final name = e.name.toLowerCase();
+                final desc = (e.desc ?? '').toLowerCase();
+                return name.contains(query) || desc.contains(query);
+              }).toList();
             },
             onSelected: (e) {
               debugPrint('onChoosed: ${e.name}');

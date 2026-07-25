@@ -496,6 +496,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.nestedScrollViewDemoSix, "nestedScrollViewDemoSix"),
   Tuple2(AppRouter.irregularClipperDemo, "irregularClipperDemo"),
   Tuple2(AppRouter.ocrPhotoDemo, "ocrPhotoDemo"),
+  Tuple2(AppRouter.recognizeTextPage, "iOS原生文字提取 RecognizeTextRequest"),
   Tuple2(AppRouter.translationTextPage, "translationTextPage"),
   Tuple2(AppRouter.floatingButtonDemo, "floatingButtonDemo"),
   Tuple2(AppRouter.floatingButtonDemoOne, "floatingButtonDemoOne"),

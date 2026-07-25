@@ -92,15 +92,9 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
                             children: [
                               Container(
                                 margin: EdgeInsets.only(right: 8),
-                                // decoration: BoxDecoration(
-                                //   border: Border.all(color: Colors.blue),
-                                // ),
                                 child: Icon(Icons.search, color: Colors.grey, size: 22),
                               ),
-                              Container(
-                                // decoration: BoxDecoration(
-                                //   border: Border.all(color: Colors.blue),
-                                // ),
+                              Expanded(
                                 child: Text.rich(
                                   TextSpan(
                                     children: RichTextExt.createTextSpans(
@@ -112,6 +106,8 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
                                       ),
                                     ),
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
