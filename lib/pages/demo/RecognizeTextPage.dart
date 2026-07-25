@@ -80,11 +80,17 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
 
   final picker = ImagePicker();
   final service = RecognizeTextService();
-  late final pageController = PageController(viewportFraction: pageViewportFraction);
   final currentPage = ValueNotifier(0);
+
+  PageController pageController = PageController(viewportFraction: pageViewportFraction);
 
   final items = <RecognizeTextItem>[];
   var currentIndex = 0;
+  var isRuntimeSupported = false;
+  var isCheckingSupport = true;
+
+  /// 串行识别队列，避免快速滑动并发多路 OCR
+  Future<void> recognizeChain = Future<void>.value();
 
   RecognizeTextItem? get currentItem {
     if (items.isEmpty || currentIndex < 0 || currentIndex >= items.length) {
@@ -95,11 +101,46 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
 
   bool get canAddMore => items.length < maxImageCount;
 
+  bool get canPickImage => isRuntimeSupported && !isCheckingSupport && canAddMore;
+
+  @override
+  void initState() {
+    super.initState();
+    checkSupport();
+  }
+
   @override
   void dispose() {
     pageController.dispose();
     currentPage.dispose();
     super.dispose();
+  }
+
+  Future<void> checkSupport() async {
+    isCheckingSupport = true;
+    setState(() {});
+    if (!service.isPlatformSupported) {
+      isRuntimeSupported = false;
+      isCheckingSupport = false;
+      if (mounted) {
+        setState(() {});
+      }
+      return;
+    }
+    isRuntimeSupported = await service.isSupported();
+    isCheckingSupport = false;
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  /// 重建 PageController，避免清空后页码越界
+  void resetPageController({int initialPage = 0}) {
+    pageController.dispose();
+    pageController = PageController(
+      viewportFraction: pageViewportFraction,
+      initialPage: initialPage,
+    );
   }
 
   @override
@@ -155,7 +196,12 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
           child: buildActions(),
         ),
-        if (!service.isPlatformSupported)
+        if (isCheckingSupport)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+            child: Text('正在检测识别能力...', style: theme.textTheme.bodySmall),
+          )
+        else if (!isRuntimeSupported)
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
             child: Text(
@@ -190,15 +236,15 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
       runSpacing: 8,
       children: [
         FilledButton(
-          onPressed: canAddMore ? () => pickImages(ImageSource.gallery) : null,
+          onPressed: canPickImage ? () => pickImages(ImageSource.gallery) : null,
           child: const Text('相册选图'),
         ),
         FilledButton.tonal(
-          onPressed: canAddMore ? () => pickImages(ImageSource.camera) : null,
+          onPressed: canPickImage ? () => pickImages(ImageSource.camera) : null,
           child: const Text('拍照'),
         ),
         OutlinedButton(
-          onPressed: item == null || isRecognizing ? null : recognizeCurrent,
+          onPressed: !isRuntimeSupported || item == null || isRecognizing ? null : recognizeCurrent,
           child: Text(isRecognizing ? '识别中...' : '开始识别'),
         ),
         if (items.isNotEmpty)
@@ -285,11 +331,11 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
     currentIndex = index;
     currentPage.value = index;
     setState(() {});
-    recognizeItemIfNeeded(items[index]);
+    enqueueRecognizeIfNeeded(items[index]);
   }
 
   Future<void> pickImages(ImageSource source) async {
-    if (!service.isPlatformSupported) {
+    if (!isRuntimeSupported) {
       showMessage('当前平台无可用识别策略');
       return;
     }
@@ -298,6 +344,7 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
       return;
     }
     final remaining = maxImageCount - items.length;
+    final wasEmpty = items.isEmpty;
     if (source == ImageSource.camera) {
       final file = await picker.pickImage(source: ImageSource.camera);
       if (file == null) {
@@ -317,13 +364,18 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
     }
     currentIndex = items.length - 1;
     currentPage.value = currentIndex;
+    if (wasEmpty) {
+      resetPageController(initialPage: currentIndex);
+    }
     setState(() {});
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!pageController.hasClients) {
         return;
       }
-      pageController.jumpToPage(currentIndex);
-      recognizeItemIfNeeded(items[currentIndex]);
+      if (!wasEmpty) {
+        pageController.jumpToPage(currentIndex);
+      }
+      enqueueRecognizeIfNeeded(items[currentIndex]);
     });
   }
 
@@ -336,20 +388,31 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
       showMessage('当前图片已有识别缓存');
       return;
     }
-    await recognizeItemIfNeeded(item);
+    await enqueueRecognizeIfNeeded(item);
   }
 
-  /// 无成功缓存且未在识别中时立即识别
+  /// 串行入队：轮到执行时若已不是当前页则跳过，避免并发多路 OCR
+  Future<void> enqueueRecognizeIfNeeded(RecognizeTextItem item) {
+    recognizeChain = recognizeChain.then((_) => recognizeItemIfNeeded(item));
+    return recognizeChain;
+  }
+
+  /// 无成功缓存且未在识别中时立即识别（仅当前页）
   Future<void> recognizeItemIfNeeded(RecognizeTextItem item) async {
-    if (!service.isPlatformSupported) {
+    if (!isRuntimeSupported) {
       return;
     }
     if (item.hasCachedResult || item.isRecognizing) {
       return;
     }
+    if (!identical(item, currentItem)) {
+      return;
+    }
     item.isRecognizing = true;
     item.errorMessage = null;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
     try {
       final result = await service.recognizeText(item.imageFile.path);
       item.result = result;
@@ -384,15 +447,17 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
     items.clear();
     currentIndex = 0;
     currentPage.value = 0;
+    resetPageController();
     setState(() {});
   }
 
   Future<void> copyResult() async {
     final item = currentItem;
-    if (item == null || !item.hasCachedResult) {
+    final text = item?.result?.text;
+    if (text == null) {
       return;
     }
-    await Clipboard.setData(ClipboardData(text: item.displayResultText));
+    await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) {
       return;
     }

@@ -79,13 +79,8 @@ final class RecognizeTextChannel {
         }
     }
 
-    /// iOS 18 以下使用 VNRecognizeTextRequest
+    /// iOS 18 以下使用 VNRecognizeTextRequest（直接基于文件 URL，避免全图解码占内存）
     private func recognizeTextLegacy(from url: URL, result: @escaping FlutterResult) {
-        guard let image = UIImage(contentsOfFile: url.path),
-              let cgImage = image.cgImage else {
-            result(FlutterError(code: "INVALID_IMAGE", message: "无法读取图片", details: nil))
-            return
-        }
         let request = VNRecognizeTextRequest { request, error in
             if let error = error {
                 DispatchQueue.main.async {
@@ -111,7 +106,7 @@ final class RecognizeTextChannel {
         } else {
             request.recognitionLanguages = ["zh-Hans", "en-US"]
         }
-        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        let handler = VNImageRequestHandler(url: url, options: [:])
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try handler.perform([request])
