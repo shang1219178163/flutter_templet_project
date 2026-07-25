@@ -68,7 +68,7 @@ class AppButton extends StatelessWidget {
     switch (type) {
       case AppButtonType.filledTonal:
         {
-          button = FilledButton(
+          button = FilledButton.tonal(
             style: buttonStyle,
             onPressed: onPressed,
             onLongPress: onLongPress,
@@ -77,7 +77,6 @@ class AppButton extends StatelessWidget {
             focusNode: focusNode,
             autofocus: autofocus,
             clipBehavior: clipBehavior,
-            iconAlignment: iconAlignment,
             child: child,
           );
         }
@@ -116,7 +115,7 @@ class AppButton extends StatelessWidget {
         break;
       default:
         {
-          button = ElevatedButton(
+          button = FilledButton(
             style: buttonStyle,
             onPressed: onPressed,
             onLongPress: onLongPress,

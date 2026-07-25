@@ -124,20 +124,24 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
   }
 
   Widget buildExpandMenu() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Theme(
-      data: ThemeData(
-        dividerColor: Colors.transparent,
-      ),
+      // 保留当前明暗主题，仅去掉分割线；勿用 ThemeData() 重置为浅色
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         tilePadding: EdgeInsets.symmetric(horizontal: 10),
+        collapsedTextColor: colorScheme.onSurface,
+        textColor: colorScheme.onSurface,
+        iconColor: colorScheme.primary,
+        collapsedIconColor: colorScheme.primary,
         leading: Icon(
           Icons.ac_unit,
-          color: context.themeData.colorScheme.primary,
+          color: colorScheme.primary,
         ),
         title: Text(
           '配置',
           style: TextStyle(
-            color: context.themeData.colorScheme.primary,
+            color: colorScheme.onSurface,
           ),
         ),
         initiallyExpanded: false,
@@ -145,8 +149,11 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
           Column(
             children: _params.map((e) {
               return SwitchListTile(
-                activeColor: context.colorScheme.primary,
-                title: Text(e.name),
+                activeColor: colorScheme.primary,
+                title: Text(
+                  e.name,
+                  style: TextStyle(color: colorScheme.onSurface),
+                ),
                 value: e.isOpen,
                 onChanged: (bool value) {
                   e.isOpen = value;

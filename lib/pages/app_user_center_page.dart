@@ -15,7 +15,6 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -50,8 +49,11 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardColor = isDark ? colorScheme.surfaceContainerHigh : colorScheme.surface;
+
     return Scaffold(
-      backgroundColor: AppColor.bgColorF7F7F7,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white), //修改返回按钮颜色
         centerTitle: true,
@@ -88,9 +90,9 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
       body: ListView(
         children: <Widget>[
           buildTop(),
-          buildMid(),
+          buildMid(cardColor: cardColor),
           SizedBox(height: 15),
-          buildBom(),
+          buildBom(cardColor: cardColor),
         ],
       ),
     );
@@ -180,11 +182,12 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
   }
 
   // 中间
-  Widget buildMid() {
+  Widget buildMid({required Color cardColor}) {
+    final onSurfaceVariant = Theme.of(context).colorScheme.onSurfaceVariant;
     return Container(
       height: 100.0,
       padding: EdgeInsets.only(top: 8),
-      color: Theme.of(context).colorScheme.surface,
+      color: cardColor,
       alignment: Alignment.center,
       child: GridView.count(
         crossAxisCount: 4,
@@ -208,7 +211,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF666666),
+                          color: onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -219,9 +222,9 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
     );
   }
 
-  Widget buildBom() {
+  Widget buildBom({required Color cardColor}) {
     return Container(
-      color: Theme.of(context).colorScheme.surface,
+      color: cardColor,
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Column(
         children: items
