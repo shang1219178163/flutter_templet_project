@@ -75,13 +75,13 @@ class AppThemeService {
       brightness: brightness,
     );
     // 暗色 surface 用中性灰 0xFF242424（R=G=B），避免旧值 0xFF242434 发紫。
-    final surfaceBase =
-        brightness == Brightness.light ? Colors.white : const Color(0xFF242424);
+    final isLight = brightness == Brightness.light;
+    final surfaceBase = isLight ? Colors.white : const Color(0xFF242424);
     final primaryContainer = Color.alphaBlend(
-      seedColor.withValues(alpha: brightness == Brightness.light ? 0.12 : 0.24),
+      seedColor.withValues(alpha: isLight ? 0.12 : 0.24),
       surfaceBase,
     );
-    if (brightness == Brightness.light) {
+    if (isLight) {
       // surface* 全部中性化：M3 BottomNavigationBar 默认用 surfaceContainer，fromSeed 蓝色会偏紫
       return baseScheme.copyWith(
         primary: seedColor,
