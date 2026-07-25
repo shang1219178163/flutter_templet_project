@@ -365,7 +365,7 @@ import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/file_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
-import 'package:flutter_templet_project/pages/demo/html_render/news_detail_page.dart';
+import 'package:flutter_templet_project/pages/demo/html_render/article_detail_page.dart';
 import 'package:flutter_templet_project/pages/demo/inputAccessoryViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/keyboard_attach_demo.dart';
 import 'package:flutter_templet_project/pages/demo/keyboard_observer_demo.dart';
