@@ -212,13 +212,17 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     return (width, height);
   }
 
-  /// 从 data-href（如 1500|1688|image/png 或 16|16|png|icon）解析宽高比；无有效宽高则返回 null
+  /// 从 data-href 解析宽高比；无有效宽高、或带 share（元数据常不准）则返回 null
   double? resolveImageAspectRatio(String? dataHref) {
     if (dataHref == null || dataHref.isEmpty) {
       return null;
     }
     final parts = dataHref.split('|');
     if (parts.length < 2) {
+      return null;
+    }
+    // 例：1500|1688|image/png||share —— share 图真实尺寸常与标注不符
+    if (parts.any((e) => e.trim().toLowerCase() == 'share')) {
       return null;
     }
     final width = double.tryParse(parts[0]) ?? 0;
@@ -229,7 +233,19 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     return width / height;
   }
 
-  /// 优先使用 style 固定宽高；否则有 data-href 宽高比时按比例占位；都没有则不做占位约束
+  Widget buildImagePlaceholder({
+    double? width,
+    double? height,
+  }) {
+    return Image.asset(
+      Assets.imagesIconNewsDetailPlaceholder,
+      width: width,
+      height: height,
+      fit: BoxFit.cover,
+    );
+  }
+
+  /// 优先 style 固定宽高；否则用可信的 data-href 宽高比占位；都没有则按图片真实高度加载
   Widget buildHtmlImage({
     required String url,
     double? width,
@@ -237,13 +253,8 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
     double? aspectRatio,
   }) {
     final hasFixedSize = width != null && height != null && width > 0 && height > 0;
-    final placeholder = Image.asset(
-      Assets.imagesIconNewsDetailPlaceholder,
-      fit: BoxFit.cover,
-      width: hasFixedSize ? width : double.infinity,
-      height: hasFixedSize ? height : double.infinity,
-    );
     if (hasFixedSize) {
+      final placeholder = buildImagePlaceholder(width: width, height: height);
       return ClipRRect(
         borderRadius: BorderRadius.circular(2),
         child: SizedBox(
@@ -262,23 +273,53 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
         ),
       );
     }
-    final image = url.isEmpty
-        ? placeholder
-        : CachedNetworkImage(
-            imageUrl: url,
-            width: double.infinity,
-            fit: aspectRatio == null ? BoxFit.fitWidth : BoxFit.contain,
-            placeholder: aspectRatio == null ? null : (_, __) => placeholder,
-            errorWidget: aspectRatio == null ? null : (_, __, ___) => placeholder,
-          );
+    if (aspectRatio != null) {
+      return SizedBox(
+        width: double.infinity,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final maxWidth = constraints.maxWidth;
+            if (!maxWidth.isFinite || maxWidth <= 0) {
+              return buildNetworkFitWidthImage(url: url);
+            }
+            final boxHeight = maxWidth / aspectRatio;
+            final placeholder = buildImagePlaceholder(width: maxWidth, height: boxHeight);
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: SizedBox(
+                width: maxWidth,
+                height: boxHeight,
+                child: url.isEmpty
+                    ? placeholder
+                    : CachedNetworkImage(
+                        imageUrl: url,
+                        width: maxWidth,
+                        height: boxHeight,
+                        fit: BoxFit.fitWidth,
+                        alignment: Alignment.topCenter,
+                        placeholder: (_, __) => placeholder,
+                        errorWidget: (_, __, ___) => placeholder,
+                      ),
+              ),
+            );
+          },
+        ),
+      );
+    }
     return ClipRRect(
       borderRadius: BorderRadius.circular(4),
-      child: aspectRatio == null
-          ? image
-          : AspectRatio(
-              aspectRatio: aspectRatio,
-              child: image,
-            ),
+      child: buildNetworkFitWidthImage(url: url),
+    );
+  }
+
+  Widget buildNetworkFitWidthImage({required String url}) {
+    if (url.isEmpty) {
+      return buildImagePlaceholder(width: double.infinity);
+    }
+    return CachedNetworkImage(
+      imageUrl: url,
+      width: double.infinity,
+      fit: BoxFit.fitWidth,
     );
   }
 
@@ -301,7 +342,9 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    color: themeProvider.isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05),
+                    color: themeProvider.isDark
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.black.withValues(alpha: 0.05),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -366,7 +409,9 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    color: themeProvider.isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.05),
+                    color: themeProvider.isDark
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.black.withValues(alpha: 0.05),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
