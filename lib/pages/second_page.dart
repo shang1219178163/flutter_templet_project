@@ -86,7 +86,7 @@ class _SecondPageState extends State<SecondPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             NSectionBox(
-              title: "NButton",
+              title: "NButtonOld",
               child: buildNButton(),
             ),
             NSectionBox(
