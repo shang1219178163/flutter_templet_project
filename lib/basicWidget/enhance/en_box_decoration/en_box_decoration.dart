@@ -215,9 +215,9 @@ class EnBoxDecoration extends Decoration {
   Path getClipPath(Rect rect, TextDirection textDirection) {
     switch (shape) {
       case BoxShape.circle:
-        final Offset center = rect.center;
-        final double radius = rect.shortestSide / 2.0;
-        final Rect square = Rect.fromCircle(center: center, radius: radius);
+        final center = rect.center;
+        final radius = rect.shortestSide / 2.0;
+        final square = Rect.fromCircle(center: center, radius: radius);
         return Path()..addOval(square);
       case BoxShape.rectangle:
         if (borderRadius != null) {
@@ -367,14 +367,14 @@ class EnBoxDecoration extends Decoration {
     switch (shape) {
       case BoxShape.rectangle:
         if (borderRadius != null) {
-          final RRect bounds = borderRadius!.resolve(textDirection).toRRect(Offset.zero & size);
+          final bounds = borderRadius!.resolve(textDirection).toRRect(Offset.zero & size);
           return bounds.contains(position);
         }
         return true;
       case BoxShape.circle:
         // Circles are inscribed into our smallest dimension.
-        final Offset center = size.center(Offset.zero);
-        final double distance = (position - center).distance;
+        final center = size.center(Offset.zero);
+        final distance = (position - center).distance;
         return distance <= math.min(size.width, size.height) / 2.0;
     }
   }
@@ -398,7 +398,7 @@ class _BoxDecorationPainter extends BoxPainter {
     assert(_decoration.gradient != null || _rectForCachedBackgroundPaint == null);
 
     if (_cachedBackgroundPaint == null || (_decoration.gradient != null && _rectForCachedBackgroundPaint != rect)) {
-      final Paint paint = Paint();
+      final paint = Paint();
       if (_decoration.backgroundBlendMode != null) {
         paint.blendMode = _decoration.backgroundBlendMode!;
       }
@@ -419,8 +419,8 @@ class _BoxDecorationPainter extends BoxPainter {
     switch (_decoration.shape) {
       case BoxShape.circle:
         assert(_decoration.borderRadius == null);
-        final Offset center = rect.center;
-        final double radius = rect.shortestSide / 2.0;
+        final center = rect.center;
+        final radius = rect.shortestSide / 2.0;
         canvas.drawCircle(center, radius, paint);
       case BoxShape.rectangle:
         if (_decoration.borderRadius == null || _decoration.borderRadius == BorderRadius.zero) {
@@ -498,7 +498,7 @@ class _BoxDecorationPainter extends BoxPainter {
     if (_decoration.color != null || _decoration.gradient != null) {
       // When border is filled, the rect is reduced to avoid anti-aliasing
       // rounding error leaking the background color around the clipped shape.
-      final Rect adjustedRect = _adjustedRectOnOutlinedBorder(rect, textDirection);
+      final adjustedRect = _adjustedRectOnOutlinedBorder(rect, textDirection);
       _paintBox(canvas, adjustedRect, _getBackgroundPaint(rect, textDirection), textDirection);
     }
   }
@@ -516,9 +516,9 @@ class _BoxDecorationPainter extends BoxPainter {
     }
 
     if (_decoration.border is Border) {
-      final Border border = _decoration.border! as Border;
+      final border = _decoration.border! as Border;
 
-      final EdgeInsets insets = EdgeInsets.fromLTRB(
+      final insets = EdgeInsets.fromLTRB(
             _calculateAdjustedSide(border.left),
             _calculateAdjustedSide(border.top),
             _calculateAdjustedSide(border.right),
@@ -533,11 +533,11 @@ class _BoxDecorationPainter extends BoxPainter {
         rect.bottom - insets.bottom,
       );
     } else if (_decoration.border is BorderDirectional && textDirection != null) {
-      final BorderDirectional border = _decoration.border! as BorderDirectional;
-      final BorderSide leftSide = textDirection == TextDirection.rtl ? border.end : border.start;
-      final BorderSide rightSide = textDirection == TextDirection.rtl ? border.start : border.end;
+      final border = _decoration.border! as BorderDirectional;
+      final leftSide = textDirection == TextDirection.rtl ? border.end : border.start;
+      final rightSide = textDirection == TextDirection.rtl ? border.start : border.end;
 
-      final EdgeInsets insets = EdgeInsets.fromLTRB(
+      final insets = EdgeInsets.fromLTRB(
             _calculateAdjustedSide(leftSide),
             _calculateAdjustedSide(border.top),
             _calculateAdjustedSide(rightSide),
@@ -565,9 +565,9 @@ class _BoxDecorationPainter extends BoxPainter {
     switch (_decoration.shape) {
       case BoxShape.circle:
         assert(_decoration.borderRadius == null);
-        final Offset center = rect.center;
-        final double radius = rect.shortestSide / 2.0;
-        final Rect square = Rect.fromCircle(center: center, radius: radius);
+        final center = rect.center;
+        final radius = rect.shortestSide / 2.0;
+        final square = Rect.fromCircle(center: center, radius: radius);
         clipPath = Path()..addOval(square);
       case BoxShape.rectangle:
         if (_decoration.borderRadius != null) {
@@ -587,8 +587,8 @@ class _BoxDecorationPainter extends BoxPainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     assert(configuration.size != null);
-    final Rect rect = offset & configuration.size!;
-    final TextDirection? textDirection = configuration.textDirection;
+    final rect = offset & configuration.size!;
+    final textDirection = configuration.textDirection;
     _paintShadows(canvas, rect, textDirection);
     _paintBackgroundColor(canvas, rect, textDirection);
     _paintBackgroundImage(canvas, rect, configuration);
