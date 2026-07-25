@@ -101,7 +101,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
                                       text: name,
                                       textTaps: [query],
                                       linkStyle: TextStyle(
-                                        color: Colors.blue,
+                                        color: context.themeData.colorScheme.primary,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),

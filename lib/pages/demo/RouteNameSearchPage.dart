@@ -27,12 +27,6 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
 
   final textFieldVN = ValueNotifier("");
 
-  /// 高亮样式
-  final TextStyle lightTextStyle = const TextStyle(
-    color: Colors.blue,
-    fontWeight: FontWeight.bold,
-  );
-
   /// 每次从 tuples 读取，避免热重载后仍用旧缓存
   List<OptionModel> get _routeOptions {
     return tuples

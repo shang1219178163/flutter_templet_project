@@ -106,6 +106,10 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: buildTagsWidget(),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: buildRelevantArticles(),
+                ),
               ],
             ),
           ),
@@ -320,6 +324,88 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
       imageUrl: url,
       width: double.infinity,
       fit: BoxFit.fitWidth,
+    );
+  }
+
+  /// 相关资讯列表
+  Widget buildRelevantArticles() {
+    final articles = detail?.relevantArticles ?? [];
+    if (articles.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 12),
+          child: Text(
+            "相关资讯",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: themeProvider.titleColor,
+            ),
+          ),
+        ),
+        ...articles.map(buildRelevantArticleItem),
+      ],
+    );
+  }
+
+  /// 相关资讯条目（左文右图）
+  Widget buildRelevantArticleItem(ArticleDetailModel item) {
+    return InkWell(
+      onTap: () {
+        debugPrint("relevantArticle tap id=${item.id} title=${item.title}");
+      },
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.title ?? "",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: themeProvider.titleColor,
+                      height: 1.35,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    item.createTime ?? "",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: themeProvider.subtitleColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if ((item.thumb ?? "").isNotEmpty) ...[
+              const SizedBox(width: 12),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: CachedNetworkImage(
+                  imageUrl: item.thumb!,
+                  width: 110,
+                  height: 74,
+                  fit: BoxFit.cover,
+                  placeholder: (_, __) => buildImagePlaceholder(width: 110, height: 74),
+                  errorWidget: (_, __, ___) => buildImagePlaceholder(width: 110, height: 74),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 
