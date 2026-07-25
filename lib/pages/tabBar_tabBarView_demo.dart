@@ -558,6 +558,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.gradientPlaygroundPage, "渐变色"),
   Tuple2(AppRouter.imageBlendModeDemo, "图片渲染模式"),
   Tuple2(AppRouter.containerDemo, "containerDemo"),
+  Tuple2(AppRouter.containerComparePage, "containerComparePage"),
   Tuple2(AppRouter.containerDemoNew, "containerDemoNew"),
   Tuple2(AppRouter.animatedContainerDemo, "animatedContainerDemo"),
   Tuple2(AppRouter.scrollPhysicsPage, "滚动行为"),

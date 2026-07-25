@@ -81,6 +81,7 @@ import 'package:flutter_templet_project/pages/demo/CompileEnvironmentPage.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConcurrentExecutorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ContainerComparePage.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
@@ -533,6 +534,7 @@ class AppRouter {
   static const String slidableDemo = '/SlidaableDemo';
   static const String settingsPage = '/AppSettingsPage';
   static const String containerDemo = '/containerDemo';
+  static const String containerComparePage = '/containerComparePage';
   static const String containerDemoNew = '/containerDemoNew';
   static const String animatedContainerDemo = '/animatedContainerDemo';
   static const String draggableDemo = '/DraggableDemo';
@@ -1210,6 +1212,10 @@ class AppRouter {
     GetPage(
       name: AppRouter.containerDemo,
       page: () => ContainerDemo(),
+    ),
+    GetPage(
+      name: AppRouter.containerComparePage,
+      page: () => ContainerComparePage(),
     ),
     GetPage(
       name: AppRouter.containerDemoNew,
