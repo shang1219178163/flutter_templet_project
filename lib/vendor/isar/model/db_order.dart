@@ -28,13 +28,14 @@ class DBOrder {
     if (map == null) {
       return null;
     }
+    final userJson = map["user"];
     return DBOrder(
-      title: map["title"],
-      isPay: map["isPay"],
+      title: map["title"] ?? "",
+      isPay: map["isPay"] ?? false,
       createdDate: map["createdDate"],
       updatedDate: map["updatedDate"],
-      isSelected: map["isSelected"],
-      user: User.fromJson(map["user"]),
+      isSelected: map["isSelected"] ?? false,
+      user: userJson is Map<String, dynamic> ? User.fromJson(userJson) : null,
     );
   }
 
@@ -63,8 +64,8 @@ class User {
 
   static User fromJson(Map<String, dynamic> map) {
     return User(
-      name: map["name"],
-      isSelected: map["isSelected"],
+      name: map["name"] ?? "",
+      isSelected: map["isSelected"] ?? false,
     );
   }
 

@@ -50,9 +50,11 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
 
   late final pageController = PageController(initialPage: 0, keepPage: true);
 
-  late final textColor = Theme.of(context).colorScheme.primary;
+  late final theme = Theme.of(context);
 
-  late final bgColor = Theme.of(context).colorScheme.onPrimary;
+  late final textColor = theme.colorScheme.onPrimary;
+
+  late final bgColor = theme.colorScheme.primary;
 
   @override
   void initState() {
@@ -134,6 +136,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       tabs: items.map((e) => Tab(text: e.item1)).toList(),
       // indicatorSize: TabBarIndicatorSize.label,
       labelColor: labelColor,
+      unselectedLabelColor: labelColor.withValues(alpha: 0.5),
       indicator: BoxDecoration(
         border: Border(
           top: !isBottom

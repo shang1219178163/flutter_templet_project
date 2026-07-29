@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
-import 'package:flutter_templet_project/vendor/isar/db_mixin.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 
@@ -17,13 +16,13 @@ class DBGenericController<E> extends GetxController {
     init();
   }
 
-  Isar get isar => DBManager().isar!;
+  Isar get isar => DBManager().isar;
 
   final List<E> _entities = <E>[];
   List<E> get entities => _entities;
 
   Future<void> init() async {
-    isar.txn(() async {
+    await isar.txn(() async {
       await update();
     });
   }
@@ -31,7 +30,7 @@ class DBGenericController<E> extends GetxController {
   /// 查
   @override
   Future<void> update([List<Object>? ids, bool condition = true]) async {
-    if (!Get.isRegistered<DBGenericController<E>>()) {
+    if (!DBManager.isControllerRegistered<E>()) {
       return;
     }
     super.update(ids, condition);
@@ -40,7 +39,7 @@ class DBGenericController<E> extends GetxController {
   /// 查
   ///
   /// filterCb 为空,返回所有实体
-  Future<List<E>> findEntitys({
+  Future<List<E>> findEntities({
     Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb,
   }) async {
     final collections = isar.collection<E>();
@@ -93,9 +92,8 @@ class DBGenericController<E> extends GetxController {
     await isar.writeTxn(() async {
       final count = await isar.collection<E>().deleteAll(ids);
       debugPrint('$this deleted $count');
-
-      await update();
     });
+    await update();
   }
 
   /// 删
@@ -108,16 +106,17 @@ class DBGenericController<E> extends GetxController {
     required Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb,
     required int Function(E e) idCb,
   }) async {
-    final entitys = await findEntitys(filterCb: filterCb);
+    final entitys = await findEntities(filterCb: filterCb);
     final ids = entitys.map((e) => idCb(e)).toList();
     await deleteAll(ids);
   }
 
-  /// 清除
+  /// 清除当前集合
   Future<void> clear() async {
     await isar.writeTxn(() async {
       await isar.collection<E>().clear();
     });
+    await update();
   }
 
   /// 模型字段更新

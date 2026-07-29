@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
+import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoItem.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_generic_controller.dart';
@@ -39,7 +40,7 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMixin {
 
   bool isAllChoic = false;
 
-  final provider = Get.put(DBGenericController<DBTodo>());
+  DBGenericController<DBTodo> get provider => DBManager.findController<DBTodo>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,7 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMixin {
               ],
             ),
       body: GetBuilder<DBGenericController<DBTodo>>(
+        tag: DBManager.controllerTag,
         builder: (value) {
           final checkedItems = value.entities.where((e) => e.isFinished == true).toList();
           isAllChoic = value.entities.firstWhereOrNull((e) => e.isFinished == false) == null;

@@ -15,7 +15,7 @@ class DBGenericProvider<E> extends ChangeNotifier {
     init();
   }
 
-  Isar get isar => DBManager().isar!;
+  Isar get isar => DBManager().isar;
 
   final List<E> _entities = <E>[];
   List<E> get entities => _entities;
@@ -28,14 +28,14 @@ class DBGenericProvider<E> extends ChangeNotifier {
 
   /// 查
   Future<void> update() async {
-    await findEntitys();
+    await findEntities();
     notifyListeners();
   }
 
   /// 查
   ///
   /// filterCb 为空,返回所有实体
-  Future<List<E>> findEntitys(
+  Future<List<E>> findEntities(
       {Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb}) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
@@ -71,9 +71,8 @@ class DBGenericProvider<E> extends ChangeNotifier {
     await isar.writeTxn(() async {
       final count = await isar.collection<E>().deleteAll(ids);
       debugPrint('$this deleted $count');
-
-      await update();
     });
+    await update();
   }
 
   /// 删
@@ -81,11 +80,12 @@ class DBGenericProvider<E> extends ChangeNotifier {
     await deleteAll([id]);
   }
 
-  /// 清除
+  /// 清除当前集合
   Future<void> clear() async {
     await isar.writeTxn(() async {
       await isar.collection<E>().clear();
     });
+    await update();
   }
 
   /// 模型字段更新

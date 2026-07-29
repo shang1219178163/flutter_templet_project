@@ -19,115 +19,107 @@ import 'package:path_provider/path_provider.dart';
 /// 数据库管理类
 class DBManager {
   DBManager._();
-  static final DBManager _instance = DBManager._();
-  factory DBManager() => _instance;
-  static DBManager get instance => _instance;
+  static final DBManager instance = DBManager._();
+  factory DBManager() => instance;
 
-  String get exception => _exception ?? "";
+  /// GetX 控制器统一 tag，页面用 [findController]
+  static const String controllerTag = 'db_manager';
+
+  static final _schemas = <CollectionSchema<dynamic>>[
+    DBTodoSchema,
+    DBStudentSchema,
+    DBOrderSchema,
+  ];
 
   String? _exception;
+  String get exception => _exception ?? '';
 
-  late Isar? isar;
+  Isar? _isar;
+  bool get isReady => _isar?.isOpen ?? false;
 
-  /// 会话详情控制器
-  late DBGenericController<DBTodo>? todoModelController;
+  Isar get isar {
+    assert(isReady, 'DBManager 未初始化或已关闭${_exception ?? ''}');
+    return _isar!;
+  }
 
-  /// 群详情控制器
-  late DBGenericController<DBStudent>? studentModelController;
+  final _listeners = <VoidCallback>[];
 
-  /// 聊天信息控制器
-  late DBGenericController<DBOrder>? orderModelController;
+  static bool isControllerRegistered<E>() {
+    return Get.isRegistered<DBGenericController<E>>(tag: controllerTag);
+  }
 
-  /// 监听列表
-  final List<VoidCallback> _listeners = [];
+  static DBGenericController<E> findController<E>() {
+    assert(instance.isReady && isControllerRegistered<E>(), 'DBManager/Controller<$E> 未就绪');
+    return Get.find<DBGenericController<E>>(tag: controllerTag);
+  }
 
-  // 添加监听
   void addListener(VoidCallback cb) {
-    if (_listeners.contains(cb)) {
-      return;
+    if (!_listeners.contains(cb)) {
+      _listeners.add(cb);
     }
-    _listeners.add(cb);
   }
 
-  // 移除监听
-  void removeListener(VoidCallback cb) {
-    _listeners.remove(cb);
-  }
+  void removeListener(VoidCallback cb) => _listeners.remove(cb);
 
-  // 通知所有监听器
   void notifyListeners() {
-    for (final ltr in _listeners) {
-      ltr();
+    for (final cb in _listeners) {
+      cb();
     }
   }
 
   Future<void> init() async {
+    _exception = null;
     try {
-      isar = null;
-      todoModelController = null;
-      studentModelController = null;
-      orderModelController = null;
-
-      isar = await _openDB(schemas: [
-        DBTodoSchema,
-        DBStudentSchema,
-        DBOrderSchema,
-      ]);
-      todoModelController = Get.put(DBGenericController<DBTodo>(), tag: isar!.name);
-      studentModelController = Get.put(DBGenericController<DBStudent>(), tag: isar!.name);
-      orderModelController = Get.put(DBGenericController<DBOrder>(), tag: isar!.name);
-
+      await closeDB();
+      final dir = await getApplicationDocumentsDirectory();
+      _isar = await Isar.open(
+        _schemas,
+        directory: dir.path,
+        inspector: !kReleaseMode,
+      );
+      Get
+        ..put(DBGenericController<DBTodo>(), tag: controllerTag)
+        ..put(DBGenericController<DBStudent>(), tag: controllerTag)
+        ..put(DBGenericController<DBOrder>(), tag: controllerTag);
       notifyListeners();
-      DLog.d("$runtimeType 初始化成功");
+      DLog.d('$runtimeType 初始化成功 path=${dir.path}');
     } catch (e) {
-      DLog.d("❌ $runtimeType 初始化失败: $e");
       _exception = e.toString();
+      DLog.d('❌ $runtimeType 初始化失败: $e');
+      await closeDB();
     } finally {
-      logDB(prefix: "openDB");
+      logDB(prefix: 'openDB');
     }
   }
 
-  /// 打开 DB
-  Future<Isar> _openDB({
-    required List<CollectionSchema<dynamic>> schemas,
-  }) async {
-    final dir = await getApplicationDocumentsDirectory();
-    final result = await Isar.open(
-      schemas,
-      directory: dir.path,
-      inspector: !kReleaseMode,
-    );
-    DLog.d("openDB: \n ${dir.path}");
-    return result;
-  }
+  /// 关闭 DB、清理控制器；[init] 重开/失败回滚也走这里
+  Future<void> closeDB({bool deleteFromDisk = false}) async {
+    await _deleteController<DBTodo>();
+    await _deleteController<DBStudent>();
+    await _deleteController<DBOrder>();
 
-  /// 打开 DB
-  Future<bool> closeDB({bool deleteFromDisk = false}) async {
-    try {
-      final result = await isar!.close(deleteFromDisk: deleteFromDisk);
-      return result;
-    } catch (e) {
-      DLog.d("$runtimeType closeDB exception: $e");
-    } finally {
-      logDB(prefix: "closeDB after");
+    final db = _isar;
+    _isar = null;
+    if (db?.isOpen ?? false) {
+      await db!.close(deleteFromDisk: deleteFromDisk);
     }
-    return false;
   }
 
-  /// 清空数据库
-  Future<void> clear() async {
-    await isar?.writeTxn(() async {
-      await isar?.clear();
-    });
+  Future<void> clear() => isar.writeTxn(isar.clear);
+
+  Future<void> _deleteController<E>() async {
+    if (Get.isRegistered<DBGenericController<E>>(tag: controllerTag)) {
+      await Get.delete<DBGenericController<E>>(tag: controllerTag, force: true);
+    }
   }
 
-  /// 数据库配置打印
-  void logDB({String? prefix = 'debugPrint', dynamic params}) {
-    DLog.d("$runtimeType $prefix ${[
-      DBManager().isar?.hashCode,
-      DBManager().isar?.name,
-      DBManager().isar?.isOpen,
+  void logDB({String prefix = 'debugPrint', Object? params}) {
+    DLog.d('$runtimeType $prefix ${[
+      _isar?.hashCode,
+      _isar?.name,
+      _isar?.isOpen,
+      isReady,
       params,
-    ].asMap()}");
+    ].asMap()}');
   }
 }

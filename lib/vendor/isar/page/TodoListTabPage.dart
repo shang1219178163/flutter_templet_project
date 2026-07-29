@@ -21,17 +21,6 @@ class _TodoListTabPageState extends State<TodoListTabPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => debugPrint(e),
-                ))
-            .toList(),
       ),
       body: buildBody(),
     );

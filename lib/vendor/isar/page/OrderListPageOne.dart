@@ -7,12 +7,13 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
+import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/page/OrderItem.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_generic_controller.dart';
 import 'package:get/get.dart';
 
-/// DBGenericProvider 示例
+/// DBGenericController<DBOrder> 示例
 class OrderListPageOne extends StatefulWidget {
   OrderListPageOne({super.key, this.title});
 
@@ -29,7 +30,7 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMixin 
 
   bool isAllChoic = false;
 
-  final provider = Get.put(DBGenericController<DBOrder>());
+  DBGenericController<DBOrder> get provider => DBManager.findController<DBOrder>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMixin 
         ],
       ),
       body: GetBuilder<DBGenericController<DBOrder>>(
+        tag: DBManager.controllerTag,
         builder: (value) {
           final checkedItems = value.entities.where((e) => e.isSelected == true).toList();
           isAllChoic = value.entities.firstWhereOrNull((e) => e.isSelected == false) == null;

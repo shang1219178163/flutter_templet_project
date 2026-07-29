@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
+import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentCell.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_generic_controller.dart';
@@ -38,7 +39,7 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMixin {
 
   bool isAllChoic = false;
 
-  final provider = Get.put(DBGenericController<DBStudent>());
+  DBGenericController<DBStudent> get provider => DBManager.findController<DBStudent>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,7 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMixin {
               ],
             ),
       body: GetBuilder<DBGenericController<DBStudent>>(
+        tag: DBManager.controllerTag,
         builder: (value) {
           final checkedItems = value.entities.where((e) => e.isSelected == true).toList();
           isAllChoic = value.entities.firstWhereOrNull((e) => e.isSelected == false) == null;
