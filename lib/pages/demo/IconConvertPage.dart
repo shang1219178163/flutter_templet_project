@@ -7,8 +7,6 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
-import 'package:tuple/tuple.dart';
-
 class IconConvertPage extends StatefulWidget {
   IconConvertPage({super.key, this.title});
 
@@ -49,33 +47,37 @@ class _IconConvertPageState extends State<IconConvertPage> {
       ),
       body: NPageView(
         items: [
-          Tuple2(
-              "全部",
-              buildPage(
-                items: linesVN,
-                controller: scrollController,
-                onConvert: convertToMapItem,
-              )),
-          Tuple2(
-              "IconData get",
-              buildPage(
-                items: linesOneVN,
-                controller: scrollController1,
-                onConvert: convertToMapItem,
-              )),
-          Tuple2(
-              "const IconData ",
-              buildPage(
-                items: linesTwoVN,
-                controller: scrollController2,
-                onConvert: convertToMapItem,
-              )),
-          Tuple2(
-              "结果",
-              buildPage(
-                items: linesThreeVN,
-                controller: scrollController3,
-              )),
+          (
+            "全部",
+            buildPage(
+              items: linesVN,
+              controller: scrollController,
+              onConvert: convertToMapItem,
+            ),
+          ),
+          (
+            "IconData get",
+            buildPage(
+              items: linesOneVN,
+              controller: scrollController1,
+              onConvert: convertToMapItem,
+            ),
+          ),
+          (
+            "const IconData ",
+            buildPage(
+              items: linesTwoVN,
+              controller: scrollController2,
+              onConvert: convertToMapItem,
+            ),
+          ),
+          (
+            "结果",
+            buildPage(
+              items: linesThreeVN,
+              controller: scrollController3,
+            ),
+          ),
         ],
       ),
     );

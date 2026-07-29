@@ -31,7 +31,6 @@ import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.da
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
-import 'package:tuple/tuple.dart';
 
 class ConvertFlle extends StatefulWidget {
   ConvertFlle({
@@ -74,7 +73,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   final progressVN = ValueNotifier(0.0);
 
   List<File> files = [];
-  List<Tuple2<String, SelectableText>> tabItems = [];
+  List<(String, SelectableText)> tabItems = [];
 
   final convertTypeIndex = 0;
 
@@ -286,7 +285,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       end: canDrag.value == false || tabItems.isEmpty
           ? null
           : NPageView(
-              items: tabItems,
+              items: tabItems.map<(String, Widget)>((e) => (e.$1, e.$2)).toList(),
               isScrollable: true,
               tabAlignment: TabAlignment.start,
               isThemeBg: false,
@@ -358,14 +357,14 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   }
 
   Future<void> onDragChanged() async {
-    final list = <Tuple2<String, SelectableText>>[];
+    final list = <(String, SelectableText)>[];
     for (final e in files) {
       final model = await current.convertFile(productName: productName, file: e);
       progressVN.value = files.indexOf(e) / (files.length - 1);
       if (model == null) {
         continue;
       }
-      final item = Tuple2(
+      final item = (
         model.nameNew ?? "",
         SelectableText(model.contentNew ?? ""),
       );
@@ -380,7 +379,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       for (final e in tabItems) {
         try {
           onConvert(
-            content: e.item2.data ?? "",
+            content: e.$2.data ?? "",
           );
         } catch (e) {
           debugPrint("❌$this $e");

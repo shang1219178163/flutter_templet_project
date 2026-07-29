@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:tuple/tuple.dart';
 
 /// 多页面左右滑动封装
 class NPageView extends StatefulWidget {
@@ -24,7 +23,7 @@ class NPageView extends StatefulWidget {
     this.onPageChanged,
   }) : super(key: key);
 
-  final List<Tuple2<String, Widget>> items;
+  final List<(String, Widget)> items;
 
   final bool needSafeArea;
 
@@ -71,8 +70,8 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
   @override
   void didUpdateWidget(covariant NPageView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final names = widget.items.map((e) => e.item1).join(",");
-    final oldNames = oldWidget.items.map((e) => e.item1).join(",");
+    final names = widget.items.map((e) => e.$1).join(",");
+    final oldNames = oldWidget.items.map((e) => e.$1).join(",");
     if (names != oldNames) {
       tabController = TabController(length: widget.items.length, vsync: this);
     }
@@ -99,7 +98,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
             setState(() {});
             widget.onPageChanged?.call(index);
           },
-          children: widget.items.map((e) => e.item2).toList(),
+          children: widget.items.map((e) => e.$2).toList(),
         ),
       ),
     ];
@@ -122,7 +121,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
   }
 
   Widget _buildBottomBar({
-    required List<Tuple2<String, Widget>> items,
+    required List<(String, Widget)> items,
     bool isScrollable = false,
     bool isBottom = false,
     bool isThemeBg = true,
@@ -133,7 +132,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       controller: tabController,
       tabAlignment: widget.tabAlignment,
       isScrollable: isScrollable,
-      tabs: items.map((e) => Tab(text: e.item1)).toList(),
+      tabs: items.map((e) => Tab(text: e.$1)).toList(),
       // indicatorSize: TabBarIndicatorSize.label,
       labelColor: labelColor,
       unselectedLabelColor: labelColor.withValues(alpha: 0.5),
