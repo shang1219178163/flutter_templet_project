@@ -146,7 +146,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             NSectionBox(
               title: "LinearGradient",
-              child: _buildGradientButton(
+              child: buildGradientButton(
                 onTap: () => debugPrint("LinearGradient"),
               ),
             ),
@@ -496,9 +496,9 @@ class _SecondPageState extends State<SecondPage> {
               title: "ToggleButtons",
               child: buildToggleButtons(),
             ),
-            NSectionBox(title: "DropdownButton", child: _buildDropdownButton()),
-            NSectionBox(title: "_buildDropdownButton1", child: _buildDropdownButton1()),
-            NSectionBox(title: "_buildPopupMenuButtonExt", child: _buildPopupMenuButtonExt()),
+            NSectionBox(title: "DropdownButton", child: buildDropdownButton()),
+            NSectionBox(title: "buildDropdownButton1", child: buildDropdownButton1()),
+            NSectionBox(title: "buildPopupMenuButtonExt", child: buildPopupMenuButtonExt()),
             NSectionBox(
               title: "UploadButton",
               child: UploadButton(
@@ -550,7 +550,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionBox(title: "_buildCustomPaint", child: _buildCustomPaint()),
+            NSectionBox(title: "buildCustomPaint", child: buildCustomPaint()),
             NSectionBox(
               title: "MyPainterArc",
               child: Container(
@@ -569,11 +569,11 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             NSectionBox(
-              title: "_buildInkWell",
-              child: _buildInkWell(),
+              title: "buildInkWell",
+              child: buildInkWell(),
             ),
             NSectionBox(
-              title: "_buildButtonBar",
+              title: "buildButtonBar",
               child: OverflowBar(
                 children: [
                   'Ok',
@@ -825,176 +825,181 @@ class _SecondPageState extends State<SecondPage> {
       final rowCount = 3.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
 
-      return Wrap(spacing: spacing, runSpacing: spacing, crossAxisAlignment: WrapCrossAlignment.center, children: [
-        ...[
-          NButton(
-            onPressed: () {
-              DLog.d("filled");
-            },
-            child: Text("filled"),
-          ),
-          NButton(
-            onPressed: null,
-            child: Text("filled: 禁用"),
-          ),
-          NButton(
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
-            onPressed: () {
-              DLog.d("filled: red");
-            },
-            child: Text("filled: red"),
-          ),
-          NButton(
-            type: NButtonType.elevated,
-            onPressed: () {
-              DLog.d("elevated");
-            },
-            child: FittedBox(child: Text("elevated")),
-          ),
-          NButton(
-            type: NButtonType.elevated,
-            onPressed: null,
-            child: FittedBox(child: Text("elevated: 禁用")),
-          ),
-          NButton(
-            type: NButtonType.elevated,
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.red,
+      return Wrap(
+        spacing: spacing,
+        runSpacing: spacing,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          ...[
+            NButton(
+              onPressed: () {
+                DLog.d("filled");
+              },
+              child: Text("filled"),
             ),
-            onPressed: () {
-              DLog.d("elevated: red");
-            },
-            child: FittedBox(child: Text("elevated: red")),
-          ),
-          NButton(
-            type: NButtonType.filledTonal,
-            onPressed: () {
-              DLog.d("tonal");
-            },
-            child: Text("tonal"),
-          ),
-          NButton(
-            type: NButtonType.filledTonal,
-            onPressed: null,
-            child: FittedBox(child: Text("tonal: 禁用")),
-          ),
-          NButton(
-            type: NButtonType.filledTonal,
-            style: FilledButton.styleFrom(
-              backgroundColor: Colors.red.withValues(alpha: 0.1),
-              foregroundColor: Colors.red,
+            NButton(
+              onPressed: null,
+              child: Text("filled: 禁用"),
             ),
-            textStyle: const TextStyle(color: Colors.red),
-            onPressed: () {
-              DLog.d("tonal: red");
-            },
-            child: Text("tonal: red"),
-          ),
-          NButton(
-            type: NButtonType.outlined,
-            onPressed: () {
-              DLog.d("outlined");
-            },
-            child: FittedBox(child: Text("outlined")),
-          ),
-          NButton(
-            type: NButtonType.outlined,
-            onPressed: null,
-            child: FittedBox(child: Text("outlined: 禁用")),
-          ),
-          NButton(
-            type: NButtonType.outlined,
-            style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.red.withValues(alpha: 0.1),
-              foregroundColor: Colors.red,
-              side: BorderSide(color: Colors.red),
+            NButton(
+              style: FilledButton.styleFrom(backgroundColor: Colors.red),
+              onPressed: () {
+                DLog.d("filled: red");
+              },
+              child: Text("filled: red"),
             ),
-            onPressed: () {
-              DLog.d("outlined: red");
-            },
-            child: FittedBox(child: Text("outlined: red")),
-          ),
-          NButton(
-            type: NButtonType.text,
-            onPressed: () {
-              DLog.d("text");
-            },
-            child: Text("text"),
-          ),
-          NButton(
-            type: NButtonType.text,
-            onPressed: null,
-            child: Text("text: 禁用"),
-          ),
-          NButton(
-            type: NButtonType.text,
-            textStyle: const TextStyle(color: Colors.red),
-            onPressed: () {
-              DLog.d("text: red");
-            },
-            child: Text("text"),
-          ),
-          NButton(
-            type: NButtonType.icon,
-            icon: const Icon(Icons.arrow_back_ios_new),
-            constraints: const BoxConstraints.tightFor(width: 26, height: 26),
-            onPressed: () {
-              DLog.d("icon");
-            },
-          ),
-          NButton(
-            type: NButtonType.icon,
-            icon: const Icon(Icons.arrow_back_ios_new),
-            constraints: const BoxConstraints.tightFor(width: 26, height: 26),
-            onPressed: null,
-          ),
-          NButton(
-            type: NButtonType.icon,
-            icon: Icon(Icons.arrow_back_ios_new, color: Colors.red),
-            constraints: const BoxConstraints.tightFor(width: 26, height: 26),
-            onPressed: () {
-              DLog.d("icon: red");
-            },
-          ),
-          NButton(
-            type: NButtonType.floating,
-            onPressed: () {
-              DLog.d("floating");
-            },
-            child: Text("floating"),
-          ),
-          NButton(
-            type: NButtonType.floating,
-            disabledGradient: LinearGradient(colors: [
-              primary.withValues(alpha: 0.5),
-              primary.withValues(alpha: 0.5),
-            ]),
-            onPressed: null,
-            child: Text("floating: 禁用"),
-          ),
-          NButton(
-            type: NButtonType.floating,
-            gradient: LinearGradient(colors: [
-              Colors.red,
-              Colors.red,
-            ]),
-            disabledGradient: LinearGradient(colors: [
-              Colors.red.withValues(alpha: 0.5),
-              Colors.red.withValues(alpha: 0.5),
-            ]),
-            onPressed: () {
-              DLog.d("floating: red");
-            },
-            child: Text("floating: red"),
-          ),
-        ]
-            .map((e) => Container(
-                  width: itemWidth.truncateToDouble(),
-                  // padding: const EdgeInsets.all(8.0),
-                  child: e,
-                ))
-            .toList(),
-      ]);
+            NButton(
+              type: NButtonType.elevated,
+              onPressed: () {
+                DLog.d("elevated");
+              },
+              child: FittedBox(child: Text("elevated")),
+            ),
+            NButton(
+              type: NButtonType.elevated,
+              onPressed: null,
+              child: FittedBox(child: Text("elevated: 禁用")),
+            ),
+            NButton(
+              type: NButtonType.elevated,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.red,
+              ),
+              onPressed: () {
+                DLog.d("elevated: red");
+              },
+              child: FittedBox(child: Text("elevated: red")),
+            ),
+            NButton(
+              type: NButtonType.filledTonal,
+              onPressed: () {
+                DLog.d("tonal");
+              },
+              child: Text("tonal"),
+            ),
+            NButton(
+              type: NButtonType.filledTonal,
+              onPressed: null,
+              child: FittedBox(child: Text("tonal: 禁用")),
+            ),
+            NButton(
+              type: NButtonType.filledTonal,
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.red.withValues(alpha: 0.1),
+                foregroundColor: Colors.red,
+              ),
+              textStyle: const TextStyle(color: Colors.red),
+              onPressed: () {
+                DLog.d("tonal: red");
+              },
+              child: Text("tonal: red"),
+            ),
+            NButton(
+              type: NButtonType.outlined,
+              onPressed: () {
+                DLog.d("outlined");
+              },
+              child: FittedBox(child: Text("outlined")),
+            ),
+            NButton(
+              type: NButtonType.outlined,
+              onPressed: null,
+              child: FittedBox(child: Text("outlined: 禁用")),
+            ),
+            NButton(
+              type: NButtonType.outlined,
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.red.withValues(alpha: 0.1),
+                foregroundColor: Colors.red,
+                side: BorderSide(color: Colors.red),
+              ),
+              onPressed: () {
+                DLog.d("outlined: red");
+              },
+              child: FittedBox(child: Text("outlined: red")),
+            ),
+            NButton(
+              type: NButtonType.text,
+              onPressed: () {
+                DLog.d("text");
+              },
+              child: Text("text"),
+            ),
+            NButton(
+              type: NButtonType.text,
+              onPressed: null,
+              child: Text("text: 禁用"),
+            ),
+            NButton(
+              type: NButtonType.text,
+              textStyle: const TextStyle(color: Colors.red),
+              onPressed: () {
+                DLog.d("text: red");
+              },
+              child: Text("text"),
+            ),
+            NButton(
+              type: NButtonType.icon,
+              icon: const Icon(Icons.arrow_back_ios_new),
+              constraints: const BoxConstraints.tightFor(width: 26, height: 26),
+              onPressed: () {
+                DLog.d("icon");
+              },
+            ),
+            NButton(
+              type: NButtonType.icon,
+              icon: const Icon(Icons.arrow_back_ios_new),
+              constraints: const BoxConstraints.tightFor(width: 26, height: 26),
+              onPressed: null,
+            ),
+            NButton(
+              type: NButtonType.icon,
+              icon: Icon(Icons.arrow_back_ios_new, color: Colors.red),
+              constraints: const BoxConstraints.tightFor(width: 26, height: 26),
+              onPressed: () {
+                DLog.d("icon: red");
+              },
+            ),
+            NButton(
+              type: NButtonType.floating,
+              onPressed: () {
+                DLog.d("floating");
+              },
+              child: Text("floating"),
+            ),
+            NButton(
+              type: NButtonType.floating,
+              disabledGradient: LinearGradient(colors: [
+                primary.withValues(alpha: 0.5),
+                primary.withValues(alpha: 0.5),
+              ]),
+              onPressed: null,
+              child: Text("floating: 禁用"),
+            ),
+            NButton(
+              type: NButtonType.floating,
+              gradient: LinearGradient(colors: [
+                Colors.red,
+                Colors.red,
+              ]),
+              disabledGradient: LinearGradient(colors: [
+                Colors.red.withValues(alpha: 0.5),
+                Colors.red.withValues(alpha: 0.5),
+              ]),
+              onPressed: () {
+                DLog.d("floating: red");
+              },
+              child: Text("floating: red"),
+            ),
+          ]
+              .map((e) => Container(
+                    width: itemWidth.truncateToDouble(),
+                    // padding: const EdgeInsets.all(8.0),
+                    child: e,
+                  ))
+              .toList(),
+        ],
+      );
     });
   }
 
@@ -1024,7 +1029,7 @@ class _SecondPageState extends State<SecondPage> {
     ];
   }
 
-  buildGridView() {
+  Widget buildGridView() {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
       crossAxisCount: 2,
@@ -1047,7 +1052,7 @@ class _SecondPageState extends State<SecondPage> {
     return <Tuple2<String, Widget>>[
       Tuple2(
         "ClipRRectGradientButton",
-        _buildGradientButton(),
+        buildGradientButton(),
       ),
       Tuple2(
         "ElevatedButton",
@@ -1151,7 +1156,7 @@ class _SecondPageState extends State<SecondPage> {
       ),
       Tuple2(
         "DropdownButton",
-        _buildDropdownButton(),
+        buildDropdownButton(),
       ),
     ];
   }
@@ -1176,7 +1181,7 @@ class _SecondPageState extends State<SecondPage> {
 
   var _dropValue = '语文';
 
-  Widget _buildDropdownButton() {
+  Widget buildDropdownButton() {
     var list = ['语文', '数学', '英语'];
     return DropdownButton(
       value: _dropValue,
@@ -1202,7 +1207,7 @@ class _SecondPageState extends State<SecondPage> {
 
   var dropdownvalue = 'Item 1';
 
-  Widget _buildDropdownButton1() {
+  Widget buildDropdownButton1() {
     var items = [
       'Item 1',
       'Item 2',
@@ -1240,7 +1245,7 @@ class _SecondPageState extends State<SecondPage> {
   final list = {"aa": "0", "bb": "1", "cc": "2"}.entries.toList();
   late var selectedValue = list.first;
 
-  Widget _buildPopupMenuButtonExt() {
+  Widget buildPopupMenuButtonExt() {
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
         return Column(
@@ -1294,7 +1299,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  Widget _buildCustomPaint() {
+  Widget buildCustomPaint() {
     return GestureDetector(
       onTap: () {
         DLog.d("ontap");
@@ -1312,7 +1317,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  Widget _buildGradientButton({
+  Widget buildGradientButton({
     Gradient? gradient,
     Widget? child,
     VoidCallback? onTap,
@@ -1363,7 +1368,7 @@ class _SecondPageState extends State<SecondPage> {
   }
 
   int _volume = 0;
-  Widget _buildInkWell() {
+  Widget buildInkWell() {
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
@@ -1385,7 +1390,7 @@ class _SecondPageState extends State<SecondPage> {
     });
   }
 
-  buildElevatedButtonGradient({
+  Widget buildElevatedButtonGradient({
     double? width,
     double? height = 45,
     required Widget child,
@@ -1425,7 +1430,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  buildMaterialButtonGradient({
+  Widget buildMaterialButtonGradient({
     ShapeBorder shape = const StadiumBorder(),
     Gradient? gradient,
     VoidCallback? onPressed,
