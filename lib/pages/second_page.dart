@@ -37,6 +37,7 @@ class _SecondPageState extends State<SecondPage> {
   late final theme = Theme.of(context);
   late final isDark = theme.brightness == Brightness.dark;
   late final primary = theme.colorScheme.primary;
+  late final colorScheme = theme.colorScheme;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +74,7 @@ class _SecondPageState extends State<SecondPage> {
           if (states.contains(WidgetState.pressed)) {
             return Colors.green;
           }
-          return Colors.black87; // Defer to the widget's default.
+          return Colors.red; // Defer to the widget's default.
         }),
       ),
       child: Text(
@@ -83,7 +84,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  buildListView() {
+  Widget buildListView() {
     return ListView(
       children: [
         Column(
@@ -828,7 +829,7 @@ class _SecondPageState extends State<SecondPage> {
         ...[
           NButton(
             onPressed: () {
-              DLog.d("NButton");
+              DLog.d("filled");
             },
             child: Text("filled"),
           ),
@@ -838,12 +839,16 @@ class _SecondPageState extends State<SecondPage> {
           ),
           NButton(
             style: FilledButton.styleFrom(backgroundColor: Colors.red),
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("filled: red");
+            },
             child: Text("filled: red"),
           ),
           NButton(
             type: NButtonType.elevated,
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("elevated");
+            },
             child: FittedBox(child: Text("elevated")),
           ),
           NButton(
@@ -856,12 +861,16 @@ class _SecondPageState extends State<SecondPage> {
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.red,
             ),
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("elevated: red");
+            },
             child: FittedBox(child: Text("elevated: red")),
           ),
           NButton(
             type: NButtonType.filledTonal,
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("tonal");
+            },
             child: Text("tonal"),
           ),
           NButton(
@@ -876,12 +885,16 @@ class _SecondPageState extends State<SecondPage> {
               foregroundColor: Colors.red,
             ),
             textStyle: const TextStyle(color: Colors.red),
-            onPressed: () {},
-            child: Text("NButton.tonal"),
+            onPressed: () {
+              DLog.d("tonal: red");
+            },
+            child: Text("tonal: red"),
           ),
           NButton(
             type: NButtonType.outlined,
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("outlined");
+            },
             child: FittedBox(child: Text("outlined")),
           ),
           NButton(
@@ -896,12 +909,16 @@ class _SecondPageState extends State<SecondPage> {
               foregroundColor: Colors.red,
               side: BorderSide(color: Colors.red),
             ),
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("outlined: red");
+            },
             child: FittedBox(child: Text("outlined: red")),
           ),
           NButton(
             type: NButtonType.text,
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("text");
+            },
             child: Text("text"),
           ),
           NButton(
@@ -912,14 +929,18 @@ class _SecondPageState extends State<SecondPage> {
           NButton(
             type: NButtonType.text,
             textStyle: const TextStyle(color: Colors.red),
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("text: red");
+            },
             child: Text("text"),
           ),
           NButton(
             type: NButtonType.icon,
             icon: const Icon(Icons.arrow_back_ios_new),
             constraints: const BoxConstraints.tightFor(width: 26, height: 26),
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("icon");
+            },
           ),
           NButton(
             type: NButtonType.icon,
@@ -931,12 +952,14 @@ class _SecondPageState extends State<SecondPage> {
             type: NButtonType.icon,
             icon: Icon(Icons.arrow_back_ios_new, color: Colors.red),
             constraints: const BoxConstraints.tightFor(width: 26, height: 26),
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("icon: red");
+            },
           ),
           NButton(
             type: NButtonType.floating,
             onPressed: () {
-              DLog.d("NButton");
+              DLog.d("floating");
             },
             child: Text("floating"),
           ),
@@ -959,7 +982,9 @@ class _SecondPageState extends State<SecondPage> {
               Colors.red.withValues(alpha: 0.5),
               Colors.red.withValues(alpha: 0.5),
             ]),
-            onPressed: () {},
+            onPressed: () {
+              DLog.d("floating: red");
+            },
             child: Text("floating: red"),
           ),
         ]
