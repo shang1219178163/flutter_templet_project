@@ -34,6 +34,10 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   bool _isList = true;
 
+  late final theme = Theme.of(context);
+  late final isDark = theme.brightness == Brightness.dark;
+  late final primary = theme.colorScheme.primary;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -826,21 +830,44 @@ class _SecondPageState extends State<SecondPage> {
             onPressed: () {
               DLog.d("NButton");
             },
-            child: Text("NButton"),
+            child: Text("filled"),
           ),
           NButton(
             onPressed: null,
-            child: Text("NButton: 禁用"),
+            child: Text("filled: 禁用"),
           ),
           NButton(
             style: FilledButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {},
-            child: Text("NButton: red"),
+            child: Text("filled: red"),
+          ),
+          NButton(
+            type: NButtonType.elevated,
+            onPressed: () {},
+            child: FittedBox(child: Text("elevated")),
+          ),
+          NButton(
+            type: NButtonType.elevated,
+            onPressed: null,
+            child: FittedBox(child: Text("elevated: 禁用")),
+          ),
+          NButton(
+            type: NButtonType.elevated,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.red,
+            ),
+            onPressed: () {},
+            child: FittedBox(child: Text("elevated: red")),
           ),
           NButton(
             type: NButtonType.filledTonal,
             onPressed: () {},
-            child: Text("NButton.tonal"),
+            child: Text("tonal"),
+          ),
+          NButton(
+            type: NButtonType.filledTonal,
+            onPressed: null,
+            child: FittedBox(child: Text("tonal: 禁用")),
           ),
           NButton(
             type: NButtonType.filledTonal,
@@ -854,42 +881,86 @@ class _SecondPageState extends State<SecondPage> {
           ),
           NButton(
             type: NButtonType.outlined,
+            onPressed: () {},
+            child: FittedBox(child: Text("outlined")),
+          ),
+          NButton(
+            type: NButtonType.outlined,
+            onPressed: null,
+            child: FittedBox(child: Text("outlined: 禁用")),
+          ),
+          NButton(
+            type: NButtonType.outlined,
             style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: Color(0xffe4e4e4)),
+              backgroundColor: Colors.red.withValues(alpha: 0.1),
+              foregroundColor: Colors.red,
+              side: BorderSide(color: Colors.red),
             ),
             onPressed: () {},
-            child: Text("NButton.tonal"),
-          ),
-          NButton(
-            type: NButtonType.filledTonal,
-            style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xffF3F3F3),
-              foregroundColor: Colors.black87,
-            ),
-            textStyle: const TextStyle(color: Colors.black87),
-            onPressed: () {},
-            child: Text("NButton.tonal1"),
-          ),
-          NButton(
-            type: NButtonType.filledTonal,
-            style: FilledButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              elevation: 0,
-            ),
-            onPressed: () {},
-            child: Text("tonal"),
+            child: FittedBox(child: Text("outlined: red")),
           ),
           NButton(
             type: NButtonType.text,
             onPressed: () {},
-            child: Text("NButton.text"),
+            child: Text("text"),
+          ),
+          NButton(
+            type: NButtonType.text,
+            onPressed: null,
+            child: Text("text: 禁用"),
+          ),
+          NButton(
+            type: NButtonType.text,
+            textStyle: const TextStyle(color: Colors.red),
+            onPressed: () {},
+            child: Text("text"),
           ),
           NButton(
             type: NButtonType.icon,
-            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.blue),
+            icon: const Icon(Icons.arrow_back_ios_new),
             constraints: const BoxConstraints.tightFor(width: 26, height: 26),
             onPressed: () {},
+          ),
+          NButton(
+            type: NButtonType.icon,
+            icon: const Icon(Icons.arrow_back_ios_new),
+            constraints: const BoxConstraints.tightFor(width: 26, height: 26),
+            onPressed: null,
+          ),
+          NButton(
+            type: NButtonType.icon,
+            icon: Icon(Icons.arrow_back_ios_new, color: Colors.red),
+            constraints: const BoxConstraints.tightFor(width: 26, height: 26),
+            onPressed: () {},
+          ),
+          NButton(
+            type: NButtonType.floating,
+            onPressed: () {
+              DLog.d("NButton");
+            },
+            child: Text("floating"),
+          ),
+          NButton(
+            type: NButtonType.floating,
+            disabledGradient: LinearGradient(colors: [
+              primary.withValues(alpha: 0.5),
+              primary.withValues(alpha: 0.5),
+            ]),
+            onPressed: null,
+            child: Text("floating: 禁用"),
+          ),
+          NButton(
+            type: NButtonType.floating,
+            gradient: LinearGradient(colors: [
+              Colors.red,
+              Colors.red,
+            ]),
+            disabledGradient: LinearGradient(colors: [
+              Colors.red.withValues(alpha: 0.5),
+              Colors.red.withValues(alpha: 0.5),
+            ]),
+            onPressed: () {},
+            child: Text("floating: red"),
           ),
         ]
             .map((e) => Container(
