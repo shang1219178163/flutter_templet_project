@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+
 part 'db_order.g.dart';
 
 @Collection()
@@ -16,7 +17,6 @@ class DBOrder {
   Id id;
 
   String title;
-  @ignore
   bool isPay;
   String? createdDate;
   String? updatedDate;
@@ -29,12 +29,13 @@ class DBOrder {
       return null;
     }
     return DBOrder(
-        title: map["title"],
-        isPay: map["isPay"],
-        createdDate: map["createdDate"],
-        updatedDate: map["updatedDate"],
-        isSelected: map["isSelected"],
-        user: User.fromJson(map["user"]));
+      title: map["title"],
+      isPay: map["isPay"],
+      createdDate: map["createdDate"],
+      updatedDate: map["updatedDate"],
+      isSelected: map["isSelected"],
+      user: User.fromJson(map["user"]),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -62,7 +63,7 @@ class User {
 
   static User fromJson(Map<String, dynamic> map) {
     return User(
-      name: map["title"],
+      name: map["name"],
       isSelected: map["isSelected"],
     );
   }

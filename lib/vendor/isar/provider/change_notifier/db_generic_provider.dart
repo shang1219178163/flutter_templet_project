@@ -17,8 +17,8 @@ class DBGenericProvider<E> extends ChangeNotifier {
 
   Isar get isar => DBManager().isar!;
 
-  final List<E> _entitys = <E>[];
-  List<E> get entitys => _entitys;
+  final List<E> _entities = <E>[];
+  List<E> get entities => _entities;
 
   Future<void> init() async {
     isar.txn(() async {
@@ -40,9 +40,9 @@ class DBGenericProvider<E> extends ChangeNotifier {
     final collections = isar.collection<E>();
     final filters = collections.filter();
     final items = await filterCb?.call(filters) ?? await collections.where().findAll();
-    _entitys.clear();
-    _entitys.addAll(items);
-    return _entitys;
+    _entities.clear();
+    _entities.addAll(items);
+    return _entities;
   }
 
   /// 寻找第一个
@@ -57,8 +57,8 @@ class DBGenericProvider<E> extends ChangeNotifier {
   Future<void> putAll(List<E> list) async {
     await isar.writeTxn(() async {
       await isar.collection<E>().putAll(list);
-      await update();
     });
+    await update();
   }
 
   /// 增/改
@@ -79,6 +79,13 @@ class DBGenericProvider<E> extends ChangeNotifier {
   /// 删
   Future<void> delete(Id id) async {
     await deleteAll([id]);
+  }
+
+  /// 清除
+  Future<void> clear() async {
+    await isar.writeTxn(() async {
+      await isar.collection<E>().clear();
+    });
   }
 
   /// 模型字段更新

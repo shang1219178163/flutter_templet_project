@@ -28,7 +28,7 @@ class StudentLisPageOne extends StatefulWidget {
   State<StudentLisPageOne> createState() => _StudentLisPageOneState();
 }
 
-class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMxin {
+class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMixin {
   late final Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? {};
 
   late final hideAppBar = arguments["hideAppBar"] as bool?;
@@ -58,27 +58,27 @@ class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMxin
             ),
       body: Consumer<DBGenericProvider<DBStudent>>(
         builder: (context, value, child) {
-          final checkedItems = value.entitys.where((e) => e.isSelected == true).toList();
-          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isSelected == false) == null;
+          final checkedItems = value.entities.where((e) => e.isSelected == true).toList();
+          isAllChoic = value.entities.firstWhereOrNull((e) => e.isSelected == false) == null;
 
           final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
+          final checkDesc = "已选择 ${checkedItems.length}/${value.entities.length}";
 
           Widget content = NPlaceholder(
             onTap: () {
               provider.update();
             },
           );
-          if (value.entitys.isNotEmpty) {
+          if (value.entities.isNotEmpty) {
             content = buildRefresh(
               onRefresh: () {
                 provider.update();
               },
               child: ListView.builder(
                   padding: EdgeInsets.all(10),
-                  itemCount: value.entitys.length,
+                  itemCount: value.entities.length,
                   itemBuilder: (context, index) {
-                    final model = value.entitys.reversed.toList()[index];
+                    final model = value.entities.reversed.toList()[index];
 
                     onToggle() {
                       model.isSelected = !model.isSelected;
@@ -119,15 +119,15 @@ class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMxin
                 checkDesc: checkDesc,
                 onCheck: () async {
                   DLog.d("isAllChoic TextButton: $isAllChoic");
-                  for (var i = 0; i < value.entitys.length; i++) {
-                    final e = value.entitys[i];
+                  for (var i = 0; i < value.entities.length; i++) {
+                    final e = value.entities[i];
                     e.isSelected = !isAllChoic;
                   }
-                  provider.putAll(value.entitys);
+                  provider.putAll(value.entities);
                 },
                 onAdd: onAddItemRandom,
                 onDelete: () async {
-                  final choicItems = value.entitys.where((e) => e.isSelected).map((e) => e.id).toList();
+                  final choicItems = value.entities.where((e) => e.isSelected).map((e) => e.id).toList();
                   await provider.deleteAll(choicItems);
                 },
               ),
