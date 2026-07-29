@@ -2,7 +2,7 @@ import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
-import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/button/n_stadium_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
@@ -86,7 +86,7 @@ class _SecondPageState extends State<SecondPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             NSectionBox(
-              title: "NButtonOld",
+              title: "NButton",
               child: buildNButton(),
             ),
             NSectionBox(
@@ -822,69 +822,73 @@ class _SecondPageState extends State<SecondPage> {
 
       return Wrap(spacing: spacing, runSpacing: spacing, crossAxisAlignment: WrapCrossAlignment.center, children: [
         ...[
-          NButtonOld(
-            title: "NButton",
+          NButton(
             onPressed: () {
               DLog.d("NButton");
             },
+            child: Text("NButton"),
           ),
-          NButtonOld(
-            title: "NButton: 禁用",
-            enable: false,
+          NButton(
+            onPressed: null,
+            child: Text("NButton: 禁用"),
+          ),
+          NButton(
+            style: FilledButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {},
+            child: Text("NButton: red"),
           ),
-          NButtonOld(
-            title: "NButton: red",
-            primary: Colors.red,
+          NButton(
+            type: NButtonType.filledTonal,
             onPressed: () {},
+            child: Text("NButton.tonal"),
           ),
-          NButtonOld.tonal(
-            title: "NButton.tonal",
-            // primary: Colors.red,
-            // border: Border.all(color: Colors.transparent),
+          NButton(
+            type: NButtonType.filledTonal,
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.red.withValues(alpha: 0.1),
+              foregroundColor: Colors.red,
+            ),
+            textStyle: const TextStyle(color: Colors.red),
             onPressed: () {},
+            child: Text("NButton.tonal"),
           ),
-          NButtonOld.tonal(
-            title: "NButton.tonal",
-            primary: Colors.red,
-            // border: Border.all(color: Colors.transparent),
+          NButton(
+            type: NButtonType.outlined,
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(color: Color(0xffe4e4e4)),
+            ),
             onPressed: () {},
+            child: Text("NButton.tonal"),
           ),
-          NButtonOld.tonal(
-            primary: Colors.white,
-            title: "NButton.tonal",
-            // style: TextStyle(color: Colors.black87),
-            border: Border.all(color: Color(0xffe4e4e4)),
+          NButton(
+            type: NButtonType.filledTonal,
+            style: FilledButton.styleFrom(
+              backgroundColor: const Color(0xffF3F3F3),
+              foregroundColor: Colors.black87,
+            ),
+            textStyle: const TextStyle(color: Colors.black87),
             onPressed: () {},
+            child: Text("NButton.tonal1"),
           ),
-          NButtonOld.tonal(
-            // primary: Colors.black87,
-            title: "NButton.tonal1",
-            border: Border.all(color: Colors.transparent),
-            backgroudColor: Color(0xffF3F3F3),
-            // gradient: LinearGradient(
-            //   colors: [Colors.green, Colors.red],
-            //   begin: Alignment.topLeft,
-            //   end: Alignment.bottomRight,
-            // ),
+          NButton(
+            type: NButtonType.filledTonal,
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              elevation: 0,
+            ),
             onPressed: () {},
+            child: Text("tonal"),
           ),
-          NButtonOld.tonal(
-            // primary: Colors.black87,
-            title: "tonal",
-            border: Border.all(color: Colors.transparent),
-            backgroudColor: Colors.transparent,
+          NButton(
+            type: NButtonType.text,
             onPressed: () {},
+            child: Text("NButton.text"),
           ),
-          NButtonOld.text(
-            // primary: Colors.red,
-            title: "NButton.text",
-            onPressed: () {},
-          ),
-          NButtonOld.text(
-            // primary: Colors.red,
-            width: 26,
-            child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
+          NButton(
+            type: NButtonType.icon,
+            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.blue),
+            constraints: const BoxConstraints.tightFor(width: 26, height: 26),
             onPressed: () {},
           ),
         ]

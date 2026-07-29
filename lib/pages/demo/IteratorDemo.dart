@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
@@ -64,14 +64,14 @@ class _IteratorDemoState extends State<IteratorDemo> {
           child: Column(
             children: [
               Text(message),
-              NButtonOld(
+              NButton(
                 onPressed: () {
                   final stream = fetchEmojis(5);
                   stream.listen(DLog.d);
                 },
                 child: Text("async* 配合 yield 生成 Stream"),
               ),
-              NButtonOld(
+              NButton(
                 onPressed: () {
                   final items = fetchEmojisNew(5);
                   DLog.d(items);

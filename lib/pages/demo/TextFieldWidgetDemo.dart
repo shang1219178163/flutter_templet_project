@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
@@ -55,11 +55,12 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
             children: [
               NSectionBox(
                 title: "NTextField",
-                child: NButtonOld.tonal(
-                  title: "取消焦点",
+                child: NButton(
+                  type: NButtonType.filledTonal,
                   onPressed: () {
                     FocusManager.instance.primaryFocus?.unfocus();
                   },
+                  child: Text("取消焦点"),
                 ),
               ),
               NSectionBox(

@@ -12,7 +12,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -93,10 +93,9 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
           ...[
             Row(
               children: [
-                NButtonOld(
-                  height: 40,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  title: "写入图像",
+                NButton(
+                  constraints: const BoxConstraints(minHeight: 40, maxHeight: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   onPressed: () async {
                     await onAssetPicker(
                       needCompress: true,
@@ -105,20 +104,20 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                       },
                     );
                   },
+                  child: Text("写入图像"),
                 ),
-                NButtonOld(
-                  height: 40,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  title: "图像缓存",
+                NButton(
+                  constraints: const BoxConstraints(minHeight: 40, maxHeight: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   onPressed: () async {
                     final directory = await AssetCacheService().getDir();
                     Get.to(() => FileBrowserPage(directory: directory, contentBuilder: fileContent));
                   },
+                  child: Text("图像缓存"),
                 ),
-                NButtonOld(
-                  height: 40,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  title: "网络图像缓存",
+                NButton(
+                  constraints: const BoxConstraints(minHeight: 40, maxHeight: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   onPressed: () async {
                     final file = await AssetCacheService().saveNetworkImage(url: AppRes.image.urls.random!);
                     final bytes = await file.readAsBytes();
@@ -130,6 +129,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                     }
                     DLog.d("image: $image");
                   },
+                  child: Text("网络图像缓存"),
                 ),
               ]
                   .map(
@@ -137,13 +137,13 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                   )
                   .toList(),
             ),
-            NButtonOld(
-              constraints: BoxConstraints(maxHeight: 35),
-              title: "DocumentsDirectory",
+            NButton(
+              constraints: const BoxConstraints(maxHeight: 35),
               onPressed: () async {
                 final directory = await getApplicationDocumentsDirectory();
                 Get.to(() => FileBrowserPage(directory: directory, contentBuilder: fileContent));
               },
+              child: Text("DocumentsDirectory"),
             ),
             buildChooseDir(),
             NFooterButtonBar(

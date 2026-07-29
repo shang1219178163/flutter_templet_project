@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/button/AppButtonTheme.dart';
 import 'package:flutter_templet_project/basicWidget/n_seed_color_box.dart';
-import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -456,9 +455,6 @@ class AppThemeService {
     );
     return [
       appTheme,
-      NButtonTheme(
-        primary: const Color(0xFF00B451),
-      ),
       NDialogTheme(
         width: 368,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

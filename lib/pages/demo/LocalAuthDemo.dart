@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/button/n_button_old.dart';
+import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
@@ -71,9 +71,9 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
         child: Column(
           children: [
             Text("$widget"),
-            NButtonOld(
-              title: "开始",
+            NButton(
               onPressed: authBiometrics,
+              child: Text("开始"),
             ),
           ],
         ),
