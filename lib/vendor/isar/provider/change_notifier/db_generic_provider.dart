@@ -21,36 +21,42 @@ class DBGenericProvider<E> extends ChangeNotifier {
   List<E> get entities => _entities;
 
   Future<void> init() async {
-    isar.txn(() async {
-      await update();
+    await isar.txn(() async {
+      await notify();
     });
   }
 
-  /// 查
-  Future<void> update() async {
+  /// 从数据库重新加载并通知监听者
+  Future<void> notify() async {
     await findEntities();
     notifyListeners();
   }
 
+  /// 兼容页面调用；语义同 [notify]
+  Future<void> update() => notify();
+
   /// 查
   ///
   /// filterCb 为空,返回所有实体
-  Future<List<E>> findEntities(
-      {Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb}) async {
+  Future<List<E>> findEntities({
+    Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb,
+  }) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
     final items = await filterCb?.call(filters) ?? await collections.where().findAll();
-    _entities.clear();
-    _entities.addAll(items);
+    _entities
+      ..clear()
+      ..addAll(items);
     return _entities;
   }
 
   /// 寻找第一个
-  Future<E?> findEntity({required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb}) async {
+  Future<E?> findEntity({
+    required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb,
+  }) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
-    final item = await filterCb(filters);
-    return item;
+    return filterCb(filters);
   }
 
   /// 增/改
@@ -58,7 +64,7 @@ class DBGenericProvider<E> extends ChangeNotifier {
     await isar.writeTxn(() async {
       await isar.collection<E>().putAll(list);
     });
-    await update();
+    await notify();
   }
 
   /// 增/改
@@ -72,7 +78,7 @@ class DBGenericProvider<E> extends ChangeNotifier {
       final count = await isar.collection<E>().deleteAll(ids);
       debugPrint('$this deleted $count');
     });
-    await update();
+    await notify();
   }
 
   /// 删
@@ -85,7 +91,7 @@ class DBGenericProvider<E> extends ChangeNotifier {
     await isar.writeTxn(() async {
       await isar.collection<E>().clear();
     });
-    await update();
+    await notify();
   }
 
   /// 模型字段更新

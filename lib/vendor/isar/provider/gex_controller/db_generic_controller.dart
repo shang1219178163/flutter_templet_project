@@ -23,17 +23,23 @@ class DBGenericController<E> extends GetxController {
 
   Future<void> init() async {
     await isar.txn(() async {
-      await update();
+      await notify();
     });
   }
 
-  /// 查
-  @override
-  Future<void> update([List<Object>? ids, bool condition = true]) async {
+  /// 从数据库重新加载并通知 GetBuilder
+  Future<void> notify() async {
     if (!DBManager.isControllerRegistered<E>()) {
       return;
     }
-    super.update(ids, condition);
+    await findEntities();
+    super.update();
+  }
+
+  /// 兼容页面/CRUD 调用；语义为刷新列表（查库 + 通知）
+  @override
+  Future<void> update([List<Object>? ids, bool condition = true]) async {
+    await notify();
   }
 
   /// 查
@@ -45,8 +51,9 @@ class DBGenericController<E> extends GetxController {
     final collections = isar.collection<E>();
     final filters = collections.filter();
     final items = await filterCb?.call(filters) ?? await collections.where().findAll();
-    _entities.clear();
-    _entities.addAll(items);
+    _entities
+      ..clear()
+      ..addAll(items);
     return _entities;
   }
 
@@ -65,7 +72,7 @@ class DBGenericController<E> extends GetxController {
     await isar.writeTxn(() async {
       await isar.collection<E>().putAll(list);
     });
-    await update();
+    await notify();
   }
 
   /// 增/改
@@ -93,7 +100,7 @@ class DBGenericController<E> extends GetxController {
       final count = await isar.collection<E>().deleteAll(ids);
       debugPrint('$this deleted $count');
     });
-    await update();
+    await notify();
   }
 
   /// 删
@@ -106,8 +113,8 @@ class DBGenericController<E> extends GetxController {
     required Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb,
     required int Function(E e) idCb,
   }) async {
-    final entitys = await findEntities(filterCb: filterCb);
-    final ids = entitys.map((e) => idCb(e)).toList();
+    final entities = await findEntities(filterCb: filterCb);
+    final ids = entities.map((e) => idCb(e)).toList();
     await deleteAll(ids);
   }
 
@@ -116,7 +123,7 @@ class DBGenericController<E> extends GetxController {
     await isar.writeTxn(() async {
       await isar.collection<E>().clear();
     });
-    await update();
+    await notify();
   }
 
   /// 模型字段更新
