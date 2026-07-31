@@ -1,5 +1,6 @@
 {
-  "dart.flutterSdkPath": ".fvm/versions/3.27.0",
+  "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  "debug.toolBarLocation": "floating",
   "cSpell.ignoreWords": [
     "LTWH",
     "raduis",

@@ -308,7 +308,6 @@ import 'package:flutter_templet_project/pages/demo/ShowSearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliverMainAxisGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliverMainAxisGroupDemoOne.dart';
-import 'package:flutter_templet_project/pages/demo/SnackBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/SplitViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
@@ -521,7 +520,6 @@ class AppRouter {
   static const String pageViewDemoThree = '/pageViewDemoThree';
 
   static const String snackBarDemo = '/SnackBarDemo';
-  static const String snackBarDemoOne = '/SnackBarDemoOne';
   static const String cupertinoTabScaffoldDemo = '/CupertinoTabScaffoldDemo';
   static const String pickerDemo = '/PickerDemo';
   static const String datePickerDemo = '/datePickerDemo';
@@ -1169,10 +1167,6 @@ class AppRouter {
     GetPage(
       name: AppRouter.snackBarDemo,
       page: () => SnackBarDemo(),
-    ),
-    GetPage(
-      name: AppRouter.snackBarDemoOne,
-      page: () => SnackBarDemoOne(),
     ),
     GetPage(
       name: AppRouter.cupertinoTabScaffoldDemo,

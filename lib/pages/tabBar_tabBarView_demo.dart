@@ -342,7 +342,6 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.segmentedControlDemoOne, "segmentControlDemoOne"),
   Tuple2(AppRouter.segmentedButtonDemo, "SegmentedButtonDemo"),
   Tuple2(AppRouter.snackBarDemo, "SnackBar"),
-  Tuple2(AppRouter.snackBarDemoOne, "SnackBar封装"),
   Tuple2(AppRouter.sliderDemo, "sliderDemo"),
   Tuple2(AppRouter.stepperDemo, "stepperDemo"),
   Tuple2(AppRouter.slidableDemo, "SlidableDemo"),

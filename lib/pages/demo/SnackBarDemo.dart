@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -25,78 +23,107 @@ class SnackBarDemo extends StatefulWidget {
 class SnackBarDemoState extends State<SnackBarDemo> {
   GlobalKey globalKey = GlobalKey();
 
-  final _globalKey = GlobalKey<ScaffoldMessengerState>();
+  /// 页面级 Messenger。
+  /// State.context 在本节点之上，`ScaffoldMessenger.of(context)` 仍会命中 MaterialApp 全局，
+  /// 展示 / 清除 Banner 必须走这个 key。
+  final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   var behavior = SnackBarBehavior.floating;
 
   SnackbarController? snackbarController;
+
+  bool _isLeaving = false;
+
+  /// MaterialBanner 收起动画时长
+  static const _bannerDismissDuration = Duration(milliseconds: 250);
 
   late final footerItems = [
     (title: "one", action: onOne),
     (title: "two", action: onToggle),
   ];
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    debugPrint("dispose");
-    super.dispose();
-  }
+  ScaffoldMessengerState? get _pageMessenger => _scaffoldMessengerKey.currentState;
 
-  @override
-  void initState() {
-    super.initState();
+  /// 先收起页面 Banner，再 pop 路由
+  Future<void> _popAfterDismissBanner([Object? result]) async {
+    if (_isLeaving) {
+      return;
+    }
+    _isLeaving = true;
+
+    final messenger = _pageMessenger;
+    if (messenger != null) {
+      messenger.hideCurrentMaterialBanner();
+      await Future<void>.delayed(_bannerDismissDuration);
+      if (!mounted) {
+        return;
+      }
+      messenger.clearMaterialBanners();
+      messenger.clearSnackBars();
+    }
+    SnackUtil.clear();
+
+    if (!mounted) {
+      return;
+    }
+    Navigator.of(context).pop(result);
   }
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final primary = themeData.colorScheme.primary;
-    final isDark = themeData.brightness == Brightness.dark;
     return PopScope(
+      canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
-          Future.delayed(const Duration(milliseconds: 100), SnackUtil.clear);
-          debugPrint("PopScope");
+          return;
         }
+        _popAfterDismissBanner(result);
       },
-      child: Scaffold(
-        persistentFooterButtons:
-            footerItems.map((e) => FilledButton(onPressed: e.action, child: Text(e.title))).toList(),
-        bottomSheet: Container(
-          height: 100,
-          color: primary,
-          alignment: Alignment.center,
-          child: Text("bottomSheet"),
-        ),
-        appBar: AppBar(
-          title: Text('SnackBar'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                behavior = behavior == SnackBarBehavior.floating ? SnackBarBehavior.fixed : SnackBarBehavior.floating;
-                setState(() {});
-              },
-              icon: Icon(Icons.all_inclusive),
+      child: ScaffoldMessenger(
+        key: _scaffoldMessengerKey,
+        child: Scaffold(
+          persistentFooterButtons:
+              footerItems.map((e) => FilledButton(onPressed: e.action, child: Text(e.title))).toList(),
+          bottomSheet: Container(
+            height: 100,
+            color: primary,
+            alignment: Alignment.center,
+            child: Text("bottomSheet"),
+          ),
+          appBar: AppBar(
+            title: Text('SnackBar'),
+            leading: IconButton(
+              icon: const BackButtonIcon(),
+              tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+              onPressed: () => _popAfterDismissBanner(),
             ),
-            IconButton(
-              onPressed: () {
-                showMaterialBannerNew();
-              },
-              icon: Icon(Icons.change_circle),
-            ),
-          ],
+            actions: [
+              IconButton(
+                onPressed: () {
+                  DLog.d("Icons.all_inclusive");
+                },
+                icon: Icon(Icons.all_inclusive),
+              ),
+              IconButton(
+                onPressed: () {
+                  DLog.d("Icons.change_circle");
+                },
+                icon: Icon(Icons.change_circle),
+              ),
+            ],
+          ),
+          body: buildBody(),
         ),
-        body: buildBody(),
       ),
     );
   }
 
   void onOne() {
     snackbarController = Get.snackbar(
-      "Get.snackbar", 100.generateChars(),
-      // overlayColor: Colors.white,
-      // overlayBlur: 0,
+      "Get.snackbar",
+      100.generateChars(),
       backgroundColor: Colors.white,
       duration: Duration(milliseconds: 1),
       onTap: (snack) {
@@ -115,7 +142,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     }
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Builder(builder: (BuildContext context) {
       return RepaintBoundary(
         key: globalKey,
@@ -125,37 +152,30 @@ class SnackBarDemoState extends State<SnackBarDemo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(),
-              _buildItem(
-                text: '显示SnackBar, 不覆盖',
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(buildSnackBar(behavior: behavior));
-                },
-              ),
+              ...SnackBarBehavior.values.map((e) {
+                final name = e.name.split(".").last;
+                return OutlinedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(buildSnackBar(behavior: behavior));
+                  },
+                  child: Text(name),
+                );
+              }),
               NDashLine(
                 color: Colors.red,
               ),
-              _buildItem(
-                text: '显示SnackBar, 覆盖 isCenter',
+              OutlinedButton(
+                child: Text('显示断网SnackBar, 覆盖'),
                 onPressed: () {
                   ScaffoldMessenger.of(context)
                     ..clearSnackBars()
-                    ..showSnackBar(buildSnackBar(behavior: behavior, isCenter: true));
+                    ..showSnackBar(buildSnackBarOffline());
                 },
               ),
-              _buildItem(
-                text: '显示SnackBar, 覆盖',
+              OutlinedButton(
+                child: Text('显示 MaterialBanner'),
                 onPressed: () {
-                  ScaffoldMessenger.of(context)
-                    ..clearSnackBars()
-                    ..showSnackBar(buildSnackBar(behavior: behavior));
-                },
-              ),
-              _buildItem(
-                text: '显示断网SnackBar, 覆盖',
-                onPressed: () {
-                  ScaffoldMessenger.of(context)
-                    ..clearSnackBars()
-                    ..showSnackBar(buildSnackBar2());
+                  showMaterialBanner();
                 },
               ),
               Spacer(),
@@ -166,33 +186,11 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     });
   }
 
-  _buildItem({required String text, required VoidCallback onPressed}) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Text(text),
-    );
-  }
-
-  // SnackBar buildFlushbar(BuildContext context) {
-  //   return Flushbar(
-  //     flushbarPosition: FlushbarPosition.TOP,
-  //     message:
-  //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-  //     duration: Duration(seconds: 3),
-  //   )..show(context);
-  // }
-
   SnackBar buildSnackBar({
     bool isCenter = false,
     SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
     Widget child = Container(
-      // color: Colors.white,
-      // decoration: BoxDecoration(color: Colors.red,
-      //     border: Border.all(width: 2.0, color: Colors.black),
-      //     borderRadius: BorderRadius.circular(20)),
-      // width: 300,
-      // height: 300,
       margin: EdgeInsets.all(0),
       padding: EdgeInsets.all(10),
       child: Text(kUpdateContent),
@@ -207,16 +205,12 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     return SnackBar(
       content: child,
       padding: EdgeInsets.only(left: 13, right: 13),
-      // backgroundColor: Colors.green,
       elevation: 1000,
       behavior: behavior,
-      // shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.all(Radius.circular(50))
-      // ),
     );
   }
 
-  SnackBar buildSnackBar2() {
+  SnackBar buildSnackBarOffline() {
     return SnackBar(
       onVisible: () {
         debugPrint("显示SnackBar");
@@ -226,25 +220,22 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       backgroundColor: Colors.orange,
       content: Text('断网了？'),
       action: SnackBarAction(
-        ///配置action的字体颜色为绿色
         textColor: Colors.green,
         label: '点击重试',
         onPressed: () {
-          //执行相关逻辑
           debugPrint('点击重试');
         },
       ),
-      // margin: EdgeInsets.only(
-      //     bottom: MediaQuery.of(context).size.height - 100,
-      //     right: 20,
-      //     left: 20),
     );
   }
 
-  /// 顶部 MaterialBanner
-  void showMaterialBannerNew() {
+  /// 顶部 MaterialBanner（必须走页面级 key）
+  void showMaterialBanner() {
+    final messenger = _pageMessenger;
+    if (messenger == null) {
+      return;
+    }
     final nowStr = "${DateTime.now()}".split(".").first;
-    final messenger = ScaffoldMessenger.of(context);
 
     final banner = MaterialBanner(
       content: InkWell(
@@ -262,6 +253,8 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         ),
       ],
     );
-    messenger.showMaterialBanner(banner);
+    messenger
+      ..clearMaterialBanners()
+      ..showMaterialBanner(banner);
   }
 }
