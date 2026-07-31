@@ -57,7 +57,11 @@ extension SnackBarExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 展示 SnackBar
-  void showSnackBar(SnackBar snackBar, {bool isClear = false, bool isReplace = false}) {
+  void showSnackBar(
+    SnackBar snackBar, {
+    bool isClear = false,
+    bool isReplace = false,
+  }) {
     if (isClear) {
       scaffoldMessenger.clearSnackBars();
       _snackBars.clear();
