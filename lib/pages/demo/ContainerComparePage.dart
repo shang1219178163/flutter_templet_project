@@ -125,14 +125,14 @@ class _ContainerComparePageState extends State<ContainerComparePage> {
   }
 
   BoxDecoration get decoration => BoxDecoration(
-        color: Colors.purple.shade50,
-        borderRadius: enableBorderRadius ? BorderRadius.circular(16) : null,
+        color: Colors.yellow,
+        borderRadius: enableBorderRadius ? BorderRadius.circular(8) : null,
         border: Border.all(color: Colors.blue, width: 2),
       );
 
   BoxDecoration get foregroundDecoration => BoxDecoration(
-        color: Colors.green.withValues(alpha: 0.35),
-        borderRadius: enableBorderRadius ? BorderRadius.circular(24) : null,
+        color: Colors.green.withValues(alpha: 0.5),
+        borderRadius: enableBorderRadius ? BorderRadius.circular(50) : null,
         border: Border.all(color: Colors.green.shade700),
         image: const DecorationImage(
           image: AssetImage(Assets.imagesBgJiguang),
@@ -171,9 +171,7 @@ class _ContainerComparePageState extends State<ContainerComparePage> {
                 title: 'decoration.borderRadius',
                 subtitle: 'Radius.circular(16) — 只画圆角，不裁剪子项',
                 value: enableBorderRadius,
-                onChanged: enableDecoration
-                    ? (v) => setState(() => enableBorderRadius = v)
-                    : null,
+                onChanged: enableDecoration ? (v) => setState(() => enableBorderRadius = v) : null,
               ),
               switchTile(
                 title: 'foregroundDecoration',
