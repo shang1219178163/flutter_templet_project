@@ -17,9 +17,9 @@ import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_categor
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_status_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/model/ShopGoodsDetailModel.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_tags.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:provider/provider.dart';
 
 /// 商品购买弹窗内容组件
@@ -46,7 +46,7 @@ class GoodsDetailPopup extends StatefulWidget {
   }) {
     // DLog.d(model.toJson());
     return NOverlayDialog.sheet(
-      context ?? AppService.globalContext,
+      context ?? AppService.currentContext,
       child: NPopupAdaptiveContainer(
         // maxHeight: 300,
         // isScrollControlled: true,
@@ -58,7 +58,7 @@ class GoodsDetailPopup extends StatefulWidget {
       ),
     );
     // return BottomSheetUtil.show(
-    //   context: AppService.globalContext,
+    //   context: AppService.currentContext,
     //   child: GoodsDetailPopup(
     //     categoryEnum: categoryEnum,
     //     model: model,
@@ -69,7 +69,7 @@ class GoodsDetailPopup extends StatefulWidget {
 
   static void dismiss() {
     NOverlayDialog.dismiss();
-    // Navigator.of(AppService.globalContext).pop();
+    // Navigator.of(AppService.currentContext).pop();
   }
 
   @override

@@ -15,10 +15,10 @@ import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dar
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:provider/provider.dart';
 
 /// 键盘辅助视图会话状态，避免 Overlay 重建时丢失已选图片
@@ -212,7 +212,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
     await WidgetsBinding.instance.endOfFrame;
     try {
       final pickedModels = await AssetPickerManager.pickAssets(
-        context: AppService.globalContext,
+        context: AppService.currentContext,
         currentModels: accessorySession.selectedModels,
         maxCount: maxCount,
       );

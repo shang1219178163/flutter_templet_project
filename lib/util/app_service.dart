@@ -25,12 +25,12 @@ class AppService {
   static NavigatorState get navigator => navigatorKey.currentState!;
 
   // 全局获取context
-  static get globalContext => navigatorKey.currentState!.overlay!.context;
+  static get currentContext => navigatorKey.currentState!.overlay!.context;
 
   // 移除输入框焦点
   static void unfocus() {
     // SystemChannels.textInput.invokeMethod('TextInput.hide');
-    FocusScope.of(globalContext).unfocus();
+    FocusScope.of(currentContext).unfocus();
     FocusManager.instance.primaryFocus?.unfocus(); //（flutter 框架本身持有一个焦点，需要手动失焦）。
   }
 
@@ -49,7 +49,7 @@ class AppService {
       openLaunchUrl(path); // 安卓
     } else {
       Navigator.push(
-        globalContext,
+        currentContext,
         MaterialPageRoute(builder: (context) {
           if (path.startsWith("http")) {
             return WebviewFilePreviewPage(
@@ -66,7 +66,7 @@ class AppService {
   // 隐私协议等webview
   static void webPreview(String url, {String title = ""}) {
     Navigator.push(
-      globalContext,
+      currentContext,
       MaterialPageRoute(
         builder: (context) => NWebViewPage(
           url: url,
@@ -78,9 +78,9 @@ class AppService {
 
   // 查看大图
   static void imagePreview(List<String> urls, int index) {
-    FocusScope.of(globalContext).unfocus();
+    FocusScope.of(currentContext).unfocus();
     Navigator.push(
-      globalContext,
+      currentContext,
       NFadePageRoute(
         builder: (context) => NImagePreview(
           urls: urls,
