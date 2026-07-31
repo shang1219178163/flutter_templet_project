@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
-/// 全局 SnackBar 工具（通过 [AppService.navigatorKey] 无需页面 BuildContext）
+/// 全局 SnackBar 工具（通过注册的 Navigator context 展示，无需页面 BuildContext）
 class SnackUtil {
   SnackUtil._();
 
-  static BuildContext? get currentContext => AppService.navigatorKey.currentContext;
+  static BuildContext? _context;
 
-  static ScaffoldMessengerState? get _currentState =>
-      currentContext == null ? null : ScaffoldMessenger.of(currentContext!);
+  /// 注册全局 context，例如：
+  /// `SnackUtil.register(AppService.navigatorKey.currentContext);`
+  static void register(BuildContext? context) {
+    _context = context;
+  }
+
+  static ScaffoldMessengerState? get _currentState {
+    return _context == null ? null : ScaffoldMessenger.maybeOf(_context!);
+  }
 
   static final List<SnackBar> _snackBars = <SnackBar>[];
 
@@ -19,9 +25,8 @@ class SnackUtil {
   /// 当前主题配色。
   /// 应取 Theme **之下** 的 Navigator context，或 [AppThemeService]。
   static ColorScheme get _colorScheme {
-    final navContext = AppService.navigatorKey.currentContext;
-    if (navContext != null) {
-      return Theme.of(navContext).colorScheme;
+    if (_context != null) {
+      return Theme.of(_context!).colorScheme;
     }
     final theme = AppThemeService();
     return theme.buildColorScheme(theme.brightness);

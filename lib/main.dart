@@ -32,6 +32,7 @@ import 'package:flutter_templet_project/util/AppImagePreloader.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
@@ -106,6 +107,7 @@ Future<void> main() async {
     initServices(),
     initDebugInfo(),
   ]);
+
 
   // AppInit.catchException(() => runApp(MyApp()));
   runApp(
@@ -189,10 +191,21 @@ Future<void> initDebugInfo() async {
   // debugPaintPointersEnabled = true; // 启用点击区域可视化
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your aptplication.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      SnackUtil.register(AppService.navigatorKey.currentContext);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
