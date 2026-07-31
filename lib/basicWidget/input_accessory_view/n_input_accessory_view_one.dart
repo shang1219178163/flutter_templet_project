@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:provider/provider.dart';
 
 /// 键盘辅助视图会话状态，避免 Overlay 重建时丢失已选图片
@@ -189,7 +189,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
       return;
     }
     NScreenManager.addListener(_onKeyboardMetricsChanged);
-    final contextNew = context ?? ToolUtil.navigator.context;
+    final contextNew = context ?? AppService.navigator.context;
     accessorySession.isShowing = true;
     NOverlayDialog.show(
       contextNew,
@@ -212,7 +212,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
     await WidgetsBinding.instance.endOfFrame;
     try {
       final pickedModels = await AssetPickerManager.pickAssets(
-        context: ToolUtil.globalContext,
+        context: AppService.globalContext,
         currentModels: accessorySession.selectedModels,
         maxCount: maxCount,
       );

@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dar
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:get/get.dart';
 
 class OverlayDemo extends StatefulWidget {
@@ -397,8 +397,8 @@ class _OverlayDemoState extends State<OverlayDemo> {
   }
 
   onPressed() {
-    final context = ToolUtil.navigatorKey.currentState!.context;
-    final context1 = ToolUtil.navigatorKey.currentState!.overlay!.context;
+    final context = AppService.navigatorKey.currentState!.context;
+    final context1 = AppService.navigatorKey.currentState!.overlay!.context;
     debugPrint("context: ${context == context1}");
 
     Get.to(() => OverlayDemoOne());

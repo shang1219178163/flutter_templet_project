@@ -13,8 +13,8 @@ import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/file_picker_mixin.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 /// 上传文档组件(基于 file_picker)
@@ -157,7 +157,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with Fil
                     }
                     final fileName = e.url?.split("/").last ?? "";
                     final filUrl = e.url ?? "";
-                    ToolUtil.filePreview(fileName, filUrl);
+                    AppService.filePreview(fileName, filUrl);
                   },
                   child: AssetUploadDocumentButton(
                     model: e,
@@ -186,7 +186,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with Fil
           if (items.length < maxCount && widget.hasPlaceholder)
             InkWell(
               onTap: () async {
-                ToolUtil.removeInputFocus();
+                AppService.unfocus();
                 if (!canEdit) {
                   debugPrint("无图片编辑权限");
                   return;

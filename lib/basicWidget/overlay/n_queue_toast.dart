@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 
 /// 队列 Toast 动画
 class NQueueToast {
-  static final GlobalKey navigatorKey = ToolUtil.navigatorKey;
+  static final GlobalKey navigatorKey = AppService.navigatorKey;
 
   /// 监听列表
   static final List<bool Function(String? routeName, Map<String, dynamic> v)> _listeners = [];

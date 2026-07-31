@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/pages/demo/point_shop/model/ShopGoodsDet
 import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_tags.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:provider/provider.dart';
 
 /// 商品购买弹窗内容组件
@@ -46,7 +46,7 @@ class GoodsDetailPopup extends StatefulWidget {
   }) {
     // DLog.d(model.toJson());
     return NOverlayDialog.sheet(
-      context ?? ToolUtil.globalContext,
+      context ?? AppService.globalContext,
       child: NPopupAdaptiveContainer(
         // maxHeight: 300,
         // isScrollControlled: true,
@@ -58,7 +58,7 @@ class GoodsDetailPopup extends StatefulWidget {
       ),
     );
     // return BottomSheetUtil.show(
-    //   context: ToolUtil.globalContext,
+    //   context: AppService.globalContext,
     //   child: GoodsDetailPopup(
     //     categoryEnum: categoryEnum,
     //     model: model,
@@ -69,7 +69,7 @@ class GoodsDetailPopup extends StatefulWidget {
 
   static void dismiss() {
     NOverlayDialog.dismiss();
-    // Navigator.of(ToolUtil.globalContext).pop();
+    // Navigator.of(AppService.globalContext).pop();
   }
 
   @override

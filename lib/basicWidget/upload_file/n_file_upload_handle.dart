@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_mo
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +48,7 @@ class NFileUploadHandle {
       switch (model.url!.fileType) {
         case NFileType.image:
           {
-            ToolUtil.imagePreview([model.url!], 0);
+            AppService.imagePreview([model.url!], 0);
           }
         case NFileType.video:
           {
@@ -75,7 +75,7 @@ class NFileUploadHandle {
             }
             final fileName = model.url?.split("/").last ?? "";
             final filUrl = model.url ?? "";
-            ToolUtil.filePreview(fileName, filUrl);
+            AppService.filePreview(fileName, filUrl);
           }
           break;
         default:

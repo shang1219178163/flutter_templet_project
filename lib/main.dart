@@ -29,11 +29,11 @@ import 'package:flutter_templet_project/service/click_track.dart';
 // import 'package:http_proxy/http_proxy.dart';
 import 'package:flutter_templet_project/service/tap_track.dart';
 import 'package:flutter_templet_project/util/AppImagePreloader.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
@@ -201,7 +201,7 @@ class MyApp extends StatelessWidget {
 
     final app = GetMaterialApp(
       popGesture: true, //swipe back
-      navigatorKey: ToolUtil.navigatorKey,
+      navigatorKey: AppService.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBinding(),

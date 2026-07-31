@@ -12,21 +12,39 @@ import 'package:get/get.dart';
 final List<Widget> _snackBars = [];
 
 extension SnackBarExt<T extends StatefulWidget> on State<T> {
+  /// 显示 SnackBar。
+  static void show(
+    BuildContext context, {
+    required String message,
+    TextStyle? style,
+    Duration duration = const Duration(milliseconds: 1500),
+    Color? backgroundColor,
+    SnackBarAction? action,
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message, style: style),
+        duration: duration,
+        backgroundColor: backgroundColor,
+        action: action,
+      ),
+    );
+  }
+
   /// ScaffoldMessengerState
-  ScaffoldMessengerState get scaffoldMessenger =>
-      ScaffoldMessenger.of(Get.context ?? context);
+  ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(Get.context ?? context);
 
   /// 当前 snackBar 堆栈
   List<Widget> get snackBars => _snackBars;
 
   /// 清除 SnackBar
-  clearSnackBars() {
+  void clearSnackBars() {
     scaffoldMessenger.clearSnackBars();
     _snackBars.clear();
   }
 
   /// 隐藏 SnackBar
-  hideSnackBar({bool isClear = false}) {
+  void hideSnackBar({bool isClear = false}) {
     if (isClear) {
       scaffoldMessenger.clearSnackBars();
       _snackBars.clear();
@@ -39,11 +57,7 @@ extension SnackBarExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 展示 SnackBar
-  showSnackBar(
-    SnackBar snackBar, {
-    bool isClear = false,
-    bool isReplace = false,
-  }) {
+  void showSnackBar(SnackBar snackBar, {bool isClear = false, bool isReplace = false}) {
     if (isClear) {
       scaffoldMessenger.clearSnackBars();
       _snackBars.clear();
@@ -58,7 +72,7 @@ extension SnackBarExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 隐藏 MaterialBanner
-  hideMaterialBanner({bool isClear = false}) {
+  void hideMaterialBanner({bool isClear = false}) {
     if (isClear) {
       scaffoldMessenger.clearMaterialBanners();
       _snackBars.clear();
@@ -69,19 +83,19 @@ extension SnackBarExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 清除 MaterialBanner
-  clearMaterialBanners() {
+  void clearMaterialBanners() {
     scaffoldMessenger.clearMaterialBanners();
     _snackBars.clear();
   }
 
   /// 清除 MaterialBanner 无动画
-  removeCurrentMaterialBanner() {
+  void removeCurrentMaterialBanner() {
     scaffoldMessenger.removeCurrentMaterialBanner();
     _snackBars.removeLast();
   }
 
   /// 展示 MaterialBanner
-  showMaterialBanner(
+  void showMaterialBanner(
     MaterialBanner banner, {
     bool isClear = false,
     bool isReplace = false,

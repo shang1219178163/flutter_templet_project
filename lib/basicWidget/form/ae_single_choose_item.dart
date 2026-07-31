@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
@@ -139,7 +139,7 @@ class AeSingleChooseItem<T> extends StatelessWidget {
       ToastUtil.show('暂无数据');
       return;
     }
-    ToolUtil.removeInputFocus();
+    AppService.unfocus();
     FlutterPickerUtil.showSinglePicker(
       title: '请选择${title ?? ""}',
       dataList: dataList.map((e) => convertCb(e)).toList(),

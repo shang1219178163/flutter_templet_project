@@ -9,7 +9,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 
 /// Overlay 管理器
 @Deprecated("已弃用,请使用 NOverlayDialog")
@@ -81,7 +81,7 @@ class NOverlayManager {
     WidgetBuilder? builder,
   }) {
     NOverlayManager.show(
-      context ?? ToolUtil.navigator.context,
+      context ?? AppService.navigator.context,
       builder: builder ??
           (_) {
             return NOverlayContent(

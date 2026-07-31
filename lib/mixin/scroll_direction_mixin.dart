@@ -55,5 +55,6 @@ mixin ScrollDirectionMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// 滚动方向改变回调
-  late ValueChanged<ScrollNotification> onScrollDirectionChanged;
+  late ValueChanged<ScrollNotification> onScrollDirectionChanged = throw UnimplementedError("❌$Widget 未实现 "
+      "onScrollDirectionChanged");
 }

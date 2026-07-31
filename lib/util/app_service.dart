@@ -1,5 +1,5 @@
 //
-//  ToolUtil.dart
+//  AppService.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2024/6/21 21:31.
@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/vendor/file_preview/webview_file_preview
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ToolUtil {
+class AppService {
   // 创建一个全局的GlobalKey
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -28,7 +28,7 @@ class ToolUtil {
   static get globalContext => navigatorKey.currentState!.overlay!.context;
 
   // 移除输入框焦点
-  static void removeInputFocus() {
+  static void unfocus() {
     // SystemChannels.textInput.invokeMethod('TextInput.hide');
     FocusScope.of(globalContext).unfocus();
     FocusManager.instance.primaryFocus?.unfocus(); //（flutter 框架本身持有一个焦点，需要手动失焦）。

@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -266,7 +266,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
     required List<String> allowedExtensions,
     required FutureOr<bool> Function() onPermission,
   }) async {
-    ToolUtil.removeInputFocus();
+    AppService.removeInputFocus();
     if (!widget.canEdit) {
       debugPrint("无编辑权限");
       return;
@@ -334,7 +334,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
             final index = urls.indexOf(model.url ?? "");
             // debugPrint("urls: ${urls.length}, $index");
             FocusScope.of(context).unfocus();
-            ToolUtil.imagePreview(urls, index);
+            AppService.imagePreview(urls, index);
           }
         case NFileType.video:
           {
@@ -355,7 +355,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           break;
         case NFileType.document:
           {
-            // ToolUtil.webViewPreview(model.url ?? "", title: fileName ?? "");
+            // AppService.webViewPreview(model.url ?? "", title: fileName ?? "");
 
             if (model.url?.startsWith("http") != true) {
               ToastUtil.show("文件链接失效");
@@ -363,7 +363,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
             }
             final fileName = model.url?.split("/").last ?? "";
             final filUrl = model.url ?? "";
-            ToolUtil.filePreview(fileName, filUrl);
+            AppService.filePreview(fileName, filUrl);
           }
           break;
         default:

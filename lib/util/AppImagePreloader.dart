@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 
 /// 全局图片缓存配置mixin
 mixin AppImageCacheMixin {
@@ -35,7 +35,7 @@ mixin AppImageCacheMixin {
 class AppImagePreloader with AppImageCacheMixin {
   AppImagePreloader._();
 
-  static BuildContext get context => ToolUtil.globalContext!;
+  static BuildContext get context => AppService.globalContext!;
 
   static bool initialized = false;
 

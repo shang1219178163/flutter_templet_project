@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_button.d
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
@@ -102,7 +102,7 @@ class AssetUploadBox extends StatefulWidget {
     required List<String> urls,
     required int index,
   }) async {
-    final contextNew = context ?? ToolUtil.navigator.context;
+    final contextNew = context ?? AppService.navigator.context;
     FocusScope.of(contextNew).unfocus();
     await Navigator.push(
       contextNew,

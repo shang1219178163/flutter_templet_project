@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 
 /// AE 地址组件
@@ -135,7 +135,7 @@ class AeAddressChooseItem extends StatelessWidget {
       return;
     }
 
-    ToolUtil.removeInputFocus();
+    AppService.unfocus();
     FlutterPickerUtil.showAddressPicker(
       title: '请选择${title ?? ""}',
       initTown: "",

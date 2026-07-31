@@ -211,7 +211,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     required List<String> urls,
     required int index,
   }) {
-    // ToolUtil.imagePreview(urls, index);
+    // AppService.imagePreview(urls, index);
     FocusScope.of(context).unfocus();
     Navigator.push(
       context,
