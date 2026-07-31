@@ -18,7 +18,6 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ApiCreateConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ApiParamsConvert.dart';
@@ -29,6 +28,7 @@ import 'package:flutter_templet_project/pages/demo/convert/SizeFilterConvert.dar
 import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
@@ -441,14 +441,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   onDownload() async {
     final model = await onConvert(content: transformController.input);
     if (model == null) {
-      showSnackBar(const SnackBar(
-        content: NText(
-          "文件转换失败",
-          color: Colors.red,
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: AppColor.fontColor333333,
-      ));
+      SnackUtil.error("文件转换失败");
       return;
     }
     await onCreateFile(name: model.name, content: model.contentNew ?? "");

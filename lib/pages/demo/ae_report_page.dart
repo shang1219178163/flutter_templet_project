@@ -27,9 +27,9 @@ import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload
 import 'package:flutter_templet_project/enum/ActivityType.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:get/get.dart';
 
@@ -155,7 +155,7 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          AppService.removeInputFocus(); // 触摸收起键盘
+          AppService.unfocus(); // 触摸收起键盘
         },
         child: buildBody(),
       ),
@@ -540,7 +540,7 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
 
   /// 编辑
   Future<void> onCancel() async {
-    AppService.removeInputFocus();
+    AppService.unfocus();
 
     readOnly = false;
     title = "不良事件编辑";
@@ -548,7 +548,7 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   }
 
   Future<void> onSubmit(String btnTitle) async {
-    AppService.removeInputFocus();
+    AppService.unfocus();
   }
 }
 

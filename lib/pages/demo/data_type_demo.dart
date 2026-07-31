@@ -18,6 +18,7 @@ import 'package:flutter_templet_project/model/NPerson.dart';
 import 'package:flutter_templet_project/util/Codable.dart';
 import 'package:flutter_templet_project/util/Singleton.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -266,7 +267,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     DLog.d(aa.toStringAsFixed(2));
     DLog.d(aa.toStringAsPrecision(2));
 
-    showSnackBar(SnackBar(content: Text(d2)));
+    SnackUtil.show(d2);
 
     var j = 0; //第n次匹配
     String pigLatin(String words) => words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false), (Match m) {

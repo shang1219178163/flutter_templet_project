@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
-/// 全局 SnackBar 工具（通过 [scaffoldKey] 无需页面 BuildContext）
+/// 全局 SnackBar 工具（通过 [AppService.navigatorKey] 无需页面 BuildContext）
 class SnackUtil {
   SnackUtil._();
 
-  /// 挂到 [MaterialApp.router.scaffoldMessengerKey]
-  static final GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  static BuildContext? get currentContext => AppService.navigatorKey.currentContext;
+
+  static ScaffoldMessengerState? get _currentState =>
+      currentContext == null ? null : ScaffoldMessenger.of(currentContext!);
 
   static final List<SnackBar> _snackBars = <SnackBar>[];
 
   /// 当前已展示 / 排队中的 SnackBar（只读）
   static List<SnackBar> get snackBars => List<SnackBar>.unmodifiable(_snackBars);
-
-  static ScaffoldMessengerState? get _currentState => scaffoldKey.currentState;
 
   /// 当前主题配色。
   /// 应取 Theme **之下** 的 Navigator context，或 [AppThemeService]。
@@ -27,11 +27,8 @@ class SnackUtil {
     return theme.buildColorScheme(theme.brightness);
   }
 
-  /// 移除尚未消失的旧弹窗
+  /// 清除全部 SnackBar
   static void clear() {
-    if (_snackBars.isEmpty) {
-      return;
-    }
     _currentState?.clearSnackBars();
     _snackBars.clear();
   }
@@ -128,18 +125,5 @@ class SnackUtil {
     controller.closed.then((_) {
       _snackBars.remove(snackBar);
     });
-  }
-
-  /// 隐藏当前 SnackBar
-  static void hide({bool clear = false}) {
-    if (clear) {
-      _currentState?.clearSnackBars();
-      _snackBars.clear();
-      return;
-    }
-    _currentState?.hideCurrentSnackBar();
-    if (_snackBars.isNotEmpty) {
-      _snackBars.removeLast();
-    }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 
 class AnimatedListSample extends StatefulWidget {
   const AnimatedListSample({Key? key}) : super(key: key);
@@ -98,8 +98,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
   }
 
   showToast(String msg) {
-    final snack = SnackBar(content: Text(msg));
-    showSnackBar(snack);
+    SnackUtil.show(msg);
   }
 }
 

@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 
 class ProviderListDemo extends StatefulWidget {
   final String? title;
@@ -227,10 +228,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
   }
 
   void update() {
-    showSnackBar(SnackBar(
-        content: Text(
-      "数据变化监听回调, 刷新重建界面",
-    )));
+    SnackUtil.show("数据变化监听回调, 刷新重建界面");
     // DLog.d("数据变化监听回调, 刷新重建界面");
     setState(() {});
   }
@@ -350,11 +348,9 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
     DLog.d(model.toString());
 
     if (value > 0) {
-      ScaffoldMessenger.of(context).removeCurrentSnackBar();
-      ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('CartModel num\'s +1')));
+      SnackUtil.show("CartModel num's +1", clear: true);
     } else {
-      showSnackBar(SnackBar(content: Text('CartModel num\'s -1')));
+      SnackUtil.show("CartModel num's -1");
     }
   }
 

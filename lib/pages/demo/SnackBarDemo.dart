@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 const kUpdateContent = """
@@ -49,18 +50,24 @@ class SnackBarDemoState extends State<SnackBarDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final primary = themeData.colorScheme.primary;
+    final isDark = themeData.brightness == Brightness.dark;
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
-          Future.delayed(const Duration(milliseconds: 100), clearSnackBars);
+          Future.delayed(const Duration(milliseconds: 100), SnackUtil.clear);
           debugPrint("PopScope");
         }
       },
       child: Scaffold(
-        persistentFooterButtons: footerItems.map((e) => TextButton(onPressed: e.action, child: Text(e.title))).toList(),
+        persistentFooterButtons:
+            footerItems.map((e) => FilledButton(onPressed: e.action, child: Text(e.title))).toList(),
         bottomSheet: Container(
-          color: Colors.green,
           height: 100,
+          color: primary,
+          alignment: Alignment.center,
+          child: Text("bottomSheet"),
         ),
         appBar: AppBar(
           title: Text('SnackBar'),
@@ -121,9 +128,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
               _buildItem(
                 text: '显示SnackBar, 不覆盖',
                 onPressed: () {
-                  // final snackBar = buildSnackBar();
-                  // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  showSnackBar(buildSnackBar(behavior: behavior));
+                  ScaffoldMessenger.of(context).showSnackBar(buildSnackBar(behavior: behavior));
                 },
               ),
               NDashLine(
@@ -132,25 +137,25 @@ class SnackBarDemoState extends State<SnackBarDemo> {
               _buildItem(
                 text: '显示SnackBar, 覆盖 isCenter',
                 onPressed: () {
-                  showSnackBar(
-                    buildSnackBar(behavior: behavior, isCenter: true),
-                  );
+                  ScaffoldMessenger.of(context)
+                    ..clearSnackBars()
+                    ..showSnackBar(buildSnackBar(behavior: behavior, isCenter: true));
                 },
               ),
               _buildItem(
                 text: '显示SnackBar, 覆盖',
                 onPressed: () {
-                  showSnackBar(
-                    buildSnackBar(behavior: behavior),
-                  );
+                  ScaffoldMessenger.of(context)
+                    ..clearSnackBars()
+                    ..showSnackBar(buildSnackBar(behavior: behavior));
                 },
               ),
               _buildItem(
                 text: '显示断网SnackBar, 覆盖',
                 onPressed: () {
-                  showSnackBar(
-                    buildSnackBar2(),
-                  );
+                  ScaffoldMessenger.of(context)
+                    ..clearSnackBars()
+                    ..showSnackBar(buildSnackBar2());
                 },
               ),
               Spacer(),
@@ -237,38 +242,26 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   }
 
   /// 顶部 MaterialBanner
-  showMaterialBannerNew() {
+  void showMaterialBannerNew() {
     final nowStr = "${DateTime.now()}".split(".").first;
+    final messenger = ScaffoldMessenger.of(context);
 
     final banner = MaterialBanner(
-      // padding: EdgeInsets.zero,
-      // leadingPadding: EdgeInsets.zero,
       content: InkWell(
         onTap: () {
-          hideMaterialBanner(isClear: false);
+          messenger.hideCurrentMaterialBanner();
         },
         child: Text('Hello, I am a Material Banner $nowStr' * 3),
       ),
       leading: const Icon(Icons.info),
       backgroundColor: Colors.yellow,
-      // actions: [ SizedBox() ],
       actions: [
         TextButton(
-          // onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
-          onPressed: () => hideMaterialBanner(isClear: false),
+          onPressed: () => messenger.hideCurrentMaterialBanner(),
           child: const Text('Dismiss'),
         ),
-        // TextButton(
-        //   child: const Text('Dismiss1'),
-        //   onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
-        //   // onPressed: () => context.hideMaterialBanner(isClear: false),
-        // ),
       ],
     );
-    // ScaffoldMessenger.of(context).showMaterialBanner(banner);
-    showMaterialBanner(
-      banner,
-      isClear: false,
-    );
+    messenger.showMaterialBanner(banner);
   }
 }

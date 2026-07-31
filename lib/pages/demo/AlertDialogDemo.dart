@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class AlertDialogDemo extends StatefulWidget {
@@ -137,9 +138,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
               child: TextButton(
                 onPressed: () {
                   alignment = e;
-                  showSnackBar(
-                    SnackBar(content: Text(name)),
-                  );
+                  SnackUtil.show(name);
                   debugPrint("alignment:$alignment ${alignment.x} ${alignment.y}");
                 },
                 child: Text(

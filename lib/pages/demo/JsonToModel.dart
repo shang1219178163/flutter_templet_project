@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
 
@@ -440,14 +440,7 @@ class _JsonToModelState extends State<JsonToModel> {
       final file = await FileManager().createFile(fileName: fileName, content: outVN.value);
       debugPrint("file: ${file.path}");
 
-      showSnackBar(SnackBar(
-        content: NText(
-          "文件已生成(下载文件夹)",
-          color: Colors.white,
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: Colors.green,
-      ));
+      SnackUtil.custom("文件已生成(下载文件夹)", backgroundColor: Colors.green);
     } catch (e) {
       debugPrint("catch: $e");
       Get.bottomSheet(Container(

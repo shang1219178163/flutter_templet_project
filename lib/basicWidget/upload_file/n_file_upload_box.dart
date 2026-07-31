@@ -20,9 +20,9 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_ha
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -266,7 +266,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
     required List<String> allowedExtensions,
     required FutureOr<bool> Function() onPermission,
   }) async {
-    AppService.removeInputFocus();
+    AppService.unfocus();
     if (!widget.canEdit) {
       debugPrint("无编辑权限");
       return;

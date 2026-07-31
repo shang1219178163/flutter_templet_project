@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 
 class RefreshIndicatorDemoOne extends StatefulWidget {
   const RefreshIndicatorDemoOne({Key? key, this.title}) : super(key: key);
@@ -98,10 +98,7 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
       } else {
         list.addAll(items);
       }
-      showSnackBar(SnackBar(
-          content: Text(
-        "${list.length} items",
-      )));
+      SnackUtil.show("${list.length} items");
       setState(() {});
     } catch (e) {
       debugPrint(e.toString());

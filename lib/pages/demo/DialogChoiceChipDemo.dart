@@ -198,7 +198,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pop();
-                // AppUti.removeInputFocus();
+                // AppUti.unfocus();
               },
               child: box,
             ),
@@ -208,7 +208,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pop();
-                // AppUti.removeInputFocus();
+                // AppUti.unfocus();
               },
               child: Container(
                   color: Colors.black.withValues(alpha: 0.05),
