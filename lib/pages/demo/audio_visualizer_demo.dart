@@ -10,6 +10,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:audio_visualizer/audio_visualizer.dart';
+import 'package:audio_visualizer/utils.dart';
+import 'package:audio_visualizer/visualizers/bar_visualizer.dart';
+import 'package:audio_visualizer/visualizers/circular_bar_visualizer.dart';
+import 'package:audio_visualizer/visualizers/line_bar_visualizer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
