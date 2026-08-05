@@ -43,6 +43,8 @@ class NButton extends StatelessWidget {
     this.style,
     this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     this.radius = 12,
+    this.side,
+    this.primary,
     this.gradient,
     this.disabledGradient,
     this.textStyle,
@@ -92,16 +94,21 @@ class NButton extends StatelessWidget {
   /// 大于等于999 为椭圆
   final double radius;
 
+  final BorderSide? side;
+
+  /// 主题色；为空时取 [ColorScheme.primary]，可覆盖各类按钮主题色。
+  final Color? primary;
+
   /// 渐进色背景；非 null 时覆盖实心背景色（描边/文字按钮不生效）。
   final Gradient? gradient;
 
-  /// 禁用态渐进色背景；为空时回退 [gradient]。
+  /// 禁用态渐进色背景；视觉禁用已改为整体透明度，此字段保留兼容，当前不参与绘制。
   final Gradient? disabledGradient;
 
   /// 启用态文字样式；其中 [TextStyle.color] 会同步到 foregroundColor。
   final TextStyle? textStyle;
 
-  /// 禁用态文字样式；为空时回退 [textStyle]，颜色默认降为 38% 透明度。
+  /// 禁用态文字样式；视觉禁用已改为整体透明度，此字段保留兼容，当前不参与绘制。
   final TextStyle? disabledTextStyle;
 
   /// 焦点节点。
@@ -140,13 +147,10 @@ class NButton extends StatelessWidget {
   /// 当前类型是否支持渐进色背景（描边/文字按钮不支持）。
   bool get supportsGradientType => ![NButtonType.outlined, NButtonType.text].contains(type);
 
-  /// 当前应绘制的渐进色；描边/文字按钮恒为 null。
+  /// 当前应绘制的渐进色；描边/文字按钮恒为 null。禁用态与启用态使用同一渐变。
   Gradient? get effectiveGradient {
     if (!supportsGradientType) {
       return null;
-    }
-    if (isDisabled) {
-      return disabledGradient ?? gradient;
     }
     return gradient;
   }
@@ -166,15 +170,29 @@ class NButton extends StatelessWidget {
   /// 启用态前景色；渐进色背景且未指定文字色时默认白色。
   Color? get foregroundColor => effectiveTextStyle.color ?? (canUseGradient ? Colors.white : null);
 
-  /// 禁用态前景色；未指定时回退为启用色 38% 透明度。
-  Color? get disabledForegroundColor => disabledTextStyle?.color ?? (foregroundColor?.withOpacity(0.38));
+  /// 禁用态前景色（保留 API）；视觉禁用统一由外层透明度处理，不再单独改色。
+  Color? get disabledForegroundColor => disabledTextStyle?.color ?? foregroundColor;
+
+  /// 实际主题色；未传 [primary] 时使用 [ColorScheme.primary]。
+  Color resolvePrimary(ColorScheme colorScheme) => primary ?? colorScheme.primary;
+
+  /// 视觉上始终按启用态交给 Material；真正禁用由外层拦截点击 + 透明度表达。
+  VoidCallback get visualOnPressed => onPressed ?? _visualNoop;
+
+  static void _visualNoop() {}
 
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final useMaterial3 = themeData.useMaterial3;
     final colorScheme = themeData.colorScheme;
-    var child = buildButtonByType(useMaterial3: useMaterial3, colorScheme: colorScheme);
+    final effectivePrimary = resolvePrimary(colorScheme);
+    final themedColorScheme = colorScheme.copyWith(primary: effectivePrimary);
+    var child = buildButtonByType(
+      useMaterial3: useMaterial3,
+      primary: effectivePrimary,
+      onPrimary: themedColorScheme.onPrimary,
+    );
     if (canUseGradient) {
       child = DecoratedBox(
         decoration: ShapeDecoration(
@@ -190,13 +208,29 @@ class NButton extends StatelessWidget {
     if (tooltip != null) {
       child = Tooltip(message: tooltip!, child: child);
     }
-    return child;
+    // 禁用态 UI 与启用态相同，仅整体透明度 0.5
+    if (isDisabled) {
+      child = IgnorePointer(
+        child: Opacity(opacity: 0.4, child: child),
+      );
+    }
+    // 用 Theme 覆盖各类 Material 按钮的 primary 主题色
+    return Theme(
+      data: themeData.copyWith(
+        colorScheme: themedColorScheme,
+        floatingActionButtonTheme: themeData.floatingActionButtonTheme.copyWith(
+          backgroundColor: primary == null ? null : effectivePrimary,
+        ),
+      ),
+      child: child,
+    );
   }
 
   /// 按钮外形；[radius] >= 999 时图标为圆形，其余为胶囊形。
   OutlinedBorder get buttonShape {
     if (radius >= 999) {
-      return type == NButtonType.icon ? const CircleBorder() : const StadiumBorder();
+      final sideNew = side ?? BorderSide(color: Colors.transparent);
+      return type == NButtonType.icon ? CircleBorder(side: sideNew) : StadiumBorder(side: sideNew);
     }
     return ContinuousRectangleBorder(
       borderRadius: BorderRadius.circular(radius),
@@ -206,12 +240,13 @@ class NButton extends StatelessWidget {
   /// 按 [type] 创建对应 SDK 按钮。
   Widget buildButtonByType({
     required bool useMaterial3,
-    required ColorScheme colorScheme,
+    required Color primary,
+    required Color onPrimary,
   }) {
     switch (type) {
       case NButtonType.filled:
         {
-          final buttonStyle = buildFilledStyle();
+          final buttonStyle = buildFilledStyle(primary);
           if (useMaterial3) {
             return buildFilledButton(style: buttonStyle, content: resolveContent(), label: resolveLabel());
           }
@@ -219,7 +254,7 @@ class NButton extends StatelessWidget {
         }
       case NButtonType.filledTonal:
         {
-          final buttonStyle = buildFilledTonalStyle();
+          final buttonStyle = buildFilledTonalStyle(primary);
           if (useMaterial3) {
             return buildFilledButtonTonal(style: buttonStyle, content: resolveContent(), label: resolveLabel());
           }
@@ -227,27 +262,27 @@ class NButton extends StatelessWidget {
         }
       case NButtonType.outlined:
         {
-          final buttonStyle = buildOutlinedStyle(colorScheme);
+          final buttonStyle = buildOutlinedStyle(primary);
           return buildOutlinedButton(style: buttonStyle, content: resolveContent(), label: resolveLabel());
         }
       case NButtonType.text:
         {
-          final buttonStyle = buildTextStyle();
+          final buttonStyle = buildTextStyle(primary);
           return buildTextButton(style: buttonStyle, content: resolveContent(), label: resolveLabel());
         }
       case NButtonType.elevated:
         {
-          final buttonStyle = buildElevatedStyle();
+          final buttonStyle = buildElevatedStyle(primary);
           return buildElevatedButton(style: buttonStyle, content: resolveContent(), label: resolveLabel());
         }
       case NButtonType.floating:
         {
-          final buttonStyle = buildFloatingStyle();
+          final buttonStyle = buildFloatingStyle(primary, onPrimary);
           return buildFloatingActionButton(style: buttonStyle, content: resolveContent(), label: resolveLabel());
         }
       case NButtonType.icon:
         {
-          final buttonStyle = buildIconStyle();
+          final buttonStyle = buildIconStyle(primary);
           return buildIconButton(style: buttonStyle, content: resolveIconContent());
         }
     }
@@ -278,41 +313,34 @@ class NButton extends StatelessWidget {
   }
 
   /// 合并公共文字色 / 图标色；[includeIconColor] 为 true 时同步写入 iconColor。
+  /// 禁用态颜色与启用态一致（外层 Opacity 表达禁用）。
   ButtonStyle mergeForegroundStyle(
     ButtonStyle baseStyle, {
     bool includeIconColor = false,
+    OutlinedBorder? shape,
     BorderSide? enabledSide,
+    Color? fallbackForeground,
   }) {
+    final resolvedForeground = foregroundColor ?? fallbackForeground;
     return baseStyle.merge(
       ButtonStyle(
-        textStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.disabled)) {
-            return disabledTextStyle ?? effectiveTextStyle;
-          }
-          return effectiveTextStyle;
-        }),
-        foregroundColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.disabled)) {
-            return disabledForegroundColor;
-          }
-          return foregroundColor;
-        }),
-        iconColor: includeIconColor
-            ? WidgetStateProperty.resolveWith((states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return disabledForegroundColor;
-                }
-                return foregroundColor;
-              })
-            : null,
-        side: enabledSide == null
-            ? null
-            : WidgetStateProperty.resolveWith((states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return null;
-                }
-                return enabledSide;
-              }),
+        textStyle: WidgetStatePropertyAll(effectiveTextStyle),
+        foregroundColor: resolvedForeground == null ? null : WidgetStatePropertyAll(resolvedForeground),
+        iconColor: includeIconColor && resolvedForeground != null ? WidgetStatePropertyAll(resolvedForeground) : null,
+        side: enabledSide == null ? null : WidgetStatePropertyAll(enabledSide),
+        shape: shape == null ? null : WidgetStatePropertyAll(shape),
+      ),
+    );
+  }
+
+  /// 合并主题色到背景；仅在显式传入 [primary] 且非渐进色时生效。
+  ButtonStyle mergePrimaryBackgroundStyle(ButtonStyle baseStyle, Color primary) {
+    if (canUseGradient || this.primary == null) {
+      return baseStyle;
+    }
+    return baseStyle.merge(
+      ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(primary),
       ),
     );
   }
@@ -333,65 +361,84 @@ class NButton extends StatelessWidget {
   }
 
   /// 构建 [NButtonType.filled] 样式。
-  ButtonStyle buildFilledStyle() {
+  ButtonStyle buildFilledStyle(Color primary) {
     var buttonStyle = style ?? FilledButton.styleFrom();
     buttonStyle = mergeCommonSizeStyle(buttonStyle);
     buttonStyle = mergeForegroundStyle(buttonStyle);
+    buttonStyle = mergePrimaryBackgroundStyle(buttonStyle, primary);
     buttonStyle = mergeGradientTransparentStyle(buttonStyle);
     return buttonStyle;
   }
 
   /// 构建 [NButtonType.filledTonal] 样式。
-  ButtonStyle buildFilledTonalStyle() {
+  ///
+  /// Material tonal：浅色底 + 主题色字；显式 [primary] 时底为 primary 16% 透明，字为 primary。
+  ButtonStyle buildFilledTonalStyle(Color primary) {
     var buttonStyle = style ?? FilledButton.styleFrom();
     buttonStyle = mergeCommonSizeStyle(buttonStyle);
-    buttonStyle = mergeForegroundStyle(buttonStyle);
+    buttonStyle = mergeForegroundStyle(
+      buttonStyle,
+      fallbackForeground: this.primary == null ? null : primary,
+    );
+    buttonStyle = mergePrimaryBackgroundStyle(buttonStyle, primary.withOpacity(0.16));
     buttonStyle = mergeGradientTransparentStyle(buttonStyle);
     return buttonStyle;
   }
 
-  /// 构建 [NButtonType.outlined] 样式，描边色取 [colorScheme.primary]。
-  ButtonStyle buildOutlinedStyle(ColorScheme colorScheme) {
+  /// 构建 [NButtonType.outlined] 样式，描边色与前景色取 [primary]。
+  ButtonStyle buildOutlinedStyle(Color primary) {
     var buttonStyle = style ?? OutlinedButton.styleFrom();
     buttonStyle = mergeCommonSizeStyle(buttonStyle);
     buttonStyle = mergeForegroundStyle(
       buttonStyle,
-      enabledSide: BorderSide(color: colorScheme.primary, width: 1),
+      enabledSide: BorderSide(color: primary, width: 1),
+      shape: buttonShape,
+      fallbackForeground: primary,
     );
     return buttonStyle;
   }
 
   /// 构建 [NButtonType.text] 样式。
-  ButtonStyle buildTextStyle() {
+  ButtonStyle buildTextStyle(Color primary) {
     var buttonStyle = style ?? TextButton.styleFrom();
     buttonStyle = mergeCommonSizeStyle(buttonStyle);
-    buttonStyle = mergeForegroundStyle(buttonStyle);
+    buttonStyle = mergeForegroundStyle(buttonStyle, fallbackForeground: primary);
     return buttonStyle;
   }
 
   /// 构建 [NButtonType.elevated] 样式。
-  ButtonStyle buildElevatedStyle() {
-    var buttonStyle = style ?? ElevatedButton.styleFrom();
+  ///
+  /// Material 3：surface 底 + primary 字 + 阴影，不把 primary 当作填充色。
+  ButtonStyle buildElevatedStyle(Color primary) {
+    var buttonStyle = style ??
+        ElevatedButton.styleFrom(
+          elevation: 1,
+        );
     buttonStyle = mergeCommonSizeStyle(buttonStyle);
-    buttonStyle = mergeForegroundStyle(buttonStyle);
+    buttonStyle = mergeForegroundStyle(buttonStyle, fallbackForeground: primary);
     buttonStyle = mergeGradientTransparentStyle(buttonStyle);
     return buttonStyle;
   }
 
-  /// 构建 [NButtonType.floating] 样式。
-  ButtonStyle buildFloatingStyle() {
+  /// 构建 [NButtonType.floating] 样式；启用态字色为 [onPrimary]。
+  ButtonStyle buildFloatingStyle(Color primary, Color onPrimary) {
     var buttonStyle = style ?? const ButtonStyle();
     buttonStyle = mergeCommonSizeStyle(buttonStyle);
-    buttonStyle = mergeForegroundStyle(buttonStyle);
+    buttonStyle = mergeForegroundStyle(buttonStyle, fallbackForeground: onPrimary);
+    buttonStyle = mergePrimaryBackgroundStyle(buttonStyle, primary);
     buttonStyle = mergeGradientTransparentStyle(buttonStyle);
     return buttonStyle;
   }
 
   /// 构建 [NButtonType.icon] 样式，同时写入 iconColor。
-  ButtonStyle buildIconStyle() {
+  ButtonStyle buildIconStyle(Color primary) {
     var buttonStyle = style ?? IconButton.styleFrom();
     buttonStyle = mergeCommonSizeStyle(buttonStyle);
-    buttonStyle = mergeForegroundStyle(buttonStyle, includeIconColor: true);
+    buttonStyle = mergeForegroundStyle(
+      buttonStyle,
+      includeIconColor: true,
+      fallbackForeground: primary,
+    );
     buttonStyle = mergeGradientTransparentStyle(buttonStyle);
     return buttonStyle;
   }
@@ -404,7 +451,7 @@ class NButton extends StatelessWidget {
   }) {
     if (icon == null) {
       return ElevatedButton(
-        onPressed: onPressed,
+        onPressed: visualOnPressed,
         onLongPress: onLongPress,
         onHover: onHover,
         onFocusChange: onFocusChange,
@@ -418,7 +465,7 @@ class NButton extends StatelessWidget {
       );
     }
     return ElevatedButton.icon(
-      onPressed: onPressed,
+      onPressed: visualOnPressed,
       onLongPress: onLongPress,
       onHover: onHover,
       onFocusChange: onFocusChange,
@@ -441,7 +488,7 @@ class NButton extends StatelessWidget {
   }) {
     if (icon == null) {
       return FilledButton(
-        onPressed: onPressed,
+        onPressed: visualOnPressed,
         onLongPress: onLongPress,
         onHover: onHover,
         onFocusChange: onFocusChange,
@@ -455,7 +502,7 @@ class NButton extends StatelessWidget {
       );
     }
     return FilledButton.icon(
-      onPressed: onPressed,
+      onPressed: visualOnPressed,
       onLongPress: onLongPress,
       onHover: onHover,
       onFocusChange: onFocusChange,
@@ -478,7 +525,7 @@ class NButton extends StatelessWidget {
   }) {
     if (icon == null) {
       return FilledButton.tonal(
-        onPressed: onPressed,
+        onPressed: visualOnPressed,
         onLongPress: onLongPress,
         onHover: onHover,
         onFocusChange: onFocusChange,
@@ -491,7 +538,7 @@ class NButton extends StatelessWidget {
       );
     }
     return FilledButton.tonalIcon(
-      onPressed: onPressed,
+      onPressed: visualOnPressed,
       onLongPress: onLongPress,
       onHover: onHover,
       onFocusChange: onFocusChange,
@@ -514,7 +561,7 @@ class NButton extends StatelessWidget {
   }) {
     if (icon == null) {
       return OutlinedButton(
-        onPressed: onPressed,
+        onPressed: visualOnPressed,
         onLongPress: onLongPress,
         onHover: onHover,
         onFocusChange: onFocusChange,
@@ -528,7 +575,7 @@ class NButton extends StatelessWidget {
       );
     }
     return OutlinedButton.icon(
-      onPressed: onPressed,
+      onPressed: visualOnPressed,
       onLongPress: onLongPress,
       onHover: onHover,
       onFocusChange: onFocusChange,
@@ -551,7 +598,7 @@ class NButton extends StatelessWidget {
   }) {
     if (icon == null) {
       return TextButton(
-        onPressed: onPressed,
+        onPressed: visualOnPressed,
         onLongPress: onLongPress,
         onHover: onHover,
         onFocusChange: onFocusChange,
@@ -565,7 +612,7 @@ class NButton extends StatelessWidget {
       );
     }
     return TextButton.icon(
-      onPressed: onPressed,
+      onPressed: visualOnPressed,
       onLongPress: onLongPress,
       onHover: onHover,
       onFocusChange: onFocusChange,
@@ -586,9 +633,8 @@ class NButton extends StatelessWidget {
     required Widget content,
     required Widget label,
   }) {
-    final states = isDisabled ? <WidgetState>{WidgetState.disabled} : <WidgetState>{};
-    final foregroundColor = style?.foregroundColor?.resolve(states);
-    final extendedTextStyle = style?.textStyle?.resolve(states);
+    final foregroundColor = style?.foregroundColor?.resolve(const <WidgetState>{});
+    final extendedTextStyle = style?.textStyle?.resolve(const <WidgetState>{});
     return Container(
       width: fixedSize?.width,
       height: fixedSize?.height,
@@ -600,14 +646,16 @@ class NButton extends StatelessWidget {
             maxHeight: maximumSize?.height ?? double.infinity,
           ),
       child: FloatingActionButton.extended(
-        // NButton 可在同页多次出现，禁用默认 Hero 避免 tag 冲突
         heroTag: null,
-        onPressed: onPressed,
+        onPressed: visualOnPressed,
         focusNode: focusNode,
         autofocus: autofocus,
-        backgroundColor: canUseGradient ? Colors.transparent : null,
+        backgroundColor:
+            canUseGradient ? Colors.transparent : (style?.backgroundColor?.resolve(const <WidgetState>{}) ?? primary),
         foregroundColor: foregroundColor,
         elevation: canUseGradient ? 0 : null,
+        focusElevation: canUseGradient ? 0 : null,
+        hoverElevation: canUseGradient ? 0 : null,
         highlightElevation: canUseGradient ? 0 : null,
         shape: buttonShape,
         extendedPadding: padding,
@@ -623,10 +671,10 @@ class NButton extends StatelessWidget {
     required ButtonStyle? style,
     required Widget content,
   }) {
-    final states = isDisabled ? <WidgetState>{WidgetState.disabled} : <WidgetState>{};
-    final foregroundColor = style?.foregroundColor?.resolve(states) ?? style?.iconColor?.resolve(states);
+    final foregroundColor =
+        style?.foregroundColor?.resolve(const <WidgetState>{}) ?? style?.iconColor?.resolve(const <WidgetState>{});
     return IconButton(
-      onPressed: onPressed,
+      onPressed: visualOnPressed,
       style: style,
       focusNode: focusNode,
       autofocus: autofocus,

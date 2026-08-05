@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/Pages/app_user_center_page.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/bottom_navigation_bar/n_bottom_navigation_bar.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_bottom_navigation_bar/en_bottom_navigation_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
@@ -137,7 +137,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
         data: Theme.of(context).copyWith(
             // canvasColor: Colors.red,
             ),
-        child: NBottomNavigationBar(
+        child: EnBottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
           selectedFontSize: 11, // 选中字体大小

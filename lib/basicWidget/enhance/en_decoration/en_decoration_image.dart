@@ -300,6 +300,7 @@ class _DecorationImagePainter implements DecorationImagePainter {
       invertColors: _details.invertColors,
       isAntiAlias: _details.isAntiAlias,
       blendMode: blendMode,
+      destinationOffset: _details.destinationOffset,
     );
 
     if (clipPath != null) {

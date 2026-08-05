@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 /// 修改: 官方 BottomNavigationBar 不支持 onDoubleTap,新增 final ValueChanged<int>? onDoubleTap;
+/// 新增: tileBuilder,方便根据选中状态自定义
 
-class NBottomNavigationBar extends StatefulWidget {
+class EnBottomNavigationBar extends StatefulWidget {
   /// Creates a bottom navigation bar which is typically used as a
   /// [Scaffold]'s [Scaffold.bottomNavigationBar] argument.
   ///
@@ -52,7 +53,7 @@ class NBottomNavigationBar extends StatefulWidget {
   /// then [showUnselectedLabels] defaults to `true` when [type] is
   /// [BottomNavigationBarType.fixed] and `false` when [type] is
   /// [BottomNavigationBarType.shifting].
-  NBottomNavigationBar({
+  EnBottomNavigationBar({
     super.key,
     required this.items,
     this.onTap,
@@ -278,13 +279,13 @@ class NBottomNavigationBar extends StatefulWidget {
   final Widget Function(int index, bool selected, Widget icon, Widget label)? tileBuilder;
 
   @override
-  State<NBottomNavigationBar> createState() => _NBottomNavigationBarState();
+  State<EnBottomNavigationBar> createState() => _EnBottomNavigationBarState();
 }
 
 // This represents a single tile in the bottom navigation bar. It is intended
 // to go into a flex container.
-class _NBottomNavigationTile extends StatelessWidget {
-  const _NBottomNavigationTile(
+class _EnBottomNavigationTile extends StatelessWidget {
+  const _EnBottomNavigationTile(
     this.type,
     this.item,
     this.animation,
@@ -655,7 +656,7 @@ class _Label extends StatelessWidget {
   }
 }
 
-class _NBottomNavigationBarState extends State<NBottomNavigationBar> with TickerProviderStateMixin {
+class _EnBottomNavigationBarState extends State<EnBottomNavigationBar> with TickerProviderStateMixin {
   List<AnimationController> _controllers = <AnimationController>[];
   late List<CurvedAnimation> _animations;
 
@@ -774,7 +775,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar> with Ticker
   }
 
   @override
-  void didUpdateWidget(NBottomNavigationBar oldWidget) {
+  void didUpdateWidget(EnBottomNavigationBar oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     // No animated segue if the length of the items list changes.
@@ -924,7 +925,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar> with Ticker
           bottomTheme.mouseCursor?.resolve(states) ??
           WidgetStateMouseCursor.clickable.resolve(states);
 
-      tiles.add(_NBottomNavigationTile(
+      tiles.add(_EnBottomNavigationTile(
         _effectiveType,
         widget.items[i],
         _animations[i],
@@ -1073,7 +1074,7 @@ class _Circle {
     controller.forward();
   }
 
-  final _NBottomNavigationBarState state;
+  final _EnBottomNavigationBarState state;
   final int index;
   final Color color;
   late AnimationController controller;

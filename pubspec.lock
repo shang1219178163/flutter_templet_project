@@ -92,11 +92,10 @@ packages:
   audio_visualizer:
     dependency: "direct main"
     description:
-      path: "."
-      ref: develop
-      resolved-ref: c58011a8a97bf3a987c7249dbb5e80f562b6597b
-      url: "git@github.com:shang1219178163/audio_visualizer.git"
-    source: git
+      name: audio_visualizer
+      sha256: eeb894a68290388530f3f5ef6ff0de7428327a8a71b80ddaa14650164501e214
+      url: "https://pub.flutter-io.cn"
+    source: hosted
     version: "1.1.0"
   audioplayers:
     dependency: "direct main"

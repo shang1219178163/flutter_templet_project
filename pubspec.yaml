@@ -247,10 +247,7 @@ dependencies:
   # AudioRecord
   record: ^6.1.2
   # 音浪
-  audio_visualizer:
-    git:
-      url: "git@github.com:shang1219178163/audio_visualizer.git"
-      ref: "develop"
+  audio_visualizer: ^1.1.0
 
   f_limit: ^1.1.0
   flutter_html: ^3.0.0
