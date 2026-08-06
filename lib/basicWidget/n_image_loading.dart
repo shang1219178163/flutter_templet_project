@@ -10,11 +10,11 @@ import 'package:flutter/material.dart';
 
 class NImageLoading extends StatelessWidget {
   const NImageLoading({
-    Key? key,
+    super.key,
     this.title,
     required this.image,
     required this.placeholder,
-  }) : super(key: key);
+  });
 
   final ImageProvider image;
   final Widget placeholder;
@@ -41,8 +41,7 @@ class NImageLoading extends StatelessWidget {
         if (loadingProgress != null &&
             loadingProgress.cumulativeBytesLoaded != 0 &&
             loadingProgress.expectedTotalBytes != 0) {
-          val = loadingProgress.cumulativeBytesLoaded.toDouble() /
-              loadingProgress.expectedTotalBytes!.toDouble();
+          val = loadingProgress.cumulativeBytesLoaded.toDouble() / loadingProgress.expectedTotalBytes!.toDouble();
         }
 
         return Center(

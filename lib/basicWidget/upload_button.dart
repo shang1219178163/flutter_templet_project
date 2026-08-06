@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class UploadButton extends StatefulWidget {
   UploadButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     this.image,
     Image? deteleImage,
@@ -18,14 +18,13 @@ class UploadButton extends StatefulWidget {
     this.deteleWidth = 30,
     this.deteleHeight = 30,
     this.color,
-  })  : deteleImage = deteleImage ??
+  }) : deteleImage = deteleImage ??
             Image.asset(
               "assets/images/icon_delete.png",
               fit: BoxFit.fill,
               width: 30,
               height: 30,
-            ),
-        super(key: key);
+            );
 
   final Image? image;
   final Image? deteleImage;

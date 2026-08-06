@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class NTicketDividerPainter extends CustomPainter {
-  NTicketDividerPainter({
+  const NTicketDividerPainter({
     required this.bgColor,
     required this.borderColor,
     this.borderStrokeWidth = 1,

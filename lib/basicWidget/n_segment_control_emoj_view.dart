@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_segment_control_emoji.dart
 
 /// 表情页面
 class NSegmentControlEmojView extends StatefulWidget {
-  NSegmentControlEmojView({
+  const NSegmentControlEmojView({
     super.key,
     required this.items,
     this.selectedIndex = 0,
@@ -36,20 +36,17 @@ class NSegmentControlEmojView extends StatefulWidget {
   final EdgeInsets segmentPadding;
 
   @override
-  State<NSegmentControlEmojView> createState() =>
-      _NSegmentControlEmojViewState();
+  State<NSegmentControlEmojView> createState() => _NSegmentControlEmojViewState();
 }
 
-class _NSegmentControlEmojViewState extends State<NSegmentControlEmojView>
-    with SingleTickerProviderStateMixin {
+class _NSegmentControlEmojViewState extends State<NSegmentControlEmojView> with SingleTickerProviderStateMixin {
   late final tabController = TabController(
     initialIndex: widget.selectedIndex,
     length: widget.items.length,
     vsync: this,
   );
 
-  late final pageController =
-      PageController(initialPage: widget.selectedIndex, keepPage: true);
+  late final pageController = PageController(initialPage: widget.selectedIndex, keepPage: true);
 
   late final selectedIndex = ValueNotifier(widget.selectedIndex);
 
@@ -65,24 +62,25 @@ class _NSegmentControlEmojViewState extends State<NSegmentControlEmojView>
     return Column(
       children: [
         ValueListenableBuilder(
-            valueListenable: selectedIndex,
-            builder: (context, value, child) {
-              return NSegmentControlEmoji(
-                items: widget.items,
-                selectedIndex: value,
-                segmentGap: widget.segmentGap,
-                segmentRadius: widget.segmentRadius,
-                segmentPadding: widget.segmentPadding,
-                onChanged: (index) {
-                  tabController.index = index;
-                  pageController.animateToPage(
-                    index,
-                    duration: Duration(milliseconds: 350),
-                    curve: Curves.ease,
-                  );
-                },
-              );
-            }),
+          valueListenable: selectedIndex,
+          builder: (context, value, child) {
+            return NSegmentControlEmoji(
+              items: widget.items,
+              selectedIndex: value,
+              segmentGap: widget.segmentGap,
+              segmentRadius: widget.segmentRadius,
+              segmentPadding: widget.segmentPadding,
+              onChanged: (index) {
+                tabController.index = index;
+                pageController.animateToPage(
+                  index,
+                  duration: Duration(milliseconds: 350),
+                  curve: Curves.ease,
+                );
+              },
+            );
+          },
+        ),
         Expanded(
           child: buildPageView(),
         ),

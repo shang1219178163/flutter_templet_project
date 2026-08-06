@@ -117,7 +117,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
   }
 
   Future<void> onDate() async {
-    showDatePicker(
+    onCupertinoPicker(
       context: context,
       onCancel: () {
         DLog.d("${DateTime.now()}");
@@ -127,7 +127,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         DLog.d("${DateTime.now()}");
         Navigator.of(context).pop();
       },
-      onDateTimeChanged: (DateTime val) {
+      onChanged: (DateTime val) {
         debugPrint("$val");
       },
     );
@@ -436,11 +436,11 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     );
   }
 
-  void showDatePicker({
+  void onCupertinoPicker({
     required BuildContext context,
     DateTime? initialDateTime,
     CupertinoDatePickerMode mode = CupertinoDatePickerMode.date,
-    required ValueChanged<DateTime> onDateTimeChanged,
+    required ValueChanged<DateTime> onChanged,
     VoidCallback? onCancel,
     required VoidCallback onConfirm,
   }) {
@@ -469,7 +469,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
                   dateOrder: DatePickerDateOrder.ymd,
                   onDateTimeChanged: (val) {
                     dateTime = val;
-                    onDateTimeChanged(val);
+                    onChanged(val);
                     setState(() {});
                   },
                 ),

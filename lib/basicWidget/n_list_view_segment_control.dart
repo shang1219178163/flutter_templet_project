@@ -13,7 +13,7 @@ import 'package:tuple/tuple.dart';
 // ignore: must_be_immutable (水平菜单单选器)
 class NListViewSegmentControl extends StatefulWidget {
   NListViewSegmentControl({
-    Key? key,
+    super.key,
     required this.items,
     required this.selectedIndex,
     this.itemWidths,
@@ -29,7 +29,7 @@ class NListViewSegmentControl extends StatefulWidget {
     this.itemBgColor = const Color(0xFFF5F5F5),
     this.itemSelectedBgColor = Colors.orange,
     required this.onValueChanged,
-  }) : super(key: key);
+  });
 
   List<String> items = [];
 
@@ -76,55 +76,56 @@ class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
       margin: widget.margin,
       height: widget.height,
       child: ListView.builder(
-          shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
-          itemCount: widget.items.length,
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (ctx, index) {
-            return GestureDetector(
-              onTap: () {
-                DLog.d(index);
-                setState(() {
-                  widget.selectedIndex = index;
-                });
-                widget.onValueChanged(index);
+        shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
+        itemCount: widget.items.length,
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (ctx, index) {
+          return GestureDetector(
+            onTap: () {
+              DLog.d(index);
+              setState(() {
+                widget.selectedIndex = index;
+              });
+              widget.onValueChanged(index);
 
-                final screenSize = MediaQuery.of(context).size;
-                if (_scrollController.position.maxScrollExtent <= 0) {
-                  // DLog.d([_scrollController.position.maxScrollExtent, screenSize.width]);
-                  return;
-                }
+              final screenSize = MediaQuery.of(context).size;
+              if (_scrollController.position.maxScrollExtent <= 0) {
+                // DLog.d([_scrollController.position.maxScrollExtent, screenSize.width]);
+                return;
+              }
 
-                ///选中item滚动中间
-                if (widget.itemWidths != null) {
-                  // final offsetX = widget.itemWidths!.take(widget.selectedIndex).reduce((value, element) => value + element);
-                  // _scrollController.animateTo(offsetX, duration: new Duration(seconds: 1), curve: Curves.ease);
-                  return;
-                }
-                final offsetX =
-                    widget.selectedIndex * (widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
-                _scrollController.animateTo(offsetX, duration: Duration(seconds: 1), curve: Curves.ease);
-              },
-              child: Container(
-                width: widget.itemWidths != null ? widget.itemWidths![index] : widget.itemWidth,
-                height: widget.height,
-                margin: widget.itemMargin,
-                padding: widget.itemPadding,
-                alignment: Alignment.center,
-                // color: ColorExt.random(),
-                decoration: BoxDecoration(
-                  color: widget.selectedIndex == index ? widget.itemSelectedBgColor : widget.itemBgColor,
-                  borderRadius: BorderRadius.circular(widget.itemRadius),
-                ),
-                child: Text(
-                  widget.items[index],
-                  textAlign: TextAlign.center,
-                  style: widget.selectedIndex == index ? widget.itemSelectedTextStyle : widget.itemTextStyle,
-                ),
+              ///选中item滚动中间
+              if (widget.itemWidths != null) {
+                // final offsetX = widget.itemWidths!.take(widget.selectedIndex).reduce((value, element) => value + element);
+                // _scrollController.animateTo(offsetX, duration: new Duration(seconds: 1), curve: Curves.ease);
+                return;
+              }
+              final offsetX =
+                  widget.selectedIndex * (widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
+              _scrollController.animateTo(offsetX, duration: Duration(seconds: 1), curve: Curves.ease);
+            },
+            child: Container(
+              width: widget.itemWidths != null ? widget.itemWidths![index] : widget.itemWidth,
+              height: widget.height,
+              margin: widget.itemMargin,
+              padding: widget.itemPadding,
+              alignment: Alignment.center,
+              // color: ColorExt.random(),
+              decoration: BoxDecoration(
+                color: widget.selectedIndex == index ? widget.itemSelectedBgColor : widget.itemBgColor,
+                borderRadius: BorderRadius.circular(widget.itemRadius),
               ),
-            );
-          }),
+              child: Text(
+                widget.items[index],
+                textAlign: TextAlign.center,
+                style: widget.selectedIndex == index ? widget.itemSelectedTextStyle : widget.itemTextStyle,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/util/dlog.dart';
 ///自定义数值增减 Stepper
 class NumberStepper extends StatefulWidget {
   NumberStepper({
-    Key? key,
+    super.key,
     this.min = 1,
     this.max = 9999,
     required this.step,
@@ -28,7 +28,7 @@ class NumberStepper extends StatefulWidget {
       fontSize: 20,
     ),
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   ///最小值
   final int min;

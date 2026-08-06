@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
 class XCollectionNavWidget extends StatelessWidget {
   const XCollectionNavWidget({
-    Key? key,
+    super.key,
     this.title,
     this.width = double.infinity,
     this.height = double.infinity,
@@ -15,7 +15,7 @@ class XCollectionNavWidget extends StatelessWidget {
     this.runSpacing = 16,
     this.direction = Axis.horizontal,
     this.rowCount = 5,
-  }) : super(key: key);
+  });
 
   final String? title;
   final double width;
@@ -40,11 +40,10 @@ class XCollectionNavWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return _buildSwiper();
     return buildBody();
   }
 
-  _buildSwiper() {
+  Widget buildSwiper() {
     return Swiper(
       itemBuilder: (BuildContext context, int index) {
         return CustomSwiperItem(
@@ -63,36 +62,38 @@ class XCollectionNavWidget extends StatelessWidget {
   }
 
   Widget buildBody() {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      var edgeHorizontal = spacing * 0.5;
-      var itemWidth = (constraints.maxWidth - spacing * (rowCount - 1) - edgeHorizontal * 2) / rowCount;
-      // var itemWidthNew = 48;
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        var edgeHorizontal = spacing * 0.5;
+        var itemWidth = (constraints.maxWidth - spacing * (rowCount - 1) - edgeHorizontal * 2) / rowCount;
+        // var itemWidthNew = 48;
 
-      return ColoredBox(
-        color: Colors.lightGreen,
-        child: Wrap(
-          direction: direction,
-          // 主轴(水平)方向间距
-          spacing: direction == Axis.horizontal ? spacing : runSpacing,
-          // 纵轴（垂直）方向间距
-          runSpacing: direction == Axis.horizontal ? runSpacing : spacing,
-          alignment: WrapAlignment.start,
-          runAlignment: WrapAlignment.start,
-          // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){
-          //   print(e);
-          // })).toList(),
-          children: Colors.primaries
-              .take(10)
-              .map(
-                (e) => _buildItemNew(color: e, width: itemWidth),
-              )
-              .toList(),
-        ),
-      );
-    });
+        return ColoredBox(
+          color: Colors.lightGreen,
+          child: Wrap(
+            direction: direction,
+            // 主轴(水平)方向间距
+            spacing: direction == Axis.horizontal ? spacing : runSpacing,
+            // 纵轴（垂直）方向间距
+            runSpacing: direction == Axis.horizontal ? runSpacing : spacing,
+            alignment: WrapAlignment.start,
+            runAlignment: WrapAlignment.start,
+            // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){
+            //   print(e);
+            // })).toList(),
+            children: Colors.primaries
+                .take(10)
+                .map(
+                  (e) => buildItemNew(color: e, width: itemWidth),
+                )
+                .toList(),
+          ),
+        );
+      },
+    );
   }
 
-  Widget _buildItemNew({Color? color, double width = double.infinity}) {
+  Widget buildItemNew({Color? color, double width = double.infinity}) {
     return GestureDetector(
       onTap: () => debugPrint(color.toString()),
       child: Container(
@@ -114,17 +115,15 @@ class XCollectionNavWidget extends StatelessWidget {
                 height: 44,
               ),
             ),
-            SizedBox(
-              height: 6,
-            ),
-            _buildText(text: '免费设计啊'),
+            SizedBox(height: 6),
+            buildText(text: '免费设计啊'),
           ],
         ),
       ),
     );
   }
 
-  _buildText({
+  Widget buildText({
     text = '-',
     maxLines = 1,
     style = const TextStyle(

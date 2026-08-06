@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 /// 图标文字按钮,支持水平和垂直显示
 class NTextButton extends StatelessWidget {
   const NTextButton({
-    Key? key,
+    super.key,
     required this.text,
     this.icon,
     required this.onPressed,
@@ -20,7 +20,7 @@ class NTextButton extends StatelessWidget {
     this.decoration,
     this.constraints,
     this.child,
-  }) : super(key: key);
+  });
 
   /// 文字
   final Widget text;

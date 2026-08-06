@@ -57,7 +57,7 @@ class _FilterDemoState extends State<FilterDemo> {
                     // buildBackdropFilter(),
                     // buildCombine(),
                     NFilter(
-                      foregroundFilter: ui.ImageFilter.blur(
+                      fgFilter: ui.ImageFilter.blur(
                         sigmaX: 2,
                         sigmaY: 2,
                       ),

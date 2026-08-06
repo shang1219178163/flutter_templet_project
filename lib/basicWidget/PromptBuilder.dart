@@ -22,8 +22,7 @@ class PromptBuilder {
     }
     var promptItem = toPromptWidgetKeys.removeAt(0);
 
-    var promptRenderObject =
-        promptItem.promptWidgetKey.currentContext?.findRenderObject();
+    var promptRenderObject = promptItem.promptWidgetKey.currentContext?.findRenderObject();
     var widgetHeight = promptRenderObject?.paintBounds.height ?? 0;
     var widgetWidth = promptRenderObject?.paintBounds.width ?? 0;
 
@@ -36,23 +35,14 @@ class PromptBuilder {
       widgetLeft = offset.dx;
     }
 
-    if (widgetHeight != 0 &&
-        widgetWidth != 0 &&
-        widgetTop != 0 &&
-        widgetLeft != 0) {
-      _buildNextPromptOverlay(
-          promptItem.promptWidgetKey.currentContext!,
-          widgetWidth,
-          widgetHeight,
-          widgetLeft,
-          widgetTop,
-          null,
-          promptItem.promptTips);
+    if (widgetHeight != 0 && widgetWidth != 0 && widgetTop != 0 && widgetLeft != 0) {
+      _buildNextPromptOverlay(promptItem.promptWidgetKey.currentContext!, widgetWidth, widgetHeight, widgetLeft,
+          widgetTop, null, promptItem.promptTips);
     }
   }
 
-  static _buildNextPromptOverlay(BuildContext context, double w, double h,
-      double l, double t, Decoration? decoration, String tips) {
+  static _buildNextPromptOverlay(
+      BuildContext context, double w, double h, double l, double t, Decoration? decoration, String tips) {
     _removeCurrentOverlay();
     lastOverlay = OverlayEntry(builder: (ctx) {
       return GestureDetector(
@@ -65,40 +55,42 @@ class PromptBuilder {
         child: Stack(
           children: [
             Positioned.fill(
-                child: ColorFiltered(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withValues(alpha: 0.7), BlendMode.srcOut),
-              child: Stack(
-                children: [
-                  // 透明色填充背景，作为蒙版
-                  Positioned.fill(
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(Colors.black.withValues(alpha: 0.7), BlendMode.srcOut),
+                child: Stack(
+                  children: [
+                    // 透明色填充背景，作为蒙版
+                    Positioned.fill(
                       child: Container(
-                    color: Colors.transparent,
-                  )),
-                  // 镂空区域
-                  Positioned(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    // 镂空区域
+                    Positioned(
                       left: l,
                       top: t,
                       child: Container(
                         width: w,
                         height: h,
-                        decoration: decoration ??
-                            const BoxDecoration(color: Colors.black),
-                      )),
-                ],
+                        decoration: decoration ?? const BoxDecoration(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )),
+            ),
             // 文字提示，需要放在ColorFiltered的外层
             Positioned(
-                left: l - 40,
-                top: t - 40,
-                child: Material(
-                  color: Colors.transparent,
-                  child: Text(
-                    tips,
-                    style: const TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                ))
+              left: l - 40,
+              top: t - 40,
+              child: Material(
+                color: Colors.transparent,
+                child: Text(
+                  tips,
+                  style: const TextStyle(fontSize: 14, color: Colors.white),
+                ),
+              ),
+            ),
           ],
         ),
       );

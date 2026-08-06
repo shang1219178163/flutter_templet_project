@@ -101,8 +101,8 @@ class _NDateStartEndState extends State<NDateStartEnd> {
     );
   }
 
-  void onPickStart() {
-    pickerDate(
+  Future<void> onPickStart() async {
+    await onPicker(
       selectDateStr: startDate,
       onConfirm: (date) {
         startDate = DateTimeExt.stringFromDate(
@@ -115,9 +115,9 @@ class _NDateStartEndState extends State<NDateStartEnd> {
     );
   }
 
-  void onPickEnd() {
+  Future<void> onPickEnd() async {
     final bDate = startDate == null ? null : DateTimeExt.dateFromString(dateStr: startDate!);
-    pickerDate(
+    await onPicker(
       minDateTime: bDate,
       selectDateStr: endDate,
       onConfirm: (date) {
@@ -131,7 +131,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
     );
   }
 
-  pickerDate({
+  Future<void> onPicker({
     DateTime? minDateTime,
     String? selectDateStr,
     required ValueChanged<DateTime> onConfirm,

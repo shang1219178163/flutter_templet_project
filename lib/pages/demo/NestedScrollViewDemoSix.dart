@@ -1,10 +1,6 @@
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_page.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_page_one.dart';
-import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
-import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +34,6 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
 
   @override
   Widget build(BuildContext context) {
-    return buildBodyOne();
     return buildBody();
     return Scaffold(
       appBar: hideApp
@@ -46,7 +41,7 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
           : AppBar(
               title: Text("$widget"),
             ),
-      body: buildBodyOne(),
+      body: buildBody(),
     );
   }
 
@@ -73,84 +68,6 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
         ),
         child: buildListView(tabTitlte: "tab"),
       ),
-    );
-  }
-
-  Widget buildBodyOne() {
-    var statusBarHeight = MediaQuery.of(context).padding.top;
-
-    var expandedHeight = 300.0;
-    var collapseHeight = kToolbarHeight;
-
-    var tabBarHeight = 40.0;
-
-    return NSliverPageOne(
-      expandedHeight: expandedHeight,
-      collapsedHeight: collapseHeight,
-      tabBarHeight: tabBarHeight,
-      title: Text("$collapseHeight/$expandedHeight"),
-      header: LayoutBuilder(builder: (context, constraints) {
-        // 59 + 56 = 115 + 40 = 155
-        var top = constraints.maxHeight;
-        // final double opacity =
-        //     ((constraints.maxHeight - collapseHeight) / (expandedHeight - collapseHeight)).clamp(0.0, 1.0);
-
-        final fixedHeight = statusBarHeight + tabBarHeight;
-        var opacity = ((top - fixedHeight - kToolbarHeight) / (expandedHeight - fixedHeight)).clamp(0.0, 1.0);
-
-        final desc = [statusBarHeight, collapseHeight, top, opacity].map((e) => e.toStringAsFixed(1)).join("_");
-
-        return Stack(
-          fit: StackFit.expand,
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: tabBarHeight), //是否包含TabBar
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                image: DecorationImage(
-                  // opacity: opacity,
-                  image: ExtendedNetworkImageProvider(
-                    AppRes.image.urls[4],
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: AnimatedOpacity(
-                opacity: opacity,
-                duration: Duration(milliseconds: 200),
-                child: UserHeader(
-                  constraints: constraints,
-                ),
-              ),
-            ),
-            Positioned(
-              child: HeaderCollapsedTopLeft(
-                opacity: opacity,
-                statusBarHeight: 18,
-              ),
-            )
-          ],
-        );
-      }),
-      tabBuilder: (context, tab) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.green.withValues(alpha: 0.5),
-          ),
-          child: TabBar(
-            controller: tabController,
-            isScrollable: true,
-            indicatorColor: Colors.red,
-            tabs: tabTitles.map((e) {
-              return Tab(
-                text: e,
-                height: tabBarHeight,
-              );
-            }).toList(),
-          ),
-        );
-      },
-      body: buildTabBarView(),
     );
   }
 

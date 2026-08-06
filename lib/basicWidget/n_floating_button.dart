@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 /// 悬浮组件
 class NFloatingButton extends StatefulWidget {
-  NFloatingButton({
-    Key? key,
+  const NFloatingButton({
+    super.key,
     required this.child,
     required this.bgChild,
     this.alignment = AlignmentDirectional.topStart,
@@ -14,7 +14,7 @@ class NFloatingButton extends StatefulWidget {
     this.childSize = const Size(100, 100),
     this.attachHorizalEdge = false,
     this.attachVerticalEdge = false,
-  }) : super(key: key);
+  });
 
   final AlignmentGeometry alignment;
 

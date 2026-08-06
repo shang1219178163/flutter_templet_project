@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 /// 域名选择器
 class NOriginSheet extends StatefulWidget {
-  NOriginSheet({
+  const NOriginSheet({
     super.key,
     this.onChanged,
   });
@@ -28,10 +28,10 @@ class NOriginSheet extends StatefulWidget {
   final void Function(AppEnv env, String origin)? onChanged;
 
   @override
-  State<NOriginSheet> createState() => _NOriginSheetState();
+  State<NOriginSheet> createState() => NOriginSheetState();
 }
 
-class _NOriginSheetState extends State<NOriginSheet> {
+class NOriginSheetState extends State<NOriginSheet> {
   final textController = TextEditingController();
 
   AppEnv get currentEnv {
@@ -42,11 +42,6 @@ class _NOriginSheetState extends State<NOriginSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return buildOriginSheet();
-  }
-
-  /// 域名选择
-  Widget buildOriginSheet() {
     if (currentEnv == AppEnv.prod && kReleaseMode) {
       return const SizedBox();
     }

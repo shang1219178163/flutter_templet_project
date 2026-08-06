@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class NUserPrivacy extends StatefulWidget {
   const NUserPrivacy({
-    Key? key,
+    super.key,
     this.title,
     this.content,
     required this.onCancel,
@@ -21,8 +21,7 @@ class NUserPrivacy extends StatefulWidget {
     this.cancellBuilder,
     this.confirmBuilder,
     this.bottomBuilder,
-  })  : assert(title != null || content != null),
-        super(key: key);
+  }) : assert(title != null || content != null);
 
   final Text? title;
   final Text? content;

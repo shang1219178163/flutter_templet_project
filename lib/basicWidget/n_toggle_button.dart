@@ -4,21 +4,22 @@ import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class ToggleButton<T> extends StatefulWidget {
-  const ToggleButton(
-      {super.key,
-      required this.onChanged,
-      this.borderRadius = 20,
-      this.backgroundColor,
-      this.sliderColor,
-      required this.originData,
-      this.selectTextColor,
-      this.textColor,
-      this.textSize = 12,
-      this.margin,
-      this.itemWidth = 60,
-      this.height = 26,
-      this.labelBuilder,
-      this.value});
+  const ToggleButton({
+    super.key,
+    required this.onChanged,
+    this.borderRadius = 20,
+    this.backgroundColor,
+    this.sliderColor,
+    required this.originData,
+    this.selectTextColor,
+    this.textColor,
+    this.textSize = 12,
+    this.margin,
+    this.itemWidth = 60,
+    this.height = 26,
+    this.labelBuilder,
+    this.value,
+  });
 
   final double itemWidth;
   final double height;

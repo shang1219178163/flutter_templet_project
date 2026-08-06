@@ -43,16 +43,17 @@ class NImageIndicator extends StatelessWidget {
     return CustomPaint(
       size: Size(maxSize * _kMaxCircleCount + space * (_kMaxCircleCount - 1), maxSize),
       painter: ImageIndicatorPainter(
-          itemCount: itemCount,
-          indicatorColor: indicatorColor,
-          indicatorOtherColor: indicatorOtherColor,
-          maxSize: maxSize,
-          minSize: minSize,
-          pageIndex: index,
-          space: space,
-          pageOffset: offset! - index,
-          isStart: (offset > index) && (index + _kMaxCircleCount - 1 < itemCount),
-          isEnd: index + _kMaxCircleCount - 2 >= itemCount),
+        itemCount: itemCount,
+        indicatorColor: indicatorColor,
+        indicatorOtherColor: indicatorOtherColor,
+        maxSize: maxSize,
+        minSize: minSize,
+        pageIndex: index,
+        space: space,
+        pageOffset: offset! - index,
+        isStart: (offset > index) && (index + _kMaxCircleCount - 1 < itemCount),
+        isEnd: index + _kMaxCircleCount - 2 >= itemCount,
+      ),
     );
   }
 }

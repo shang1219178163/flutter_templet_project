@@ -6,9 +6,9 @@ class SkeletonItem extends StatelessWidget {
   final Axis direction;
 
   const SkeletonItem({
-    Key? key,
+    super.key,
     this.direction = Axis.vertical,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

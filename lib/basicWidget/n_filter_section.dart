@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class NFilterSection<T> extends StatefulWidget {
-  NFilterSection({
+  const NFilterSection({
     super.key,
     required this.title,
     this.isSingle = true,
@@ -79,49 +79,51 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
     }
     final disable = (models.length <= widget.collapseCount);
 
-    return StatefulBuilder(builder: (context, setState) {
-      final items = isExpand ? models : models.take(widget.collapseCount).toList();
+    return StatefulBuilder(
+      builder: (context, setState) {
+        final items = isExpand ? models : models.take(widget.collapseCount).toList();
 
-      return buildExpandMenu(
-        title: widget.title,
-        disable: disable,
-        isExpand: isExpand,
-        onExpansionChanged: (val) {
-          isExpand = !isExpand;
-          setState(() {});
-        },
-        childrenHeader: (isExpanded, onTap) => Column(
-          children: [
-            NChoiceBox<T>(
-              isSingle: true,
-              itemColor: Colors.transparent,
-              items: items
-                  .map((e) => ChoiceBoxModel<T>(
-                        id: widget.cbID(e),
-                        title: widget.cbName(e),
-                        isSelected: widget.cbSelected(e),
-                        data: e,
-                      ))
-                  .toList(),
-              onChanged: (value) {
-                if (widget.isSingle) {
-                  final tmp = value.isEmpty ? null : value.first.data;
-                  widget.onSingleChanged?.call(tmp);
-                } else {
-                  var tmp = value.map((e) => e.data!).where((e) => e != null).toList();
-                  widget.onChanged?.call(tmp);
-                }
-              },
-              itemBuilder: widget.itemBuilder,
-            ),
-          ],
-        ),
-        children: [],
-      );
-    });
+        return buildSection(
+          title: widget.title,
+          disable: disable,
+          isExpand: isExpand,
+          onExpansionChanged: (val) {
+            isExpand = !isExpand;
+            setState(() {});
+          },
+          childrenHeader: (isExpanded, onTap) => Column(
+            children: [
+              NChoiceBox<T>(
+                isSingle: true,
+                itemColor: Colors.transparent,
+                items: items
+                    .map((e) => ChoiceBoxModel<T>(
+                          id: widget.cbID(e),
+                          title: widget.cbName(e),
+                          isSelected: widget.cbSelected(e),
+                          data: e,
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  if (widget.isSingle) {
+                    final tmp = value.isEmpty ? null : value.first.data;
+                    widget.onSingleChanged?.call(tmp);
+                  } else {
+                    var tmp = value.map((e) => e.data!).where((e) => e != null).toList();
+                    widget.onChanged?.call(tmp);
+                  }
+                },
+                itemBuilder: widget.itemBuilder,
+              ),
+            ],
+          ),
+          children: [],
+        );
+      },
+    );
   }
 
-  Widget buildExpandMenu({
+  Widget buildSection({
     required String title,
     List<Widget>? children,
     bool isExpand = true,

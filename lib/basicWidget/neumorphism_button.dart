@@ -12,14 +12,14 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 /// 拟物按钮
 class NeumorphismButton extends StatelessWidget {
   NeumorphismButton({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     this.padding = const EdgeInsets.all(8),
     this.borderRadius = 30,
     required this.child,
     this.onClick,
-  }) : super(key: key);
+  });
 
   NeumorphismButton.icon({
     Key? key,

@@ -15,7 +15,7 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 /// webview_flutter 简易封装
 class NWebViewPage extends StatefulWidget {
-  NWebViewPage({
+  const NWebViewPage({
     super.key,
     required this.title,
     required this.url,
@@ -36,10 +36,10 @@ class NWebViewPage extends StatefulWidget {
   final bool errorReloadAgain;
 
   @override
-  _NWebViewPageState createState() => _NWebViewPageState();
+  NWebViewPageState createState() => NWebViewPageState();
 }
 
-class _NWebViewPageState extends State<NWebViewPage> {
+class NWebViewPageState extends State<NWebViewPage> {
   late final WebViewController _controller;
 
   bool isFirstLoad = true;

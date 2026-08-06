@@ -681,8 +681,8 @@ class AppRouter {
   static const String badgesDemo = '/badgesDemo';
   static const String flutterSwiperDemo = '/flutterSwiperDemo';
   static const String flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
-  static const String homeSrollDemo = '/synHomeSrollDemo';
-  static const String homeNavDemo = '/synHomeNavDemo';
+  static const String homeSrollDemo = '/homeSrollDemo';
+  static const String homeNavDemo = '/homeNavDemo';
   static const String wrapDemo = '/wrapDemo';
   static const String boxConstraintsDemo = '/boxConstraintsDemo';
   static const String gradientDemo = '/gradientDemo';

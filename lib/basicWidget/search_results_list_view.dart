@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class SearchResultsListView extends StatefulWidget {
   SearchResultsListView({
-    Key? key,
+    super.key,
     this.map = const {},
     this.hintText = "搜索",
     this.isSort = true,
@@ -13,8 +13,7 @@ class SearchResultsListView extends StatefulWidget {
     this.separatorBuilder,
     this.searchCallback,
     required this.tap,
-  })  : editingController = editingController ?? TextEditingController(),
-        super(key: key);
+  }) : editingController = editingController ?? TextEditingController();
 
   final Map<String, dynamic> map;
   final String? hintText;
@@ -67,7 +66,7 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
             child: Text("找到 ${searchResults.length} 条数据"),
           ),
           Expanded(
-            child: _buildListView(context),
+            child: buildListView(context),
             flex: 1,
           )
         ],
@@ -93,7 +92,7 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
     );
   }
 
-  _buildListView(BuildContext context) {
+  Widget buildListView(BuildContext context) {
     if (widget.isSort != null && widget.isSort == true) {
       searchResults.sort((a, b) => "$a".compareTo("$b"));
     }

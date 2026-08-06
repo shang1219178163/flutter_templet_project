@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 /// 标签编辑
 class NTagBox<E> extends StatelessWidget {
   const NTagBox({
-    Key? key,
+    super.key,
     this.keywords = "",
     required this.items,
     required this.titleCb,
@@ -23,7 +23,7 @@ class NTagBox<E> extends StatelessWidget {
     this.tagColor = Colors.blue,
     this.tagAddColor = Colors.deepOrange,
     this.max = 9,
-  }) : super(key: key);
+  });
 
   /// 标签主题关键字
   final String keywords;

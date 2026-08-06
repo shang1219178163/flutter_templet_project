@@ -12,12 +12,12 @@ import 'package:flutter/material.dart';
 
 /// 自定义滤镜组件, 支持前后滤镜
 class NFilter extends StatelessWidget {
-  NFilter({
+  const NFilter({
     super.key,
     this.borderRadius = BorderRadius.zero,
     this.clipper,
     this.clipBehavior = Clip.antiAlias,
-    this.foregroundFilter,
+    this.fgFilter,
     this.filter,
     this.child,
   });
@@ -29,7 +29,7 @@ class NFilter extends StatelessWidget {
   final Clip clipBehavior;
 
   /// 前景滤镜
-  final ui.ImageFilter? foregroundFilter;
+  final ui.ImageFilter? fgFilter;
 
   /// 背景滤镜
   final ui.ImageFilter? filter;
@@ -38,7 +38,7 @@ class NFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if ([foregroundFilter, filter].every((e) => e == null)) {
+    if ([fgFilter, filter].every((e) => e == null)) {
       return child ?? SizedBox();
     }
 
@@ -47,17 +47,9 @@ class NFilter extends StatelessWidget {
       clipper: clipper,
       clipBehavior: clipBehavior,
       child: BackdropFilter(
-        filter: filter ??
-            ui.ImageFilter.blur(
-              sigmaX: 0,
-              sigmaY: 0,
-            ),
+        filter: filter ?? ui.ImageFilter.blur(sigmaX: 0, sigmaY: 0),
         child: ImageFiltered(
-          imageFilter: foregroundFilter ??
-              ui.ImageFilter.blur(
-                sigmaX: 0,
-                sigmaY: 0,
-              ),
+          imageFilter: fgFilter ?? ui.ImageFilter.blur(sigmaX: 0, sigmaY: 0),
           child: child,
         ),
       ),

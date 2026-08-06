@@ -22,14 +22,6 @@ class _NColorAnimationState extends State<NColorAnimation> with SingleTickerProv
 
   late final List<Color> _colors = widget.colors;
 
-  // final List<Color> colors = [
-  //   Colors.blue,
-  //   Colors.red,
-  //   Colors.green,
-  //   Colors.orange,
-  //   Colors.purple,
-  // ];
-
   @override
   void dispose() {
     _controller.dispose();

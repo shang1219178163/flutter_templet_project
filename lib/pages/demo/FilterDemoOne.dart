@@ -83,7 +83,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
                     children: [
                       Text("01" * 399),
                       NFilter(
-                        foregroundFilter: ui.ImageFilter.blur(
+                        fgFilter: ui.ImageFilter.blur(
                           sigmaX: imageFilteredVN.value,
                           sigmaY: imageFilteredVN.value,
                         ),

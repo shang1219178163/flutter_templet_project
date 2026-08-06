@@ -44,107 +44,109 @@ class _NHorizalStepState<E> extends State<NHorizalStep<E>> {
     final seedColor = Theme.of(context).colorScheme.primary;
     final items = widget.items;
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      final maxWidth = constraints.maxWidth;
-      final itemWidth = widget.itemWidth ?? (maxWidth / items.length.toDouble()).truncateToDouble();
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final maxWidth = constraints.maxWidth;
+        final itemWidth = widget.itemWidth ?? (maxWidth / items.length.toDouble()).truncateToDouble();
 
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: widget.itemHeight,
-            child: Row(
-              children: [
-                Expanded(
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, i) {
-                      final title = i * 100;
-                      final subtitle = i * 1010;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: widget.itemHeight,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (_, i) {
+                        final title = i * 100;
+                        final subtitle = i * 1010;
 
-                      final isSelected = i == selectedIndex;
-                      var color = seedColor;
-                      Color unselecedColor = Colors.grey;
-                      final currColor = isSelected ? color : unselecedColor;
-                      final diverColor = i <= selectedIndex ? color : unselecedColor;
-                      final diverHeight = i <= selectedIndex ? 2.0 : 1.0;
+                        final isSelected = i == selectedIndex;
+                        var color = seedColor;
+                        Color unselecedColor = Colors.grey;
+                        final currColor = isSelected ? color : unselecedColor;
+                        final diverColor = i <= selectedIndex ? color : unselecedColor;
+                        final diverHeight = i <= selectedIndex ? 2.0 : 1.0;
 
-                      final isFirst = i == 0;
-                      final isLast = i == items.length - 1;
+                        final isFirst = i == 0;
+                        final isLast = i == items.length - 1;
 
-                      return GestureDetector(
-                        onTap: () {
-                          selectedIndex = i;
-                          setState(() {});
-                        },
-                        child: widget.itemBuilder?.call(context, i, isSelected) ??
-                            Container(
-                              width: itemWidth,
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  widget.itemHeaderBuilder?.call(context, i, isSelected) ??
-                                      Text(
-                                        title.toString(),
-                                        style: TextStyle(fontSize: 13, color: currColor),
+                        return GestureDetector(
+                          onTap: () {
+                            selectedIndex = i;
+                            setState(() {});
+                          },
+                          child: widget.itemBuilder?.call(context, i, isSelected) ??
+                              Container(
+                                width: itemWidth,
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    widget.itemHeaderBuilder?.call(context, i, isSelected) ??
+                                        Text(
+                                          title.toString(),
+                                          style: TextStyle(fontSize: 13, color: currColor),
+                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.only(top: 1, bottom: 2),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: buildDivider(
+                                              color: isFirst ? diverColor.withValues(alpha: 0.0) : diverColor,
+                                              colorEnd: diverColor,
+                                              thickness: diverHeight,
+                                            ),
+                                          ),
+                                          buildIndicator(isSelected: isSelected, color: diverColor),
+                                          Expanded(
+                                            child: buildDivider(
+                                              color: diverColor,
+                                              colorEnd: diverColor,
+                                              thickness: diverHeight,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                  Container(
-                                    padding: const EdgeInsets.only(top: 1, bottom: 2),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: buildDivider(
-                                            color: isFirst ? diverColor.withValues(alpha: 0.0) : diverColor,
-                                            colorEnd: diverColor,
-                                            thickness: diverHeight,
-                                          ),
-                                        ),
-                                        buildIndicator(isSelected: isSelected, color: diverColor),
-                                        Expanded(
-                                          child: buildDivider(
-                                            color: diverColor,
-                                            colorEnd: diverColor,
-                                            thickness: diverHeight,
-                                          ),
-                                        ),
-                                      ],
                                     ),
-                                  ),
-                                  widget.itemFooterBuilder?.call(context, i, isSelected) ??
-                                      Text(
-                                        subtitle.toString(),
-                                        style: TextStyle(fontSize: 10, color: currColor),
-                                      ),
-                                ],
+                                    widget.itemFooterBuilder?.call(context, i, isSelected) ??
+                                        Text(
+                                          subtitle.toString(),
+                                          style: TextStyle(fontSize: 10, color: currColor),
+                                        ),
+                                  ],
+                                ),
                               ),
-                            ),
-                      );
-                    },
-                    separatorBuilder: (_, i) {
-                      return const SizedBox();
-                    },
-                    itemCount: items.length,
+                        );
+                      },
+                      separatorBuilder: (_, i) {
+                        return const SizedBox();
+                      },
+                      itemCount: items.length,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-          /// 底部折线指示器
-          NAnimatedStepLineIndicator(
-            currentIndex: selectedIndex.toDouble(),
-            count: items.length,
-            itemWidth: itemWidth,
-            spacing: 0,
-            color: widget.indicatorColor ?? seedColor,
-          )
-        ],
-      );
-    });
+            /// 底部折线指示器
+            NAnimatedStepLineIndicator(
+              currentIndex: selectedIndex.toDouble(),
+              count: items.length,
+              itemWidth: itemWidth,
+              spacing: 0,
+              color: widget.indicatorColor ?? seedColor,
+            )
+          ],
+        );
+      },
+    );
   }
 
   Widget buildIndicator({required bool isSelected, Color color = Colors.green}) {

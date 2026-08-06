@@ -62,55 +62,58 @@ class _ContainerDemoState extends State<ContainerDemo> {
           ],
         ),
         // body: isSliver ? buildBodyCustom() : buildBodyColumn(),
-        body: CustomScrollView(
-          slivers: [
-            NSectionBox(
-              title: "EnDecorationImage - placeholder",
-              child: Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue),
-                  image: EnDecorationImage(
-                    image: CachedNetworkImageProvider(
-                      AppRes.image.urls[6],
-                      cacheKey: "${DateTime.now()}",
+        body: KeepAlive(
+          keepAlive: true,
+          child: CustomScrollView(
+            slivers: [
+              NSectionBox(
+                title: "EnDecorationImage - placeholder",
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blue),
+                    image: EnDecorationImage(
+                      image: CachedNetworkImageProvider(
+                        AppRes.image.urls[6],
+                        cacheKey: "${DateTime.now()}",
+                      ),
+                      placeholder: AssetImage(Assets.assetsImagesFlutter),
+                      fit: BoxFit.fill,
                     ),
-                    placeholder: AssetImage(Assets.assetsImagesFlutter),
-                    fit: BoxFit.fill,
                   ),
                 ),
               ),
-            ),
-            buildSection(),
-            buildSection1(),
-            buildGradientBorder(),
-            buildSectionDecorationImage(),
-            buildSectionEnDecorationImage(),
-            NSectionBox(
-              title: "NInnerShadow",
-              child: buildInnerShadow(),
-            ),
-            NSectionBox(
-              title: "EnBoxDecoration",
-              child: buildEnBoxDecoration(),
-            ),
-          ]
-              .map((e) => SliverToBoxAdapter(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blue),
+              buildSection(),
+              buildSection1(),
+              buildGradientBorder(),
+              buildSectionDecorationImage(),
+              buildSectionEnDecorationImage(),
+              NSectionBox(
+                title: "NInnerShadow",
+                child: buildInnerShadow(),
+              ),
+              NSectionBox(
+                title: "EnBoxDecoration",
+                child: buildEnBoxDecoration(),
+              ),
+            ]
+                .map((e) => SliverToBoxAdapter(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blue),
+                            ),
+                            child: e,
                           ),
-                          child: e,
-                        ),
-                        Divider(height: 16),
-                      ],
-                    ),
-                  ))
-              .toList(),
+                          Divider(height: 16),
+                        ],
+                      ),
+                    ))
+                .toList(),
+          ),
         ),
       ),
     );

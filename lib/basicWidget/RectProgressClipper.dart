@@ -22,50 +22,51 @@ class RectProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: progressVN,
-        child: child,
-        builder: (context, value, child) {
-          debugPrint("value: $value");
-          final precent = (value * 100).toInt().toStringAsFixed(0);
-          var precentStr = "$precent%";
-          if (precent == "0") {
-            precentStr = "加载中";
-          }
+      valueListenable: progressVN,
+      child: child,
+      builder: (context, value, child) {
+        debugPrint("value: $value");
+        final precent = (value * 100).toInt().toStringAsFixed(0);
+        var precentStr = "$precent%";
+        if (precent == "0") {
+          precentStr = "加载中";
+        }
 
-          return ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
+        return ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: width,
+                height: height,
+                child: child ?? FlutterLogo(),
+              ),
+              ClipPath(
+                clipper: RectProgressClipper(
+                  progress: value,
+                ),
+                child: Container(
                   width: width,
                   height: height,
-                  child: child ?? FlutterLogo(),
+                  color: Colors.black.withValues(alpha: 0.6),
                 ),
-                ClipPath(
-                  clipper: RectProgressClipper(
-                    progress: value,
-                  ),
-                  child: Container(
-                    width: width,
-                    height: height,
-                    color: Colors.black.withValues(alpha: 0.6),
+              ),
+              Positioned(
+                child: Text(
+                  precentStr,
+                  style: TextStyle(
+                    color: Color(0xffEDFBFF),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
-                Positioned(
-                  child: Text(
-                    precentStr,
-                    style: TextStyle(
-                      color: Color(0xffEDFBFF),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          );
-        });
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 

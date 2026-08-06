@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 /// 订单数量/金额等修改
 class NOrderNumUnit extends StatefulWidget {
   NOrderNumUnit({
-    Key? key,
+    super.key,
     required this.value,
     this.keyboardType = TextInputType.text,
     this.readOnly = false,
@@ -25,7 +25,7 @@ class NOrderNumUnit extends StatefulWidget {
     this.suffixIcon,
     this.suffixIconConstraints,
     this.unit = "元",
-  }) : super(key: key);
+  });
 
   /// 默认值
   final String value;
@@ -91,8 +91,7 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
       decoration: InputDecoration(
         labelText: widget.labelText,
         filled: true,
-        fillColor:
-            widget.readOnly ? widget.fillColorReadOnly : widget.fillColor,
+        fillColor: widget.readOnly ? widget.fillColorReadOnly : widget.fillColor,
         border: border,
         enabledBorder: border,
         focusedBorder: border,
@@ -119,49 +118,4 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
       ),
     );
   }
-
-  // /// 高度 36
-  // buildTextFieldUnit({
-  //   TextEditingController? controller,
-  //   TextInputType keyboardType = TextInputType.number,
-  //   bool readOnly = true,
-  //   String? labelText,
-  //   Color? fillColor = Colors.black12,
-  //   Color? fillColorReadOnly = Colors.transparent,
-  //   List<TextInputFormatter>? inputFormatters,
-  //   Widget? suffixIcon,
-  //   String unit = "元",
-  // }) {
-  //   final contentPadding = EdgeInsets.symmetric(
-  //     horizontal: 8,
-  //     vertical: 12,
-  //   );
-  //   return buildTextField(
-  //     controller: controller,
-  //     keyboardType: keyboardType,
-  //     readOnly: readOnly,
-  //     // labelText: 'Weight (KG)',
-  //     borderColor: Colors.transparent,
-  //     isCollapsed: true,
-  //     contentPadding: contentPadding,
-  //     fillColor: readOnly ? fillColorReadOnly : fillColor,
-  //     inputFormatters: inputFormatters,
-  //     suffixIconConstraints: BoxConstraints().loosen(),
-  //     suffixIcon: suffixIcon ?? Row(
-  //       mainAxisSize: MainAxisSize.min,
-  //       // crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Padding(
-  //           padding: EdgeInsets.only(right: contentPadding.left),
-  //           child: Text("| $unit",
-  //             textAlign: TextAlign.center,
-  //             style: TextStyle(
-  //               color: Colors.black54,
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

@@ -23,17 +23,6 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  onPressed: () => debugPrint("done"),
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
       ),
       body: buildBody(),
     );
@@ -92,7 +81,7 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
     );
   }
 
-  Widget buildItem() {
+  MaterialSlice buildItem() {
     return MaterialSlice(
         // key:  ValueKey<int>(currIndexNum),
         key: UniqueKey(),

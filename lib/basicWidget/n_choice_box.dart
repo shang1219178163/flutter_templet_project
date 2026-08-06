@@ -88,11 +88,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
           spacing: widget.wrapSpacing,
           runSpacing: widget.wrapRunSpacing,
           alignment: widget.wrapAlignment,
-          children: widget.items
-              .map(
-                (e) => buildItem(e),
-              )
-              .toList(),
+          children: widget.items.map((e) => buildItem(e)).toList(),
         ),
         widget.footer ?? SizedBox(),
       ],

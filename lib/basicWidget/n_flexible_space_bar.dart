@@ -8,42 +8,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart' show clampDouble;
 import 'package:flutter/material.dart';
 
-/// The part of a Material Design [AppBar] that expands, collapses, and
-/// stretches.
-///
-/// {@youtube 560 315 https://www.youtube.com/watch?v=mSc7qFzxHDw}
-///
-/// Most commonly used in the [SliverAppBar.flexibleSpace] field, a flexible
-/// space bar expands and contracts as the app scrolls so that the [AppBar]
-/// reaches from the top of the app to the top of the scrolling contents of the
-/// app. When using [SliverAppBar.flexibleSpace], the [SliverAppBar.expandedHeight]
-/// must be large enough to accommodate the [SliverAppBar.flexibleSpace] widget.
-///
-/// Furthermore is included functionality for stretch behavior. When
-/// [SliverAppBar.stretch] is true, and your [ScrollPhysics] allow for
-/// overscroll, this space will stretch with the overscroll.
-///
-/// The widget that sizes the [AppBar] must wrap it in the widget returned by
-/// [NFlexibleSpaceBar.createSettings], to convey sizing information down to the
-/// [NFlexibleSpaceBar].
-///
-/// {@tool dartpad}
-/// This sample application demonstrates the different features of the
-/// [NFlexibleSpaceBar] when used in a [SliverAppBar]. This app bar is configured
-/// to stretch into the overscroll space, and uses the
-/// [NFlexibleSpaceBar.stretchModes] to apply `fadeTitle`, `blurBackground` and
-/// `zoomBackground`. The app bar also makes use of [CollapseMode.parallax] by
-/// default.
-///
-/// ** See code in examples/api/lib/material/flexible_space_bar/flexible_space_bar.0.dart **
-/// {@end-tool}
-///
-/// See also:
-///
-///  * [SliverAppBar], which implements the expanding and contracting.
-///  * [AppBar], which is used by [SliverAppBar].
-///  * <https://material.io/design/components/app-bars-top.html#behavior>
-
 typedef FractionalBuilder = Widget Function(double t);
 
 class NFlexibleSpaceBar extends StatefulWidget {
@@ -61,7 +25,7 @@ class NFlexibleSpaceBar extends StatefulWidget {
     this.collapseMode = CollapseMode.parallax,
     this.stretchModes = const <StretchMode>[StretchMode.zoomBackground],
     this.expandedTitleScale = 1.5,
-  })  : assert(expandedTitleScale >= 1);
+  }) : assert(expandedTitleScale >= 1);
 
   /// The primary contents of the flexible space bar when expanded.
   ///
@@ -161,8 +125,7 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final settings = context
-            .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
+        final settings = context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
 
         final children = <Widget>[];
 
@@ -170,28 +133,22 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
 
         // 0.0 -> Expanded
         // 1.0 -> Collapsed to toolbar
-        final t = clampDouble(
-            1.0 - (settings.currentExtent - settings.minExtent) / deltaExtent,
-            0.0,
-            1.0);
+        final t = clampDouble(1.0 - (settings.currentExtent - settings.minExtent) / deltaExtent, 0.0, 1.0);
         // print("=======build=======$t========");
 
         // background
         if (widget.background != null) {
-          final double fadeStart =
-              math.max(0.0, 1.0 - kToolbarHeight / deltaExtent);
+          final double fadeStart = math.max(0.0, 1.0 - kToolbarHeight / deltaExtent);
           const fadeEnd = 1.0;
           assert(fadeStart <= fadeEnd);
           // If the min and max extent are the same, the app bar cannot collapse
           // and the content should be visible, so opacity = 1.
-          final opacity = settings.maxExtent == settings.minExtent
-              ? 1.0
-              : 1.0 - Interval(fadeStart, fadeEnd).transform(t);
+          final opacity =
+              settings.maxExtent == settings.minExtent ? 1.0 : 1.0 - Interval(fadeStart, fadeEnd).transform(t);
           var height = settings.maxExtent;
 
           // StretchMode.zoomBackground
-          if (widget.stretchModes.contains(StretchMode.zoomBackground) &&
-              constraints.maxHeight > height) {
+          if (widget.stretchModes.contains(StretchMode.zoomBackground) && constraints.maxHeight > height) {
             height = constraints.maxHeight;
           }
           children.add(Positioned(
@@ -209,10 +166,8 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
           ));
 
           // StretchMode.blurBackground
-          if (widget.stretchModes.contains(StretchMode.blurBackground) &&
-              constraints.maxHeight > settings.maxExtent) {
-            final blurAmount =
-                (constraints.maxHeight - settings.maxExtent) / 10;
+          if (widget.stretchModes.contains(StretchMode.blurBackground) && constraints.maxHeight > settings.maxExtent) {
+            final blurAmount = (constraints.maxHeight - settings.maxExtent) / 10;
             children.add(Positioned.fill(
               child: BackdropFilter(
                 filter: ui.ImageFilter.blur(
@@ -249,11 +204,8 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
           }
 
           // StretchMode.fadeTitle
-          if (widget.stretchModes.contains(StretchMode.fadeTitle) &&
-              constraints.maxHeight > settings.maxExtent) {
-            final stretchOpacity = 1 -
-                clampDouble((constraints.maxHeight - settings.maxExtent) / 100,
-                    0.0, 1.0);
+          if (widget.stretchModes.contains(StretchMode.fadeTitle) && constraints.maxHeight > settings.maxExtent) {
+            final stretchOpacity = 1 - clampDouble((constraints.maxHeight - settings.maxExtent) / 100, 0.0, 1.0);
             title = Opacity(
               opacity: stretchOpacity,
               child: title,
@@ -272,16 +224,12 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
                   start: effectiveCenterTitle ? 0.0 : 72.0,
                   bottom: 16.0,
                 );
-            final scaleValue =
-                Tween<double>(begin: widget.expandedTitleScale, end: 1.0)
-                    .transform(t);
+            final scaleValue = Tween<double>(begin: widget.expandedTitleScale, end: 1.0).transform(t);
             final scaleTransform = Matrix4.identity()
               ..scale(scaleValue, scaleValue, 1.0)
               ..translate(t * 30);
-            final translateTransform = Matrix4.identity()
-              ..translate(t * 30);
-            final titleAlignment =
-                _getTitleAlignment(effectiveCenterTitle);
+            final translateTransform = Matrix4.identity()..translate(t * 30);
+            final titleAlignment = _getTitleAlignment(effectiveCenterTitle);
             children.add(
               Container(
                 padding: padding,
@@ -297,19 +245,14 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
                         child: DefaultTextStyle(
                           style: titleStyle,
                           child: LayoutBuilder(
-                            builder: (BuildContext context,
-                                BoxConstraints constraints) {
+                            builder: (BuildContext context, BoxConstraints constraints) {
                               return Container(
                                 width: constraints.maxWidth / scaleValue,
                                 alignment: titleAlignment,
                                 child: Wrap(
                                   crossAxisAlignment: WrapCrossAlignment.center,
                                   spacing: 5,
-                                  children: [
-                                    title!,
-                                    if (widget.titleIconBuilder != null)
-                                      widget.titleIconBuilder!(t)
-                                  ],
+                                  children: [title!, if (widget.titleIconBuilder != null) widget.titleIconBuilder!(t)],
                                 ),
                               );
                             },
@@ -318,10 +261,7 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
                       ),
                     ),
                     if (widget.fixedSubtitle != null)
-                      Transform(
-                          alignment: titleAlignment,
-                          transform: translateTransform,
-                          child: widget.fixedSubtitle!)
+                      Transform(alignment: titleAlignment, transform: translateTransform, child: widget.fixedSubtitle!)
                   ],
                 ),
               ),

@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 
-typedef PageIndicatorItemWidgetBuilder = Widget Function(
-    bool isSelected, Size itemSize);
+typedef PageIndicatorItemWidgetBuilder = Widget Function(bool isSelected, Size itemSize);
 
 /// 轮播图指示器
 class PageIndicatorWidget extends StatelessWidget {
-  PageIndicatorWidget(
-      {Key? key,
-      this.margin = const EdgeInsets.only(bottom: 10),
-      required this.currentPage,
-      required this.itemCount,
-      this.normalColor = const Color(0x25ffffff),
-      this.selectedColor = Colors.white,
-      this.itemSize = const Size(8, 2),
-      this.itemBuilder,
-      this.hidesForSinglePage = true})
-      : super(key: key);
+  PageIndicatorWidget({
+    super.key,
+    this.margin = const EdgeInsets.only(bottom: 10),
+    required this.currentPage,
+    required this.itemCount,
+    this.normalColor = const Color(0x25ffffff),
+    this.selectedColor = Colors.white,
+    this.itemSize = const Size(8, 2),
+    this.itemBuilder,
+    this.hidesForSinglePage = true,
+  });
 
   /// 当前页面索引
   final ValueNotifier<int> currentPage;

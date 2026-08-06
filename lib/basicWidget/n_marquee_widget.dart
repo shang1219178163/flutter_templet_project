@@ -17,7 +17,7 @@ typedef MarqueeWidgetBuilder = Widget Function(BuildContext context, int index, 
 class NMarqueeWidget extends StatefulWidget {
   /// 跑马灯
   NMarqueeWidget({
-    Key? key,
+    super.key,
     this.title,
     this.controller,
     this.duration = const Duration(milliseconds: 350),
@@ -26,7 +26,7 @@ class NMarqueeWidget extends StatefulWidget {
     required this.itemBuilder,
     required this.separatorBuilder,
     required this.edgeBuilder,
-  }) : super(key: key);
+  });
 
   final String? title;
 

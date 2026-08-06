@@ -133,7 +133,7 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
     // );
   }
 
-  InputBorder buildSliverBorderRadius({bool addToSliverBox = true}) {
+  Widget buildSliverBorderRadius({bool addToSliverBox = true}) {
     final child = Container(
       color: Color(0xff5c63f1),
       height: 20,
@@ -153,7 +153,6 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
         ],
       ),
     );
-
     if (addToSliverBox) {
       return SliverToBoxAdapter(
         child: child,

@@ -72,75 +72,79 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      final textPainter = TextPainterExt.getTextPainter(
-        text: widget.text,
-        textStyle: widget.textStyle,
-        maxLine: widget.expandMinLine,
-        maxWidth: constraints.maxWidth,
-      );
-      // final numberOfLines = textPainter.computeLineMetrics().length;
-      // debugPrint("numberOfLines:${numberOfLines}");
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final textPainter = TextPainterExt.getTextPainter(
+          text: widget.text,
+          textStyle: widget.textStyle,
+          maxLine: widget.expandMinLine,
+          maxWidth: constraints.maxWidth,
+        );
+        // final numberOfLines = textPainter.computeLineMetrics().length;
+        // debugPrint("numberOfLines:${numberOfLines}");
 
-      var isBeyond = textPainter.didExceedMaxLines;
+        var isBeyond = textPainter.didExceedMaxLines;
 
-      return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        // final btnTitle = isExpand ? "收起" : "展开";
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            // final btnTitle = isExpand ? "收起" : "展开";
 
-        final toggleImage = (isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png").toAssetImage();
+            final toggleImage = (isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png").toAssetImage();
 
-        onToggle() {
-          isExpand = !isExpand;
-          setState(() {});
-        }
+            onToggle() {
+              isExpand = !isExpand;
+              setState(() {});
+            }
 
-        final textChild = widget.textBuilder?.call(isExpand, widget.expandMinLine) ??
-            buildTextField(
-              text: widget.text,
-              style: widget.textStyle,
-              maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
-              readOnly: widget.readOnly,
-              maxLength: widget.maxLength,
-            );
+            final textChild = widget.textBuilder?.call(isExpand, widget.expandMinLine) ??
+                buildTextField(
+                  text: widget.text,
+                  style: widget.textStyle,
+                  maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
+                  readOnly: widget.readOnly,
+                  maxLength: widget.maxLength,
+                );
 
-        final opacity = widget.fillColor == Colors.white ? 0.1 : 0.05;
-        return GestureDetector(
-          onTap: onToggle,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              buildMask(
-                showMask: isBeyond && !isExpand && widget.readOnly,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  (widget.fillColor ?? Color(0xFFFFFFFF)).withValues(alpha: opacity),
-                  (widget.fillColor ?? Color(0xFFFFFFFF)),
-                ],
-                child: textChild,
-              ),
-              Offstage(
-                offstage: !isBeyond || !widget.readOnly,
-                child: InkWell(
-                  onTap: onToggle,
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 8, bottom: 8),
-                    alignment: Alignment.center,
-                    child: Image(
-                      image: toggleImage,
-                      width: 21,
-                      height: 8,
-                      color: context.themeData.colorScheme.primary,
+            final opacity = widget.fillColor == Colors.white ? 0.1 : 0.05;
+            return GestureDetector(
+              onTap: onToggle,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  buildMask(
+                    showMask: isBeyond && !isExpand && widget.readOnly,
+                    colors: [
+                      Colors.transparent,
+                      Colors.transparent,
+                      (widget.fillColor ?? Color(0xFFFFFFFF)).withValues(alpha: opacity),
+                      (widget.fillColor ?? Color(0xFFFFFFFF)),
+                    ],
+                    child: textChild,
+                  ),
+                  Offstage(
+                    offstage: !isBeyond || !widget.readOnly,
+                    child: InkWell(
+                      onTap: onToggle,
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 8, bottom: 8),
+                        alignment: Alignment.center,
+                        child: Image(
+                          image: toggleImage,
+                          width: 21,
+                          height: 8,
+                          color: context.themeData.colorScheme.primary,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         );
-      });
-    });
+      },
+    );
   }
 
   Widget buildTextField({

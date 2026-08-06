@@ -10,7 +10,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class NNetworkImage extends StatelessWidget {
-  NNetworkImage({
+  const NNetworkImage({
     super.key,
     this.title,
     required this.url,

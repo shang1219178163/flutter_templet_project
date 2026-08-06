@@ -23,7 +23,7 @@ class NAutocompleteSearch<T extends Object> extends StatefulWidget {
 
   final AutocompleteFieldViewBuilder? fieldViewBuilder;
   final String Function(T option) displayStringForOption;
-  final FutureOr<Iterable<T>> Function(TextEditingValue textEditingValue) optionsBuilder;
+  final FutureOr<Iterable<T>> Function(TextEditingValue v) optionsBuilder;
   final IndexedWidgetBuilder? optionsItemBuilder;
 
   final ValueChanged<T>? onSelected;

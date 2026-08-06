@@ -9,14 +9,14 @@
 import 'package:flutter/cupertino.dart';
 
 class NResize extends StatelessWidget {
-  NResize({
+  const NResize({
     super.key,
-    this.width,
-    this.height,
+    required this.width,
+    required this.height,
     this.fit = BoxFit.fill,
     this.alignment = Alignment.center,
     this.clipBehavior = Clip.none,
-    this.child,
+    required this.child,
   });
 
   final double? width;

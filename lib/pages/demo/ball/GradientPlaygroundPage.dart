@@ -111,7 +111,7 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
               ),
 
               /// 控制面板
-              slider(
+              buildSlider(
                 label: 'begin.x',
                 value: beginX,
                 onChanged: (v) {
@@ -119,7 +119,7 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
                   setState(() {});
                 },
               ),
-              slider(
+              buildSlider(
                 label: 'begin.y',
                 value: beginY,
                 onChanged: (v) {
@@ -127,7 +127,7 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
                   setState(() {});
                 },
               ),
-              slider(
+              buildSlider(
                 label: 'end.x',
                 value: endX,
                 onChanged: (v) {
@@ -135,7 +135,7 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
                   setState(() {});
                 },
               ),
-              slider(
+              buildSlider(
                 label: 'end.y',
                 value: endY,
                 onChanged: (v) {
@@ -164,7 +164,7 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
     );
   }
 
-  Widget slider({
+  Widget buildSlider({
     required String label,
     required double value,
     required ValueChanged<double> onChanged,

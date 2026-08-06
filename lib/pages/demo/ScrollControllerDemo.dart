@@ -43,7 +43,7 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
     );
   }
 
-  Widget buildChildren({int page = 0, int count = 20}) {
+  List<Widget> buildChildren({int page = 0, int count = 20}) {
     return List<Widget>.generate(count, (i) {
       return ListTile(
         leading: Text('page $page item $i'),

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class VoiceAnimationImage extends StatefulWidget {
   VoiceAnimationImage({
-    Key? key,
+    super.key,
     required this.assetList,
     this.width = 100,
     this.height = 100,
     this.isPlaying = false,
     this.interval = 200,
-  }) : super(key: key);
+  });
 
   final List<String> assetList;
   final double width;
@@ -21,8 +21,7 @@ class VoiceAnimationImage extends StatefulWidget {
   State<StatefulWidget> createState() => VoiceAnimationImageState();
 }
 
-class VoiceAnimationImageState extends State<VoiceAnimationImage>
-    with SingleTickerProviderStateMixin {
+class VoiceAnimationImageState extends State<VoiceAnimationImage> with SingleTickerProviderStateMixin {
   // 动画控制
   late Animation<double> _animation;
   late AnimationController _controller;
@@ -42,19 +41,17 @@ class VoiceAnimationImageState extends State<VoiceAnimationImage>
     final maxTime = widget.interval * imageCount;
 
     // 启动动画controller
-    _controller = AnimationController(
-        duration: Duration(milliseconds: maxTime), vsync: this);
+    _controller = AnimationController(duration: Duration(milliseconds: maxTime), vsync: this);
     _controller.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed) {
         _controller.forward(from: 0.0); // 完成后重新开始
       }
     });
 
-    _animation =
-        Tween<double>(begin: 0, end: imageCount.toDouble()).animate(_controller)
-          ..addListener(() {
-            setState(() {});
-          });
+    _animation = Tween<double>(begin: 0, end: imageCount.toDouble()).animate(_controller)
+      ..addListener(() {
+        setState(() {});
+      });
 
     if (widget.isPlaying) {
       start();
@@ -88,18 +85,18 @@ class VoiceAnimationImageState extends State<VoiceAnimationImage>
     );
   }
 
-  start() {
+  void start() {
     _controller.forward();
     debugPrint("$this, start");
   }
 
-  stop() {
+  void stop() {
     // _controller.stop();
     _controller.reset();
     debugPrint("$this, stop");
   }
 
-  change({ValueChanged<bool>? cb}) {
+  void change({ValueChanged<bool>? cb}) {
     cb?.call(_controller.value == _controller.lowerBound);
     if (_controller.value == _controller.lowerBound) {
       start();

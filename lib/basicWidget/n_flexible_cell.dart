@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// 列表中自适应宽度
 class NFlexibleCell extends StatelessWidget {
   const NFlexibleCell({
-    Key? key,
+    super.key,
     required this.content,
     this.prefix,
     this.suffix,
@@ -16,7 +16,7 @@ class NFlexibleCell extends StatelessWidget {
       minWidth: 100,
       maxWidth: 300,
     ),
-  }) : super(key: key);
+  });
 
   /// 内容
   final Widget content;
@@ -37,24 +37,6 @@ class NFlexibleCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildFlexibleCell(
-      content: content,
-      padding: padding,
-      decoration: decoration,
-      constraints: constraints,
-      prefix: prefix,
-      suffix: suffix,
-    );
-  }
-
-  Widget buildFlexibleCell({
-    required Widget content,
-    EdgeInsets? padding,
-    Decoration? decoration,
-    BoxConstraints? constraints,
-    Widget? prefix,
-    Widget? suffix,
-  }) {
     return Container(
       alignment: Alignment.center,
       child: Container(
@@ -80,7 +62,7 @@ class NFlexibleCell extends StatelessWidget {
             Flexible(
               child: content,
             ),
-            if (suffix != null) suffix,
+            if (suffix != null) suffix!,
           ],
         ),
       ),

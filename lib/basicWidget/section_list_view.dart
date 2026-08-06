@@ -13,13 +13,12 @@ import 'package:flutter/material.dart';
 ///抽象封装
 class SectionListView<H, E> extends StatefulWidget {
   const SectionListView({
-    Key? key,
+    super.key,
     this.headerList = const [],
     required this.headerBuilder,
     this.itemList = const [],
     required this.itemBuilder,
-  })  : assert(itemList.length == headerList.length),
-        super(key: key);
+  }) : assert(itemList.length == headerList.length);
 
   final List<H> headerList;
 
@@ -40,7 +39,7 @@ class _SectionListViewState<H, E> extends State<SectionListView<H, E>> {
   void initState() {
     super.initState();
 
-    _updateSlivers();
+    updateSlivers();
   }
 
   @override
@@ -74,7 +73,7 @@ class _SectionListViewState<H, E> extends State<SectionListView<H, E>> {
     );
   }
 
-  _updateSlivers() {
+  void updateSlivers() {
     for (var i = 0; i < widget.headerList.length; i++) {
       var headerItem = widget.headerList[i];
       var items = widget.itemList[i];
@@ -82,7 +81,9 @@ class _SectionListViewState<H, E> extends State<SectionListView<H, E>> {
         section: i,
         child: widget.headerBuilder(headerItem),
       ));
-      slivers.add(buildSliverList(section: i, list: items.whereType<E>().toList()));
+      slivers.add(
+        buildSliverList(section: i, list: items.whereType<E>().toList()),
+      );
     }
     // DLog.d([widget.sectionTitles.length, slivers.length]);
 

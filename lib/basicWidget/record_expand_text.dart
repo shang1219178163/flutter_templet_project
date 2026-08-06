@@ -61,40 +61,22 @@ class RecordExpandTextState extends State<RecordExpandText> {
 
   @override
   Widget build(BuildContext context) {
-    return buildText(
-      text: widget.text,
-      textStyle: widget.textStyle,
-      expandMaxLine: widget.expandMinLine,
-      tailing: widget.tailing,
-      tailingWidth: widget.tailingWidth,
-      disableExpand: widget.disableExpand,
-    );
-  }
-
-  Widget buildText({
-    required String text,
-    TextStyle? textStyle,
-    int expandMaxLine = 3,
-    Widget? tailing,
-    double tailingWidth = 0,
-    bool disableExpand = false,
-  }) {
-    // assert(tailing != null && tailingWidth > 0 || tailing == null,
+    // assert(widget.tailing != null && widget.tailingWidth > 0 || widget.tailing == null,
     //     "tailingWidth 应该是tailing的宽度");
-    if (disableExpand) {
+    if (widget.disableExpand) {
       return Row(
         children: [
           Expanded(
             child: NText(
-              text,
+              widget.text,
               fontSize: 16,
               maxLines: null,
               overflow: TextOverflow.clip,
               fontWeight: FontWeight.w400,
-              style: textStyle,
+              style: widget.textStyle,
             ),
           ),
-          tailing ?? const SizedBox(),
+          widget.tailing ?? const SizedBox(),
         ],
       );
     }
@@ -102,17 +84,17 @@ class RecordExpandTextState extends State<RecordExpandText> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final textPainter = TextPainterExt.getTextPainter(
-          text: text,
-          textStyle: textStyle,
-          maxLine: expandMaxLine,
-          maxWidth: (constraints.maxWidth - tailingWidth),
+          text: widget.text,
+          textStyle: widget.textStyle,
+          maxLine: widget.expandMinLine,
+          maxWidth: (constraints.maxWidth - widget.tailingWidth),
         );
         // final numberOfLines = textPainter.computeLineMetrics().length;
         // debugPrint("numberOfLines:${numberOfLines}");
         var isBeyond = textPainter.didExceedMaxLines;
         // DLog.d([
-        //   text.length,
-        //   constraints.maxWidth - tailingWidth,
+        //   widget.text.length,
+        //   constraints.maxWidth - widget.tailingWidth,
         //   textPainter.height,
         //   textPainter.didExceedMaxLines,
         //   textPainter.computeLineMetrics().length,
@@ -132,12 +114,12 @@ class RecordExpandTextState extends State<RecordExpandText> {
 
             final textChild = widget.textBuilder?.call(isExpand, widget.expandMinLine) ??
                 NText(
-                  text,
+                  widget.text,
                   fontSize: 16,
                   maxLines: isExpand ? null : widget.expandMinLine,
                   overflow: TextOverflow.clip,
                   fontWeight: FontWeight.w400,
-                  style: textStyle,
+                  style: widget.textStyle,
                 );
 
             final textContent = Row(
@@ -150,7 +132,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
                         )
                       : textChild,
                 ),
-                tailing ?? const SizedBox(),
+                widget.tailing ?? const SizedBox(),
               ],
             );
             if (!isBeyond) {

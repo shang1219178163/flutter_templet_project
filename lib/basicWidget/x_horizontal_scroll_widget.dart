@@ -33,7 +33,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
   final void Function(Tuple4<String, String, String, bool> e) onTap;
 
   XHorizontalScrollWidget({
-    Key? key,
+    super.key,
     this.title,
     required this.width,
     this.height = double.infinity,
@@ -51,7 +51,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
     this.boxShadow,
     this.isSwiper = false,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   double getItemWidth() {
     var w = width - padding.left - padding.right;

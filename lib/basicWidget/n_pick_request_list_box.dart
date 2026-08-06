@@ -65,10 +65,10 @@ class NPickRequestListBox<E> extends StatefulWidget {
   final Widget Function({int index, E e})? itemBuilder;
 
   @override
-  State<NPickRequestListBox<E>> createState() => _NPickRequestListBoxState<E>();
+  State<NPickRequestListBox<E>> createState() => NPickRequestListBoxState<E>();
 }
 
-class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
+class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
   final refreshViewController = NListRefreshController<E>();
 
   var search = "";

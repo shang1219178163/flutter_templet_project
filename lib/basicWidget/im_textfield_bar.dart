@@ -17,7 +17,7 @@ typedef EventWidgetBuilder = Widget Function(BuildContext context, IMTextfieldBa
 
 class IMTextfieldBar extends StatefulWidget {
   IMTextfieldBar({
-    Key? key,
+    super.key,
     this.controller,
     required this.onChanged,
     required this.onSubmitted,
@@ -33,7 +33,7 @@ class IMTextfieldBar extends StatefulWidget {
     this.runSpacing = 8,
     this.isVoice = false,
     // required this.isKeyboardVisibleVN,
-  }) : super(key: key);
+  });
 
   // final String? title;
   /// 控制器
@@ -116,7 +116,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     InputBorder buildBorder() {
-      OutlineInputBorder(
+      return OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4.w)), //边角
         borderSide: const BorderSide(
           color: Colors.transparent, //边框颜色为白色

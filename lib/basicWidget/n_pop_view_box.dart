@@ -49,44 +49,8 @@ class _NPopViewBoxState extends State<NPopViewBox> {
 
   @override
   Widget build(BuildContext context) {
-    return buildBody(
-      title: widget.title,
-      content: widget.content,
-      header: widget.header,
-      footer: widget.footer,
-      divderColor: widget.divderColor,
-      margin: widget.margin,
-      radius: widget.radius,
-      alignment: widget.alignment,
-      onCancell: widget.onCancell,
-      onConfirm: widget.onConfirm,
-      contentMaxHeight: widget.contentMaxHeight,
-      contentMinHeight: widget.contentMinHeight,
-      buttonBarHeight: widget.buttonBarHeight,
-      contentPadding: widget.contentPadding,
-      contentChildBuilder: widget.contentChildBuilder,
-      scrollController: widget.scrollController ?? _scrollController,
-    );
-  }
+    final scrollController = widget.scrollController ?? _scrollController;
 
-  Widget buildBody({
-    Widget? title,
-    Widget? content,
-    Widget? header,
-    Widget? footer,
-    Color divderColor = const Color(0xffF3F3F3),
-    EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 38),
-    Radius radius = const Radius.circular(8),
-    Alignment alignment = Alignment.center,
-    VoidCallback? onCancell,
-    VoidCallback? onConfirm,
-    double contentMaxHeight = 500,
-    double contentMinHeight = 150,
-    double buttonBarHeight = 48,
-    EdgeInsets contentPadding = const EdgeInsets.all(20),
-    StatefulWidgetBuilder? contentChildBuilder,
-    required ScrollController scrollController,
-  }) {
     final defaultHeader = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -94,7 +58,7 @@ class _NPopViewBoxState extends State<NPopViewBox> {
           padding: EdgeInsets.only(
             left: 20,
           ),
-          child: title ??
+          child: widget.title ??
               Text(
                 "标题",
                 style: TextStyle(
@@ -108,7 +72,7 @@ class _NPopViewBoxState extends State<NPopViewBox> {
           padding: EdgeInsets.only(right: 4),
           child: Material(
             child: IconButton(
-              onPressed: onCancell ??
+              onPressed: widget.onCancell ??
                   () {
                     Navigator.of(context).pop();
                   },
@@ -128,51 +92,51 @@ class _NPopViewBoxState extends State<NPopViewBox> {
         controller: scrollController,
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: contentMaxHeight - buttonBarHeight,
-            minHeight: contentMinHeight,
+            maxHeight: widget.contentMaxHeight - widget.buttonBarHeight,
+            minHeight: widget.contentMinHeight,
           ),
           child: SingleChildScrollView(
               controller: scrollController,
               child: Padding(
-                padding: contentPadding,
-                child: contentChildBuilder?.call(context, setState),
+                padding: widget.contentPadding,
+                child: widget.contentChildBuilder?.call(context, setState),
               )),
         ),
       );
     });
 
     final defaultFooter = NCancelAndConfirmBar(
-      height: buttonBarHeight,
+      height: widget.buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
-      bottomRadius: radius,
-      onCancel: onCancell ??
+      bottomRadius: widget.radius,
+      onCancel: widget.onCancell ??
           () {
             Navigator.of(context).pop();
           },
-      onConfirm: onConfirm ??
+      onConfirm: widget.onConfirm ??
           () {
             Navigator.of(context).pop();
           },
     );
     return Align(
-      alignment: alignment,
+      alignment: widget.alignment,
       child: Container(
-        margin: margin,
+        margin: widget.margin,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(radius),
+          borderRadius: BorderRadius.all(widget.radius),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            header ?? defaultHeader,
+            widget.header ?? defaultHeader,
             Divider(
               height: 1,
-              color: divderColor,
+              color: widget.divderColor,
             ),
-            content ?? defaultContent,
-            footer ?? defaultFooter,
+            widget.content ?? defaultContent,
+            widget.footer ?? defaultFooter,
           ],
         ),
       ),

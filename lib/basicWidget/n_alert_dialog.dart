@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 
 class NAlertDialog extends StatelessWidget {
-  NAlertDialog({
-    Key? key,
+  const NAlertDialog({
+    super.key,
     this.header,
     this.content,
     this.footer,
@@ -20,9 +20,7 @@ class NAlertDialog extends StatelessWidget {
     this.confirmButton,
     this.dividerColor,
   })  : assert(header != null || content != null),
-        assert(
-            (actions != null || cancelButton != null || confirmButton != null)),
-        super(key: key);
+        assert((actions != null || cancelButton != null || confirmButton != null));
 
   final Widget? header;
 
@@ -62,24 +60,14 @@ class NAlertDialog extends StatelessWidget {
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: actions
-                    ?.map(
-                      (e) => Expanded(
-                        child: e,
-                      ),
-                    )
-                    .toList() ??
+            children: actions?.map((e) => Expanded(child: e)).toList() ??
                 [
-                  if (cancelButton != null)
-                    Expanded(
-                      child: cancelButton!,
-                    ),
+                  if (cancelButton != null) Expanded(child: cancelButton!),
                   Container(
-                      height: 55, child: VerticalDivider(color: effectiveDividerColor)),
-                  if (confirmButton != null)
-                    Expanded(
-                      child: confirmButton!,
-                    ),
+                    height: 55,
+                    child: VerticalDivider(color: effectiveDividerColor),
+                  ),
+                  if (confirmButton != null) Expanded(child: confirmButton!),
                 ],
           ),
         ],

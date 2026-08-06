@@ -40,8 +40,7 @@ class NBoxSegmentControl<T> extends StatefulWidget {
 }
 
 class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
-  late List<GlobalKey> _itemKeys =
-      List.generate(widget.labels.length, (_) => GlobalKey());
+  late List<GlobalKey> _itemKeys = List.generate(widget.labels.length, (_) => GlobalKey());
   List<double> _widths = const [];
 
   @override
@@ -61,42 +60,46 @@ class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
   }
 
   void _measure() {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     final next = <double>[];
     for (final key in _itemKeys) {
       final width = key.currentContext?.size?.width ?? 0;
       next.add(width);
     }
-    if (next.length != _widths.length ||
-        !_listEqualsApprox(next, _widths)) {
+    if (next.length != _widths.length || !_listEqualsApprox(next, _widths)) {
       setState(() => _widths = next);
     }
   }
 
   bool _listEqualsApprox(List<double> a, List<double> b) {
-    if (a.length != b.length) return false;
+    if (a.length != b.length) {
+      return false;
+    }
     for (var i = 0; i < a.length; i++) {
-      if ((a[i] - b[i]).abs() > 0.5) return false;
+      if ((a[i] - b[i]).abs() > 0.5) {
+        return false;
+      }
     }
     return true;
   }
 
   double get _thumbLeft {
-    if (_widths.isEmpty || widget.index <= 0) return 0;
+    if (_widths.isEmpty || widget.index <= 0) {
+      return 0;
+    }
     return _widths.take(widget.index).fold<double>(0, (sum, w) => sum + w);
   }
 
   double get _thumbWidth {
-    if (_widths.isEmpty ||
-        widget.index < 0 ||
-        widget.index >= _widths.length) {
+    if (_widths.isEmpty || widget.index < 0 || widget.index >= _widths.length) {
       return 0;
     }
     return _widths[widget.index];
   }
 
-  bool get _ready => _widths.length == widget.labels.length &&
-      _widths.every((w) => w > 0);
+  bool get _ready => _widths.length == widget.labels.length && _widths.every((w) => w > 0);
 
   @override
   Widget build(BuildContext context) {

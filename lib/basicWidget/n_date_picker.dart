@@ -18,7 +18,7 @@ class NDatePicker extends StatelessWidget {
 
   ///时间选择器
   const NDatePicker({
-    Key? key,
+    super.key,
     this.title = "请选择",
     this.datePickerHeight = 216,
     this.mode,
@@ -30,8 +30,7 @@ class NDatePicker extends StatelessWidget {
     required this.onDateTimeChanged,
     required this.cancellOnPressed,
     required this.confirmOnPressed,
-  })  : assert(datePickerHeight != null),
-        super(key: key);
+  }) : assert(datePickerHeight != null);
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +69,13 @@ class NDatePicker extends StatelessWidget {
             height: datePickerHeight,
             color: Colors.white,
             child: CupertinoDatePicker(
-                use24hFormat: true,
-                mode: mode ?? CupertinoDatePickerMode.dateAndTime,
-                initialDateTime: initialDateTime,
-                minimumDate: minimumDate,
-                maximumDate: maximumDate,
-                onDateTimeChanged: onDateTimeChanged),
+              use24hFormat: true,
+              mode: mode ?? CupertinoDatePickerMode.dateAndTime,
+              initialDateTime: initialDateTime,
+              minimumDate: minimumDate,
+              maximumDate: maximumDate,
+              onDateTimeChanged: onDateTimeChanged,
+            ),
           ),
         ],
       ),

@@ -33,28 +33,6 @@ class NCupertinoSwitch extends StatelessWidget {
   /// Whether this switch is on or off.
   final bool value;
 
-  /// Called when the user toggles with switch on or off.
-  ///
-  /// The switch passes the new value to the callback but does not actually
-  /// change state until the parent widget rebuilds the switch with the new
-  /// value.
-  ///
-  /// If null, the switch will be displayed as disabled, which has a reduced opacity.
-  ///
-  /// The callback provided to onChanged should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
-  ///
-  /// ```dart
-  /// CupertinoSwitch(
-  ///   value: _giveVerse,
-  ///   onChanged: (bool newValue) {
-  ///     setState(() {
-  ///       _giveVerse = newValue;
-  ///     });
-  ///   },
-  /// )
-  /// ```
   final ValueChanged<bool>? onChanged;
 
   /// The color to use for the track when the switch is on.
@@ -109,26 +87,6 @@ class NCupertinoSwitch extends StatelessWidget {
   /// {@endtemplate}
   final bool? applyTheme;
 
-  /// {@template flutter.cupertino.CupertinoSwitch.dragStartBehavior}
-  /// Determines the way that drag start behavior is handled.
-  ///
-  /// If set to [DragStartBehavior.start], the drag behavior used to move the
-  /// switch from on to off will begin at the position where the drag gesture won
-  /// the arena. If set to [DragStartBehavior.down] it will begin at the position
-  /// where a down event was first detected.
-  ///
-  /// In general, setting this to [DragStartBehavior.start] will make drag
-  /// animation smoother and setting it to [DragStartBehavior.down] will make
-  /// drag behavior feel slightly more reactive.
-  ///
-  /// By default, the drag start behavior is [DragStartBehavior.start].
-  ///
-  /// See also:
-  ///
-  ///  * [DragGestureRecognizer.dragStartBehavior], which gives an example for
-  ///    the different behaviors.
-  ///
-  /// {@endtemplate}
   final DragStartBehavior dragStartBehavior;
 
   @override

@@ -16,7 +16,7 @@ class SteperConnector extends StatelessWidget {
   /// The [direction]and [child] must be null. And [space], [indent] and
   /// [endIndent] must be null or non-negative.
   const SteperConnector({
-    Key? key,
+    super.key,
     required this.direction,
     this.space = 2,
     this.indent = 0,
@@ -24,8 +24,7 @@ class SteperConnector extends StatelessWidget {
     required this.child,
   })  : assert(space >= 0),
         assert(indent >= 0),
-        assert(endIndent >= 0),
-        super(key: key);
+        assert(endIndent >= 0);
 
   /// {@macro timelines.direction}
   final Axis direction;

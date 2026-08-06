@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -13,7 +12,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 // ignore: must_be_immutable
 class NHorizontalScrollWidget extends StatefulWidget {
   NHorizontalScrollWidget({
-    Key? key,
+    super.key,
     this.title,
     required this.items,
     this.width = double.infinity,
@@ -22,7 +21,7 @@ class NHorizontalScrollWidget extends StatefulWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.isSwiper = false,
     this.showCount = 2.5,
-  }) : super(key: key);
+  });
 
   String? title;
 
@@ -95,12 +94,12 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
   @override
   Widget build(BuildContext context) {
     if (widget.isSwiper) {
-      return _buildSwiper();
+      return buildSwiper();
     }
-    return _buildListView();
+    return buildListView();
   }
 
-  _buildListView() {
+  Widget buildListView() {
     final child = LayoutBuilder(
       builder: (context, constraints) {
         return Stack(
@@ -121,8 +120,8 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
                   padding: EdgeInsets.all(0),
                   itemCount: _items.length,
                   // cacheExtent: 10,
-                  itemBuilder: (context, index) => _buildItem(context, index, constraints.maxWidth),
-                  separatorBuilder: (context, index) => _buildSeparator(context, index),
+                  itemBuilder: (context, index) => buildItem(context, index, constraints.maxWidth),
+                  separatorBuilder: (context, index) => buildSeparator(context, index),
                 ),
               ),
             ),
@@ -151,7 +150,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
   }
 
   ///创建子项
-  Widget _buildItem(BuildContext context, int index, double maxWidth) {
+  Widget buildItem(BuildContext context, int index, double maxWidth) {
     var model = _items[index];
     var blur = 0.0;
 
@@ -169,12 +168,12 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
     final itemWidth = getItemWidth(maxWidth);
 
     return InkWell(
-      onTap: () => _onClick(model, index),
+      onTap: () => onClick(model, index),
       child: Container(
         // color: Colors.green,
         width: itemWidth,
         padding: EdgeInsets.only(bottom: blur), //为了显示阴影
-        decoration: _buildDecoration(),
+        decoration: buildDecoration(),
         child: ClipRRect(
           borderRadius: widget.borderRadius ?? BorderRadius.zero,
           child: Stack(
@@ -212,19 +211,20 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
     );
   }
 
-  _buildSwiper() {
-    return LayoutBuilder(builder: (context, constraints) {
-      final itemWidth = getItemWidth(constraints.maxWidth);
+  Widget buildSwiper() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final itemWidth = getItemWidth(constraints.maxWidth);
 
-      return Container(
-        width: constraints.maxWidth,
-        height: constraints.maxHeight,
-        child: ClipRRect(
+        return Container(
+          width: constraints.maxWidth,
+          height: constraints.maxHeight,
+          child: ClipRRect(
             borderRadius: widget.borderRadius ?? BorderRadius.zero,
             child: Stack(
               children: [
                 Swiper(
-                    itemBuilder: (context, index) => _buildItem(context, index, constraints.maxWidth),
+                    itemBuilder: (context, index) => buildItem(context, index, constraints.maxWidth),
                     // indicatorLayout: PageIndicatorLayout.COLOR,
                     autoplay: _items.length > 1,
                     loop: _items.length > 1,
@@ -250,13 +250,15 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
                     // },
                   )
               ],
-            )),
-      );
-    });
+            ),
+          ),
+        );
+      },
+    );
   }
 
   //分割区间
-  _buildSeparator(context, index) {
+  Widget buildSeparator(context, index) {
     // return Container(
     //   width: gap,
     //   color: Colors.blue,
@@ -268,7 +270,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
     );
   }
 
-  _buildDecoration() {
+  BoxDecoration buildDecoration() {
     return BoxDecoration(
       // color: Colors.green,
       // border: Border.all(width: 3, color: Colors.red),
@@ -286,7 +288,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
   }
 
   /// 水平滚动条
-  Widget _scrollerBar({
+  Widget buildScrollerBar({
     required double maxWidth,
     required double itemWidth,
     double barHeight = 3,
@@ -328,7 +330,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
   }
 
   /// 点击事件
-  _onClick(AttrCarouseItem model, int index) {
+  void onClick(AttrCarouseItem model, int index) {
     debugPrint(model.detailName ?? "");
   }
 }

@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 /// 多页面左右滑动封装
 class NPageView extends StatefulWidget {
   const NPageView({
-    Key? key,
+    super.key,
     required this.items,
     this.needSafeArea = true,
     this.isThemeBg = false,
@@ -21,7 +21,7 @@ class NPageView extends StatefulWidget {
     this.tabAlignment = TabAlignment.center,
     this.tabBar,
     this.onPageChanged,
-  }) : super(key: key);
+  });
 
   final List<(String, Widget)> items;
 
@@ -84,7 +84,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       return SizedBox();
     }
     var children = [
-      _buildBottomBar(
+      buildBottomBar(
         items: widget.items,
         isScrollable: widget.isScrollable,
         isBottom: widget.isBottom,
@@ -120,7 +120,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildBottomBar({
+  Widget buildBottomBar({
     required List<(String, Widget)> items,
     bool isScrollable = false,
     bool isBottom = false,

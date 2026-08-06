@@ -100,8 +100,7 @@ class _BorderDemoState extends State<BorderDemo> {
               child: TextButton(
                 style: TextButton.styleFrom(
                   shape: ContinuousRectangleBorder(
-                      side: BorderSide(width: 1, color: Colors.red),
-                      borderRadius: BorderRadius.circular(20)),
+                      side: BorderSide(width: 1, color: Colors.red), borderRadius: BorderRadius.circular(20)),
                 ),
                 onPressed: () {},
                 child: Text('ContinuousRectangleBorder'),
@@ -126,8 +125,7 @@ class _BorderDemoState extends State<BorderDemo> {
               child: TextButton(
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Colors.red),
-                      borderRadius: BorderRadius.circular(8)),
+                      side: BorderSide(width: 1, color: Colors.red), borderRadius: BorderRadius.circular(8)),
                 ),
                 onPressed: () {},
                 child: Text('RoundedRectangleBorder'),
@@ -218,8 +216,7 @@ class _BorderDemoState extends State<BorderDemo> {
                             left: BorderSide(color: Colors.green, width: 5))),
                     child: TextButton(
                       onPressed: () {},
-                      child: Text(
-                          'ShapeDecoration - Border.top,bottom,right,left'),
+                      child: Text('ShapeDecoration - Border.top,bottom,right,left'),
                     ),
                   ),
                   Container(
@@ -256,9 +253,7 @@ class _BorderDemoState extends State<BorderDemo> {
                             Colors.green,
                           ],
                         ),
-                        shape: UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.red, width: 2))),
+                        shape: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red, width: 2))),
                     child: TextButton(
                       onPressed: () {},
                       child: Text('ShapeDecoration - UnderlineInputBorder'),
@@ -272,8 +267,7 @@ class _BorderDemoState extends State<BorderDemo> {
               child: Container(
                 margin: EdgeInsets.all(8),
                 decoration: UnderlineTabIndicator(
-                    borderSide: BorderSide(width: 2.0, color: Colors.red),
-                    insets: EdgeInsets.fromLTRB(0, 0, 0, 10)),
+                    borderSide: BorderSide(width: 2.0, color: Colors.red), insets: EdgeInsets.fromLTRB(0, 0, 0, 10)),
                 child: TextButton(
                   onPressed: () {},
                   child: Text('Decoration - UnderlineTabIndicator'),
@@ -320,13 +314,14 @@ class _BorderDemoState extends State<BorderDemo> {
   }
 
   /// 斜角矩形边框
-  InputBorder buildBeveledRectangleBorder({
+  OutlinedBorder buildBeveledRectangleBorder({
     required double radius,
     double width = 1,
     Color color = Colors.red,
   }) {
     return BeveledRectangleBorder(
-        side: BorderSide(width: width, color: color),
-        borderRadius: BorderRadius.circular(radius));
+      side: BorderSide(width: width, color: color),
+      borderRadius: BorderRadius.circular(radius),
+    );
   }
 }

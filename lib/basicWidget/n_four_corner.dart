@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 /// 四角有图标
 class NFourCorner extends StatelessWidget {
   NFourCorner({
-    Key? key,
+    super.key,
     required this.child,
     this.cornerImage = const AssetImage("assets/images/icon_corner.png"),
     this.cornerImageSize = 20,
     this.cornerImageColor,
-  }) : super(key: key);
+  });
 
   final Widget child;
 

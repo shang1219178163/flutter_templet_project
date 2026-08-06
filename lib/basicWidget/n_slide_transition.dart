@@ -11,12 +11,12 @@ import 'package:flutter/cupertino.dart';
 ///移动动画
 class NSlideTransition extends AnimatedWidget {
   NSlideTransition({
-    Key? key,
+    super.key,
     required Animation<double> position,
     this.transformHitTests = true,
     this.direction = AxisDirection.down,
     required this.child,
-  }) : super(key: key, listenable: position) {
+  }) : super(listenable: position) {
     switch (direction) {
       case AxisDirection.up:
         _tween = Tween(begin: Offset(0, 1), end: Offset(0, 0));

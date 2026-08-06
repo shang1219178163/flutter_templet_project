@@ -12,12 +12,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 /// 红色角标
 class NBadge extends StatelessWidget {
   const NBadge({
-    Key? key,
+    super.key,
     required this.value,
     this.top = 8,
     this.letterStep = 5,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// 数值
   final int value;
@@ -38,8 +38,7 @@ class NBadge extends StatelessWidget {
 
     var badge = value;
     var badgeStr = badge > 99 ? "99+" : "$badge";
-    ShapeBorder shape =
-        badge > 99 ? const StadiumBorder() : const CircleBorder();
+    ShapeBorder shape = badge > 99 ? const StadiumBorder() : const CircleBorder();
     var right = -8 - (badgeStr.length - 1) * letterStep;
 
     final badgeChild = buildBadge(badgeStr: badgeStr, shape: shape);
@@ -47,14 +46,17 @@ class NBadge extends StatelessWidget {
       return child;
     }
 
-    return Stack(clipBehavior: Clip.none, children: <Widget>[
-      child,
-      Positioned(
-        top: top,
-        right: right,
-        child: badgeChild,
-      ),
-    ]);
+    return Stack(
+      clipBehavior: Clip.none,
+      children: <Widget>[
+        child,
+        Positioned(
+          top: top,
+          right: right,
+          child: badgeChild,
+        ),
+      ],
+    );
   }
 
   /// 红色角标

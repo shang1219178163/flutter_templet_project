@@ -86,8 +86,6 @@ class NCollectionNavWidget extends StatefulWidget {
 }
 
 class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
-  // /// 初始传值数据
-  // List<AttrNavItem> _initilItems = [];
   /// 当前页面数据
   List<AttrNavItem> _items = [];
 

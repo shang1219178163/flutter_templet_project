@@ -48,13 +48,6 @@ class NCupertinoSliverRefreshIndicator extends StatelessWidget {
 
     final percentageComplete = clampDouble(pulledExtent / refreshTriggerPullDistance, 0.0, 1.0);
 
-    // Place the indicator at the top of the sliver that opens up. We're using a
-    // Stack/Positioned widget because the CupertinoActivityIndicator does some
-    // internal translations based on the current size (which grows as the user drags)
-    // that makes Padding calculations difficult. Rather than be reliant on the
-    // internal implementation of the activity indicator, the Positioned widget allows
-    // us to be explicit where the widget gets placed. The indicator should appear
-    // over the top of the dragged widget, hence the use of Clip.none.
     return Center(
       child: Stack(
         clipBehavior: Clip.none,
@@ -63,14 +56,14 @@ class NCupertinoSliverRefreshIndicator extends StatelessWidget {
             top: _kActivityIndicatorMargin,
             left: 0.0,
             right: 0.0,
-            child: _buildIndicatorForRefreshState(refreshState, _kActivityIndicatorRadius, percentageComplete),
+            child: buildIndicatorForRefreshState(refreshState, _kActivityIndicatorRadius, percentageComplete),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildIndicatorForRefreshState(RefreshIndicatorMode refreshState, double radius, double percentageComplete) {
+  Widget buildIndicatorForRefreshState(RefreshIndicatorMode refreshState, double radius, double percentageComplete) {
     switch (refreshState) {
       case RefreshIndicatorMode.drag:
         // While we're dragging, we draw individual ticks of the spinner while simultaneously

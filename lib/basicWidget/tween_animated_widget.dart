@@ -6,12 +6,12 @@ typedef TweenAnimatedBuilder<T extends Object?> = Widget Function(
 ///自定义动画组件
 class TweenAnimatedWidget<T extends Object?> extends StatefulWidget {
   TweenAnimatedWidget({
-    Key? key,
+    super.key,
     this.duration = const Duration(seconds: 2),
     required this.tween,
     this.child,
     required this.builder,
-  }) : super(key: key);
+  });
 
   final Duration? duration;
 
@@ -25,10 +25,9 @@ class TweenAnimatedWidget<T extends Object?> extends StatefulWidget {
   _TweenAnimatedWidgetState<T> createState() => _TweenAnimatedWidgetState<T>();
 }
 
-class _TweenAnimatedWidgetState<T extends Object?>
-    extends State<TweenAnimatedWidget<T>> with SingleTickerProviderStateMixin {
-  late AnimationController controller =
-      AnimationController(duration: widget.duration, vsync: this);
+class _TweenAnimatedWidgetState<T extends Object?> extends State<TweenAnimatedWidget<T>>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller = AnimationController(duration: widget.duration, vsync: this);
   late Animation<T> animation = widget.tween.animate(controller);
 
   @override

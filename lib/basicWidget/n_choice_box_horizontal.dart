@@ -52,17 +52,18 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.items.length,
-        itemBuilder: (context, index) {
-          final e = widget.items[index];
-          return buildItem(e);
-        },
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            width: widget.spacing,
-          );
-        });
+      scrollDirection: Axis.horizontal,
+      itemCount: widget.items.length,
+      itemBuilder: (context, index) {
+        final e = widget.items[index];
+        return buildItem(e);
+      },
+      separatorBuilder: (context, index) {
+        return SizedBox(
+          width: widget.spacing,
+        );
+      },
+    );
   }
 
   Widget buildItem(ChoiceBoxModel e) {
@@ -155,30 +156,3 @@ class NChoiceBoxHorizontalModel<T> {
   /// 通用参数,挂载任何其他需要的参数
   dynamic data;
 }
-
-/// 多选模型
-// class HorizontalChoicModel<T>{
-//
-//   HorizontalChoicModel({
-//     required this.models,
-//     this.selectedModelsTmp = const [],
-//     this.selectedModels = const [],
-//     this.title = "",
-//     this.isSingle = false,
-//     this.data,
-//   });
-//
-//   String title;
-//   /// 是否单选
-//   bool isSingle;
-//   /// 模型数组
-//   List<T> models;
-//   /// 模型最终数组(可传入默认选择)
-//   List<T> selectedModels = [];
-//   /// 模型临时数组(可传入默认选择)
-//   List<T> selectedModelsTmp = [];
-//
-//   /// 通用参数,挂载任何其他需要的参数
-//   dynamic data;
-//
-// }

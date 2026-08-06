@@ -11,12 +11,12 @@ import 'package:flutter/material.dart';
 /// SizeTransition 动画封装
 class NSizeTransition extends StatefulWidget {
   NSizeTransition({
-    Key? key,
+    super.key,
     this.axis = Axis.vertical,
     this.axisAlignment = 0.0,
     this.duration = const Duration(milliseconds: 350),
     required this.child,
-  }) : super(key: key);
+  });
 
   final Axis axis;
 
@@ -32,15 +32,14 @@ class NSizeTransition extends StatefulWidget {
   _NSizeTransitionState createState() => _NSizeTransitionState();
 }
 
-class _NSizeTransitionState extends State<NSizeTransition>
-    with SingleTickerProviderStateMixin {
-  late final _controller = AnimationController(
+class _NSizeTransitionState extends State<NSizeTransition> with SingleTickerProviderStateMixin {
+  late final controller = AnimationController(
     vsync: this,
     duration: widget.duration ?? Duration(seconds: 1),
   );
 
   late final Animation<double> _animation = CurvedAnimation(
-    parent: _controller,
+    parent: controller,
     curve: Curves.easeIn,
   );
 
@@ -48,12 +47,12 @@ class _NSizeTransitionState extends State<NSizeTransition>
   void initState() {
     super.initState();
 
-    _controller.forward(from: 0);
+    controller.forward(from: 0);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    controller.dispose();
     super.dispose();
   }
 

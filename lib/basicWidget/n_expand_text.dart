@@ -45,73 +45,67 @@ class NExpandText extends StatefulWidget {
 class _NExpandTextState extends State<NExpandText> {
   @override
   Widget build(BuildContext context) {
-    return buildText(
-      text: widget.text,
-      textStyle: widget.textStyle,
-      isExpand: widget.initiallyExpanded,
-      expandMaxLine: widget.expandMaxLine,
-      expandTitleStyle: widget.expandTitleStyle,
-    );
-  }
+    var isExpand = widget.initiallyExpanded;
+    final text = widget.text;
+    final textStyle = widget.textStyle;
+    final expandMaxLine = widget.expandMaxLine;
+    final expandTitleStyle = widget.expandTitleStyle;
 
-  Widget buildText({
-    required String text,
-    TextStyle? textStyle,
-    bool isExpand = false,
-    int expandMaxLine = 10,
-    TextStyle? expandTitleStyle,
-  }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-      final textPainter = TextPainterExt.getTextPainter(
-        text: text,
-        textStyle: textStyle,
-        maxLine: 100,
-        maxWidth: constraints.maxWidth,
-      );
-      final numberOfLines = textPainter.computeLineMetrics().length;
-      // debugPrint("numberOfLines:${numberOfLines}");
-
-      return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-        final btnTitle = isExpand ? "收起" : "展开";
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(19))),
-                child: Container(
-                  // color: Colors.green,
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    text,
-                    style: textStyle,
-                    maxLines: isExpand ? expandMaxLine : 1,
-                  ),
-                ),
-              ),
-            ),
-            if (numberOfLines > 1)
-              Padding(
-                padding: EdgeInsets.only(bottom: 8),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size(50, 18),
-                  ),
-                  onPressed: () {
-                    isExpand = !isExpand;
-                    setState(() {});
-                  },
-                  child: Text(
-                    btnTitle,
-                    style: expandTitleStyle,
-                  ),
-                ),
-              ),
-          ],
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final textPainter = TextPainterExt.getTextPainter(
+          text: text,
+          textStyle: textStyle,
+          maxLine: 100,
+          maxWidth: constraints.maxWidth,
         );
-      });
-    });
+        final numberOfLines = textPainter.computeLineMetrics().length;
+        // debugPrint("numberOfLines:${numberOfLines}");
+
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            final btnTitle = isExpand ? "收起" : "展开";
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(19))),
+                    child: Container(
+                      // color: Colors.green,
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Text(
+                        text,
+                        style: textStyle,
+                        maxLines: isExpand ? expandMaxLine : 1,
+                      ),
+                    ),
+                  ),
+                ),
+                if (numberOfLines > 1)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        minimumSize: Size(50, 18),
+                      ),
+                      onPressed: () {
+                        isExpand = !isExpand;
+                        setState(() {});
+                      },
+                      child: Text(
+                        btnTitle,
+                        style: expandTitleStyle,
+                      ),
+                    ),
+                  ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }

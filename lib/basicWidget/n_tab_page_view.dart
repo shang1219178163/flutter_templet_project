@@ -12,7 +12,7 @@ import 'package:tuple/tuple.dart';
 /// TabBar + PageView
 class NTabPageView extends StatefulWidget {
   const NTabPageView({
-    Key? key,
+    super.key,
     required this.items,
     this.labelColor,
     this.labelStyle,
@@ -23,7 +23,7 @@ class NTabPageView extends StatefulWidget {
     required this.onPageChanged,
     this.canPageChanged,
     this.isTabBottom = false,
-  }) : super(key: key);
+  });
 
   final List<Tuple2<String, Widget>> items;
 
@@ -58,27 +58,21 @@ class NTabPageView extends StatefulWidget {
   _NTabPageViewState createState() => _NTabPageViewState();
 }
 
-class _NTabPageViewState extends State<NTabPageView>
-    with SingleTickerProviderStateMixin {
-  late final _tabController = widget.tabController ??
-      TabController(
-          initialIndex: widget.initialIndex,
-          length: widget.items.length,
-          vsync: this);
-  late final _pageController = widget.pageController ??
-      PageController(initialPage: widget.initialIndex, keepPage: true);
+class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderStateMixin {
+  late final tabController = widget.tabController ??
+      TabController(initialIndex: widget.initialIndex, length: widget.items.length, vsync: this);
+  late final pageController = widget.pageController ?? PageController(initialPage: widget.initialIndex, keepPage: true);
 
   ///是否允许滚动
   bool get canScrollable {
-    final disable =
-        (widget.canPageChanged?.call(_tabController.index) == false);
+    final disable = (widget.canPageChanged?.call(tabController.index) == false);
     return !disable;
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
-    _pageController.dispose();
+    tabController.dispose();
+    pageController.dispose();
 
     super.dispose();
   }
@@ -95,8 +89,7 @@ class _NTabPageViewState extends State<NTabPageView>
         widget.labelColor != oldWidget.labelColor ||
         widget.labelStyle != oldWidget.labelStyle ||
         widget.isTabBottom != oldWidget.isTabBottom ||
-        widget.items.map((e) => e.item1).join(",") !=
-            oldWidget.items.map((e) => e.item1).join(",")) {
+        widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
       setState(() {});
     }
   }
@@ -117,8 +110,7 @@ class _NTabPageViewState extends State<NTabPageView>
   }
 
   Widget buildTabBar() {
-    final textColor =
-        widget.labelColor ?? Theme.of(context).colorScheme.primary;
+    final textColor = widget.labelColor ?? Theme.of(context).colorScheme.primary;
 
     final borderSide = BorderSide(
       color: textColor,
@@ -138,13 +130,13 @@ class _NTabPageViewState extends State<NTabPageView>
     );
 
     final tabBar = TabBar(
-      controller: _tabController,
+      controller: tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
       labelColor: textColor,
       labelStyle: widget.labelStyle,
       indicator: widget.isTabBottom ? decorationTop : decorationBom,
       onTap: (index) {
-        _pageController.jumpToPage(index);
+        pageController.jumpToPage(index);
         setState(() {});
       },
     );
@@ -168,13 +160,11 @@ class _NTabPageViewState extends State<NTabPageView>
   Widget buildPageView() {
     return Expanded(
       child: PageView(
-        controller: _pageController,
-        physics: canScrollable
-            ? BouncingScrollPhysics()
-            : NeverScrollableScrollPhysics(),
+        controller: pageController,
+        physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
           widget.onPageChanged(index);
-          _tabController.animateTo(index);
+          tabController.animateTo(index);
           setState(() {});
         },
         children: widget.items.map((e) => e.item2).toList(),

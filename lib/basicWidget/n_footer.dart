@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 ///表尾
 @Deprecated("已弃用,请使用 NFooterButtonBar")
 class NFooter extends StatelessWidget {
-  NFooter({
-    Key? key,
+  const NFooter({
+    super.key,
     required this.title,
     required this.onPressed,
     this.style,
@@ -18,7 +18,7 @@ class NFooter extends StatelessWidget {
     this.header,
     this.child,
     this.footer,
-  }) : super(key: key);
+  });
 
   final String title;
   final TextStyle? style;
@@ -35,24 +35,6 @@ class NFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildPageFooter(context);
-  }
-
-  Widget buildPageFooter(BuildContext context
-      //     {
-      //   String title = "button",
-      //   TextStyle? style,
-      //   EdgeInsets padding = const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-      //   double height = 45,
-      //   double radius = 22.5,
-      //   bool enable = true,
-      //   VoidCallback? onPressed,
-      //   Color? bgColor,
-      //   Color? btnColor = primary,
-      //   Widget? header,
-      //   Widget? footer,
-      // }
-      ) {
     final effectiveBtnColor = btnColor ?? Theme.of(context).primaryColor;
     return Container(
       color: color,

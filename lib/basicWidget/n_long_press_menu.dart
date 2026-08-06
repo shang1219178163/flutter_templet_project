@@ -7,10 +7,10 @@ import 'package:tuple/tuple.dart';
 /// 长按黑色菜单
 class NLongPressMenu extends StatelessWidget {
   const NLongPressMenu({
-    Key? key,
+    super.key,
     required this.items,
     required this.onItem,
-  }) : super(key: key);
+  });
 
   /// 标题和本地图片
   final List<Tuple2<String, AssetImage>> items;
@@ -72,13 +72,13 @@ class NLongPressMenu extends StatelessWidget {
 /// 长按黑色菜单(中间有横线版本)
 class NLongPressMenuOne extends StatelessWidget {
   const NLongPressMenuOne({
-    Key? key,
+    super.key,
     required this.items,
     this.hideAssetImage = false,
     required this.onItem,
     this.itemWidth = 65,
     this.itemHeight,
-  }) : super(key: key);
+  });
 
   /// 标题和本地图片
   final List<Tuple2<String, AssetImage>> items;

@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 /// 业务折叠菜单
 class NExpansionMenu extends StatefulWidget {
   const NExpansionMenu({
-    Key? key,
+    super.key,
     required this.title,
     this.children,
     this.isExpand = true,
@@ -17,7 +17,7 @@ class NExpansionMenu extends StatefulWidget {
     this.trailingBuilder,
     this.childrenHeader,
     this.childrenFooter,
-  }) : super(key: key);
+  });
 
   final String title;
 
@@ -70,7 +70,7 @@ class NExpansionMenuState extends State<NExpansionMenu> {
         tilePadding: const EdgeInsets.symmetric(horizontal: 0),
         trailing: widget.disable
             ? const SizedBox()
-            : buildExpandMenuTrailing(
+            : buildTrailing(
                 isExpand: widget.isExpand,
                 color: widget.color,
               ),
@@ -103,7 +103,7 @@ class NExpansionMenuState extends State<NExpansionMenu> {
     );
   }
 
-  Widget buildExpandMenuTrailing({
+  Widget buildTrailing({
     bool isExpand = true,
     Color? color = Colors.blueAccent,
   }) {

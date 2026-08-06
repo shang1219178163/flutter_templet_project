@@ -14,12 +14,12 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 /// 票据分割线
 class NTicketDivder extends StatelessWidget {
   const NTicketDivder({
-    Key? key,
+    super.key,
     this.halfCircleWidth = 10,
     this.halfCircleHeight = 20,
     this.halfCircleColor,
     this.dashLine,
-  }) : super(key: key);
+  });
 
   /// 半圆宽度
   final double halfCircleWidth;

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class NSectionBox extends StatelessWidget {
   const NSectionBox({
-    Key? key,
+    super.key,
     this.title = '',
     this.text,
     this.style = const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
@@ -23,7 +23,7 @@ class NSectionBox extends StatelessWidget {
     this.addSliverToBoxAdapter = false,
     this.hide = false,
     required this.child,
-  }) : super(key: key);
+  });
 
   final String title;
   final Text? text;

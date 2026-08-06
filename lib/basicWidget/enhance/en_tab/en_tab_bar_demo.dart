@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {
-  const EnhanceTabBarDemo({Key? key, this.title}) : super(key: key);
+  const EnhanceTabBarDemo({super.key, this.title});
 
   final String? title;
 
@@ -180,9 +180,12 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
-          _buildDropdownButton(),
+          buildDropdownButton(),
         ],
-        bottom: buildEnhanceTabBar(controller: _tabController, indexVN: indexVN, items: titles),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(46),
+          child: buildEnhanceTabBar(controller: _tabController, indexVN: indexVN, items: titles),
+        ),
       ),
       body: buildTabBarView(controller: _tabController, items: titles),
     );
@@ -193,7 +196,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: [
-            _buildDropdownButton(),
+            buildDropdownButton(),
           ],
         ),
         body: CustomScrollView(
@@ -220,7 +223,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
         ));
   }
 
-  Widget _buildDropdownButton() {
+  Widget buildDropdownButton() {
     // var dropValue = '语文';
     // var list = ['语文', '数学', '英语'];
 

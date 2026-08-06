@@ -9,13 +9,6 @@
 import 'package:flutter/material.dart';
 
 class NTabIndicatorFixedWidth extends Decoration {
-  final Color? color;
-  final Gradient? gradient;
-  final double width;
-  final double height;
-  final double topMargin;
-  final double borderRadius;
-
   const NTabIndicatorFixedWidth({
     this.color,
     this.gradient,
@@ -24,6 +17,13 @@ class NTabIndicatorFixedWidth extends Decoration {
     this.topMargin = 0.0,
     this.borderRadius = 8.0,
   });
+
+  final Color? color;
+  final Gradient? gradient;
+  final double width;
+  final double height;
+  final double topMargin;
+  final double borderRadius;
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {

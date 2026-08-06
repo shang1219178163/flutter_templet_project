@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 /// 雷达渐进色按钮
 class RadialButton extends StatefulWidget {
   RadialButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onTap,
     // required this.colors,
@@ -23,7 +23,7 @@ class RadialButton extends StatefulWidget {
     this.margin = const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
     this.padding = const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
     this.center = Alignment.center,
-  }) : super(key: key);
+  });
 
   final Text text;
   // List<Color> colors;

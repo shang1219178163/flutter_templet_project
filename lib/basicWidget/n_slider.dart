@@ -13,7 +13,7 @@ typedef ValueWidgetBuilder<T> = Widget Function(BuildContext context, T value);
 /// 自定义 Slider 组件封住，增加首尾组件，尾部组件实时显示当前数值；
 class NSlider extends StatefulWidget {
   NSlider({
-    Key? key,
+    super.key,
     this.title,
     this.leading,
     this.trailingBuilder,
@@ -32,7 +32,7 @@ class NSlider extends StatefulWidget {
     this.semanticFormatterCallback,
     this.focusNode,
     this.autofocus = false,
-  }) : super(key: key);
+  });
 
   final String? title;
   final Widget? leading;

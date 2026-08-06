@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class NPointIndicator extends StatelessWidget {
   const NPointIndicator({
-    Key? key,
+    super.key,
     required this.color,
     this.bigCircleRadius = 6,
     this.smallCircleRadius = 3,
-  }) : super(key: key);
+  });
 
   final Color color;
   final double bigCircleRadius;

@@ -30,10 +30,11 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
         Column(
           children: [
             buildNav(
-                child: XCollectionNavWidget(
-              width: context.screenSize.width - 24,
-              rowCount: 5,
-            )),
+              child: XCollectionNavWidget(
+                width: context.screenSize.width - 24,
+                rowCount: 5,
+              ),
+            ),
             Divider(),
             buildSwiper(),
           ],

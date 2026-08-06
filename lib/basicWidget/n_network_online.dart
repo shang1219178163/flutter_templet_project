@@ -32,10 +32,10 @@ class NNetworkOnLine extends StatefulWidget {
   final TransitionBuilder offlineBuilder;
 
   @override
-  _NNetworkOnLineState createState() => _NNetworkOnLineState();
+  State<NNetworkOnLine> createState() => NNetworkOnLineState();
 }
 
-class _NNetworkOnLineState extends State<NNetworkOnLine> {
+class NNetworkOnLineState extends State<NNetworkOnLine> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(

@@ -80,62 +80,17 @@ class NBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildBody(
-      width: width,
-      height: height,
-      blur: blur,
-      bgBlur: bgBlur,
-      opacity: opacity,
-      margin: margin,
-      padding: padding,
-      border: border,
-      borderRadius: borderRadius,
-      bgUrl: bgUrl,
-      bgColor: bgColor,
-      bgGradient: bgGradient,
-      boxShadows: boxShadows,
-      child: child,
-      imageFit: imageFit,
-    );
-  }
-
-  Widget buildBody({
-    double? width,
-    double? height,
-    double blur = 0,
-    double bgBlur = 0,
-    double? opacity = 1.0,
-    EdgeInsets margin = const EdgeInsets.all(0),
-    EdgeInsets padding = const EdgeInsets.all(0),
-    BoxBorder? border,
-    BorderRadius? borderRadius,
-    Color? bgColor,
-    Gradient? bgGradient,
-    String? bgUrl,
-    BoxFit? imageFit,
-    List<BoxShadow>? boxShadows,
-    required Widget child,
-  }) {
-    // add test
-    // bgGradient = LinearGradient(
-    //     colors: [Colors.red, Colors.green],
-    //     begin: Alignment.topCenter,
-    //     end: Alignment.bottomCenter,
-    //   );
-    // add test
-    // bgUrl = 'https://i.zgjm.org/top/20190526/3264-1.jpg';
-    //bgUrl 不为空则为背景图片
     var decorationImage = bgUrl?.startsWith('http') == true
         ? DecorationImage(
-//         image: NetworkImage(bgUrl),
             image: CachedNetworkImageProvider(bgUrl!),
             fit: imageFit,
           )
         : null;
 
+    var marginNew = margin;
     if (width != null && height != null) {
       /// 留出阴影空间
-      margin = margin.mergeShadows(shadows: boxShadows);
+      marginNew = margin.mergeShadows(shadows: boxShadows);
       // print("margin: ${margin}");
     }
 
@@ -161,7 +116,7 @@ class NBox extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+        margin: marginNew.isNonNegative ? marginNew : EdgeInsets.zero,
         padding: padding,
         decoration: decoration,
         child: ClipRRect(

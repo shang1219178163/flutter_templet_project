@@ -29,10 +29,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
 
   /// 每次从 tuples 读取，避免热重载后仍用旧缓存
   List<OptionModel> get _routeOptions {
-    return tuples
-        .expand((e) => e.item2)
-        .map((e) => OptionModel(name: e.item1, desc: e.item2))
-        .toList();
+    return tuples.expand((e) => e.item2).map((e) => OptionModel(name: e.item1, desc: e.item2)).toList();
   }
 
   @override
@@ -149,7 +146,8 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
           Column(
             children: _params.map((e) {
               return SwitchListTile(
-                activeColor: colorScheme.primary,
+                inactiveThumbColor: Colors.white,
+                inactiveTrackColor: Colors.black.withValues(alpha: 0.1),
                 title: Text(
                   e.name,
                   style: TextStyle(color: colorScheme.onSurface),

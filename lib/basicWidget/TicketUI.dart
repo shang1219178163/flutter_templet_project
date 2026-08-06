@@ -10,7 +10,7 @@
 import 'package:flutter/material.dart';
 
 class TicketUi extends StatelessWidget {
-  const TicketUi({Key? key}) : super(key: key);
+  const TicketUi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -108,17 +108,17 @@ class TicketPainter extends CustomPainter {
 
     path.moveTo(cornerRadius, 0);
     path.lineTo(maxWidth - cornerRadius, 0);
-    _drawCornerArc(path, maxWidth, cornerRadius);
+    drawCornerArc(path, maxWidth, cornerRadius);
     path.lineTo(maxWidth, rightCutoutStartY);
-    _drawCutout(path, maxWidth, rightCutoutStartY + _cutoutDiameter);
+    drawCutout(path, maxWidth, rightCutoutStartY + _cutoutDiameter);
     path.lineTo(maxWidth, maxHeight - cornerRadius);
-    _drawCornerArc(path, maxWidth - cornerRadius, maxHeight);
+    drawCornerArc(path, maxWidth - cornerRadius, maxHeight);
     path.lineTo(cornerRadius, maxHeight);
-    _drawCornerArc(path, 0, maxHeight - cornerRadius);
+    drawCornerArc(path, 0, maxHeight - cornerRadius);
     path.lineTo(0, leftCutoutStartY);
-    _drawCutout(path, 0.0, leftCutoutStartY - _cutoutDiameter);
+    drawCutout(path, 0.0, leftCutoutStartY - _cutoutDiameter);
     path.lineTo(0, cornerRadius);
-    _drawCornerArc(path, cornerRadius, 0);
+    drawCornerArc(path, cornerRadius, 0);
 
     canvas.drawPath(path, paintBg);
     canvas.drawPath(path, paintBorder);
@@ -133,7 +133,7 @@ class TicketPainter extends CustomPainter {
     }
   }
 
-  _drawCutout(Path path, double startX, double endY) {
+  drawCutout(Path path, double startX, double endY) {
     path.arcToPoint(
       Offset(startX, endY),
       radius: Radius.circular(cutoutRadius),
@@ -141,7 +141,7 @@ class TicketPainter extends CustomPainter {
     );
   }
 
-  _drawCornerArc(Path path, double endPointX, double endPointY) {
+  drawCornerArc(Path path, double endPointX, double endPointY) {
     path.arcToPoint(
       Offset(endPointX, endPointY),
       radius: Radius.circular(cornerRadius),

@@ -120,24 +120,5 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
         ),
       ),
     );
-
-    // return Theme(
-    //   data: ThemeData(
-    //     floatingActionButtonTheme: FloatingActionButtonThemeData(
-    //       backgroundColor: Theme.of(context).indicatorColor,
-    //       splashColor: Colors.transparent,
-    //     )
-    //   ),
-    //   child: FloatingActionButton(
-    //     onPressed: onPressed,
-    //     child: Padding(
-    //       padding: padding,
-    //       child: Image(
-    //         image: imgName.toAssetImage(),
-    //         color: Colors.white,
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

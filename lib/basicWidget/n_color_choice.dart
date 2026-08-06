@@ -82,12 +82,7 @@ class _NColorChoiceState extends State<NColorChoice> {
                     width: 40,
                     height: 40,
                     color: e,
-                    child: widget.selectedColorVN.value == e
-                        ? Icon(
-                            Icons.done,
-                            color: Colors.white,
-                          )
-                        : null,
+                    child: widget.selectedColorVN.value == e ? Icon(Icons.done, color: Colors.white) : null,
                   ),
                 );
               }).toList(),

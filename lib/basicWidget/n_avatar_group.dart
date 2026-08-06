@@ -77,10 +77,7 @@ class NAvatarGroup extends StatelessWidget {
     return list;
   }
 
-  Widget buildAvatar({
-    required String url,
-    required AssetImage placehorder,
-  }) {
+  Widget buildAvatar({required String url, required AssetImage placehorder}) {
     return Container(
       padding: itemPadding ?? const EdgeInsets.all(2),
       decoration: BoxDecoration(
