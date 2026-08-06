@@ -95,7 +95,7 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton> wi
     Widget img = FractionallySizedBox(
       heightFactor: 0.75,
       child: Image(
-        image: fileType.iconName.toAssetImage(),
+        image: AssetImage(fileType.iconName),
         width: widget.width,
         height: widget.height,
       ),

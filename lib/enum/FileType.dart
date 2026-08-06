@@ -1,13 +1,15 @@
+import 'package:flutter_templet_project/generated/assets.dart';
+
 /// 文件类型
 enum IMFileType {
-  unknow("icon_file_word.png"),
-  docx("icon_file_word.png"),
-  doc("icon_file_word.png"),
-  xls("icon_file_excel.png.png"),
-  xlsx("icon_file_excel.png"),
-  ppt("icon_file_ppt.png"),
-  pptx("icon_file_ppt.png"),
-  pdf("icon_file_pdf.png");
+  unknow(Assets.imagesIconFileWord),
+  docx(Assets.imagesIconFileWord),
+  doc(Assets.imagesIconFileWord),
+  xls(Assets.imagesIconFileExcel),
+  xlsx(Assets.imagesIconFileExcel),
+  ppt(Assets.imagesIconFilePpt),
+  pptx(Assets.imagesIconFilePpt),
+  pdf(Assets.imagesIconFilePdf);
 
   const IMFileType(this.iconName);
 

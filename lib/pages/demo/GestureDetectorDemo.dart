@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/sound_state_mixin.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
@@ -162,8 +163,8 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         valueListenable: cancelVN,
         builder: (context, isCancel, child) {
           final closeButtonIconName =
-              (isCancel ? "img_sound_overlay_button_cancel.png" : "img_sound_overlay_button.png");
-          final bottombarIconName = (isCancel ? "img_sound_overlay_bottom_cancel.png" : "img_sound_overlay_bottom.png");
+              isCancel ? Assets.imagesImgSoundOverlayButtonCancel : Assets.imagesImgSoundOverlayButton;
+          final bottombarIconName = isCancel ? Assets.imagesImgSoundOverlayBottomCancel : Assets.imagesImgSoundOverlayBottom;
 
           return Material(
             type: MaterialType.transparency,
@@ -179,7 +180,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: "img_sound_overlay_bg_recording.png".toAssetImage(),
+                        image: AssetImage(Assets.imagesImgSoundOverlayBgRecording),
                         fit: BoxFit.scaleDown,
                         colorFilter: ColorFilter.mode(
                           isCancel ? Colors.red : context.themeData.colorScheme.primary,
@@ -188,7 +189,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                       ),
                     ),
                     child: Image(
-                      image: "img_sound_recording.gif".toAssetImage(),
+                      image: AssetImage(Assets.imagesImgSoundRecording),
                       width: 112.w,
                       height: 42.w,
                     ),
@@ -215,7 +216,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                     alignment: Alignment.center,
                     decoration: BoxDecoration(),
                     child: Image(
-                      image: closeButtonIconName.toAssetImage(),
+                      image: AssetImage(closeButtonIconName),
                       width: 64,
                       height: 64,
                     ),
@@ -240,7 +241,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                     // alignment: Alignment.center,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: bottombarIconName.toAssetImage(),
+                        image: AssetImage(bottombarIconName),
                         fit: BoxFit.fill,
                         // colorFilter: ColorFilter.mode(Colors.yellow, BlendMode.srcIn),
                       ),

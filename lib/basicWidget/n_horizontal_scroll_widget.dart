@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 // import 'package:tuple/tuple.dart';
 
@@ -187,7 +188,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
                   boxShadow: boxShadows,
                 ),
                 child: FadeInImage(
-                  placeholder: 'img_placeholder.png'.toAssetImage(),
+                  placeholder: AssetImage(Assets.imagesImgPlaceholder),
                   image: NetworkImage(model.icon ?? ''),
                   fit: BoxFit.cover,
                 ),

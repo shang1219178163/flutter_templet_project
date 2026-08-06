@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_search_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/NCustomScrollBehavior.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
@@ -166,38 +167,38 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
     final children = [
       (
         text: '事情',
-        iconImage: 'assets/images/icon_adverse_event.png',
+        iconImage: Assets.imagesIconAdverseEvent,
         onTap: () {},
       ),
       (
         text: '记录',
-        iconImage: 'assets/images/icon_wait_reply.png',
+        iconImage: Assets.imagesIconWaitReply,
         onTap: () {},
       ),
       (
         text: '方案',
-        iconImage: 'assets/images/icon_reviewed.png',
+        iconImage: Assets.imagesIconReviewed,
         onTap: () {
           //待审核
         },
       ),
       (
         text: '样本',
-        iconImage: 'assets/images/icon_arranged.png',
+        iconImage: Assets.imagesIconArranged,
         onTap: () {
           //待安排
         },
       ),
       (
         text: '处理',
-        iconImage: 'assets/images/icon_reviewed.png',
+        iconImage: Assets.imagesIconReviewed,
         onTap: () {
           //待审核
         },
       ),
       (
         text: '排期',
-        iconImage: 'assets/images/icon_arranged.png',
+        iconImage: Assets.imagesIconArranged,
         onTap: () {
           //待安排
         },
@@ -208,7 +209,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
             direction: Axis.vertical,
             spacing: 2,
             icon: Image(
-              image: e.iconImage.toAssetImage(),
+              image: AssetImage(e.iconImage),
               width: 44,
               height: 44,
             ),

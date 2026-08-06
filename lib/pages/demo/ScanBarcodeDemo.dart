@@ -10,6 +10,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/photo_picker_mixin.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
@@ -75,7 +76,7 @@ class _ScanBarcodeDemoState extends State<ScanBarcodeDemo> with PhotoPickerMixin
   Widget buildImage() {
     Widget content = file == null
         ? Image(
-            image: "assets/images/img_placeholder.png".toAssetImage(),
+            image: AssetImage(Assets.imagesImgPlaceholder),
           )
         : Image.file(file!);
     return GestureDetector(

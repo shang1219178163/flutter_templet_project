@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_button.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/file_picker_mixin.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
@@ -202,7 +203,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with Fil
                   borderRadius: BorderRadius.circular(radius),
                 ),
                 child: Image(
-                  image: 'assets/images/icon_upload.png'.toAssetImage(),
+                  image: AssetImage(Assets.imagesIconUpload),
                   width: 24,
                   height: 24,
                 ),

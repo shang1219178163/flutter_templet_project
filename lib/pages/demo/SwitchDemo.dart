@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class SwitchDemo extends StatefulWidget {
   SwitchDemo({Key? key, this.title}) : super(key: key);
@@ -60,8 +61,8 @@ class _SwitchDemoState extends State<SwitchDemo> {
         ),
         Switch(
           thumbIcon: WidgetStateProperty.all(Icon(Icons.add)),
-          activeThumbImage: "icon_check_circle_selected.png".toAssetImage(),
-          inactiveThumbImage: "icon_clear.png".toAssetImage(),
+          activeThumbImage: AssetImage(Assets.imagesIconCheckCircleSelected),
+          inactiveThumbImage: AssetImage(Assets.imagesIconClear),
           value: value,
           onChanged: (val) {
             value = val;

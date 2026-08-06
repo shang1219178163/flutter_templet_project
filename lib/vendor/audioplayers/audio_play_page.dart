@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/audioplayers/audio_player_bar.dart';
@@ -151,7 +152,7 @@ class MediaRecordCard extends StatelessWidget {
                   const SizedBox(height: 16),
                   NPair(
                     icon: Image(
-                      image: "icon_time_long.png".toAssetImage(),
+                      image: AssetImage(Assets.imagesIconTimeLong),
                       width: 14,
                       height: 14,
                     ),
@@ -172,7 +173,7 @@ class MediaRecordCard extends StatelessWidget {
   }
 
   Widget buildMediaBox({required bool isVideo}) {
-    final imageName = isVideo ? "icon_video_visit_evaluate.png" : "icon_audio_visit_evaluate.png";
+    final imageName = isVideo ? Assets.imagesIconVideoVisitEvaluate : Assets.imagesIconAudioVisitEvaluate;
     return Container(
       width: 80,
       height: 80,
@@ -182,7 +183,7 @@ class MediaRecordCard extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(4)),
       ),
       child: Image(
-        image: imageName.toAssetImage(),
+        image: AssetImage(imageName),
         width: 33,
         height: 32,
       ),

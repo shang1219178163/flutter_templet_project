@@ -113,7 +113,7 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         child: Image(
-          image: imgName.toAssetImage(),
+          image: AssetImage(imgName),
           color: Colors.white,
           width: 20,
           height: 20,

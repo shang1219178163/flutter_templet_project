@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_blur_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class BlurViewDemo extends StatelessWidget {
   final String? title;
@@ -37,7 +38,7 @@ class BlurViewDemo extends StatelessWidget {
       fit: StackFit.expand,
       children: <Widget>[
         Image(
-          image: "bg.png".toAssetImage(),
+          image: AssetImage(Assets.imagesBg),
           fit: BoxFit.cover,
         ),
         Container(

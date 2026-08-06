@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_It
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_handle.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -243,7 +244,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
         ),
         child: NPair(
           icon: Image(
-            image: "icon_upload_one.png".toAssetImage(),
+            image: AssetImage(Assets.imagesIconUploadOne),
             width: 16,
             height: 16,
           ),

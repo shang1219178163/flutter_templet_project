@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class FilterDemoOne extends StatefulWidget {
   const FilterDemoOne({Key? key, this.title}) : super(key: key);
@@ -92,7 +93,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
                           sigmaY: backdropFilterVN.value,
                         ),
                         child: Image(
-                          image: '404.png'.toAssetImage(),
+                          image: AssetImage(Assets.images404),
                           fit: BoxFit.cover,
                           width: 200.0,
                           height: 120.0,

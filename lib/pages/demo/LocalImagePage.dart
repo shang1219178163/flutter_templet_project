@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class LocalImagePage extends StatelessWidget {
   final String? title;
@@ -44,25 +44,25 @@ class LocalImagePage extends StatelessWidget {
                       child: FittedBox(fit: BoxFit.fitWidth, child: Text(e)),
                     )),
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image(image: e.toAssetImage(), fit: BoxFit.contain),
+                  Image(image: AssetImage(e), fit: BoxFit.contain),
                 ]),
               ))
           .toList(),
     );
   }
 
-  final List<String> imageNames = <String>[
-    "avatar.png",
-    "icon_appbar_back.png",
-    "icon_appbar_back_white.png",
-    "icon_home_delete.png",
-    "img_placeholder_empty.png",
-    "img_placeholder_empty_one.png",
-    "img_placeholder_offonline.png",
-    "img_placeholder_search.png",
-    "img_update.png",
-    "img_upload_placeholder.png",
-    "icon_delete.png",
+    final List<String> imageNames = <String>[
+    Assets.imagesAvatar,
+    Assets.imagesIconAppbarBack,
+    Assets.imagesIconAppbarBackWhite,
+    Assets.imagesIconHomeDelete,
+    Assets.imagesImgPlaceholderEmpty,
+    Assets.imagesImgPlaceholderEmptyOne,
+    Assets.imagesImgPlaceholderOffonline,
+    Assets.imagesImgPlaceholderSearch,
+    Assets.imagesImgUpdate,
+    Assets.imagesImgUploadPlaceholder,
+    Assets.imagesIconDelete,
   ];
   // var imageNames = [
   //   Image.asset("avatar.png", fit: BoxFit.fill),

@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 非展开组件不支持 Y 轴翻转
 class FloatingButtonDemoTwo extends StatefulWidget {
@@ -177,7 +178,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
           Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Image(
-              image: "assets/images/icon_again_shopping_cart.png".toAssetImage(),
+              image: AssetImage(Assets.imagesIconAgainShoppingCart),
               width: 27,
               height: 27,
             ),
@@ -210,7 +211,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
       firstChild: InkWell(
         onTap: onToggle,
         child: Image(
-          image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
+          image: AssetImage(Assets.imagesRecLeftFlotBtn),
           width: childSize.width,
           height: childSize.height,
         ),
@@ -246,7 +247,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
                   // border: Border.all(color: Colors.blue),
                 ),
                 child: Image(
-                  image: "assets/images/icon_rec_cat.png".toAssetImage(),
+                  image: AssetImage(Assets.imagesIconRecCat),
                   width: 45,
                   height: 40,
                 ),

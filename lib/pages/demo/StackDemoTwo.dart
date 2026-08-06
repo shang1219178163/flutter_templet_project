@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
 
@@ -102,7 +103,7 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
                         color: Colors.yellowAccent,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: "bg_mine.png".toAssetImage(),
+                          image: AssetImage(Assets.imagesBgMine),
                         )),
                   ),
                   InkWell(

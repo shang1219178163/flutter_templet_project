@@ -1,3 +1,4 @@
+import 'package:flutter_templet_project/generated/assets.dart';
 //
 //  PointsBizTypeEnum.dart
 //  flutter_templet_project
@@ -6,7 +7,6 @@
 //  Copyright © 2026/6/22 shang. All rights reserved.
 //
 
-import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 积分来源枚举公共部分
 abstract interface class PointsBizTypeEnumInterface {

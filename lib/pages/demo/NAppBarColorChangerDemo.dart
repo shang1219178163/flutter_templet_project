@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_app_bar_them_change.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class NAppBarColorChangerDemo extends StatefulWidget {
@@ -73,7 +74,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: "bg_beach.jpg".toAssetImage(),
+            image: AssetImage(Assets.imagesBgBeach),
             fit: BoxFit.fill,
           )),
           child: Column(children: [

@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:tuple/tuple.dart';
 
@@ -23,19 +24,19 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
   late final items = <Tuple2<String, String>>[
     Tuple2(
       "复制",
-      "icon_copy.png",
+      Assets.imagesIconCopy,
     ),
-    // Tuple2("引用", "icon_quote.png",),
+    // Tuple2("引用", Assets.imagesIconQuote,),
     Tuple2(
       "撤回",
-      "icon_revoke.png",
+      Assets.imagesIconRevoke,
     ),
 
-    // Tuple2("复制", "icon_copy.png"),
-    // Tuple2("引用", "icon_quote.png"),
-    // Tuple2("撤回", "icon_revoke.png"),
-    // Tuple2("复制", "icon_copy.png"),
-    // Tuple2("引用", "icon_quote.png"),
+    // Tuple2("复制", Assets.imagesIconCopy),
+    // Tuple2("引用", Assets.imagesIconQuote),
+    // Tuple2("撤回", Assets.imagesIconRevoke),
+    // Tuple2("复制", Assets.imagesIconCopy),
+    // Tuple2("引用", Assets.imagesIconQuote),
   ];
 
   final List<OverlayEntry> entries = [];
@@ -120,7 +121,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                                     onHide();
                                   },
                                   child: NLongPressMenu(
-                                      items: items.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
+                                      items: items.map((e) => Tuple2(e.item1, AssetImage(e.item2))).toList(),
                                       onItem: (Tuple2<String, AssetImage> t) {
                                         onHide();
                                         debugPrint("onChanged_$t");
@@ -211,7 +212,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
           final child = NPair(
             direction: Axis.vertical,
             icon: Image(
-              image: e.item2.toAssetImage(),
+              image: AssetImage(e.item2),
               width: 18,
               height: 18,
               fit: BoxFit.fill,

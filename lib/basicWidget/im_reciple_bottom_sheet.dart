@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
 
@@ -65,7 +66,7 @@ class IMRecipleBottomSheet extends StatelessWidget {
                 // height: 46,
                 child: buildWhiteButton(
                     title: "关闭",
-                    assetImage: "icon_clear.png".toAssetImage(),
+                    assetImage: AssetImage(Assets.imagesIconClear),
                     assetImageSize: 18,
                     margin: EdgeInsets.only(top: 23),
                     radius: 12,

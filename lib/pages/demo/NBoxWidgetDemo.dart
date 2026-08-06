@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class NBoxWidgetDemo extends StatefulWidget {
@@ -119,7 +120,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
       imageFit: BoxFit.cover,
       boxShadows: boxShadows,
       child: Image(
-        image: '404.png'.toAssetImage(),
+        image: AssetImage(Assets.images404),
         fit: BoxFit.cover,
         // width: 300.0,
         // height: 200.0,

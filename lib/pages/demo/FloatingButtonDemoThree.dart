@@ -10,6 +10,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 非展开组件支持 Y 轴翻转
@@ -202,7 +203,7 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
           Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Image(
-              image: "assets/images/icon_again_shopping_cart.png".toAssetImage(),
+              image: AssetImage(Assets.imagesIconAgainShoppingCart),
               width: 27,
               height: 27,
             ),
@@ -235,7 +236,7 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
       firstChild: InkWell(
         onTap: onToggle,
         child: Image(
-          image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
+          image: AssetImage(Assets.imagesRecLeftFlotBtn),
           width: childSize.width,
           height: childSize.height,
         ),
@@ -271,7 +272,7 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
                   // border: Border.all(color: Colors.blue),
                 ),
                 child: Image(
-                  image: "assets/images/icon_rec_cat.png".toAssetImage(),
+                  image: AssetImage(Assets.imagesIconRecCat),
                   width: 45,
                   height: 40,
                 ),

@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 档案文字展开/收起组件
 class NExpandTextVertical extends StatefulWidget {
@@ -127,10 +128,10 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
           builder: (BuildContext context, StateSetter setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
-            final arrowImageName = isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+            final arrowImageName = isExpand ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;
 
             final arrowImage = Image(
-              image: arrowImageName.toAssetImage(),
+              image: AssetImage(arrowImageName),
               width: 21,
               height: 8,
               color: context.themeData.colorScheme.primary,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/tween_animated_widget.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class AnimatedBuilderDemo extends StatefulWidget {
   const AnimatedBuilderDemo({Key? key, this.title}) : super(key: key);
@@ -75,7 +76,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
-      child: Image(image: "bg.png".toAssetImage()),
+      child: Image(image: AssetImage(Assets.imagesBg)),
     );
   }
 
@@ -94,7 +95,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
-      child: Image(image: "bg.png".toAssetImage()),
+      child: Image(image: AssetImage(Assets.imagesBg)),
     );
   }
 }

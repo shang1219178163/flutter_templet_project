@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliding_segmented_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliding_segmented_page_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +33,7 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
   })>[
     (
       title: "医生",
-      icon: "icon_segmented_control_doctor_gray.png",
+      icon: Assets.imagesIconSegmentedControlDoctorGray,
       child: Container(
         color: ColorExt.random,
       ),
@@ -121,7 +122,7 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
                           Padding(
                             padding: const EdgeInsets.only(right: 4),
                             child: Image(
-                              image: icon.toAssetImage(),
+                              image: AssetImage(icon),
                               width: 12,
                               height: 14,
                               color: color,

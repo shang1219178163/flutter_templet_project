@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class NEmpty extends StatelessWidget {
   const NEmpty({
@@ -13,7 +14,7 @@ class NEmpty extends StatelessWidget {
       child: Hero(
         tag: 'avatar',
         child: Image(
-          image: '404.png'.toAssetImage(),
+          image: AssetImage(Assets.images404),
         ),
       ),
     );

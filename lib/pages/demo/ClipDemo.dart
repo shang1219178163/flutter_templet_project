@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_path.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class ClipDemo extends StatefulWidget {
   final String? title;
@@ -85,7 +86,7 @@ class _ClipDemoState extends State<ClipDemo> {
       height: 100,
       width: 150,
       child: Image(
-        image: 'bg.png'.toAssetImage(),
+        image: AssetImage(Assets.imagesBg),
         fit: BoxFit.cover,
       ),
     );

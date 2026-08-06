@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -274,7 +275,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
                       return Tab(
                         child: FadeInImage(
                           image: NetworkImage(url),
-                          placeholder: "flutter_logo.png".toAssetImage(),
+                          placeholder: AssetImage(Assets.imagesFlutterLogo),
                         ),
                       );
                     }),

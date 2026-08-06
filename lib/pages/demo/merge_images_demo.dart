@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class MergeImagesDemo extends StatefulWidget {
   final String? title;
@@ -79,7 +80,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey1,
               child: Image(
-                image: 'bg_jiguang.png'.toAssetImage(),
+                image: AssetImage(Assets.imagesBgJiguang),
                 fit: BoxFit.cover,
                 width: context.screenSize.width,
                 height: screenSize.height * 0.25,
@@ -105,7 +106,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey3,
               child: Image(
-                image: 'sha_qiu.png'.toAssetImage(),
+                image: AssetImage(Assets.imagesShaQiu),
                 fit: BoxFit.cover,
                 width: context.screenSize.width,
                 // height: screenSize.height,
@@ -119,7 +120,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey2,
               child: Image(
-                image: 'bg_beach.jpg'.toAssetImage(),
+                image: AssetImage(Assets.imagesBgBeach),
                 fit: BoxFit.cover,
                 width: context.screenSize.width,
                 height: screenSize.height,

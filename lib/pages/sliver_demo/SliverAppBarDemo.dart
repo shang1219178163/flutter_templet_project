@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class SliverAppBarDemo extends StatefulWidget {
   const SliverAppBarDemo({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo> with SingleTickerPr
           flexibleSpace: FlexibleSpaceBar(
             title: Text('SliverAppBar'),
             background: Image(
-              image: 'bg.png'.toAssetImage(),
+              image: AssetImage(Assets.imagesBg),
               fit: BoxFit.cover,
               height: 250,
             ),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:tuple/tuple.dart';
 
@@ -187,7 +188,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
                         ? Text(e.item2)
                         : e.item1.startsWith('http')
                             ? FadeInImage(
-                                placeholder: 'img_placeholder.png'.toAssetImage(),
+                                placeholder: AssetImage(Assets.imagesImgPlaceholder),
                                 image: NetworkImage(e.item1),
                                 fit: BoxFit.cover,
                                 height: 60,

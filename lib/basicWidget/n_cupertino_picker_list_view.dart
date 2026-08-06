@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 底部列表选择封装
@@ -107,7 +108,7 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
                 : Container(
                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                     child: Image(
-                      image: "assets/images/icon_arrow_left.png".toAssetImage(),
+                      image: AssetImage(Assets.imagesIconArrowLeft),
                       width: 16,
                       height: 16,
                       // fit: BoxFit.fill,

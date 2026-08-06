@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -173,7 +174,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
         padding: EdgeInsets.zero,
         // prefixIcon: Icon(Icons.search, color: Color(0xff999999), size: 20.h,),
         prefixIcon: Image(
-          image: "icon_search.png".toAssetImage(),
+          image: AssetImage(Assets.imagesIconSearch),
           width: 14.w,
           height: 14.w,
         ),

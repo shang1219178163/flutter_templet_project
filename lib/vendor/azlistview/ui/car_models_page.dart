@@ -2,6 +2,7 @@ import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class CarModelsPage extends StatefulWidget {
@@ -122,7 +123,7 @@ class _CarModelsPageState extends State<CarModelsPage> {
           indexHintHeight: 97,
           indexHintDecoration: BoxDecoration(
             image: DecorationImage(
-              image: 'avatar.png'.toAssetImage(),
+              image: AssetImage(Assets.imagesAvatar),
               fit: BoxFit.contain,
             ),
           ),

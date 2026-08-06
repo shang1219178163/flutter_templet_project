@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:tuple/tuple.dart';
 
 typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
@@ -443,7 +444,7 @@ class HorizontalScrollWidget extends StatelessWidget {
                   fit: StackFit.expand,
                   children: [
                     FadeInImage(
-                      placeholder: 'img_placeholder.png'.toAssetImage(),
+                      placeholder: AssetImage(Assets.imagesImgPlaceholder),
                       image: NetworkImage(e.item1),
                       fit: BoxFit.fill,
                       height: double.infinity,

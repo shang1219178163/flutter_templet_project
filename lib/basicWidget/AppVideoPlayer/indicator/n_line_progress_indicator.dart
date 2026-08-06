@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_templet_project/generated/assets.dart';
+
 
 /// 播放器上的直线指示器
 class NLineProgressIndicator extends StatelessWidget {

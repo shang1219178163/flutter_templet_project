@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
@@ -118,7 +119,7 @@ class AeSingleChooseItem<T> extends StatelessWidget {
             const SizedBox(width: 8),
             if (enable)
               Image(
-                image: 'assets/images/icon_arrow_down.png'.toAssetImage(),
+                image: AssetImage(Assets.imagesIconArrowDown),
                 width: 12,
                 height: 12,
                 color: AppColor.fontColorB3B3B3,

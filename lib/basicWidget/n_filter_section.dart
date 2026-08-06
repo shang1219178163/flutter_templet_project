@@ -9,7 +9,7 @@
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class NFilterSection<T> extends StatefulWidget {
@@ -178,7 +178,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
       return const SizedBox();
     }
 
-    final tuple = isExpand ? (title: "收起", image: "icon_arrow_up.png") : (title: "展开", image: "icon_arrow_down.png");
+    final tuple = isExpand ? (title: "收起", image: Assets.imagesIconArrowUp) : (title: "展开", image: Assets.imagesIconArrowDown);
 
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 6, top: 4, bottom: 4),
@@ -194,7 +194,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
           ),
           const SizedBox(width: 4),
           Image(
-            image: tuple.image.toAssetImage(),
+            image: AssetImage(tuple.image),
             width: 10,
             height: 10,
           ),

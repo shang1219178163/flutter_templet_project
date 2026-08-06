@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 不良事件问卷信息展示
@@ -93,7 +94,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
             NPair(
               isReverse: true,
               icon: Image(
-                image: "icon_arrow_right.png".toAssetImage(),
+                image: AssetImage(Assets.imagesIconArrowRight),
                 width: 16,
                 height: 16,
               ),

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/TextInputFormatter/fraction_digits_text_input_formatter.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -221,7 +222,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
                       },
                       // icon: Icon(Icons.clear),
                       icon: Image(
-                        image: "icon_clear.png".toAssetImage(),
+                        image: AssetImage(Assets.imagesIconClear),
                         width: 16,
                         height: 16,
                       ),

@@ -10,6 +10,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class BackdropFilterDemo extends StatefulWidget {
   final String? title;
@@ -36,7 +37,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       fit: StackFit.expand,
       children: <Widget>[
         Image(
-          image: 'bg.png'.toAssetImage(),
+          image: AssetImage(Assets.imagesBg),
           fit: BoxFit.cover,
         ),
         Center(
@@ -64,7 +65,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     return StackExt.createBlurView(
         blur: 5,
         child: Image(
-          image: 'bg.png'.toAssetImage(),
+          image: AssetImage(Assets.imagesBg),
           fit: BoxFit.cover,
         ));
   }

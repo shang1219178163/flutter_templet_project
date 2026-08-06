@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_cross_fade.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/floating_button_mixin.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
@@ -130,7 +131,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
 
   Widget buildFirst({VoidCallback? onTap, bool isLeft = true, required Size childSize}) {
     return Image(
-      image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
+      image: AssetImage(Assets.imagesRecLeftFlotBtn),
       width: childSize.width,
       height: childSize.height,
     );
@@ -144,7 +145,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
           Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Image(
-              image: "assets/images/icon_again_shopping_cart.png".toAssetImage(),
+              image: AssetImage(Assets.imagesIconAgainShoppingCart),
               width: 27,
               height: 27,
             ),
@@ -201,7 +202,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
               // border: Border.all(color: Colors.blue),
             ),
             child: Image(
-              image: "assets/images/icon_rec_cat.png".toAssetImage(),
+              image: AssetImage(Assets.imagesIconRecCat),
               width: 45,
               height: 40,
             ),
@@ -358,7 +359,7 @@ class _NFloatingButtonTestState extends State<NFloatingButtonTest> {
           Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Image(
-              image: "assets/images/icon_again_shopping_cart.png".toAssetImage(),
+              image: AssetImage(Assets.imagesIconAgainShoppingCart),
               width: 27,
               height: 27,
             ),
@@ -396,7 +397,7 @@ class _NFloatingButtonTestState extends State<NFloatingButtonTest> {
           transformAlignment: Alignment.center,
           // transformAlignment: isLeft ? Alignment.centerLeft : Alignment.centerRight,
           child: Image(
-            image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
+            image: AssetImage(Assets.imagesRecLeftFlotBtn),
             width: childSize.width,
             height: childSize.height,
             alignment: !isLeft ? Alignment.centerLeft : Alignment.centerRight,
@@ -434,7 +435,7 @@ class _NFloatingButtonTestState extends State<NFloatingButtonTest> {
                   // border: Border.all(color: Colors.blue),
                 ),
                 child: Image(
-                  image: "assets/images/icon_rec_cat.png".toAssetImage(),
+                  image: AssetImage(Assets.imagesIconRecCat),
                   width: 45,
                   height: 40,
                 ),

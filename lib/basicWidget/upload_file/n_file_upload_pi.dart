@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_It
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_handle.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 文件上传样式示例
@@ -182,7 +183,7 @@ class NFileUploadPI extends NFileUploadHandle {
         ),
         child: NPair(
           icon: Image(
-            image: "icon_upload_one.png".toAssetImage(),
+            image: AssetImage(Assets.imagesIconUploadOne),
             width: 16,
             height: 16,
             color: AppColor.primary,

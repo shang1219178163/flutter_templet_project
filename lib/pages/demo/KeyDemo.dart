@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class KeyDemo extends StatefulWidget {
   const KeyDemo({Key? key, this.title}) : super(key: key);
@@ -56,7 +57,7 @@ class _KeyDemoState extends State<KeyDemo> {
         child: Column(
           children: [
             Image(
-              image: "assets/images/flutter_key.webp".toAssetImage(),
+              image: AssetImage(Assets.imagesFlutterKey),
               fit: BoxFit.fitWidth,
             ),
             Center(

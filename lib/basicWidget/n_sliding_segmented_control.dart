@@ -189,7 +189,7 @@ class NSlidingSegmentedControlIconAndTitlel extends NSlidingSegmentedControl<({S
                     Padding(
                       padding: const EdgeInsets.only(right: 4),
                       child: Image(
-                        image: icon.toAssetImage(),
+                        image: AssetImage(icon),
                         width: 12,
                         height: 14,
                         color: color,

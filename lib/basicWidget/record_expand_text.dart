@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_shader_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 档案文字展开/收起组件
 class RecordExpandText extends StatefulWidget {
@@ -104,7 +105,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
           builder: (BuildContext context, StateSetter setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
-            final toggleImage = (isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png").toAssetImage();
+            final toggleImage = AssetImage((isExpand) ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown);
             // gradientColor = Colors.blue;
 
             onToggle() {

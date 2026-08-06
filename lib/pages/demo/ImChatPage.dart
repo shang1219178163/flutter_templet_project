@@ -442,19 +442,19 @@ class _ImChatPageState extends State<ImChatPage>
     );
 
     late final menueItems = <Tuple2<String, AssetImage>>[
-      Tuple2("复制", "icon_copy.png".toAssetImage()),
-      Tuple2("引用", "icon_quote.png".toAssetImage()),
-      Tuple2("撤回", "icon_revoke.png".toAssetImage()),
+      Tuple2("复制", AssetImage(Assets.imagesIconCopy)),
+      Tuple2("引用", AssetImage(Assets.imagesIconQuote)),
+      Tuple2("撤回", AssetImage(Assets.imagesIconRevoke)),
     ];
 
     if (modelIndex == 0) {
       menueItems.addAll([
-        Tuple2("标记", "icon_quote.png".toAssetImage()),
-        Tuple2("取消", "icon_revoke.png".toAssetImage()),
+        Tuple2("标记", AssetImage(Assets.imagesIconQuote)),
+        Tuple2("取消", AssetImage(Assets.imagesIconRevoke)),
       ]);
     }
     menueItems.addAll([
-      Tuple2("${menueItems.length}", "icon_quote.png".toAssetImage()),
+      Tuple2("${menueItems.length}", AssetImage(Assets.imagesIconQuote)),
     ]);
 
     if (menueItems.isEmpty) {
@@ -867,7 +867,7 @@ class _ImChatPageState extends State<ImChatPage>
                 Padding(
                   padding: const EdgeInsets.only(top: 2),
                   child: Image(
-                    image: "icon_hi.png".toAssetImage(),
+                    image: AssetImage(Assets.imagesIconHi),
                     width: 35,
                     height: 42,
                   ),

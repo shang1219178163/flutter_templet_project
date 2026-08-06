@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_scroll_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 /// 自定义 ScrollBar
@@ -210,7 +211,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
             fit: StackFit.expand,
             children: [
               FadeInImage(
-                placeholder: 'img_placeholder.png'.toAssetImage(),
+                placeholder: AssetImage(Assets.imagesImgPlaceholder),
                 image: NetworkImage(url),
                 fit: BoxFit.fill,
                 // height: double.infinity,

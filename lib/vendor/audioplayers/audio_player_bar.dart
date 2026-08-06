@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:path/path.dart';
 
@@ -134,7 +135,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
       debugPrint("$widget 无效链接: $url");
       return const SizedBox();
     }
-    final imgPath = _isPlaying ? 'assets/images/icon_pause.png' : 'assets/images/icon_play.png';
+    final imgPath = _isPlaying ? Assets.imagesIconPause : Assets.imagesIconPlay;
 
     final totalDesc = _duration == null ? "--" : _duration!.toStringFormat();
 
@@ -155,7 +156,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
           InkWell(
             onTap: _isPlaying ? _pause : _play,
             child: Image(
-              image: imgPath.toAssetImage(),
+              image: AssetImage(imgPath),
               width: 20,
               height: 20,
             ),

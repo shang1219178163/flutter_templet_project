@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
@@ -133,10 +133,7 @@ class AeDateChooseItem extends StatelessWidget {
             const SizedBox(width: 8),
             if (enable)
               Image(
-                image: (rightIconPath ??
-                        'assets/images/icon_date_calender'
-                            '.png')
-                    .toAssetImage(),
+                image: AssetImage(rightIconPath ?? Assets.imagesIconDateCalender),
                 width: 16,
                 height: 16,
                 // color: primary,

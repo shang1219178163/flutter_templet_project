@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 用 Textfield实现的文字折叠组件
 class NExpandTextfield extends StatefulWidget {
@@ -89,7 +90,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
           builder: (BuildContext context, StateSetter setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
-            final toggleImage = (isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png").toAssetImage();
+            final toggleImage = AssetImage((isExpand) ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown);
 
             onToggle() {
               isExpand = !isExpand;

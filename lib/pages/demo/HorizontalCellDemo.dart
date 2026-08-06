@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/horizontal_cell.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class HorizontalCellDemo extends StatefulWidget {
@@ -91,7 +92,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         left: FadeInImage(
           height: 60,
           image: NetworkImage(AppRes.image.urls[4]),
-          placeholder: "img_placeholder.png".toAssetImage(),
+          placeholder: AssetImage(Assets.imagesImgPlaceholder),
         ),
         // mid: Container(
         //   width: 60,

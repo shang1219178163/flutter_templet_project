@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class DecorationDemo extends StatefulWidget {
@@ -49,7 +50,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
       borderRadius: BorderRadius.all(Radius.circular(15)),
       bgUrl: AppRes.image.urls[0],
       // bgChild: FadeInImage(
-      //   placeholder: 'img_placeholder.png'.toAssetImage(),
+      //   placeholder: AssetImage(Assets.imagesImgPlaceholder),
       //   image: NetworkImage(R.image.urls[0]),
       //   fit: BoxFit.fill,
       //   width: 400,

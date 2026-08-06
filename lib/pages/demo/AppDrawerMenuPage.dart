@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/model/cell_model.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
@@ -149,14 +150,14 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.7),
           // image: DecorationImage(
-          //   image: "img_flutter_3_10.webp".toAssetImage(),
+          //   image: AssetImage(Assets.assetsImagesImgFlutter310),
           // ),
         ),
         child: UnconstrainedBox(
           //解除父级的大小限制
           child: CircleAvatar(
             radius: 48,
-            backgroundImage: 'avatar.png'.toAssetImage(),
+            backgroundImage: AssetImage(Assets.imagesAvatar),
           ),
         ),
       ),

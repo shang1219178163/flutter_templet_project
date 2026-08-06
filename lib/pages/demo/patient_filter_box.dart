@@ -539,7 +539,7 @@
 //             width: 4,
 //           ),
 //           Image(
-//             image: tuple.$2.toAssetImage(),
+//             image: AssetImage(tuple.$2),
 //             width: 10,
 //             height: 10,
 //           ),

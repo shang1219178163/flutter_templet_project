@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class TabBarViewDemo extends StatefulWidget {
@@ -98,7 +99,7 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
                             return Tab(
                               child: FadeInImage(
                                 image: NetworkImage(url),
-                                placeholder: "flutter_logo.png".toAssetImage(),
+                                placeholder: AssetImage(Assets.imagesFlutterLogo),
                               ),
                             );
                           }),

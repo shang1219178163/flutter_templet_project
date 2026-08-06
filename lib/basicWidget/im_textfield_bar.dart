@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 enum IMTextfieldBarEvent {
@@ -186,7 +187,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                           setState(() {});
                         },
                         child: Image(
-                          image: "icon_voice_circle.png".toAssetImage(),
+                          image: AssetImage(Assets.imagesIconVoiceCircle),
                           width: 30,
                           height: 30,
                           // color: color,
@@ -211,7 +212,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                           // setState(() {});
                         },
                         child: Image(
-                          image: "icon_emoji_circle.png".toAssetImage(),
+                          image: AssetImage(Assets.imagesIconEmojiCircle),
                           width: 30.w,
                           height: 30.w,
                           // color: color,
@@ -233,7 +234,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                           // setState(() {});
                         },
                         child: Image(
-                          image: "icon_add_circle.png".toAssetImage(),
+                          image: AssetImage(Assets.imagesIconAddCircle),
                           width: 30.w,
                           height: 30.w,
                           // color: color,

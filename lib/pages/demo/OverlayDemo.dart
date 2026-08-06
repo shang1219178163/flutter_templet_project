@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/overlay/n_overlay.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_bottom_sheet.dart';
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -414,7 +415,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
           color: Colors.black.withValues(alpha: 0.1),
           child: Center(
             child: Image(
-              image: "icon_skipping.gif".toAssetImage(),
+              image: AssetImage(Assets.imagesIconSkipping),
               width: 200,
               height: 100,
             ),

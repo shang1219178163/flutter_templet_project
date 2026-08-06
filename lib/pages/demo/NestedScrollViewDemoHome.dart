@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -280,7 +281,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
             child: Padding(
               padding: const EdgeInsets.only(left: 2.0),
               child: Image(
-                image: "assets/images/icon_qr.png".toAssetImage(),
+                image: AssetImage(Assets.imagesIconQr),
                 width: 18,
                 height: 18,
               ),
@@ -333,7 +334,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                         Container(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Image(
-                            image: 'assets/images/icon_switch.png'.toAssetImage(),
+                            image: AssetImage(Assets.imagesIconSwitch),
                             width: 14,
                             height: 14,
                           ),
@@ -495,7 +496,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                   width: 6,
                 ),
                 Image(
-                  image: 'assets/images/icon_arrow_right.png'.toAssetImage(),
+                  image: AssetImage(Assets.imagesIconArrowRight),
                   width: 14,
                   height: 14,
                   color: AppColor.fontColor737373,
@@ -736,7 +737,7 @@ class ProjectGreyButton extends StatelessWidget {
           isReverse: true,
           icon: image ??
               Image(
-                image: 'assets/images/icon_edit.png'.toAssetImage(),
+                image: AssetImage(Assets.imagesIconEdit),
                 width: 12,
                 height: 12,
               ),

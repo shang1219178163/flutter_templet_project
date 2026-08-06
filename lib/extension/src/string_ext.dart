@@ -90,12 +90,6 @@ extension StringExt on String {
     return "$dir/$this";
   }
 
-  /// 图片名称转 AssetImage
-  AssetImage toAssetImage({AssetBundle? bundle, String? package}) {
-    final assetName = startsWith("assets/images/") ? this : "assets/images/$this";
-    return AssetImage(assetName, bundle: bundle, package: package);
-  }
-
   /// 同 int.tryParse(this)
   int? get tryParseInt => int.tryParse(this);
 

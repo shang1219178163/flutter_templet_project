@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/CircleSectorProgressIndicator.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class ProgressClipperDemo extends StatefulWidget {
@@ -67,7 +68,7 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
                         builder: (context, value, child) {
                           if (value == 1.0) {
                             return Image(
-                              image: "assets/images/bg_mk11.jpg".toAssetImage(),
+                              image: AssetImage(Assets.imagesBgMk11),
                               width: 16,
                               height: 16,
                               fit: BoxFit.fill,
@@ -75,7 +76,7 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
                           }
 
                           return Image(
-                            image: "assets/images/bg_mk11.jpg".toAssetImage(),
+                            image: AssetImage(Assets.imagesBgMk11),
                             width: 16,
                             height: 16,
                             fit: BoxFit.fill,

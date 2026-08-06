@@ -4,6 +4,7 @@ import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 
 class DrawCanvasDemo extends StatefulWidget {
@@ -37,7 +38,7 @@ class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image(
-                image: "assets/images/canvas_draw_arc.png".toAssetImage(),
+                image: AssetImage(Assets.imagesCanvasDrawArc),
                 fit: BoxFit.fitWidth,
               ),
               Container(

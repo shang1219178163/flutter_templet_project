@@ -10,6 +10,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/widget/user_header.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -247,7 +248,7 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
             child: Padding(
               padding: const EdgeInsets.only(left: 2.0),
               child: Image(
-                image: "assets/images/icon_qr.png".toAssetImage(),
+                image: AssetImage(Assets.imagesIconQr),
                 width: 18,
                 height: 18,
               ),

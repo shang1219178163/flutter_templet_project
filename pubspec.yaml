@@ -315,6 +315,7 @@ dev_dependencies:
   # 通过dart进行调用shll命令执行
   process_run:
   color_logger: ^1.0.2
+  flutter_assets_generator: ^0.1.0
 
 # The following section is specific to Flutter.
 flutter:

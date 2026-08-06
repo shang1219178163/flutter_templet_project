@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class NExpandTextOne extends StatefulWidget {
   const NExpandTextOne({
@@ -53,7 +54,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
       setState(() {});
     }
 
-    final arrowImage = isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+    final arrowImage = isExpand ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;
 
     Widget buildArrow() {
       // return Text(
@@ -64,7 +65,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
       // );
 
       return Image(
-        image: arrowImage.toAssetImage(),
+        image: AssetImage(arrowImage),
         width: 21,
         height: 8,
       );

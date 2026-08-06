@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliding_segmented_control.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
@@ -108,11 +109,11 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
               items: <({String title, String icon})>[
                 (
                   title: "医生",
-                  icon: "icon_segmented_control_doctor_gray.png",
+                  icon: Assets.imagesIconSegmentedControlDoctorGray,
                 ),
                 (
                   title: "健管师",
-                  icon: "icon_segmented_control_carer_gray.png",
+                  icon: Assets.imagesIconSegmentedControlCarerGray,
                 ),
               ],
               selectedIndex: 1,
@@ -138,7 +139,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
                         Padding(
                           padding: const EdgeInsets.only(right: 4),
                           child: Image(
-                            image: icon.toAssetImage(),
+                            image: AssetImage(icon),
                             width: 12,
                             height: 14,
                             color: color,
@@ -371,11 +372,11 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
     })>[
       (
         title: "医生",
-        icon: "icon_segmented_control_doctor_gray.png",
+        icon: Assets.imagesIconSegmentedControlDoctorGray,
       ),
       (
         title: "健管师",
-        icon: "icon_segmented_control_carer_gray.png",
+        icon: Assets.imagesIconSegmentedControlCarerGray,
       ),
     ];
 
@@ -431,7 +432,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
                       Padding(
                         padding: const EdgeInsets.only(right: 4),
                         child: Image(
-                          image: icon.toAssetImage(),
+                          image: AssetImage(icon),
                           width: 12,
                           height: 14,
                           color: color,

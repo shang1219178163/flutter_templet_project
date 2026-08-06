@@ -10,6 +10,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 扫描图片
 class NScanPhoto extends StatefulWidget {
@@ -81,7 +82,7 @@ class _NScanPhotoState extends State<NScanPhoto> with SingleTickerProviderStateM
               child: AnimatedBuilder(
                 animation: _controller!,
                 child: Image(
-                  image: "icon_ocr_bar.png".toAssetImage(),
+                  image: AssetImage(Assets.imagesIconOcrBar),
                   fit: BoxFit.fitWidth,
                   width: double.infinity,
                 ),

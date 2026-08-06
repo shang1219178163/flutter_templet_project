@@ -431,3 +431,6 @@ flutter pub upgrade --major-versions
 ## 三、Flutter pub package 认证文件路径 pub-credentials.json
 
 /Users/shang/Library/Application Support/dart/pub-credentials.json
+
+## 四、flutter_assets_generator
+dart run flutter_assets_generator

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text_one.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
@@ -175,7 +176,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
           border: Border.all(color: Colors.blue),
         ),
         child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-          final arrowImage = isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+          final arrowImage = isExpand ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;
 
           onToggle() {
             isExpand = !isExpand;
@@ -191,7 +192,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
             // );
 
             return Image(
-              image: arrowImage.toAssetImage(),
+              image: AssetImage(arrowImage),
               width: 21,
               height: 8,
             );

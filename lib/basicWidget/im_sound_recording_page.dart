@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 /// 发语音: 声音录制页面
@@ -33,8 +34,8 @@ class IMSoundRecordingPage extends StatelessWidget {
     return ValueListenableBuilder<bool>(
       valueListenable: cancelVN,
       builder: (context, isCancel, child) {
-        final closeButtonIconName = (isCancel ? "img_sound_overlay_button_cancel.png" : "img_sound_overlay_button.png");
-        final bottomBarIconName = (isCancel ? "img_sound_overlay_bottom_cancel.png" : "img_sound_overlay_bottom.png");
+        final closeButtonIconName = isCancel ? Assets.imagesImgSoundOverlayButtonCancel : Assets.imagesImgSoundOverlayButton;
+        final bottomBarIconName = isCancel ? Assets.imagesImgSoundOverlayBottomCancel : Assets.imagesImgSoundOverlayBottom;
 
         return Container(
           color: Colors.black.withValues(alpha: 0.5),
@@ -49,7 +50,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   // border: Border.all(width: 1),
                   image: DecorationImage(
-                    image: "img_sound_overlay_bg_recording.png".toAssetImage(),
+                    image: AssetImage(Assets.imagesImgSoundOverlayBgRecording),
                     fit: BoxFit.scaleDown,
                     colorFilter: ColorFilter.mode(
                       isCancel ? Colors.red : primary,
@@ -58,7 +59,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                   ),
                 ),
                 child: Image(
-                  image: "img_sound_recording.gif".toAssetImage(),
+                  image: AssetImage(Assets.imagesImgSoundRecording),
                   width: 150,
                   height: 70,
                 ),
@@ -85,7 +86,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(),
                 child: Image(
-                  image: closeButtonIconName.toAssetImage(),
+                  image: AssetImage(closeButtonIconName),
                   width: 64,
                   height: 64,
                 ),
@@ -117,7 +118,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                       // alignment: Alignment.center,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: bottomBarIconName.toAssetImage(),
+                          image: AssetImage(bottomBarIconName),
                           fit: BoxFit.fill,
                           // colorFilter: ColorFilter.mode(Colors.yellow, BlendMode.srcIn),
                         ),

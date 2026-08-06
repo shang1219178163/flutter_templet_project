@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.da
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 /// 上传图片单元(基于 wechat_assets_picker)
@@ -91,7 +92,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
   Widget build(BuildContext context) {
     super.build(context);
 
-    Widget img = Image(image: "img_placeholder.png".toAssetImage());
+    Widget img = Image(image: AssetImage(Assets.imagesImgPlaceholder));
     if (widget.model.url?.startsWith("http") == true) {
       final imgUrl = widget.model.url ?? "";
       img = widget.imgBuilder?.call(imgUrl) ??

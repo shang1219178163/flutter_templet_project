@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/GradientOfRadialDemo.dart';
 
@@ -439,7 +440,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
       shaderCallback: shaderCallback,
       blendMode: blendMode,
       child: Image(
-        image: 'bg_jiguang.png'.toAssetImage(),
+        image: AssetImage(Assets.imagesBgJiguang),
         fit: BoxFit.cover,
         height: 300,
       ),

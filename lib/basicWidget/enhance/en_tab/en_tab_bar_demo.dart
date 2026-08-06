@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_tab/en_tab_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {
@@ -63,7 +64,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),
-        placeholder: "flutter_logo.png".toAssetImage(),
+        placeholder: AssetImage(Assets.imagesFlutterLogo),
       ),
     );
   }
@@ -146,7 +147,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
                       return Tab(
                         child: FadeInImage(
                           image: NetworkImage(url),
-                          placeholder: "flutter_logo.png".toAssetImage(),
+                          placeholder: AssetImage(Assets.imagesFlutterLogo),
                         ),
                       );
                     }),

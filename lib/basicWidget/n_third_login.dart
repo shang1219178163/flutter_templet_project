@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/apple_sigin_mixin.dart';
 import 'package:flutter_templet_project/vendor/fluwx/fluwx_util.dart';
@@ -35,8 +35,8 @@ class NThirdLogin extends StatefulWidget {
 class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMixin {
   List<Tuple2<String, VoidCallback>> get thirdLoginItems {
     return [
-      if (Platform.isIOS) Tuple2("icon_apple_bg_grey.png".toPath(), onLoginApple),
-      Tuple2("icon_wechat_bg_green.png".toPath(), onLoginWechat),
+      if (Platform.isIOS) Tuple2(Assets.imagesIconAppleBgGrey, onLoginApple),
+      Tuple2(Assets.imagesIconWechatBgGreen, onLoginWechat),
     ];
   }
 
@@ -89,7 +89,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
             children: thirdLoginItems.map((e) {
               return InkWell(
                 onTap: e.item2,
-                child: Image(image: e.item1.toAssetImage(), width: 40, height: 40),
+                child: Image(image: AssetImage(e.item1), width: 40, height: 40),
               );
             }).toList(),
           ),

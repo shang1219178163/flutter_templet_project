@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_expansion_fade.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class AnimatedContainerDemo extends StatefulWidget {
@@ -213,7 +214,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                           height: 28,
                           alignment: Alignment.center,
                           child: Image(
-                            image: 'icon_search.png'.toAssetImage(),
+                            image: AssetImage(Assets.imagesIconSearch),
                             width: 18,
                             height: 18,
                           ),
@@ -298,7 +299,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
 
   Widget buildExpansionChild({required String content, required bool isExpanded, required VoidCallback onToggle}) {
     final maxLines = isExpanded ? 10 : 5;
-    final arrowImage = isExpanded ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+    final arrowImage = isExpanded ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;
 
     return InkWell(
       onTap: onToggle,
@@ -329,7 +330,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                 // )
                 ),
             child: Image(
-              image: arrowImage.toAssetImage(),
+              image: AssetImage(arrowImage),
               width: 21,
               height: 8,
             ),

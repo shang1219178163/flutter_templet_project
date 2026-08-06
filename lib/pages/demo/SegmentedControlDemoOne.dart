@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_segment_control_emoj_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_segment_control_emoji.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:get/get.dart';
 
 class SegmentedControlDemoOne extends StatefulWidget {
@@ -31,12 +32,12 @@ class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
 
   final items = [
     SegmentEmojiModel(
-      iconPath: 'assets/images/icon_segment_emoji.png',
+      iconPath: Assets.imagesIconSegmentEmoji,
       name: '',
       activeColor: Color(0xff007DBF),
     ),
     SegmentEmojiModel(
-      iconPath: 'assets/images/icon_segment_collect.png',
+      iconPath: Assets.imagesIconSegmentCollect,
       name: '',
       activeColor: Color(0xffFF8F3E),
     ),
@@ -135,7 +136,7 @@ class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
                   children: [
                     if (e.iconPath.isNotEmpty)
                       Image(
-                        image: e.iconPath.toAssetImage(),
+                        image: AssetImage(e.iconPath),
                         width: 25,
                         height: 25,
                         color: iconColor,

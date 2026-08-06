@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/no_top_over_scroll_physics.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:tuple/tuple.dart';
 
 typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);
@@ -227,7 +228,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                   color: Colors.green,
                   child: e.item1.startsWith('http')
                       ? FadeInImage(
-                          placeholder: 'img_placeholder.png'.toAssetImage(),
+                          placeholder: AssetImage(Assets.imagesImgPlaceholder),
                           image: NetworkImage(e.item1),
                           fit: BoxFit.cover,
                           height: 60,

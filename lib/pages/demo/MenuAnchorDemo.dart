@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dar
 import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_manager_new.dart';
 import 'package:flutter_templet_project/basicWidget/text_field/n_input_accessory_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
 
@@ -78,9 +79,9 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
 
   Widget buildFloatingActionButton() {
     final values = [
-      "icon_heart_border.png",
-      "icon_heart_half.png",
-      "icon_heart.png",
+      Assets.imagesIconHeartBorder,
+      Assets.imagesIconHeartHalf,
+      Assets.imagesIconHeart,
     ];
 
     return NMenuAnchorForImage(

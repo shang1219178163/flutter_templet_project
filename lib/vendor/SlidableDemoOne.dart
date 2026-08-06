@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_templet_project/basicWidget/n_slidable_delete_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class SlidableDemoOne extends StatefulWidget {
   SlidableDemoOne({Key? key, this.title}) : super(key: key);
@@ -119,7 +120,7 @@ class _SlidableDemoOneState extends State<SlidableDemoOne> {
             child: buildSlideAction(
               disable: disableVoice,
               title: isBan ? "取消禁言" : "禁言",
-              imagePath: isBan ? "icon_member_voice.png" : "icon_member_voice_disable.png",
+              imagePath: isBan ? Assets.imagesIconMemberVoice : Assets.imagesIconMemberVoiceDisable,
               bgColors: [
                 const Color(0xff27BDCE),
                 const Color(0xff2BCDAE),
@@ -132,7 +133,7 @@ class _SlidableDemoOneState extends State<SlidableDemoOne> {
             child: buildSlideAction(
               disable: disableRemove,
               title: "移出",
-              imagePath: "icon_member_remove.png",
+              imagePath: Assets.imagesIconMemberRemove,
               bgColors: [
                 const Color(0xffFF584C),
                 const Color(0xffFFB07F),
@@ -173,7 +174,7 @@ class _SlidableDemoOneState extends State<SlidableDemoOne> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image(
-              image: imagePath.toAssetImage(),
+              image: AssetImage(imagePath),
               width: 24,
               height: 24,
             ),

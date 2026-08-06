@@ -65,7 +65,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
                           // height: itemWidth,
                           // decoration: BoxDecoration(
                           //   image: DecorationImage(
-                          //     image: name.toPath().toAssetImage(),
+                          //     image: AssetImage(name.toPath()),
                           //     fit: BoxFit.scaleDown,
                           //     colorFilter: ColorFilter.mode(Colors.red, e),
                           //   ),

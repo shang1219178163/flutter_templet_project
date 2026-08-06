@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_templet_project/generated/assets.dart';
+
 
 /// 弹窗底部折叠/收起
 class NPoppuBottomIndicator extends StatelessWidget {

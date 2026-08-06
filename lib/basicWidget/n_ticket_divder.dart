@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 票据分割线
 class NTicketDivder extends StatelessWidget {
@@ -36,7 +37,7 @@ class NTicketDivder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final halfCircle = Image(
-      image: "icon_circle_half.png".toAssetImage(),
+      image: AssetImage(Assets.imagesIconCircleHalf),
       width: halfCircleWidth.h,
       height: halfCircleHeight.h,
     );
