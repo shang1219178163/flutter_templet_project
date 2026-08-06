@@ -41,45 +41,12 @@ class _WrapDemoState extends State<WrapDemo> {
             NSectionBox(
               title: "NWrapPageView · 20 色 · 每页 8 项（4×2）",
               mainAxisSize: MainAxisSize.min,
-              child: Container(
-                decoration: BoxDecoration(
-                  // color: Colors.green,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.blue),
-                ),
-                child: NWrapPageView<Color>(
-                  height: 168,
-                  items: items,
-                  crossAxisCount: 4,
-                  rowCount: 2,
-                  spacing: 12,
-                  runSpacing: 12,
-                  itemBuilder: (context, index) {
-                    final item = items[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: item,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${index + 1}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              child: buildWrapPageView(),
             ),
             NSectionBox(
               title: "buildWrapBox",
               mainAxisSize: MainAxisSize.min,
               child: Container(
-                height: 200,
                 margin: EdgeInsets.all(12),
                 child: buildWrapBox(),
               ),
@@ -90,13 +57,50 @@ class _WrapDemoState extends State<WrapDemo> {
     );
   }
 
+  Widget buildWrapPageView() {
+    return Container(
+      decoration: BoxDecoration(
+        // color: Colors.green,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.blue),
+      ),
+      child: NWrapPageView<Color>(
+        height: 168,
+        items: items,
+        crossAxisCount: 4,
+        rowCount: 2,
+        spacing: 12,
+        runSpacing: 12,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return Container(
+            decoration: BoxDecoration(
+              color: item,
+              border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              '${index + 1}',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget buildWrapBox() {
     final urls = AppRes.image.urls;
     return Container(
       decoration: BoxDecoration(
         color: Colors.transparent,
         border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.all(Radius.circular(0)),
+        borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
       child: Wrap(
         spacing: 8.0,
@@ -109,7 +113,7 @@ class _WrapDemoState extends State<WrapDemo> {
               decoration: BoxDecoration(
                 color: Colors.transparent,
                 border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.all(Radius.circular(0)),
+                borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
