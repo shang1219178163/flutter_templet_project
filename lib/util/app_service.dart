@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 import 'package:flutter_templet_project/basicWidget/route/n_fade_page_route.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/vendor/file_preview/file_preview_page.dart';
 import 'package:flutter_templet_project/vendor/file_preview/webview_file_preview_page.dart';
@@ -20,12 +21,19 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AppService {
   // 创建一个全局的GlobalKey
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+  /// 当前 Navigator
   static NavigatorState get navigator => navigatorKey.currentState!;
 
-  // 全局获取context
-  static get currentContext => navigatorKey.currentState!.overlay!.context;
+  /// 当前上下文
+  static BuildContext get currentContext => navigator.context;
+
+  /// 是否已挂载
+  static bool get isMounted => currentContext.mounted;
+
+  // /// 全局获取overlay.context
+  // static BuildContext get overlayContext => navigator.overlay!.context;
 
   // 移除输入框焦点
   static void unfocus() {
@@ -92,8 +100,8 @@ class AppService {
 
   /// 返回登录页
   static toLoginPage() {
-    if (Get.currentRoute != AppRouter.loginPage) {
-      Get.offAllNamed(AppRouter.loginPage);
+    if (Get.currentRoute != AppRouter.login) {
+      Get.offAllNamed(AppRouter.login);
     }
   }
 
@@ -101,5 +109,18 @@ class AppService {
     if (Get.currentRoute != page) {
       Get.toNamed(page);
     }
+  }
+}
+
+extension VoidCallbackLoggedExt on VoidCallback {
+  /// 未登录跳转登录页，已登录执行原回调
+  VoidCallback runIfLogged() {
+    return () {
+      if (!CacheService().isLogin) {
+        Navigator.pushNamed(AppService.currentContext, AppRouter.login);
+        return;
+      }
+      this();
+    };
   }
 }

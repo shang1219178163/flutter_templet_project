@@ -744,7 +744,7 @@ var others = <Tuple2<String, String>>[
   Tuple2(AppRouter.unknown, "notFound"),
   Tuple2(AppRouter.firstPage, "firstPage"),
   Tuple2(AppRouter.fourthPage, "fourthPage"),
-  Tuple2(AppRouter.loginPage, "LoginPage"),
+  Tuple2(AppRouter.login, "login"),
   Tuple2(AppRouter.loginPageOne, "LoginPage2"),
   Tuple2(AppRouter.loginPageTwo, "loginPageTwo"),
   Tuple2(AppRouter.clipDemo, "clipDemo"),

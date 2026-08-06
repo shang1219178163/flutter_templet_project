@@ -467,7 +467,7 @@ class AppRouter {
   static const String appBarDemo = '/appBarDemo';
   static const String textDemo = '/textDemo';
 
-  static const String loginPage = '/LoginPage';
+  static const String login = '/login';
   static const String loginPageOne = '/loginPageOne';
   static const String loginPageTwo = '/loginPageTwo';
 
@@ -1045,7 +1045,7 @@ class AppRouter {
       page: () => TestPageOne(),
     ),
     GetPage(
-      name: AppRouter.loginPage, page: () => LoginPage(),
+      name: AppRouter.login, page: () => LoginPage(),
       middlewares: [
         AuthMiddleware(),
       ],

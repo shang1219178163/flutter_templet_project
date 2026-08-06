@@ -147,7 +147,7 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
   }
 
   void onLoginPage() {
-    Get.toNamed(AppRouter.loginPage);
+    Get.toNamed(AppRouter.login);
   }
 
   onUnbindPhone() async {
