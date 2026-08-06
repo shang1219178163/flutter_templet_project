@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_templet_project/basicWidget/n_box_segment_control.dart';
 
 export 'n_box_segment_control.dart' show NBoxSegmentControl;
@@ -68,7 +67,9 @@ class _NDescriptionCardState extends State<NDescriptionCard> {
       };
 
   void _setLanguage(NDescriptionLanguage language) {
-    if (_language == language) return;
+    if (_language == language) {
+      return;
+    }
     setState(() => _language = language);
   }
 
@@ -177,8 +178,7 @@ class _NDescriptionCardState extends State<NDescriptionCard> {
                         NBoxSegmentControl<NDescriptionLanguage>(
                           labels: NDescriptionLanguage.values,
                           index: _language.index,
-                          onChanged: (i) =>
-                              _setLanguage(NDescriptionLanguage.values[i]),
+                          onChanged: (i) => _setLanguage(NDescriptionLanguage.values[i]),
                           itemBuilder: (context, language, selected) {
                             return Text(language.label);
                           },
