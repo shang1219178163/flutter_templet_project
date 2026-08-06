@@ -6,7 +6,6 @@ import 'package:flutter_templet_project/basicWidget/enhance/en_box_decoration/en
 import 'package:flutter_templet_project/basicWidget/enhance/en_decoration/en_decoration_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/shadow/n_inner_shadow.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 

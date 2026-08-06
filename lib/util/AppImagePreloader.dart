@@ -35,7 +35,7 @@ mixin AppImageCacheMixin {
 class AppImagePreloader with AppImageCacheMixin {
   AppImagePreloader._();
 
-  static BuildContext get context => AppService.currentContext!;
+  static BuildContext get context => AppService.currentContext;
 
   static bool initialized = false;
 

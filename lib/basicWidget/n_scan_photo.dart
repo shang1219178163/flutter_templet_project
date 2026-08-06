@@ -9,7 +9,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 扫描图片

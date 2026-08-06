@@ -55,9 +55,9 @@ class NSliverContainer extends StatelessWidget {
     this.safeAreaRight = true,
     this.safeAreaBottom = true,
     this.safeAreaMinimum = EdgeInsets.zero,
-  })  : assert(margin == null || margin!.isNonNegative),
-        assert(padding == null || padding!.isNonNegative),
-        assert(foregroundPadding == null || foregroundPadding!.isNonNegative),
+  })  : assert(margin == null || margin.isNonNegative),
+        assert(padding == null || padding.isNonNegative),
+        assert(foregroundPadding == null || foregroundPadding.isNonNegative),
         assert(decoration == null || decoration.debugAssertIsValid()),
         assert(
           clipBehavior == Clip.none,

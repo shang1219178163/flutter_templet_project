@@ -73,8 +73,8 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               child: Text("找到 ${searchResults.length} 条数据"),
             ),
             Expanded(
-              child: isGrid ? buildGridView() : buildListView(),
               flex: 1,
+              child: isGrid ? buildGridView() : buildListView(),
             )
           ],
         ),

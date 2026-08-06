@@ -66,8 +66,8 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
             child: Text("找到 ${searchResults.length} 条数据"),
           ),
           Expanded(
-            child: buildListView(context),
             flex: 1,
+            child: buildListView(context),
           )
         ],
       ),

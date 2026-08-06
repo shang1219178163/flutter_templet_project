@@ -22,65 +22,65 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
             Column(
               children: [
                 PhysicalModel(
-                  child: buildBlueBox(title: '1'),
                   color: Colors.black,
+                  child: buildBlueBox(title: '1'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 PhysicalModel(
-                  child: buildBlueBox(title: '2'),
                   color: Colors.black,
                   elevation: 8.0,
+                  child: buildBlueBox(title: '2'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 PhysicalModel(
-                  child: buildBlueBox(title: '3'),
                   color: Colors.black,
                   shadowColor: Colors.red,
                   elevation: 8.0,
+                  child: buildBlueBox(title: '3'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 PhysicalModel(
-                  child: buildBlueBox(title: '4'),
                   color: Colors.black,
                   shadowColor: Colors.pink,
                   elevation: 8.0,
                   borderRadius: BorderRadius.circular(45),
+                  child: buildBlueBox(title: '4'),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 PhysicalModel(
+                  color: Colors.black,
+                  shadowColor: Colors.pink,
+                  elevation: 8.0,
+                  shape: BoxShape.circle,
                   child: buildBlueBox(title: '5'),
-                  color: Colors.black,
-                  shadowColor: Colors.pink,
-                  elevation: 8.0,
-                  shape: BoxShape.circle,
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 PhysicalModel(
+                  color: Colors.black,
+                  shadowColor: Colors.pink,
+                  elevation: 8.0,
+                  shape: BoxShape.circle,
                   child: buildBlueBox(title: '6', opacity: 1.0),
-                  color: Colors.black,
-                  shadowColor: Colors.pink,
-                  elevation: 8.0,
-                  shape: BoxShape.circle,
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 PhysicalModel(
-                  child: buildBlueBox(title: '7', opacity: 0.0),
                   color: Colors.black,
                   shadowColor: Colors.pink,
                   elevation: 8.0,
                   shape: BoxShape.circle,
+                  child: buildBlueBox(title: '7', opacity: 0.0),
                 ),
                 SizedBox(
                   height: 15,
