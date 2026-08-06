@@ -551,7 +551,7 @@ class _NTextFieldState extends State<_NTextField> {
     );
   }
 
-  buildEnabledBorder({double radus = 4, double borderWidth = 1}) {
+  InputBorder buildEnabledBorder({double radus = 4, double borderWidth = 1}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(radus), //边角
@@ -563,7 +563,7 @@ class _NTextFieldState extends State<_NTextField> {
     );
   }
 
-  buildFocusedBorder({double radus = 4, double borderWidth = 1}) {
+  InputBorder buildFocusedBorder({double radus = 4, double borderWidth = 1}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
       borderSide: BorderSide(

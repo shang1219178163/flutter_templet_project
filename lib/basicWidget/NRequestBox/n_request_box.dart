@@ -196,7 +196,7 @@ class _NRequestBoxState extends State<NRequestBox> {
   }
 
   /// 搜索框和筛选按钮
-  buildSearchAndFilterBar({
+  Widget buildSearchAndFilterBar({
     required TextEditingController? controller,
     String placeholder = "请搜索",
     required ValueChanged<String> onChanged,
@@ -248,7 +248,7 @@ class _NRequestBoxState extends State<NRequestBox> {
   }
 
   /// 创建叠层
-  buildStack({
+  Widget buildStack({
     required Widget body,
     required Widget positionedChild,
     required ValueNotifier<bool> showPositionedChild,

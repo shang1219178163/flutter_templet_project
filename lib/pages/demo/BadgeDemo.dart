@@ -159,7 +159,7 @@ class _BadgeDemoState extends State<BadgeDemo> {
   }
 
   /// 自定义红色角标
-  buildCustomBadge({
+  Widget buildCustomBadge({
     required String badge,
     TextStyle? textStyle,
     double minWidth = 20,

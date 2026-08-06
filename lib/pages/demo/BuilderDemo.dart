@@ -33,7 +33,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
     );
   }
 
-  buildBox(String title) {
+  Widget buildBox(String title) {
     return Container(
       width: 150.0,
       height: 50.0,
@@ -44,7 +44,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       children: [
         NSectionBox(

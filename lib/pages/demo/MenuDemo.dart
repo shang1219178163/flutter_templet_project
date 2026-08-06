@@ -41,7 +41,7 @@ class _MenuDemoState extends State<MenuDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

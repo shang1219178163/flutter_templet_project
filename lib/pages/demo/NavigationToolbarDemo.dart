@@ -43,7 +43,7 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       height: 50,
       // decoration: BoxDecoration(

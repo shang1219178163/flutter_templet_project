@@ -59,7 +59,7 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
           child: Container(
             child: Column(
               children: <Widget>[
-                _buildImage(constraints: hasConstraints ? constraints : null),
+                buildImage(constraints: hasConstraints ? constraints : null),
                 Text("图片"),
               ],
             ),
@@ -69,7 +69,7 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     );
   }
 
-  _buildImage({BoxConstraints? constraints}) {
+  Widget buildImage({BoxConstraints? constraints}) {
     // return FadeInImage(
     //   // placeholder: "img_placeholder.png"),
     //   placeholder: R.image.placeholder(),
@@ -84,12 +84,12 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
       fit: BoxFit.fill,
       width: constraints?.maxWidth,
       height: 100,
-      loadingBuilder: _buildLoadingBuilder,
+      loadingBuilder: buildLoadingBuilder,
     );
   }
 
   /// 占位
-  Widget _buildLoadingBuilder(
+  Widget buildLoadingBuilder(
     BuildContext context,
     Widget child,
     ImageChunkEvent? loadingProgress,

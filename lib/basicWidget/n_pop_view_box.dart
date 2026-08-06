@@ -69,7 +69,7 @@ class _NPopViewBoxState extends State<NPopViewBox> {
     );
   }
 
-  buildBody({
+  Widget buildBody({
     Widget? title,
     Widget? content,
     Widget? header,

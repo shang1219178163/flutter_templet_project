@@ -37,7 +37,7 @@ class _RegExpDemoState extends State<RegExpDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return CustomScrollView(

@@ -40,11 +40,11 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
       appBar: AppBar(
         title: Text(pageTitle ?? widget.title ?? "$widget"),
       ),
-      body: _buildPageView(),
+      body: buildPageView(),
     );
   }
 
-  Widget _buildPageView() {
+  Widget buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
       pageSnapping: true,
@@ -55,14 +55,14 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         });
       },
       children: <Widget>[
-        _buildTweenAnimationBuilder(),
+        buildTweenAnimationBuilder(),
         buildColorFlashAnim(),
-        _buildPausePlayIcon(),
-        _buildAnimatedSizeIcon(),
-        _buildAnimatedCrossFade(),
-        _buildAnimatedScale(),
-        _buildAnimatedNSlideTransition(),
-        _buildAnimatedLineSlideTransition(),
+        buildPausePlayIcon(),
+        buildAnimatedSizeIcon(),
+        buildAnimatedCrossFade(),
+        buildAnimatedScale(),
+        buildAnimatedNSlideTransition(),
+        buildAnimatedLineSlideTransition(),
         Container(
           color: Colors.red,
           child: Center(child: Text('第0页')),
@@ -149,7 +149,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   }
 
   ///播放按钮组件
-  Widget _buildPausePlayIcon() {
+  Widget buildPausePlayIcon() {
     return Center(
       child: InkWell(
         onTap: () {
@@ -176,7 +176,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   }
 
   ///缩放组件
-  Widget _buildAnimatedSizeIcon() {
+  Widget buildAnimatedSizeIcon() {
     return GestureDetector(
       onTap: () {
         DLog.d("AnimatedSize");
@@ -206,7 +206,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   CrossFadeState _crossFadeState = CrossFadeState.showFirst;
 
   ///播放按钮组件
-  Widget _buildAnimatedCrossFade() {
+  Widget buildAnimatedCrossFade() {
     return Center(
       child: InkWell(
         child: Container(
@@ -241,7 +241,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
 
   int _count = 0;
 
-  Widget _buildAnimatedScale() {
+  Widget buildAnimatedScale() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -280,7 +280,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
     );
   }
 
-  Widget _buildAnimatedNSlideTransition() {
+  Widget buildAnimatedNSlideTransition() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -319,7 +319,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
     );
   }
 
-  Widget _buildAnimatedLineSlideTransition() {
+  Widget buildAnimatedLineSlideTransition() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -361,7 +361,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
     );
   }
 
-  Widget _buildTweenAnimationBuilder() {
+  Widget buildTweenAnimationBuilder() {
     final duration = const Duration(milliseconds: 1300);
     return Center(
       child: TweenAnimationBuilder<double>(
@@ -390,7 +390,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
     );
   }
 
-  Widget _buildNTweenAnimationBuilder() {
+  Widget buildNTweenAnimationBuilder() {
     final duration = const Duration(milliseconds: 1300);
     return Center(
       child: TweenAnimationBuilder<double>(

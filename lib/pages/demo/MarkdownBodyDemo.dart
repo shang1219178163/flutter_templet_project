@@ -103,7 +103,7 @@ class _MarkdownBodyDemoState extends State<MarkdownBodyDemo> with AssetResourceM
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CupertinoActivityIndicator();
                 }
-                return _markdownWidget(snapshot.data ?? '');
+                return markdownWidget(snapshot.data ?? '');
               }),
             )
           ],
@@ -146,7 +146,7 @@ class _MarkdownBodyDemoState extends State<MarkdownBodyDemo> with AssetResourceM
     );
   }
 
-  Widget _markdownWidget(String data) {
+  Widget markdownWidget(String data) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(

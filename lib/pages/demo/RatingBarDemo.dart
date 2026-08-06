@@ -19,17 +19,17 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
       ),
       body: Column(
         children: [
-          _buildBar(),
+          buildBar(),
           Divider(),
-          _buildBar1(),
+          buildBar1(),
           Divider(),
-          _buildBar2(),
+          buildBar2(),
         ],
       ),
     );
   }
 
-  _buildBar() {
+  Widget buildBar() {
     return RatingBar.builder(
       initialRating: 3,
       minRating: 1,
@@ -47,16 +47,16 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
     );
   }
 
-  _buildBar1() {
+  Widget buildBar1() {
     return RatingBar(
       initialRating: 3,
       direction: Axis.horizontal,
       allowHalfRating: true,
       itemCount: 5,
       ratingWidget: RatingWidget(
-        full: _image('assets/images/icon_heart.png'),
-        half: _image('assets/images/icon_heart_half.png'),
-        empty: _image('assets/images/icon_heart_border.png'),
+        full: image('assets/images/icon_heart.png'),
+        half: image('assets/images/icon_heart_half.png'),
+        empty: image('assets/images/icon_heart_border.png'),
       ),
       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
       onRatingUpdate: (rating) {
@@ -65,7 +65,7 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
     );
   }
 
-  _buildBar2() {
+  Widget buildBar2() {
     return RatingBar.builder(
       initialRating: 3,
       itemCount: 5,
@@ -76,7 +76,7 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
     );
   }
 
-  Widget _image(String asset) {
+  Widget image(String asset) {
     return Image.asset(
       asset,
       height: 30.0,

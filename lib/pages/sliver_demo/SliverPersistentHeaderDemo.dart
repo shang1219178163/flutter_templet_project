@@ -52,7 +52,7 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
     );
   }
 
-  buildSliverGrid({int count = 100}) {
+  Widget buildSliverGrid({int count = 100}) {
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200.0,

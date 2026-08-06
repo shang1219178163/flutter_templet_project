@@ -59,7 +59,7 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
           children: [
             if (_photoPath == null)
               GestureDetector(
-                onTap: _pickImage,
+                onTap: pickImage,
                 child: Icon(
                   Icons.image,
                   color: Colors.grey.withValues(alpha: 0.5),
@@ -68,14 +68,14 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
               ),
             if (_photoPath != null)
               GestureDetector(
-                onTap: _pickImage,
+                onTap: pickImage,
                 child: Image.file(
                   File(_photoPath!),
                   width: 100,
                 ),
               ),
             ElevatedButton(
-              onPressed: _pickVideo,
+              onPressed: pickVideo,
               child: Text('Pick a Video'),
             ),
             if (_videoPath != null) ...[
@@ -95,18 +95,18 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
   }
 
   // 选择照片
-  Future<void> _pickImage() async {
+  Future<void> pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _photoPath = pickedFile.path;
       });
-      _detectFaceInPhoto(pickedFile.path);
+      detectFaceInPhoto(pickedFile.path);
     }
   }
 
   // 选择视频
-  Future<void> _pickVideo() async {
+  Future<void> pickVideo() async {
     final pickedFile = await _picker.pickVideo(source: ImageSource.gallery);
     if (pickedFile == null) {
       return;
@@ -117,7 +117,7 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
   }
 
   // 检测照片中的人脸
-  Future<void> _detectFaceInPhoto(String photoPath) async {
+  Future<void> detectFaceInPhoto(String photoPath) async {
     final inputImage = InputImage.fromFilePath(photoPath);
     final faces = await faceDetector.processImage(inputImage);
 
@@ -143,7 +143,7 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
   //   final frames = Directory(outputDir).listSync();
   //   for (final frame in frames) {
   //     final framePath = frame.path;
-  //     final result = await _detectFaceInFrame(framePath);
+  //     final result = await detectFaceInFrame(framePath);
   //     if (result) {
   //       // 如果找到匹配的人脸，截取该帧
   //       _resultImagePath = framePath;
@@ -177,7 +177,7 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
   // }
 
   // 检测视频帧中的人脸
-  Future<bool> _detectFaceInFrame(String framePath) async {
+  Future<bool> detectFaceInFrame(String framePath) async {
     final inputImage = InputImage.fromFilePath(framePath);
 
     final faces = await faceDetector.processImage(inputImage);

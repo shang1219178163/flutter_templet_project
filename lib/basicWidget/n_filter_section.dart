@@ -166,7 +166,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
     );
   }
 
-  buildExpandMenuTrailing({
+  Widget buildExpandMenuTrailing({
     bool isExpand = true,
     Color color = Colors.blueAccent,
     Color borderColor = Colors.blueAccent,

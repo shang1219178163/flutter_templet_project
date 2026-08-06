@@ -28,7 +28,7 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.all(16),

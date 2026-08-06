@@ -25,7 +25,7 @@ class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
     super.initState();
   }
 
-  _playAnimation() async {
+  playAnimation() async {
     try {
       //先正向执行动画
       await _controller.forward().orCancel;
@@ -46,7 +46,7 @@ class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () => _playAnimation(),
+              onPressed: () => playAnimation(),
               child: Text("start animation"),
             ),
             Container(
@@ -119,7 +119,7 @@ class AnimatedStagger extends StatelessWidget {
   late final Animation<EdgeInsets> padding;
   late final Animation<Color?> color;
 
-  Widget _buildAnimation(BuildContext context, child) {
+  Widget buildAnimation(BuildContext context, child) {
     return Container(
       alignment: Alignment.bottomCenter,
       padding: padding.value,
@@ -134,7 +134,7 @@ class AnimatedStagger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      builder: _buildAnimation,
+      builder: buildAnimation,
       animation: controller,
     );
   }

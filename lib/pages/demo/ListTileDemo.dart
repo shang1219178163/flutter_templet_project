@@ -92,7 +92,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
                   _isSelected = value;
                 });
               }),
-          _buildRadioGroup(
+          buildRadioGroup(
               header: Container(
                 color: Colors.lightBlue,
                 alignment: Alignment.centerLeft,
@@ -104,7 +104,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
                   Container(color: Colors.lightGreen, alignment: Alignment.centerLeft, child: Text("RadioGroup 备注信息")),
               cb: (value) {
                 sexValue = value;
-                debugPrint(["_buildRadioGroup", sexValue].toString());
+                debugPrint(["buildRadioGroup", sexValue].toString());
               }),
         ],
       )),
@@ -112,7 +112,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
   }
 
   /// 一组选项
-  _buildRadioGroup(
+  Widget buildRadioGroup(
       {List items = const <String>[
         "男",
         "女",

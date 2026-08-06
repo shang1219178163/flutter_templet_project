@@ -31,7 +31,7 @@ class _TextViewDemoState extends State<TextViewDemo> {
         body: buildBody());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       constraints: BoxConstraints(
         // minWidth: 100,

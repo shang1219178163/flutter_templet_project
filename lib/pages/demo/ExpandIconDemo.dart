@@ -77,11 +77,11 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           ),
           NSectionBox(
             title: "Visibility",
-            child: _buildVisbility(),
+            child: buildVisbility(),
           ),
           NSectionBox(
             title: "自定义 VisibleContainer",
-            child: _buildVisibleContainer(),
+            child: buildVisibleContainer(),
           ),
           NSectionBox(
             title: "自定义 FoldMenu - NExpansionFade",
@@ -204,7 +204,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
   bool _isShowing = true;
 
-  Widget _buildVisbility() {
+  Widget buildVisbility() {
     return Container(
       color: Colors.green,
       child: Column(children: [
@@ -234,7 +234,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
   bool isVisible = true;
 
-  Widget _buildVisibleContainer() {
+  Widget buildVisibleContainer() {
     return Column(
       children: [
         Container(
@@ -395,7 +395,7 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       children: [
         NSectionBox(
@@ -465,7 +465,7 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
     );
   }
 
-  buildTrailing({
+  Widget buildTrailing({
     Color? color,
     bool isExpand = true,
   }) {
@@ -479,10 +479,10 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
     //   ),
     // );
 
-    return _buildCustomBtn(isExpand: isExpand, color: Colors.green);
+    return buildCustomBtn(isExpand: isExpand, color: Colors.green);
   }
 
-  _buildCustomBtn({
+  Widget buildCustomBtn({
     bool isExpand = true,
     Color color = Colors.blueAccent,
   }) {

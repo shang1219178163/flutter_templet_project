@@ -28,20 +28,20 @@ class _FoggyEffectState extends State<FoggyEffect>
     )..repeat();
 
     // 创建雾气云团 - 使用更少但更大的云团
-    _createFogClouds();
+    createFogClouds();
   }
 
-  void _createFogClouds() {
+  void createFogClouds() {
     // 清除现有云团
     _fogClouds.clear();
 
     // 创建前景和背景雾气
-    _createLayeredFogClouds(5, 0.0, 0.3, 0.06); // 前景雾
-    _createLayeredFogClouds(8, 0.4, 0.8, 0.02); // 中间雾
-    _createLayeredFogClouds(10, 0.7, 1.0, 0.01); // 背景雾
+    createLayeredFogClouds(5, 0.0, 0.3, 0.06); // 前景雾
+    createLayeredFogClouds(8, 0.4, 0.8, 0.02); // 中间雾
+    createLayeredFogClouds(10, 0.7, 1.0, 0.01); // 背景雾
   }
 
-  void _createLayeredFogClouds(
+  void createLayeredFogClouds(
       int count, double minOpacity, double maxOpacity, double maxSpeed) {
     for (var i = 0; i < count; i++) {
       final size = 150.0 + random.nextDouble() * 300;
@@ -154,10 +154,10 @@ class NewFogPainter extends CustomPainter {
         Rect.fromLTWH(0, 0, size.width, size.height), backgroundPaint);
 
     // 绘制模糊的远景深度
-    _drawSilhouettes(canvas, size);
+    drawSilhouettes(canvas, size);
 
     // 绘制全屏环境雾气 - 创造整体氛围
-    _drawAmbientFog(canvas, size);
+    drawAmbientFog(canvas, size);
 
     // 绘制各种云团 - 按不透明度排序（从后到前）
     fogClouds.sort((a, b) => a.opacity.compareTo(b.opacity));
@@ -204,10 +204,10 @@ class NewFogPainter extends CustomPainter {
     );
 
     // 添加微妙的光影效果
-    _drawLightEffects(canvas, size);
+    drawLightEffects(canvas, size);
   }
 
-  void _drawSilhouettes(Canvas canvas, Size size) {
+  void drawSilhouettes(Canvas canvas, Size size) {
     final silhouettePaint = Paint()
       ..color = Colors.blueGrey.shade800.withValues(alpha: 0.15)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
@@ -239,7 +239,7 @@ class NewFogPainter extends CustomPainter {
     }
   }
 
-  void _drawAmbientFog(Canvas canvas, Size size) {
+  void drawAmbientFog(Canvas canvas, Size size) {
     // 创建渐变雾气效果
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.width, size.height),
@@ -258,7 +258,7 @@ class NewFogPainter extends CustomPainter {
     );
   }
 
-  void _drawLightEffects(Canvas canvas, Size size) {
+  void drawLightEffects(Canvas canvas, Size size) {
     // 添加顶部微弱的光源效果
     final lightX = sin(animationValue * pi * 0.2) * 0.3 + 0.5; // 光源缓慢移动
 

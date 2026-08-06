@@ -99,7 +99,7 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
     );
   }
 
-  buildInputView({
+  Widget buildInputView({
     TextEditingController? controller,
     required ValueChanged<String>? onChanged,
   }) {

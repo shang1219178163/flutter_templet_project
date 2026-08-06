@@ -41,9 +41,9 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
           children: <Widget>[
             Text(message),
             buildSwitchCell(),
-            // _buildSection2(),
+            // buildSection2(),
             Divider(),
-            _buildAbsorbPointerNew(absorbing: _disable),
+            buildAbsorbPointerNew(absorbing: _disable),
             MaterialButton(
               color: Colors.lightBlue,
               onPressed: () => onClick('我是外面的按钮，不受影响'),
@@ -130,7 +130,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
     );
   }
 
-  buildSwitchCell() {
+  Widget buildSwitchCell() {
     return Row(
       children: <Widget>[
         Text('不可点击：absorbing: $_disable'),
@@ -145,7 +145,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
     );
   }
 
-  _buildSection2() {
+  Widget buildSection2() {
     return Container(
       child: AbsorbPointer(
         absorbing: _disable,
@@ -163,14 +163,14 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
               onPressed: () => onClick('我是按钮'),
               child: Text('我是按钮'),
             ),
-            _buildSection3(),
+            buildSection3(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSection3() {
+  Widget buildSection3() {
     return Container(
       height: 200,
       width: 200,
@@ -207,7 +207,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   }
 
   /// 默认吸收事件，拦截事件
-  _buildAbsorbPointerNew({bool absorbing = true}) {
+  Widget buildAbsorbPointerNew({bool absorbing = true}) {
     return InkWell(
       onTap: () => onClick("green: outside"),
       child: Container(
@@ -231,7 +231,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   }
 
   /// 默认吸收事件，拦截事件
-  _buildAbsorbPointer({bool absorbing = true}) {
+  Widget buildAbsorbPointer({bool absorbing = true}) {
     return Listener(
       onPointerDown: (e) => onClick("up"),
       child: AbsorbPointer(

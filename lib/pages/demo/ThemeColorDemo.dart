@@ -249,7 +249,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
     );
   }
 
-  buildBody({
+  Widget buildBody({
     required List<Tuple2<String, Color>> items,
     required List<Tuple2<String, Color>> colorSchemeItems,
   }) {

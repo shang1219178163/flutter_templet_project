@@ -81,7 +81,7 @@ class _NTreeDemoState extends State<NTreeDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return CustomScrollView(

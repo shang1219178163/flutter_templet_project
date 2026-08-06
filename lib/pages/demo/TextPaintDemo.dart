@@ -47,7 +47,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

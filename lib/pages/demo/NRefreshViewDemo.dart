@@ -90,7 +90,7 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       children: [
         ValueListenableBuilder(

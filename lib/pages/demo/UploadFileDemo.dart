@@ -53,7 +53,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SingleChildScrollView(
       child: Column(
         children: [

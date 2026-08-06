@@ -102,16 +102,16 @@ class ConcurrentExecutor {
 
   void add(Future<void> Function() task) {
     _taskQueue.add(task);
-    _tryExecuteNext();
+    tryExecuteNext();
   }
 
-  void _tryExecuteNext() {
+  void tryExecuteNext() {
     while (_running < maxConcurrent && _taskQueue.isNotEmpty) {
       final task = _taskQueue.removeFirst();
       _running++;
       task().whenComplete(() {
         _running--;
-        _tryExecuteNext();
+        tryExecuteNext();
       });
     }
   }

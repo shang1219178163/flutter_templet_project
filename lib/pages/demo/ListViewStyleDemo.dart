@@ -30,10 +30,10 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
     // _tabController.index = _pages.length - 1;
 
     _pages = [
-      Tuple2('功能列表', _buildPage1()),
-      Tuple2('升级列表', _buildPage2()),
-      Tuple2('列表(泛型)', _buildPage3()),
-      Tuple2('列表(折叠)', _buildPage4()),
+      Tuple2('功能列表', buildPage1()),
+      Tuple2('升级列表', buildPage2()),
+      Tuple2('列表(泛型)', buildPage3()),
+      Tuple2('列表(折叠)', buildPage4()),
     ];
   }
 
@@ -76,7 +76,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
     );
   }
 
-  _buildPage1() {
+  Widget buildPage1() {
     return ListView.separated(
       cacheExtent: 180,
       itemCount: kAliPayList.length,
@@ -131,7 +131,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
     );
   }
 
-  _buildPage2() {
+  Widget buildPage2() {
     return ListView.separated(
       cacheExtent: 180,
       itemCount: kUpdateAppList.length,
@@ -152,7 +152,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
     );
   }
 
-  _buildPage3() {
+  Widget buildPage3() {
     return SectionListView<String, Tuple2<String, String>>(
       headerList: tuples.map((e) => e.item1).toList(),
       itemList: tuples
@@ -189,7 +189,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
     );
   }
 
-  _buildPage4() {
+  Widget buildPage4() {
     return EnhanceExpandListView(
       children: tuples
           .map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(

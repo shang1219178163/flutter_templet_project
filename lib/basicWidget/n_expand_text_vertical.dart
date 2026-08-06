@@ -75,7 +75,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
     );
   }
 
-  buildText({
+  Widget buildText({
     required String text,
     TextStyle? textStyle,
     int expandMaxLine = 3,

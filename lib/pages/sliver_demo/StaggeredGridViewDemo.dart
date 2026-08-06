@@ -39,11 +39,11 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
           ),
         ],
       ),
-      body: _type == true ? buildBody() : _buildCustomScrollView(),
+      body: _type == true ? buildBody() : buildCustomScrollView(),
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container();
     // return ClipRRect(
     //   borderRadius: BorderRadius.circular(30),
@@ -71,17 +71,17 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
     // );
   }
 
-  Widget _buildCustomScrollView() {
+  Widget buildCustomScrollView() {
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[
-        // _buildSliverBorderRadius(),
-        _buildGrid(),
+        // buildSliverBorderRadius(),
+        buildGrid(),
       ],
     );
   }
 
-  _buildGrid() {
+  Widget buildGrid() {
     var list = List<Widget>.generate(
         9,
         (index) => Container(
@@ -133,7 +133,7 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
     // );
   }
 
-  _buildSliverBorderRadius({bool addToSliverBox = true}) {
+  InputBorder buildSliverBorderRadius({bool addToSliverBox = true}) {
     final child = Container(
       color: Color(0xff5c63f1),
       height: 20,

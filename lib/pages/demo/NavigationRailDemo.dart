@@ -64,10 +64,10 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
           AnimatedBuilder(
             animation: Listenable.merge([_selectIndex, isNavigationRailExpand]),
             builder: (context, child) {
-              return _buildLeftNavigation(selectedIndex: _selectIndex.value, extended: isNavigationRailExpand.value);
+              return buildLeftNavigation(selectedIndex: _selectIndex.value, extended: isNavigationRailExpand.value);
             },
           ),
-          _buildRight(),
+          buildRight(),
         ]));
   }
 
@@ -77,7 +77,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     _selectIndex.value = value;
   }
 
-  Widget _buildLeftNavigation({int selectedIndex = 0, bool extended = false}) {
+  Widget buildLeftNavigation({int selectedIndex = 0, bool extended = false}) {
     final openIcon = extended ? Icon(Icons.menu_open) : Icon(Icons.menu);
     return NavigationRail(
       leading: IconButton(
@@ -115,7 +115,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     _selectIndex.value = value;
   }
 
-  _buildRight() {
+  Widget buildRight() {
     return Expanded(
       child: PageView(
         scrollDirection: Axis.vertical,

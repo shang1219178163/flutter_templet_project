@@ -46,7 +46,7 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     final text = "刚开始进行搜索，发现很多都是让在每段开始的时候采用空格进行填充，但是采用这种形式之后，不知道为何首行直接溢出了，最后采用下面方法进行实现"
         "的。";
 

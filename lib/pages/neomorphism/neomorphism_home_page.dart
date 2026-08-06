@@ -42,7 +42,7 @@ class _NeomorphismHomePageState extends State<NeomorphismHomePage> {
     );
   }
 
-  buildBoyd() {
+  Widget buildBoyd() {
     return Scrollbar(
       controller: scrollController,
       child: ListView.separated(

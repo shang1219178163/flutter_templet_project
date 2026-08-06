@@ -32,7 +32,7 @@ class _FloatingButtonDemoOneState extends State<FloatingButtonDemoOne> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return NFloatingButton(
       attachHorizalEdge: true,
       // attachVerticalEdge: true,

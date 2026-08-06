@@ -329,10 +329,10 @@ class Hexagon extends CustomPainter {
     final cornerRadius = 20.0; // 圆角半径（控制圆角幅度）
 
     // 1. 计算六边形的六个顶点坐标
-    final vertices = _calculateHexagonVertices(centerX, centerY, radius);
+    final vertices = calculateHexagonVertices(centerX, centerY, radius);
 
     // 2. 构建圆角路径
-    final path = _buildRoundedHexagonPath(vertices, cornerRadius);
+    final path = buildRoundedHexagonPath(vertices, cornerRadius);
 
     var paint = Paint()
       ..color = Colors.blue
@@ -346,7 +346,7 @@ class Hexagon extends CustomPainter {
   }
 
   // 计算六边形顶点坐标（带角度调整）
-  List<Offset> _calculateHexagonVertices(double centerX, double centerY, double radius) {
+  List<Offset> calculateHexagonVertices(double centerX, double centerY, double radius) {
     final vertices = <Offset>[];
     for (var i = 0; i < 6; i++) {
       // 调整起始角度使六边形垂直（-π/6 用于对齐）
@@ -359,7 +359,7 @@ class Hexagon extends CustomPainter {
   }
 
   // 构建圆角六边形路径
-  Path _buildRoundedHexagonPath(List<Offset> vertices, double cornerRadius) {
+  Path buildRoundedHexagonPath(List<Offset> vertices, double cornerRadius) {
     final path = Path();
     for (var i = 0; i < vertices.length; i++) {
       final currentVertex = vertices[i];

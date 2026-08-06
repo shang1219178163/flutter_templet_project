@@ -24,15 +24,15 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
       ),
       body: Column(
         children: <Widget>[
-          _buildSlider(),
-          _buildCell(),
+          buildSlider(),
+          buildCell(),
         ],
       ),
     );
   }
 
   /// 透明度滑动组件
-  _buildSlider() {
+  Widget buildSlider() {
     return Row(
       children: [
         Expanded(
@@ -67,21 +67,21 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
     );
   }
 
-  Text _buildText(String text) {
+  Text buildText(String text) {
     return Text(text, style: TextStyle(fontSize: 16));
   }
 
-  _buildCell() {
+  Widget buildCell() {
     return HorizontalCell(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.red),
           color: Colors.green,
         ),
-        title: _buildText("title"),
-        titleRight: _buildText("titleRight"),
-        subtitle: _buildText("subtitle"),
-        subtitleRight: _buildText("subtitleRight"),
+        title: buildText("title"),
+        titleRight: buildText("titleRight"),
+        subtitle: buildText("subtitle"),
+        subtitleRight: buildText("subtitleRight"),
         // titleSpace: Spacer(),
         // titleSpace: Container(
         //   height: 20,

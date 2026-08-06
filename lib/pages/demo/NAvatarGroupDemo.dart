@@ -40,7 +40,7 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     final doctorNum = 10;
     final avatarsMax = doctorNum > 3 ? 3 : doctorNum;
 

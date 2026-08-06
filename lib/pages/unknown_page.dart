@@ -28,7 +28,7 @@ class UnknownPage extends StatelessWidget {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Padding(
       padding: const EdgeInsets.only(top: 200.0),
       child: Center(

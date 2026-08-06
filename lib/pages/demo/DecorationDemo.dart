@@ -38,7 +38,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
     );
   }
 
-  buildSection1() {
+  Widget buildSection1() {
     final child = NBox(
       width: 300,
       height: 200,
@@ -80,7 +80,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
     return child;
   }
 
-  buildSection3() {
+  Widget buildSection3() {
     return Opacity(
       opacity: 1,
       child: Container(
@@ -121,7 +121,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
     );
   }
 
-  buildImage({
+  Widget buildImage({
     double width = 200,
     double height = 200,
   }) {

@@ -35,11 +35,11 @@ class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {
                 ))
             .toList(),
       ),
-      body: _buildListWheelScrollView(),
+      body: buildListWheelScrollView(),
     );
   }
 
-  _buildListWheelScrollView() {
+  Widget buildListWheelScrollView() {
     return ListWheelScrollView.useDelegate(
       itemExtent: 150,
       childDelegate: ListWheelChildBuilderDelegate(

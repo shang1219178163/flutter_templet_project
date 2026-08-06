@@ -69,12 +69,12 @@ class XHorizontalScrollWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isSwiper) {
-      return _buildBodySwiper();
+      return buildBodySwiper();
     }
     return buildBody();
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
         width: width,
         height: height,
@@ -241,7 +241,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
     );
   }
 
-  _buildBodySwiper() {
+  Widget buildBodySwiper() {
     return Container(
       width: width,
       height: height,

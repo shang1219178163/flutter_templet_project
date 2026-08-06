@@ -27,7 +27,7 @@ class LocalImagePage extends StatelessWidget {
     );
   }
 
-  buildGridView() {
+  Widget buildGridView() {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
       crossAxisCount: 2,

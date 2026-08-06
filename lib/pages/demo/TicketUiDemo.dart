@@ -111,12 +111,12 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
                       ),
                       child: Column(
                         children: [
-                          _buildHeadder(),
+                          buildHeadder(),
                           const SizedBox(height: 16),
-                          _buildBodyRow1(),
-                          _buildBodyRow2(),
+                          buildBodyRow1(),
+                          buildBodyRow2(),
                           const Spacer(),
-                          _buildFooter(),
+                          buildFooter(),
                         ],
                       ),
                     );
@@ -131,7 +131,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
   }
 
   // 分割虚线
-  Widget _dashLine() {
+  Widget dashLine() {
     return Container(
       height: 3,
       margin: EdgeInsets.symmetric(horizontal: 4),
@@ -142,7 +142,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
     );
   }
 
-  _buildHeadder({
+  Widget buildHeadder({
     String leftTitle = "DEA-HYD",
     String midTitle = "BH07",
     String rightTitle = "\$140",
@@ -175,7 +175,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
     );
   }
 
-  _buildBodyRow1({
+  Widget buildBodyRow1({
     String leftTitle = "May 30, 2022",
     String rightTitle = "May 30, 2022",
   }) {
@@ -203,7 +203,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.center,
-                  child: _dashLine(),
+                  child: dashLine(),
                   // child: CustomPaint(
                   //   painter: HorizontalDottedLinePainter(),
                   //   size: const Size(double.infinity, 1),
@@ -241,7 +241,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
     );
   }
 
-  _buildBodyRow2({
+  Widget buildBodyRow2({
     String leftTitle = "10:40AM",
     String midTitle = "1h 30m",
     String rightTitle = "12:50AM",
@@ -274,13 +274,12 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
     );
   }
 
-  _buildFooter({
+  Widget buildFooter({
     String leftTitle = "Indigo",
     String midTitle = "",
     String rightTitle = "Cheapest",
   }) {
-    return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

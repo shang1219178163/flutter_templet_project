@@ -38,7 +38,7 @@ class _BatterLevelPageState extends State<BatterLevelPage> {
             OutlinedButton.icon(
               icon: Icon(Icons.search),
               label: Text("Get Battery Level"),
-              onPressed: _getBatterLevel,
+              onPressed: getBatterLevel,
             ),
           ],
         ),
@@ -46,7 +46,7 @@ class _BatterLevelPageState extends State<BatterLevelPage> {
     );
   }
 
-  _getBatterLevel() async {
+  getBatterLevel() async {
     String batteryLevel;
     try {
       final int result = await platform.invokeMethod('getBatteryLevel');

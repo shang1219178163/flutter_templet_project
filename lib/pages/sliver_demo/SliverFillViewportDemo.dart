@@ -13,7 +13,7 @@ class SliverFillViewportDemo extends StatelessWidget {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     List<Color> colors = Colors.primaries.sublist(6, 10);
 
     return CustomScrollView(

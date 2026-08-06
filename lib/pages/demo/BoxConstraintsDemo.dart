@@ -21,7 +21,7 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
         body: buildBody());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: ListView(
@@ -39,35 +39,35 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
                     minWidth: 40,
                     maxWidth: 300,
                   ),
-                  child: _buildBox(),
+                  child: buildBox(),
                 ),
               ),
               NSectionBox(
                 title: "ConstrainedBox.expand（展开约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.expand(width: 300, height: 100),
-                  child: _buildBox(),
+                  child: buildBox(),
                 ),
               ),
               NSectionBox(
                 title: "ConstrainedBox.loose（松约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.loose(Size(300, 100)),
-                  child: _buildBox(),
+                  child: buildBox(),
                 ),
               ),
               NSectionBox(
                 title: "ConstrainedBox.tight（紧约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.tight(Size(300, 100)),
-                  child: _buildBox(),
+                  child: buildBox(),
                 ),
               ),
               NSectionBox(
                 title: "BoxConstraints.tightForFinite（有限紧约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.tightForFinite(height: 100),
-                  child: _buildBox(),
+                  child: buildBox(),
                 ),
               ),
               NSectionBox(
@@ -80,7 +80,7 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
                     minWidth: 40,
                     maxWidth: 300,
                   ).loosen(),
-                  child: _buildBox(),
+                  child: buildBox(),
                 ),
               ),
               NSectionBox(
@@ -120,7 +120,7 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
     );
   }
 
-  _buildBox({String text = 'ConstrainedBox 属性 ConstrainedBox'}) {
+  Widget buildBox({String text = 'ConstrainedBox 属性 ConstrainedBox'}) {
     return Container(
       color: Colors.lightBlue,
       child: Text(text),

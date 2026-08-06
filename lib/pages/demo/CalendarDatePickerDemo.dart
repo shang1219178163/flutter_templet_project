@@ -40,7 +40,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
                     children: [
                       // Text("${selectedDate.toLocal()}".substring(0, 10)),
                       ElevatedButton(
-                        onPressed: () => _selectDate(context),
+                        onPressed: () => selectDate(context),
                         child:
                             Text("${selectedDate.toLocal()}".substring(0, 10)),
                       ),
@@ -99,7 +99,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
 
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> selectDate(BuildContext context) async {
     final picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,

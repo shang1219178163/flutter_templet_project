@@ -39,7 +39,7 @@ class _OverflowDemoState extends State<OverflowDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       color: Colors.yellow,
       width: 200.0,

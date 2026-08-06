@@ -26,11 +26,11 @@ class _OffstageDemoState extends State<OffstageDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildOffstageExampele(),
+      body: buildOffstageExampele(),
     );
   }
 
-  Widget _buildOffstageExampele() {
+  Widget buildOffstageExampele() {
     return Column(
       // mainAxisAlignment: MainAxisAlignment.center,
       // crossAxisAlignment: CrossAxisAlignment.center,

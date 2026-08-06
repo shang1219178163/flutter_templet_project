@@ -50,14 +50,14 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeaderHeight(overlapHeight: widget.height));
+    WidgetsBinding.instance.addPostFrameCallback((_) => measureHeaderHeight(overlapHeight: widget.height));
   }
 
   @override
   void didUpdateWidget(covariant _HeadView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.height != widget.height && widget.height > oldWidget.height) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeaderHeight(overlapHeight: widget.height));
+      WidgetsBinding.instance.addPostFrameCallback((_) => measureHeaderHeight(overlapHeight: widget.height));
     }
   }
 
@@ -252,7 +252,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
     );
   }
 
-  void _measureHeaderHeight({int overlapHeight = 30}) {
+  void measureHeaderHeight({int overlapHeight = 30}) {
     if (!mounted || _headerKey.currentContext == null) {
       return;
     }
@@ -269,7 +269,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
             setState(() {});
           } else {
             // 如果测量失败，使用默认值或重新尝试
-            WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeaderHeight());
+            WidgetsBinding.instance.addPostFrameCallback((_) => measureHeaderHeight());
           }
         }
       }
@@ -280,9 +280,9 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _headerView(
+        headerView(
           onPop: () {
-            DLog.d("_headerView");
+            DLog.d("headerView");
             Navigator.pop(context);
           },
           avatarUrl: avatar,
@@ -294,7 +294,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _nameInfoView(
+            nameInfoView(
               name: "意难平1",
               level: 90,
               follow: 91,
@@ -325,7 +325,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
     );
   }
 
-  Widget _headerView({
+  Widget headerView({
     required void Function() onPop,
     required String avatarUrl,
     required bool isFollow,
@@ -369,7 +369,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
               bottom: 0,
               left: 0,
               right: 0,
-              child: _actionView(
+              child: actionView(
                 isFollow: isFollow,
                 followCallback: onFollow,
                 personalLetterCallback: onPersonalLetter,
@@ -430,7 +430,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
     });
   }
 
-  Widget _actionView({
+  Widget actionView({
     required bool isFollow,
     void Function()? followCallback,
     void Function()? personalLetterCallback,
@@ -538,7 +538,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
   /// [level] 等级
   /// [follow] 关注量
   /// [vermicelli] 粉丝数量
-  Widget _nameInfoView({
+  Widget nameInfoView({
     required String name,
     required int level,
     required int follow,

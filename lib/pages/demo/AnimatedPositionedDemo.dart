@@ -71,7 +71,7 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
                 ),
                 child: Stack(
                   children: [
-                    _buildGridBackground(),
+                    buildGridBackground(),
 
                     // 主要的 AnimatedPositioned 组件
                     AnimatedPositioned(
@@ -116,7 +116,7 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
               const SizedBox(height: 30),
 
               // 控制面板
-              _buildControlPanel(currentPreset),
+              buildControlPanel(currentPreset),
             ],
           ),
         ),
@@ -125,7 +125,7 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
   }
 
 // 构建控制面板
-  Widget _buildControlPanel(Map<String, dynamic> currentPreset) {
+  Widget buildControlPanel(Map<String, dynamic> currentPreset) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -145,9 +145,9 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildInfoItem('位置', currentPreset['label']),
-                _buildInfoItem('坐标', '(${currentPreset['left']}, ${currentPreset['top']})'),
-                _buildInfoItem('持续时间', '${_animationDuration}s'),
+                buildInfoItem('位置', currentPreset['label']),
+                buildInfoItem('坐标', '(${currentPreset['left']}, ${currentPreset['top']})'),
+                buildInfoItem('持续时间', '${_animationDuration}s'),
               ],
             ),
           ),
@@ -254,7 +254,7 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
   }
 
 // 构建信息项
-  Widget _buildInfoItem(String label, String value) {
+  Widget buildInfoItem(String label, String value) {
     return Column(
       children: [
         Text(
@@ -270,7 +270,7 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
   }
 
 // 构建网格背景
-  Widget _buildGridBackground() {
+  Widget buildGridBackground() {
     return IgnorePointer(
       child: Container(
         decoration: BoxDecoration(

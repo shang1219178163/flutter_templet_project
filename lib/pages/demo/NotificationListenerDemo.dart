@@ -34,7 +34,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return NotificationListener<ScrollNotification>(
       onNotification: onNotification,
       child: ListView.separated(
@@ -52,7 +52,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     );
   }
 
-  buildFloatingActionButton() {
+  Widget buildFloatingActionButton() {
     return ValueListenableBuilder(
       valueListenable: isScrolling,
       builder: (context, bool value, child) {
@@ -113,16 +113,16 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
   }
 
   /// 监听尺寸改变
-  _buildSizeChangedLayoutNotifier() {
+  Widget buildSizeChangedLayoutNotifier() {
     return NotificationListener<SizeChangedLayoutNotification>(
-        onNotification: _onNotification,
+        onNotification: onSizeChangedNotification,
         child: SizeChangedLayoutNotifier(
           // key: _filterBarChangeKey,
           child: Wrap(),
         ));
   }
 
-  bool _onNotification(SizeChangedLayoutNotification notification) {
+  bool onSizeChangedNotification(SizeChangedLayoutNotification notification) {
     // change height here
     // _filterBarChangeKey = GlobalKey();
     return false;

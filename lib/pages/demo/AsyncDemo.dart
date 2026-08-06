@@ -55,7 +55,7 @@ class _AsyncDemoState extends State<AsyncDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

@@ -33,7 +33,7 @@ class _DashLineDemoState extends State<DashLineDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -58,7 +58,7 @@ class _DashLineDemoState extends State<DashLineDemo> {
     );
   }
 
-  buildDashLineOfMutiColor({direction = Axis.horizontal}) {
+  Widget buildDashLineOfMutiColor({direction = Axis.horizontal}) {
     return NDashLineOfMutiColor(
       direction: direction,
       height: 2,

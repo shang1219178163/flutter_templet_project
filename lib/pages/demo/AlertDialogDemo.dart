@@ -112,13 +112,13 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
                 color: Colors.white,
               ))
         ],
-        bottom: _buildAppbarBottom(),
+        bottom: buildAppbarBottom(),
       ),
       body: buildBody(),
     );
   }
 
-  _buildAppbarBottom() {
+  PreferredSizeWidget buildAppbarBottom() {
     return PreferredSize(
       preferredSize: Size.fromHeight(45),
       child: Container(

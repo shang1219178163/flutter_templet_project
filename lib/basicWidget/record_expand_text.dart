@@ -71,7 +71,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
     );
   }
 
-  buildText({
+  Widget buildText({
     required String text,
     TextStyle? textStyle,
     int expandMaxLine = 3,

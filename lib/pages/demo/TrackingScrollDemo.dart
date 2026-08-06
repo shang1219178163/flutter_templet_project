@@ -26,7 +26,7 @@ class _TrackingScrollDemoState extends State<TrackingScrollDemo> {
   }
 
   ///共享 ScrollController 可以同步列表滚动位置
-  buildPageView() {
+  Widget buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
       children: <Widget>[
@@ -46,7 +46,7 @@ class _TrackingScrollDemoState extends State<TrackingScrollDemo> {
     );
   }
 
-  buildChildren({int page = 0, int count = 20}) {
+  Widget buildChildren({int page = 0, int count = 20}) {
     return List<Widget>.generate(count, (i) {
       return ListTile(
         leading: Text('page $page item $i'),

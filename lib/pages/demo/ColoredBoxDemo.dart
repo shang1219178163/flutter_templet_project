@@ -28,7 +28,7 @@ class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       children: [
         ColoredBox(

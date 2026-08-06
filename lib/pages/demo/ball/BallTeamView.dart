@@ -44,11 +44,11 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
     super.didChangeDependencies();
 
     if (provider.categories.isNotEmpty && _tabController == null) {
-      _initTabController(provider.categories.length);
+      initTabController(provider.categories.length);
     }
   }
 
-  void _initTabController(int length) {
+  void initTabController(int length) {
     _tabController?.dispose();
     _tabController = null;
     _tabController = TabController(length: length, vsync: this);
@@ -79,7 +79,7 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
         }
         // 确保 TabController 已被正确初始化
         if (_tabController == null || _tabController!.length != provider.categories.length) {
-          _initTabController(provider.categories.length);
+          initTabController(provider.categories.length);
         }
         final currentIndex = _tabController!.index;
         return Column(

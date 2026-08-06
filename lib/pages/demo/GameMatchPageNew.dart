@@ -86,9 +86,9 @@ class ScoreBoard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildTeam(AppRes.image.urls.first, "韩国男篮"),
+              buildTeam(AppRes.image.urls.first, "韩国男篮"),
               const SizedBox(width: 60),
-              _buildTeam(AppRes.image.urls.last, "关岛男篮"),
+              buildTeam(AppRes.image.urls.last, "关岛男篮"),
             ],
           ),
           const SizedBox(height: 8),
@@ -141,7 +141,7 @@ class ScoreBoard extends StatelessWidget {
     );
   }
 
-  Widget _buildTeam(String flagUrl, String name) {
+  Widget buildTeam(String flagUrl, String name) {
     return Row(
       children: [
         ClipRRect(

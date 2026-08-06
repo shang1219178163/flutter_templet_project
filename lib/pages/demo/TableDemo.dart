@@ -41,11 +41,11 @@ class _TableDemoState extends State<TableDemo> {
         width: 2,
         style: BorderStyle.solid,
       ),
-      children: _renderList(),
+      children: renderList(),
     );
   }
 
-  List<TableRow> _renderList() {
+  List<TableRow> renderList() {
     var titles = ['a', 'b' * 2, 'c' * 4, 'd' * 8, 'e' * 16];
 
     return titles

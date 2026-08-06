@@ -56,7 +56,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     final paddingTop = MediaQuery.of(context).viewPadding.top;
     final cardSize = Size(343.w, (161 + 24 + 108).w);
 
@@ -116,7 +116,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
     );
   }
 
-  buildListBox() {
+  Widget buildListBox() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
@@ -137,7 +137,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
     );
   }
 
-  buildFooter() {
+  Widget buildFooter() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -162,7 +162,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
     );
   }
 
-  buildTab({
+  PreferredSizeWidget buildTab({
     required TabController? controller,
     required List<Widget> tabs,
     required ValueChanged<int>? onTap,

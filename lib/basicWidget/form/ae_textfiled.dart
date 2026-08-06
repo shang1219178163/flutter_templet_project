@@ -124,7 +124,7 @@ class AeTextfiled extends StatelessWidget {
   }
 
   /// 边框
-  buildBorder({Color color = const Color(0xFFE6E6E6)}) {
+  InputBorder buildBorder({Color color = const Color(0xFFE6E6E6)}) {
     return OutlineInputBorder(
       borderSide: BorderSide(color: color, width: 0.5),
       borderRadius: BorderRadius.circular(radius),

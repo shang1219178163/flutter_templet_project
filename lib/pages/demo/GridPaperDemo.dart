@@ -20,10 +20,10 @@ class GridPaperDemo extends StatelessWidget {
           title: Text('Girdpaper'),
           centerTitle: true,
         ),
-        body: _contentWidget());
+        body: contentWidget());
   }
 
-  Widget _contentWidget() {
+  Widget contentWidget() {
     final items = AppRes.image.urls.map((e) => NNetworkImage(url: e, fit: BoxFit.cover)).toList();
 
     final style = const TextStyle(

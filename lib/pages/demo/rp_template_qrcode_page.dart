@@ -55,7 +55,7 @@ class _QrcodePageState extends State<QrcodePage> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     final radius = Radius.circular(16.r);
 
     return Column(

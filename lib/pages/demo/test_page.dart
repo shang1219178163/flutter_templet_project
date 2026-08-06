@@ -160,7 +160,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     Scrollable.maybeOf(context);
   }
 
-  Future<void> _onPressed(int e) async {
+  Future<void> onPressed(int e) async {
     final file = await FileExt.fromAssets("assets/images/icon_skipping.gif");
     DLog.d("file: ${file.fileSizeDesc}");
   }

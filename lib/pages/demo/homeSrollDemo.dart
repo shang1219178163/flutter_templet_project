@@ -32,15 +32,15 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
           ),
         ],
       ),
-      body: isList ? _buildBodyList() : buildBody(),
+      body: isList ? buildBodyList() : buildBody(),
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return buildDecoration(child: buildHorizontalScrollWidget(showCount: 2.0));
   }
 
-  _buildBodyList() {
+  Widget buildBodyList() {
     return CustomScrollView(
       slivers: [
         SizedBox(height: 16),
@@ -66,7 +66,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
     );
   }
 
-  buildHorizontalScrollWidget({double showCount = 1.0, bool isSwiper = false, Color? color}) {
+  Widget buildHorizontalScrollWidget({double showCount = 1.0, bool isSwiper = false, Color? color}) {
     var paddingRight = showCount == 2.5 ? 0.0 : 12.0;
     var paddingLeft = isSwiper ? 12.0 : 0.0;
 

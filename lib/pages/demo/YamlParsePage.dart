@@ -38,7 +38,7 @@ class _YamlParsePageState extends State<YamlParsePage> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -77,7 +77,7 @@ class _YamlParsePageState extends State<YamlParsePage> {
     );
   }
 
-  String _scriptPath() {
+  String scriptPath() {
     var script = Platform.script.toString();
     DLog.d("script: $script");
 

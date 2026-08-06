@@ -24,25 +24,25 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(
       children: [
         Column(
           children: [
-            _buildNav(
+            buildNav(
                 child: XCollectionNavWidget(
               width: context.screenSize.width - 24,
               rowCount: 5,
             )),
             Divider(),
-            _buildSwiper(),
+            buildSwiper(),
           ],
         ),
       ],
     );
   }
 
-  _buildNav({required Widget child}) {
+  Widget buildNav({required Widget child}) {
     return Container(
       // height: 200,
       // width: 400,
@@ -55,7 +55,7 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
     );
   }
 
-  _buildSwiper() {
+  Widget buildSwiper() {
     return Container(
       color: Colors.lightBlue,
       // padding: EdgeInsets.all(0),
@@ -65,7 +65,7 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
       ).loosen(),
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return _buildNav(
+          return buildNav(
               child: XCollectionNavWidget(
             width: context.screenSize.width - 24,
             rowCount: 3,

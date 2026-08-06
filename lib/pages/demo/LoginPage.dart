@@ -58,13 +58,13 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   TextButton(
                     onPressed: () {
-                      _changeFocusNode(context);
+                      changeFocusNode(context);
                     },
                     child: Text("移动焦点"),
                   ),
                   TextButton(
                     onPressed: () {
-                      _unfocusNodes();
+                      unfocusNodes();
                     },
                     child: Text("隐藏键盘"),
                   ),
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _changeFocusNode(BuildContext context) {
+  changeFocusNode(BuildContext context) {
     //将焦点从第一个TextField移到第二个TextField
     // 这是一种写法
     // FocusScope.of(context).requestFocus(focusNode2);
@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
     // DLog.d(focusNode2.hasFocus);
   }
 
-  _unfocusNodes() {
+  unfocusNodes() {
     // 当所有编辑框都失去焦点时键盘就会收起
     focusNode1.unfocus();
     focusNode2.unfocus();

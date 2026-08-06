@@ -116,7 +116,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                 .map((e) => DataColumn(
                       label: Text(e.title),
                       onSort: (int columnIndex, bool ascending) {
-                        _changeSort(columnIndex: columnIndex, ascending: ascending);
+                        changeSort(columnIndex: columnIndex, ascending: ascending);
                       },
                     ))
                 .toList(),
@@ -148,7 +148,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
     );
   }
 
-  void _changeSort({required int columnIndex, required bool ascending}) {
+  void changeSort({required int columnIndex, required bool ascending}) {
     setState(() {
       _sortColumnIndex = columnIndex;
       _sortAscending = ascending;
@@ -284,16 +284,16 @@ extension _ListExtObject<E extends Object> on List<E> {
   List<E> sortedByValue({bool ascending = true, required String? Function(E e) cb}) {
     if (ascending) {
       // this.sort((a, b) => cb(a).compareTo(cb(b)));
-      sort((a, b) => _customeCompare(cb(a), cb(b)));
+      sort((a, b) => customeCompare(cb(a), cb(b)));
     } else {
       // this.sort((a, b) => cb(b).compareTo(cb(a)));
-      sort((a, b) => _customeCompare(cb(b), cb(a)));
+      sort((a, b) => customeCompare(cb(b), cb(a)));
     }
     return this;
   }
 
   /// 处理字符串中包含数字排序异常的问题
-  int _customeCompare(String? a, String? b) {
+  int customeCompare(String? a, String? b) {
     if (a == null || b == null) {
       return -1;
     }

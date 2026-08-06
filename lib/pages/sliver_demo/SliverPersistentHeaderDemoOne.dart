@@ -40,11 +40,11 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       builder: (_, model) {
         return SliverMainAxisGroup(
           slivers: [
-            _buildSliverList(list: data),
-            _buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
-            _buildSliverList(list: data1),
-            _buildPersistentHeader("section1"),
-            _buildSliverList(list: data2),
+            buildSliverList(list: data),
+            buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
+            buildSliverList(list: data1),
+            buildPersistentHeader("section1"),
+            buildSliverList(list: data2),
           ],
         );
       },
@@ -63,29 +63,29 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
 
     return CustomScrollView(
       slivers: <Widget>[
-        _buildSliverList(list: data),
-        _buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
-        _buildSliverList(list: data1),
-        _buildPersistentHeader("section1"),
-        _buildSliverList(list: data2),
+        buildSliverList(list: data),
+        buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
+        buildSliverList(list: data1),
+        buildPersistentHeader("section1"),
+        buildSliverList(list: data2),
       ],
     );
   }
 
   // 构建颜色列表
-  Widget _buildSliverList({required List<Color> list}) {
+  Widget buildSliverList({required List<Color> list}) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         childCount: list.length,
         (_, int index) {
-          return _buildColorItem(list[index], index);
+          return buildColorItem(list[index], index);
         },
       ),
     );
   }
 
   // 构建颜色列表item
-  Widget _buildColorItem(Color color, int index) {
+  Widget buildColorItem(Color color, int index) {
     var text = colorString(color);
     text = [color.argbInt.toRadixString(16)].join("/");
     return Card(
@@ -114,7 +114,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   // 颜色转换为文字
   String colorString(Color color) => "#${color.argbInt.toRadixString(16).padLeft(8, '0').toUpperCase()}";
 
-  Widget _buildPersistentHeader(String title) {
+  Widget buildPersistentHeader(String title) {
     return NSliverPersistentHeaderBuilder(
       pinned: true,
       floating: true,

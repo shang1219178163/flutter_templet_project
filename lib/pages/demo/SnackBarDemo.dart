@@ -42,16 +42,16 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     (title: "two", action: onToggle),
   ];
 
-  ScaffoldMessengerState? get _pageMessenger => _scaffoldMessengerKey.currentState;
+  ScaffoldMessengerState? get pageMessenger => _scaffoldMessengerKey.currentState;
 
   /// 先收起页面 Banner，再 pop 路由
-  Future<void> _popAfterDismissBanner([Object? result]) async {
+  Future<void> popAfterDismissBanner([Object? result]) async {
     if (_isLeaving) {
       return;
     }
     _isLeaving = true;
 
-    final messenger = _pageMessenger;
+    final messenger = pageMessenger;
     if (messenger != null) {
       messenger.hideCurrentMaterialBanner();
       await Future<void>.delayed(_bannerDismissDuration);
@@ -79,7 +79,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         if (didPop) {
           return;
         }
-        _popAfterDismissBanner(result);
+        popAfterDismissBanner(result);
       },
       child: ScaffoldMessenger(
         key: _scaffoldMessengerKey,
@@ -97,7 +97,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
             leading: IconButton(
               icon: const BackButtonIcon(),
               tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-              onPressed: () => _popAfterDismissBanner(),
+              onPressed: () => popAfterDismissBanner(),
             ),
             actions: [
               IconButton(
@@ -231,7 +231,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
 
   /// 顶部 MaterialBanner（必须走页面级 key）
   void showMaterialBanner() {
-    final messenger = _pageMessenger;
+    final messenger = pageMessenger;
     if (messenger == null) {
       return;
     }

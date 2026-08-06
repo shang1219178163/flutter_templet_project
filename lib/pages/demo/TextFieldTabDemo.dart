@@ -55,7 +55,7 @@ class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return NTabBarPage(
       items: items,
     );

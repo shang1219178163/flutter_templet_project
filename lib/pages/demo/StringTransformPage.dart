@@ -37,7 +37,7 @@ class _StringTransformPageState extends State<StringTransformPage> {
         body: buildBody());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       padding: EdgeInsets.all(16),
       child: Column(

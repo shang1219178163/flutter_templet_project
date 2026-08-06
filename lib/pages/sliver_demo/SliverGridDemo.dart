@@ -33,7 +33,7 @@ class _SliverGridDemoState extends State<SliverGridDemo> {
     );
   }
 
-  Widget _buildItem({required Color color}) {
+  Widget buildItem({required Color color}) {
     return Container(
       height: 50,
       color: color,
@@ -44,7 +44,7 @@ class _SliverGridDemoState extends State<SliverGridDemo> {
     List<Color> colors = Colors.primaries.sublist(
       5,
     );
-    var list = colors.map((e) => _buildItem(color: e)).toList();
+    var list = colors.map((e) => buildItem(color: e)).toList();
 
     return CustomScrollView(
       slivers: <Widget>[

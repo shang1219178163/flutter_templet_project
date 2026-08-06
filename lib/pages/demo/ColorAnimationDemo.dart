@@ -177,11 +177,11 @@ class _TweenSequenceColorAnimationState extends State<TweenSequenceColorAnimatio
       vsync: this,
     );
 
-    _setupTweenSequence();
+    setupTweenSequence();
     _controller.repeat();
   }
 
-  void _setupTweenSequence() {
+  void setupTweenSequence() {
     var items = <TweenSequenceItem<Color?>>[];
 
     for (var i = 0; i < colors.length - 1; i++) {

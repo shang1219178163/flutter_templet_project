@@ -21,23 +21,23 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     items = <Tuple2<Tab, Widget>>[
       Tuple2(
         Tab(icon: Icon(Icons.directions_railway)),
-        _buildPage(),
+        buildPage(),
       ),
       Tuple2(
         Tab(icon: Icon(Icons.directions_car)),
-        _buildPage1(),
+        buildPage1(),
       ),
       Tuple2(
         Tab(icon: Icon(Icons.directions_bus)),
-        _buildPage2(),
+        buildPage2(),
       ),
       Tuple2(
         Tab(icon: Icon(Icons.directions_bike)),
-        _buildPage3(),
+        buildPage3(),
       ),
       Tuple2(
         Tab(icon: Icon(Icons.directions_boat)),
-        _buildPage4(),
+        buildPage4(),
       ),
     ];
 
@@ -71,7 +71,7 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
   @override
   bool get wantKeepAlive => true;
 
-  _buildPage() {
+  Widget buildPage() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -95,7 +95,7 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     );
   }
 
-  _buildPage1() {
+  Widget buildPage1() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -112,7 +112,7 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     );
   }
 
-  _buildPage2() {
+  Widget buildPage2() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -129,7 +129,7 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     );
   }
 
-  _buildPage3() {
+  Widget buildPage3() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -146,7 +146,7 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     );
   }
 
-  _buildPage4() {
+  Widget buildPage4() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[

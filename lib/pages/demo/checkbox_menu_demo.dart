@@ -22,7 +22,7 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
     super.dispose();
   }
 
-  void _setMessageVisibility(bool visible) {
+  void setMessageVisibility(bool visible) {
     setState(() {
       _showing = visible;
     });
@@ -33,7 +33,7 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
     return CallbackShortcuts(
       bindings: <ShortcutActivator, VoidCallback>{
         _showShortcut: () {
-          _setMessageVisibility(!_showing);
+          setMessageVisibility(!_showing);
         },
       },
       child: Column(
@@ -45,7 +45,7 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
               CheckboxMenuButton(
                 value: _showing,
                 onChanged: (bool? value) {
-                  _setMessageVisibility(value!);
+                  setMessageVisibility(value!);
                 },
                 child: const Text('Show Message'),
               ),

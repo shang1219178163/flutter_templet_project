@@ -32,7 +32,7 @@ class _BannerDemoState extends State<BannerDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       padding: EdgeInsets.all(16),
       child: Align(

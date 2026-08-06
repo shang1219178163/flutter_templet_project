@@ -165,7 +165,7 @@ class _NTextViewState extends State<NTextView> {
     );
   }
 
-  buildBorder({required Color color, double radius = 4}) {
+  InputBorder buildBorder({required Color color, double radius = 4}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       borderSide: BorderSide(

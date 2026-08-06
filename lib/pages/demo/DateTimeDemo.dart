@@ -26,7 +26,7 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
         actions: [
           TextButton(
               onPressed: () {
-                _handleDateTime();
+                handleDateTime();
               },
               child: Text(
                 "done",
@@ -34,11 +34,11 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
               )),
         ],
       ),
-      body: _buildInputDatePickerFormField(),
+      body: buildInputDatePickerFormField(),
     );
   }
 
-  void _handleDateTime() {
+  void handleDateTime() {
     final now = DateTime.now();
 
     var _time = "2012-02-27 13:27:00";
@@ -58,7 +58,7 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
 
   DateTime? selectedDate;
 
-  Widget _buildInputDatePickerFormField() {
+  Widget buildInputDatePickerFormField() {
     final firstDate = DateTime(DateTime.now().year - 120);
     final lastDate = DateTime.now();
 

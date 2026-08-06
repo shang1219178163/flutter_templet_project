@@ -37,14 +37,14 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
 
     rounds = buildMockBracket();
 
-    _calculateAllCenterY();
+    calculateAllCenterY();
   }
 
   @override
   Widget build(BuildContext context) {
     final totalWidth = rounds.length * roundWidth + 300;
 
-    final totalHeight = _calculateTotalHeight();
+    final totalHeight = calculateTotalHeight();
 
     return Scaffold(
       backgroundColor: const Color(0xfff5f5f5),
@@ -71,7 +71,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
                     leftPadding: leftPadding,
                   ),
                 ),
-                ..._buildTeamCards(),
+                ...buildTeamCards(),
               ],
             ),
           ),
@@ -83,7 +83,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
   ///
   /// 计算所有 match centerY
   ///
-  void _calculateAllCenterY() {
+  void calculateAllCenterY() {
     ///
     /// 第一轮
     ///
@@ -135,7 +135,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
     }
   }
 
-  List<Widget> _buildTeamCards() {
+  List<Widget> buildTeamCards() {
     final widgets = <Widget>[];
 
     for (var round = 0; round < rounds.length; round++) {
@@ -175,7 +175,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
               team: match.topTeam,
               selected: match.winner?.id == match.topTeam?.id,
               onTap: () {
-                _onSelectWinner(round, index, match.topTeam);
+                onSelectWinner(round, index, match.topTeam);
               },
             ),
           ),
@@ -192,7 +192,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
               team: match.bottomTeam,
               selected: match.winner?.id == match.bottomTeam?.id,
               onTap: () {
-                _onSelectWinner(round, index, match.bottomTeam);
+                onSelectWinner(round, index, match.bottomTeam);
               },
             ),
           ),
@@ -203,7 +203,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
     return widgets;
   }
 
-  void _onSelectWinner(int round, int matchIndex, Team? team) {
+  void onSelectWinner(int round, int matchIndex, Team? team) {
     if (team == null) {
       return;
     }
@@ -236,7 +236,7 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
     });
   }
 
-  double _calculateTotalHeight() {
+  double calculateTotalHeight() {
     final firstRoundCount = rounds.first.length;
     return firstRoundCount * (cardHeight * 2 + teamGap + matchGap);
   }

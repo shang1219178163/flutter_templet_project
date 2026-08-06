@@ -76,7 +76,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       child: LayoutBuilder(builder: (context, constraints) {
         final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
@@ -88,7 +88,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     );
   }
 
-  buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -116,7 +116,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     );
   }
 
-  buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
     return Container(
       padding: EdgeInsets.all(spacing * 3),
       child: Column(

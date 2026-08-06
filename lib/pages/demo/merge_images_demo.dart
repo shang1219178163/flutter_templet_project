@@ -35,7 +35,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           TextButton(
             onPressed: () => {
               // print("保存")
-              _compositePicNew().then((pngBytes) {
+              compositePicNew().then((pngBytes) {
                 imageMerged = Image.memory(pngBytes!, width: double.maxFinite, height: 1200);
                 setState(() {});
               })
@@ -48,7 +48,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           TextButton(
             onPressed: () {
               final keys = [repaintBoundaryKey1, repaintBoundaryKey2, repaintBoundaryKey3];
-              _compositePics(keys).then(
+              compositePics(keys).then(
                 (pngBytes) {
                   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
                   setState(() {});
@@ -62,11 +62,11 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           ),
         ],
       ),
-      body: _buildBodyNew(),
+      body: buildBodyNew(),
     );
   }
 
-  _buildBodyNew() {
+  Widget buildBodyNew() {
     final screenSize = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
@@ -75,7 +75,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
         children: [
           if (imageMerged != null) imageMerged!,
           Text('合成图片'),
-          _buildItem(
+          buildItem(
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey1,
               child: Image(
@@ -101,7 +101,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               debugPrint("2_${list.join(', ')}");
             },
           ),
-          _buildItem(
+          buildItem(
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey3,
               child: Image(
@@ -115,7 +115,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               debugPrint("callback:$step");
             },
           ),
-          _buildItem(
+          buildItem(
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey2,
               child: Image(
@@ -134,7 +134,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     );
   }
 
-  _buildItem({
+  Widget buildItem({
     required RepaintBoundary repaintBoundary,
     void Function(int step)? callback,
   }) {
@@ -183,7 +183,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     );
   }
 
-  Future<ui.Image?> _capturePic(GlobalKey key) async {
+  Future<ui.Image?> capturePic(GlobalKey key) async {
     debugPrint("key:$key");
     var buildContext = key.currentContext;
     if (buildContext == null) {
@@ -200,11 +200,11 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   }
 
   /// 合成截图
-  Future<Uint8List?> _compositePicNew() async {
+  Future<Uint8List?> compositePicNew() async {
     try {
-      var one = await _capturePic(repaintBoundaryKey1);
-      var two = await _capturePic(repaintBoundaryKey2);
-      var three = await _capturePic(repaintBoundaryKey3);
+      var one = await capturePic(repaintBoundaryKey1);
+      var two = await capturePic(repaintBoundaryKey2);
+      var three = await capturePic(repaintBoundaryKey3);
       if (one == null || two == null || three == null) {
         return null;
       }
@@ -246,7 +246,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   /// 通过多个 SingleChildScrollView 的 RepaintBoundary 对象合成长海报
   ///
   /// keys: 根据 GlobalKey 获取 Image 数组
-  Future<Uint8List?> _compositePics([
+  Future<Uint8List?> compositePics([
     List<GlobalKey> keys = const [],
   ]) async {
     //根据 GlobalKey 获取 Image 数组

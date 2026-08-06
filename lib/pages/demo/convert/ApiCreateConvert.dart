@@ -45,7 +45,7 @@ TagClearApi
     if (className.contains("/")) {
       className = "${className.splitByLastNumberAndPascal()}Api";
     }
-    final contentNew = _createApi(productName: productName, className: className);
+    final contentNew = createApi(productName: productName, className: className);
     final nameNew = className.toUncamlCase();
     DLog.d([className, nameNew]);
     return ConvertModel(
@@ -57,7 +57,7 @@ TagClearApi
     );
   }
 
-  String _createApi({
+  String createApi({
     required String productName,
     required String className,
   }) {

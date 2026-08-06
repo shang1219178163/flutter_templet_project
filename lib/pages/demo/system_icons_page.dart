@@ -73,7 +73,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               child: Text("找到 ${searchResults.length} 条数据"),
             ),
             Expanded(
-              child: isGrid ? _buildGridView() : _buildListView(),
+              child: isGrid ? buildGridView() : buildListView(),
               flex: 1,
             )
           ],
@@ -108,7 +108,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     );
   }
 
-  _buildListView() {
+  Widget buildListView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return CupertinoScrollbar(
         thumbVisibility: false,
@@ -139,7 +139,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
         ));
   }
 
-  _buildGridView() {
+  Widget buildGridView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return GridView.builder(
       itemCount: searchResults.length,

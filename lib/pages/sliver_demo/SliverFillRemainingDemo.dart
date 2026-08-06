@@ -15,7 +15,7 @@ class SliverFillRemainingDemo extends StatelessWidget {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(

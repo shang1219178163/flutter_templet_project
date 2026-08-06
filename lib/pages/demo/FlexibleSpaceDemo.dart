@@ -46,7 +46,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
         body: buildBody());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(
       children: List.generate(20, (i) => i).map((e) {
         return ListTile(
@@ -56,7 +56,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
     );
   }
 
-  buildPage() {
+  Widget buildPage() {
     var isDark = Theme.of(context).brightness == Brightness.dark;
     var appBarColor = Theme.of(context).appBarTheme.backgroundColor;
     var appBarTextColor = Theme.of(context).appBarTheme.titleTextStyle?.color;

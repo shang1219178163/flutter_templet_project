@@ -63,7 +63,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     var indexs = List<int>.generate(30, (index) => index);
     return Scrollbar(
       controller: _scrollController,

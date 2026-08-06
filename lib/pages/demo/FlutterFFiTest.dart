@@ -37,7 +37,7 @@ class _FlutterFFiTestState extends State<FlutterFFiTest> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

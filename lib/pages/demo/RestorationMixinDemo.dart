@@ -31,7 +31,7 @@ class _RestorationMixinDemoState extends State<RestorationMixinDemo> with Restor
     registerForRestoration(_controller, 'text_field');
     _dialogRoute = RestorableRouteFuture<void>(
       onPresent: (navigator, args) {
-        return navigator.restorablePush(_dialogBuilder);
+        return navigator.restorablePush(dialogBuilder);
       },
     );
     registerForRestoration(_dialogRoute, 'dialog');
@@ -68,7 +68,7 @@ class _RestorationMixinDemoState extends State<RestorationMixinDemo> with Restor
   """;
 
   // ====== 4️⃣ Dialog 路由定义 ======
-  static Route<void> _dialogBuilder(BuildContext context, Object? args) {
+  static Route<void> dialogBuilder(BuildContext context, Object? args) {
     return DialogRoute<void>(
       context: context,
       builder: (_) => AlertDialog(
@@ -88,7 +88,7 @@ class _RestorationMixinDemoState extends State<RestorationMixinDemo> with Restor
     super.dispose();
   }
 
-  void _increment() {
+  void increment() {
     _counter.value++;
     setState(() {});
   }
@@ -118,7 +118,7 @@ class _RestorationMixinDemoState extends State<RestorationMixinDemo> with Restor
               title: Text('计数值：${_counter.value}', style: Theme.of(context).textTheme.titleLarge),
               trailing: IconButton(
                 icon: const Icon(Icons.add_circle_outline),
-                onPressed: _increment,
+                onPressed: increment,
               ),
             ),
           ),

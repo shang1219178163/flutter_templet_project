@@ -293,10 +293,10 @@ class ScrollWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildbody();
+    return buildbody();
   }
 
-  _buildbody() {
+  Widget buildbody() {
     final items = List.generate(3, (index) => "$index");
 
     return ListView.separated(

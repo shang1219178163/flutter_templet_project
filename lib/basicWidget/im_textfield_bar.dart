@@ -115,7 +115,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-    buildBorder() {
+    InputBorder buildBorder() {
       OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4.w)), //边角
         borderSide: const BorderSide(

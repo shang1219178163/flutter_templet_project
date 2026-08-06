@@ -35,18 +35,18 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
   void initState() {
     super.initState();
     // 监听右侧列表的滚动
-    _itemPositionsListener.itemPositions.addListener(_onRightListScroll);
+    _itemPositionsListener.itemPositions.addListener(onRightListScroll);
   }
 
   @override
   void dispose() {
-    _itemPositionsListener.itemPositions.removeListener(_onRightListScroll);
+    _itemPositionsListener.itemPositions.removeListener(onRightListScroll);
     _leftNavScrollController.dispose();
     super.dispose();
   }
 
   // 当右侧列表滚动时触发
-  void _onRightListScroll() {
+  void onRightListScroll() {
     // 如果是程序触发的滚动，则忽略，防止循环触发
     if (_isScrollingProgrammatically) {
       return;
@@ -63,7 +63,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
       setState(() {});
 
       // 自动滚动左侧导航到选中项
-      _scrollLeftNavToSelected();
+      scrollLeftNavToSelected();
     }
   }
 
@@ -73,7 +73,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
   // 只有刚好越界，才触发一次居中滚动（不是每次都滚）
   int _lastCenteredIndex = -1;
 
-  void _scrollLeftNavToSelected() {
+  void scrollLeftNavToSelected() {
     LinkedScrollUtils.scrollToCenterIfNeeded(
       controller: _leftNavScrollController,
       index: _selectedLeftNavIndex,
@@ -86,7 +86,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
   }
 
   // 点击左侧导航时，滚动右侧列表到指定位置
-  Future<void> _scrollToIndex(int index) async {
+  Future<void> scrollToIndex(int index) async {
     // 标记为程序滚动
     _isScrollingProgrammatically = true;
     _selectedLeftNavIndex = index;
@@ -140,7 +140,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
 
             return InkWell(
               onTap: () {
-                _scrollToIndex(index);
+                scrollToIndex(index);
               },
               child: Stack(
                 children: [

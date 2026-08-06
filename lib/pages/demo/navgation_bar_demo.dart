@@ -40,14 +40,14 @@ class _NavgationBarDemoState extends State<NavgationBarDemo> {
         Positioned(
           child: Container(
             height: 102,
-            child: _buildAppBar(),
+            child: buildAppBar(),
           ),
         ),
       ]),
     );
   }
 
-  _buildAppBar() {
+  Widget buildAppBar() {
     return AppBar(
       title: Text("title"),
       actions: [

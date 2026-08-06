@@ -38,7 +38,7 @@ class NFooter extends StatelessWidget {
     return buildPageFooter(context);
   }
 
-  buildPageFooter(BuildContext context
+  Widget buildPageFooter(BuildContext context
       //     {
       //   String title = "button",
       //   TextStyle? style,

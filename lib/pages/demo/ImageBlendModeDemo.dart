@@ -38,7 +38,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
     );
   }
 
-  buildBody({
+  Widget buildBody({
     int rowCount = 4,
     double spacing = 8,
     double runSpacing = 8,

@@ -23,12 +23,12 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
 
   final locations = FloatingActionButtonLocationExt.allCases;
 
-  void _onShowFabChanged(bool value) {
+  void onShowFabChanged(bool value) {
     _showFab = value;
     setState(() {});
   }
 
-  void _onFabLocationChanged(FloatingActionButtonLocation? value) {
+  void onFabLocationChanged(FloatingActionButtonLocation? value) {
     _fabLocation = value ?? FloatingActionButtonLocation.endDocked;
     _showNotch = _fabLocation.toString().contains("Docked");
     setState(() {});
@@ -36,7 +36,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
 
   @override
   Widget build(BuildContext context) {
-    // return _buildPage1();//椭圆形
+    // return buildPage1();//椭圆形
 
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +51,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
               'Floating Action Button',
             ),
             value: _showFab,
-            onChanged: _onShowFabChanged,
+            onChanged: onShowFabChanged,
           ),
           const Padding(
             padding: EdgeInsets.all(16),
@@ -66,7 +66,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
                       title: Text(e.toString().split(".").last),
                       value: e,
                       groupValue: _fabLocation,
-                      onChanged: _onFabLocationChanged,
+                      onChanged: onFabLocationChanged,
                     ))
                 .toList(),
           ),
@@ -90,7 +90,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
     );
   }
 
-  _buildPage1() {
+  Widget buildPage1() {
     ShapeBorder? buttonShape = BeveledRectangleBorder(borderRadius: BorderRadius.circular(10));
     buttonShape = StadiumBorder(side: BorderSide(color: Colors.transparent));
     return Scaffold(

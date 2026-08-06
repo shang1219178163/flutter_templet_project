@@ -145,7 +145,7 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer>
         ));
   }
 
-  buildBody() {
+  Widget buildBody() {
     final indexs = List.generate(20, (index) => index);
     return Scrollbar(
       controller: _scrollController,

@@ -228,7 +228,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
     );
   }
 
-  buildSlidable({
+  Widget buildSlidable({
     required bool isPinned,
     required VoidCallback? onPin,
     required VoidCallback? onDelete,

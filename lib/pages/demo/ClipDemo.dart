@@ -31,7 +31,7 @@ class _ClipDemoState extends State<ClipDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(
       children: [
         Column(
@@ -43,7 +43,7 @@ class _ClipDemoState extends State<ClipDemo> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   heightFactor: 0.5,
-                  child: _buildBox(),
+                  child: buildBox(),
                 ),
               ),
             ),
@@ -51,27 +51,27 @@ class _ClipDemoState extends State<ClipDemo> {
               title: "ClipRRect",
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: _buildBox(),
+                child: buildBox(),
               ),
             ),
             NSectionBox(
               title: "ClipOval",
               child: ClipOval(
-                child: _buildBox(),
+                child: buildBox(),
               ),
             ),
             NSectionBox(
               title: "ClipPath.shape",
               child: ClipPath.shape(
                 shape: StadiumBorder(),
-                child: _buildBox(),
+                child: buildBox(),
               ),
             ),
             NSectionBox(
               title: "ClipPath - TrianglePath",
               child: ClipPath(
                 clipper: TrianglePath(),
-                child: _buildBox(),
+                child: buildBox(),
               ),
             ),
           ],
@@ -80,7 +80,7 @@ class _ClipDemoState extends State<ClipDemo> {
     );
   }
 
-  _buildBox() {
+  Widget buildBox() {
     return Container(
       height: 100,
       width: 150,

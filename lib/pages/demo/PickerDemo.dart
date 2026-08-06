@@ -117,7 +117,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
   }
 
   Future<void> onDate() async {
-    _showDatePicker(
+    showDatePicker(
       context: context,
       onCancel: () {
         DLog.d("${DateTime.now()}");
@@ -436,7 +436,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     );
   }
 
-  void _showDatePicker({
+  void showDatePicker({
     required BuildContext context,
     DateTime? initialDateTime,
     CupertinoDatePickerMode mode = CupertinoDatePickerMode.date,
@@ -505,12 +505,12 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('$widget.dateTime'),
-        // This button triggers the _showDatePicker function
+        // This button triggers the showDatePicker function
         trailing: Container(
           child: CupertinoButton(
             padding: EdgeInsetsDirectional.zero,
             onPressed: () {
-              // _showDatePicker(context);
+              // showDatePicker(context);
               // _datePickerValueChange();
             },
             child: Text('Show Picker'),
@@ -521,7 +521,7 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
         child: Center(
             child: TextButton(
           onPressed: () {
-            // _showDatePicker(context);
+            // showDatePicker(context);
             //   _datePickerValueChange();
           },
           child: Text(time),

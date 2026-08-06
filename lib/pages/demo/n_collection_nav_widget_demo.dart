@@ -90,10 +90,10 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       body: ListView(children: [
         Column(
           children: [
-            ..._buildHeader(),
+            ...buildHeader(),
             Container(
               margin: EdgeInsets.all(12),
-              child: _buildAnimatedBuilder(),
+              child: buildAnimatedBuilder(),
             ),
           ],
         )
@@ -114,7 +114,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   /// 多值变化
-  List<Widget> _buildHeader() {
+  List<Widget> buildHeader() {
     return tuples
         .map((e) => Container(
               padding: EdgeInsets.symmetric(vertical: 8),
@@ -147,7 +147,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   /// 多值监听
-  Widget _buildAnimatedBuilder() {
+  Widget buildAnimatedBuilder() {
     return AnimatedBuilder(
         animation: _collectionNavModel,
         builder: (context, child) {

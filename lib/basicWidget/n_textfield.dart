@@ -362,7 +362,7 @@ class _NTextFieldState extends State<NTextField> {
     );
   }
 
-  buildEnabledBorder({Color color = AppColor.lineColor, double radius = 4}) {
+  InputBorder buildEnabledBorder({Color color = AppColor.lineColor, double radius = 4}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       borderSide: BorderSide(

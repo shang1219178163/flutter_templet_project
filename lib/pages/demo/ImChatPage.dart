@@ -722,7 +722,7 @@ class _ImChatPageState extends State<ImChatPage>
     dataList.value = [...dataList.value, ...list];
   }
 
-  buildIMBarFooter({
+  Widget buildIMBarFooter({
     int rowCount = 4,
     required ValueChanged<int> cb,
   }) {

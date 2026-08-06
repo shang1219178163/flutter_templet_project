@@ -24,19 +24,19 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
   double x = 0.0;
   double y = 0.0;
 
-  void _incrementEnter(PointerEvent details) {
+  void incrementEnter(PointerEvent details) {
     setState(() {
       _enterCounter++;
     });
   }
 
-  void _incrementExit(PointerEvent details) {
+  void incrementExit(PointerEvent details) {
     setState(() {
       _exitCounter++;
     });
   }
 
-  void _updateLocation(PointerEvent details) {
+  void updateLocation(PointerEvent details) {
     setState(() {
       x = details.position.dx;
       y = details.position.dy;
@@ -120,9 +120,9 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
   Widget buildBody1() {
     return Container(
       child: MouseRegion(
-        onEnter: _incrementEnter,
-        onHover: _updateLocation,
-        onExit: _incrementExit,
+        onEnter: incrementEnter,
+        onHover: updateLocation,
+        onExit: incrementExit,
         child: Container(
           color: Colors.lightBlueAccent,
           child: Column(
@@ -147,9 +147,9 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
     return ConstrainedBox(
       constraints: BoxConstraints.tight(const Size(300.0, 200.0)),
       child: MouseRegion(
-        onEnter: _incrementEnter,
-        onHover: _updateLocation,
-        onExit: _incrementExit,
+        onEnter: incrementEnter,
+        onHover: updateLocation,
+        onExit: incrementExit,
         child: Container(
           color: Colors.lightBlueAccent,
           child: Column(

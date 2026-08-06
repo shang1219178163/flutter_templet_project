@@ -105,7 +105,7 @@ class _FormDemoState extends State<FormDemo> {
     DLog.d("isSame: $isSame");
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

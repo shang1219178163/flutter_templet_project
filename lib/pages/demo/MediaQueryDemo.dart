@@ -86,10 +86,10 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
                     ),
                   ),
                 ),
-                _buildItems(),
-                buildTable(rows: _renderTuples(items: tips)),
+                buildItems(),
+                buildTable(rows: renderTuples(items: tips)),
                 Divider(),
-                buildTable(rows: _renderTuples(items: items)),
+                buildTable(rows: renderTuples(items: items)),
                 buildOtherPropertys(),
               ],
             ),
@@ -99,7 +99,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     );
   }
 
-  Widget _buildItems() {
+  Widget buildItems() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -187,7 +187,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     );
   }
 
-  List<TableRow> _renderTuples({List<Object?> items = const []}) {
+  List<TableRow> renderTuples({List<Object?> items = const []}) {
     if (items.isEmpty || !isTuple(items[0])) {
       return [];
     }

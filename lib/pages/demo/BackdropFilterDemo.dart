@@ -7,6 +7,7 @@
 //
 
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
@@ -26,11 +27,11 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody1(),
+      body: buildBody1(),
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
@@ -59,7 +60,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     );
   }
 
-  _buildBody1() {
+  Widget buildBody1() {
     return StackExt.createBlurView(
         blur: 5,
         child: Image(

@@ -14,7 +14,7 @@ class FourthPage extends StatelessWidget {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     ///默认 3D 阴影
     const shadow3D = [
       Shadow(

@@ -153,14 +153,14 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
     DLog.d('刷新完成');
   }
 
-  Future<void> _onRefresh() async {
+  Future<void> refreshItems() async {
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
       items = List.generate(20, (i) => i);
     });
   }
 
-  Future<void> _onLoadMore() async {
+  Future<void> onLoadMore() async {
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
       items.addAll(List.generate(10, (i) => items.length + i));

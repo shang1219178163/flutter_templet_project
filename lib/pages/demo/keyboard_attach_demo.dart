@@ -63,7 +63,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(

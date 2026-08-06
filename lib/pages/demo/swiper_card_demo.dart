@@ -55,7 +55,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 1)).then((_) {
-      _shakeCard();
+      shakeCard();
     });
     super.initState();
   }
@@ -109,8 +109,8 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
                   //       '${position.offset}, '
                   //       '${position.angle}');
                   // },
-                  onSwipeEnd: _swipeEnd,
-                  onEnd: _onEnd,
+                  onSwipeEnd: swipeEnd,
+                  onEnd: onEnd,
                   cardCount: candidates.length,
                   cardBuilder: (BuildContext context, int index) {
                     final e = candidates[index];
@@ -141,7 +141,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   buildIconButton(
-                    onTap: _shakeCard,
+                    onTap: shakeCard,
                     child: const Icon(
                       Icons.question_mark,
                       color: CupertinoColors.systemGrey2,
@@ -184,7 +184,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
     );
   }
 
-  void _swipeEnd(int previousIndex, int targetIndex, SwiperActivity activity) {
+  void swipeEnd(int previousIndex, int targetIndex, SwiperActivity activity) {
     switch (activity) {
       case Swipe():
         DLog.d('The card was swiped to the : ${activity.direction}');
@@ -203,12 +203,12 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
     }
   }
 
-  void _onEnd() {
+  void onEnd() {
     DLog.d('end reached!');
   }
 
   // Animates the card back and forth to teach the user that it is swipable.
-  Future<void> _shakeCard() async {
+  Future<void> shakeCard() async {
     const distance = 30.0;
     // We can animate back and forth by chaining different animations.
     await controller.animateTo(

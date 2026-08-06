@@ -20,7 +20,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
     _list = ListModel<int>(
       listKey: _listKey,
       initialItems: <int>[0, 1, 2],
-      removedItemBuilder: _buildRemovedItem,
+      removedItemBuilder: buildRemovedItem,
     );
     _nextItem = 3;
   }
@@ -34,12 +34,12 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add_circle),
-            onPressed: _insert,
+            onPressed: insert,
             tooltip: 'insert a new item',
           ),
           IconButton(
             icon: Icon(Icons.remove_circle),
-            onPressed: _remove,
+            onPressed: remove,
             tooltip: 'remove the selected item',
           ),
         ],
@@ -49,7 +49,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
         child: AnimatedList(
           key: _listKey,
           initialItemCount: _list.length,
-          itemBuilder: _buildItem,
+          itemBuilder: buildItem,
         ),
       ),
     );
@@ -57,7 +57,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
 
   ///
   // Used to build list items that haven't been removed.
-  Widget _buildItem(BuildContext context, int index, Animation<double> animation) {
+  Widget buildItem(BuildContext context, int index, Animation<double> animation) {
     if (index == 0) {
       return Container();
     }
@@ -77,7 +77,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
     );
   }
 
-  Widget _buildRemovedItem(int item, BuildContext context, Animation<double> animation) {
+  Widget buildRemovedItem(int item, BuildContext context, Animation<double> animation) {
     return CardItem(
       animation: animation,
       item: item,
@@ -85,11 +85,11 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
     );
   }
 
-  _insert() {
+  void insert() {
     _list.insert(_list.length, _nextItem++);
   }
 
-  _remove() {
+  remove() {
     if (_list.length == 0) {
       showToast("暂无数据");
       return;
@@ -115,19 +115,19 @@ class ListModel<E> {
   final List<E> _items;
 
   ///
-  AnimatedListState? get _animatedList => listKey.currentState;
+  AnimatedListState? get animatedList => listKey.currentState;
 
   ///
   void insert(int index, E item) {
     _items.insert(index, item);
-    _animatedList?.insertItem(index);
+    animatedList?.insertItem(index);
   }
 
   ///
   E removeAt(int index) {
     final removedItem = _items.removeAt(index);
     if (removedItem != null) {
-      _animatedList?.removeItem(
+      animatedList?.removeItem(
         index,
         (BuildContext context, Animation<double> animation) {
           return removedItemBuilder(removedItem, context, animation);

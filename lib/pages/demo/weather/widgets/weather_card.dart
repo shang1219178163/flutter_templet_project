@@ -20,7 +20,7 @@ class WeatherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _showFullScreenWeather(context),
+      onTap: () => showFullScreenWeather(context),
       child: Card(
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -40,7 +40,7 @@ class WeatherCard extends StatelessWidget {
             child: Stack(
               children: [
                 // 天气效果层
-                _buildWeatherEffect(),
+                buildWeatherEffect(),
 
                 // 信息层
                 Padding(
@@ -80,7 +80,7 @@ class WeatherCard extends StatelessWidget {
     );
   }
 
-  Widget _buildWeatherEffect() {
+  Widget buildWeatherEffect() {
     // 为不同类型的天气效果提供不同的默认速度
     var speed = animationSpeed;
 
@@ -109,7 +109,7 @@ class WeatherCard extends StatelessWidget {
     }
   }
 
-  void _showFullScreenWeather(BuildContext context) {
+  void showFullScreenWeather(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Scaffold(
@@ -132,7 +132,7 @@ class WeatherCard extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                _buildWeatherEffect(),
+                buildWeatherEffect(),
                 Center(
                   child: Text(
                     weatherType.temperature,

@@ -31,17 +31,17 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
   final _picker = ImagePicker();
   final _textRecognizer = TextRecognizer(script: TextRecognitionScript.chinese);
 
-  Future<void> _pickImage() async {
+  Future<void> pickImage() async {
     final image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       _imageFile = File(image.path);
       _recognizedText = "正在识别文字...";
       setState(() {});
-      _processImage(_imageFile!);
+      processImage(_imageFile!);
     }
   }
 
-  Future<void> _processImage(File imageFile) async {
+  Future<void> processImage(File imageFile) async {
     final inputImage = InputImage.fromFile(imageFile);
 
     try {
@@ -77,7 +77,7 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: ElevatedButton(
-                  onPressed: _pickImage,
+                  onPressed: pickImage,
                   child: Text("选择图片"),
                 ),
               ),

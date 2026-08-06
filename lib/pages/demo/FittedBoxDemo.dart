@@ -28,7 +28,7 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Center(
       child: Column(
         children: [

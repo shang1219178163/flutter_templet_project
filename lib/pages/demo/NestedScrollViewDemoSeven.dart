@@ -31,15 +31,15 @@ class _NestedScrollViewDemoSevenState extends State<NestedScrollViewDemoSeven> w
     items = <Tuple2<Tab, Widget>>[
       Tuple2(
         Tab(icon: Text("汽车")),
-        _buildPage(),
+        buildPage(),
       ),
       Tuple2(
         Tab(icon: Text("火车")),
-        _buildPage1(),
+        buildPage1(),
       ),
       Tuple2(
         Tab(icon: Text("飞机")),
-        _buildPage2(),
+        buildPage2(),
       ),
     ];
 
@@ -124,15 +124,15 @@ class _NestedScrollViewDemoSevenState extends State<NestedScrollViewDemoSeven> w
     );
   }
 
-  Widget _buildPage() {
+  Widget buildPage() {
     return buildListView(tab: 0);
   }
 
-  Widget _buildPage1() {
+  Widget buildPage1() {
     return buildListView(tab: 1);
   }
 
-  Widget _buildPage2() {
+  Widget buildPage2() {
     return buildListView(tab: 2);
   }
 

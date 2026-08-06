@@ -34,12 +34,12 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _initData().then((v) {
+    initData().then((v) {
       setState(() {});
     });
   }
 
-  Future<void> _initData() async {
+  Future<void> initData() async {
     final str = await rootBundle.loadString("assets/data/article_json.json");
     final map = jsonDecode(str) as Map<String, dynamic>;
     final data = map["data"] as Map<String, dynamic>? ?? <String, dynamic>{};
@@ -82,7 +82,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
         actions: [
           if (kDebugMode)
             IconButton(
-              onPressed: _initData,
+              onPressed: initData,
               icon: Icon(Icons.print, color: themeProvider.titleColor),
             ),
         ],

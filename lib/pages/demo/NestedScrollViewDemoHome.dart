@@ -190,7 +190,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: _headerCountWidget(),
+              child: headerCountWidget(),
             ),
             Expanded(
               child: Padding(
@@ -236,7 +236,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                         const SizedBox(height: 6),
                         buildProjectBox(),
                         const SizedBox(height: 11),
-                        _headerCountWidget(),
+                        headerCountWidget(),
                         const SizedBox(height: 10),
                         buildSystemMessage(),
                       ],
@@ -361,9 +361,9 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
   }
 
   /// 顶部功能模块
-  Widget _headerCountWidget() {
+  Widget headerCountWidget() {
     final children = [
-      _menuItemCard(
+      menuItemCard(
         asyncNumber: Future(() => 1),
         color: const Color(0xFFE65F55),
         subText: '件事情待处理',
@@ -371,7 +371,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
         iconImage: 'assets/images/icon_adverse_event.png',
         onTap: () {},
       ),
-      _menuItemCard(
+      menuItemCard(
         count: 1,
         color: const Color(0xFFFF8F3E),
         subText: '条记录待处理',
@@ -379,7 +379,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
         iconImage: 'assets/images/icon_wait_reply.png',
         onTap: () {},
       ),
-      _menuItemCard(
+      menuItemCard(
         asyncNumber: Future(() => 3),
         color: const Color(0xFF2277E5),
         subText: '项方案待审核',
@@ -389,7 +389,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
           //待审核
         },
       ),
-      _menuItemCard(
+      menuItemCard(
         asyncNumber: Future(() => 4),
         color: const Color(0xFF00B451),
         subText: '个样本待处理',
@@ -509,7 +509,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
   }
 
   /// 顶部功能模块子条目卡片
-  Widget _menuItemCard({
+  Widget menuItemCard({
     required Color color,
     required String textImage,
     required String iconImage,

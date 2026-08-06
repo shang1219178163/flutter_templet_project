@@ -62,7 +62,7 @@ class XCollectionNavWidget extends StatelessWidget {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       var edgeHorizontal = spacing * 0.5;
       var itemWidth = (constraints.maxWidth - spacing * (rowCount - 1) - edgeHorizontal * 2) / rowCount;
@@ -150,7 +150,7 @@ class XCollectionNavWidget extends StatelessWidget {
     );
   }
 
-  // _buildBodySwiper() {
+  // buildBodySwiper() {
   //   return Container(
   //     width: this.width,
   //     height: this.height,

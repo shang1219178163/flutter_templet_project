@@ -60,12 +60,12 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
     if (overlayEntry != null) {
       return;
     }
-    overlayEntry ??= _showOverlay();
+    overlayEntry ??= showOverlay();
     //往Overlay中插入插入OverlayEntry
     Overlay.of(context).insert(overlayEntry!);
   }
 
-  OverlayEntry _showOverlay() {
+  OverlayEntry showOverlay() {
     var overlayEntry = OverlayEntry(builder: (context) {
       //外层使用Positioned进行定位，控制在Overlay中的位置
       // 控制不可拖出屏幕外
@@ -98,7 +98,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
             this.offset = offset;
             setState(() {});
           },
-          child: _contentBody(),
+          child: contentBody(),
         ),
       );
     });
@@ -113,7 +113,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
     );
   }
 
-  Widget _contentBody() {
+  Widget contentBody() {
     return Container(
       color: Colors.red,
       width: overlayWidth,

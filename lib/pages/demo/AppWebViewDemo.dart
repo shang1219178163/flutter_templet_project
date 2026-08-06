@@ -317,35 +317,35 @@ class SampleMenu extends StatelessWidget {
       onSelected: (MenuOptions value) {
         switch (value) {
           case MenuOptions.showUserAgent:
-            _onShowUserAgent();
+            onShowUserAgent();
           case MenuOptions.listCookies:
-            _onListCookies(context);
+            onListCookies(context);
           case MenuOptions.clearCookies:
-            _onClearCookies(context);
+            onClearCookies(context);
           case MenuOptions.addToCache:
-            _onAddToCache(context);
+            onAddToCache(context);
           case MenuOptions.listCache:
-            _onListCache();
+            onListCache();
           case MenuOptions.clearCache:
-            _onClearCache(context);
+            onClearCache(context);
           case MenuOptions.navigationDelegate:
-            _onNavigationDelegateExample();
+            onNavigationDelegateExample();
           case MenuOptions.doPostRequest:
-            _onDoPostRequest();
+            onDoPostRequest();
           case MenuOptions.loadLocalFile:
-            _onLoadLocalFileExample();
+            onLoadLocalFileExample();
           case MenuOptions.loadFlutterAsset:
-            _onLoadFlutterAssetExample();
+            onLoadFlutterAssetExample();
           case MenuOptions.loadHtmlString:
-            _onLoadHtmlStringExample();
+            onLoadHtmlStringExample();
           case MenuOptions.transparentBackground:
-            _onTransparentBackground();
+            onTransparentBackground();
           case MenuOptions.setCookie:
-            _onSetCookie();
+            onSetCookie();
           case MenuOptions.logExample:
-            _onLogExample();
+            onLogExample();
           case MenuOptions.basicAuthentication:
-            _promptForUrl(context);
+            promptForUrl(context);
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
@@ -414,7 +414,7 @@ class SampleMenu extends StatelessWidget {
     );
   }
 
-  Future<void> _onShowUserAgent() {
+  Future<void> onShowUserAgent() {
     // Send a message with the user agent string to the Toaster JavaScript channel we registered
     // with the WebView.
     return webViewController.runJavaScript(
@@ -422,7 +422,7 @@ class SampleMenu extends StatelessWidget {
     );
   }
 
-  Future<void> _onListCookies(BuildContext context) async {
+  Future<void> onListCookies(BuildContext context) async {
     final cookies = await webViewController
         .runJavaScriptReturningResult('document.cookie') as String;
     if (context.mounted) {
@@ -432,14 +432,14 @@ class SampleMenu extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const Text('Cookies:'),
-            _getCookieList(cookies),
+            getCookieList(cookies),
           ],
         ),
       ));
     }
   }
 
-  Future<void> _onAddToCache(BuildContext context) async {
+  Future<void> onAddToCache(BuildContext context) async {
     await webViewController.runJavaScript(
       'caches.open("test_caches_entry"); localStorage["test_localStorage"] = "dummy_entry";',
     );
@@ -450,14 +450,14 @@ class SampleMenu extends StatelessWidget {
     }
   }
 
-  Future<void> _onListCache() {
+  Future<void> onListCache() {
     return webViewController.runJavaScript('caches.keys()'
         // ignore: missing_whitespace_between_adjacent_strings
         '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
         '.then((caches) => Toaster.postMessage(caches))');
   }
 
-  Future<void> _onClearCache(BuildContext context) async {
+  Future<void> onClearCache(BuildContext context) async {
     await webViewController.clearCache();
     await webViewController.clearLocalStorage();
     if (context.mounted) {
@@ -467,7 +467,7 @@ class SampleMenu extends StatelessWidget {
     }
   }
 
-  Future<void> _onClearCookies(BuildContext context) async {
+  Future<void> onClearCookies(BuildContext context) async {
     final hadCookies = await cookieManager.clearCookies();
     var message = 'There were cookies. Now, they are gone!';
     if (!hadCookies) {
@@ -480,7 +480,7 @@ class SampleMenu extends StatelessWidget {
     }
   }
 
-  Future<void> _onNavigationDelegateExample() {
+  Future<void> onNavigationDelegateExample() {
     final contentBase64 = base64Encode(
       const Utf8Encoder().convert(kNavigationExamplePage),
     );
@@ -489,7 +489,7 @@ class SampleMenu extends StatelessWidget {
     );
   }
 
-  Future<void> _onSetCookie() async {
+  Future<void> onSetCookie() async {
     await cookieManager.setCookie(
       const WebViewCookie(
         name: 'foo',
@@ -503,7 +503,7 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
-  Future<void> _onDoPostRequest() {
+  Future<void> onDoPostRequest() {
     return webViewController.loadRequest(
       Uri.parse('https://httpbin.org/post'),
       method: LoadRequestMethod.post,
@@ -512,24 +512,24 @@ class SampleMenu extends StatelessWidget {
     );
   }
 
-  Future<void> _onLoadLocalFileExample() async {
-    final pathToIndex = await _prepareLocalFile();
+  Future<void> onLoadLocalFileExample() async {
+    final pathToIndex = await prepareLocalFile();
     await webViewController.loadFile(pathToIndex);
   }
 
-  Future<void> _onLoadFlutterAssetExample() {
+  Future<void> onLoadFlutterAssetExample() {
     return webViewController.loadFlutterAsset('assets/www/index.html');
   }
 
-  Future<void> _onLoadHtmlStringExample() {
+  Future<void> onLoadHtmlStringExample() {
     return webViewController.loadHtmlString(kLocalExamplePage);
   }
 
-  Future<void> _onTransparentBackground() {
+  Future<void> onTransparentBackground() {
     return webViewController.loadHtmlString(kTransparentBackgroundPage);
   }
 
-  Widget _getCookieList(String cookies) {
+  Widget getCookieList(String cookies) {
     if (cookies == '""') {
       return Container();
     }
@@ -542,7 +542,7 @@ class SampleMenu extends StatelessWidget {
     );
   }
 
-  static Future<String> _prepareLocalFile() async {
+  static Future<String> prepareLocalFile() async {
     final tmpDir = (await getTemporaryDirectory()).path;
     final indexFile = File(
         <String>{tmpDir, 'www', 'index.html'}.join(Platform.pathSeparator));
@@ -553,7 +553,7 @@ class SampleMenu extends StatelessWidget {
     return indexFile.path;
   }
 
-  Future<void> _onLogExample() {
+  Future<void> onLogExample() {
     webViewController
         .setOnConsoleMessage((JavaScriptConsoleMessage consoleMessage) {
       debugPrint(
@@ -563,7 +563,7 @@ class SampleMenu extends StatelessWidget {
     return webViewController.loadHtmlString(kLogExamplePage);
   }
 
-  Future<void> _promptForUrl(BuildContext context) {
+  Future<void> promptForUrl(BuildContext context) {
     final urlTextController = TextEditingController();
 
     return showDialog<String>(

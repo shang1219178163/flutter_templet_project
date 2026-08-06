@@ -39,7 +39,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -71,7 +71,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
   }
 
   /// 创建悬浮按钮
-  buildFloatingButton({
+  Widget buildFloatingButton({
     GestureDragStartCallback? onPanStart,
     GestureDragEndCallback? onPanEnd,
     EdgeInsets padding = const EdgeInsets.only(

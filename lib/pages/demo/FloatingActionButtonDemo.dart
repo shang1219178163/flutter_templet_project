@@ -58,7 +58,7 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
     );
   }
 
-  buildBody({required List<Tuple2<String, Widget>> items}) {
+  Widget buildBody({required List<Tuple2<String, Widget>> items}) {
     return Column(
       children: [
         SingleChildScrollView(

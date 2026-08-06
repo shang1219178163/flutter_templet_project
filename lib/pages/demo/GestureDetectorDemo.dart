@@ -49,7 +49,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
     );
   }
 
-  buildBottomSheet() {
+  Widget buildBottomSheet() {
     return GestureDetector(
       onPanStart: (e) {
         debugPrint("onPanStart");
@@ -135,7 +135,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
     );
   }
 
-  buildSoundRecordBar() {
+  Widget buildSoundRecordBar() {
     return IMSoundRecordBar(
       onRecordStart: () async {
         // debugPrint("${DateTime.now()} onRecordStart");

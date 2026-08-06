@@ -235,11 +235,11 @@ class _NFullscreenTextLinkifyState extends State<NFullscreenTextLinkify> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       focusNode.requestFocus();
       await Future.delayed(const Duration(milliseconds: 100));
-      _selectAll(); // 双保险（解决布局延迟）
+      selectAll(); // 双保险（解决布局延迟）
     });
   }
 
-  void _selectAll() {
+  void selectAll() {
     regionKey.currentState?.selectAll(SelectionChangedCause.toolbar);
   }
 

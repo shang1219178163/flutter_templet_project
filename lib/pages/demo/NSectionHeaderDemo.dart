@@ -35,7 +35,7 @@ class _NSectionHeaderDemoState extends State<NSectionHeaderDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

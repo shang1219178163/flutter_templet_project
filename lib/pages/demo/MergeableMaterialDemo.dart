@@ -39,7 +39,7 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -69,7 +69,7 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
   bool currIndex = false;
   int currIndexNum = 0;
 
-  _isChildExpanded() {
+  isChildExpanded() {
     setState(() {
       currIndex = !currIndex;
       ++currIndexNum;
@@ -77,14 +77,14 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
   }
 
   Widget buildMergeableMaterial() {
-    items.add(_buildItem());
+    items.add(buildItem());
 
     return Column(
       children: <Widget>[
         MergeableMaterial(hasDividers: false, children: items),
         ElevatedButton(
           onPressed: () {
-            _isChildExpanded();
+            isChildExpanded();
           },
           child: Text("点击添加"),
         )
@@ -92,7 +92,7 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
     );
   }
 
-  _buildItem() {
+  Widget buildItem() {
     return MaterialSlice(
         // key:  ValueKey<int>(currIndexNum),
         key: UniqueKey(),

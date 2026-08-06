@@ -35,10 +35,10 @@ class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(_onOnFocusNodeEvent);
+    _focusNode.addListener(onOnFocusNodeEvent);
   }
 
-  _onOnFocusNodeEvent() {
+  onOnFocusNodeEvent() {
     setState(() {});
   }
 
@@ -191,18 +191,18 @@ class _LoginInputState extends State<LoginInput> {
 
     _textEditingController.text = widget.value ?? "";
 
-    _focusNode.addListener(_onFocusChange);
+    _focusNode.addListener(onFocusChange);
   }
 
   @override
   void dispose() {
-    _focusNode.removeListener(_onFocusChange);
+    _focusNode.removeListener(onFocusChange);
     _focusNode.dispose();
 
     super.dispose();
   }
 
-  void _onFocusChange() {
+  void onFocusChange() {
     hasFocusVN.value = _focusNode.hasFocus;
     if (hasFocusVN.value && widget.isPwd && widget.isFocusClear) {
       onClear();
@@ -215,10 +215,10 @@ class _LoginInputState extends State<LoginInput> {
 
   @override
   Widget build(BuildContext context) {
-    return _passwordInput();
+    return passwordInput();
 
     // if (widget.isPwd) {
-    //   return _passwordInput();
+    //   return passwordInput();
     // }
     // return _input();
   }
@@ -267,7 +267,7 @@ class _LoginInputState extends State<LoginInput> {
   //   );
   // }
 
-  _passwordInput() {
+  passwordInput() {
     Widget? suffixIconTmp;
     if (widget.showEyeIcon) {
       suffixIconTmp = widget.suffixIcon ??
@@ -336,7 +336,7 @@ class _LoginInputState extends State<LoginInput> {
     );
   }
 
-  buildBorder({Color? color, double raduis = 6}) {
+  InputBorder buildBorder({Color? color, double raduis = 6}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(raduis),

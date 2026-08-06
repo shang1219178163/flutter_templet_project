@@ -110,11 +110,11 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       //   child: Icon(Icons.add),
       // ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      // floatingActionButton: _buildFab(isTop: true),
+      // floatingActionButton: buildFab(isTop: true),
     );
   }
 
-  Widget _buildFab({bool isTop = true}) {
+  Widget buildFab({bool isTop = true}) {
     final icons = [Icons.sms, Icons.mail, Icons.phone];
     return AnchoredOverlay(
       showOverlay: true,
@@ -139,7 +139,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     );
   }
 
-  buildPage1() {
+  Widget buildPage1() {
     return ListView.separated(
       cacheExtent: 180,
       itemCount: kAliPayList.length,
@@ -194,7 +194,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     );
   }
 
-  buildPage2() {
+  Widget buildPage2() {
     return ListView.separated(
       cacheExtent: 180,
       itemCount: kUpdateAppList.length,
@@ -215,13 +215,13 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     );
   }
 
-  buildPage3() {
+  Widget buildPage3() {
     return RouteNameSearchPage(
       hideAppBar: true,
     );
   }
 
-  buildPage4() {
+  Widget buildPage4() {
     Widget buildHeader({required String sectionTile, required bool isExpand}) {
       final trailing = isExpand
           ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)

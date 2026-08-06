@@ -33,7 +33,7 @@ class _DisplayFeatureDemoState extends State<DisplayFeatureDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

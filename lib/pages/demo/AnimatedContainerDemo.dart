@@ -66,7 +66,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           ElevatedButton(
-            onPressed: _changeSize,
+            onPressed: changeSize,
             child: const Text('更新宽高'),
           ),
           NSectionBox(
@@ -143,10 +143,10 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   onPressed() {
-    _changeSize();
+    changeSize();
   }
 
-  void _changeSize() {
+  void changeSize() {
     _width.value = _width.value == sizeStart.width ? sizeEnd.width : sizeStart.width;
     _height.value = _height.value == sizeStart.height ? sizeEnd.height : sizeStart.height;
     _color.value = _color.value == Colors.green ? Colors.lightBlue : Colors.green;
@@ -296,7 +296,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
         });
   }
 
-  buildExpansionChild({required String content, required bool isExpanded, required VoidCallback onToggle}) {
+  Widget buildExpansionChild({required String content, required bool isExpanded, required VoidCallback onToggle}) {
     final maxLines = isExpanded ? 10 : 5;
     final arrowImage = isExpanded ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
 

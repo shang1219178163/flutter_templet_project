@@ -35,10 +35,10 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
   @override
   void initState() {
     super.initState();
-    _initValues();
+    initValues();
   }
 
-  Future<void> _initValues() async {
+  Future<void> initValues() async {
     final currentBrightness = await FlutterScreenWake.brightness;
     // final currentVolume = await VolumeController.instance.getVolume();
     _brightness = currentBrightness;
@@ -46,11 +46,11 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
     setState(() {});
   }
 
-  void _onPanStart(DragStartDetails details) {
+  void onPanStart(DragStartDetails details) {
     _startPosition = details.localPosition;
   }
 
-  void _onPanUpdate(DragUpdateDetails details) {
+  void onPanUpdate(DragUpdateDetails details) {
     if (_startPosition == null) {
       return;
     }
@@ -81,7 +81,7 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
     }
   }
 
-  void _onPanEnd(DragEndDetails details) {
+  void onPanEnd(DragEndDetails details) {
     _startPosition = null;
   }
 
@@ -102,9 +102,9 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
 
   Widget buildBody() {
     return GestureDetector(
-      onPanStart: _onPanStart,
-      onPanUpdate: _onPanUpdate,
-      onPanEnd: _onPanEnd,
+      onPanStart: onPanStart,
+      onPanUpdate: onPanUpdate,
+      onPanEnd: onPanEnd,
       child: Container(
         color: Colors.black,
         child: Center(

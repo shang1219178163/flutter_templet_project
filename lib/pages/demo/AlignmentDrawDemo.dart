@@ -50,7 +50,7 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

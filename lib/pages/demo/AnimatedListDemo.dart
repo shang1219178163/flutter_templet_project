@@ -40,11 +40,11 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
                 ))
             .toList(),
       ),
-      body: _buildAnimatedList(),
+      body: buildAnimatedList(),
     );
   }
 
-  _buildAnimatedList() {
+  Widget buildAnimatedList() {
     if (data.isEmpty) {
       return Center(
         child: Container(

@@ -77,7 +77,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -148,7 +148,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
     );
   }
 
-  buildTabbar() {
+  Widget buildTabbar() {
     return Material(
       // color: Theme.of(context).colorScheme.primary,
       child: TabBar(

@@ -47,7 +47,7 @@ class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return CustomScrollView(

@@ -24,11 +24,11 @@ class _FlexDemoState extends State<FlexDemo> {
         body: Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: ListView(children: [
-            NSectionBox(title: "Flex.Horizontal", child: _buildFlexHorizontal()),
-            NSectionBox(title: "Flex.Vertical", child: _buildFlexVertical()),
-            NSectionBox(title: "_buildSection", child: _buildSection()),
-            NSectionBox(title: "_buildSection2", child: _buildSection2()),
-            NSectionBox(title: "_buildSection3", child: _buildSection3()),
+            NSectionBox(title: "Flex.Horizontal", child: buildFlexHorizontal()),
+            NSectionBox(title: "Flex.Vertical", child: buildFlexVertical()),
+            NSectionBox(title: "buildSection", child: buildSection()),
+            NSectionBox(title: "buildSection2", child: buildSection2()),
+            NSectionBox(title: "buildSection3", child: buildSection3()),
             NSectionBox(title: "buildMutipleExpanded", child: buildMutipleExpanded()),
             NSectionBox(
               title: "buildMutipleFlexible",
@@ -42,7 +42,7 @@ class _FlexDemoState extends State<FlexDemo> {
         ));
   }
 
-  _buildSection() {
+  Widget buildSection() {
     return Container(
       // color: Colors.greenAccent,
       child: Row(
@@ -64,7 +64,7 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-  _buildFlexHorizontal() {
+  Widget buildFlexHorizontal() {
     return Flex(
         direction: Axis.horizontal, // this is unique
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -81,7 +81,7 @@ class _FlexDemoState extends State<FlexDemo> {
             .toList());
   }
 
-  _buildFlexVertical() {
+  Widget buildFlexVertical() {
     return Flex(
         direction: Axis.vertical, // this is unique
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -98,7 +98,7 @@ class _FlexDemoState extends State<FlexDemo> {
             .toList());
   }
 
-  _buildSection2() {
+  Widget buildSection2() {
     return Column(
       children: [
         Row(
@@ -132,7 +132,7 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-  _buildSection3() {
+  Widget buildSection3() {
     return Container(
       color: Colors.greenAccent,
       child: Row(
@@ -158,7 +158,7 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-  buildExpanded() {
+  Widget buildExpanded() {
     return Expanded(
       child: Container(
         color: Colors.greenAccent,
@@ -167,7 +167,7 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-  buildFlexible({fit = FlexFit.loose}) {
+  Widget buildFlexible({fit = FlexFit.loose}) {
     return Flexible(
       fit: fit,
       child: Container(
@@ -177,7 +177,7 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-  buildMutipleExpanded() {
+  Widget buildMutipleExpanded() {
     return Row(
       children: [
         Expanded(
@@ -205,7 +205,7 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-  buildMutipleFlexible() {
+  Widget buildMutipleFlexible() {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [

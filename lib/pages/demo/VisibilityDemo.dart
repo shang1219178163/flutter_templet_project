@@ -61,21 +61,21 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
                     // maintainAnimation: true,
                     // maintainSize: true,
                     // maintainState: true,
-                    replacement: _buildItem('Visibility\nreplacement'),
-                    child: _buildItem('Visibility'),
+                    replacement: buildItem('Visibility\nreplacement'),
+                    child: buildItem('Visibility'),
                   ),
                   Opacity(
                     opacity: isVisible ? 1 : 0.5,
-                    child: _buildItem('Opacity'),
+                    child: buildItem('Opacity'),
                   ),
                   AnimatedOpacity(
                     opacity: isVisible ? 1 : 0.5,
                     duration: Duration.zero,
-                    child: _buildItem('AnimatedOpacity'),
+                    child: buildItem('AnimatedOpacity'),
                   ),
                   Offstage(
                     offstage: !isVisible,
-                    child: _buildItem('Offstage'),
+                    child: buildItem('Offstage'),
                   ),
                 ],
               )
@@ -86,7 +86,7 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
     );
   }
 
-  _buildItem(String text) {
+  Widget buildItem(String text) {
     return Container(
       width: 120,
       height: 120,

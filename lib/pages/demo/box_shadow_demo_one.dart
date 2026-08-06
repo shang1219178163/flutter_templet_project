@@ -33,7 +33,7 @@ class _BoxShadowDemoOneState extends State<BoxShadowDemoOne> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       padding: EdgeInsets.all(10),
       child: SingleChildScrollView(

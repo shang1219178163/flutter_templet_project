@@ -61,10 +61,10 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
             ),
           ),
         ],
-        bottom: isTabBar.value ? null : _buildTabBar(),
+        bottom: isTabBar.value ? null : buildTabBar(),
       ),
-      body: _buildPageView(),
-      bottomNavigationBar: !isTabBar.value ? null : _buildBottomNavigationBar(),
+      body: buildPageView(),
+      bottomNavigationBar: !isTabBar.value ? null : buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         onPressed: () {},
@@ -74,7 +74,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     );
   }
 
-  PreferredSize _buildPreferredSize(Widget child) {
+  PreferredSize buildPreferredSize(Widget child) {
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
       child: Theme(
@@ -89,7 +89,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     );
   }
 
-  TabBar _buildTabBar() {
+  TabBar buildTabBar() {
     return TabBar(
       controller: _tabController,
       isScrollable: true,
@@ -104,7 +104,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     );
   }
 
-  Material _buildBottomNavigationBar() {
+  Material buildBottomNavigationBar() {
     final textColor = Theme.of(context).colorScheme.secondary;
     const bgColor = Colors.white;
 
@@ -137,7 +137,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
         ));
   }
 
-  Widget _buildPageView() {
+  Widget buildPageView() {
     return PageView(
       controller: _pageController,
       onPageChanged: (index) {

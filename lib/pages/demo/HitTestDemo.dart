@@ -24,7 +24,7 @@ class HitTest extends StatelessWidget {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Material(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

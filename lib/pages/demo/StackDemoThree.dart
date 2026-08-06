@@ -31,7 +31,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
   // bool isExpanded = false;
   // double topOffset = -1;
 
-  void _handleDrag(DragUpdateDetails details) {
+  void handleDrag(DragUpdateDetails details) {
     _isDragging = true;
     _topOffset += details.delta.dy;
     // _topOffset = _topOffset.clamp(_maxTop, _minTop);
@@ -39,22 +39,22 @@ class _StackDemoThreeState extends State<StackDemoThree> {
     provider.updateExpanded(false, _topOffset);
   }
 
-  void _handleDragEnd(DragEndDetails details) {
+  void handleDragEnd(DragEndDetails details) {
     _isDragging = false;
     if (_topOffset < _minTop / 2) {
-      _expand();
+      expand();
     } else {
-      // _collapse();
+      // collapse();
     }
     setState(() {});
   }
 
-  void _expand() {
+  void expand() {
     provider.updateExpanded(true, _maxTop);
   }
 
-  void _collapse() {
-    debugPrint("_collapse=$_minTop");
+  void collapse() {
+    debugPrint("collapse=$_minTop");
     provider.updateExpanded(false, _minTop);
     debugPrint("_collapseEnd=$_minTop");
   }
@@ -62,7 +62,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
   double _lastScrollOffset = 0.0;
   bool _readyToCollapse = false;
 
-  bool _onScrollNotification(ScrollNotification n) {
+  bool onScrollNotification(ScrollNotification n) {
     DLog.d(n.runtimeType);
 
     if (n is ScrollStartNotification) {
@@ -86,7 +86,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
       if (n.overscroll < 0 && n.metrics.pixels <= 0 && provider.isExpanded && _userTouching) {
         debugPrint("Trigger collapse: overscroll=${n.overscroll}, offset=${n.metrics.pixels}");
         if (_readyToCollapse) {
-          _collapse();
+          collapse();
           return true;
         } else {
           _readyToCollapse = true; // 仅标记准备收缩
@@ -146,10 +146,10 @@ class _StackDemoThreeState extends State<StackDemoThree> {
               right: 0,
               bottom: 0,
               child: GestureDetector(
-                onVerticalDragUpdate: _handleDrag,
-                onVerticalDragEnd: _handleDragEnd,
+                onVerticalDragUpdate: handleDrag,
+                onVerticalDragEnd: handleDragEnd,
                 child: NotificationListener<ScrollNotification>(
-                  onNotification: _onScrollNotification,
+                  onNotification: onScrollNotification,
                   child: HotScreenViewThree(arguments: args),
                 ),
               ),

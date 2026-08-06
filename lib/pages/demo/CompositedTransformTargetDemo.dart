@@ -56,11 +56,11 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
           alignment: Alignment.center,
           child: GestureDetector(
             // onTap: _toggleOverlay,
-            // onPanStart: (e) => _showOverlay(),
-            // onPanEnd: (e) => _hideOverlay(),
+            // onPanStart: (e) => showOverlay(),
+            // onPanEnd: (e) => hideOverlay(),
             // onPanUpdate: updateIndicator,
-            onLongPressStart: (e) => _showOverlay(),
-            onLongPressEnd: (e) => _hideOverlay(),
+            onLongPressStart: (e) => showOverlay(),
+            onLongPressEnd: (e) => hideOverlay(),
             onLongPressMoveUpdate: updateIndicatorLongPress,
             child: CompositedTransformTarget(
               link: layerLink,
@@ -156,19 +156,19 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
 
   // void _toggleOverlay() {
   //   if (!show) {
-  //     _showOverlay();
+  //     showOverlay();
   //   } else {
-  //     _hideOverlay();
+  //     hideOverlay();
   //   }
   //   show = !show;
   // }
 
-  void _showOverlay() {
-    _overlayEntry = _createOverlayEntry(indicatorOffset);
+  void showOverlay() {
+    _overlayEntry = createOverlayEntry(indicatorOffset);
     Overlay.of(context).insert(_overlayEntry);
   }
 
-  void _hideOverlay() {
+  void hideOverlay() {
     _overlayEntry.remove();
   }
 
@@ -182,7 +182,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
     _overlayEntry.markNeedsBuild();
   }
 
-  OverlayEntry _createOverlayEntry(Offset localPosition) {
+  OverlayEntry createOverlayEntry(Offset localPosition) {
     indicatorOffset = localPosition;
     return OverlayEntry(
       builder: (BuildContext context) => UnconstrainedBox(

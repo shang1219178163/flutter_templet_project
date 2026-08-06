@@ -89,7 +89,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
       lists.add(
         InkWell(
           onTap: () {
-            _onPressed(list.indexOf(e));
+            onPressed(list.indexOf(e));
           },
           child: Container(
             decoration: BoxDecoration(
@@ -113,7 +113,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
     return lists;
   }
 
-  void _onPressed(int e) {
+  void onPressed(int e) {
     DLog.d(e);
   }
 
@@ -183,27 +183,27 @@ class _ToastContextState extends State<ToastContext> {
     list = [
       Tuple2(
         'Show Custom Toast',
-        _showToast,
+        showToast,
       ),
       Tuple2(
         'Show Custom Toast by PositionedToastBuilder',
-        _showBuilderToast,
+        showBuilderToast,
       ),
       Tuple2(
         'Custom Toast With Close',
-        _showToastCancel,
+        showToastCancel,
       ),
       Tuple2(
         'Queue Toasts',
-        _queueToasts,
+        queueToasts,
       ),
       Tuple2(
         'Cancel Toast',
-        _removeToast,
+        removeToast,
       ),
       Tuple2(
         'Remove Queued Toasts',
-        _removeAllQueuedToasts,
+        removeAllQueuedToasts,
       ),
     ];
   }
@@ -231,7 +231,7 @@ class _ToastContextState extends State<ToastContext> {
     );
   }
 
-  _showToast() {
+  showToast() {
     fToast.showToast(
       child: toast,
       gravity: ToastGravity.BOTTOM,
@@ -239,7 +239,7 @@ class _ToastContextState extends State<ToastContext> {
     );
   }
 
-  _showBuilderToast() {
+  showBuilderToast() {
     // fToast.showToast(
     //   child: toast,
     //   gravity: ToastGravity.BOTTOM,
@@ -254,7 +254,7 @@ class _ToastContextState extends State<ToastContext> {
     // );
   }
 
-  _showToastCancel() {
+  showToastCancel() {
     Widget toastWithButton = Container(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
       decoration: BoxDecoration(
@@ -292,7 +292,7 @@ class _ToastContextState extends State<ToastContext> {
     );
   }
 
-  _queueToasts() {
+  queueToasts() {
     fToast.showToast(
       child: toast,
       gravity: ToastGravity.CENTER,
@@ -320,11 +320,11 @@ class _ToastContextState extends State<ToastContext> {
     );
   }
 
-  _removeToast() {
+  removeToast() {
     fToast.removeCustomToast();
   }
 
-  _removeAllQueuedToasts() {
+  removeAllQueuedToasts() {
     fToast.removeQueuedCustomToasts();
   }
 }

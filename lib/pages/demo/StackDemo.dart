@@ -84,7 +84,7 @@ class _StackDemoState extends State<StackDemo> with SingleTickerProviderStateMix
     );
   }
 
-  buildSection() {
+  Widget buildSection() {
     return NSectionBox(
       title: "buildSection",
       child: Stack(
@@ -120,7 +120,7 @@ class _StackDemoState extends State<StackDemo> with SingleTickerProviderStateMix
     );
   }
 
-  buildSection1() {
+  Widget buildSection1() {
     return NSectionBox(
       title: "buildSection1",
       child: Stack(

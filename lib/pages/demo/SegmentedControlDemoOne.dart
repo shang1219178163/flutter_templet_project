@@ -67,7 +67,7 @@ class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return buildSegmentControlEmojView();
 
     return Scrollbar(

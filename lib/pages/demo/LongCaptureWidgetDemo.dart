@@ -37,11 +37,11 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return buildCapture(key: _shareKey);
   }
 
-  buildCapture({GlobalKey? key}) {
+  Widget buildCapture({GlobalKey? key}) {
     return SingleChildScrollView(
       child: RepaintBoundary(
         key: key,

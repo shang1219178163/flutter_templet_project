@@ -49,7 +49,7 @@ class _SliderDemoState extends State<SliderDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -119,7 +119,7 @@ class _SliderDemoState extends State<SliderDemo> {
     );
   }
 
-  buildSlider() {
+  Widget buildSlider() {
     return Row(
       children: [
         Expanded(
@@ -168,7 +168,7 @@ class _SliderDemoState extends State<SliderDemo> {
     );
   }
 
-  buildRangeSlider() {
+  Widget buildRangeSlider() {
     return RangeSlider(
       values: rangeValues,
       min: 0,
@@ -186,7 +186,7 @@ class _SliderDemoState extends State<SliderDemo> {
     );
   }
 
-  buildNSlider() {
+  Widget buildNSlider() {
     return NSlider(
       min: 0.0,
       max: 100.0,

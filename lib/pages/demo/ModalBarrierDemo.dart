@@ -23,12 +23,12 @@ class _ModalBarrierDemoState extends State<ModalBarrierDemo> {
             // child: ModalBarrier(
             //   color: Colors.black.withValues(alpha: .4),
             // ),
-            child: _buildModalBarrier(),
+            child: buildModalBarrier(),
           ),
         ));
   }
 
-  Widget _buildModalBarrier() {
+  Widget buildModalBarrier() {
     return Stack(
       children: [
         Container(

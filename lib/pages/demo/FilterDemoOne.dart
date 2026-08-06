@@ -47,7 +47,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       child: Center(
         child: Column(
@@ -63,13 +63,13 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
                 child: Text("前景模糊 ImageFilter 显示在组件上边, \n背景模糊 BackdropFilter 显示在组件下边"),
               ),
             ),
-            _buildNNSlider(
+            buildNNSlider(
                 max: 20,
                 leading: Text("前景模糊"),
                 onChanged: (val) {
                   imageFilteredVN.value = val;
                 }),
-            _buildNNSlider(
+            buildNNSlider(
                 max: 20,
                 leading: Text("背景模糊"),
                 onChanged: (val) {
@@ -107,7 +107,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
     );
   }
 
-  _buildNNSlider({double max = 100, Widget? leading, ValueChanged<double>? onChanged}) {
+  Widget buildNNSlider({double max = 100, Widget? leading, ValueChanged<double>? onChanged}) {
     return NSlider(
       leading: leading,
       max: max,

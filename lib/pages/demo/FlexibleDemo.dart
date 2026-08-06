@@ -17,7 +17,7 @@ class _FlexibleDemoState extends State<FlexibleDemo> {
         title: Text(widget.title ?? "$widget"),
       ),
       // body: _buildSection(),
-      body: _buildSection1(),
+      body: buildSection1(),
     );
   }
 
@@ -44,7 +44,7 @@ class _FlexibleDemoState extends State<FlexibleDemo> {
   //   );
   // }
 
-  _buildSection1() {
+  Widget buildSection1() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

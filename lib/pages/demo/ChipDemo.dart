@@ -191,7 +191,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                                 child: Text(e.toString().characters.first.toUpperCase())),
                             label: Text("Action_$e"),
                             onPressed: () {
-                              _onPressed(titles.indexOf(e));
+                              onPressed(titles.indexOf(e));
                             },
                           ))
                       .toList(),
@@ -298,12 +298,12 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
     );
   }
 
-  void _onPressed(int e) {
+  void onPressed(int e) {
     DLog.d(e);
   }
 
   /// 标签管理器
-  buildTagManager() {
+  Widget buildTagManager() {
     return NSectionBox(
       title: "NTagBox",
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,7 +330,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
   }
 
   /// 标签管理器
-  buildTagManagerNew() {
+  Widget buildTagManagerNew() {
     return NSectionBox(
       title: "NTagBoxNew",
       crossAxisAlignment: CrossAxisAlignment.start,

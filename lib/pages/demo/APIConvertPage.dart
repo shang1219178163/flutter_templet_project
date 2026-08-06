@@ -134,7 +134,7 @@ class TagGetApi extends BaseRequestAPI{
     debugPrint("content: $content");
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       child: LayoutBuilder(builder: (context, constraints) {
         final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
@@ -146,7 +146,7 @@ class TagGetApi extends BaseRequestAPI{
     );
   }
 
-  buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -174,7 +174,7 @@ class TagGetApi extends BaseRequestAPI{
     );
   }
 
-  buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
     return Container(
       padding: EdgeInsets.all(spacing * 3),
       child: Column(

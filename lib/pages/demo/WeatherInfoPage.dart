@@ -46,7 +46,7 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SingleChildScrollView(
       child: Column(
         children: [

@@ -73,12 +73,12 @@ class _SystemColorPageState extends State<SystemColorPage> {
         tap: (obj) {
           debugPrint("obj:$obj");
         },
-        itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
+        itemBuilder: (context, index, searchResults) => buildCell(context, index, searchResults),
       ),
     );
   }
 
-  _buildCell(BuildContext context, int index, List searchResults) {
+  Widget buildCell(BuildContext context, int index, List searchResults) {
     final str = searchResults[index];
     var subtitle = kColorDic[str]
         .toString()

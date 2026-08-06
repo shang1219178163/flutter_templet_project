@@ -24,16 +24,16 @@ class _KeyboardObserverDemoState extends State<KeyboardObserverDemo> {
   @override
   void initState() {
     super.initState();
-    HardwareKeyboard.instance.addHandler(_handleEvent);
+    HardwareKeyboard.instance.addHandler(handleEvent);
   }
 
   @override
   void dispose() {
     super.dispose();
-    HardwareKeyboard.instance.removeHandler(_handleEvent);
+    HardwareKeyboard.instance.removeHandler(handleEvent);
   }
 
-  bool _handleEvent(event) {
+  bool handleEvent(event) {
     pressedKeysVN.value = HardwareKeyboard.instance.logicalKeysPressed;
 
     final result = HardwareKeyboard.instance.logicalKeysPressed.containsAll([

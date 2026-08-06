@@ -89,7 +89,7 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
     );
   }
 
-  buildPageFooter({
+  Widget buildPageFooter({
     Color? primary = Colors.blue,
     required VoidCallback onConfirm,
   }) {

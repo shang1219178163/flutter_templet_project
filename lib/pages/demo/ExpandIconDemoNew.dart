@@ -24,7 +24,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
 
   @override
   void initState() {
-    _data = _generateItems(3);
+    _data = generateItems(3);
 
     super.initState();
   }
@@ -35,20 +35,20 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
       appBar: AppBar(
         title: Text("$widget"),
       ),
-      // body: _buildExpandIcon(context),
-      // body: _buildExpansionPanelList(context),
+      // body: buildExpandIcon(context),
+      // body: buildExpansionPanelList(context),
       body: SafeArea(
         child: Column(
           children: [
-            // _buildExpandIcon(),
-            Expanded(child: _buildExpansionPanelList()),
+            // buildExpandIcon(),
+            Expanded(child: buildExpansionPanelList()),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildExpandIcon() {
+  Widget buildExpandIcon() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -93,7 +93,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
     );
   }
 
-  Widget _buildExpansionPanelList() {
+  Widget buildExpansionPanelList() {
     return SingleChildScrollView(
       child: Container(
         child: ExpansionPanelList(
@@ -124,8 +124,8 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
                 //   subtitle: Text("subtitle"),
                 // );
               },
-              body: _buildExpansionPanelBody(item.index),
-              // body: _buildListTitle(item),
+              body: buildExpansionPanelBody(item.index),
+              // body: buildListTitle(item),
             );
           }).toList(),
         ),
@@ -133,7 +133,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
     );
   }
 
-  Widget _buildExpansionPanelBody(int section) {
+  Widget buildExpansionPanelBody(int section) {
     final item = _data[section];
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -157,7 +157,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
     );
   }
 
-  _buildListTitle(ExpandedItem item) {
+  Widget buildListTitle(ExpandedItem item) {
     return ListTile(
         title: Text(item.expandedValue),
         subtitle: Text('To delete this panel, tap the trash can icon'),
@@ -169,7 +169,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
         });
   }
 
-  List<ExpandedItem<String>> _generateItems(int count) {
+  List<ExpandedItem<String>> generateItems(int count) {
     return List<ExpandedItem<String>>.generate(count, (int index) {
       return ExpandedItem<String>(
         index: index,

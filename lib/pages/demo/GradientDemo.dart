@@ -52,7 +52,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           preferredSize: Size(double.infinity, 50),
           child: Row(
             children: [
-              _buildDropdownButton(),
+              buildDropdownButton(),
             ],
           ),
         ),
@@ -107,7 +107,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
   var _dropValue = AlignmentExt.allCases[0];
   var _radius = 0.5;
 
-  _buildDropdownButton() {
+  Widget buildDropdownButton() {
     return DropdownButton<Alignment>(
       value: _dropValue,
       items: AlignmentExt.allCases
@@ -134,7 +134,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(children: <Widget>[
       buildTop(),
       NSectionBox(
@@ -364,7 +364,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
         title: "ShaderMask - RadialGradient",
         child: Column(
           children: [
-            _buildShaderMask(
+            buildShaderMask(
               blendMode: BlendMode.color,
               shaderCallback: (Rect bounds) {
                 return RadialGradient(
@@ -374,7 +374,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                 ).createShader(bounds);
               },
             ),
-            _buildShaderMask(
+            buildShaderMask(
               blendMode: BlendMode.srcATop,
               shaderCallback: (Rect bounds) {
                 return RadialGradient(
@@ -434,7 +434,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-  _buildShaderMask({required BlendMode blendMode, required ShaderCallback shaderCallback}) {
+  Widget buildShaderMask({required BlendMode blendMode, required ShaderCallback shaderCallback}) {
     return ShaderMask(
       shaderCallback: shaderCallback,
       blendMode: blendMode,
@@ -446,7 +446,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-  buildTop() {
+  Widget buildTop() {
     return Row(
       children: [
         TextButton(
@@ -464,7 +464,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-  buildGradientText({
+  Widget buildGradientText({
     required Offset from,
     required Offset to,
     required List<Color> colors,

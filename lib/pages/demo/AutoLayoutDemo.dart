@@ -34,7 +34,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(
       children: [
         for (var i = 1; i <= 3; i++)

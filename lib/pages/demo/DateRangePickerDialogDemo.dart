@@ -57,7 +57,7 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -81,10 +81,10 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
   }
 
   onPressed() {
-    _showDateRange();
+    showDateRange();
   }
 
-  _showDateRange() async {
+  showDateRange() async {
     var firstDate = DateTime(2021, 1, 1);
     var lastDate = DateTime.now();
 

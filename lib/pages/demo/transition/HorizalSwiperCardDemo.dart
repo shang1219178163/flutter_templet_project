@@ -40,24 +40,24 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
     );
   }
 
-  void _onPanUpdate(DragUpdateDetails details) {
+  void onPanUpdate(DragUpdateDetails details) {
     offset += details.delta;
     setState(() {});
   }
 
-  void _onPanEnd(DragEndDetails details) {
+  void onPanEnd(DragEndDetails details) {
     final width = MediaQuery.of(context).size.width;
 
     // 判定滑动是否成功
     if (offset.dx.abs() > width * 0.25) {
-      _flyOut();
+      flyOut();
     } else {
-      _backToCenter();
+      backToCenter();
     }
   }
 
   /// 飞出动画
-  void _flyOut() {
+  void flyOut() {
     final width = MediaQuery.of(context).size.width;
 
     final end = Offset(
@@ -82,7 +82,7 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
   }
 
   /// 回弹动画
-  void _backToCenter() {
+  void backToCenter() {
     animation = Tween(begin: offset, end: Offset.zero).animate(controller)
       ..addListener(() {
         offset = animation!.value;
@@ -99,13 +99,13 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
       body: Center(
         child: Stack(
           alignment: Alignment.center,
-          children: _buildCards(),
+          children: buildCards(),
         ),
       ),
     );
   }
 
-  List<Widget> _buildCards() {
+  List<Widget> buildCards() {
     final cards = <Widget>[];
 
     for (var i = currentIndex; i < currentIndex + 3; i++) {
@@ -120,7 +120,7 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
           bottom: bottom,
           child: Transform.translate(
             offset: isTop ? offset : Offset(0, (i - currentIndex) * 10),
-            child: isTop ? _buildTopCard(i: i) : _buildCard(i: i),
+            child: isTop ? buildTopCard(i: i) : buildCard(i: i),
           ),
         ),
       );
@@ -129,7 +129,7 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
     return cards.reversed.toList();
   }
 
-  Widget _buildTopCard({
+  Widget buildTopCard({
     required int i,
     VoidCallback? onLeft,
     VoidCallback? onRight,
@@ -140,14 +140,14 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
     return Transform.rotate(
       angle: angle,
       child: GestureDetector(
-        onPanUpdate: _onPanUpdate,
-        onPanEnd: _onPanEnd,
-        child: _buildCard(i: i, onLeft: onLeft, onRight: onRight),
+        onPanUpdate: onPanUpdate,
+        onPanEnd: onPanEnd,
+        child: buildCard(i: i, onLeft: onLeft, onRight: onRight),
       ),
     );
   }
 
-  Widget _buildCard({
+  Widget buildCard({
     required int i,
     VoidCallback? onLeft,
     VoidCallback? onRight,
@@ -179,8 +179,8 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FloatingActionButton(onPressed: onLeft ?? _flyOut, child: Icon(Icons.close)),
-                FloatingActionButton(onPressed: onRight ?? _flyOut, child: Icon(Icons.check)),
+                FloatingActionButton(onPressed: onLeft ?? flyOut, child: Icon(Icons.close)),
+                FloatingActionButton(onPressed: onRight ?? flyOut, child: Icon(Icons.check)),
               ],
             )
           ],

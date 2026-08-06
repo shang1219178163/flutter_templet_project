@@ -47,7 +47,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
     );
   }
 
-  Widget _buildItem({required Color color}) {
+  Widget buildItem({required Color color}) {
     return Container(
       height: 50,
       color: color,
@@ -56,7 +56,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
 
   createExample() {
     List<Color> colors = Colors.primaries.sublist(5, 10);
-    var list = colors.map((e) => _buildItem(color: e)).toList();
+    var list = colors.map((e) => buildItem(color: e)).toList();
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -66,18 +66,18 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
             list,
           ),
         ),
-        _buildSection().toSliverToBoxAdapter(),
+        buildSection().toSliverToBoxAdapter(),
         sectionHeader(child: Text('SliverList - SliverChildBuilderDelegate')),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildItem(color: colors[index]);
+            return buildItem(color: colors[index]);
           }, childCount: colors.length),
         ),
         sectionHeader(child: Text('SliverFixedExtentList - SliverChildBuilderDelegate')),
         SliverFixedExtentList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              return _buildItem(color: colors[index]);
+              return buildItem(color: colors[index]);
             },
             childCount: colors.length,
           ),
@@ -87,12 +87,12 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
     );
   }
 
-  Widget _buildSection() {
+  Widget buildSection() {
     return Stack(
       key: _globalKey,
       clipBehavior: Clip.none,
       children: [
-        _buildMenu(),
+        buildMenu(),
         if (isVisible)
           Positioned(
             // left: 0,
@@ -100,13 +100,13 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
             top: _globalKey.currentContext?.renderBoxSize?.height ?? 30,
             width: context.screenSize.width,
             height: 300.0,
-            child: _buildDropBox(),
+            child: buildDropBox(),
           ),
       ],
     );
   }
 
-  _buildMenu({int count = 3}) {
+  Widget buildMenu({int count = 3}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: List.generate(
@@ -123,19 +123,19 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
     );
   }
 
-  _buildDropBox() {
+  Widget buildDropBox() {
     return Builder(builder: (context) {
       if (btnIdx == 0) {
-        return _buildDropBox1();
+        return buildDropBox1();
       }
       if (btnIdx == 1) {
-        return _buildDropBox2();
+        return buildDropBox2();
       }
-      return _buildDropBox3();
+      return buildDropBox3();
     });
   }
 
-  _buildDropBox1() {
+  Widget buildDropBox1() {
     return Container(
         decoration: BoxDecoration(
           color: Colors.green,
@@ -144,7 +144,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
         child: Center(child: Text("one")));
   }
 
-  _buildDropBox2() {
+  Widget buildDropBox2() {
     return Container(
         decoration: BoxDecoration(
           color: Colors.green,
@@ -153,7 +153,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
         child: Center(child: Text("two")));
   }
 
-  _buildDropBox3() {
+  Widget buildDropBox3() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.green,

@@ -27,11 +27,11 @@ class _ReorderableListViewDemoState extends State<ReorderableListViewDemo> {
       appBar: AppBar(
         title: Text("$widget"),
       ),
-      body: _buildList(),
+      body: buildList(),
     );
   }
 
-  Widget _buildList() {
+  Widget buildList() {
     final colorScheme = Theme.of(context).colorScheme;
     final oddItemColor = colorScheme.primary.withValues(alpha: 0.05);
     final evenItemColor = colorScheme.primary.withValues(alpha: 0.15);

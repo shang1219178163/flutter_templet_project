@@ -77,7 +77,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
         body: buildBody());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       child: Column(
         children: [
@@ -158,7 +158,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
     );
   }
 
-  buildFollowerDefault({required VoidCallback onHide, required int index}) {
+  Widget buildFollowerDefault({required VoidCallback onHide, required int index}) {
     return Container(
       // width: 200,
       // height: 100,
@@ -187,7 +187,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
     );
   }
 
-  buildFollower({
+  Widget buildFollower({
     required List<Tuple2<String, String>> items,
     required ValueChanged<Tuple2<String, String>> onChanged,
   }) {

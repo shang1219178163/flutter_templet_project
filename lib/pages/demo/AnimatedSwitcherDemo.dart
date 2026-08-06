@@ -101,12 +101,12 @@ class LineSlideTransition extends AnimatedWidget {
 
   final Widget child;
 
-  Animation<Offset> get _position => listenable as Animation<Offset>;
+  Animation<Offset> get position => listenable as Animation<Offset>;
 
   @override
   Widget build(BuildContext context) {
-    var offset = _position.value;
-    if (_position.status == AnimationStatus.reverse) {
+    var offset = position.value;
+    if (position.status == AnimationStatus.reverse) {
       offset = Offset(-offset.dx, -offset.dy);
     }
     return FractionalTranslation(

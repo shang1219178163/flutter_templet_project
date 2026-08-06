@@ -66,8 +66,8 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
               )),
         ],
       ),
-      body: _isModel ? _buildBodyByModel() : buildBody(),
-      // body: _isModel ? _buildBodyByModel1() : buildBody(),
+      body: _isModel ? buildBodyByModel() : buildBody(),
+      // body: _isModel ? buildBodyByModel1() : buildBody(),
     );
   }
 
@@ -101,7 +101,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
     );
   }
 
-  Widget _buildBodyByModel() {
+  Widget buildBodyByModel() {
     return Container(
       alignment: Alignment.center,
       child: FutureBuilder<Response<String>>(
@@ -116,9 +116,8 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
                 return const Text('无数据');
               }
               final list = jsonDecode(response!.data!) as List<dynamic>;
-              final models = list
-                  .map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>))
-                  .toList();
+              final models =
+                  list.map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>)).toList();
               return ListView(
                 children: models
                     .map<Widget>((Repository e) => ListTile(
@@ -133,7 +132,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
     );
   }
 
-  Widget _buildBodyByModel1() {
+  Widget buildBodyByModel1() {
     return Container(
       alignment: Alignment.center,
       child: FutureBuilder<Response<List<dynamic>>>(
@@ -148,9 +147,8 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
                 return const Text('无数据');
               }
               final data = response!.data ?? <dynamic>[];
-              final models = data
-                  .map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>))
-                  .toList();
+              final models =
+                  data.map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>)).toList();
               return ListView(
                 children: models
                     .map<Widget>((Repository e) => ListTile(

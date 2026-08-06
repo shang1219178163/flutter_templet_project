@@ -99,7 +99,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     );
   }
 
-  buildEnhanceTabBar({
+  Widget buildEnhanceTabBar({
     required TabController? controller,
     required ValueNotifier<int> indexVN,
     required List<String> items,
@@ -155,7 +155,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     );
   }
 
-  buildTabBarView({
+  Widget buildTabBarView({
     required TabController? controller,
     required List<String> items,
   }) {

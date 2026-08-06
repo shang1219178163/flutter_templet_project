@@ -35,7 +35,7 @@ class _FirstPageState extends State<FirstPage> {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 InkWell(
-                  onTap: _changeAppBarState,
+                  onTap: changeAppBarState,
                   child: Container(
                     width: 100,
                     height: 100,
@@ -60,7 +60,7 @@ class _FirstPageState extends State<FirstPage> {
     );
   }
 
-  void _changeAppBarState() {
+  void changeAppBarState() {
     _hiddenAppBar = !_hiddenAppBar;
     setState(() {});
   }

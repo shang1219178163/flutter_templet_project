@@ -28,7 +28,7 @@ class _PositionedDirectionalDemoState extends State<PositionedDirectionalDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Stack(
       children: <Widget>[
         PositionedDirectional(

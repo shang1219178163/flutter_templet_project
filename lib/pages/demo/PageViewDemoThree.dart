@@ -87,7 +87,7 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,

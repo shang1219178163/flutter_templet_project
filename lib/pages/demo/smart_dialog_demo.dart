@@ -19,10 +19,10 @@ class SmartDialogPage extends StatelessWidget {
   const SmartDialogPage({Key? key}) : super(key: key);
 
   List<Tuple2> get items => [
-        Tuple2('showToast', _showToast()),
-        Tuple2('showLoading', _showLoading()),
-        Tuple2('_show', _show()),
-        Tuple2('_showAttach', _showAttach()),
+        Tuple2('showToast', showToast()),
+        Tuple2('showLoading', showLoading()),
+        Tuple2('show', show()),
+        Tuple2('showAttach', showAttach()),
       ];
 
   @override
@@ -44,7 +44,7 @@ class SmartDialogPage extends StatelessWidget {
     );
   }
 
-  _showToast() {
+  showToast() {
     // SmartDialog.showToast('test toast11', alignment: Alignment.topCenter);
     SmartDialog.showToast('the toast at the center',
         alignment: Alignment.center);
@@ -54,7 +54,7 @@ class SmartDialogPage extends StatelessWidget {
     debugPrint('SmartDialog.showToast');
   }
 
-  _show() async {
+  show() async {
     SmartDialog.show(
         maskColor: Colors.transparent,
         animationType: SmartAnimationType.fade,
@@ -80,7 +80,7 @@ class SmartDialogPage extends StatelessWidget {
     SmartDialog.dismiss();
   }
 
-  _showAttach() {
+  showAttach() {
     //target widget
     SmartDialog.show(
       useSystem: true,
@@ -116,7 +116,7 @@ class SmartDialogPage extends StatelessWidget {
     );
   }
 
-  _bindPage(BuildContext ctx) {
+  bindPage(BuildContext ctx) {
     //target widget
     SmartDialog.show(
       bindPage: true,
@@ -147,7 +147,7 @@ class SmartDialogPage extends StatelessWidget {
     );
   }
 
-  _showLoading() async {
+  showLoading() async {
     SmartDialog.showLoading();
     await Future.delayed(Duration(seconds: 2));
     SmartDialog.dismiss();

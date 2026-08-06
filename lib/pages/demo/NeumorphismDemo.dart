@@ -67,7 +67,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildBtn(),
+                buildBtn(),
                 NeumorphismButton.icon(
                   borderRadius: 12,
                   onClick: () => debugPrint('bookmark'),
@@ -140,7 +140,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
     );
   }
 
-  _buildBtn() {
+  Widget buildBtn() {
     return Container(
       height: 50,
       decoration: BoxDecoration(

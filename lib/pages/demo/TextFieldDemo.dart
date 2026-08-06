@@ -61,7 +61,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   final delayed = Debouncer(delay: Duration(milliseconds: 1000));
   final _debounce = Debounce();
 
-  final _throttle = Throttle();
+  final throttle = Throttle();
 
   var tips = [
     "安卓手机普通键盘和安全键盘切换时焦点丢失?可以通过延迟 300ms 通过 focusNode 二次获取焦点解决.",
@@ -419,7 +419,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   }
 
   onPressed() {
-    _throttle(() => debugPrint("${DateTime.now()}: onPressed"));
+    throttle(() => debugPrint("${DateTime.now()}: onPressed"));
   }
 
   void onSheetTips() {
@@ -560,7 +560,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   }
 
   /// 高度 36
-  buildTextFieldUnit({
+  Widget buildTextFieldUnit({
     TextEditingController? controller,
     TextInputType keyboardType = TextInputType.number,
     bool readOnly = true,

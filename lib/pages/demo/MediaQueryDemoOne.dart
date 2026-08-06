@@ -46,9 +46,9 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
-              buildTable(rows: _renderTuples(items: tips)),
+              buildTable(rows: renderTuples(items: tips)),
               Divider(),
-              buildTable(rows: _renderTuples(items: items)),
+              buildTable(rows: renderTuples(items: items)),
             ].map((e) => e.toSliverToBoxAdapter()).toList(),
           ),
         ));
@@ -71,7 +71,7 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
     );
   }
 
-  List<TableRow> _renderTuples({List<Object?> items = const []}) {
+  List<TableRow> renderTuples({List<Object?> items = const []}) {
     if (items.isEmpty || !isTuple(items[0])) {
       return [];
     }

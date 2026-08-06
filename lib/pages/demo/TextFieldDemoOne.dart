@@ -78,9 +78,9 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: _buildButtons(),
+            children: buildButtons(),
           ),
-          _buildTextField(),
+          buildTextField(),
           Divider(),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -99,7 +99,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
     );
   }
 
-  List<Widget> _buildButtons() {
+  List<Widget> buildButtons() {
     return [
       TextButton(
         onPressed: () {
@@ -130,7 +130,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
     ];
   }
 
-  _buildTextField({
+  Widget buildTextField({
     ValueChanged<String>? onChanged,
   }) {
     return Container(

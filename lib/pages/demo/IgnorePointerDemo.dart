@@ -38,7 +38,7 @@ class _IgnorePointerDemoState extends State<IgnorePointerDemo> {
         body: buildBody());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Stack(
       children: [
         InkWell(

@@ -41,7 +41,7 @@ class _ReflectDemoState extends State<ReflectDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[

@@ -9,8 +9,8 @@ class SliverBaseDemo extends StatelessWidget {
       appBar: AppBar(
         title: Text('SliverBase'),
       ),
-      // body: _buildSliverOpacityAndPadding(),
-      body: _buildSliverOpacityAndPadding(),
+      // body: buildSliverOpacityAndPadding(),
+      body: buildSliverOpacityAndPadding(),
     );
   }
 
@@ -27,7 +27,7 @@ class SliverBaseDemo extends StatelessWidget {
     );
   }
 
-  _buildSliverOpacityAndPadding() {
+  Widget buildSliverOpacityAndPadding() {
     return CustomScrollView(
       slivers: <Widget>[
         sectionHeader(child: Text('SliverOpacity')),

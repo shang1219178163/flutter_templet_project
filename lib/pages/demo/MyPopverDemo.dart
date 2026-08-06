@@ -37,7 +37,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
               (index) => ListTile(
                     title: Text("top_$index"),
                   )).toList(),
-          _buildSection(),
+          buildSection(),
           ...List.generate(
               20,
               (index) => ListTile(
@@ -48,12 +48,12 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
     );
   }
 
-  _buildSection() {
+  Widget buildSection() {
     return Stack(
       key: _globalKey,
       clipBehavior: Clip.none,
       children: [
-        _buildMenu(),
+        buildMenu(),
         if (isVisible)
           Positioned(
             // left: 0,
@@ -61,13 +61,13 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
             top: _globalKey.currentContext?.renderBoxSize?.height ?? 30,
             width: context.screenSize.width,
             height: 300.0,
-            child: _buildDropBox(),
+            child: buildDropBox(),
           ),
       ],
     );
   }
 
-  _buildMenu({int count = 3}) {
+  Widget buildMenu({int count = 3}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: List.generate(
@@ -85,19 +85,19 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
     );
   }
 
-  _buildDropBox() {
+  Widget buildDropBox() {
     return Builder(builder: (context) {
       if (btnIdx == 0) {
-        return _buildDropBox1();
+        return buildDropBox1();
       }
       if (btnIdx == 1) {
-        return _buildDropBox2();
+        return buildDropBox2();
       }
-      return _buildDropBox3();
+      return buildDropBox3();
     });
   }
 
-  _buildDropBox1() {
+  Widget buildDropBox1() {
     return Container(
         decoration: BoxDecoration(
           color: Colors.green,
@@ -106,7 +106,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
         child: Center(child: Text("one")));
   }
 
-  _buildDropBox2() {
+  Widget buildDropBox2() {
     return Container(
         decoration: BoxDecoration(
           color: Colors.green,
@@ -115,7 +115,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
         child: Center(child: Text("two")));
   }
 
-  _buildDropBox3() {
+  Widget buildDropBox3() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.green,
@@ -145,7 +145,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
     ),
   );
 
-  _build() {
+  Widget buildDemo() {
     return Column(children: [
       LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return SizedBox();

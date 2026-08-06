@@ -66,7 +66,7 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,

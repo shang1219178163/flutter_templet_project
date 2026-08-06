@@ -13,7 +13,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
   double _size = 50.0;
   bool _large = false;
 
-  void _updateSize() {
+  void updateSize() {
     setState(() {
       _size = _large ? 250.0 : 100.0;
       _large = !_large;
@@ -25,7 +25,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _updateSize();
+      updateSize();
     });
   }
 
@@ -54,7 +54,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     return Column(
       children: [
         GestureDetector(
-          onTap: () => _updateSize(),
+          onTap: () => updateSize(),
           child: ColoredBox(
             color: Colors.amberAccent,
             child: AnimatedSize(

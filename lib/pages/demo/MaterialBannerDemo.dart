@@ -17,11 +17,11 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
           title: Text(widget.title ?? "$widget"),
         ),
         body: Column(children: [
-          _buildMaterialBanner(),
+          buildMaterialBanner(),
         ]));
   }
 
-  _buildMaterialBanner() {
+  Widget buildMaterialBanner() {
     return MaterialBanner(
       content: Text('Your account has been deleted.'),
       leading: CircleAvatar(

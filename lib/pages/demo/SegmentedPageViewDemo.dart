@@ -60,14 +60,14 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
     );
   }
 
-  buildBodyNew() {
+  Widget buildBodyNew() {
     return NSlidingSegmentedPageView(
       items: items,
       selectedIndex: 1,
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return buildSlidingSegmentedControl(
         // segmentedBuilder: (NSlidingSegmentedControl segmentedControl) {
         //   return Container(

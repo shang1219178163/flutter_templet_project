@@ -111,7 +111,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          _buildList(context),
+          buildList(context),
           Positioned(
             top: -30,
             right: 15,
@@ -129,7 +129,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
     ).toShowModalBottomSheet(context: context);
   }
 
-  Widget _buildList(BuildContext context) {
+  Widget buildList(BuildContext context) {
     final theme = Theme.of(context);
 
     final titleMediumStyle = theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onPrimary);

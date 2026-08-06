@@ -50,7 +50,7 @@ class _MyMenuBarState extends State<MyMenuBar> {
           children: <Widget>[
             Expanded(
               child: MenuBar(
-                children: MenuEntry.build(_getMenus()),
+                children: MenuEntry.build(getMenus()),
               ),
             ),
           ],
@@ -80,7 +80,7 @@ class _MyMenuBarState extends State<MyMenuBar> {
     );
   }
 
-  List<MenuEntry> _getMenus() {
+  List<MenuEntry> getMenus() {
     final result = <MenuEntry>[
       MenuEntry(
         label: 'Menu Demo',

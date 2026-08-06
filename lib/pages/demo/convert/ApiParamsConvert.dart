@@ -211,7 +211,7 @@ class ApiParamsConvert extends ConvertProtocol {
     return null;
   }
 
-  String _createApi({
+  String createApi({
     required String productName,
     required String className,
   }) {

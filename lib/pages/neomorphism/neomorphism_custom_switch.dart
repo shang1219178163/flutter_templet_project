@@ -65,14 +65,14 @@ class CustomSwitch extends StatefulWidget {
     );
 
     // Get size required for text. Max size of the above
-    _spaceRequiredForText = max(_textSize(_activeTextWidget).width,
-        _textSize(_inactiveTextWidget).width);
+    _spaceRequiredForText = max(textSize(_activeTextWidget).width,
+        textSize(_inactiveTextWidget).width);
   }
 
   @override
   State<CustomSwitch> createState() => _CustomSwitchState();
 
-  Size _textSize(Text text) {
+  Size textSize(Text text) {
     /// Method to get size of text widget
     final textPainter = TextPainter(
         text: TextSpan(text: text.data, style: text.style),

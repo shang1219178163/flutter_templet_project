@@ -46,7 +46,7 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return CustomScrollView(
       slivers: [
         Container(height: 200, alignment: Alignment.center, color: Colors.green, child: Text("$widget"))

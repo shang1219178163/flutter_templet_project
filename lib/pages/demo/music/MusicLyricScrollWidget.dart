@@ -26,18 +26,18 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
 
   @override
   void dispose() {
-    _itemPositionsListener.itemPositions.removeListener(_onScroll);
+    _itemPositionsListener.itemPositions.removeListener(onScroll);
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    _itemPositionsListener.itemPositions.addListener(_onScroll);
-    widget.positionStream.listen(_onPosition);
+    _itemPositionsListener.itemPositions.addListener(onScroll);
+    widget.positionStream.listen(onPosition);
   }
 
-  void _onScroll() {
+  void onScroll() {
     if (_itemPositionsListener.itemPositions.value.isNotEmpty) {
       final firstVisible = _itemPositionsListener.itemPositions.value.first;
       _isScrolling = firstVisible.itemLeadingEdge != 0;
@@ -45,16 +45,16 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
     }
   }
 
-  void _onPosition(Duration position) {
-    final newIndex = _findCurrentLyricIndex(position);
+  void onPosition(Duration position) {
+    final newIndex = findCurrentLyricIndex(position);
     if (newIndex != _currentIndex) {
       _currentIndex = newIndex;
-      _scrollToCurrentLyric(_currentIndex);
+      scrollToCurrentLyric(_currentIndex);
     }
   }
 
   // 根据时间查找当前歌词索引
-  int _findCurrentLyricIndex(Duration position) {
+  int findCurrentLyricIndex(Duration position) {
     for (var i = 0; i < widget.lyrics.length; i++) {
       if (position >= widget.lyrics[i].startTime && position < widget.lyrics[i].endTime) {
         return i;
@@ -64,7 +64,7 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
   }
 
   // 滚动到当前歌词
-  void _scrollToCurrentLyric(int index) {
+  void scrollToCurrentLyric(int index) {
     if (!_itemScrollController.isAttached) {
       return;
     }

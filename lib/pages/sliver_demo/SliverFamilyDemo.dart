@@ -47,11 +47,11 @@ class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildListView(context),
+      body: buildListView(context),
     );
   }
 
-  Widget _buildListView(BuildContext context) {
+  Widget buildListView(BuildContext context) {
     return ListView.separated(
       itemCount: _list.length,
       itemBuilder: (context, index) {
@@ -92,11 +92,11 @@ class _SliverFamilyPageViewDemoState extends State<SliverFamilyPageViewDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildPageView(),
+      body: buildPageView(),
     );
   }
 
-  Widget _buildPageView() {
+  Widget buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
       pageSnapping: true,

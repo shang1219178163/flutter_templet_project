@@ -34,7 +34,7 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
           SliverAnimatedList(
             key: listKey,
             initialItemCount: list.length,
-            itemBuilder: _buildItem,
+            itemBuilder: buildItem,
           ),
         ],
       ),
@@ -42,7 +42,7 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
   }
 
   // 创建item
-  Widget _buildItem(
+  Widget buildItem(
       BuildContext context, int index, Animation<double> animation) {
     return SizeTransition(
       sizeFactor: animation,
@@ -71,7 +71,7 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
     final _index = list.length - 1;
     var item = list[_index];
     listKey.currentState!.removeItem(
-        _index, (context, animation) => _buildItem(context, item, animation));
+        _index, (context, animation) => buildItem(context, item, animation));
     list.removeAt(_index);
   }
 }

@@ -163,15 +163,15 @@ class MatchCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Flexible(child: _buildTeamRow(team1)),
+          Flexible(child: buildTeamRow(team1)),
           const SizedBox(height: 4),
-          Flexible(child: _buildTeamRow(team2)),
+          Flexible(child: buildTeamRow(team2)),
         ],
       ),
     );
   }
 
-  Widget _buildTeamRow(Map<String, dynamic> team) {
+  Widget buildTeamRow(Map<String, dynamic> team) {
     return Row(
       children: [
         Image.network(team["flag"], width: 24, height: 16, fit: BoxFit.cover),
@@ -313,7 +313,7 @@ class _NetworkImageWithTextState extends State<NetworkImageWithText> {
   @override
   void initState() {
     super.initState();
-    _loadImage(widget.imageUrl);
+    loadImage(widget.imageUrl);
   }
 
   @override
@@ -321,11 +321,11 @@ class _NetworkImageWithTextState extends State<NetworkImageWithText> {
     super.didUpdateWidget(oldWidget);
 
     if (_image == null) {
-      _loadImage(widget.imageUrl);
+      loadImage(widget.imageUrl);
     }
   }
 
-  Future<void> _loadImage(String url) async {
+  Future<void> loadImage(String url) async {
     try {
       final response = await Dio().get<List<int>>(
         url,
@@ -441,8 +441,8 @@ class _GameMatchItemState extends State<GameMatchItem> {
 
   Future<void> initData() async {
     final results = await Future.wait([
-      _loadImage(widget.imageUrl),
-      _loadImage(widget.imageUrlRight),
+      loadImage(widget.imageUrl),
+      loadImage(widget.imageUrlRight),
     ]);
     _image = results.first;
     _imageRight = results.last;
@@ -464,7 +464,7 @@ class _GameMatchItemState extends State<GameMatchItem> {
     }
   }
 
-  Future<ui.Image?> _loadImage(String url) async {
+  Future<ui.Image?> loadImage(String url) async {
     try {
       ui.Image? _image;
 

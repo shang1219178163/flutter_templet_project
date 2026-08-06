@@ -25,7 +25,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
 
   var selectedIndex = 0;
 
-  GlobalKey _globalKey(int index) {
+  GlobalKey globalKey(int index) {
     return GlobalKey(debugLabel: "$index");
   }
 
@@ -184,7 +184,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
                 selectedIndex,
                 index,
               ]);
-              DLog.d([_globalKey(index).currentContext?.frame]);
+              DLog.d([globalKey(index).currentContext?.frame]);
             },
           );
 

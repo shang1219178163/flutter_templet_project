@@ -22,12 +22,12 @@ class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
         ),
         body: Column(
           children: <Widget>[
-            _buildCustomeBanner(),
+            buildCustomeBanner(),
           ],
         ));
   }
 
-  _buildCustomeBanner() {
+  Widget buildCustomeBanner() {
     return CustomSwipper(
       images: images,
       onTap: (int index) {

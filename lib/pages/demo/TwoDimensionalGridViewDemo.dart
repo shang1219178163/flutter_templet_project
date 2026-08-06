@@ -40,7 +40,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

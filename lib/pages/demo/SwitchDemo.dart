@@ -47,7 +47,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
         body: buildBody());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       children: [
         Switch(

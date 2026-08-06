@@ -102,7 +102,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
     );
   }
 
-  buildBox() {
+  Widget buildBox() {
     return NBox(
       // width: 300,
       height: 200,

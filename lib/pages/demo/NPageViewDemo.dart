@@ -61,7 +61,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Column(
       children: [
         Expanded(

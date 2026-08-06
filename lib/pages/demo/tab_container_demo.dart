@@ -118,13 +118,13 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
 
   /// 银行卡效果
   Widget buildCardBox() {
-    List<Widget> _getChildren1() {
+    List<Widget> getChildren1() {
       var cards = kCreditCards.map((e) => CreditCardData.fromJson(e)).toList();
 
       return cards.map((e) => CreditCard(data: e)).toList();
     }
 
-    List<Widget> _getTabs1() {
+    List<Widget> getTabs1() {
       var cards = kCreditCards.map((e) => CreditCardData.fromJson(e)).toList();
       return cards.map((e) => Text('*${e.number.substring(e.number.length - 4, e.number.length)}')).toList();
     }
@@ -153,8 +153,8 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
           ],
           selectedTextStyle: textTheme.bodyMedium?.copyWith(fontSize: 15.0),
           unselectedTextStyle: textTheme.bodyMedium?.copyWith(fontSize: 13.0),
-          tabs: _getTabs1(),
-          children: _getChildren1().map((e) {
+          tabs: getTabs1(),
+          children: getChildren1().map((e) {
             return NSwiperGestureDetector(
               onPre: onPre,
               onNext: onNext,
@@ -168,7 +168,7 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
 
   /// Tab 效果
   Widget buildCarBox() {
-    List<Widget> _getChildren2() {
+    List<Widget> getChildren2() {
       return <Widget>[
         Image.network(
             'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
@@ -182,7 +182,7 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
       ];
     }
 
-    List<Widget> _getTabs2() {
+    List<Widget> getTabs2() {
       return List.generate(4, (i) => Text('选项 $i'));
     }
 
@@ -197,8 +197,8 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
           duration: const Duration(seconds: 0),
           selectedTextStyle: textTheme.bodyMedium?.copyWith(color: Colors.white),
           unselectedTextStyle: textTheme.bodyMedium?.copyWith(color: Colors.black),
-          tabs: _getTabs2(),
-          children: _getChildren2().map((e) {
+          tabs: getTabs2(),
+          children: getChildren2().map((e) {
             return NSwiperGestureDetector(
               onPre: onPre,
               onNext: onNext,
@@ -224,7 +224,7 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
   }
 
   Widget buildTabRight() {
-    List<Widget> _getChildren3(BuildContext context) => <Widget>[
+    List<Widget> getChildren3(BuildContext context) => <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,7 +338,7 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
           ),
         ];
 
-    List<Widget> _getTabs3(BuildContext context) => <Widget>[
+    List<Widget> getTabs3(BuildContext context) => <Widget>[
           const Icon(Icons.info),
           const Icon(Icons.text_snippet),
           const Icon(Icons.person),
@@ -355,15 +355,15 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
           color: Theme.of(context).colorScheme.secondary,
           tabEdge: TabEdge.right,
           childPadding: const EdgeInsets.all(20.0),
-          tabs: _getTabs3(context),
-          children: _getChildren3(context),
+          tabs: getTabs3(context),
+          children: getChildren3(context),
         ),
       ),
     );
   }
 
   Widget buildTabLeft() {
-    Widget _buildPage({required String title, required String content}) {
+    Widget buildPage({required String title, required String content}) {
       return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -386,7 +386,7 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
       );
     }
 
-    List<String> _getcontents() => <String>[
+    List<String> getcontents() => <String>[
           '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque, est ac suscipit interdum, leo lacus ultrices metus, eget tristique metus velit eget nisi. Cras ut sagittis libero, in volutpat erat. Proin luctus turpis nec molestie congue. Nam et mollis augue. Duis ornare odio vel egestas lacinia. Nam luctus venenatis diam sollicitudin elementum. Duis laoreet, mi quis luctus lacinia, nunc mauris auctor turpis, ac condimentum felis augue at purus. Integer eu dolor vehicula odio elementum vulputate vel non neque.
         Vestibulum et sapien sed quam euismod rutrum. Phasellus molestie dignissim ullamcorper. Donec eleifend sapien egestas tincidunt ornare. Pellentesque elit leo, bibendum nec augue nec, faucibus eleifend nisi. In blandit nulla sit amet congue tincidunt. Etiam dictum ornare justo, vulputate aliquam nisi egestas id. Nulla diam ipsum, pretium vitae leo et, fringilla mollis arcu. Praesent ut ipsum malesuada, posuere quam non, consectetur sem. Aenean velit dolor, laoreet sit amet lacinia quis, porta vitae tortor. Pellentesque scelerisque lacus nec velit finibus pharetra. Donec lacus arcu, consectetur eget nibh ac, viverra mollis nunc. Morbi auctor condimentum odio, ut laoreet neque maximus et. Mauris ut magna ipsum.''',
           '''Duis in tortor nisl. Vestibulum vitae ullamcorper urna. Aliquam at consequat mi, sit amet ultricies mauris. Nam volutpat risus mollis tortor porta volutpat. Fusce sollicitudin felis in interdum finibus. Nam ultrices volutpat posuere. Quisque eget mattis nulla. Cras sit amet consequat erat. Nam consectetur urna sem, eget faucibus quam tincidunt sed. Cras congue diam vitae turpis tristique, ut commodo nunc placerat. Nunc id risus mattis, cursus erat in, dignissim mauris.
@@ -398,10 +398,10 @@ Donec ac libero arcu. Pellentesque sollicitudin mi et lectus interdum, sit amet 
 
     List<({Widget title, Widget page})> _getTabs4() {
       return [
-        (title: Text('页面1'), page: _buildPage(title: "页面1", content: _getcontents()[0])),
-        (title: Text('页面2'), page: _buildPage(title: "页面2", content: _getcontents()[1])),
-        (title: Text('页面3'), page: _buildPage(title: "页面3", content: _getcontents()[2])),
-        (title: Text('页面4'), page: _buildPage(title: "页面4", content: _getcontents()[3])),
+        (title: Text('页面1'), page: buildPage(title: "页面1", content: getcontents()[0])),
+        (title: Text('页面2'), page: buildPage(title: "页面2", content: getcontents()[1])),
+        (title: Text('页面3'), page: buildPage(title: "页面3", content: getcontents()[2])),
+        (title: Text('页面4'), page: buildPage(title: "页面4", content: getcontents()[3])),
       ];
     }
 

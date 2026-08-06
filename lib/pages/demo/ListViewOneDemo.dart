@@ -62,13 +62,13 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     //     print("atEdge:到边界了");
     //   }
     // });
-    _initTimer();
+    initTimer();
     super.initState();
   }
 
   @override
   void dispose() {
-    _cancelTimer();
+    cancelTimer();
     super.dispose();
   }
 
@@ -97,7 +97,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
       ),
       body: Column(
         children: [
-          _buildListView(
+          buildListView(
               height: 100,
               key: _globalKey,
               controller: _scrollController,
@@ -149,7 +149,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     );
   }
 
-  _buildListView({
+  Widget buildListView({
     required GlobalKey key,
     required ScrollController? controller,
     required KeyCallback onKeyCallback,
@@ -203,18 +203,18 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     );
   }
 
-  _cancelTimer({bool isContinue = false}) {
+  cancelTimer({bool isContinue = false}) {
     if (_timer != null) {
       _timer?.cancel();
       _timer = null;
       if (isContinue) {
-        _initTimer();
+        initTimer();
       }
     }
   }
 
   /// 初始化定时任务
-  _initTimer() {
+  initTimer() {
     _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
       final val = _scrollController.offset + 30;
       _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
@@ -334,13 +334,13 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
 
   @override
   void initState() {
-    _initTimer();
+    initTimer();
     super.initState();
   }
 
   @override
   void dispose() {
-    _cancelTimer();
+    cancelTimer();
     super.dispose();
   }
 
@@ -350,7 +350,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
       return Container();
     }
 
-    return _buildListView(
+    return buildListView(
       key: _globalKey,
       controller: _scrollController,
       scrollDirection: Axis.horizontal,
@@ -358,7 +358,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
     );
   }
 
-  _buildListView({
+  Widget buildListView({
     required GlobalKey key,
     required ScrollController? controller,
     Axis scrollDirection = Axis.vertical,
@@ -393,18 +393,18 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
     return child;
   }
 
-  _cancelTimer({bool isContinue = false}) {
+  cancelTimer({bool isContinue = false}) {
     if (_timer != null) {
       _timer?.cancel();
       _timer = null;
       if (isContinue) {
-        _initTimer();
+        initTimer();
       }
     }
   }
 
   /// 初始化定时任务
-  _initTimer() {
+  initTimer() {
     _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
       final val = _scrollController.offset + 30;
       _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);

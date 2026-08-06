@@ -97,7 +97,7 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
         ));
   }
 
-  buildBlueBox({required String title, opacity = 1.0}) {
+  Widget buildBlueBox({required String title, opacity = 1.0}) {
     return Container(
       width: 100,
       height: 100,

@@ -46,9 +46,9 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
       ),
       body: Column(
         children: [
-          _buildNetState(),
-          _buildNetOnline(),
-          _buildNet(),
+          buildNetState(),
+          buildNetOnline(),
+          buildNet(),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             ElevatedButton(
               onPressed: () => _easyRefreshController.callRefresh(),
@@ -64,7 +64,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
     );
   }
 
-  _buildNetState() {
+  Widget buildNetState() {
     return ValueListenableBuilder<ConnectivityResult>(
       valueListenable: ConnectivityService().netState,
       builder: (context, value, child) {
@@ -82,7 +82,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
     );
   }
 
-  _buildNetOnline() {
+  Widget buildNetOnline() {
     return ValueListenableBuilder<bool>(
       valueListenable: ConnectivityService().onLine,
       builder: (context, value, child) {
@@ -102,7 +102,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
     );
   }
 
-  _buildNet() {
+  Widget buildNet() {
     return NNetworkOnLine(
       builder: (ctx, child) {
         return ElevatedButton(

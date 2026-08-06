@@ -75,7 +75,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
 
   TagDetailModel? selectTag;
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       child: SingleChildScrollView(
         child: Column(children: [

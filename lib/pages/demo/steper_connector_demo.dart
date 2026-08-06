@@ -28,11 +28,11 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
         title: Text(widget.title ?? "$widget"),
       ),
       body: buildBody(),
-      //   body: _buildBodyColumn(),
+      //   body: buildBodyColumn(),
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(
       children: [
         TimelineTile(
@@ -82,7 +82,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
                 child: Text('12月9日\n10: 53'),
               ),
             ),
-            _buildNode(
+            buildNode(
               startConnector: Container(
                 color: Colors.green,
                 width: 5,
@@ -94,7 +94,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
                 // height: 60,
               ),
             ),
-            _buildVerticalRight(),
+            buildVerticalRight(),
           ]),
           Flex(direction: Axis.vertical, children: [
             NNTimelineTile(
@@ -121,7 +121,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
     );
   }
 
-  _buildBodyColumn() {
+  Widget buildBodyColumn() {
     return Column(children: [
       Container(
         color: Colors.yellow,
@@ -130,7 +130,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
           child: Text('12月9日\n10: 53'),
         ),
       ),
-      _buildNode(
+      buildNode(
         direction: Axis.horizontal,
         startConnector: Container(
           color: Colors.green,
@@ -141,11 +141,11 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
           height: 5,
         ),
       ),
-      _buildVerticalRight(),
+      buildVerticalRight(),
     ]);
   }
 
-  _buildBodyRow() {
+  Widget buildBodyRow() {
     return Row(children: [
       Container(
         color: Colors.yellow,
@@ -154,7 +154,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
           child: Text('12月9日\n10: 53'),
         ),
       ),
-      _buildNode(
+      buildNode(
         direction: Axis.vertical,
         startConnector: Container(
           color: Colors.green,
@@ -167,11 +167,11 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
           height: double.infinity,
         ),
       ),
-      _buildVerticalRight(),
+      buildVerticalRight(),
     ]);
   }
 
-  _buildHorizontal() {
+  Widget buildHorizontal() {
     return Row(children: [
       SteperConnector(
         direction: Axis.vertical,
@@ -198,7 +198,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
     ]);
   }
 
-  _buildNode({Axis direction = Axis.vertical, Widget? startConnector, Widget? endConnector}) {
+  Widget buildNode({Axis direction = Axis.vertical, Widget? startConnector, Widget? endConnector}) {
     final indicator = Container(
       color: Colors.green,
       width: 30,
@@ -240,7 +240,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
     return line;
   }
 
-  _buildVertical() {
+  Widget buildVertical() {
     return Column(
       children: [
         Center(
@@ -272,7 +272,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
     );
   }
 
-  _buildVerticalRight() {
+  Widget buildVerticalRight() {
     return Expanded(
       child: Card(
         // color: Colors.yellow,

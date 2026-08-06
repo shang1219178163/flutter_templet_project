@@ -149,7 +149,7 @@ class _EmojiPageState extends State<EmojiPage> {
     );
   }
 
-  buildBody({
+  Widget buildBody({
     required List<Tuple2<String, String>> items,
     bool hideSelected = false,
     ValueChanged<String>? onChanged,
@@ -231,7 +231,7 @@ class _EmojiPageState extends State<EmojiPage> {
     );
   }
 
-  buildHeader() {
+  Widget buildHeader() {
     return Container(
       padding: EdgeInsets.all(8),
       alignment: Alignment.center,

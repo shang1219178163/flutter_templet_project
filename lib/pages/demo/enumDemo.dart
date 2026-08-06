@@ -47,7 +47,7 @@ class _EnumDemoState extends State<EnumDemo> {
     DLog.d([v, v1, v2].asMap());
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SingleChildScrollView(
       child: Column(
         children: [

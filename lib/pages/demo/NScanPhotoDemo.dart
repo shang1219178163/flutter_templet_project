@@ -47,7 +47,7 @@ class _NScanPhotoDemoState extends State<NScanPhotoDemo> with PhotoPickerMixin {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return NScanPhoto(
       image: file,
       onScanning: onAction,

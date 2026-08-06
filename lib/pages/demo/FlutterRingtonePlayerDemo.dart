@@ -42,7 +42,7 @@ class _FlutterRingtonePlayerDemoState extends State<FlutterRingtonePlayerDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(

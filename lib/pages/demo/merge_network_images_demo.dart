@@ -93,11 +93,11 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
         ],
       ),
       // body: buildBody(),
-      body: _buildBodyNew(),
+      body: buildBodyNew(),
     );
   }
 
-  _buildBodyNew() {
+  Widget buildBodyNew() {
     final screenSize = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
@@ -128,12 +128,12 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     final screenSize = MediaQuery.of(context).size;
 
     var children = detailList.map((e) {
       var idx = detailList.indexOf(e);
-      return _buildToolNew(
+      return buildToolNew(
         hideUp: idx == 0,
         hideDown: idx == detailList.length - 1,
         repaintBoundary: RepaintBoundary(
@@ -165,7 +165,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     );
   }
 
-  _buildToolNew({
+  Widget buildToolNew({
     required RepaintBoundary repaintBoundary,
     bool hideUp = false,
     bool hideDown = false,
@@ -179,13 +179,13 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           left: 8,
           child: Column(
             children: [
-              _buildBtn(
+              buildBtn(
                 onTap: () => callback?.call(-1),
                 image: Image.asset('icon_move_up.png'.toPath()),
                 hidden: hideUp,
               ),
               hideUp ? Container() : SizedBox(height: 6),
-              _buildBtn(
+              buildBtn(
                 image: Image.asset('icon_move_down.png'.toPath()),
                 onTap: () => callback?.call(1),
                 hidden: hideDown,
@@ -197,7 +197,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     );
   }
 
-  _buildTool({
+  Widget buildTool({
     required RepaintBoundary repaintBoundary,
     bool hideUp = false,
     bool hideDown = false,
@@ -211,7 +211,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           left: 8,
           child: Column(
             children: [
-              _buildBtnSystemIcon(
+              buildBtnSystemIcon(
                 image: Icon(
                   Icons.arrow_circle_up,
                 ),
@@ -219,7 +219,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                 hidden: hideUp,
               ),
               hideUp ? Container() : SizedBox(height: 6),
-              _buildBtnSystemIcon(
+              buildBtnSystemIcon(
                 image: Icon(
                   Icons.arrow_circle_down,
                 ),
@@ -234,7 +234,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   }
 
   /// 本地图片
-  _buildBtn({
+  Widget buildBtn({
     Widget? image,
     GestureTapCallback? onTap,
     double? width = 28,
@@ -255,7 +255,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   }
 
   /// 系统图标
-  _buildBtnSystemIcon({
+  Widget buildBtnSystemIcon({
     Widget? image,
     double? width = 28,
     double? height = 28,
@@ -282,7 +282,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   /// 通过多个 SingleChildScrollView 的 RepaintBoundary 对象合成长海报
   ///
   /// keys: 根据 GlobalKey 获取 Image 数组
-  Future<Uint8List?> _compositePics([
+  Future<Uint8List?> compositePics([
     List<GlobalKey?> keys = const [],
   ]) async {
     //根据 GlobalKey 获取 Image 数组

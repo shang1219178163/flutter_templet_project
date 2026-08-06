@@ -231,7 +231,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
         pageBuilder: (context, animation, secondaryAnimation) {
           return Align(
             alignment: alignment,
-            child: _buildPhrasesDrawer(),
+            child: buildPhrasesDrawer(),
           );
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -247,7 +247,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
 
   final _canPopNotifier = ValueNotifier(true);
 
-  Widget _buildPhrasesDrawer() {
+  Widget buildPhrasesDrawer() {
     // 内部页面跳转使用 [Navigator] 子路由实现
     // 通过检测 [_canPopNotifier] 来实现回复语编辑中的后退拦截
     return ListenableBuilder(

@@ -29,7 +29,7 @@ class _BorderDemoState extends State<BorderDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(
       children: [
         Column(
@@ -50,7 +50,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 children: [
                   TextButton(
                     style: TextButton.styleFrom(
-                      shape: _buildBeveledRectangleBorder(radius: 0),
+                      shape: buildBeveledRectangleBorder(radius: 0),
                     ),
                     onPressed: () {},
                     child: Text('BeveledRectangleBorder - radius: 0'),
@@ -60,7 +60,7 @@ class _BorderDemoState extends State<BorderDemo> {
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      shape: _buildBeveledRectangleBorder(radius: 10),
+                      shape: buildBeveledRectangleBorder(radius: 10),
                     ),
                     onPressed: () {},
                     child: Text('BeveledRectangleBorder - radius: 10'),
@@ -70,7 +70,7 @@ class _BorderDemoState extends State<BorderDemo> {
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      shape: _buildBeveledRectangleBorder(radius: 100),
+                      shape: buildBeveledRectangleBorder(radius: 100),
                     ),
                     onPressed: () {},
                     child: Text('BeveledRectangleBorder - radius: 100'),
@@ -320,7 +320,7 @@ class _BorderDemoState extends State<BorderDemo> {
   }
 
   /// 斜角矩形边框
-  _buildBeveledRectangleBorder({
+  InputBorder buildBeveledRectangleBorder({
     required double radius,
     double width = 1,
     Color color = Colors.red,

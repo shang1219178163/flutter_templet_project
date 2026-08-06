@@ -80,7 +80,7 @@ class NBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildBody(
+    return buildBody(
       width: width,
       height: height,
       blur: blur,
@@ -99,22 +99,23 @@ class NBox extends StatelessWidget {
     );
   }
 
-  _buildBody(
-      {double? width,
-      double? height,
-      double blur = 0,
-      double bgBlur = 0,
-      double? opacity = 1.0,
-      EdgeInsets margin = const EdgeInsets.all(0),
-      EdgeInsets padding = const EdgeInsets.all(0),
-      BoxBorder? border,
-      BorderRadius? borderRadius,
-      Color? bgColor,
-      Gradient? bgGradient,
-      String? bgUrl,
-      BoxFit? imageFit,
-      List<BoxShadow>? boxShadows,
-      required Widget child}) {
+  Widget buildBody({
+    double? width,
+    double? height,
+    double blur = 0,
+    double bgBlur = 0,
+    double? opacity = 1.0,
+    EdgeInsets margin = const EdgeInsets.all(0),
+    EdgeInsets padding = const EdgeInsets.all(0),
+    BoxBorder? border,
+    BorderRadius? borderRadius,
+    Color? bgColor,
+    Gradient? bgGradient,
+    String? bgUrl,
+    BoxFit? imageFit,
+    List<BoxShadow>? boxShadows,
+    required Widget child,
+  }) {
     // add test
     // bgGradient = LinearGradient(
     //     colors: [Colors.red, Colors.green],

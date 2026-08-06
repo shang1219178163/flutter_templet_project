@@ -15,7 +15,7 @@ class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindi
   GlobalKey centerWidgetKey = GlobalKey();
   GlobalKey bottomWidgetKey = GlobalKey();
 
-  void _incrementCounter() {
+  void incrementCounter() {
     setState(() {
       _counter++;
     });
@@ -61,7 +61,7 @@ class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindi
       floatingActionButton: FloatingActionButton(
         // 需要高亮展示的widget，需要声明其GlobalKey
         key: bottomWidgetKey,
-        onPressed: _incrementCounter,
+        onPressed: incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

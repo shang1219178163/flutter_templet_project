@@ -36,11 +36,11 @@ class _TooltipDemoState extends State<TooltipDemo> {
               .toList(),
         ),
         body: Center(
-          child: _buildTooltip(),
+          child: buildTooltip(),
         ));
   }
 
-  _buildTooltip() {
+  Widget buildTooltip() {
     return Tooltip(
         preferBelow: false,
         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),

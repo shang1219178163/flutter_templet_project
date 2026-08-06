@@ -33,7 +33,7 @@ class _GlowingOverscrollIndicatorDemoState
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     // return buildPage1();
     return buildPage2();
   }

@@ -67,7 +67,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
               TextField(
                 controller: shippingAddress1,
                 autofillHints: const <String>[AutofillHints.streetAddressLine1],
-                decoration: _buildInputDecoration(
+                decoration: buildInputDecoration(
                   textEditingController: shippingAddress1,
                   hintText: AutofillHints.streetAddressLine1.splitMapJoin(
                       RegExp('[A-Z]'),
@@ -77,7 +77,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
               TextField(
                 controller: shippingAddress2,
                 autofillHints: const <String>[AutofillHints.streetAddressLine2],
-                decoration: _buildInputDecoration(
+                decoration: buildInputDecoration(
                   textEditingController: shippingAddress2,
                   hintText: AutofillHints.streetAddressLine2.splitMapJoin(
                       RegExp('[A-Z]'),
@@ -106,7 +106,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                   autofillHints: const <String>[
                     AutofillHints.streetAddressLine1,
                   ],
-                  decoration: _buildInputDecoration(
+                  decoration: buildInputDecoration(
                     textEditingController: billingAddress1,
                     hintText: AutofillHints.streetAddressLine1.splitMapJoin(
                         RegExp('[A-Z]'),
@@ -118,7 +118,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                   autofillHints: const <String>[
                     AutofillHints.streetAddressLine2,
                   ],
-                  decoration: _buildInputDecoration(
+                  decoration: buildInputDecoration(
                     textEditingController: billingAddress2,
                     hintText: AutofillHints.streetAddressLine2.splitMapJoin(
                         RegExp('[A-Z]'),
@@ -135,7 +135,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
               TextField(
                 controller: creditCardNumber,
                 autofillHints: const <String>[AutofillHints.creditCardNumber],
-                decoration: _buildInputDecoration(
+                decoration: buildInputDecoration(
                     textEditingController: creditCardNumber,
                     hintText: AutofillHints.creditCardNumber.splitMapJoin(
                         RegExp('[A-Z]'),
@@ -146,7 +146,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 autofillHints: const <String>[
                   AutofillHints.creditCardSecurityCode,
                 ],
-                decoration: _buildInputDecoration(
+                decoration: buildInputDecoration(
                     textEditingController: billingAddress2,
                     hintText: AutofillHints.creditCardSecurityCode.splitMapJoin(
                         RegExp('[A-Z]'),
@@ -159,7 +159,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
         TextField(
           controller: phoneNumber,
           autofillHints: const <String>[AutofillHints.telephoneNumber],
-          decoration: _buildInputDecoration(
+          decoration: buildInputDecoration(
             textEditingController: phoneNumber,
             hintText: AutofillHints.telephoneNumber
                 .splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
@@ -170,7 +170,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
   }
 
   /// 输入框修饰器
-  _buildInputDecoration({
+  InputDecoration buildInputDecoration({
     required TextEditingController textEditingController,
     String hintText = "请输入",
     bool hasEnabledBorder = false,

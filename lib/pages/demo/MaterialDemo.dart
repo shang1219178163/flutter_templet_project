@@ -58,7 +58,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -99,7 +99,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
                         builder: (context, value, child) {
                           debugPrint("ValueListenableBuilder:$value");
 
-                          return _buildMaterialDemo(type: value);
+                          return buildMaterialDemo(type: value);
                         }),
                   ],
                 ),
@@ -113,7 +113,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
 
   onPressed() {}
 
-  _buildMaterialDemo({MaterialType type = MaterialType.button}) {
+  Widget buildMaterialDemo({MaterialType type = MaterialType.button}) {
     return Center(
       child: Material(
           type: type,

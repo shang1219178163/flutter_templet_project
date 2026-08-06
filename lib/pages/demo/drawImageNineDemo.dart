@@ -31,7 +31,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        child: _buildImage(),
+        child: buildImage(),
       ),
     );
   }
@@ -55,7 +55,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
     return completer.future;
   }
 
-  Widget _buildImage() {
+  Widget buildImage() {
     final screenSize = MediaQuery.of(context).size;
     if (image != null) {
       return CustomPaint(

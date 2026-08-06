@@ -242,7 +242,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
     Navigator.pop(context);
   }
 
-  void _showSnackBar(String message) {
+  void showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );

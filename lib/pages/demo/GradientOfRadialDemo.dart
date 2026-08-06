@@ -41,21 +41,21 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     );
   }
 
-  buildAppBottom() {
+  PreferredSizeWidget buildAppBottom() {
     return PreferredSize(
         preferredSize: Size(double.infinity, 50),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildDropdownButton(),
-            _buildButton(
+            buildDropdownButton(),
+            buildButton(
               text: "isGreed: ${isGreed.toString()}",
               onPressed: () {
                 isGreed = !isGreed;
                 setState(() {});
               },
             ),
-            _buildButton(
+            buildButton(
               text: "isDiagonal: ${isDiagonal.toString()}",
               onPressed: () {
                 isDiagonal = !isDiagonal;
@@ -69,7 +69,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
   var _dropValue = AlignmentExt.allCases[0];
   var _radius = 0.5;
 
-  _buildDropdownButton() {
+  Widget buildDropdownButton() {
     return DropdownButton<Alignment>(
       value: _dropValue,
       items: AlignmentExt.allCases
@@ -90,7 +90,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     );
   }
 
-  _buildButton({required String text, required VoidCallback onPressed}) {
+  Widget buildButton({required String text, required VoidCallback onPressed}) {
     return TextButton(
       onPressed: onPressed,
       child: Center(
@@ -101,7 +101,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     );
   }
 
-  Widget _buildBox({
+  Widget buildBox({
     required String text,
     required Decoration decoration,
     double height = 100,
@@ -120,7 +120,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     });
   }
 
-  buildRadial() {
+  Widget buildRadial() {
     var tuples = <Tuple2<Color, double>>[
       Tuple2(Colors.red, 0.1),
       Tuple2(Colors.blue, 0.3),
@@ -132,7 +132,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
             width: maxWidth, height: maxHeight, isGreed: isGreed, isDiagonal: isDiagonal) ??
         0.5;
     debugPrint("_dropValue:$_dropValue _radius:$_radius maxWidth:$maxWidth maxHeight:$maxHeight");
-    return _buildBox(
+    return buildBox(
       height: 100,
       text: 'RadialGradient',
       decoration: BoxDecoration(

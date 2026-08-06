@@ -170,11 +170,11 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
   }
 
   void presentSingle() {
-    _showChioceList(isMutiple: false);
+    showChioceList(isMutiple: false);
   }
 
   void presentMutiple() {
-    _showChioceList(isMutiple: true);
+    showChioceList(isMutiple: true);
   }
 
   void presentSearcgPage() {
@@ -259,7 +259,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
     ).toShowCupertinoModalPopup(context: context);
   }
 
-  _showChioceList({required bool isMutiple}) {
+  showChioceList({required bool isMutiple}) {
     CupertinoActionSheet(
       title: Text(title, style: TextStyle(fontSize: 18, color: Colors.black)),
       message: Text(
@@ -327,7 +327,7 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
           RadioListTile(
             value: 0,
             onChanged: (value) {
-              _changeValue(value);
+              changeValue(value);
             },
             groupValue: selectedIndex,
             title: Text("一级标题"),
@@ -338,7 +338,7 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
           RadioListTile(
             value: 1,
             onChanged: (value) {
-              _changeValue(value);
+              changeValue(value);
             },
             groupValue: selectedIndex,
             title: Text("一级标题"),
@@ -351,7 +351,7 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
     );
   }
 
-  void _changeValue(Object? value) {
+  void changeValue(Object? value) {
     setState(() {
       selectedIndex = value;
     });
@@ -388,7 +388,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
                 value: 0,
                 groupValue: selectedIndex,
                 onChanged: (value) {
-                  _changeValue(value);
+                  changeValue(value);
                 },
               ),
               Text("男"),
@@ -397,7 +397,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
                 value: 1,
                 groupValue: selectedIndex,
                 onChanged: (value) {
-                  _changeValue(value);
+                  changeValue(value);
                 },
               ),
               Text("女"),
@@ -412,7 +412,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
     );
   }
 
-  void _changeValue(Object? value) {
+  void changeValue(Object? value) {
     if (value == null) {
       return;
     }

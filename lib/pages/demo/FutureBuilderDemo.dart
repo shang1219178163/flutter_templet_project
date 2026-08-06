@@ -84,7 +84,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     );
   }
 
-  buildList({required List<GitRepoModel> list, ScrollController? controller}) {
+  Widget buildList({required List<GitRepoModel> list, ScrollController? controller}) {
     controller ??= ScrollController();
     return RefreshIndicator(
       onRefresh: () {

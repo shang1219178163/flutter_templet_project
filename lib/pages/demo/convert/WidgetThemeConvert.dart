@@ -189,7 +189,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     //         "\n");
 
     final fileName = "${clsName.toUncamlCase("_")}_theme.dart".replaceFirst("yl_", "");
-    final contentNew = _createThemeFileContent(
+    final contentNew = createThemeFileContent(
       clsName: clsName,
       propertys: propertys,
     );
@@ -202,7 +202,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  String _createThemeFileContent({
+  String createThemeFileContent({
     String prefix = "Yl",
     required String clsName,
     required List<PropertyRecord> propertys,

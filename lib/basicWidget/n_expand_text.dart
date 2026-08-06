@@ -54,7 +54,7 @@ class _NExpandTextState extends State<NExpandText> {
     );
   }
 
-  buildText({
+  Widget buildText({
     required String text,
     TextStyle? textStyle,
     bool isExpand = false,

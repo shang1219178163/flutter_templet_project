@@ -36,7 +36,7 @@ class _HeroDemoState extends State<HeroDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: scrollController,
       child: SingleChildScrollView(

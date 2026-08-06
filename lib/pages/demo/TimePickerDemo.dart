@@ -20,7 +20,7 @@ class TimePickerDemo extends StatefulWidget {
 class _TimePickerDemoState extends State<TimePickerDemo> {
   TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
 
-  Future<void> _selectTime() async {
+  Future<void> selectTime() async {
     final newTime = await showTimePicker(
       context: context,
       initialTime: _time,
@@ -41,7 +41,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: _selectTime,
+              onPressed: selectTime,
               child: Text('SELECT TIME'),
             ),
             SizedBox(height: 8),

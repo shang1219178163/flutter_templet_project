@@ -25,7 +25,7 @@ class _TransformDemoState extends State<TransformDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ListView(
       children: [
         NSectionBox(

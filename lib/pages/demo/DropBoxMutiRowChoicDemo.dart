@@ -139,7 +139,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     );
   }
 
-  buildSearchAndFilterBar({
+  Widget buildSearchAndFilterBar({
     required VoidCallback onToggle,
   }) {
     return Container(
@@ -163,7 +163,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     );
   }
 
-  buildSearch({String placeholder = "搜索", ValueChanged<String>? cb}) {
+  Widget buildSearch({String placeholder = "搜索", ValueChanged<String>? cb}) {
     return Container(
       height: 36.h,
       // width: 295.w,
@@ -426,7 +426,7 @@ selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
     );
   }
 
-  buildList({required List<String> items}) {
+  Widget buildList({required List<String> items}) {
     return Material(
       // color: Colors.transparent,
       child: ListView.separated(

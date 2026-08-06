@@ -43,7 +43,7 @@ class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDem
       body: ListView(children: [
         Column(
           children: [
-            _buildAnimatedBuilder(),
+            buildAnimatedBuilder(),
           ],
         )
       ]),
@@ -51,7 +51,7 @@ class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDem
   }
 
   /// 多值监听
-  Widget _buildAnimatedBuilder() {
+  Widget buildAnimatedBuilder() {
     return NHorizontalScrollWidget(
       items: _items,
     );

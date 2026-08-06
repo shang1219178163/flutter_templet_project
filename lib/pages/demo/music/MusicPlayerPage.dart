@@ -30,18 +30,18 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
   void initState() {
     super.initState();
     _audioManager = AudioPlayerManager();
-    _loadLyrics();
-    _setupAudioListeners();
+    loadLyrics();
+    setupAudioListeners();
   }
 
-  Future<void> _loadLyrics() async {
+  Future<void> loadLyrics() async {
     final assetFilePath = "assets/media/立心-国风集.河图.lrc";
     final lrcContent = await rootBundle.loadString(assetFilePath);
     _lyrics = parseLrc(lrcContent);
     setState(() {});
   }
 
-  void _setupAudioListeners() {
+  void setupAudioListeners() {
     _audioManager.durationStream.listen((position) {
       totalDuration = position;
       setState(() {});
@@ -52,7 +52,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
     // });
   }
 
-  void _onLyricSeek(Duration position) {
+  void onLyricSeek(Duration position) {
     _audioManager.seek(position);
   }
 
@@ -65,15 +65,15 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
       body: Column(
         children: [
           // 音频控制面板
-          _buildAudioControls(),
+          buildAudioControls(),
           // 进度条
-          _buildProgressBar(),
+          buildProgressBar(),
           // 歌词显示区域
           Expanded(
             child: LyricScrollWidget(
               lyrics: _lyrics,
               positionStream: _audioManager.positionStream,
-              onSeek: _onLyricSeek,
+              onSeek: onLyricSeek,
             ),
           ),
         ],
@@ -81,7 +81,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
     );
   }
 
-  Widget _buildAudioControls() {
+  Widget buildAudioControls() {
     return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +134,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
     });
   }
 
-  Widget _buildProgressBar() {
+  Widget buildProgressBar() {
     return StreamBuilder<Duration>(
       stream: _audioManager.positionStream,
       builder: (context, snapshot) {

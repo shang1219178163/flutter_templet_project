@@ -29,7 +29,7 @@ class _NWebViewDemoState extends State<NWebViewDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return NWebViewPage(
       url: initialUrl,
       title: initialUrl,

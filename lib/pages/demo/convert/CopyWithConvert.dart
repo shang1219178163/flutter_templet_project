@@ -128,7 +128,7 @@ class UserModel with SelectableMixin {
 
     final fileName = "${clsNameNew.toUncamlCase("_")}_${DateTime.now().toString19()}"
         ".dart";
-    final contentNew = _createFileContent(className: className, propertys: propertys);
+    final contentNew = createFileContent(className: className, propertys: propertys);
 
     return ConvertModel(
       productName: productName,
@@ -139,7 +139,7 @@ class UserModel with SelectableMixin {
     );
   }
 
-  String _createFileContent({
+  String createFileContent({
     required String className,
     required List<PropertyRecord> propertys,
   }) {

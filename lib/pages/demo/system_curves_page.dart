@@ -80,7 +80,7 @@ class _SystemCurvesPageState extends State<SystemCurvesPage> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scollController,
       child: SingleChildScrollView(

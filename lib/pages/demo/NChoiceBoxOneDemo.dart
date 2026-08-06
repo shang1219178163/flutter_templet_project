@@ -74,7 +74,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     var isSingle = false;
     return Scrollbar(
       controller: _scrollController,

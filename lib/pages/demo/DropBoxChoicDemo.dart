@@ -121,7 +121,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
   }
 
-  buildSearchAndFilterBar({
+  Widget buildSearchAndFilterBar({
     required VoidCallback onToggle,
   }) {
     return Container(
@@ -476,7 +476,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
   }
 
-  buildExpandMenuTrailing({
+  Widget buildExpandMenuTrailing({
     bool isExpand = true,
     Color color = Colors.blueAccent,
   }) {
@@ -501,7 +501,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
   }
 
-  buildList({required List<String> items}) {
+  Widget buildList({required List<String> items}) {
     return Material(
       // color: Colors.transparent,
       child: Scrollbar(

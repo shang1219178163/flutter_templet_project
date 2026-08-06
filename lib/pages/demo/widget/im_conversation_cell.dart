@@ -60,7 +60,7 @@ class IMConversationCell extends StatelessWidget {
     );
   }
 
-  buildIMCell({
+  Widget buildIMCell({
     required String imgUrl,
     required String title,
     String groupId = "",

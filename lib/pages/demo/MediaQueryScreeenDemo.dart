@@ -52,7 +52,7 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
     );
   }
 
-  buildBodyNew() {
+  Widget buildBodyNew() {
     return Container(
       // color: ColorExt.random,
       child: Column(
@@ -126,7 +126,7 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scaffold(
       body: Container(
         // color: ColorExt.random,
