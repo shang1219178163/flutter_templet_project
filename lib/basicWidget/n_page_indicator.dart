@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-typedef PageIndicatorItemWidgetBuilder = Widget Function(bool isSelected, Size itemSize);
+typedef NPageIndicatorItemBuilder = Widget Function(bool isSelected, Size itemSize);
 
 /// 轮播图指示器
-class PageIndicatorWidget extends StatelessWidget {
-  PageIndicatorWidget({
+class NPageIndicator extends StatelessWidget {
+  NPageIndicator({
     super.key,
     this.margin = const EdgeInsets.only(bottom: 10),
     required this.currentPage,
@@ -28,7 +28,7 @@ class PageIndicatorWidget extends StatelessWidget {
   final Size itemSize;
 
   /// 自定义每个 item
-  final PageIndicatorItemWidgetBuilder? itemBuilder;
+  final NPageIndicatorItemBuilder? itemBuilder;
 
   /// 默认颜色
   final Color? normalColor;

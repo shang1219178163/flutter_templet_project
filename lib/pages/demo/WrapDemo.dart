@@ -16,7 +16,7 @@ class WrapDemo extends StatefulWidget {
 
 class _WrapDemoState extends State<WrapDemo> {
   /// 20 种颜色作为分页数据源（4 列 × 2 行 = 每页 8 项 → 共 3 页）
-  final List<Color> colorItems = [
+  final List<Color> items = [
     ...Colors.primaries,
     Colors.amberAccent,
   ];
@@ -41,31 +41,38 @@ class _WrapDemoState extends State<WrapDemo> {
             NSectionBox(
               title: "NWrapPageView · 20 色 · 每页 8 项（4×2）",
               mainAxisSize: MainAxisSize.min,
-              child: NWrapPageView<Color>(
-                items: colorItems,
-                crossAxisCount: 4,
-                rowCount: 2,
-                spacing: 30,
-                runSpacing: 12,
-                height: 108,
-                itemBuilder: (context, index) {
-                  final color = colorItems[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${index + 1}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+              child: Container(
+                decoration: BoxDecoration(
+                  // color: Colors.green,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.blue),
+                ),
+                child: NWrapPageView<Color>(
+                  height: 168,
+                  items: items,
+                  crossAxisCount: 4,
+                  rowCount: 2,
+                  spacing: 12,
+                  runSpacing: 12,
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: item,
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                    ),
-                  );
-                },
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${index + 1}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             NSectionBox(

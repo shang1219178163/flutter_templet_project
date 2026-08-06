@@ -20,8 +20,8 @@ class NSectionBox extends StatelessWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.start,
-    this.addSliverToBoxAdapter = false,
     this.hide = false,
+    this.decoration,
     required this.child,
   });
 
@@ -37,22 +37,18 @@ class NSectionBox extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
 
-  final bool addSliverToBoxAdapter;
   final bool hide;
+
+  final Decoration? decoration;
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     if (hide) {
-      if (addSliverToBoxAdapter) {
-        return SliverToBoxAdapter(
-          child: SizedBox(),
-        );
-      }
       return SizedBox();
     }
-    Widget content = Column(
+    final content = Column(
       mainAxisSize: mainAxisSize,
       mainAxisAlignment: mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment,
@@ -72,11 +68,12 @@ class NSectionBox extends StatelessWidget {
         divider ?? Divider(height: 0.5),
       ],
     );
-    if (addSliverToBoxAdapter) {
-      content = SliverToBoxAdapter(
-        child: content,
-      );
+    if (decoration == null) {
+      return content;
     }
-    return content;
+    return DecoratedBox(
+      decoration: decoration!,
+      child: content,
+    );
   }
 }

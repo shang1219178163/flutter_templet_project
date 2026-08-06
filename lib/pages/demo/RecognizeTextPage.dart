@@ -10,7 +10,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_page_indicator.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/service/recognize_text/recognize_text_service.dart';
 import 'package:get/get.dart';
@@ -184,7 +184,7 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
           child: buildImagePageView(),
         ),
         if (items.length >= 2)
-          PageIndicatorWidget(
+          NPageIndicator(
             currentPage: currentPage,
             itemCount: items.length,
             margin: const EdgeInsets.only(top: 8),

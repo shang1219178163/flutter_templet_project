@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_page_indicator.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
@@ -81,7 +81,7 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
                   }),
               // if (this.items.length > 1) buildPageIndicator(),
               if (items.isNotEmpty)
-                PageIndicatorWidget(
+                NPageIndicator(
                   currentPage: currentIndex,
                   itemCount: items.length,
                   itemSize: Size(context.screenSize.width / 4 / items.length, 2),

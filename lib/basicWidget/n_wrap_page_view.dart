@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_page_indicator.dart';
 
 /// 横向分页 Wrap：每页固定列×行（默认 4 列 2 行 = 8 项），底部带页面指示器。
 class NWrapPageView<T> extends StatefulWidget {
@@ -137,7 +137,7 @@ class _NWrapPageViewState<T> extends State<NWrapPageView<T>> {
           if (_pageCount > 1)
             Padding(
               padding: widget.indicatorMargin,
-              child: PageIndicatorWidget(
+              child: NPageIndicator(
                 currentPage: _currentPage,
                 itemCount: _pageCount,
                 itemSize: widget.indicatorItemSize,
