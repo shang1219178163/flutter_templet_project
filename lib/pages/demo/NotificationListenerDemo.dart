@@ -115,14 +115,14 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
   /// 监听尺寸改变
   Widget buildSizeChangedLayoutNotifier() {
     return NotificationListener<SizeChangedLayoutNotification>(
-        onNotification: onSizeChangedNotification,
+        onNotification: onChanged,
         child: SizeChangedLayoutNotifier(
           // key: _filterBarChangeKey,
           child: Wrap(),
         ));
   }
 
-  bool onSizeChangedNotification(SizeChangedLayoutNotification notification) {
+  bool onChanged(SizeChangedLayoutNotification n) {
     // change height here
     // _filterBarChangeKey = GlobalKey();
     return false;
