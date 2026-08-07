@@ -35,7 +35,7 @@ class IMSoundRecordBar extends StatefulWidget {
 }
 
 class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
-  late final screenSize = MediaQuery.of(context).size;
+  late final screenSize = MediaQuery.sizeOf(context);
 
   final cancelVN = ValueNotifier(false);
 

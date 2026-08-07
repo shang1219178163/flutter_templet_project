@@ -98,7 +98,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   }
 
   Widget buildBodyNew() {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
 
     return SingleChildScrollView(
       child: Column(
@@ -129,7 +129,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   }
 
   Widget buildBody() {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
 
     var children = detailList.map((e) {
       var idx = detailList.indexOf(e);

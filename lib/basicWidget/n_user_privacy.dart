@@ -63,7 +63,7 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
 
     return Center(
       child: Material(

@@ -68,7 +68,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   }
 
   Widget buildBodyNew() {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
 
     return SingleChildScrollView(
       key: _globalKey,
@@ -139,7 +139,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     required RepaintBoundary repaintBoundary,
     void Function(int step)? callback,
   }) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
     const moveBtnSize = 40.0;
     const radius = 8.0;
     return Stack(

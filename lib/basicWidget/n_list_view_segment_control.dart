@@ -90,7 +90,7 @@ class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
               });
               widget.onValueChanged(index);
 
-              final screenSize = MediaQuery.of(context).size;
+              final screenSize = MediaQuery.sizeOf(context);
               if (_scrollController.position.maxScrollExtent <= 0) {
                 // DLog.d([_scrollController.position.maxScrollExtent, screenSize.width]);
                 return;

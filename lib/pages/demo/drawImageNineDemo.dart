@@ -56,7 +56,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
   }
 
   Widget buildImage() {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
     if (image != null) {
       return CustomPaint(
         // size: screenSize,
@@ -89,8 +89,7 @@ class ImageEditor extends CustomPainter {
     // Rect dst = Rect.fromLTWH(0, 0, 300, 300);
     // canvas.drawImageRect(image, src, dst, Paint());
 
-    var center = Rect.fromCenter(
-        center: size.center(Offset.zero), width: 50, height: 50);
+    var center = Rect.fromCenter(center: size.center(Offset.zero), width: 50, height: 50);
     debugPrint('paint center $center');
 
     var dst = Rect.fromCenter(

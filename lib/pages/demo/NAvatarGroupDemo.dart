@@ -17,7 +17,7 @@ class NAvatarGroupDemo extends StatefulWidget {
 class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
   final _scrollController = ScrollController();
 
-  late final screenSize = MediaQuery.of(context).size;
+  late final screenSize = MediaQuery.sizeOf(context);
 
   @override
   Widget build(BuildContext context) {

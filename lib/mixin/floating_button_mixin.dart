@@ -108,7 +108,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
         return;
       }
 
-      final screenSize = MediaQuery.of(context).size;
+      final screenSize = MediaQuery.sizeOf(context);
       final maxWidth = screenSize.width;
 
       final defaultPosition = floatingButtonConfig.globalPosition ?? Offset(maxWidth, 120);
@@ -123,7 +123,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
   OverlayEntry _createOverlayEntry({
     bool attachHorizalEdge = true,
   }) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
     final maxWidth = screenSize.width;
     final maxHeight = screenSize.height;
 

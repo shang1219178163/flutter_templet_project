@@ -92,7 +92,7 @@ class ExampleHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// 扩展属性 MediaQuery.of(this.context).size
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -146,7 +146,7 @@ class ExampleFraction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.sizeOf(context);
 
     return Scaffold(
         appBar: AppBar(
