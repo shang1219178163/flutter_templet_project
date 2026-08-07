@@ -52,12 +52,12 @@ class _NDragSortWrapState<T extends Object> extends State<NDragSortWrap<T>> {
       spacing: widget.spacing,
       runSpacing: widget.runSpacing,
       children: [
-        for (int i = 0; i < _list.length; i++) _buildDraggableItem(context, i),
+        for (int i = 0; i < _list.length; i++) buildDraggableItem(context, i),
       ],
     );
   }
 
-  Widget _buildDraggableItem(BuildContext context, int index) {
+  Widget buildDraggableItem(BuildContext context, int index) {
     final item = _list[index];
     final enableItem = widget.enableBuilder?.call(context, item) ?? true;
     if (!enableItem) {

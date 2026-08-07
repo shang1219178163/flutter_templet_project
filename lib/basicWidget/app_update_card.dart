@@ -6,12 +6,12 @@ import 'package:flutter_templet_project/util/dlog.dart';
 // ignore: must_be_immutable
 class AppUpdateCard extends StatefulWidget {
   AppUpdateCard({
-    Key? key,
+    super.key,
     required this.data,
     this.isExpand = false,
     this.showExpand = true,
     this.padding = const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-  }) : super(key: key);
+  });
 
   final AppUpdateItemModel data;
 
@@ -19,7 +19,7 @@ class AppUpdateCard extends StatefulWidget {
 
   final bool showExpand;
 
-  EdgeInsets padding;
+  final EdgeInsets padding;
 
   @override
   _AppUpdateCardState createState() => _AppUpdateCardState();
@@ -30,21 +30,23 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: widget.padding,
-      decoration: BoxDecoration(
-          // color: Colors.green,
-          // border: Border.all(color: Colors.blue, width: 1),
-          ),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-        buildTopSection(),
-        buildBottomSection(),
-      ]),
+      // decoration: BoxDecoration(
+      // color: Colors.green,
+      // border: Border.all(color: Colors.blue, width: 1),
+      // ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          buildTopSection(),
+          buildBottomSection(),
+        ],
+      ),
     );
   }
 
-  _changeState() {
-    setState(() {
-      widget.isExpand = !widget.isExpand;
-    });
+  onChanged() {
+    widget.isExpand = !widget.isExpand;
+    setState(() {});
   }
 
   Widget buildTopSection() {
@@ -85,52 +87,49 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
     return Container(
       // margin: EdgeInsets.symmetric(vertical: 8),
       child: Column(
-          //Column控件用来垂直摆放子Widget
-          crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
-          children: <Widget>[
-            Stack(
-              // alignment: Alignment.center,
-              children: <Widget>[
-                Container(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    alignment: Alignment.topLeft,
+        //Column控件用来垂直摆放子Widget
+        crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
+        children: <Widget>[
+          Stack(
+            // alignment: Alignment.center,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                alignment: Alignment.topLeft,
+                decoration: BoxDecoration(
+                    // color: Colors.greenAccent,
+                    // border: Border.all(color: Colors.red, width: 1),
+                    ),
+                child: Text(
+                  widget.data.appDescription,
+                  maxLines: widget.isExpand ? null : 2,
+                ),
+              ),
+              if (widget.showExpand)
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    margin: EdgeInsets.zero,
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.bottomRight,
                     decoration: BoxDecoration(
-                        // color: Colors.greenAccent,
-                        // border: Border.all(color: Colors.red, width: 1),
+                        // color: Colors.green,
+                        // border: Border.all(color: Colors.blue, width: 2),
                         ),
-                    child: Text(
-                      widget.data.appDescription,
-                      maxLines: widget.isExpand ? null : 2,
-                    )),
-                if (widget.showExpand)
-                  Positioned(
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.zero,
-                        alignment: Alignment.bottomRight,
-                        decoration: BoxDecoration(
-                            // color: Colors.green,
-                            // border: Border.all(color: Colors.blue, width: 2),
-                            ),
-                        child: TextButton(
-                          // style: TextButton.styleFrom(
-                          //   minimumSize: Size.zero,
-                          //   padding: EdgeInsets.zero,
-                          //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          // ),
-                          onPressed: _changeState,
-                          child: Text(
-                            widget.isExpand ? '收起' : "展开",
-                            style: TextStyle(color: Theme.of(context).primaryColor),
-                          ),
-                        ),
-                      )),
-              ],
-            ),
-            Text("${widget.data.appVersion} • ${widget.data.appSize} MB"),
-          ]),
+                    child: TextButton(
+                      onPressed: onChanged,
+                      child: Text(
+                        widget.isExpand ? '收起' : "展开",
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          Text("${widget.data.appVersion} • ${widget.data.appSize} MB"),
+        ],
+      ),
     );
   }
 }

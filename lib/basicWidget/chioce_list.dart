@@ -38,10 +38,10 @@ class _ChioceListState extends State<ChioceList> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.canScroll ? _buildListViewSeparated() : _buildListView();
+    return widget.canScroll ? buildListViewSeparated() : buildListView();
   }
 
-  Widget _buildListView() {
+  Widget buildListView() {
     return Material(
       color: Colors.transparent,
       child: Container(
@@ -80,7 +80,7 @@ class _ChioceListState extends State<ChioceList> {
     );
   }
 
-  Widget _buildListViewSeparated() {
+  Widget buildListViewSeparated() {
     return Material(
       // color: Colors.transparent,
       color: widget.backgroudColor,

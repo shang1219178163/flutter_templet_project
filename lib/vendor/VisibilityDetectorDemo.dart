@@ -34,14 +34,14 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
         var visiblePercentage = visibilityInfo.visibleFraction * 100;
         debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
       },
-      child: _buildPage1(),
+      child: buildPage1(),
     );
 
     // return _buildPage();
-    return _buildPage1();
+    return buildPage1();
   }
 
-  Widget _buildPage() {
+  Widget buildPage() {
     return ListView.builder(itemBuilder: (context, i) {
       return SizedBox(
         height: 180,
@@ -71,7 +71,7 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
     });
   }
 
-  Widget _buildPage1() {
+  Widget buildPage1() {
     final imgUrls = AppRes.image.urls;
     return ListView.builder(
         itemCount: imgUrls.length,

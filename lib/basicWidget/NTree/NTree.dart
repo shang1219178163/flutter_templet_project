@@ -47,7 +47,7 @@ class _NTreeState extends State<NTree> {
       children: widget.list.map((e) {
         return Column(
           children: [
-            _buildNode(
+            buildNode(
               e: e,
               color: widget.color,
               iconColor: widget.iconColor,
@@ -66,7 +66,7 @@ class _NTreeState extends State<NTree> {
     );
   }
 
-  Widget _buildNode({
+  Widget buildNode({
     required NTreeNodeModel e,
     Color? color,
     Color? iconColor,

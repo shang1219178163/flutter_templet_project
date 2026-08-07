@@ -23,10 +23,10 @@ class NImageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(animation: controller, builder: _buildAnimatedItem);
+    return AnimatedBuilder(animation: controller, builder: buildAnimatedItem);
   }
 
-  Widget _buildAnimatedItem(BuildContext context, Widget? child) {
+  Widget buildAnimatedItem(BuildContext context, Widget? child) {
     //当前页数
     int index;
     //偏移量

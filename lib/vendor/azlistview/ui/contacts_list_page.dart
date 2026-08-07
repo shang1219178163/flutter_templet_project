@@ -57,7 +57,7 @@ class _ContactListPageState extends State<ContactListPage> {
     setState(() {});
   }
 
-  Widget _buildHeader() {
+  Widget buildHeader() {
     return Container(
       padding: EdgeInsets.all(20),
       alignment: Alignment.center,
@@ -82,7 +82,7 @@ class _ContactListPageState extends State<ContactListPage> {
     );
   }
 
-  Widget _buildSusWidget(String susTag) {
+  Widget buildSusWidget(String susTag) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.0),
       height: susItemHeight,
@@ -105,7 +105,7 @@ class _ContactListPageState extends State<ContactListPage> {
     );
   }
 
-  Widget _buildListItem(ContactInfo model) {
+  Widget buildListItem(ContactInfo model) {
     var susTag = model.getSuspensionTag();
     debugPrint("_buildListItem:${model.name}_${model.isShowSuspension}");
     return Container(
@@ -151,7 +151,7 @@ class _ContactListPageState extends State<ContactListPage> {
       itemBuilder: (BuildContext context, int index) {
         // if (index == 0) return _buildHeader();
         var model = _contacts[index];
-        return _buildListItem(model);
+        return buildListItem(model);
       },
       susItemBuilder: (BuildContext context, int index) {
         var model = _contacts[index];
@@ -178,8 +178,7 @@ class _ContactListPageState extends State<ContactListPage> {
             color: Colors.blue[700]!.withAlpha(200),
             shape: BoxShape.circle,
           ),
-          child:
-              Text(hint, style: TextStyle(color: Colors.red, fontSize: 30.0)),
+          child: Text(hint, style: TextStyle(color: Colors.red, fontSize: 30.0)),
         );
       },
       indexBarMargin: EdgeInsets.all(10),

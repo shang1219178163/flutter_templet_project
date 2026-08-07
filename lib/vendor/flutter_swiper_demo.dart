@@ -19,11 +19,11 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildListView(context),
+      body: buildListView(context),
     );
   }
 
-  Widget _buildListView(BuildContext context) {
+  Widget buildListView(BuildContext context) {
     return ListView.separated(
         itemCount: _list.length,
         separatorBuilder: (context, index) {
@@ -84,11 +84,7 @@ final List<String> images = [
   'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
 ];
 
-const List<String> titles = [
-  "Flutter Swiper is awosome",
-  "Really nice",
-  "Yeap"
-];
+const List<String> titles = ["Flutter Swiper is awosome", "Really nice", "Yeap"];
 
 class ExampleHorizontal extends StatelessWidget {
   const ExampleHorizontal({Key? key}) : super(key: key);
@@ -198,8 +194,7 @@ class ExampleFraction extends StatelessWidget {
         var left = index == 0 ? 20.0 : 0.0;
         var right = index == (images.length - 1) ? 20.0 : 0.0;
 
-        var padding =
-            EdgeInsets.only(left: left, right: right, top: 0, bottom: 0);
+        var padding = EdgeInsets.only(left: left, right: right, top: 0, bottom: 0);
         var margin = EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0);
         if (![0, images.length - 1].contains(index)) {
           margin = EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 0);
@@ -301,11 +296,8 @@ class ExampleFraction extends StatelessWidget {
       child: Swiper(
         layout: SwiperLayout.CUSTOM,
         customLayoutOption: CustomLayoutOption(startIndex: -1, stateCount: 3)
-            .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
-          Offset(-370.0, -40.0),
-          Offset(0.0, 0.0),
-          Offset(370.0, -40.0)
-        ]),
+            .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate(
+                [Offset(-370.0, -40.0), Offset(0.0, 0.0), Offset(370.0, -40.0)]),
         itemWidth: 300.0,
         itemHeight: 200.0,
         itemBuilder: (BuildContext context, int index) {
@@ -357,8 +349,7 @@ class ExampleCustomPagination extends StatelessWidget {
                 itemCount: images.length,
                 pagination: SwiperPagination(
                     margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder:
-                        (BuildContext context, SwiperPluginConfig config) {
+                    builder: SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
                       return ConstrainedBox(
                         constraints: BoxConstraints.expand(height: 50.0),
                         child: Container(
@@ -384,8 +375,7 @@ class ExampleCustomPagination extends StatelessWidget {
                 itemCount: images.length,
                 pagination: SwiperPagination(
                     margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder:
-                        (BuildContext context, SwiperPluginConfig config) {
+                    builder: SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
                       return ConstrainedBox(
                         constraints: BoxConstraints.expand(height: 50.0),
                         child: Row(
@@ -398,10 +388,7 @@ class ExampleCustomPagination extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: DotSwiperPaginationBuilder(
-                                        color: Colors.black12,
-                                        activeColor: Colors.black,
-                                        size: 10.0,
-                                        activeSize: 20.0)
+                                        color: Colors.black12, activeColor: Colors.black, size: 10.0, activeSize: 20.0)
                                     .build(context, config),
                               ),
                             )
@@ -440,10 +427,7 @@ class ExamplePhone extends StatelessWidget {
             pagination: SwiperPagination(
                 margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
                 builder: DotSwiperPaginationBuilder(
-                    color: Colors.white30,
-                    activeColor: Colors.white,
-                    size: 20.0,
-                    activeSize: 20.0)),
+                    color: Colors.white30, activeColor: Colors.white, size: 20.0, activeSize: 20.0)),
             children: <Widget>[
               Image.asset(
                 "assets/images/1.png",
@@ -463,8 +447,7 @@ class ExamplePhone extends StatelessWidget {
 }
 
 class ScaffoldWidget extends StatelessWidget {
-  const ScaffoldWidget({Key? key, this.child, this.title, this.actions})
-      : super(key: key);
+  const ScaffoldWidget({Key? key, this.child, this.title, this.actions}) : super(key: key);
 
   final Widget? child;
   final String? title;

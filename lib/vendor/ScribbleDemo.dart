@@ -70,7 +70,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     );
   }
 
-  // Widget _buildStrokeToolbar(BuildContext context) {
+  // Widget buildStrokeToolbar(BuildContext context) {
   //   return StateNotifierBuilder<ScribbleState>(
   //     stateNotifier: notifier,
   //     builder: (context, state, _) => Column(
@@ -88,7 +88,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
   //   );
   // }
 
-  Widget _buildStrokeButton(
+  Widget buildStrokeButton(
     BuildContext context, {
     required double strokeWidth,
     required ScribbleState state,
@@ -122,7 +122,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     );
   }
 
-  // Widget _buildColorToolbar(BuildContext context) {
+  // Widget buildColorToolbar(BuildContext context) {
   //   return StateNotifierBuilder<ScribbleState>(
   //     stateNotifier: notifier,
   //     builder: (context, state, _) => Column(
@@ -156,7 +156,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
   //   );
   // }
 
-  Widget _buildPointerModeSwitcher(BuildContext context, {required bool penMode}) {
+  Widget buildPointerModeSwitcher(BuildContext context, {required bool penMode}) {
     return FloatingActionButton.small(
       onPressed: () => notifier.setAllowedPointersMode(
         penMode ? ScribblePointerMode.all : ScribblePointerMode.penOnly,
@@ -177,7 +177,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     );
   }
 
-  Widget _buildEraserButton(BuildContext context, {required bool isSelected}) {
+  Widget buildEraserButton(BuildContext context, {required bool isSelected}) {
     return Padding(
       padding: const EdgeInsets.all(4),
       child: FloatingActionButton.small(
@@ -195,7 +195,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     );
   }
 
-  Widget _buildColorButton(
+  Widget buildColorButton(
     BuildContext context, {
     required Color color,
     required ScribbleState state,
@@ -217,7 +217,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     );
   }
 
-  Widget _buildUndoButton(
+  Widget buildUndoButton(
     BuildContext context,
   ) {
     return FloatingActionButton.small(
@@ -232,7 +232,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     );
   }
 
-  Widget _buildRedoButton(
+  Widget buildRedoButton(
     BuildContext context,
   ) {
     return FloatingActionButton.small(
@@ -247,7 +247,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     );
   }
 
-  Widget _buildClearButton(BuildContext context) {
+  Widget buildClearButton(BuildContext context) {
     return FloatingActionButton.small(
       tooltip: "Clear",
       onPressed: notifier.clear,

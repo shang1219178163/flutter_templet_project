@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
-
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -48,18 +48,14 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return buildBody();
-  }
-
-  Widget buildBody() {
-    final screenSize = MediaQuery.of(context).size;
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final screenSize = MediaQuery.sizeOf(context);
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
 
     List<Widget> children = widget.models.map((e) {
       var idx = widget.models.indexOf(e);
       return Stack(
         children: [
-          _buildTool(
+          buildTool(
               hideUp: idx == 0,
               hideDown: idx == widget.models.length - 1,
               repaintBoundary: RepaintBoundary(
@@ -107,7 +103,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     );
   }
 
-  Widget _buildTool({
+  Widget buildTool({
     required RepaintBoundary repaintBoundary,
     bool hideUp = false,
     bool hideDown = false,

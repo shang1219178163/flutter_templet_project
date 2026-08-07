@@ -125,7 +125,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
     }
   }
 
-  static Widget _buildOverlayEntry(BuildContext ctx) {
+  static Widget buildOverlayEntry(BuildContext ctx) {
     final bottom = NScreenManager.mediaQueryData.viewInsets.bottom;
 
     onHideKeyBorad() {
@@ -196,7 +196,7 @@ class NInputAccessoryViewOne extends StatefulWidget {
       hideBarrier: true,
       barrierDismissible: false,
       from: Alignment.bottomCenter,
-      builder: _buildOverlayEntry,
+      builder: buildOverlayEntry,
     );
   }
 

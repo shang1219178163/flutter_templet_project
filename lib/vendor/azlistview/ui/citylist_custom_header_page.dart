@@ -7,8 +7,7 @@ class CityListCustomHeaderPage extends StatefulWidget {
   const CityListCustomHeaderPage({Key? key}) : super(key: key);
 
   @override
-  _CityListCustomHeaderPageState createState() =>
-      _CityListCustomHeaderPageState();
+  _CityListCustomHeaderPageState createState() => _CityListCustomHeaderPageState();
 }
 
 class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
@@ -58,16 +57,12 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
     SuspensionUtil.setShowSuspensionStatus(cityList);
 
     // add header.
-    cityList.insert(
-        0,
-        CityModel(
-            name: 'header',
-            tagIndex: imgFavorite)); //index bar support local images.
+    cityList.insert(0, CityModel(name: 'header', tagIndex: imgFavorite)); //index bar support local images.
 
     setState(() {});
   }
 
-  Widget _buildHeader() {
+  Widget buildHeader() {
     var hotCityList = <CityModel>[];
     hotCityList.addAll([
       CityModel(name: "北京市"),
@@ -127,11 +122,10 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
             itemCount: cityList.length,
             itemBuilder: (BuildContext context, int index) {
               if (index == 0) {
-                return _buildHeader();
+                return buildHeader();
               }
               var model = cityList[index];
-              return Utils.getListItem(context, model,
-                  susHeight: susItemHeight);
+              return Utils.getListItem(context, model, susHeight: susItemHeight);
             },
             susItemHeight: susItemHeight,
             susItemBuilder: (BuildContext context, int index) {

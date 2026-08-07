@@ -84,7 +84,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
     return Container(
       child: Stack(
         children: <Widget>[
-          _buildInfoWidget(context),
+          buildInfoWidget(context),
           // _downloadProgress > 0
           // ? Positioned.fill(child: _buildDownloadProgress())
           //     : Container(
@@ -96,7 +96,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
   }
 
   /// 信息展示widget
-  Widget _buildInfoWidget(BuildContext context) {
+  Widget buildInfoWidget(BuildContext context) {
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.min,

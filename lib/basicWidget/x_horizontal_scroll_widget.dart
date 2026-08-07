@@ -98,11 +98,11 @@ class XHorizontalScrollWidget extends StatelessWidget {
         ),
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: items.map((e) => _buildChildrenItem(e: e)).toList(),
+          children: items.map((e) => buildItem(e: e)).toList(),
         ));
   }
 
-  Widget _buildChildrenItem({
+  Widget buildItem({
     required Tuple4<String, String, String, bool> e,
   }) {
     var itemWidth = getItemWidth();
@@ -259,7 +259,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             final e = items[index];
-            return _buildChildrenItem(e: e);
+            return buildItem(e: e);
           },
           indicatorLayout: PageIndicatorLayout.COLOR,
           autoplay: true,

@@ -50,20 +50,20 @@ class _CustomSwipperState extends State<CustomSwipper> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
-        _buildPageView(),
+        buildPageView(),
         // Positioned(
         //   bottom: 10,
         //   child: _buildIndicator(),
         // ),
         Positioned(
           bottom: 10,
-          child: _buildIndicatorNew(),
+          child: buildIndicatorNew(),
         ),
       ],
     );
   }
 
-  Widget _buildIndicator() {
+  Widget buildIndicator() {
     var length = widget.images.length;
 
     return Row(
@@ -74,9 +74,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
             child: Container(
               width: 8,
               height: 8,
-              color: e == widget.images[_curIndex % length]
-                  ? Colors.white
-                  : Colors.grey,
+              color: e == widget.images[_curIndex % length] ? Colors.white : Colors.grey,
             ),
           ),
         );
@@ -84,7 +82,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
     );
   }
 
-  Widget _buildIndicatorNew() {
+  Widget buildIndicatorNew() {
     var length = widget.images.length;
     return Row(
       children: widget.images.map((e) {
@@ -93,16 +91,14 @@ class _CustomSwipperState extends State<CustomSwipper> {
           child: Container(
             width: 28,
             height: 2,
-            color: e == widget.images[_curIndex % length]
-                ? Colors.white
-                : Colors.grey,
+            color: e == widget.images[_curIndex % length] ? Colors.white : Colors.grey,
           ),
         );
       }).toList(),
     );
   }
 
-  Widget _buildPageView() {
+  Widget buildPageView() {
     var length = widget.images.length;
     return Container(
       height: widget.height,
