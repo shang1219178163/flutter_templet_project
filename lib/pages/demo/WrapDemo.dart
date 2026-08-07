@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/basicWidget/n_render_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_wrap_page_view.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 
 class WrapDemo extends StatefulWidget {
   final String? title;
@@ -21,11 +21,55 @@ class _WrapDemoState extends State<WrapDemo> {
     Colors.amberAccent,
   ];
 
+  /// 仅取阿里云图，便于服务端缩略；首帧后再挂载，避免进页即并发下载
+  late final List<String> imageUrls =
+      AppRes.image.urls.where((e) => e.contains('.aliyuncs.com')).take(16).toList();
+
+  var _showNetworkImages = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final cache = PaintingBinding.instance.imageCache;
+    cache.maximumSize = 40;
+    cache.maximumSizeBytes = 20 << 20; // 20MB
+    logImageCache('WrapDemo.initState');
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      setState(() => _showNetworkImages = true);
+      logImageCache('WrapDemo.afterFirstFrame');
+    });
+  }
+
+  @override
+  void dispose() {
+    PaintingBinding.instance.imageCache.clear();
+    logImageCache('WrapDemo.dispose');
+    super.dispose();
+  }
+
+  void logImageCache(String tag) {
+    final c = PaintingBinding.instance.imageCache;
+    DLog.d(
+      '[$tag] imageCache size=${c.currentSize} '
+      'bytes=${(c.currentSizeBytes / 1024 / 1024).toStringAsFixed(2)}MB '
+      'maxBytes=${(c.maximumSizeBytes / 1024 / 1024).toStringAsFixed(0)}MB',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
+        actions: [
+          IconButton(
+            tooltip: '打印 ImageCache',
+            onPressed: () => logImageCache('manual'),
+            icon: const Icon(Icons.memory),
+          ),
+        ],
       ),
       body: buildBody(),
     );
@@ -44,11 +88,16 @@ class _WrapDemoState extends State<WrapDemo> {
               child: buildWrapPageView(),
             ),
             NSectionBox(
-              title: "buildWrapBox",
+              title: "网图分页（OSS 缩略 · 每页 8 张 · 首帧后加载）",
               mainAxisSize: MainAxisSize.min,
               child: Container(
-                margin: EdgeInsets.all(12),
-                child: buildWrapBox(),
+                margin: const EdgeInsets.all(12),
+                child: _showNetworkImages
+                    ? buildWrapBox()
+                    : const SizedBox(
+                        height: 200,
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
               ),
             ),
           ],
@@ -60,7 +109,6 @@ class _WrapDemoState extends State<WrapDemo> {
   Widget buildWrapPageView() {
     return Container(
       decoration: BoxDecoration(
-        // color: Colors.green,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.blue),
       ),
@@ -95,40 +143,36 @@ class _WrapDemoState extends State<WrapDemo> {
   }
 
   Widget buildWrapBox() {
-    final urls = AppRes.image.urls;
     return Container(
       decoration: BoxDecoration(
         color: Colors.transparent,
         border: Border.all(color: Colors.blue),
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
       ),
-      child: Wrap(
-        spacing: 8.0,
-        runSpacing: 8.0,
-        alignment: WrapAlignment.start,
-        children: List.generate(12, (index) {
-          return NRenderBox(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.all(Radius.circular(4)),
+      child: NWrapPageView<String>(
+        height: 200,
+        items: imageUrls,
+        crossAxisCount: 4,
+        rowCount: 2,
+        spacing: 8,
+        runSpacing: 8,
+        onPageChanged: (_) => logImageCache('pageChanged'),
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Expanded(
+                child: NNetworkImage(
+                  url: imageUrls[index],
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  radius: 4,
+                ),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  NNetworkImage(
-                    width: 50,
-                    height: 60,
-                    url: urls[index % urls.length],
-                  ),
-                  Text("选项_$index"),
-                ],
-              ),
-            ),
+              Text("选项_$index", style: const TextStyle(fontSize: 12)),
+            ],
           );
-        }).toList(),
+        },
       ),
     );
   }

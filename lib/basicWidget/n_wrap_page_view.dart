@@ -115,6 +115,8 @@ class _NWrapPageViewState<T> extends State<NWrapPageView<T>> {
     final pageView = PageView.builder(
       controller: _pageController,
       itemCount: _pageCount,
+      // 避免预创建邻页，减少同时解码/下载的图片数量
+      allowImplicitScrolling: false,
       onPageChanged: (index) {
         _currentPage.value = index;
         widget.onPageChanged?.call(index);

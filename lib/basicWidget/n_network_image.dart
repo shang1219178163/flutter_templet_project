@@ -8,18 +8,20 @@
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 
 class NNetworkImage extends StatelessWidget {
   const NNetworkImage({
     super.key,
     this.title,
     required this.url,
-    this.placeholder = const AssetImage("assets/images/img_placeholder.png"),
+    this.placeholder = const AssetImage(Assets.imagesImgPlaceholder),
     this.fit = BoxFit.fill,
     this.width,
     this.height,
     this.radius = 8,
     this.cache = true,
+    this.clearMemoryCacheWhenDispose = true,
     this.mode = ExtendedImageMode.none,
   });
 
@@ -40,57 +42,111 @@ class NNetworkImage extends StatelessWidget {
 
   final bool cache;
 
+  /// 组件销毁时清理该图的内存缓存，降低列表滚动堆积
+  final bool clearMemoryCacheWhenDispose;
+
   final ExtendedImageMode mode;
+
+  static const int _maxCachePx = 1024;
 
   @override
   Widget build(BuildContext context) {
-    final placeholderImage = Image(
+    final isUrlError = !url.startsWith('http');
+    if (isUrlError) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: buildPlaceholder(),
+      );
+    }
+
+    // 已明确宽高时不必再依赖约束
+    if (width != null && height != null) {
+      return buildNetworkImage(context, width!, height!);
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final w = width ?? finiteOrNull(constraints.maxWidth);
+        final h = height ?? finiteOrNull(constraints.maxHeight);
+        return buildNetworkImage(context, w, h);
+      },
+    );
+  }
+
+  Widget buildNetworkImage(BuildContext context, double? logicalWidth, double? logicalHeight) {
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    // 只约束宽度，保留比例，避免宽高同时指定导致异常放大解码
+    final cacheWidth = cachePx(logicalWidth, dpr);
+    final requestUrl = resolveRequestUrl(url, cacheWidth);
+    final borderRadius = BorderRadius.circular(radius);
+
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: ExtendedImage.network(
+        requestUrl,
+        key: ValueKey(requestUrl),
+        width: width,
+        height: height,
+        cacheWidth: cacheWidth,
+        fit: fit,
+        cache: cache,
+        mode: mode,
+        clearMemoryCacheWhenDispose: clearMemoryCacheWhenDispose,
+        clearMemoryCacheIfFailed: true,
+        borderRadius: borderRadius,
+        loadStateChanged: (ExtendedImageState state) {
+          switch (state.extendedImageLoadState) {
+            case LoadState.completed:
+              return null;
+            case LoadState.loading:
+            case LoadState.failed:
+              return buildPlaceholder();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget buildPlaceholder() {
+    return Image(
       image: placeholder,
       width: width,
       height: height,
       fit: fit,
     );
+  }
 
-    final isUrlError = url.startsWith("http") == false;
-    if (isUrlError) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(radius),
-        child: placeholderImage,
-      );
+  /// 阿里云 OSS 走服务端缩略，减少下载体积与解码峰值
+  static String resolveRequestUrl(String url, int? cacheWidth) {
+    if (cacheWidth == null || cacheWidth <= 0) {
+      return url;
     }
+    if (!url.contains('.aliyuncs.com')) {
+      return url;
+    }
+    if (url.contains('x-oss-process=')) {
+      return url;
+    }
+    final sep = url.contains('?') ? '&' : '?';
+    return '$url${sep}x-oss-process=image/resize,w_$cacheWidth';
+  }
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(radius),
-      child: ExtendedImage.network(
-        url,
-        key: ValueKey(url),
-        width: width,
-        height: height,
-        cacheWidth: width == null ? null : (width! * 3).toInt(),
-        cacheHeight: height == null ? null : (height! * 3).toInt(),
-        fit: fit,
-        cache: cache,
-        mode: mode,
-        // border: Border.all(color: Colors.red, width: 1.0),
-        borderRadius: BorderRadius.circular(radius),
-        //cancelToken: cancellationToken,
-        loadStateChanged: (ExtendedImageState state) {
-          if (state.extendedImageLoadState != LoadState.completed) {
-            return placeholderImage;
-          }
-          // debugPrint("Image width ${state.extendedImageInfo?.image.width} height : ${state.extendedImageInfo?.image.height}");
-          final image = state.extendedImageInfo?.image;
-          var child = ExtendedRawImage(
-            image: image,
-            width: width ?? image?.width.toDouble(),
-            height: height ?? image?.height.toDouble(),
-            fit: fit,
-            // soucreRect: Rect.fromLTWH((state.extendedImageInfo?.image?.width-200)/2,(state.extendedImageInfo?.image?.height-200)/2, 200, 200),
-          );
-          // debugPrint("Source Rect width ${widget.width} height : ${widget.height}");
-          return child;
-        },
-      ),
-    );
+  static double? finiteOrNull(double value) {
+    if (value.isFinite && value > 0) {
+      return value;
+    }
+    return null;
+  }
+
+  /// 按设备像素比计算解码像素，限制上限避免极端约束撑爆内存
+  static int? cachePx(double? logicalPx, double devicePixelRatio) {
+    if (logicalPx == null || logicalPx <= 0) {
+      return null;
+    }
+    final px = (logicalPx * devicePixelRatio).round();
+    if (px <= 0) {
+      return null;
+    }
+    return px.clamp(1, _maxCachePx);
   }
 }
