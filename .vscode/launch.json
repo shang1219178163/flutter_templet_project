@@ -9,20 +9,30 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
+      "deviceId": "9C49E6FE-3EE1-422C-8476-2E5EE27DA658"
+    },
+    {
+      "name": "flutter_templet_project (iPhone 16)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "iPhone 16"
     },
     {
       "name": "flutter_templet_project (profile mode)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "deviceId": "iPhone 16"
     },
     {
       "name": "flutter_templet_project (release mode)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "deviceId": "iPhone 16"
     },
     {
       "name": "Flutter for web",
