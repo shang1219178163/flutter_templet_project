@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Model/app_update_model.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
-// ignore: must_be_immutable
 class AppUpdateCard extends StatefulWidget {
-  AppUpdateCard({
+  const AppUpdateCard({
     super.key,
     required this.data,
     this.isExpand = false,
@@ -15,7 +14,7 @@ class AppUpdateCard extends StatefulWidget {
 
   final AppUpdateItemModel data;
 
-  late bool isExpand;
+  final bool isExpand;
 
   final bool showExpand;
 
@@ -26,14 +25,20 @@ class AppUpdateCard extends StatefulWidget {
 }
 
 class _AppUpdateCardState extends State<AppUpdateCard> {
+  late bool _isExpand = widget.isExpand;
+
+  @override
+  void didUpdateWidget(covariant AppUpdateCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isExpand != widget.isExpand) {
+      _isExpand = widget.isExpand;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: widget.padding,
-      // decoration: BoxDecoration(
-      // color: Colors.green,
-      // border: Border.all(color: Colors.blue, width: 1),
-      // ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -44,43 +49,47 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
     );
   }
 
-  onChanged() {
-    widget.isExpand = !widget.isExpand;
-    setState(() {});
+  void onChanged() {
+    setState(() {
+      _isExpand = !_isExpand;
+    });
   }
 
   Widget buildTopSection() {
-    return Row(//Row控件，用来水平摆放子Widget
-        children: <Widget>[
-      ClipRRect(
-        //圆⻆矩形裁剪控件
-        borderRadius: BorderRadius.circular(8.0), //圆⻆半径为8
-        // child: Image.asset(data.appIcon, width: 60, height: 60),
-        child: FlutterLogo(
-          size: 60,
+    return Row(
+      //Row控件，用来水平摆放子Widget
+      children: <Widget>[
+        ClipRRect(
+          //圆⻆矩形裁剪控件
+          borderRadius: BorderRadius.circular(8.0), //圆⻆半径为8
+          // child: Image.asset(data.appIcon, width: 60, height: 60),
+          child: FlutterLogo(
+            size: 60,
+          ),
         ),
-      ),
-      Expanded(
-        //Expanded控件，用来拉伸中间区域
-        child: Column(
-          //Column控件，用来垂直摆放子Widget
-          mainAxisAlignment: MainAxisAlignment.center, //垂直方向居中对⻬
-          crossAxisAlignment: CrossAxisAlignment.start, //水平方向居左对⻬
-          children: <Widget>[
-            Text(widget.data.appName, maxLines: 1, overflow: TextOverflow.ellipsis), //App名字
-            Text(widget.data.appDate, maxLines: 1), //App更新日期
-          ],
+        Expanded(
+          //Expanded控件，用来拉伸中间区域
+          child: Column(
+            //Column控件，用来垂直摆放子Widget
+            mainAxisAlignment: MainAxisAlignment.center, //垂直方向居中对⻬
+            crossAxisAlignment: CrossAxisAlignment.start, //水平方向居左对⻬
+            children: <Widget>[
+              Text(widget.data.appName, maxLines: 1, overflow: TextOverflow.ellipsis), //App名字
+              Text(widget.data.appDate, maxLines: 1), //App更新日期
+            ],
+          ),
         ),
-      ),
-      ElevatedButton(
-        onPressed: () => DLog.d('Make a Note'),
-        child: Row(
-          children: [
-            Text("更新"),
-          ],
+        FilledButton(
+          style: FilledButton.styleFrom(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          onPressed: () => DLog.d('Make a Note'),
+          child: Text("更新"),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 
   Widget buildBottomSection() {
@@ -102,7 +111,7 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
                     ),
                 child: Text(
                   widget.data.appDescription,
-                  maxLines: widget.isExpand ? null : 2,
+                  maxLines: _isExpand ? null : 2,
                 ),
               ),
               if (widget.showExpand)
@@ -120,7 +129,7 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
                     child: TextButton(
                       onPressed: onChanged,
                       child: Text(
-                        widget.isExpand ? '收起' : "展开",
+                        _isExpand ? '收起' : "展开",
                       ),
                     ),
                   ),

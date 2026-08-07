@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
-// ignore: must_be_immutable (水平菜单单选器)
+/// 水平菜单单选器
 class NListViewSegmentControl extends StatefulWidget {
-  NListViewSegmentControl({
+  const NListViewSegmentControl({
     super.key,
     required this.items,
     required this.selectedIndex,
@@ -31,11 +31,11 @@ class NListViewSegmentControl extends StatefulWidget {
     required this.onValueChanged,
   });
 
-  List<String> items = [];
+  final List<String> items;
 
-  List<double>? itemWidths;
+  final List<double>? itemWidths;
 
-  int selectedIndex = 0;
+  final int selectedIndex;
 
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
@@ -54,7 +54,7 @@ class NListViewSegmentControl extends StatefulWidget {
   final Color itemBgColor;
   final Color itemSelectedBgColor;
 
-  void Function(int value) onValueChanged;
+  final void Function(int value) onValueChanged;
 
   @override
   _NListViewSegmentControlState createState() => _NListViewSegmentControlState();
@@ -62,6 +62,21 @@ class NListViewSegmentControl extends StatefulWidget {
 
 class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
   late final ScrollController _scrollController = ScrollController();
+  late int _selectedIndex = widget.selectedIndex;
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant NListViewSegmentControl oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedIndex != widget.selectedIndex) {
+      _selectedIndex = widget.selectedIndex;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,24 +101,20 @@ class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
             onTap: () {
               DLog.d(index);
               setState(() {
-                widget.selectedIndex = index;
+                _selectedIndex = index;
               });
               widget.onValueChanged(index);
 
-              final screenSize = MediaQuery.sizeOf(context);
               if (_scrollController.position.maxScrollExtent <= 0) {
-                // DLog.d([_scrollController.position.maxScrollExtent, screenSize.width]);
                 return;
               }
 
               ///选中item滚动中间
               if (widget.itemWidths != null) {
-                // final offsetX = widget.itemWidths!.take(widget.selectedIndex).reduce((value, element) => value + element);
-                // _scrollController.animateTo(offsetX, duration: new Duration(seconds: 1), curve: Curves.ease);
                 return;
               }
               final offsetX =
-                  widget.selectedIndex * (widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
+                  _selectedIndex * (widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
               _scrollController.animateTo(offsetX, duration: Duration(seconds: 1), curve: Curves.ease);
             },
             child: Container(
@@ -112,15 +123,14 @@ class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
               margin: widget.itemMargin,
               padding: widget.itemPadding,
               alignment: Alignment.center,
-              // color: ColorExt.random(),
               decoration: BoxDecoration(
-                color: widget.selectedIndex == index ? widget.itemSelectedBgColor : widget.itemBgColor,
+                color: _selectedIndex == index ? widget.itemSelectedBgColor : widget.itemBgColor,
                 borderRadius: BorderRadius.circular(widget.itemRadius),
               ),
               child: Text(
                 widget.items[index],
                 textAlign: TextAlign.center,
-                style: widget.selectedIndex == index ? widget.itemSelectedTextStyle : widget.itemTextStyle,
+                style: _selectedIndex == index ? widget.itemSelectedTextStyle : widget.itemTextStyle,
               ),
             ),
           );

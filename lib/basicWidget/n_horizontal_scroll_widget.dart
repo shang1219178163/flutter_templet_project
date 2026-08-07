@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_indicator.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
@@ -10,45 +11,44 @@ import 'package:flutter_templet_project/generated/assets.dart';
 // typedef HomeSwiperItemWidgetBuilder = Widget Function(int index);
 
 /// 轮播样式2(3.2.4)
-// ignore: must_be_immutable
 class NHorizontalScrollWidget extends StatefulWidget {
   NHorizontalScrollWidget({
     super.key,
     this.title,
     required this.items,
     this.width = double.infinity,
-    this.height = double.infinity,
+    this.height = 120,
     this.gap = 8,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
+    this.boxShadows,
     this.isSwiper = false,
     this.showCount = 2.5,
   });
 
-  String? title;
+  final String? title;
 
-  List<AttrCarouseItem> items = [];
+  final List<AttrCarouseItem> items;
 
-  double width;
-  double height;
+  final double width;
+  final double height;
 
-  double showCount;
+  final double showCount;
 
-  double gap;
+  final double gap;
 
-  // final Radius radius;
-  BorderRadius? borderRadius;
+  final BorderRadius? borderRadius;
 
   /// 阴影
-  List<BoxShadow>? boxShadows;
+  final List<BoxShadow>? boxShadows;
 
-  bool isSwiper;
+  final bool isSwiper;
 
   @override
   _HorizontalScrollWidgetState createState() => _HorizontalScrollWidgetState();
 }
 
 class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
-  final List<AttrCarouseItem> _items = [];
+  List<AttrCarouseItem> get _items => widget.items;
 
   /// 根据 maxWidth 计算 item 宽度
   double getItemWidth(double maxWidth) {
@@ -76,6 +76,9 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
   @override
   void dispose() {
     _scrollController.dispose();
+    currentIndex.dispose();
+    scrollerOffset.dispose();
+    isScrolling.dispose();
     super.dispose();
   }
 
@@ -94,10 +97,14 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isSwiper) {
-      return buildSwiper();
-    }
-    return buildListView();
+    final child = widget.isSwiper ? buildSwiper() : buildListView();
+    final height = widget.height.isFinite ? widget.height : 120.0;
+    final width = widget.width.isFinite ? widget.width : null;
+    return SizedBox(
+      width: width,
+      height: height,
+      child: child,
+    );
   }
 
   Widget buildListView() {
@@ -167,6 +174,8 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
     }
 
     final itemWidth = getItemWidth(maxWidth);
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    final cacheWidth = NNetworkImage.cachePx(itemWidth, dpr);
 
     return InkWell(
       onTap: () => onClick(model, index),
@@ -189,8 +198,14 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
                 ),
                 child: FadeInImage(
                   placeholder: AssetImage(Assets.imagesImgPlaceholder),
-                  image: NetworkImage(model.icon ?? ''),
+                  image: ResizeImage.resizeIfNeeded(
+                    cacheWidth,
+                    null,
+                    NetworkImage(model.icon ?? ''),
+                  ),
                   fit: BoxFit.cover,
+                  width: itemWidth,
+                  height: widget.height.isFinite ? widget.height : 120,
                 ),
               ),
               if ([3, 4].contains(model.contentType))

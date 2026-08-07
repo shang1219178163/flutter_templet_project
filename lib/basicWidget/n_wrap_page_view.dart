@@ -93,10 +93,11 @@ class _NWrapPageViewState<T> extends State<NWrapPageView<T>> {
   final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   int get _pageCount {
-    if (widget.items.isEmpty) {
+    final pageSize = widget.pageSize;
+    if (widget.items.isEmpty || pageSize <= 0) {
       return 0;
     }
-    return (widget.items.length / widget.pageSize).ceil();
+    return (widget.items.length / pageSize).ceil();
   }
 
   @override
@@ -107,8 +108,24 @@ class _NWrapPageViewState<T> extends State<NWrapPageView<T>> {
   }
 
   @override
+  void didUpdateWidget(covariant NWrapPageView<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final maxPage = _pageCount - 1;
+    if (maxPage < 0) {
+      _currentPage.value = 0;
+      return;
+    }
+    if (_currentPage.value > maxPage) {
+      _currentPage.value = maxPage;
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(maxPage);
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (widget.items.isEmpty || _pageCount == 0) {
+    if (widget.items.isEmpty || _pageCount == 0 || widget.pageSize <= 0) {
       return const SizedBox.shrink();
     }
 

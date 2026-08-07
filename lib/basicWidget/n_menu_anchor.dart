@@ -16,6 +16,7 @@ class NMenuAnchor<E> extends StatelessWidget {
     this.controller,
     this.style,
     this.dropButtonStyle,
+    this.scrollController,
     this.constraints,
     this.decoration,
     required this.values,
@@ -33,6 +34,8 @@ class NMenuAnchor<E> extends StatelessWidget {
   final MenuController? controller;
   final MenuStyle? style;
   final ButtonStyle? dropButtonStyle;
+
+  final ScrollController? scrollController;
 
   /// 下拉框约束
   final BoxConstraints? constraints;
@@ -163,12 +166,10 @@ class NMenuAnchor<E> extends StatelessWidget {
   }
 
   Widget buildMenu({
-    required BoxConstraints constraints,
+    required BoxConstraints? constraints,
     required BoxDecoration? decoration,
     required List<Widget> children,
   }) {
-    final scrollController = ScrollController();
-
     return Container(
       constraints: constraints,
       decoration: decoration,

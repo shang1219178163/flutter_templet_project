@@ -38,12 +38,20 @@ class NSlidingSegmentedPageView extends StatefulWidget {
 }
 
 class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
-  late final selectedIndexVN = ValueNotifier(widget.selectedIndex.clamp(0, widget.items.length));
+  late final selectedIndexVN = ValueNotifier(_clampIndex(widget.selectedIndex));
 
-  late var pageController = PageController(initialPage: widget.selectedIndex, keepPage: true);
+  late var pageController = PageController(initialPage: _clampIndex(widget.selectedIndex), keepPage: true);
+
+  int _clampIndex(int index) {
+    if (widget.items.isEmpty) {
+      return 0;
+    }
+    return index.clamp(0, widget.items.length - 1);
+  }
 
   @override
   void dispose() {
+    selectedIndexVN.dispose();
     pageController.dispose();
     super.dispose();
   }
@@ -55,8 +63,10 @@ class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
         oldWidget.selectedIndex != widget.selectedIndex ||
         oldWidget.segmentedBuilder != widget.segmentedBuilder ||
         oldWidget.middleBuilder != widget.middleBuilder) {
-      selectedIndexVN.value = widget.selectedIndex.clamp(0, widget.items.length);
-      pageController = PageController(initialPage: widget.selectedIndex, keepPage: true);
+      final nextIndex = _clampIndex(widget.selectedIndex);
+      selectedIndexVN.value = nextIndex;
+      pageController.dispose();
+      pageController = PageController(initialPage: nextIndex, keepPage: true);
       setState(() {});
     }
   }

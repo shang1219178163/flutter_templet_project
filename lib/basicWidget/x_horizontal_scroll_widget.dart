@@ -70,12 +70,12 @@ class XHorizontalScrollWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isSwiper) {
-      return buildBodySwiper();
+      return buildBodySwiper(context);
     }
-    return buildBody();
+    return buildBody(context);
   }
 
-  Widget buildBody() {
+  Widget buildBody(BuildContext context) {
     return Container(
         width: width,
         height: height,
@@ -98,11 +98,12 @@ class XHorizontalScrollWidget extends StatelessWidget {
         ),
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: items.map((e) => buildItem(e: e)).toList(),
+          children: items.map((e) => buildItem(context: context, e: e)).toList(),
         ));
   }
 
   Widget buildItem({
+    required BuildContext context,
     required Tuple4<String, String, String, bool> e,
   }) {
     var itemWidth = getItemWidth();
@@ -136,6 +137,8 @@ class XHorizontalScrollWidget extends StatelessWidget {
         padding = EdgeInsets.only(left: 0, right: 0);
       }
     }
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
+    final cacheWidth = (itemWidth * devicePixelRatio).round().clamp(1, 1024);
 
     return InkWell(
       onTap: () {
@@ -163,6 +166,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                           width: itemWidth,
                           height: double.infinity,
+                          imageCacheWidth: cacheWidth,
                         ),
                 ),
               ),
@@ -242,7 +246,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
     );
   }
 
-  Widget buildBodySwiper() {
+  Widget buildBodySwiper(BuildContext context) {
     return Container(
       width: width,
       height: height,
@@ -259,7 +263,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             final e = items[index];
-            return buildItem(e: e);
+            return buildItem(context: context, e: e);
           },
           indicatorLayout: PageIndicatorLayout.COLOR,
           autoplay: true,

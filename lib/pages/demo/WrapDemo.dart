@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_wrap_page_view.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
@@ -22,8 +22,7 @@ class _WrapDemoState extends State<WrapDemo> {
   ];
 
   /// 仅取阿里云图，便于服务端缩略；首帧后再挂载，避免进页即并发下载
-  late final List<String> imageUrls =
-      AppRes.image.urls.where((e) => e.contains('.aliyuncs.com')).take(16).toList();
+  late final List<String> imageUrls = AppRes.image.urls.where((e) => e.contains('.aliyuncs.com')).take(16).toList();
 
   var _showNetworkImages = false;
 

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/CacheImageProvider.dart';
 
@@ -125,47 +126,29 @@ class NImage extends StatelessWidget {
   Widget buildImageWidget(ImageProvider imageProvider) {
     final placeholderWidget = buildPlaceholderWidget();
     final errorView = buildErrorWidget();
-    Widget image = Image(
-      image: imageProvider,
-      width: width,
-      height: height,
-      fit: fit,
-      color: color,
-      colorBlendMode: colorBlendMode,
-      errorBuilder: (_, __, ___) => errorView,
-      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-        if (wasSynchronouslyLoaded || frame != null) {
-          return child;
-        }
-        return placeholderWidget;
-      },
-      loadingBuilder: showLoadingProgress
-          ? (context, child, loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              final expectedTotalBytes = loadingProgress.expectedTotalBytes;
-              final progressValue = expectedTotalBytes == null || expectedTotalBytes == 0
-                  ? 0.0
-                  : loadingProgress.cumulativeBytesLoaded / expectedTotalBytes;
-              return Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  placeholderWidget,
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(value: progressValue),
-                  ),
-                ],
-              );
+    Widget image = Builder(
+      builder: (context) {
+        final screenSize = MediaQuery.sizeOf(context);
+        final dpr = MediaQuery.devicePixelRatioOf(context);
+        final cacheW = NNetworkImage.cachePx(width, dpr) ?? NNetworkImage.cachePx(screenSize.width, dpr);
+        final cacheH = NNetworkImage.cachePx(height, dpr);
+        return Image(
+          image: ResizeImage.resizeIfNeeded(cacheW, cacheH, imageProvider),
+          width: width,
+          height: height,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode,
+          errorBuilder: (_, __, ___) => errorView,
+          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+            if (wasSynchronouslyLoaded || frame != null) {
+              return child;
             }
-          : (context, child, loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return placeholderWidget;
-            },
+            return placeholderWidget;
+          },
+          loadingBuilder: buildLoadingBuilder,
+        );
+      },
     );
     if (borderRadius != null) {
       image = ClipRRect(
@@ -174,6 +157,37 @@ class NImage extends StatelessWidget {
       );
     }
     return image;
+  }
+
+  /// 加载中：已完成返回 [child]；否则按 [showLoadingProgress] 显示进度或占位图
+  Widget buildLoadingBuilder(BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+    if (loadingProgress == null) {
+      return child;
+    }
+    if (!showLoadingProgress) {
+      return buildPlaceholderWidget();
+    }
+    final expectedTotalBytes = loadingProgress.expectedTotalBytes;
+    final progressValue = expectedTotalBytes == null || expectedTotalBytes == 0
+        ? 0.0
+        : loadingProgress.cumulativeBytesLoaded / expectedTotalBytes;
+    return Container(
+      width: width,
+      height: height,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: placeholder,
+          fit: fit,
+        ),
+        borderRadius: borderRadius,
+      ),
+      child: SizedBox(
+        width: 24,
+        height: 24,
+        child: CircularProgressIndicator(value: progressValue),
+      ),
+    );
   }
 
   Widget buildImageFromProvider(

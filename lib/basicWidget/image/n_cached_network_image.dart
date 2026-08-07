@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 
 /// 网络图片
 class NCachedNetworkImage extends StatelessWidget {
@@ -88,6 +89,7 @@ class NCachedNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dpr = MediaQuery.devicePixelRatioOf(context);
     final widthNew = resolveSize(width);
     final heightNew = resolveSize(height);
     final blendModeNew = colorBlendMode ?? BlendMode.srcIn;
@@ -103,6 +105,10 @@ class NCachedNetworkImage extends StatelessWidget {
             placeholderWidget,
       );
     }
+    final memW = resolveMemCache(memCacheWidth) ??
+        NNetworkImage.cachePx(widthNew, dpr) ??
+        NNetworkImage.cachePx(MediaQuery.sizeOf(context).width, dpr);
+    final memH = resolveMemCache(memCacheHeight) ?? NNetworkImage.cachePx(heightNew, dpr);
     return CachedNetworkImage(
       imageUrl: url,
       httpHeaders: httpHeaders,
@@ -122,10 +128,10 @@ class NCachedNetworkImage extends StatelessWidget {
       fadeOutCurve: fadeOutCurve,
       placeholderFadeInDuration: placeholderFadeInDuration,
       useOldImageOnUrlChange: useOldImageOnUrlChange,
-      memCacheWidth: resolveMemCache(memCacheWidth) ?? resolveMemCache(widthNew, scale: 3),
-      memCacheHeight: resolveMemCache(memCacheHeight) ?? resolveMemCache(heightNew, scale: 3),
-      maxWidthDiskCache: maxWidthDiskCache,
-      maxHeightDiskCache: maxHeightDiskCache,
+      memCacheWidth: memW,
+      memCacheHeight: memH,
+      maxWidthDiskCache: maxWidthDiskCache ?? memW,
+      maxHeightDiskCache: maxHeightDiskCache ?? memH,
       placeholder: placeholder ?? ((_, __) => placeholderWidget),
       progressIndicatorBuilder: progressIndicatorBuilder,
       errorWidget: errorWidget ?? ((_, __, ___) => placeholderWidget),
@@ -167,8 +173,8 @@ class NCachedNetworkImage extends StatelessWidget {
     return value;
   }
 
-  /// memCache 像素，须 > 0
-  int? resolveMemCache(num? value, {int scale = 1}) {
+  /// memCache 像素，须 > 0（显式传入时不再额外乘 scale）
+  int? resolveMemCache(num? value) {
     if (value == null) {
       return null;
     }
@@ -176,7 +182,7 @@ class NCachedNetworkImage extends StatelessWidget {
     if (!v.isFinite || v <= 0) {
       return null;
     }
-    return v.toInt() * scale;
+    return v.round().clamp(1, NNetworkImage.maxCachePx);
   }
 
   Widget buildPlaceholder({double? width, double? height, Widget? child}) {

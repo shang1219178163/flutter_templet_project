@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_shader_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -8,7 +6,7 @@ import 'package:flutter_templet_project/generated/assets.dart';
 
 /// 档案文字展开/收起组件
 class RecordExpandText extends StatefulWidget {
-  RecordExpandText({
+  const RecordExpandText({
     super.key,
     required this.text,
     this.textStyle = const TextStyle(

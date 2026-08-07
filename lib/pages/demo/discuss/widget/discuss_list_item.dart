@@ -9,7 +9,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_cached_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/image/n_cached_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';

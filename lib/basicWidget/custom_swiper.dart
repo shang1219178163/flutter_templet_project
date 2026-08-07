@@ -27,34 +27,40 @@ class CustomSwipper extends StatefulWidget {
 
 class _CustomSwipperState extends State<CustomSwipper> {
   int _curIndex = 0;
-  PageController _pageController = PageController(initialPage: 0);
+  late PageController _pageController;
 
   Timer? _timer;
+  Timer? _jumpTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    final length = widget.images.length;
+    _curIndex = length > 0 ? length * 5 : 0;
+    _pageController = PageController(initialPage: _curIndex);
+    if (length > 0) {
+      _initTimer();
+    }
+  }
 
   @override
   void dispose() {
+    _cancelTimer(restart: false);
+    _jumpTimer?.cancel();
     _pageController.dispose();
     super.dispose();
   }
 
   @override
-  void initState() {
-    super.initState();
-    _curIndex = widget.images.length * 5;
-    _pageController = PageController(initialPage: _curIndex);
-    _initTimer();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    if (widget.images.isEmpty) {
+      return SizedBox(height: widget.height);
+    }
+
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         buildPageView(),
-        // Positioned(
-        //   bottom: 10,
-        //   child: _buildIndicator(),
-        // ),
         Positioned(
           bottom: 10,
           child: buildIndicatorNew(),
@@ -105,16 +111,19 @@ class _CustomSwipperState extends State<CustomSwipper> {
       child: PageView.builder(
         controller: _pageController,
         onPageChanged: (index) {
-          setState(() {
-            _curIndex = index;
-            if (index == 0) {
-              _curIndex = length;
-              _changePage();
-            }
-            debugPrint("_curIndex:$_curIndex");
-          });
+          _curIndex = index;
+          if (index == 0) {
+            _curIndex = length;
+            _changePage();
+          }
+          debugPrint("_curIndex:$_curIndex");
+          setState(() {});
         },
         itemBuilder: (context, index) {
+          final screenSize = MediaQuery.sizeOf(context);
+          final dpr = MediaQuery.devicePixelRatioOf(context);
+          final imageCacheWidth = (screenSize.width * dpr).round().clamp(1, 1024);
+
           return GestureDetector(
             onPanDown: (details) {
               _cancelTimer();
@@ -131,6 +140,8 @@ class _CustomSwipperState extends State<CustomSwipper> {
                     placeholder: 'images/img_placeholder.png',
                     image: widget.images[index % length],
                     fit: BoxFit.cover,
+                    height: widget.height,
+                    imageCacheWidth: imageCacheWidth,
                   ),
           );
         },
@@ -138,18 +149,24 @@ class _CustomSwipperState extends State<CustomSwipper> {
     );
   }
 
-  /// 点击到图片的时候取消定时任务
-  _cancelTimer() {
-    if (_timer != null) {
-      _timer?.cancel();
-      // _timer = null;
+  /// 点击到图片的时候取消定时任务，随后重新开始
+  void _cancelTimer({bool restart = true}) {
+    _timer?.cancel();
+    _timer = null;
+    if (restart) {
       _initTimer();
     }
   }
 
   /// 初始化定时任务
-  _initTimer() {
+  void _initTimer() {
+    if (widget.images.isEmpty) {
+      return;
+    }
     _timer ??= Timer.periodic(widget.duration ?? Duration(seconds: 3), (t) {
+      if (!mounted) {
+        return;
+      }
       _curIndex++;
       _pageController.animateToPage(
         _curIndex,
@@ -160,10 +177,14 @@ class _CustomSwipperState extends State<CustomSwipper> {
   }
 
   /// 切换页面，并刷新小圆点
-  _changePage() {
+  void _changePage() {
     debugPrint("_changePage:$_curIndex");
 
-    Timer(Duration(milliseconds: 350), () {
+    _jumpTimer?.cancel();
+    _jumpTimer = Timer(Duration(milliseconds: 350), () {
+      if (!mounted) {
+        return;
+      }
       _pageController.jumpToPage(_curIndex);
     });
   }

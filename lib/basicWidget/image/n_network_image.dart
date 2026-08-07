@@ -47,7 +47,7 @@ class NNetworkImage extends StatelessWidget {
 
   final ExtendedImageMode mode;
 
-  static const int _maxCachePx = 1024;
+  static const int maxCachePx = 1024;
 
   @override
   Widget build(BuildContext context) {
@@ -66,17 +66,21 @@ class NNetworkImage extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        final screenSize = MediaQuery.sizeOf(context);
         final w = width ?? finiteOrNull(constraints.maxWidth);
         final h = height ?? finiteOrNull(constraints.maxHeight);
-        return buildNetworkImage(context, w, h);
+        // 无有效约束时用屏宽兜底，避免原图解码
+        final fallbackW = w ?? screenSize.width;
+        return buildNetworkImage(context, fallbackW, h);
       },
     );
   }
 
   Widget buildNetworkImage(BuildContext context, double? logicalWidth, double? logicalHeight) {
+    final screenSize = MediaQuery.sizeOf(context);
     final dpr = MediaQuery.devicePixelRatioOf(context);
     // 只约束宽度，保留比例，避免宽高同时指定导致异常放大解码
-    final cacheWidth = cachePx(logicalWidth, dpr);
+    final cacheWidth = cachePx(logicalWidth, dpr) ?? cachePx(screenSize.width, dpr);
     final requestUrl = resolveRequestUrl(url, cacheWidth);
     final borderRadius = BorderRadius.circular(radius);
 
@@ -147,6 +151,6 @@ class NNetworkImage extends StatelessWidget {
     if (px <= 0) {
       return null;
     }
-    return px.clamp(1, _maxCachePx);
+    return px.clamp(1, maxCachePx);
   }
 }
