@@ -21,10 +21,8 @@ class _WrapDemoState extends State<WrapDemo> {
     Colors.amberAccent,
   ];
 
-  /// 仅取阿里云图，便于服务端缩略；首帧后再挂载，避免进页即并发下载
+  /// 仅取阿里云图，便于服务端缩略
   late final List<String> imageUrls = AppRes.image.urls.where((e) => e.contains('.aliyuncs.com')).take(16).toList();
-
-  var _showNetworkImages = false;
 
   @override
   void initState() {
@@ -32,28 +30,22 @@ class _WrapDemoState extends State<WrapDemo> {
     final cache = PaintingBinding.instance.imageCache;
     cache.maximumSize = 40;
     cache.maximumSizeBytes = 20 << 20; // 20MB
-    logImageCache('WrapDemo.initState');
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      setState(() => _showNetworkImages = true);
-      logImageCache('WrapDemo.afterFirstFrame');
-    });
+    testCache('WrapDemo.initState');
   }
 
   @override
   void dispose() {
     PaintingBinding.instance.imageCache.clear();
-    logImageCache('WrapDemo.dispose');
+    testCache('WrapDemo.dispose');
     super.dispose();
   }
 
-  void logImageCache(String tag) {
-    final c = PaintingBinding.instance.imageCache;
+  void testCache(String tag) {
+    final imageCache = PaintingBinding.instance.imageCache;
     DLog.d(
-      '[$tag] imageCache size=${c.currentSize} '
-      'bytes=${(c.currentSizeBytes / 1024 / 1024).toStringAsFixed(2)}MB '
-      'maxBytes=${(c.maximumSizeBytes / 1024 / 1024).toStringAsFixed(0)}MB',
+      '[$tag] imageCache size=${imageCache.currentSize} '
+      'bytes=${(imageCache.currentSizeBytes / 1024 / 1024).toStringAsFixed(2)}MB '
+      'maxBytes=${(imageCache.maximumSizeBytes / 1024 / 1024).toStringAsFixed(0)}MB',
     );
   }
 
@@ -65,7 +57,7 @@ class _WrapDemoState extends State<WrapDemo> {
         actions: [
           IconButton(
             tooltip: '打印 ImageCache',
-            onPressed: () => logImageCache('manual'),
+            onPressed: () => testCache('manual'),
             icon: const Icon(Icons.memory),
           ),
         ],
@@ -87,16 +79,11 @@ class _WrapDemoState extends State<WrapDemo> {
               child: buildWrapPageView(),
             ),
             NSectionBox(
-              title: "网图分页（OSS 缩略 · 每页 8 张 · 首帧后加载）",
+              title: "网图分页（OSS 缩略 · 每页 8 张）",
               mainAxisSize: MainAxisSize.min,
               child: Container(
                 margin: const EdgeInsets.all(12),
-                child: _showNetworkImages
-                    ? buildWrapBox()
-                    : const SizedBox(
-                        height: 200,
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
+                child: buildWrapBox(),
               ),
             ),
           ],
@@ -155,7 +142,7 @@ class _WrapDemoState extends State<WrapDemo> {
         rowCount: 2,
         spacing: 8,
         runSpacing: 8,
-        onPageChanged: (_) => logImageCache('pageChanged'),
+        onPageChanged: (_) => testCache('pageChanged'),
         itemBuilder: (context, index) {
           return Column(
             children: [
