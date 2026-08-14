@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
+import 'package:get/get.dart';
 
 /// 开发工具列表
 class DevelopToolList extends StatefulWidget {
@@ -23,6 +23,7 @@ class _DevelopToolListState extends State<DevelopToolList> {
     Tuple2("字符串转换", AppRouter.stringTransformPage),
     Tuple2("json转model", AppRouter.jsonToModel),
   ];
+
 
   @override
   Widget build(BuildContext context) {

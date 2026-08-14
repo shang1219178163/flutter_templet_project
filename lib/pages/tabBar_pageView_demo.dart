@@ -13,9 +13,10 @@ import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
+import 'package:get/get.dart';
 
 class TabBarPageViewDemo extends StatefulWidget {
   final String? title;
@@ -269,7 +270,6 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
             trailing: Icon(Icons.keyboard_arrow_right_rounded),
             dense: true,
             onTap: () {
-              Get.toNamed(e.item1, arguments: e);
               if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
                 Get.offNamed(e.item1, arguments: e.item1);
               } else {

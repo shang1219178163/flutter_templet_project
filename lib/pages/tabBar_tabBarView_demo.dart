@@ -18,8 +18,8 @@ import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/RouteNameSearchPage.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
+import 'package:get/get.dart';
 
 class TabBarTabBarViewDemo extends StatefulWidget {
   const TabBarTabBarViewDemo({Key? key}) : super(key: key);

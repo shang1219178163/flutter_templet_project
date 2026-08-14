@@ -114,6 +114,9 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
                           Navigator.pop(context);
 
                           final name = e.arguments?["name"] as String? ?? "";
+                          if (name.isEmpty) {
+                            return;
+                          }
                           Get.toNamed(name,
                               arguments: RouteSettings(
                                 name: name,

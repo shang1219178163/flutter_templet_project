@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_search.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:get/get.dart';
 
 class RouteNameSearchPage extends StatefulWidget {
   RouteNameSearchPage({
