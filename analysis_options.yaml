@@ -8,11 +8,14 @@ analyzer:
     - ".dart_tool/**"
     - "ios/**"
     - "android/**"
-    - "macos/**"
     - "windows/**"
     - "web/**"
     - "assets/images/**"
     - "graphify-out/**"
+    # 嵌套工程：macos/ 下误含完整 Flutter 工程（含 android/ios/windows/lib/pubspec.yaml）
+    - "macos/**"
+    - "apps/**"
+    - "packages/**"
 
 formatter:
   # Dart 3.7+ 才读取此项；当前工程是 Dart 3.6，IDE 以 dart.lineLength 为准。
