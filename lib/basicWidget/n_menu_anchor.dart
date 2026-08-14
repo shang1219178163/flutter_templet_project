@@ -170,19 +170,24 @@ class NMenuAnchor<E> extends StatelessWidget {
     required BoxDecoration? decoration,
     required List<Widget> children,
   }) {
+    // primary: false，避免与页面 ListView 共用 PrimaryScrollController；
+    // 未传入 scrollController 时不要用 thumbVisibility Scrollbar（会强制挂 Primary）。
+    final scrollView = SingleChildScrollView(
+      controller: scrollController,
+      primary: false,
+      child: Column(children: children),
+    );
+
     return Container(
       constraints: constraints,
       decoration: decoration,
-      child: Scrollbar(
-        controller: scrollController,
-        thumbVisibility: true,
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            children: children,
-          ),
-        ),
-      ),
+      child: scrollController == null
+          ? scrollView
+          : Scrollbar(
+              controller: scrollController,
+              thumbVisibility: true,
+              child: scrollView,
+            ),
     );
   }
 }

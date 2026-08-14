@@ -38,8 +38,8 @@ class AppRouterLazyLoader {
         ..clear()
         ..addAll(pages.map((e) => e.name));
       _ready = true;
-    } catch (e, st) {
-      debugPrint('AppRouterLazyLoader: failed to load demo routes: $e\n$st');
+    } catch (e, s) {
+      debugPrint('AppRouterLazyLoader: failed to load lazy routes: $e\n$s');
       rethrow;
     } finally {
       // Allow retry after failure (or clear in-flight handle after success).

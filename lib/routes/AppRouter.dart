@@ -337,6 +337,8 @@ class AppRouter {
   static const String imChatPage = '/imChatPage';
   static const String imChatSettingPage = '/imChatSettingPage';
   static const String imChatBubbleChange = '/ImChatBubbleChange';
+  static const String aiChatPage = '/AIChatPage';
+  static const String aiChatSettingPage = '/AIChatSettingPage';
   static const String imConversationPage = '/ImConversationPage';
   static const String livestreamEffectPage = '/livestreamEffectPage';
   static const String soundPlayDemo = '/soundPlayDemo';

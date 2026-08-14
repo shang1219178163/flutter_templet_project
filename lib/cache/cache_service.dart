@@ -31,7 +31,12 @@ enum CacheKey {
   tagRootModel(needLogin: true, desc: "标签缓存"),
   accountList(needLogin: false, desc: "账号列表"),
   lastPageRoute(needLogin: true, desc: "重启app前页面路由"),
-  recoverLastPageRoute(needLogin: true, desc: "是否恢复重启前页面路由");
+  recoverLastPageRoute(needLogin: true, desc: "是否恢复重启前页面路由"),
+
+  aiApiKey(needLogin: false, desc: "AI 对话 API Key"),
+  aiModelUrl(needLogin: false, desc: "AI 请求地址"),
+  aiModelList(needLogin: false, desc: "AI 模型列表"),
+  aiModelName(needLogin: false, desc: "AI 所选模型");
 
   const CacheKey({
     required this.desc,

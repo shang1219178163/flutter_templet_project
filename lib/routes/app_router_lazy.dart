@@ -7,6 +7,8 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo
 import 'package:flutter_templet_project/pages/IrregularClipperDemo.dart';
 import 'package:flutter_templet_project/pages/ScrollablePositionedListDemo.dart';
 import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatPage.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatSettingPage.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
@@ -1477,6 +1479,14 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.imChatPage,
       page: () => ImChatPage(),
+    ),
+    GetPage(
+      name: AppRouter.aiChatPage,
+      page: () => AIChatPage(),
+    ),
+    GetPage(
+      name: AppRouter.aiChatSettingPage,
+      page: () => AIChatSettingPage(),
     ),
     GetPage(
       name: AppRouter.imChatSettingPage,
