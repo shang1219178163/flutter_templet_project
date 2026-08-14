@@ -12,6 +12,12 @@ analyzer:
     - "windows/**"
     - "web/**"
     - "assets/images/**"
+    - "graphify-out/**"
+
+formatter:
+  # Dart 3.7+ 才读取此项；当前工程是 Dart 3.6，IDE 以 dart.lineLength 为准。
+  page_width: 120
+  trailing_commas: preserve  # 保留你手动添加的尾随逗号
 
   errors:
     deprecated_member_use: ignore

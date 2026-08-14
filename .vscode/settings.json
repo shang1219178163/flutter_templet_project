@@ -5,5 +5,20 @@
     "LTWH",
     "raduis",
     "templet"
-  ]
+  ],
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/build/**": true,
+    "**/.dart_tool/**": true,
+    "**/.fvm/**": true,
+    "**/ios/Pods/**": true,
+    "**/macos/Pods/**": true,
+    "**/macos/android/**": true,
+    "**/macos/ios/**": true,
+    "**/macos/windows/**": true,
+    "**/macos/build/**": true,
+    "**/android/.gradle/**": true,
+    "**/android/app/build/**": true
+  }
 }
