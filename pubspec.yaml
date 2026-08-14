@@ -321,8 +321,18 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    # `assets/` 已递归包含子目录
+    # Flutter 目录条目只包含该目录下的文件，子目录需单独声明
     - assets/
+    - assets/translations/
+    - assets/data/
+    - assets/images/
+    - assets/images/curve/
+    - assets/images/message/
+    - assets/images/shop/
+    - assets/images/points/
+    - assets/images/discuss/
+    - assets/images/input_bar/
+    - assets/media/
 
 flutter_assets_generator:
   assets_path: assets/

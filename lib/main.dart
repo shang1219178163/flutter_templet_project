@@ -102,12 +102,12 @@ Future<void> main() async {
   await Future.wait([
     EasyLocalization.ensureInitialized(),
     ScreenUtil.ensureScreenSize(),
+    AppRouter.lazyLoadRoutes(),
     CacheService().init(),
     DBManager().init(),
     initServices(),
     initDebugInfo(),
   ]);
-
 
   // AppInit.catchException(() => runApp(MyApp()));
   runApp(

@@ -39,10 +39,15 @@ class AppRouteObserver {
     }
     final lastRouteInfo = CacheService().getMap(CacheKey.lastPageRoute.name) ?? {};
     final settings = RouteSettingsExt.fromJson(lastRouteInfo);
-    if (AppRouter.pages.firstWhereOrNull((e) => e.name == settings.name) == null) {
+    final name = settings.name;
+    if (name == null) {
       return;
     }
-    await Get.toNamed(settings.name!, arguments: settings.arguments);
+    await AppRouter.lazyLoadRoutes();
+    if (!AppRouter.hasRoute(name)) {
+      return;
+    }
+    await Get.toNamed(name, arguments: settings.arguments);
   }
 }
 
