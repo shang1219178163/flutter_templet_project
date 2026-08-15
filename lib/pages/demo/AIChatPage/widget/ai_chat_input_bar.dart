@@ -58,6 +58,7 @@ class AiChatInputBar extends StatelessWidget {
                         final current = controller.model;
                         final short = current.length > 16 ? '${current.substring(0, 16)}…' : current;
                         return NMenuAnchor<String>(
+                          key: ValueKey('${controller.provider.name}_$current'),
                           values: controller.selectableModels,
                           initialItem: current,
                           equal: (a, b) => a == b,

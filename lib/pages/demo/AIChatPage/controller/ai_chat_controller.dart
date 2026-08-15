@@ -7,6 +7,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/mixin/safe_change_notifier_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_chat_models.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_env_service.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider_config.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
 
 /// AI 对话状态：消息列表、流式标记、打字缓冲。
@@ -20,6 +23,20 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   }
 
   final SwitchingAiChatStreamSource _source;
+
+  /// 各 provider 独立配置（策略注册表）
+  final Map<AiProvider, AiProviderConfig> _configs = {
+    for (final p in AiProvider.values) p: AiProviderConfig(p),
+  };
+
+  /// 当前选中的 provider
+  AiProvider _currentProvider = AiProvider.deepseek;
+
+  AiProvider get provider => _currentProvider;
+
+  AiProviderConfig get currentConfig => _configs[_currentProvider]!;
+
+  AiProviderConfig configOf(AiProvider p) => _configs[p]!;
 
   final List<AiChatMessage> _messages = [];
 
@@ -38,32 +55,34 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   bool get useMock => _source.useMock;
 
-  String get sseUrl => _source.sseUrl;
+  String get sseUrl => currentConfig.baseUrl;
 
-  String get apiKey => _source.remote.apiKey;
+  String get apiKey => currentConfig.apiKey;
 
-  String get model => _source.remote.model;
+  String get model => currentConfig.model;
 
   /// 由当前 completions URL 推导的 models 地址
-  String get modelsUrl => _source.modelsUrl;
+  String get modelsUrl => currentConfig.modelsUrl;
 
-  /// 设置页拉取并缓存的模型 id 列表
-  List<String> _models = [];
-
-  List<String> get models => List.unmodifiable(_models);
+  /// 当前 provider 拉取并缓存的模型 id 列表
+  List<String> get models => currentConfig.models;
 
   set models(List<String> value) {
-    _models = List.of(value);
+    currentConfig.models = List.of(value);
+    _persistConfig();
+    // 列表刷新后若当前 model 不属于该 provider，立刻改回合法值并同步 remote
+    _ensureModelInList();
+    _syncActiveRemote();
     notifyListeners();
   }
 
   /// 下拉可选模型（无缓存时至少包含当前模型）
   List<String> get selectableModels {
-    final current = model.isEmpty ? kAiDefaultModel : model;
-    if (_models.isEmpty) {
+    final current = model.isEmpty ? provider.defaultModel : model;
+    if (models.isEmpty) {
       return [current];
     }
-    return _models.contains(current) ? List.of(_models) : [current, ..._models];
+    return models.contains(current) ? List.of(models) : [current, ...models];
   }
 
   /// 取消当前 HTTP / Mock 流
@@ -90,17 +109,60 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   /// 切换 Mock / Remote（流式中勿调）
   void setUseMock(bool value) => _setField(() => _source.useMock = value, _source.useMock == value);
 
-  void setSseUrl(String url) => _setField(() => _source.sseUrl = url, _source.sseUrl == url);
-
-  void setApiKey(String key) => _setField(() => _source.remote.apiKey = key, apiKey == key);
-
-  /// 更新模型并写入缓存；下次 Remote 发送即生效
-  void setModel(String value) {
-    if (model == value) {
+  void setSseUrl(String url) {
+    if (currentConfig.baseUrl == url) {
       return;
     }
-    _source.remote.model = value;
-    CacheService().setString(CacheKey.aiModelName.name, value);
+    currentConfig.baseUrl = url;
+    _syncActiveRemote();
+    _persistConfig();
+    notifyListeners();
+  }
+
+  void setApiKey(String key) {
+    if (currentConfig.apiKey == key) {
+      return;
+    }
+    currentConfig.apiKey = key;
+    _syncActiveRemote();
+    _persistConfig();
+    notifyListeners();
+  }
+
+  /// 更新模型并写入当前 provider 缓存；下次 Remote 发送即生效
+  void setModel(String value) {
+    if (currentConfig.model == value) {
+      return;
+    }
+    currentConfig.model = value;
+    _syncActiveRemote();
+    _persistConfig();
+    notifyListeners();
+  }
+
+  /// 配置加载代际：丢弃过期的 [loadConfigFromCache]，避免覆盖用户刚切的 provider
+  int _configLoadEpoch = 0;
+
+  /// 切换 provider：先落盘当前，再载入目标（流式中拒绝）
+  Future<void> setProvider(AiProvider p) async {
+    if (p == _currentProvider || !mounted) {
+      return;
+    }
+    if (_isStreaming) {
+      return;
+    }
+    // 作废进行中的缓存加载，防止异步回调把 provider 改回去
+    _configLoadEpoch++;
+    await _writeConfigToCache(_currentProvider);
+    _currentProvider = p;
+    await CacheService().setString(CacheKey.aiProvider.name, p.name);
+    // 目标可能尚未写入过缓存：再读一次以合并 .env 兜底
+    await _loadProviderConfigFromCache(p);
+    _ensureModelInList();
+    _syncActiveRemote();
+    // 切换后端后清空会话，避免带着 Kimi 历史让 DeepSeek「接着扮 Kimi」
+    _messages.clear();
+    _errorMessage = null;
     notifyListeners();
   }
 
@@ -112,29 +174,109 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     notifyListeners();
   }
 
-  /// 从本地缓存恢复 API Key / URL / 模型名 / 模型列表
-  Future<void> loadConfigFromCache() async {
-    final cache = CacheService();
-    await cache.init();
-    if (!mounted) {
+  /// 激活的 remote 与当前 config 对齐
+  void _syncActiveRemote() {
+    final c = currentConfig;
+    _source.remote
+      ..url = c.baseUrl
+      ..apiKey = c.apiKey
+      ..model = c.model;
+  }
+
+  /// 当前 model 不在列表中时，回退到默认或列表首项
+  void _ensureModelInList() {
+    final c = currentConfig;
+    if (c.model.isEmpty) {
+      c.model = provider.defaultModel;
       return;
     }
-    final key = cache.getString(CacheKey.aiApiKey.name);
-    if (key != null && key.isNotEmpty) {
-      setApiKey(key);
+    if (c.models.isEmpty) {
+      return;
     }
-    final url = cache.getString(CacheKey.aiModelUrl.name);
-    if (url != null && url.isNotEmpty) {
-      setSseUrl(url);
+    if (c.models.contains(c.model)) {
+      return;
     }
-    final name = cache.getString(CacheKey.aiModelName.name);
+    c.model = c.models.contains(provider.defaultModel)
+        ? provider.defaultModel
+        : c.models.first;
+    _persistConfig();
+  }
+
+  FutureOr<void> _persistConfig([AiProvider? p]) {
+    final target = p ?? provider;
+    return CacheService().setMap(
+      aiConfigCacheKey(target).name,
+      _configs[target]!.toJson(),
+    );
+  }
+
+  Future<void> _writeConfigToCache(AiProvider p) async {
+    final cache = CacheService();
+    await cache.init();
+    await _persistConfig(p);
+  }
+
+  Future<void> _loadProviderConfigFromCache(AiProvider p) async {
+    final cache = CacheService();
+    await cache.init();
+    final c = _configs[p]!;
+    final map = cache.getMap(aiConfigCacheKey(p).name);
+    if (map != null && map.isNotEmpty) {
+      c.applyJson(map);
+    }
+    // 空串视为未配置，继续走 .env / 默认值，避免被空缓存挡住
+    if (c.apiKey.isEmpty) {
+      c.apiKey = AiEnvService.keyFor(p.name) ??
+          (p == AiProvider.deepseek ? kAiDefaultApiKey : '');
+    }
+    if (c.baseUrl.isEmpty) {
+      c.baseUrl = p.defaultBaseUrl;
+    }
+    // 旧版 Kimi 缓存指向国际区域名 api.moonshot.ai（会 401），迁移到中国区默认
+    if (p == AiProvider.kimi && c.baseUrl.contains('api.moonshot.ai')) {
+      c.baseUrl = p.defaultBaseUrl;
+      await _persistConfig(p);
+    }
+    if (c.model.isEmpty) {
+      c.model = p.defaultModel;
+    }
+    // 旧默认模型 moonshot-v1-8k 已不存在，回退到当前默认
+    if (p == AiProvider.kimi && c.model == 'moonshot-v1-8k') {
+      c.model = p.defaultModel;
+      await _persistConfig(p);
+    }
+    if (_currentProvider == p) {
+      _syncActiveRemote();
+    }
+  }
+
+  /// 从本地缓存恢复当前 provider 及各项配置
+  Future<void> loadConfigFromCache() async {
+    final epoch = ++_configLoadEpoch;
+    final cache = CacheService();
+    await cache.init();
+    if (!mounted || epoch != _configLoadEpoch) {
+      return;
+    }
+    final name = cache.getString(CacheKey.aiProvider.name);
     if (name != null && name.isNotEmpty) {
-      setModel(name);
+      final p = AiProvider.values.asNameMap()[name];
+      if (p != null) {
+        _currentProvider = p;
+      }
     }
-    final list = cache.getStringList(CacheKey.aiModelList.name);
-    if (list != null && list.isNotEmpty) {
-      _models = List.of(list);
+    // 预加载全部 provider，切换时内存里已有各自 Key / URL
+    for (final p in AiProvider.values) {
+      if (!mounted || epoch != _configLoadEpoch) {
+        return;
+      }
+      await _loadProviderConfigFromCache(p);
     }
+    if (!mounted || epoch != _configLoadEpoch) {
+      return;
+    }
+    _ensureModelInList();
+    _syncActiveRemote();
     notifyListeners();
   }
 
@@ -144,6 +286,10 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     if (prompt.isEmpty || _isStreaming || !mounted) {
       return;
     }
+
+    // 发送前强制对齐 remote，避免切换 provider 后仍打到旧 URL / model
+    _ensureModelInList();
+    _syncActiveRemote();
 
     _session++;
     _ending = false;

@@ -34,21 +34,40 @@ String resolveModelsUrl(String chatCompletionsUrl) {
 
 /// 流式对话数据源抽象：产出统一的 [AiStreamEvent]
 abstract class AiChatStreamSource {
-  /// [messages] 为 OpenAI 风格 `[{role, content}, ...]`（含历史多轮）
+  /// [messages] 为 OpenAI 风格 `[{role, content}, ...]`（含历史多轮）。
+  ///
+  /// 兼容旧调用：可传 [prompt]（等价于单条 user message）；二者至少其一。
   Stream<AiStreamEvent> start({
-    required List<Map<String, String>> messages,
+    List<Map<String, String>>? messages,
+    String? prompt,
     CancelToken? cancelToken,
   });
+}
+
+/// 将 messages / prompt 归一化为 API messages 列表
+List<Map<String, String>> resolveChatMessages({
+  List<Map<String, String>>? messages,
+  String? prompt,
+}) {
+  if (messages != null && messages.isNotEmpty) {
+    return messages;
+  }
+  final text = prompt?.trim() ?? '';
+  return [
+    {'role': 'user', 'content': text},
+  ];
 }
 
 /// Mock：直接产出 delta，不走 SSE，便于本地演示打字效果
 class MockAiChatStreamSource implements AiChatStreamSource {
   @override
   Stream<AiStreamEvent> start({
-    required List<Map<String, String>> messages,
+    List<Map<String, String>>? messages,
+    String? prompt,
     CancelToken? cancelToken,
   }) async* {
-    final lastUser = messages.reversed.firstWhere(
+    final resolved = resolveChatMessages(messages: messages, prompt: prompt);
+    final lastUser = resolved.reversed.firstWhere(
       (m) => m['role'] == 'user',
       orElse: () => const {'content': ''},
     )['content']
@@ -94,7 +113,8 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
 
   @override
   Stream<AiStreamEvent> start({
-    required List<Map<String, String>> messages,
+    List<Map<String, String>>? messages,
+    String? prompt,
     CancelToken? cancelToken,
   }) async* {
     if (url.trim().isEmpty) {
@@ -102,6 +122,7 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
       return;
     }
 
+    final resolved = resolveChatMessages(messages: messages, prompt: prompt);
     final parser = SseEventParser();
     // 有状态 UTF-8 解码，避免多字节字符跨包被拆坏
     const utf8Decoder = Utf8Decoder(allowMalformed: true);
@@ -113,7 +134,7 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
         data: {
           'model': model,
           'stream': true,
-          'messages': messages,
+          'messages': resolved,
         },
         options: Options(
           responseType: ResponseType.stream,
@@ -190,9 +211,14 @@ class SwitchingAiChatStreamSource implements AiChatStreamSource {
 
   @override
   Stream<AiStreamEvent> start({
-    required List<Map<String, String>> messages,
+    List<Map<String, String>>? messages,
+    String? prompt,
     CancelToken? cancelToken,
   }) {
-    return (useMock ? mock : remote).start(messages: messages, cancelToken: cancelToken);
+    return (useMock ? mock : remote).start(
+      messages: messages,
+      prompt: prompt,
+      cancelToken: cancelToken,
+    );
   }
 }

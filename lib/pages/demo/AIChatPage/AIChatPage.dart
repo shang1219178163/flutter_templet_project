@@ -97,10 +97,15 @@ class _AIChatPageState extends State<AIChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final title = widget.title ?? 'AI 流式对话';
+    final title = widget.title ?? 'AIChat';
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: ListenableBuilder(
+          listenable: _controller,
+          builder: (context, _) {
+            return Text('$title · ${_controller.provider.label}');
+          },
+        ),
         actions: [
           AiChatAppBarActions(controller: _controller),
         ],

@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/pages/ScrollablePositionedListDemo.dart'
 import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatSettingPage.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
@@ -1486,7 +1487,12 @@ class AppRouterLazy {
     ),
     GetPage(
       name: AppRouter.aiChatSettingPage,
-      page: () => AIChatSettingPage(),
+      page: () {
+        final args = Get.arguments;
+        return AIChatSettingPage(
+          controller: args is AiChatController ? args : null,
+        );
+      },
     ),
     GetPage(
       name: AppRouter.imChatSettingPage,

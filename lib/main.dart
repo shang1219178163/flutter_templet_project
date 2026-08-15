@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/basicWidget/n_file_viewer/n_file_viewer.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_env_service.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
@@ -104,6 +105,7 @@ Future<void> main() async {
     ScreenUtil.ensureScreenSize(),
     AppRouter.lazyLoadRoutes(),
     CacheService().init(),
+    AiEnvService.load(),
     DBManager().init(),
     initServices(),
     initDebugInfo(),

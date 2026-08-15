@@ -321,6 +321,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    # AI 提供商 API Key 配置文件（git 忽略，仅本地存在）
+    - .env
     # Flutter 目录条目只包含该目录下的文件，子目录需单独声明
     - assets/
     - assets/translations/

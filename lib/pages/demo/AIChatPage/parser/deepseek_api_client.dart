@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
+import 'package:flutter/foundation.dart';
 
 /// DeepSeek 模型列表接口地址（与 chat completions 不同 path）
 const kAiDefaultModelsUrl = 'https://api.deepseek.com/models';
 
-/// DeepSeek 非流式 API 客户端：连通性检查、拉取模型列表。
+/// OpenAI 兼容非流式客户端：拉取模型列表。
 class DeepseekApiClient {
   DeepseekApiClient({
     Dio? dio,
@@ -28,32 +30,15 @@ class DeepseekApiClient {
         if (apiKey.isNotEmpty) 'Authorization': 'Bearer $apiKey',
       }),
     );
+    // 打印原始 JSON，便于核对接口返回
+    final rawJson = resp.data is String
+        ? resp.data as String
+        : jsonEncode(resp.data);
+    debugPrint('[DeepseekApiClient] models response ($url):\n$rawJson');
+
     final map = resp.data as Map<String, dynamic>;
     final list = (map['data'] as List?) ?? const [];
     return list.map((e) => (e as Map<String, dynamic>)['id'] as String).toList();
-  }
-
-  /// 检查 API Key 与服务连通性：能拉到模型列表即视为正常。
-  ///
-  /// [chatCompletionsUrl] 非空时会推导 `/models` 地址，与设置页请求地址保持一致。
-  Future<({bool ok, String message})> checkConnection({
-    required String apiKey,
-    String? chatCompletionsUrl,
-  }) async {
-    if (apiKey.isEmpty) {
-      return (ok: false, message: 'API Key 为空');
-    }
-    final modelsUrl = chatCompletionsUrl == null || chatCompletionsUrl.trim().isEmpty
-        ? baseUrl
-        : resolveModelsUrl(chatCompletionsUrl);
-    try {
-      final models = await fetchModels(apiKey: apiKey, modelsUrl: modelsUrl);
-      return (ok: true, message: '连接正常，共 ${models.length} 个模型\n$modelsUrl');
-    } on DioException catch (e) {
-      return (ok: false, message: '${dioErrorText(e)}\n$modelsUrl');
-    } catch (e) {
-      return (ok: false, message: '$e\n$modelsUrl');
-    }
   }
 
   /// 将 Dio 错误转成可读中文提示

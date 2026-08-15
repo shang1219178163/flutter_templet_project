@@ -33,10 +33,9 @@ enum CacheKey {
   lastPageRoute(needLogin: true, desc: "重启app前页面路由"),
   recoverLastPageRoute(needLogin: true, desc: "是否恢复重启前页面路由"),
 
-  aiApiKey(needLogin: false, desc: "AI 对话 API Key"),
-  aiModelUrl(needLogin: false, desc: "AI 请求地址"),
-  aiModelList(needLogin: false, desc: "AI 模型列表"),
-  aiModelName(needLogin: false, desc: "AI 所选模型");
+  aiProvider(needLogin: false, desc: "AI 当前模型提供商"),
+  aiDeepseekConfig(needLogin: false, desc: "AI DeepSeek 配置"),
+  aiKimiConfig(needLogin: false, desc: "AI Kimi 配置");
 
   const CacheKey({
     required this.desc,
