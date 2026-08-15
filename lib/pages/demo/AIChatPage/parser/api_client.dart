@@ -1,41 +1,24 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-
-/// DeepSeek 模型列表接口地址（与 chat completions 不同 path）
-const kAiDefaultModelsUrl = 'https://api.deepseek.com/models';
 
 /// OpenAI 兼容非流式客户端：拉取模型列表。
-class DeepseekApiClient {
-  DeepseekApiClient({
-    Dio? dio,
-    this.baseUrl = kAiDefaultModelsUrl,
-  }) : dio = dio ?? Dio();
+///
+/// 与流式 chat completions 分离，仅用于设置页刷新模型（DeepSeek / Kimi 等均可）。
+class ApiClient {
+  ApiClient({Dio? dio}) : dio = dio ?? Dio();
 
   final Dio dio;
-
-  /// 默认模型列表 GET 地址（可被 [modelsUrl] 参数覆盖）
-  final String baseUrl;
 
   /// 获取模型 id 列表（未授权等会抛 [DioException]）
   Future<List<String>> fetchModels({
     required String apiKey,
-    String? modelsUrl,
+    required String modelsUrl,
   }) async {
-    final url = (modelsUrl == null || modelsUrl.trim().isEmpty) ? baseUrl : modelsUrl.trim();
     final resp = await dio.get<dynamic>(
-      url,
+      modelsUrl.trim(),
       options: Options(headers: {
         if (apiKey.isNotEmpty) 'Authorization': 'Bearer $apiKey',
       }),
     );
-    // 打印原始 JSON，便于核对接口返回
-    final rawJson = resp.data is String
-        ? resp.data as String
-        : jsonEncode(resp.data);
-    debugPrint('[DeepseekApiClient] models response ($url):\n$rawJson');
-
     final map = resp.data as Map<String, dynamic>;
     final list = (map['data'] as List?) ?? const [];
     return list.map((e) => (e as Map<String, dynamic>)['id'] as String).toList();

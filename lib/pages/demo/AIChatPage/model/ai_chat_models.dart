@@ -60,9 +60,5 @@ class AiStreamEvent {
   /// [AiStreamEventKind.error] 时的错误文案
   final String? message;
 
-  bool get isDelta => kind == AiStreamEventKind.delta;
-
   bool get isDone => kind == AiStreamEventKind.done;
-
-  bool get isError => kind == AiStreamEventKind.error;
 }

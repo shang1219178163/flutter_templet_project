@@ -4,23 +4,18 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_chat_models.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/sse_event_parser.dart';
 
 /// 默认 API Key：构建时通过 `--dart-define=DEEPSEEK_API_KEY=sk-xxx` 注入
 // ignore: do_not_use_environment -- 从 --dart-define 注入
 const kAiDefaultApiKey = String.fromEnvironment('DEEPSEEK_API_KEY', defaultValue: '');
 
-/// DeepSeek / OpenAI 兼容的 chat completions 地址
-const kAiDefaultBaseUrl = 'https://api.deepseek.com/chat/completions';
-
-/// 默认模型 id
-const kAiDefaultModel = 'deepseek-chat';
-
 /// 由 chat completions URL 推导 `/models` 地址
 String resolveModelsUrl(String chatCompletionsUrl) {
   final t = chatCompletionsUrl.trim();
   if (t.isEmpty) {
-    return 'https://api.deepseek.com/models';
+    return resolveModelsUrl(AiProvider.deepseek.defaultBaseUrl);
   }
   if (t.contains('/chat/completions')) {
     return t.replaceFirst('/chat/completions', '/models');
@@ -34,45 +29,25 @@ String resolveModelsUrl(String chatCompletionsUrl) {
 
 /// 流式对话数据源抽象：产出统一的 [AiStreamEvent]
 abstract class AiChatStreamSource {
-  /// [messages] 为 OpenAI 风格 `[{role, content}, ...]`（含历史多轮）。
-  ///
-  /// 兼容旧调用：可传 [prompt]（等价于单条 user message）；二者至少其一。
+  /// [messages] 为 OpenAI 风格 `[{role, content}, ...]`（含历史多轮）
   Stream<AiStreamEvent> start({
-    List<Map<String, String>>? messages,
-    String? prompt,
+    required List<Map<String, String>> messages,
     CancelToken? cancelToken,
   });
-}
-
-/// 将 messages / prompt 归一化为 API messages 列表
-List<Map<String, String>> resolveChatMessages({
-  List<Map<String, String>>? messages,
-  String? prompt,
-}) {
-  if (messages != null && messages.isNotEmpty) {
-    return messages;
-  }
-  final text = prompt?.trim() ?? '';
-  return [
-    {'role': 'user', 'content': text},
-  ];
 }
 
 /// Mock：直接产出 delta，不走 SSE，便于本地演示打字效果
 class MockAiChatStreamSource implements AiChatStreamSource {
   @override
   Stream<AiStreamEvent> start({
-    List<Map<String, String>>? messages,
-    String? prompt,
+    required List<Map<String, String>> messages,
     CancelToken? cancelToken,
   }) async* {
-    final resolved = resolveChatMessages(messages: messages, prompt: prompt);
-    final lastUser = resolved.reversed.firstWhere(
-      (m) => m['role'] == 'user',
-      orElse: () => const {'content': ''},
-    )['content']
-        ?.trim();
-    final q = (lastUser == null || lastUser.isEmpty) ? '（空消息）' : lastUser;
+    final lastUser = messages.reversed
+        .where((m) => m['role'] == 'user')
+        .map((m) => m['content']?.trim() ?? '')
+        .firstWhere((c) => c.isNotEmpty, orElse: () => '');
+    final q = lastUser.isEmpty ? '（空消息）' : lastUser;
     final reply = '这是 Mock 流式回复。\n你说：「$q」\n\n'
         '1. Dio SSE\n2. SseEventParser\n3. ChangeNotifier\n4. 打字缓冲\n';
     final random = Random();
@@ -96,14 +71,16 @@ class MockAiChatStreamSource implements AiChatStreamSource {
 class DioSseAiChatStreamSource implements AiChatStreamSource {
   DioSseAiChatStreamSource({
     Dio? dio,
-    this.url = kAiDefaultBaseUrl,
+    String? url,
     this.apiKey = kAiDefaultApiKey,
-    this.model = kAiDefaultModel,
-  }) : dio = dio ?? Dio();
+    String? model,
+  })  : dio = dio ?? Dio(),
+        url = url ?? AiProvider.deepseek.defaultBaseUrl,
+        model = model ?? AiProvider.deepseek.defaultModel;
 
   final Dio dio;
 
-  /// 完整 completions URL（可在设置页修改）
+  /// 完整 completions URL
   String url;
 
   String apiKey;
@@ -113,8 +90,7 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
 
   @override
   Stream<AiStreamEvent> start({
-    List<Map<String, String>>? messages,
-    String? prompt,
+    required List<Map<String, String>> messages,
     CancelToken? cancelToken,
   }) async* {
     if (url.trim().isEmpty) {
@@ -122,7 +98,6 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
       return;
     }
 
-    final resolved = resolveChatMessages(messages: messages, prompt: prompt);
     final parser = SseEventParser();
     // 有状态 UTF-8 解码，避免多字节字符跨包被拆坏
     const utf8Decoder = Utf8Decoder(allowMalformed: true);
@@ -134,7 +109,7 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
         data: {
           'model': model,
           'stream': true,
-          'messages': resolved,
+          'messages': messages,
         },
         options: Options(
           responseType: ResponseType.stream,
@@ -202,22 +177,13 @@ class SwitchingAiChatStreamSource implements AiChatStreamSource {
   /// true 走本地 Mock；false 走真实 SSE
   bool useMock = false;
 
-  String get sseUrl => remote.url;
-
-  set sseUrl(String value) => remote.url = value;
-
-  /// 由当前 completions URL 推导的 models 地址
-  String get modelsUrl => resolveModelsUrl(sseUrl);
-
   @override
   Stream<AiStreamEvent> start({
-    List<Map<String, String>>? messages,
-    String? prompt,
+    required List<Map<String, String>> messages,
     CancelToken? cancelToken,
   }) {
     return (useMock ? mock : remote).start(
       messages: messages,
-      prompt: prompt,
       cancelToken: cancelToken,
     );
   }

@@ -5,20 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/pick/n_pick_one.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/deepseek_api_client.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/api_client.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
-/// AI 聊天设置页：提供商 / API Key / 模型列表（单页纵向）。
+/// AI 设置：提供商 / API Key（只读）/ 模型列表。
 ///
-/// 从聊天页进入时通过 [Get.arguments] 共享 [AiChatController]，改动能立刻作用于对话。
+/// 优先使用构造传入或 [Get.arguments] 的共享 [AiChatController]。
 class AIChatSettingPage extends StatefulWidget {
   const AIChatSettingPage({super.key, this.title, this.controller});
 
   final String? title;
-
-  /// 聊天页传入的共享 controller；为空则自建
   final AiChatController? controller;
 
   @override
@@ -26,10 +23,15 @@ class AIChatSettingPage extends StatefulWidget {
 }
 
 class _AIChatSettingPageState extends State<AIChatSettingPage> {
-  late final AiChatController _controller =
-      widget.controller ?? (Get.arguments is AiChatController ? Get.arguments as AiChatController : AiChatController());
-  late final bool _ownsController = widget.controller == null && Get.arguments is! AiChatController;
-  final _client = DeepseekApiClient();
+  /// 优先取聊天页传入的共享 controller；自建时由本页负责释放
+  late final AiChatController _controller = widget.controller ??
+      (Get.arguments is AiChatController
+          ? Get.arguments as AiChatController
+          : AiChatController());
+  late final bool _ownsController =
+      widget.controller == null && Get.arguments is! AiChatController;
+
+  final _client = ApiClient();
 
   bool _loadingModels = false;
 
@@ -41,16 +43,12 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
     super.initState();
     // 仅自建 controller 时需要再读缓存；共享实例聊天页已加载过，避免并发 load 覆盖刚切换的 provider
     if (_ownsController) {
-      _syncAfterCache();
+      _controller.loadConfigFromCache().then((_) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
     }
-  }
-
-  Future<void> _syncAfterCache() async {
-    await _controller.loadConfigFromCache();
-    if (!mounted) {
-      return;
-    }
-    setState(() {});
   }
 
   @override
@@ -101,7 +99,9 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
                 const Icon(Icons.arrow_forward_ios, size: 14),
               ],
             ),
-            onTap: _onPickProvider,
+            onTap: _controller.isStreaming
+                ? () => SnackUtil.warn('生成中，请先停止再切换提供商')
+                : _onPickProvider,
           ),
         );
       },
@@ -109,10 +109,9 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
   }
 
   Future<void> _onPickProvider() async {
-    final providers = AiProvider.values.toList();
     NPickOne.show<AiProvider>(
       context: context,
-      items: providers,
+      items: AiProvider.values.toList(),
       initialItem: _controller.provider,
       onSelected: (p) async {
         await _controller.setProvider(p);
@@ -149,11 +148,7 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
                 tooltip: _obscureApiKey ? '显示 Key' : '隐藏 Key',
                 onPressed: apiKey.isEmpty
                     ? null
-                    : () {
-                        setState(() {
-                          _obscureApiKey = !_obscureApiKey;
-                        });
-                      },
+                    : () => setState(() => _obscureApiKey = !_obscureApiKey),
                 icon: Icon(
                   _obscureApiKey ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 ),
@@ -165,7 +160,7 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
               dense: true,
               title: const Text('请求地址'),
               subtitle: SelectableText(
-                _controller.sseUrl.isEmpty ? kAiDefaultBaseUrl : _controller.sseUrl,
+                _controller.sseUrl,
                 style: TextStyle(
                   fontSize: 13,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -176,10 +171,7 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 'Key / 地址由 .env 或 dart-define 注入，不可在此修改',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).hintColor,
-                ),
+                style: TextStyle(fontSize: 12, color: Theme.of(context).hintColor),
               ),
             ),
           ],
@@ -246,16 +238,20 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
   }
 
   Future<void> _onFetchModels({bool showSuccessToast = true}) async {
-    setState(() {
-      _loadingModels = true;
-    });
+    // 捕获发起时的 provider，避免 await 期间切换导致写错配置
+    final forProvider = _controller.provider;
+    final apiKey = _controller.apiKey.trim();
+    final modelsUrl = _controller.modelsUrl;
+    setState(() => _loadingModels = true);
     try {
-      final url = _controller.sseUrl.trim();
       final models = await _client.fetchModels(
-        apiKey: _controller.apiKey.trim(),
-        modelsUrl: resolveModelsUrl(url),
+        apiKey: apiKey,
+        modelsUrl: modelsUrl,
       );
-      _controller.models = models;
+      if (!mounted) {
+        return;
+      }
+      await _controller.setModelsFor(forProvider, models);
       if (showSuccessToast) {
         SnackUtil.show('获取到 ${models.length} 个模型');
       }
@@ -265,9 +261,7 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
       );
     } finally {
       if (mounted) {
-        setState(() {
-          _loadingModels = false;
-        });
+        setState(() => _loadingModels = false);
       }
     }
   }
@@ -280,10 +274,7 @@ class _SectionCard extends StatelessWidget {
     this.trailing,
   });
 
-  /// 区块标题
   final String title;
-
-  /// 标题右侧操作（如刷新）
   final Widget? trailing;
   final List<Widget> children;
 
@@ -302,10 +293,7 @@ class _SectionCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: scheme.primary,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, color: scheme.primary),
                   ),
                 ),
                 if (trailing != null) trailing!,

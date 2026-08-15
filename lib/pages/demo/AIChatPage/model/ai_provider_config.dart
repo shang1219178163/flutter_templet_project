@@ -1,8 +1,11 @@
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_env_service.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
 
-/// 单个 provider 的运行态配置（独立持久化为一个 Map）
+/// 单个 provider 的运行态配置（整包持久化为一个 Map）
+///
+/// **不落盘 apiKey**：密钥只来自 `.env` / dart-define，避免 SharedPreferences 冻住旧 Key。
 class AiProviderConfig {
   AiProviderConfig(this.provider)
       : baseUrl = provider.defaultBaseUrl,
@@ -10,7 +13,7 @@ class AiProviderConfig {
 
   final AiProvider provider;
 
-  /// API Key；空时由调用方决定兜底（如 deepseek 用 kAiDefaultApiKey）
+  /// API Key；仅内存态，由 [resolveApiKey] 从环境注入
   String apiKey = '';
 
   /// chat completions 地址
@@ -25,18 +28,15 @@ class AiProviderConfig {
   /// 由 chat completions 地址推导的 models 地址
   String get modelsUrl => resolveModelsUrl(baseUrl);
 
+  /// 持久化字段（故意不含 apiKey）
   Map<String, dynamic> toJson() => {
-        'apiKey': apiKey,
         'baseUrl': baseUrl,
         'model': model,
         'models': models,
       };
 
+  /// 从缓存 Map 回填字段（忽略历史 apiKey；空串 / 缺省不覆盖默认）
   void applyJson(Map<String, dynamic> json) {
-    final key = json['apiKey'];
-    if (key is String) {
-      apiKey = key;
-    }
     final url = json['baseUrl'];
     if (url is String && url.isNotEmpty) {
       baseUrl = url;
@@ -50,9 +50,39 @@ class AiProviderConfig {
       models = list.whereType<String>().toList();
     }
   }
+
+  /// 空值 / 过期域名与模型回退到默认；有改动返回 true
+  bool normalize() {
+    var changed = false;
+    if (baseUrl.isEmpty) {
+      baseUrl = provider.defaultBaseUrl;
+      changed = true;
+    }
+    if (model.isEmpty) {
+      model = provider.defaultModel;
+      changed = true;
+    }
+    if (provider == AiProvider.kimi) {
+      if (baseUrl.contains('api.moonshot.ai')) {
+        baseUrl = provider.defaultBaseUrl;
+        changed = true;
+      }
+      if (model == 'moonshot-v1-8k') {
+        model = provider.defaultModel;
+        changed = true;
+      }
+    }
+    return changed;
+  }
+
+  /// 始终从 .env / dart-define 解析（不读缓存，便于改 Key 后生效）
+  void resolveApiKey() {
+    apiKey = AiEnvService.keyFor(provider.name) ??
+        (provider == AiProvider.deepseek ? kAiDefaultApiKey : '');
+  }
 }
 
-/// provider → 整包配置的 CacheKey
+/// provider → 整包配置 CacheKey
 CacheKey aiConfigCacheKey(AiProvider p) => switch (p) {
       AiProvider.deepseek => CacheKey.aiDeepseekConfig,
       AiProvider.kimi => CacheKey.aiKimiConfig,

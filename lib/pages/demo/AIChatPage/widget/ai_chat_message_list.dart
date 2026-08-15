@@ -26,7 +26,7 @@ class AiChatMessageList extends StatelessWidget {
         if (list.isEmpty) {
           return Center(
             child: Text(
-              '输入消息开始体验流式回复\n点右上角设置配置 API Key / 模型',
+              '输入消息开始体验流式回复\n点右上角设置切换提供商 / 模型',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Theme.of(context).hintColor,
