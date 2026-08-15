@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
-class FourthPage extends StatelessWidget {
-  const FourthPage({Key? key}) : super(key: key);
+class Shadow3DTextPage extends StatelessWidget {
+  const Shadow3DTextPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

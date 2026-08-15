@@ -1,54 +1,47 @@
 //
-//  TabBarTabBarViewDemo.dart
+//  HomePage.dart
 //  flutter_templet_project
 //
 //  Created by shang on 10/22/21 2:32 PM.
 //  Copyright © 10/22/21 shang. All rights reserved.
 //
 
-import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_icons.dart';
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_layout.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
-import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/RouteNameSearchPage.dart';
+import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:tuple/tuple.dart';
 import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
-class TabBarTabBarViewDemo extends StatefulWidget {
-  const TabBarTabBarViewDemo({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _TabBarTabBarViewDemoState createState() => _TabBarTabBarViewDemoState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   late final _tabController = TabController(length: items.length, vsync: this);
 
   final textEditingController = TextEditingController();
 
-  // late PageController _pageController = PageController(initialPage: 0, keepPage: true);
-
-  // late List<String> _titles = getTitlesOfTuples();
+  // late _pageController = PageController(initialPage: 0, keepPage: true);
 
   late final List<Tuple2<String, Widget>> items = [
-    Tuple2('功能列表', buildPage1()),
+    Tuple2('路由搜索', buildPage3()),
     Tuple2('升级列表', buildPage2()),
-    Tuple2('列表搜索', buildPage3()),
-    Tuple2('列表(折叠)', buildPage4()),
+    Tuple2('icon搜索', buildPage1()),
   ];
 
   @override
   void initState() {
     super.initState();
-
-    _tabController.index = items.length - 2;
     // testData();
   }
 
@@ -140,57 +133,8 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   }
 
   Widget buildPage1() {
-    return ListView.separated(
-      cacheExtent: 180,
-      itemCount: kAliPayList.length,
-      itemBuilder: (context, index) {
-        final data = kAliPayList[index];
-        return ListSubtitleCell(
-          padding: EdgeInsets.all(10),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: Image.network(
-              data.imageUrl,
-              width: 40,
-              height: 40,
-            ),
-          ),
-          title: Text(
-            data.title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: context.themeData.colorScheme.onSurface,
-            ),
-          ),
-          subtitle: Text(
-            data.content,
-            // maxLines: 1,
-            // overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 15,
-              color: Color(0xFF999999),
-            ),
-          ),
-          trailing: Text(
-            data.time,
-            style: TextStyle(
-              fontSize: 13,
-              color: Color(0xFF999999),
-            ),
-          ),
-          subtrailing: Text(
-            "已完成",
-            style: TextStyle(
-              fontSize: 13,
-              color: context.themeData.colorScheme.primary,
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return Divider();
-      },
+    return SystemIconsPage(
+      hideAppBar: true,
     );
   }
 
@@ -219,76 +163,6 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     return RouteNameSearchPage(
       hideAppBar: true,
     );
-  }
-
-  Widget buildPage4() {
-    Widget buildHeader({required String sectionTile, required bool isExpand}) {
-      final trailing = isExpand
-          ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)
-          : Icon(Icons.keyboard_arrow_down, color: Colors.blue);
-      return Container(
-        // color: Colors.green,
-        color: isExpand ? Colors.black12 : null,
-        child: ListTile(
-          title: Text(
-            sectionTile,
-            style: TextStyle(fontWeight: FontWeight.w600),
-          ),
-          // subtitle: Text("subtitle"),
-          trailing: trailing,
-        ),
-      );
-    }
-
-    Widget buildItem(Tuple2<String, String> e) {
-      return ListTile(
-        title: Text(
-          e.item1,
-          style: TextStyle(fontSize: 14),
-        ),
-        subtitle: Text(
-          e.item2,
-          style: TextStyle(fontSize: 12),
-        ),
-        trailing: Icon(Icons.chevron_right),
-        dense: true,
-        // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-        onTap: () {
-          DLog.d("section_");
-          if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
-            Get.offNamed(e.item1, arguments: e.item1);
-          } else {
-            Get.toNamed(e.item1, arguments: e.item1);
-          }
-        },
-      );
-    }
-
-    return EnhanceExpandListView(
-      children: tuples
-          .map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
-                canTapOnHeader: true,
-                isExpanded: false,
-                arrowPosition: EnhanceExpansionPanelArrowPosition.none,
-                // backgroundColor: Color(0xFFDDDDDD),
-                headerBuilder: (context, isExpand) {
-                  return buildHeader(isExpand: isExpand, sectionTile: e.item1);
-                },
-                bodyChildren: e.item2.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())),
-                bodyItemBuilder: (context, e) {
-                  return buildItem(e);
-                },
-              ))
-          .toList(),
-    );
-  }
-
-  List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
-    final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
-    final result = List<String>.from(titles.sorted());
-    // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
-    debugPrint('result runtimeType:${result.runtimeType}');
-    return result;
   }
 }
 
@@ -697,7 +571,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.scanBarcodeDemo, "scanBarcodeDemo"),
   Tuple2(AppRouter.animatedModalBarrierDemo, "animatedModalBarrierDemo"),
   Tuple2(AppRouter.metaDataDemo, "metaDataDemo"),
-  Tuple2(AppRouter.appLocaleChangePage, "appLocaleChangePage"),
+  Tuple2(AppRouter.appLocalePage, "appLocalePage"),
   Tuple2(AppRouter.backgroundTaskDemo, "backgroundTaskDemo"),
   Tuple2(AppRouter.colorSchemeDemo, "colorSchemeDemo"),
   Tuple2(AppRouter.concurrentExecutorDemo, "concurrentExecutorDemo"),
@@ -743,8 +617,10 @@ var vendors = <Tuple2<String, String>>[
 
 var others = <Tuple2<String, String>>[
   Tuple2(AppRouter.unknown, "notFound"),
-  Tuple2(AppRouter.firstPage, "firstPage"),
-  Tuple2(AppRouter.fourthPage, "fourthPage"),
+  Tuple2(AppRouter.buttonPage, "buttonPage"),
+  Tuple2(AppRouter.listViewOffsetPage, "listViewOffsetPage"),
+  Tuple2(AppRouter.shadow3DTextPage, "shadow3DTextPage"),
+  Tuple2(AppRouter.homePage, "homePage"),
   Tuple2(AppRouter.login, "login"),
   Tuple2(AppRouter.loginPageOne, "LoginPage2"),
   Tuple2(AppRouter.loginPageTwo, "loginPageTwo"),

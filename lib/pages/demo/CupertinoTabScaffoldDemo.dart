@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/Pages/second_page.dart';
+import 'package:flutter_templet_project/pages/button_page.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -88,7 +88,7 @@ class TwoPage extends StatelessWidget {
         trailing: InkWell(
           onTap: () {
             final route = MaterialPageRoute(
-              builder: (context) => SecondPage(),
+              builder: (context) => ButtonPage(),
             );
             Navigator.of(context).push(route);
           },

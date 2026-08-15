@@ -4,9 +4,9 @@ import 'package:flutter_templet_project/basicWidget/RedPacketRain/RedPacketRainD
 import 'package:flutter_templet_project/basicWidget/enhance/en_tab/en_tab_bar_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
-import 'package:flutter_templet_project/pages/IrregularClipperDemo.dart';
-import 'package:flutter_templet_project/pages/ScrollablePositionedListDemo.dart';
-import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
+import 'package:flutter_templet_project/pages/demo/IrregularClipperDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ScrollablePositionedListDemo.dart';
+import 'package:flutter_templet_project/pages/app_locale_page.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatSettingPage.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
@@ -383,10 +383,9 @@ import 'package:flutter_templet_project/pages/demo/transition/TweenSequenceDemo.
 import 'package:flutter_templet_project/pages/demo/w3_theme_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
-import 'package:flutter_templet_project/pages/first_page.dart';
-import 'package:flutter_templet_project/pages/fourth_page.dart';
+import 'package:flutter_templet_project/pages/demo/shadow_3d_text_page.dart';
 import 'package:flutter_templet_project/pages/neomorphism/neomorphism_home_page.dart';
-import 'package:flutter_templet_project/pages/second_page.dart';
+import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/NPinnedTabBarPageDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
@@ -394,10 +393,10 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeader
 import 'package:flutter_templet_project/pages/sliver_demo/SliverRefreshControlDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverStickyHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/listener_header_page.dart';
-import 'package:flutter_templet_project/pages/tabBar_pageView_demo.dart';
-import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
-import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:flutter_templet_project/pages/third_page.dart';
+import 'package:flutter_templet_project/pages/demo/tabBar_pageView_demo.dart';
+import 'package:flutter_templet_project/pages/demo/tabBar_reuse_page_demo.dart';
+import 'package:flutter_templet_project/pages/home_page.dart';
+import 'package:flutter_templet_project/pages/demo/list_view_offset_page.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo_new.dart';
@@ -428,7 +427,7 @@ import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
 import 'package:flutter_templet_project/vendor/table_calendar/table_calender_main.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
-import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart' hide HomePage;
 import 'package:flutter_templet_project/vendor/video_player/video_player_by_chewie_page.dart';
 import 'package:flutter_templet_project/vendor/wechat_assets_picker_demo.dart';
 import 'package:get/get.dart';
@@ -458,8 +457,8 @@ class AppRouterLazy {
       page: () => YamlParsePage(),
     ),
     GetPage(
-      name: AppRouter.tabBarTabBarViewDemo,
-      page: () => TabBarTabBarViewDemo(),
+      name: AppRouter.homePage,
+      page: () => HomePage(),
     ),
     GetPage(
       name: AppRouter.mediaQueryScreeenDemo,
@@ -490,20 +489,16 @@ class AppRouterLazy {
       page: () => TestPageOne(),
     ),
     GetPage(
-      name: AppRouter.firstPage,
-      page: () => FirstPage(),
+      name: AppRouter.buttonPage,
+      page: () => ButtonPage(),
     ),
     GetPage(
-      name: AppRouter.secondPage,
-      page: () => SecondPage(),
+      name: AppRouter.listViewOffsetPage,
+      page: () => ListViewOffsetPage(),
     ),
     GetPage(
-      name: AppRouter.thirdPage,
-      page: () => ThirdPage(),
-    ),
-    GetPage(
-      name: AppRouter.fourthPage,
-      page: () => FourthPage(),
+      name: AppRouter.shadow3DTextPage,
+      page: () => Shadow3DTextPage(),
     ),
     GetPage(
       name: AppRouter.pageBuilderDemo,
@@ -1987,8 +1982,8 @@ class AppRouterLazy {
       page: () => MetaDataDemo(),
     ),
     GetPage(
-      name: AppRouter.appLocaleChangePage,
-      page: () => AppLocaleChangePage(),
+      name: AppRouter.appLocalePage,
+      page: () => AppLocalePage(),
     ),
     GetPage(
       name: AppRouter.backgroundTaskDemo,

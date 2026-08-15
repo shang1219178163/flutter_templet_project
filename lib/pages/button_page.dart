@@ -22,16 +22,16 @@ import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
-class SecondPage extends StatefulWidget {
+class ButtonPage extends StatefulWidget {
   final String? title;
 
-  const SecondPage({Key? key, this.title}) : super(key: key);
+  const ButtonPage({Key? key, this.title}) : super(key: key);
 
   @override
-  _SecondPageState createState() => _SecondPageState();
+  _ButtonPageState createState() => _ButtonPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _ButtonPageState extends State<ButtonPage> {
   bool _isList = true;
 
   late final theme = Theme.of(context);
@@ -396,7 +396,7 @@ class _SecondPageState extends State<SecondPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FloatingActionButton.extended(
-                    heroTag: 'second_page_fab_extend_no_icon',
+                    heroTag: 'button_page_fab_extend_no_icon',
                     extendedIconLabelSpacing: 0,
                     elevation: 0,
                     // isExtended: false,
@@ -410,7 +410,7 @@ class _SecondPageState extends State<SecondPage> {
                     label: Text('EXTEND'.toLowerCase()),
                   ),
                   FloatingActionButton(
-                    heroTag: 'second_page_fab_mini',
+                    heroTag: 'button_page_fab_mini',
                     mini: true,
                     elevation: 0,
                     backgroundColor: const Color(0xff03dac6),
@@ -421,7 +421,7 @@ class _SecondPageState extends State<SecondPage> {
                     child: Icon(Icons.open_with),
                   ),
                   FloatingActionButton.extended(
-                    heroTag: 'second_page_fab_extend',
+                    heroTag: 'button_page_fab_extend',
                     elevation: 0,
                     // isExtended: false,
                     extendedPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
@@ -1131,7 +1131,7 @@ class _SecondPageState extends State<SecondPage> {
       Tuple2(
         "FloatingActionButton",
         FloatingActionButton(
-          heroTag: 'second_page_tuple_fab_mini',
+          heroTag: 'button_page_tuple_fab_mini',
           mini: true,
           backgroundColor: const Color(0xff03dac6),
           foregroundColor: Colors.black,
@@ -1144,7 +1144,7 @@ class _SecondPageState extends State<SecondPage> {
       Tuple2(
         "FloatingActionButton",
         FloatingActionButton.extended(
-          heroTag: 'second_page_tuple_fab_extend',
+          heroTag: 'button_page_tuple_fab_extend',
           backgroundColor: const Color(0xff03dac6),
           foregroundColor: Colors.black,
           onPressed: () {

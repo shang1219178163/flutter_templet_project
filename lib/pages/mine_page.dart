@@ -1,5 +1,5 @@
 //
-//  APPUserCenterPage.dart
+//  MinePage.dart
 //  flutter_templet_project
 //
 //  Created by shang on 5/20/21 4:57 PM.
@@ -18,14 +18,14 @@ import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 import 'package:tuple/tuple.dart';
 import 'package:get/get.dart';
 
-class APPUserCenterPage extends StatefulWidget {
-  const APPUserCenterPage({Key? key}) : super(key: key);
+class MinePage extends StatefulWidget {
+  const MinePage({Key? key}) : super(key: key);
 
   @override
-  _APPUserCenterPageState createState() => _APPUserCenterPageState();
+  _MinePageState createState() => _MinePageState();
 }
 
-class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetImageMixin {
+class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
   // 我的 列表菜单
   final services = <Tuple2<String, IconData>>[
     Tuple2('京豆', Icons.adjust),

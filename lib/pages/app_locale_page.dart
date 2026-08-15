@@ -4,8 +4,8 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart' hide Trans;
 
-class AppLocaleChangePage extends StatefulWidget {
-  const AppLocaleChangePage({
+class AppLocalePage extends StatefulWidget {
+  const AppLocalePage({
     super.key,
     this.arguments,
   });
@@ -13,10 +13,10 @@ class AppLocaleChangePage extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<AppLocaleChangePage> createState() => _AppLocaleChangePageState();
+  State<AppLocalePage> createState() => _AppLocalePageState();
 }
 
-class _AppLocaleChangePageState extends State<AppLocaleChangePage> {
+class _AppLocalePageState extends State<AppLocalePage> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
@@ -27,7 +27,7 @@ class _AppLocaleChangePageState extends State<AppLocaleChangePage> {
   late final id = arguments["id"];
 
   @override
-  void didUpdateWidget(covariant AppLocaleChangePage oldWidget) {
+  void didUpdateWidget(covariant AppLocalePage oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 

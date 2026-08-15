@@ -4,15 +4,15 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
-class ThirdPage extends StatefulWidget {
+class ListViewOffsetPage extends StatefulWidget {
   final String? title;
-  const ThirdPage({Key? key, this.title}) : super(key: key);
+  const ListViewOffsetPage({Key? key, this.title}) : super(key: key);
 
   @override
-  _ThirdPageState createState() => _ThirdPageState();
+  _ListViewOffsetPageState createState() => _ListViewOffsetPageState();
 }
 
-class _ThirdPageState extends State<ThirdPage> with RouteAware {
+class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware {
   late final _easyRefreshController = EasyRefreshController(
     controlFinishRefresh: true,
     controlFinishLoad: true,
@@ -180,11 +180,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
             onTap: () {
               selectedIndex = index;
               setState(() {});
-              DLog.d([
-                selectedIndex,
-                index,
-              ]);
-              DLog.d([globalKey(index).currentContext?.frame]);
+              DLog.d([selectedIndex, index, globalKey(index).currentContext?.frame]);
             },
           );
 

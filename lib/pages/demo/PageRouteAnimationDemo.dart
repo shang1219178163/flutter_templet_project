@@ -8,7 +8,7 @@
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/Pages/second_page.dart';
+import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -82,7 +82,7 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
                 final i = list.indexOf(e);
                 return _NOpenContainer<bool>(
                   openBuilder: (BuildContext _, VoidCallback openContainer) {
-                    return SecondPage();
+                    return ButtonPage();
                   },
                   closedBuilder: (BuildContext _, VoidCallback openContainer) {
                     return buildCard(

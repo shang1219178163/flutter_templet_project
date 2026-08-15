@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
-import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
-import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/pages/home_page.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
-import 'package:tuple/tuple.dart';
 import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 class NPageViewDemo extends StatefulWidget {
   NPageViewDemo({Key? key, this.title}) : super(key: key);
@@ -102,61 +100,6 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   }
 
   List<(String, Widget)> items = [
-    (
-      '功能列表',
-      ListView.separated(
-        cacheExtent: 180,
-        itemCount: kAliPayList.length,
-        itemBuilder: (context, index) {
-          final data = kAliPayList[index];
-          return ListSubtitleCell(
-            padding: EdgeInsets.all(10),
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: Image.network(
-                data.imageUrl,
-                width: 40,
-                height: 40,
-              ),
-            ),
-            title: Text(
-              data.title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF333333),
-              ),
-            ),
-            subtitle: Text(
-              data.content,
-              // maxLines: 1,
-              // overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 15,
-                color: Color(0xFF999999),
-              ),
-            ),
-            trailing: Text(
-              data.time,
-              style: TextStyle(
-                fontSize: 13,
-                color: Color(0xFF999999),
-              ),
-            ),
-            subtrailing: Text(
-              "已完成",
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.blue,
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider();
-        },
-      ),
-    ),
     (
       '升级列表(新)',
       ListView.separated(

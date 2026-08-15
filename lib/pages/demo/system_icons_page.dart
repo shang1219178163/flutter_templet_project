@@ -15,7 +15,12 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/icons_map_output.dart';
 
 class SystemIconsPage extends StatefulWidget {
-  const SystemIconsPage({Key? key}) : super(key: key);
+  const SystemIconsPage({
+    super.key,
+    this.hideAppBar = false,
+  });
+
+  final bool hideAppBar;
 
   @override
   _SystemIconsPageState createState() => _SystemIconsPageState();
@@ -34,25 +39,27 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("系统 Icons"),
-        actions: [
-          IconButton(
-            onPressed: genSystemIconsMap,
-            icon: Icon(Icons.change_circle_outlined),
-          ),
-          TextButton(
-            onPressed: () {
-              isGrid = !isGrid;
-              setState(() {});
-            },
-            child: Text(
-              actionTitle,
-              style: TextStyle(color: Colors.white),
+      appBar: widget.hideAppBar
+          ? null
+          : AppBar(
+              title: Text("系统 Icons"),
+              actions: [
+                IconButton(
+                  onPressed: genSystemIconsMap,
+                  icon: Icon(Icons.change_circle_outlined),
+                ),
+                TextButton(
+                  onPressed: () {
+                    isGrid = !isGrid;
+                    setState(() {});
+                  },
+                  child: Text(
+                    actionTitle,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
       body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,6 +101,8 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
         contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         // labelText: "Search",
         hintText: "Search",
+        filled: true,
+        fillColor: Colors.black.withValues(alpha: 0.05),
         prefixIconConstraints: BoxConstraints(minHeight: 24, minWidth: 24 + 16),
         suffixIconConstraints: BoxConstraints(minHeight: 24, minWidth: 24 + 16),
         prefixIcon: Icon(Icons.search),

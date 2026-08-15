@@ -39,10 +39,9 @@ class AppRouter {
 
   static const String signinPage = '/SigninPage';
 
-  static const String firstPage = '/FirstPage';
-  static const String secondPage = '/SecondPage';
-  static const String thirdPage = '/ThirdPage';
-  static const String fourthPage = '/FourthPage';
+  static const String buttonPage = '/buttonPage';
+  static const String listViewOffsetPage = '/listViewOffsetPage';
+  static const String shadow3DTextPage = '/shadow3DTextPage';
 
   static const String pageBuilderDemo = '/pageBuilderDemo';
 
@@ -156,7 +155,7 @@ class AppRouter {
 
   static const String tabBarViewDemo = '/tabBarViewDemo';
 
-  static const String tabBarTabBarViewDemo = '/tabBarTabBarViewDemo';
+  static const String homePage = '/homePage';
   static const String tabBarPageViewDemo = '/tabBarPageViewDemo';
   static const String tabBarPageViewDemoNew = '/tabBarPageViewDemoNew';
   static const String tabBarReusePageDemo = '/tabBarReusePageDemo';
@@ -465,7 +464,7 @@ class AppRouter {
   static const String scanBarcodeDemo = '/scanBarcodeDemo';
   static const String animatedModalBarrierDemo = '/animatedModalBarrierDemo';
   static const String metaDataDemo = '/metaDataDemo';
-  static const String appLocaleChangePage = '/appLocaleChangePage';
+  static const String appLocalePage = '/appLocalePage';
   static const String backgroundTaskDemo = '/backgroundTaskDemo';
   static const String colorSchemeDemo = '/colorSchemeDemo';
   static const String concurrentExecutorDemo = '/concurrentExecutorDemo';

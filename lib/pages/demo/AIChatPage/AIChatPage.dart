@@ -120,7 +120,6 @@ class _AIChatPageState extends State<AIChatPage> {
         automaticallyImplyLeading: false,
         leading: IconButton(
           tooltip: '历史会话',
-          style: IconButton.styleFrom(shape: const CircleBorder()),
           onPressed: _openHistoryDrawer,
           icon: const Icon(Icons.more_horiz),
         ),

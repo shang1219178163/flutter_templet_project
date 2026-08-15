@@ -12,16 +12,16 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/Pages/app_user_center_page.dart';
-import 'package:flutter_templet_project/Pages/second_page.dart';
+import 'package:flutter_templet_project/pages/mine_page.dart';
+import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_bottom_navigation_bar/en_bottom_navigation_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppDrawerMenuPage.dart';
-import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
-import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:flutter_templet_project/pages/third_page.dart';
+import 'package:flutter_templet_project/pages/home_page.dart';
+import 'package:flutter_templet_project/pages/demo/list_view_offset_page.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
@@ -50,11 +50,11 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
   final unreadVN = ValueNotifier(0);
 
   final List<Tuple2<Tuple2<String, Icon>, Widget>> items = [
-    Tuple2(Tuple2("首页", Icon(Icons.home)), TabBarTabBarViewDemo()),
-    Tuple2(Tuple2("按钮", Icon(Icons.pets)), SecondPage()),
-    Tuple2(Tuple2("消息", Icon(Icons.message)), TabBarViewDemo()),
-    Tuple2(Tuple2("购物车", Icon(Icons.shopping_cart)), ThirdPage()),
-    Tuple2(Tuple2("我的", Icon(Icons.person)), APPUserCenterPage()),
+    Tuple2(Tuple2("首页", Icon(Icons.home)), HomePage()),
+    Tuple2(Tuple2("按钮", Icon(Icons.pets)), ButtonPage()),
+    Tuple2(Tuple2("消息", Icon(Icons.message)), AIChatPage()),
+    Tuple2(Tuple2("购物车", Icon(Icons.shopping_cart)), ListViewOffsetPage()),
+    Tuple2(Tuple2("我的", Icon(Icons.person)), MinePage()),
   ];
 
   late AppLifecycleListener? _lifecycleListener;
