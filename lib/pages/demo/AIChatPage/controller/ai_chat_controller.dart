@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/mixin/safe_change_notifier_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_chat_models.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/util/ai_chat_stream_source.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
 
 /// AI 对话状态：消息列表、流式标记、打字缓冲。
 ///

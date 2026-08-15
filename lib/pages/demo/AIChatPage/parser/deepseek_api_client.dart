@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/util/ai_chat_stream_source.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
 
 /// DeepSeek 模型列表接口地址（与 chat completions 不同 path）
 const kAiDefaultModelsUrl = 'https://api.deepseek.com/models';

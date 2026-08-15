@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_chat_models.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/util/sse_event_parser.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/sse_event_parser.dart';
 
 /// 默认 API Key：构建时通过 `--dart-define=DEEPSEEK_API_KEY=sk-xxx` 注入
 // ignore: do_not_use_environment -- 从 --dart-define 注入

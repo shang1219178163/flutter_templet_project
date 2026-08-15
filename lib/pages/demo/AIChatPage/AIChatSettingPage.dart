@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/pick/n_pick_one.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/util/ai_chat_stream_source.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/util/deepseek_api_client.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/deepseek_api_client.dart';
 import 'package:get/get.dart';
 
 /// AI 聊天设置页：API Key / 请求地址 / 连通性检查 / 模型列表与选择。
