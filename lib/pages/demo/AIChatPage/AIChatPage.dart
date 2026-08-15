@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/overlay/n_overlay_dialog.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/widget/ai_chat_app_bar_actions.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/widget/ai_chat_error_banner.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/widget/ai_chat_history_drawer.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/widget/ai_chat_input_bar.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/widget/ai_chat_message_list.dart';
 
@@ -95,11 +97,33 @@ class _AIChatPageState extends State<AIChatPage> {
     _focusNode.requestFocus();
   }
 
+  /// 左侧 more_horiz：从左向右滑出历史会话抽屉
+  Future<void> _openHistoryDrawer() async {
+    await _controller.syncActiveSessionToHistory();
+    if (!mounted) {
+      return;
+    }
+    NOverlayDialog.drawer(
+      context,
+      from: Alignment.centerLeft,
+      widthFactor: 0.82,
+      child: AiChatHistoryDrawer(controller: _controller),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final title = widget.title ?? 'AIChat';
     return Scaffold(
       appBar: AppBar(
+        // 用 more_horiz 替换系统返回，打开历史会话
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          tooltip: '历史会话',
+          style: IconButton.styleFrom(shape: const CircleBorder()),
+          onPressed: _openHistoryDrawer,
+          icon: const Icon(Icons.more_horiz),
+        ),
         title: ListenableBuilder(
           listenable: _controller,
           builder: (context, _) {

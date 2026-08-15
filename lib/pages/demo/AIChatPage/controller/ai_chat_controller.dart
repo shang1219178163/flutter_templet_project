@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:convert';
 import 'dart:math' show min;
 
 import 'package:dio/dio.dart';
@@ -36,6 +37,12 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   final List<AiChatMessage> _messages = [];
 
+  /// 历史会话列表（含当前活动会话快照，按 updatedAt 倒序）
+  final List<AiChatSession> _sessions = [];
+
+  /// 当前活动会话 id；null 表示尚未落库的空白会话
+  String? _activeSessionId;
+
   bool _isStreaming = false;
 
   String? _errorMessage;
@@ -67,6 +74,12 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   /// 对外只读消息列表
   List<AiChatMessage> get messages => List.unmodifiable(_messages);
+
+  /// 历史会话（只读，已按时间倒序）
+  List<AiChatSession> get sessions => List.unmodifiable(_sessions);
+
+  /// 当前活动会话 id
+  String? get activeSessionId => _activeSessionId;
 
   /// 是否正在生成（发送中 / 打字中）
   bool get isStreaming => _isStreaming;
@@ -141,10 +154,8 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     await _loadProviderConfig(p);
     _ensureModelInList();
     await _commitConfig(p);
-    // 切换后端后清空会话，避免带着 A 历史让 B「接着扮演 A」
-    _messages.clear();
-    _errorMessage = null;
-    notifyListeners();
+    // 切换后端后开启新会话，避免跨模型带着旧上下文
+    await newSession();
   }
 
   /// 激活的 remote 与当前 config 对齐
@@ -232,8 +243,151 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     }
     _ensureModelInList();
     _syncActiveRemote();
+    await _loadSessions();
+    if (!mounted || epoch != _configLoadEpoch) {
+      return;
+    }
     notifyListeners();
   }
+
+  Future<void> _loadSessions() async {
+    final cache = CacheService();
+    await cache.init();
+    final raw = cache.getString(CacheKey.aiChatSessions.name);
+    if (raw == null || raw.isEmpty) {
+      return;
+    }
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) {
+        return;
+      }
+      _sessions
+        ..clear()
+        ..addAll(
+          decoded
+              .whereType<Map>()
+              .map((e) => AiChatSession.fromJson(Map<String, dynamic>.from(e))),
+        );
+      _sessions.sort((a, b) => b.updatedAtMs.compareTo(a.updatedAtMs));
+    } catch (e) {
+      debugPrint('loadSessions failed: $e');
+    }
+  }
+
+  Future<void> _persistSessions() async {
+    final cache = CacheService();
+    await cache.init();
+    await cache.setString(
+      CacheKey.aiChatSessions.name,
+      jsonEncode(_sessions.map((e) => e.toJson()).toList()),
+    );
+  }
+
+  /// 从当前消息生成可归档快照（去掉空的流式气泡）
+  List<AiChatMessage> _snapshotMessages() {
+    return _messages
+        .where((m) => !m.isStreaming || m.content.isNotEmpty)
+        .map((m) => AiChatMessage(id: m.id, role: m.role, content: m.content))
+        .where((m) => m.content.isNotEmpty || m.role == AiChatRole.user)
+        .toList();
+  }
+
+  String _titleFromMessages(List<AiChatMessage> msgs) {
+    for (final m in msgs) {
+      if (m.role == AiChatRole.user && m.content.trim().isNotEmpty) {
+        final t = m.content.trim();
+        return t.length > 28 ? '${t.substring(0, 28)}…' : t;
+      }
+    }
+    return '新会话';
+  }
+
+  /// 将当前有内容的会话写入历史列表（新建或更新）
+  Future<void> _upsertActiveSession() async {
+    final snapshot = _snapshotMessages();
+    if (snapshot.isEmpty) {
+      return;
+    }
+    final now = DateTime.now().millisecondsSinceEpoch;
+    final id = _activeSessionId ?? 's_${now}_$_idSeq';
+    _activeSessionId = id;
+    final session = AiChatSession(
+      id: id,
+      title: _titleFromMessages(snapshot),
+      messages: snapshot,
+      updatedAtMs: now,
+    );
+    final i = _sessions.indexWhere((e) => e.id == id);
+    if (i >= 0) {
+      _sessions[i] = session;
+    } else {
+      _sessions.insert(0, session);
+    }
+    _sessions.sort((a, b) => b.updatedAtMs.compareTo(a.updatedAtMs));
+    await _persistSessions();
+  }
+
+  /// 开启新会话：归档当前上下文后清空，后续发送不再携带历史
+  Future<void> newSession() async {
+    if (_isStreaming) {
+      stop();
+    }
+    await _upsertActiveSession();
+    _activeSessionId = null;
+    _messages.clear();
+    _errorMessage = null;
+    notifyListeners();
+  }
+
+  /// 打开历史会话：先归档当前，再载入目标（不携带其它会话上下文）
+  Future<void> openSession(String id) async {
+    if (_isStreaming) {
+      stop();
+    }
+    if (id == _activeSessionId && _messages.isNotEmpty) {
+      return;
+    }
+    await _upsertActiveSession();
+    AiChatSession? target;
+    for (final s in _sessions) {
+      if (s.id == id) {
+        target = s;
+        break;
+      }
+    }
+    if (target == null) {
+      return;
+    }
+    _activeSessionId = target.id;
+    _messages
+      ..clear()
+      ..addAll(
+        target.messages.map(
+          (m) => AiChatMessage(id: m.id, role: m.role, content: m.content),
+        ),
+      );
+    _errorMessage = null;
+    notifyListeners();
+  }
+
+  /// 删除历史会话；若删的是当前会话则清空消息
+  Future<void> deleteSession(String id) async {
+    _sessions.removeWhere((e) => e.id == id);
+    if (_activeSessionId == id) {
+      _activeSessionId = null;
+      if (_isStreaming) {
+        stop();
+      }
+      _messages.clear();
+      _errorMessage = null;
+    }
+    await _persistSessions();
+    notifyListeners();
+  }
+
+  /// 打开历史抽屉前调用：把当前对话同步进列表
+  Future<void> syncActiveSessionToHistory() => _upsertActiveSession();
 
   /// 发送用户消息并开始流式回复（流式中再次调用会被忽略）
   Future<void> send(String text) async {
@@ -314,7 +468,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     notifyListeners();
   }
 
-  /// 清空会话；若正在流式则先 stop
+  /// 清空当前消息；若正在流式则先 stop（不归档，归档请用 [newSession]）
   void clearMessages() {
     if (_isStreaming) {
       stop();
@@ -434,6 +588,8 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     _ending = false;
     _cancelToken = null;
     notifyListeners();
+    // 流结束后把当前会话写入历史，便于侧栏展示
+    unawaited(_upsertActiveSession());
   }
 
   String _nextId() => 'm_${++_idSeq}';

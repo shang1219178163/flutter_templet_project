@@ -35,7 +35,8 @@ enum CacheKey {
 
   aiProvider(needLogin: false, desc: "AI 当前模型提供商"),
   aiDeepseekConfig(needLogin: false, desc: "AI DeepSeek 配置"),
-  aiKimiConfig(needLogin: false, desc: "AI Kimi 配置");
+  aiKimiConfig(needLogin: false, desc: "AI Kimi 配置"),
+  aiChatSessions(needLogin: false, desc: "AI 历史会话列表");
 
   const CacheKey({
     required this.desc,

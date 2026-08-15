@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
-/// AppBar 右侧操作：Mock/Remote 切换、设置、清空会话
+/// AppBar 右侧操作：Mock/Remote 切换、设置、新会话
 class AiChatAppBarActions extends StatelessWidget {
   const AiChatAppBarActions({
     super.key,
@@ -15,34 +16,45 @@ class AiChatAppBarActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ListenableBuilder(
-          listenable: controller,
-          builder: (context, _) {
-            final mock = controller.useMock;
-            return IconButton(
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, _) {
+        final streaming = controller.isStreaming;
+        final mock = controller.useMock;
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
               tooltip: mock ? '当前 Mock，点击切 Remote' : '当前 Remote，点击切 Mock',
-              onPressed: controller.isStreaming ? null : () => controller.setUseMock(!mock),
+              onPressed: streaming ? null : () => controller.setUseMock(!mock),
               icon: Icon(mock ? Icons.science_outlined : Icons.cloud_outlined),
-            );
-          },
-        ),
-        IconButton(
-          tooltip: '设置',
-          onPressed: () => Get.toNamed(
-            AppRouter.aiChatSettingPage,
-            arguments: controller,
-          ),
-          icon: const Icon(Icons.settings_outlined),
-        ),
-        IconButton(
-          tooltip: '清空',
-          onPressed: controller.clearMessages,
-          icon: const Icon(Icons.delete_outline),
-        ),
-      ],
+            ),
+            IconButton(
+              tooltip: '设置',
+              onPressed: () => Get.toNamed(
+                AppRouter.aiChatSettingPage,
+                arguments: controller,
+              ),
+              icon: const Icon(Icons.settings_outlined),
+            ),
+            // 新会话：清空消息，后续发送不再携带历史上下文
+            IconButton(
+              tooltip: '新会话',
+              onPressed: streaming ? null : _onNewSession,
+              icon: const Icon(Icons.add_circle_outline),
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  void _onNewSession() {
+    if (controller.messages.isEmpty) {
+      SnackUtil.show('已是新会话');
+      return;
+    }
+    controller.newSession();
+    SnackUtil.show('已开启新会话');
   }
 }

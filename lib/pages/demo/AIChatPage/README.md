@@ -25,6 +25,7 @@ AIChatPage/
 └── widget/
     ├── ai_chat_app_bar_actions.dart
     ├── ai_chat_error_banner.dart
+    ├── ai_chat_history_drawer.dart  # 历史会话（NOverlayDialog 左滑）
     ├── ai_chat_input_bar.dart
     ├── ai_chat_message_list.dart
     └── ai_chat_message_bubble.dart
@@ -55,10 +56,13 @@ AIChatPage/
 - `aiProvider`：当前选中的提供商名
 - `aiDeepseekConfig` / `aiKimiConfig`：整包 Map  
   `{ baseUrl, model, models }`（**不含 apiKey**）
+- `aiChatSessions`：历史会话列表 JSON
 
 API Key **不写 SharedPreferences**，每次从 `.env`（`AiEnvService`）或 `--dart-define=DEEPSEEK_API_KEY`（仅 DeepSeek）解析，改 Key 后重启即生效。
 
 设置页中 Key / 请求地址为**只读**展示；可切换提供商并刷新模型列表。生成中不可切换提供商。
+
+AppBar 左侧 `more_horiz` 打开历史会话（`NOverlayDialog.drawer` 从左滑入）；右侧「新会话」会先归档再清空上下文。
 
 ### 切换提供商
 

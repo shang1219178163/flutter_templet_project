@@ -28,6 +28,68 @@ class AiChatMessage {
 
   /// 是否仍在流式输出（气泡显示光标）
   bool isStreaming;
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'role': role.name,
+        'content': content,
+      };
+
+  factory AiChatMessage.fromJson(Map<String, dynamic> json) {
+    final roleName = json['role'] as String? ?? 'user';
+    final role = AiChatRole.values.asNameMap()[roleName] ?? AiChatRole.user;
+    return AiChatMessage(
+      id: json['id'] as String? ?? '',
+      role: role,
+      content: json['content'] as String? ?? '',
+    );
+  }
+}
+
+/// 一条历史会话（标题取自首条用户消息）
+class AiChatSession {
+  AiChatSession({
+    required this.id,
+    required this.title,
+    required this.messages,
+    required this.updatedAtMs,
+  });
+
+  final String id;
+
+  /// 列表展示标题
+  String title;
+
+  /// 会话内消息快照
+  List<AiChatMessage> messages;
+
+  /// 最后更新时间（毫秒）
+  int updatedAtMs;
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'updatedAtMs': updatedAtMs,
+        'messages': messages.map((e) => e.toJson()).toList(),
+      };
+
+  factory AiChatSession.fromJson(Map<String, dynamic> json) {
+    final raw = json['messages'];
+    final list = <AiChatMessage>[];
+    if (raw is List) {
+      for (final e in raw) {
+        if (e is Map) {
+          list.add(AiChatMessage.fromJson(Map<String, dynamic>.from(e)));
+        }
+      }
+    }
+    return AiChatSession(
+      id: json['id'] as String? ?? '',
+      title: json['title'] as String? ?? '新会话',
+      messages: list,
+      updatedAtMs: json['updatedAtMs'] as int? ?? 0,
+    );
+  }
 }
 
 /// 流式事件类型
