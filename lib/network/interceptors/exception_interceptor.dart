@@ -16,7 +16,7 @@ class ExceptionInterceptor extends QueuedInterceptor {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-      case DioExceptionType.transformTimeout:
+        // case DioExceptionType.transformTimeout:
         throw TimeoutException(err.requestOptions);
       case DioExceptionType.badResponse:
         switch (err.response?.statusCode) {

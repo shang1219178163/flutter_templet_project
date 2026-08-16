@@ -49,3 +49,6 @@ app.*.map.json
 
 # Local env / secrets
 .env
+
+# Blog / docs generated
+doc/
