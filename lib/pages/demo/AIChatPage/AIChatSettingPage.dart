@@ -1,17 +1,16 @@
 import 'dart:math' show min;
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/pick/n_pick_one.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/enum/ai_provider.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_error.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/api_client.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
-import 'package:get/get.dart';
 
 /// AI 设置：提供商 / API Key（只读）/ 模型列表。
 ///
-/// 优先使用构造传入或 [Get.arguments] 的共享 [AiChatController]。
+/// 优先使用构造传入的共享 [AiChatController]（聊天页 Get.to 传入）。
 class AIChatSettingPage extends StatefulWidget {
   const AIChatSettingPage({super.key, this.title, this.controller});
 
@@ -24,12 +23,8 @@ class AIChatSettingPage extends StatefulWidget {
 
 class _AIChatSettingPageState extends State<AIChatSettingPage> {
   /// 优先取聊天页传入的共享 controller；自建时由本页负责释放
-  late final AiChatController _controller = widget.controller ??
-      (Get.arguments is AiChatController
-          ? Get.arguments as AiChatController
-          : AiChatController());
-  late final bool _ownsController =
-      widget.controller == null && Get.arguments is! AiChatController;
+  late final AiChatController _controller = widget.controller ?? AiChatController();
+  late final bool _ownsController = widget.controller == null;
 
   final _client = ApiClient();
 
@@ -256,9 +251,10 @@ class _AIChatSettingPageState extends State<AIChatSettingPage> {
         SnackUtil.show('获取到 ${models.length} 个模型');
       }
     } catch (e) {
-      SnackUtil.error(
-        e is DioException ? _client.dioErrorText(e) : '获取失败：$e',
-      );
+      final msg = e is FormatException
+          ? (e.message.isNotEmpty ? e.message : '模型列表响应格式错误')
+          : AiChatError.format(e);
+      SnackUtil.error(msg);
     } finally {
       if (mounted) {
         setState(() => _loadingModels = false);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatSettingPage.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/controller/ai_chat_controller.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
@@ -31,9 +32,10 @@ class AiChatAppBarActions extends StatelessWidget {
             ),
             IconButton(
               tooltip: '设置',
-              onPressed: () => Get.toNamed(
-                AppRouter.aiChatSettingPage,
-                arguments: controller,
+              // 构造器传入 controller，勿放 Get.arguments（会被路由观察者 json 缓存）
+              onPressed: () => Get.to(
+                () => AIChatSettingPage(controller: controller),
+                routeName: AppRouter.aiChatSettingPage,
               ),
               icon: const Icon(Icons.settings_outlined),
             ),

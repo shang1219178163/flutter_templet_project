@@ -19,18 +19,17 @@ class ApiClient {
         if (apiKey.isNotEmpty) 'Authorization': 'Bearer $apiKey',
       }),
     );
-    final map = resp.data as Map<String, dynamic>;
-    final list = (map['data'] as List?) ?? const [];
-    return list.map((e) => (e as Map<String, dynamic>)['id'] as String).toList();
-  }
-
-  /// 将 Dio 错误转成可读中文提示
-  String dioErrorText(DioException e) {
-    final code = e.response?.statusCode;
-    return switch (code) {
-      401 => 'API Key 无效（401）',
-      null => '网络异常：${e.message}',
-      _ => '请求失败（$code）：${e.message}',
-    };
+    final data = resp.data;
+    if (data is! Map) {
+      throw const FormatException('模型列表响应格式错误');
+    }
+    final list = data['data'];
+    if (list is! List) {
+      return const [];
+    }
+    return [
+      for (final e in list)
+        if (e is Map && e['id'] is String) e['id'] as String,
+    ];
   }
 }

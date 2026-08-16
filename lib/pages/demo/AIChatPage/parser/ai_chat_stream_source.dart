@@ -3,29 +3,12 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/enum/ai_provider.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/enum/ai_sse_progress.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_chat_models.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_error.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_env_service.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/sse_event_parser.dart';
-
-/// 默认 API Key：构建时通过 `--dart-define=DEEPSEEK_API_KEY=sk-xxx` 注入
-// ignore: do_not_use_environment -- 从 --dart-define 注入
-const kAiDefaultApiKey = String.fromEnvironment('DEEPSEEK_API_KEY', defaultValue: '');
-
-/// 由 chat completions URL 推导 `/models` 地址
-String resolveModelsUrl(String chatCompletionsUrl) {
-  final t = chatCompletionsUrl.trim();
-  if (t.isEmpty) {
-    return resolveModelsUrl(AiProvider.deepseek.defaultBaseUrl);
-  }
-  if (t.contains('/chat/completions')) {
-    return t.replaceFirst('/chat/completions', '/models');
-  }
-  if (t.endsWith('/models')) {
-    return t;
-  }
-  final base = t.endsWith('/') ? t.substring(0, t.length - 1) : t;
-  return '$base/models';
-}
 
 /// 流式对话数据源抽象：产出统一的 [AiStreamEvent]
 abstract class AiChatStreamSource {
@@ -101,8 +84,17 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
     final parser = SseEventParser();
     // 有状态 UTF-8 解码，避免多字节字符跨包被拆坏
     const utf8Decoder = Utf8Decoder(allowMalformed: true);
-    // 部分服务只关连接不发 [DONE]，用此标记补发 done
-    var sawDone = false;
+    // idle → hasDelta（收到正文）→ done（收到 [DONE]）
+    var progress = AiSseProgress.idle;
+
+    void note(AiStreamEvent e) {
+      if (e.isDone) {
+        progress = AiSseProgress.done;
+      } else if (e.kind == AiStreamEventKind.delta && progress == AiSseProgress.idle) {
+        progress = AiSseProgress.hasDelta;
+      }
+    }
+
     try {
       final response = await dio.post<ResponseBody>(
         url.trim(),
@@ -136,29 +128,34 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
           continue;
         }
         for (final e in parser.addChunk(chunk)) {
-          if (e.isDone) {
-            sawDone = true;
-          }
+          note(e);
           yield e;
+          // 流内 error 事件后不再补 done
+          if (e.kind == AiStreamEventKind.error) {
+            return;
+          }
         }
       }
       // 流结束时冲刷半行 / 未闭合 data
       for (final e in parser.flush()) {
-        if (e.isDone) {
-          sawDone = true;
-        }
+        note(e);
         yield e;
+        if (e.kind == AiStreamEventKind.error) {
+          return;
+        }
       }
-      if (!sawDone) {
+      // 无 [DONE]：有正文则视为正常结束；零增量断开则按链接中断
+      if (progress == AiSseProgress.hasDelta) {
         yield AiStreamEvent.done();
-      }
-    } on DioException catch (e) {
-      // 用户取消不视为错误
-      if (!CancelToken.isCancel(e)) {
-        yield AiStreamEvent.error(e.message ?? e.toString());
+      } else if (progress == AiSseProgress.idle) {
+        yield AiStreamEvent.error('链接中断，请检查网络后重试');
       }
     } catch (e) {
-      yield AiStreamEvent.error(e.toString());
+      // 用户取消不视为错误
+      if (AiChatError.isCancel(e)) {
+        return;
+      }
+      yield AiStreamEvent.error(AiChatError.format(e));
     }
   }
 }

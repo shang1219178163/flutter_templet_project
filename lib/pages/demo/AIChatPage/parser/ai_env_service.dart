@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+/// DeepSeek 默认 API Key：构建时通过 `--dart-define=DEEPSEEK_API_KEY=sk-xxx` 注入
+// ignore: do_not_use_environment -- 从 --dart-define 注入
+const kAiDefaultApiKey = String.fromEnvironment('DEEPSEEK_API_KEY', defaultValue: '');
+
 /// 从 `.env` 加载各 AI provider 的 API Key。
 ///
 /// `.env` 为 JSON 列表：`[{ "name": "deepseek", "key": "sk-xxx" }, ...]`，

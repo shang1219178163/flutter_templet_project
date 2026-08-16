@@ -76,7 +76,7 @@ class SseEventParser {
     try {
       final decoded = jsonDecode(data);
       if (decoded is! Map) {
-        return [AiStreamEvent.error('SSE data is not a JSON object')];
+        return [AiStreamEvent.error('SSE 数据不是 JSON 对象')];
       }
       final map = Map<String, dynamic>.from(decoded);
       // OpenAI 风格错误对象
@@ -90,7 +90,7 @@ class SseEventParser {
       }
       return [AiStreamEvent.delta(content)];
     } catch (e) {
-      return [AiStreamEvent.error('SSE JSON parse failed: $e')];
+      return [AiStreamEvent.error('SSE JSON 解析失败：$e')];
     }
   }
 
@@ -99,13 +99,13 @@ class SseEventParser {
     final choices = map['choices'];
     if (choices is List && choices.isNotEmpty && choices.first is Map) {
       final first = Map<String, dynamic>.from(choices.first as Map);
-      final delta = first['delta'];
-      if (delta is Map && delta['content'] is String) {
-        return delta['content'] as String;
+      final fromDelta = _stringField(first['delta'], 'content');
+      if (fromDelta != null) {
+        return fromDelta;
       }
-      final message = first['message'];
-      if (message is Map && message['content'] is String) {
-        return message['content'] as String;
+      final fromMessage = _stringField(first['message'], 'content');
+      if (fromMessage != null) {
+        return fromMessage;
       }
     }
     if (map['content'] is String) {
@@ -113,6 +113,13 @@ class SseEventParser {
     }
     if (map['delta'] is String) {
       return map['delta'] as String;
+    }
+    return null;
+  }
+
+  String? _stringField(dynamic node, String key) {
+    if (node is Map && node[key] is String) {
+      return node[key] as String;
     }
     return null;
   }

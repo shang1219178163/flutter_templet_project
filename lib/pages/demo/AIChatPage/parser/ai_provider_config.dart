@@ -1,7 +1,6 @@
 import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_env_service.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/enum/ai_provider.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_env_service.dart';
 
 /// 单个 provider 的运行态配置（整包持久化为一个 Map）
 ///
@@ -26,7 +25,26 @@ class AiProviderConfig {
   List<String> models = [];
 
   /// 由 chat completions 地址推导的 models 地址
-  String get modelsUrl => resolveModelsUrl(baseUrl);
+  String get modelsUrl => resolveModelsUrl(baseUrl, fallbackBaseUrl: provider.defaultBaseUrl);
+
+  /// 由 chat completions URL 推导 `/models` 地址
+  static String resolveModelsUrl(
+    String chatCompletionsUrl, {
+    String? fallbackBaseUrl,
+  }) {
+    final t = chatCompletionsUrl.trim();
+    if (t.isEmpty) {
+      return resolveModelsUrl(fallbackBaseUrl ?? AiProvider.deepseek.defaultBaseUrl);
+    }
+    if (t.contains('/chat/completions')) {
+      return t.replaceFirst('/chat/completions', '/models');
+    }
+    if (t.endsWith('/models')) {
+      return t;
+    }
+    final base = t.endsWith('/') ? t.substring(0, t.length - 1) : t;
+    return '$base/models';
+  }
 
   /// 持久化字段（故意不含 apiKey）
   Map<String, dynamic> toJson() => {
@@ -62,6 +80,7 @@ class AiProviderConfig {
       model = provider.defaultModel;
       changed = true;
     }
+    // Kimi 旧域名 / 旧默认模型迁移
     if (provider == AiProvider.kimi) {
       if (baseUrl.contains('api.moonshot.ai')) {
         baseUrl = provider.defaultBaseUrl;

@@ -7,10 +7,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/mixin/safe_change_notifier_mixin.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/enum/ai_provider.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/enum/ai_reply_phase.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_chat_models.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider.dart';
-import 'package:flutter_templet_project/pages/demo/AIChatPage/model/ai_provider_config.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_error.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_chat_stream_source.dart';
+import 'package:flutter_templet_project/pages/demo/AIChatPage/parser/ai_provider_config.dart';
 
 /// AI 对话状态：消息列表、流式标记、打字缓冲。
 ///
@@ -43,7 +45,8 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   /// 当前活动会话 id；null 表示尚未落库的空白会话
   String? _activeSessionId;
 
-  bool _isStreaming = false;
+  /// 回复相位：idle → streaming → draining → idle
+  AiReplyPhase _phase = AiReplyPhase.idle;
 
   String? _errorMessage;
 
@@ -63,9 +66,6 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   /// 会话代际：stop / fail / dispose / 新 send 时递增，作废未完成的收尾 Future
   int _session = 0;
 
-  /// 是否已进入「等打字队列排空再 finish」阶段，避免 done 与 onDone 重复触发
-  bool _ending = false;
-
   int _idSeq = 0;
 
   AiProvider get provider => _currentProvider;
@@ -81,8 +81,8 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   /// 当前活动会话 id
   String? get activeSessionId => _activeSessionId;
 
-  /// 是否正在生成（发送中 / 打字中）
-  bool get isStreaming => _isStreaming;
+  /// 是否正在生成（收流 / 打字 / 排空缓冲）
+  bool get isStreaming => _phase != AiReplyPhase.idle;
 
   /// 最近一次错误；非 null 时顶部 Banner 展示
   String? get errorMessage => _errorMessage;
@@ -108,9 +108,9 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     if (p == _currentProvider) {
       _ensureModelInList();
       await _commitConfig(p);
-    } else {
-      await _persistConfig(p);
+      return;
     }
+    await _persistConfig(p);
   }
 
   /// 下拉可选模型（无缓存时至少包含当前模型）
@@ -119,12 +119,15 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     if (models.isEmpty) {
       return [current];
     }
-    return models.contains(current) ? List.of(models) : [current, ...models];
+    if (models.contains(current)) {
+      return List.of(models);
+    }
+    return [current, ...models];
   }
 
-  /// 切换 Mock / Remote（流式中勿调）
+  /// 切换 Mock / Remote（流式中拒绝）
   void setUseMock(bool value) {
-    if (_source.useMock == value) {
+    if (_source.useMock == value || isStreaming) {
       return;
     }
     _source.useMock = value;
@@ -142,7 +145,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   /// 切换 provider：落盘当前 → 载入目标 → 清空会话（流式中拒绝）
   Future<void> setProvider(AiProvider p) async {
-    if (p == _currentProvider || !mounted || _isStreaming) {
+    if (p == _currentProvider || !mounted || isStreaming) {
       return;
     }
     // 作废进行中的缓存加载，防止异步回调把 provider 改回去
@@ -192,16 +195,23 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     notifyListeners();
   }
 
-  Future<void> _persistConfig([AiProvider? p]) async {
-    final target = p ?? provider;
+  Future<CacheService> _readyCache() async {
     final cache = CacheService();
     await cache.init();
+    return cache;
+  }
+
+  /// 配置加载是否已被新一轮 load / setProvider 作废
+  bool _isConfigStale(int epoch) => !mounted || epoch != _configLoadEpoch;
+
+  Future<void> _persistConfig([AiProvider? p]) async {
+    final target = p ?? provider;
+    final cache = await _readyCache();
     await cache.setMap(aiConfigCacheKey(target).name, _configs[target]!.toJson());
   }
 
   Future<void> _loadProviderConfig(AiProvider p) async {
-    final cache = CacheService();
-    await cache.init();
+    final cache = await _readyCache();
     final c = _configs[p]!;
     final map = cache.getMap(aiConfigCacheKey(p).name);
     if (map != null && map.isNotEmpty) {
@@ -219,11 +229,11 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   /// 从本地缓存恢复当前 provider 及各项配置
   Future<void> loadConfigFromCache() async {
     final epoch = ++_configLoadEpoch;
-    final cache = CacheService();
-    await cache.init();
-    if (!mounted || epoch != _configLoadEpoch) {
+    final cache = await _readyCache();
+    if (_isConfigStale(epoch)) {
       return;
     }
+
     final name = cache.getString(CacheKey.aiProvider.name);
     if (name != null && name.isNotEmpty) {
       final p = AiProvider.values.asNameMap()[name];
@@ -233,30 +243,31 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     }
     // 预加载全部 provider，切换时内存里已有各自 Key / URL
     for (final p in AiProvider.values) {
-      if (!mounted || epoch != _configLoadEpoch) {
+      if (_isConfigStale(epoch)) {
         return;
       }
       await _loadProviderConfig(p);
     }
-    if (!mounted || epoch != _configLoadEpoch) {
+    if (_isConfigStale(epoch)) {
       return;
     }
+
     _ensureModelInList();
     _syncActiveRemote();
     await _loadSessions();
-    if (!mounted || epoch != _configLoadEpoch) {
+    if (_isConfigStale(epoch)) {
       return;
     }
     notifyListeners();
   }
 
   Future<void> _loadSessions() async {
-    final cache = CacheService();
-    await cache.init();
+    final cache = await _readyCache();
     final raw = cache.getString(CacheKey.aiChatSessions.name);
     if (raw == null || raw.isEmpty) {
       return;
     }
+
     try {
       final decoded = jsonDecode(raw);
       if (decoded is! List) {
@@ -269,19 +280,22 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
               .whereType<Map>()
               .map((e) => AiChatSession.fromJson(Map<String, dynamic>.from(e))),
         );
-      _sessions.sort((a, b) => b.updatedAtMs.compareTo(a.updatedAtMs));
+      _sortSessions();
     } catch (e) {
       debugPrint('loadSessions failed: $e');
     }
   }
 
   Future<void> _persistSessions() async {
-    final cache = CacheService();
-    await cache.init();
+    final cache = await _readyCache();
     await cache.setString(
       CacheKey.aiChatSessions.name,
       jsonEncode(_sessions.map((e) => e.toJson()).toList()),
     );
+  }
+
+  void _sortSessions() {
+    _sessions.sort((a, b) => b.updatedAtMs.compareTo(a.updatedAtMs));
   }
 
   /// 从当前消息生成可归档快照（去掉空的流式气泡）
@@ -309,6 +323,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     if (snapshot.isEmpty) {
       return;
     }
+
     final now = DateTime.now().millisecondsSinceEpoch;
     final id = _activeSessionId ?? 's_${now}_$_idSeq';
     _activeSessionId = id;
@@ -324,13 +339,13 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     } else {
       _sessions.insert(0, session);
     }
-    _sessions.sort((a, b) => b.updatedAtMs.compareTo(a.updatedAtMs));
+    _sortSessions();
     await _persistSessions();
   }
 
   /// 开启新会话：归档当前上下文后清空，后续发送不再携带历史
   Future<void> newSession() async {
-    if (_isStreaming) {
+    if (isStreaming) {
       stop();
     }
     await _upsertActiveSession();
@@ -342,23 +357,20 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   /// 打开历史会话：先归档当前，再载入目标（不携带其它会话上下文）
   Future<void> openSession(String id) async {
-    if (_isStreaming) {
+    if (isStreaming) {
       stop();
     }
     if (id == _activeSessionId && _messages.isNotEmpty) {
       return;
     }
+
     await _upsertActiveSession();
-    AiChatSession? target;
-    for (final s in _sessions) {
-      if (s.id == id) {
-        target = s;
-        break;
-      }
-    }
-    if (target == null) {
+    final i = _sessions.indexWhere((e) => e.id == id);
+    if (i < 0) {
       return;
     }
+
+    final target = _sessions[i];
     _activeSessionId = target.id;
     _messages
       ..clear()
@@ -376,7 +388,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     _sessions.removeWhere((e) => e.id == id);
     if (_activeSessionId == id) {
       _activeSessionId = null;
-      if (_isStreaming) {
+      if (isStreaming) {
         stop();
       }
       _messages.clear();
@@ -392,7 +404,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   /// 发送用户消息并开始流式回复（流式中再次调用会被忽略）
   Future<void> send(String text) async {
     final prompt = text.trim();
-    if (prompt.isEmpty || _isStreaming || !mounted) {
+    if (prompt.isEmpty || isStreaming || !mounted) {
       return;
     }
 
@@ -400,8 +412,14 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     _ensureModelInList();
     _syncActiveRemote();
 
+    if (!_source.useMock && currentConfig.apiKey.trim().isEmpty) {
+      _errorMessage = '未配置 API Key，请在 .env 中填写或改用 Mock';
+      notifyListeners();
+      return;
+    }
+
     _session++;
-    _ending = false;
+    _phase = AiReplyPhase.streaming;
     _errorMessage = null;
     _messages
       ..add(AiChatMessage(id: _nextId(), role: AiChatRole.user, content: prompt))
@@ -412,7 +430,6 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
         isStreaming: true,
       ));
     _streamingAssistantId = _messages.last.id;
-    _isStreaming = true;
     _typeQueue.clear();
     notifyListeners();
 
@@ -427,7 +444,12 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     }
     _subscription = _source.start(messages: apiMessages, cancelToken: _cancelToken).listen(
       _onStreamEvent,
-      onError: (Object e) => _fail(e.toString()),
+      onError: (Object e) {
+        if (AiChatError.isCancel(e)) {
+          return;
+        }
+        _fail(AiChatError.format(e));
+      },
       onDone: _requestEnd,
       cancelOnError: true,
     );
@@ -439,24 +461,22 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
     return _messages
         .where((m) => m.id != streamingId)
         .where((m) => m.content.isNotEmpty || m.role == AiChatRole.user)
-        .map((m) => {
-              'role': switch (m.role) {
-                AiChatRole.user => 'user',
-                AiChatRole.assistant => 'assistant',
-                AiChatRole.system => 'system',
-              },
-              'content': m.content,
-            })
+        .map((m) => {'role': m.role.name, 'content': m.content})
         .toList();
+  }
+
+  /// 取消 HTTP / 订阅并冲刷打字缓冲（不改变 phase；由调用方收尾）
+  void _abortActiveStream(String cancelReason) {
+    _session++;
+    _cancelToken?.cancel(cancelReason);
+    _subscription?.cancel();
+    _subscription = null;
+    _flushTypewriter();
   }
 
   /// 用户手动停止：取消请求、冲刷缓冲、标记结束
   void stop() {
-    _session++;
-    _cancelToken?.cancel('user_stop');
-    _subscription?.cancel();
-    _subscription = null;
-    _flushTypewriter();
+    _abortActiveStream('user_stop');
     _finishAssistant(emptyHint: '（已停止）');
   }
 
@@ -470,7 +490,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   /// 清空当前消息；若正在流式则先 stop（不归档，归档请用 [newSession]）
   void clearMessages() {
-    if (_isStreaming) {
+    if (isStreaming) {
       stop();
     }
     _messages.clear();
@@ -488,9 +508,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
           return;
         }
         // 按 Unicode 码点入队，再由定时器逐批吐出
-        for (final r in delta.runes) {
-          _typeQueue.add(String.fromCharCode(r));
-        }
+        _typeQueue.addAll(delta.runes.map(String.fromCharCode));
       case AiStreamEventKind.error:
         _fail(event.message ?? '未知错误');
       case AiStreamEventKind.done:
@@ -500,16 +518,17 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   /// 流结束：等打字队列排空后再收尾（避免最后几字被截断）
   void _requestEnd() {
-    if (!_isStreaming || _ending || !mounted) {
+    // 仅 streaming→draining；已在 draining / idle 则忽略（防 done 与 onDone 重复）
+    if (_phase != AiReplyPhase.streaming || !mounted) {
       return;
     }
-    _ending = true;
+    _phase = AiReplyPhase.draining;
     final session = _session;
     Future<void>(() async {
       while (_typeQueue.isNotEmpty && session == _session && mounted) {
         await Future<void>.delayed(const Duration(milliseconds: 20));
       }
-      if (session == _session && _isStreaming && mounted) {
+      if (session == _session && _phase != AiReplyPhase.idle && mounted) {
         _finishAssistant();
       }
     });
@@ -556,18 +575,17 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
 
   /// 流错误：取消 HTTP、展示 Banner 并结束当前助手气泡
   void _fail(String message) {
-    _session++;
-    _cancelToken?.cancel('fail');
-    _subscription?.cancel();
-    _subscription = null;
-    _flushTypewriter();
+    _abortActiveStream('fail');
     _errorMessage = message;
-    _finishAssistant(emptyHint: '（出错）');
+    // 链接中断时用更明确的空气泡提示；已有部分正文则保留
+    final emptyHint =
+        AiChatError.isConnectionIssue(message) ? '（链接中断）' : '（出错）';
+    _finishAssistant(emptyHint: emptyHint);
   }
 
   /// 结束当前助手消息：停定时器、清流式标记
   void _finishAssistant({String? emptyHint}) {
-    if (!_isStreaming) {
+    if (_phase == AiReplyPhase.idle) {
       return;
     }
     _typeTimer?.cancel();
@@ -584,8 +602,7 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
       }
     }
     _streamingAssistantId = null;
-    _isStreaming = false;
-    _ending = false;
+    _phase = AiReplyPhase.idle;
     _cancelToken = null;
     notifyListeners();
     // 流结束后把当前会话写入历史，便于侧栏展示
@@ -597,12 +614,17 @@ class AiChatController extends ChangeNotifier with SafeChangeNotifierMixin {
   @override
   void dispose() {
     _session++;
-    _typeTimer?.cancel();
-    _typeTimer = null;
     _subscription?.cancel();
     _subscription = null;
     _cancelToken?.cancel('dispose');
     _cancelToken = null;
+    if (_phase != AiReplyPhase.idle) {
+      _flushTypewriter();
+      _finishAssistant(emptyHint: '（已取消）');
+    } else {
+      _typeTimer?.cancel();
+      _typeTimer = null;
+    }
     // SafeChangeNotifierMixin 会将 mounted 置 false，再 dispose ChangeNotifier
     super.dispose();
   }
