@@ -1,0 +1,40 @@
+# 发布配置模板：复制为 config.yaml 后填入真实密钥
+# config.yaml 已被 .gitignore 忽略，密钥不会入库。
+
+# 蒲公英
+pgyer:
+  # 蒲公英 API Key（个人/企业版均可，v2 接口使用 _api_key）
+  api_key: "your_pgyer_api_key"
+  # 可选：更新说明，留空则自动生成本次提交信息
+  update_description: ""
+  # 可选：安装密码，留空则不设置
+  install_password: ""
+
+# 钉钉机器人
+dingtalk:
+  # 群机器人 Webhook（自定义机器人 → 加签 或 关键字 方式创建）
+  webhook: "https://oapi.dingtalk.com/robot/send?access_token=xxx"
+  # 可选：加签模式的安全密钥（Secret），留空表示机器人用「关键字」校验
+  secret: ""
+
+# 飞书机器人
+feishu:
+  # 自定义机器人 Webhook（https://open.feishu.cn/open-apis/bot/v2/hook/xxx）
+  webhook: "https://open.feishu.cn/open-apis/bot/v2/hook/xxx"
+  # 可选：签名校验的安全密钥（Secret），留空表示机器人用「关键字」校验
+  secret: ""
+
+# 打包
+build:
+  # 环境映射：<key> 会作为 --dart-define=app_env=<key>
+  # 修改此处的显示名即可，key 保持小写
+  environments:
+    - key: test
+      label: "测试环境"
+    - key: pre
+      label: "预发布环境"
+    - key: prod
+      label: "生产环境"
+
+  # 蒲公英应用 key（用于跳转安装页，可留空）
+  app_key: ""

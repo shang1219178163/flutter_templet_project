@@ -1,0 +1,14 @@
+name: publish_cli
+description: 一键发布 CLI：命令编排 + 打包 + 蒲公英上传 + 钉钉通知。
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  args: ^2.4.2
+  http: ^1.0.0
+  yaml: ^3.1.2
+  path: ^1.8.1
+  crypto: ^3.0.0
