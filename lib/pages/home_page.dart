@@ -337,6 +337,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.textPaintDemo, "textPaintDemo"),
   Tuple2(AppRouter.segmentedPageViewDemo, "segmentedPageViewDemo"),
   Tuple2(AppRouter.nRefreshViewDemo, "nRefreshListViewDemo"),
+  Tuple2(AppRouter.tracelessLoadDemo, "无痕加载更多"),
   Tuple2(AppRouter.nestedScrollViewDemoThree, "nestedScrollPageDemo"),
   Tuple2(AppRouter.formDemo, "formDemoPage"),
   Tuple2(AppRouter.choiceExpansionDemo, "choiceExpansionDemo"),

@@ -328,6 +328,7 @@ import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TooltipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TrackingScrollDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TracelessLoadDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TranslationTextPage.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
@@ -1788,6 +1789,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.nRefreshViewDemo,
       page: () => NRefreshViewDemo(),
+    ),
+    GetPage(
+      name: AppRouter.tracelessLoadDemo,
+      page: () => TracelessLoadDemo(),
     ),
     GetPage(
       name: AppRouter.nestedScrollViewDemoThree,

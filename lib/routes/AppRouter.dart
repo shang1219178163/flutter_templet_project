@@ -410,6 +410,7 @@ class AppRouter {
   static const String segmentedPageViewDemo = '/segmentedPageViewDemo';
   static const String nPinnedTabBarPageDemo = '/nPinnedTabBarPageDemo';
   static const String nRefreshViewDemo = '/nRefreshViewDemo';
+  static const String tracelessLoadDemo = '/tracelessLoadDemo';
   static const String nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
   static const String apiCreatePage = '/apiCreatePage';
   static const String formDemo = '/formDemo';
