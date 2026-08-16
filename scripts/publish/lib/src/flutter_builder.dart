@@ -5,7 +5,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
-import 'logger.dart';
+import 'package:publish_cli/src/logger.dart';
 
 /// 打包目标平台
 enum BuildTarget {

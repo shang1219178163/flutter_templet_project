@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 
-import 'logger.dart';
+import 'package:publish_cli/src/logger.dart';
 
 /// 飞书通知内容
 class FeishuMessage {

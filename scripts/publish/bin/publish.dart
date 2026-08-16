@@ -32,7 +32,11 @@ void main(List<String> arguments) async {
       return;
     }
 
-    final env = _resolveEnv(results, config);
+    final dryRun = results['dry-run'] as bool;
+    // dry-run 自测模式下避免交互：未指定 --env 时直接取第一个环境
+    final env = dryRun && (results['env'] as String).trim().isEmpty
+        ? config.environments.first
+        : _resolveEnv(results, config);
     final targets = _resolveTargets(results);
     final skipBuild = results['skip-build'] as bool;
     final skipUpload = results['skip-upload'] as bool;
@@ -40,6 +44,11 @@ void main(List<String> arguments) async {
 
     logger.info('项目: ${version.alias.isEmpty ? version.name : version.alias} '
         '版本: ${version.fullVersion} 环境: ${env.label}(${env.key}) 目标: ${targets.map((t) => t.label).join('/')}');
+
+    if (dryRun) {
+      _runDryRun(logger, config, version, env, targets, skipBuild, skipUpload, skipNotify);
+      return;
+    }
 
     // 1. 打包（支持多平台；all = Android + iOS）
     final builds = <BuildResult>[];
@@ -77,19 +86,18 @@ void main(List<String> arguments) async {
     if (skipNotify) {
       logger.warn('跳过通知（--skip-notify）');
     } else {
-      final message = _buildMessage(config, version, env, targets, builds, uploads);
       final dingTalk = DingTalkNotifier(
         webhook: config.dingtalkWebhook,
         secret: config.dingtalkSecret,
         logger: logger,
       );
-      await dingTalk.send(message);
+      await dingTalk.send(_buildDingTalkMessage(config, version, env, targets, uploads));
       final feishu = FeishuNotifier(
         webhook: config.feishuWebhook,
         secret: config.feishuSecret,
         logger: logger,
       );
-      await feishu.send(message);
+      await feishu.send(_buildFeishuMessage(config, version, env, targets, uploads));
     }
 
     _printSummary(logger, version, env, targets, builds, uploads);
@@ -116,6 +124,7 @@ ArgParser _buildParser() {
   return ArgParser()
     ..addOption('env', abbr: 'e', help: '构建环境 key（test/pre/prod）', defaultsTo: '')
     ..addOption('target', abbr: 't', help: '构建目标：android / ios / all', defaultsTo: 'android')
+    ..addFlag('dry-run', help: '自测模式：只校验配置/参数并预览消息，不打包/上传/发送', defaultsTo: false)
     ..addFlag('skip-build', help: '跳过打包', defaultsTo: false)
     ..addFlag('skip-upload', help: '跳过蒲公英上传', defaultsTo: false)
     ..addFlag('skip-notify', help: '跳过钉钉/飞书通知', defaultsTo: false)
@@ -159,13 +168,67 @@ List<BuildTarget> _resolveTargets(ArgResults results) {
   return [target];
 }
 
-/// 组装通知 markdown（钉钉与飞书共用内容）
-DingTalkMessage _buildMessage(
+/// dry-run 自测：校验配置与参数、预览将执行的步骤和通知消息，不做任何副作用
+void _runDryRun(
+  Logger logger,
   PublishConfig config,
   AppVersion version,
   BuildEnv env,
   List<BuildTarget> targets,
-  List<BuildResult> builds,
+  bool skipBuild,
+  bool skipUpload,
+  bool skipNotify,
+) {
+  logger.info('===== DRY-RUN（自测模式，不执行任何实际操作） =====');
+
+  // 配置校验
+  logger.info('配置校验：');
+  logger.info('  蒲公英 api_key: ${config.pgyerApiKey.isEmpty ? "❌ 未配置" : "✅ 已配置"}');
+  logger.info('  蒲公英 install_password: ${config.pgyerInstallPassword.isEmpty ? "(空)" : "已设置"}');
+  logger.info('  钉钉 webhook: ${config.dingtalkWebhook.isEmpty ? "❌ 未配置" : "✅ 已配置"}');
+  logger.info('  飞书 webhook: ${config.feishuWebhook.isEmpty ? "❌ 未配置" : "✅ 已配置"}');
+  logger.info('  可用环境: ${config.environments.map((e) => "${e.key}(${e.label})").join(', ')}');
+
+  // 参数校验
+  logger.info('参数校验：');
+  logger.info('  目标平台: ${targets.map((t) => t.label).join(' / ')}');
+  logger.info('  跳过打包: $skipBuild | 跳过上传: $skipUpload | 跳过通知: $skipNotify');
+
+  // 通知消息预览
+  if (!skipNotify) {
+    logger.info('===== 通知消息预览 =====');
+    final ding = _buildDingTalkMessage(config, version, env, targets, const []);
+    logger.info('--- 钉钉 ---\n${ding.markdown}');
+    final feishu = _buildFeishuMessage(config, version, env, targets, const []);
+    logger.info('--- 飞书 ---\n${feishu.markdown}');
+  }
+
+  // 计划执行步骤
+  logger.info('===== 计划执行 =====');
+  if (skipBuild) {
+    logger.info('  [跳过] 打包');
+  } else {
+    logger.info('  [执行] flutter build ${targets.map((t) => t.flag).join(', ')} --dart-define=app_env=${env.key}');
+  }
+  if (skipUpload) {
+    logger.info('  [跳过] 蒲公英上传');
+  } else {
+    logger.info('  [执行] 上传蒲公英（无产物时自动跳过）');
+  }
+  if (skipNotify) {
+    logger.info('  [跳过] 钉钉/飞书通知');
+  } else {
+    logger.info('  [执行] 发送钉钉 + 飞书通知');
+  }
+  logger.info('===== DRY-RUN 通过，未执行任何实际操作 =====');
+}
+
+/// 组装钉钉通知 markdown（钉钉 markdown 支持标题/粗体/链接/图片）
+DingTalkMessage _buildDingTalkMessage(
+  PublishConfig config,
+  AppVersion version,
+  BuildEnv env,
+  List<BuildTarget> targets,
   List<PgyerUploadResult> uploads,
 ) {
   final appName = version.alias.isEmpty ? version.name : version.alias;
@@ -185,6 +248,31 @@ DingTalkMessage _buildMessage(
     buf.writeln('- **更新说明**：${config.pgyerUpdateDescription}');
   }
   return DingTalkMessage(title: title, markdown: buf.toString());
+}
+
+/// 组装飞书通知 markdown（飞书 card 的 markdown 不支持 `###` 标题与图片，
+/// 链接使用标准 `[text](url)` 语法，二维码信息由下载链接承载）
+FeishuMessage _buildFeishuMessage(
+  PublishConfig config,
+  AppVersion version,
+  BuildEnv env,
+  List<BuildTarget> targets,
+  List<PgyerUploadResult> uploads,
+) {
+  final appName = version.alias.isEmpty ? version.name : version.alias;
+  final title = '$appName 发布通知';
+  final buf = StringBuffer('**$appName 发布通知**\n\n');
+  buf.writeln('- **应用**：$appName');
+  buf.writeln('- **版本**：${version.fullVersion}');
+  buf.writeln('- **环境**：${env.label}（${env.key}）');
+  buf.writeln('- **平台**：${targets.map((t) => t.label).join(' / ')}');
+  for (final upload in uploads) {
+    buf.writeln('- **蒲公英下载**：[${upload.downloadUrl}](${upload.downloadUrl})');
+  }
+  if (config.pgyerUpdateDescription.isNotEmpty) {
+    buf.writeln('- **更新说明**：${config.pgyerUpdateDescription}');
+  }
+  return FeishuMessage(title: title, markdown: buf.toString());
 }
 
 void _printSummary(

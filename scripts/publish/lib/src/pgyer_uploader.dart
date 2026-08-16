@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 
-import 'logger.dart';
+import 'package:publish_cli/src/logger.dart';
 
 /// 蒲公英上传结果
 class PgyerUploadResult {
@@ -63,12 +63,12 @@ class PgyerUploader {
     final request = http.MultipartRequest('POST', uri)
       ..fields['_api_key'] = apiKey
       ..fields['buildInstallType'] = '1'; // 公开安装
-      if (installPassword.isNotEmpty) {
-        request.fields['buildPassword'] = installPassword;
-      }
-      if (updateDescription.isNotEmpty) {
-        request.fields['buildUpdateDescription'] = updateDescription;
-      }
+    if (installPassword.isNotEmpty) {
+      request.fields['buildPassword'] = installPassword;
+    }
+    if (updateDescription.isNotEmpty) {
+      request.fields['buildUpdateDescription'] = updateDescription;
+    }
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',

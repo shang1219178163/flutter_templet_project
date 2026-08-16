@@ -56,6 +56,9 @@ dart run scripts/publish/bin/publish.dart --env prod --target all
 
 # 跳过某一步（例如只发通知）
 dart run scripts/publish/bin/publish.dart --skip-build --skip-upload --env test
+
+# 自测：校验配置与参数、预览通知消息，不打包/上传/发送
+dart run scripts/publish/bin/publish.dart --dry-run --env test --target all
 ```
 
 ### 参数
@@ -64,6 +67,7 @@ dart run scripts/publish/bin/publish.dart --skip-build --skip-upload --env test
 | --- | --- | --- |
 | `--env, -e` | 环境 key（config 中 `build.environments` 定义，如 test/pre/prod） | 交互选择 |
 | `--target, -t` | 构建目标：`android` / `ios` / `all` | `android` |
+| `--dry-run` | 自测模式：校验配置/参数并预览钉钉/飞书消息，不执行任何实际操作 | `false` |
 | `--skip-build` | 跳过打包 | `false` |
 | `--skip-upload` | 跳过蒲公英上传 | `false` |
 | `--skip-notify` | 跳过钉钉/飞书通知 | `false` |

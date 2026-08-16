@@ -42,7 +42,7 @@ AppVersion parseVersion(String rootDir) {
   return AppVersion(
     name: name,
     alias: alias,
-    versionName: parts.length > 0 ? parts[0] : version,
+    versionName: parts.isNotEmpty ? parts[0] : version,
     versionCode: parts.length > 1 ? parts[1] : '0',
   );
 }

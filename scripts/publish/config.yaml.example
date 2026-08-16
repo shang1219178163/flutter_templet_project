@@ -5,7 +5,7 @@
 pgyer:
   # 蒲公英 API Key（个人/企业版均可，v2 接口使用 _api_key）
   api_key: "your_pgyer_api_key"
-  # 可选：更新说明，留空则自动生成本次提交信息
+  # 可选：更新说明，会作为蒲公英 buildUpdateDescription 与通知里的「更新说明」；留空则通知中不展示
   update_description: ""
   # 可选：安装密码，留空则不设置
   install_password: ""

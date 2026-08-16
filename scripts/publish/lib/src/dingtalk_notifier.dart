@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 
-import 'logger.dart';
+import 'package:publish_cli/src/logger.dart';
 
 /// 钉钉通知内容
 class DingTalkMessage {
@@ -50,6 +50,9 @@ class DingTalkNotifier {
   }
 
   /// 加签模式：按时间戳 + secret 生成签名参数
+  ///
+  /// 注意：sign 不要手动 encodeComponent——`replace(queryParameters:)` 会做百分号编码，
+  /// 再 encode 一次会双重编码导致签名校验失败。
   Uri _signedUri() {
     if (secret.isEmpty) {
       return Uri.parse(webhook);
@@ -61,7 +64,7 @@ class DingTalkNotifier {
     final uri = Uri.parse(webhook);
     final query = Map<String, String>.from(uri.queryParameters)
       ..['timestamp'] = timestamp
-      ..['sign'] = Uri.encodeComponent(sign);
+      ..['sign'] = sign;
     return uri.replace(queryParameters: query);
   }
 }
