@@ -175,6 +175,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
         ElevatedButton(
           onPressed: () {
             countVN.value = 90;
+            setState(() {});
 
             NQueueCard.show(
               context: context,
@@ -192,6 +193,7 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
         ElevatedButton(
           onPressed: () {
             countVN.value++;
+            setState(() {});
 
             NQueueCard.show(
               context: context,

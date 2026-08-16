@@ -52,6 +52,7 @@ class NQueueCard {
     // debugPrint(["show", tag, targetIndex, child.hashCode].join(","));
     if (targetIndex != -1) {
       _entries[targetIndex].update(
+        child: child,
         data: data,
         duration: duration,
         onRemove: onRemove,
@@ -63,7 +64,7 @@ class NQueueCard {
       removeIndex(0);
     }
 
-    final toastEntry = NReuseToastEntry(tag: tag, data: data);
+    final toastEntry = NReuseToastEntry(tag: tag, child: child, data: data);
     toastEntry.entry = OverlayEntry(
       builder: (context) {
         var top = initialTop + (entries.indexWhere((e) => e.tag == tag) + 1) * (height + spacing);
@@ -78,7 +79,6 @@ class NQueueCard {
               alignment: alignment,
               beginOffset: beginOffset,
               duration: slideDuration,
-              child: child,
             ),
           ),
         );
@@ -102,12 +102,12 @@ class NQueueCard {
 
   static void removeIndex(int index) {
     final item = _entries.removeAt(index);
-    item.entry?.remove();
+    item.dispose();
   }
 
   static void clear() {
-    for (var i = 0; i < _entries.length; i++) {
-      removeIndex(i);
+    while (_entries.isNotEmpty) {
+      removeIndex(0);
     }
   }
 }
@@ -115,20 +115,16 @@ class NQueueCard {
 class NReuseToastEntry {
   NReuseToastEntry({
     required this.tag,
-    // required this.height,
-    // required this.spacing,
+    required Widget child,
     this.data,
     this.entry,
-  });
+  }) : childVN = ValueNotifier(child);
 
   /// tag 类型,同值复用
   final String tag;
 
-  // /// height 高度
-  // double height;
-  //
-  // /// spacing 间距
-  // double spacing;
+  /// 当前展示内容（同 tag 更新时替换）
+  final ValueNotifier<Widget> childVN;
 
   /// data 补充参数
   Map<String, dynamic>? data;
@@ -145,40 +141,51 @@ class NReuseToastEntry {
     Duration duration = const Duration(milliseconds: 300),
     Alignment alignment = Alignment.centerLeft,
     Offset beginOffset = const Offset(-1, 0),
-    required Widget child,
   }) {
     return NOverlayAnimatedSlide(
+      key: ValueKey(tag),
       duration: duration,
       alignment: alignment,
       beginOffset: beginOffset,
       child: (dismiss) {
         _onDismiss = dismiss;
-        return child;
+        return ValueListenableBuilder<Widget>(
+          valueListenable: childVN,
+          builder: (context, child, _) => child,
+        );
       },
     );
   }
 
   /// 🔥 更新内容（核心）
   void update({
+    required Widget child,
     Map<String, dynamic>? data,
     required Duration duration,
     VoidCallback? onRemove,
   }) {
     // debugPrint([runtimeType, "update", tag].join(","));
     this.data = data;
-    // ✅ 关键：触发重建
-    entry?.markNeedsBuild();
+    // 通过 ValueNotifier 刷新内容，避免仅 markNeedsBuild 时子树不更新
+    childVN.value = child;
     _timer?.cancel();
     startTimer(duration: duration, onRemove: onRemove);
   }
 
   void startTimer({required Duration duration, VoidCallback? onRemove}) {
     _timer = Timer(duration, () async {
-      if (entry == NQueueCard.entries.first.entry) {
+      if (NQueueCard.entries.isNotEmpty && entry == NQueueCard.entries.first.entry) {
         await _onDismiss?.call();
       }
       NQueueCard.remove(tag);
       onRemove?.call();
     });
+  }
+
+  void dispose() {
+    _timer?.cancel();
+    entry?.remove();
+    entry = null;
+    childVN.dispose();
   }
 }
