@@ -18,7 +18,6 @@ import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:flutter_templet_project/network/interceptors/token_interceptor.dart';
 import 'package:flutter_templet_project/network/interceptors/validate_interceptor.dart';
-import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart' as get_navigation;
@@ -88,9 +87,6 @@ class RequestManager extends BaseRequestAPI {
     dio.interceptors.add(interceptor);
     dio.interceptors.add(cacheInterceptor);
 
-    DioProxy.setProxy(dio);
-
-    /// 添加抓包代理
     return dio;
   }
 

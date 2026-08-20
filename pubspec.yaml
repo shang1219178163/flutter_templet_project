@@ -96,7 +96,7 @@ dependencies:
   #  cached_network_image: ^2.5.1
   hive: ^2.0.4
 
-  http_proxy: ^1.2.1
+  flutter_debug_kit: ^0.1.2
 
   dio: ^5.1.0
   dio_cookie_manager: ^3.1.1

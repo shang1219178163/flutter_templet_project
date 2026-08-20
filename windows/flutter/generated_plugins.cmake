@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   desktop_drop
   file_selector_windows
+  flutter_debug_kit
   flutter_inappwebview_windows
   flutter_tts
   isar_flutter_libs

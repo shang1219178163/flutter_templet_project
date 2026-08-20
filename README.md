@@ -434,3 +434,44 @@ flutter pub upgrade --major-versions
 
 ## 四、flutter_assets_generator
 dart run flutter_assets_generator
+
+## 五、抓包调试（flutter_debug_kit + Charles）
+
+使用 [flutter_debug_kit](https://pub.dev/packages/flutter_debug_kit) 配合 Charles 抓包。原理：App 启动时读取系统 HTTP 代理，若检测到代理则安装 `HttpOverrides.global`，进程内所有 `dart:io` 流量（Dio、WebSocket 握手等）自动走代理。
+
+#### 1、依赖（已在 pubspec.yaml 中）
+
+```yaml
+flutter_debug_kit: ^0.1.2
+```
+
+#### 2、初始化（已在 lib/main.dart 中）
+
+```dart
+WidgetsFlutterBinding.ensureInitialized();
+
+/// 读取系统代理并安装 HttpOverrides.global，配合 Charles/Fiddler 抓包
+if (!kReleaseMode) {
+  await DebugProxy.enableFromSystem();
+}
+```
+
+> 仅 debug 构建生效，release 构建不会调用。
+
+#### 3、Android debug 抓包配置
+
+- `android/app/src/debug/res/xml/network_security_config.xml`：信任用户 CA + 允许明文流量
+- `android/app/src/debug/AndroidManifest.xml`：`<application>` 添加 `usesCleartextTraffic` 与 `networkSecurityConfig`，仅作用于 debug 构建
+
+#### 4、Charles 各平台配置步骤
+
+| 平台 | 步骤 |
+| --- | --- |
+| iOS 模拟器 / macOS | Charles 开启 macOS Proxy，信任 Charles 根证书，冷启动 App |
+| iOS 真机 | Wi-Fi 设置 HTTP 代理，安装 Charles 描述文件，并在 设置 → 通用 → 关于本机 → 证书信任设置 中开启信任，冷启动 App |
+| Android 真机 | Wi-Fi 设置 HTTP 代理，安装 Charles 用户证书（debug 构建已信任），冷启动 App |
+
+#### 5、注意事项
+
+- 插件只在启动时读取一次系统代理，修改代理后需**完全重启 App**
+- 若 WebSocket / STOMP 走代理出现 `CONNECT host:0` 错误，用 `DebugProxy.normalizeWsUrl(url)` 补默认端口（ws→80，wss→443）

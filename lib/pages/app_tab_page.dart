@@ -16,7 +16,6 @@ import 'package:flutter_templet_project/pages/mine_page.dart';
 import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_bottom_navigation_bar/en_bottom_navigation_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppDrawerMenuPage.dart';
@@ -72,8 +71,6 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
   }
 
   Future<void> initData() async {
-    // 代理
-    DioProxy.initHttp();
     // 收起键盘
     SystemChannels.textInput.invokeMethod('TextInput.hide');
 

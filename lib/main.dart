@@ -10,6 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_debug_kit/flutter_debug_kit.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,6 @@ import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
 import 'package:flutter_templet_project/service/click_track.dart';
-// import 'package:http_proxy/http_proxy.dart';
 import 'package:flutter_templet_project/service/tap_track.dart';
 import 'package:flutter_templet_project/util/AppImagePreloader.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
@@ -63,6 +63,11 @@ import 'package:route_stack_manager/route_stack_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// 读取系统代理并安装 HttpOverrides.global，配合 Charles/Fiddler 抓包
+  if (!kReleaseMode) {
+    await DebugProxy.enableFromSystem();
+  }
 
   // 全局埋点
   ClickTrack.init(

@@ -12,6 +12,7 @@ import desktop_drop
 import device_info_plus
 import file_picker
 import file_selector_macos
+import flutter_debug_kit
 import flutter_image_compress_macos
 import flutter_inappwebview_macos
 import flutter_tts
@@ -43,6 +44,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   DeviceInfoPlusMacosPlugin.register(with: registry.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
   FilePickerPlugin.register(with: registry.registrar(forPlugin: "FilePickerPlugin"))
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
+  FlutterDebugKitPlugin.register(with: registry.registrar(forPlugin: "FlutterDebugKitPlugin"))
   FlutterImageCompressMacosPlugin.register(with: registry.registrar(forPlugin: "FlutterImageCompressMacosPlugin"))
   InAppWebViewFlutterPlugin.register(with: registry.registrar(forPlugin: "InAppWebViewFlutterPlugin"))
   FlutterTtsPlugin.register(with: registry.registrar(forPlugin: "FlutterTtsPlugin"))
