@@ -81,7 +81,7 @@ class EnBottomNavigationBar extends StatefulWidget {
     this.tileBuilder,
   })  : assert(items.length >= 2),
         assert(
-          items.every((BottomNavigationBarItem item) => item.label != null),
+          items.every((item) => item.label != null),
           'Every item must have a non-null label',
         ),
         assert(0 <= currentIndex && currentIndex < items.length),
@@ -678,13 +678,13 @@ class _EnBottomNavigationBarState extends State<EnBottomNavigationBar> with Tick
     }
     _circles.clear();
 
-    _controllers = List<AnimationController>.generate(widget.items.length, (int index) {
+    _controllers = List<AnimationController>.generate(widget.items.length, (index) {
       return AnimationController(
         duration: kThemeAnimationDuration,
         vsync: this,
       )..addListener(_rebuild);
     });
-    _animations = List<CurvedAnimation>.generate(widget.items.length, (int index) {
+    _animations = List<CurvedAnimation>.generate(widget.items.length, (index) {
       return CurvedAnimation(
         parent: _controllers[index],
         curve: Curves.fastOutSlowIn,
@@ -755,7 +755,7 @@ class _EnBottomNavigationBarState extends State<EnBottomNavigationBar> with Tick
           color: widget.items[index].backgroundColor!,
           vsync: this,
         )..controller.addStatusListener(
-            (AnimationStatus status) {
+            (status) {
               switch (status) {
                 case AnimationStatus.completed:
                   setState(() {
@@ -1084,7 +1084,7 @@ class _Circle {
     double weightSum(Iterable<Animation<double>> animations) {
       // We're adding flex values instead of animation values to produce correct
       // ratios.
-      return animations.map<double>(state._evaluateFlex).fold<double>(0.0, (double sum, double value) => sum + value);
+      return animations.map<double>(state._evaluateFlex).fold<double>(0.0, (sum, value) => sum + value);
     }
 
     final allWeights = weightSum(state._animations);

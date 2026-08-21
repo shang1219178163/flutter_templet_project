@@ -80,7 +80,7 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
           title: Text("${prefix}_$index"),
         );
       },
-      separatorBuilder: (BuildContext context, int index) {
+      separatorBuilder: (context, index) {
         return Divider();
       },
     );
@@ -165,7 +165,7 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
           title: Text("${prefix}_$index"),
         );
       },
-      separatorBuilder: (BuildContext context, int index) {
+      separatorBuilder: (context, index) {
         return Divider();
       },
     );

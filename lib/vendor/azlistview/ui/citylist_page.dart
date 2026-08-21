@@ -139,12 +139,12 @@ class _CityListPageState extends State<CityListPage> {
                       child: AzListView(
                         data: cityList,
                         itemCount: cityList.length,
-                        itemBuilder: (BuildContext context, int index) {
+                        itemBuilder: (context, index) {
                           var model = cityList[index];
                           return Utils.getListItem(context, model);
                         },
                         padding: EdgeInsets.zero,
-                        susItemBuilder: (BuildContext context, int index) {
+                        susItemBuilder: (context, index) {
                           var model = cityList[index];
                           var tag = model.getSuspensionTag();
                           return Utils.getSusItem(context, tag);

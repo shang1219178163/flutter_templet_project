@@ -64,9 +64,9 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
           key: globalKey,
           initialItemCount: data.length,
           itemBuilder: (
-            BuildContext context,
-            int index,
-            Animation<double> animation,
+            context,
+            index,
+            animation,
           ) {
             //添加列表项时会执行渐显动画
             return FadeTransition(

@@ -115,7 +115,7 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
               onSelectionChanged: (v) {
                 DLog.d("onSelectionChanged: ${v?.plainText}");
               },
-              contextMenuBuilder: (BuildContext context, SelectableRegionState selectableRegionState) {
+              contextMenuBuilder: (context, selectableRegionState) {
                 return AdaptiveTextSelectionToolbar.buttonItems(
                   anchors: selectableRegionState.contextMenuAnchors,
                   buttonItems: <ContextMenuButtonItem>[

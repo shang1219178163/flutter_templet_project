@@ -92,13 +92,13 @@ class _CarModelsPageState extends State<CarModelsPage> {
       body: AzListView(
         data: contactList,
         itemCount: contactList.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           // if (index == 0) return customHeader();
           var model = contactList[index];
           return Utils.getWeChatListItem(context, model, susHeight: susItemHeight);
         },
         susItemHeight: susItemHeight,
-        susItemBuilder: (BuildContext context, int index) {
+        susItemBuilder: (context, index) {
           var model = contactList[index];
           if ('选' == model.getSuspensionTag()) {
             return Container();
@@ -111,7 +111,7 @@ class _CarModelsPageState extends State<CarModelsPage> {
         },
         // indexBarData: ['选', ...kIndexBarData],
         indexBarData: [...SuspensionUtil.getTagIndexList(contactList)],
-        indexHintBuilder: (BuildContext context, String tag) {
+        indexHintBuilder: (context, tag) {
           return SizedBox();
         },
         indexBarOptions: IndexBarOptions(

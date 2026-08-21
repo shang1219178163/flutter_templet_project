@@ -19,7 +19,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
         elevation: 0,
       ),
       bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
+        onDestinationSelected: (index) {
           currentPageIndex = index;
           setState(() {});
         },

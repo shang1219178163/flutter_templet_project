@@ -89,7 +89,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
     return CupertinoSegmentedControl<int>(
       children: children,
       borderColor: Colors.white,
-      onValueChanged: (int newValue) {
+      onValueChanged: (newValue) {
         setState(() {
           groupValue = newValue;
         });
@@ -115,7 +115,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
             columns: titles
                 .map((e) => DataColumn(
                       label: Text(e.title),
-                      onSort: (int columnIndex, bool ascending) {
+                      onSort: (columnIndex, ascending) {
                         changeSort(columnIndex: columnIndex, ascending: ascending);
                       },
                     ))
@@ -130,7 +130,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                         DataCell(Text(e.desc ?? "")),
                       ],
                       selected: e.isSelected,
-                      onSelectChanged: (bool? value) {
+                      onSelectChanged: (value) {
                         if (value == null) {
                           return;
                         }

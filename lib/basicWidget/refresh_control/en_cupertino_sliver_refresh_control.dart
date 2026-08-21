@@ -469,7 +469,7 @@ class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefre
       if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.idle) {
         setState(() => hasSliverLayoutExtent = false);
       } else {
-        SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
+        SchedulerBinding.instance.addPostFrameCallback((timestamp) {
           setState(() => hasSliverLayoutExtent = false);
         }, debugLabel: 'Refresh.goToDone');
       }
@@ -495,7 +495,7 @@ class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefre
             // Call onRefresh after this frame finished since the function is
             // user supplied and we're always here in the middle of the sliver's
             // performLayout.
-            SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
+            SchedulerBinding.instance.addPostFrameCallback((timestamp) {
               refreshTask = widget.onRefresh!()
                 ..whenComplete(() {
                   if (mounted) {
@@ -556,7 +556,7 @@ class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefre
       // A LayoutBuilder lets the sliver's layout changes be fed back out to
       // its owner to trigger state changes.
       child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+        builder: (context, constraints) {
           latestIndicatorBoxExtent = constraints.maxHeight;
           refreshState = transitionNextState();
           if (widget.builder != null && latestIndicatorBoxExtent > 0) {

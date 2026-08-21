@@ -101,7 +101,7 @@ class _StreamControllerDemoState extends State<StreamControllerDemo> {
               },
             ),
             buildWrap(
-              onItem: (String value) {
+              onItem: (value) {
                 streamController.add(value);
               },
             ),
@@ -115,7 +115,7 @@ class _StreamControllerDemoState extends State<StreamControllerDemo> {
     final list = List.generate(8, (i) => i);
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final spacing = 8.0;
         final rowCount = 4.0;
         final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;

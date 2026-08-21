@@ -98,7 +98,7 @@ class _NSliderState extends State<NSlider> {
           child: StatefulBuilder(builder: (context, setState) {
             return Slider(
               value: sliderVN.value,
-              onChanged: (double value) {
+              onChanged: (value) {
                 sliderVN.value = value;
                 widget.onChanged?.call(value);
                 setState(() {});

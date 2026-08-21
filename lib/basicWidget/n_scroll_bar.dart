@@ -53,7 +53,7 @@ class NScrollBar extends StatelessWidget {
         );
 
     if (isVertical) {
-      return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      return LayoutBuilder(builder: (context, constraints) {
         final lengthNew = (length ?? constraints.maxHeight).truncateToDouble();
 
         return Stack(
@@ -102,7 +102,7 @@ class NScrollBar extends StatelessWidget {
         );
       });
     }
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final lengthNew = length ?? constraints.maxWidth;
 
       return Stack(

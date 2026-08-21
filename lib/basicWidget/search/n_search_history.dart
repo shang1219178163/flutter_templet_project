@@ -62,7 +62,7 @@ class _NSearchHistoryState extends State<NSearchHistory> {
               crossAxisAlignment: WrapCrossAlignment.start,
               children: List.generate(
                 widget.items.length,
-                (int index) {
+                (index) {
                   final item = widget.items[index];
                   return GestureDetector(
                     onTap: () {

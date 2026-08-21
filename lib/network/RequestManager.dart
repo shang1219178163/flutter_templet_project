@@ -67,16 +67,16 @@ class RequestManager extends BaseRequestAPI {
     dio.options = options;
 
     final interceptor = QueuedInterceptorsWrapper(
-      onRequest: (RequestOptions options, handler) {
+      onRequest: (options, handler) {
         // print("请求之前");
         return handler.next(options);
       },
-      onResponse: (Response response, handler) {
+      onResponse: (response, handler) {
         // print("响应之前");
         // DLog.d(response.toDescription());
         return handler.next(response);
       },
-      onError: (DioException e, handler) async {
+      onError: (e, handler) async {
         return handler.next(e);
       },
     );

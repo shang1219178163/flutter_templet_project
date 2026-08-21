@@ -28,12 +28,12 @@ class _ShortcutsDemoState extends State<ShortcutsDemo> {
           child: Actions(
             actions: <Type, Action<Intent>>{
               IncrementIntent: CallbackAction<IncrementIntent>(
-                onInvoke: (IncrementIntent intent) => setState(() {
+                onInvoke: (intent) => setState(() {
                   count++;
                 }),
               ),
               DecrementIntent: CallbackAction<DecrementIntent>(
-                onInvoke: (DecrementIntent intent) => setState(() {
+                onInvoke: (intent) => setState(() {
                   count--;
                 }),
               ),

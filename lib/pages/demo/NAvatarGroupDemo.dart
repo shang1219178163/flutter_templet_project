@@ -97,7 +97,7 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
       urls = urls.sublist(0, countCb(urls.length));
     }
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final scale = (constraints.maxWidth - 50) / urls.length / 50;
         DLog.d("constraints.maxWidth: ${constraints.maxWidth.toStringAsFixed(2)}, scale: $scale");
         return NAvatarGroup(

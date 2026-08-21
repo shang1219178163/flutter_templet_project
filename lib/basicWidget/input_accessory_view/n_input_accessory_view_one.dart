@@ -333,8 +333,8 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
   void syncSelectedModels(List<AssetUploadModel> models) {
     selectedModels = List<AssetUploadModel>.from(models);
     urls = selectedModels
-        .where((AssetUploadModel model) => model.url?.startsWith('http') == true)
-        .map((AssetUploadModel model) => model.url ?? '')
+        .where((model) => model.url?.startsWith('http') == true)
+        .map((model) => model.url ?? '')
         .toList();
   }
 
@@ -422,8 +422,8 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
                     radius: 4,
                     items: selectedModels,
                     canTakePhoto: true,
-                    onPickRequest: (int maxCount) => NInputAccessoryViewOne.executePickAssets(maxCount: maxCount),
-                    onChanged: (List<AssetUploadModel> items) {
+                    onPickRequest: (maxCount) => NInputAccessoryViewOne.executePickAssets(maxCount: maxCount),
+                    onChanged: (items) {
                       updateSessionSelectedModels(items);
                     },
                     onTap: (urls, index) async {

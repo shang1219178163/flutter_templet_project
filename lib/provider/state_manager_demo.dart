@@ -43,7 +43,7 @@ class _StateManagerDemoState extends State<StateManagerDemo> {
   buildBody() {
     return ListView.builder(
         itemCount: _tuples.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           final e = _tuples[index];
           return ListTile(
             title: Text(e.item1),

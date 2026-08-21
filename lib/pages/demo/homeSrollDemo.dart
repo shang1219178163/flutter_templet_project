@@ -92,7 +92,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
         bottom: 16,
       ),
       showCount: showCount,
-      onTap: (Tuple4<String, String, String, bool> e) {
+      onTap: (e) {
         debugPrint("onTap:$e");
       },
     );

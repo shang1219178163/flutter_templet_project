@@ -232,7 +232,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                           label: Text('Choice_$e'),
                           // padding: EdgeInsets.only(left: 8, right: 8),
                           selected: _value == e,
-                          onSelected: (bool selected) {
+                          onSelected: (selected) {
                             DLog.d(e);
                             _value = selected ? e : null;
                             setState(() {});
@@ -307,7 +307,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
     return NSectionBox(
       title: "NTagBox",
       crossAxisAlignment: CrossAxisAlignment.start,
-      child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+      child: StatefulBuilder(builder: (context, setState) {
         return NTagBox<(int, String)>(
             keywords: "初步诊断",
             items: tuples,
@@ -394,7 +394,7 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
           avatar: CircleAvatar(child: Text(actor.initials)),
           label: Text(actor.name),
           selected: _filters.map((e) => e.name).contains(actor.name),
-          onSelected: (bool value) {
+          onSelected: (value) {
             if (value) {
               _filters.add(actor);
             } else {

@@ -92,7 +92,7 @@ class _NRatingStarsState extends State<NRatingStars> {
           valueLabelMargin: const EdgeInsets.only(right: 8),
           starOffColor: const Color(0xffe7e8ea),
           starColor: Color(0xffE91025),
-          starBuilder: (int index, Color? color) {
+          starBuilder: (index, color) {
             final isSelected = index < value;
             final path = isSelected ? Assets.imagesIcRatingStarSelected : Assets.imagesIcRatingStarLight;
             // DLog.d([index, isSelected, color]);

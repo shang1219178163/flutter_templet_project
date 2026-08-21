@@ -45,7 +45,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
           // border: Border.all(color: Colors.red, width: 1.0),
           // borderRadius: BorderRadius.all(Radius.circular(30.0)),
           //cancelToken: cancellationToken,
-          loadStateChanged: (ExtendedImageState state) {
+          loadStateChanged: (state) {
         if (state.extendedImageLoadState != LoadState.completed) {
           return Icon(
             Icons.photo,

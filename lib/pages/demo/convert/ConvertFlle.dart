@@ -207,7 +207,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       start: canDrag.value == false
           ? null
           : buildDragBox(
-              onDropChanged: (List<File> files) async {
+              onDropChanged: (files) async {
                 // DLog.d(files);
                 this.files = files;
                 await onDragChanged();
@@ -258,7 +258,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                 SizedBox(height: 8),
                 ValueListenableBuilder(
                     valueListenable: transformController.outVN,
-                    builder: (context, value, Widget? child) {
+                    builder: (context, value, child) {
                       return Wrap(
                         spacing: 8,
                         runSpacing: 8,
@@ -303,7 +303,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
         border: Border.all(width: 2, color: Colors.blue),
       ),
       child: StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+        builder: (context, setState) {
           return DropTarget(
             onDragDone: (detail) {
               files = detail.files.map((e) => File(e.path)).toList();

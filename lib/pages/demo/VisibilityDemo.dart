@@ -45,7 +45,7 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
                   ),
                   NResizeSwitch(
                     value: isVisible,
-                    onChanged: (bool value) {
+                    onChanged: (value) {
                       isVisible = value;
                       setState(() {});
                     },

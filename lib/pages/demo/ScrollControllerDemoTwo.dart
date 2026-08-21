@@ -211,7 +211,7 @@ class _ScrollControllerDemoTwoState extends State<ScrollControllerDemoTwo>
   Widget buildWrap() {
     final list = List.generate(8, (i) => i);
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;

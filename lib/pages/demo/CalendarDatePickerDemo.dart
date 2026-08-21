@@ -59,7 +59,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
 
     return CalendarDatePicker(
       // initialCalendarMode: DatePickerMode.year,
-      onDateChanged: (DateTime value) {
+      onDateChanged: (value) {
         debugPrint(value.toString());
       },
       firstDate: DateTime(2020, 6, 0), // 开始日期
@@ -90,7 +90,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
         // minimumDate: DateTime(2020, 6),
         // maximumDate: DateTime(2023, 6),
         dateOrder: DatePickerDateOrder.ymd,
-        onDateTimeChanged: (DateTime newDateTime) {
+        onDateTimeChanged: (newDateTime) {
           // Do something
         },
       ),

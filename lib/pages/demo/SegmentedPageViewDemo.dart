@@ -97,12 +97,12 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
               final segmentedControl = NSlidingSegmentedControl(
                 items: items.map((e) => (title: e.title, icon: e.icon)).toList(),
                 selectedIndex: selectedIndex,
-                onChanged: (int index) {
+                onChanged: (index) {
                   DLog.d("onChanged: $index");
                   pageController.animateToPage(index, duration: Duration(milliseconds: 350), curve: Curves.ease);
                   // pageController.jumpToPage(index);
                 },
-                itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
+                itemBuilder: (({String icon, String title}) e, isSelecetd) {
                   final color = isSelecetd ? Colors.white : Color(0xff737373);
                   final icon = isSelecetd ? e.icon : e.icon;
 

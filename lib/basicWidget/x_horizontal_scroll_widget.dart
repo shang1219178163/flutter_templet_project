@@ -261,7 +261,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.all(radius),
         child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             final e = items[index];
             return buildItem(context: context, e: e);
           },

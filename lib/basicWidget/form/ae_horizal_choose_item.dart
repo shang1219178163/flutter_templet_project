@@ -140,7 +140,7 @@ class AeHorizalChooseItem extends StatelessWidget {
     FlutterPickerUtil.showMultiPicker(
       dataList: dataList,
       selectData: (selectVN.value ?? []),
-      confirm: (List value, List<int> indexs) {
+      confirm: (value, indexs) {
         // DLog.d("value: $value, indexs: $indexs");
         final val = value.map((e) => e.toString()).toList();
         selectVN.value = val;

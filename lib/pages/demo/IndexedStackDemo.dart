@@ -73,7 +73,7 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
       children: items.map((e) {
         final index = items.indexOf(e);
 
-        return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        return StatefulBuilder(builder: (context, setState) {
           DLog.d("$widget, index $index");
 
           return Container(

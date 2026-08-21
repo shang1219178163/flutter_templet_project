@@ -158,7 +158,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
   }) {
     indicatorOffset = localPosition;
     return OverlayEntry(
-      builder: (BuildContext context) => UnconstrainedBox(
+      builder: (context) => UnconstrainedBox(
         child: CompositedTransformFollower(
           link: layerLink,
           targetAnchor: widget.targetAnchorBuilder?.call(context, details) ?? widget.targetAnchor,

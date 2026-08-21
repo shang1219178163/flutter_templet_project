@@ -75,7 +75,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: NSearchBar(
-                  onChanged: (String v) {
+                  onChanged: (v) {
                     DLog.d("onChanged: $v");
                   },
                 ),
@@ -126,7 +126,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
           // tabbar列表
           NSliverPersistentHeaderBuilder(
             pinned: true,
-            builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+            builder: (context, shrinkOffset, overlapsContent) {
               return buildTabBar();
               return PreferredSize(
                 preferredSize: Size.fromHeight(35.0),

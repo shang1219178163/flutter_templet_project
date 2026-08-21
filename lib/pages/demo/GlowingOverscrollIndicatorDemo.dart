@@ -42,7 +42,7 @@ class _GlowingOverscrollIndicatorDemoState
     var top = MediaQuery.of(context).padding.top;
     final leadingPaintOffset = top + AppBar().preferredSize.height;
     return NotificationListener<OverscrollIndicatorNotification>(
-      onNotification: (OverscrollIndicatorNotification notification) {
+      onNotification: (notification) {
         if (notification.leading) {
           notification.paintOffset = leadingPaintOffset;
         }
@@ -67,7 +67,7 @@ class _GlowingOverscrollIndicatorDemoState
 
   Widget buildPage2() {
     return NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
         return const <Widget>[
           SliverAppBar(title: Text('Custom NestedScrollViews')),
         ];

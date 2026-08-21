@@ -48,7 +48,7 @@ class _TweenAnimatedWidgetState<T extends Object?> extends State<TweenAnimatedWi
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animation,
-      builder: (BuildContext ctx, child) {
+      builder: (ctx, child) {
         return widget.builder(ctx, child, animation);
       },
       child: widget.child,

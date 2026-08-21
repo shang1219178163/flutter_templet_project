@@ -142,7 +142,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         // debugPrint("${DateTime.now()} onRecordStart");
         await soundStartRecord();
       },
-      onRecordEnd: (bool isCancel) async {
+      onRecordEnd: (isCancel) async {
         // debugPrint("${DateTime.now()} onRecordEnd");
         final fileURL = await stopSoundRecorder();
         debugPrint("${DateTime.now()} onRecordEnd fileURL: $fileURL");

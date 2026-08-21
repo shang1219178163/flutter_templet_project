@@ -109,7 +109,7 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
         selected: e.isSelected == true,
         selectedColor: widget.itemSelectedColor,
         backgroundColor: widget.itemColor,
-        onSelected: (bool selected) {
+        onSelected: (selected) {
           for (final element in widget.items) {
             if (element.id == e.id) {
               element.isSelected = selected;

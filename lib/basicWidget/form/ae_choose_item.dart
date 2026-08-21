@@ -155,7 +155,7 @@ class AeChooseItem<T> extends StatelessWidget {
             Navigator.of(context).pop();
           },
           items: dataList,
-          itemBuilder: (BuildContext context, idx) {
+          itemBuilder: (context, idx) {
             final e = dataList[idx];
 
             final name = convertCb(e);

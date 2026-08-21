@@ -106,7 +106,7 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage> with SingleTicker
     return DefaultTabController(
       length: tabItems.length,
       child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
           final top = MediaQuery.of(context).viewPadding.top + kToolbarHeight;
 
           return <Widget>[

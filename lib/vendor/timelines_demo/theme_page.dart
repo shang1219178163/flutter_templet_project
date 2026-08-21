@@ -83,7 +83,7 @@ class _ThemePageState extends State<ThemePage> {
                           'Horizontal': Axis.horizontal,
                         },
                         value: _theme.direction,
-                        onChanged: (Axis? axis) {
+                        onChanged: (axis) {
                           if (_theme.direction != axis) {
                             setState(() {
                               _updateTheme(_theme.copyWith(direction: axis));
@@ -95,7 +95,7 @@ class _ThemePageState extends State<ThemePage> {
                         title: 'Color',
                         items: _themeColors,
                         value: _theme.color,
-                        onChanged: (Color? color) {
+                        onChanged: (color) {
                           _updateTheme(_theme.copyWith(color: color));
                         },
                       ),

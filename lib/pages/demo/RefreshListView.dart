@@ -72,14 +72,14 @@ class _RefreshListViewState extends State<RefreshListView> {
             return ListView.separated(
               physics: physics,
               itemCount: list.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 final e = list[index];
                 return ListTile(
                   leading: Icon(Icons.ac_unit),
                   title: Text(e),
                 );
               },
-              separatorBuilder: (BuildContext context, int index) {
+              separatorBuilder: (context, index) {
                 return Divider();
               },
             );
@@ -119,7 +119,7 @@ class _RefreshListViewState extends State<RefreshListView> {
           return ListView.separated(
             // physics: physics,
             itemCount: list.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (context, index) {
               final e = list[index];
 
               final controller = TextEditingController();
@@ -152,7 +152,7 @@ class _RefreshListViewState extends State<RefreshListView> {
                 ],
               );
             },
-            separatorBuilder: (BuildContext context, int index) {
+            separatorBuilder: (context, index) {
               return Divider();
             },
           );

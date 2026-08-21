@@ -40,7 +40,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       initValue: 6,
       minValue: 0,
       maxValue: 9,
-      block: (num minValue, num maxValue) {
+      block: (minValue, maxValue) {
         DLog.d("数值必须在$minValue - $maxValue 之间");
       });
 
@@ -48,7 +48,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       initValue: 6,
       minValue: 0,
       maxValue: 9,
-      block: (num minValue, num maxValue) {
+      block: (minValue, maxValue) {
         DLog.d("数值必须在$minValue - $maxValue 之间");
       });
   // static ValueNotifierInt valueNotifierInt = ValueNotifierInt(initValue: 6, minValue: 0, maxValue: 9);
@@ -164,10 +164,10 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
           //shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           //padding: EdgeInsets.all(0),
-          separatorBuilder: (BuildContext context, int index) {
+          separatorBuilder: (context, index) {
             return Divider();
           },
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             //widget return
             return buildListCell(context, index);
           }),

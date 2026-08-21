@@ -112,7 +112,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
                   onSwipeEnd: swipeEnd,
                   onEnd: onEnd,
                   cardCount: candidates.length,
-                  cardBuilder: (BuildContext context, int index) {
+                  cardBuilder: (context, index) {
                     final e = candidates[index];
                     e.color ??= LinearGradient(
                       begin: Alignment.topCenter,

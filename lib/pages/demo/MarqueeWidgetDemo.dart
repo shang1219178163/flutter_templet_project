@@ -90,7 +90,7 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
             ),
             child: NMarqueeWidget(
               itemCount: mottos.length,
-              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              itemBuilder: (context, index, constraints) {
                 final e = mottos[index];
                 // final text = "${index}_${e.item2}";
                 final text = e;
@@ -100,7 +100,7 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
                   child: Text(text),
                 );
               },
-              separatorBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              separatorBuilder: (context, index, constraints) {
                 return Container(
                   width: 100,
                   // decoration: BoxDecoration(
@@ -110,7 +110,7 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
                   // child: Text("$index"),
                 );
               },
-              edgeBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              edgeBuilder: (context, index, constraints) {
                 // print("MarqueeWidget edgeBuilder: $index ${index % 2 == 0}");
                 return Container(
                   width: constraints.maxWidth,

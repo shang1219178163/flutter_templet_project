@@ -165,7 +165,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
                         backgroundColor: AppColor.bgColorF9F9F9,
-                        onSelected: (bool selected) {
+                        onSelected: (selected) {
                           for (final element in tags) {
                             if (element.data?.id == e.data?.id) {
                               element.isSelected = selected;
@@ -288,7 +288,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
                         backgroundColor: AppColor.bgColorF9F9F9,
-                        onSelected: (bool selected) {
+                        onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
                               element.isSelected = selected;
@@ -377,7 +377,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
                         backgroundColor: AppColor.bgColorF9F9F9,
-                        onSelected: (bool selected) {
+                        onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
                               element.isSelected = selected;
@@ -445,7 +445,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                 children: tags
                     .map((e) => Material(
                           color: Colors.transparent,
-                          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                          child: StatefulBuilder(builder: (context, setState) {
                             return InkWell(
                               onTap: () {
                                 e.isSelected = !e.isSelected!;

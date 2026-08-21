@@ -167,7 +167,7 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
       TabAlignment.center: WrapAlignment.center,
       TabAlignment.startOffset: WrapAlignment.end,
     };
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       // final spacing = widget.spacing;
       // final rowCount = 4.0;
       // final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();

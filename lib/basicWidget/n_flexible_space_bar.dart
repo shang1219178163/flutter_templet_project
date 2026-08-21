@@ -124,7 +124,7 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final settings = context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
 
         final children = <Widget>[];
@@ -245,7 +245,7 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
                         child: DefaultTextStyle(
                           style: titleStyle,
                           child: LayoutBuilder(
-                            builder: (BuildContext context, BoxConstraints constraints) {
+                            builder: (context, constraints) {
                               return Container(
                                 width: constraints.maxWidth / scaleValue,
                                 alignment: titleAlignment,

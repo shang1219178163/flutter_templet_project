@@ -132,7 +132,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             child: NSearchTextField(
               placeholder: "搜索",
               backgroundColor: AppColor.white,
-              onChanged: (String value) {
+              onChanged: (value) {
                 searchText = value;
               },
             ),

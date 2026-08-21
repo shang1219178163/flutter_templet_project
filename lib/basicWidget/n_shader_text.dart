@@ -29,7 +29,7 @@ class NShaderText extends StatelessWidget {
     }
 
     return ShaderMask(
-      shaderCallback: (Rect bounds) {
+      shaderCallback: (bounds) {
         return LinearGradient(
           colors: colors,
           begin: Alignment.topCenter,

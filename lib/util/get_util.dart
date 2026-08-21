@@ -561,8 +561,8 @@ class NBottomInputBox extends StatelessWidget {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(lengthLimit),
                   ],
-                  onChanged: (String value) {},
-                  onSubmitted: (String value) {},
+                  onChanged: (value) {},
+                  onSubmitted: (value) {},
                 ),
               ],
             ),

@@ -62,7 +62,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
                 itemExtent: 300.0, // 每个子项的宽度
                 shrinkExtent: 50.0, // 子项缩小后的宽度
                 itemSnapping: true,
-                children: List<Widget>.generate(20, (int index) {
+                children: List<Widget>.generate(20, (index) {
                   return UncontainedLayoutCard(index: index, label: 'Item $index');
                 }),
               ),

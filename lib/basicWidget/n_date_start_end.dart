@@ -143,7 +143,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
       selectDate: selectDate == null ? null : PDuration.parse(selectDate),
       minDateTime: minDateTimeNew,
       maxDateTime: PDuration.now(),
-      confirm: (PDuration pDate, String date) {
+      confirm: (pDate, date) {
         // debugPrint('日期选择：$date');
         onConfirm(pDate.toDate());
       },

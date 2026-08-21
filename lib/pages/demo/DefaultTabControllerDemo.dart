@@ -167,7 +167,7 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     var nums = <int>[1, 2, 3, 4, 5];
     final sum = nums.reduce((pre, e) => pre + e);
 
-    final join = nums.fold("", (prev, int e) => "$prev $e");
+    final join = nums.fold("", (prev, e) => "$prev $e");
 
     debugPrint("sum: $sum");
     debugPrint("join: $join");

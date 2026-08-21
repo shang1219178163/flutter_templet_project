@@ -173,7 +173,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
               return ListTile(
                 title: Text(lable),
                 trailing: Switch(
-                  onChanged: (bool value) {
+                  onChanged: (value) {
                     e["value"] = value;
                     setState(() {});
                   },
@@ -252,7 +252,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
     return ListView.builder(
       itemCount: 20,
       // 使用 itemExtentBuilder 为每个下标指定不同的高度
-      itemExtentBuilder: (int index, dimensions) {
+      itemExtentBuilder: (index, dimensions) {
         // 在这里，你可以根据下标和 dimensions 的信息来返回不同的值
         final itemHeight = index.isEven ? 60.0 : 100.0;
         return itemHeight;

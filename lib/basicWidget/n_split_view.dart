@@ -69,7 +69,7 @@ class _NSplitViewState extends State<NSplitView> {
   }
 
   Widget buildHorizal() {
-    return LayoutBuilder(builder: (context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       assert(ratio <= 1 && ratio >= 0);
       if (_total != constraints.maxWidth) {
         _total = constraints.maxWidth - dividerWidth;
@@ -94,7 +94,7 @@ class _NSplitViewState extends State<NSplitView> {
                   child: Icon(Icons.drag_handle, size: dividerWidth),
                 ),
               ),
-              onPanUpdate: (DragUpdateDetails details) {
+              onPanUpdate: (details) {
                 ratio += details.delta.dx / _total;
                 ratio = ratio.clamp(0, 1.0);
                 setState(() {});
@@ -111,7 +111,7 @@ class _NSplitViewState extends State<NSplitView> {
   }
 
   Widget buildVertical() {
-    return LayoutBuilder(builder: (context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       assert(ratio <= 1 && ratio >= 0);
       // if (_totalWidth != constraints.maxHeight) {
       //   _totalWidth = constraints.maxHeight - _dividerWidth;
@@ -137,7 +137,7 @@ class _NSplitViewState extends State<NSplitView> {
                   child: Icon(Icons.drag_handle, size: dividerWidth),
                 ),
               ),
-              onPanUpdate: (DragUpdateDetails details) {
+              onPanUpdate: (details) {
                 ratio += details.delta.dy / _total;
                 ratio = ratio.clamp(0, 1.0);
                 setState(() {});

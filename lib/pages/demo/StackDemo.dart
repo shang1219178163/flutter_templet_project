@@ -49,7 +49,7 @@ class _StackDemoState extends State<StackDemo> with SingleTickerProviderStateMix
                       borderRadius: BorderRadius.all(Radius.circular(0)),
                     ),
                   ),
-                  builder: (BuildContext context) {
+                  builder: (context) {
                     final items = List.generate(10, (i) => i);
                     return Container(
                       decoration: BoxDecoration(

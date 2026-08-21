@@ -52,7 +52,7 @@ class _NRefreshIndicatorState extends State<NRefreshIndicator> {
 
     return CustomRefreshIndicator(
       onRefresh: widget.onRefresh,
-      builder: (BuildContext context, Widget child, IndicatorController controller) {
+      builder: (context, child, controller) {
         final state = controller.state;
         final progress = controller.value; // 0~1
         const tabHeight = 44.0;

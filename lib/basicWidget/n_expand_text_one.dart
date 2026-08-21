@@ -71,7 +71,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
       );
     }
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final textPainter = TextPainterExt.getTextPainter(
         text: widget.data,
         textStyle: widget.textStyle,

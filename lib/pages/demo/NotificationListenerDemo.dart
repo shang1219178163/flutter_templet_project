@@ -45,7 +45,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
             title: Text("row_$index"),
           );
         },
-        separatorBuilder: (BuildContext context, int index) {
+        separatorBuilder: (context, index) {
           return Divider();
         },
       ),
@@ -55,7 +55,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
   Widget buildFloatingActionButton() {
     return ValueListenableBuilder(
       valueListenable: isScrolling,
-      builder: (context, bool value, child) {
+      builder: (context, value, child) {
         debugPrint('Offstage value:$value');
         return Offstage(
           offstage: value,
@@ -70,7 +70,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
             },
             child: ValueListenableBuilder(
               valueListenable: progress,
-              builder: (context, double value, child) {
+              builder: (context, value, child) {
                 // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
                 final progressInfo = (value * 100).toInt();
                 if (value >= 1.0) {

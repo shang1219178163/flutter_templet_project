@@ -127,7 +127,7 @@ class _TagSortPageState extends State<TagSortPage> with TickerProviderStateMixin
       ("读取", onRead),
     ];
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();

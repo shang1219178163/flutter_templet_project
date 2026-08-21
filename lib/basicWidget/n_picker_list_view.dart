@@ -102,7 +102,7 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
             child: NSearchTextField(
               placeholder: '请输入',
               backgroundColor: Color(0xffEDEDED),
-              onChanged: (String value) {
+              onChanged: (value) {
                 searchVN.value = value;
                 DLog.d("onChanged: $value, ${searchVN.value}, ");
               },

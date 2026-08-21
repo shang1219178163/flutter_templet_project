@@ -83,7 +83,7 @@ class _AutocompletePageState extends State<AutocompletePage> {
                 displayStringForOption: (option) {
                   return option.name ?? "";
                 },
-                optionsBuilder: (TextEditingValue textEditingValue) {
+                optionsBuilder: (textEditingValue) {
                   final query = textEditingValue.text;
 
                   final result =

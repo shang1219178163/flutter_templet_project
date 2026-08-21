@@ -133,8 +133,8 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
   /// not 0 or the `state` is [DisplayFeatureState.postureHalfOpened].
   static Iterable<Rect> avoidBounds(MediaQueryData mediaQuery) {
     return mediaQuery.displayFeatures
-        .where((DisplayFeature d) => d.bounds.shortestSide > 0 || d.state == DisplayFeatureState.postureHalfOpened)
-        .map((DisplayFeature d) => d.bounds);
+        .where((d) => d.bounds.shortestSide > 0 || d.state == DisplayFeatureState.postureHalfOpened)
+        .map((d) => d.bounds);
   }
 
   /// Returns the closest sub-screen to the [anchorPoint].

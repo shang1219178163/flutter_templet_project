@@ -60,7 +60,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     return Center(
       child: FutureBuilder<dynamic>(
         future: _res,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (context, snapshot) {
           // 请求已结束
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {

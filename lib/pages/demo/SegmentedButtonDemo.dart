@@ -74,7 +74,7 @@ class _SingleChoiceState extends State<SingleChoice> {
             icon: Icon(Icons.calendar_today)),
       ],
       selected: <Calendar>{calendarView},
-      onSelectionChanged: (Set<Calendar> newSelection) {
+      onSelectionChanged: (newSelection) {
         calendarView = newSelection.first;
         setState(() {});
       },
@@ -115,7 +115,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
       ],
       selected: selection,
       multiSelectionEnabled: true,
-      onSelectionChanged: (Set<Sizes> newSelection) {
+      onSelectionChanged: (newSelection) {
         selection = newSelection;
         setState(() {});
       },

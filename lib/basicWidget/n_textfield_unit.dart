@@ -245,7 +245,7 @@ class NTextfieldUnit extends StatelessWidget {
         maxWidth: suffixWidth + clearWidth,
         minWidth: suffixWidth + clearWidth,
       ),
-      onChanged: (String value) {
+      onChanged: (value) {
         if (value.trim().isEmpty) {
           DLog.d("$this onChanged 不能为空");
           return;

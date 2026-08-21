@@ -97,7 +97,7 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
           },
           child: buildDropMenu(
             controller: textController,
-            onChanged: (int value) {
+            onChanged: (value) {
               // DLog.d("onSend $value");
               // widget.onChanged(value);
               targetFollowerController.toggle();

@@ -75,7 +75,7 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
                   prefix: Text('TextField'),
                   placeholder: 'Enter text',
                   textAlign: TextAlign.end,
-                  validator: (String? value) {
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a value';
                     }
@@ -95,12 +95,12 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
               ]),
               CupertinoFormSection.insetGrouped(
                 header: Text('SECTION 2'),
-                children: List<Widget>.generate(5, (int index) {
+                children: List<Widget>.generate(5, (index) {
                   return CupertinoTextFormFieldRow(
                     prefix: Text('TextField'),
                     placeholder: 'Enter text',
                     textAlign: TextAlign.end,
-                    validator: (String? value) {
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a value';
                       }

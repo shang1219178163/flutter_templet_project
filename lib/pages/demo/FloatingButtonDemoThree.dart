@@ -123,7 +123,7 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
                       isLeft = d.globalPosition.dx < maxWidth * 0.5;
                       // DLog.d("onPanStart isLeft: $isLeft, $d");
                     },
-                    onPanUpdate: (DragUpdateDetails e) {
+                    onPanUpdate: (e) {
                       // debugPrint("e.delta:${e.delta.dx},${e.delta.dy}");
 
                       //用户手指滑动时，更新偏移，重新构建
@@ -148,7 +148,7 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
                       _rightVN.value = maxWidth - _leftVN.value - childSize.width;
                       // debugPrint("xy:${_topVN.value},${_leftVN.value},${_rightVN.value}");
                     },
-                    onPanEnd: (DragEndDetails e) {
+                    onPanEnd: (e) {
                       // debugPrint("_leftVN.value:${_leftVN.value}");
                       final midX = _leftVN.value + childSize.width / 2;
                       final midY = _topVN.value + childSize.height / 2;

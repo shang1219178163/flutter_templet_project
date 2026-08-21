@@ -116,7 +116,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
               width: constraints.maxWidth,
               height: constraints.maxHeight,
               child: NotificationListener<ScrollNotification>(
-                onNotification: (ScrollNotification n) {
+                onNotification: (n) {
                   if (n is! UserScrollNotification) {
                     isScrolling.value = n is! ScrollEndNotification;
                   }

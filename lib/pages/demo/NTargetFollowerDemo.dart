@@ -121,7 +121,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                                   },
                                   child: NLongPressMenu(
                                       items: items.map((e) => Tuple2(e.item1, AssetImage(e.item2))).toList(),
-                                      onItem: (Tuple2<String, AssetImage> t) {
+                                      onItem: (t) {
                                         onHide();
                                         debugPrint("onChanged_$t");
                                         ToastUtil.show(t.item1);

@@ -48,7 +48,7 @@ class DropMenu {
     }
 
     _overlayEntry = OverlayEntry(
-      builder: (BuildContext context) {
+      builder: (context) {
         return Center(
           child: CompositedTransformFollower(
             link: _layerLink,
@@ -101,7 +101,7 @@ class DropMenu {
                               ),
                             );
                           },
-                      separatorBuilder: (BuildContext context, int index) => Divider(),
+                      separatorBuilder: (context, index) => Divider(),
                     ),
                   ),
                 ),

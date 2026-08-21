@@ -112,7 +112,7 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with Sing
       body: DefaultTabController(
         length: tabItems.length,
         child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
             final top = MediaQuery.of(context).viewPadding.top + kToolbarHeight;
             return <Widget>[
               SliverAppBar(

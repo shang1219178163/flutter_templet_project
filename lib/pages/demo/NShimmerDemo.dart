@@ -173,7 +173,7 @@ class _NShimmerDemoState extends State<NShimmerDemo> {
             ButtonSegment(value: Axis.vertical, label: Text("垂直"), icon: Icon(Icons.swap_vert)),
           ],
           selected: {direction},
-          onSelectionChanged: (Set<Axis> selected) {
+          onSelectionChanged: (selected) {
             direction = selected.first;
             setState(() {});
           },

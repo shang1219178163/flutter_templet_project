@@ -154,7 +154,7 @@ class CardUploadBoxState extends State<CardUploadBox> {
     final isDark = theme.brightness == Brightness.dark;
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
 
         return Wrap(
@@ -285,7 +285,7 @@ class CardUploadBoxState extends State<CardUploadBox> {
               specialItemPosition: !widget.canTakePhoto ? SpecialItemPosition.none : SpecialItemPosition.prepend,
               specialItemBuilder: !widget.canTakePhoto
                   ? null
-                  : (context, AssetPathEntity? path, int length) {
+                  : (context, path, length) {
                       if (path?.isAll != true) {
                         return null;
                       }

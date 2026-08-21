@@ -38,7 +38,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
       //   DLog.d("onPopInvoked: $pop");
       //   await showAlert();
       // },
-      onPopInvokedWithResult: (bool didPop, result) async {
+      onPopInvokedWithResult: (didPop, result) async {
         DLog.d("onPopInvokedWithResult: $didPop, $result");
         await showAlert();
       },
@@ -53,7 +53,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
               buildSwitch(
                 name: '可以返回 canPop：',
                 value: canPop,
-                onChanged: (bool val) {
+                onChanged: (val) {
                   canPop = val;
                   setState(() {});
                 },

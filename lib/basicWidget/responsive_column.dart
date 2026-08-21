@@ -22,7 +22,7 @@ class ResponsiveColumn extends StatelessWidget {
     final scrennize = MediaQuery.of(context).size;
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         if (constraints.maxWidth < scrennize.width * 0.5) {
           return Column(
             mainAxisSize: MainAxisSize.min,

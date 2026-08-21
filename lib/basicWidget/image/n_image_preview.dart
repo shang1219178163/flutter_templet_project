@@ -163,7 +163,7 @@ class _NImagePreviewState extends State<NImagePreview> {
                 onBack();
               },
               child: PhotoViewGallery.builder(
-                builder: (BuildContext context, int index) {
+                builder: (context, index) {
                   int quarterTurns = urlMaps[index]["quarterTurns"];
                   final url = widget.urls[index];
 

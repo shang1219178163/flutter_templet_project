@@ -62,7 +62,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             delegate: TwoDimensionalChildBuilderDelegate(
               maxXIndex: 9,
               maxYIndex: 9,
-              builder: (BuildContext context, ChildVicinity vicinity) {
+              builder: (context, vicinity) {
                 final xyEven = vicinity.xIndex.isEven && vicinity.yIndex.isEven;
                 final xyOdd = vicinity.xIndex.isOdd && vicinity.yIndex.isOdd;
 

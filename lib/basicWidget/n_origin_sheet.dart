@@ -105,7 +105,7 @@ class NOriginSheetState extends State<NOriginSheet> {
                 onTap: () {
                   // DLog.d("edit");
 
-                  showAlertTextField(onChanged: (String value) {
+                  showAlertTextField(onChanged: (value) {
                     DLog.d("showAlertTextField $value");
                     onUpdate(env: AppEnv.dev, origin: value);
                   });
@@ -164,10 +164,10 @@ class NOriginSheetState extends State<NOriginSheet> {
             ),
             isCollapsed: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            onChanged: (String value) {
+            onChanged: (value) {
               // DLog.d("onChanged $value");
             },
-            onSubmitted: (String value) {
+            onSubmitted: (value) {
               // DLog.d("onSubmitted $value");
             },
           ),

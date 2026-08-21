@@ -151,7 +151,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
             child: NSearchTextField(
               placeholder: "搜索",
               backgroundColor: AppColor.white,
-              onChanged: (String value) {},
+              onChanged: (value) {},
             ),
           ),
           SizedBox(width: 8),
@@ -215,7 +215,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
     return NRefreshListView<UserModel>(
       controller: refreshViewController,
       // tag: "${tabIndex.value}",
-      onRequest: (bool isRefresh, int page, int pageSize, last) async {
+      onRequest: (isRefresh, page, pageSize, last) async {
         return requestList(
           pageNo: page,
           pageSize: pageSize,
@@ -228,7 +228,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
           indent: 16,
         );
       },
-      itemBuilder: (BuildContext context, int index, e) {
+      itemBuilder: (context, index, e) {
         return InkWell(
           onTap: () {
             DLog.d("${e.toJson()}");

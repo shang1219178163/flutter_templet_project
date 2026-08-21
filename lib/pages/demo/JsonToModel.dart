@@ -285,7 +285,7 @@ class _JsonToModelState extends State<JsonToModel> {
                     height: 25,
                     child: CupertinoSwitch(
                       value: hasCopyWithFunc,
-                      onChanged: (bool val) {
+                      onChanged: (val) {
                         hasCopyWithFunc = val;
                         setState(() {});
                         onGenerate();
@@ -306,7 +306,7 @@ class _JsonToModelState extends State<JsonToModel> {
                     height: 25,
                     child: CupertinoSwitch(
                       value: hasTypeConversion,
-                      onChanged: (bool val) {
+                      onChanged: (val) {
                         hasTypeConversion = val;
                         setState(() {});
                         onGenerate();

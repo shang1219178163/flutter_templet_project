@@ -874,7 +874,7 @@ class _EnTabBarState extends State<EnTabBar> {
     super.initState();
     // If indicatorSize is TabIndicatorSize.label, _tabKeys[i] is used to find
     // the width of tab widget i. See _EnhanceIndicatorPainter.indicatorRect().
-    _tabKeys = widget.tabs.map((Widget tab) => GlobalKey()).toList();
+    _tabKeys = widget.tabs.map((tab) => GlobalKey()).toList();
   }
 
   Decoration get _indicator {
@@ -977,7 +977,7 @@ class _EnTabBarState extends State<EnTabBar> {
 
     if (widget.tabs.length > oldWidget.tabs.length) {
       final delta = widget.tabs.length - oldWidget.tabs.length;
-      _tabKeys.addAll(List<GlobalKey>.generate(delta, (int n) => GlobalKey()));
+      _tabKeys.addAll(List<GlobalKey>.generate(delta, (n) => GlobalKey()));
     } else if (widget.tabs.length < oldWidget.tabs.length) {
       _tabKeys.removeRange(widget.tabs.length, oldWidget.tabs.length);
     }
@@ -1116,7 +1116,7 @@ class _EnTabBarState extends State<EnTabBar> {
 
     final tabBarTheme = TabBarTheme.of(context);
 
-    final wrappedTabs = List<Widget>.generate(widget.tabs.length, (int index) {
+    final wrappedTabs = List<Widget>.generate(widget.tabs.length, (index) {
       const verticalAdjustment = (_kTextAndIconTabHeight - _kTabHeight) / 2.0;
       EdgeInsetsGeometry? adjustedPadding;
 

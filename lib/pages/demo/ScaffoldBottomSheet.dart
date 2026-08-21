@@ -43,7 +43,7 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
       // bottomSheet: buildInputBar(),
       bottomSheet: buildInputView(
           controller: _inputController,
-          onChanged: (String value) {
+          onChanged: (value) {
             list.insert(0, value);
             setState(() {});
           }),

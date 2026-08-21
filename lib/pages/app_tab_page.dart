@@ -160,7 +160,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
                 ),
               )
               .toList(),
-          tileBuilder: (int index, bool selected, Widget icon, Widget label) {
+          tileBuilder: (index, selected, icon, label) {
             if (index == 0 && selected) {
               final e = items[index];
               return Container(
@@ -188,7 +188,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
       // ),
     );
     return Consumer<ColorFilteredProvider>(
-      builder: (BuildContext context, provider, Widget? child) {
+      builder: (context, provider, child) {
         //仅首页置灰
         return ColorFiltered(
           colorFilter: ColorFilter.mode(provider.color, BlendMode.color),

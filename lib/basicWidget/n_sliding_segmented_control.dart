@@ -169,7 +169,7 @@ class NSlidingSegmentedControlIconAndTitlel extends NSlidingSegmentedControl<({S
     super.thumbColor,
     super.radius,
   }) : super(
-          itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
+          itemBuilder: (({String icon, String title}) e, isSelecetd) {
             final color = isSelecetd ? Colors.white : thumbTextColor;
             final icon = isSelecetd ? e.icon : e.icon;
 

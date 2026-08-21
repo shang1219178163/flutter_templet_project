@@ -46,7 +46,7 @@ class NDashLine extends StatelessWidget {
     }
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final boxWidth = direction == Axis.horizontal ? constraints.constrainWidth() : constraints.constrainHeight();
         final dashHeight = height;
         final count = boxWidth / (2 * step);
@@ -108,7 +108,7 @@ class NDashLineOfMutiColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final boxWidth = direction == Axis.horizontal ? constraints.constrainWidth() : constraints.constrainHeight();
 
         final step = steps.map((e) => e.item1).reduce((v, e) => v + e);

@@ -187,7 +187,7 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
           fit: BoxFit.cover,
         ),
       ),
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (context, constraints) {
         var top = constraints.maxHeight;
         final fixedHeight = statusBarHeight + tabBarHeight;
         var opacity = ((top - fixedHeight - kToolbarHeight) / (expandedHeight - fixedHeight)).clamp(0.0, 1.0);

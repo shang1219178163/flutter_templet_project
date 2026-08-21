@@ -148,12 +148,12 @@ class _ContactListPageState extends State<ContactListPage> {
       physics: AlwaysScrollableScrollPhysics(),
       data: _contacts,
       itemCount: _contacts.length,
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         // if (index == 0) return _buildHeader();
         var model = _contacts[index];
         return buildListItem(model);
       },
-      susItemBuilder: (BuildContext context, int index) {
+      susItemBuilder: (context, index) {
         var model = _contacts[index];
         final str = "section${model.getSuspensionTag()}";
         return Container(

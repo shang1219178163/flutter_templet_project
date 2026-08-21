@@ -38,13 +38,13 @@ class _LargeDataPageState extends State<LargeDataPage> {
       body: AzListView(
         data: cityList,
         itemCount: cityList.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           var model = cityList[index];
           return Utils.getListItem(context, model);
         },
         physics: BouncingScrollPhysics(),
         susItemHeight: susItemHeight,
-        susItemBuilder: (BuildContext context, int index) {
+        susItemBuilder: (context, index) {
           var model = cityList[index];
           return Utils.getSusItem(context, model.getSuspensionTag());
         },

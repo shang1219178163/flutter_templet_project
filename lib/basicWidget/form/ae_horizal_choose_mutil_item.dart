@@ -145,7 +145,7 @@ class AeHorizalChooseMutilItem<T> extends StatelessWidget {
       dataList: dataList.map((e1) => convertCb(e1)).toList(),
       // selectData: (selectVN.value ?? []).map((e) => convertCb(e)).toList(),
       selectData: (selectVN.value ?? []).map((e) => convertCb(e as List<T>)).toList(),
-      confirm: (value, List<int> indexs) {
+      confirm: (value, indexs) {
         DLog.d("value: $value");
         DLog.d("indexs: $indexs");
         // final val = value

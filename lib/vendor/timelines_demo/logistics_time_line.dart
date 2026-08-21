@@ -77,7 +77,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
               child: CupertinoSegmentedControl(
                 children: map,
                 groupValue: groupValue,
-                onValueChanged: (int value) {
+                onValueChanged: (value) {
                   DLog.d(value.toString());
                   setState(() {
                     groupValue = value;

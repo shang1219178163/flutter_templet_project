@@ -243,7 +243,7 @@ class _ENSegmentSeparatorState extends State<_ENSegmentSeparator>
     return AnimatedBuilder(
       animation: separatorOpacityController,
       child: const SizedBox(width: _kSeparatorWidth),
-      builder: (BuildContext context, Widget? child) {
+      builder: (context, child) {
         return Padding(
           padding: _kSeparatorInset,
           child: DecoratedBox(
@@ -720,7 +720,7 @@ class _ENSegmentedControlState<T>
         ),
         child: AnimatedBuilder(
           animation: thumbScaleAnimation,
-          builder: (BuildContext context, Widget? child) {
+          builder: (context, child) {
             return _ENSegmentedControlRenderWidget<T>(
               highlightedIndex: highlightedIndex,
               thumbColor:
@@ -1200,7 +1200,7 @@ class _ENRenderSegmentedControl<T> extends RenderBox
         return result.addWithPaintOffset(
           offset: childParentData.offset,
           position: position,
-          hitTest: (BoxHitTestResult result, Offset localOffset) {
+          hitTest: (result, localOffset) {
             assert(localOffset == position - childParentData.offset);
             return child!.hitTest(result, position: localOffset);
           },

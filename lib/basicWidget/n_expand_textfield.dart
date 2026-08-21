@@ -74,7 +74,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final textPainter = TextPainterExt.getTextPainter(
           text: widget.text,
           textStyle: widget.textStyle,
@@ -87,7 +87,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
         var isBeyond = textPainter.didExceedMaxLines;
 
         return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+          builder: (context, setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
             final toggleImage = AssetImage((isExpand) ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown);
@@ -234,7 +234,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
     }
 
     return ShaderMask(
-      shaderCallback: (Rect bounds) {
+      shaderCallback: (bounds) {
         return LinearGradient(
           colors: colors,
           begin: Alignment.topCenter,

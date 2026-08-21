@@ -81,10 +81,10 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
               ...list.map((e) {
                 final i = list.indexOf(e);
                 return _NOpenContainer<bool>(
-                  openBuilder: (BuildContext _, VoidCallback openContainer) {
+                  openBuilder: (_, openContainer) {
                     return ButtonPage();
                   },
-                  closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                  closedBuilder: (_, openContainer) {
                     return buildCard(
                       onTap: openContainer,
                       url: e,

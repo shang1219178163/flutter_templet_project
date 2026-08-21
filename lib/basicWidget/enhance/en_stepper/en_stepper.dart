@@ -315,7 +315,7 @@ class _EnStepperState extends State<EnStepper> with TickerProviderStateMixin {
     super.initState();
     _keys = List<GlobalKey>.generate(
       widget.steps.length,
-      (int i) => GlobalKey(),
+      (i) => GlobalKey(),
     );
 
     for (var i = 0; i < widget.steps.length; i += 1) {
@@ -500,12 +500,12 @@ class _EnStepperState extends State<EnStepper> with TickerProviderStateMixin {
             TextButton(
               onPressed: widget.onStepContinue,
               style: ButtonStyle(
-                foregroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+                foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
                   return states.contains(WidgetState.disabled)
                       ? null
                       : (_isDark() ? colorScheme.onSurface : colorScheme.onPrimary);
                 }),
-                backgroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+                backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
                   return _isDark() || states.contains(WidgetState.disabled) ? null : colorScheme.primary;
                 }),
                 padding: WidgetStateProperty.all<EdgeInsetsGeometry>(buttonPadding),

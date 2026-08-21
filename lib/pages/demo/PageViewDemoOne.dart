@@ -81,7 +81,7 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
                 buildTab(
                   controller: tabController,
                   tabs: _tabItems.map((e) => Tab(text: e.item1)).toList(),
-                  onTap: (int index) async {
+                  onTap: (index) async {
                     // debugPrint("buildTab: $index");
                     tabIndex.value = index;
                     pageController.jumpToPage(index);

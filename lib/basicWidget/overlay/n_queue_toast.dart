@@ -99,7 +99,7 @@ class NQueueToast {
           data: data,
           id: id,
           onTap: onTap,
-          onDismiss: (int? id) {
+          onDismiss: (id) {
             remove(id);
           },
           bottom: bottom,

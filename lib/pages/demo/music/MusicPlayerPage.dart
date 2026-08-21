@@ -82,7 +82,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
   }
 
   Widget buildAudioControls() {
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

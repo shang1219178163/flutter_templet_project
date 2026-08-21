@@ -127,7 +127,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         DLog.d("${DateTime.now()}");
         Navigator.of(context).pop();
       },
-      onChanged: (DateTime val) {
+      onChanged: (val) {
         debugPrint("$val");
       },
     );
@@ -136,7 +136,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
   Future<void> onDateMixin() async {
     presentCupertinoDatePicker(
       context: context,
-      onDateTimeConfirm: (DateTime val) {
+      onDateTimeConfirm: (val) {
         debugPrint("$val");
         Navigator.of(context).pop();
       },
@@ -202,7 +202,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       title: 'NPickerListView',
       items: items,
       filterCb: (e, value) => (e['name'] ?? '').contains(value),
-      itemBuilder: (BuildContext context, idx, list) {
+      itemBuilder: (context, idx, list) {
         final item = list[idx];
 
         final isSame = selectedItem['name'] == item['name'];
@@ -255,7 +255,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
               children: payTypes * 5,
               indexs: [0],
               canScroll: true,
-              callback: (Object index) {
+              callback: (index) {
                 DLog.d(index);
               },
             ),
@@ -286,7 +286,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           children: payTypes * 5,
           indexs: [0],
           canScroll: true,
-          callback: (Object index) {
+          callback: (index) {
             DLog.d(index);
           },
         ),

@@ -100,7 +100,7 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
           pinned: true,
           min: widget.headerHeight,
           max: widget.headerHeight,
-          builder: (context, double shrinkOffset, bool overlapsContent) {
+          builder: (context, shrinkOffset, overlapsContent) {
             final header = widget.headerBuilder?.call(context, shrinkOffset, overlapsContent) ??
                 Container(
                   alignment: Alignment.centerLeft,

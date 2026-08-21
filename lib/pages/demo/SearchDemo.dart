@@ -68,7 +68,7 @@ class _SearchDemoState extends State<SearchDemo> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (BuildContext context) {
+        builder: (context) {
           return NSearchPage<UserModel>(
             hint: '搜索用户',
             cacheKey: "SearchHistory",
@@ -110,7 +110,7 @@ class _SearchDemoState extends State<SearchDemo> {
   Widget buildHistory() {
     return NSearchHistory(
       items: items,
-      onSelected: (String v) {
+      onSelected: (v) {
         DLog.d(v);
       },
       onClear: () {
@@ -160,7 +160,7 @@ class _SearchDemoState extends State<SearchDemo> {
       suggestionsBuilder: (context, controller) {
         return List<Widget>.generate(
           5,
-          (int i) {
+          (i) {
             final item = 'item $i';
             return buildItem(
                 url: AppRes.image.urls[i],

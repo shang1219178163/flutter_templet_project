@@ -70,7 +70,7 @@ class _NestedScrollViewDemoSevenState extends State<NestedScrollViewDemoSeven> w
                 border: Border.all(color: Colors.blue),
                 borderRadius: BorderRadius.all(Radius.circular(0)),
               ),
-              child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+              child: LayoutBuilder(builder: (context, constraints) {
                 final spacing = 8.0;
                 final rowCount = 3.0;
                 final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;

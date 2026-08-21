@@ -86,7 +86,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
               height: 25,
               child: CupertinoSwitch(
                 value: isSingle,
-                onChanged: (bool val) {
+                onChanged: (val) {
                   isSingle = val;
                   setState(() {});
                 },

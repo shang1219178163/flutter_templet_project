@@ -123,7 +123,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
               fontSize: 16,
               color: Colors.black,
             ),
-            onPainted: (TextPainter textPainter) {
+            onPainted: (textPainter) {
               // DLog.d([message,
               //   textPainter.didExceedMaxLines,
               //   textPainter.height,
@@ -147,7 +147,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
       tailingWidth: tailingWidth,
     );
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final textStyle = TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -175,7 +175,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
           // color: Colors.green,
           border: Border.all(color: Colors.blue),
         ),
-        child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        child: StatefulBuilder(builder: (context, setState) {
           final arrowImage = isExpand ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;
 
           onToggle() {

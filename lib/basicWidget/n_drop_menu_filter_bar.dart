@@ -183,7 +183,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                           ),
                         );
                       },
-                      itemBuilder: (e, bool isSelected) {
+                      itemBuilder: (e, isSelected) {
                         final textColor = isSelected ? primary : AppColor.fontColor;
                         final iconColor = isSelected ? primary : Colors.transparent;
 

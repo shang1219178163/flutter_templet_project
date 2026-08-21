@@ -149,7 +149,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
                       text: e.item1,
                     ))
                 .toList(),
-            onTap: (int index) async {
+            onTap: (index) async {
               debugPrint("buildTab: $index");
               _pageController.jumpToPage(index);
             }),

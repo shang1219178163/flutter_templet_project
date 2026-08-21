@@ -110,7 +110,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
               child: ListView.separated(
                 controller: controller,
                 itemCount: items.length,
-                itemBuilder: (context, int i) {
+                itemBuilder: (context, i) {
                   final e = items[i];
 
                   return InkWell(
@@ -141,7 +141,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
                     ),
                   );
                 },
-                separatorBuilder: (context, int index) {
+                separatorBuilder: (context, index) {
                   return Divider(
                     height: 16.w,
                     indent: 16.w,

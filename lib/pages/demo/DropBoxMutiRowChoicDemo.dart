@@ -188,13 +188,13 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
         placeholder: placeholder,
         placeholderStyle: TextStyle(fontSize: 15.sp, color: AppColor.fontColorBCBFC2),
         decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4.w)), color: AppColor.bgColor),
-        onChanged: (String value) {
+        onChanged: (value) {
           _debounce(() {
             debugPrint('searchText: $value');
             cb?.call(value);
           });
         },
-        onSubmitted: (String value) {
+        onSubmitted: (value) {
           _debounce(() {
             debugPrint('onSubmitted: $value');
             cb?.call(value);

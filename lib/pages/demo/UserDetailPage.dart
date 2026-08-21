@@ -88,7 +88,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
           return value == null ? buildHeader! : child!;
         },
         child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverPersistentHeader(
                 pinned: true,

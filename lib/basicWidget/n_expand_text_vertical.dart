@@ -106,7 +106,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
     }
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final textPainter = TextPainterExt.getTextPainter(
           text: text,
           textStyle: textStyle,
@@ -125,7 +125,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
         // ].asMap().toString());
 
         return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+          builder: (context, setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
             final arrowImageName = isExpand ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;

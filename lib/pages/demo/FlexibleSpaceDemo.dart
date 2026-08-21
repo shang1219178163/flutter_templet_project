@@ -111,7 +111,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
             ],
           ),
           SliverList.separated(
-            itemBuilder: (context, int index) {
+            itemBuilder: (context, index) {
               return Container(
                 height: 70,
                 // color: ColorExt.random,
@@ -120,7 +120,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
                 ),
               );
             },
-            separatorBuilder: (context, int index) {
+            separatorBuilder: (context, index) {
               return Divider(
                 height: 1,
               );

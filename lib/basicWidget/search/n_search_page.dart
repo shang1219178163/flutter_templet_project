@@ -123,7 +123,7 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
                       },
                       child: NSearchHistory(
                         items: history,
-                        onSelected: (String v) {
+                        onSelected: (v) {
                           final index = history.indexOf(v);
                           onSelectedItem(index);
                         },

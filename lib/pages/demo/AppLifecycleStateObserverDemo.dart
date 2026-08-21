@@ -117,7 +117,7 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
 
   timeUpdate() {
     timeReset();
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       var now = DateTime.now();
       var duration = now.difference(_startTime);
       durationVN.value = duration;

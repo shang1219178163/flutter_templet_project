@@ -74,7 +74,7 @@ class NMenuAnchor<E> extends StatelessWidget {
     var selectedItem = initialItem;
 
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
+      builder: (context, setState) {
         // 点击子项
         onItem(E e) {
           selectedItem = e;
@@ -116,7 +116,7 @@ class NMenuAnchor<E> extends StatelessWidget {
           ),
           child: MenuAnchor(
             controller: controller,
-            builder: (context, MenuController controller, Widget? child) {
+            builder: (context, controller, child) {
               final defaultName = selectedItem == null ? placeholder : cbName(selectedItem);
 
               return builder?.call(controller, selectedItem) ??

@@ -156,7 +156,7 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
           NSlider(
             max: 100,
             leading: Text('倾斜角度'),
-            onChanged: (double value) {
+            onChanged: (value) {
               debugPrint('NNSlider onChangeEnd: $value');
               sliderVN.value = value / 100;
             },

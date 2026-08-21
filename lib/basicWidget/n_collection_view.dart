@@ -85,7 +85,7 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
           onPageChanged: (index) {
             indexVN.value = index;
           },
-          itemBuilder: (BuildContext context, int pageIndex) {
+          itemBuilder: (context, pageIndex) {
             return Container(
               padding: widget.contentPadding,
               // alignment: Alignment.center,

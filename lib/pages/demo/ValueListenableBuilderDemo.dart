@@ -36,7 +36,7 @@ class _ValueListenableBuilderDemoState
             const Text('You have pushed the button this many times:'),
             ValueListenableBuilder<int>(
               valueListenable: _counter,
-              builder: (BuildContext context, int value, Widget? child) {
+              builder: (context, value, child) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[

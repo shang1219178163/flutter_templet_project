@@ -120,7 +120,7 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
           child: AzListView(
             data: cityList,
             itemCount: cityList.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (context, index) {
               if (index == 0) {
                 return buildHeader();
               }
@@ -128,7 +128,7 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
               return Utils.getListItem(context, model, susHeight: susItemHeight);
             },
             susItemHeight: susItemHeight,
-            susItemBuilder: (BuildContext context, int index) {
+            susItemBuilder: (context, index) {
               var model = cityList[index];
               var tag = model.getSuspensionTag();
               if (imgFavorite == tag) {

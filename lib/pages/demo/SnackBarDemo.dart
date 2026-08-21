@@ -143,7 +143,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   }
 
   Widget buildBody() {
-    return Builder(builder: (BuildContext context) {
+    return Builder(builder: (context) {
       return RepaintBoundary(
         key: globalKey,
         child: Container(

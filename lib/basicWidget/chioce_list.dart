@@ -54,7 +54,7 @@ class _ChioceListState extends State<ChioceList> {
               physics: NeverScrollableScrollPhysics(), //禁止滑动
               itemExtent: widget.rowHeight,
               itemCount: widget.children.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 final e = widget.children[index];
                 return Container(
                   decoration: BoxDecoration(

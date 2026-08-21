@@ -147,13 +147,13 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
 
   Widget buildDemo() {
     return Column(children: [
-      LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      LayoutBuilder(builder: (context, constraints) {
         return SizedBox();
       }),
       Builder(builder: (context) {
         return SizedBox();
       }),
-      StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+      StatefulBuilder(builder: (context, setState) {
         return SizedBox();
       }),
     ]);

@@ -64,7 +64,7 @@ class NInputAccessoryView extends StatelessWidget {
       hideBarrier: true,
       barrierDismissible: false,
       from: Alignment.bottomCenter,
-      builder: (BuildContext c) {
+      builder: (c) {
         final bottom = MediaQuery.of(c).viewInsets.bottom;
         DLog.d("NOverlayDialog.show $bottom");
         return Padding(

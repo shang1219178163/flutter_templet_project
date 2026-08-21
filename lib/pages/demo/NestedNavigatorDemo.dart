@@ -184,7 +184,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
           ),
         ),
         child: Navigator(
-          onGenerateRoute: (RouteSettings settings) {
+          onGenerateRoute: (settings) {
             return MaterialPageRoute(
               builder: (context) {
                 return NestedNavigatorSubpage(

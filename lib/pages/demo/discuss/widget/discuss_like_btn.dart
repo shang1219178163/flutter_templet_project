@@ -85,7 +85,7 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
       icon: NScaleButton(
         enabled: !widget.disable,
         tween: Tween<double>(begin: 1.0, end: 1.5),
-        builder: (AnimationController controller) {
+        builder: (controller) {
           return GestureDetector(
             onTap: onTap,
             child: Container(

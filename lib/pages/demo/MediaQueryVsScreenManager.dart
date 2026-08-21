@@ -60,7 +60,7 @@ class _MediaQueryVsScreenManagerState extends State<MediaQueryVsScreenManager> w
       children: [
         NTextfieldBar(
           controller: textEditingController,
-          onConfirm: (String value) {
+          onConfirm: (value) {
             DLog.d([
               NScreenManager.mediaQueryData.viewInsets,
               "viewInsets: ${MediaQuery.of(context).viewInsets.bottom}",

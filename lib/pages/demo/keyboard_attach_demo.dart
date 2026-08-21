@@ -215,11 +215,11 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
       context: context,
       isScrollControlled: true, // !important
       barrierColor: Colors.transparent,
-      builder: (BuildContext context) {
+      builder: (context) {
         return Container(
           // height: viewInsets.bottom,
           color: Colors.white,
-          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+          child: StatefulBuilder(builder: (context, setState) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,

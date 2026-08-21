@@ -119,7 +119,7 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
               iconOpacity: 1,
               height: height,
               indicatorSize: Size.fromWidth(constraints.maxWidth / widget.items.length),
-              iconBuilder: (int i) {
+              iconBuilder: (i) {
                 final isSelected = i == value;
                 final textStyle = isSelected ? labelStyle : unselectedLabelStyle;
 

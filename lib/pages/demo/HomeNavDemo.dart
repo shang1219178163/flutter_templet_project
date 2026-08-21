@@ -65,7 +65,7 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
         maxHeight: 400,
       ).loosen(),
       child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           return buildNav(
               child: XCollectionNavWidget(
             width: context.screenSize.width - 24,

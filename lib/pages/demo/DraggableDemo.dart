@@ -90,9 +90,9 @@ class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateM
         ),
         DragTarget<int>(
           builder: (
-            BuildContext context,
-            List<dynamic> accepted,
-            List<dynamic> rejected,
+            context,
+            accepted,
+            rejected,
           ) {
             return Container(
               height: 100.0,
@@ -125,7 +125,7 @@ class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateM
 
   Widget buildDragSortWrap() {
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
+      builder: (context, setState) {
         tabController = TabController(length: tags.length, vsync: this);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -165,7 +165,7 @@ class _StepperDemoState extends State<StepperDemo> {
             _index = index;
           });
         },
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
+        controlsBuilder: (context, details) {
           return Row(
             children: [
               SizedBox(
@@ -234,7 +234,7 @@ class _StepperDemoState extends State<StepperDemo> {
             _index = index;
           });
         },
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
+        controlsBuilder: (context, details) {
           return Row(
             children: [
               SizedBox(

@@ -40,7 +40,7 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne> with SingleTi
     return DefaultTabController(
       length: items.length, // This is the number of tabs.
       child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
           // These are the slivers that show up in the "outer" scroll view.
           return <Widget>[
             SliverOverlapAbsorber(
@@ -90,7 +90,7 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne> with SingleTi
                   labelColor: Colors.white,
                   backgroudColor: context.themeData.primaryColor,
                   child: TabBar(
-                    tabs: items.map((String name) => Tab(text: name)).toList(),
+                    tabs: items.map((name) => Tab(text: name)).toList(),
                     controller: tabController,
                     isScrollable: true,
                   ),
@@ -108,10 +108,10 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne> with SingleTi
     return TabBarView(
       controller: tabController,
       // These are the contents of the tab views, below the tabs.
-      children: items.map((String name) {
+      children: items.map((name) {
         //SafeArea 适配刘海屏的一个widget
         return Builder(
-          builder: (BuildContext context) {
+          builder: (context) {
             return CustomScrollView(
               key: PageStorageKey<String>(name),
               slivers: <Widget>[
@@ -123,7 +123,7 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne> with SingleTi
                   sliver: SliverFixedExtentList(
                     itemExtent: 50.0, //item高度或宽度，取决于滑动方向
                     delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
+                      (context, index) {
                         return ListTile(
                           title: Text('Item $index, tab${tabController.index}'),
                         );

@@ -192,7 +192,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             ),
           ),
           NotificationListener<DraggableScrollableNotification>(
-            onNotification: (DraggableScrollableNotification e) {
+            onNotification: (e) {
               // doing this in setState breaks DraggableScrollableSheet behaviour
               DLog.d("e: $e");
               extentVN.value = e.extent;
@@ -210,7 +210,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: 20,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (context, index) {
                       return ListTile(
                         title: Text('Item $index'),
                       );
@@ -239,13 +239,13 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
       child: SizedBox.expand(
         child: DraggableScrollableSheet(
           controller: draggableController,
-          builder: (BuildContext context, ScrollController scrollController) {
+          builder: (context, scrollController) {
             return Container(
               color: Colors.white,
               child: ListView.builder(
                 controller: scrollController,
                 itemCount: 25,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   return Container(
                     height: 75,
                     child: Column(

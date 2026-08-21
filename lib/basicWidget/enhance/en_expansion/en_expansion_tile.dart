@@ -329,7 +329,7 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
       if (_isExpanded) {
         _controller.forward();
       } else {
-        _controller.reverse().then<void>((void value) {
+        _controller.reverse().then<void>((value) {
           if (!mounted) {
             return;
           }

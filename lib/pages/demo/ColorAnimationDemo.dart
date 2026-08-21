@@ -41,7 +41,7 @@ class _ColorAnimationDemoState extends State<ColorAnimationDemo> {
     super.initState();
 
     _timer = null;
-    _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (t) {
       homeEnter.value = !homeEnter.value;
       awayEnter.value = !awayEnter.value;
     });

@@ -93,7 +93,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
       selectTags: selectTags,
       // isMuti: false,
       onCancel: () {},
-      onConfirm: (List<SelectModel> selectedItems) {
+      onConfirm: (selectedItems) {
         selectTags = selectedItems;
 
         debugPrint(selectTagNames.toString());

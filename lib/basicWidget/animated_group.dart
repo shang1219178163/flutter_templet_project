@@ -73,7 +73,7 @@ class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMi
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller!,
-      builder: (BuildContext context, Widget? child) {
+      builder: (context, child) {
         return widget.builder(context, child, _animations);
       },
       child: widget.child,

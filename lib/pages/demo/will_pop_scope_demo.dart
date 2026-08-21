@@ -95,7 +95,7 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
             SwitchListTile(
               title: Text('直接返回'),
               value: enable,
-              onChanged: (bool val) {
+              onChanged: (val) {
                 enable = val;
                 setState(() {});
               },

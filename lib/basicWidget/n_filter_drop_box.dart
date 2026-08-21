@@ -118,7 +118,7 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
         widget.child,
         ValueListenableBuilder<bool>(
           valueListenable: isVisible,
-          builder: (context, bool value, child) {
+          builder: (context, value, child) {
             if (!value) {
               return SizedBox();
             }

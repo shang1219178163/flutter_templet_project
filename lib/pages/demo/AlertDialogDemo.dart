@@ -127,7 +127,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         width: double.infinity,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             var e = alignments[index];
             var name = e.toString().split('.')[1];
 
@@ -148,7 +148,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
               ),
             );
           },
-          separatorBuilder: (BuildContext context, int index) {
+          separatorBuilder: (context, index) {
             return Divider(height: 8);
           },
           itemCount: alignments.length,
@@ -741,7 +741,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
 
     showGeneralDialog(
         context: context,
-        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+        pageBuilder: (context, animation, secondaryAnimation) {
           return NUserPrivacy(
             title: Text(
               '用户隐私及协议',

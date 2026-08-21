@@ -42,7 +42,7 @@ class VoiceAnimationImageState extends State<VoiceAnimationImage> with SingleTic
 
     // 启动动画controller
     _controller = AnimationController(duration: Duration(milliseconds: maxTime), vsync: this);
-    _controller.addStatusListener((AnimationStatus status) {
+    _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _controller.forward(from: 0.0); // 完成后重新开始
       }

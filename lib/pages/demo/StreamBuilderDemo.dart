@@ -32,7 +32,7 @@ class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
   // );
 
   late final textController = TextEditingController().debounce(
-    onChanged: (String v) {
+    onChanged: (v) {
       searchVN.value = v;
     },
   );

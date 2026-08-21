@@ -107,7 +107,7 @@ class IMSoundRecordingPage extends StatelessWidget {
               ),
               _NTransitionBuilder(
                 duration: duration,
-                builder: (context, controller, Animation<double> animation) {
+                builder: (context, controller, animation) {
                   return SizeTransition(
                     axisAlignment: 0.0,
                     sizeFactor: animation,

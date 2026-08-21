@@ -39,7 +39,7 @@ class _ShortcutsDemoOneState extends State<ShortcutsDemoOne> {
                       'Subtract from the counter by pressing the down arrow key'),
                   AnimatedBuilder(
                     animation: model,
-                    builder: (BuildContext context, Widget? child) {
+                    builder: (context, child) {
                       return Text('count: ${model.count}');
                     },
                   ),

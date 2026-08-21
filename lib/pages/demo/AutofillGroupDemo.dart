@@ -90,7 +90,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
         const Text('Billing address'),
         Checkbox(
           value: isSameAddress,
-          onChanged: (bool? newValue) {
+          onChanged: (newValue) {
             if (newValue != null) {
               isSameAddress = newValue;
               setState(() {});

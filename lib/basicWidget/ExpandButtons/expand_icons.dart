@@ -27,7 +27,7 @@ class ExpandIconsState extends State<ExpandIcons>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: List.generate(widget.items.length, (int index) {
+      children: List.generate(widget.items.length, (index) {
         return _buildChild(index);
       }).toList()
         ..add(

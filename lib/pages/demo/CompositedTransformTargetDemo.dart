@@ -119,7 +119,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
             buildListViewHorizontal(
               title: "Target:",
               items: items,
-              onChanged: (int value) {
+              onChanged: (value) {
                 targetAnchor = AlignmentExt.allCases[value];
                 debugPrint("targetAnchor: $targetAnchor");
                 _overlayEntry.markNeedsBuild();
@@ -128,7 +128,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
             buildListViewHorizontal(
               title: "Follower:",
               items: items,
-              onChanged: (int value) {
+              onChanged: (value) {
                 followerAnchor = AlignmentExt.allCases[value];
                 debugPrint("followerAnchor: $followerAnchor");
                 _overlayEntry.markNeedsBuild();
@@ -138,7 +138,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
               title: "Rotation:",
               items: rotations.map((e) => e.toString()).toList(),
               index: rotations.indexOf(0),
-              onChanged: (int value) {
+              onChanged: (value) {
                 followerRotation = rotations[value];
                 _overlayEntry.markNeedsBuild();
               },
@@ -185,7 +185,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   OverlayEntry createOverlayEntry(Offset localPosition) {
     indicatorOffset = localPosition;
     return OverlayEntry(
-      builder: (BuildContext context) => UnconstrainedBox(
+      builder: (context) => UnconstrainedBox(
         child: CompositedTransformFollower(
           link: layerLink,
           // offset: indicatorOffset,
@@ -277,7 +277,7 @@ class _CustomSlideDemoState extends State {
   void showIndicator(DragStartDetails details) {
     indicatorOffset = getIndicatorOffset(details.localPosition);
     _overlayEntry = OverlayEntry(
-      builder: (BuildContext context) {
+      builder: (context) {
         return Positioned(
           top: 0.0,
           left: 0.0,

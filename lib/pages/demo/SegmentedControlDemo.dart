@@ -90,7 +90,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         buildSegmentedControlNew(
           radius: Radius.circular(24),
           padding: EdgeInsets.all(4),
-          onChanged: (int index) {
+          onChanged: (index) {
             DLog.d("index: $index");
           },
         ),
@@ -117,10 +117,10 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
                 ),
               ],
               selectedIndex: 1,
-              onChanged: (int index) {
+              onChanged: (index) {
                 DLog.d("onChanged: $index");
               },
-              itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
+              itemBuilder: (({String icon, String title}) e, isSelecetd) {
                 final color = isSelecetd ? Colors.white : Color(0xff737373);
                 final icon = isSelecetd ? e.icon : e.icon;
 
@@ -213,7 +213,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
   Widget buildSegmentedControl() {
     return CupertinoSegmentedControl<int>(
       children: children,
-      onValueChanged: (int newValue) {
+      onValueChanged: (newValue) {
         setState(() {
           groupValue = newValue;
         });
@@ -275,7 +275,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
     var current = items[0];
 
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return Container(
         // height: 56,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -382,7 +382,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
     var current = items[0];
 
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return Container(
         // height: 56,
         padding: EdgeInsets.symmetric(horizontal: 48, vertical: 0),

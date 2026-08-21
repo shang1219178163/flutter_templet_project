@@ -45,7 +45,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
               value: sliderVN.value,
               min: 0.0,
               max: 100.0,
-              onChanged: (double value) {
+              onChanged: (value) {
                 sliderVN.value = value;
                 setState(() {});
               },
@@ -54,7 +54,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         ),
         ValueListenableBuilder(
             valueListenable: sliderVN,
-            builder: (BuildContext context, double value, Widget? child) {
+            builder: (context, value, child) {
               final result = (value / 100).toStringAsFixed(2);
               return TextButton(
                 onPressed: () {

@@ -98,7 +98,7 @@ class NNetworkImage extends StatelessWidget {
         clearMemoryCacheWhenDispose: clearMemoryCacheWhenDispose,
         clearMemoryCacheIfFailed: true,
         borderRadius: borderRadius,
-        loadStateChanged: (ExtendedImageState state) {
+        loadStateChanged: (state) {
           switch (state.extendedImageLoadState) {
             case LoadState.completed:
               return null;

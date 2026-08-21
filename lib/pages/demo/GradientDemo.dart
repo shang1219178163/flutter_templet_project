@@ -68,7 +68,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
 
     showSheet(
       items: items,
-      onSelected: (int index) {
+      onSelected: (index) {
         tileMode = tileModes[index];
         debugPrint("$index, $tileMode");
         setState(() {});
@@ -83,7 +83,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
 
     showSheet(
       items: items,
-      onSelected: (int index) {
+      onSelected: (index) {
         blendMode = blendModes[index];
         debugPrint("$index, $blendMode");
         setState(() {});
@@ -119,7 +119,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             ),
           )
           .toList(),
-      onChanged: (Alignment? value) {
+      onChanged: (value) {
         if (value == null) {
           return;
         }
@@ -367,7 +367,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           children: [
             buildShaderMask(
               blendMode: BlendMode.color,
-              shaderCallback: (Rect bounds) {
+              shaderCallback: (bounds) {
                 return RadialGradient(
                   tileMode: tileMode,
                   radius: 0.5,
@@ -377,7 +377,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             ),
             buildShaderMask(
               blendMode: BlendMode.srcATop,
-              shaderCallback: (Rect bounds) {
+              shaderCallback: (bounds) {
                 return RadialGradient(
                   tileMode: tileMode,
                   radius: .6,

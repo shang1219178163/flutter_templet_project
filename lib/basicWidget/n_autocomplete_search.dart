@@ -51,7 +51,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
       displayStringForOption: widget.displayStringForOption,
       fieldViewBuilder: widget.fieldViewBuilder ?? buildFieldView,
       onSelected: widget.onSelected,
-      optionsBuilder: (TextEditingValue textEditingValue) {
+      optionsBuilder: (textEditingValue) {
         _textEditingValue = textEditingValue;
         final text = textEditingValue.text;
         if (text.isEmpty) {

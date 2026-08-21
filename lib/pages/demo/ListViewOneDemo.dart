@@ -111,7 +111,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: MarqueeWidget(
               itemCount: itemCount,
-              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              itemBuilder: (context, index, constraints) {
                 // print("MarqueeWidget: $index ${index % 2 == 0}");
                 final isEdge = (index == 0 || index == itemCount - 1);
                 if (isEdge) {
@@ -259,7 +259,7 @@ class MarqueeSimpleWidget extends StatelessWidget {
 
     return MarqueeWidget(
       itemCount: totalCount,
-      itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+      itemBuilder: (context, index, constraints) {
         debugPrint("MarqueeWidget: $index ${index % 2 == 0}");
         final isEdge = (index == 0 || index == totalCount - 1);
         if (isEdge) {

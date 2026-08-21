@@ -48,7 +48,7 @@ class NGradientMask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      shaderCallback: (Rect bounds) {
+      shaderCallback: (bounds) {
         return LinearGradient(
           // transform: const GradientRotation(65 * (pi / 180)),
           begin: begin,

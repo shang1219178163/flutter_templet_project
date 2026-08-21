@@ -380,7 +380,7 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                 }).toList(),
                 AeAddressChooseItem(
                   selectVN: addressVN,
-                  convertCb: (AddressPickerModel e) {
+                  convertCb: (e) {
                     return [e.province, e.city, e.town].where((e) => e?.isNotEmpty == true).join();
                   },
                   onChanged: (e) {

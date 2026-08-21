@@ -45,7 +45,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
           ...buildHeader(),
           NAutocompleteSearch(
             displayStringForOption: (option) => option.name,
-            optionsBuilder: (TextEditingValue textEditingValue) {
+            optionsBuilder: (textEditingValue) {
               final query = textEditingValue.text.trim().toLowerCase();
               if (query.isEmpty) {
                 return const <OptionModel>[];
@@ -153,7 +153,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
                   style: TextStyle(color: colorScheme.onSurface),
                 ),
                 value: e.isOpen,
-                onChanged: (bool value) {
+                onChanged: (value) {
                   e.isOpen = value;
                   setState(() {});
                 },

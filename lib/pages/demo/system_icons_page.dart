@@ -152,7 +152,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     searchResults.sort((a, b) => a.compareTo(b));
     return GridView.builder(
       itemCount: searchResults.length,
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         final item = searchResults[index];
         return Container(
           padding: EdgeInsets.all(8),

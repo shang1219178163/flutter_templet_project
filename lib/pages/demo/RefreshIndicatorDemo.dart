@@ -55,7 +55,7 @@ class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
       // Pull from top to show refresh indicator.
       child: ListView.builder(
         itemCount: 25,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           return ListTile(
             title: Text('Item $index'),
           );

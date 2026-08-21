@@ -67,7 +67,7 @@ class _CountDownPageState extends State<CountDownPage> {
       children: [
         NRollingDigit(
           value: value,
-          builder: (String v) {
+          builder: (v) {
             return Text(
               value,
               style: const TextStyle(

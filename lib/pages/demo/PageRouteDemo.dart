@@ -156,7 +156,7 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
     Navigator.push(
       context,
       NFadePageRoute(
-        builder: (BuildContext context) {
+        builder: (context) {
           return page;
         },
       ),

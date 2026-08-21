@@ -49,7 +49,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
 
   Future<ui.Image> loadImage(Uint8List bytes) async {
     final completer = Completer<ui.Image>();
-    ui.decodeImageFromList(bytes, (ui.Image img) {
+    ui.decodeImageFromList(bytes, (img) {
       return completer.complete(img);
     });
     return completer.future;

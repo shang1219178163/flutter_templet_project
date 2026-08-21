@@ -123,7 +123,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                 child: NTextView(
                   isCounterInner: false,
                   minLines: 4,
-                  onChanged: (String value) {},
+                  onChanged: (value) {},
                 ),
               ),
               NSectionBox(
@@ -131,14 +131,14 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                 child: NTextView(
                   isCounterInner: true,
                   minLines: 4,
-                  onChanged: (String value) {},
+                  onChanged: (value) {},
                 ),
               ),
               NSectionBox(
                 title: "NSearchTextField",
                 child: NSearchTextField(
                   backgroundColor: Colors.white,
-                  onChanged: (String value) {},
+                  onChanged: (value) {},
                 ),
               ),
               NSectionBox(
@@ -146,13 +146,13 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                 child: NSearchTextField(
                   backgroundColor: Colors.white,
                   textAlign: TextAlign.center,
-                  onChanged: (String value) {},
+                  onChanged: (value) {},
                 ),
               ),
               NSectionBox(
                 title: "NSearchBar ",
                 child: NSearchBar(
-                  onChanged: (String value) {},
+                  onChanged: (value) {},
                   onCancel: () {},
                 ),
               ),
@@ -167,7 +167,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                       color: AppColor.bgColor,
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
-                    onChanged: (String value) {},
+                    onChanged: (value) {},
                     onCancel: () {},
                   ),
                 ),
@@ -258,7 +258,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
       hideSuffix: hideSuffix,
       hideClear: hideClear,
       decorationBuilder: decorationBuilder,
-      onChanged: (String value) {
+      onChanged: (value) {
         if (value.trim().isEmpty) {
           DLog.d("$this onChanged 不能为空");
           return;

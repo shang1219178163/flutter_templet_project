@@ -132,7 +132,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
         ),
         ListenableBuilder(
           listenable: provider,
-          builder: (context, Widget? child) {
+          builder: (context, child) {
             var top = provider.topOffset == -1 ? (provider.isExpanded ? _maxTop : _minTop) : provider.topOffset;
 
             final args = {
@@ -163,7 +163,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
   Widget buildWrap() {
     final list = List.generate(8, (i) => i);
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -308,7 +308,7 @@ class _HotScreenViewThreeState extends State<HotScreenViewThree> {
   Widget buildWrap() {
     final list = List.generate(16, (i) => i);
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;

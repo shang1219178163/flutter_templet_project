@@ -91,7 +91,7 @@ class _ContactsPageState extends State<ContactsPage> {
       body: AzListView(
         data: contactList,
         itemCount: contactList.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           var model = contactList[index];
           return Utils.getWeChatListItem(
             context,
@@ -100,7 +100,7 @@ class _ContactsPageState extends State<ContactsPage> {
           );
         },
         physics: BouncingScrollPhysics(),
-        susItemBuilder: (BuildContext context, int index) {
+        susItemBuilder: (context, index) {
           var model = contactList[index];
           if ('↑' == model.getSuspensionTag()) {
             return Container();

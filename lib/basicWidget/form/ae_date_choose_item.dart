@@ -156,7 +156,7 @@ class AeDateChooseItem extends StatelessWidget {
       selectDate: selectVN.value,
       minDateTime: minDateTime,
       maxDateTime: maxDateTime,
-      onConfirm: (DateTime dateTime) {
+      onConfirm: (dateTime) {
         selectVN.value = dateTime;
         onChanged?.call(dateTime);
         DLog.d("$this ${title ?? ""} $dateTime");

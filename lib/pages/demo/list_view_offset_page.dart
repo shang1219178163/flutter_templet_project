@@ -199,7 +199,7 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
             },
             background: buildFavorite(context),
             secondaryBackground: buildDelete(context),
-            confirmDismiss: (DismissDirection direction) async {
+            confirmDismiss: (direction) async {
               return buildConfirmDismiss(context);
             },
             child: Container(height: IntExt.random(max: 100, min: 45).toDouble(), color: ColorExt.random, child: child),
@@ -252,7 +252,7 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
   Future<bool?> buildConfirmDismiss(BuildContext context) async {
     return showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           title: const Text("Delete Confirmation"),
           content: const Text("Are you sure you want to delete this item?"),

@@ -65,7 +65,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
                 color: Colors.white,
                 expandedColor: Colors.black,
                 disabledColor: Colors.grey,
-                onPressed: (bool isExpanded) {
+                onPressed: (isExpanded) {
                   setState(() {
                     _isExpanded = !isExpanded;
                     DLog.d(isExpanded);
@@ -101,7 +101,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
           // elevation: 4,
           materialGapSize: 0,
           expandedHeaderPadding: EdgeInsets.only(top: 0, bottom: 0),
-          expansionCallback: (int index, bool isExpanded) {
+          expansionCallback: (index, isExpanded) {
             setState(() {
               _data[index].isExpanded = !isExpanded;
             });
@@ -110,7 +110,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
             return ExpansionPanel(
               isExpanded: item.isExpanded,
               canTapOnHeader: true,
-              headerBuilder: (BuildContext context, bool isExpanded) {
+              headerBuilder: (context, isExpanded) {
                 return CustomExpansionTile();
                 return Container(
                   color: Colors.green,
@@ -164,13 +164,13 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
         trailing: Icon(Icons.delete),
         onTap: () {
           setState(() {
-            _data.removeWhere((ExpandedItem currentItem) => item == currentItem);
+            _data.removeWhere((currentItem) => item == currentItem);
           });
         });
   }
 
   List<ExpandedItem<String>> generateItems(int count) {
-    return List<ExpandedItem<String>>.generate(count, (int index) {
+    return List<ExpandedItem<String>>.generate(count, (index) {
       return ExpandedItem<String>(
         index: index,
         headerValue: 'Panel $index',
@@ -229,7 +229,7 @@ class CustomExpansionTileState extends State<CustomExpansionTile> {
         ),
       ),
       subtitle: Text("subtitle"),
-      onExpansionChanged: (bool expanding) => setState(() => isExpanded = expanding),
+      onExpansionChanged: (expanding) => setState(() => isExpanded = expanding),
       children: <Widget>[
         Text("Child Widget One"),
         Text("Child Widget Two"),

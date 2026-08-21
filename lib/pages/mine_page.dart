@@ -112,7 +112,7 @@ class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
                 chooseImagesByWechatPicker(
                   maxCount: 1,
                   needCropp: true,
-                  onChanged: (File val) {
+                  onChanged: (val) {
                     debugPrint("value: $val");
                     avatarVN.value = val.path;
                   },

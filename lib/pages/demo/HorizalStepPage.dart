@@ -47,7 +47,7 @@ class _HorizalStepPageState extends State<HorizalStepPage> {
               title: "比赛阶段",
               child: NHorizalStep(
                 items: items,
-                itemHeaderBuilder: (_, i, bool isSelected) {
+                itemHeaderBuilder: (_, i, isSelected) {
                   Color unselecedColor = Colors.grey;
                   final currColor = isSelected ? seedColor : unselecedColor;
 
@@ -63,7 +63,7 @@ class _HorizalStepPageState extends State<HorizalStepPage> {
                     ),
                   );
                 },
-                itemFooterBuilder: (_, i, bool isSelected) {
+                itemFooterBuilder: (_, i, isSelected) {
                   Color unselecedColor = Colors.grey;
                   final currColor = isSelected ? seedColor : unselecedColor;
 

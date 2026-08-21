@@ -225,7 +225,7 @@ class _SinglePickerPageState extends State<SinglePickerPage> {
         debugPrint('数据发生改变：$p');
         debugPrint('longer >>> 返回数据下标：$position');
       },
-      onCancel: (bool isCancel) {
+      onCancel: (isCancel) {
         debugPrint('longer >>> 点击了取消,是否是通过点击按钮取消：$isCancel');
       },
     );

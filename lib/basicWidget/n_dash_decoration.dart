@@ -113,7 +113,7 @@ class _DashPainter {
     final partLength =
         step + span * (pointCount + 1) + pointCount * pointLineLength;
 
-    pms.forEach((PathMetric pm) {
+    pms.forEach((pm) {
       final count = pm.length ~/ partLength;
       for (var i = 0; i < count; i++) {
         canvas.drawPath(

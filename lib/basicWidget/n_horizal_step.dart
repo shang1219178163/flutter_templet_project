@@ -45,7 +45,7 @@ class _NHorizalStepState<E> extends State<NHorizalStep<E>> {
     final items = widget.items;
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final maxWidth = constraints.maxWidth;
         final itemWidth = widget.itemWidth ?? (maxWidth / items.length.toDouble()).truncateToDouble();
 

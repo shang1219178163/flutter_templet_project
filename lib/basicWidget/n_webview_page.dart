@@ -73,22 +73,22 @@ class NWebViewPageState extends State<NWebViewPage> {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
+          onProgress: (progress) {
             debugPrint('WebView is loading (progress : $progress%)');
             progressVN.value = progress / 100.0;
             widget.onProgress?.call(progressVN.value);
           },
-          onPageStarted: (String url) {
+          onPageStarted: (url) {
             debugPrint('Page started loading: $url');
           },
-          onPageFinished: (String url) {
+          onPageFinished: (url) {
             debugPrint('Page finished loading: $url');
 
             if (progressVN.value < 1) {
               progressVN.value = 1;
             }
           },
-          onWebResourceError: (WebResourceError error) {
+          onWebResourceError: (error) {
             debugPrint('''
 Page resource error:
   code: ${error.errorCode}
@@ -104,7 +104,7 @@ Page resource error:
               }
             }
           },
-          onNavigationRequest: (NavigationRequest request) {
+          onNavigationRequest: (request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
               debugPrint('blocking navigation to ${request.url}');
               return NavigationDecision.prevent;
@@ -112,17 +112,17 @@ Page resource error:
             debugPrint('allowing navigation to ${request.url}');
             return NavigationDecision.navigate;
           },
-          onUrlChange: (UrlChange change) {
+          onUrlChange: (change) {
             debugPrint('url change to ${change.url}');
           },
-          onHttpAuthRequest: (HttpAuthRequest request) {
+          onHttpAuthRequest: (request) {
             // openDialog(request);
           },
         ),
       )
       ..addJavaScriptChannel(
         'Toast',
-        onMessageReceived: (JavaScriptMessage message) {
+        onMessageReceived: (message) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message.message)),
           );

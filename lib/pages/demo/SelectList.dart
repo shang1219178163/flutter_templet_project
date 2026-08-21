@@ -55,7 +55,7 @@ class _SelectListPageState extends State<SelectListPage> {
     return SelectList(
       models: models,
       isMultiple: isMultiple,
-      onSelected: (List<UserModel> items) {
+      onSelected: (items) {
         DLog.d(items.map((e) => (e.name,)));
       },
     );
@@ -145,7 +145,7 @@ class _SelectListState extends State<SelectList> {
                       ListTile(
                         leading: Checkbox(
                           value: e.isSelected == true,
-                          onChanged: (bool? value) {
+                          onChanged: (value) {
                             onTap();
                           },
                         ),

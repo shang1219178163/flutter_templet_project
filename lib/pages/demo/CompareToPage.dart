@@ -119,7 +119,7 @@ class _CompareToPageState extends State<CompareToPage> {
           pinned: true,
           min: 30,
           max: 200,
-          builder: (context, double shrinkOffset, bool overlapsContent) {
+          builder: (context, shrinkOffset, overlapsContent) {
             return buildHeader(context, shrinkOffset, overlapsContent);
           },
         ),

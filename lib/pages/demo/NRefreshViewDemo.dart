@@ -120,11 +120,11 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
               return NRefreshListView<UserModel>(
                 controller: refreshViewController,
                 page: 10,
-                onRequest: (bool isRefresh, int page, int pageSize, last) async {
+                onRequest: (isRefresh, page, pageSize, last) async {
                   return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
                 },
-                itemBuilder: (BuildContext context, int index, e) {
-                  return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                itemBuilder: (context, index, e) {
+                  return StatefulBuilder(builder: (context, setState) {
                     void onTap() {
                       DLog.d("onSelected: ${e.toJson()}");
                     }

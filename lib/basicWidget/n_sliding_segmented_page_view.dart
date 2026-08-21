@@ -82,7 +82,7 @@ class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
               final segmentedControl = NSlidingSegmentedControl(
                 items: widget.items.map((e) => (title: e.title, icon: e.icon)).toList(),
                 selectedIndex: index,
-                onChanged: (int page) {
+                onChanged: (page) {
                   pageController.animateToPage(page, duration: Duration(milliseconds: 350), curve: Curves.ease);
                   // pageController.jumpToPage(index);
                 },

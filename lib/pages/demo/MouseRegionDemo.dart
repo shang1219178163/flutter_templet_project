@@ -53,14 +53,14 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
         title: Text(demoTitle ?? widget.title ?? "$widget"),
         actions: [
           MouseRegion(
-              onEnter: (PointerEvent details) {
+              onEnter: (details) {
                 setState(() {
                   setState(() => DLog.d(details));
                   demoTitle = "onEnter";
                   _isVisible = true;
                 });
               },
-              onExit: (PointerEvent details) {
+              onExit: (details) {
                 setState(() {
                   setState(() => DLog.d(details));
                   demoTitle = "onExit";

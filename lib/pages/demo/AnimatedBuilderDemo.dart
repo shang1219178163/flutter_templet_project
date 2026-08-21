@@ -63,7 +63,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
   Widget buildAnimatedBuilder() {
     return AnimatedBuilder(
       animation: animation,
-      builder: (BuildContext ctx, child) {
+      builder: (ctx, child) {
         return Center(
           child: Container(
             color: Colors.green,
@@ -82,7 +82,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
   Widget buildTweenAnimatedWidget() {
     return TweenAnimatedWidget<double>(
       tween: Tween(begin: 0, end: 300),
-      builder: (BuildContext ctx, child, animation) {
+      builder: (ctx, child, animation) {
         return Center(
           child: Container(
             color: Colors.yellow,

@@ -142,7 +142,7 @@ class _ModalBottomSheetNewState<T> extends State<_ModalBottomSheetNew<T>> {
         onDragStart: handleDragStart,
         onDragEnd: handleDragEnd,
       ),
-      builder: (BuildContext context, Widget? child) {
+      builder: (context, child) {
         // Disable the initial animation when accessible navigation is on so
         // that the semantics are added to the tree at the correct time.
         final animationValue = animationCurve.transform(
@@ -393,7 +393,7 @@ class ModalBottomSheetRouteNew<T> extends PopupRoute<T> {
       anchorPoint: anchorPoint,
       right: right,
       child: Builder(
-        builder: (BuildContext context) {
+        builder: (context) {
           final sheetTheme = Theme.of(context).bottomSheetTheme;
           final defaults =
               Theme.of(context).useMaterial3 ? _BottomSheetDefaultsM3(context) : const BottomSheetThemeData();

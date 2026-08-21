@@ -64,7 +64,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
           AnimatedSwitcher(
             duration: Duration(milliseconds: 200),
             child: child,
-            transitionBuilder: (Widget child, Animation<double> animation) {
+            transitionBuilder: (child, animation) {
               // var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
 
               // return ScaleTransition(scale: animation, child: child);

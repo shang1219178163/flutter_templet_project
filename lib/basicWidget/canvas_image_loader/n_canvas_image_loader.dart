@@ -36,7 +36,7 @@ class NCanvasImageLoader {
 
     late ImageStreamListener listener;
     listener = ImageStreamListener(
-      (ImageInfo info, _) {
+      (info, _) {
         completer.complete(info.image);
         stream.removeListener(listener);
       },

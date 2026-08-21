@@ -83,7 +83,7 @@ class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
                 ],
                 items: selectedFiles,
                 // showFileSize: true,
-                onChanged: (List<NFileUploadModel> value) {
+                onChanged: (value) {
                   selectedFiles = value;
                   DLog.d("$widget selectedFiles: $selectedFiles");
                   isAllUploadFinished.value = true;

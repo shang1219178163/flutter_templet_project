@@ -94,7 +94,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
         child: Draggable(
           feedback: feedback(),
           childWhenDragging: childWhenDragging(), //拖动过程回调
-          onDraggableCanceled: (Velocity velocity, Offset offset) {
+          onDraggableCanceled: (velocity, offset) {
             this.offset = offset;
             setState(() {});
           },

@@ -257,7 +257,7 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
   }) async {
     var res = await OssUtil.upload(
       filePath: path,
-      onSendProgress: (int count, int total) {
+      onSendProgress: (count, total) {
         final percent = (count / total);
         if (percent >= 0.99) {
           _percentVN.value = 0.99;
@@ -265,7 +265,7 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
           _percentVN.value = percent;
         }
       },
-      onReceiveProgress: (int count, int total) {
+      onReceiveProgress: (count, total) {
         _percentVN.value = 1;
       },
     );

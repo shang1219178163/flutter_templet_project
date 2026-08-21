@@ -77,7 +77,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         childCount: list.length,
-        (_, int index) {
+        (_, index) {
           return buildColorItem(list[index], index);
         },
       ),
@@ -120,7 +120,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       floating: true,
       min: 40,
       max: 120,
-      builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+      builder: (context, shrinkOffset, overlapsContent) {
         return Container(
           alignment: Alignment.center,
           color: Colors.orangeAccent,

@@ -150,7 +150,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
           Container(
             padding: EdgeInsets.only(top: 5, bottom: 15),
             child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
+              builder: (context, constraints) {
                 const spacing = 8.0;
                 const rowCount = 4.0;
                 final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
@@ -209,7 +209,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
           Container(
             padding: EdgeInsets.only(top: 5, bottom: 15),
             child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
+              builder: (context, constraints) {
                 const spacing = 8.0;
                 const rowCount = 4.0;
                 final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
@@ -374,7 +374,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
   Widget buildWrap() {
     final list = List.generate(8, (i) => i);
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;

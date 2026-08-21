@@ -92,7 +92,7 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
   Widget buildFileVier({required NExpandModel<File> e}) {
     return FutureBuilder<String>(
       future: e.value.readAsString(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return CircularProgressIndicator();
         }
@@ -103,7 +103,7 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
 
         final result = snapshot.data ?? "";
 
-        return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        return StatefulBuilder(builder: (context, setState) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [

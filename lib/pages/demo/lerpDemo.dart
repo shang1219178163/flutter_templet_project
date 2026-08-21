@@ -162,7 +162,7 @@ class _LerpDemoState extends State<LerpDemo>
                 Expanded(
                   child: Slider(
                     value: current,
-                    onChanged: (double value) {
+                    onChanged: (value) {
                       current = value;
                       setState(() {});
                     },

@@ -80,7 +80,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
             ),
           )
           .toList(),
-      onChanged: (Alignment? value) {
+      onChanged: (value) {
         if (value == null) {
           return;
         }

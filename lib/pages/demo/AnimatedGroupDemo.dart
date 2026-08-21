@@ -76,8 +76,8 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
                 key: _globalKey,
                 duration: Duration(milliseconds: 2000),
                 animations: _animations,
-                builder: (BuildContext context, Widget? child,
-                    List<Animation<dynamic>> animations) {
+                builder: (context, child,
+                    animations) {
                   final aHeight = animations[0];
                   final aColor = animations[1];
                   final aPadding = animations[2];

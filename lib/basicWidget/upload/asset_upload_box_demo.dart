@@ -138,7 +138,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     double runSpacing = 10,
     bool hasAddBtn = false,
   }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: runSpacing, children: [

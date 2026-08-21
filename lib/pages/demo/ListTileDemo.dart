@@ -121,7 +121,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
       ValueChanged<String>? cb,
       Widget? header,
       Widget? footer}) {
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
           if (header != null) header,

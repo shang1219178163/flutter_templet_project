@@ -254,7 +254,7 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
     return TextButton(
       onPressed: () {},
       style: ButtonStyle(
-        foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
           debugPrint("states:$states");
           if (states.contains(WidgetState.pressed)) {
             return Colors.pink;

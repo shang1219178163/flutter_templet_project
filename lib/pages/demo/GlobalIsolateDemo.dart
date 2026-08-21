@@ -41,7 +41,7 @@ class _GlobalIsolateDemoState extends State<GlobalIsolateDemo> {
 
     final result = (await GlobalIsolate.isolateDo(
           params: {"a": a},
-          work: (Map<String, dynamic> params) async {
+          work: (params) async {
             sleep(const Duration(seconds: 2));
             final base = params["a"] as int;
             return {

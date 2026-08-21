@@ -110,7 +110,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
               focusNode,
               keyboardHeightVN,
             ]),
-            builder: (context, Widget? child) {
+            builder: (context, child) {
               final isHide = keyboardHeightVN.value == 0.0;
               return Container(
                 decoration: BoxDecoration(
@@ -179,7 +179,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
                 initialItem: SomeItemType.itemThree,
                 cbName: (e) => e?.name ?? "请选择",
                 equal: (a, b) => a == b,
-                onChanged: (SomeItemType e) {
+                onChanged: (e) {
                   debugPrint(e.name);
                   _selectedItemVN.value = e;
                 },
@@ -228,10 +228,10 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
   }) {
     var selectedItem = initialItem;
 
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return MenuAnchor(
         alignmentOffset: Offset(0, 0),
-        builder: (context, MenuController controller, Widget? child) {
+        builder: (context, controller, child) {
           return itemBuilder?.call(controller, selectedItem) ??
               OutlinedButton(
                 onPressed: () {

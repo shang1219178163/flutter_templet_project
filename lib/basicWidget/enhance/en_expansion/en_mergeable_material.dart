@@ -240,12 +240,12 @@ class _EnMergeableMaterialState extends State<EnMergeableMaterial> with TickerPr
 
     final oldKeys = oldWidget.children
         .map<LocalKey>(
-          (MergeableMaterialItem child) => child.key,
+          (child) => child.key,
         )
         .toSet();
     final newKeys = widget.children
         .map<LocalKey>(
-          (MergeableMaterialItem child) => child.key,
+          (child) => child.key,
         )
         .toSet();
     final newOnly = newKeys.difference(oldKeys);

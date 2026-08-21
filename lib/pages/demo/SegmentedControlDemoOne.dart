@@ -106,7 +106,7 @@ class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
   }) {
     var current = items[0];
 
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: items.map((e) {

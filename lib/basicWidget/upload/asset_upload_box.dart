@@ -175,7 +175,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     bool canEdit = true,
   }) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
         // print("itemWidth: $itemWidth");
         return Wrap(spacing: spacing, runSpacing: runSpacing, alignment: WrapAlignment.start, children: [
@@ -304,7 +304,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
               selectedAssets: selectedEntitys,
               maxAssets: maxCount,
               specialItemPosition: SpecialItemPosition.prepend,
-              specialItemBuilder: (context, AssetPathEntity? path, int length) {
+              specialItemBuilder: (context, path, length) {
                 if (path?.isAll != true) {
                   return null;
                 }

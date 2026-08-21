@@ -42,19 +42,19 @@ class _StatefulBuilderDemoState extends State<StatefulBuilderDemo> {
   showDialogAlert() async {
     await showDialog<void>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         int? selectedRadio = 0;
         return AlertDialog(
           content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
-                children: List<Widget>.generate(3, (int index) {
+                children: List<Widget>.generate(3, (index) {
                   return ListTile(
                     leading: Radio<int>(
                       value: index,
                       groupValue: selectedRadio,
-                      onChanged: (int? value) {
+                      onChanged: (value) {
                         setState(() => selectedRadio = value);
                       },
                     ),

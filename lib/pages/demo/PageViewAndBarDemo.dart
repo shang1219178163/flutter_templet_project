@@ -57,14 +57,14 @@ class _PageViewAndBarDemoState extends State<PageViewAndBarDemo> {
                     alignment: Alignment.center,
                     child: Text("第 $i 页"),
                   )).toList(),
-          onPageChanged: (int index) {
+          onPageChanged: (index) {
             _currentIndex = index;
             setState(() {});
           },
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: tabBarItems,
-          onTap: (int index) {
+          onTap: (index) {
             _pageController.jumpToPage(index);
             // _pageController.animateToPage(index,
             //     duration: Duration(milliseconds: 400),

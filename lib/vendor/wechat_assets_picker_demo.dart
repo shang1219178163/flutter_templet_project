@@ -53,7 +53,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
     int rowCount = 3,
     double spacing = 10,
   }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: spacing, children: [
@@ -148,7 +148,7 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
             WechatPhotoPicker(
               key: _globalKey,
               rowCount: 4,
-              onChanged: (List<AssetEntity> assets) {
+              onChanged: (assets) {
                 debugPrint("onChanged assets: ${assets.length}");
                 selectedAssets = assets;
               },
@@ -231,7 +231,7 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
     int rowCount = 3,
     double spacing = 10,
   }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: spacing, children: [

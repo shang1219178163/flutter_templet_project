@@ -249,7 +249,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("ScaleTransition"),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
-            transitionBuilder: (Widget child, Animation<double> animation) {
+            transitionBuilder: (child, animation) {
               //执行缩放动画
               return ScaleTransition(
                 scale: animation,
@@ -288,7 +288,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("NSlideTransition"),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
-            transitionBuilder: (Widget child, Animation<double> animation) {
+            transitionBuilder: (child, animation) {
               return NSlideTransition(
                 direction: AxisDirection.up, //上入下出
                 position: animation,
@@ -327,7 +327,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("LineSlideTransition"),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
-            transitionBuilder: (Widget child, Animation<double> animation) {
+            transitionBuilder: (child, animation) {
               final tween = Tween<Offset>(
                 begin: Offset(0, 1),
                 end: Offset(0, 0),

@@ -159,10 +159,10 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
     return NRefreshListView<E>(
       controller: refreshViewController,
       pageSize: 30,
-      onRequest: (bool isRefresh, int page, int pageSize, last) async {
+      onRequest: (isRefresh, page, pageSize, last) async {
         return widget.requestList(isRefresh, page, pageSize, search);
       },
-      itemBuilder: (BuildContext context, int index, model) {
+      itemBuilder: (context, index, model) {
         final isSelected = widget.selected(widget.items, model);
         final textColor = isSelected ? primary : AppColor.fontColor;
         final color = isSelected ? primary : Colors.transparent;

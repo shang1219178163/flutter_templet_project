@@ -60,7 +60,7 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
           ))),
       child: MenuAnchor(
         controller: menuController,
-        builder: (context, MenuController controller, Widget? child) {
+        builder: (context, controller, child) {
           return buildItem(
             imgName: selectedItem,
             padding: widget.itemPadding,

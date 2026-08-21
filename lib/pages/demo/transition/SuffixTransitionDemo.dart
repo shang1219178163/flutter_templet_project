@@ -510,7 +510,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 MatrixTransition(
                   animation: animation,
-                  onTransform: (double value) {
+                  onTransform: (value) {
                     return Matrix4.identity()
                       ..setEntry(3, 2, 0.004)
                       ..rotateY(pi * 2.0 * value);
@@ -539,7 +539,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
       child: Column(
         children: [
           StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
               final axis = isHorizal ? Axis.horizontal : Axis.vertical;
               return Column(
                 children: [

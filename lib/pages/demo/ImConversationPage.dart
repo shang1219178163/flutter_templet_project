@@ -106,10 +106,10 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
     return NRefreshListView<ImConversationDetailModel>(
       controller: refreshViewController,
       page: 5,
-      onRequest: (bool isRefresh, int page, int pageSize, last) async {
+      onRequest: (isRefresh, page, pageSize, last) async {
         return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
       },
-      itemBuilder: (BuildContext context, int index, e) {
+      itemBuilder: (context, index, e) {
         final dateStr = DateTime.now().toString19();
 
         final content = InkWell(
@@ -196,7 +196,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
       offset: const Offset(0, 50.0),
       tooltip: '',
       color: const Color(0xFF353535),
-      itemBuilder: (BuildContext context) {
+      itemBuilder: (context) {
         return items.map((e) {
           return popupMenuItem(e.iconData, e.title, e.index);
         }).toList();

@@ -155,7 +155,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                         onTap: () {
                           PhoneAreaCodePopup.show(
                             context,
-                            onChange: (AreaCodeEntity e) {
+                            onChange: (e) {
                               DLog.d(e.toJson());
                               valueVN.value = e;
                             },
@@ -208,12 +208,12 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(4)),
                   ),
-                  onChanged: (String value) {
+                  onChanged: (value) {
                     // debugPrint('onChanged: $value');
                     delayed(() => debugPrint('delayed: $value'));
                     // _debounce(() => debugPrint( 'delayed: $value' ));
                   },
-                  onSubmitted: (String value) {
+                  onSubmitted: (value) {
                     debugPrint('onSubmitted: $value');
                   },
                 ),

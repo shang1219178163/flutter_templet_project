@@ -33,7 +33,7 @@ class _SlidableDemoOneState extends State<SlidableDemoOne> {
       ),
       body: ListView.separated(
         itemCount: 9,
-        itemBuilder: (context, int index) {
+        itemBuilder: (context, index) {
           final content = Container(
             height: 70,
             child: ListTile(
@@ -88,7 +88,7 @@ class _SlidableDemoOneState extends State<SlidableDemoOne> {
             child: content,
           );
         },
-        separatorBuilder: (context, int index) {
+        separatorBuilder: (context, index) {
           return Divider(
             height: 1,
             color: Color(0xffe4e4e4),

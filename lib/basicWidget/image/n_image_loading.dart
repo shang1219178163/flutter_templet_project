@@ -36,7 +36,7 @@ class NImageLoading extends StatelessWidget {
           child: frame != null ? child : placeholder,
         );
       },
-      loadingBuilder: (context, child, ImageChunkEvent? loadingProgress) {
+      loadingBuilder: (context, child, loadingProgress) {
         var val = 0.0;
         if (loadingProgress != null &&
             loadingProgress.cumulativeBytesLoaded != 0 &&

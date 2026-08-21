@@ -19,7 +19,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
   bool value = false;
 
   final thumbIcon = WidgetStateProperty.resolveWith<Icon?>(
-    (Set<WidgetState> states) {
+    (states) {
       if (states.contains(WidgetState.selected)) {
         return const Icon(Icons.check);
       }
@@ -53,7 +53,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
         Switch(
           thumbIcon: thumbIcon,
           value: value,
-          onChanged: (bool val) {
+          onChanged: (val) {
             value = val;
             setState(() {});
           },
@@ -82,7 +82,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
           height: 25,
           child: CupertinoSwitch(
             value: value,
-            onChanged: (bool val) {
+            onChanged: (val) {
               value = val;
               setState(() {});
             },

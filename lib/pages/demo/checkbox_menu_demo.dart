@@ -44,7 +44,7 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
             menuChildren: <Widget>[
               CheckboxMenuButton(
                 value: _showing,
-                onChanged: (bool? value) {
+                onChanged: (value) {
                   setMessageVisibility(value!);
                 },
                 child: const Text('Show Message'),
@@ -52,11 +52,11 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
               RadioMenuButton(
                 groupValue: 0,
                 value: 0,
-                onChanged: (int? value) {},
+                onChanged: (value) {},
                 child: const Text('two'),
               ),
             ],
-            builder: (context, MenuController controller, Widget? child) {
+            builder: (context, controller, child) {
               return TextButton(
                 focusNode: _buttonFocusNode,
                 onPressed: () {

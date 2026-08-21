@@ -132,7 +132,7 @@ class DialogTagSelect with DialogMixin {
                   selected: e.isSelected == true,
                   selectedColor: context.themeData.colorScheme.primary,
                   backgroundColor: Colors.white,
-                  onSelected: (bool selected) {
+                  onSelected: (selected) {
                     final chooseCount = tags.where((e) => e.isSelected == true).toList().length;
 
                     for (final element in tags) {

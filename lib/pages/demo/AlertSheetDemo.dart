@@ -188,7 +188,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       message: Text(message, textAlign: TextAlign.start),
       items: List.generate(3, (index) => Text("item_$index")).toList(),
       cancel: Text('取消'),
-      onSelected: (int index) {
+      onSelected: (index) {
         debugPrint(index.toString());
       },
       onCancel: () {

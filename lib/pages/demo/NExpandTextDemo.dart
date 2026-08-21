@@ -109,7 +109,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
     showTipsSheet(
         items: items,
         textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-        cb: (String val) {
+        cb: (val) {
           debugPrint(val);
         });
   }
@@ -131,7 +131,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
           Expanded(
             child: ListView.separated(
               itemCount: items.length,
-              itemBuilder: (context, int i) {
+              itemBuilder: (context, i) {
                 final e = items[i];
 
                 return InkWell(
@@ -156,7 +156,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                   ),
                 );
               },
-              separatorBuilder: (context, int index) {
+              separatorBuilder: (context, index) {
                 return SizedBox(
                   height: 8,
                 );

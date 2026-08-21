@@ -491,7 +491,7 @@ class _ImChatPageState extends State<ImChatPage>
           },
           child: NLongPressMenu(
             items: menueItems,
-            onItem: (Tuple2<String, AssetImage> t) {
+            onItem: (t) {
               onHide();
               debugPrint("onChanged_$t");
               ToastUtil.show(t.item1);
@@ -612,10 +612,10 @@ class _ImChatPageState extends State<ImChatPage>
   Widget buildInputBar() {
     return IMTextfieldBar(
       controller: _inputController,
-      onChanged: (String val) {
+      onChanged: (val) {
         debugPrint("onChanged:$val");
       },
-      onSubmitted: (String val) {
+      onSubmitted: (val) {
         debugPrint("onSubmitted:$val");
         sendTextMessage();
       },

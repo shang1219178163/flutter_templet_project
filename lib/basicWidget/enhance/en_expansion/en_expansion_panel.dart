@@ -279,7 +279,7 @@ class _EnExpansionPanelListState extends State<EnExpansionPanelList> {
           padding: _kExpandIconPadding,
           splashColor: child.splashColor,
           highlightColor: child.highlightColor,
-          onPressed: !child.canTapOnHeader ? (bool isExpanded) => _handlePressed(isExpanded, index) : null,
+          onPressed: !child.canTapOnHeader ? (isExpanded) => _handlePressed(isExpanded, index) : null,
         ),
       );
 

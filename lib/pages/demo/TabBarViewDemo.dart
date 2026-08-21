@@ -78,7 +78,7 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
                 .map((e) => Tab(
                       child: ValueListenableBuilder<int>(
                           valueListenable: tabIndex,
-                          builder: (BuildContext context, int value, Widget? child) {
+                          builder: (context, value, child) {
                             final index = titles.indexOf(e);
                             if (index != 1) {
                               if (index == 2) {

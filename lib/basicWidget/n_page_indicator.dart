@@ -54,7 +54,7 @@ class NPageIndicator extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: ValueListenableBuilder(
           valueListenable: currentPage,
-          builder: (BuildContext context, dynamic value, Widget? child) {
+          builder: (context, dynamic value, child) {
             return Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,

@@ -53,7 +53,7 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
         onPressed: portalController.toggle,
         child: OverlayPortal(
           controller: portalController,
-          overlayChildBuilder: (BuildContext context) {
+          overlayChildBuilder: (context) {
             return Positioned(
               right: 30,
               bottom: 30,

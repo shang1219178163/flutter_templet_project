@@ -97,7 +97,7 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
           title: Text("${prefix}_$index"),
         );
       },
-      separatorBuilder: (BuildContext context, int index) {
+      separatorBuilder: (context, index) {
         return Divider();
       },
     );

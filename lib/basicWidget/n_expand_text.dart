@@ -52,7 +52,7 @@ class _NExpandTextState extends State<NExpandText> {
     final expandTitleStyle = widget.expandTitleStyle;
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final textPainter = TextPainterExt.getTextPainter(
           text: text,
           textStyle: textStyle,
@@ -63,7 +63,7 @@ class _NExpandTextState extends State<NExpandText> {
         // debugPrint("numberOfLines:${numberOfLines}");
 
         return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+          builder: (context, setState) {
             final btnTitle = isExpand ? "收起" : "展开";
             return Row(
               crossAxisAlignment: CrossAxisAlignment.end,

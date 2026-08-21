@@ -81,7 +81,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
     }
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final textPainter = TextPainterExt.getTextPainter(
           text: widget.text,
           textStyle: widget.textStyle,
@@ -100,7 +100,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
         // ].asMap().toString());
 
         return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+          builder: (context, setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
             final toggleImage = AssetImage((isExpand) ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown);
