@@ -195,7 +195,7 @@ linter:
     - avoid_types_as_parameter_names
     - cancel_subscriptions
     #    - collection_methods_unrelated_type
-    - diagnostic_describe_all_properties
+#    - diagnostic_describe_all_properties # 公共属性未在 debugFillProperties / debugDescribeChildren 中描述
     #    - discarded_futures
     - hash_and_equals
     - literal_only_boolean_expressions
