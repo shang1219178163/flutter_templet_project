@@ -44,13 +44,13 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColor.cancelColor.withValues(alpha: 0.1),
+                color: AppColor.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: NText(
                 "注：AE&SAE表单仅支持PC端添加与填写。",
                 fontSize: 14,
-                color: AppColor.cancelColor,
+                color: AppColor.error,
                 maxLines: 1,
               ),
             ),

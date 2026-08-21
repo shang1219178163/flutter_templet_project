@@ -8,7 +8,7 @@ class NSlidableTabbar extends StatefulWidget {
     required this.onChanged,
     this.height = 36,
     this.backgroudColor = const Color(0xffF6F6F6),
-    this.color = AppColor.cancelColor,
+    this.color = AppColor.error,
     this.labelStyle,
     this.unselectedLabelStyle,
   });

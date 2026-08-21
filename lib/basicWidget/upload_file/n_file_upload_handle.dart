@@ -94,7 +94,7 @@ class NFileUploadHandle {
         height: 36,
         decoration: BoxDecoration(
           // color: bgColor,
-          border: Border.all(color: AppColor.lineColor),
+          border: Border.all(color: AppColor.divider),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         child: NPair(

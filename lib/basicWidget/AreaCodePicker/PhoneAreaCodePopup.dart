@@ -108,7 +108,7 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
               susPosition: const Offset(0, 40),
               indexBarData: SuspensionUtil.getTagIndexList(models),
               indexBarOptions: IndexBarOptions(
-                textStyle: TextStyle(color: AppColor.cancelColor, fontSize: 12),
+                textStyle: TextStyle(color: AppColor.error, fontSize: 12),
               ),
               itemBuilder: (context, index) {
                 return GestureDetector(

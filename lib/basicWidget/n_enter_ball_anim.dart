@@ -29,7 +29,7 @@ class NEnterBallAnim extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: valueListenable,
       builder: (context, value, _) {
-        final bgColorDefault = value ? AppColor.cancelColor : Colors.transparent;
+        final bgColorDefault = value ? AppColor.error : Colors.transparent;
         final bgColor = backgroundColorBuilder?.call(value) ?? bgColorDefault;
         final style = styleBuilder?.call(value) ??
             TextStyle(

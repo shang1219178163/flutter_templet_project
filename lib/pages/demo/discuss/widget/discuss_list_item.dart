@@ -473,7 +473,7 @@ class DiscussListItem extends StatelessWidget {
                           image: AssetImage(Assets.discussIcArrowRatings),
                           width: 4,
                           height: 8,
-                          color: AppColor.cancelColor,
+                          color: AppColor.error,
                         ),
                         // child: const Image.asset(
                         //   Assets.dataIcArrowRatings,
@@ -485,7 +485,7 @@ class DiscussListItem extends StatelessWidget {
                       child: Text(
                         "${model.replyCount}条回复",
                         style: const TextStyle(
-                          color: AppColor.cancelColor,
+                          color: AppColor.error,
                           fontSize: 11.5,
                           // fontWeight: FontWeight.w500,
                           // fontFamily: "PingFang SC",

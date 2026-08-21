@@ -667,7 +667,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   InputBorder buildFocusedBorder({
     double radus = 4,
     double borderWidth = 1,
-    color = AppColor.lineColor,
+    color = AppColor.divider,
   }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角

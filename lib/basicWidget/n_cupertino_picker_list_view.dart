@@ -115,7 +115,7 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
                     ),
                   ),
           ),
-        if (widget.toolbar == null) const Divider(height: 0.5, color: AppColor.lineColor),
+        if (widget.toolbar == null) const Divider(height: 0.5, color: AppColor.divider),
         widget.toolbar ?? const SizedBox(),
         Expanded(
           child: CupertinoPicker(
@@ -144,7 +144,7 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
                           ),
                         ),
                       ),
-                      const Divider(height: 0.5, color: AppColor.lineColor),
+                      const Divider(height: 0.5, color: AppColor.divider),
                     ],
                   );
             }).toList(),

@@ -239,7 +239,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
         height: 36,
         decoration: BoxDecoration(
           // color: bgColor,
-          border: Border.all(color: AppColor.lineColor),
+          border: Border.all(color: AppColor.divider),
           borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
         ),
         child: NPair(

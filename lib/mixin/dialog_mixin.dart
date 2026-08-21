@@ -306,11 +306,11 @@ class DeleteAlert with DialogMixin {
       ),
       buttonBarDividerTop: const Divider(
         height: 1,
-        color: AppColor.lineColor,
+        color: AppColor.divider,
       ),
       buttonBarDivider: const VerticalDivider(
         width: 1,
-        color: AppColor.lineColor,
+        color: AppColor.divider,
       ),
       onCancel: onCancel,
       onConfirm: onConfirm,

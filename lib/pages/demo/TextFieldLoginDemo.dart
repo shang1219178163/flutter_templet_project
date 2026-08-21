@@ -314,7 +314,7 @@ class _LoginInputState extends State<LoginInput> {
         // fillColor:  widget.focusColor,
         contentPadding: const EdgeInsets.only(left: 20, right: 20),
         border: InputBorder.none,
-        enabledBorder: buildBorder(color: AppColor.lineColor),
+        enabledBorder: buildBorder(color: AppColor.divider),
         focusedBorder: buildBorder(color: primaryColor),
         hintText: widget.hint,
         hintStyle: TextStyle(fontSize: 16.sp, color: AppColor.fontColorF9F9F9),
@@ -342,7 +342,7 @@ class _LoginInputState extends State<LoginInput> {
         Radius.circular(raduis),
       ),
       borderSide: BorderSide(
-        color: color ?? AppColor.lineColor, //边线颜色为白色
+        color: color ?? AppColor.divider, //边线颜色为白色
         width: 1, //边线宽度为1
       ),
     );

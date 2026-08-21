@@ -695,7 +695,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
           },
           separatorBuilder: (_, index) {
             return SizedBox(height: 8);
-            return Divider(height: 0.5, color: AppColor.lineColor);
+            return Divider(height: 0.5, color: AppColor.divider);
           },
           itemCount: 20,
         ),

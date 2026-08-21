@@ -91,7 +91,7 @@ class _AppLocalePageState extends State<AppLocalePage> {
           );
         },
         separatorBuilder: (context, index) {
-          return Divider(height: 1, color: AppColor.lineColor);
+          return Divider(height: 1, color: AppColor.divider);
         },
         itemCount: context.supportedLocales.length + 1,
       ),

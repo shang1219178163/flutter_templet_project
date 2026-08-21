@@ -189,7 +189,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                   color: (!isSelected &&
                           !((selectedIndex - 1) >= 0 && index == selectedIndex - 1) &&
                           index != list.length - 1)
-                      ? AppColor.lineColor
+                      ? AppColor.divider
                       : Colors.transparent,
                 ),
               ],

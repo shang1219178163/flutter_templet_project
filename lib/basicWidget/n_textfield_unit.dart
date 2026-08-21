@@ -39,7 +39,7 @@ class NTextfieldUnit extends StatelessWidget {
     this.onClear,
     this.readOnly = false,
     this.readOnlyFillColor = AppColor.bgColorF3F3F3,
-    this.readOnlyBorderColor = AppColor.lineColor,
+    this.readOnlyBorderColor = AppColor.divider,
     this.radius = 4,
     this.keyboardType,
     this.inputFormatters,
@@ -558,7 +558,7 @@ class _NTextFieldState extends State<_NTextField> {
         Radius.circular(radus), //边角
       ),
       borderSide: BorderSide(
-        color: AppColor.lineColor, //边线颜色为白色
+        color: AppColor.divider, //边线颜色为白色
         width: borderWidth, //边线宽度为1
       ),
     );

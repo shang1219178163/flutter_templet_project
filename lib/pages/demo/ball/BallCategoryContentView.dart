@@ -168,7 +168,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13,
-                          color: isSelected ? AppColor.cancelColor : themeProvider.subtitleColor,
+                          color: isSelected ? AppColor.error : themeProvider.subtitleColor,
                         ),
                       ),
                     ),

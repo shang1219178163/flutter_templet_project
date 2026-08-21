@@ -249,7 +249,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
           ),
           SlidableAction(
             onPressed: (ctx) => onDelete?.call(),
-            backgroundColor: AppColor.cancelColor,
+            backgroundColor: AppColor.error,
             foregroundColor: Colors.white,
             icon: Icons.delete,
             label: '删除',

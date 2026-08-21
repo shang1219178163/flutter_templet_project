@@ -61,7 +61,7 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
   Widget build(BuildContext context) {
     super.build(context);
     final style = TextStyle(
-      color: widget.isHot ? AppColor.cancelColor : themeProvider.titleColor,
+      color: widget.isHot ? AppColor.error : themeProvider.titleColor,
       fontSize: 14.5,
       fontWeight: FontWeight.w500,
       fontFamily: "PingFang SC",
@@ -83,7 +83,7 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
                 margin: const EdgeInsets.only(right: 10),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
-                  color: AppColor.cancelColor,
+                  color: AppColor.error,
                 ),
               ),
             Expanded(

@@ -129,7 +129,7 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
           );
         },
         separatorBuilder: (_, index) {
-          return const Divider(height: 1, color: AppColor.lineColor);
+          return const Divider(height: 1, color: AppColor.divider);
         },
       ),
     );

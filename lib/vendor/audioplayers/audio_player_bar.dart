@@ -147,7 +147,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(29),
-        border: Border.all(width: 0.5, color: AppColor.lineColor),
+        border: Border.all(width: 0.5, color: AppColor.divider),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -172,7 +172,7 @@ class _NestedScrollViewDemoSevenState extends State<NestedScrollViewDemoSeven> w
         },
         separatorBuilder: (_, index) {
           // return SizedBox(height: 8);
-          return Divider(height: 0.5, color: AppColor.lineColor);
+          return Divider(height: 0.5, color: AppColor.divider);
         },
         itemCount: 20,
       ),

@@ -224,7 +224,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
       separatorBuilder: (context, index) {
         return const Divider(
           height: 0.5,
-          color: AppColor.lineColor,
+          color: AppColor.divider,
           indent: 16,
         );
       },

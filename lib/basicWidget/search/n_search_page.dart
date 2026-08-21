@@ -101,8 +101,8 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
           child: NSearchBarView(
             controller: controller,
             hint: widget.hint,
-            onTapSearch: onTapSearch,
-            onChanged: (v) => onTapSearch.debounce.call(v),
+            onTapSearch: onSearch,
+            onChanged: (v) => onSearch.debounce.call(v),
           ),
         ),
       ),
@@ -127,7 +127,7 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
                           final index = history.indexOf(v);
                           onSelectedItem(index);
                         },
-                        onClear: onClearSearchKeyword,
+                        onClear: onClear,
                       ),
                     ),
             ),
@@ -137,7 +137,7 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
     );
   }
 
-  void onClearSearchKeyword() {
+  void onClear() {
     history.clear();
     CacheService().setStringList(widget.cacheKey, history);
     setState(() {});
@@ -145,10 +145,10 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
 
   void onSelectedItem(int index) {
     controller.text = history[index];
-    onTapSearch(controller.text);
+    onSearch(controller.text);
   }
 
-  void onTapSearch(String value) {
+  void onSearch(String value) {
     if (value.isEmpty) {
       searchList.clear();
       setState(() {});

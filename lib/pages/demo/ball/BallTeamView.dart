@@ -110,7 +110,7 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
                         dividerColor: Colors.transparent,
                         indicatorColor: Colors.transparent,
                         indicator: const BoxDecoration(),
-                        labelColor: AppColor.cancelColor,
+                        labelColor: AppColor.error,
                         unselectedLabelColor: themeProvider.subtitleColor,
                         labelStyle: const TextStyle(fontSize: 13),
                         unselectedLabelStyle: const TextStyle(fontSize: 13),
@@ -123,8 +123,8 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
                               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                               decoration: isSelected
                                   ? BoxDecoration(
-                                      color: AppColor.cancelColor.withValues(alpha: 0.1),
-                                      border: Border.all(color: AppColor.cancelColor.withValues(alpha: 0.5)),
+                                      color: AppColor.error.withValues(alpha: 0.1),
+                                      border: Border.all(color: AppColor.error.withValues(alpha: 0.5)),
                                       borderRadius: BorderRadius.circular(6))
                                   : BoxDecoration(
                                       border: Border.all(color: themeProvider.borderColor),

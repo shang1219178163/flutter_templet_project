@@ -35,8 +35,7 @@ class NFileUploadPI extends NFileUploadHandle {
       urlBlock: urlBlock,
       onDelete: canEdit == false ? null : deleteItem,
       showFileSize: showFileSize,
-      builder: (model, onDelete, onRefresh, successVN,
-          percentVN) {
+      builder: (model, onDelete, onRefresh, successVN, percentVN) {
         final validUrl = model.url?.startsWith("http") == true;
 
         var name = model.fileName ?? "--";
@@ -56,7 +55,7 @@ class NFileUploadPI extends NFileUploadHandle {
                   if (canEdit && onDelete != null)
                     GestureDetector(
                       onTap: onDelete,
-                      child: Icon(Icons.delete, color: AppColor.cancelColor),
+                      child: Icon(Icons.delete, color: AppColor.error),
                     ),
                 ],
               ),

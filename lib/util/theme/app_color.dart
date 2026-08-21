@@ -3,10 +3,26 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
+  /// 方便浅色主题适配
   static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+  static const Color transparent = Colors.transparent;
 
   ///主色调
   static const Color primary = Colors.blueAccent;
+  static const Color page = Color(0xFFF6F6F6);
+  static const Color pageDark = Color(0xFF181818);
+  static const Color card = Color(0xFFFFFFFF);
+  static const Color cardDark = Color(0xFF242434);
+  static const Color textPrimary = Color(0xFF000000);
+  static const Color textPrimaryDark = Color(0xFFFFFFFF);
+  static const Color textSecondary = Color(0x99000000);
+  static const Color textSecondaryDark = Color(0x99FFFFFF);
+  static const Color textHint = Color(0x4c000000);
+  static const Color textHintDark = Color(0x4cFFFFFF);
+  static const Color divider = Color(0xFFE4E4E4);
+  static const Color dividerDark = Color(0x0FFFFFFF);
+  static const Color error = Color(0xFFD32F2F);
 
   /// 默认字体颜色 #1A1A1A
   static const Color fontColor = Color(0xFF1A1A1A);
@@ -29,25 +45,19 @@ class AppColor {
   static const Color bgColorF9F9F9 = Color(0xffF9F9F9);
   static const Color bgColor000000 = Color(0xFF000000);
 
-  /// 线条
-  static const Color lineColor = Color(0xFFE5E5E5);
-
-  /// 取消颜色
-  static const Color cancelColor = Color(0xFFE65F55);
-
   /// 阴影 #B5B5B5
   static const Color shadowColor = Color(0x08000000);
 
-  // static const Color primary = Color(0xFF1565C0);
-  // static const Color primaryLight = Color(0xFF1E88E5);
-  // static const Color primaryDark = Color(0xFF0D47A1);
-  // static const Color secondary = Color(0xFFFF6F00);
-  // static const Color surface = Color(0xFFF5F5F5);
-  // static const Color background = Color(0xFFFFFFFF);
-  // static const Color textPrimary = Color(0xFF212121);
-  // static const Color textSecondary = Color(0xFF757575);
-  // static const Color textHint = Color(0xFFBDBDBD);
-  // static const Color error = Color(0xFFD32F2F);
-  // static const Color success = Color(0xFF2E7D32);
-  // static const Color divider = Color(0xFFE4E4E4);
+// static const Color primary = Color(0xFF1565C0);
+// static const Color primaryLight = Color(0xFF1E88E5);
+// static const Color primaryDark = Color(0xFF0D47A1);
+// static const Color secondary = Color(0xFFFF6F00);
+// static const Color surface = Color(0xFFF5F5F5);
+// static const Color background = Color(0xFFFFFFFF);
+// static const Color textPrimary = Color(0xFF212121);
+// static const Color textSecondary = Color(0xFF757575);
+// static const Color textHint = Color(0xFFBDBDBD);
+// static const Color error = Color(0xFFD32F2F);
+// static const Color success = Color(0xFF2E7D32);
+// static const Color divider = Color(0xFFE4E4E4);
 }

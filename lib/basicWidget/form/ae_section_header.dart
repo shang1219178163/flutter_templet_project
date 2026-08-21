@@ -69,7 +69,7 @@ class AeSectionHeader extends StatelessWidget {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
-                color: AppColor.cancelColor,
+                color: AppColor.error,
               ),
             ),
           TextSpan(

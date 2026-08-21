@@ -151,7 +151,7 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
     required double percent,
     double size = 50,
     double strokeWidth = 4,
-    Color color = AppColor.cancelColor,
+    Color color = AppColor.error,
     Color backgroundColor = AppColor.bgColor,
   }) {
     return Container(

@@ -159,7 +159,7 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
             ),
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(color: AppColor.lineColor),
+              border: Border.all(color: AppColor.divider),
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: Row(

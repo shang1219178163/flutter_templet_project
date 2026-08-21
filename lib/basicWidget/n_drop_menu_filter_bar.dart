@@ -100,7 +100,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 12),
                 decoration: BoxDecoration(
                   color: AppColor.white,
-                  border: Border.all(color: AppColor.lineColor),
+                  border: Border.all(color: AppColor.divider),
                   borderRadius: BorderRadius.all(Radius.circular(radius)),
                 ),
                 // padding: EdgeInsets.only(left: 8, top: 4, bottom: 4),
@@ -158,7 +158,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: AppColor.lineColor),
+                              border: Border.all(color: AppColor.divider),
                               borderRadius: BorderRadius.all(Radius.circular(radius)),
                             ),
                             child: Row(

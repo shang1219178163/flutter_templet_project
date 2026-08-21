@@ -144,7 +144,7 @@ class _RefreshListViewState extends State<RefreshListView> {
                       },
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide: BorderSide(color: AppColor.lineColor, width: 1),
+                        borderSide: BorderSide(color: AppColor.divider, width: 1),
                       ),
                     ),
                   ),

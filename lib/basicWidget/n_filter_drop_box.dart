@@ -178,9 +178,9 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
                           color: Colors.white,
                           child: Column(
                             children: [
-                              widget.header?.call(context) ?? const Divider(height: 1, color: AppColor.lineColor),
+                              widget.header?.call(context) ?? const Divider(height: 1, color: AppColor.divider),
                               ...widget.sections,
-                              widget.footer?.call(context) ?? const Divider(height: 1, color: AppColor.lineColor),
+                              widget.footer?.call(context) ?? const Divider(height: 1, color: AppColor.divider),
                             ],
                           ),
                         ),

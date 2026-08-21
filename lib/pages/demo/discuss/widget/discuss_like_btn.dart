@@ -106,7 +106,7 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
       child: Text(
         likeNumberStr,
         style: TextStyle(
-          color: isLike ? AppColor.cancelColor : AppColor.fontColor999999,
+          color: isLike ? AppColor.error : AppColor.fontColor999999,
           fontSize: 13,
           fontWeight: FontWeight.w500,
           fontFamily: "PingFang SC",
