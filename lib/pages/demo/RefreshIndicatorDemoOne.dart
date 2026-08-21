@@ -54,10 +54,11 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
   }
 
   Widget buildBody() {
-    return NotificationListener(
+    return NotificationListener<ScrollNotification>(
       onNotification: (n) {
         /// 判断滑动距离【小于等于400 】和 滚动方向
-        final needRefresh = n.metrics.pixels >= (n.metrics.maxScrollExtent - 400) && n.metrics.axis == Axis.vertical;
+        final metrics = n.metrics;
+        final needRefresh = metrics.pixels >= (metrics.maxScrollExtent - 400) && metrics.axis == Axis.vertical;
         if (needRefresh) {
           _pageIndex += 1;
           loadData(_pageIndex);

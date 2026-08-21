@@ -50,7 +50,7 @@ class _NSearchHistoryState extends State<NSearchHistory> {
                 ),
                 IconButton(
                   onPressed: widget.onClear,
-                  icon: Icon(Icons.delete_outline),
+                  icon: Icon(Icons.delete_forever),
                 )
               ],
             ),
