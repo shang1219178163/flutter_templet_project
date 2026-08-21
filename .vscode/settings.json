@@ -1,5 +1,5 @@
 {
-  "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  "dart.flutterSdkPath": "/Users/shang/fvm/default",
   "debug.toolBarLocation": "floating",
   "cSpell.ignoreWords": [
     "LTWH",
