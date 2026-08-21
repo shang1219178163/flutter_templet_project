@@ -12,18 +12,12 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 
 class SteperConnectorDemo extends StatefulWidget {
+  final String? title;
 
   const SteperConnectorDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _SteperConnectorDemoState createState() => _SteperConnectorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SteperConnectorDemoState extends State<SteperConnectorDemo> {

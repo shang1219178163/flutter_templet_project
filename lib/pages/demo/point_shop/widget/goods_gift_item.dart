@@ -64,13 +64,4 @@ class GoodsGiftItem extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ShopGoodsDetailModel>('model', model));
-    properties.add(ColorProperty('color', color));
-    properties.add(ColorProperty('borderColor', borderColor));
-    properties.add(DiagnosticsProperty<FontWeight?>('fontWeight', fontWeight));
-  }
 }

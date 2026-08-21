@@ -5,18 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QrCodeScannerDemo extends StatefulWidget {
+  final String? title;
 
   const QrCodeScannerDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _QrCodeScannerDemoState createState() => _QrCodeScannerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _QrCodeScannerDemoState extends State<QrCodeScannerDemo> {
@@ -78,13 +72,5 @@ class _QrCodeScannerDemoState extends State<QrCodeScannerDemo> {
   void dispose() {
     controller?.dispose();
     super.dispose();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('qrKey', qrKey));
-    properties.add(DiagnosticsProperty<Barcode?>('result', result));
-    properties.add(DiagnosticsProperty<QRViewController?>('controller', controller));
   }
 }

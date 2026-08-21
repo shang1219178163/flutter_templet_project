@@ -34,10 +34,10 @@ class SliverFloatingHeaderDemo extends StatelessWidget {
 
 // 自定义 SliverPersistentHeaderDelegate 用于创建浮动标题
 class FloatingHeaderDelegate extends SliverPersistentHeaderDelegate {
-
-  FloatingHeaderDelegate({required this.minHeight, required this.maxHeight});
   final double minHeight;
   final double maxHeight;
+
+  FloatingHeaderDelegate({required this.minHeight, required this.maxHeight});
 
   @override
   double get minExtent => minHeight;

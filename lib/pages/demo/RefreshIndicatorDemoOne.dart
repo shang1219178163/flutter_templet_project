@@ -8,12 +8,6 @@ class RefreshIndicatorDemoOne extends StatefulWidget {
 
   @override
   _RefreshIndicatorDemoOneState createState() => _RefreshIndicatorDemoOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
@@ -61,7 +55,7 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
 
   Widget buildBody() {
     return NotificationListener(
-      onNotification: (n) {
+      onNotification: (ScrollNotification n) {
         /// 判断滑动距离【小于等于400 】和 滚动方向
         final needRefresh = n.metrics.pixels >= (n.metrics.maxScrollExtent - 400) && n.metrics.axis == Axis.vertical;
         if (needRefresh) {
@@ -83,7 +77,7 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
         // Pull from top to show refresh indicator.
         child: ListView.builder(
           itemCount: list.length,
-          itemBuilder: (context, index) {
+          itemBuilder: (BuildContext context, int index) {
             return ListTile(
               title: Text('Item $index'),
             );
@@ -109,11 +103,5 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
     } catch (e) {
       debugPrint(e.toString());
     } finally {}
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('list', list));
   }
 }

@@ -6,11 +6,11 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class ThemeProvider extends ChangeNotifier {
+  static final ThemeProvider _instance = ThemeProvider._();
   ThemeProvider._() {
     init();
   }
   factory ThemeProvider() => _instance;
-  static final ThemeProvider _instance = ThemeProvider._();
   static ThemeProvider get instance => _instance;
 
   static const themeKey = "themeModel"; // 存储 key

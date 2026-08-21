@@ -37,16 +37,6 @@ class NSegmentControlEmojView extends StatefulWidget {
 
   @override
   State<NSegmentControlEmojView> createState() => _NSegmentControlEmojViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<SegmentEmojiModel>('items', items));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
-    properties.add(DoubleProperty('segmentGap', segmentGap));
-    properties.add(DoubleProperty('segmentRadius', segmentRadius));
-    properties.add(DiagnosticsProperty<EdgeInsets>('segmentPadding', segmentPadding));
-  }
 }
 
 class _NSegmentControlEmojViewState extends State<NSegmentControlEmojView> with SingleTickerProviderStateMixin {
@@ -126,13 +116,5 @@ class _NSegmentControlEmojViewState extends State<NSegmentControlEmojView> with 
               ))
           .toList(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('selectedIndex', selectedIndex));
   }
 }

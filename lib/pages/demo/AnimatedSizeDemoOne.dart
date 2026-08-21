@@ -7,12 +7,6 @@ class AnimatedSizeDemoOne extends StatefulWidget {
 
   @override
   _AnimatedSizeDemoOneState createState() => _AnimatedSizeDemoOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AnimatedSizeDemoOneState extends State<AnimatedSizeDemoOne>

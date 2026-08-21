@@ -46,7 +46,7 @@ class NDashLine extends StatelessWidget {
     }
 
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         final boxWidth = direction == Axis.horizontal ? constraints.constrainWidth() : constraints.constrainHeight();
         final dashHeight = height;
         final count = boxWidth / (2 * step);
@@ -80,16 +80,6 @@ class NDashLine extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('color', color));
-    properties.add(IterableProperty<Tuple2<double, Color>>('steps', steps));
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('step', step));
-  }
 }
 
 /// 多颜色虚线
@@ -118,7 +108,7 @@ class NDashLineOfMutiColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         final boxWidth = direction == Axis.horizontal ? constraints.constrainWidth() : constraints.constrainHeight();
 
         final step = steps.map((e) => e.item1).reduce((v, e) => v + e);
@@ -169,13 +159,5 @@ class NDashLineOfMutiColor extends StatelessWidget {
         ),
       );
     }).toList();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<double, Color>>('steps', steps));
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(DoubleProperty('height', height));
   }
 }

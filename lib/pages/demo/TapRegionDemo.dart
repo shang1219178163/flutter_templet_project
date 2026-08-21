@@ -8,12 +8,6 @@ class TapRegionDemo extends StatefulWidget {
 
   @override
   State<TapRegionDemo> createState() => _TapRegionDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TapRegionDemoState extends State<TapRegionDemo> {

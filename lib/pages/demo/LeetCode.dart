@@ -7,12 +7,6 @@ class LeetCode extends StatefulWidget {
 
   @override
   _LeetCodeState createState() => _LeetCodeState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _LeetCodeState extends State<LeetCode> {

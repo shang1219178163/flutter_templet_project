@@ -14,12 +14,6 @@ class FlutterPickerUtilDemo extends StatefulWidget {
 
   @override
   State<FlutterPickerUtilDemo> createState() => _FlutterPickerUtilDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _FlutterPickerUtilDemoState extends State<FlutterPickerUtilDemo> {
@@ -86,17 +80,5 @@ class _FlutterPickerUtilDemoState extends State<FlutterPickerUtilDemo> {
         DLog.d(e);
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(IterableProperty<({void Function() action, String name})>('items', items));
-    properties.add(StringProperty('initProvince', initProvince));
-    properties.add(StringProperty('initCity', initCity));
-    properties.add(StringProperty('initTown', initTown));
   }
 }

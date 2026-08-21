@@ -16,12 +16,6 @@ class AsyncDemo extends StatefulWidget {
 
   @override
   State<AsyncDemo> createState() => _AsyncDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _AsyncDemoState extends State<AsyncDemo> {
@@ -108,14 +102,5 @@ class _AsyncDemoState extends State<AsyncDemo> {
 
     completer.complete('completion value');
     return completer.future;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('resultVN', resultVN));
   }
 }

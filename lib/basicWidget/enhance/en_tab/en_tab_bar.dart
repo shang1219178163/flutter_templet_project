@@ -137,8 +137,6 @@ class EnTab extends StatelessWidget implements PreferredSizeWidget {
     super.debugFillProperties(properties);
     properties.add(StringProperty('text', text, defaultValue: null));
     properties.add(DiagnosticsProperty<Widget>('icon', icon, defaultValue: null));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('iconMargin', iconMargin));
-    properties.add(DoubleProperty('height', height));
   }
 
   @override
@@ -209,16 +207,6 @@ class _TabStyle extends AnimatedWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextStyle?>('labelStyle', labelStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>('unselectedLabelStyle', unselectedLabelStyle));
-    properties.add(DiagnosticsProperty<bool>('selected', selected));
-    properties.add(ColorProperty('labelColor', labelColor));
-    properties.add(ColorProperty('unselectedLabelColor', unselectedLabelColor));
-  }
 }
 
 typedef _LayoutCallback = void Function(List<double> xOffsets, TextDirection textDirection, double width);
@@ -271,12 +259,6 @@ class _TabLabelBarRenderer extends RenderFlex {
     }
     onPerformLayout(xOffsets, textDirection!, size.width);
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<_LayoutCallback>.has('onPerformLayout', onPerformLayout));
-  }
 }
 
 // This class and its renderer class only exist to report the widths of the tabs
@@ -316,12 +298,6 @@ class _TabLabelBar extends Flex {
   void updateRenderObject(BuildContext context, _TabLabelBarRenderer renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject.onPerformLayout = onPerformLayout;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<_LayoutCallback>.has('onPerformLayout', onPerformLayout));
   }
 }
 
@@ -883,33 +859,6 @@ class EnTabBar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   State<EnTabBar> createState() => _EnTabBarState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TabController?>('controller', controller));
-    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('padding', padding));
-    properties.add(ColorProperty('indicatorColor', indicatorColor));
-    properties.add(DoubleProperty('indicatorWeight', indicatorWeight));
-    properties.add(DoubleProperty('indicatorWidth', indicatorWidth));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('indicatorPadding', indicatorPadding));
-    properties.add(DiagnosticsProperty<Decoration?>('indicator', indicator));
-    properties.add(DiagnosticsProperty<bool>('automaticIndicatorColorAdjustment', automaticIndicatorColorAdjustment));
-    properties.add(EnumProperty<EnTabBarIndicatorSize?>('indicatorSize', indicatorSize));
-    properties.add(ColorProperty('labelColor', labelColor));
-    properties.add(ColorProperty('unselectedLabelColor', unselectedLabelColor));
-    properties.add(DiagnosticsProperty<TextStyle?>('labelStyle', labelStyle));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('labelPadding', labelPadding));
-    properties.add(DiagnosticsProperty<TextStyle?>('unselectedLabelStyle', unselectedLabelStyle));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<Color?>?>('overlayColor', overlayColor));
-    properties.add(EnumProperty<DragStartBehavior>('dragStartBehavior', dragStartBehavior));
-    properties.add(DiagnosticsProperty<MouseCursor?>('mouseCursor', mouseCursor));
-    properties.add(DiagnosticsProperty<bool?>('enableFeedback', enableFeedback));
-    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onTap', onTap));
-    properties.add(DiagnosticsProperty<ScrollPhysics?>('physics', physics));
-    properties.add(DiagnosticsProperty<bool>('tabHasTextAndIcon', tabHasTextAndIcon));
-  }
 }
 
 class _EnTabBarState extends State<EnTabBar> {
@@ -925,7 +874,7 @@ class _EnTabBarState extends State<EnTabBar> {
     super.initState();
     // If indicatorSize is TabIndicatorSize.label, _tabKeys[i] is used to find
     // the width of tab widget i. See _EnhanceIndicatorPainter.indicatorRect().
-    _tabKeys = widget.tabs.map((tab) => GlobalKey()).toList();
+    _tabKeys = widget.tabs.map((Widget tab) => GlobalKey()).toList();
   }
 
   Decoration get _indicator {
@@ -1028,7 +977,7 @@ class _EnTabBarState extends State<EnTabBar> {
 
     if (widget.tabs.length > oldWidget.tabs.length) {
       final delta = widget.tabs.length - oldWidget.tabs.length;
-      _tabKeys.addAll(List<GlobalKey>.generate(delta, (n) => GlobalKey()));
+      _tabKeys.addAll(List<GlobalKey>.generate(delta, (int n) => GlobalKey()));
     } else if (widget.tabs.length < oldWidget.tabs.length) {
       _tabKeys.removeRange(widget.tabs.length, oldWidget.tabs.length);
     }
@@ -1167,7 +1116,7 @@ class _EnTabBarState extends State<EnTabBar> {
 
     final tabBarTheme = TabBarTheme.of(context);
 
-    final wrappedTabs = List<Widget>.generate(widget.tabs.length, (index) {
+    final wrappedTabs = List<Widget>.generate(widget.tabs.length, (int index) {
       const verticalAdjustment = (_kTextAndIconTabHeight - _kTabHeight) / 2.0;
       EdgeInsetsGeometry? adjustedPadding;
 
@@ -1289,12 +1238,6 @@ class _EnTabBarState extends State<EnTabBar> {
     }
 
     return tabBar;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('maxTabIndex', maxTabIndex));
   }
 }
 

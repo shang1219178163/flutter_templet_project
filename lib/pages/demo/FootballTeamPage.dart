@@ -12,12 +12,6 @@ class FootballTeamPage extends StatefulWidget {
 
   @override
   State<FootballTeamPage> createState() => _FootballTeamPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _FootballTeamPageState extends State<FootballTeamPage> {
@@ -72,14 +66,5 @@ class _FootballTeamPageState extends State<FootballTeamPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

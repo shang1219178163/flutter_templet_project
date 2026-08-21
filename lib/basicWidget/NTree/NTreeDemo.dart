@@ -16,12 +16,6 @@ class NTreeDemo extends StatefulWidget {
 
   @override
   _NTreeDemoState createState() => _NTreeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NTreeDemoState extends State<NTreeDemo> {

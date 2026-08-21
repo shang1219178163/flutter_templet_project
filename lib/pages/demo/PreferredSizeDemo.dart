@@ -9,12 +9,6 @@ class PreferredSizeDemo extends StatefulWidget {
 
   @override
   State<PreferredSizeDemo> createState() => _PreferredSizeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTickerProviderStateMixin {
@@ -86,18 +80,10 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
           title: Text("${prefix}_$index"),
         );
       },
-      separatorBuilder: (context, index) {
+      separatorBuilder: (BuildContext context, int index) {
         return Divider();
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-    properties.add(IntProperty('tabBarIndex', tabBarIndex));
   }
 }
 
@@ -108,12 +94,6 @@ class NTabBarPage extends StatefulWidget {
 
   @override
   State<NTabBarPage> createState() => _NTabBarPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStateMixin {
@@ -185,17 +165,9 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
           title: Text("${prefix}_$index"),
         );
       },
-      separatorBuilder: (context, index) {
+      separatorBuilder: (BuildContext context, int index) {
         return Divider();
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-    properties.add(IntProperty('tabBarIndex', tabBarIndex));
   }
 }

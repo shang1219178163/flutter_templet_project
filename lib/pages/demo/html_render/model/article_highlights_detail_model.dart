@@ -9,15 +9,6 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 足球集锦详情模型
 class ArticleHighlightsDetailModel {
-
-  ArticleHighlightsDetailModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    duration = json['duration'];
-    title = json['title'];
-    nmMatchId = json['nmMatchId'];
-    logo = json['logo'];
-    url = json['url'];
-  }
   ArticleHighlightsDetailModel({
     this.id,
     this.duration,
@@ -48,6 +39,15 @@ class ArticleHighlightsDetailModel {
     }
     final result = Duration(seconds: duration ?? 0).toStringFormat(format: DurationFormatEnum.MMSS);
     return result;
+  }
+
+  ArticleHighlightsDetailModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    duration = json['duration'];
+    title = json['title'];
+    nmMatchId = json['nmMatchId'];
+    logo = json['logo'];
+    url = json['url'];
   }
 
   Map<String, dynamic> toJson() {

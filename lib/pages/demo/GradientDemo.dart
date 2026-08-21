@@ -9,18 +9,12 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/GradientOfRadialDemo.dart';
 
 class GradientDemo extends StatefulWidget {
+  final String? title;
 
   const GradientDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _GradientDemoState createState() => _GradientDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
@@ -74,7 +68,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
 
     showSheet(
       items: items,
-      onSelected: (index) {
+      onSelected: (int index) {
         tileMode = tileModes[index];
         debugPrint("$index, $tileMode");
         setState(() {});
@@ -89,7 +83,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
 
     showSheet(
       items: items,
-      onSelected: (index) {
+      onSelected: (int index) {
         blendMode = blendModes[index];
         debugPrint("$index, $blendMode");
         setState(() {});
@@ -125,7 +119,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             ),
           )
           .toList(),
-      onChanged: (value) {
+      onChanged: (Alignment? value) {
         if (value == null) {
           return;
         }
@@ -373,7 +367,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           children: [
             buildShaderMask(
               blendMode: BlendMode.color,
-              shaderCallback: (bounds) {
+              shaderCallback: (Rect bounds) {
                 return RadialGradient(
                   tileMode: tileMode,
                   radius: 0.5,
@@ -383,7 +377,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             ),
             buildShaderMask(
               blendMode: BlendMode.srcATop,
-              shaderCallback: (bounds) {
+              shaderCallback: (Rect bounds) {
                 return RadialGradient(
                   tileMode: tileMode,
                   radius: .6,
@@ -501,12 +495,5 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       return page;
     }));
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<ui.BlendMode>('blendMode', blendMode));
-    properties.add(EnumProperty<ui.TileMode>('tileMode', tileMode));
   }
 }

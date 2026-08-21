@@ -23,18 +23,6 @@ class NSlidableTabbar extends StatefulWidget {
 
   @override
   State<NSlidableTabbar> createState() => _NSlidableTabbarState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onChanged', onChanged));
-    properties.add(DoubleProperty('height', height));
-    properties.add(ColorProperty('backgroudColor', backgroudColor));
-    properties.add(ColorProperty('color', color));
-    properties.add(DiagnosticsProperty<TextStyle?>('labelStyle', labelStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>('unselectedLabelStyle', unselectedLabelStyle));
-  }
 }
 
 class _NSlidableTabbarState extends State<NSlidableTabbar> with TickerProviderStateMixin {
@@ -78,13 +66,5 @@ class _NSlidableTabbarState extends State<NSlidableTabbar> with TickerProviderSt
         tabs: items.map((e) => Tab(text: e)).toList(),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
-    properties.add(DiagnosticsProperty<TabController>('controller', controller));
-    properties.add(IntProperty('index', index));
   }
 }

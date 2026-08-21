@@ -10,18 +10,12 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class ContainerDemo extends StatefulWidget {
+  final String? title;
 
   const ContainerDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _ContainerDemoState createState() => _ContainerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ContainerDemoState extends State<ContainerDemo> {
@@ -335,14 +329,5 @@ class _ContainerDemoState extends State<ContainerDemo> {
         child: Text("EnBoxDecoration"),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isSliver', isSliver));
-    properties.add(DiagnosticsProperty<ThemeData>('themeData', themeData));
-    properties.add(ColorProperty('primary', primary));
-    properties.add(DiagnosticsProperty<bool>('isDark', isDark));
   }
 }

@@ -69,21 +69,6 @@ class AppUpgradeView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _AppUpgradeWidget();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle));
-    properties.add(StringProperty('content', content));
-    properties.add(DiagnosticsProperty<TextStyle?>('contentStyle', contentStyle));
-    properties.add(StringProperty('okText', okText));
-    properties.add(DiagnosticsProperty<TextStyle?>('okTextStyle', okTextStyle));
-    properties.add(StringProperty('cancelText', cancelText));
-    properties.add(DiagnosticsProperty<TextStyle?>('cancelTextStyle', cancelTextStyle));
-    properties.add(DoubleProperty('borderRadius', borderRadius));
-    properties.add(DiagnosticsProperty<bool>('force', force));
-  }
 }
 
 class _AppUpgradeWidget extends State<AppUpgradeView> {

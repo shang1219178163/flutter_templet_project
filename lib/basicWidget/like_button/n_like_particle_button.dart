@@ -14,13 +14,6 @@ class NLikeParticleButton extends StatefulWidget {
 
   @override
   State<NLikeParticleButton> createState() => _NLikeParticleButtonState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('size', size));
-    properties.add(DiagnosticsProperty<Size?>('boomSize', boomSize));
-  }
 }
 
 class _NLikeParticleButtonState extends State<NLikeParticleButton> with SingleTickerProviderStateMixin {
@@ -127,6 +120,12 @@ class _NLikeParticleButtonState extends State<NLikeParticleButton> with SingleTi
 }
 
 class _Particle {
+  Offset position;
+  final Offset direction; // 单位向量
+  final double speed;
+  double life;
+  final double radius;
+  final Color color;
 
   _Particle({
     required this.position,
@@ -136,12 +135,6 @@ class _Particle {
     required this.radius,
     required this.color,
   });
-  Offset position;
-  final Offset direction; // 单位向量
-  final double speed;
-  double life;
-  final double radius;
-  final Color color;
 
   void update(double dt) {
     final decay = life.clamp(0, 1.0).toDouble();
@@ -151,9 +144,9 @@ class _Particle {
 }
 
 class _ParticlePainter extends CustomPainter {
+  final List<_Particle> particles;
 
   _ParticlePainter(this.particles);
-  final List<_Particle> particles;
 
   @override
   void paint(Canvas canvas, Size size) {

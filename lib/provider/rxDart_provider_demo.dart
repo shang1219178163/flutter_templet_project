@@ -3,18 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RxDartProviderDemo extends StatefulWidget {
+  final String? title;
 
   const RxDartProviderDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _RxDartProviderDemoState createState() => _RxDartProviderDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _RxDartProviderDemoState extends State<RxDartProviderDemo> {

@@ -9,18 +9,6 @@
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class StatusRootModel {
-
-  StatusRootModel.fromJson(Map<String, dynamic> json) {
-    code = (json['code'] as String?);
-    errorCode = (json['errorCode'] as String?);
-    if (json['result'] != null) {
-      final array = (json['result'] as List).map((e) => StatusDetailModel.fromJson(e as Map<String, dynamic>));
-      result = List<StatusDetailModel>.from(array);
-    }
-    application = (json['application'] as String?);
-    traceId = (json['traceId'] as String?);
-    message = (json['message'] as String?);
-  }
   StatusRootModel({
     this.code,
     this.errorCode,
@@ -42,6 +30,18 @@ class StatusRootModel {
 
   String? message;
 
+  StatusRootModel.fromJson(Map<String, dynamic> json) {
+    code = (json['code'] as String?);
+    errorCode = (json['errorCode'] as String?);
+    if (json['result'] != null) {
+      final array = (json['result'] as List).map((e) => StatusDetailModel.fromJson(e as Map<String, dynamic>));
+      result = List<StatusDetailModel>.from(array);
+    }
+    application = (json['application'] as String?);
+    traceId = (json['traceId'] as String?);
+    message = (json['message'] as String?);
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['code'] = code;
@@ -58,20 +58,6 @@ class StatusRootModel {
 
 /// 患者状态详情
 class StatusDetailModel with SelectableMixin {
-
-  StatusDetailModel.fromJson(Map<String, dynamic> json) {
-    id = (json['id'] as String?);
-    appId = (json['appId'] as String?);
-    dictCode = (json['dictCode'] as String?);
-    itemKey = (json['itemKey'] as String?);
-    itemValue = (json['itemValue'] as String?);
-    name = (json['itemValue'] as String?);
-    orderNum = (json['orderNum'] as int?);
-    lockStatus = (json['lockStatus'] as String?);
-    remark = (json['remark'] as Null);
-    scope = (json['scope'] as String?);
-    isSelected = (json['isSelected']) as bool? ?? false;
-  }
   StatusDetailModel({
     this.id,
     this.orderNum,
@@ -101,6 +87,20 @@ class StatusDetailModel with SelectableMixin {
 
   @override
   String get selectableName => name ?? itemValue ?? "";
+
+  StatusDetailModel.fromJson(Map<String, dynamic> json) {
+    id = (json['id'] as String?);
+    appId = (json['appId'] as String?);
+    dictCode = (json['dictCode'] as String?);
+    itemKey = (json['itemKey'] as String?);
+    itemValue = (json['itemValue'] as String?);
+    name = (json['itemValue'] as String?);
+    orderNum = (json['orderNum'] as int?);
+    lockStatus = (json['lockStatus'] as String?);
+    remark = (json['remark'] as Null);
+    scope = (json['scope'] as String?);
+    isSelected = (json['isSelected']) as bool? ?? false;
+  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -71,28 +71,6 @@ class NSlider extends StatefulWidget {
 
   @override
   _NSliderState createState() => _NSliderState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(ObjectFlagProperty<ValueWidgetBuilder<double>?>.has('trailingBuilder', trailingBuilder));
-    properties.add(ObjectFlagProperty<ValueChanged<double>?>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<ValueChanged<double>?>.has('onChangeStart', onChangeStart));
-    properties.add(ObjectFlagProperty<ValueChanged<double>?>.has('onChangeEnd', onChangeEnd));
-    properties.add(DoubleProperty('value', value));
-    properties.add(DoubleProperty('min', min));
-    properties.add(DoubleProperty('max', max));
-    properties.add(IntProperty('divisions', divisions));
-    properties.add(StringProperty('label', label));
-    properties.add(ColorProperty('activeColor', activeColor));
-    properties.add(ColorProperty('inactiveColor', inactiveColor));
-    properties.add(ColorProperty('thumbColor', thumbColor));
-    properties.add(DiagnosticsProperty<MouseCursor?>('mouseCursor', mouseCursor));
-    properties.add(ObjectFlagProperty<SemanticFormatterCallback?>.has('semanticFormatterCallback', semanticFormatterCallback));
-    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
-  }
 }
 
 class _NSliderState extends State<NSlider> {
@@ -120,7 +98,7 @@ class _NSliderState extends State<NSlider> {
           child: StatefulBuilder(builder: (context, setState) {
             return Slider(
               value: sliderVN.value,
-              onChanged: (value) {
+              onChanged: (double value) {
                 sliderVN.value = value;
                 widget.onChanged?.call(value);
                 setState(() {});
@@ -156,11 +134,5 @@ class _NSliderState extends State<NSlider> {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('sliderVN', sliderVN));
   }
 }

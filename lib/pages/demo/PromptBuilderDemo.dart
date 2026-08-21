@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/PromptBuilder.dart';
 
 class PromptBuilderDemo extends StatefulWidget {
+  final String? title;
 
   const PromptBuilderDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _PromptBuilderDemoState createState() => _PromptBuilderDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindingObserver {
@@ -72,12 +66,5 @@ class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindi
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('centerWidgetKey', centerWidgetKey));
-    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('bottomWidgetKey', bottomWidgetKey));
   }
 }

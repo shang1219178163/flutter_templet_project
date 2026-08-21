@@ -46,13 +46,4 @@ class NBlurView extends StatelessWidget {
           ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BorderRadiusGeometry>('borderRadius', borderRadius));
-    properties.add(DiagnosticsProperty<CustomClipper<ui.RRect>?>('clipper', clipper));
-    properties.add(EnumProperty<ui.Clip>('clipBehavior', clipBehavior));
-    properties.add(DoubleProperty('blur', blur));
-  }
 }

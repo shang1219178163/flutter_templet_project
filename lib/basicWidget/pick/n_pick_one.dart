@@ -135,14 +135,4 @@ class NPickOne<T> extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<T>('items', items));
-    properties.add(DiagnosticsProperty<T?>('initialItem', initialItem));
-    properties.add(ObjectFlagProperty<void Function(T value)>.has('onSelected', onSelected));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
-  }
 }

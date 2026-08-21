@@ -234,14 +234,4 @@ class _AddressPickerPageState extends State<AddressPickerPage> {
 
     return value.trim().isEmpty;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('initProvince', initProvince));
-    properties.add(StringProperty('initCity', initCity));
-    properties.add(StringProperty('initTown', initTown));
-    properties.add(IterableProperty<>('locations1', locations1));
-    properties.add(IterableProperty<>('locations2', locations2));
-  }
 }

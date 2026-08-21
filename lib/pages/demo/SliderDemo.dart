@@ -13,17 +13,11 @@ import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class SliderDemo extends StatefulWidget {
-  const SliderDemo({Key? key, this.title}) : super(key: key);
   final String? title;
+  const SliderDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _SliderDemoState createState() => _SliderDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SliderDemoState extends State<SliderDemo> {
@@ -89,7 +83,7 @@ class _SliderDemoState extends State<SliderDemo> {
         ),
         NSectionBox(
           title: "AnimatedSlider",
-          child: StatefulBuilder(builder: (context, setState) {
+          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
             return Column(
               children: [
                 AnimatedSlider(
@@ -129,7 +123,7 @@ class _SliderDemoState extends State<SliderDemo> {
     return Row(
       children: [
         Expanded(
-          child: StatefulBuilder(builder: (context, setState) {
+          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
             return SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 valueIndicatorColor: Colors.red,
@@ -137,10 +131,10 @@ class _SliderDemoState extends State<SliderDemo> {
               child: Slider(
                 inactiveColor: Color(0xffC0C0C0),
                 activeColor: Color(0xff21BA45),
-                onChangeStart: (value) {
+                onChangeStart: (double value) {
                   debugPrint('Start value is $value');
                 },
-                onChangeEnd: (value) {
+                onChangeEnd: (double value) {
                   debugPrint('Finish value is $value');
                 },
                 //onChanged: (double value) {},
@@ -150,7 +144,7 @@ class _SliderDemoState extends State<SliderDemo> {
                 min: 0.0,
                 max: 100.0,
                 label: (sliderVN.value / 100).toStringAsFixed(2),
-                onChanged: (value) {
+                onChanged: (double value) {
                   sliderVN.value = value;
                   setState(() {});
                 },
@@ -160,7 +154,7 @@ class _SliderDemoState extends State<SliderDemo> {
         ),
         ValueListenableBuilder(
           valueListenable: sliderVN,
-          builder: (context, value, child) {
+          builder: (BuildContext context, double value, Widget? child) {
             final result = (value / 100).toStringAsFixed(2);
             return TextButton(
               onPressed: () {
@@ -184,7 +178,7 @@ class _SliderDemoState extends State<SliderDemo> {
         rangeValues.start.round().toString(),
         rangeValues.end.round().toString(),
       ),
-      onChanged: (values) {
+      onChanged: (RangeValues values) {
         setState(() {
           rangeValues = values;
         });
@@ -203,7 +197,7 @@ class _SliderDemoState extends State<SliderDemo> {
           debugPrint("Downloading");
         },
       ),
-      onChangeEnd: (value) {
+      onChangeEnd: (double value) {
         debugPrint('NNSlider onChangeEnd: $value');
         sliderVN.value = value;
         setState(() {});
@@ -220,13 +214,5 @@ class _SliderDemoState extends State<SliderDemo> {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('sliderVN', sliderVN));
-    properties.add(DiagnosticsProperty<RangeValues>('rangeValues', rangeValues));
-    properties.add(DiagnosticsProperty<AnimatedSliderController>('sliderController', sliderController));
   }
 }

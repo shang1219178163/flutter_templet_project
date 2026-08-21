@@ -36,20 +36,15 @@ class NTabIndicatorFixedWidth extends Decoration {
       borderRadius: borderRadius,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('color', color));
-    properties.add(DiagnosticsProperty<Gradient?>('gradient', gradient));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('topMargin', topMargin));
-    properties.add(DoubleProperty('borderRadius', borderRadius));
-  }
 }
 
 class _RoundedPainter extends BoxPainter {
+  final Color? color;
+  final Gradient? gradient;
+  final double width;
+  final double height;
+  final double topMargin;
+  final double borderRadius;
 
   _RoundedPainter({
     this.color,
@@ -59,12 +54,6 @@ class _RoundedPainter extends BoxPainter {
     required this.topMargin,
     required this.borderRadius,
   });
-  final Color? color;
-  final Gradient? gradient;
-  final double width;
-  final double height;
-  final double topMargin;
-  final double borderRadius;
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {

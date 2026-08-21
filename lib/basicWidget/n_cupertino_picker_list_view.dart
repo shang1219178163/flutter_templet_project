@@ -62,20 +62,6 @@ class NCupertinoPickerListView<E> extends StatefulWidget {
 
   @override
   NNCupertinoPickerListViewState<E> createState() => NNCupertinoPickerListViewState<E>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<bool>('cancelArrow', cancelArrow));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
-    properties.add(IterableProperty<E>('items', items));
-    properties.add(ObjectFlagProperty<String Function(E e)?>.has('cbName', cbName));
-    properties.add(ObjectFlagProperty<Widget? Function(BuildContext context, int index)?>.has('itemBuilder', itemBuilder));
-    properties.add(IntProperty('initialItem', initialItem));
-    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onSelectedItemChanged', onSelectedItemChanged));
-  }
 }
 
 class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E>> {
@@ -179,12 +165,5 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
       ),
       child: child,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
   }
 }

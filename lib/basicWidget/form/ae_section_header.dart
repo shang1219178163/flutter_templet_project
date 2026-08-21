@@ -94,14 +94,4 @@ class AeSectionHeader extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<TextStyle>('style', style));
-    properties.add(IntProperty('maxLines', maxLines));
-    properties.add(DiagnosticsProperty<bool>('isRequired', isRequired));
-    properties.add(DiagnosticsProperty<bool>('hasIndicator', hasIndicator));
-  }
 }

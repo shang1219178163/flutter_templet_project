@@ -25,12 +25,6 @@ class NestedNavigatorDemo extends StatefulWidget {
 
   @override
   State<NestedNavigatorDemo> createState() => _NestedNavigatorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
@@ -190,7 +184,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
           ),
         ),
         child: Navigator(
-          onGenerateRoute: (settings) {
+          onGenerateRoute: (RouteSettings settings) {
             return MaterialPageRoute(
               builder: (context) {
                 return NestedNavigatorSubpage(
@@ -289,13 +283,6 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(IterableProperty<({VoidCallback action, String title})>('items', items));
-  }
 }
 
 /// 嵌套导航子视图
@@ -361,11 +348,5 @@ class _NestedNavigatorSubpageState extends State<NestedNavigatorSubpage> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

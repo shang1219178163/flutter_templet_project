@@ -152,10 +152,4 @@ class SmartDialogPage extends StatelessWidget {
     await Future.delayed(Duration(seconds: 2));
     SmartDialog.dismiss();
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2>('items', items));
-  }
 }

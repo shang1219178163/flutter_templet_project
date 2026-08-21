@@ -18,13 +18,6 @@ class RouteNameSearchPage extends StatefulWidget {
 
   @override
   _RouteNameSearchPageState createState() => _RouteNameSearchPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<bool>('hideAppBar', hideAppBar));
-  }
 }
 
 class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
@@ -52,7 +45,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
           ...buildHeader(),
           NAutocompleteSearch(
             displayStringForOption: (option) => option.name,
-            optionsBuilder: (textEditingValue) {
+            optionsBuilder: (TextEditingValue textEditingValue) {
               final query = textEditingValue.text.trim().toLowerCase();
               if (query.isEmpty) {
                 return const <OptionModel>[];
@@ -160,7 +153,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
                   style: TextStyle(color: colorScheme.onSurface),
                 ),
                 value: e.isOpen,
-                onChanged: (value) {
+                onChanged: (bool value) {
                   e.isOpen = value;
                   setState(() {});
                 },
@@ -170,14 +163,6 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('textFieldVN', textFieldVN));
-    properties.add(IterableProperty<MaterialColor>('colors', colors));
-    properties.add(DiagnosticsProperty<ValueNotifier>('selectedColor', selectedColor));
   }
 }
 

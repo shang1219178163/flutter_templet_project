@@ -58,21 +58,6 @@ class NSlidingSegmentedControl<T> extends StatefulWidget {
 
   @override
   State<NSlidingSegmentedControl<T>> createState() => _NSlidingSegmentedControlState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<T>('items', items));
-    properties.add(ObjectFlagProperty<Widget Function(T e, bool isSelecetd)?>.has('itemBuilder', itemBuilder));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onChanged', onChanged));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(ColorProperty('thumbTextColor', thumbTextColor));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(ColorProperty('thumbColor', thumbColor));
-    properties.add(DiagnosticsProperty<Radius?>('radius', radius));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-  }
 }
 
 class _NSlidingSegmentedControlState<T> extends State<NSlidingSegmentedControl<T>> {
@@ -168,12 +153,6 @@ class _NSlidingSegmentedControlState<T> extends State<NSlidingSegmentedControl<T
       padding: padding ?? EdgeInsets.all(2),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<T?>('current', current));
-  }
 }
 
 /// 带图标默认实现
@@ -190,7 +169,7 @@ class NSlidingSegmentedControlIconAndTitlel extends NSlidingSegmentedControl<({S
     super.thumbColor,
     super.radius,
   }) : super(
-          itemBuilder: (({String icon, String title}) e, isSelecetd) {
+          itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
             final color = isSelecetd ? Colors.white : thumbTextColor;
             final icon = isSelecetd ? e.icon : e.icon;
 

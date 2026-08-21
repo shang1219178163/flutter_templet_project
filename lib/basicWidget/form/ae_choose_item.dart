@@ -155,7 +155,7 @@ class AeChooseItem<T> extends StatelessWidget {
             Navigator.of(context).pop();
           },
           items: dataList,
-          itemBuilder: (context, idx) {
+          itemBuilder: (BuildContext context, idx) {
             final e = dataList[idx];
 
             final name = convertCb(e);
@@ -198,18 +198,5 @@ class AeChooseItem<T> extends StatelessWidget {
       context: context,
       backgroundColor: Colors.transparent,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<T>('dataList', dataList));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<T>?>>('selectVN', selectVN));
-    properties.add(ObjectFlagProperty<String Function(T e)>.has('convertCb', convertCb));
-    properties.add(ObjectFlagProperty<ValueChanged<List<T>?>?>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-    properties.add(ColorProperty('disableTextColor', disableTextColor));
-    properties.add(ColorProperty('disableBgColor', disableBgColor));
   }
 }

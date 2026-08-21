@@ -60,15 +60,4 @@ class NLogoCard extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('name', name));
-    properties.add(ColorProperty('color', color));
-    properties.add(DiagnosticsProperty<AssetImage?>('logo', logo));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(DoubleProperty('radius', radius));
-  }
 }

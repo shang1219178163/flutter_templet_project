@@ -27,17 +27,6 @@ class NSwiperView extends StatefulWidget {
 
   @override
   State<NSwiperView> createState() => _NSwiperViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollPhysics?>('physics', physics));
-    properties.add(EnumProperty<Axis>('scrollDirection', scrollDirection));
-    properties.add(ObjectFlagProperty<NullableIndexedWidgetBuilder>.has('itemBuilder', itemBuilder));
-    properties.add(IntProperty('initIndex', initIndex));
-    properties.add(IntProperty('itemCount', itemCount));
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-  }
 }
 
 class _NSwiperViewState extends State<NSwiperView> {
@@ -87,11 +76,5 @@ class _NSwiperViewState extends State<NSwiperView> {
         },
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('currentIndex', currentIndex));
   }
 }

@@ -20,12 +20,6 @@ class SplitViewDemo extends StatefulWidget {
 
   @override
   State<SplitViewDemo> createState() => _SplitViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _SplitViewDemoState extends State<SplitViewDemo> {
@@ -90,12 +84,5 @@ class _SplitViewDemoState extends State<SplitViewDemo> {
         title: Text("buildRight" * 9),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(DoubleProperty('ratio', ratio));
   }
 }

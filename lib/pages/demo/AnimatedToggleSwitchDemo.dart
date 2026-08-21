@@ -25,12 +25,6 @@ class AnimatedToggleSwitchDemo extends StatefulWidget {
 
   @override
   State<AnimatedToggleSwitchDemo> createState() => _AnimatedToggleSwitchDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
@@ -851,19 +845,6 @@ class _AnimatedToggleSwitchDemoState extends State<AnimatedToggleSwitchDemo> {
     }
     return Icon(data);
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(DiagnosticsProperty<bool>('positive', positive));
-    properties.add(IntProperty('value', value));
-    properties.add(IntProperty('nullableValue', nullableValue));
-    properties.add(DiagnosticsProperty<bool?>('loading', loading));
-  }
 }
 
 const tappableTextStyle = TextStyle(color: Colors.blue);
@@ -939,12 +920,6 @@ class _CrazySwitchState extends State<CrazySwitch> {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('current', current));
-  }
 }
 
 class LoadSwitch extends StatefulWidget {
@@ -999,11 +974,5 @@ class _LoadSwitchState extends State<LoadSwitch> {
       },
       iconBuilder: (context, local, global) => const SizedBox(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('value', value));
   }
 }

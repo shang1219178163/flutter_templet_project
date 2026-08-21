@@ -13,12 +13,6 @@ class ColorFilterDemo extends StatefulWidget {
 
   @override
   State<ColorFilterDemo> createState() => _ColorFilterDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ColorFilterDemoState extends State<ColorFilterDemo> {
@@ -219,17 +213,5 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(IterableProperty<int>('predictionLevels', predictionLevels));
-    properties.add(DiagnosticsProperty<Map<int, Color>>('predictionLevelMap', predictionLevelMap));
-    properties.add(DiagnosticsProperty<ValueNotifier<Color>>('selectedColorVN', selectedColorVN));
   }
 }

@@ -17,12 +17,6 @@ class ImChatSettingPage extends StatefulWidget {
 
   @override
   State<ImChatSettingPage> createState() => _ImChatSettingPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ImChatSettingPageState extends State<ImChatSettingPage> {
@@ -147,13 +141,5 @@ class _ImChatSettingPageState extends State<ImChatSettingPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('args', args));
-    properties.add(DiagnosticsProperty<bool>('isIgnore', isIgnore));
-    properties.add(DiagnosticsProperty<bool>('isPined', isPined));
   }
 }

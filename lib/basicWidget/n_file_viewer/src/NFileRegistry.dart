@@ -4,9 +4,9 @@ import 'package:flutter_templet_project/basicWidget/n_file_viewer/src/NFileReade
 import 'package:flutter_templet_project/basicWidget/n_file_viewer/src/NFileRenderer.dart';
 
 class NFileRegistry {
+  static final NFileRegistry _instance = NFileRegistry._();
   NFileRegistry._();
   factory NFileRegistry() => _instance;
-  static final NFileRegistry _instance = NFileRegistry._();
   static NFileRegistry get instance => _instance;
 
   final List<NFileReader> _readers = [];

@@ -17,18 +17,12 @@ import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class TabBarPageViewDemo extends StatefulWidget {
+  final String? title;
 
   const TabBarPageViewDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _TabBarPageViewDemoState createState() => _TabBarPageViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTickerProviderStateMixin {
@@ -231,11 +225,4 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
       ),
     ),
   ];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isTabBar', isTabBar));
-    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
-  }
 }

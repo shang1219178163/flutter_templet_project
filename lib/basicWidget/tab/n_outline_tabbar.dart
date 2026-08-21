@@ -59,26 +59,6 @@ class NOutlineTabbar extends StatefulWidget {
 
   @override
   State<NOutlineTabbar> createState() => _NOutlineTabbarState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
-    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
-    properties.add(DiagnosticsProperty<bool>('isWrap', isWrap));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('itemPadding', itemPadding));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DoubleProperty('spacing', spacing));
-    properties.add(DoubleProperty('lastSpacing', lastSpacing));
-    properties.add(DiagnosticsProperty<TextStyle?>('selectedLabelStyle', selectedLabelStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>('unselectedLabelStyle', unselectedLabelStyle));
-    properties.add(EnumProperty<TabAlignment?>('tabAlignment', tabAlignment));
-    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('itemBuilder', itemBuilder));
-  }
 }
 
 class _NOutlineTabbarState extends State<NOutlineTabbar> {
@@ -187,7 +167,7 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
       TabAlignment.center: WrapAlignment.center,
       TabAlignment.startOffset: WrapAlignment.end,
     };
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       // final spacing = widget.spacing;
       // final rowCount = 4.0;
       // final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
@@ -250,13 +230,5 @@ class _NOutlineTabbarState extends State<NOutlineTabbar> {
     currIndex = i;
     widget.indexVN.value = i;
     widget.onChanged?.call(widget.indexVN.value);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('currIndex', currIndex));
-    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
-    properties.add(DiagnosticsProperty<TabBarThemeData>('tabBarTheme', tabBarTheme));
   }
 }

@@ -33,12 +33,6 @@ class ImConversationPage extends StatefulWidget {
 
   @override
   State<ImConversationPage> createState() => _ImConversationPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ImConversationPageState extends State<ImConversationPage> with AssetResourceMixin {
@@ -112,10 +106,10 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
     return NRefreshListView<ImConversationDetailModel>(
       controller: refreshViewController,
       page: 5,
-      onRequest: (isRefresh, page, pageSize, last) async {
+      onRequest: (bool isRefresh, int page, int pageSize, last) async {
         return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
       },
-      itemBuilder: (context, index, e) {
+      itemBuilder: (BuildContext context, int index, e) {
         final dateStr = DateTime.now().toString19();
 
         final content = InkWell(
@@ -202,7 +196,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
       offset: const Offset(0, 50.0),
       tooltip: '',
       color: const Color(0xFF353535),
-      itemBuilder: (context) {
+      itemBuilder: (BuildContext context) {
         return items.map((e) {
           return popupMenuItem(e.iconData, e.title, e.index);
         }).toList();
@@ -264,13 +258,5 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
       ),
       child: child,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<NListRefreshController<ImConversationDetailModel>>('refreshViewController', refreshViewController));
-    properties.add(DiagnosticsProperty<Random>('random', random));
   }
 }

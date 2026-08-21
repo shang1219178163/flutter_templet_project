@@ -65,22 +65,6 @@ class NumberStepper extends StatefulWidget {
 
   @override
   _NumberStepperState createState() => _NumberStepperState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('min', min));
-    properties.add(IntProperty('max', max));
-    properties.add(IntProperty('step', step));
-    properties.add(IntProperty('value', value));
-    properties.add(DoubleProperty('iconSize', iconSize));
-    properties.add(DiagnosticsProperty<bool>('wraps', wraps));
-    properties.add(ColorProperty('color', color));
-    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onChanged', onChanged));
-  }
 }
 
 class _NumberStepperState extends State<NumberStepper> {
@@ -252,13 +236,5 @@ class _NumberStepperState extends State<NumberStepper> {
     current += stepValue;
     setState(() {});
     widget.onChanged(current);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode1', focusNode1));
-    properties.add(IntProperty('current', current));
-    properties.add(ColorProperty('centerColor', centerColor));
   }
 }

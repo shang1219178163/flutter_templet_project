@@ -8,14 +8,14 @@ import 'package:flutter_templet_project/pages/demo/weather/widgets/weather_effec
 import 'package:flutter_templet_project/pages/demo/weather/widgets/weather_effects/thunderstorm_effect.dart';
 
 class WeatherCard extends StatelessWidget {
+  final WeatherType weatherType;
+  final double animationSpeed;
 
   const WeatherCard({
     super.key,
     required this.weatherType,
     this.animationSpeed = 1.0,
   });
-  final WeatherType weatherType;
-  final double animationSpeed;
 
   @override
   Widget build(BuildContext context) {
@@ -150,12 +150,5 @@ class WeatherCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<WeatherType>('weatherType', weatherType));
-    properties.add(DoubleProperty('animationSpeed', animationSpeed));
   }
 }

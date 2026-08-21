@@ -114,28 +114,6 @@ class NRefreshListView<T> extends StatefulWidget {
 
   @override
   State<NRefreshListView<T>> createState() => NRefreshListViewState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NListRefreshController<T>?>('controller', controller));
-    properties.add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ScrollPhysics?>('physics', physics, defaultValue: null));
-    properties.add(StringProperty('title', title, defaultValue: null));
-    properties.add(DiagnosticsProperty<bool>('notRefresh', notRefresh));
-    properties.add(DiagnosticsProperty<bool>('notLoad', notLoad));
-    properties.add(DiagnosticsProperty<Widget?>('placeholder', placeholder));
-    properties.add(DiagnosticsProperty<bool>('needRemovePadding', needRemovePadding));
-    properties.add(IntProperty('page', page));
-    properties.add(IntProperty('pageInitial', pageInitial));
-    properties.add(IntProperty('pageSize', pageSize));
-    properties.add(IterableProperty<T>('firstPageItems', firstPageItems));
-    properties.add(ObjectFlagProperty<RequestListCallback<T>>.has('onRequest', onRequest));
-    properties.add(ObjectFlagProperty<ValueIndexedWidgetBuilder<T>>.has('itemBuilder', itemBuilder));
-    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('separatorBuilder', separatorBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(int count)?>.has('headerBuilder', headerBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(int count)?>.has('footerBuilder', footerBuilder));
-  }
 }
 
 class NRefreshListViewState<T> extends State<NRefreshListView<T>>

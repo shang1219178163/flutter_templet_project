@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
 class _User {
-
-  _User({required this.name, required this.age});
   String name;
   int age;
+
+  _User({required this.name, required this.age});
 }
 
 class UserController extends GetxController {

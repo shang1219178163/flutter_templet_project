@@ -32,18 +32,12 @@ import 'package:flutter_templet_project/pages/sliver_demo/StaggeredGridViewDemo.
 import 'package:tuple/tuple.dart';
 
 class SliverFamilyDemo extends StatefulWidget {
+  final String? title;
 
   const SliverFamilyDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _SliverFamilyDemoState createState() => _SliverFamilyDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
@@ -83,18 +77,12 @@ class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
 }
 
 class SliverFamilyPageViewDemo extends StatefulWidget {
+  final String? title;
 
   const SliverFamilyPageViewDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _SliverFamilyPageViewDemoState createState() => _SliverFamilyPageViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SliverFamilyPageViewDemoState extends State<SliverFamilyPageViewDemo> {

@@ -66,16 +66,4 @@ class NTweenAnimationBuilder<T> extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Tween<T>>('tween', tween));
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(DiagnosticsProperty<Curve>('curve', curve));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onEnd', onEnd));
-    properties.add(DiagnosticsProperty<bool>('needScale', needScale));
-    properties.add(DiagnosticsProperty<bool>('needFade', needFade));
-    properties.add(DiagnosticsProperty<bool>('needRotation', needRotation));
-  }
 }

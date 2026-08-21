@@ -37,15 +37,6 @@ class ChioceWrap extends StatefulWidget {
 
   @override
   _ChioceWrapState createState() => _ChioceWrapState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isMutiple', isMutiple));
-    properties.add(IterableProperty<int>('indexs', indexs));
-    properties.add(ColorProperty('backgroudColor', backgroudColor));
-    properties.add(ObjectFlagProperty<void Function(List<int> indexs)>.has('callback', callback));
-  }
 }
 
 class _ChioceWrapState extends State<ChioceWrap> {

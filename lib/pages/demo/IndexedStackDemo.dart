@@ -10,18 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class IndexedStackDemo extends StatefulWidget {
+  final String? title;
 
   const IndexedStackDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _IndexedStackDemoState createState() => _IndexedStackDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _IndexedStackDemoState extends State<IndexedStackDemo> {
@@ -79,7 +73,7 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
       children: items.map((e) {
         final index = items.indexOf(e);
 
-        return StatefulBuilder(builder: (context, setState) {
+        return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           DLog.d("$widget, index $index");
 
           return Container(
@@ -92,11 +86,5 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
         });
       }).toList(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('selectedIndex', selectedIndex));
   }
 }

@@ -51,12 +51,12 @@ enum CacheKey {
 }
 
 class CacheService {
-  factory CacheService() => _instance;
   CacheService._() {
     init();
   }
 
   static final CacheService _instance = CacheService._();
+  factory CacheService() => _instance;
   static CacheService get shard => _instance;
 
   SharedPreferences? _prefs;
@@ -348,9 +348,9 @@ extension CacheServiceExt on CacheService {
 
     onDone();
 
-    for (final e in tuples) {
+    tuples.forEach((e) {
       CacheService().set(e.$1, e.$2);
-    }
+    });
   }
 
   List<String> get noClearKeys {

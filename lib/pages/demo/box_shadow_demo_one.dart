@@ -9,12 +9,6 @@ class BoxShadowDemoOne extends StatefulWidget {
 
   @override
   _BoxShadowDemoOneState createState() => _BoxShadowDemoOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _BoxShadowDemoOneState extends State<BoxShadowDemoOne> {

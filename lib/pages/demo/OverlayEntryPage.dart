@@ -20,12 +20,6 @@ class OverlayEntryPage extends StatefulWidget {
 
   @override
   State<OverlayEntryPage> createState() => _OverlayEntryPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _OverlayEntryPageState extends State<OverlayEntryPage> {
@@ -421,22 +415,5 @@ class _OverlayEntryPageState extends State<OverlayEntryPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('countVN', countVN));
-    properties.add(DoubleProperty('heightRatio', heightRatio));
-    properties.add(DoubleProperty('top', top));
-    properties.add(DiagnosticsProperty<bool>('isLeft', isLeft));
-    properties.add(DiagnosticsProperty<bool>('isSlide', isSlide));
-    properties.add(DiagnosticsProperty<bool>('hasIndent', hasIndent));
-    properties.add(DiagnosticsProperty<Offset>('beginOffset', beginOffset));
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
-    properties.add(DiagnosticsProperty<Duration>('slideDuration', slideDuration));
-    properties.add(DoubleProperty('indent', indent));
   }
 }

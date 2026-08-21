@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PromptItem {
-
-  PromptItem(this.promptWidgetKey, this.promptTips);
   GlobalKey promptWidgetKey;
   String promptTips;
+
+  PromptItem(this.promptWidgetKey, this.promptTips);
 }
 
 class PromptBuilder {

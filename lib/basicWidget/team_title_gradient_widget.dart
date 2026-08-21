@@ -81,16 +81,6 @@ class TeamTitleGradientWidget extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isRevesed', isRevesed));
-    properties.add(StringProperty('logo', logo));
-    properties.add(DoubleProperty('iconSize', iconSize));
-    properties.add(StringProperty('name', name));
-    properties.add(ColorProperty('color', color));
-  }
 }
 
 /// 比赛标题渐进色背景色组件
@@ -144,18 +134,5 @@ class TeamNameMatchGradientWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(DoubleProperty('iconSize', iconSize));
-    properties.add(StringProperty('logo', logo));
-    properties.add(StringProperty('name', name));
-    properties.add(ColorProperty('color', color));
-    properties.add(StringProperty('awayLogo', awayLogo));
-    properties.add(StringProperty('awayName', awayName));
-    properties.add(ColorProperty('awayColor', awayColor));
   }
 }

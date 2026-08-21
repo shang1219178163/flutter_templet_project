@@ -14,12 +14,6 @@ class NestedScrollViewDemoSix extends StatefulWidget {
 
   @override
   State<NestedScrollViewDemoSix> createState() => _NestedScrollViewDemoSixState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with SingleTickerProviderStateMixin {
@@ -95,16 +89,6 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
       tabController: tabController,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<String>('tabTitles', tabTitles));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('descVN', descVN));
-  }
 }
 
 class NewsPage extends StatefulWidget {
@@ -119,13 +103,6 @@ class NewsPage extends StatefulWidget {
 
   @override
   State<NewsPage> createState() => _NewsPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('tabTitlte', tabTitlte));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-  }
 }
 
 class _NewsPageState extends State<NewsPage> {
@@ -205,14 +182,6 @@ class _NewsPageState extends State<NewsPage> {
     items.addAll(List.generate(20, (i) => "item_${items.length + i}"));
     setState(() {});
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
-    properties.add(StringProperty('tabTitlte', tabTitlte));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-  }
 }
 
 class HeaderContentAnimated extends StatelessWidget {
@@ -244,13 +213,6 @@ class HeaderContentAnimated extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('opacity', opacity));
-    properties.add(DoubleProperty('statusBarHeight', statusBarHeight));
   }
 }
 
@@ -301,12 +263,5 @@ class HeaderCollapsedTopLeft extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('opacity', opacity));
-    properties.add(DoubleProperty('statusBarHeight', statusBarHeight));
   }
 }

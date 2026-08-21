@@ -22,12 +22,6 @@ class FlexbleListViewDemo extends StatefulWidget {
 
   @override
   State<FlexbleListViewDemo> createState() => _FlexbleListViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
@@ -110,7 +104,7 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
                 pinned: true,
                 min: 56,
                 max: 56,
-                builder: (context, shrinkOffset, overlapsContent) {
+                builder: (context, double shrinkOffset, bool overlapsContent) {
                   return SearchBar(
                     hintText: "search",
                   );
@@ -146,7 +140,7 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
             pinned: true,
             min: min,
             max: max,
-            builder: (context, shrinkOffset, overlapsContent) {
+            builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
               final opacity = 1 - (shrinkOffset / (max - min));
 
               return Container(
@@ -177,7 +171,7 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
             pinned: true,
             min: 40,
             max: 40,
-            builder: (context, shrinkOffset, overlapsContent) {
+            builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
@@ -203,13 +197,5 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

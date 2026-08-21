@@ -366,13 +366,4 @@ class _GridViewDemoState extends State<GridViewDemo> {
     }
     return items;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('titles', titles));
-    properties.add(ColorProperty('primaryColor', primaryColor));
-    properties.add(IterableProperty<int>('indexs', indexs));
-    properties.add(IterableProperty<UserModel>('memberList', memberList));
-  }
 }

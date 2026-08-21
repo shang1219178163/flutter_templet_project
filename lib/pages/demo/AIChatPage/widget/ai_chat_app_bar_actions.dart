@@ -59,10 +59,4 @@ class AiChatAppBarActions extends StatelessWidget {
     controller.newSession();
     SnackUtil.show('已开启新会话');
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AiChatController>('controller', controller));
-  }
 }

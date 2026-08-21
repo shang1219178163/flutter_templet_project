@@ -17,12 +17,6 @@ class IsolateSimpleWidget extends StatefulWidget {
 
   @override
   State<IsolateSimpleWidget> createState() => IsolateSimpleWidgetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class IsolateSimpleWidgetState extends State<IsolateSimpleWidget> {
@@ -85,12 +79,6 @@ class IsolateSimpleWidgetState extends State<IsolateSimpleWidget> {
     final List<dynamic> categorys = data['categorys'];
     final result = categorys.map((json) => CategoryItem.fromJson(json)).toList();
     return Future.value(result);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('content', content));
   }
 }
 

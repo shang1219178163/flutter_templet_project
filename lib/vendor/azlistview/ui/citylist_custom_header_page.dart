@@ -29,9 +29,9 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
       cityList.clear();
       Map countyMap = jsonDecode(value);
       List list = countyMap['china'];
-      for (final v in list) {
+      list.forEach((v) {
         cityList.add(CityModel.fromJson(v));
-      }
+      });
       _handleList(cityList);
     });
   }
@@ -120,7 +120,7 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
           child: AzListView(
             data: cityList,
             itemCount: cityList.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (BuildContext context, int index) {
               if (index == 0) {
                 return buildHeader();
               }
@@ -128,7 +128,7 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
               return Utils.getListItem(context, model, susHeight: susItemHeight);
             },
             susItemHeight: susItemHeight,
-            susItemBuilder: (context, index) {
+            susItemBuilder: (BuildContext context, int index) {
               var model = cityList[index];
               var tag = model.getSuspensionTag();
               if (imgFavorite == tag) {
@@ -147,13 +147,5 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<CityModel>('cityList', cityList));
-    properties.add(DoubleProperty('susItemHeight', susItemHeight));
-    properties.add(StringProperty('imgFavorite', imgFavorite));
   }
 }

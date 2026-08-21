@@ -12,12 +12,6 @@ class NAvatarGroupDemo extends StatefulWidget {
 
   @override
   State<NAvatarGroupDemo> createState() => _NAvatarGroupDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
@@ -103,7 +97,7 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
       urls = urls.sublist(0, countCb(urls.length));
     }
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         final scale = (constraints.maxWidth - 50) / urls.length / 50;
         DLog.d("constraints.maxWidth: ${constraints.maxWidth.toStringAsFixed(2)}, scale: $scale");
         return NAvatarGroup(
@@ -189,12 +183,5 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
         DLog.d(value);
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Size>('screenSize', screenSize));
-    properties.add(DiagnosticsProperty<bool>('isFirst', isFirst));
   }
 }

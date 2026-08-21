@@ -68,12 +68,4 @@ class NFourCorner extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AssetImage>('cornerImage', cornerImage));
-    properties.add(DoubleProperty('cornerImageSize', cornerImageSize));
-    properties.add(ColorProperty('cornerImageColor', cornerImageColor));
-  }
 }

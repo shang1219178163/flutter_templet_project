@@ -9,18 +9,12 @@
 import 'package:flutter/material.dart';
 
 class AfterLayoutDemo extends StatefulWidget {
+  final String? title;
 
   const AfterLayoutDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _AfterLayoutDemoState createState() => _AfterLayoutDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AfterLayoutDemoState extends State<AfterLayoutDemo> {

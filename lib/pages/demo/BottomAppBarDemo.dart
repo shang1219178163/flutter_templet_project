@@ -127,12 +127,6 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<FloatingActionButtonLocation>('locations', locations));
-  }
 }
 
 class _DemoBottomAppBar extends StatelessWidget {
@@ -184,12 +178,5 @@ class _DemoBottomAppBar extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FloatingActionButtonLocation>('fabLocation', fabLocation));
-    properties.add(DiagnosticsProperty<NotchedShape?>('shape', shape));
   }
 }

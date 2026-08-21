@@ -111,11 +111,4 @@ class _SoundPlayDemoState extends State<SoundPlayDemo> {
     }
     return _mPlayer!.isStopped ? play() : stopPlayer();
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('assetList', assetList));
-    properties.add(DiagnosticsProperty<bool>('isPlaying', isPlaying));
-  }
 }

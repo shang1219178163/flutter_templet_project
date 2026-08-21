@@ -33,16 +33,6 @@ class NOverlayAnimatedSlide extends StatefulWidget {
 
   @override
   State<NOverlayAnimatedSlide> createState() => NOverlayAnimatedSlideState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AlignmentGeometry?>('alignment', alignment));
-    properties.add(ObjectFlagProperty<Widget Function(Future<void> Function() onDismiss)>.has('child', child));
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(DiagnosticsProperty<Curve>('curve', curve));
-    properties.add(DiagnosticsProperty<Offset>('beginOffset', beginOffset));
-  }
 }
 
 class NOverlayAnimatedSlideState extends State<NOverlayAnimatedSlide> {
@@ -95,13 +85,5 @@ class NOverlayAnimatedSlideState extends State<NOverlayAnimatedSlide> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Offset>('offset', offset));
-    properties.add(DoubleProperty('opacity', opacity));
-    properties.add(DiagnosticsProperty<bool>('isDismissing', isDismissing));
   }
 }

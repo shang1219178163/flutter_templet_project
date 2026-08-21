@@ -25,12 +25,6 @@ class ScanBarcodeDemo extends StatefulWidget {
 
   @override
   State<ScanBarcodeDemo> createState() => _ScanBarcodeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ScanBarcodeDemoState extends State<ScanBarcodeDemo> with PhotoPickerMixin {
@@ -108,14 +102,5 @@ class _ScanBarcodeDemoState extends State<ScanBarcodeDemo> with PhotoPickerMixin
       debugPrint("$this $e");
       recognizedCodes = [e.toString()];
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<File?>('file', file));
-    properties.add(IterableProperty<>('recognizedCodes', recognizedCodes));
   }
 }

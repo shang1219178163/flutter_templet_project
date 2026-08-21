@@ -24,12 +24,6 @@ class VideoPlayerByChewiePage extends StatefulWidget {
 
   @override
   _VideoPlayerByChewiePageState createState() => _VideoPlayerByChewiePageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onBack', onBack));
-  }
 }
 
 class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
@@ -197,18 +191,6 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map>('arguments', arguments));
-    properties.add(StringProperty('videoTitle', videoTitle));
-    properties.add(StringProperty('videoUrl', videoUrl));
-    properties.add(StringProperty('videoThumbUrl', videoThumbUrl));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onBackNew', onBackNew));
-    properties.add(DiagnosticsProperty<bool>('hideDownload', hideDownload));
-    properties.add(IntProperty('bufferDelay', bufferDelay));
   }
 
 // saveVideo({required String url}) async {

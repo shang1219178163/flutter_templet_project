@@ -19,7 +19,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
         elevation: 0,
       ),
       bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (index) {
+        onDestinationSelected: (int index) {
           currentPageIndex = index;
           setState(() {});
         },
@@ -78,11 +78,5 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
         ),
       ][currentPageIndex],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('currentPageIndex', currentPageIndex));
   }
 }

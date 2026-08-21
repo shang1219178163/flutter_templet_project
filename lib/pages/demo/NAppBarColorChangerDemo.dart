@@ -18,12 +18,6 @@ class NAppBarColorChangerDemo extends StatefulWidget {
 
   @override
   State<NAppBarColorChangerDemo> createState() => _NAppBarColorChangerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {

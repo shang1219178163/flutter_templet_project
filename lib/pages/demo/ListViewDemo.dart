@@ -7,18 +7,12 @@ import 'package:tuple/tuple.dart';
 typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 
 class ListViewDemo extends StatefulWidget {
+  final String? title;
 
   const ListViewDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _ListViewDemoState createState() => _ListViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ListViewDemoState extends State<ListViewDemo> {
@@ -179,7 +173,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
               return ListTile(
                 title: Text(lable),
                 trailing: Switch(
-                  onChanged: (value) {
+                  onChanged: (bool value) {
                     e["value"] = value;
                     setState(() {});
                   },
@@ -258,7 +252,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
     return ListView.builder(
       itemCount: 20,
       // 使用 itemExtentBuilder 为每个下标指定不同的高度
-      itemExtentBuilder: (index, dimensions) {
+      itemExtentBuilder: (int index, dimensions) {
         // 在这里，你可以根据下标和 dimensions 的信息来返回不同的值
         final itemHeight = index.isEven ? 60.0 : 100.0;
         return itemHeight;
@@ -274,18 +268,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('initialIndex', initialIndex));
-    properties.add(IterableProperty<Tuple2<Tab, Widget>>('tabItems', tabItems));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DiagnosticsProperty<bool>('flag', flag));
-    properties.add(IterableProperty<Tuple4<String, String, String, bool>>('items', items));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('offsetY', offsetY));
-    properties.add(IterableProperty<Map<String, dynamic>>('options', options));
   }
 }
 
@@ -338,13 +320,5 @@ class ScrollWidget extends StatelessWidget {
               indent: 8,
               // color: Colors.blue,
             ));
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DoubleProperty('showCount', showCount));
-    properties.add(DoubleProperty('itemWidth', itemWidth));
   }
 }

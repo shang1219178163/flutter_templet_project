@@ -15,12 +15,6 @@ class MarqueeWidgetDemo extends StatefulWidget {
 
   @override
   _MarqueeWidgetDemoState createState() => _MarqueeWidgetDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
@@ -96,7 +90,7 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
             ),
             child: NMarqueeWidget(
               itemCount: mottos.length,
-              itemBuilder: (context, index, constraints) {
+              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 final e = mottos[index];
                 // final text = "${index}_${e.item2}";
                 final text = e;
@@ -106,7 +100,7 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
                   child: Text(text),
                 );
               },
-              separatorBuilder: (context, index, constraints) {
+              separatorBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 return Container(
                   width: 100,
                   // decoration: BoxDecoration(
@@ -116,7 +110,7 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
                   // child: Text("$index"),
                 );
               },
-              edgeBuilder: (context, index, constraints) {
+              edgeBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 // print("MarqueeWidget edgeBuilder: $index ${index % 2 == 0}");
                 return Container(
                   width: constraints.maxWidth,
@@ -132,13 +126,5 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('offset', offset));
-    properties.add(IterableProperty<Tuple4<String, String, String, bool>>('items', items));
-    properties.add(IterableProperty<String>('mottos', mottos));
   }
 }

@@ -15,18 +15,12 @@ import 'package:flutter_templet_project/network/RequestManager.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 
 class GithubRepoDemo extends StatefulWidget {
+  final String? title;
 
   const GithubRepoDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _GithubRepoDemoState createState() => _GithubRepoDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _GithubRepoDemoState extends State<GithubRepoDemo> {
@@ -82,7 +76,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
       alignment: Alignment.center,
       child: FutureBuilder<Response<List<dynamic>>>(
           future: _dio.get<List<dynamic>>("https://api.github.com/orgs/flutterchina/repos"),
-          builder: (context, snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<Response<List<dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
@@ -112,7 +106,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
       alignment: Alignment.center,
       child: FutureBuilder<Response<String>>(
           future: _dio.get<String>("https://api.github.com/orgs/flutterchina/repos"),
-          builder: (context, snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<Response<String>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
@@ -126,7 +120,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
                   list.map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>)).toList();
               return ListView(
                 children: models
-                    .map<Widget>((e) => ListTile(
+                    .map<Widget>((Repository e) => ListTile(
                           title: Text(e.name ?? "_"),
                           subtitle: Text(e.url ?? "_"),
                         ))
@@ -143,7 +137,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
       alignment: Alignment.center,
       child: FutureBuilder<Response<List<dynamic>>>(
           future: _dio.get<List<dynamic>>("https://api.github.com/orgs/flutterchina/repos"),
-          builder: (context, snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<Response<List<dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
@@ -157,7 +151,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
                   data.map<Repository>((dynamic item) => Repository.fromJson(item as Map<String, dynamic>)).toList();
               return ListView(
                 children: models
-                    .map<Widget>((e) => ListTile(
+                    .map<Widget>((Repository e) => ListTile(
                           title: Text(e.name ?? "_"),
                           subtitle: Text(e.url ?? "_"),
                         ))

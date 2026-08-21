@@ -49,20 +49,6 @@ class AppVideoPlayer extends StatefulWidget {
 
   @override
   State<AppVideoPlayer> createState() => _AppVideoPlayerState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AppVideoPlayerController?>('controller', controller));
-    properties.add(StringProperty('url', url));
-    properties.add(DiagnosticsProperty<bool>('autoPlay', autoPlay));
-    properties.add(DiagnosticsProperty<bool>('looping', looping));
-    properties.add(DoubleProperty('aspectRatio', aspectRatio));
-    properties.add(DiagnosticsProperty<bool>('isPortrait', isPortrait));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>?>('fullScreenVN', fullScreenVN));
-    properties.add(ObjectFlagProperty<void Function(bool isFullScreen)?>.has('onFullScreen', onFullScreen));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onClose', onClose));
-  }
 }
 
 class _AppVideoPlayerState extends State<AppVideoPlayer>
@@ -275,13 +261,6 @@ class _AppVideoPlayerState extends State<AppVideoPlayer>
 
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Duration>('position', position));
-    properties.add(DiagnosticsProperty<bool>('isPortrait', isPortrait));
-  }
 }
 
 class AppVideoPlayerController {

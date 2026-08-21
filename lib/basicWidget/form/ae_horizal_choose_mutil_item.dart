@@ -145,7 +145,7 @@ class AeHorizalChooseMutilItem<T> extends StatelessWidget {
       dataList: dataList.map((e1) => convertCb(e1)).toList(),
       // selectData: (selectVN.value ?? []).map((e) => convertCb(e)).toList(),
       selectData: (selectVN.value ?? []).map((e) => convertCb(e as List<T>)).toList(),
-      confirm: (value, indexs) {
+      confirm: (value, List<int> indexs) {
         DLog.d("value: $value");
         DLog.d("indexs: $indexs");
         // final val = value
@@ -154,18 +154,5 @@ class AeHorizalChooseMutilItem<T> extends StatelessWidget {
         // onChanged?.call(current);
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<List<T>>('dataList', dataList));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<T>?>>('selectVN', selectVN));
-    properties.add(ObjectFlagProperty<List<String> Function(List<T> e)>.has('convertCb', convertCb));
-    properties.add(ObjectFlagProperty<ValueChanged<List<T>>?>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-    properties.add(ColorProperty('disableTextColor', disableTextColor));
-    properties.add(ColorProperty('disableBgColor', disableBgColor));
   }
 }

@@ -11,12 +11,6 @@ class SwitchDemo extends StatefulWidget {
 
   @override
   _SwitchDemoState createState() => _SwitchDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SwitchDemoState extends State<SwitchDemo> {
@@ -25,7 +19,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
   bool value = false;
 
   final thumbIcon = WidgetStateProperty.resolveWith<Icon?>(
-    (states) {
+    (Set<WidgetState> states) {
       if (states.contains(WidgetState.selected)) {
         return const Icon(Icons.check);
       }
@@ -59,7 +53,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
         Switch(
           thumbIcon: thumbIcon,
           value: value,
-          onChanged: (val) {
+          onChanged: (bool val) {
             value = val;
             setState(() {});
           },
@@ -88,7 +82,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
           height: 25,
           child: CupertinoSwitch(
             value: value,
-            onChanged: (val) {
+            onChanged: (bool val) {
               value = val;
               setState(() {});
             },
@@ -96,13 +90,5 @@ class _SwitchDemoState extends State<SwitchDemo> {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('light', light));
-    properties.add(DiagnosticsProperty<bool>('value', value));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<Icon?>>('thumbIcon', thumbIcon));
   }
 }

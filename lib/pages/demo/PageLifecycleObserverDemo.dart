@@ -10,12 +10,6 @@ class PageLifecycleObserverDemo extends StatefulWidget {
 
   @override
   _PageLifecycleObserverDemoState createState() => _PageLifecycleObserverDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> with WidgetsBindingObserver {

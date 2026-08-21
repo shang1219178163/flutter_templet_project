@@ -17,18 +17,12 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 class OverlayDemo extends StatefulWidget {
+  final String? title;
 
   const OverlayDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _OverlayDemoState createState() => _OverlayDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _OverlayDemoState extends State<OverlayDemo> {
@@ -338,7 +332,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ShaderMask(
-                  shaderCallback: (bounds) {
+                  shaderCallback: (Rect bounds) {
                     return const LinearGradient(
                       colors: [Color(0xFFFE4455), Color(0xFFF6040F)],
                     ).createShader(bounds);
@@ -460,14 +454,5 @@ class _OverlayDemoState extends State<OverlayDemo> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<OverlayState>('overlayState', overlayState));
-    properties.add(DiagnosticsProperty<OverlayEntry?>('overlayEntry', overlayEntry));
-    properties.add(IterableProperty<String>('menus', menus));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('currentMenu', currentMenu));
   }
 }

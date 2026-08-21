@@ -5,6 +5,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 /// 一个能感知平台的文本表单字段
 /// 在桌面/Web端响应Tab和回车，在移动端优化体验
 class PlatformAwareTextField extends StatelessWidget {
+  final String name;
+  final String? hintText;
+  final bool isLastField;
 
   const PlatformAwareTextField({
     super.key,
@@ -12,9 +15,6 @@ class PlatformAwareTextField extends StatelessWidget {
     this.hintText,
     this.isLastField = false,
   });
-  final String name;
-  final String? hintText;
-  final bool isLastField;
 
   @override
   Widget build(BuildContext context) {
@@ -83,18 +83,14 @@ class PlatformAwareTextField extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('name', name));
-    properties.add(StringProperty('hintText', hintText));
-    properties.add(DiagnosticsProperty<bool>('isLastField', isLastField));
-  }
 }
 
 /// 一个简易的、通过InheritedWidget提供的表单导航服务
 class FormNavigationService extends InheritedWidget {
+  static FormNavigationService? of(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<FormNavigationService>();
+    return result;
+  }
 
   const FormNavigationService({
     super.key,
@@ -102,21 +98,10 @@ class FormNavigationService extends InheritedWidget {
     required this.focusNext,
     required this.submitForm,
   });
-  static FormNavigationService? of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FormNavigationService>();
-    return result;
-  }
 
   final void Function() focusNext;
   final void Function() submitForm;
 
   @override
   bool updateShouldNotify(FormNavigationService oldWidget) => false;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<void Function()>.has('focusNext', focusNext));
-    properties.add(ObjectFlagProperty<void Function()>.has('submitForm', submitForm));
-  }
 }

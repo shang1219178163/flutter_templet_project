@@ -13,12 +13,6 @@ class DrawCanvasDemo extends StatefulWidget {
 
   @override
   _DrawCanvasDemoState createState() => _DrawCanvasDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
@@ -143,12 +137,6 @@ class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }
 

@@ -168,10 +168,4 @@ class _ListenerHeaderPageState extends State<ListenerHeaderPage> {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ThemeData>('themeData', themeData));
-  }
 }

@@ -54,21 +54,6 @@ class NTagBoxNew<E> extends StatefulWidget {
 
   @override
   State<NTagBoxNew<E>> createState() => _NTagBoxNewState<E>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('keywords', keywords));
-    properties.add(IterableProperty<E>('items', items));
-    properties.add(ObjectFlagProperty<String Function(E e)>.has('titleCb', titleCb));
-    properties.add(ObjectFlagProperty<bool Function(E value, void Function(E e) onDelete)?>.has('canDelete', canDelete));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onAdd', onAdd));
-    properties.add(ObjectFlagProperty<void Function(List<E> value)>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<Radius>('radius', radius));
-    properties.add(ColorProperty('tagColor', tagColor));
-    properties.add(ColorProperty('tagAddColor', tagAddColor));
-    properties.add(IntProperty('max', max));
-  }
 }
 
 class _NTagBoxNewState<E> extends State<NTagBoxNew<E>> {

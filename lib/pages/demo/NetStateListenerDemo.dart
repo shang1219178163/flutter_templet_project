@@ -19,12 +19,6 @@ class NetStateListenerDemo extends StatefulWidget {
 
   @override
   _NetStateListenerDemoState createState() => _NetStateListenerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NetStateListenerDemoState extends State<NetStateListenerDemo> {

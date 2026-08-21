@@ -55,15 +55,4 @@ class NFilterButton extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<AssetImage>('image', image));
-    properties.add(ColorProperty('color', color));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
-  }
 }

@@ -8,12 +8,6 @@ class FloatingButtonDemoOne extends StatefulWidget {
 
   @override
   _FloatingButtonDemoOneState createState() => _FloatingButtonDemoOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _FloatingButtonDemoOneState extends State<FloatingButtonDemoOne> {

@@ -10,12 +10,6 @@ class FlexDemo extends StatefulWidget {
 
   @override
   _FlexDemoState createState() => _FlexDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _FlexDemoState extends State<FlexDemo> {
@@ -305,11 +299,5 @@ class _FlexDemoState extends State<FlexDemo> {
       height: 1,
       color: color,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('showTips', showTips));
   }
 }

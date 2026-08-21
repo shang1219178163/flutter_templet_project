@@ -18,13 +18,6 @@ class NSingleTickerStatefulBuilder<T> extends StatefulWidget {
   @override
   _NSingleTickerStatefulBuilderState createState() =>
       _NSingleTickerStatefulBuilderState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<NSingleTickerStatefulWidgetBuilder>.has('builder', builder));
-    properties.add(ObjectFlagProperty<T Function()?>.has('initFunc', initFunc));
-  }
 }
 
 class _NSingleTickerStatefulBuilderState<T>

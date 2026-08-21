@@ -137,13 +137,6 @@ class _OcrPhotoDemoState extends State<OcrPhotoDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
-    properties.add(IterableProperty<String>('urls', urls));
-  }
 }
 
 class OCRNetImageCard extends StatefulWidget {
@@ -156,12 +149,6 @@ class OCRNetImageCard extends StatefulWidget {
 
   @override
   State<OCRNetImageCard> createState() => _OCRNetImageCardState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('avatar', avatar));
-  }
 }
 
 class _OCRNetImageCardState extends State<OCRNetImageCard> with AutomaticKeepAliveClientMixin {
@@ -278,12 +265,5 @@ class _OCRNetImageCardState extends State<OCRNetImageCard> with AutomaticKeepAli
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('recognitionText', recognitionText));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isLoading', isLoading));
   }
 }

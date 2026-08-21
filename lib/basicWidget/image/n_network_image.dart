@@ -98,7 +98,7 @@ class NNetworkImage extends StatelessWidget {
         clearMemoryCacheWhenDispose: clearMemoryCacheWhenDispose,
         clearMemoryCacheIfFailed: true,
         borderRadius: borderRadius,
-        loadStateChanged: (state) {
+        loadStateChanged: (ExtendedImageState state) {
           switch (state.extendedImageLoadState) {
             case LoadState.completed:
               return null;
@@ -152,20 +152,5 @@ class NNetworkImage extends StatelessWidget {
       return null;
     }
     return px.clamp(1, maxCachePx);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('url', url));
-    properties.add(DiagnosticsProperty<AssetImage>('placeholder', placeholder));
-    properties.add(EnumProperty<BoxFit?>('fit', fit));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DiagnosticsProperty<bool>('cache', cache));
-    properties.add(DiagnosticsProperty<bool>('clearMemoryCacheWhenDispose', clearMemoryCacheWhenDispose));
-    properties.add(EnumProperty<ExtendedImageMode>('mode', mode));
   }
 }

@@ -3,17 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_file_viewer/n_file_viewer.dart';
 
 class NFileViewer extends StatefulWidget {
-  const NFileViewer({super.key, required this.path});
   final String path;
+  const NFileViewer({super.key, required this.path});
 
   @override
   State<NFileViewer> createState() => _NFileViewerState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('path', path));
-  }
 }
 
 class _NFileViewerState extends State<NFileViewer> {

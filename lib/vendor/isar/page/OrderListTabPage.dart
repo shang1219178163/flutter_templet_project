@@ -14,12 +14,6 @@ class OrderListTabPage extends StatefulWidget {
 
   @override
   State<OrderListTabPage> createState() => _OrderListTabPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _OrderListTabPageState extends State<OrderListTabPage> {
@@ -60,11 +54,5 @@ class _OrderListTabPageState extends State<OrderListTabPage> {
       case 1:
         DBManager.findController<DBOrder>().notify();
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<(String, Widget)>('items', items));
   }
 }

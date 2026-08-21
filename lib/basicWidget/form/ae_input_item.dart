@@ -213,27 +213,4 @@ class AeInputItem extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
-    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onEditingComplete', onEditingComplete));
-    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
-    properties.add(EnumProperty<TextAlign>('textAlign', textAlign));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(IntProperty('minLines', minLines));
-    properties.add(IntProperty('maxLines', maxLines));
-    properties.add(IntProperty('maxLength', maxLength));
-    properties.add(DiagnosticsProperty<bool>('softWrap', softWrap));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
-    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
-    properties.add(ColorProperty('disableBgColor', disableBgColor));
-    properties.add(ColorProperty('disableTextColor', disableTextColor));
-    properties.add(DiagnosticsProperty<bool>('showCounter', showCounter));
-    properties.add(DiagnosticsProperty<bool>('isCounterInner', isCounterInner));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-  }
 }

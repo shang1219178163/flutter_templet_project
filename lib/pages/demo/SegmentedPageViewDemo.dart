@@ -17,12 +17,6 @@ class SegmentedPageViewDemo extends StatefulWidget {
 
   @override
   State<SegmentedPageViewDemo> createState() => _SegmentedPageViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
@@ -103,12 +97,12 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
               final segmentedControl = NSlidingSegmentedControl(
                 items: items.map((e) => (title: e.title, icon: e.icon)).toList(),
                 selectedIndex: selectedIndex,
-                onChanged: (index) {
+                onChanged: (int index) {
                   DLog.d("onChanged: $index");
                   pageController.animateToPage(index, duration: Duration(milliseconds: 350), curve: Curves.ease);
                   // pageController.jumpToPage(index);
                 },
-                itemBuilder: (({String icon, String title}) e, isSelecetd) {
+                itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
                   final color = isSelecetd ? Colors.white : Color(0xff737373);
                   final icon = isSelecetd ? e.icon : e.icon;
 
@@ -181,14 +175,5 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
       },
       children: items.map((e) => e.child).toList(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
-    properties.add(IterableProperty<({Widget child, String icon, String title})>('items', items));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('selectedIndexVN', selectedIndexVN));
   }
 }

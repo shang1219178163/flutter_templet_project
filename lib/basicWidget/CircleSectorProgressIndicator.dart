@@ -70,24 +70,15 @@ class CircleSectorProgressIndicator extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progressVN', progressVN));
-    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
-  }
 }
 
 /// 扇形进度条
 class CircleSectorProgressClipper extends CustomClipper<Path> {
+  final double progress;
 
   CircleSectorProgressClipper({
     this.progress = 0,
   });
-  final double progress;
 
   @override
   Path getClip(Size size) {

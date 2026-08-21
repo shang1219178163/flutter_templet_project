@@ -15,12 +15,6 @@ class FractionallySizedBoxDemo extends StatefulWidget {
 
   @override
   _FractionallySizedBoxDemoState createState() => _FractionallySizedBoxDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _FractionallySizedBoxDemoState extends State<FractionallySizedBoxDemo> {

@@ -82,25 +82,6 @@ class AssetUploadDocumentBox extends StatefulWidget {
 
   @override
   AssetUploadDocumentBoxState createState() => AssetUploadDocumentBoxState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AssetUploadDocumentBoxController?>('controller', controller));
-    properties.add(IterableProperty<AssetUploadDocumentModel>('items', items));
-    properties.add(ObjectFlagProperty<ValueChanged<List<AssetUploadDocumentModel>>?>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onStart', onStart));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
-    properties.add(IntProperty('maxCount', maxCount));
-    properties.add(IntProperty('rowCount', rowCount));
-    properties.add(DoubleProperty('spacing', spacing));
-    properties.add(DoubleProperty('runSpacing', runSpacing));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
-    properties.add(DiagnosticsProperty<bool>('hasPlaceholder', hasPlaceholder));
-    properties.add(DiagnosticsProperty<bool>('showFileSize', showFileSize));
-    properties.add(DiagnosticsProperty<bool>('hasUrls', hasUrls));
-  }
 }
 
 class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with FilePickerMixin {
@@ -285,13 +266,6 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with Fil
 
   showToast({required String message}) {
     Text(message).toShowCupertinoDialog(context: context);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<AssetUploadDocumentModel>('selectedModels', selectedModels));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isAllUploadFinished', isAllUploadFinished));
   }
 }
 

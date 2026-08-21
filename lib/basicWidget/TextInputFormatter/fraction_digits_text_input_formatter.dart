@@ -24,7 +24,7 @@ class FractionDigitsTextInputFormatter extends TextInputFormatter {
     Pattern p = RegExp(r'(\d+\.?)|(\.?\d+)|(\.?)');
     nValue = p
         .allMatches(nValue)
-        .map<String>((match) => match.group(0) ?? "")
+        .map<String>((Match match) => match.group(0) ?? "")
         .join();
 
     // 用匹配完的字符判断

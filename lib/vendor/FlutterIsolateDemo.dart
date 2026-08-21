@@ -8,12 +8,6 @@ class FlutterIsolateDemo extends StatefulWidget {
 
   @override
   _FlutterIsolateDemoState createState() => _FlutterIsolateDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _FlutterIsolateDemoState extends State<FlutterIsolateDemo> {

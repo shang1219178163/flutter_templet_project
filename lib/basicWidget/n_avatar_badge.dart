@@ -101,18 +101,4 @@ class NAvatarBadge extends StatelessWidget {
             ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(StringProperty('url', url));
-    properties.add(DiagnosticsProperty<DecorationImage?>('decorationImage', decorationImage));
-    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
-    properties.add(DoubleProperty('badgeSize', badgeSize));
-    properties.add(StringProperty('badgeStr', badgeStr));
-    properties.add(DiagnosticsProperty<EdgeInsets>('badgePadding', badgePadding));
-    properties.add(DiagnosticsProperty<TextStyle>('badgeTextStyle', badgeTextStyle));
-  }
 }

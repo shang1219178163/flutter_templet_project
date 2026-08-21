@@ -18,12 +18,6 @@ class AutocompletePage extends StatefulWidget {
 
   @override
   State<AutocompletePage> createState() => _AutocompletePageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _AutocompletePageState extends State<AutocompletePage> {
@@ -89,7 +83,7 @@ class _AutocompletePageState extends State<AutocompletePage> {
                 displayStringForOption: (option) {
                   return option.name ?? "";
                 },
-                optionsBuilder: (textEditingValue) {
+                optionsBuilder: (TextEditingValue textEditingValue) {
                   final query = textEditingValue.text;
 
                   final result =
@@ -126,15 +120,5 @@ class _AutocompletePageState extends State<AutocompletePage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ProjectPubDepsModel>('rootModel', rootModel));
-    properties.add(IterableProperty<ProjectPackageModel>('packages', packages));
-    properties.add(DiagnosticsProperty<ValueNotifier<ProjectPackageModel?>>('packageVN', packageVN));
-    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
   }
 }

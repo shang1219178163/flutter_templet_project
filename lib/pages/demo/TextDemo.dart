@@ -13,12 +13,6 @@ class TextDemo extends StatefulWidget {
 
   @override
   State<TextDemo> createState() => _TextDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
@@ -162,7 +156,7 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
           NSlider(
             max: 100,
             leading: Text('倾斜角度'),
-            onChanged: (value) {
+            onChanged: (double value) {
               debugPrint('NNSlider onChangeEnd: $value');
               sliderVN.value = value / 100;
             },
@@ -237,12 +231,6 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<ui.TextDecoration>('textDecorations', textDecorations));
   }
 }
 

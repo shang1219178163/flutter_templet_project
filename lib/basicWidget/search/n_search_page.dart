@@ -70,15 +70,6 @@ class NSearchPage<M> extends StatefulWidget {
 
   @override
   State<NSearchPage<M>> createState() => _NSearchPageState<M>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('hint', hint));
-    properties.add(StringProperty('cacheKey', cacheKey));
-    properties.add(ObjectFlagProperty<FutureOr<List<M>> Function(String keyword)>.has('search', search));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, List<M> results)>.has('builder', builder));
-  }
 }
 
 class _NSearchPageState<M> extends State<NSearchPage<M>> {
@@ -132,7 +123,7 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
                       },
                       child: NSearchHistory(
                         items: history,
-                        onSelected: (v) {
+                        onSelected: (String v) {
                           final index = history.indexOf(v);
                           onSelectedItem(index);
                         },
@@ -181,13 +172,5 @@ class _NSearchPageState<M> extends State<NSearchPage<M>> {
     searchList = await widget.search(value);
     setState(() {});
     debugPrint(["searchList", searchList.length].join("\n"));
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('history', history));
-    properties.add(IterableProperty<M>('searchList', searchList));
-    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
   }
 }

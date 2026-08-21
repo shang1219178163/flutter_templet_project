@@ -16,18 +16,12 @@ import 'package:flutter_templet_project/model/n_expand_model.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class DragAndDropDemo extends StatefulWidget {
+  final String? title;
 
   const DragAndDropDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _DragAndDropDemoState createState() => _DragAndDropDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DragAndDropDemoState extends State<DragAndDropDemo> {
@@ -98,7 +92,7 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
   Widget buildFileVier({required NExpandModel<File> e}) {
     return FutureBuilder<String>(
       future: e.value.readAsString(),
-      builder: (context, snapshot) {
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return CircularProgressIndicator();
         }
@@ -109,7 +103,7 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
 
         final result = snapshot.data ?? "";
 
-        return StatefulBuilder(builder: (context, setState) {
+        return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -185,11 +179,5 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
       return content;
     }
     return "";
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<NExpandModel<File>>('fileList', fileList));
   }
 }

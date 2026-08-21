@@ -187,13 +187,4 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('beginX', beginX));
-    properties.add(DoubleProperty('beginY', beginY));
-    properties.add(DoubleProperty('endX', endX));
-    properties.add(DoubleProperty('endY', endY));
-  }
 }

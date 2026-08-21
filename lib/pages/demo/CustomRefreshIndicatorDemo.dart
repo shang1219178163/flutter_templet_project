@@ -14,12 +14,6 @@ class CustomRefreshIndicatorDemo extends StatefulWidget {
 
   @override
   State<CustomRefreshIndicatorDemo> createState() => _CustomRefreshIndicatorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _CustomRefreshIndicatorDemoState extends State<CustomRefreshIndicatorDemo> with SingleTickerProviderStateMixin {
@@ -188,13 +182,5 @@ class _CustomRefreshIndicatorDemoState extends State<CustomRefreshIndicatorDemo>
   Future<void> onRefresh() async {
     await Future.delayed(const Duration(seconds: 3));
     DLog.d('刷新完成');
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<TabItemRecord>('tabItems', tabItems));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

@@ -17,12 +17,6 @@ class NavigationRailDemo extends StatefulWidget {
 
   @override
   _NavigationRailDemoState createState() => _NavigationRailDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NavigationRailDemoState extends State<NavigationRailDemo> {
@@ -142,12 +136,5 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             .toList(),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<NavigationRailDestination>('destinations', destinations));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isNavigationRailExpand', isNavigationRailExpand));
   }
 }

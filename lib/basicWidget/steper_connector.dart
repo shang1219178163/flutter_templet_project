@@ -67,15 +67,6 @@ class SteperConnector extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(DoubleProperty('space', space));
-    properties.add(DoubleProperty('indent', indent));
-    properties.add(DoubleProperty('endIndent', endIndent));
-  }
 }
 
 class SteperNode extends StatelessWidget {
@@ -177,18 +168,6 @@ class SteperNode extends StatelessWidget {
         break;
     }
     return result;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(ColorProperty('color', color));
-    properties.add(DoubleProperty('indicatorSize', indicatorSize));
-    properties.add(DoubleProperty('indent', indent));
-    properties.add(DoubleProperty('endIndent', endIndent));
-    properties.add(DiagnosticsProperty<bool?>('drawStartConnector', drawStartConnector));
-    properties.add(DiagnosticsProperty<bool?>('drawEndConnector', drawEndConnector));
   }
 }
 
@@ -368,15 +347,5 @@ class NNTimelineTile extends StatelessWidget {
     );
 
     return result;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis?>('direction', direction));
-    properties.add(EnumProperty<TimelineNodeAlign>('nodeAlign', nodeAlign));
-    properties.add(DoubleProperty('nodePosition', nodePosition));
-    properties.add(DoubleProperty('mainAxisExtent', mainAxisExtent));
-    properties.add(DoubleProperty('crossAxisExtent', crossAxisExtent));
   }
 }

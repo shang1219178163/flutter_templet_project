@@ -20,13 +20,6 @@ class NCountdownBar extends StatefulWidget {
 
   @override
   State<NCountdownBar> createState() => _NCountdownBarState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<DateTime>('startTime', startTime));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onCountdownFinished', onCountdownFinished));
-  }
 }
 
 class _NCountdownBarState extends State<NCountdownBar>

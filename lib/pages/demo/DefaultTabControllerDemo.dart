@@ -9,12 +9,6 @@ class DefaultTabControllerDemo extends StatefulWidget {
 
   @override
   _DefaultTabControllerDemoState createState() => _DefaultTabControllerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> with AutomaticKeepAliveClientMixin {
@@ -173,16 +167,9 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     var nums = <int>[1, 2, 3, 4, 5];
     final sum = nums.reduce((pre, e) => pre + e);
 
-    final join = nums.fold("", (prev, e) => "$prev $e");
+    final join = nums.fold("", (prev, int e) => "$prev $e");
 
     debugPrint("sum: $sum");
     debugPrint("join: $join");
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('initialIndex', initialIndex));
-    properties.add(IterableProperty<Tuple2<Tab, Widget>>('items', items));
   }
 }

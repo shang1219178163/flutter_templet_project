@@ -9,12 +9,6 @@ class NHorizontalScrollWidgetDemo extends StatefulWidget {
 
   @override
   _NHorizontalScrollWidgetDemoState createState() => _NHorizontalScrollWidgetDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDemo> {
@@ -61,11 +55,5 @@ class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDem
     return NHorizontalScrollWidget(
       items: _items,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('imgUrls', imgUrls));
   }
 }

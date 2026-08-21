@@ -33,13 +33,6 @@ class FileBrowserPage extends StatefulWidget {
 
   @override
   State<FileBrowserPage> createState() => _FileBrowserPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Directory?>('directory', directory));
-    properties.add(ObjectFlagProperty<Future<Widget> Function(File file)?>.has('contentBuilder', contentBuilder));
-  }
 }
 
 class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheetMixin {
@@ -187,12 +180,5 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
       },
       content: contentWidget,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Directory?>('currentDirectory', currentDirectory));
-    properties.add(IterableProperty<FileSystemEntity>('files', files));
   }
 }

@@ -15,12 +15,6 @@ class ColorAnimationDemo extends StatefulWidget {
 
   @override
   State<ColorAnimationDemo> createState() => _ColorAnimationDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ColorAnimationDemoState extends State<ColorAnimationDemo> {
@@ -47,7 +41,7 @@ class _ColorAnimationDemoState extends State<ColorAnimationDemo> {
     super.initState();
 
     _timer = null;
-    _timer = Timer.periodic(const Duration(seconds: 5), (t) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       homeEnter.value = !homeEnter.value;
       awayEnter.value = !awayEnter.value;
     });
@@ -145,16 +139,6 @@ class _ColorAnimationDemoState extends State<ColorAnimationDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(IterableProperty<Color>('colors', colors));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('homeEnter', homeEnter));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('awayEnter', awayEnter));
-  }
 }
 
 class TweenSequenceColorAnimation extends StatefulWidget {
@@ -171,14 +155,6 @@ class TweenSequenceColorAnimation extends StatefulWidget {
 
   @override
   _TweenSequenceColorAnimationState createState() => _TweenSequenceColorAnimationState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Color>('colors', colors));
-    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
-    properties.add(ObjectFlagProperty<Widget Function(Color? color, Animation<Color?> anim)>.has('builder', builder));
-  }
 }
 
 class _TweenSequenceColorAnimationState extends State<TweenSequenceColorAnimation> with SingleTickerProviderStateMixin {
@@ -240,11 +216,5 @@ class _TweenSequenceColorAnimationState extends State<TweenSequenceColorAnimatio
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Color>('colors', colors));
   }
 }

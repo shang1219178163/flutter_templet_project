@@ -35,12 +35,6 @@ class MarkdownBodyDemo extends StatefulWidget {
 
   @override
   State<MarkdownBodyDemo> createState() => _MarkdownBodyDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _MarkdownBodyDemoState extends State<MarkdownBodyDemo> with AssetResourceMixin {
@@ -163,14 +157,5 @@ class _MarkdownBodyDemoState extends State<MarkdownBodyDemo> with AssetResourceM
         child: MarkdownBody(selectable: true, data: data),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<StreamController<String>>('streamController', streamController));
-    properties.add(DiagnosticsProperty<bool>('isPrinting', isPrinting));
-    properties.add(StringProperty('fullText', fullText));
-    properties.add(IntProperty('charIndex', charIndex));
   }
 }

@@ -37,16 +37,6 @@ class NWebViewPage extends StatefulWidget {
 
   @override
   NWebViewPageState createState() => NWebViewPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('url', url));
-    properties.add(ObjectFlagProperty<ValueChanged<double>?>.has('onProgress', onProgress));
-    properties.add(DiagnosticsProperty<bool>('hideAppBar', hideAppBar));
-    properties.add(DiagnosticsProperty<bool>('errorReloadAgain', errorReloadAgain));
-  }
 }
 
 class NWebViewPageState extends State<NWebViewPage> {
@@ -83,22 +73,22 @@ class NWebViewPageState extends State<NWebViewPage> {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (progress) {
+          onProgress: (int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
             progressVN.value = progress / 100.0;
             widget.onProgress?.call(progressVN.value);
           },
-          onPageStarted: (url) {
+          onPageStarted: (String url) {
             debugPrint('Page started loading: $url');
           },
-          onPageFinished: (url) {
+          onPageFinished: (String url) {
             debugPrint('Page finished loading: $url');
 
             if (progressVN.value < 1) {
               progressVN.value = 1;
             }
           },
-          onWebResourceError: (error) {
+          onWebResourceError: (WebResourceError error) {
             debugPrint('''
 Page resource error:
   code: ${error.errorCode}
@@ -114,7 +104,7 @@ Page resource error:
               }
             }
           },
-          onNavigationRequest: (request) {
+          onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
               debugPrint('blocking navigation to ${request.url}');
               return NavigationDecision.prevent;
@@ -122,17 +112,17 @@ Page resource error:
             debugPrint('allowing navigation to ${request.url}');
             return NavigationDecision.navigate;
           },
-          onUrlChange: (change) {
+          onUrlChange: (UrlChange change) {
             debugPrint('url change to ${change.url}');
           },
-          onHttpAuthRequest: (request) {
+          onHttpAuthRequest: (HttpAuthRequest request) {
             // openDialog(request);
           },
         ),
       )
       ..addJavaScriptChannel(
         'Toast',
-        onMessageReceived: (message) {
+        onMessageReceived: (JavaScriptMessage message) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message.message)),
           );
@@ -194,14 +184,6 @@ Page resource error:
     await controller.clearCache();
     await controller.clearLocalStorage();
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isFirstLoad', isFirstLoad));
-    properties.add(StringProperty('currentTitle', currentTitle));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progressVN', progressVN));
-  }
 }
 
 class WebViewNavigationControls extends StatelessWidget {
@@ -258,11 +240,5 @@ class WebViewNavigationControls extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<WebViewController>('controller', controller));
   }
 }

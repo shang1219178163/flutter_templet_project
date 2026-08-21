@@ -99,7 +99,7 @@ class NQueueToast {
           data: data,
           id: id,
           onTap: onTap,
-          onDismiss: (id) {
+          onDismiss: (int? id) {
             remove(id);
           },
           bottom: bottom,
@@ -209,21 +209,6 @@ class _NQueueToastItem extends StatefulWidget {
 
   @override
   State<_NQueueToastItem> createState() => _NQueueToastItemState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('index', index));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('data', data));
-    properties.add(IntProperty('id', id));
-    properties.add(ObjectFlagProperty<ValueChanged<int?>>.has('onDismiss', onDismiss));
-    properties.add(ObjectFlagProperty<void Function(int id)?>.has('onTap', onTap));
-    properties.add(DoubleProperty('bottom', bottom));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('spacing', spacing));
-    properties.add(DoubleProperty('horizalSpacing', horizalSpacing));
-    properties.add(DiagnosticsProperty<bool>('isReverse', isReverse));
-  }
 }
 
 class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderStateMixin {
@@ -425,18 +410,6 @@ class _NQueueToastItemState extends State<_NQueueToastItem> with TickerProviderS
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FlutterView>('current', current));
-    properties.add(DiagnosticsProperty<Size>('screenSize', screenSize));
-    properties.add(DiagnosticsProperty<AnimationController>('animController', animController));
-    properties.add(DiagnosticsProperty<Animation<Offset>>('offsetAnimation', offsetAnimation));
-    properties.add(DiagnosticsProperty<Animation<double>>('opacityAnimation', opacityAnimation));
-    properties.add(DiagnosticsProperty<AnimationController?>('reboundController', reboundController));
-    properties.add(DoubleProperty('dragOffsetX', dragOffsetX));
   }
 }
 

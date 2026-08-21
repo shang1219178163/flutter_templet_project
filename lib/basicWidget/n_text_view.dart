@@ -82,29 +82,6 @@ class NTextView extends StatefulWidget {
 
   @override
   _NTextViewState createState() => _NTextViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('value', value));
-    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
-    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<TapRegionCallback?>.has('onTapOutside', onTapOutside));
-    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
-    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
-    properties.add(StringProperty('hintText', hintText));
-    properties.add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle));
-    properties.add(IntProperty('minLines', minLines));
-    properties.add(IntProperty('maxLines', maxLines));
-    properties.add(IntProperty('maxLength', maxLength));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
-    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<bool?>('isCollapsed', isCollapsed));
-    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
-    properties.add(DiagnosticsProperty<bool>('isCounterInner', isCounterInner));
-    properties.add(ObjectFlagProperty<InputDecoration Function(InputDecoration decoration)?>.has('decorationBuilder', decorationBuilder));
-  }
 }
 
 class _NTextViewState extends State<NTextView> {
@@ -196,13 +173,5 @@ class _NTextViewState extends State<NTextView> {
         width: 1, //边线宽度为1
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('hasFocus', hasFocus));
   }
 }

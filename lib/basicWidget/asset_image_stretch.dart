@@ -63,13 +63,6 @@ class AssetImageStretch extends StatelessWidget {
     final frameInfo = await codec.getNextFrame();
     return frameInfo.image;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('path', path));
-    properties.add(DiagnosticsProperty<ui.Rect>('center', center));
-  }
 }
 
 class AssetImageStretchPainter extends CustomPainter {

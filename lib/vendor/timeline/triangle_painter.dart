@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 //自绘图像小三角
-class TrianglePainter extends CustomPainter { //绘制路径
+class TrianglePainter extends CustomPainter {
+  Color color; //填充颜色
+  // Paint painter; //画笔
+  Path path; //绘制路径
   // double angle; //角度
 
   TrianglePainter({
@@ -14,9 +17,6 @@ class TrianglePainter extends CustomPainter { //绘制路径
     //   ..color = color
     //   ..isAntiAlias = true;
   }
-  Color color; //填充颜色
-  // Paint painter; //画笔
-  Path path;
   // TrianglePainter(this.color) {
   //   _paint = Paint()
   //     ..strokeWidth = 1.0 //线宽

@@ -113,10 +113,4 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
       barrierDismissible: false,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Alignment>('topAlignment', topAlignment));
-  }
 }

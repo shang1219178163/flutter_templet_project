@@ -176,7 +176,5 @@ class NRenderSliverDecorated extends RenderProxySliver {
     super.debugFillProperties(properties);
     properties.add(_decoration.toDiagnosticsNode(name: 'decoration'));
     properties.add(DiagnosticsProperty<ImageConfiguration>('configuration', configuration));
-    properties.add(DiagnosticsProperty<Decoration>('decoration', decoration));
-    properties.add(EnumProperty<DecorationPosition>('position', position));
   }
 }

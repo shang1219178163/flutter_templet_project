@@ -21,12 +21,6 @@ class TabBarReusePageDemo extends StatefulWidget {
 
   @override
   _TabBarReusePageDemoState createState() => _TabBarReusePageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
@@ -128,11 +122,4 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
           },
         )),
   ];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isPageView', isPageView));
-    properties.add(DiagnosticsProperty<bool>('isBom', isBom));
-  }
 }

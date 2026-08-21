@@ -359,7 +359,6 @@ class EnBoxDecoration extends Decoration {
         defaultValue: null, style: DiagnosticsTreeStyle.whitespace));
     properties.add(DiagnosticsProperty<Gradient>('gradient', gradient, defaultValue: null));
     properties.add(EnumProperty<BoxShape>('shape', shape, defaultValue: BoxShape.rectangle));
-    properties.add(EnumProperty<BlendMode?>('backgroundBlendMode', backgroundBlendMode));
   }
 
   @override

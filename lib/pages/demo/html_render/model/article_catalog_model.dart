@@ -13,19 +13,6 @@ export 'article_detail_model.dart';
 
 /// 新闻分类
 class ArticleCatalogModel with NTagSortMixin {
-
-  ArticleCatalogModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    names = json['names'];
-    mine = json['mine'];
-    pageNum = json['pageNum'];
-    if (json['items'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['items'] ?? []);
-      items = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
-    }
-    tagOrder = json['tagOrder'] ?? 0; // 直接读取 mixin 字段
-    tagEnable = json['tagEnable'] ?? true;
-  }
   ArticleCatalogModel({
     this.id,
     this.names,
@@ -56,6 +43,19 @@ class ArticleCatalogModel with NTagSortMixin {
 
   @override
   int tagOrder = 0;
+
+  ArticleCatalogModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    names = json['names'];
+    mine = json['mine'];
+    pageNum = json['pageNum'];
+    if (json['items'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['items'] ?? []);
+      items = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
+    }
+    tagOrder = json['tagOrder'] ?? 0; // 直接读取 mixin 字段
+    tagEnable = json['tagEnable'] ?? true;
+  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -183,7 +183,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                           ),
                         );
                       },
-                      itemBuilder: (e, isSelected) {
+                      itemBuilder: (e, bool isSelected) {
                         final textColor = isSelected ? primary : AppColor.fontColor;
                         final iconColor = isSelected ? primary : Colors.transparent;
 
@@ -236,25 +236,5 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
       color: AppColor.fontColor,
       fontWeight: FontWeight.w400,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(IterableProperty<E>('values', values));
-    properties.add(DiagnosticsProperty<ValueNotifier<E?>?>('selectedItemVN', selectedItemVN));
-    properties.add(ObjectFlagProperty<String Function(E? e)>.has('cbName', cbName));
-    properties.add(ObjectFlagProperty<bool Function(E a, E? b)>.has('equal', equal));
-    properties.add(StringProperty('placeholder', placeholder));
-    properties.add(DiagnosticsProperty<BoxConstraints?>('constraints', constraints));
-    properties.add(ObjectFlagProperty<ValueChanged<E>>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('hideDropMenu', hideDropMenu));
-    properties.add(StringProperty('searchPlaceholder', searchPlaceholder));
-    properties.add(StringProperty('search', search));
-    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onSearchChanged', onSearchChanged));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(ObjectFlagProperty<String Function(String name)?>.has('onItemName', onItemName));
   }
 }

@@ -66,12 +66,6 @@ class RecognizeTextPage extends StatefulWidget {
 
   @override
   State<RecognizeTextPage> createState() => _RecognizeTextPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _RecognizeTextPageState extends State<RecognizeTextPage> {
@@ -474,24 +468,5 @@ class _RecognizeTextPageState extends State<RecognizeTextPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
-    properties.add(DiagnosticsProperty<ImagePicker>('picker', picker));
-    properties.add(DiagnosticsProperty<RecognizeTextService>('service', service));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('currentPage', currentPage));
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
-    properties.add(IterableProperty<RecognizeTextItem>('items', items));
-    properties.add(IntProperty('currentIndex', currentIndex));
-    properties.add(DiagnosticsProperty<bool>('isRuntimeSupported', isRuntimeSupported));
-    properties.add(DiagnosticsProperty<bool>('isCheckingSupport', isCheckingSupport));
-    properties.add(DiagnosticsProperty<Future<void>>('recognizeChain', recognizeChain));
-    properties.add(DiagnosticsProperty<RecognizeTextItem?>('currentItem', currentItem));
-    properties.add(DiagnosticsProperty<bool>('canAddMore', canAddMore));
-    properties.add(DiagnosticsProperty<bool>('canPickImage', canPickImage));
   }
 }

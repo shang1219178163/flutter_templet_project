@@ -200,13 +200,4 @@ class _TranslationTextPageState extends State<TranslationTextPage> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<OnDeviceTranslator>('translator', translator));
-    properties.add(EnumProperty<TranslateLanguage?>('sourceLanguage', sourceLanguage));
-    properties.add(EnumProperty<TranslateLanguage?>('targetLanguage', targetLanguage));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isSimulatorVN', isSimulatorVN));
-  }
 }

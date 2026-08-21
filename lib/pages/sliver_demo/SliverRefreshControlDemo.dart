@@ -16,12 +16,6 @@ class SliverRefreshControlDemo extends StatefulWidget {
 
   @override
   State<SliverRefreshControlDemo> createState() => _SliverRefreshControlDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
@@ -157,15 +151,5 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
       loadController.resetState(noMore: noMore);
     }
     setState(() {});
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<String>('list', list));
-    properties.add(IntProperty('page', page));
-    properties.add(IntProperty('pageSize', pageSize));
-    properties.add(DiagnosticsProperty<NLoadMoreController>('loadController', loadController));
   }
 }

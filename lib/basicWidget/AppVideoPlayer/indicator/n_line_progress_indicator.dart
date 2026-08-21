@@ -67,18 +67,6 @@ class NLineProgressIndicator extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('width', width));
-    properties.add(DiagnosticsProperty<AssetImage>('prefix', prefix));
-    properties.add(DoubleProperty('prefixSize', prefixSize));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(ColorProperty('progressValueColor', progressValueColor));
-    properties.add(ColorProperty('progressBgColor', progressBgColor));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('valueVN', valueVN));
-  }
 }
 
 /// 视频音量指示器

@@ -75,15 +75,4 @@ class ImGroupAvatar extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
-    properties.add(StringProperty('avatar', avatar));
-    properties.add(DiagnosticsProperty<AssetImage>('placeholder', placeholder));
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('subtitle', subtitle));
-    properties.add(DiagnosticsProperty<bool>('hasSubtitle', hasSubtitle));
-  }
 }

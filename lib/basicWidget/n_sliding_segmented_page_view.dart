@@ -35,15 +35,6 @@ class NSlidingSegmentedPageView extends StatefulWidget {
 
   @override
   State<NSlidingSegmentedPageView> createState() => _NSlidingSegmentedPageViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<({Widget child, String icon, String title})>('items', items));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
-    properties.add(ObjectFlagProperty<Widget Function(NSlidingSegmentedControl segmentedControl)?>.has('segmentedBuilder', segmentedBuilder));
-    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('middleBuilder', middleBuilder));
-  }
 }
 
 class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
@@ -91,7 +82,7 @@ class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
               final segmentedControl = NSlidingSegmentedControl(
                 items: widget.items.map((e) => (title: e.title, icon: e.icon)).toList(),
                 selectedIndex: index,
-                onChanged: (page) {
+                onChanged: (int page) {
                   pageController.animateToPage(page, duration: Duration(milliseconds: 350), curve: Curves.ease);
                   // pageController.jumpToPage(index);
                 },
@@ -130,12 +121,5 @@ class _NSlidingSegmentedPageViewState extends State<NSlidingSegmentedPageView> {
       },
       children: widget.items.map((e) => e.child).toList(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('selectedIndexVN', selectedIndexVN));
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
   }
 }

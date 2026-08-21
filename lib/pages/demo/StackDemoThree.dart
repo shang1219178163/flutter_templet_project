@@ -13,12 +13,6 @@ class StackDemoThree extends StatefulWidget {
 
   @override
   State<StackDemoThree> createState() => _StackDemoThreeState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _StackDemoThreeState extends State<StackDemoThree> {
@@ -138,7 +132,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
         ),
         ListenableBuilder(
           listenable: provider,
-          builder: (context, child) {
+          builder: (context, Widget? child) {
             var top = provider.topOffset == -1 ? (provider.isExpanded ? _maxTop : _minTop) : provider.topOffset;
 
             final args = {
@@ -169,7 +163,7 @@ class _StackDemoThreeState extends State<StackDemoThree> {
   Widget buildWrap() {
     final list = List.generate(8, (i) => i);
 
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -195,13 +189,6 @@ class _StackDemoThreeState extends State<StackDemoThree> {
       );
     });
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<CategoryProviderThree>('provider', provider));
-  }
 }
 
 class HotScreenViewThree extends StatefulWidget {
@@ -214,12 +201,6 @@ class HotScreenViewThree extends StatefulWidget {
 
   @override
   State<HotScreenViewThree> createState() => _HotScreenViewThreeState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _HotScreenViewThreeState extends State<HotScreenViewThree> {
@@ -327,7 +308,7 @@ class _HotScreenViewThreeState extends State<HotScreenViewThree> {
   Widget buildWrap() {
     final list = List.generate(16, (i) => i);
 
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -354,14 +335,6 @@ class _HotScreenViewThreeState extends State<HotScreenViewThree> {
         ],
       );
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
-    properties.add(IterableProperty<({Color color, String title})>('leftItems', leftItems));
   }
 }
 

@@ -14,12 +14,6 @@ class APIConvertPage extends StatefulWidget {
 
   @override
   State<APIConvertPage> createState() => _APIConvertPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 // ignore: deprecated_member_use_from_same_package -- 已弃用页面，保留兼容
@@ -541,13 +535,5 @@ class TagGetApi extends BaseRequestAPI{
     // var str1 = str.toUncamlCase();
     // debugPrint("str1: $str1");
     onGenerate();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('rootClassNameStr', rootClassNameStr));
-    properties.add(StringProperty('jsonStr', jsonStr));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('outVN', outVN));
   }
 }

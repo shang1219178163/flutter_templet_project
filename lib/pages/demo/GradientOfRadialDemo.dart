@@ -9,12 +9,6 @@ class GradientOfRadialDemo extends StatefulWidget {
 
   @override
   _GradientOfRadialDemoState createState() => _GradientOfRadialDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
@@ -86,7 +80,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
             ),
           )
           .toList(),
-      onChanged: (value) {
+      onChanged: (Alignment? value) {
         if (value == null) {
           return;
         }
@@ -155,14 +149,5 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('maxWidth', maxWidth));
-    properties.add(DoubleProperty('maxHeight', maxHeight));
-    properties.add(DiagnosticsProperty<bool>('isGreed', isGreed));
-    properties.add(DiagnosticsProperty<bool>('isDiagonal', isDiagonal));
   }
 }

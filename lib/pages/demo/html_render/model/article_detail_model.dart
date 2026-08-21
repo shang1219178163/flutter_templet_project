@@ -2,6 +2,14 @@ import 'package:flutter_templet_project/pages/demo/html_render/model/article_rel
 import 'package:flutter_templet_project/pages/demo/html_render/model/article_sport_item_model.dart';
 
 class ArticleListDataModel {
+  ArticleListDataModel({
+    this.total,
+    this.items,
+  });
+
+  int? total;
+
+  List<ArticleDetailModel>? items;
 
   ArticleListDataModel.fromJson(Map<String, dynamic> json) {
     total = json['total'];
@@ -11,14 +19,6 @@ class ArticleListDataModel {
       items = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
     }
   }
-  ArticleListDataModel({
-    this.total,
-    this.items,
-  });
-
-  int? total;
-
-  List<ArticleDetailModel>? items;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -30,33 +30,6 @@ class ArticleListDataModel {
 
 /// 资讯详情
 class ArticleDetailModel {
-
-  ArticleDetailModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    sportId = json['sportId'];
-    top = json['top'];
-    title = json['title'];
-    thumb = json['thumb'];
-    thumbType = json['thumbType'];
-    type = json['type'];
-    visitTimes = json['visitTimes'];
-    createTime = json['createTime'];
-    context = json['context'];
-    if (json['relevantArticles'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['relevantArticles'] ?? []);
-      relevantArticles = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
-    }
-    if (json['sportItems'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['sportItems'] ?? []);
-      sportItems = array.map((e) => ArticleSportItemModel.fromJson(e)).toList();
-    }
-    if (json['relevantMatch'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['relevantMatch'] ?? []);
-      relevantMatch = array.map((e) => ArticleRelevantMatch.fromJson(e)).toList();
-    }
-    isVideo = json['isVideo'];
-    videoTime = json['videoTime'];
-  }
   ArticleDetailModel({
     this.id,
     this.sportId,
@@ -122,6 +95,33 @@ class ArticleDetailModel {
     //   tag = "战报";
     // }
     return tag;
+  }
+
+  ArticleDetailModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    sportId = json['sportId'];
+    top = json['top'];
+    title = json['title'];
+    thumb = json['thumb'];
+    thumbType = json['thumbType'];
+    type = json['type'];
+    visitTimes = json['visitTimes'];
+    createTime = json['createTime'];
+    context = json['context'];
+    if (json['relevantArticles'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['relevantArticles'] ?? []);
+      relevantArticles = array.map((e) => ArticleDetailModel.fromJson(e)).toList();
+    }
+    if (json['sportItems'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['sportItems'] ?? []);
+      sportItems = array.map((e) => ArticleSportItemModel.fromJson(e)).toList();
+    }
+    if (json['relevantMatch'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['relevantMatch'] ?? []);
+      relevantMatch = array.map((e) => ArticleRelevantMatch.fromJson(e)).toList();
+    }
+    isVideo = json['isVideo'];
+    videoTime = json['videoTime'];
   }
 
   Map<String, dynamic> toJson() {

@@ -164,13 +164,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       hideAppBar: true,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
-    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
-  }
 }
 
 /// 元祖总数组

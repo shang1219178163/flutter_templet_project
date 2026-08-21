@@ -7,12 +7,6 @@ class InputDatePickerFormFieldDemo extends StatefulWidget {
 
   @override
   _InputDatePickerFormFieldDemoState createState() => _InputDatePickerFormFieldDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _InputDatePickerFormFieldDemoState extends State<InputDatePickerFormFieldDemo> {
@@ -71,13 +65,5 @@ class _InputDatePickerFormFieldDemoState extends State<InputDatePickerFormFieldD
               ))
           .toList(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<DateTime>('firstDate', firstDate));
-    properties.add(DiagnosticsProperty<DateTime>('lastDate', lastDate));
-    properties.add(DiagnosticsProperty<DateTime>('selectedDate', selectedDate));
   }
 }

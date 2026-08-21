@@ -11,27 +11,6 @@ typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index
 typedef XHomeSwiperItemWidgetBuilder = Widget Function(int index);
 
 class XHorizontalScrollWidget extends StatelessWidget {
-
-  XHorizontalScrollWidget({
-    super.key,
-    this.title,
-    required this.width,
-    this.height = double.infinity,
-    this.padding = EdgeInsets.zero,
-    this.margin = EdgeInsets.zero,
-    this.bg,
-    this.bgBuilder,
-    this.itemBuilder,
-    this.showCount = 2.5,
-    this.startLeft = 12,
-    this.endRight = 12,
-    this.gap = 8,
-    this.items = const [],
-    this.radius = const Radius.circular(8),
-    this.boxShadow,
-    this.isSwiper = false,
-    required this.onTap,
-  });
   final String? title;
   final List<Tuple4<String, String, String, bool>> items;
 
@@ -53,6 +32,27 @@ class XHorizontalScrollWidget extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
 
   final void Function(Tuple4<String, String, String, bool> e) onTap;
+
+  XHorizontalScrollWidget({
+    super.key,
+    this.title,
+    required this.width,
+    this.height = double.infinity,
+    this.padding = EdgeInsets.zero,
+    this.margin = EdgeInsets.zero,
+    this.bg,
+    this.bgBuilder,
+    this.itemBuilder,
+    this.showCount = 2.5,
+    this.startLeft = 12,
+    this.endRight = 12,
+    this.gap = 8,
+    this.items = const [],
+    this.radius = const Radius.circular(8),
+    this.boxShadow,
+    this.isSwiper = false,
+    required this.onTap,
+  });
 
   double getItemWidth() {
     var w = width - padding.left - padding.right;
@@ -261,7 +261,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.all(radius),
         child: Swiper(
-          itemBuilder: (context, index) {
+          itemBuilder: (BuildContext context, int index) {
             final e = items[index];
             return buildItem(context: context, e: e);
           },
@@ -277,33 +277,17 @@ class XHorizontalScrollWidget extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<Tuple4<String, String, String, bool>>('items', items));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
-    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
-    properties.add(DiagnosticsProperty<ImageProvider<Object>?>('bg', bg));
-    properties.add(ObjectFlagProperty<XHomeSwiperItemWidgetBuilder?>.has('itemBuilder', itemBuilder));
-    properties.add(ObjectFlagProperty<XHomeSwiperBGWidgetBuilder?>.has('bgBuilder', bgBuilder));
-    properties.add(DoubleProperty('showCount', showCount));
-    properties.add(DoubleProperty('startLeft', startLeft));
-    properties.add(DoubleProperty('endRight', endRight));
-    properties.add(DoubleProperty('gap', gap));
-    properties.add(DiagnosticsProperty<Radius>('radius', radius));
-    properties.add(DiagnosticsProperty<bool>('isSwiper', isSwiper));
-    properties.add(IterableProperty<BoxShadow>('boxShadow', boxShadow));
-    properties.add(ObjectFlagProperty<void Function(Tuple4<String, String, String, bool> e)>.has('onTap', onTap));
-  }
 }
 
 class _SynHomeSwiperTitleWidget extends StatelessWidget {
   const _SynHomeSwiperTitleWidget({
     Key? key,
+    this.text,
+    this.maxLines,
+    this.style,
+    this.title,
+    this.padding,
+    this.alignment,
   }) : super(key: key);
 
   final String? text;
@@ -354,17 +338,6 @@ class _SynHomeSwiperTitleWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-    properties.add(IntProperty('maxLines', maxLines));
-    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(DiagnosticsProperty<Alignment?>('alignment', alignment));
   }
 }
 
@@ -551,20 +524,5 @@ class HorizontalScrollWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<Tuple4<String, String, String, bool>>('items', items));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('gap', gap));
-    properties.add(DiagnosticsProperty<bool>('isSwiper', isSwiper));
-    properties.add(DoubleProperty('showCount', showCount));
-    properties.add(DiagnosticsProperty<Radius>('radius', radius));
-    properties.add(DiagnosticsProperty<bool>('isVideo', isVideo));
-    properties.add(DoubleProperty('itemWidth', itemWidth));
   }
 }

@@ -42,18 +42,6 @@ class NPinnedTabBarPage extends StatefulWidget {
 
   @override
   State<NPinnedTabBarPage> createState() => _NPinnedTabBarPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('expandedHeight', expandedHeight));
-    properties.add(IterableProperty<({Widget child, Tab tab})>('tabItems', tabItems));
-    properties.add(ColorProperty('backgroudColor', backgroudColor));
-    properties.add(ColorProperty('labelColor', labelColor));
-    properties.add(EnumProperty<TabAlignment>('tabAlignment', tabAlignment));
-    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
-    properties.add(DiagnosticsProperty<EdgeInsets>('labelPadding', labelPadding));
-  }
 }
 
 class _NPinnedTabBarPageState extends State<NPinnedTabBarPage> with SingleTickerProviderStateMixin {
@@ -118,7 +106,7 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage> with SingleTicker
     return DefaultTabController(
       length: tabItems.length,
       child: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           final top = MediaQuery.of(context).viewPadding.top + kToolbarHeight;
 
           return <Widget>[
@@ -197,11 +185,5 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage> with SingleTicker
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

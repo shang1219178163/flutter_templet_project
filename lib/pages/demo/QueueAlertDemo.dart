@@ -14,12 +14,6 @@ class QueueAlertDemo extends StatefulWidget {
 
   @override
   State<QueueAlertDemo> createState() => _QueueAlertDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _QueueAlertDemoState extends State<QueueAlertDemo> {
@@ -83,14 +77,6 @@ class _QueueAlertDemoState extends State<QueueAlertDemo> {
 
     intercepts.intercept(DialogPass('你确定你要阅读全部协议吗1？', 1));
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-  }
 }
 
 class InterceptChain<T> {
@@ -127,10 +113,10 @@ class InterceptChainHandler<T> {
 }
 
 class DialogPass {
-
-  DialogPass(this.msg, this.passType);
   String? msg;
   int passType = 0;
+
+  DialogPass(this.msg, this.passType);
 }
 
 class TipsIntercept extends InterceptChain<DialogPass> {

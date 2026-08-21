@@ -87,28 +87,6 @@ class NFilterDropBox extends StatefulWidget {
 
   @override
   State<NFilterDropBox> createState() => _NFilterDropBoxState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NFilterDropBoxController?>('controller', controller));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onCancel', onCancel));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onReset', onReset));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onConfirm', onConfirm));
-    properties.add(DiagnosticsProperty<AlignmentGeometry>('stackAlignment', stackAlignment));
-    properties.add(EnumProperty<TextDirection?>('stackTextDirection', stackTextDirection));
-    properties.add(EnumProperty<StackFit>('stackFit', stackFit));
-    properties.add(EnumProperty<Clip>('stackClipBehavior', stackClipBehavior));
-    properties.add(DiagnosticsProperty<Alignment>('contentAlignment', contentAlignment));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('heightFactor', heightFactor));
-    properties.add(ColorProperty('barrierColor', barrierColor));
-    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onVisible', onVisible));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context)?>.has('header', header));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context)?>.has('footer', footer));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, Widget buttonBar)?>.has('buttonBar', buttonBar));
-  }
 }
 
 class _NFilterDropBoxState extends State<NFilterDropBox> {
@@ -140,7 +118,7 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
         widget.child,
         ValueListenableBuilder<bool>(
           valueListenable: isVisible,
-          builder: (context, value, child) {
+          builder: (context, bool value, child) {
             if (!value) {
               return SizedBox();
             }
@@ -261,13 +239,6 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
   void onToggle() {
     isVisible.value = !isVisible.value;
     widget.onVisible?.call(isVisible.value);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isVisible', isVisible));
   }
 }
 

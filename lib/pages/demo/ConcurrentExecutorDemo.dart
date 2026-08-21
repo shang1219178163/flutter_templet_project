@@ -14,12 +14,6 @@ class ConcurrentExecutorDemo extends StatefulWidget {
 
   @override
   State<ConcurrentExecutorDemo> createState() => _ConcurrentExecutorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ConcurrentExecutorDemoState extends State<ConcurrentExecutorDemo> {
@@ -92,17 +86,6 @@ class _ConcurrentExecutorDemoState extends State<ConcurrentExecutorDemo> {
     await executor.waitForEmpty();
     DLog.d('All tasks complete');
     descVN.value += "[$timeStr]All tasks complete ${executor.isComplete}\n";
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(IntProperty('taskCount', taskCount));
-    properties.add(IntProperty('maxConcurrent', maxConcurrent));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('descVN', descVN));
-    properties.add(StringProperty('timeStr', timeStr));
   }
 }
 

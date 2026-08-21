@@ -19,12 +19,6 @@ class WebviewDemo extends StatefulWidget {
 
   @override
   State<WebviewDemo> createState() => _WebviewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _WebviewDemoState extends State<WebviewDemo> {
@@ -94,11 +88,5 @@ class _WebviewDemoState extends State<WebviewDemo> {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('fullUrl', fullUrl));
   }
 }

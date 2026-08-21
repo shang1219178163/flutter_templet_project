@@ -9,18 +9,12 @@
 import 'package:flutter/material.dart';
 
 class OverflowBarDemo extends StatefulWidget {
+  final String? title;
 
   const OverflowBarDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _OverflowBarDemoState createState() => _OverflowBarDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _OverflowBarDemoState extends State<OverflowBarDemo> {

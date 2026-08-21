@@ -80,25 +80,6 @@ class AppWebViewPage extends StatefulWidget {
 
   @override
   State<AppWebViewPage> createState() => _AppWebViewPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AppWebViewPageController?>('controller', controller));
-    properties.add(StringProperty('url', url));
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('htmlContent', htmlContent));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onBack', onBack));
-    properties.add(DiagnosticsProperty<bool>('canShare', canShare));
-    properties.add(DiagnosticsProperty<bool>('hideAppBar', hideAppBar));
-    properties.add(DiagnosticsProperty<bool>('hideSkeletonScreen', hideSkeletonScreen));
-    properties.add(DiagnosticsProperty<bool?>('javaScriptEnabled', javaScriptEnabled));
-    properties.add(DiagnosticsProperty<bool?>('mediaPlaybackRequiresUserGesture', mediaPlaybackRequiresUserGesture));
-    properties.add(ObjectFlagProperty<void Function(InAppWebViewController controller)?>.has('onWebViewCreated', onWebViewCreated));
-    properties.add(ObjectFlagProperty<void Function(InAppWebViewController controller, WebUri? url)?>.has('onLoadStart', onLoadStart));
-    properties.add(ObjectFlagProperty<void Function(InAppWebViewController controller, WebUri? url)?>.has('onLoadStop', onLoadStop));
-    properties.add(ObjectFlagProperty<Future<NavigationActionPolicy?> Function(InAppWebViewController controller, NavigationAction navigationAction)?>.has('shouldOverrideUrlLoading', shouldOverrideUrlLoading));
-  }
 }
 
 class _AppWebViewPageState extends State<AppWebViewPage> {
@@ -447,19 +428,6 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
     DLog.d("当前播放视频的链接: $videoUrl");
     return videoUrl;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progressVN', progressVN));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('titleVN', titleVN));
-    properties.add(DiagnosticsProperty<bool>('isFirst', isFirst));
-    properties.add(DiagnosticsProperty<InAppWebViewSettings>('settings', settings));
-    properties.add(DiagnosticsProperty<bool>('isAssetPath', isAssetPath));
-    properties.add(DiagnosticsProperty<bool>('isInFullScreenMode', isInFullScreenMode));
-    properties.add(DiagnosticsProperty<bool?>('fullScreenLandscape', fullScreenLandscape));
-    properties.add(IterableProperty<VideoElementDetailModel>('videoModels', videoModels));
-  }
 }
 
 class AppWebViewPageController {
@@ -481,15 +449,6 @@ class AppWebViewPageController {
 
 /// 视频标签<Video>模型
 class VideoElementDetailModel {
-
-  VideoElementDetailModel.fromJson(Map<String, dynamic> json) {
-    src = json['src'];
-    type = json['type'];
-    poster = json['poster'];
-    controls = json['controls'];
-    width = json['width'];
-    height = json['height'];
-  }
   VideoElementDetailModel({
     this.src,
     this.type,
@@ -510,6 +469,15 @@ class VideoElementDetailModel {
   bool get isHorizontal {
     final result = (width ?? "auto").compareTo(height ?? "auto") >= 0;
     return result;
+  }
+
+  VideoElementDetailModel.fromJson(Map<String, dynamic> json) {
+    src = json['src'];
+    type = json['type'];
+    poster = json['poster'];
+    controls = json['controls'];
+    width = json['width'];
+    height = json['height'];
   }
 
   Map<String, dynamic> toJson() {

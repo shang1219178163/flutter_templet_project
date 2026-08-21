@@ -7,7 +7,6 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
@@ -68,24 +67,6 @@ class NCustomScrollViewForModel<T> extends StatefulWidget {
 
   @override
   State<NCustomScrollViewForModel<T>> createState() => _NCustomScrollViewForModelState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NRefreshController<T>?>('controller', controller));
-    properties.add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<bool>('notRefresh', notRefresh));
-    properties.add(DiagnosticsProperty<bool>('notLoad', notLoad));
-    properties.add(DiagnosticsProperty<Widget?>('placeholder', placeholder));
-    properties.add(DiagnosticsProperty<Widget?>('skeletonScreen', skeletonScreen));
-    properties.add(DiagnosticsProperty<Decoration>('contentDecoration', contentDecoration));
-    properties.add(DiagnosticsProperty<EdgeInsets>('contentPadding', contentPadding));
-    properties.add(DiagnosticsProperty<bool>('onlyHeader', onlyHeader));
-    properties.add(ObjectFlagProperty<RequestModelCallback<T>>.has('onRequest', onRequest));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, T? model)>.has('builder', builder));
-    properties.add(ObjectFlagProperty<List<Widget> Function(BuildContext context, T? m)>.has('headerBuilder', headerBuilder));
-    properties.add(ObjectFlagProperty<List<Widget> Function(BuildContext context, T? m)>.has('footerBuilder', footerBuilder));
-  }
 }
 
 class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel<T>>
@@ -95,6 +76,9 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
 
   // @override
   // late RequestModelCallback<T> onRequest = widget.onRequest;
+
+  /// 首次加载
+  var isFirstLoad = true;
 
   @override
   void dispose() {
@@ -111,6 +95,7 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (item == null) {
         await onRefresh();
+        isFirstLoad = false;
       }
     });
   }
@@ -133,14 +118,11 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   Widget build(BuildContext context) {
     super.build(context);
 
-    if (firstLoad && widget.skeletonScreen != null) {
+    if (isFirstLoad && widget.skeletonScreen != null) {
       return widget.skeletonScreen!;
     }
 
     if (item == null && !widget.onlyHeader) {
-      if (firstLoad) {
-        return const SizedBox.shrink();
-      }
       return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
     }
 
@@ -167,9 +149,6 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
 
   Widget buildContent() {
     if (item == null) {
-      if (firstLoad) {
-        return const SizedBox.shrink();
-      }
       return SliverToBoxAdapter(child: widget.placeholder);
     }
 

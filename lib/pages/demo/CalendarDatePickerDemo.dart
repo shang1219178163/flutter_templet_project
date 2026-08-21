@@ -11,18 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class CalendarDatePickerDemo extends StatefulWidget {
+  final String? title;
 
   const CalendarDatePickerDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _CalendarDatePickerDemoState createState() => _CalendarDatePickerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
@@ -65,7 +59,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
 
     return CalendarDatePicker(
       // initialCalendarMode: DatePickerMode.year,
-      onDateChanged: (value) {
+      onDateChanged: (DateTime value) {
         debugPrint(value.toString());
       },
       firstDate: DateTime(2020, 6, 0), // 开始日期
@@ -96,7 +90,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
         // minimumDate: DateTime(2020, 6),
         // maximumDate: DateTime(2023, 6),
         dateOrder: DatePickerDateOrder.ymd,
-        onDateTimeChanged: (newDateTime) {
+        onDateTimeChanged: (DateTime newDateTime) {
           // Do something
         },
       ),
@@ -116,11 +110,5 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
         selectedDate = picked;
       });
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<DateTime>('selectedDate', selectedDate));
   }
 }

@@ -7,6 +7,13 @@
 //
 
 class OssAuthModel {
+  String? accessKeyId;
+  String? accessKeySecret;
+  String? securityToken;
+  String? regionId;
+  String? bucket;
+  String? basePath;
+  int? expiration;
 
   OssAuthModel({
     this.accessKeyId,
@@ -27,13 +34,6 @@ class OssAuthModel {
     basePath = json['basePath'];
     expiration = json['expiration'];
   }
-  String? accessKeyId;
-  String? accessKeySecret;
-  String? securityToken;
-  String? regionId;
-  String? bucket;
-  String? basePath;
-  int? expiration;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

@@ -9,12 +9,6 @@ class CustomMultiChildLayoutDemo extends StatefulWidget {
 
   @override
   _CustomMultiChildLayoutDemoState createState() => _CustomMultiChildLayoutDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo> with SingleTickerProviderStateMixin {

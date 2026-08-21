@@ -9,12 +9,6 @@ class DashLineDemo extends StatefulWidget {
 
   @override
   _DashLineDemoState createState() => _DashLineDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DashLineDemoState extends State<DashLineDemo> {

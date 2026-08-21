@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 
 ///时间选择器
 class NDatePicker extends StatelessWidget {
+  final String? title;
+  final CupertinoDatePickerMode? mode;
+  final DateTime? initialDateTime;
+  final DateTime? minimumDate;
+  final DateTime? maximumDate;
+  final ValueChanged<DateTime> onDateTimeChanged;
+  final Widget? cancellChild;
+  final Widget? confirmChild;
+  final VoidCallback cancellOnPressed;
+  final VoidCallback confirmOnPressed;
+
+  final double? datePickerHeight;
 
   ///时间选择器
   const NDatePicker({
@@ -19,18 +31,6 @@ class NDatePicker extends StatelessWidget {
     required this.cancellOnPressed,
     required this.confirmOnPressed,
   }) : assert(datePickerHeight != null);
-  final String? title;
-  final CupertinoDatePickerMode? mode;
-  final DateTime? initialDateTime;
-  final DateTime? minimumDate;
-  final DateTime? maximumDate;
-  final ValueChanged<DateTime> onDateTimeChanged;
-  final Widget? cancellChild;
-  final Widget? confirmChild;
-  final VoidCallback cancellOnPressed;
-  final VoidCallback confirmOnPressed;
-
-  final double? datePickerHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -80,19 +80,5 @@ class NDatePicker extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(EnumProperty<CupertinoDatePickerMode?>('mode', mode));
-    properties.add(DiagnosticsProperty<DateTime?>('initialDateTime', initialDateTime));
-    properties.add(DiagnosticsProperty<DateTime?>('minimumDate', minimumDate));
-    properties.add(DiagnosticsProperty<DateTime?>('maximumDate', maximumDate));
-    properties.add(ObjectFlagProperty<ValueChanged<DateTime>>.has('onDateTimeChanged', onDateTimeChanged));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('cancellOnPressed', cancellOnPressed));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('confirmOnPressed', confirmOnPressed));
-    properties.add(DoubleProperty('datePickerHeight', datePickerHeight));
   }
 }

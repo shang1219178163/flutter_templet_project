@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ListSubtitleCell extends StatelessWidget {
-
-  const ListSubtitleCell({
-    Key? key,
-    this.leading,
-    required this.title,
-    this.subtitle,
-    this.trailing,
-    this.subtrailing,
-    this.padding,
-    this.spacing = 8,
-  }) : super(key: key);
   final EdgeInsetsGeometry? padding;
 
   final double spacing;
@@ -26,6 +15,17 @@ class ListSubtitleCell extends StatelessWidget {
   final Widget? trailing;
 
   final Widget? subtrailing;
+
+  const ListSubtitleCell({
+    Key? key,
+    this.leading,
+    required this.title,
+    this.subtitle,
+    this.trailing,
+    this.subtrailing,
+    this.padding,
+    this.spacing = 8,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +67,5 @@ class ListSubtitleCell extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('padding', padding));
-    properties.add(DoubleProperty('spacing', spacing));
   }
 }

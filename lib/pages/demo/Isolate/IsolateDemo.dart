@@ -13,12 +13,6 @@ class IsolateDemo extends StatefulWidget {
 
   @override
   State<IsolateDemo> createState() => _IsolateDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _IsolateDemoState extends State<IsolateDemo> with AutomaticKeepAliveClientMixin {
@@ -115,12 +109,5 @@ class _IsolateDemoState extends State<IsolateDemo> with AutomaticKeepAliveClient
         ].map((e) => SliverToBoxAdapter(child: e)).toList(),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('initialIndex', initialIndex));
-    properties.add(IterableProperty<Tuple2<Tab, Widget>>('items', items));
   }
 }

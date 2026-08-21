@@ -48,13 +48,6 @@ class NConvertView extends StatefulWidget {
 
   @override
   NConvertViewState createState() => NConvertViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NTransformViewController?>('controller', controller));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context)>.has('toolbarBuilder', toolbarBuilder));
-  }
 }
 
 class NConvertViewState extends State<NConvertView> {
@@ -308,19 +301,6 @@ class NConvertViewState extends State<NConvertView> {
             );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('extraController', extraController));
-    properties.add(DiagnosticsProperty<FocusNode>('extraFocusNode', extraFocusNode));
-    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollControllerRight', scrollControllerRight));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('outVN', outVN));
-    properties.add(IterableProperty<File>('files', files));
   }
 }
 

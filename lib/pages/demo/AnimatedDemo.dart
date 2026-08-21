@@ -13,18 +13,12 @@ import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class AnimatedDemo extends StatefulWidget {
+  final String? title;
 
   AnimatedDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _AnimatedDemoState createState() => _AnimatedDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMixin {
@@ -255,7 +249,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("ScaleTransition"),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
-            transitionBuilder: (child, animation) {
+            transitionBuilder: (Widget child, Animation<double> animation) {
               //执行缩放动画
               return ScaleTransition(
                 scale: animation,
@@ -294,7 +288,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("NSlideTransition"),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
-            transitionBuilder: (child, animation) {
+            transitionBuilder: (Widget child, Animation<double> animation) {
               return NSlideTransition(
                 direction: AxisDirection.up, //上入下出
                 position: animation,
@@ -333,7 +327,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("LineSlideTransition"),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
-            transitionBuilder: (child, animation) {
+            transitionBuilder: (Widget child, Animation<double> animation) {
               final tween = Tween<Offset>(
                 begin: Offset(0, 1),
                 end: Offset(0, 0),
@@ -423,15 +417,5 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NColorFlashAnimController>('colorController', colorController));
-    properties.add(DiagnosticsProperty<NColorFlashAnimController>('colorControllerOne', colorControllerOne));
-    properties.add(DoubleProperty('size', size));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isLoading', isLoading));
-    properties.add(StringProperty('pageTitle', pageTitle));
   }
 }

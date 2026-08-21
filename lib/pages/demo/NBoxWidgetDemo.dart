@@ -18,12 +18,6 @@ class NBoxWidgetDemo extends StatefulWidget {
 
   @override
   _NBoxWidgetDemoState createState() => _NBoxWidgetDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
@@ -131,13 +125,5 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
         // height: 200.0,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<LinearGradient>('bgGradient', bgGradient));
-    properties.add(IterableProperty<BoxShadow>('boxShadows', boxShadows));
-    properties.add(DiagnosticsProperty<Border>('border', border));
   }
 }

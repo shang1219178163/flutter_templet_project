@@ -15,12 +15,6 @@ class SearchDemo extends StatefulWidget {
 
   @override
   _SearchDemoState createState() => _SearchDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SearchDemoState extends State<SearchDemo> {
@@ -74,7 +68,7 @@ class _SearchDemoState extends State<SearchDemo> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) {
+        builder: (BuildContext context) {
           return NSearchPage<UserModel>(
             hint: '搜索用户',
             cacheKey: "SearchHistory",
@@ -116,7 +110,7 @@ class _SearchDemoState extends State<SearchDemo> {
   Widget buildHistory() {
     return NSearchHistory(
       items: items,
-      onSelected: (v) {
+      onSelected: (String v) {
         DLog.d(v);
       },
       onClear: () {
@@ -166,7 +160,7 @@ class _SearchDemoState extends State<SearchDemo> {
       suggestionsBuilder: (context, controller) {
         return List<Widget>.generate(
           5,
-          (i) {
+          (int i) {
             final item = 'item $i';
             return buildItem(
                 url: AppRes.image.urls[i],
@@ -207,11 +201,5 @@ class _SearchDemoState extends State<SearchDemo> {
         onTap: onTap,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
   }
 }

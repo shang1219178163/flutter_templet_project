@@ -21,12 +21,6 @@ class RebuildChainPage extends StatefulWidget {
 
   @override
   State<RebuildChainPage> createState() => _RebuildChainPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _RebuildChainPageState extends State<RebuildChainPage> {
@@ -167,16 +161,6 @@ class _RebuildChainPageState extends State<RebuildChainPage> {
   void clearLogs() {
     logsVN.value = [];
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<String>>>('logsVN', logsVN));
-    properties.add(IntProperty('parentCount', parentCount));
-    properties.add(IntProperty('childValue', childValue));
-  }
 }
 
 class _RebuildChainChild extends StatefulWidget {
@@ -190,13 +174,6 @@ class _RebuildChainChild extends StatefulWidget {
 
   @override
   State<_RebuildChainChild> createState() => _RebuildChainChildState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('value', value));
-    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onLog', onLog));
-  }
 }
 
 class _RebuildChainChildState extends State<_RebuildChainChild> {
@@ -246,12 +223,6 @@ class _RebuildChainChildState extends State<_RebuildChainChild> {
     widget.onLog('触发 Child.setState → local=$localCount');
     setState(() {});
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('localCount', localCount));
-  }
 }
 
 class _RebuildChainGrandChild extends StatefulWidget {
@@ -265,13 +236,6 @@ class _RebuildChainGrandChild extends StatefulWidget {
 
   @override
   State<_RebuildChainGrandChild> createState() => _RebuildChainGrandChildState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('value', value));
-    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onLog', onLog));
-  }
 }
 
 class _RebuildChainGrandChildState extends State<_RebuildChainGrandChild> {

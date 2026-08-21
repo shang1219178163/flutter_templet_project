@@ -21,16 +21,6 @@ class NRollingCountDown extends StatefulWidget {
 
   @override
   State<NRollingCountDown> createState() => _NRollingCountDownState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(ObjectFlagProperty<Widget Function(String v)?>.has('dayBuilder', dayBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(String v)?>.has('hourBuilder', hourBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(String v)?>.has('minuteBuilder', minuteBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(String v)?>.has('secondBuilder', secondBuilder));
-  }
 }
 
 class _NRollingCountDownState extends State<NRollingCountDown> {
@@ -139,13 +129,6 @@ class _NRollingCountDownState extends State<NRollingCountDown> {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(DiagnosticsProperty<Timer?>('timer', timer));
-  }
 }
 
 class RollingDigit extends StatelessWidget {
@@ -208,12 +191,5 @@ class RollingDigit extends StatelessWidget {
         child: builder(digit),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('digit', digit));
-    properties.add(ObjectFlagProperty<Widget Function(String digit)>.has('builder', builder));
   }
 }

@@ -15,12 +15,6 @@ class DateRangePickerDialogDemo extends StatefulWidget {
 
   @override
   _DateRangePickerDialogDemoState createState() => _DateRangePickerDialogDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> with SingleTickerProviderStateMixin {
@@ -106,12 +100,5 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
       currentDate: DateTime(2022, 10, 8),
     );
     debugPrint(range.toString());
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<DatePickerEntryMode>('models', models));
-    properties.add(EnumProperty<DatePickerEntryMode>('model', model));
   }
 }

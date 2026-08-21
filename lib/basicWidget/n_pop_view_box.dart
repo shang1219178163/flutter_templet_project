@@ -42,23 +42,6 @@ class NPopViewBox extends StatefulWidget {
 
   @override
   _NPopViewBoxState createState() => _NPopViewBoxState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('divderColor', divderColor));
-    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
-    properties.add(DiagnosticsProperty<Radius>('radius', radius));
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancell', onCancell));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
-    properties.add(DoubleProperty('contentMaxHeight', contentMaxHeight));
-    properties.add(DoubleProperty('contentMinHeight', contentMinHeight));
-    properties.add(DoubleProperty('buttonBarHeight', buttonBarHeight));
-    properties.add(DiagnosticsProperty<EdgeInsets>('contentPadding', contentPadding));
-    properties.add(ObjectFlagProperty<StatefulWidgetBuilder?>.has('contentChildBuilder', contentChildBuilder));
-    properties.add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController));
-  }
 }
 
 class _NPopViewBoxState extends State<NPopViewBox> {

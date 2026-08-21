@@ -56,7 +56,7 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
       body: DefaultTabController(
         length: tabItems.length,
         child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             Color backgroudColor = Colors.blue;
             var labelColor = Colors.white;
 
@@ -198,7 +198,7 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
           // 列表 100 行
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) {
+              (BuildContext context, int index) {
                 return ListTile(title: Text('Item $index'));
               },
               childCount: 100,
@@ -215,7 +215,7 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
       sliver: SliverFixedExtentList(
         itemExtent: 48.0,
         delegate: SliverChildBuilderDelegate(
-          (context, index) {
+          (BuildContext context, int index) {
             return ListTile(
               title: Text('$name - $index'),
             );
@@ -224,11 +224,5 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<({Widget child, Tab tab})>('tabItems', tabItems));
   }
 }

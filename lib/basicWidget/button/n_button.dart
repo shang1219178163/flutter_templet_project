@@ -121,7 +121,7 @@ class NButton extends StatelessWidget {
   final Clip? clipBehavior;
 
   /// 按钮状态控制器。
-  final WidgetStatesController? statesController;
+  final MaterialStatesController? statesController;
 
   /// 是否为语义化按钮，仅 [NButtonType.text] 生效。
   final bool? isSemanticButton;
@@ -685,44 +685,5 @@ class NButton extends StatelessWidget {
         child: content,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<NButtonType>('type', type));
-    properties.add(DiagnosticsProperty<BoxConstraints?>('constraints', constraints));
-    properties.add(DiagnosticsProperty<Size?>('minimumSize', minimumSize));
-    properties.add(DiagnosticsProperty<Size?>('fixedSize', fixedSize));
-    properties.add(DiagnosticsProperty<Size?>('maximumSize', maximumSize));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onLongPress', onLongPress));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onHover', onHover));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onFocusChange', onFocusChange));
-    properties.add(DiagnosticsProperty<ButtonStyle?>('style', style));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DiagnosticsProperty<BorderSide?>('side', side));
-    properties.add(ColorProperty('primary', primary));
-    properties.add(DiagnosticsProperty<Gradient?>('gradient', gradient));
-    properties.add(DiagnosticsProperty<Gradient?>('disabledGradient', disabledGradient));
-    properties.add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>('disabledTextStyle', disabledTextStyle));
-    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
-    properties.add(EnumProperty<Clip?>('clipBehavior', clipBehavior));
-    properties.add(DiagnosticsProperty<WidgetStatesController?>('statesController', statesController));
-    properties.add(DiagnosticsProperty<bool?>('isSemanticButton', isSemanticButton));
-    properties.add(EnumProperty<IconAlignment>('iconAlignment', iconAlignment));
-    properties.add(StringProperty('tooltip', tooltip));
-    properties.add(DiagnosticsProperty<bool>('isDisabled', isDisabled));
-    properties.add(DiagnosticsProperty<bool>('supportsGradientType', supportsGradientType));
-    properties.add(DiagnosticsProperty<Gradient?>('effectiveGradient', effectiveGradient));
-    properties.add(DiagnosticsProperty<bool>('canUseGradient', canUseGradient));
-    properties.add(DiagnosticsProperty<TextStyle>('effectiveTextStyle', effectiveTextStyle));
-    properties.add(ColorProperty('foregroundColor', foregroundColor));
-    properties.add(ColorProperty('disabledForegroundColor', disabledForegroundColor));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('visualOnPressed', visualOnPressed));
-    properties.add(DiagnosticsProperty<OutlinedBorder>('buttonShape', buttonShape));
   }
 }

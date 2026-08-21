@@ -14,12 +14,6 @@ class TwoDimensionalGridViewDemo extends StatefulWidget {
 
   @override
   State<TwoDimensionalGridViewDemo> createState() => _TwoDimensionalGridViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo> {
@@ -68,7 +62,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             delegate: TwoDimensionalChildBuilderDelegate(
               maxXIndex: 9,
               maxYIndex: 9,
-              builder: (context, vicinity) {
+              builder: (BuildContext context, ChildVicinity vicinity) {
                 final xyEven = vicinity.xIndex.isEven && vicinity.yIndex.isEven;
                 final xyOdd = vicinity.xIndex.isOdd && vicinity.yIndex.isOdd;
 
@@ -88,12 +82,6 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<DiagonalDragBehavior>('diagonalDragBehavior', diagonalDragBehavior));
   }
 }
 
@@ -136,13 +124,6 @@ class TwoDimensionalGridView extends TwoDimensionalScrollView {
       itemWidth: itemWidth,
       itemHeight: itemHeight,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
   }
 }
 
@@ -197,13 +178,6 @@ class TwoDimensionalGridViewport extends TwoDimensionalViewport {
       ..clipBehavior = clipBehavior
       ..itemWidth = itemWidth
       ..itemHeight = itemHeight;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
   }
 }
 
@@ -298,12 +272,5 @@ class RenderTwoDimensionalGridViewport extends RenderTwoDimensionalViewport {
       clampDouble(horizontalExtent - viewportDimension.width, 0.0, double.infinity),
     );
     // Super class handles garbage collection too!
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
   }
 }

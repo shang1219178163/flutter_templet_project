@@ -17,12 +17,6 @@ class VideoPlayerDemo extends StatefulWidget {
 
   @override
   State<VideoPlayerDemo> createState() => _VideoPlayerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
@@ -120,18 +114,5 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
     IconData? icon =
         _controller.value.isPlaying ? Icons.pause : Icons.play_arrow;
     return Icon(icon);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<VideoPlayerValue>('videoPlayerValue', videoPlayerValue));
-    properties.add(DiagnosticsProperty<bool>('isInitialized', isInitialized));
-    properties.add(DiagnosticsProperty<bool>('isPlaying', isPlaying));
-    properties.add(DoubleProperty('aspectRatio', aspectRatio));
-    properties.add(DiagnosticsProperty<bool>('isBuffer', isBuffer));
-    properties.add(DiagnosticsProperty<bool>('isLoop', isLoop));
-    properties.add(DiagnosticsProperty<Duration>('totalDuration', totalDuration));
-    properties.add(DiagnosticsProperty<Duration>('currentDuration', currentDuration));
   }
 }

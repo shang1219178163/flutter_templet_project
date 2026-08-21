@@ -123,13 +123,6 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AppTabBarController>('appController', appController));
-    properties.add(IterableProperty<Tuple3<String, IconData, VoidCallback>>('items', items));
-  }
 }
 
 class BottomSheetHelper {

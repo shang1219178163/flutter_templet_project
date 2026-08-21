@@ -15,12 +15,6 @@ class IgnorePointerDemo extends StatefulWidget {
 
   @override
   _IgnorePointerDemoState createState() => _IgnorePointerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _IgnorePointerDemoState extends State<IgnorePointerDemo> {

@@ -21,13 +21,6 @@ class NTypeWriterText extends StatefulWidget {
 
   @override
   State<NTypeWriterText> createState() => _NTypeWriterTextState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-    properties.add(ObjectFlagProperty<Widget Function(String value)?>.has('onChanged', onChanged));
-  }
 }
 
 class _NTypeWriterTextState extends State<NTypeWriterText>
@@ -74,13 +67,5 @@ class _NTypeWriterTextState extends State<NTypeWriterText>
   Widget build(BuildContext context) {
     return widget.onChanged?.call(displayedText) ??
         Text(displayedText, style: TextStyle(fontSize: 16));
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-    properties.add(StringProperty('displayedText', displayedText));
-    properties.add(IntProperty('charPosition', charPosition));
   }
 }

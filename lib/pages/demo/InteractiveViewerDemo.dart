@@ -8,12 +8,6 @@ class InteractiveViewerDemo extends StatefulWidget {
 
   @override
   _InteractiveViewerDemoState createState() => _InteractiveViewerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _InteractiveViewerDemoState extends State<InteractiveViewerDemo> {

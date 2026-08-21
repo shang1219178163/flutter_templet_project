@@ -11,12 +11,6 @@ export 'ShopGoodsDetailModel.dart';
 
 /// 熊猫币全部礼物
 class ShopGoodsRootModel {
-
-  ShopGoodsRootModel.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    msg = json['msg'];
-    data = json['data'] != null ? ShopGoodsDataModel.fromJson(json['data'] as Map<String, dynamic>) : null;
-  }
   ShopGoodsRootModel({
     this.code,
     this.msg,
@@ -28,6 +22,12 @@ class ShopGoodsRootModel {
   String? msg;
 
   ShopGoodsDataModel? data;
+
+  ShopGoodsRootModel.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    msg = json['msg'];
+    data = json['data'] != null ? ShopGoodsDataModel.fromJson(json['data'] as Map<String, dynamic>) : null;
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -41,6 +41,14 @@ class ShopGoodsRootModel {
 }
 
 class ShopGoodsDataModel {
+  ShopGoodsDataModel({
+    this.balance,
+    this.goodsList,
+  });
+
+  int? balance;
+
+  List<ShopGoodsCategoryModel>? goodsList;
 
   ShopGoodsDataModel.fromJson(Map<String, dynamic> json) {
     balance = json['balance'];
@@ -50,14 +58,6 @@ class ShopGoodsDataModel {
       goodsList = array.map((e) => ShopGoodsCategoryModel.fromJson(e)).toList();
     }
   }
-  ShopGoodsDataModel({
-    this.balance,
-    this.goodsList,
-  });
-
-  int? balance;
-
-  List<ShopGoodsCategoryModel>? goodsList;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

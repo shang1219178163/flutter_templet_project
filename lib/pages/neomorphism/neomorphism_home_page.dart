@@ -11,12 +11,6 @@ class NeomorphismHomePage extends StatefulWidget {
 
   @override
   _NeomorphismHomePageState createState() => _NeomorphismHomePageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NeomorphismHomePageState extends State<NeomorphismHomePage> {
@@ -72,12 +66,5 @@ class _NeomorphismHomePageState extends State<NeomorphismHomePage> {
         },
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<Tuple2<StatefulWidget, String>>('tuples', tuples));
   }
 }

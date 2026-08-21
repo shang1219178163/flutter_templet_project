@@ -13,12 +13,6 @@ class BadgeDemo extends StatefulWidget {
 
   @override
   State<BadgeDemo> createState() => _BadgeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _BadgeDemoState extends State<BadgeDemo> {
@@ -228,11 +222,5 @@ class _BadgeDemoState extends State<BadgeDemo> {
         child: buildCustomBadge(badge: badgeStr),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('badge', badge));
   }
 }

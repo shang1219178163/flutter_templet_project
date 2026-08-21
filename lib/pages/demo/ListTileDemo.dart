@@ -10,18 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class ListTileDemo extends StatefulWidget {
+  final String? title;
 
   const ListTileDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _ListTileDemoState createState() => _ListTileDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ListTileDemoState extends State<ListTileDemo> {
@@ -127,7 +121,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
       ValueChanged<String>? cb,
       Widget? header,
       Widget? footer}) {
-    return StatefulBuilder(builder: (context, setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Column(
         children: [
           if (header != null) header,
@@ -153,11 +147,5 @@ class _ListTileDemoState extends State<ListTileDemo> {
         ],
       );
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('sexValue', sexValue));
   }
 }

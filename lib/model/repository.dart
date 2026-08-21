@@ -7,6 +7,84 @@
 //
 
 class Repository {
+  int? id;
+  String? nodeId;
+  String? name;
+  String? fullName;
+  bool? private;
+  Owner? owner;
+  String? htmlUrl;
+  String? description;
+  bool? fork;
+  String? url;
+  String? forksUrl;
+  String? keysUrl;
+  String? collaboratorsUrl;
+  String? teamsUrl;
+  String? hooksUrl;
+  String? issueEventsUrl;
+  String? eventsUrl;
+  String? assigneesUrl;
+  String? branchesUrl;
+  String? tagsUrl;
+  String? blobsUrl;
+  String? gitTagsUrl;
+  String? gitRefsUrl;
+  String? treesUrl;
+  String? statusesUrl;
+  String? languagesUrl;
+  String? stargazersUrl;
+  String? contributorsUrl;
+  String? subscribersUrl;
+  String? subscriptionUrl;
+  String? commitsUrl;
+  String? gitCommitsUrl;
+  String? commentsUrl;
+  String? issueCommentUrl;
+  String? contentsUrl;
+  String? compareUrl;
+  String? mergesUrl;
+  String? archiveUrl;
+  String? downloadsUrl;
+  String? issuesUrl;
+  String? pullsUrl;
+  String? milestonesUrl;
+  String? notificationsUrl;
+  String? labelsUrl;
+  String? releasesUrl;
+  String? deploymentsUrl;
+  String? createdAt;
+  String? updatedAt;
+  String? pushedAt;
+  String? gitUrl;
+  String? sshUrl;
+  String? cloneUrl;
+  String? svnUrl;
+  String? homepage;
+  int? size;
+  int? stargazersCount;
+  int? watchersCount;
+  String? language;
+  bool? hasIssues;
+  bool? hasProjects;
+  bool? hasDownloads;
+  bool? hasWiki;
+  bool? hasPages;
+  int? forksCount;
+  String? mirrorUrl;
+  bool? archived;
+  bool? disabled;
+  int? openIssuesCount;
+  License? license;
+  bool? allowForking;
+  bool? isTemplate;
+  List<String>? topics;
+  String? visibility;
+  int? forks;
+  int? openIssues;
+  int? watchers;
+  String? defaultBranch;
+  Permissions? permissions;
 
   Repository(
       {this.id,
@@ -172,84 +250,6 @@ class Repository {
         ? Permissions.fromJson(json['permissions'])
         : null;
   }
-  int? id;
-  String? nodeId;
-  String? name;
-  String? fullName;
-  bool? private;
-  Owner? owner;
-  String? htmlUrl;
-  String? description;
-  bool? fork;
-  String? url;
-  String? forksUrl;
-  String? keysUrl;
-  String? collaboratorsUrl;
-  String? teamsUrl;
-  String? hooksUrl;
-  String? issueEventsUrl;
-  String? eventsUrl;
-  String? assigneesUrl;
-  String? branchesUrl;
-  String? tagsUrl;
-  String? blobsUrl;
-  String? gitTagsUrl;
-  String? gitRefsUrl;
-  String? treesUrl;
-  String? statusesUrl;
-  String? languagesUrl;
-  String? stargazersUrl;
-  String? contributorsUrl;
-  String? subscribersUrl;
-  String? subscriptionUrl;
-  String? commitsUrl;
-  String? gitCommitsUrl;
-  String? commentsUrl;
-  String? issueCommentUrl;
-  String? contentsUrl;
-  String? compareUrl;
-  String? mergesUrl;
-  String? archiveUrl;
-  String? downloadsUrl;
-  String? issuesUrl;
-  String? pullsUrl;
-  String? milestonesUrl;
-  String? notificationsUrl;
-  String? labelsUrl;
-  String? releasesUrl;
-  String? deploymentsUrl;
-  String? createdAt;
-  String? updatedAt;
-  String? pushedAt;
-  String? gitUrl;
-  String? sshUrl;
-  String? cloneUrl;
-  String? svnUrl;
-  String? homepage;
-  int? size;
-  int? stargazersCount;
-  int? watchersCount;
-  String? language;
-  bool? hasIssues;
-  bool? hasProjects;
-  bool? hasDownloads;
-  bool? hasWiki;
-  bool? hasPages;
-  int? forksCount;
-  String? mirrorUrl;
-  bool? archived;
-  bool? disabled;
-  int? openIssuesCount;
-  License? license;
-  bool? allowForking;
-  bool? isTemplate;
-  List<String>? topics;
-  String? visibility;
-  int? forks;
-  int? openIssues;
-  int? watchers;
-  String? defaultBranch;
-  Permissions? permissions;
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
@@ -342,6 +342,24 @@ class Repository {
 }
 
 class Owner {
+  String? login;
+  int? id;
+  String? nodeId;
+  String? avatarUrl;
+  String? gravatarId;
+  String? url;
+  String? htmlUrl;
+  String? followersUrl;
+  String? followingUrl;
+  String? gistsUrl;
+  String? starredUrl;
+  String? subscriptionsUrl;
+  String? organizationsUrl;
+  String? reposUrl;
+  String? eventsUrl;
+  String? receivedEventsUrl;
+  String? type;
+  bool? siteAdmin;
 
   Owner(
       {this.login,
@@ -383,24 +401,6 @@ class Owner {
     type = json['type'];
     siteAdmin = json['site_admin'];
   }
-  String? login;
-  int? id;
-  String? nodeId;
-  String? avatarUrl;
-  String? gravatarId;
-  String? url;
-  String? htmlUrl;
-  String? followersUrl;
-  String? followingUrl;
-  String? gistsUrl;
-  String? starredUrl;
-  String? subscriptionsUrl;
-  String? organizationsUrl;
-  String? reposUrl;
-  String? eventsUrl;
-  String? receivedEventsUrl;
-  String? type;
-  bool? siteAdmin;
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
@@ -427,6 +427,11 @@ class Owner {
 }
 
 class License {
+  String? key;
+  String? name;
+  String? spdxId;
+  String? url;
+  String? nodeId;
 
   License({this.key, this.name, this.spdxId, this.url, this.nodeId});
 
@@ -437,11 +442,6 @@ class License {
     url = json['url'];
     nodeId = json['node_id'];
   }
-  String? key;
-  String? name;
-  String? spdxId;
-  String? url;
-  String? nodeId;
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
@@ -455,6 +455,11 @@ class License {
 }
 
 class Permissions {
+  bool? admin;
+  bool? maintain;
+  bool? push;
+  bool? triage;
+  bool? pull;
 
   Permissions({this.admin, this.maintain, this.push, this.triage, this.pull});
 
@@ -465,11 +470,6 @@ class Permissions {
     triage = json['triage'];
     pull = json['pull'];
   }
-  bool? admin;
-  bool? maintain;
-  bool? push;
-  bool? triage;
-  bool? pull;
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

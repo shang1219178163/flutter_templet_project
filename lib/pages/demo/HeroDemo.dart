@@ -10,12 +10,6 @@ class HeroDemo extends StatefulWidget {
 
   @override
   State<HeroDemo> createState() => _HeroDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _HeroDemoState extends State<HeroDemo> {
@@ -137,12 +131,6 @@ class _HeroDemoState extends State<HeroDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-  }
 }
 
 class HeroAnimationDetailPage extends StatelessWidget {
@@ -170,11 +158,5 @@ class HeroAnimationDetailPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('heroTag', heroTag));
   }
 }

@@ -5,9 +5,9 @@ import 'package:flutter/foundation.dart';
 
 /// AudioSession 音频理类
 class AudioSessionManager {
+  static final AudioSessionManager _instance = AudioSessionManager._();
   AudioSessionManager._();
   factory AudioSessionManager() => _instance;
-  static final AudioSessionManager _instance = AudioSessionManager._();
 
   /// 播放器: 是否外放
   bool isSpeaker = true;
@@ -129,12 +129,6 @@ class AudioSessionManager {
 }
 
 class AudioSessionSoundPlayerModel {
-
-  AudioSessionSoundPlayerModel.fromJson(Map<String, dynamic> json) {
-    data = json['data'] ?? {};
-    onPlay = json['onPlay'];
-    onStop = json['onStop'];
-  }
   AudioSessionSoundPlayerModel({
     this.data,
     this.onPlay,
@@ -149,6 +143,12 @@ class AudioSessionSoundPlayerModel {
 
   /// 停止播放
   Future<void> Function()? onStop;
+
+  AudioSessionSoundPlayerModel.fromJson(Map<String, dynamic> json) {
+    data = json['data'] ?? {};
+    onPlay = json['onPlay'];
+    onStop = json['onStop'];
+  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

@@ -19,12 +19,6 @@ class MediaQueryDemo extends StatefulWidget {
 
   @override
   _MediaQueryDemoState createState() => _MediaQueryDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObserver {
@@ -332,17 +326,6 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     Tuple2("boldText", "平台是否要求使用粗体。"),
     Tuple2("orientation", "是横屏还是竖屏。"),
   ];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('labelText', labelText));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<MediaQueryData>('mediaQuery', mediaQuery));
-    properties.add(DiagnosticsProperty<Size>('screenSize', screenSize));
-    properties.add(IterableProperty<Tuple3<String, String, String>>('tips', tips));
-    properties.add(IterableProperty<Tuple2<String, String>>('items', items));
-  }
 }
 
 bool isTuple(Object? obj) {

@@ -8,12 +8,6 @@ class ExtendedImageDemo extends StatefulWidget {
 
   @override
   _ExtendedImageDemoState createState() => _ExtendedImageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
@@ -51,7 +45,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
           // border: Border.all(color: Colors.red, width: 1.0),
           // borderRadius: BorderRadius.all(Radius.circular(30.0)),
           //cancelToken: cancellationToken,
-          loadStateChanged: (state) {
+          loadStateChanged: (ExtendedImageState state) {
         if (state.extendedImageLoadState != LoadState.completed) {
           return Icon(
             Icons.photo,

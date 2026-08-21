@@ -15,12 +15,6 @@ class IrregularClipperDemo extends StatefulWidget {
 
   @override
   State<IrregularClipperDemo> createState() => _IrregularClipperDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _IrregularClipperDemoState extends State<IrregularClipperDemo> {
@@ -192,14 +186,6 @@ class _IrregularClipperDemoState extends State<IrregularClipperDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }
 

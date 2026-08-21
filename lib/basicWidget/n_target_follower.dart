@@ -62,23 +62,6 @@ class NTargetFollower extends StatefulWidget {
 
   @override
   _NTargetFollowerState createState() => _NTargetFollowerState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NTargetFollowerController?>('controller', controller));
-    properties.add(DiagnosticsProperty<Alignment>('targetAnchor', targetAnchor));
-    properties.add(DiagnosticsProperty<Alignment>('followerAnchor', followerAnchor));
-    properties.add(ObjectFlagProperty<Alignment Function(BuildContext context, LongPressStartDetails details)?>.has('targetAnchorBuilder', targetAnchorBuilder));
-    properties.add(ObjectFlagProperty<Alignment Function(BuildContext context, LongPressStartDetails details)?>.has('followerAnchorBuilder', followerAnchorBuilder));
-    properties.add(DiagnosticsProperty<bool>('showWhenUnlinked', showWhenUnlinked));
-    properties.add(DiagnosticsProperty<Offset>('offset', offset));
-    properties.add(ObjectFlagProperty<Offset Function(BuildContext context, LongPressStartDetails details)?>.has('offsetBuilder', offsetBuilder));
-    properties.add(ObjectFlagProperty<GestureTapCallback?>.has('onTap', onTap));
-    properties.add(ObjectFlagProperty<GestureLongPressEndCallback?>.has('onLongPressEnd', onLongPressEnd));
-    properties.add(IterableProperty<OverlayEntry>('entries', entries));
-    properties.add(ObjectFlagProperty<VoidCallbackWidgetBuilder?>.has('followerBuilder', followerBuilder));
-  }
 }
 
 class _NTargetFollowerState extends State<NTargetFollower> {
@@ -175,7 +158,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
   }) {
     indicatorOffset = localPosition;
     return OverlayEntry(
-      builder: (context) => UnconstrainedBox(
+      builder: (BuildContext context) => UnconstrainedBox(
         child: CompositedTransformFollower(
           link: layerLink,
           targetAnchor: widget.targetAnchorBuilder?.call(context, details) ?? widget.targetAnchor,
@@ -186,14 +169,6 @@ class _NTargetFollowerState extends State<NTargetFollower> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<LayerLink>('layerLink', layerLink));
-    properties.add(DiagnosticsProperty<bool>('isShowing', isShowing));
-    properties.add(DiagnosticsProperty<Offset>('indicatorOffset', indicatorOffset));
   }
 }
 

@@ -143,7 +143,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   }
 
   Widget buildBody() {
-    return Builder(builder: (context) {
+    return Builder(builder: (BuildContext context) {
       return RepaintBoundary(
         key: globalKey,
         child: Container(
@@ -256,15 +256,5 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     messenger
       ..clearMaterialBanners()
       ..showMaterialBanner(banner);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('globalKey', globalKey));
-    properties.add(EnumProperty<SnackBarBehavior>('behavior', behavior));
-    properties.add(DiagnosticsProperty<SnackbarController?>('snackbarController', snackbarController));
-    properties.add(IterableProperty<({void Function() action, String title})>('footerItems', footerItems));
-    properties.add(DiagnosticsProperty<ScaffoldMessengerState?>('pageMessenger', pageMessenger));
   }
 }

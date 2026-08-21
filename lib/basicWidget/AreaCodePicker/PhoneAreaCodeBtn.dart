@@ -29,18 +29,6 @@ class PhoneAreaCodeBtn<T> extends StatefulWidget {
 
   @override
   State<PhoneAreaCodeBtn<T>> createState() => _PhoneAreaCodeBtnState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap));
-    properties.add(DiagnosticsProperty<ValueNotifier<T?>>('valueVN', valueVN));
-    properties.add(ObjectFlagProperty<String Function(T? e)>.has('nameCb', nameCb));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(DiagnosticsProperty<bool>('hasArrow', hasArrow));
-    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
-    properties.add(DoubleProperty('dividerHeight', dividerHeight));
-  }
 }
 
 class _PhoneAreaCodeBtnState<T> extends State<PhoneAreaCodeBtn<T>> {

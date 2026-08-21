@@ -15,12 +15,6 @@ class SliverMainAxisGroupDemo extends StatefulWidget {
 
   @override
   State<SliverMainAxisGroupDemo> createState() => _SliverMainAxisGroupDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
@@ -190,7 +184,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
             sliver: SliverPadding(
               padding: const EdgeInsets.all(0.8),
               sliver: SliverList.separated(
-                itemBuilder: (_, index) {
+                itemBuilder: (_, int index) {
                   return Container(
                     // margin: const EdgeInsets.all(8),
                     padding: const EdgeInsets.all(8.0),

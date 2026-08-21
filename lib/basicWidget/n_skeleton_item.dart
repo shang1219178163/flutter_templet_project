@@ -9,13 +9,13 @@
 import 'package:flutter/material.dart';
 
 class NSkeletonItem extends StatelessWidget {
+  /// Scrollable direction.
+  final Axis direction;
 
   const NSkeletonItem({
     super.key,
     this.direction = Axis.vertical,
   });
-  /// Scrollable direction.
-  final Axis direction;
 
   @override
   Widget build(BuildContext context) {
@@ -119,11 +119,5 @@ class NSkeletonItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('direction', direction));
   }
 }

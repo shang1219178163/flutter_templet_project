@@ -14,8 +14,8 @@ class PinnedHeaderSliverDemo extends StatelessWidget {
             pinned: true, // 确保标题在顶部固定
             min: 60.0,
             max: 120.0,
-            builder: (context, shrinkOffset,
-                overlapsContent) {
+            builder: (BuildContext context, double shrinkOffset,
+                bool overlapsContent) {
               return Container(
                 color: Colors.blue,
                 alignment: Alignment.center,

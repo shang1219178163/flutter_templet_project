@@ -113,13 +113,4 @@ class AiChatInputBar extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AiChatController>('controller', controller));
-    properties.add(DiagnosticsProperty<TextEditingController>('inputController', inputController));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onSendOrStop', onSendOrStop));
-  }
 }

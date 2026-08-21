@@ -530,7 +530,7 @@ void _paintImage({
     // as an upper bound for the display size of the image.
     final maxDevicePixelRatio = PaintingBinding.instance.platformDispatcher.views.fold(
       0.0,
-      (previousValue, view) => math.max(previousValue, view.devicePixelRatio),
+      (double previousValue, ui.FlutterView view) => math.max(previousValue, view.devicePixelRatio),
     );
     final sizeInfo = ImageSizeInfo(
       // Some ImageProvider implementations may not have given this.
@@ -599,7 +599,7 @@ void _paintImage({
         _pendingImageSizeInfo[sizeInfo.source!] = sizeInfo;
       }
       debugOnPaintImage?.call(sizeInfo);
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
         _lastFrameImageSizeInfo = _pendingImageSizeInfo.values.toSet();
         if (_pendingImageSizeInfo.isEmpty) {
           return;

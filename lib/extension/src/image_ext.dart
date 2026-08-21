@@ -67,7 +67,7 @@ extension ImageProviderExt on ImageProvider {
     final completer = Completer<ImageInfo>();
     resolve(configuration).addListener(
       ImageStreamListener(
-        (imageInfo, _) async {
+        (ImageInfo imageInfo, bool _) async {
           // imageInfo.image.dispose();
           completer.complete(imageInfo);
           evict();
@@ -79,7 +79,7 @@ extension ImageProviderExt on ImageProvider {
           final progress = event.cumulativeBytesLoaded / event.expectedTotalBytes!.clamp(0.0, 1.0);
           onProgress?.call(progress);
         },
-        onError: (exception, stackTrace) {
+        onError: (Object exception, StackTrace? stackTrace) {
           completer.completeError(exception, stackTrace);
           evict();
         },
@@ -148,9 +148,9 @@ extension ImageCacheExt on ImageCache {
 
   /// evict images
   static evictImages(List<String> urls) {
-    for (final e in urls) {
+    urls.forEach((e) {
       Object key = NetworkImage(e, scale: 1.0);
       PaintingBinding.instance.imageCache.evict(key, includeLive: true);
-    }
+    });
   }
 }

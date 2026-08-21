@@ -22,15 +22,6 @@ class DiscussTitleBar extends StatefulWidget {
 
   @override
   State<DiscussTitleBar> createState() => _DiscussTitleBarState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hasIndicator', hasIndicator));
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
-    properties.add(DiagnosticsProperty<bool>('isHot', isHot));
-  }
 }
 
 class _DiscussTitleBarState extends State<DiscussTitleBar>
@@ -117,11 +108,4 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
 
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('scaffoldBackgroundColor', scaffoldBackgroundColor));
-    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
-  }
 }

@@ -44,16 +44,6 @@ class AnimatedGroup extends StatefulWidget {
 
   @override
   AnimatedGroupState createState() => AnimatedGroupState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('data', data));
-    properties.add(IterableProperty<AnimatedGroupItemModel>('animations', animations));
-    properties.add(ObjectFlagProperty<AnimatedGroupBuilder>.has('builder', builder));
-    properties.add(DiagnosticsProperty<AnimationController?>('controller', controller));
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-  }
 }
 
 /// 混合动画 State
@@ -83,7 +73,7 @@ class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMi
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller!,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return widget.builder(context, child, _animations);
       },
       child: widget.child,
@@ -126,12 +116,6 @@ class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMi
         curve: Curves.ease,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
   }
 }
 

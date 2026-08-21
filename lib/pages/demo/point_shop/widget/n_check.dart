@@ -39,11 +39,4 @@ class NCheck extends StatelessWidget {
       height: size,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isSelected', isSelected));
-    properties.add(DoubleProperty('size', size));
-  }
 }

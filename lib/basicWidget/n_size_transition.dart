@@ -30,14 +30,6 @@ class NSizeTransition extends StatefulWidget {
 
   @override
   _NSizeTransitionState createState() => _NSizeTransitionState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('axis', axis));
-    properties.add(DoubleProperty('axisAlignment', axisAlignment));
-    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
-  }
 }
 
 class _NSizeTransitionState extends State<NSizeTransition> with SingleTickerProviderStateMixin {
@@ -72,11 +64,5 @@ class _NSizeTransitionState extends State<NSizeTransition> with SingleTickerProv
       axis: widget.axis,
       child: widget.child,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
   }
 }

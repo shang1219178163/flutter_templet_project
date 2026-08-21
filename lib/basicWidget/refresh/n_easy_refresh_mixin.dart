@@ -24,10 +24,6 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 );
 
 abstract interface class NRefreshable {
-  /// 首次请求结束前不展示占位图。
-  bool get firstLoad;
-  set firstLoad(bool value);
-
   bool get isLoading;
   set isLoading(bool value);
 
@@ -135,15 +131,6 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
     _indicator = value;
   }
 
-  /// 首次请求结束前不展示占位图。
-  bool _firstLoad = false;
-  @override
-  bool get firstLoad => _firstLoad;
-  @override
-  set firstLoad(bool value) {
-    _firstLoad = value;
-  }
-
   bool _isLoading = false;
   @override
   bool get isLoading => _isLoading;
@@ -158,6 +145,7 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
   Future<void> onRefresh() async {
     try {
       if (isLoading) {
+        refreshController.finishRefresh();
         return;
       }
       isLoading = true;
@@ -175,7 +163,6 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
       refreshController.finishRefresh(IndicatorResult.fail);
     } finally {
       isLoading = false;
-      firstLoad = false;
       updateUI();
     }
   }
@@ -207,7 +194,6 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
       refreshController.finishLoad(IndicatorResult.fail);
     } finally {
       isLoading = false;
-      firstLoad = false;
       updateUI();
     }
   }
@@ -352,10 +338,6 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
   @override
   var indicator = IndicatorResult.success;
 
-  /// 首次请求结束前不展示占位图。
-  @override
-  bool firstLoad = true;
-
   @override
   bool isLoading = false;
 
@@ -376,7 +358,6 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
       refreshController.finishRefresh(IndicatorResult.fail);
     } finally {
       isLoading = false;
-      firstLoad = false;
       updateUI();
     }
   }

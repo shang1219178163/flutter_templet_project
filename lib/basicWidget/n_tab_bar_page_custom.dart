@@ -50,23 +50,6 @@ class NTabBarPageCustom extends StatefulWidget {
 
   @override
   State<NTabBarPageCustom> createState() => _NTabBarPageCustomState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<({Widget child, AssetImage selected, AssetImage unselected})>('items', items));
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
-    properties.add(IntProperty('initialIndex', initialIndex));
-    properties.add(DiagnosticsProperty<Alignment>('tabBarAlignment', tabBarAlignment));
-    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
-    properties.add(DiagnosticsProperty<bool>('isThemeBg', isThemeBg));
-    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onTabBar', onTabBar));
-    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('headerBuilder', headerBuilder));
-    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('middleBuilder', middleBuilder));
-    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('footerBuilder', footerBuilder));
-  }
 }
 
 class _NTabBarPageCustomState extends State<NTabBarPageCustom>
@@ -208,16 +191,5 @@ class _NTabBarPageCustomState extends State<NTabBarPageCustom>
       controller: tabController,
       children: items.map((e) => e.child).toList(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<({Widget child, AssetImage selected, AssetImage unselected})>('items', items));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('tabBarIndex', tabBarIndex));
-    properties.add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(ColorProperty('bgColor', bgColor));
   }
 }

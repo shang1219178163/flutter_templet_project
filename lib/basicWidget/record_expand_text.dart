@@ -40,18 +40,6 @@ class RecordExpandText extends StatefulWidget {
 
   @override
   RecordExpandTextState createState() => RecordExpandTextState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-    properties.add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle));
-    properties.add(IntProperty('expandMinLine', expandMinLine));
-    properties.add(DiagnosticsProperty<bool>('disableExpand', disableExpand));
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
-    properties.add(DoubleProperty('tailingWidth', tailingWidth));
-    properties.add(ObjectFlagProperty<Widget Function(bool isExpand, int expandMinLine)?>.has('textBuilder', textBuilder));
-  }
 }
 
 class RecordExpandTextState extends State<RecordExpandText> {
@@ -93,7 +81,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
     }
 
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         final textPainter = TextPainterExt.getTextPainter(
           text: widget.text,
           textStyle: widget.textStyle,
@@ -112,7 +100,7 @@ class RecordExpandTextState extends State<RecordExpandText> {
         // ].asMap().toString());
 
         return StatefulBuilder(
-          builder: (context, setState) {
+          builder: (BuildContext context, StateSetter setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
             final toggleImage = AssetImage((isExpand) ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown);
@@ -177,11 +165,5 @@ class RecordExpandTextState extends State<RecordExpandText> {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
   }
 }

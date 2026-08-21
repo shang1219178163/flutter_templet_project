@@ -24,18 +24,12 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class BoxDemo extends StatefulWidget {
+  final String? title;
 
   const BoxDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _BoxDemoState createState() => _BoxDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _BoxDemoState extends State<BoxDemo> {
@@ -349,14 +343,5 @@ class _BoxDemoState extends State<BoxDemo> {
         badgeStr: badgeStr,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Alignment>('values', values));
-    properties.add(DiagnosticsProperty<ValueNotifier<Alignment>>('selectedItemVN', selectedItemVN));
-    properties.add(IntProperty('badge', badge));
-    properties.add(StringProperty('badgeStr', badgeStr));
   }
 }

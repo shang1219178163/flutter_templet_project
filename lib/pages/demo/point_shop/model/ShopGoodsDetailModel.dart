@@ -15,19 +15,6 @@ import 'package:flutter_templet_project/pages/demo/point_shop/model/ShopGoodsGif
 
 /// 熊猫币商品详情
 class ShopGoodsDetailModel {
-
-  ShopGoodsDetailModel.fromJson(Map<String, dynamic> json) {
-    categoryCode = json['categoryCode'];
-    goodsId = json['goodsId'];
-    goodsName = json['goodsName'];
-    price = json['price'];
-    thumbUrl = json['thumbUrl'];
-    animationUrl = json['animationUrl'];
-    description = json['description'];
-    goodsStatus = json['goodsStatus'];
-    isDefault = json['isDefault'];
-    attributes = List<String>.from(json['attributes'] ?? []);
-  }
   ShopGoodsDetailModel({
     this.categoryCode,
     this.goodsId,
@@ -126,6 +113,19 @@ class ShopGoodsDetailModel {
   /// 本地气泡文字样式
   Color? get bubbleTextColor {
     return pathMap[goodsId]?.color;
+  }
+
+  ShopGoodsDetailModel.fromJson(Map<String, dynamic> json) {
+    categoryCode = json['categoryCode'];
+    goodsId = json['goodsId'];
+    goodsName = json['goodsName'];
+    price = json['price'];
+    thumbUrl = json['thumbUrl'];
+    animationUrl = json['animationUrl'];
+    description = json['description'];
+    goodsStatus = json['goodsStatus'];
+    isDefault = json['isDefault'];
+    attributes = List<String>.from(json['attributes'] ?? []);
   }
 
   Map<String, dynamic> toJson() {

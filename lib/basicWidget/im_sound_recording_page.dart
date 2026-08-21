@@ -107,7 +107,7 @@ class IMSoundRecordingPage extends StatelessWidget {
               ),
               _NTransitionBuilder(
                 duration: duration,
-                builder: (context, controller, animation) {
+                builder: (context, controller, Animation<double> animation) {
                   return SizeTransition(
                     axisAlignment: 0.0,
                     sizeFactor: animation,
@@ -132,14 +132,6 @@ class IMSoundRecordingPage extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('bottomBarHeight', bottomBarHeight));
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('cancelVN', cancelVN));
-  }
 }
 
 typedef AnimationWidgeBuilder<T> = Widget Function(
@@ -160,13 +152,6 @@ class _NTransitionBuilder extends StatefulWidget {
 
   @override
   _NTransitionBuilderState createState() => _NTransitionBuilderState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
-    properties.add(ObjectFlagProperty<AnimationWidgeBuilder<double>>.has('builder', builder));
-  }
 }
 
 class _NTransitionBuilderState extends State<_NTransitionBuilder> with SingleTickerProviderStateMixin {
@@ -211,12 +196,5 @@ class _NTransitionBuilderState extends State<_NTransitionBuilder> with SingleTic
     } else {
       await controller.reverse(from: controller.upperBound);
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
-    properties.add(DiagnosticsProperty<Animation<double>>('animation', animation));
   }
 }

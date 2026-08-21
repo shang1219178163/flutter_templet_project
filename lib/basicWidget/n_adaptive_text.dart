@@ -47,14 +47,4 @@ class NAdaptiveText extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('data', data));
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
-    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
-    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
-    properties.add(DiagnosticsProperty<BoxDecoration?>('decoration', decoration));
-  }
 }

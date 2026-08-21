@@ -154,7 +154,7 @@ class PickerUtil {
     required ValueChanged<String> onSelected,
     int selectedIndex = 1,
   }) {
-    return StatefulBuilder(builder: (context, setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return CupertinoPicker.builder(
         backgroundColor: Colors.white,
         itemExtent: 50,
@@ -168,7 +168,7 @@ class PickerUtil {
           // setState(() {});
         },
         childCount: items.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           var text = items[index];
 
           return Align(

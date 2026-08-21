@@ -14,12 +14,6 @@ class IconConvertPage extends StatefulWidget {
 
   @override
   State<IconConvertPage> createState() => _IconConvertPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _IconConvertPageState extends State<IconConvertPage> {
@@ -208,18 +202,5 @@ Map<String, IconData> kIConDic = {
     debugPrint("file: ${file.path}");
 
     SnackUtil.custom("文件已生成(下载文件夹)", backgroundColor: Colors.green);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController1', scrollController1));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController2', scrollController2));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController3', scrollController3));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<String>>>('linesVN', linesVN));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<String>>>('linesOneVN', linesOneVN));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<String>>>('linesTwoVN', linesTwoVN));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<String>>>('linesThreeVN', linesThreeVN));
   }
 }

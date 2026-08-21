@@ -38,16 +38,6 @@ class NSendGiftButton extends StatefulWidget {
 
   @override
   State<NSendGiftButton> createState() => _NSendGiftButtonState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<int>('items', items));
-    properties.add(DiagnosticsProperty<TextEditingController>('textController', textController));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onGiftCountCustom', onGiftCountCustom));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDropHide', onDropHide));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onSendChanged', onSendChanged));
-  }
 }
 
 class _NSendGiftButtonState extends State<NSendGiftButton> {
@@ -107,7 +97,7 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
           },
           child: buildDropMenu(
             controller: textController,
-            onChanged: (value) {
+            onChanged: (int value) {
               // DLog.d("onSend $value");
               // widget.onChanged(value);
               targetFollowerController.toggle();
@@ -342,13 +332,5 @@ class _NSendGiftButtonState extends State<NSendGiftButton> {
         width: 1, //边线宽度为1
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NTargetFollowerController>('targetFollowerController', targetFollowerController));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('giftCountVN', giftCountVN));
-    properties.add(DiagnosticsProperty<TextEditingController>('textController', textController));
   }
 }

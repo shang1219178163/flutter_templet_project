@@ -137,16 +137,4 @@ class AeJudgeItem extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('keyName', keyName));
-    properties.add(IntProperty('numPerRow', numPerRow));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('itemPadding', itemPadding));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool?>>('isYes', isYes));
-    properties.add(ObjectFlagProperty<void Function(String? keyName, bool value)?>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-  }
 }

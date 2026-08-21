@@ -12,12 +12,6 @@ class AudioPlayPageDemo extends StatefulWidget {
 
   @override
   State<AudioPlayPageDemo> createState() => _AudioPlayPageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _AudioPlayPageDemoState extends State<AudioPlayPageDemo> {
@@ -76,13 +70,5 @@ class _AudioPlayPageDemoState extends State<AudioPlayPageDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

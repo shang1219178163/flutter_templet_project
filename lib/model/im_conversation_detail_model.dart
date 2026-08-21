@@ -18,6 +18,64 @@ import 'package:flutter_templet_project/vendor/isar/db_mixin.dart';
 /// 自定义会话模型(用于数据库存储, sdk 类无法标记)
 
 class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
+  ImConversationDetailModel({
+    required this.conversationID,
+    this.type,
+    this.userID,
+    this.groupID,
+    this.showName,
+    this.faceUrl,
+    this.groupType,
+    this.unreadCount,
+    this.lastMessageString,
+    this.draftText,
+    this.draftTimestamp,
+    this.groupAtInfoListString,
+    this.isPinned,
+    this.recvOpt,
+    this.orderkey,
+    this.markList,
+    this.customData,
+    this.conversationGroupList,
+    this.c2cReadTimestamp,
+    this.groupReadSequence,
+    this.loginUserId,
+    this.loginAccount,
+  });
+
+  @override
+  Id get isarId => ("$conversationID,${loginUserId ?? ""}").fastHash;
+
+  /// 当前登录用户id
+  String? loginUserId = CacheService().userID;
+  String? loginAccount = CacheService().loginAccount;
+
+  late String conversationID;
+  int? type;
+  String? userID;
+  String? groupID;
+  String? showName;
+  String? faceUrl;
+  String? groupType;
+  int? unreadCount;
+
+  // V2TimMessage? lastMessage;
+  String? lastMessageString;
+
+  String? draftText;
+  int? draftTimestamp;
+  bool? isPinned;
+  int? recvOpt;
+
+  // List<V2TimGroupAtInfo?>? groupAtInfoList = List.empty(growable: true);
+  String? groupAtInfoListString;
+
+  int? orderkey;
+  List<int?>? markList;
+  String? customData;
+  List<String?>? conversationGroupList;
+  int? c2cReadTimestamp;
+  int? groupReadSequence;
 
   // @ignore
   // V2TimMessage? get lastMessage {
@@ -115,15 +173,15 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
     draftTimestamp = json['draftTimestamp'];
     if (json['markList'] != null) {
       markList = List.empty(growable: true);
-      for (final v in (json['markList'] as List)) {
+      (json['markList'] as List).forEach((v) {
         markList?.add(v as int?);
-      }
+      });
     }
     if (json['conversationGroupList'] != null) {
       conversationGroupList = List.empty(growable: true);
-      for (final v in (json['conversationGroupList'] as List)) {
+      (json['conversationGroupList'] as List).forEach((v) {
         conversationGroupList?.add(v as String?);
-      }
+      });
     }
 
     try {
@@ -136,64 +194,6 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
     loginUserId ??= CacheService().userID;
     loginAccount ??= CacheService().loginAccount;
   }
-  ImConversationDetailModel({
-    required this.conversationID,
-    this.type,
-    this.userID,
-    this.groupID,
-    this.showName,
-    this.faceUrl,
-    this.groupType,
-    this.unreadCount,
-    this.lastMessageString,
-    this.draftText,
-    this.draftTimestamp,
-    this.groupAtInfoListString,
-    this.isPinned,
-    this.recvOpt,
-    this.orderkey,
-    this.markList,
-    this.customData,
-    this.conversationGroupList,
-    this.c2cReadTimestamp,
-    this.groupReadSequence,
-    this.loginUserId,
-    this.loginAccount,
-  });
-
-  @override
-  Id get isarId => ("$conversationID,${loginUserId ?? ""}").fastHash;
-
-  /// 当前登录用户id
-  String? loginUserId = CacheService().userID;
-  String? loginAccount = CacheService().loginAccount;
-
-  late String conversationID;
-  int? type;
-  String? userID;
-  String? groupID;
-  String? showName;
-  String? faceUrl;
-  String? groupType;
-  int? unreadCount;
-
-  // V2TimMessage? lastMessage;
-  String? lastMessageString;
-
-  String? draftText;
-  int? draftTimestamp;
-  bool? isPinned;
-  int? recvOpt;
-
-  // List<V2TimGroupAtInfo?>? groupAtInfoList = List.empty(growable: true);
-  String? groupAtInfoListString;
-
-  int? orderkey;
-  List<int?>? markList;
-  String? customData;
-  List<String?>? conversationGroupList;
-  int? c2cReadTimestamp;
-  int? groupReadSequence;
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

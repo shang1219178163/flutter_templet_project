@@ -10,18 +10,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextViewDemo extends StatefulWidget {
+  final String? title;
 
   const TextViewDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _TextViewDemoState createState() => _TextViewDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TextViewDemoState extends State<TextViewDemo> {
@@ -52,11 +46,5 @@ class _TextViewDemoState extends State<TextViewDemo> {
         messsage,
       ))),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('messsage', messsage));
   }
 }

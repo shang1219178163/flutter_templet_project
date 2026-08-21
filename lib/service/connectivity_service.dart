@@ -8,8 +8,6 @@ abstract class NetConnectivityListener {
 }
 
 class ConnectivityService {
-
-  factory ConnectivityService() => _instance;
   ConnectivityService._() {
     try {
       _listener = _connectivity.onConnectivityChanged.listen((result) async {
@@ -23,6 +21,8 @@ class ConnectivityService {
   }
 
   static final ConnectivityService _instance = ConnectivityService._();
+
+  factory ConnectivityService() => _instance;
 
   // static ConnectivityService get instance => _instance;
 

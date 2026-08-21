@@ -16,12 +16,6 @@ class MyPopverDemo extends StatefulWidget {
 
   @override
   _MyPopverDemoState createState() => _MyPopverDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _MyPopverDemoState extends State<MyPopverDemo> {
@@ -153,22 +147,15 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
 
   Widget buildDemo() {
     return Column(children: [
-      LayoutBuilder(builder: (context, constraints) {
+      LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return SizedBox();
       }),
       Builder(builder: (context) {
         return SizedBox();
       }),
-      StatefulBuilder(builder: (context, setState) {
+      StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         return SizedBox();
       }),
     ]);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('btnIdx', btnIdx));
-    properties.add(DiagnosticsProperty<bool>('isVisible', isVisible));
   }
 }

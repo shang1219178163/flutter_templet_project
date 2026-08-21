@@ -24,18 +24,6 @@ class NHorizalStep<E> extends StatefulWidget {
 
   @override
   State<NHorizalStep<E>> createState() => _NHorizalStepState<E>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<E>('items', items));
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, int i, bool isSelected)?>.has('itemBuilder', itemBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, int i, bool isSelected)?>.has('itemHeaderBuilder', itemHeaderBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, int i, bool isSelected)?>.has('itemFooterBuilder', itemFooterBuilder));
-    properties.add(ColorProperty('indicatorColor', indicatorColor));
-  }
 }
 
 class _NHorizalStepState<E> extends State<NHorizalStep<E>> {
@@ -57,7 +45,7 @@ class _NHorizalStepState<E> extends State<NHorizalStep<E>> {
     final items = widget.items;
 
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         final maxWidth = constraints.maxWidth;
         final itemWidth = widget.itemWidth ?? (maxWidth / items.length.toDouble()).truncateToDouble();
 
@@ -204,12 +192,5 @@ class _NHorizalStepState<E> extends State<NHorizalStep<E>> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
   }
 }

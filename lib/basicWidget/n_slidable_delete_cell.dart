@@ -53,10 +53,4 @@ class NSlidableDeleteCell extends StatelessWidget {
       child: child,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDelete', onDelete));
-  }
 }

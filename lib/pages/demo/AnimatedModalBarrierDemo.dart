@@ -22,12 +22,6 @@ class AnimatedModalBarrierDemo extends StatefulWidget {
 
   @override
   State<AnimatedModalBarrierDemo> createState() => _AnimatedModalBarrierDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _AnimatedModalBarrierDemoState extends State<AnimatedModalBarrierDemo> with SingleTickerProviderStateMixin {
@@ -152,12 +146,4 @@ class _AnimatedModalBarrierDemoState extends State<AnimatedModalBarrierDemo> wit
   }
 
   void onTest() {}
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<ActionRecord>('items', items));
-  }
 }

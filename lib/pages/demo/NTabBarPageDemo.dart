@@ -18,12 +18,6 @@ class NTabBarPageDemo extends StatefulWidget {
 
   @override
   State<NTabBarPageDemo> createState() => _NTabBarPageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
@@ -103,16 +97,9 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
           title: Text("${prefix}_$index"),
         );
       },
-      separatorBuilder: (context, index) {
+      separatorBuilder: (BuildContext context, int index) {
         return Divider();
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
-    properties.add(DiagnosticsProperty<bool>('isThemeBg', isThemeBg));
   }
 }

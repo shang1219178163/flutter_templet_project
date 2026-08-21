@@ -12,12 +12,6 @@ class NExpandTextDemo extends StatefulWidget {
 
   @override
   _NExpandTextDemoState createState() => _NExpandTextDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NExpandTextDemoState extends State<NExpandTextDemo> {
@@ -115,7 +109,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
     showTipsSheet(
         items: items,
         textStyle: TextStyle(overflow: TextOverflow.ellipsis),
-        cb: (val) {
+        cb: (String val) {
           debugPrint(val);
         });
   }
@@ -137,7 +131,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
           Expanded(
             child: ListView.separated(
               itemCount: items.length,
-              itemBuilder: (context, i) {
+              itemBuilder: (context, int i) {
                 final e = items[i];
 
                 return InkWell(
@@ -162,7 +156,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                   ),
                 );
               },
-              separatorBuilder: (context, index) {
+              separatorBuilder: (context, int index) {
                 return SizedBox(
                   height: 8,
                 );
@@ -187,12 +181,5 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
       ),
     );
     child.toShowModalBottomSheet(context: context);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-    properties.add(DiagnosticsProperty<TextStyle>('textStyle', textStyle));
   }
 }

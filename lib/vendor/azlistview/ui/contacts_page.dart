@@ -44,9 +44,9 @@ class _ContactsPageState extends State<ContactsPage> {
     //加载联系人列表
     rootBundle.loadString('assets/data/car_models.json').then((value) {
       List list = jsonDecode(value);
-      for (final v in list) {
+      list.forEach((v) {
         contactList.add(ContactInfo.fromJson(v));
-      }
+      });
       _handleList(contactList);
     });
   }
@@ -91,7 +91,7 @@ class _ContactsPageState extends State<ContactsPage> {
       body: AzListView(
         data: contactList,
         itemCount: contactList.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           var model = contactList[index];
           return Utils.getWeChatListItem(
             context,
@@ -100,7 +100,7 @@ class _ContactsPageState extends State<ContactsPage> {
           );
         },
         physics: BouncingScrollPhysics(),
-        susItemBuilder: (context, index) {
+        susItemBuilder: (BuildContext context, int index) {
           var model = contactList[index];
           if ('↑' == model.getSuspensionTag()) {
             return Container();
@@ -128,12 +128,5 @@ class _ContactsPageState extends State<ContactsPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<ContactInfo>('contactList', contactList));
-    properties.add(IterableProperty<ContactInfo>('topList', topList));
   }
 }

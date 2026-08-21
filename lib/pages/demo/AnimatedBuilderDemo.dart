@@ -9,12 +9,6 @@ class AnimatedBuilderDemo extends StatefulWidget {
 
   @override
   _AnimatedBuilderDemoState createState() => _AnimatedBuilderDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTickerProviderStateMixin {
@@ -69,7 +63,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
   Widget buildAnimatedBuilder() {
     return AnimatedBuilder(
       animation: animation,
-      builder: (ctx, child) {
+      builder: (BuildContext ctx, child) {
         return Center(
           child: Container(
             color: Colors.green,
@@ -88,7 +82,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
   Widget buildTweenAnimatedWidget() {
     return TweenAnimatedWidget<double>(
       tween: Tween(begin: 0, end: 300),
-      builder: (ctx, child, animation) {
+      builder: (BuildContext ctx, child, animation) {
         return Center(
           child: Container(
             color: Colors.yellow,
@@ -102,12 +96,5 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
       },
       child: Image(image: AssetImage(Assets.imagesBg)),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
-    properties.add(DiagnosticsProperty<Animation<double>>('animation', animation));
   }
 }

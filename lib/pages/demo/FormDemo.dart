@@ -24,12 +24,6 @@ class FormDemo extends StatefulWidget {
 
   @override
   State<FormDemo> createState() => _FormDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _FormDemoState extends State<FormDemo> {
@@ -323,17 +317,5 @@ class _FormDemoState extends State<FormDemo> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(IterableProperty<({TextEditingController controller, List<TextInputFormatter> inputFormatters, String key, int? maxLines, String title, String value})>('items', items));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('resultVN', resultVN));
-    properties.add(StringProperty('text', text));
-    properties.add(IterableProperty<String>('delimiters', delimiters));
   }
 }

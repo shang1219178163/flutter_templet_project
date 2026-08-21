@@ -226,13 +226,4 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<int>('indexs', indexs));
-    properties.add(IterableProperty<DateTime>('dateTimes', dateTimes));
-    properties.add(IterableProperty<Tuple2<String, Color>>('eventTypes', eventTypes));
-    properties.add(IterableProperty<Event>('events', events));
-  }
 }

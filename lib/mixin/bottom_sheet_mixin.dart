@@ -180,7 +180,7 @@ mixin BottomSheetMixin {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) {
+      builder: (BuildContext context) {
         return content;
       },
     );

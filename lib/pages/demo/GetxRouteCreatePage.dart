@@ -18,12 +18,6 @@ class GetxRouteCreatePage extends StatefulWidget {
 
   @override
   State<GetxRouteCreatePage> createState() => _GetxRouteCreatePageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _GetxRouteCreatePageState extends State<GetxRouteCreatePage> {
@@ -197,16 +191,5 @@ class AppPages {
   ];
 }
 ''';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('descVN', descVN));
   }
 }

@@ -188,7 +188,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       message: Text(message, textAlign: TextAlign.start),
       items: List.generate(3, (index) => Text("item_$index")).toList(),
       cancel: Text('取消'),
-      onSelected: (index) {
+      onSelected: (int index) {
         debugPrint(index.toString());
       },
       onCancel: () {
@@ -305,15 +305,6 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       barrierColor: Colors.transparent,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<(String, void Function())>('items', items));
-    properties.add(IterableProperty<String>('titles', titles));
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('message', message));
-  }
 }
 
 ///单选列表
@@ -365,31 +356,19 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
       selectedIndex = value;
     });
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Object?>('selectedIndex', selectedIndex));
-  }
 }
 
 ///单选菜单
 class RadioTileSexWidget extends StatefulWidget {
+  final Object selectedIndex;
 
   RadioTileSexWidget({
     Key? key,
     required this.selectedIndex,
   }) : super(key: key);
-  final Object selectedIndex;
 
   @override
   _RadioTileSexWidgetState createState() => _RadioTileSexWidgetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Object>('selectedIndex', selectedIndex));
-  }
 }
 
 class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
@@ -441,12 +420,6 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
       selectedIndex = value;
     });
     DLog.d(selectedIndex);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Object>('selectedIndex', selectedIndex));
   }
 }
 

@@ -27,16 +27,6 @@ class NExpandTextOne extends StatefulWidget {
 
   @override
   State<NExpandTextOne> createState() => _NExpandTextOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('data', data));
-    properties.add(DiagnosticsProperty<TextStyle>('textStyle', textStyle));
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
-    properties.add(DoubleProperty('tailingWidth', tailingWidth));
-    properties.add(ObjectFlagProperty<Widget Function(bool isExpand, VoidCallback onToggle)?>.has('expandBuilder', expandBuilder));
-  }
 }
 
 class _NExpandTextOneState extends State<NExpandTextOne> {
@@ -81,7 +71,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
       );
     }
 
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final textPainter = TextPainterExt.getTextPainter(
         text: widget.data,
         textStyle: widget.textStyle,
@@ -185,11 +175,5 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
             ),
           );
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
   }
 }

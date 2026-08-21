@@ -10,18 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class WillPopScopeDemo extends StatefulWidget {
+  final String? title;
 
   const WillPopScopeDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _WillPopScopeDemoState createState() => _WillPopScopeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
@@ -101,7 +95,7 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
             SwitchListTile(
               title: Text('直接返回'),
               value: enable,
-              onChanged: (val) {
+              onChanged: (bool val) {
                 enable = val;
                 setState(() {});
               },
@@ -110,11 +104,5 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
   }
 }

@@ -18,12 +18,6 @@ class BoxShadowDemo extends StatefulWidget {
 
   @override
   _BoxShadowDemoState createState() => _BoxShadowDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _BoxShadowDemoState extends State<BoxShadowDemo> {
@@ -245,11 +239,5 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
         "innerBoxShadow color: Colors.blue",
       ].join("\n")),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('tips', tips));
   }
 }

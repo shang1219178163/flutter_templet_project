@@ -15,12 +15,6 @@ class WeatherInfoPage extends StatefulWidget {
 
   @override
   _WeatherInfoPageState createState() => _WeatherInfoPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _WeatherInfoPageState extends State<WeatherInfoPage> {
@@ -115,11 +109,5 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
     } catch (e) {
       contentVN.value = e.toString();
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('contentVN', contentVN));
   }
 }

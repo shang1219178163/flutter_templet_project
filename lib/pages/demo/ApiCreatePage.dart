@@ -19,12 +19,6 @@ class ApiCreatePage extends StatefulWidget {
 
   @override
   State<ApiCreatePage> createState() => _ApiCreatePageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ApiCreatePageState extends State<ApiCreatePage> {
@@ -418,17 +412,5 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     // var str1 = str.toUncamlCase();
     // debugPrint("str1: $str1");
     onGenerate();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('rootClassNameStr', rootClassNameStr));
-    properties.add(StringProperty('classPrefix', classPrefix));
-    properties.add(StringProperty('classSuffix', classSuffix));
-    properties.add(StringProperty('jsonStr', jsonStr));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('outVN', outVN));
-    properties.add(IterableProperty<String>('productNames', productNames));
-    properties.add(StringProperty('productName', productName));
   }
 }

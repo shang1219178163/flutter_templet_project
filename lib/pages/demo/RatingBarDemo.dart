@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class RatingBarDemo extends StatefulWidget {
+  final String? title;
 
   const RatingBarDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _RatingBarDemoState createState() => _RatingBarDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _RatingBarDemoState extends State<RatingBarDemo> {
@@ -113,10 +107,4 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
       color: Colors.green,
     )
   };
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('itemMap', itemMap));
-  }
 }

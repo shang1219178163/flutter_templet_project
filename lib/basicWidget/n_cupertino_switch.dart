@@ -114,25 +114,4 @@ class NCupertinoSwitch extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(EnumProperty<BoxFit>('fit', fit));
-    properties.add(DiagnosticsProperty<bool>('value', value));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onChanged', onChanged));
-    properties.add(ColorProperty('activeColor', activeColor));
-    properties.add(ColorProperty('trackColor', trackColor));
-    properties.add(ColorProperty('thumbColor', thumbColor));
-    properties.add(ColorProperty('focusColor', focusColor));
-    properties.add(ColorProperty('onLabelColor', onLabelColor));
-    properties.add(ColorProperty('offLabelColor', offLabelColor));
-    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onFocusChange', onFocusChange));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
-    properties.add(DiagnosticsProperty<bool?>('applyTheme', applyTheme));
-    properties.add(EnumProperty<DragStartBehavior>('dragStartBehavior', dragStartBehavior));
-  }
 }

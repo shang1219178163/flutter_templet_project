@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ShortcutsDemoOne extends StatefulWidget {
+  final String? title;
 
   const ShortcutsDemoOne({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _ShortcutsDemoOneState createState() => _ShortcutsDemoOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ShortcutsDemoOneState extends State<ShortcutsDemoOne> {
@@ -45,7 +39,7 @@ class _ShortcutsDemoOneState extends State<ShortcutsDemoOne> {
                       'Subtract from the counter by pressing the down arrow key'),
                   AnimatedBuilder(
                     animation: model,
-                    builder: (context, child) {
+                    builder: (BuildContext context, Widget? child) {
                       return Text('count: ${model.count}');
                     },
                   ),
@@ -54,12 +48,6 @@ class _ShortcutsDemoOneState extends State<ShortcutsDemoOne> {
             ),
           ),
         ));
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Model>('model', model));
   }
 }
 
@@ -80,24 +68,12 @@ class IncrementIntent extends Intent {
   const IncrementIntent(this.amount);
 
   final int amount;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('amount', amount));
-  }
 }
 
 class DecrementIntent extends Intent {
   const DecrementIntent(this.amount);
 
   final int amount;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('amount', amount));
-  }
 }
 
 class IncrementAction extends Action<IncrementIntent> {
@@ -109,12 +85,6 @@ class IncrementAction extends Action<IncrementIntent> {
   void invoke(covariant IncrementIntent intent) {
     model.incrementBy(intent.amount);
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Model>('model', model));
-  }
 }
 
 class DecrementAction extends Action<DecrementIntent> {
@@ -125,11 +95,5 @@ class DecrementAction extends Action<DecrementIntent> {
   @override
   void invoke(covariant DecrementIntent intent) {
     model.decrementBy(intent.amount);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Model>('model', model));
   }
 }

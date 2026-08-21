@@ -66,21 +66,6 @@ class NPickRequestListBox<E> extends StatefulWidget {
 
   @override
   State<NPickRequestListBox<E>> createState() => NPickRequestListBoxState<E>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('placeholder', placeholder));
-    properties.add(IterableProperty<E>('items', items));
-    properties.add(ObjectFlagProperty<ValueChanged<List<E>>>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<Future<List<E>> Function(bool isRefresh, int pageNo, int pageSize, String? search)>.has('requestList', requestList));
-    properties.add(ObjectFlagProperty<E Function(E e)?>.has('onSelectedTap', onSelectedTap));
-    properties.add(ObjectFlagProperty<String Function(E e)>.has('cbName', cbName));
-    properties.add(ObjectFlagProperty<Widget Function(int index, E e)?>.has('nameWidget', nameWidget));
-    properties.add(ObjectFlagProperty<bool Function(List<E> items, E? b)>.has('selected', selected));
-    properties.add(ObjectFlagProperty<Widget Function({E e, int index})?>.has('itemBuilder', itemBuilder));
-  }
 }
 
 class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
@@ -174,10 +159,10 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
     return NRefreshListView<E>(
       controller: refreshViewController,
       pageSize: 30,
-      onRequest: (isRefresh, page, pageSize, last) async {
+      onRequest: (bool isRefresh, int page, int pageSize, last) async {
         return widget.requestList(isRefresh, page, pageSize, search);
       },
-      itemBuilder: (context, index, model) {
+      itemBuilder: (BuildContext context, int index, model) {
         final isSelected = widget.selected(widget.items, model);
         final textColor = isSelected ? primary : AppColor.fontColor;
         final color = isSelected ? primary : Colors.transparent;
@@ -218,13 +203,5 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NListRefreshController<E>>('refreshViewController', refreshViewController));
-    properties.add(StringProperty('search', search));
-    properties.add(DiagnosticsProperty<E?>('selecetdModel', selecetdModel));
   }
 }

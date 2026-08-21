@@ -16,12 +16,6 @@ class YamlParsePage extends StatefulWidget {
 
   @override
   State<YamlParsePage> createState() => _YamlParsePageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _YamlParsePageState extends State<YamlParsePage> {
@@ -132,12 +126,5 @@ class _YamlParsePageState extends State<YamlParsePage> {
     // 通过 pubspec_parse 解析,返回模型
     final pubspecModel = Pubspec.parse(content);
     DLog.d('pubspecModel: $pubspecModel');
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('contentVN', contentVN));
-    properties.add(IterableProperty<({VoidCallback action, String title})>('items', items));
   }
 }

@@ -39,24 +39,6 @@ class ToggleButton<T> extends StatefulWidget {
 
   @override
   State<ToggleButton<T>> createState() => _ToggleButtonState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('borderRadius', borderRadius));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(ColorProperty('sliderColor', sliderColor));
-    properties.add(ColorProperty('selectTextColor', selectTextColor));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(DoubleProperty('textSize', textSize));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('margin', margin));
-    properties.add(IterableProperty<T>('originData', originData));
-    properties.add(DiagnosticsProperty<T?>('value', value));
-    properties.add(ObjectFlagProperty<String? Function(T p1)?>.has('labelBuilder', labelBuilder));
-    properties.add(ObjectFlagProperty<ValueChanged<T>>.has('onChanged', onChanged));
-  }
 }
 
 class _ToggleButtonState<T> extends State<ToggleButton<T>> {
@@ -186,21 +168,5 @@ class _ToggleButtonState<T> extends State<ToggleButton<T>> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('borderRadius', borderRadius));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(ColorProperty('sliderColor', sliderColor));
-    properties.add(ColorProperty('selectTextColor', selectTextColor));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(DoubleProperty('textSize', textSize));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('margin', margin));
-    properties.add(IterableProperty<T>('originData', originData));
-    properties.add(DiagnosticsProperty<T?>('selected', selected));
   }
 }

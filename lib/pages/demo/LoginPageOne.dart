@@ -14,12 +14,6 @@ class LoginPageOne extends StatefulWidget {
 
   @override
   _LoginPageOneState createState() => _LoginPageOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _LoginPageOneState extends State<LoginPageOne> {
@@ -288,19 +282,5 @@ class _LoginPageOneState extends State<LoginPageOne> {
 
   void onClear() {
     accountSheetController.clear();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('accountController', accountController));
-    properties.add(DiagnosticsProperty<TextEditingController>('pwdController', pwdController));
-    properties.add(DiagnosticsProperty<RegExp>('accountExp', accountExp));
-    properties.add(DiagnosticsProperty<RegExp>('pwdExp', pwdExp));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode1', focusNode1));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode2', focusNode2));
-    properties.add(DiagnosticsProperty<bool>('isEye', isEye));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('btnEnable', btnEnable));
-    properties.add(DiagnosticsProperty<NAccountSheetController>('accountSheetController', accountSheetController));
   }
 }

@@ -27,13 +27,6 @@ class TodoListPage extends StatefulWidget {
 
   @override
   State<TodoListPage> createState() => _TodoListPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _TodoListPageState extends State<TodoListPage> with DBDialogMixin {
@@ -180,15 +173,5 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMixin {
       createdDate: DateTime.now().toIso8601String(),
     );
     provider.put(todo);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty<bool?>('hideAppBar', hideAppBar));
-    properties.add(DiagnosticsProperty<TextEditingController>('titleController', titleController));
-    properties.add(DiagnosticsProperty<bool>('isAllChoic', isAllChoic));
-    properties.add(DiagnosticsProperty<DBGenericController<DBTodo>>('provider', provider));
   }
 }

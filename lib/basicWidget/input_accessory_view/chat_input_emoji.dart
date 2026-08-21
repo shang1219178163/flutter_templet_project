@@ -90,21 +90,14 @@ class ChatInputEmoji extends StatelessWidget {
       emojiClicked,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('maxCrossAxisExtent', maxCrossAxisExtent));
-    properties.add(DoubleProperty('mainAxisSpacing', mainAxisSpacing));
-    properties.add(DoubleProperty('crossAxisSpacing', crossAxisSpacing));
-    properties.add(DoubleProperty('childAspectRatio', childAspectRatio));
-    properties.add(DoubleProperty('bigSizeRatio', bigSizeRatio));
-    properties.add(ObjectFlagProperty<EmojiClick?>.has('emojiClicked', emojiClicked));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('deleteOnTap', deleteOnTap));
-  }
 }
 
 class ChatExpression extends StatelessWidget {
+  final String emoji;
+
+  final double bigSizeRatio;
+
+  final EmojiClick? emojiClicked;
 
   const ChatExpression(
     this.emoji,
@@ -112,11 +105,6 @@ class ChatExpression extends StatelessWidget {
     this.emojiClicked, {
     super.key,
   });
-  final String emoji;
-
-  final double bigSizeRatio;
-
-  final EmojiClick? emojiClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -132,14 +120,6 @@ class ChatExpression extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('emoji', emoji));
-    properties.add(DoubleProperty('bigSizeRatio', bigSizeRatio));
-    properties.add(ObjectFlagProperty<EmojiClick?>.has('emojiClicked', emojiClicked));
   }
 }
 

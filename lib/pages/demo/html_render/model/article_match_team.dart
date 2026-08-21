@@ -1,11 +1,4 @@
 class ArticleMatchTeam {
-
-  ArticleMatchTeam.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    logo = json['logo'];
-    names = json['names'];
-    sportId = json['sportId'];
-  }
   ArticleMatchTeam({
     this.id,
     this.logo,
@@ -17,6 +10,13 @@ class ArticleMatchTeam {
   String? logo;
   String? names;
   int? sportId;
+
+  ArticleMatchTeam.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    logo = json['logo'];
+    names = json['names'];
+    sportId = json['sportId'];
+  }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

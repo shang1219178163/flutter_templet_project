@@ -21,12 +21,6 @@ class FloatingButtonDemoTwo extends StatefulWidget {
 
   @override
   State<FloatingButtonDemoTwo> createState() => _FloatingButtonDemoTwoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
@@ -123,7 +117,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
                       debugPrint("onTap");
                     },
                     onPanStart: onPanStart,
-                    onPanUpdate: (e) {
+                    onPanUpdate: (DragUpdateDetails e) {
                       // debugPrint("e.delta:${e.delta.dx},${e.delta.dy}");
 
                       //用户手指滑动时，更新偏移，重新构建
@@ -148,7 +142,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
                       _rightVN.value = maxWidth - _leftVN.value - childSize.width;
                       // debugPrint("xy:${_topVN.value},${_leftVN.value},${_rightVN.value}");
                     },
-                    onPanEnd: (e) {
+                    onPanEnd: (DragEndDetails e) {
                       // debugPrint("_leftVN.value:${_leftVN.value}");
                       final midX = _leftVN.value + childSize.width / 2;
                       final midY = _topVN.value + childSize.height / 2;
@@ -270,11 +264,5 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
   onToggle() {
     isExpanded = !isExpanded;
     setState(() {});
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isExpanded', isExpanded));
   }
 }

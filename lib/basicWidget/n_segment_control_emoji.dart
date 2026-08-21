@@ -30,17 +30,6 @@ class NSegmentControlEmoji extends StatefulWidget {
 
   @override
   State<NSegmentControlEmoji> createState() => _NSegmentControlEmojiState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<SegmentEmojiModel>('items', items));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
-    properties.add(DoubleProperty('segmentGap', segmentGap));
-    properties.add(DoubleProperty('segmentRadius', segmentRadius));
-    properties.add(DiagnosticsProperty<EdgeInsets>('segmentPadding', segmentPadding));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onChanged', onChanged));
-  }
 }
 
 class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
@@ -132,12 +121,6 @@ class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
         );
       }).toList(),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<SegmentEmojiModel>('current', current));
   }
 }
 

@@ -20,12 +20,6 @@ class QrcodePage extends StatefulWidget {
 
   @override
   _QrcodePageState createState() => _QrcodePageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _QrcodePageState extends State<QrcodePage> {
@@ -222,13 +216,5 @@ class _QrcodePageState extends State<QrcodePage> {
   /// 分享到给患者
   onSharePatient() {
     debugPrint("onSharePatient");
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('name', name));
-    properties.add(StringProperty('qrUrl', qrUrl));
-    properties.add(IterableProperty<Tuple3<String, String, VoidCallback>>('shareItems', shareItems));
   }
 }

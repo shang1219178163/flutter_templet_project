@@ -22,12 +22,6 @@ class TabContainerDemo extends StatefulWidget {
 
   @override
   State<TabContainerDemo> createState() => _TabContainerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerProviderStateMixin {
@@ -438,25 +432,17 @@ Donec ac libero arcu. Pellentesque sollicitudin mi et lectus interdum, sit amet 
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty<TextTheme>('textTheme', textTheme));
-  }
 }
 
 class CreditCard extends StatelessWidget {
+  final Color? color;
+  final CreditCardData data;
 
   const CreditCard({
     super.key,
     this.color,
     required this.data,
   });
-  final Color? color;
-  final CreditCardData data;
 
   @override
   Widget build(BuildContext context) {
@@ -520,16 +506,16 @@ class CreditCard extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('color', color));
-    properties.add(DiagnosticsProperty<CreditCardData>('data', data));
-  }
 }
 
 class CreditCardData {
+  int index;
+  bool locked;
+  final String bank;
+  final String name;
+  final String number;
+  final String expiration;
+  final String cvc;
 
   CreditCardData({
     this.index = 0,
@@ -549,13 +535,6 @@ class CreditCardData {
         expiration: json['expiration'],
         cvc: json['cvc'],
       );
-  int index;
-  bool locked;
-  final String bank;
-  final String name;
-  final String number;
-  final String expiration;
-  final String cvc;
 }
 
 const List<Map<String, dynamic>> kCreditCards = [

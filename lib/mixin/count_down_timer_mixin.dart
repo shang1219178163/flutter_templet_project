@@ -84,12 +84,6 @@ class TimerButton extends StatefulWidget {
 
   @override
   State<TimerButton> createState() => TimerButtonState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<Future<bool> Function()>.has('onRequest', onRequest));
-  }
 }
 
 /// 倒计时

@@ -1,14 +1,6 @@
 
 
 class ArticleSportItemModel {
-
-  ArticleSportItemModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    type = json['type'];
-    sportId = json['sportId'];
-    logo = json['logo'];
-    names = json['names'];
-  }
   ArticleSportItemModel({
     this.id,
     this.type,
@@ -32,6 +24,14 @@ class ArticleSportItemModel {
   /// 相关资讯.战队,球员
   void jumpSportItemDetail() {
 
+  }
+
+  ArticleSportItemModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    type = json['type'];
+    sportId = json['sportId'];
+    logo = json['logo'];
+    names = json['names'];
   }
 
   Map<String, dynamic> toJson() {

@@ -43,20 +43,6 @@ class NExpandChoice<T> extends StatefulWidget {
 
   @override
   State<NExpandChoice<T>> createState() => _NExpandChoiceState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(ColorProperty('itemsBackgroudColor', itemsBackgroudColor));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('itemsMargin', itemsMargin));
-    properties.add(IterableProperty<T>('items', items));
-    properties.add(ObjectFlagProperty<Widget Function(T e)?>.has('leading', leading));
-    properties.add(ObjectFlagProperty<Widget Function(T e)>.has('itemBuilder', itemBuilder));
-    properties.add(IntProperty('rowCount', rowCount));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onChanged', onChanged));
-  }
 }
 
 class _NExpandChoiceState<T> extends State<NExpandChoice<T>> {
@@ -126,12 +112,5 @@ class _NExpandChoiceState<T> extends State<NExpandChoice<T>> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('selectedIndex', selectedIndex));
-    properties.add(DiagnosticsProperty<T>('current', current));
   }
 }

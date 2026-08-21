@@ -1,5 +1,9 @@
 // --- CategoryItem Model (树状结构) ---
-class CategoryItem { // children 可能为空，所以是可空类型 List?
+class CategoryItem {
+  final int id;
+  final String name;
+  final String? logo; // logo 可能为空，所以是可空类型 String?
+  final List<CategoryItem>? children; // children 可能为空，所以是可空类型 List?
 
   CategoryItem({
     required this.id,
@@ -24,8 +28,4 @@ class CategoryItem { // children 可能为空，所以是可空类型 List?
       children: parsedChildren,
     );
   }
-  final int id;
-  final String name;
-  final String? logo; // logo 可能为空，所以是可空类型 String?
-  final List<CategoryItem>? children;
 }

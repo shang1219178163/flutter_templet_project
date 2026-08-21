@@ -5,17 +5,11 @@ import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class ListViewOffsetPage extends StatefulWidget {
-  const ListViewOffsetPage({Key? key, this.title}) : super(key: key);
   final String? title;
+  const ListViewOffsetPage({Key? key, this.title}) : super(key: key);
 
   @override
   _ListViewOffsetPageState createState() => _ListViewOffsetPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware {
@@ -205,7 +199,7 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
             },
             background: buildFavorite(context),
             secondaryBackground: buildDelete(context),
-            confirmDismiss: (direction) async {
+            confirmDismiss: (DismissDirection direction) async {
               return buildConfirmDismiss(context);
             },
             child: Container(height: IntExt.random(max: 100, min: 45).toDouble(), color: ColorExt.random, child: child),
@@ -258,7 +252,7 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
   Future<bool?> buildConfirmDismiss(BuildContext context) async {
     return showDialog(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Delete Confirmation"),
           content: const Text("Are you sure you want to delete this item?"),
@@ -272,13 +266,5 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('offsetY', offsetY));
-    properties.add(IterableProperty<String>('items', items));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
   }
 }

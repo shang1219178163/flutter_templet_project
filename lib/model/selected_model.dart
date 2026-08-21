@@ -1,11 +1,5 @@
 ///选择通用模型
 class SelectModel<T> {
-
-  SelectModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['title'];
-    isSelected = json['isSelected'];
-  }
   SelectModel({
     required this.id,
     required this.name,
@@ -21,6 +15,12 @@ class SelectModel<T> {
 
   /// 通用数据
   T? data;
+
+  SelectModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['title'];
+    isSelected = json['isSelected'];
+  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

@@ -15,12 +15,6 @@ class ListViewStyleDemo extends StatefulWidget {
 
   @override
   _ListViewStyleDemoState createState() => _ListViewStyleDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTickerProviderStateMixin {

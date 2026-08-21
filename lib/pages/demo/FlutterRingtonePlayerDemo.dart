@@ -16,12 +16,6 @@ class FlutterRingtonePlayerDemo extends StatefulWidget {
   @override
   State<FlutterRingtonePlayerDemo> createState() =>
       _FlutterRingtonePlayerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _FlutterRingtonePlayerDemoState extends State<FlutterRingtonePlayerDemo> {

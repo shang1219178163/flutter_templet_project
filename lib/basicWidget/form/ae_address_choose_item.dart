@@ -145,16 +145,4 @@ class AeAddressChooseItem extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<ValueNotifier<AddressPickerModel?>>('selectVN', selectVN));
-    properties.add(ObjectFlagProperty<String Function(AddressPickerModel e)>.has('convertCb', convertCb));
-    properties.add(ObjectFlagProperty<ValueChanged<AddressPickerModel>?>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-    properties.add(ColorProperty('disableTextColor', disableTextColor));
-    properties.add(ColorProperty('disableBgColor', disableBgColor));
-  }
 }

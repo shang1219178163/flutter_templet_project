@@ -34,16 +34,6 @@ class NMenuAnchorForImage extends StatefulWidget {
 
   @override
   State<NMenuAnchorForImage> createState() => _NMenuAnchorForImageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('values', values));
-    properties.add(StringProperty('initialItem', initialItem));
-    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<EdgeInsets>('itemPadding', itemPadding));
-    properties.add(DoubleProperty('itemSpacing', itemSpacing));
-  }
 }
 
 class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
@@ -70,7 +60,7 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
           ))),
       child: MenuAnchor(
         controller: menuController,
-        builder: (context, controller, child) {
+        builder: (context, MenuController controller, Widget? child) {
           return buildItem(
             imgName: selectedItem,
             padding: widget.itemPadding,
@@ -129,12 +119,5 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('selectedItem', selectedItem));
-    properties.add(DiagnosticsProperty<MenuController>('menuController', menuController));
   }
 }

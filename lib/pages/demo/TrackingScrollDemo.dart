@@ -10,12 +10,6 @@ class TrackingScrollDemo extends StatefulWidget {
 
   @override
   State<TrackingScrollDemo> createState() => _TrackingScrollDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _TrackingScrollDemoState extends State<TrackingScrollDemo> {
@@ -58,11 +52,5 @@ class _TrackingScrollDemoState extends State<TrackingScrollDemo> {
         leading: Text('page $page item $i'),
       );
     }).toList();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TrackingScrollController>('trackingScrollController', trackingScrollController));
   }
 }

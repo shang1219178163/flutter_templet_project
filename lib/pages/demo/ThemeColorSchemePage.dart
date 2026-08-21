@@ -266,10 +266,4 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Color>('colors', colors));
-  }
 }

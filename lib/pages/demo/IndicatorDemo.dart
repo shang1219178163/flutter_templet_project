@@ -173,10 +173,4 @@ class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateM
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
-  }
 }

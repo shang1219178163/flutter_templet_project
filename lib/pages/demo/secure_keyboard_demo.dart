@@ -18,12 +18,6 @@ class SecureKeyboardDemo extends StatefulWidget {
 
   @override
   State<SecureKeyboardDemo> createState() => _SecureKeyboardDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _SecureKeyboardDemoState extends State<SecureKeyboardDemo> {
@@ -120,12 +114,5 @@ class _SecureKeyboardDemoState extends State<SecureKeyboardDemo> {
       borderSide: BorderSide(color: color, width: .5),
       borderRadius: BorderRadius.circular(4),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FocusNode>('focusNodeAccount', focusNodeAccount));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNodePwd', focusNodePwd));
   }
 }

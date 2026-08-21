@@ -83,7 +83,7 @@ class _ThemePageState extends State<ThemePage> {
                           'Horizontal': Axis.horizontal,
                         },
                         value: _theme.direction,
-                        onChanged: (axis) {
+                        onChanged: (Axis? axis) {
                           if (_theme.direction != axis) {
                             setState(() {
                               _updateTheme(_theme.copyWith(direction: axis));
@@ -95,7 +95,7 @@ class _ThemePageState extends State<ThemePage> {
                         title: 'Color',
                         items: _themeColors,
                         value: _theme.color,
-                        onChanged: (color) {
+                        onChanged: (Color? color) {
                           _updateTheme(_theme.copyWith(color: color));
                         },
                       ),
@@ -308,15 +308,6 @@ class _ThemeDropdown<T> extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<Map<String, T>>('items', items));
-    properties.add(DiagnosticsProperty<T>('value', value));
-    properties.add(ObjectFlagProperty<ValueChanged<T?>>.has('onChanged', onChanged));
-  }
 }
 
 class _ThemeSlider extends StatelessWidget {
@@ -357,14 +348,5 @@ class _ThemeSlider extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DoubleProperty('value', value));
-    properties.add(ObjectFlagProperty<ValueChanged<double>>.has('onChanged', onChanged));
-    properties.add(DoubleProperty('max', max));
   }
 }

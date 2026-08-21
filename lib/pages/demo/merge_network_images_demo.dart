@@ -11,18 +11,12 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
+  final String? title;
 
   const MergeNetworkImagesDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _MergeNetworkImagesDemoState createState() => _MergeNetworkImagesDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
@@ -339,18 +333,21 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     }
     return null;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ui.FlutterView>('keyView', keyView));
-    properties.add(DoubleProperty('devicePixelRatio', devicePixelRatio));
-    properties.add(IterableProperty<MaterialDetailConfig>('detailList', detailList));
-    properties.add(StringProperty('qrCodeUrl', qrCodeUrl));
-  }
 }
 
 class MaterialDetailConfig {
+  String? materialType; // 素材类型 text/image/video
+  int? mainId;
+  int? id;
+  String? materialName; // 图片/视频名
+  String? message; // 素材信息.文本/url
+  String? materialWidth; // 素材宽度
+  String? materialHeight; // 素材高度
+  int? sort; // 排序
+  String? examineId; // 审批id
+  String? score; // 得分
+  bool? deletedFlag; // 是否删除
+  GlobalKey? globalKey;
 
   MaterialDetailConfig({
     this.materialType,
@@ -367,16 +364,4 @@ class MaterialDetailConfig {
   }) : super() {
     globalKey = GlobalKey();
   }
-  String? materialType; // 素材类型 text/image/video
-  int? mainId;
-  int? id;
-  String? materialName; // 图片/视频名
-  String? message; // 素材信息.文本/url
-  String? materialWidth; // 素材宽度
-  String? materialHeight; // 素材高度
-  int? sort; // 排序
-  String? examineId; // 审批id
-  String? score; // 得分
-  bool? deletedFlag; // 是否删除
-  GlobalKey? globalKey;
 }

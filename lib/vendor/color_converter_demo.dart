@@ -12,12 +12,6 @@ class ColorConverterDemo extends StatefulWidget {
 
   @override
   _ColorConverterDemoState createState() => _ColorConverterDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ColorConverterDemoState extends State<ColorConverterDemo> {
@@ -79,11 +73,5 @@ class _ColorConverterDemoState extends State<ColorConverterDemo> {
     debugPrint(rgbColor.toLab().toString());
     debugPrint(rgbColor.toXyz().toString());
     debugPrint((rgbColor == CMYK(c: 0, m: 0, y: 49, k: 8)).toString());
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Color>('colors', colors));
   }
 }

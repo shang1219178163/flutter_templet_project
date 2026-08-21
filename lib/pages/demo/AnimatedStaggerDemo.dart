@@ -138,13 +138,4 @@ class AnimatedStagger extends StatelessWidget {
       animation: controller,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Animation<double>>('controller', controller));
-    properties.add(DiagnosticsProperty<Animation<double>>('height', height));
-    properties.add(DiagnosticsProperty<Animation<EdgeInsets>>('padding', padding));
-    properties.add(DiagnosticsProperty<Animation<Color?>>('color', color));
-  }
 }

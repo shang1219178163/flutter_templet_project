@@ -45,20 +45,6 @@ class NHorizontalScrollWidget extends StatefulWidget {
 
   @override
   _HorizontalScrollWidgetState createState() => _HorizontalScrollWidgetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<AttrCarouseItem>('items', items));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('showCount', showCount));
-    properties.add(DoubleProperty('gap', gap));
-    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
-    properties.add(IterableProperty<BoxShadow>('boxShadows', boxShadows));
-    properties.add(DiagnosticsProperty<bool>('isSwiper', isSwiper));
-  }
 }
 
 class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
@@ -130,7 +116,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
               width: constraints.maxWidth,
               height: constraints.maxHeight,
               child: NotificationListener<ScrollNotification>(
-                onNotification: (n) {
+                onNotification: (ScrollNotification n) {
                   if (n is! UserScrollNotification) {
                     isScrolling.value = n is! ScrollEndNotification;
                   }
@@ -362,15 +348,6 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
   /// 点击事件
   void onClick(AttrCarouseItem model, int index) {
     debugPrint(model.detailName ?? "");
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('showScrollbar', showScrollbar));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('currentIndex', currentIndex));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('scrollerOffset', scrollerOffset));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isScrolling', isScrolling));
   }
 }
 

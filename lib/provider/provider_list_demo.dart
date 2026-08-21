@@ -14,18 +14,12 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
 
 class ProviderListDemo extends StatefulWidget {
+  final String? title;
 
   const ProviderListDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _ProviderListDemoState createState() => _ProviderListDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ProviderListDemoState extends State<ProviderListDemo> {
@@ -46,7 +40,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       initValue: 6,
       minValue: 0,
       maxValue: 9,
-      block: (minValue, maxValue) {
+      block: (num minValue, num maxValue) {
         DLog.d("数值必须在$minValue - $maxValue 之间");
       });
 
@@ -54,7 +48,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       initValue: 6,
       minValue: 0,
       maxValue: 9,
-      block: (minValue, maxValue) {
+      block: (num minValue, num maxValue) {
         DLog.d("数值必须在$minValue - $maxValue 之间");
       });
   // static ValueNotifierInt valueNotifierInt = ValueNotifierInt(initValue: 6, minValue: 0, maxValue: 9);
@@ -170,10 +164,10 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
           //shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           //padding: EdgeInsets.all(0),
-          separatorBuilder: (context, index) {
+          separatorBuilder: (BuildContext context, int index) {
             return Divider();
           },
-          itemBuilder: (context, index) {
+          itemBuilder: (BuildContext context, int index) {
             //widget return
             return buildListCell(context, index);
           }),
@@ -372,18 +366,11 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
     // ValueNotifierModel(name: "valueNotifierIntOrigin", notifier: valueNotifierIntOrigin),
     ValueNotifierModel(name: "valueNotifierListOrigin", notifier: valueNotifierListOrigin),
   ];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('notifier', notifier));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('counter', counter));
-    properties.add(ColorProperty('primaryColor', primaryColor));
-    properties.add(IterableProperty<ValueNotifierModel>('list', list));
-  }
 }
 
 class ValueNotifierModel {
+  String name = "";
+  ValueNotifier? notifier;
   // ChangeNotifier? notifier;
 
   ValueNotifierModel({
@@ -398,8 +385,6 @@ class ValueNotifierModel {
     notifier = json["notifier"] as ValueNotifier?;
     name = json["name"] as String? ?? "";
   }
-  String name = "";
-  ValueNotifier? notifier;
 
   Map<String, dynamic> toJson() {
     var json = Map<String, dynamic>();

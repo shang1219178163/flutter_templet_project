@@ -19,7 +19,7 @@ class ReorderableListViewDemo extends StatefulWidget {
 
 /// This is the private State class that goes with ReorderableListViewDemo.
 class _ReorderableListViewDemoState extends State<ReorderableListViewDemo> {
-  final _items = List<int>.generate(20, (index) => index);
+  final _items = List<int>.generate(20, (int index) => index);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _ReorderableListViewDemoState extends State<ReorderableListViewDemo> {
                 trailing: Icon(Icons.drag_handle),
               ))
           .toList(),
-      onReorder: (oldIndex, newIndex) {
+      onReorder: (int oldIndex, int newIndex) {
         setState(() {
           if (oldIndex < newIndex) {
             newIndex -= 1;

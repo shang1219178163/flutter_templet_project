@@ -10,18 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
+  final String? title;
 
   const LoginPage({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _LoginPageState createState() => _LoginPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -107,14 +101,6 @@ class _LoginPageState extends State<LoginPage> {
     FocusManager.instance.primaryFocus?.unfocus();
 
     SystemChannels.textInput.invokeMethod('TextInput.hide');
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode1', focusNode1));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode2', focusNode2));
-    properties.add(DiagnosticsProperty<FocusScopeNode>('focusScopeNode', focusScopeNode));
   }
 }
 

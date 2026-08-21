@@ -19,13 +19,6 @@ class AIChatSettingPage extends StatefulWidget {
 
   @override
   State<AIChatSettingPage> createState() => _AIChatSettingPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<AiChatController?>('controller', controller));
-  }
 }
 
 class _AIChatSettingPageState extends State<AIChatSettingPage> {
@@ -308,11 +301,5 @@ class _SectionCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
   }
 }

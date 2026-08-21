@@ -140,24 +140,12 @@ class AeHorizalChooseItem extends StatelessWidget {
     FlutterPickerUtil.showMultiPicker(
       dataList: dataList,
       selectData: (selectVN.value ?? []),
-      confirm: (value, indexs) {
+      confirm: (List value, List<int> indexs) {
         // DLog.d("value: $value, indexs: $indexs");
         final val = value.map((e) => e.toString()).toList();
         selectVN.value = val;
         onChanged?.call(val);
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<List<String>>('dataList', dataList));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<String>?>>('selectVN', selectVN));
-    properties.add(ObjectFlagProperty<ValueChanged<List<String>>?>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-    properties.add(ColorProperty('disableTextColor', disableTextColor));
-    properties.add(ColorProperty('disableBgColor', disableBgColor));
   }
 }

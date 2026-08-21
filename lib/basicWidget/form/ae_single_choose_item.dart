@@ -151,17 +151,4 @@ class AeSingleChooseItem<T> extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<T>('dataList', dataList));
-    properties.add(DiagnosticsProperty<ValueNotifier<T?>>('selectVN', selectVN));
-    properties.add(ObjectFlagProperty<String Function(T e)>.has('convertCb', convertCb));
-    properties.add(ObjectFlagProperty<ValueChanged<T>?>.has('onChanged', onChanged));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-    properties.add(ColorProperty('disableTextColor', disableTextColor));
-    properties.add(ColorProperty('disableBgColor', disableBgColor));
-  }
 }

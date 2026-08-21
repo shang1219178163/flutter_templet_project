@@ -20,12 +20,6 @@ class UrlLauncherDemo extends StatefulWidget {
 
   @override
   State<UrlLauncherDemo> createState() => _UrlLauncherDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _UrlLauncherDemoState extends State<UrlLauncherDemo> {
@@ -151,13 +145,5 @@ class _UrlLauncherDemoState extends State<UrlLauncherDemo> {
     if (!await launchUrl(uri)) {
       throw Exception('Could not launch sms $phone');
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

@@ -67,11 +67,4 @@ class TapTrackWidget extends StatelessWidget {
       child: child,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('data', data));
-    properties.add(EnumProperty<HitTestBehavior>('behavior', behavior));
-  }
 }

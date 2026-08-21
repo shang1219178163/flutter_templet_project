@@ -103,16 +103,6 @@ class _ENSegment<T> extends StatefulWidget {
 
   @override
   _ENSegmentState<T> createState() => _ENSegmentState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('pressed', pressed));
-    properties.add(DiagnosticsProperty<bool>('highlighted', highlighted));
-    properties.add(DiagnosticsProperty<bool>('isDragging', isDragging));
-    properties.add(DiagnosticsProperty<bool>('shouldFadeoutContent', shouldFadeoutContent));
-    properties.add(DiagnosticsProperty<bool>('shouldScaleContent', shouldScaleContent));
-  }
 }
 
 class _ENSegmentState<T> extends State<_ENSegment<T>>
@@ -198,13 +188,6 @@ class _ENSegmentState<T> extends State<_ENSegment<T>>
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('highlightPressScaleController', highlightPressScaleController));
-    properties.add(DiagnosticsProperty<Animation<double>>('highlightPressScaleAnimation', highlightPressScaleAnimation));
-  }
 }
 
 // Fadeout the separator when either adjacent segment is highlighted.
@@ -218,12 +201,6 @@ class _ENSegmentSeparator extends StatefulWidget {
 
   @override
   _ENSegmentSeparatorState createState() => _ENSegmentSeparatorState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('highlighted', highlighted));
-  }
 }
 
 class _ENSegmentSeparatorState extends State<_ENSegmentSeparator>
@@ -266,7 +243,7 @@ class _ENSegmentSeparatorState extends State<_ENSegmentSeparator>
     return AnimatedBuilder(
       animation: separatorOpacityController,
       child: const SizedBox(width: _kSeparatorWidth),
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return Padding(
           padding: _kSeparatorInset,
           child: DecoratedBox(
@@ -280,12 +257,6 @@ class _ENSegmentSeparatorState extends State<_ENSegmentSeparator>
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('separatorOpacityController', separatorOpacityController));
   }
 }
 
@@ -449,19 +420,6 @@ class ENCupertinoSlidingSegmentedControl<T> extends StatefulWidget {
   @override
   State<ENCupertinoSlidingSegmentedControl<T>> createState() =>
       _ENSegmentedControlState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<T, Widget>>('children', children));
-    properties.add(DiagnosticsProperty<T?>('groupValue', groupValue));
-    properties.add(ObjectFlagProperty<ValueChanged<T?>>.has('onValueChanged', onValueChanged));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(ColorProperty('thumbColor', thumbColor));
-    properties.add(DiagnosticsProperty<Radius>('radius', radius));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
-    properties.add(DoubleProperty('height', height));
-  }
 }
 
 class _ENSegmentedControlState<T>
@@ -762,7 +720,7 @@ class _ENSegmentedControlState<T>
         ),
         child: AnimatedBuilder(
           animation: thumbScaleAnimation,
-          builder: (context, child) {
+          builder: (BuildContext context, Widget? child) {
             return _ENSegmentedControlRenderWidget<T>(
               highlightedIndex: highlightedIndex,
               thumbColor:
@@ -776,21 +734,6 @@ class _ENSegmentedControlState<T>
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('thumbController', thumbController));
-    properties.add(DiagnosticsProperty<Animatable<Rect?>?>('thumbAnimatable', thumbAnimatable));
-    properties.add(DiagnosticsProperty<AnimationController>('thumbScaleController', thumbScaleController));
-    properties.add(DiagnosticsProperty<Animation<double>>('thumbScaleAnimation', thumbScaleAnimation));
-    properties.add(DiagnosticsProperty<TapGestureRecognizer>('tap', tap));
-    properties.add(DiagnosticsProperty<HorizontalDragGestureRecognizer>('drag', drag));
-    properties.add(DiagnosticsProperty<LongPressGestureRecognizer>('longPress', longPress));
-    properties.add(DiagnosticsProperty<bool>('isThumbDragging', isThumbDragging));
-    properties.add(DiagnosticsProperty<T?>('highlighted', highlighted));
-    properties.add(DiagnosticsProperty<T?>('pressed', pressed));
   }
 }
 
@@ -830,16 +773,6 @@ class _ENSegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
       ..thumbColor = thumbColor
       ..thumbScale = thumbScale
       ..highlightedIndex = highlightedIndex;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('highlightedIndex', highlightedIndex));
-    properties.add(ColorProperty('thumbColor', thumbColor));
-    properties.add(DoubleProperty('thumbScale', thumbScale));
-    properties.add(DiagnosticsProperty<Radius>('radius', radius));
-    properties.add(DiagnosticsProperty<_ENSegmentedControlState<T>>('state', state));
   }
 }
 
@@ -1267,7 +1200,7 @@ class _ENRenderSegmentedControl<T> extends RenderBox
         return result.addWithPaintOffset(
           offset: childParentData.offset,
           position: position,
-          hitTest: (result, localOffset) {
+          hitTest: (BoxHitTestResult result, Offset localOffset) {
             assert(localOffset == position - childParentData.offset);
             return child!.hitTest(result, position: localOffset);
           },
@@ -1276,18 +1209,5 @@ class _ENRenderSegmentedControl<T> extends RenderBox
       child = childParentData.previousSibling;
     }
     return false;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<_ENSegmentedControlState<T>>('state', state));
-    properties.add(DiagnosticsProperty<Rect?>('currentThumbRect', currentThumbRect));
-    properties.add(DoubleProperty('thumbScale', thumbScale));
-    properties.add(IntProperty('highlightedIndex', highlightedIndex));
-    properties.add(ColorProperty('thumbColor', thumbColor));
-    properties.add(DiagnosticsProperty<Radius>('radius', radius));
-    properties.add(DoubleProperty('totalSeparatorWidth', totalSeparatorWidth));
-    properties.add(DiagnosticsProperty<Paint>('separatorPaint', separatorPaint));
   }
 }

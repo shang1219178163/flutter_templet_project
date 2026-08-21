@@ -11,12 +11,6 @@ class EnhanceTabBarDemo extends StatefulWidget {
 
   @override
   _EnhanceTabBarDemoState createState() => _EnhanceTabBarDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTickerProviderStateMixin {
@@ -131,7 +125,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
           .map((e) => Tab(
                 child: ValueListenableBuilder<int>(
                     valueListenable: indexVN,
-                    builder: (context, value, child) {
+                    builder: (BuildContext context, int value, Widget? child) {
                       final index = items.indexOf(e);
                       if (index != 1) {
                         if (index == 2) {
@@ -253,16 +247,5 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
         setState(() {});
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<EnTabBarIndicatorSize>('indicatorSizes', indicatorSizes));
-    properties.add(EnumProperty<EnTabBarIndicatorSize>('dropValue', dropValue));
-    properties.add(IntProperty('currentIndex', currentIndex));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
-    properties.add(IterableProperty<String>('titles', titles));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
   }
 }

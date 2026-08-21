@@ -107,7 +107,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
 
     return NestedScrollView(
       controller: scrollControllerNew,
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
           SliverOverlapAbsorber(
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
@@ -702,14 +702,6 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollControllerNew', scrollControllerNew));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('scrollProgress', scrollProgress));
-    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('topKey', topKey));
-  }
 }
 
 /// 项目名称修改按钮
@@ -757,13 +749,6 @@ class ProjectGreyButton extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onPressed', onPressed));
   }
 }
 

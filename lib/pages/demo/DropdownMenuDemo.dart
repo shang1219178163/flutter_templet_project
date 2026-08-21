@@ -12,12 +12,6 @@ class DropdownMenuDemo extends StatefulWidget {
 
   @override
   _DropdownMenuDemoState createState() => _DropdownMenuDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
@@ -56,7 +50,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                 values: BoxFit.values,
                 initialItem: BoxFit.values[0],
                 cbName: (e) => e.name,
-                onChanged: (e) {
+                onChanged: (BoxFit e) {
                   debugPrint(e.name);
                   _selectedItemVN.value = e;
                 },
@@ -68,7 +62,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                 onChanged: (e) {
                   DLog.d(jsonEncode(e.toJson()));
                 },
-                onSearchChanged: (value) {
+                onSearchChanged: (String value) {
                   DLog.d("onSearchChanged: $value");
                 },
                 onItemName: (name) => "$name${"\t\t" * 9}",
@@ -97,7 +91,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                 initialSelection: ColorLabel.green,
                 label: const Text('Color'),
                 dropdownMenuEntries: colorEntries,
-                onSelected: (color) {
+                onSelected: (ColorLabel? color) {
                   selectedColor = color;
                   setState(() {});
                 },
@@ -113,7 +107,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                   filled: true,
                   contentPadding: EdgeInsets.symmetric(vertical: 5.0),
                 ),
-                onSelected: (icon) {
+                onSelected: (IconLabel? icon) {
                   selectedIcon = icon;
                   setState(() {});
                 },
@@ -151,10 +145,10 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
   }) {
     var selectedItem = initialItem;
 
-    return StatefulBuilder(builder: (context, setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return MenuAnchor(
         alignmentOffset: Offset(0, 0),
-        builder: (context, controller, child) {
+        builder: (context, MenuController controller, Widget? child) {
           return itemBuilder?.call(controller, selectedItem) ??
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
@@ -190,17 +184,6 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
         }).toList(),
       );
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('colorController', colorController));
-    properties.add(DiagnosticsProperty<TextEditingController>('iconController', iconController));
-    properties.add(EnumProperty<ColorLabel?>('selectedColor', selectedColor));
-    properties.add(EnumProperty<IconLabel?>('selectedIcon', selectedIcon));
-    properties.add(IterableProperty<DropdownMenuEntry<ColorLabel>>('colorEntries', colorEntries));
-    properties.add(IterableProperty<DropdownMenuEntry<IconLabel>>('iconEntries', iconEntries));
   }
 }
 

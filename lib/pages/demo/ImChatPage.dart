@@ -32,12 +32,6 @@ class ImChatPage extends StatefulWidget {
 
   @override
   _ImChatPageState createState() => _ImChatPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ImChatPageState extends State<ImChatPage>
@@ -497,7 +491,7 @@ class _ImChatPageState extends State<ImChatPage>
           },
           child: NLongPressMenu(
             items: menueItems,
-            onItem: (t) {
+            onItem: (Tuple2<String, AssetImage> t) {
               onHide();
               debugPrint("onChanged_$t");
               ToastUtil.show(t.item1);
@@ -618,10 +612,10 @@ class _ImChatPageState extends State<ImChatPage>
   Widget buildInputBar() {
     return IMTextfieldBar(
       controller: _inputController,
-      onChanged: (val) {
+      onChanged: (String val) {
         debugPrint("onChanged:$val");
       },
-      onSubmitted: (val) {
+      onSubmitted: (String val) {
         debugPrint("onSubmitted:$val");
         sendTextMessage();
       },
@@ -935,20 +929,5 @@ class _ImChatPageState extends State<ImChatPage>
       time: DateTime.now().secondsSinceEpoch,
     );
     return msgModel;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ListObserverController>('observerController', observerController));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('currentEmojiVN', currentEmojiVN));
-    properties.add(DiagnosticsProperty<ValueNotifier<List<IMMsgDetailModel>>>('dataList', dataList));
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('heightVN', heightVN));
-    properties.add(IterableProperty<Tuple3<String, IconData, String>>('inputBarFooterItems', inputBarFooterItems));
-    properties.add(IterableProperty<OverlayEntry>('longPressEntries', longPressEntries));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isKeyboardVisibleVN', isKeyboardVisibleVN));
-    properties.add(StringProperty('bubblePath', bubblePath));
   }
 }

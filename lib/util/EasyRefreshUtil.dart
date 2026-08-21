@@ -87,13 +87,13 @@ class EasyRefreshUtil {
       infiniteOffset: null,
       succeededIcon: const SizedBox.shrink(),
       noMoreIcon: const SizedBox.shrink(),
-      textBuilder: (context, state, text) {
+      textBuilder: (BuildContext context, IndicatorState state, String text) {
         if (shouldHideLoadResult(state)) {
           return const SizedBox.shrink();
         }
         return Text(text, style: TextStyle(fontSize: 14));
       },
-      pullIconBuilder: (context, state, animation) {
+      pullIconBuilder: (BuildContext context, IndicatorState state, double animation) {
         if (shouldHideLoadResult(state)) {
           return const SizedBox.shrink();
         }

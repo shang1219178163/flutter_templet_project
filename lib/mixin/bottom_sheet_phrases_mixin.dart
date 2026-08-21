@@ -110,7 +110,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
               child: ListView.separated(
                 controller: controller,
                 itemCount: items.length,
-                itemBuilder: (context, i) {
+                itemBuilder: (context, int i) {
                   final e = items[i];
 
                   return InkWell(
@@ -141,7 +141,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
                     ),
                   );
                 },
-                separatorBuilder: (context, index) {
+                separatorBuilder: (context, int index) {
                   return Divider(
                     height: 16.w,
                     indent: 16.w,
@@ -211,13 +211,6 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
 }
 
 class IMPhrasesDetailModel {
-
-  IMPhrasesDetailModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    phrases = json['phrases'];
-    orderNum = json['orderNum'];
-    createBy = json['createBy'];
-  }
   IMPhrasesDetailModel({
     this.id,
     this.phrases,
@@ -229,6 +222,13 @@ class IMPhrasesDetailModel {
   String? phrases;
   int? orderNum;
   String? createBy;
+
+  IMPhrasesDetailModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    phrases = json['phrases'];
+    orderNum = json['orderNum'];
+    createBy = json['createBy'];
+  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

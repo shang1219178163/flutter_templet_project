@@ -29,13 +29,6 @@ const List<AppUpdateItemModel> kUpdateAppList = [
 ];
 
 class TestModel {
-
-  const TestModel({
-    required this.title,
-    required this.imageUrl,
-    required this.content,
-    required this.time,
-  });
   /// 用户昵称
   final String title;
 
@@ -47,4 +40,11 @@ class TestModel {
 
   /// 消息收到时间
   final String time;
+
+  const TestModel({
+    required this.title,
+    required this.imageUrl,
+    required this.content,
+    required this.time,
+  });
 }

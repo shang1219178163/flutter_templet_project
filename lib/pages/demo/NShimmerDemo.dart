@@ -22,12 +22,6 @@ class NShimmerDemo extends StatefulWidget {
 
   @override
   State<NShimmerDemo> createState() => _NShimmerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _NShimmerDemoState extends State<NShimmerDemo> {
@@ -179,7 +173,7 @@ class _NShimmerDemoState extends State<NShimmerDemo> {
             ButtonSegment(value: Axis.vertical, label: Text("垂直"), icon: Icon(Icons.swap_vert)),
           ],
           selected: {direction},
-          onSelectionChanged: (selected) {
+          onSelectionChanged: (Set<Axis> selected) {
             direction = selected.first;
             setState(() {});
           },
@@ -269,17 +263,5 @@ class _NShimmerDemoState extends State<NShimmerDemo> {
         borderRadius: BorderRadius.circular(8),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(DoubleProperty('angle', angle));
-    properties.add(ColorProperty('baseColor', baseColor));
-    properties.add(ColorProperty('highlightColor', highlightColor));
   }
 }

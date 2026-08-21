@@ -44,13 +44,6 @@ class NChatBubble extends StatelessWidget {
       child: child,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('imagePath', imagePath));
-    properties.add(DiagnosticsProperty<NChatBubbleMetrics>('metrics', metrics));
-  }
 }
 
 /// 聊天气泡参数

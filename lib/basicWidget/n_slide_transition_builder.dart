@@ -32,14 +32,6 @@ class NSlideTransitionBuilder extends StatefulWidget {
 
   @override
   NSlideTransitionBuilderState createState() => NSlideTransitionBuilderState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(DiagnosticsProperty<bool>('hasFade', hasFade));
-  }
 }
 
 class NSlideTransitionBuilderState extends State<NSlideTransitionBuilder>
@@ -129,12 +121,5 @@ class NSlideTransitionBuilderState extends State<NSlideTransitionBuilder>
   /// 消失动画
   onDismissAnimation() {
     _controller.reverse();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
-    properties.add(DiagnosticsProperty<Tween<Offset>>('tween', tween));
   }
 }

@@ -30,13 +30,6 @@ class NThirdLogin extends StatefulWidget {
 
   @override
   NThirdLoginState createState() => NThirdLoginState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<bool Function()>.has('onAgreedPrivice', onAgreedPrivice));
-    properties.add(DiagnosticsProperty<bool>('wxIsInstalled', wxIsInstalled));
-  }
 }
 
 class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMixin {
@@ -167,14 +160,6 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
 
     initFlux();
     FluwxUtil().authLogin();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<String, VoidCallback>>('thirdLoginItems', thirdLoginItems));
-    properties.add(DiagnosticsProperty<bool>('isCheck', isCheck));
-    properties.add(DiagnosticsProperty<bool>('wxIsInstalled', wxIsInstalled));
   }
 }
 

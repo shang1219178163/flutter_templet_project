@@ -6,12 +6,6 @@
 
 /// 查询评论分页列表
 class NewsDiscussRootModel {
-
-  NewsDiscussRootModel.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    msg = json['msg'];
-    data = json['data'] != null ? NewsDiscussDataModel.fromJson(json['data'] as Map<String, dynamic>) : null;
-  }
   NewsDiscussRootModel({
     this.code,
     this.msg,
@@ -23,6 +17,12 @@ class NewsDiscussRootModel {
   String? msg;
 
   NewsDiscussDataModel? data;
+
+  NewsDiscussRootModel.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    msg = json['msg'];
+    data = json['data'] != null ? NewsDiscussDataModel.fromJson(json['data'] as Map<String, dynamic>) : null;
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -36,12 +36,6 @@ class NewsDiscussRootModel {
 }
 
 class NewsDiscussDataModel {
-
-  NewsDiscussDataModel.fromJson(Map<String, dynamic> json) {
-    page = json['page'] != null ? NewsDiscussPageModel.fromJson(json['page'] as Map<String, dynamic>) : null;
-    hasFeatured = json['hasFeatured'];
-    totalCommentCount = json['totalCommentCount'];
-  }
   NewsDiscussDataModel({
     this.page,
     this.hasFeatured,
@@ -55,6 +49,12 @@ class NewsDiscussDataModel {
 
   int? totalCommentCount;
 
+  NewsDiscussDataModel.fromJson(Map<String, dynamic> json) {
+    page = json['page'] != null ? NewsDiscussPageModel.fromJson(json['page'] as Map<String, dynamic>) : null;
+    hasFeatured = json['hasFeatured'];
+    totalCommentCount = json['totalCommentCount'];
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (page != null) {
@@ -67,17 +67,6 @@ class NewsDiscussDataModel {
 }
 
 class NewsDiscussPageModel {
-
-  NewsDiscussPageModel.fromJson(Map<String, dynamic> json) {
-    rootComment = json['rootComment'] != null
-        ? NewsDiscussDetailModel.fromJson(json['rootComment'] as Map<String, dynamic>)
-        : null;
-    total = json['total'];
-    if (json['items'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['items'] ?? []);
-      items = array.map((e) => NewsDiscussDetailModel.fromJson(e)).toList();
-    }
-  }
   NewsDiscussPageModel({
     this.rootComment,
     this.total,
@@ -90,6 +79,17 @@ class NewsDiscussPageModel {
 
   List<NewsDiscussDetailModel>? items;
 
+  NewsDiscussPageModel.fromJson(Map<String, dynamic> json) {
+    rootComment = json['rootComment'] != null
+        ? NewsDiscussDetailModel.fromJson(json['rootComment'] as Map<String, dynamic>)
+        : null;
+    total = json['total'];
+    if (json['items'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['items'] ?? []);
+      items = array.map((e) => NewsDiscussDetailModel.fromJson(e)).toList();
+    }
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['total'] = total;
@@ -99,12 +99,6 @@ class NewsDiscussPageModel {
 }
 
 class CustomerInfoModel {
-
-  CustomerInfoModel.fromJson(Map<String, dynamic> json) {
-    customerId = json['customerId'];
-    nickname = json['nickname'];
-    avatar = json['avatar'];
-  }
   CustomerInfoModel({
     this.customerId,
     this.nickname,
@@ -117,6 +111,12 @@ class CustomerInfoModel {
 
   String? avatar;
 
+  CustomerInfoModel.fromJson(Map<String, dynamic> json) {
+    customerId = json['customerId'];
+    nickname = json['nickname'];
+    avatar = json['avatar'];
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['customerId'] = customerId;
@@ -128,44 +128,6 @@ class CustomerInfoModel {
 
 /// 资讯评论详情
 class NewsDiscussDetailModel {
-
-  NewsDiscussDetailModel.fromJson(Map<String, dynamic> json) {
-    commentId = json['commentId'];
-    parentId = json['parentId'];
-    customerId = json['customerId'];
-    customerInfo =
-        json['customerInfo'] != null ? CustomerInfoModel.fromJson(json['customerInfo'] as Map<String, dynamic>) : null;
-    replyToCustomerInfo = json['replyToCustomerInfo'] != null
-        ? CustomerInfoModel.fromJson(json['replyToCustomerInfo'] as Map<String, dynamic>)
-        : null;
-    message = json['content'];
-    if (json['imageUrls'] != null) {
-      imageUrls = List<String>.from(json['imageUrls'] ?? []);
-    }
-    replyCount = json['replyCount'];
-    likeNumber = json['likeCount'];
-    like = json['isLike'];
-    canDelete = json['canDelete'];
-    createTime = json['createTime'];
-    showTime = json['showTime'];
-    if (json['replyList'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['replyList'] ?? []);
-      replyList = array.map((e) => NewsDiscussDetailModel.fromJson(e)).toList();
-    }
-    followNumber = json['followNumber'];
-
-    parent = json['parent'] != null ? NewsDiscussDetailModel.fromJson(json['parent'] as Map<String, dynamic>) : null;
-    parentContent = json['parentContent'];
-    parentImageUrls = List<String>.from(json['parentImageUrls'] ?? <String>[]);
-    if (replyToCustomerInfo != null) {
-      parent ??= NewsDiscussDetailModel(
-        customerInfo: replyToCustomerInfo,
-        parentId: parentId,
-        message: parentContent,
-        imageUrls: parentImageUrls,
-      );
-    }
-  }
   NewsDiscussDetailModel({
     this.commentId,
     this.parentId,
@@ -249,6 +211,44 @@ class NewsDiscussDetailModel {
   /// 更多条数
   int get moreCount {
     return (replyCount ?? 0) - (replyList ?? []).length;
+  }
+
+  NewsDiscussDetailModel.fromJson(Map<String, dynamic> json) {
+    commentId = json['commentId'];
+    parentId = json['parentId'];
+    customerId = json['customerId'];
+    customerInfo =
+        json['customerInfo'] != null ? CustomerInfoModel.fromJson(json['customerInfo'] as Map<String, dynamic>) : null;
+    replyToCustomerInfo = json['replyToCustomerInfo'] != null
+        ? CustomerInfoModel.fromJson(json['replyToCustomerInfo'] as Map<String, dynamic>)
+        : null;
+    message = json['content'];
+    if (json['imageUrls'] != null) {
+      imageUrls = List<String>.from(json['imageUrls'] ?? []);
+    }
+    replyCount = json['replyCount'];
+    likeNumber = json['likeCount'];
+    like = json['isLike'];
+    canDelete = json['canDelete'];
+    createTime = json['createTime'];
+    showTime = json['showTime'];
+    if (json['replyList'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['replyList'] ?? []);
+      replyList = array.map((e) => NewsDiscussDetailModel.fromJson(e)).toList();
+    }
+    followNumber = json['followNumber'];
+
+    parent = json['parent'] != null ? NewsDiscussDetailModel.fromJson(json['parent'] as Map<String, dynamic>) : null;
+    parentContent = json['parentContent'];
+    parentImageUrls = List<String>.from(json['parentImageUrls'] ?? <String>[]);
+    if (replyToCustomerInfo != null) {
+      parent ??= NewsDiscussDetailModel(
+        customerInfo: replyToCustomerInfo,
+        parentId: parentId,
+        message: parentContent,
+        imageUrls: parentImageUrls,
+      );
+    }
   }
 
   Map<String, dynamic> toJson() {

@@ -63,23 +63,6 @@ class NChoiceBox<T> extends StatefulWidget {
 
   @override
   _NChoiceBoxState<T> createState() => _NChoiceBoxState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isSingle', isSingle));
-    properties.add(IterableProperty<ChoiceBoxModel<T>>('items', items));
-    properties.add(ObjectFlagProperty<ValueChanged<List<ChoiceBoxModel<T>>>>.has('onChanged', onChanged));
-    properties.add(EnumProperty<CrossAxisAlignment>('crossAxisAlignment', crossAxisAlignment));
-    properties.add(DoubleProperty('wrapSpacing', wrapSpacing));
-    properties.add(DoubleProperty('wrapRunSpacing', wrapRunSpacing));
-    properties.add(EnumProperty<WrapAlignment>('wrapAlignment', wrapAlignment));
-    properties.add(DiagnosticsProperty<EdgeInsets>('itemMargin', itemMargin));
-    properties.add(DoubleProperty('itemRadius', itemRadius));
-    properties.add(ColorProperty('itemColor', itemColor));
-    properties.add(ColorProperty('itemSelectedColor', itemSelectedColor));
-    properties.add(ObjectFlagProperty<Widget? Function(T e, bool isSelected)?>.has('itemBuilder', itemBuilder));
-  }
 }
 
 class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
@@ -170,13 +153,6 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
     }
     setState(() {});
     widget.onChanged(selectedItems);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<ChoiceBoxModel<T>>('selectedItems', selectedItems));
-    properties.add(IterableProperty<String>('selectedItemNames', selectedItemNames));
   }
 }
 

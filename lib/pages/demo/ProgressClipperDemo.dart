@@ -13,12 +13,6 @@ class ProgressClipperDemo extends StatefulWidget {
 
   @override
   State<ProgressClipperDemo> createState() => _ProgressClipperDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
@@ -192,12 +186,6 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progressVN', progressVN));
-  }
 }
 
 class RotatingCircularProgress extends StatefulWidget {
@@ -305,13 +293,6 @@ class NCircularProgress extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('strokeWidth', strokeWidth));
-    properties.add(DoubleProperty('percent', percent));
   }
 }
 

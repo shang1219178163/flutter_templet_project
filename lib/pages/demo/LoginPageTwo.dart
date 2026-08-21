@@ -7,12 +7,6 @@ class LoginPageTwo extends StatefulWidget {
 
   @override
   _LoginPageTwoState createState() => _LoginPageTwoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _LoginPageTwoState extends State<LoginPageTwo> {
@@ -99,12 +93,6 @@ class _LoginPageTwoState extends State<LoginPageTwo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('pwdShow', pwdShow));
   }
 
   // void _onLogin() async {

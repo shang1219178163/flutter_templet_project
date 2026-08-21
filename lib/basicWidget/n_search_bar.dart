@@ -62,13 +62,4 @@ class NSearchBar extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('placeholder', placeholder));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
-  }
 }

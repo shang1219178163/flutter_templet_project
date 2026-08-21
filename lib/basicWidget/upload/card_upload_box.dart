@@ -85,27 +85,6 @@ class CardUploadBox extends StatefulWidget {
 
   @override
   CardUploadBoxState createState() => CardUploadBoxState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<CardUploadBoxController?>('controller', controller));
-    properties.add(IterableProperty<AssetUploadModel>('items', items));
-    properties.add(ObjectFlagProperty<ValueChanged<List<AssetUploadModel>>>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onStart', onStart));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
-    properties.add(IntProperty('maxCount', maxCount));
-    properties.add(IntProperty('rowCount', rowCount));
-    properties.add(DoubleProperty('spacing', spacing));
-    properties.add(DoubleProperty('runSpacing', runSpacing));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
-    properties.add(DiagnosticsProperty<bool>('canTakePhoto', canTakePhoto));
-    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
-    properties.add(ObjectFlagProperty<Widget Function(String url)?>.has('imgBuilder', imgBuilder));
-    properties.add(ObjectFlagProperty<Void Function(List<String> urls, int index)?>.has('onTap', onTap));
-    properties.add(DiagnosticsProperty<bool>('showFileSize', showFileSize));
-    properties.add(DiagnosticsProperty<bool>('hasTakePhoto', hasTakePhoto));
-  }
 }
 
 class CardUploadBoxState extends State<CardUploadBox> {
@@ -175,7 +154,7 @@ class CardUploadBoxState extends State<CardUploadBox> {
     final isDark = theme.brightness == Brightness.dark;
 
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
 
         return Wrap(
@@ -306,7 +285,7 @@ class CardUploadBoxState extends State<CardUploadBox> {
               specialItemPosition: !widget.canTakePhoto ? SpecialItemPosition.none : SpecialItemPosition.prepend,
               specialItemBuilder: !widget.canTakePhoto
                   ? null
-                  : (context, path, length) {
+                  : (context, AssetPathEntity? path, int length) {
                       if (path?.isAll != true) {
                         return null;
                       }
@@ -419,13 +398,6 @@ class CardUploadBoxState extends State<CardUploadBox> {
         builder: (context) => imagePreView,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<AssetUploadModel>('selectedModels', selectedModels));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isAllUploadFinished', isAllUploadFinished));
   }
 }
 

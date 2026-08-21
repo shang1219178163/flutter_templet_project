@@ -6,18 +6,12 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:tuple/tuple.dart';
 
 class HomeSrollDemo extends StatefulWidget {
+  final String? title;
 
   const HomeSrollDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _HomeSrollDemoState createState() => _HomeSrollDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _HomeSrollDemoState extends State<HomeSrollDemo> {
@@ -98,7 +92,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
         bottom: 16,
       ),
       showCount: showCount,
-      onTap: (e) {
+      onTap: (Tuple4<String, String, String, bool> e) {
         debugPrint("onTap:$e");
       },
     );
@@ -170,11 +164,4 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
     //    false
     // ),
   ];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isList', isList));
-    properties.add(IterableProperty<Tuple4<String, String, String, bool>>('items', items));
-  }
 }

@@ -49,7 +49,7 @@ class _MultipleLinkPickerPageState extends State<MultipleLinkPickerPage> {
       selectData: ['c', 'cc3'],
       columnNum: 5,
       suffix: ['', '', '', '', ''],
-      onConfirm: (p, position) {
+      onConfirm: (List p, List<int> position) {
         debugPrint('longer >>> 返回数据：${p.join('、')}');
         debugPrint('longer >>> 返回数据下标：${position.join('、')}');
         debugPrint('longer >>> 返回数据类型：${p.map((x) => x.runtimeType).toList()}');

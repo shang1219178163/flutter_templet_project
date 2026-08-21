@@ -15,12 +15,6 @@ class RedPacketRainDemo extends StatefulWidget {
 
   @override
   State<RedPacketRainDemo> createState() => _RedPacketRainDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _RedPacketRainDemoState extends State<RedPacketRainDemo> {
@@ -97,11 +91,5 @@ class _RedPacketRainDemoState extends State<RedPacketRainDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

@@ -45,11 +45,4 @@ class LiveStreamEnterEffectCard extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('imagePath', imagePath));
-    properties.add(StringProperty('text', text));
-  }
 }

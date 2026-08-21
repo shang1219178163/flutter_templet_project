@@ -86,25 +86,6 @@ class NWrapPageView<T> extends StatefulWidget {
 
   @override
   State<NWrapPageView<T>> createState() => _NWrapPageViewState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<T>('items', items));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, int index)>.has('itemBuilder', itemBuilder));
-    properties.add(IntProperty('crossAxisCount', crossAxisCount));
-    properties.add(IntProperty('rowCount', rowCount));
-    properties.add(DoubleProperty('spacing', spacing));
-    properties.add(DoubleProperty('runSpacing', runSpacing));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('indicatorMargin', indicatorMargin));
-    properties.add(DiagnosticsProperty<Size>('indicatorItemSize', indicatorItemSize));
-    properties.add(ColorProperty('indicatorNormalColor', indicatorNormalColor));
-    properties.add(ColorProperty('indicatorSelectedColor', indicatorSelectedColor));
-    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onPageChanged', onPageChanged));
-    properties.add(IntProperty('pageSize', pageSize));
-  }
 }
 
 class _NWrapPageViewState<T> extends State<NWrapPageView<T>> {

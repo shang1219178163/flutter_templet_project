@@ -22,12 +22,6 @@ class IteratorDemo extends StatefulWidget {
 
   @override
   State<IteratorDemo> createState() => _IteratorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _IteratorDemoState extends State<IteratorDemo> {
@@ -115,14 +109,5 @@ class _IteratorDemoState extends State<IteratorDemo> {
     for (var i = 0; i < count; i++) {
       yield String.fromCharCodes(first.map((e) => e + i));
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(StringProperty('message', message));
   }
 }

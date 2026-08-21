@@ -14,12 +14,6 @@ class LinkifyPage extends StatefulWidget {
 
   @override
   State<LinkifyPage> createState() => _LinkifyPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _LinkifyPageState extends State<LinkifyPage> {
@@ -115,12 +109,6 @@ class _LinkifyPageState extends State<LinkifyPage> {
       },
     );
     return child;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }
 
@@ -232,13 +220,6 @@ class NFullscreenTextLinkify extends StatefulWidget {
 
   @override
   State<NFullscreenTextLinkify> createState() => _NFullscreenTextLinkifyState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('message', message));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onDismiss', onDismiss));
-  }
 }
 
 class _NFullscreenTextLinkifyState extends State<NFullscreenTextLinkify> {
@@ -376,13 +357,5 @@ class _NFullscreenTextLinkifyState extends State<NFullscreenTextLinkify> {
     //     },
     //   ),
     // );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('message', message));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<GlobalKey<SelectableRegionState>>('regionKey', regionKey));
   }
 }

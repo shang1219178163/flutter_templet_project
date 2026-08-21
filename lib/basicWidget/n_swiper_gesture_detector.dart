@@ -57,12 +57,4 @@ class NSwiperGestureDetector extends StatelessWidget {
       onNext();
     }
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onPre', onPre));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onNext', onNext));
-  }
 }

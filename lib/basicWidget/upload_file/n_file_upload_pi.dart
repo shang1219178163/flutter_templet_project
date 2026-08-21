@@ -35,8 +35,8 @@ class NFileUploadPI extends NFileUploadHandle {
       urlBlock: urlBlock,
       onDelete: canEdit == false ? null : deleteItem,
       showFileSize: showFileSize,
-      builder: (model, onDelete, onRefresh, successVN,
-          percentVN) {
+      builder: (NFileUploadModel model, VoidCallback? onDelete, VoidCallback? onRefresh, ValueNotifier<bool> successVN,
+          ValueNotifier<double> percentVN) {
         final validUrl = model.url?.startsWith("http") == true;
 
         var name = model.fileName ?? "--";

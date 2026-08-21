@@ -21,12 +21,6 @@ class OrderListPageOne extends StatefulWidget {
 
   @override
   State<OrderListPageOne> createState() => _OrderListPageOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMixin {
@@ -167,13 +161,5 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMixin 
       createdDate: DateTime.now().toIso8601String(),
     );
     provider.put(todo);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('titleController', titleController));
-    properties.add(DiagnosticsProperty<bool>('isAllChoic', isAllChoic));
-    properties.add(DiagnosticsProperty<DBGenericController<DBOrder>>('provider', provider));
   }
 }

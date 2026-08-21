@@ -14,12 +14,6 @@ class AnnotatedRegionPage extends StatefulWidget {
 
   @override
   State<AnnotatedRegionPage> createState() => _AnnotatedRegionPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _AnnotatedRegionPageState extends State<AnnotatedRegionPage> {
@@ -78,13 +72,5 @@ class _AnnotatedRegionPageState extends State<AnnotatedRegionPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('currIndexVN', currIndexVN));
   }
 }

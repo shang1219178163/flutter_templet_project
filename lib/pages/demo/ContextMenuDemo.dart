@@ -11,12 +11,6 @@ class ContextMenuDemo extends StatefulWidget {
 
   @override
   _ContextMenuDemoState createState() => _ContextMenuDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ContextMenuDemoState extends State<ContextMenuDemo> {
@@ -121,7 +115,7 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
               onSelectionChanged: (v) {
                 DLog.d("onSelectionChanged: ${v?.plainText}");
               },
-              contextMenuBuilder: (context, selectableRegionState) {
+              contextMenuBuilder: (BuildContext context, SelectableRegionState selectableRegionState) {
                 return AdaptiveTextSelectionToolbar.buttonItems(
                   anchors: selectableRegionState.contextMenuAnchors,
                   buttonItems: <ContextMenuButtonItem>[
@@ -153,12 +147,5 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<({VoidCallback event, String title})>('contextItems', contextItems));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
   }
 }

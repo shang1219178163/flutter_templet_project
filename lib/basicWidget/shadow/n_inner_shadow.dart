@@ -43,14 +43,6 @@ class NInnerShadow extends StatelessWidget {
       child: child,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<BoxShadow>('boxShadow', boxShadow));
-    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
-    properties.add(DoubleProperty('blurExtent', blurExtent));
-  }
 }
 
 class _InnerShadowPainter extends CustomPainter {

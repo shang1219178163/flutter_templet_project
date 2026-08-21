@@ -242,12 +242,6 @@ class BaseListApi extends BaseRequestAPI {
 
 /// 根模型
 class BaseRootModel<T> {
-
-  BaseRootModel.fromJson(Map<String, dynamic> json) {
-    code = (json['code'] as String?);
-    message = (json['message'] as String?);
-    result = onResult?.call(json);
-  }
   BaseRootModel({
     this.code,
     this.message,
@@ -264,6 +258,12 @@ class BaseRootModel<T> {
 
   T Function(Map<String, dynamic> response)? onResult;
   Map<String, dynamic>? resultJson;
+
+  BaseRootModel.fromJson(Map<String, dynamic> json) {
+    code = (json['code'] as String?);
+    message = (json['message'] as String?);
+    result = onResult?.call(json);
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

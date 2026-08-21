@@ -117,13 +117,4 @@ class NCupertinoSliverRefreshIndicator extends StatelessWidget {
         return const SizedBox.shrink();
     }
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<RefreshIndicatorMode>('refreshState', refreshState));
-    properties.add(DoubleProperty('pulledExtent', pulledExtent));
-    properties.add(DoubleProperty('refreshTriggerPullDistance', refreshTriggerPullDistance));
-    properties.add(DoubleProperty('refreshIndicatorExtent', refreshIndicatorExtent));
-  }
 }

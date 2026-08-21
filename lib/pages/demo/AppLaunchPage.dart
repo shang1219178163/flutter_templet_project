@@ -12,12 +12,6 @@ class AppLaunchPage extends StatefulWidget {
 
   @override
   _AppLaunchPageState createState() => _AppLaunchPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AppLaunchPageState extends State<AppLaunchPage> {
@@ -50,11 +44,5 @@ class _AppLaunchPageState extends State<AppLaunchPage> {
         ),
       ),
     ));
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Timer?>('timer', timer));
   }
 }

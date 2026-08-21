@@ -130,20 +130,4 @@ class NCancelAndConfirmBar extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('height', height));
-    properties.add(DiagnosticsProperty<Radius>('bottomRadius', bottomRadius));
-    properties.add(DiagnosticsProperty<bool>('hasCancelButton', hasCancelButton));
-    properties.add(StringProperty('cancelTitle', cancelTitle));
-    properties.add(StringProperty('confirmTitle', confirmTitle));
-    properties.add(DiagnosticsProperty<TextStyle?>('cancelTextStyle', cancelTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>('confirmTextStyle', confirmTextStyle));
-    properties.add(ColorProperty('cancelBgColor', cancelBgColor));
-    properties.add(ColorProperty('confirmBgColor', confirmBgColor));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
-  }
 }

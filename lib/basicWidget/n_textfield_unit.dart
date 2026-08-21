@@ -245,7 +245,7 @@ class NTextfieldUnit extends StatelessWidget {
         maxWidth: suffixWidth + clearWidth,
         minWidth: suffixWidth + clearWidth,
       ),
-      onChanged: (value) {
+      onChanged: (String value) {
         if (value.trim().isEmpty) {
           DLog.d("$this onChanged 不能为空");
           return;
@@ -284,35 +284,6 @@ class NTextfieldUnit extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<bool?>('enabled', enabled));
-    properties.add(StringProperty('name', name));
-    properties.add(StringProperty('value', value));
-    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
-    properties.add(StringProperty('unit', unit));
-    properties.add(IntProperty('maxLines', maxLines));
-    properties.add(DiagnosticsProperty<bool>('hideSuffix', hideSuffix));
-    properties.add(DoubleProperty('suffixWidth', suffixWidth));
-    properties.add(DoubleProperty('suffixHeight', suffixHeight));
-    properties.add(StringProperty('hitText', hitText));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(ColorProperty('hintTextColor', hintTextColor));
-    properties.add(IntProperty('debounceMilliseconds', debounceMilliseconds));
-    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
-    properties.add(DiagnosticsProperty<bool>('showClear', showClear));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onClear', onClear));
-    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
-    properties.add(ColorProperty('readOnlyFillColor', readOnlyFillColor));
-    properties.add(ColorProperty('readOnlyBorderColor', readOnlyBorderColor));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
-    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
-  }
 }
 
 /// 封装输入框组件
@@ -337,6 +308,25 @@ class _NTextField extends StatefulWidget {
     this.hasFocusVN,
     this.isCollapsed,
     this.inputFormatters,
+    this.contextMenuBuilder,
+    this.onTapOutside,
+    this.onSubmitted,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical,
+    this.obscureText,
+    this.minLines,
+    this.maxLength,
+    this.keyboardType,
+    this.textInputAction,
+    this.autofocus = false,
+    this.focusColor,
+    this.radius = 4,
+    this.border,
+    this.enabledBorder,
+    this.focusedBorder,
+    this.prefixIconBuilder,
+    this.suffix,
+    this.debounceMilliseconds = 300,
   });
 
   final bool? enabled;
@@ -431,48 +421,6 @@ class _NTextField extends StatefulWidget {
 
   @override
   _NTextFieldState createState() => _NTextFieldState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool?>('enabled', enabled));
-    properties.add(StringProperty('value', value));
-    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
-    properties.add(ObjectFlagProperty<EditableTextContextMenuBuilder?>.has('contextMenuBuilder', contextMenuBuilder));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
-    properties.add(ObjectFlagProperty<TapRegionCallback?>.has('onTapOutside', onTapOutside));
-    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
-    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onSubmitted', onSubmitted));
-    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
-    properties.add(EnumProperty<TextAlign>('textAlign', textAlign));
-    properties.add(DiagnosticsProperty<TextAlignVertical?>('textAlignVertical', textAlignVertical));
-    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
-    properties.add(DiagnosticsProperty<bool?>('obscureText', obscureText));
-    properties.add(StringProperty('hintText', hintText));
-    properties.add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle));
-    properties.add(IntProperty('minLines', minLines));
-    properties.add(IntProperty('maxLines', maxLines));
-    properties.add(IntProperty('maxLength', maxLength));
-    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
-    properties.add(EnumProperty<TextInputAction?>('textInputAction', textInputAction));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('contentPadding', contentPadding));
-    properties.add(ColorProperty('fillColor', fillColor));
-    properties.add(ColorProperty('focusColor', focusColor));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DoubleProperty('borderWidth', borderWidth));
-    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>?>('hasFocusVN', hasFocusVN));
-    properties.add(DiagnosticsProperty<InputBorder?>('border', border));
-    properties.add(DiagnosticsProperty<InputBorder?>('enabledBorder', enabledBorder));
-    properties.add(DiagnosticsProperty<InputBorder?>('focusedBorder', focusedBorder));
-    properties.add(ObjectFlagProperty<Widget Function(bool isFocus)?>.has('prefixIconBuilder', prefixIconBuilder));
-    properties.add(ObjectFlagProperty<Widget? Function(bool isFocus)?>.has('suffixIconBuilder', suffixIconBuilder));
-    properties.add(DiagnosticsProperty<BoxConstraints?>('suffixIconConstraints', suffixIconConstraints));
-    properties.add(DiagnosticsProperty<bool?>('isCollapsed', isCollapsed));
-    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
-    properties.add(IntProperty('debounceMilliseconds', debounceMilliseconds));
-  }
 }
 
 class _NTextFieldState extends State<_NTextField> {
@@ -624,14 +572,5 @@ class _NTextFieldState extends State<_NTextField> {
         width: borderWidth, //宽度为1
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('current', current));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('hasFocusVN', hasFocusVN));
-    properties.add(DiagnosticsProperty<bool>('isCloseEye', isCloseEye));
   }
 }

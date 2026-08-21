@@ -9,18 +9,12 @@
 import 'package:flutter/material.dart';
 
 class SegmentedButtonDemo extends StatefulWidget {
+  final String? title;
 
   const SegmentedButtonDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _SegmentedButtonDemoState createState() => _SegmentedButtonDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SegmentedButtonDemoState extends State<SegmentedButtonDemo> {
@@ -80,7 +74,7 @@ class _SingleChoiceState extends State<SingleChoice> {
             icon: Icon(Icons.calendar_today)),
       ],
       selected: <Calendar>{calendarView},
-      onSelectionChanged: (newSelection) {
+      onSelectionChanged: (Set<Calendar> newSelection) {
         calendarView = newSelection.first;
         setState(() {});
       },
@@ -91,12 +85,6 @@ class _SingleChoiceState extends State<SingleChoice> {
         side: BorderSide(color: Theme.of(context).primaryColor),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Calendar>('calendarView', calendarView));
   }
 }
 
@@ -127,7 +115,7 @@ class _MultipleChoiceState extends State<MultipleChoice> {
       ],
       selected: selection,
       multiSelectionEnabled: true,
-      onSelectionChanged: (newSelection) {
+      onSelectionChanged: (Set<Sizes> newSelection) {
         selection = newSelection;
         setState(() {});
       },
@@ -138,11 +126,5 @@ class _MultipleChoiceState extends State<MultipleChoice> {
         side: BorderSide(color: Theme.of(context).primaryColor),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Sizes>('selection', selection));
   }
 }

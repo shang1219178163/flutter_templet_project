@@ -14,14 +14,6 @@ class NColorAnimation extends StatefulWidget {
 
   @override
   _NColorAnimationState createState() => _NColorAnimationState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Color>('colors', colors));
-    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
-    properties.add(ObjectFlagProperty<Widget Function(Color color, Animation<double> anim)>.has('builder', builder));
-  }
 }
 
 class _NColorAnimationState extends State<NColorAnimation> with SingleTickerProviderStateMixin {

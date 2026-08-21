@@ -142,16 +142,16 @@ class _AppWebViewDemoState extends State<AppWebViewDemo> {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (progress) {
+          onProgress: (int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
           },
-          onPageStarted: (url) {
+          onPageStarted: (String url) {
             debugPrint('Page started loading: $url');
           },
-          onPageFinished: (url) {
+          onPageFinished: (String url) {
             debugPrint('Page finished loading: $url');
           },
-          onWebResourceError: (error) {
+          onWebResourceError: (WebResourceError error) {
             debugPrint('''
 Page resource error:
   code: ${error.errorCode}
@@ -160,7 +160,7 @@ Page resource error:
   isForMainFrame: ${error.isForMainFrame}
           ''');
           },
-          onNavigationRequest: (request) {
+          onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
               debugPrint('blocking navigation to ${request.url}');
               return NavigationDecision.prevent;
@@ -168,17 +168,17 @@ Page resource error:
             debugPrint('allowing navigation to ${request.url}');
             return NavigationDecision.navigate;
           },
-          onUrlChange: (change) {
+          onUrlChange: (UrlChange change) {
             debugPrint('url change to ${change.url}');
           },
-          onHttpAuthRequest: (request) {
+          onHttpAuthRequest: (HttpAuthRequest request) {
             openDialog(request);
           },
         ),
       )
       ..addJavaScriptChannel(
         'Toaster',
-        onMessageReceived: (message) {
+        onMessageReceived: (JavaScriptMessage message) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message.message)),
           );
@@ -235,7 +235,7 @@ Page resource error:
     return showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) {
+      builder: (BuildContext context) {
         return AlertDialog(
           title: Text('${httpRequest.host}: ${httpRequest.realm ?? '-'}'),
           content: SingleChildScrollView(
@@ -281,12 +281,6 @@ Page resource error:
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('initialUrl', initialUrl));
-  }
 }
 
 enum MenuOptions {
@@ -320,7 +314,7 @@ class SampleMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuOptions>(
       key: const ValueKey<String>('ShowPopupMenu'),
-      onSelected: (value) {
+      onSelected: (MenuOptions value) {
         switch (value) {
           case MenuOptions.showUserAgent:
             onShowUserAgent();
@@ -354,7 +348,7 @@ class SampleMenu extends StatelessWidget {
             promptForUrl(context);
         }
       },
-      itemBuilder: (context) => <PopupMenuItem<MenuOptions>>[
+      itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
         const PopupMenuItem<MenuOptions>(
           value: MenuOptions.showUserAgent,
           child: Text('Show user agent'),
@@ -540,7 +534,7 @@ class SampleMenu extends StatelessWidget {
       return Container();
     }
     final cookieList = cookies.split(';');
-    final cookieWidgets = cookieList.map((cookie) => Text(cookie));
+    final cookieWidgets = cookieList.map((String cookie) => Text(cookie));
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,
@@ -561,7 +555,7 @@ class SampleMenu extends StatelessWidget {
 
   Future<void> onLogExample() {
     webViewController
-        .setOnConsoleMessage((consoleMessage) {
+        .setOnConsoleMessage((JavaScriptConsoleMessage consoleMessage) {
       debugPrint(
           '== JS == ${consoleMessage.level.name}: ${consoleMessage.message}');
     });
@@ -574,7 +568,7 @@ class SampleMenu extends StatelessWidget {
 
     return showDialog<String>(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Input URL to visit'),
           content: TextField(
@@ -599,13 +593,6 @@ class SampleMenu extends StatelessWidget {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<WebViewController>('webViewController', webViewController));
-    properties.add(DiagnosticsProperty<WebViewCookieManager>('cookieManager', cookieManager));
   }
 }
 
@@ -652,11 +639,5 @@ class NavigationControls extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<WebViewController>('webViewController', webViewController));
   }
 }

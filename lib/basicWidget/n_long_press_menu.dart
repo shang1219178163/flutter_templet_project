@@ -67,13 +67,6 @@ class NLongPressMenu extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<String, AssetImage>>('items', items));
-    properties.add(ObjectFlagProperty<ValueChanged<Tuple2<String, AssetImage>>>.has('onItem', onItem));
-  }
 }
 
 /// 长按黑色菜单(中间有横线版本)
@@ -198,15 +191,5 @@ class NLongPressMenuOne extends StatelessWidget {
         },
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<String, AssetImage>>('items', items));
-    properties.add(DiagnosticsProperty<bool>('hideAssetImage', hideAssetImage));
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
-    properties.add(ObjectFlagProperty<ValueChanged<Tuple2<String, AssetImage>>>.has('onItem', onItem));
   }
 }

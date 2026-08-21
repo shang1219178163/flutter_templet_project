@@ -5,17 +5,6 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/vendor/isar/db_mixin.dart';
 
 class IMMsgDetailModel with DbMixin {
-
-  IMMsgDetailModel.fromJson(Map<String, dynamic> json) {
-    restructureMsgBody = json['restructureMsgBody'];
-    final restructure = jsonDecode(json['restructureMsgBody']);
-    cloudCustomData = json['cloudCustomData'];
-    avatar = json['avatar'];
-    nickName = json['nickName'];
-    sequence = json['sequence'].toString();
-    time = json['time'];
-    isOwner = json['isOwner'];
-  }
   IMMsgDetailModel({
     this.restructureMsgBody,
     this.cloudCustomData,
@@ -75,6 +64,17 @@ class IMMsgDetailModel with DbMixin {
       dateStr = "";
     }
     return dateStr;
+  }
+
+  IMMsgDetailModel.fromJson(Map<String, dynamic> json) {
+    restructureMsgBody = json['restructureMsgBody'];
+    final restructure = jsonDecode(json['restructureMsgBody']);
+    cloudCustomData = json['cloudCustomData'];
+    avatar = json['avatar'];
+    nickName = json['nickName'];
+    sequence = json['sequence'].toString();
+    time = json['time'];
+    isOwner = json['isOwner'];
   }
 
   Map<String, dynamic> toJson() {

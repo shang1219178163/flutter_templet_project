@@ -32,14 +32,6 @@ class NFloatingDraggable extends StatefulWidget {
 
   @override
   State<NFloatingDraggable> createState() => _NFloatingDraggableState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Offset>('offset', offset));
-    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
-    properties.add(ObjectFlagProperty<ValueChanged<Offset>?>.has('onFinish', onFinish));
-  }
 }
 
 class _NFloatingDraggableState extends State<NFloatingDraggable> {
@@ -119,12 +111,6 @@ class _NFloatingDraggableState extends State<NFloatingDraggable> {
       child: child,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Offset>('offset', offset));
-  }
 }
 
 class MeasureSize extends StatefulWidget {
@@ -139,12 +125,6 @@ class MeasureSize extends StatefulWidget {
 
   @override
   State<MeasureSize> createState() => _MeasureSizeState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<Function(Size size)>.has('onChanged', onChanged));
-  }
 }
 
 class _MeasureSizeState extends State<MeasureSize> {

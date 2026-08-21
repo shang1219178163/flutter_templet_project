@@ -11,12 +11,6 @@ class LongCaptureWidgetDemo extends StatefulWidget {
 
   @override
   _LongCaptureWidgetDemoState createState() => _LongCaptureWidgetDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {

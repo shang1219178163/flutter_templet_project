@@ -37,16 +37,6 @@ class NSearchBarView extends StatefulWidget {
 
   @override
   State<NSearchBarView> createState() => _NSearchBarViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
-    properties.add(StringProperty('hint', hint));
-    properties.add(ColorProperty('backgroudColor', backgroudColor));
-    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onTapSearch', onTapSearch));
-    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onChanged', onChanged));
-  }
 }
 
 class _NSearchBarViewState extends State<NSearchBarView> {

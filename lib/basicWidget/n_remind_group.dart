@@ -32,16 +32,6 @@ class NRemindGroup<T> extends StatefulWidget {
 
   @override
   State<NRemindGroup<T>> createState() => _NRemindGroupState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<T>('items', items));
-    properties.add(ObjectFlagProperty<String Function(T e)>.has('itemCb', itemCb));
-    properties.add(DiagnosticsProperty<bool>('isFirst', isFirst));
-    properties.add(DoubleProperty('maxWidth', maxWidth));
-    properties.add(ObjectFlagProperty<ValueChanged<T>>.has('onChanged', onChanged));
-  }
 }
 
 class _NRemindGroupState<T> extends State<NRemindGroup<T>> {
@@ -143,12 +133,5 @@ class _NRemindGroupState<T> extends State<NRemindGroup<T>> {
         overflow: TextOverflow.ellipsis,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isFirst', isFirst));
-    properties.add(IterableProperty<T>('items', items));
   }
 }

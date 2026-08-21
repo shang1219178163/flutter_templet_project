@@ -137,19 +137,4 @@ class NGridView extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('scrollDirection', scrollDirection));
-    properties.add(IntProperty('crossAxisCount', crossAxisCount));
-    properties.add(DoubleProperty('crossAxisSpacing', crossAxisSpacing));
-    properties.add(DoubleProperty('mainAxisSpacing', mainAxisSpacing));
-    properties.add(DoubleProperty('cacheExtent', cacheExtent));
-    properties.add(DoubleProperty('visibleHeightRatio', visibleHeightRatio));
-    properties.add(DoubleProperty('itemWidth', itemWidth));
-    properties.add(DoubleProperty('itemHeight', itemHeight));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(ObjectFlagProperty<Widget Function(Widget? item, double itemWidth)?>.has('itemBuilder', itemBuilder));
-  }
 }

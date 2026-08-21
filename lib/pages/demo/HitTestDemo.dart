@@ -185,16 +185,6 @@ class MyCustomHitTestWidget extends SingleChildRenderObjectWidget {
       ..textSpan = textSpan
       ..textPainter = textPainter;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(ColorProperty('color', color));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
-    properties.add(DiagnosticsProperty<TextSpan?>('textSpan', textSpan));
-    properties.add(DiagnosticsProperty<TextPainter?>('textPainter', textPainter));
-  }
 }
 
 class MyHitTestRenderBox extends RenderBox {
@@ -289,15 +279,5 @@ class MyHitTestRenderBox extends RenderBox {
           (size.height - textPainterNew.height) / 2,
         );
     textPainterNew.paint(canvas, textOffset);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(ColorProperty('color', color));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
-    properties.add(DiagnosticsProperty<TextSpan?>('textSpan', textSpan));
-    properties.add(DiagnosticsProperty<TextPainter?>('textPainter', textPainter));
   }
 }

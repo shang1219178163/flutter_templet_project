@@ -47,7 +47,7 @@ mixin AssetPickerMixin<T extends StatefulWidget> on State<T> {
               selectedAssets: selectedEntitys,
               maxAssets: maxCount,
               specialItemPosition: SpecialItemPosition.prepend,
-              specialItemBuilder: (context, path, length) {
+              specialItemBuilder: (context, AssetPathEntity? path, int length) {
                 if (path?.isAll != true) {
                   return null;
                 }

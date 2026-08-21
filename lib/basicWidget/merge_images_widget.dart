@@ -8,6 +8,17 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 合并多张图片为长图
 class MergeImagesWidget extends StatefulWidget {
+  final List<MergeImageModel> models;
+  final Widget Function(MergeImageModel model)? imageBuilder;
+  // double width;
+  /// 二维码图片
+  // Container Function()? QRCodeBuiler;
+  final Widget? Function(String qrCodeUrl)? qrCodeBuilder;
+  final String qrCodeUrl;
+  // double? QRCodeWidth;
+  // double? QRCodeHeight;
+  final int qrCodeRight;
+  final int qrCodeBottom;
   // void Function()? QRCodeTap;
 
   const MergeImagesWidget({
@@ -24,31 +35,9 @@ class MergeImagesWidget extends StatefulWidget {
     this.qrCodeBottom = 24,
     // this.QRCodeTap,
   });
-  final List<MergeImageModel> models;
-  final Widget Function(MergeImageModel model)? imageBuilder;
-  // double width;
-  /// 二维码图片
-  // Container Function()? QRCodeBuiler;
-  final Widget? Function(String qrCodeUrl)? qrCodeBuilder;
-  final String qrCodeUrl;
-  // double? QRCodeWidth;
-  // double? QRCodeHeight;
-  final int qrCodeRight;
-  final int qrCodeBottom;
 
   @override
   MergeImagesWidgetState createState() => MergeImagesWidgetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<MergeImageModel>('models', models));
-    properties.add(ObjectFlagProperty<Widget Function(MergeImageModel model)?>.has('imageBuilder', imageBuilder));
-    properties.add(ObjectFlagProperty<Widget? Function(String qrCodeUrl)?>.has('qrCodeBuilder', qrCodeBuilder));
-    properties.add(StringProperty('qrCodeUrl', qrCodeUrl));
-    properties.add(IntProperty('qrCodeRight', qrCodeRight));
-    properties.add(IntProperty('qrCodeBottom', qrCodeBottom));
-  }
 }
 
 class MergeImagesWidgetState extends State<MergeImagesWidget> {
@@ -338,18 +327,16 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     final miniCodeBytes = await ImageExt.imageDataFromUrl(imageUrl: widget.qrCodeUrl);
     return toCompositeImageUrls(imageUrls: urls, miniCode: miniCodeBytes);
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('minCodeGlobalKey', minCodeGlobalKey));
-    properties.add(DiagnosticsProperty<ui.FlutterView>('keyView', keyView));
-    properties.add(DoubleProperty('devicePixelRatio', devicePixelRatio));
-  }
 }
 
 /// 图片拼接 model
 class MergeImageModel {
+  int? id;
+  String? name;
+  String? url;
+  String? width; // 素材宽度
+  String? height; // 素材高度
+  GlobalKey? globalKey;
 
   MergeImageModel({
     this.id,
@@ -360,10 +347,4 @@ class MergeImageModel {
   }) : super() {
     globalKey = GlobalKey();
   }
-  int? id;
-  String? name;
-  String? url;
-  String? width; // 素材宽度
-  String? height; // 素材高度
-  GlobalKey? globalKey;
 }

@@ -33,14 +33,6 @@ class InnerShadow extends SingleChildRenderObjectWidget {
       ..blur = blur
       ..offset = offset;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('color', color));
-    properties.add(DoubleProperty('blur', blur));
-    properties.add(DiagnosticsProperty<ui.Offset>('offset', offset));
-  }
 }
 
 class RenderInnerShadow extends RenderProxyBox {
@@ -139,13 +131,5 @@ class RenderInnerShadow extends RenderProxyBox {
     if (child != null) {
       visitor(child!);
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('color', color));
-    properties.add(DoubleProperty('blur', blur));
-    properties.add(DiagnosticsProperty<ui.Offset>('offset', offset));
   }
 }

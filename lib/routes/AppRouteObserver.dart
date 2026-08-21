@@ -5,11 +5,11 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
 class AppRouteObserver {
-  factory AppRouteObserver() => _instance;
   AppRouteObserver._();
 
   //这是个单例
   static final AppRouteObserver _instance = AppRouteObserver._();
+  factory AppRouteObserver() => _instance;
 
   //这是实际上的路由监听
   static final _routeObserver = RouteObserver<ModalRoute<dynamic>>();

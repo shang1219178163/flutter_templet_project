@@ -13,12 +13,6 @@ class CountDownPage extends StatefulWidget {
 
   @override
   State<CountDownPage> createState() => _CountDownPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _CountDownPageState extends State<CountDownPage> {
@@ -73,7 +67,7 @@ class _CountDownPageState extends State<CountDownPage> {
       children: [
         NRollingDigit(
           value: value,
-          builder: (v) {
+          builder: (String v) {
             return Text(
               value,
               style: const TextStyle(
@@ -94,12 +88,5 @@ class _CountDownPageState extends State<CountDownPage> {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<DateTime>('targetTime', targetTime));
   }
 }

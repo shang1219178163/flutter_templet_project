@@ -18,12 +18,6 @@ class TicketUiDemo extends StatefulWidget {
 
   @override
   _TicketUiDemoState createState() => _TicketUiDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TicketUiDemoState extends State<TicketUiDemo> {
@@ -72,7 +66,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
           );
           return ListView.separated(
             itemCount: _count,
-            separatorBuilder: (context, index) {
+            separatorBuilder: (BuildContext context, int index) {
               return SizedBox(height: _spacing);
             },
             itemBuilder: (_, index) {
@@ -285,7 +279,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
     String midTitle = "",
     String rightTitle = "Cheapest",
   }) {
-    return StatefulBuilder(builder: (context, setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -27,12 +27,6 @@ class ExpressionsCalulatorDemo extends StatefulWidget {
 
   @override
   State<ExpressionsCalulatorDemo> createState() => _ExpressionsCalulatorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
@@ -172,27 +166,9 @@ class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
     }
     return null;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(IterableProperty<ExpressionCalulator>('items', items));
-  }
 }
 
 class ExpressionCalulator with ExpressionFormulaMxin {
-
-  factory ExpressionCalulator.fromJson(Map<String, dynamic> json) {
-    return ExpressionCalulator(
-      title: json['title'],
-      formula: json['formula'],
-      params: json['params'],
-      result: json['result'],
-    );
-  }
   ExpressionCalulator({
     required this.title,
     required this.formula,
@@ -208,6 +184,15 @@ class ExpressionCalulator with ExpressionFormulaMxin {
 
   dynamic calulator() {
     return formulaCalulator(formula: formula, params: params);
+  }
+
+  factory ExpressionCalulator.fromJson(Map<String, dynamic> json) {
+    return ExpressionCalulator(
+      title: json['title'],
+      formula: json['formula'],
+      params: json['params'],
+      result: json['result'],
+    );
   }
 
   Map<String, dynamic> toJson() {

@@ -21,12 +21,6 @@ class AnimatedContainerDemo extends StatefulWidget {
 
   @override
   _AnimatedContainerDemoState createState() => _AnimatedContainerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
@@ -344,13 +338,5 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Size>('sizeStart', sizeStart));
-    properties.add(DiagnosticsProperty<Size>('sizeEnd', sizeEnd));
-    properties.add(DiagnosticsProperty<bool>('isExpandedExpansion', isExpandedExpansion));
   }
 }

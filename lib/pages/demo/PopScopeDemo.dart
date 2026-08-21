@@ -19,12 +19,6 @@ class PopScopeDemo extends StatefulWidget {
 
   @override
   State<PopScopeDemo> createState() => _PopScopeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _PopScopeDemoState extends State<PopScopeDemo> {
@@ -44,7 +38,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
       //   DLog.d("onPopInvoked: $pop");
       //   await showAlert();
       // },
-      onPopInvokedWithResult: (didPop, result) async {
+      onPopInvokedWithResult: (bool didPop, result) async {
         DLog.d("onPopInvokedWithResult: $didPop, $result");
         await showAlert();
       },
@@ -59,7 +53,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
               buildSwitch(
                 name: '可以返回 canPop：',
                 value: canPop,
-                onChanged: (val) {
+                onChanged: (bool val) {
                   canPop = val;
                   setState(() {});
                 },
@@ -112,11 +106,5 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
         )
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('canPop', canPop));
   }
 }

@@ -77,7 +77,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         childCount: list.length,
-        (_, index) {
+        (_, int index) {
           return buildColorItem(list[index], index);
         },
       ),
@@ -120,7 +120,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       floating: true,
       min: 40,
       max: 120,
-      builder: (context, shrinkOffset, overlapsContent) {
+      builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
         return Container(
           alignment: Alignment.center,
           color: Colors.orangeAccent,
@@ -131,13 +131,5 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Color>('data', data));
-    properties.add(IterableProperty<Color>('data1', data1));
-    properties.add(IterableProperty<Color>('data2', data2));
   }
 }

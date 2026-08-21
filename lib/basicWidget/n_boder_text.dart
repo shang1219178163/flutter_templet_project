@@ -90,20 +90,4 @@ class NBoderText extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('text', text));
-    properties.add(DoubleProperty('fontSize', fontSize));
-    properties.add(DiagnosticsProperty<FontWeight?>('fontWeight', fontWeight));
-    properties.add(StringProperty('fontFamily', fontFamily));
-    properties.add(EnumProperty<FontStyle?>('fontStyle', fontStyle));
-    properties.add(IntProperty('maxLines', maxLines));
-    properties.add(EnumProperty<TextOverflow?>('overflow', overflow));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(ColorProperty('textBorderColor', textBorderColor));
-    properties.add(ObjectFlagProperty<TextStyle? Function(TextStyle style)?>.has('textStyleBuilder', textStyleBuilder));
-    properties.add(ObjectFlagProperty<TextStyle? Function(TextStyle style)?>.has('boderTextStyleBuilder', boderTextStyleBuilder));
-  }
 }

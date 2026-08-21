@@ -153,14 +153,4 @@ class _ShowcaseCard extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('image', image));
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('designer', designer));
-    properties.add(StringProperty('url', url));
-    properties.add(ObjectFlagProperty<NavigateWidgetBuilder>.has('navigationBuilder', navigationBuilder));
-  }
 }

@@ -23,12 +23,6 @@ class MediaQueryVsScreenManager extends StatefulWidget {
 
   @override
   State<MediaQueryVsScreenManager> createState() => _MediaQueryVsScreenManagerState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _MediaQueryVsScreenManagerState extends State<MediaQueryVsScreenManager> with SafeSetStateMixin {
@@ -66,7 +60,7 @@ class _MediaQueryVsScreenManagerState extends State<MediaQueryVsScreenManager> w
       children: [
         NTextfieldBar(
           controller: textEditingController,
-          onConfirm: (value) {
+          onConfirm: (String value) {
             DLog.d([
               NScreenManager.mediaQueryData.viewInsets,
               "viewInsets: ${MediaQuery.of(context).viewInsets.bottom}",
@@ -202,15 +196,6 @@ class _MediaQueryVsScreenManagerState extends State<MediaQueryVsScreenManager> w
         children: renderItems(items: items),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
   }
 }
 

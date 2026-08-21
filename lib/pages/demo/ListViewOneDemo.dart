@@ -13,12 +13,6 @@ class ListViewOneDemo extends StatefulWidget {
 
   @override
   _ListViewOneDemoState createState() => _ListViewOneDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ListViewOneDemoState extends State<ListViewOneDemo> {
@@ -117,7 +111,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: MarqueeWidget(
               itemCount: itemCount,
-              itemBuilder: (context, index, constraints) {
+              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 // print("MarqueeWidget: $index ${index % 2 == 0}");
                 final isEdge = (index == 0 || index == itemCount - 1);
                 if (isEdge) {
@@ -231,14 +225,6 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
       }
     });
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('offset', offset));
-    properties.add(IterableProperty<Tuple4<String, String, String, bool>>('items', items));
-    properties.add(IntProperty('itemCount', itemCount));
-  }
 }
 
 /// 跑马灯 Builder 类型
@@ -273,7 +259,7 @@ class MarqueeSimpleWidget extends StatelessWidget {
 
     return MarqueeWidget(
       itemCount: totalCount,
-      itemBuilder: (context, index, constraints) {
+      itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
         debugPrint("MarqueeWidget: $index ${index % 2 == 0}");
         final isEdge = (index == 0 || index == totalCount - 1);
         if (isEdge) {
@@ -315,16 +301,6 @@ class MarqueeSimpleWidget extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IntProperty('itemCount', itemCount));
-    properties.add(ObjectFlagProperty<MarqueeWidgetBuilder>.has('itemBuilder', itemBuilder));
-    properties.add(ObjectFlagProperty<MarqueeWidgetBuilder?>.has('edgeBuilder', edgeBuilder));
-    properties.add(ObjectFlagProperty<MarqueeWidgetBuilder?>.has('gapBuilder', gapBuilder));
-  }
 }
 
 /// 跑马灯
@@ -347,15 +323,6 @@ class MarqueeWidget extends StatefulWidget {
 
   @override
   _MarqueeWidgetState createState() => _MarqueeWidgetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IntProperty('itemCount', itemCount));
-    properties.add(DoubleProperty('itemSpacing', itemSpacing));
-    properties.add(ObjectFlagProperty<MarqueeWidgetBuilder>.has('itemBuilder', itemBuilder));
-  }
 }
 
 class _MarqueeWidgetState extends State<MarqueeWidget> {
@@ -447,11 +414,5 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
         _scrollController.jumpTo(0);
       }
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('offset', offset));
   }
 }

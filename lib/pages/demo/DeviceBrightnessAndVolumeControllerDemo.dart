@@ -21,12 +21,6 @@ class DeviceBrightnessAndVolumeControllerDemo extends StatefulWidget {
 
   @override
   State<DeviceBrightnessAndVolumeControllerDemo> createState() => _DeviceBrightnessAndVolumeControllerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightnessAndVolumeControllerDemo> {
@@ -133,12 +127,5 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
   }
 }

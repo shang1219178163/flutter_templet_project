@@ -21,12 +21,6 @@ class CompareToPage extends StatefulWidget {
 
   @override
   State<CompareToPage> createState() => _CompareToPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _CompareToPageState extends State<CompareToPage> {
@@ -65,14 +59,14 @@ class _CompareToPageState extends State<CompareToPage> {
     final matchScoreDataModel = MatchMemberScoreDataModel.fromJson(map['data']);
     teams = [matchScoreDataModel.home!, matchScoreDataModel.away!];
     players = matchScoreDataModel.playerScoreItem ?? [];
-    for (final p in players) {
+    players.forEach((p) {
       final team = teams.where((e) => e.id == p.teamId).firstOrNull;
       p.teamName = team?.name;
       p.teamLogo = team?.logo;
       if (!teams.map((e) => e.id).contains(p.teamId)) {
         DLog.d([p.shortName, p.teamName]);
       }
-    }
+    });
     players.sort(comparePlayer);
 
     sortKeys = players.first.toJson().keys.toList();
@@ -125,7 +119,7 @@ class _CompareToPageState extends State<CompareToPage> {
           pinned: true,
           min: 30,
           max: 200,
-          builder: (context, shrinkOffset, overlapsContent) {
+          builder: (context, double shrinkOffset, bool overlapsContent) {
             return buildHeader(context, shrinkOffset, overlapsContent);
           },
         ),
@@ -266,16 +260,5 @@ class _CompareToPageState extends State<CompareToPage> {
     final jobA = a['jobNo'] as int? ?? 0;
     final jobB = b['jobNo'] as int? ?? 0;
     return jobB.compareTo(jobA);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<Team>('teams', teams));
-    properties.add(IterableProperty<PlayerScoreItemModel>('players', players));
-    properties.add(IterableProperty<String>('sortKeys', sortKeys));
-    properties.add(StringProperty('sortSelected', sortSelected));
   }
 }

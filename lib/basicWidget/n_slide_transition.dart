@@ -58,11 +58,4 @@ class NSlideTransition extends AnimatedWidget {
       child: child,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('transformHitTests', transformHitTests));
-    properties.add(EnumProperty<AxisDirection>('direction', direction));
-  }
 }

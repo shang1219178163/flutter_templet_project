@@ -11,12 +11,6 @@ class MyMenuBar extends StatefulWidget {
 
   @override
   State<MyMenuBar> createState() => _MyMenuBarState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('message', message));
-  }
 }
 
 class _MyMenuBarState extends State<MyMenuBar> {
@@ -177,13 +171,6 @@ class _MyMenuBarState extends State<MyMenuBar> {
     _shortcutsEntry =
         ShortcutRegistry.of(context).addAll(MenuEntry.shortcuts(result));
     return result;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(DiagnosticsProperty<bool>('showingMessage', showingMessage));
   }
 }
 

@@ -16,9 +16,9 @@ import 'package:video_player/video_player.dart';
 /// 视频播放控制器全局管理(安卓不支持多控制器,不可控不可测的视频解码错误)
 /// 视频播放控制器全局管理
 class AppVideoPlayerService {
-  factory AppVideoPlayerService() => _instance;
   AppVideoPlayerService._();
   static final AppVideoPlayerService _instance = AppVideoPlayerService._();
+  factory AppVideoPlayerService() => _instance;
   static AppVideoPlayerService get instance => _instance;
 
   LruMap<String, VideoPlayerController> get controllerMap => _controllerMap;

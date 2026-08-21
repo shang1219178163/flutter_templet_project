@@ -11,12 +11,6 @@ class GetxDemo extends StatefulWidget {
 
   @override
   _GetxDemoState createState() => _GetxDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _GetxDemoState extends State<GetxDemo> {
@@ -151,13 +145,5 @@ class _GetxDemoState extends State<GetxDemo> {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<RxInt>('count', count));
-    properties.add(DiagnosticsProperty<GetStorage>('storage', storage));
-    properties.add(IterableProperty<Tuple2<String, VoidCallback>>('items', items));
   }
 }

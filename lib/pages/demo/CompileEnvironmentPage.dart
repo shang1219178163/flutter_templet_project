@@ -13,12 +13,6 @@ class CompileEnvironmentPage extends StatefulWidget {
 
   @override
   State<CompileEnvironmentPage> createState() => _CompileEnvironmentPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _CompileEnvironmentPageState extends State<CompileEnvironmentPage> {
@@ -66,7 +60,7 @@ class _CompileEnvironmentPageState extends State<CompileEnvironmentPage> {
   Widget buildWrap() {
     final list = List.generate(8, (i) => i);
 
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -98,14 +92,5 @@ class _CompileEnvironmentPageState extends State<CompileEnvironmentPage> {
         ],
       );
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

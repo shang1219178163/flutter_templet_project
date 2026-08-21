@@ -21,12 +21,6 @@ class PlatformDispatcherDemo extends StatefulWidget {
 
   @override
   State<PlatformDispatcherDemo> createState() => _PlatformDispatcherDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> {
@@ -142,14 +136,5 @@ final mediaQueryData = MediaQueryData.fromView(keyView);
       WidgetsBinding.instance.platformDispatcher.implicitView,
       mediaQueryData.toJson().formatedString(),
     ].asMap());
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<({void Function() event, String title})>('items', items));
-    properties.add(StringProperty('message', message));
   }
 }

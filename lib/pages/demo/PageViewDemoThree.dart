@@ -14,12 +14,6 @@ class PageViewDemoThree extends StatefulWidget {
 
   @override
   _PageViewDemoThreeState createState() => _PageViewDemoThreeState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTickerProviderStateMixin {
@@ -179,17 +173,5 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
 
   onTap() {
     debugPrint("onTap");
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<Tuple3<String, String, VoidCallback>>('items', items));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
-    properties.add(IntProperty('rowNum', rowNum));
-    properties.add(IntProperty('numPerRow', numPerRow));
-    properties.add(IntProperty('numPerPage', numPerPage));
   }
 }

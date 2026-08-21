@@ -11,12 +11,6 @@ class HomeNavDemo extends StatefulWidget {
 
   @override
   _HomeNavDemoState createState() => _HomeNavDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _HomeNavDemoState extends State<HomeNavDemo> {
@@ -71,7 +65,7 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
         maxHeight: 400,
       ).loosen(),
       child: Swiper(
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           return buildNav(
               child: XCollectionNavWidget(
             width: context.screenSize.width - 24,

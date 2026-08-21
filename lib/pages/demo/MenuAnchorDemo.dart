@@ -110,7 +110,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
               focusNode,
               keyboardHeightVN,
             ]),
-            builder: (context, child) {
+            builder: (context, Widget? child) {
               final isHide = keyboardHeightVN.value == 0.0;
               return Container(
                 decoration: BoxDecoration(
@@ -179,7 +179,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
                 initialItem: SomeItemType.itemThree,
                 cbName: (e) => e?.name ?? "请选择",
                 equal: (a, b) => a == b,
-                onChanged: (e) {
+                onChanged: (SomeItemType e) {
                   debugPrint(e.name);
                   _selectedItemVN.value = e;
                 },
@@ -228,10 +228,10 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
   }) {
     var selectedItem = initialItem;
 
-    return StatefulBuilder(builder: (context, setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return MenuAnchor(
         alignmentOffset: Offset(0, 0),
-        builder: (context, controller, child) {
+        builder: (context, MenuController controller, Widget? child) {
           return itemBuilder?.call(controller, selectedItem) ??
               OutlinedButton(
                 onPressed: () {
@@ -385,17 +385,5 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> with KeyboardHeightChan
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('defaultValue', defaultValue));
-    properties.add(EnumProperty<SomeItemType>('selectedItem', selectedItem));
-    properties.add(DiagnosticsProperty<MenuController>('controller', controller));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('giftCountVN', giftCountVN));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
-    properties.add(DiagnosticsProperty<TextEditingController>('textController', textController));
-    properties.add(DiagnosticsProperty<KeyboardAccessoryController>('keyboardAccessoryController', keyboardAccessoryController));
   }
 }

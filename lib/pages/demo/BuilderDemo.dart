@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class BuilderDemo extends StatefulWidget {
+  final String? title;
 
   const BuilderDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _BuilderDemoState createState() => _BuilderDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin {
@@ -58,7 +52,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           child: AnimatedBuilder(
             animation: _controller,
             child: buildBox('AnimatedBuilder'),
-            builder: (context, child) {
+            builder: (BuildContext context, Widget? child) {
               return Transform.rotate(
                 angle: _controller.value * 2.0 * math.pi,
                 child: child,
@@ -71,7 +65,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           child: AnimatedBuilder(
             animation: _controller,
             child: buildBox('AnimatedBuilder'),
-            builder: (context, child) {
+            builder: (BuildContext context, Widget? child) {
               return Transform.rotate(
                 angle: _controller.value * 2.0 * math.pi,
                 child: child,
@@ -85,9 +79,9 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           child: AnimatedBuilder(
             animation: _controller,
             child: buildBox('AnimatedBuilder'),
-            builder: (context, child) {
+            builder: (BuildContext context, Widget? child) {
               return Builder(
-                builder: (context) {
+                builder: (BuildContext context) {
                   return buildBox('Builder');
                 },
               );
@@ -100,9 +94,9 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
           child: AnimatedBuilder(
             animation: _controller,
             child: buildBox('AnimatedBuilder'),
-            builder: (context, child) {
+            builder: (BuildContext context, Widget? child) {
               return StatefulBuilder(
-                builder: (context, setState) {
+                builder: (BuildContext context, StateSetter setState) {
                   return buildBox('StatefulBuilder');
                 },
               );

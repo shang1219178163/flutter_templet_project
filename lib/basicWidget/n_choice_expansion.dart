@@ -75,24 +75,6 @@ class NChoiceExpansion<T> extends StatefulWidget {
 
   @override
   _NChoiceExpansionState<T> createState() => _NChoiceExpansionState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NChoiceExpansionController?>('controller', controller));
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle));
-    properties.add(IterableProperty<T>('items', items));
-    properties.add(ObjectFlagProperty<bool Function(T e)>.has('selectedCb', selectedCb));
-    properties.add(ObjectFlagProperty<String Function(T e)>.has('titleCb', titleCb));
-    properties.add(ObjectFlagProperty<ValueChanged<T>>.has('onSelected', onSelected));
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
-    properties.add(IntProperty('collapseCount', collapseCount));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onExpand', onExpand));
-    properties.add(ObjectFlagProperty<Widget? Function(T e, bool isSelected)?>.has('itemBuilder', itemBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)?>.has('headerBuilder', headerBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)?>.has('footerBuilder', footerBuilder));
-  }
 }
 
 class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
@@ -243,13 +225,6 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
     isExpand = !isExpand;
     widget.onExpand?.call(isExpand);
     setState(() {});
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
-    properties.add(ColorProperty('weChatSubTitleColor', weChatSubTitleColor));
   }
 }
 

@@ -61,15 +61,4 @@ class NIndicator extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('length', length));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexListenable', indexListenable));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DoubleProperty('spacing', spacing));
-    properties.add(ColorProperty('color', color));
-    properties.add(ColorProperty('colorActive', colorActive));
-  }
 }

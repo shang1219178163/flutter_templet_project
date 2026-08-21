@@ -4,18 +4,12 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 /// 曝光检测
 class VisibilityDetectorDemo extends StatefulWidget {
+  final String? title;
 
   const VisibilityDetectorDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _VisibilityDetectorDemoState createState() => _VisibilityDetectorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
@@ -108,11 +102,5 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
             ),
           );
         });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('percentVN', percentVN));
   }
 }

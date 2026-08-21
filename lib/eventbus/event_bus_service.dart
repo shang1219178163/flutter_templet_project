@@ -15,11 +15,11 @@ import 'package:flutter/widgets.dart';
 // });
 
 class EventBusService {
-
-  factory EventBusService() => _instance;
   EventBusService._();
 
   static final EventBusService _instance = EventBusService._();
+
+  factory EventBusService() => _instance;
 
   final EventBus _eventBus = EventBus();
 

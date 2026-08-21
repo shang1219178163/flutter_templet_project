@@ -32,14 +32,6 @@ class IMSoundRecordBar extends StatefulWidget {
 
   @override
   _IMSoundRecordBarState createState() => _IMSoundRecordBarState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('height', height));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onRecordStart', onRecordStart));
-    properties.add(ObjectFlagProperty<ValueChanged<bool>>.has('onRecordEnd', onRecordEnd));
-  }
 }
 
 class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
@@ -107,13 +99,5 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Size>('screenSize', screenSize));
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('cancelVN', cancelVN));
-    properties.add(DoubleProperty('bottomBarHeight', bottomBarHeight));
   }
 }

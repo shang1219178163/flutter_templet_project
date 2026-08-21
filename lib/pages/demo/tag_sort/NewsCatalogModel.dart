@@ -8,14 +8,6 @@ import 'package:flutter_templet_project/basicWidget/n_tag_sort_widget.dart';
 
 /// 新闻分类
 class NewsCatalogModel with NTagSortMixin {
-
-  NewsCatalogModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    mine = json['mine'];
-    tagOrder = json['tagOrder'] ?? 0; // 直接读取 mixin 字段
-    tagEnable = json['tagEnable'] ?? true;
-  }
   NewsCatalogModel({
     this.id,
     this.name,
@@ -38,6 +30,14 @@ class NewsCatalogModel with NTagSortMixin {
 
   @override
   int tagOrder = 0;
+
+  NewsCatalogModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    mine = json['mine'];
+    tagOrder = json['tagOrder'] ?? 0; // 直接读取 mixin 字段
+    tagEnable = json['tagEnable'] ?? true;
+  }
 
   @override
   Map<String, dynamic> toJson() {

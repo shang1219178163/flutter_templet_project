@@ -13,12 +13,6 @@ class ScrollControllerDemoTwo extends StatefulWidget {
 
   @override
   State<ScrollControllerDemoTwo> createState() => _ScrollControllerDemoTwoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ScrollControllerDemoTwoState extends State<ScrollControllerDemoTwo>
@@ -217,7 +211,7 @@ class _ScrollControllerDemoTwoState extends State<ScrollControllerDemoTwo>
   Widget buildWrap() {
     final list = List.generate(8, (i) => i);
 
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -258,12 +252,4 @@ class _ScrollControllerDemoTwoState extends State<ScrollControllerDemoTwo>
 
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('initialIndex', initialIndex));
-    properties.add(IterableProperty<Tuple2<Tab, Widget>>('items', items));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-  }
 }

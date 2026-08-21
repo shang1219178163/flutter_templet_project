@@ -50,16 +50,6 @@ class NImagePreview extends StatefulWidget {
 
   @override
   _NImagePreviewState createState() => _NImagePreviewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('urls', urls));
-    properties.add(IterableProperty<AssetUploadModel>('extraInfoModels', extraInfoModels));
-    properties.add(IntProperty('index', index));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onBack', onBack));
-    properties.add(DiagnosticsProperty<bool>('isBlackBackgroud', isBlackBackgroud));
-  }
 }
 
 class _NImagePreviewState extends State<NImagePreview> {
@@ -173,7 +163,7 @@ class _NImagePreviewState extends State<NImagePreview> {
                 onBack();
               },
               child: PhotoViewGallery.builder(
-                builder: (context, index) {
+                builder: (BuildContext context, int index) {
                   int quarterTurns = urlMaps[index]["quarterTurns"];
                   final url = widget.urls[index];
 
@@ -399,20 +389,5 @@ class _NImagePreviewState extends State<NImagePreview> {
       return url;
     }
     return getCachedImageFilePath(url);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('currentIndex', currentIndex));
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
-    properties.add(IterableProperty<Map<String, dynamic>>('urlMaps', urlMaps));
-    properties.add(DiagnosticsProperty<AssetUploadModel?>('currExtraModel', currExtraModel));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('currImageMap', currImageMap));
-    properties.add(DiagnosticsProperty<bool>('showImageInfo', showImageInfo));
-    properties.add(IterableProperty<({void Function() action, Icon child})>('buttonItems', buttonItems));
-    properties.add(DiagnosticsProperty<BarcodeScanner>('barcodeScanner', barcodeScanner));
-    properties.add(ColorProperty('bgColor', bgColor));
-    properties.add(ColorProperty('textColor', textColor));
   }
 }

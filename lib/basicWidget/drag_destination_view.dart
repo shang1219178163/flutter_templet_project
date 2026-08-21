@@ -21,12 +21,6 @@ class DragDestinationView extends StatefulWidget {
 
   @override
   _DragDestinationViewState createState() => _DragDestinationViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<ValueChanged<List<File>>>.has('onChanged', onChanged));
-  }
 }
 
 class _DragDestinationViewState extends State<DragDestinationView> {
@@ -73,7 +67,7 @@ class _DragDestinationViewState extends State<DragDestinationView> {
   }
 
   Widget buildBody() {
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final spacing = 8.0;
       final rowCount = 3.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -99,7 +93,7 @@ class _DragDestinationViewState extends State<DragDestinationView> {
         ? Image.file(
             File(file.path),
             fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) {
+            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
               return const Icon(
                 Icons.file_present,
                 size: 48,
@@ -177,12 +171,5 @@ class _DragDestinationViewState extends State<DragDestinationView> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<XFile>('files', files));
-    properties.add(DiagnosticsProperty<bool>('dragging', dragging));
   }
 }

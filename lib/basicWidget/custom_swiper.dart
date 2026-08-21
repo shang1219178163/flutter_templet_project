@@ -23,17 +23,6 @@ class CustomSwipper extends StatefulWidget {
 
   @override
   _CustomSwipperState createState() => _CustomSwipperState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('images', images));
-    properties.add(DoubleProperty('height', height));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onTap', onTap));
-    properties.add(DiagnosticsProperty<Curve>('curve', curve));
-    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('itemBuilder', itemBuilder));
-    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
-  }
 }
 
 class _CustomSwipperState extends State<CustomSwipper> {

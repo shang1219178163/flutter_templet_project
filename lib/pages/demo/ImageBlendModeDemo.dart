@@ -3,18 +3,12 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class ImageBlendModeDemo extends StatefulWidget {
+  final String? title;
 
   const ImageBlendModeDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _ImageBlendModeDemoState createState() => _ImageBlendModeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
@@ -97,11 +91,5 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
         );
       }),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('flag', flag));
   }
 }

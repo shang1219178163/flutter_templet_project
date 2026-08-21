@@ -9,12 +9,6 @@ class OverlayDemoOne extends StatefulWidget {
 
   @override
   State<OverlayDemoOne> createState() => _OverlayDemoOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _OverlayDemoOneState extends State<OverlayDemoOne> {
@@ -100,7 +94,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
         child: Draggable(
           feedback: feedback(),
           childWhenDragging: childWhenDragging(), //拖动过程回调
-          onDraggableCanceled: (velocity, offset) {
+          onDraggableCanceled: (Velocity velocity, Offset offset) {
             this.offset = offset;
             setState(() {});
           },
@@ -133,15 +127,5 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
       width: overlayWidth * 1.5,
       height: overlayWidth * 1.5,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<OverlayEntry?>('overlayEntry', overlayEntry));
-    properties.add(DoubleProperty('overlayWidth', overlayWidth));
-    properties.add(DiagnosticsProperty<Offset>('offset', offset));
-    properties.add(DoubleProperty('screenWidth', screenWidth));
   }
 }

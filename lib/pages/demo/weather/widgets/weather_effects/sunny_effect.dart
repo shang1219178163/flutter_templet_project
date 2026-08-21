@@ -2,21 +2,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class SunnyEffect extends StatefulWidget {
+  final double animationSpeed;
 
   const SunnyEffect({
     super.key,
     this.animationSpeed = 1.0,
   });
-  final double animationSpeed;
 
   @override
   State<SunnyEffect> createState() => _SunnyEffectState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('animationSpeed', animationSpeed));
-  }
 }
 
 class _SunnyEffectState extends State<SunnyEffect>
@@ -51,18 +45,12 @@ class _SunnyEffectState extends State<SunnyEffect>
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Random>('random', random));
-  }
 }
 
 class SunPainter extends CustomPainter {
+  final double animationValue;
 
   SunPainter(this.animationValue);
-  final double animationValue;
 
   @override
   void paint(Canvas canvas, Size size) {

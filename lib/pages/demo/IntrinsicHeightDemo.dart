@@ -11,12 +11,6 @@ class IntrinsicHeightDemo extends StatefulWidget {
 
   @override
   _IntrinsicHeightDemoState createState() => _IntrinsicHeightDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _IntrinsicHeightDemoState extends State<IntrinsicHeightDemo> {
@@ -123,12 +117,6 @@ class _IntrinsicHeightDemoState extends State<IntrinsicHeightDemo> {
         ]),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('flag', flag));
   }
 }
 
@@ -312,14 +300,6 @@ class PredictionItem extends StatelessWidget {
             ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
-    properties.add(DiagnosticsProperty<bool>('hasIndicator', hasIndicator));
-    properties.add(ObjectFlagProperty<ValueChanged<SchemeMatchEntity>?>.has('onTapSchemeMatch', onTapSchemeMatch));
-  }
 }
 
 /// SchemeMatch 对应的组件
@@ -378,14 +358,6 @@ class SchemeMatchItem extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('textWidth', textWidth));
-    properties.add(StringProperty('value', value));
-    properties.add(DiagnosticsProperty<bool>('isLast', isLast));
   }
 }
 
@@ -463,18 +435,15 @@ class SchemeMatchWidget extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('textWidth', textWidth));
-    properties.add(StringProperty('sportType', sportType));
-    properties.add(IterableProperty<SchemeMatchEntity>('models', models));
-    properties.add(ObjectFlagProperty<ValueChanged<SchemeMatchEntity>?>.has('onTap', onTap));
-  }
 }
 
 class SchemeMatchEntity {
+  int? matchId;
+  String? competitionShortName;
+  String? matchTimeStr;
+  int? matchTime;
+  String? homeTeamName;
+  String? awayTeamName;
 
   SchemeMatchEntity({
     this.matchId,
@@ -493,12 +462,6 @@ class SchemeMatchEntity {
     homeTeamName = json['homeTeamName'];
     awayTeamName = json['awayTeamName'];
   }
-  int? matchId;
-  String? competitionShortName;
-  String? matchTimeStr;
-  int? matchTime;
-  String? homeTeamName;
-  String? awayTeamName;
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

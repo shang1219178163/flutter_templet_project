@@ -37,18 +37,6 @@ class NBoxSegmentControl<T> extends StatefulWidget {
 
   @override
   State<NBoxSegmentControl<T>> createState() => _NBoxSegmentControlState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<T>('labels', labels));
-    properties.add(ObjectFlagProperty<NBoxSegmentItemBuilder<T>>.has('itemBuilder', itemBuilder));
-    properties.add(IntProperty('index', index));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onChanged', onChanged));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('inset', inset));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('itemPadding', itemPadding));
-  }
 }
 
 class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
@@ -217,14 +205,5 @@ class _NBoxSegmentControlItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('height', height));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
-    properties.add(DiagnosticsProperty<bool>('selected', selected));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap));
   }
 }

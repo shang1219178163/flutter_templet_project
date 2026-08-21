@@ -7,12 +7,6 @@ class CustomSingleChildLayoutDemo extends StatefulWidget {
 
   @override
   _CustomSingleChildLayoutDemoState createState() => _CustomSingleChildLayoutDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _CustomSingleChildLayoutDemoState extends State<CustomSingleChildLayoutDemo> {

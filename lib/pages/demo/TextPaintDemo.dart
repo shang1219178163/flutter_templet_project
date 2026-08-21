@@ -15,12 +15,6 @@ class TextPaintDemo extends StatefulWidget {
 
   @override
   State<TextPaintDemo> createState() => _TextPaintDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _TextPaintDemoState extends State<TextPaintDemo> {
@@ -129,7 +123,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
               fontSize: 16,
               color: Colors.black,
             ),
-            onPainted: (textPainter) {
+            onPainted: (TextPainter textPainter) {
               // DLog.d([message,
               //   textPainter.didExceedMaxLines,
               //   textPainter.height,
@@ -153,7 +147,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
       tailingWidth: tailingWidth,
     );
 
-    return LayoutBuilder(builder: (context, constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final textStyle = TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -181,7 +175,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
           // color: Colors.green,
           border: Border.all(color: Colors.blue),
         ),
-        child: StatefulBuilder(builder: (context, setState) {
+        child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           final arrowImage = isExpand ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;
 
           onToggle() {
@@ -286,13 +280,6 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
         }),
       );
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(StringProperty('message', message));
   }
 }
 

@@ -7,12 +7,6 @@ class RefreshIndicatorDemo extends StatefulWidget {
 
   @override
   _RefreshIndicatorDemoState createState() => _RefreshIndicatorDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
@@ -61,7 +55,7 @@ class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
       // Pull from top to show refresh indicator.
       child: ListView.builder(
         itemCount: 25,
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           return ListTile(
             title: Text('Item $index'),
           );

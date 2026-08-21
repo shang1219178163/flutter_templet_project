@@ -58,10 +58,4 @@ class NSkeletonScreen extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-  }
 }

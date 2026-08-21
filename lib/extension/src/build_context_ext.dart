@@ -170,7 +170,7 @@ extension BuildContextExt on BuildContext {
   /// 查询 state StatefulWidget 对应的 state
   T? lookUpState<T>(bool Function(Element e) test) {
     T? state;
-    visitAncestorElements((element) {
+    visitAncestorElements((Element element) {
       if (element is! StatefulElement) {
         return true;
       }

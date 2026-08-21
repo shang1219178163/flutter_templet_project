@@ -20,12 +20,6 @@ class LerpDemo extends StatefulWidget {
 
   @override
   State<LerpDemo> createState() => _LerpDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _LerpDemoState extends State<LerpDemo>
@@ -168,7 +162,7 @@ class _LerpDemoState extends State<LerpDemo>
                 Expanded(
                   child: Slider(
                     value: current,
-                    onChanged: (value) {
+                    onChanged: (double value) {
                       current = value;
                       setState(() {});
                     },
@@ -207,13 +201,5 @@ class _LerpDemoState extends State<LerpDemo>
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty<ColorTween>('tween', tween));
-    properties.add(StringProperty('desc', desc));
   }
 }

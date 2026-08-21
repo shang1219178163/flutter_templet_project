@@ -21,12 +21,6 @@ class ButtonStyleDemo extends StatefulWidget {
 
   @override
   _ButtonStyleDemoState createState() => _ButtonStyleDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
@@ -260,7 +254,7 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
     return TextButton(
       onPressed: () {},
       style: ButtonStyle(
-        foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
           debugPrint("states:$states");
           if (states.contains(WidgetState.pressed)) {
             return Colors.pink;

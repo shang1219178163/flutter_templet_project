@@ -210,20 +210,4 @@ class NImage extends StatelessWidget {
     }
     return image;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Object?>('source', source));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(EnumProperty<BoxFit>('fit', fit));
-    properties.add(DiagnosticsProperty<ImageProvider<Object>>('placeholder', placeholder));
-    properties.add(DiagnosticsProperty<ImageProvider<Object>?>('errorPlaceholder', errorPlaceholder));
-    properties.add(DiagnosticsProperty<bool>('useCache', useCache));
-    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
-    properties.add(ColorProperty('color', color));
-    properties.add(EnumProperty<BlendMode?>('colorBlendMode', colorBlendMode));
-    properties.add(DiagnosticsProperty<bool>('showLoadingProgress', showLoadingProgress));
-  }
 }

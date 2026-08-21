@@ -178,11 +178,4 @@ class _PageViewDemoState extends State<PageViewDemo> with AssetsJsonMixin {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('scrollerOffset', scrollerOffset));
-    properties.add(DiagnosticsProperty<PageController?>('controller', controller));
-  }
 }

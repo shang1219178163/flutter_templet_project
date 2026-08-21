@@ -52,19 +52,6 @@ class NMarqueeWidget extends StatefulWidget {
 
   @override
   _NMarqueeWidgetState createState() => _NMarqueeWidgetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IntProperty('itemCount', itemCount));
-    properties.add(ObjectFlagProperty<MarqueeWidgetBuilder>.has('itemBuilder', itemBuilder));
-    properties.add(ObjectFlagProperty<MarqueeWidgetBuilder>.has('edgeBuilder', edgeBuilder));
-    properties.add(ObjectFlagProperty<MarqueeWidgetBuilder>.has('separatorBuilder', separatorBuilder));
-    properties.add(DiagnosticsProperty<ScrollController?>('controller', controller));
-    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
-    properties.add(DoubleProperty('durationOffset', durationOffset));
-  }
 }
 
 class _NMarqueeWidgetState extends State<NMarqueeWidget> {
@@ -149,11 +136,5 @@ class _NMarqueeWidgetState extends State<NMarqueeWidget> {
         }
       });
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

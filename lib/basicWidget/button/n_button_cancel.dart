@@ -104,19 +104,4 @@ class NButtonCancel extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('bgColor', bgColor));
-    properties.add(StringProperty('title', title));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
-    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onTitle', onTitle));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
-    properties.add(DiagnosticsProperty<bool>('enable', enable));
-  }
 }

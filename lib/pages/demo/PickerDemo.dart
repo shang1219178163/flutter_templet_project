@@ -127,7 +127,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         DLog.d("${DateTime.now()}");
         Navigator.of(context).pop();
       },
-      onChanged: (val) {
+      onChanged: (DateTime val) {
         debugPrint("$val");
       },
     );
@@ -136,7 +136,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
   Future<void> onDateMixin() async {
     presentCupertinoDatePicker(
       context: context,
-      onDateTimeConfirm: (val) {
+      onDateTimeConfirm: (DateTime val) {
         debugPrint("$val");
         Navigator.of(context).pop();
       },
@@ -202,7 +202,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       title: 'NPickerListView',
       items: items,
       filterCb: (e, value) => (e['name'] ?? '').contains(value),
-      itemBuilder: (context, idx, list) {
+      itemBuilder: (BuildContext context, idx, list) {
         final item = list[idx];
 
         final isSame = selectedItem['name'] == item['name'];
@@ -255,7 +255,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
               children: payTypes * 5,
               indexs: [0],
               canScroll: true,
-              callback: (index) {
+              callback: (Object index) {
                 DLog.d(index);
               },
             ),
@@ -286,7 +286,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           children: payTypes * 5,
           indexs: [0],
           canScroll: true,
-          callback: (index) {
+          callback: (Object index) {
             DLog.d(index);
           },
         ),
@@ -480,16 +480,6 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<({VoidCallback action, String name})>('items', items));
-    properties.add(IterableProperty<List<String>>('weightData', weightData));
-    properties.add(IterableProperty<String>('weightSelectedData', weightSelectedData));
-    properties.add(DiagnosticsProperty<Map<String, String>>('selectedItem', selectedItem));
-  }
 }
 
 class DatePickerDemo extends StatefulWidget {
@@ -506,13 +496,6 @@ class DatePickerDemo extends StatefulWidget {
 
   @override
   _DatePickerDemoState createState() => _DatePickerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<DateTime?>('dateTime', dateTime));
-    properties.add(ObjectFlagProperty<void Function(DateTime dateTime)?>.has('callback', callback));
-  }
 }
 
 class _DatePickerDemoState extends State<DatePickerDemo> {

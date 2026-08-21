@@ -7,7 +7,6 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
@@ -49,19 +48,6 @@ class NRefreshView<T> extends StatefulWidget {
 
   @override
   NRefreshViewState<T> createState() => NRefreshViewState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NRefreshController<T>?>('controller', controller));
-    properties.add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<bool>('notRefresh', notRefresh));
-    properties.add(DiagnosticsProperty<bool>('notLoad', notLoad));
-    properties.add(DiagnosticsProperty<Widget>('child', child));
-    properties.add(DiagnosticsProperty<Widget>('placeholder', placeholder));
-    properties.add(DiagnosticsProperty<Widget?>('skeletonScreen', skeletonScreen));
-    properties.add(ObjectFlagProperty<RequestModelCallback<T>>.has('onRequest', onRequest));
-  }
 }
 
 class NRefreshViewState<T> extends State<NRefreshView<T>>
@@ -131,12 +117,5 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   @override
   void updateUI() {
     setState(() {});
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<bool>('isFirstLoad', isFirstLoad));
   }
 }

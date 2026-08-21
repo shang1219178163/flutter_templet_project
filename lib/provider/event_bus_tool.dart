@@ -12,14 +12,14 @@ typedef EventCallback = void Function(dynamic arg);
 
 /// 自定义时间总线
 class EventBusTool {
-
-  //工厂构造函数
-  factory EventBusTool() => _instance;
   //私有构造函数
   EventBusTool._();
 
   //保存单例
   static final EventBusTool _instance = EventBusTool._();
+
+  //工厂构造函数
+  factory EventBusTool() => _instance;
 
   static EventBusTool get instance => _instance;
 

@@ -34,16 +34,6 @@ class NShimmer extends StatefulWidget {
 
   @override
   State<NShimmer> createState() => _NShimmerState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(ColorProperty('baseColor', baseColor));
-    properties.add(ColorProperty('highlightColor', highlightColor));
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(DoubleProperty('angle', angle));
-  }
 }
 
 class _NShimmerState extends State<NShimmer> with SingleTickerProviderStateMixin {
@@ -110,11 +100,5 @@ class _NShimmerState extends State<NShimmer> with SingleTickerProviderStateMixin
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
   }
 }

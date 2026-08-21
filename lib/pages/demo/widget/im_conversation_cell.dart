@@ -230,23 +230,4 @@ class IMConversationCell extends StatelessWidget {
       child: content,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('subtitle', subtitle));
-    properties.add(StringProperty('time', time));
-    properties.add(DoubleProperty('spacing', spacing));
-    properties.add(DoubleProperty('runSpacing', runSpacing));
-    properties.add(StringProperty('imgUrl', imgUrl));
-    properties.add(DiagnosticsProperty<DecorationImage?>('decorationImage', decorationImage));
-    properties.add(DoubleProperty('imgSize', imgSize));
-    properties.add(DoubleProperty('imgGap', imgGap));
-    properties.add(IntProperty('badgeValue', badgeValue));
-    properties.add(StringProperty('groupId', groupId));
-    properties.add(ColorProperty('bgColor', bgColor));
-    properties.add(DiagnosticsProperty<Decoration?>('decoration', decoration));
-    properties.add(StringProperty('highlightContent', highlightContent));
-  }
 }

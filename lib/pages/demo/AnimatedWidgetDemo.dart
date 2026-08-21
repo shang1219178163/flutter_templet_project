@@ -10,18 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class AnimatedWidgetDemo extends StatefulWidget {
+  final String? title;
 
   const AnimatedWidgetDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _AnimatedWidgetDemoState createState() => _AnimatedWidgetDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
@@ -207,12 +201,6 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('opacityLevel', opacityLevel));
-  }
 }
 
 class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
@@ -232,12 +220,6 @@ class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
 
   @override
   _AnimatedDecoratedBoxState createState() => _AnimatedDecoratedBoxState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BoxDecoration>('decoration', decoration));
-  }
 }
 
 class _AnimatedDecoratedBoxState extends AnimatedWidgetBaseState<AnimatedDecoratedBox> {

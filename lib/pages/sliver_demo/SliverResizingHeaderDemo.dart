@@ -34,10 +34,10 @@ class SliverResizingHeaderDemo extends StatelessWidget {
 
 // 自定义 SliverPersistentHeaderDelegate 用于创建可调整大小的标题
 class ResizingHeaderDelegate extends SliverPersistentHeaderDelegate {
-
-  ResizingHeaderDelegate({required this.minHeight, required this.maxHeight});
   final double minHeight;
   final double maxHeight;
+
+  ResizingHeaderDelegate({required this.minHeight, required this.maxHeight});
 
   @override
   double get minExtent => minHeight;

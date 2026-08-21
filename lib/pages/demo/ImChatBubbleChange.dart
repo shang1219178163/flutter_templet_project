@@ -16,12 +16,6 @@ class ImChatBubbleChange extends StatefulWidget {
 
   @override
   State<ImChatBubbleChange> createState() => _ImChatBubbleChangeState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ImChatBubbleChangeState extends State<ImChatBubbleChange> {
@@ -229,17 +223,5 @@ class _ImChatBubbleChangeState extends State<ImChatBubbleChange> {
         child: Text(text),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('args', args));
-    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onBubble', onBubble));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<String>('items', items));
-    properties.add(IntProperty('selectedIndex', selectedIndex));
-    properties.add(StringProperty('current', current));
   }
 }

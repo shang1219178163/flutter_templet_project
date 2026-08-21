@@ -9,18 +9,12 @@
 import 'package:flutter/material.dart';
 
 class OffstageDemo extends StatefulWidget {
+  final String? title;
 
   const OffstageDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _OffstageDemoState createState() => _OffstageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _OffstageDemoState extends State<OffstageDemo> {

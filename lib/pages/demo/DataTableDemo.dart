@@ -45,18 +45,12 @@ List<UserModel> models = [
 ];
 
 class DataTableDemo extends StatefulWidget {
+  final String? title;
 
   const DataTableDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _DataTableDemoState createState() => _DataTableDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DataTableDemoState extends State<DataTableDemo> {
@@ -95,7 +89,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
     return CupertinoSegmentedControl<int>(
       children: children,
       borderColor: Colors.white,
-      onValueChanged: (newValue) {
+      onValueChanged: (int newValue) {
         setState(() {
           groupValue = newValue;
         });
@@ -121,7 +115,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
             columns: titles
                 .map((e) => DataColumn(
                       label: Text(e.title),
-                      onSort: (columnIndex, ascending) {
+                      onSort: (int columnIndex, bool ascending) {
                         changeSort(columnIndex: columnIndex, ascending: ascending);
                       },
                     ))
@@ -136,7 +130,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                         DataCell(Text(e.desc ?? "")),
                       ],
                       selected: e.isSelected,
-                      onSelectChanged: (value) {
+                      onSelectChanged: (bool? value) {
                         if (value == null) {
                           return;
                         }
@@ -181,13 +175,6 @@ class _DataTableDemoState extends State<DataTableDemo> {
           break;
       }
     });
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<int, Widget>>('children', children));
-    properties.add(IntProperty('groupValue', groupValue));
   }
 }
 
@@ -235,12 +222,6 @@ class PaginatedDataTableDemo extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<({String key, String title})>('titles', titles));
   }
 }
 

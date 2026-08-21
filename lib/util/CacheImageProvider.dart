@@ -144,7 +144,7 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
 
     return consolidateHttpClientResponseBytes(
       response,
-      onBytesReceived: (cumulative, total) {
+      onBytesReceived: (int cumulative, int? total) {
         chunkEvents?.add(ImageChunkEvent(
           cumulativeBytesLoaded: cumulative,
           expectedTotalBytes: total,

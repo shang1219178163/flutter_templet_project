@@ -9,12 +9,6 @@ class Uint8ListDemo extends StatefulWidget {
 
   @override
   _Uint8ListDemoState createState() => _Uint8ListDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _Uint8ListDemoState extends State<Uint8ListDemo> {

@@ -74,13 +74,6 @@ class DialogCenter extends StatefulWidget {
     SmartDialog.dismiss();
     // SmartDialog.dismiss(tag: 'DialogCenter');
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
-  }
 }
 
 class _DialogCenterState extends State<DialogCenter> {

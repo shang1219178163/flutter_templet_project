@@ -18,12 +18,6 @@ class RiverPodPageCreate extends StatefulWidget {
 
   @override
   State<RiverPodPageCreate> createState() => _RiverPodPageCreateState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
@@ -113,9 +107,9 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
 
       return result;
     }).toList();
-    for (final e in list) {
+    list.forEach((e) {
       toCreateDartFile(fileName: e);
-    }
+    });
   }
 
   /// 生成模型文件
@@ -239,15 +233,5 @@ mixin _PageBuilder on ConsumerState<$className> {
   }
 }
 ''';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
   }
 }

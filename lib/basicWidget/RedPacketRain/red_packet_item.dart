@@ -19,15 +19,6 @@ class RedPacketItem extends StatefulWidget {
 
   @override
   State<RedPacketItem> createState() => _RedPacketItemState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<RedPacketModel>('model', model));
-    properties.add(DiagnosticsProperty<Size>('screenSize', screenSize));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onFinish', onFinish));
-    properties.add(ObjectFlagProperty<void Function(Offset global)>.has('onTap', onTap));
-  }
 }
 
 class _RedPacketItemState extends State<RedPacketItem> with SingleTickerProviderStateMixin {

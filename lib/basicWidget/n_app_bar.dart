@@ -92,21 +92,4 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
     return copyBuilder?.call(child) ?? child;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('titleStr', titleStr));
-    properties.add(DiagnosticsProperty<bool>('centerTitle', centerTitle));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(DoubleProperty('leadingWidth', leadingWidth));
-    properties.add(DoubleProperty('titleSpacing', titleSpacing));
-    properties.add(DiagnosticsProperty<bool>('leadingVisible', leadingVisible));
-    properties.add(DoubleProperty('elevation', elevation));
-    properties.add(DoubleProperty('toolbarHeight', toolbarHeight));
-    properties.add(DiagnosticsProperty<SystemUiOverlayStyle>('systemOverlayStyle', systemOverlayStyle));
-    properties.add(DiagnosticsProperty<bool>('automaticallyImplyLeading', automaticallyImplyLeading));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onBack', onBack));
-    properties.add(ObjectFlagProperty<AppBar Function(AppBar appBar)?>.has('copyBuilder', copyBuilder));
-  }
 }

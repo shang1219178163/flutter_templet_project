@@ -11,12 +11,6 @@ class PageTopBackgroudImageDemo extends StatefulWidget {
 
   @override
   State<PageTopBackgroudImageDemo> createState() => _PageTopBackgroudImageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _PageTopBackgroudImageDemoState extends State<PageTopBackgroudImageDemo> {
@@ -69,14 +63,5 @@ class _PageTopBackgroudImageDemoState extends State<PageTopBackgroudImageDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

@@ -13,11 +13,11 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 全局屏幕工具类，不依赖 BuildContext
 class NScreenManager {
-  factory NScreenManager() => _instance;
   NScreenManager._() {
     _init();
   }
   static final NScreenManager _instance = NScreenManager._();
+  factory NScreenManager() => _instance;
   static NScreenManager get instance => _instance;
 
   _init() {

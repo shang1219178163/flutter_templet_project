@@ -73,12 +73,6 @@ class DraggablePopup extends StatefulWidget {
 
   @override
   State<DraggablePopup> createState() => _DraggablePopupState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
-  }
 }
 
 class _DraggablePopupState extends State<DraggablePopup> {

@@ -56,13 +56,4 @@ class NEnterBallAnim extends StatelessWidget {
       },
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('valueListenable', valueListenable));
-    properties.add(EnumProperty<TextAlign?>('textAlign', textAlign));
-    properties.add(ObjectFlagProperty<Color Function(bool isEnter)?>.has('backgroundColorBuilder', backgroundColorBuilder));
-    properties.add(ObjectFlagProperty<TextStyle Function(bool isEnter)?>.has('styleBuilder', styleBuilder));
-  }
 }

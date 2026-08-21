@@ -14,12 +14,6 @@ class TodoListTabPage extends StatefulWidget {
 
   @override
   State<TodoListTabPage> createState() => _TodoListTabPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TodoListTabPageState extends State<TodoListTabPage> {
@@ -52,11 +46,5 @@ class _TodoListTabPageState extends State<TodoListTabPage> {
       case 1:
         context.read<DBGenericProvider<DBTodo>>().notify();
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<(String, Widget)>('items', items));
   }
 }

@@ -12,18 +12,12 @@ import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class StateManagerDemo extends StatefulWidget {
+  final String? title;
 
   const StateManagerDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _StateManagerDemoState createState() => _StateManagerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _StateManagerDemoState extends State<StateManagerDemo> {
@@ -49,7 +43,7 @@ class _StateManagerDemoState extends State<StateManagerDemo> {
   buildBody() {
     return ListView.builder(
         itemCount: _tuples.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           final e = _tuples[index];
           return ListTile(
             title: Text(e.item1),

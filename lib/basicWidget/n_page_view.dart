@@ -42,18 +42,6 @@ class NPageView extends StatefulWidget {
 
   @override
   _NPageViewState createState() => _NPageViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<(String, Widget)>('items', items));
-    properties.add(DiagnosticsProperty<bool>('needSafeArea', needSafeArea));
-    properties.add(DiagnosticsProperty<bool>('isThemeBg', isThemeBg));
-    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
-    properties.add(DiagnosticsProperty<bool>('isBottom', isBottom));
-    properties.add(EnumProperty<TabAlignment>('tabAlignment', tabAlignment));
-    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onPageChanged', onPageChanged));
-  }
 }
 
 class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
@@ -183,15 +171,5 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       color: isThemeBg ? context.themeData.colorScheme.primary : null,
       child: tabBar,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
-    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
-    properties.add(ColorProperty('textColor', textColor));
-    properties.add(ColorProperty('bgColor', bgColor));
   }
 }

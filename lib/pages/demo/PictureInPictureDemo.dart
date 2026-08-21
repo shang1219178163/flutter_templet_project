@@ -19,12 +19,6 @@ class PictureInPictureDemo extends StatefulWidget {
 
   @override
   State<PictureInPictureDemo> createState() => _PictureInPictureDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _PictureInPictureDemoState extends State<PictureInPictureDemo> {
@@ -62,13 +56,5 @@ class _PictureInPictureDemoState extends State<PictureInPictureDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

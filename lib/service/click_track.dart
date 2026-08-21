@@ -84,12 +84,6 @@ class ClickTrackWidget extends StatelessWidget {
       child: child,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('data', data));
-  }
 }
 
 class _ClickTrackInherited extends InheritedWidget {
@@ -113,11 +107,5 @@ class _ClickTrackInherited extends InheritedWidget {
   @override
   bool updateShouldNotify(covariant _ClickTrackInherited oldWidget) {
     return !mapEquals(oldWidget.data, data);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('data', data));
   }
 }

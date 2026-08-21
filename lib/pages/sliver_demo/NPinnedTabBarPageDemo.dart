@@ -14,12 +14,6 @@ class NPinnedTabBarPageDemo extends StatefulWidget {
 
   @override
   State<NPinnedTabBarPageDemo> createState() => _NPinnedTabBarPageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with SingleTickerProviderStateMixin {
@@ -118,7 +112,7 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with Sing
       body: DefaultTabController(
         length: tabItems.length,
         child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             final top = MediaQuery.of(context).viewPadding.top + kToolbarHeight;
             return <Widget>[
               SliverAppBar(
@@ -217,13 +211,5 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with Sing
         title: Text('${tabController.index}, Item #$index,'),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(IterableProperty<({Widget child, Tab tab})>('tabItems', tabItems));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

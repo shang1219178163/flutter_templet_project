@@ -26,13 +26,6 @@ class StudentLisPageOne extends StatefulWidget {
 
   @override
   State<StudentLisPageOne> createState() => _StudentLisPageOneState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMixin {
@@ -178,15 +171,5 @@ class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMixi
       createdDate: DateTime.now().toIso8601String(),
     );
     provider.put(todo);
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty<bool?>('hideAppBar', hideAppBar));
-    properties.add(DiagnosticsProperty<TextEditingController>('titleController', titleController));
-    properties.add(DiagnosticsProperty<bool>('isAllChoic', isAllChoic));
-    properties.add(DiagnosticsProperty<DBGenericProvider<DBStudent>>('provider', provider));
   }
 }

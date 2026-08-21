@@ -34,15 +34,6 @@ class NExpansionFade extends StatefulWidget {
 
   @override
   State<NExpansionFade> createState() => _NExpansionFadeState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<NExpansionFadeController?>('controller', controller));
-    properties.add(DiagnosticsProperty<bool>('isExpanded', isExpanded));
-    properties.add(ObjectFlagProperty<Widget Function(bool isExpanded, VoidCallback onToggle)?>.has('childBuilder', childBuilder));
-    properties.add(ObjectFlagProperty<Widget Function(bool isExpanded, VoidCallback onToggle)?>.has('expandedBuilder', expandedBuilder));
-  }
 }
 
 class _NExpansionFadeState extends State<NExpansionFade> {
@@ -88,12 +79,6 @@ class _NExpansionFadeState extends State<NExpansionFade> {
   onToggle() {
     isExpanded = !isExpanded;
     setState(() {});
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('isExpanded', isExpanded));
   }
 }
 

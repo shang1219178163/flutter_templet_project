@@ -168,21 +168,6 @@ class EnExpansionPanelList extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _EnExpansionPanelListState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<ExpansionPanel>('children', children));
-    properties.add(ObjectFlagProperty<ExpansionPanelCallback?>.has('expansionCallback', expansionCallback));
-    properties.add(DiagnosticsProperty<Duration>('animationDuration', animationDuration));
-    properties.add(DiagnosticsProperty<Object?>('initialOpenPanelValue', initialOpenPanelValue));
-    properties.add(DiagnosticsProperty<EdgeInsets>('expandedHeaderPadding', expandedHeaderPadding));
-    properties.add(DiagnosticsProperty<Radius?>('radius', radius));
-    properties.add(ColorProperty('dividerColor', dividerColor));
-    properties.add(DoubleProperty('elevation', elevation));
-    properties.add(ColorProperty('expandIconColor', expandIconColor));
-    properties.add(DoubleProperty('materialGapSize', materialGapSize));
-  }
 }
 
 class _EnExpansionPanelListState extends State<EnExpansionPanelList> {
@@ -294,7 +279,7 @@ class _EnExpansionPanelListState extends State<EnExpansionPanelList> {
           padding: _kExpandIconPadding,
           splashColor: child.splashColor,
           highlightColor: child.highlightColor,
-          onPressed: !child.canTapOnHeader ? (isExpanded) => _handlePressed(isExpanded, index) : null,
+          onPressed: !child.canTapOnHeader ? (bool isExpanded) => _handlePressed(isExpanded, index) : null,
         ),
       );
 

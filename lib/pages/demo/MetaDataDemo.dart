@@ -44,12 +44,6 @@ class MetaDataDemoNew extends StatelessWidget {
       body: Text(arguments.toString()),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class MetaDataDemo extends StatefulWidget {
@@ -62,12 +56,6 @@ class MetaDataDemo extends StatefulWidget {
 
   @override
   State<MetaDataDemo> createState() => _MetaDataDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _MetaDataDemoState extends State<MetaDataDemo> {
@@ -179,13 +167,5 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
       DLog.e(
           "$e"); //[log] [2025-03-27 10:13:00.727041][ERROR][ios][_MetaDataDemoState.onTest Line:164]: type 'Null' is not a subtype of type 'String'
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<ActionRecord>('items', items));
   }
 }

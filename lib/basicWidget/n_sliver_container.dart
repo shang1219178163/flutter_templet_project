@@ -217,11 +217,5 @@ class NSliverContainer extends StatelessWidget {
     properties.add(DiagnosticsProperty<bool>('ignoring', ignoring, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('offstage', offstage, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('safeArea', safeArea, defaultValue: false));
-    properties.add(DiagnosticsProperty<bool>('alwaysIncludeSemantics', alwaysIncludeSemantics));
-    properties.add(DiagnosticsProperty<bool>('safeAreaLeft', safeAreaLeft));
-    properties.add(DiagnosticsProperty<bool>('safeAreaTop', safeAreaTop));
-    properties.add(DiagnosticsProperty<bool>('safeAreaRight', safeAreaRight));
-    properties.add(DiagnosticsProperty<bool>('safeAreaBottom', safeAreaBottom));
-    properties.add(DiagnosticsProperty<EdgeInsets>('safeAreaMinimum', safeAreaMinimum));
   }
 }

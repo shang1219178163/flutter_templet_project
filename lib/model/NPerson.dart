@@ -1,11 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 class NPerson {
-
-  NPerson.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    age = json['age'];
-  }
   NPerson({
     required this.name,
     required this.age,
@@ -13,6 +8,11 @@ class NPerson {
 
   String? name;
   int? age;
+
+  NPerson.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    age = json['age'];
+  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

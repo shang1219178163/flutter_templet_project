@@ -10,18 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class BorderDemo extends StatefulWidget {
+  final String? title;
 
   const BorderDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _BorderDemoState createState() => _BorderDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _BorderDemoState extends State<BorderDemo> {

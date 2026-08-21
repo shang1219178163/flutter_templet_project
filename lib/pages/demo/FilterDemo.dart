@@ -19,12 +19,6 @@ class FilterDemo extends StatefulWidget {
 
   @override
   _FilterDemoState createState() => _FilterDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _FilterDemoState extends State<FilterDemo> {

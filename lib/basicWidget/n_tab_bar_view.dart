@@ -52,20 +52,6 @@ class NTabBarView extends StatefulWidget {
 
   @override
   NTabBarViewState createState() => NTabBarViewState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
-    properties.add(ColorProperty('tabBgColor', tabBgColor));
-    properties.add(ColorProperty('labelColor', labelColor));
-    properties.add(DiagnosticsProperty<TextStyle?>('labelStyle', labelStyle));
-    properties.add(DiagnosticsProperty<TabController?>('tabController', tabController));
-    properties.add(IntProperty('initialIndex', initialIndex));
-    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onPageChanged', onPageChanged));
-    properties.add(ObjectFlagProperty<bool Function(int p1)?>.has('canPageChanged', canPageChanged));
-    properties.add(DiagnosticsProperty<bool>('isTabBottom', isTabBottom));
-  }
 }
 
 class NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStateMixin {
@@ -168,12 +154,5 @@ class NTabBarViewState extends State<NTabBarView> with SingleTickerProviderState
         children: widget.items.map((e) => e.item2).toList(),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
-    properties.add(DiagnosticsProperty<bool>('canScrollable', canScrollable));
   }
 }

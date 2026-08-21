@@ -19,12 +19,6 @@ class ListBodyDemo extends StatefulWidget {
 
   @override
   State<ListBodyDemo> createState() => _ListBodyDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ListBodyDemoState extends State<ListBodyDemo> {
@@ -104,13 +98,5 @@ class _ListBodyDemoState extends State<ListBodyDemo> {
         ),
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

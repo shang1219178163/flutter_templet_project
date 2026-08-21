@@ -13,12 +13,6 @@ class ScrollPhysicsPage extends StatefulWidget {
 
   @override
   State<ScrollPhysicsPage> createState() => _ScrollPhysicsPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ScrollPhysicsPageState extends State<ScrollPhysicsPage> with SingleTickerProviderStateMixin {
@@ -87,14 +81,5 @@ class _ScrollPhysicsPageState extends State<ScrollPhysicsPage> with SingleTicker
         itemCount: 20,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(IterableProperty<({String k, ScrollPhysics v})>('items', items));
-    properties.add(DiagnosticsProperty<ScrollPhysics>('scrollPhysics', scrollPhysics));
-    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

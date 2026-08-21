@@ -12,12 +12,6 @@ class ListViewSeparatedDemo extends StatefulWidget {
 
   @override
   State<ListViewSeparatedDemo> createState() => _ListViewSeparatedDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _ListViewSeparatedDemoState extends State<ListViewSeparatedDemo> {
@@ -84,14 +78,5 @@ class _ListViewSeparatedDemoState extends State<ListViewSeparatedDemo> {
       ),
       child: Text('Footer'),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
   }
 }

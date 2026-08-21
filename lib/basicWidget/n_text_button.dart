@@ -87,20 +87,4 @@ class NTextButton extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<Axis>('direction', direction));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onPressed', onPressed));
-    properties.add(ColorProperty('color', color));
-    properties.add(ColorProperty('borderColor', borderColor));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
-    properties.add(DoubleProperty('radius', radius));
-    properties.add(DoubleProperty('iconTextGap', iconTextGap));
-    properties.add(DiagnosticsProperty<bool>('isReverse', isReverse));
-    properties.add(DiagnosticsProperty<Decoration?>('decoration', decoration));
-    properties.add(DiagnosticsProperty<BoxConstraints?>('constraints', constraints));
-  }
 }

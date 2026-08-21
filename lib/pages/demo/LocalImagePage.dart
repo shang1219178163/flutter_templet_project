@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 class LocalImagePage extends StatelessWidget {
+  final String? title;
 
   LocalImagePage({
     Key? key,
     this.title,
   }) : super(key: key);
-  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +64,6 @@ class LocalImagePage extends StatelessWidget {
     Assets.imagesImgUploadPlaceholder,
     Assets.imagesIconDelete,
   ];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-    properties.add(IterableProperty<String>('imageNames', imageNames));
-  }
   // var imageNames = [
   //   Image.asset("avatar.png", fit: BoxFit.fill),
   //   Image.asset("icon_appbar_back.png", fit: BoxFit.fill),

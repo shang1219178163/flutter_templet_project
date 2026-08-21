@@ -156,7 +156,7 @@ class SchemeSignPageState extends State<SchemeSignPage> {
   }) async {
     var res = await OssUtil.upload(
       filePath: path,
-      onSendProgress: (count, total) {
+      onSendProgress: (int count, int total) {
         final percent = (count / total);
         if (percent >= 0.99) {
           percentVN?.value = 0.99;
@@ -164,7 +164,7 @@ class SchemeSignPageState extends State<SchemeSignPage> {
           percentVN?.value = percent;
         }
       },
-      onReceiveProgress: (count, total) {
+      onReceiveProgress: (int count, int total) {
         percentVN?.value = 1;
       },
     );
@@ -173,12 +173,5 @@ class SchemeSignPageState extends State<SchemeSignPage> {
       return res;
     }
     return null;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<SignatureController>('signatureController', signatureController));
-    properties.add(DiagnosticsProperty<bool>('isEmpty', isEmpty));
   }
 }

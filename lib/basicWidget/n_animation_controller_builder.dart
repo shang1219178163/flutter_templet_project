@@ -49,18 +49,6 @@ class NAnimationControllerBuilder<T> extends StatefulWidget {
 
   @override
   State<NAnimationControllerBuilder<T>> createState() => _NAnimationControllerBuilderState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
-    properties.add(DiagnosticsProperty<Duration?>('reverseDuration', reverseDuration));
-    properties.add(DoubleProperty('lowerBound', lowerBound));
-    properties.add(DoubleProperty('upperBound', upperBound));
-    properties.add(StringProperty('debugLabel', debugLabel));
-    properties.add(EnumProperty<AnimationBehavior>('animationBehavior', animationBehavior));
-    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, Widget? child, AnimationController animController)>.has('builder', builder));
-  }
 }
 
 class _NAnimationControllerBuilderState<T> extends State<NAnimationControllerBuilder<T>>
@@ -125,11 +113,5 @@ class _NAnimationControllerBuilderState<T> extends State<NAnimationControllerBui
         return widget.builder(c, child, controller);
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
   }
 }

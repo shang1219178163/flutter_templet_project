@@ -1,20 +1,5 @@
 /// api 属性
 class ApiPropertyModel<T> {
-
-  factory ApiPropertyModel.fromJson(
-    Map<String, dynamic> json, {
-    T Function(dynamic json)? fromJsonT,
-  }) {
-    return ApiPropertyModel<T>(
-      name: json['name'] ?? "unknown",
-      type: json['type'] ?? "unknown",
-      typeDart: json['typeDart'] ?? "unknown",
-      typeValidate: json['typeValidate'] ?? "",
-      format: json['format'] ?? "",
-      description: json['description'] ?? "",
-      result: fromJsonT?.call(json['result']),
-    );
-  }
   ApiPropertyModel({
     this.name = "unknown",
     this.type = "unknown",
@@ -34,6 +19,21 @@ class ApiPropertyModel<T> {
   String? format;
   String? description;
   T? result;
+
+  factory ApiPropertyModel.fromJson(
+    Map<String, dynamic> json, {
+    T Function(dynamic json)? fromJsonT,
+  }) {
+    return ApiPropertyModel<T>(
+      name: json['name'] ?? "unknown",
+      type: json['type'] ?? "unknown",
+      typeDart: json['typeDart'] ?? "unknown",
+      typeValidate: json['typeValidate'] ?? "",
+      format: json['format'] ?? "",
+      description: json['description'] ?? "",
+      result: fromJsonT?.call(json['result']),
+    );
+  }
 
   Map<String, dynamic> toJson({
     dynamic Function(T value)? toJsonT,

@@ -18,13 +18,6 @@ class NSystemThemeTab extends StatefulWidget {
 
   @override
   State<NSystemThemeTab> createState() => _NSystemThemeTabState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<ThemeMode>('mode', mode));
-    properties.add(ObjectFlagProperty<ValueChanged<ThemeMode>>.has('onChanged', onChanged));
-  }
 }
 
 class _NSystemThemeTabState extends State<NSystemThemeTab> {
@@ -166,13 +159,5 @@ class _NSystemThemeTabState extends State<NSystemThemeTab> {
         );
       }),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('index', index));
-    properties.add(IterableProperty<SystemThemeTabRecord<ThemeMode>>('systemModes', systemModes));
-    properties.add(IntProperty('numPerRow', numPerRow));
   }
 }

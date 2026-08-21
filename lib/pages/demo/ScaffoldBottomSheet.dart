@@ -10,12 +10,6 @@ class ScaffoldBottomSheet extends StatefulWidget {
 
   @override
   _ScaffoldBottomSheetState createState() => _ScaffoldBottomSheetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
@@ -49,7 +43,7 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
       // bottomSheet: buildInputBar(),
       bottomSheet: buildInputView(
           controller: _inputController,
-          onChanged: (value) {
+          onChanged: (String value) {
             list.insert(0, value);
             setState(() {});
           }),
@@ -164,11 +158,5 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
         onSubmitted: (_) => onChanged?.call(controller?.text.trim() ?? ""),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('list', list));
   }
 }

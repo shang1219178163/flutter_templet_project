@@ -26,12 +26,6 @@ class FaceDetectionPage extends StatefulWidget {
 
   @override
   State<FaceDetectionPage> createState() => _FaceDetectionPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _FaceDetectionPageState extends State<FaceDetectionPage> {
@@ -188,12 +182,5 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
 
     final faces = await faceDetector.processImage(inputImage);
     return faces.isNotEmpty;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FaceDetectorOptions>('options', options));
-    properties.add(DiagnosticsProperty<FaceDetector>('faceDetector', faceDetector));
   }
 }

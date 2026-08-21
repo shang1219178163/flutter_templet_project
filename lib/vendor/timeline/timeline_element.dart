@@ -254,20 +254,4 @@ class TimelineElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return _buildRow(context);
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty('lineColor', lineColor));
-    properties.add(ColorProperty('backgroundColor', backgroundColor));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('model', model));
-    properties.add(DiagnosticsProperty<bool>('firstElement', firstElement));
-    properties.add(DiagnosticsProperty<bool>('lastElement', lastElement));
-    properties.add(DiagnosticsProperty<Animation<double>>('controller', controller));
-    properties.add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>('subtitleStyle', subtitleStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>('descriptionStyle', descriptionStyle));
-    properties.add(DiagnosticsProperty<bool?>('leftContent', leftContent));
-    properties.add(DoubleProperty('height', height));
-  }
 }

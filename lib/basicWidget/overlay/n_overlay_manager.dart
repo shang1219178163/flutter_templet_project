@@ -139,14 +139,4 @@ class NOverlayContent extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('message', message));
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
-    properties.add(DoubleProperty('offset', offset));
-    properties.add(ColorProperty('backgroudColor', backgroudColor));
-    properties.add(ColorProperty('color', color));
-  }
 }

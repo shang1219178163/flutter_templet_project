@@ -17,12 +17,6 @@ class StackDemoTwo extends StatefulWidget {
 
   @override
   _StackDemoTwoState createState() => _StackDemoTwoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderStateMixin {
@@ -183,7 +177,7 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
                       text: e.item1,
                     ))
                 .toList(),
-            onTap: (index) async {
+            onTap: (int index) async {
               debugPrint("buildTab: $index");
               _pageController.jumpToPage(index);
             }),
@@ -306,14 +300,5 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('globalKey', globalKey));
-    properties.add(DiagnosticsProperty<MediaQueryData>('mediaQuery', mediaQuery));
-    properties.add(DiagnosticsProperty<Size>('screenSize', screenSize));
   }
 }

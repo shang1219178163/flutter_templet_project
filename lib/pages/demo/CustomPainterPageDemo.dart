@@ -22,12 +22,6 @@ class CustomPainterPageDemo extends StatefulWidget {
 
   @override
   State<CustomPainterPageDemo> createState() => _CustomPainterPageDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
-  }
 }
 
 class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
@@ -183,15 +177,6 @@ class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
-    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
-    properties.add(DiagnosticsProperty('id', id));
-  }
 }
 
 class PriceTagPainter extends CustomPainter {
@@ -244,9 +229,9 @@ class PriceTagPainter extends CustomPainter {
 }
 
 class CameraClosePainter extends CustomPainter {
+  final double cornerRadius;
 
   CameraClosePainter({this.cornerRadius = 10.0});
-  final double cornerRadius;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -302,9 +287,9 @@ class CameraClosePainter extends CustomPainter {
 }
 
 class RightArrowPainter extends CustomPainter {
+  final double cornerRadius;
 
   RightArrowPainter({this.cornerRadius = 10.0});
-  final double cornerRadius;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -421,6 +406,12 @@ extension _OffsetExtensions on Offset {
 }
 
 class ArcPainter extends CustomPainter {
+  final Color color;
+  final Offset startPoint;
+  final double radius;
+  final double startAngle;
+  final double sweepAngle;
+  final Color backgroundColor;
 
   ArcPainter({
     this.color = Colors.blue,
@@ -430,12 +421,6 @@ class ArcPainter extends CustomPainter {
     this.sweepAngle = pi / 2, // 默认为90度
     this.backgroundColor = Colors.green,
   });
-  final Color color;
-  final Offset startPoint;
-  final double radius;
-  final double startAngle;
-  final double sweepAngle;
-  final Color backgroundColor;
 
   @override
   void paint(Canvas canvas, Size size) {

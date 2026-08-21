@@ -127,7 +127,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
         width: double.infinity,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
+          itemBuilder: (BuildContext context, int index) {
             var e = alignments[index];
             var name = e.toString().split('.')[1];
 
@@ -148,7 +148,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProv
               ),
             );
           },
-          separatorBuilder: (context, index) {
+          separatorBuilder: (BuildContext context, int index) {
             return Divider(height: 8);
           },
           itemCount: alignments.length,
@@ -741,7 +741,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
 
     showGeneralDialog(
         context: context,
-        pageBuilder: (context, animation, secondaryAnimation) {
+        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
           return NUserPrivacy(
             title: Text(
               '用户隐私及协议',
@@ -770,22 +770,6 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         Navigator.of(context).pop();
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Size>('itemSize', itemSize));
-    properties.add(IterableProperty<ActionRecord<String>>('items', items));
-    properties.add(StringProperty('title', title));
-    properties.add(StringProperty('message', message));
-    properties.add(StringProperty('title1', title1));
-    properties.add(StringProperty('message1', message1));
-    properties.add(DiagnosticsProperty<Object?>('sex', sex));
-    properties.add(IterableProperty<Alignment>('alignments', alignments));
-    properties.add(DiagnosticsProperty<Map<String, Widget>>('map', map));
-    properties.add(DiagnosticsProperty<Map<String, Alignment>>('alignmentMap', alignmentMap));
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
   }
 }
 

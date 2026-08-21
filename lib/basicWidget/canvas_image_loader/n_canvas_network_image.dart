@@ -49,28 +49,6 @@ class NCanvasNetworkImage extends StatefulWidget {
 
   @override
   State<NCanvasNetworkImage> createState() => _NCanvasNetworkImageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('url', url));
-    properties.add(DoubleProperty('width', width));
-    properties.add(DoubleProperty('height', height));
-    properties.add(DiagnosticsProperty<AssetImage>('placeholder', placeholder));
-    properties.add(StringProperty('debugImageLabel', debugImageLabel));
-    properties.add(DoubleProperty('scale', scale));
-    properties.add(DoubleProperty('opacity', opacity));
-    properties.add(DiagnosticsProperty<ui.ColorFilter?>('colorFilter', colorFilter));
-    properties.add(EnumProperty<BoxFit?>('fit', fit));
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
-    properties.add(DiagnosticsProperty<ui.Rect?>('centerSlice', centerSlice));
-    properties.add(EnumProperty<ImageRepeat>('repeat', repeat));
-    properties.add(DiagnosticsProperty<bool>('flipHorizontally', flipHorizontally));
-    properties.add(DiagnosticsProperty<bool>('invertColors', invertColors));
-    properties.add(EnumProperty<ui.FilterQuality>('filterQuality', filterQuality));
-    properties.add(DiagnosticsProperty<bool>('isAntiAlias', isAntiAlias));
-    properties.add(EnumProperty<ui.BlendMode>('blendMode', blendMode));
-  }
 }
 
 class _NCanvasNetworkImageState extends State<NCanvasNetworkImage> {
@@ -163,11 +141,5 @@ class _NCanvasNetworkImageState extends State<NCanvasNetworkImage> {
         blendMode: widget.blendMode,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ui.Image?>('image', image));
   }
 }

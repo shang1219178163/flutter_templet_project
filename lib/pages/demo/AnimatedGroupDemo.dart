@@ -15,12 +15,6 @@ class AnimatedGroupDemo extends StatefulWidget {
 
   @override
   _AnimatedGroupDemoState createState() => _AnimatedGroupDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
@@ -82,8 +76,8 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
                 key: _globalKey,
                 duration: Duration(milliseconds: 2000),
                 animations: _animations,
-                builder: (context, child,
-                    animations) {
+                builder: (BuildContext context, Widget? child,
+                    List<Animation<dynamic>> animations) {
                   final aHeight = animations[0];
                   final aColor = animations[1];
                   final aPadding = animations[2];

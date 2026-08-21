@@ -214,11 +214,4 @@ class _DatePickerPageState extends State<DatePickerPage> {
       // onChanged: (p) => print(p),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('stateText', stateText));
-    properties.add(DiagnosticsProperty<Map<DateMode, String>>('selectData', selectData));
-  }
 }

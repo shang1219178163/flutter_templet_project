@@ -7,12 +7,6 @@ class PageBuilderDemo extends StatefulWidget {
 
   @override
   _PageBuilderDemoState createState() => _PageBuilderDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _PageBuilderDemoState extends State<PageBuilderDemo> {
@@ -43,11 +37,5 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       ),
       body: Text(arguments.toString()),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
   }
 }

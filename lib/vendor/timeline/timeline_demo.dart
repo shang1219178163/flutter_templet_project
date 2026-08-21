@@ -11,18 +11,12 @@ import 'package:flutter_templet_project/vendor/timeline/common/colors.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
 
 class TimelineDemo extends StatefulWidget {
+  final String? title;
 
   const TimelineDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _TimelineDemoState createState() => _TimelineDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _TimelineDemoState extends State<TimelineDemo> {
@@ -75,10 +69,4 @@ class _TimelineDemoState extends State<TimelineDemo> {
     },
     {'id': "5", 'day': '07-08', 'time': '13:20', 'description': "备注：降价1000客户可考虑", 'subtitle': '何神(主播)', 'title': "新建工单"}
   ];
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<>('listData', listData));
-  }
 }

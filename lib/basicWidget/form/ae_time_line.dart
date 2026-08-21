@@ -44,11 +44,4 @@ class AeTimeLine extends StatelessWidget {
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('dateStr', dateStr));
-    properties.add(DiagnosticsProperty<bool>('addExpanded', addExpanded));
-  }
 }

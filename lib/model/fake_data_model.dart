@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class FakeDataModel with SelectableMixin {
+  String? id;
+  String? name;
+  String? code;
+  String? createBy;
 
   FakeDataModel({
     required this.id,
@@ -18,10 +22,6 @@ class FakeDataModel with SelectableMixin {
     createBy = json['createBy'];
     isSelected = json['isSelected'];
   }
-  String? id;
-  String? name;
-  String? code;
-  String? createBy;
 
   @override
   Map<String, dynamic> toJson() {

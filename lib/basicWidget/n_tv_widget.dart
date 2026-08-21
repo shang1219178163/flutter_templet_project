@@ -41,18 +41,6 @@ class NTVWidget extends StatefulWidget {
 
   @override
   State<NTVWidget> createState() => NTVWidgetState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<void Function(bool hasFocus)?>.has('focusChanged', focusChanged));
-    properties.add(ObjectFlagProperty<VoidCallback?>.has('onClick', onClick));
-    properties.add(DiagnosticsProperty<bool>('requestFocus', requestFocus));
-    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
-    properties.add(DiagnosticsProperty<BoxDecoration?>('decoration', decoration));
-    properties.add(DiagnosticsProperty<bool>('hasDecoration', hasDecoration));
-    properties.add(ObjectFlagProperty<KeyEventResult Function(KeyEvent event)?>.has('onKeyEventChanged', onKeyEventChanged));
-  }
 }
 
 class NTVWidgetState extends State<NTVWidget> with SafeSetStateMixin {
@@ -149,11 +137,5 @@ class NTVWidgetState extends State<NTVWidget> with SafeSetStateMixin {
         child: widget.child,
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BoxDecoration>('defaultDecoration', defaultDecoration));
   }
 }

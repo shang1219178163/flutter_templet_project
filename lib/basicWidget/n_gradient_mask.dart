@@ -48,7 +48,7 @@ class NGradientMask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      shaderCallback: (bounds) {
+      shaderCallback: (Rect bounds) {
         return LinearGradient(
           // transform: const GradientRotation(65 * (pi / 180)),
           begin: begin,
@@ -59,13 +59,5 @@ class NGradientMask extends StatelessWidget {
       },
       child: child,
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AlignmentGeometry>('begin', begin));
-    properties.add(DiagnosticsProperty<AlignmentGeometry>('end', end));
-    properties.add(IterableProperty<NGradientModel>('models', models));
   }
 }

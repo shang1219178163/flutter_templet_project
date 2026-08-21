@@ -10,12 +10,6 @@ class GlobalIsolateDemo extends StatefulWidget {
 
   @override
   _GlobalIsolateDemoState createState() => _GlobalIsolateDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _GlobalIsolateDemoState extends State<GlobalIsolateDemo> {
@@ -47,7 +41,7 @@ class _GlobalIsolateDemoState extends State<GlobalIsolateDemo> {
 
     final result = (await GlobalIsolate.isolateDo(
           params: {"a": a},
-          work: (params) async {
+          work: (Map<String, dynamic> params) async {
             sleep(const Duration(seconds: 2));
             final base = params["a"] as int;
             return {

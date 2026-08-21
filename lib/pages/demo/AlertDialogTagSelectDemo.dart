@@ -10,12 +10,6 @@ class AlertDialogTagSelectDemo extends StatefulWidget {
   @override
   _AlertDialogTagSelectDemoState createState() =>
       _AlertDialogTagSelectDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
@@ -99,7 +93,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
       selectTags: selectTags,
       // isMuti: false,
       onCancel: () {},
-      onConfirm: (selectedItems) {
+      onConfirm: (List<SelectModel> selectedItems) {
         selectTags = selectedItems;
 
         debugPrint(selectTagNames.toString());
@@ -113,15 +107,5 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
         );
       },
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<String>('items', items));
-    properties.add(IterableProperty<SelectModel>('tags', tags));
-    properties.add(IterableProperty<SelectModel>('selectTags', selectTags));
-    properties.add(IterableProperty<SelectModel>('selectTagsTmp', selectTagsTmp));
-    properties.add(IterableProperty<String>('selectTagNames', selectTagNames));
   }
 }

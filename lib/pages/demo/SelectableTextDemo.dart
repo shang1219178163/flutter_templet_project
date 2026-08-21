@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SelectableTextDemo extends StatefulWidget {
+  final String? title;
 
   const SelectableTextDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _SelectableTextDemoState createState() => _SelectableTextDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _SelectableTextDemoState extends State<SelectableTextDemo> {
@@ -50,11 +44,5 @@ Jank 类型分为两种：首次运行卡顿(Early-onset Jank)和非首次运行
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('message', message));
   }
 }

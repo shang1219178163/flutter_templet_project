@@ -10,17 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class DateTimeDemo extends StatefulWidget {
-  const DateTimeDemo({Key? key, this.title}) : super(key: key);
   final String? title;
+  const DateTimeDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _DateTimeDemoState createState() => _DateTimeDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DateTimeDemoState extends State<DateTimeDemo> {
@@ -86,11 +80,5 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
         },
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<DateTime?>('selectedDate', selectedDate));
   }
 }

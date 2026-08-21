@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 class NotificationListenerDemo extends StatefulWidget {
+  final String? title;
 
   const NotificationListenerDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _NotificationListenerDemoState createState() => _NotificationListenerDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
@@ -51,7 +45,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
             title: Text("row_$index"),
           );
         },
-        separatorBuilder: (context, index) {
+        separatorBuilder: (BuildContext context, int index) {
           return Divider();
         },
       ),
@@ -61,7 +55,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
   Widget buildFloatingActionButton() {
     return ValueListenableBuilder(
       valueListenable: isScrolling,
-      builder: (context, value, child) {
+      builder: (context, bool value, child) {
         debugPrint('Offstage value:$value');
         return Offstage(
           offstage: value,
@@ -76,7 +70,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
             },
             child: ValueListenableBuilder(
               valueListenable: progress,
-              builder: (context, value, child) {
+              builder: (context, double value, child) {
                 // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
                 final progressInfo = (value * 100).toInt();
                 if (value >= 1.0) {
@@ -132,13 +126,6 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     // change height here
     // _filterBarChangeKey = GlobalKey();
     return false;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isScrolling', isScrolling));
-    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progress', progress));
   }
 }
 
@@ -204,12 +191,6 @@ class NotificationCustomDemoState extends State<NotificationCustomDemo> {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ValueNotifier<String>>('messageVN', messageVN));
   }
 }
 

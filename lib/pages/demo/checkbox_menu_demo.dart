@@ -8,12 +8,6 @@ class CheckboxMenuDemo extends StatefulWidget {
 
   @override
   State<CheckboxMenuDemo> createState() => _CheckboxMenuDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('message', message));
-  }
 }
 
 class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
@@ -50,7 +44,7 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
             menuChildren: <Widget>[
               CheckboxMenuButton(
                 value: _showing,
-                onChanged: (value) {
+                onChanged: (bool? value) {
                   setMessageVisibility(value!);
                 },
                 child: const Text('Show Message'),
@@ -58,11 +52,11 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
               RadioMenuButton(
                 groupValue: 0,
                 value: 0,
-                onChanged: (value) {},
+                onChanged: (int? value) {},
                 child: const Text('two'),
               ),
             ],
-            builder: (context, controller, child) {
+            builder: (context, MenuController controller, Widget? child) {
               return TextButton(
                 focusNode: _buttonFocusNode,
                 onPressed: () {

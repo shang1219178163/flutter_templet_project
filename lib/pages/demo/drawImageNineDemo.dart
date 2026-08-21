@@ -6,18 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DrawImageNineDemo extends StatefulWidget {
+  final String? title;
 
   const DrawImageNineDemo({Key? key, this.title}) : super(key: key);
-  final String? title;
 
   @override
   _DrawImageNineDemoState createState() => _DrawImageNineDemoState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
@@ -55,7 +49,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
 
   Future<ui.Image> loadImage(Uint8List bytes) async {
     final completer = Completer<ui.Image>();
-    ui.decodeImageFromList(bytes, (img) {
+    ui.decodeImageFromList(bytes, (ui.Image img) {
       return completer.complete(img);
     });
     return completer.future;
@@ -73,20 +67,14 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
       return Center(child: Text('loading'));
     }
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ui.Image?>('image', image));
-  }
 }
 
 class ImageEditor extends CustomPainter {
+  ui.Image image;
 
   ImageEditor({
     required this.image,
   });
-  ui.Image image;
 
   @override
   void paint(Canvas canvas, Size size) {

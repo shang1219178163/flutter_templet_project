@@ -12,15 +12,15 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/pages/mine_page.dart';
+import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_bottom_navigation_bar/en_bottom_navigation_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppDrawerMenuPage.dart';
-import 'package:flutter_templet_project/pages/demo/list_view_offset_page.dart';
 import 'package:flutter_templet_project/pages/home_page.dart';
-import 'package:flutter_templet_project/pages/mine_page.dart';
+import 'package:flutter_templet_project/pages/demo/list_view_offset_page.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
@@ -39,12 +39,6 @@ class AppTabPage extends StatefulWidget {
 
   @override
   _AppTabPageState createState() => _AppTabPageState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
-  }
 }
 
 class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, AppLifecycleObserverMixin {
@@ -166,7 +160,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
                 ),
               )
               .toList(),
-          tileBuilder: (index, selected, icon, label) {
+          tileBuilder: (int index, bool selected, Widget icon, Widget label) {
             if (index == 0 && selected) {
               final e = items[index];
               return Container(
@@ -194,7 +188,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
       // ),
     );
     return Consumer<ColorFilteredProvider>(
-      builder: (context, provider, child) {
+      builder: (BuildContext context, provider, Widget? child) {
         //仅首页置灰
         return ColorFiltered(
           colorFilter: ColorFilter.mode(provider.color, BlendMode.color),
@@ -323,14 +317,5 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AppTabBarController>('appController', appController));
-    properties.add(IntProperty('currentIndex', currentIndex));
-    properties.add(DiagnosticsProperty<ValueNotifier<int>>('unreadVN', unreadVN));
-    properties.add(IterableProperty<Tuple2<Tuple2<String, Icon>, Widget>>('items', items));
   }
 }
