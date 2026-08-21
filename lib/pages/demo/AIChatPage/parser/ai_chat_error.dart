@@ -27,7 +27,6 @@ abstract final class AiChatError {
         case DioExceptionType.connectionTimeout:
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
-        case DioExceptionType.transformTimeout:
           return '连接超时，请检查网络后重试';
         case DioExceptionType.connectionError:
           return '网络连接失败，请检查网络后重试';
@@ -48,8 +47,6 @@ abstract final class AiChatError {
             return format(inner);
           }
           return _matchMessage(error.message) ?? '网络异常，请重试';
-        default:
-          return '${error.type}异常';
       }
     }
     if (error is SocketException) {
