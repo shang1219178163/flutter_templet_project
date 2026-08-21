@@ -10,6 +10,12 @@ class HorizontalCellDemo extends StatefulWidget {
 
   @override
   _HorizontalCellDemoState createState() => _HorizontalCellDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
@@ -45,7 +51,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
               value: sliderVN.value,
               min: 0.0,
               max: 100.0,
-              onChanged: (double value) {
+              onChanged: (value) {
                 sliderVN.value = value;
                 setState(() {});
               },
@@ -54,7 +60,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         ),
         ValueListenableBuilder(
             valueListenable: sliderVN,
-            builder: (BuildContext context, double value, Widget? child) {
+            builder: (context, value, child) {
               final result = (value / 100).toStringAsFixed(2);
               return TextButton(
                 onPressed: () {
@@ -108,5 +114,11 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
           // padding: EdgeInsets.all(8),
           child: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
         ));
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('sliderVN', sliderVN));
   }
 }

@@ -3,12 +3,18 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:scribble/scribble.dart';
 
 class ScribbleDemo extends StatefulWidget {
-  final String? title;
 
   const ScribbleDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ScribbleDemoState createState() => _ScribbleDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ScribbleDemoState extends State<ScribbleDemo> {
@@ -255,5 +261,11 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
       backgroundColor: Colors.blueGrey,
       child: const Icon(Icons.clear),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScribbleNotifier>('notifier', notifier));
   }
 }

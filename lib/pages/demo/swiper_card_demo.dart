@@ -28,6 +28,12 @@ class SwiperCardDemo extends StatefulWidget {
 
   @override
   State<SwiperCardDemo> createState() => _SwiperCardDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMixin {
@@ -112,7 +118,7 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
                   onSwipeEnd: swipeEnd,
                   onEnd: onEnd,
                   cardCount: candidates.length,
-                  cardBuilder: (BuildContext context, int index) {
+                  cardBuilder: (context, index) {
                     final e = candidates[index];
                     e.color ??= LinearGradient(
                       begin: Alignment.topCenter,
@@ -343,6 +349,16 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMi
       content: buildPageView(index: index),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(DiagnosticsProperty<AppinioSwiperController>('controller', controller));
+    properties.add(IterableProperty<_CandidateModel>('candidates', candidates));
+  }
 }
 
 class _CandidateModel with EqualIdenticalMixin {
@@ -490,5 +506,11 @@ class _CandidateCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<_CandidateModel>('model', model));
   }
 }

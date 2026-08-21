@@ -2,15 +2,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CloudyEffect extends StatefulWidget {
-  final double animationSpeed;
 
   const CloudyEffect({
     super.key,
     this.animationSpeed = 1.0,
   });
+  final double animationSpeed;
 
   @override
   State<CloudyEffect> createState() => _CloudyEffectState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('animationSpeed', animationSpeed));
+  }
 }
 
 class _CloudyEffectState extends State<CloudyEffect>
@@ -70,15 +76,16 @@ class _CloudyEffectState extends State<CloudyEffect>
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Cloud>('clouds', clouds));
+    properties.add(DiagnosticsProperty<Random>('random', random));
+  }
 }
 
 class Cloud {
-  double x;
-  double y;
-  double width;
-  double height;
-  double speed;
-  double opacity;
 
   Cloud({
     required this.x,
@@ -88,12 +95,18 @@ class Cloud {
     required this.speed,
     required this.opacity,
   });
+  double x;
+  double y;
+  double width;
+  double height;
+  double speed;
+  double opacity;
 }
 
 class CloudPainter extends CustomPainter {
-  final List<Cloud> clouds;
 
   CloudPainter(this.clouds);
+  final List<Cloud> clouds;
 
   @override
   void paint(Canvas canvas, Size size) {

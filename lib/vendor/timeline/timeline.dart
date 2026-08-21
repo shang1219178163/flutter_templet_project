@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_element.dart';
 
 class TimelineComponent extends StatefulWidget {
+
+  ///参数实例化
+  const TimelineComponent({
+    Key? key,
+    required this.timelineList,
+    this.lineColor = Colors.black12,
+    this.backgroundColor = Colors.white,
+    this.titleStyle,
+    this.subtitleStyle,
+    this.descriptionStyle,
+    this.leftContent,
+    this.height,
+  }) : super(key: key);
   ///timeline 数据实体list
   final List timelineList;
 
@@ -24,22 +37,22 @@ class TimelineComponent extends StatefulWidget {
   ///时间轴左侧是否展示
   final bool? leftContent;
 
-  ///参数实例化
-  const TimelineComponent({
-    Key? key,
-    required this.timelineList,
-    this.lineColor = Colors.black12,
-    this.backgroundColor = Colors.white,
-    this.titleStyle,
-    this.subtitleStyle,
-    this.descriptionStyle,
-    this.leftContent,
-    this.height,
-  }) : super(key: key);
-
   @override
   TimelineComponentState createState() {
     return TimelineComponentState();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<>('timelineList', timelineList));
+    properties.add(ColorProperty('lineColor', lineColor));
+    properties.add(DoubleProperty('height', height));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('subtitleStyle', subtitleStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('descriptionStyle', descriptionStyle));
+    properties.add(DiagnosticsProperty<bool?>('leftContent', leftContent));
   }
 }
 
@@ -94,5 +107,13 @@ class TimelineComponentState extends State<TimelineComponent>
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Animation<double>>('animation', animation));
+    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
+    properties.add(DoubleProperty('fraction', fraction));
   }
 }

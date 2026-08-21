@@ -11,11 +11,17 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import "package:intl/intl.dart";
 
 class NumberFormatDemo extends StatefulWidget {
-  final String? title;
   const NumberFormatDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _NumberFormatDemoState createState() => _NumberFormatDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NumberFormatDemoState extends State<NumberFormatDemo> {

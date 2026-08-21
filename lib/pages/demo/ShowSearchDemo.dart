@@ -10,12 +10,18 @@
 import 'package:flutter/material.dart';
 
 class ShowSearchDemo extends StatefulWidget {
-  final String? title;
 
   const ShowSearchDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ShowSearchDemoState createState() => _ShowSearchDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ShowSearchDemoState extends State<ShowSearchDemo> {
@@ -40,7 +46,7 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
                 delegate: CustomSearchDelegate(
                   list: filters,
                   select: '',
-                  onSelected: (String query) {
+                  onSelected: (query) {
                     filters = list.where((e) => query.isEmpty || e.contains(query.trim())).toList();
                     setState(() {});
                   },
@@ -60,6 +66,14 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
             .toList(),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('list', list));
+    properties.add(IterableProperty<String>('filters', filters));
+    properties.add(StringProperty('search', search));
   }
 }
 
@@ -106,7 +120,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   /// 用户从搜索页面提交搜索后显示的结果
   @override
   Widget buildResults(BuildContext context) {
-    var filterList = list.where((String s) => s.contains(query.trim()));
+    var filterList = list.where((s) => s.contains(query.trim()));
     return ListView(
       children: filterList
           .map((e) => ListTile(
@@ -128,7 +142,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   /// 当用户在搜索字段中键入查询时，在搜索页面正文中显示的建议
   @override
   Widget buildSuggestions(BuildContext context) {
-    var filterList = list.where((String s) => s.contains(query.trim()));
+    var filterList = list.where((s) => s.contains(query.trim()));
     return ListView(
       children: filterList
           .map((e) => ListTile(
@@ -213,7 +227,7 @@ class SearchBarViewDelegate extends SearchDelegate<String> {
     ///展示搜索结果
     return ListView.builder(
       itemCount: result.length,
-      itemBuilder: (BuildContext context, int index) => ListTile(
+      itemBuilder: (context, index) => ListTile(
         title: Text(result[index]),
       ),
     );
@@ -224,7 +238,7 @@ class SearchBarViewDelegate extends SearchDelegate<String> {
     var suggest = query.isEmpty ? suggestList : sourceList.where((input) => input.startsWith(query)).toList();
     return ListView.builder(
       itemCount: suggest.length,
-      itemBuilder: (BuildContext context, int index) => InkWell(
+      itemBuilder: (context, index) => InkWell(
         onTap: () {
           //  query.replaceAll("", suggest[index].toString());
           searchHint = "";

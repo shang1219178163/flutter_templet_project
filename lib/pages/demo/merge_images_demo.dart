@@ -8,12 +8,18 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 class MergeImagesDemo extends StatefulWidget {
-  final String? title;
 
   const MergeImagesDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _MergeImagesDemoState createState() => _MergeImagesDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MergeImagesDemoState extends State<MergeImagesDemo> {
@@ -296,6 +302,14 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       debugPrint(e.toString());
     }
     return null;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('repaintBoundaryKey1', repaintBoundaryKey1));
+    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('repaintBoundaryKey2', repaintBoundaryKey2));
+    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('repaintBoundaryKey3', repaintBoundaryKey3));
   }
   // Future<Uint8List> createImageFromWidget(Widget widget, {Duration? wait, Size? logicalSize, Size? imageSize}) async {
   //   final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();

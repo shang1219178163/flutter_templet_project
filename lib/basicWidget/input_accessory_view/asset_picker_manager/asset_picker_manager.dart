@@ -32,7 +32,7 @@ class AssetPickerManager {
               selectedAssets: selectedEntities,
               maxAssets: maxCount,
               specialItemPosition: SpecialItemPosition.prepend,
-              specialItemBuilder: (context, AssetPathEntity? path, int length) {
+              specialItemBuilder: (context, path, length) {
                 if (path?.isAll != true) {
                   return null;
                 }

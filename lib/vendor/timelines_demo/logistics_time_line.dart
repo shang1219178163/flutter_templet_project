@@ -14,12 +14,18 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 
 class LogisticsTimeLine extends StatefulWidget {
-  final String? title;
 
   const LogisticsTimeLine({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _LogisticsTimeLineState createState() => _LogisticsTimeLineState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
@@ -77,7 +83,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
               child: CupertinoSegmentedControl(
                 children: map,
                 groupValue: groupValue,
-                onValueChanged: (int value) {
+                onValueChanged: (value) {
                   DLog.d(value.toString());
                   setState(() {
                     groupValue = value;
@@ -358,6 +364,12 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('groupValue', groupValue));
   }
 }
 

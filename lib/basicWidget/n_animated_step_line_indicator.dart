@@ -3,17 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class NAnimatedStepLineIndicator extends StatelessWidget {
-  final double currentIndex;
-  final int count;
-  final Duration duration;
-  final double height;
-
-  final double itemWidth;
-  final double spacing;
-
-  final Color color;
-
-  static const double _kMinHeight = 18;
 
   const NAnimatedStepLineIndicator({
     super.key,
@@ -25,6 +14,17 @@ class NAnimatedStepLineIndicator extends StatelessWidget {
     required this.spacing,
     this.color = const Color(0xFFFF1236),
   });
+  final double currentIndex;
+  final int count;
+  final Duration duration;
+  final double height;
+
+  final double itemWidth;
+  final double spacing;
+
+  final Color color;
+
+  static const double _kMinHeight = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +50,21 @@ class NAnimatedStepLineIndicator extends StatelessWidget {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('currentIndex', currentIndex));
+    properties.add(IntProperty('count', count));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('itemWidth', itemWidth));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(ColorProperty('color', color));
+  }
 }
 
 class _StepIndicatorPainter extends CustomPainter {
-  final double currentIndex;
-  final int count;
-  final double itemWidth;
-  final double spacing;
-  final Color color;
 
   _StepIndicatorPainter({
     required this.currentIndex,
@@ -66,6 +73,11 @@ class _StepIndicatorPainter extends CustomPainter {
     required this.spacing,
     required this.color,
   });
+  final double currentIndex;
+  final int count;
+  final double itemWidth;
+  final double spacing;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {

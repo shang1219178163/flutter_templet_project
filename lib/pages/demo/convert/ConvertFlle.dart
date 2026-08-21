@@ -42,6 +42,12 @@ class ConvertFlle extends StatefulWidget {
 
   @override
   State<ConvertFlle> createState() => _ConvertFlleState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
@@ -207,7 +213,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       start: canDrag.value == false
           ? null
           : buildDragBox(
-              onDropChanged: (List<File> files) async {
+              onDropChanged: (files) async {
                 // DLog.d(files);
                 this.files = files;
                 await onDragChanged();
@@ -258,7 +264,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                 SizedBox(height: 8),
                 ValueListenableBuilder(
                     valueListenable: transformController.outVN,
-                    builder: (context, value, Widget? child) {
+                    builder: (context, value, child) {
                       return Wrap(
                         spacing: 8,
                         runSpacing: 8,
@@ -303,7 +309,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
         border: Border.all(width: 2, color: Colors.blue),
       ),
       child: StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+        builder: (context, setState) {
           return DropTarget(
             onDragDone: (detail) {
               files = detail.files.map((e) => File(e.path)).toList();
@@ -445,5 +451,25 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       return;
     }
     await onCreateFile(name: model.name, content: model.contentNew ?? "");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(DiagnosticsProperty<NTransformViewController>('transformController', transformController));
+    properties.add(IterableProperty<({VoidCallback action, String name})>('actionItems', actionItems));
+    properties.add(IterableProperty<({VoidCallback action, String name})>('actionFiles', actionFiles));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('canDrag', canDrag));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progressVN', progressVN));
+    properties.add(IterableProperty<File>('files', files));
+    properties.add(IterableProperty<(String, SelectableText)>('tabItems', tabItems));
+    properties.add(IntProperty('convertTypeIndex', convertTypeIndex));
+    properties.add(IterableProperty<ConvertProtocol>('convertTypes', convertTypes));
+    properties.add(DiagnosticsProperty<ConvertProtocol>('current', current));
+    properties.add(IterableProperty<String>('productNames', productNames));
+    properties.add(StringProperty('productName', productName));
   }
 }

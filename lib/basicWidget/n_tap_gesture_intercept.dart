@@ -38,4 +38,12 @@ class NTapGestureIntercept extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<HitTestBehavior?>('behavior', behavior));
+    properties.add(DiagnosticsProperty<bool>('ignoring', ignoring));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap));
+  }
 }

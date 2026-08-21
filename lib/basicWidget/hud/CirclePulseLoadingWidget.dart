@@ -34,6 +34,17 @@ class CirclePulseLoadingWidget extends StatefulWidget {
 
   @override
   _CirclePulseLoadingWidgetState createState() => _CirclePulseLoadingWidgetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(EnumProperty<BoxShape>('itemShape', itemShape));
+    properties.add(ColorProperty('itemColor', itemColor));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(DiagnosticsProperty<Curve>('curve', curve));
+    properties.add(IntProperty('count', count));
+  }
 }
 
 class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget> with SingleTickerProviderStateMixin {
@@ -74,9 +85,9 @@ class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget> wit
 }
 
 class _CircleFlow extends FlowDelegate {
-  final double radius;
 
   _CircleFlow(this.radius);
+  final double radius;
 
   @override
   void paintChildren(FlowPaintingContext context) {
@@ -97,9 +108,9 @@ class _CircleFlow extends FlowDelegate {
 /// desc:
 ///
 class DelayTween extends Tween<double> {
-  final double delay;
 
   DelayTween({required double begin, required double end, required this.delay}) : super(begin: begin, end: end);
+  final double delay;
 
   @override
   double lerp(double t) {

@@ -88,4 +88,11 @@ class NCrossNotice extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<Widget Function(bool isExpand)>.has('childBuilder', childBuilder));
+    properties.add(DoubleProperty('arrowHeight', arrowHeight));
+  }
 }

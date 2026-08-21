@@ -15,6 +15,12 @@ class AutofillGroupDemo extends StatefulWidget {
 
   @override
   _AutofillGroupDemoState createState() => _AutofillGroupDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
@@ -90,7 +96,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
         const Text('Billing address'),
         Checkbox(
           value: isSameAddress,
-          onChanged: (bool? newValue) {
+          onChanged: (newValue) {
             if (newValue != null) {
               isSameAddress = newValue;
               setState(() {});
@@ -208,5 +214,18 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
       // ),
       enabledBorder: enabledBorderWidget,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isSameAddress', isSameAddress));
+    properties.add(DiagnosticsProperty<TextEditingController>('shippingAddress1', shippingAddress1));
+    properties.add(DiagnosticsProperty<TextEditingController>('shippingAddress2', shippingAddress2));
+    properties.add(DiagnosticsProperty<TextEditingController>('billingAddress1', billingAddress1));
+    properties.add(DiagnosticsProperty<TextEditingController>('billingAddress2', billingAddress2));
+    properties.add(DiagnosticsProperty<TextEditingController>('creditCardNumber', creditCardNumber));
+    properties.add(DiagnosticsProperty<TextEditingController>('creditCardSecurityCode', creditCardSecurityCode));
+    properties.add(DiagnosticsProperty<TextEditingController>('phoneNumber', phoneNumber));
   }
 }

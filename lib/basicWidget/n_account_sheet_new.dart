@@ -42,6 +42,18 @@ class NAccountSheetNew<E extends MapEntry<String, dynamic>> extends StatefulWidg
 
   @override
   State<NAccountSheetNew<E>> createState() => _NAccountSheetNewState<E>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NAccountSheetNewController<E>?>('controller', controller));
+    properties.add(IterableProperty<E>('items', items));
+    properties.add(DiagnosticsProperty<E>('selectedItem', selectedItem));
+    properties.add(ObjectFlagProperty<ValueChanged<E>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<String Function(E e)>.has('selecetdCb', selecetdCb));
+    properties.add(ObjectFlagProperty<String Function(E e)>.has('titleCb', titleCb));
+    properties.add(ObjectFlagProperty<String Function(E e)?>.has('subtitleCb', subtitleCb));
+  }
 }
 
 class _NAccountSheetNewState<E extends MapEntry<String, dynamic>> extends State<NAccountSheetNew<E>> {
@@ -146,6 +158,15 @@ class _NAccountSheetNewState<E extends MapEntry<String, dynamic>> extends State<
   void updateCurrent(E e) {
     current = e;
     debugPrint("current: $current");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('cacheKey', cacheKey));
+    properties.add(IterableProperty<E>('items', items));
+    properties.add(DiagnosticsProperty<E?>('current', current));
+    properties.add(StringProperty('btnTitle', btnTitle));
   }
 }
 

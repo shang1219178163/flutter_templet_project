@@ -16,6 +16,12 @@ class StackDemoOne extends StatefulWidget {
 
   @override
   _StackDemoOneState createState() => _StackDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderStateMixin {
@@ -149,7 +155,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
                       text: e.item1,
                     ))
                 .toList(),
-            onTap: (int index) async {
+            onTap: (index) async {
               debugPrint("buildTab: $index");
               _pageController.jumpToPage(index);
             }),

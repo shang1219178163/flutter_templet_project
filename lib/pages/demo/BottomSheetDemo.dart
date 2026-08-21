@@ -26,6 +26,12 @@ class BottomSheetDemo extends StatefulWidget {
 
   @override
   State<BottomSheetDemo> createState() => _BottomSheetDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMixin {
@@ -363,5 +369,15 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
         Navigator.of(context).pop();
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(IterableProperty<(String, void Function())>('items', items));
+    properties.add(DiagnosticsProperty<TextEditingController>('textController', textController));
   }
 }

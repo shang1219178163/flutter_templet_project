@@ -52,4 +52,12 @@ class NButtonFloor extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isDark', isDark));
+    properties.add(StringProperty('title', title));
+    properties.add(StringProperty('value', value));
+  }
 }

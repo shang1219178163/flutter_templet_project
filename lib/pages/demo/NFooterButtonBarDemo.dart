@@ -18,6 +18,12 @@ class NFooterButtonBarDemo extends StatefulWidget {
 
   @override
   State<NFooterButtonBarDemo> createState() => _NFooterButtonBarDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
@@ -154,5 +160,12 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
             padding: EdgeInsets.zero,
           );
         });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('enableVN', enableVN));
+    properties.add(IterableProperty<int>('items', items));
   }
 }

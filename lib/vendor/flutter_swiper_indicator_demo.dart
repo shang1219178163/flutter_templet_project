@@ -11,6 +11,12 @@ class FlutterSwiperIndicatorDemo extends StatefulWidget {
 
   @override
   _FlutterSwiperIndicatorDemoState createState() => _FlutterSwiperIndicatorDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo> {
@@ -96,5 +102,13 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
             ],
           )),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('currentIndex', currentIndex));
+    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
+    properties.add(IterableProperty<String>('items', items));
   }
 }

@@ -36,6 +36,12 @@ class DiscussListPage extends StatefulWidget {
 
   @override
   State<DiscussListPage> createState() => _DiscussListPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _DiscussListPageState extends State<DiscussListPage>
@@ -82,7 +88,7 @@ class _DiscussListPageState extends State<DiscussListPage>
   Widget buildBody() {
     return NCustomScrollView<NewsDiscussDetailModel>(
       controller: refreshController,
-      onRequest: (bool isRefresh, int page, int pageSize, pres) async {
+      onRequest: (isRefresh, page, pageSize, pres) async {
         final jsonStr = await rootBundle.loadString('assets/data/discuss.json');
         final Map<String, dynamic> json = jsonDecode(jsonStr);
         final rootModel = NewsDiscussRootModel.fromJson(json);
@@ -99,7 +105,7 @@ class _DiscussListPageState extends State<DiscussListPage>
           ],
         );
       },
-      headerBuilder: (int count) {
+      headerBuilder: (count) {
         final length = refreshController.items.length;
         return [
           NSliverPersistentHeaderBuilder(
@@ -220,5 +226,17 @@ class _DiscussListPageState extends State<DiscussListPage>
     items.insert(targetIndex, model);
     discussProvider.total += 1;
     refreshController.updateItems(items);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<NListRefreshController<NewsDiscussDetailModel>>('refreshController', refreshController));
+    properties.add(DiagnosticsProperty<NewsDiscussProvider>('discussProvider', discussProvider));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
+    properties.add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
+    properties.add(DiagnosticsProperty<bool>('isDark', isDark));
   }
 }

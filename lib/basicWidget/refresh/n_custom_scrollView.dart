@@ -86,6 +86,29 @@ class NCustomScrollView<T> extends StatefulWidget {
 
   @override
   State<NCustomScrollView<T>> createState() => _NCustomScrollViewState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NListRefreshController<T>?>('controller', controller));
+    properties.add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<bool>('notRefresh', notRefresh));
+    properties.add(DiagnosticsProperty<bool>('notLoad', notLoad));
+    properties.add(DiagnosticsProperty<Widget?>('placeholder', placeholder));
+    properties.add(DiagnosticsProperty<Decoration>('contentDecoration', contentDecoration));
+    properties.add(DiagnosticsProperty<EdgeInsets>('contentPadding', contentPadding));
+    properties.add(DiagnosticsProperty<bool>('onlyHeader', onlyHeader));
+    properties.add(IntProperty('page', page));
+    properties.add(IntProperty('pageInitial', pageInitial));
+    properties.add(IntProperty('pageSize', pageSize));
+    properties.add(IterableProperty<T>('firstPageItems', firstPageItems));
+    properties.add(ObjectFlagProperty<RequestListCallback<T>>.has('onRequest', onRequest));
+    properties.add(ObjectFlagProperty<ValueIndexedWidgetBuilder<T>>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('separatorBuilder', separatorBuilder));
+    properties.add(ObjectFlagProperty<List<Widget> Function(int count)?>.has('headerBuilder', headerBuilder));
+    properties.add(ObjectFlagProperty<List<Widget> Function(int count)?>.has('footerBuilder', footerBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(List<T> items)?>.has('builder', builder));
+  }
 }
 
 class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
@@ -142,6 +165,9 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   Widget build(BuildContext context) {
     super.build(context);
     if (items.isEmpty && !widget.onlyHeader) {
+      if (firstLoad) {
+        return const SizedBox.shrink();
+      }
       return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
     }
 
@@ -168,6 +194,9 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
 
   Widget buildContent() {
     if (items.isEmpty) {
+      if (firstLoad) {
+        return const SizedBox.shrink();
+      }
       return SliverToBoxAdapter(child: Center(child: widget.placeholder));
     }
 

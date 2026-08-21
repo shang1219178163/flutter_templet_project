@@ -100,7 +100,7 @@ Future<void> main() async {
   // HttpOverrides.global = httpProxy;
 
   if (kReleaseMode) {
-    debugPrint = (String? message, {int? wrapWidth}) {
+    debugPrint = (message, {wrapWidth}) {
       // empty debugPrint implementation in the release mode
     };
   }

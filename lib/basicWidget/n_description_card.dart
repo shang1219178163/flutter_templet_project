@@ -51,6 +51,14 @@ class NDescriptionCard extends StatefulWidget {
 
   @override
   State<NDescriptionCard> createState() => _NDescriptionCardState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('comparedTo', comparedTo));
+    properties.add(IterableProperty<NDescriptionItem>('items', items));
+    properties.add(EnumProperty<NDescriptionLanguage>('initialLanguage', initialLanguage));
+  }
 }
 
 class _NDescriptionCardState extends State<NDescriptionCard> {
@@ -270,5 +278,13 @@ class _NDescriptionRow extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('index', index));
+    properties.add(StringProperty('text', text));
+    properties.add(DiagnosticsProperty<bool>('compact', compact));
   }
 }

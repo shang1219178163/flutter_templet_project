@@ -79,6 +79,13 @@ class AiChatMessageBubble extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AiChatMessage>('message', message));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onResend', onResend));
+  }
 }
 
 /// 助手尚未产出文本时的跳动三点
@@ -89,6 +96,12 @@ class _TypingDots extends StatefulWidget {
 
   @override
   State<_TypingDots> createState() => _TypingDotsState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('color', color));
+  }
 }
 
 class _TypingDotsState extends State<_TypingDots> with SingleTickerProviderStateMixin {

@@ -27,6 +27,12 @@ class AudioPlayPage extends StatefulWidget {
 
   @override
   State<AudioPlayPage> createState() => _AudioPlayPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _AudioPlayPageState extends State<AudioPlayPage> {
@@ -91,6 +97,16 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(StringProperty('url', url));
+    properties.add(StringProperty('title', title));
+    properties.add(StringProperty('desc', desc));
+    properties.add(IntProperty('timeLong', timeLong));
   }
 }
 
@@ -188,5 +204,14 @@ class MediaRecordCard extends StatelessWidget {
         height: 32,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('timeLong', timeLong));
+    properties.add(StringProperty('desc', desc));
+    properties.add(DiagnosticsProperty<bool>('isVideo', isVideo));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPlay', onPlay));
   }
 }

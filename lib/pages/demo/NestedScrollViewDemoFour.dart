@@ -32,6 +32,12 @@ class NestedScrollViewDemoFour extends StatefulWidget {
 
   @override
   State<NestedScrollViewDemoFour> createState() => _NestedScrollViewDemoFourState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> with SingleTickerProviderStateMixin {
@@ -75,7 +81,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: NSearchBar(
-                  onChanged: (String v) {
+                  onChanged: (v) {
                     DLog.d("onChanged: $v");
                   },
                 ),
@@ -126,7 +132,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
           // tabbar列表
           NSliverPersistentHeaderBuilder(
             pinned: true,
-            builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+            builder: (context, shrinkOffset, overlapsContent) {
               return buildTabBar();
               return PreferredSize(
                 preferredSize: Size.fromHeight(35.0),
@@ -286,5 +292,13 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
           },
       separatorBuilder: (_, i) => Divider(height: 1),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<String>('tabItems', tabItems));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

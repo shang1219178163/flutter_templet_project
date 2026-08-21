@@ -74,6 +74,14 @@ class GoodsDetailPopup extends StatefulWidget {
 
   @override
   State<GoodsDetailPopup> createState() => _GoodsDetailPopupState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<GoodsCategoryEnum>('categoryEnum', categoryEnum));
+    properties.add(DiagnosticsProperty<ShopGoodsDetailModel>('model', model));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onEquip', onEquip));
+  }
 }
 
 class _GoodsDetailPopupState extends State<GoodsDetailPopup> {

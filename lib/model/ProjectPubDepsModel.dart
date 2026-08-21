@@ -8,20 +8,6 @@
 // flutter pub deps --json
 
 class ProjectPubDepsModel {
-  ProjectPubDepsModel({
-    this.root,
-    this.packages = const [],
-    this.sdks = const [],
-    this.executables = const [],
-  });
-
-  String? root;
-
-  List<ProjectPackageModel>? packages;
-
-  List<ProjectSdkModel>? sdks;
-
-  List<String>? executables;
 
   ProjectPubDepsModel.fromJson(Map<String, dynamic> json) {
     root = json['root'];
@@ -38,6 +24,20 @@ class ProjectPubDepsModel {
       executables = List<String>.from(json['executables'] ?? []);
     }
   }
+  ProjectPubDepsModel({
+    this.root,
+    this.packages = const [],
+    this.sdks = const [],
+    this.executables = const [],
+  });
+
+  String? root;
+
+  List<ProjectPackageModel>? packages;
+
+  List<ProjectSdkModel>? sdks;
+
+  List<String>? executables;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -55,6 +55,17 @@ class ProjectPubDepsModel {
 }
 
 class ProjectPackageModel {
+
+  ProjectPackageModel.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    version = json['version'];
+    kind = json['kind'];
+    source = json['source'];
+
+    if (json['dependencies'] != null) {
+      dependencies = List<String>.from(json['dependencies'] ?? []);
+    }
+  }
   ProjectPackageModel({
     this.name,
     this.version,
@@ -73,17 +84,6 @@ class ProjectPackageModel {
 
   List<String>? dependencies;
 
-  ProjectPackageModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    version = json['version'];
-    kind = json['kind'];
-    source = json['source'];
-
-    if (json['dependencies'] != null) {
-      dependencies = List<String>.from(json['dependencies'] ?? []);
-    }
-  }
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['name'] = name;
@@ -101,6 +101,11 @@ class ProjectPackageModel {
 }
 
 class ProjectSdkModel {
+
+  ProjectSdkModel.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    version = json['version'];
+  }
   ProjectSdkModel({
     this.name,
     this.version,
@@ -109,11 +114,6 @@ class ProjectSdkModel {
   String? name;
 
   String? version;
-
-  ProjectSdkModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    version = json['version'];
-  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

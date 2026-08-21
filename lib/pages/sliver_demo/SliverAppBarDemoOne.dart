@@ -10,12 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SliverAppBarDemoOne extends StatefulWidget {
-  final String? title;
 
   const SliverAppBarDemoOne({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SliverAppBarDemoOneState createState() => _SliverAppBarDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTickerProviderStateMixin {
@@ -54,7 +60,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
       length: items.length, // This is the number of tabs.
       child: NestedScrollView(
         controller: scrollControllerNew,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
           // These are the slivers that show up in the "outer" scroll view.
           return <Widget>[
             SliverOverlapAbsorber(
@@ -122,7 +128,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
                   ),
                 ),
                 bottom: TabBar(
-                  tabs: items.map((String name) => Tab(text: name)).toList(),
+                  tabs: items.map((name) => Tab(text: name)).toList(),
                   controller: tabController,
                   isScrollable: true,
                   indicatorColor: Colors.white,
@@ -146,13 +152,13 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
     return TabBarView(
       controller: tabController,
       // These are the contents of the tab views, below the tabs.
-      children: items.map((String name) {
+      children: items.map((name) {
         //SafeArea 适配刘海屏的一个widget
         return SafeArea(
           top: false,
           bottom: false,
           child: Builder(
-            builder: (BuildContext context) {
+            builder: (context) {
               return CustomScrollView(
                 key: PageStorageKey<String>(name),
                 slivers: <Widget>[
@@ -164,7 +170,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
                     sliver: SliverFixedExtentList(
                       itemExtent: 50.0, //item高度或宽度，取决于滑动方向
                       delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
+                        (context, index) {
                           return ListTile(
                             title: Text('Item $index, tab${tabController.index}'),
                           );
@@ -219,5 +225,14 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollControllerNew', scrollControllerNew));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('scrollY', scrollY));
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

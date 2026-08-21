@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 
 class AnchoredOverlay extends StatelessWidget {
-  final bool showOverlay;
-  final Widget Function(BuildContext, Offset anchor) overlayBuilder;
-  final Widget child;
 
   AnchoredOverlay({
     super.key,
@@ -13,14 +10,17 @@ class AnchoredOverlay extends StatelessWidget {
     required this.overlayBuilder,
     required this.child,
   });
+  final bool showOverlay;
+  final Widget Function(BuildContext, Offset anchor) overlayBuilder;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         return OverlayBuilder(
           showOverlay: showOverlay,
-          overlayBuilder: (BuildContext overlayContext) {
+          overlayBuilder: (overlayContext) {
             var box = context.findRenderObject() as RenderBox?;
             var center = box?.size.center(box.localToGlobal(const Offset(0.0, 0.0)));
             center ??= Offset(0.0, 0.0);
@@ -31,12 +31,16 @@ class AnchoredOverlay extends StatelessWidget {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('showOverlay', showOverlay));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext p1, Offset anchor)>.has('overlayBuilder', overlayBuilder));
+  }
 }
 
 class OverlayBuilder extends StatefulWidget {
-  final bool showOverlay;
-  final WidgetBuilder overlayBuilder;
-  final Widget child;
 
   OverlayBuilder({
     super.key,
@@ -44,9 +48,19 @@ class OverlayBuilder extends StatefulWidget {
     required this.overlayBuilder,
     required this.child,
   });
+  final bool showOverlay;
+  final WidgetBuilder overlayBuilder;
+  final Widget child;
 
   @override
   _OverlayBuilderState createState() => _OverlayBuilderState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('showOverlay', showOverlay));
+    properties.add(ObjectFlagProperty<WidgetBuilder>.has('overlayBuilder', overlayBuilder));
+  }
 }
 
 class _OverlayBuilderState extends State<OverlayBuilder> {
@@ -109,17 +123,24 @@ class _OverlayBuilderState extends State<OverlayBuilder> {
   Widget build(BuildContext context) {
     return widget.child;
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<OverlayEntry?>('overlayEntry', overlayEntry));
+    properties.add(DiagnosticsProperty<bool>('isShowingOverlay', isShowingOverlay));
+  }
 }
 
 class CenterAbout extends StatelessWidget {
-  final Offset position;
-  final Widget child;
 
   CenterAbout({
     super.key,
     required this.position,
     required this.child,
   });
+  final Offset position;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -131,5 +152,11 @@ class CenterAbout extends StatelessWidget {
         child: child,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Offset>('position', position));
   }
 }

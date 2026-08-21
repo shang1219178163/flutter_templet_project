@@ -33,6 +33,14 @@ class NNetworkOnLine extends StatefulWidget {
 
   @override
   State<NNetworkOnLine> createState() => NNetworkOnLineState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>?>('onLine', onLine));
+    properties.add(ObjectFlagProperty<TransitionBuilder>.has('builder', builder));
+    properties.add(ObjectFlagProperty<TransitionBuilder>.has('offlineBuilder', offlineBuilder));
+  }
 }
 
 class NNetworkOnLineState extends State<NNetworkOnLine> {

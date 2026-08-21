@@ -50,6 +50,21 @@ class NTextfieldBar extends StatefulWidget {
 
   @override
   State<NTextfieldBar> createState() => _NTextfieldBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
+    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
+    properties.add(StringProperty('hintText', hintText));
+    properties.add(IntProperty('maxLines', maxLines));
+    properties.add(IntProperty('maxLength', maxLength));
+    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
+    properties.add(ObjectFlagProperty<TextField Function(TextField v)?>.has('textFieldBuilder', textFieldBuilder));
+    properties.add(ObjectFlagProperty<TapRegionCallback?>.has('onTapOutside', onTapOutside));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onConfirm', onConfirm));
+  }
 }
 
 class _NTextfieldBarState extends State<NTextfieldBar> with KeyboardHeightChangedMixin<NTextfieldBar> {

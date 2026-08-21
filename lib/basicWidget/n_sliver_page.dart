@@ -27,6 +27,16 @@ class NSliverPage extends StatefulWidget {
 
   @override
   State<NSliverPage> createState() => _NSliverPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController));
+    properties.add(DoubleProperty('collapsedHeight', collapsedHeight));
+    properties.add(DoubleProperty('expandedHeight', expandedHeight));
+    properties.add(DoubleProperty('tabBarHeight', tabBarHeight));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, TabBar tab)?>.has('tabBuilder', tabBuilder));
+  }
 }
 
 class _NSliverPageState extends State<NSliverPage> with SingleTickerProviderStateMixin {
@@ -99,5 +109,14 @@ class _NSliverPageState extends State<NSliverPage> with SingleTickerProviderStat
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('opacity', opacity));
   }
 }

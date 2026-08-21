@@ -52,6 +52,13 @@ class NavigationCard extends StatelessWidget with NavigateMixin {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('margin', margin));
+    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
+  }
 }
 
 class TitleAppBar extends AppBar {

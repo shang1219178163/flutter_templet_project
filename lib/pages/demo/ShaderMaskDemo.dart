@@ -18,6 +18,12 @@ class ShaderMaskDemo extends StatefulWidget {
 
   @override
   State<ShaderMaskDemo> createState() => _ShaderMaskDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ShaderMaskDemoState extends State<ShaderMaskDemo> {
@@ -58,7 +64,7 @@ class _ShaderMaskDemoState extends State<ShaderMaskDemo> {
 
   Widget buildShaderMask() {
     return ShaderMask(
-      shaderCallback: (Rect bounds) {
+      shaderCallback: (bounds) {
         return RadialGradient(
           center: Alignment.topLeft,
           radius: 1.0,
@@ -79,7 +85,7 @@ class _ShaderMaskDemoState extends State<ShaderMaskDemo> {
   Widget buildExample({BlendMode blendMode = BlendMode.modulate}) {
     return ShaderMask(
       blendMode: blendMode,
-      shaderCallback: (Rect bounds) {
+      shaderCallback: (bounds) {
         return LinearGradient(
           colors: [Colors.purple, Colors.blue],
           begin: Alignment.topLeft,
@@ -102,5 +108,11 @@ class _ShaderMaskDemoState extends State<ShaderMaskDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

@@ -20,6 +20,12 @@ class GameMatchPage extends StatefulWidget {
 
   @override
   State<GameMatchPage> createState() => _GameMatchPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _GameMatchPageState extends State<GameMatchPage> {
@@ -72,6 +78,15 @@ class _GameMatchPageState extends State<GameMatchPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }
 
@@ -144,14 +159,14 @@ class TournamentView extends StatelessWidget {
 
 /// 单场比赛卡片
 class MatchCard extends StatelessWidget {
-  final Map<String, dynamic> team1;
-  final Map<String, dynamic> team2;
 
   const MatchCard({
     super.key,
     required this.team1,
     required this.team2,
   });
+  final Map<String, dynamic> team1;
+  final Map<String, dynamic> team2;
 
   @override
   Widget build(BuildContext context) {
@@ -190,6 +205,13 @@ class MatchCard extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('team1', team1));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('team2', team2));
   }
 }
 
@@ -294,17 +316,24 @@ class BracketHorLinePainter extends CustomPainter {
 }
 
 class NetworkImageWithText extends StatefulWidget {
-  final String imageUrl;
-  final String text;
 
   const NetworkImageWithText({
     super.key,
     required this.imageUrl,
     required this.text,
   });
+  final String imageUrl;
+  final String text;
 
   @override
   State<NetworkImageWithText> createState() => _NetworkImageWithTextState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('imageUrl', imageUrl));
+    properties.add(StringProperty('text', text));
+  }
 }
 
 class _NetworkImageWithTextState extends State<NetworkImageWithText> {
@@ -352,10 +381,10 @@ class _NetworkImageWithTextState extends State<NetworkImageWithText> {
 }
 
 class _ImageTextPainter extends CustomPainter {
-  final ui.Image? image;
-  final String text;
 
   _ImageTextPainter(this.image, this.text);
+  final ui.Image? image;
+  final String text;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -426,6 +455,15 @@ class GameMatchItem extends StatefulWidget {
 
   @override
   State<GameMatchItem> createState() => _GameMatchItemState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('imageUrl', imageUrl));
+    properties.add(StringProperty('text', text));
+    properties.add(StringProperty('imageUrlRight', imageUrlRight));
+    properties.add(StringProperty('textRight', textRight));
+  }
 }
 
 class _GameMatchItemState extends State<GameMatchItem> {

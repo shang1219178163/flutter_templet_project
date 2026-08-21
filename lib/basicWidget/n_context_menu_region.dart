@@ -23,6 +23,12 @@ class NContextMenuRegion extends StatefulWidget {
 
   @override
   State<NContextMenuRegion> createState() => _NContextMenuRegionState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<WidgetOffsetBuilder>.has('contextMenuBuilder', contextMenuBuilder));
+  }
 }
 
 class _NContextMenuRegionState extends State<NContextMenuRegion> {

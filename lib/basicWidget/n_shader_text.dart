@@ -29,7 +29,7 @@ class NShaderText extends StatelessWidget {
     }
 
     return ShaderMask(
-      shaderCallback: (Rect bounds) {
+      shaderCallback: (bounds) {
         return LinearGradient(
           colors: colors,
           begin: Alignment.topCenter,
@@ -40,5 +40,12 @@ class NShaderText extends StatelessWidget {
       blendMode: BlendMode.srcATop,
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hasShader', hasShader));
+    properties.add(IterableProperty<Color>('colors', colors));
   }
 }

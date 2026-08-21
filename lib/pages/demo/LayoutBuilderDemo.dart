@@ -19,6 +19,12 @@ class LayoutBuilderDemo extends StatefulWidget {
 
   @override
   _LayoutBuilderDemoState createState() => _LayoutBuilderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {

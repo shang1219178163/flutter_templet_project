@@ -14,12 +14,18 @@ import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class TextFieldDemoOne extends StatefulWidget {
-  final String? title;
 
   const TextFieldDemoOne({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TextFieldDemoOneState createState() => _TextFieldDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
@@ -300,6 +306,17 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('current', current));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
+    properties.add(DiagnosticsProperty<bool>('isEnable', isEnable));
+    properties.add(IterableProperty<Tuple3<String, TextInputFormatter, String>>('inputFormatters', inputFormatters));
   }
 }
 

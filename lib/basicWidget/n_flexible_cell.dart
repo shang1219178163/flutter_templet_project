@@ -68,4 +68,12 @@ class NFlexibleCell extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
+    properties.add(DiagnosticsProperty<Decoration?>('decoration', decoration));
+    properties.add(DiagnosticsProperty<BoxConstraints?>('constraints', constraints));
+  }
 }

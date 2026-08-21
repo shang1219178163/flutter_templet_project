@@ -84,4 +84,21 @@ class NPair<T> extends StatelessWidget {
       children: children,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<T?>('data', data));
+    properties.add(DiagnosticsProperty<bool>('isReverse', isReverse));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(EnumProperty<Axis>('direction', direction));
+    properties.add(EnumProperty<MainAxisAlignment>('mainAxisAlignment', mainAxisAlignment));
+    properties.add(EnumProperty<MainAxisSize>('mainAxisSize', mainAxisSize));
+    properties.add(EnumProperty<CrossAxisAlignment>('crossAxisAlignment', crossAxisAlignment));
+    properties.add(EnumProperty<TextDirection?>('textDirection', textDirection));
+    properties.add(EnumProperty<VerticalDirection>('verticalDirection', verticalDirection));
+    properties.add(EnumProperty<TextBaseline?>('textBaseline', textBaseline));
+    properties.add(EnumProperty<Clip>('clipBehavior', clipBehavior));
+    properties.add(DiagnosticsProperty<bool>('flexibleChild', flexibleChild));
+  }
 }

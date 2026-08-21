@@ -129,7 +129,7 @@ class ListModel<E> {
     if (removedItem != null) {
       animatedList?.removeItem(
         index,
-        (BuildContext context, Animation<double> animation) {
+        (context, animation) {
           return removedItemBuilder(removedItem, context, animation);
         },
       );
@@ -185,5 +185,14 @@ class CardItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Animation<double>>('animation', animation));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
+    properties.add(IntProperty('item', item));
+    properties.add(DiagnosticsProperty<bool>('selected', selected));
   }
 }

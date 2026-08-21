@@ -17,6 +17,12 @@ class KeyDemo extends StatefulWidget {
 
   @override
   _KeyDemoState createState() => _KeyDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _KeyDemoState extends State<KeyDemo> {
@@ -75,6 +81,12 @@ class _KeyDemoState extends State<KeyDemo> {
   switchWidget() {
     items.insert(0, items.removeAt(1));
     setState(() {});
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }
 

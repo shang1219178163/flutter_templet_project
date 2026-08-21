@@ -56,6 +56,22 @@ class NFilterSection<T> extends StatefulWidget {
 
   @override
   State<NFilterSection<T>> createState() => _NFilterSectionState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<bool>('isSingle', isSingle));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(IntProperty('collapseCount', collapseCount));
+    properties.add(IterableProperty<T>('items', items));
+    properties.add(ObjectFlagProperty<String Function(T p1)>.has('cbID', cbID));
+    properties.add(ObjectFlagProperty<String Function(T p1)>.has('cbName', cbName));
+    properties.add(ObjectFlagProperty<bool Function(T p1)>.has('cbSelected', cbSelected));
+    properties.add(ObjectFlagProperty<Widget? Function(T e, bool isSelected)?>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<ValueChanged<T?>?>.has('onSingleChanged', onSingleChanged));
+    properties.add(ObjectFlagProperty<ValueChanged<List<T>>?>.has('onChanged', onChanged));
+  }
 }
 
 class _NFilterSectionState<T> extends State<NFilterSection<T>> {
@@ -201,5 +217,11 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
   }
 }

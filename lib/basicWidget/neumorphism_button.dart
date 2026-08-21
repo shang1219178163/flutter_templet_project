@@ -66,4 +66,14 @@ class NeumorphismButton extends StatelessWidget {
           bottomShadowColor: const Color(0xFFA3B1C6), borderRadius: borderRadius, topShadowColor: Colors.white),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('padding', padding));
+    properties.add(DoubleProperty('borderRadius', borderRadius));
+    properties.add(ObjectFlagProperty<GestureTapCallback?>.has('onClick', onClick));
+  }
 }

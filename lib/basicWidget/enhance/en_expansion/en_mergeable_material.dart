@@ -70,6 +70,10 @@ class EnMergeableMaterial extends StatefulWidget {
     super.debugFillProperties(properties);
     properties.add(EnumProperty<Axis>('mainAxis', mainAxis));
     properties.add(DoubleProperty('elevation', elevation));
+    properties.add(IterableProperty<MergeableMaterialItem>('children', children));
+    properties.add(DiagnosticsProperty<Radius?>('radius', radius));
+    properties.add(DiagnosticsProperty<bool>('hasDividers', hasDividers));
+    properties.add(ColorProperty('dividerColor', dividerColor));
   }
 
   @override
@@ -240,12 +244,12 @@ class _EnMergeableMaterialState extends State<EnMergeableMaterial> with TickerPr
 
     final oldKeys = oldWidget.children
         .map<LocalKey>(
-          (MergeableMaterialItem child) => child.key,
+          (child) => child.key,
         )
         .toSet();
     final newKeys = widget.children
         .map<LocalKey>(
-          (MergeableMaterialItem child) => child.key,
+          (child) => child.key,
         )
         .toSet();
     final newOnly = newKeys.difference(oldKeys);
@@ -634,6 +638,13 @@ class _CustomMergeableMaterialListBody extends ListBody {
       ..axisDirection = _getDirection(context)
       ..elevation = elevation;
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<MergeableMaterialItem>('items', items));
+    properties.add(DoubleProperty('elevation', elevation));
+  }
 }
 
 class _RenderCustomMergeableMaterialListBody extends RenderListBody {
@@ -678,5 +689,11 @@ class _RenderCustomMergeableMaterialListBody extends RenderListBody {
       index += 1;
     }
     defaultPaint(context, offset);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('elevation', elevation));
   }
 }

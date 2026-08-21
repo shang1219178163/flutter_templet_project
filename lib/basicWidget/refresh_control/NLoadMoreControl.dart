@@ -47,6 +47,15 @@ class NLoadMoreControl extends StatefulWidget {
 
   @override
   State<NLoadMoreControl> createState() => _NLoadMoreControlState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NLoadMoreController?>('controller', controller));
+    properties.add(ObjectFlagProperty<Future<void> Function()>.has('onLoad', onLoad));
+    properties.add(DoubleProperty('triggerDistance', triggerDistance));
+    properties.add(ObjectFlagProperty<LoadMoreBuilder?>.has('builder', builder));
+  }
 }
 
 class _NLoadMoreControlState extends State<NLoadMoreControl> {

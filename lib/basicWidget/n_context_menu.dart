@@ -22,7 +22,7 @@ class NContextMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NContextMenuRegion(
-      contextMenuBuilder: (BuildContext context, Offset offset) {
+      contextMenuBuilder: (context, offset) {
         return AdaptiveTextSelectionToolbar.buttonItems(
             anchors: TextSelectionToolbarAnchors(
               primaryAnchor: offset,
@@ -39,5 +39,12 @@ class NContextMenu extends StatelessWidget {
       },
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onItem', onItem));
   }
 }

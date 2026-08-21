@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class OverlayToast {
-  static final OverlayToast _instance = OverlayToast._();
   OverlayToast._();
   factory OverlayToast() => _instance;
+  static final OverlayToast _instance = OverlayToast._();
   static OverlayToast get instance => _instance;
 
   OverlayEntry? _entry;
@@ -66,6 +66,16 @@ class _AnimatedOverlay extends StatefulWidget {
 
   @override
   State<_AnimatedOverlay> createState() => _AnimatedOverlayState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Duration>('showDuration', showDuration));
+    properties.add(DiagnosticsProperty<Duration>('fadeDuration', fadeDuration));
+    properties.add(ObjectFlagProperty<ValueChanged<AnimationController>>.has('onInit', onInit));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onDispose', onDispose));
+    properties.add(DiagnosticsProperty<Tween<Offset>?>('offset', offset));
+  }
 }
 
 class _AnimatedOverlayState extends State<_AnimatedOverlay> with SingleTickerProviderStateMixin {

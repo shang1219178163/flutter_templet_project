@@ -14,6 +14,12 @@ class RedPacketRain extends StatefulWidget {
 
   @override
   State<RedPacketRain> createState() => _RedPacketRainState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<void Function(RedPacketModel model, Offset global)>.has('onSelected', onSelected));
+  }
 }
 
 class _RedPacketRainState extends State<RedPacketRain> {

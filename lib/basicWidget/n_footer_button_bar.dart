@@ -161,4 +161,26 @@ class NFooterButtonBar extends StatelessWidget {
       children: children,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('primary', primary));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
+    properties.add(DiagnosticsProperty<BoxDecoration?>('decoration', decoration));
+    properties.add(StringProperty('cancelTitle', cancelTitle));
+    properties.add(StringProperty('confirmTitle', confirmTitle));
+    properties.add(DoubleProperty('gap', gap));
+    properties.add(DiagnosticsProperty<BorderRadius?>('btnBorderRadius', btnBorderRadius));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onCancelTitle', onCancelTitle));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onConfirmTitle', onConfirmTitle));
+    properties.add(DiagnosticsProperty<Gradient?>('gradient', gradient));
+    properties.add(IterableProperty<BoxShadow>('boxShadow', boxShadow));
+    properties.add(DiagnosticsProperty<bool>('hideCancel', hideCancel));
+    properties.add(DiagnosticsProperty<bool>('hideConfirm', hideConfirm));
+    properties.add(DiagnosticsProperty<bool>('isReverse', isReverse));
+    properties.add(DiagnosticsProperty<bool>('enable', enable));
+  }
 }

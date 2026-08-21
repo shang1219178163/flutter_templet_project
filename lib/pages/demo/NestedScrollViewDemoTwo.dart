@@ -19,6 +19,12 @@ class NestedScrollViewDemoTwo extends StatefulWidget {
 
   @override
   _NestedScrollViewDemoTwoState createState() => _NestedScrollViewDemoTwoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with SingleTickerProviderStateMixin {
@@ -94,7 +100,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
   }) {
     return NestedScrollView(
       controller: scrollController,
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
         return <Widget>[
           buildSliverOverlapAbsorber(
             context: context,
@@ -109,7 +115,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
         children: items.map((e) {
           return SafeArea(
             child: Builder(
-              builder: (BuildContext context) {
+              builder: (context) {
                 return CustomScrollView(
                   slivers: <Widget>[
                     SliverFillRemaining(
@@ -217,7 +223,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
           .map((e) => Tab(
                 child: ValueListenableBuilder<int>(
                     valueListenable: indexVN,
-                    builder: (BuildContext context, int value, Widget? child) {
+                    builder: (context, value, child) {
                       final index = items.indexOf(e);
                       if (index != 1) {
                         if (index == 2) {
@@ -333,7 +339,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     return ListView.builder(
         // controller: _scrollController,
         itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           final color = items[index];
           return ListTile(
             leading: Icon(
@@ -343,5 +349,15 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
             title: Text("$index"),
           );
         });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('flagVN', flagVN));
   }
 }

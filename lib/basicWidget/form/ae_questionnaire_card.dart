@@ -110,4 +110,11 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<ChooseItemRecord<T>>('items', items));
+    properties.add(ObjectFlagProperty<ValueChanged<ChooseItemRecord<T>>?>.has('onTap', onTap));
+  }
 }

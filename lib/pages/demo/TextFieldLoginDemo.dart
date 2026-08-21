@@ -12,6 +12,12 @@ class TextFieldLoginDemo extends StatefulWidget {
 
   @override
   _TextFieldLoginDemoState createState() => _TextFieldLoginDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
@@ -126,6 +132,16 @@ class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
   checkLoginEnable() {
     loginEnable.value = loginId.isNotEmpty && password.isNotEmpty;
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(ColorProperty('primaryColor', primaryColor));
+    properties.add(StringProperty('loginId', loginId));
+    properties.add(StringProperty('password', password));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('loginEnable', loginEnable));
+  }
 }
 
 ///登录输入框，自定义widget
@@ -170,6 +186,24 @@ class LoginInput extends StatefulWidget {
 
   @override
   _LoginInputState createState() => _LoginInputState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
+    properties.add(StringProperty('value', value));
+    properties.add(StringProperty('image', image));
+    properties.add(StringProperty('hint', hint));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onChanged', onChanged));
+    properties.add(DiagnosticsProperty<bool>('isPwd', isPwd));
+    properties.add(DiagnosticsProperty<bool>('isFocusClear', isFocusClear));
+    properties.add(DiagnosticsProperty<bool>('showEyeIcon', showEyeIcon));
+    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
+    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
+    properties.add(ColorProperty('fillColor', fillColor));
+    properties.add(ColorProperty('focusColor', focusColor));
+    properties.add(DoubleProperty('radius', radius));
+  }
 }
 
 class _LoginInputState extends State<LoginInput> {
@@ -376,5 +410,13 @@ class _LoginInputState extends State<LoginInput> {
   onClear() {
     _textEditingController.clear();
     widget.onChanged?.call("");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('primaryColor', primaryColor));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('hasFocusVN', hasFocusVN));
+    properties.add(DiagnosticsProperty<bool>('isCloseEye', isCloseEye));
   }
 }

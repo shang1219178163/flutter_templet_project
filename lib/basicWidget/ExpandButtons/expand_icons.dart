@@ -8,6 +8,13 @@ class ExpandIcons extends StatefulWidget {
 
   @override
   State createState() => ExpandIconsState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<IconData>('items', items));
+    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onItem', onItem));
+  }
 }
 
 class ExpandIconsState extends State<ExpandIcons>
@@ -27,7 +34,7 @@ class ExpandIconsState extends State<ExpandIcons>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: List.generate(widget.items.length, (int index) {
+      children: List.generate(widget.items.length, (index) {
         return _buildChild(index);
       }).toList()
         ..add(

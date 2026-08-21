@@ -23,6 +23,12 @@ class JPushInfoPage extends StatefulWidget {
 
   @override
   _JPushInfoPageState createState() => _JPushInfoPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixin {
@@ -220,5 +226,13 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
       _printIsarLink(text);
       CacheService().updateLogs(value: "$runtimeType $text");
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('jpushStatusInfoVN', jpushStatusInfoVN));
+    properties.add(IterableProperty<({VoidCallback action, String title})>('records', records));
   }
 }

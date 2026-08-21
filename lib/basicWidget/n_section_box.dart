@@ -76,4 +76,18 @@ class NSectionBox extends StatelessWidget {
       child: content,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
+    properties.add(EnumProperty<MainAxisAlignment>('mainAxisAlignment', mainAxisAlignment));
+    properties.add(EnumProperty<MainAxisSize>('mainAxisSize', mainAxisSize));
+    properties.add(EnumProperty<CrossAxisAlignment>('crossAxisAlignment', crossAxisAlignment));
+    properties.add(DiagnosticsProperty<bool>('hide', hide));
+    properties.add(DiagnosticsProperty<Decoration?>('decoration', decoration));
+  }
 }

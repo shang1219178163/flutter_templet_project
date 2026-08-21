@@ -3,12 +3,18 @@ import 'package:flutter_templet_project/basicWidget/custom_swiper.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class CustomSwipperDemo extends StatefulWidget {
-  final String? title;
 
   const CustomSwipperDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _CustomSwipperDemoState createState() => _CustomSwipperDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
@@ -30,12 +36,18 @@ class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
   Widget buildCustomeBanner() {
     return CustomSwipper(
       images: images,
-      onTap: (int index) {
+      onTap: (index) {
         debugPrint('CustomBanner 当前 page 为 $index');
       },
       // itemBuilder: (BuildContext context, int index) {
       //
       // },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('images', images));
   }
 }

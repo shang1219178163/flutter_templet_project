@@ -81,4 +81,15 @@ class NAnimatedFinger extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('scale', scale));
+    properties.add(DoubleProperty('offset', offset));
+    properties.add(DoubleProperty('offsetX', offsetX));
+    properties.add(DiagnosticsProperty<bool>('isShow', isShow));
+    properties.add(DoubleProperty('handsX', handsX));
+    properties.add(DoubleProperty('handsY', handsY));
+  }
 }

@@ -15,6 +15,12 @@ class MergeableMaterialDemo extends StatefulWidget {
 
   @override
   _MergeableMaterialDemoState createState() => _MergeableMaterialDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
@@ -105,5 +111,13 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
             duration: Duration(microseconds: 6),
           )
         ]));
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<MergeableMaterialItem>('items', items));
+    properties.add(DiagnosticsProperty<bool>('currIndex', currIndex));
+    properties.add(IntProperty('currIndexNum', currIndexNum));
   }
 }

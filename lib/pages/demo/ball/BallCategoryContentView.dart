@@ -10,12 +10,18 @@ import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class BallCategoryContentView extends StatefulWidget {
-  final List<CategoryItem> leftNavItems;
 
   const BallCategoryContentView({super.key, required this.leftNavItems});
+  final List<CategoryItem> leftNavItems;
 
   @override
   State<BallCategoryContentView> createState() => _BallCategoryContentViewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<CategoryItem>('leftNavItems', leftNavItems));
+  }
 }
 
 class _BallCategoryContentViewState extends State<BallCategoryContentView> {
@@ -280,5 +286,11 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
         }),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
   }
 }

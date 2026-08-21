@@ -38,6 +38,17 @@ class NCrossFade extends StatefulWidget {
 
   @override
   State<NCrossFade> createState() => _NCrossFadeState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)>.has('firstChild', firstChild));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)>.has('secondChild', secondChild));
+    properties.add(DiagnosticsProperty<AlignmentGeometry>('alignment', alignment));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(DiagnosticsProperty<bool>('isFirst', isFirst));
+    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onChanged', onChanged));
+  }
 }
 
 class _NCrossFadeState extends State<NCrossFade> {
@@ -71,5 +82,11 @@ class _NCrossFadeState extends State<NCrossFade> {
     isFirst = !isFirst;
     widget.onChanged?.call(isFirst);
     setState(() {});
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isFirst', isFirst));
   }
 }

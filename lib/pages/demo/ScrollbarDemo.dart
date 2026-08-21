@@ -7,6 +7,12 @@ class ScrollbarDemo extends StatefulWidget {
 
   @override
   _ScrollbarDemoState createState() => _ScrollbarDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ScrollbarDemoState extends State<ScrollbarDemo> {
@@ -96,5 +102,12 @@ class _ScrollbarDemoState extends State<ScrollbarDemo> {
       },
       itemCount: 30,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollControllerHeader', scrollControllerHeader));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

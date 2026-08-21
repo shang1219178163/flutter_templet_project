@@ -44,6 +44,19 @@ class NFloatingButton extends StatefulWidget {
 
   @override
   _NFloatingButtonState createState() => _NFloatingButtonState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AlignmentGeometry>('alignment', alignment));
+    properties.add(EnumProperty<TextDirection?>('textDirection', textDirection));
+    properties.add(EnumProperty<StackFit>('fit', fit));
+    properties.add(EnumProperty<Clip>('clipBehavior', clipBehavior));
+    properties.add(DiagnosticsProperty<Size>('childSize', childSize));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(DiagnosticsProperty<bool>('attachHorizalEdge', attachHorizalEdge));
+    properties.add(DiagnosticsProperty<bool>('attachVerticalEdge', attachVerticalEdge));
+  }
 }
 
 class _NFloatingButtonState extends State<NFloatingButton> {
@@ -83,7 +96,7 @@ class _NFloatingButtonState extends State<NFloatingButton> {
                   onTap: () {
                     debugPrint("onTap");
                   },
-                  onPanUpdate: (DragUpdateDetails e) {
+                  onPanUpdate: (e) {
                     // debugPrint("e.delta:${e.delta.dx},${e.delta.dy}");
 
                     //用户手指滑动时，更新偏移，重新构建
@@ -109,7 +122,7 @@ class _NFloatingButtonState extends State<NFloatingButton> {
                     _rightVN.value = maxWidth - _leftVN.value - widget.childSize.width;
                     debugPrint("xy:${_topVN.value},${_leftVN.value},${_rightVN.value}");
                   },
-                  onPanEnd: (DragEndDetails e) {
+                  onPanEnd: (e) {
                     // debugPrint("_leftVN.value:${_leftVN.value}");
                     final midX = _leftVN.value + widget.childSize.width / 2;
                     final midY = _topVN.value + widget.childSize.height / 2;

@@ -7,9 +7,9 @@ import 'package:table_calendar/table_calendar.dart';
 
 /// Example event class.
 class Event {
-  final String title;
 
   const Event(this.title);
+  final String title;
 
   @override
   String toString() => title;

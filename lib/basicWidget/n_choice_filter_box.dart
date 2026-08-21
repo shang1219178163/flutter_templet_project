@@ -180,6 +180,21 @@ class NChoiceFilterBox extends StatefulWidget {
 
   @override
   State<NChoiceFilterBox> createState() => _NChoiceFilterBoxState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ChoiceFilterBoxController?>('controller', controller));
+    properties.add(DiagnosticsProperty<NChoiceFilterBoxModel>('model', model));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isChanged', isChanged));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onInit', onInit));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onClose', onClose));
+    properties.add(ObjectFlagProperty<ValueChanged<NChoiceFilterBoxModel>>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<ValueChanged<NChoiceFilterBoxModel>>.has('onReset', onReset));
+    properties.add(ObjectFlagProperty<ValueChanged<NChoiceFilterBoxModel>>.has('onConfirm', onConfirm));
+    properties.add(DiagnosticsProperty<Alignment>('contentAlignment', contentAlignment));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onInitState', onInitState));
+  }
 }
 
 class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerProviderStateMixin {
@@ -420,6 +435,13 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
 
   closeKeyboard() {
     FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isHighlight', isHighlight));
+    properties.add(DiagnosticsProperty<NFilterDropBoxController>('filterController', filterController));
   }
 }
 

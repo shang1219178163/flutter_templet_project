@@ -9,12 +9,12 @@
 import 'package:flutter/cupertino.dart';
 
 class ContextMenuActionDemo extends StatelessWidget {
-  final String? title;
 
   const ContextMenuActionDemo({
     Key? key,
     this.title,
   }) : super(key: key);
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -67,5 +67,11 @@ class ContextMenuActionDemo extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
   }
 }

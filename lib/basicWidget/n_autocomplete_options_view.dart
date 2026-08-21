@@ -48,16 +48,16 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 itemCount: options.length,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   final option = options.elementAt(index);
 
                   return InkWell(
                     onTap: () => onSelected(option),
                     child: itemBuilder?.call(context, index) ??
-                        Builder(builder: (BuildContext context) {
+                        Builder(builder: (context) {
                           final highlight = AutocompleteHighlightedOption.of(context) == index;
                           if (highlight) {
-                            SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
+                            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
                               Scrollable.ensureVisible(context, alignment: 0.5);
                             });
                           }
@@ -75,5 +75,15 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<AutocompleteOptionToString<T>>.has('displayStringForOption', displayStringForOption));
+    properties.add(ObjectFlagProperty<AutocompleteOnSelected<T>>.has('onSelected', onSelected));
+    properties.add(IterableProperty<T>('options', options));
+    properties.add(DoubleProperty('maxHeight', maxHeight));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('itemBuilder', itemBuilder));
   }
 }

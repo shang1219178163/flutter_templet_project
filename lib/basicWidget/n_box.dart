@@ -139,4 +139,25 @@ class NBox extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('opacity', opacity));
+    properties.add(DoubleProperty('blur', blur));
+    properties.add(DoubleProperty('bgBlur', bgBlur));
+    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
+    properties.add(DiagnosticsProperty<BoxBorder?>('border', border));
+    properties.add(StringProperty('bgUrl', bgUrl));
+    properties.add(EnumProperty<BoxFit?>('imageFit', imageFit));
+    properties.add(ColorProperty('bgColor', bgColor));
+    properties.add(DiagnosticsProperty<Gradient?>('bgGradient', bgGradient));
+    properties.add(IterableProperty<BoxShadow>('boxShadows', boxShadows));
+    properties.add(DiagnosticsProperty<ui.ImageFilter?>('foregroundFilter', foregroundFilter));
+    properties.add(DiagnosticsProperty<ui.ImageFilter?>('filter', filter));
+  }
 }

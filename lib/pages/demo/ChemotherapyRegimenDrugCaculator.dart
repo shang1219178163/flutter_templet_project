@@ -30,6 +30,12 @@ class ChemotherapyRegimenDrugCaculator extends StatefulWidget {
 
   @override
   State<ChemotherapyRegimenDrugCaculator> createState() => _ChemotherapyRegimenDrugCaculatorState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDrugCaculator> {
@@ -249,5 +255,17 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
         onConfirm: (value) {},
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('weight', weight));
+    properties.add(DoubleProperty('bsa', bsa));
+    properties.add(DiagnosticsProperty<Map<ChemotherapyRegimenTreatmentStrategyEnum, ChemotherapyRegimenTreatmentStrategy>>('strategyMap', strategyMap));
+    properties.add(EnumProperty<ChemotherapyRegimenTreatmentStrategyEnum?>('selectedStrategy', selectedStrategy));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('dosageVN', dosageVN));
   }
 }

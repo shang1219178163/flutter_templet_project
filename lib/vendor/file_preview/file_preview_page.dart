@@ -26,6 +26,13 @@ class FilePreviewPage extends StatefulWidget {
 
   @override
   _FilePreviewPageState createState() => _FilePreviewPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('path', path));
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FilePreviewPageState extends State<FilePreviewPage> {
@@ -90,5 +97,11 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
 
   onShare() async {
     SharePlus.instance.share(ShareParams(files: [XFile(widget.path)]));
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FilePreviewController>('controller', controller));
   }
 }

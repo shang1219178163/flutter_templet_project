@@ -20,6 +20,12 @@ class FilterDemoOne extends StatefulWidget {
 
   @override
   _FilterDemoOneState createState() => _FilterDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FilterDemoOneState extends State<FilterDemoOne> {
@@ -124,5 +130,12 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('imageFilteredVN', imageFilteredVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('backdropFilterVN', backdropFilterVN));
   }
 }

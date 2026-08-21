@@ -21,6 +21,12 @@ class EmailSenderDemo extends StatefulWidget {
 
   @override
   State<EmailSenderDemo> createState() => _EmailSenderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _EmailSenderDemoState extends State<EmailSenderDemo> {
@@ -93,5 +99,13 @@ class _EmailSenderDemoState extends State<EmailSenderDemo> {
     } catch (e) {
       DLog.d('邮件发送失败: $e');
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }

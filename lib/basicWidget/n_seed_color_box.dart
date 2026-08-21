@@ -19,6 +19,16 @@ class NSeedColorBox extends StatefulWidget {
 
   @override
   State<NSeedColorBox> createState() => _NSeedColorBoxState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Color>('items', items));
+    properties.add(IntProperty('index', index));
+    properties.add(EnumProperty<Brightness>('brightness', brightness));
+    properties.add(ObjectFlagProperty<ValueChanged<Color>?>.has('onColorChanged', onColorChanged));
+    properties.add(ObjectFlagProperty<ValueChanged<Brightness>?>.has('onBrightnessChanged', onBrightnessChanged));
+  }
 }
 
 class _NSeedColorBoxState extends State<NSeedColorBox> {
@@ -118,6 +128,15 @@ class _NSeedColorBoxState extends State<NSeedColorBox> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Color>('items', items));
+    properties.add(IntProperty('index', index));
+    properties.add(ColorProperty('seedColor', seedColor));
+    properties.add(EnumProperty<Brightness>('brightness', brightness));
   }
 }
 

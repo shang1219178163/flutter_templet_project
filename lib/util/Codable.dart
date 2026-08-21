@@ -17,17 +17,17 @@ abstract class Codable {
 }
 
 class XYZModel implements Codable {
+
+  XYZModel.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    name = json["name"];
+  }
   XYZModel({
     this.id,
     this.name,
   });
   String? id;
   String? name;
-
-  XYZModel.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    name = json["name"];
-  }
 
   @override
   Map<String, dynamic> toJson() {

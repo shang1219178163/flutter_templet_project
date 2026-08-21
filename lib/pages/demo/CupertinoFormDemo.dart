@@ -4,12 +4,18 @@ import 'package:flutter_templet_project/basicWidget/n_date_picker.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class CupertinoFormDemo extends StatefulWidget {
-  final String? title;
 
   const CupertinoFormDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _CupertinoFormDemoState createState() => _CupertinoFormDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
@@ -75,7 +81,7 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
                   prefix: Text('TextField'),
                   placeholder: 'Enter text',
                   textAlign: TextAlign.end,
-                  validator: (String? value) {
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a value';
                     }
@@ -95,12 +101,12 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
               ]),
               CupertinoFormSection.insetGrouped(
                 header: Text('SECTION 2'),
-                children: List<Widget>.generate(5, (int index) {
+                children: List<Widget>.generate(5, (index) {
                   return CupertinoTextFormFieldRow(
                     prefix: Text('TextField'),
                     placeholder: 'Enter text',
                     textAlign: TextAlign.end,
-                    validator: (String? value) {
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a value';
                       }
@@ -242,5 +248,12 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
             },
           );
         });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isSwitch', isSwitch));
+    properties.add(DiagnosticsProperty<DateTime?>('dateTime', dateTime));
   }
 }

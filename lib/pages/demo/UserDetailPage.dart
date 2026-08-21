@@ -33,6 +33,12 @@ class _HeadView extends StatefulWidget {
 
   @override
   State<_HeadView> createState() => _HeadViewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('height', height));
+  }
 }
 
 class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixin {
@@ -88,7 +94,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
           return value == null ? buildHeader! : child!;
         },
         child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverPersistentHeader(
                 pinned: true,
@@ -620,6 +626,15 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isCheckPrediction', isCheckPrediction));
+    properties.add(DiagnosticsProperty<ValueNotifier<double?>>('maxHeight', maxHeight));
+    properties.add(IterableProperty<String>('tabList', tabList));
+    properties.add(StringProperty('avatar', avatar));
+  }
 }
 
 class LoadingView extends StatelessWidget {
@@ -646,14 +661,15 @@ class LoadingView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isDark', isDark));
+  }
 }
 
 class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  final ValueChanged<double>? onHeightChanged;
 
   SliverAppBarDelegate({
     required this.minHeight,
@@ -661,6 +677,11 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     required this.child,
     this.onHeightChanged,
   });
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  final ValueChanged<double>? onHeightChanged;
 
   @override
   double get minExtent => minHeight;
@@ -777,6 +798,17 @@ class AvatarView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isDark', isDark));
+    properties.add(StringProperty('avatar', avatar));
+    properties.add(DiagnosticsProperty<bool>('isAnchor', isAnchor));
+    properties.add(IntProperty('level', level));
+    properties.add(DoubleProperty('avatarSize', avatarSize));
+    properties.add(DoubleProperty('levelSize', levelSize));
+  }
 }
 
 class UserHeaderWidget extends StatelessWidget {
@@ -842,5 +874,19 @@ class UserHeaderWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('anchorAvatar', anchorAvatar));
+    properties.add(StringProperty('anchorIdentify', anchorIdentify));
+    properties.add(IntProperty('actionStatus', actionStatus));
+    properties.add(DoubleProperty('widthBorder', widthBorder));
+    properties.add(DoubleProperty('widthInner', widthInner));
+    properties.add(DiagnosticsProperty<bool>('isAnchor', isAnchor));
+    properties.add(IntProperty('level', level));
+    properties.add(DoubleProperty('levelSize', levelSize));
+    properties.add(DiagnosticsProperty<bool?>('big', big));
   }
 }

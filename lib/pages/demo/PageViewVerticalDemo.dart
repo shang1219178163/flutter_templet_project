@@ -23,6 +23,12 @@ class PageViewVerticalDemo extends StatefulWidget {
 
   @override
   State<PageViewVerticalDemo> createState() => _PageViewVerticalDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _PageViewVerticalDemoState extends State<PageViewVerticalDemo> with SingleTickerProviderStateMixin {
@@ -198,5 +204,19 @@ class _PageViewVerticalDemoState extends State<PageViewVerticalDemo> with Single
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(IterableProperty<({Widget child, String name})>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
+    properties.add(DiagnosticsProperty<ValueNotifier<Axis>>('scrollDirection', scrollDirection));
+    properties.add(DiagnosticsProperty<MediaQueryData>('mq', mq));
+    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('tabIndex', tabIndex));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('segmentIndex', segmentIndex));
   }
 }

@@ -13,6 +13,12 @@ class ImageStretchDemo extends StatefulWidget {
 
   @override
   _ImageStretchDemoState createState() => _ImageStretchDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ImageStretchDemoState extends State<ImageStretchDemo> {
@@ -78,5 +84,11 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
         fontWeight: FontWeight.bold,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('message', message));
   }
 }

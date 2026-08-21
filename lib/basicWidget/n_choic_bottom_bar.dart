@@ -96,4 +96,14 @@ class NChoicBottomBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<IconData?>('checkIcon', checkIcon));
+    properties.add(StringProperty('checkDesc', checkDesc));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onCheck', onCheck));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onAdd', onAdd));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onDelete', onDelete));
+  }
 }

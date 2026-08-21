@@ -19,6 +19,12 @@ class ColorOpacityCompareDemo extends StatefulWidget {
 
   @override
   State<ColorOpacityCompareDemo> createState() => _ColorOpacityCompareDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ColorOpacityCompareDemoState extends State<ColorOpacityCompareDemo> {
@@ -276,6 +282,14 @@ class _ColorOpacityCompareDemoState extends State<ColorOpacityCompareDemo> {
     return CustomPaint(
       painter: _CheckerboardPainter(),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<MaterialColor>('colors', colors));
+    properties.add(DiagnosticsProperty<ValueNotifier<MaterialColor>>('selectedColor', selectedColor));
+    properties.add(IterableProperty<double>('alphaValues', alphaValues));
   }
 }
 

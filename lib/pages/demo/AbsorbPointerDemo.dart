@@ -136,7 +136,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
         Text('不可点击：absorbing: $_disable'),
         Switch(
           value: _disable,
-          onChanged: (bool val) {
+          onChanged: (val) {
             _disable = val;
             setState(() {});
           },
@@ -153,7 +153,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
           children: <Widget>[
             Switch(
               value: _switchValue,
-              onChanged: (bool val) {
+              onChanged: (val) {
                 _switchValue = val;
                 setState(() {});
               },
@@ -256,5 +256,12 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
     // DLog.d(msg);
     debugPrint(msg);
     desc.value = msg;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('desc', desc));
+    properties.add(StringProperty('message', message));
   }
 }

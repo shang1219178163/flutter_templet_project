@@ -49,6 +49,24 @@ class NChromeTabBar extends StatefulWidget {
 
   @override
   State<NChromeTabBar> createState() => _NChromeTabBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NChromeTabController<_NChromeTabBarState>?>('controller', controller));
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
+    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onChanged', onChanged));
+    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('itemPadding', itemPadding));
+    properties.add(ColorProperty('bgColor', bgColor));
+    properties.add(ColorProperty('selectedBgColor', selectedBgColor));
+    properties.add(DiagnosticsProperty<TextStyle?>('labelStyle', labelStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('unselectedLabelStyle', unselectedLabelStyle));
+    properties.add(EnumProperty<TabAlignment?>('tabAlignment', tabAlignment));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('itemBuilder', itemBuilder));
+  }
 }
 
 class _NChromeTabBarState extends State<NChromeTabBar> {
@@ -220,6 +238,16 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
     currIndex = i;
     widget.indexVN.value = i;
     widget.onChanged?.call(widget.indexVN.value);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('currIndex', currIndex));
+    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
+    properties.add(DiagnosticsProperty<TabBarThemeData>('tabBarTheme', tabBarTheme));
+    properties.add(DiagnosticsProperty<TextStyle>('textStyle', textStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('unselectedTextStyle', unselectedTextStyle));
   }
 }
 

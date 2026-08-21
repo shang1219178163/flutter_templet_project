@@ -13,6 +13,12 @@ class HorizalStepPage extends StatefulWidget {
 
   @override
   State<HorizalStepPage> createState() => _HorizalStepPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _HorizalStepPageState extends State<HorizalStepPage> {
@@ -47,7 +53,7 @@ class _HorizalStepPageState extends State<HorizalStepPage> {
               title: "比赛阶段",
               child: NHorizalStep(
                 items: items,
-                itemHeaderBuilder: (_, i, bool isSelected) {
+                itemHeaderBuilder: (_, i, isSelected) {
                   Color unselecedColor = Colors.grey;
                   final currColor = isSelected ? seedColor : unselecedColor;
 
@@ -63,7 +69,7 @@ class _HorizalStepPageState extends State<HorizalStepPage> {
                     ),
                   );
                 },
-                itemFooterBuilder: (_, i, bool isSelected) {
+                itemFooterBuilder: (_, i, isSelected) {
                   Color unselecedColor = Colors.grey;
                   final currColor = isSelected ? seedColor : unselecedColor;
 
@@ -104,5 +110,11 @@ class _HorizalStepPageState extends State<HorizalStepPage> {
         maxLines: 1,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

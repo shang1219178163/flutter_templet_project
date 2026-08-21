@@ -21,6 +21,12 @@ class NestedScrollViewDemoOne extends StatefulWidget {
 
   @override
   _NestedScrollViewDemoOneState createState() => _NestedScrollViewDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with SingleTickerProviderStateMixin {
@@ -100,7 +106,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
               pinned: true,
               min: min,
               max: max,
-              builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+              builder: (context, shrinkOffset, overlapsContent) {
                 final opacity = 1 - (shrinkOffset / (max - min));
 
                 return Container(
@@ -183,7 +189,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
   Widget buildPage() {
     return NestedScrollView(
       controller: _scrollController,
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
         return <Widget>[
           // buildSliverAppBar(),
           buildNSliverPersistentHeader(),
@@ -252,7 +258,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
           .map((e) => Tab(
                 child: ValueListenableBuilder<int>(
                     valueListenable: indexVN,
-                    builder: (BuildContext context, int value, Widget? child) {
+                    builder: (context, value, child) {
                       final index = items.indexOf(e);
                       if (index != 1) {
                         if (index == 2) {
@@ -306,7 +312,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
     const items = Colors.primaries;
     return ListView.builder(
         itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           final color = items[index];
           return ListTile(
             leading: Icon(
@@ -316,5 +322,14 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
             title: Text("$index"),
           );
         });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('flagVN', flagVN));
   }
 }

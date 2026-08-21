@@ -13,6 +13,12 @@ class CustomScrollBarDemo extends StatefulWidget {
 
   @override
   _CustomScrollBarDemoState createState() => _CustomScrollBarDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
@@ -126,7 +132,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
               width: constraints.maxWidth,
               height: constraints.maxHeight,
               child: NotificationListener<ScrollNotification>(
-                onNotification: (ScrollNotification n) {
+                onNotification: (n) {
                   if (n is! UserScrollNotification) {
                     isScrolling.value = n is! ScrollEndNotification;
                   }
@@ -152,7 +158,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                 bottom: 0,
                 child: ValueListenableBuilder(
                     valueListenable: isScrolling,
-                    builder: (context, bool value, child) {
+                    builder: (context, value, child) {
                       // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
                       return Offstage(
                         // offstage: !value,
@@ -278,7 +284,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
 
   /// NScrollBar
   Widget buildBottom() {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       return Row(
         children: [
           Expanded(
@@ -310,7 +316,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
           ),
           SizedBox(width: 20),
           Expanded(
-            child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+            child: LayoutBuilder(builder: (context, constraints) {
               return NScrollBar(
                 controller: scrollController2,
                 scrollDirection: Axis.horizontal,
@@ -357,5 +363,22 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
         ],
       );
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController1', scrollController1));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController2', scrollController2));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('currentIndex', currentIndex));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('scrollerOffset', scrollerOffset));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isScrolling', isScrolling));
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DoubleProperty('gap', gap));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
+    properties.add(DoubleProperty('showCount', showCount));
+    properties.add(DiagnosticsProperty<bool>('showScrollbar', showScrollbar));
   }
 }

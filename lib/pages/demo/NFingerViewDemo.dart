@@ -12,6 +12,12 @@ class NFingerViewDemo extends StatefulWidget {
 
   @override
   State<NFingerViewDemo> createState() => _NFingerViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _NFingerViewDemoState extends State<NFingerViewDemo> {
@@ -65,5 +71,14 @@ class _NFingerViewDemoState extends State<NFingerViewDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }

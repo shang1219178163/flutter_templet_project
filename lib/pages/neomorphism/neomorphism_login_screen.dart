@@ -221,4 +221,10 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
       ),
     ];
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('status', status));
+  }
 }

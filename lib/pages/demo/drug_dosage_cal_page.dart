@@ -77,6 +77,20 @@ class DrugDosageCalPage extends StatefulWidget {
 
   @override
   State<DrugDosageCalPage> createState() => _DrugDosageCalPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('height', height));
+    properties.add(StringProperty('weight', weight));
+    properties.add(IterableProperty<ChemotherapyRegimenTreatmentStrategyEnum>('drugFormulas', drugFormulas));
+    properties.add(EnumProperty<ChemotherapyRegimenTreatmentStrategyEnum?>('drugFormulaSelected', drugFormulaSelected));
+    properties.add(EnumProperty<ChemotherapyRegimenTreatmentStrategyEnum?>('drugPlanSelected', drugPlanSelected));
+    properties.add(EnumProperty<DrugUseWayEnum?>('drugUseWaySelected', drugUseWaySelected));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<ValueChanged<ChemotherapyRegimenTreatmentStrategyEnum?>>.has('onConfirm', onConfirm));
+    properties.add(ObjectFlagProperty<void Function(Map<String, dynamic> value)?>.has('onPatient', onPatient));
+  }
 }
 
 class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetStateMixin {
@@ -480,5 +494,22 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
       "height": height,
       "weight": weight,
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('height', height));
+    properties.add(StringProperty('weight', weight));
+    properties.add(IterableProperty<ChemotherapyRegimenTreatmentStrategyEnum>('drugFormulas', drugFormulas));
+    properties.add(DiagnosticsProperty<ValueNotifier<ChemotherapyRegimenTreatmentStrategyEnum?>>('drugFormulaSelectedVN', drugFormulaSelectedVN));
+    properties.add(IterableProperty<ChemotherapyRegimenTreatmentStrategyEnum>('drugPlans', drugPlans));
+    properties.add(EnumProperty<ChemotherapyRegimenTreatmentStrategyEnum?>('drugPlanSelected', drugPlanSelected));
+    properties.add(IterableProperty<DrugUseWayEnum>('drugUseWays', drugUseWays));
+    properties.add(EnumProperty<DrugUseWayEnum?>('drugUseWaySelected', drugUseWaySelected));
+    properties.add(DiagnosticsProperty<ValueNotifier<double?>>('dosageVN', dosageVN));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNodeHeight', focusNodeHeight));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNodeWeight', focusNodeWeight));
+    properties.add(DiagnosticsProperty<bool>('isRequesting', isRequesting));
   }
 }

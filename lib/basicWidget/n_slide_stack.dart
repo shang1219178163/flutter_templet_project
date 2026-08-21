@@ -17,6 +17,15 @@ class NSlideStack extends StatefulWidget {
 
   @override
   State<NSlideStack> createState() => _NSlideStackState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('fromRight', fromRight));
+    properties.add(DoubleProperty('drawerWidth', drawerWidth));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)>.has('drawerBuilder', drawerBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)>.has('childBuilder', childBuilder));
+  }
 }
 
 class _NSlideStackState extends State<NSlideStack> {
@@ -67,5 +76,11 @@ class _NSlideStackState extends State<NSlideStack> {
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('rightVN', rightVN));
   }
 }

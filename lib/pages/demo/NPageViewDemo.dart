@@ -16,6 +16,12 @@ class NPageViewDemo extends StatefulWidget {
 
   @override
   _NPageViewDemoState createState() => _NPageViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NPageViewDemoState extends State<NPageViewDemo> {
@@ -158,4 +164,15 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
       ),
     ),
   ];
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isTabBarVN', isTabBarVN));
+    properties.add(DiagnosticsProperty<bool>('isThemeBg', isThemeBg));
+    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
+    properties.add(DiagnosticsProperty<bool>('isBottom', isBottom));
+    properties.add(IterableProperty<Tuple2<String, VoidCallback>>('btns', btns));
+    properties.add(IterableProperty<(String, Widget)>('items', items));
+  }
 }

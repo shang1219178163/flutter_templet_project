@@ -9,12 +9,18 @@
 import 'package:flutter/material.dart';
 
 class TableDemo extends StatefulWidget {
-  final String? title;
 
   const TableDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TableDemoState createState() => _TableDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TableDemoState extends State<TableDemo> {

@@ -23,6 +23,12 @@ class DropBoxChoicDemo extends StatefulWidget {
 
   @override
   _DropBoxChoicDemoState createState() => _DropBoxChoicDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
@@ -132,7 +138,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             child: NSearchTextField(
               placeholder: "搜索",
               backgroundColor: AppColor.white,
-              onChanged: (String value) {
+              onChanged: (value) {
                 searchText = value;
               },
             ),
@@ -541,5 +547,31 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
   closeKeyboard() {
     FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<int>('items', items));
+    properties.add(StringProperty('searchText', searchText));
+    properties.add(DiagnosticsProperty<TextEditingController>('searchtEditingController', searchtEditingController));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('showDropBox', showDropBox));
+    properties.add(DiagnosticsProperty<NFilterDropBoxController>('dropBoxController', dropBoxController));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isFilterHighlight', isFilterHighlight));
+    properties.add(IterableProperty<FakeDataModel>('models', models));
+    properties.add(IterableProperty<FakeDataModel>('selectedModels', selectedModels));
+    properties.add(IterableProperty<FakeDataModel>('selectedModelsTmp', selectedModelsTmp));
+    properties.add(IterableProperty<TagDetailModel>('tagModels', tagModels));
+    properties.add(IterableProperty<TagDetailModel>('selectedTags', selectedTags));
+    properties.add(IterableProperty<TagDetailModel>('selectedTagsTmp', selectedTagsTmp));
+    properties.add(IterableProperty<OrderModel>('orders', orders));
+    properties.add(IterableProperty<OrderModel>('selectedOrders', selectedOrders));
+    properties.add(IterableProperty<OrderModel>('selectedOrdersTmp', selectedOrdersTmp));
+    properties.add(StringProperty('startTime', startTime));
+    properties.add(StringProperty('startTimeTmp', startTimeTmp));
+    properties.add(StringProperty('endTime', endTime));
+    properties.add(StringProperty('endTimeTmp', endTimeTmp));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('dataDesc', dataDesc));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('tagDesc', tagDesc));
   }
 }

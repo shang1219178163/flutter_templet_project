@@ -13,6 +13,12 @@ class StreamControllerDemo extends StatefulWidget {
 
   @override
   State<StreamControllerDemo> createState() => _StreamControllerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _StreamControllerDemoState extends State<StreamControllerDemo> {
@@ -101,7 +107,7 @@ class _StreamControllerDemoState extends State<StreamControllerDemo> {
               },
             ),
             buildWrap(
-              onItem: (String value) {
+              onItem: (value) {
                 streamController.add(value);
               },
             ),
@@ -115,7 +121,7 @@ class _StreamControllerDemoState extends State<StreamControllerDemo> {
     final list = List.generate(8, (i) => i);
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final spacing = 8.0;
         final rowCount = 4.0;
         final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -146,5 +152,13 @@ class _StreamControllerDemoState extends State<StreamControllerDemo> {
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<StreamController<String>>('streamController', streamController));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('valueVN', valueVN));
   }
 }

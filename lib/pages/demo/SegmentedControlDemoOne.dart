@@ -22,6 +22,12 @@ class SegmentedControlDemoOne extends StatefulWidget {
 
   @override
   State<SegmentedControlDemoOne> createState() => _SegmentedControlDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
@@ -106,7 +112,7 @@ class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
   }) {
     var current = items[0];
 
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: items.map((e) {
@@ -168,5 +174,12 @@ class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
     return NSegmentControlEmojView(
       items: items,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(IterableProperty<SegmentEmojiModel>('items', items));
   }
 }

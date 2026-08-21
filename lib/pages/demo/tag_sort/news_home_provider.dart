@@ -7,11 +7,11 @@ import 'package:flutter_templet_project/pages/demo/tag_sort/NewsCatalogModel.dar
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class NewsHomeProvider extends ChangeNotifier {
+  factory NewsHomeProvider() => _instance;
   NewsHomeProvider._() {
     // _init();
   }
   static final NewsHomeProvider _instance = NewsHomeProvider._();
-  factory NewsHomeProvider() => _instance;
   static NewsHomeProvider get instance => _instance;
 
   /// 本地固定写死

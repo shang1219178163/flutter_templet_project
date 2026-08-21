@@ -65,6 +65,22 @@ class NOrderNumUnit extends StatefulWidget {
 
   @override
   State<NOrderNumUnit> createState() => _NOrderNumUnitState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('value', value));
+    properties.add(DiagnosticsProperty<TextInputType>('keyboardType', keyboardType));
+    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
+    properties.add(StringProperty('labelText', labelText));
+    properties.add(ColorProperty('fillColor', fillColor));
+    properties.add(ColorProperty('fillColorReadOnly', fillColorReadOnly));
+    properties.add(ColorProperty('borderColor', borderColor));
+    properties.add(DoubleProperty('borderRadius', borderRadius));
+    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
+    properties.add(DiagnosticsProperty<BoxConstraints?>('suffixIconConstraints', suffixIconConstraints));
+    properties.add(StringProperty('unit', unit));
+  }
 }
 
 class _NOrderNumUnitState extends State<NOrderNumUnit> {

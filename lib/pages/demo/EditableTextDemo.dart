@@ -7,6 +7,12 @@ class EditableTextDemo extends StatefulWidget {
 
   @override
   _EditableTextDemoState createState() => _EditableTextDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _EditableTextDemoState extends State<EditableTextDemo> {

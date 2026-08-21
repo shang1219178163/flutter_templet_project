@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:tuple/tuple.dart';
 import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 /// 开发工具列表
 class DevelopToolList extends StatefulWidget {
@@ -12,6 +12,12 @@ class DevelopToolList extends StatefulWidget {
 
   @override
   _DevelopToolListState createState() => _DevelopToolListState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DevelopToolListState extends State<DevelopToolList> {
@@ -87,5 +93,11 @@ class _DevelopToolListState extends State<DevelopToolList> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, String>>('items', items));
   }
 }

@@ -14,6 +14,12 @@ class NTransformViewDemo extends StatefulWidget {
 
   @override
   State<NTransformViewDemo> createState() => _NTransformViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _NTransformViewDemoState extends State<NTransformViewDemo> {
@@ -100,5 +106,15 @@ class _NTransformViewDemoState extends State<NTransformViewDemo> {
 
   onCreate() {
     DLog.d(transformViewController.out);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(DiagnosticsProperty<NTransformViewController>('transformViewController', transformViewController));
+    properties.add(IterableProperty<({VoidCallback action, String name})>('actionItems', actionItems));
   }
 }

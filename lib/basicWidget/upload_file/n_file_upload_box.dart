@@ -95,6 +95,29 @@ class NFileUploadBox extends StatefulWidget {
 
   @override
   State<NFileUploadBox> createState() => _NFileUploadBoxState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NFileUploadBoxController?>('controller', controller));
+    properties.add(IterableProperty<NFileUploadModel>('items', items));
+    properties.add(DoubleProperty('itemWidth', itemWidth));
+    properties.add(DoubleProperty('itemHeight', itemHeight));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(StringProperty('title', title));
+    properties.add(StringProperty('description', description));
+    properties.add(ObjectFlagProperty<ValueChanged<List<NFileUploadModel>>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onStart', onStart));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
+    properties.add(IntProperty('maxCount', maxCount));
+    properties.add(IntProperty('maxMB', maxMB));
+    properties.add(EnumProperty<FileType>('type', type));
+    properties.add(DiagnosticsProperty<bool>('allowMultiple', allowMultiple));
+    properties.add(IterableProperty<String>('allowedExtensions', allowedExtensions));
+    properties.add(DiagnosticsProperty<bool>('showFileSize', showFileSize));
+    properties.add(DiagnosticsProperty<NFileUploadHandle?>('fileUpload', fileUpload));
+  }
 }
 
 class _NFileUploadBoxState extends State<NFileUploadBox> {
@@ -371,6 +394,13 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           break;
       }
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<NFileUploadModel>('selectedModels', selectedModels));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isAllUploadFinished', isAllUploadFinished));
   }
 }
 

@@ -25,4 +25,11 @@ class GenericStateWidget<T extends ChangeNotifier> extends InheritedWidget {
   static GenericStateWidget? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<GenericStateWidget>();
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<T>('data', data));
+    properties.add(ObjectFlagProperty<bool Function(GenericStateWidget<ChangeNotifier> oldWidget, T data)>.has('updateNotifyBuilder', updateNotifyBuilder));
+  }
 }

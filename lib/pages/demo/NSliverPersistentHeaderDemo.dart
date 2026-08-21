@@ -17,6 +17,12 @@ class NSliverPersistentHeaderDemo extends StatefulWidget {
 
   @override
   _NSliverPersistentHeaderDemoState createState() => _NSliverPersistentHeaderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDemo> {

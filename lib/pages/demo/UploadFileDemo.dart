@@ -10,6 +10,12 @@ class UploadFileDemo extends StatefulWidget {
 
   @override
   _UploadFileDemoState createState() => _UploadFileDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _UploadFileDemoState extends State<UploadFileDemo> {
@@ -71,5 +77,12 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<AssetUploadDocumentModel>('selectedModels', selectedModels));
+    properties.add(IterableProperty<String>('urls', urls));
   }
 }

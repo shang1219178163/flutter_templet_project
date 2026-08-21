@@ -11,12 +11,12 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class UnknownPage extends StatelessWidget {
-  final String? title;
 
   const UnknownPage({
     Key? key,
     this.title,
   }) : super(key: key);
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -57,5 +57,11 @@ class UnknownPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
   }
 }

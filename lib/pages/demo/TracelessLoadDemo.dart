@@ -23,6 +23,12 @@ class TracelessLoadDemo extends StatefulWidget {
 
   @override
   State<TracelessLoadDemo> createState() => _TracelessLoadDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _TracelessLoadDemoState extends State<TracelessLoadDemo>
@@ -136,5 +142,11 @@ class _TracelessLoadDemoState extends State<TracelessLoadDemo>
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
   }
 }

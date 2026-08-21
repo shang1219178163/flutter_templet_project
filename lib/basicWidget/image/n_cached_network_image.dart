@@ -202,4 +202,38 @@ class NCachedNetworkImage extends StatelessWidget {
       child: child,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('imageUrl', imageUrl));
+    properties.add(DiagnosticsProperty<AssetImage>('placeholderImage', placeholderImage));
+    properties.add(ObjectFlagProperty<PlaceholderWidgetBuilder?>.has('placeholder', placeholder));
+    properties.add(ObjectFlagProperty<LoadingErrorWidgetBuilder?>.has('errorWidget', errorWidget));
+    properties.add(ObjectFlagProperty<ProgressIndicatorBuilder?>.has('progressIndicatorBuilder', progressIndicatorBuilder));
+    properties.add(ObjectFlagProperty<ImageWidgetBuilder?>.has('imageBuilder', imageBuilder));
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(EnumProperty<BoxFit?>('fit', fit));
+    properties.add(ColorProperty('color', color));
+    properties.add(EnumProperty<BlendMode?>('colorBlendMode', colorBlendMode));
+    properties.add(DiagnosticsProperty<Duration>('fadeOutDuration', fadeOutDuration));
+    properties.add(DiagnosticsProperty<Curve>('fadeOutCurve', fadeOutCurve));
+    properties.add(DiagnosticsProperty<Duration>('fadeInDuration', fadeInDuration));
+    properties.add(DiagnosticsProperty<Curve>('fadeInCurve', fadeInCurve));
+    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
+    properties.add(EnumProperty<ImageRepeat>('repeat', repeat));
+    properties.add(DiagnosticsProperty<bool>('matchTextDirection', matchTextDirection));
+    properties.add(DiagnosticsProperty<bool>('useOldImageOnUrlChange', useOldImageOnUrlChange));
+    properties.add(EnumProperty<FilterQuality>('filterQuality', filterQuality));
+    properties.add(DiagnosticsProperty<Duration?>('placeholderFadeInDuration', placeholderFadeInDuration));
+    properties.add(IntProperty('memCacheWidth', memCacheWidth));
+    properties.add(IntProperty('memCacheHeight', memCacheHeight));
+    properties.add(StringProperty('cacheKey', cacheKey));
+    properties.add(IntProperty('maxWidthDiskCache', maxWidthDiskCache));
+    properties.add(IntProperty('maxHeightDiskCache', maxHeightDiskCache));
+    properties.add(DiagnosticsProperty<Map<String, String>?>('httpHeaders', httpHeaders));
+    properties.add(ObjectFlagProperty<ValueChanged<Object>?>.has('errorListener', errorListener));
+  }
 }

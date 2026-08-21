@@ -15,6 +15,12 @@ class ListWheelScrollViewDemo extends StatefulWidget {
 
   @override
   _ListWheelScrollViewDemoState createState() => _ListWheelScrollViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {

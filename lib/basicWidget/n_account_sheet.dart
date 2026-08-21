@@ -42,6 +42,16 @@ class NAccountSheet extends StatefulWidget {
 
   @override
   State<NAccountSheet> createState() => _NAccountSheetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NAccountSheetController?>('controller', controller));
+    properties.add(IterableProperty<MapEntry<String, dynamic>>('items', items));
+    properties.add(ObjectFlagProperty<ValueChanged<MapEntry<String, dynamic>>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<String Function(MapEntry<String, dynamic> e)?>.has('titleCb', titleCb));
+    properties.add(ObjectFlagProperty<String Function(MapEntry<String, dynamic> e)?>.has('subtitleCb', subtitleCb));
+  }
 }
 
 class _NAccountSheetState extends State<NAccountSheet> {
@@ -180,6 +190,15 @@ class _NAccountSheetState extends State<NAccountSheet> {
   void updateCurrent(MapEntry<String, dynamic>? e) {
     current = e;
     debugPrint("current: $current");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('cacheKey', cacheKey));
+    properties.add(IterableProperty<MapEntry<String, dynamic>>('items', items));
+    properties.add(DiagnosticsProperty<MapEntry<String, dynamic>?>('current', current));
+    properties.add(StringProperty('btnTitle', btnTitle));
   }
 }
 

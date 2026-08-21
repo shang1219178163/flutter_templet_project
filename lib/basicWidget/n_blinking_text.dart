@@ -22,6 +22,17 @@ class NBlinkingText extends StatefulWidget {
 
   @override
   State<NBlinkingText> createState() => _NBlinkingTextState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('text', text));
+    properties.add(DiagnosticsProperty<Duration>('interval', interval));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(DiagnosticsProperty<TextStyle?>('highlightedstyle', highlightedstyle));
+    properties.add(ColorProperty('backgroudColor', backgroudColor));
+    properties.add(ColorProperty('highlightedBackgroudColor', highlightedBackgroudColor));
+  }
 }
 
 class _NBlinkingTextState extends State<NBlinkingText> with SingleTickerProviderStateMixin {
@@ -67,5 +78,11 @@ class _NBlinkingTextState extends State<NBlinkingText> with SingleTickerProvider
         child: Text(widget.text),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isHighlighted', isHighlighted));
   }
 }

@@ -37,9 +37,9 @@ class _CityListPageState extends State<CityListPage> {
       cityList.clear();
       Map countyMap = jsonDecode(value);
       List list = countyMap['china'];
-      list.forEach((v) {
+      for (final v in list) {
         cityList.add(CityModel.fromJson(v));
-      });
+      }
       _handleList(cityList);
     });
   }
@@ -139,12 +139,12 @@ class _CityListPageState extends State<CityListPage> {
                       child: AzListView(
                         data: cityList,
                         itemCount: cityList.length,
-                        itemBuilder: (BuildContext context, int index) {
+                        itemBuilder: (context, index) {
                           var model = cityList[index];
                           return Utils.getListItem(context, model);
                         },
                         padding: EdgeInsets.zero,
-                        susItemBuilder: (BuildContext context, int index) {
+                        susItemBuilder: (context, index) {
                           var model = cityList[index];
                           var tag = model.getSuspensionTag();
                           return Utils.getSusItem(context, tag);
@@ -160,5 +160,11 @@ class _CityListPageState extends State<CityListPage> {
         ],
       )),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<CityModel>('cityList', cityList));
   }
 }

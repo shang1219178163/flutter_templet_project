@@ -46,6 +46,16 @@ class NRefreshControl extends StatefulWidget {
 
   @override
   State<NRefreshControl> createState() => _NRefreshControlState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CupertinoRefreshController?>('controller', controller));
+    properties.add(ObjectFlagProperty<Future<void> Function()>.has('onRefresh', onRefresh));
+    properties.add(DoubleProperty('triggerDistance', triggerDistance));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(ObjectFlagProperty<RefreshBuilder?>.has('builder', builder));
+  }
 }
 
 class _NRefreshControlState extends State<NRefreshControl> {

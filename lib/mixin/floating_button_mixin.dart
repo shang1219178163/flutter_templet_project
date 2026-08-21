@@ -175,7 +175,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
             _right = maxWidth - _left - currButtonSize.width;
             _overlayEntry.markNeedsBuild();
           },
-          onPanEnd: (DragEndDetails e) {
+          onPanEnd: (e) {
             if (floatingButtonConfig.draggable != true) {
               return;
             }

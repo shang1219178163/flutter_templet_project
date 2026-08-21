@@ -38,6 +38,16 @@ class NScanPhoto extends StatefulWidget {
 
   @override
   State<NScanPhoto> createState() => _NScanPhotoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<File?>('image', image));
+    properties.add(DiagnosticsProperty<Tween<double>?>('tween', tween));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(ObjectFlagProperty<Future<void> Function()>.has('onScanning', onScanning));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onStop', onStop));
+  }
 }
 
 class _NScanPhotoState extends State<NScanPhoto> with SingleTickerProviderStateMixin {
@@ -145,5 +155,11 @@ class _NScanPhotoState extends State<NScanPhoto> with SingleTickerProviderStateM
 
   Future<void> onAction() async {
     await widget.onScanning();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isScaning', isScaning));
   }
 }

@@ -15,8 +15,8 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
-import 'package:tuple/tuple.dart';
 import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({Key? key}) : super(key: key);
@@ -112,7 +112,7 @@ class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
                 chooseImagesByWechatPicker(
                   maxCount: 1,
                   needCropp: true,
-                  onChanged: (File val) {
+                  onChanged: (val) {
                     debugPrint("value: $val");
                     avatarVN.value = val.path;
                   },
@@ -255,5 +255,13 @@ class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
             .toList(),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, IconData>>('services', services));
+    properties.add(IterableProperty<Tuple2<String, IconData>>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('avatarVN', avatarVN));
   }
 }

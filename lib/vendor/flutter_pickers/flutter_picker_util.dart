@@ -10,6 +10,15 @@ import 'package:get/get.dart';
 
 // 地址选择器模型
 class AddressPickerModel {
+
+  AddressPickerModel.fromJson(Map<String, dynamic> json) {
+    province = json['province'];
+    provinceCode = json['provinceCode'];
+    city = json['city'];
+    cityCode = json['cityCode'];
+    town = json['town'];
+    townCode = json['townCode'];
+  }
   AddressPickerModel({
     this.province,
     this.provinceCode,
@@ -34,15 +43,6 @@ class AddressPickerModel {
       town,
     ].where((e) => e != null).join("");
     return result;
-  }
-
-  AddressPickerModel.fromJson(Map<String, dynamic> json) {
-    province = json['province'];
-    provinceCode = json['provinceCode'];
-    city = json['city'];
-    cityCode = json['cityCode'];
-    town = json['town'];
-    townCode = json['townCode'];
   }
 
   Map<String, dynamic> toJson() {

@@ -45,6 +45,12 @@ class AppSandboxFileDirectory extends StatefulWidget {
 
   @override
   State<AppSandboxFileDirectory> createState() => _AppSandboxFileDirectoryState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
@@ -560,5 +566,13 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
     }
 
     return result;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<PathProviderDirectory>('directorys', directorys));
+    properties.add(DiagnosticsProperty<ValueNotifier<Map<String, dynamic>>>('cacheUserMapVN', cacheUserMapVN));
+    properties.add(DiagnosticsProperty<CacheController>('cacheController', cacheController));
   }
 }

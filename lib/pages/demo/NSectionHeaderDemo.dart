@@ -9,6 +9,12 @@ class NSectionHeaderDemo extends StatefulWidget {
 
   @override
   State<NSectionHeaderDemo> createState() => _NSectionHeaderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NSectionHeaderDemoState extends State<NSectionHeaderDemo> {

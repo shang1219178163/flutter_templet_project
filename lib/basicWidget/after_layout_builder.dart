@@ -26,6 +26,12 @@ class AfterLayoutBuilder extends StatefulWidget {
 
   @override
   _AfterLayoutBuilderState createState() => _AfterLayoutBuilderState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<AfterLayoutWidgetBuilder>.has('builder', builder));
+  }
 }
 
 class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> with SafeSetStateMixin {

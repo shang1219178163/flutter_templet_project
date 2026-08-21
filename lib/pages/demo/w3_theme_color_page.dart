@@ -26,6 +26,12 @@ class W3ThemeColorPage extends StatefulWidget {
 
   @override
   State<W3ThemeColorPage> createState() => _W3ThemeColorPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _W3ThemeColorPageState extends State<W3ThemeColorPage> {
@@ -124,5 +130,14 @@ class _W3ThemeColorPageState extends State<W3ThemeColorPage> {
     DLog.d("截屏结果: $result");
     final isSuccess = result is Map && (result['isSuccess'] as bool? ?? false);
     ToastUtil.show(isSuccess ? "已保存到相册" : "保存失败");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('boundaryKey', boundaryKey));
+    properties.add(IterableProperty<W3ThemeColor>('items', items));
   }
 }

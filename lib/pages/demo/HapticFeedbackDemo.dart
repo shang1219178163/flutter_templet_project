@@ -21,6 +21,12 @@ class HapticFeedbackDemo extends StatefulWidget {
 
   @override
   State<HapticFeedbackDemo> createState() => _HapticFeedbackDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
@@ -104,5 +110,14 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
         DLog.d("name: $name");
         break;
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(IterableProperty<({Future<void> action, String name})>('feedbacks', feedbacks));
   }
 }

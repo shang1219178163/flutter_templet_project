@@ -22,6 +22,15 @@ class AppUpdateCard extends StatefulWidget {
 
   @override
   _AppUpdateCardState createState() => _AppUpdateCardState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AppUpdateItemModel>('data', data));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(DiagnosticsProperty<bool>('showExpand', showExpand));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+  }
 }
 
 class _AppUpdateCardState extends State<AppUpdateCard> {
@@ -144,12 +153,12 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
 }
 
 class NNListUpdateAppWidget extends StatelessWidget {
-  final List<AppUpdateItemModel> list;
 
   const NNListUpdateAppWidget({
     Key? key,
     required this.list,
   }) : super(key: key);
+  final List<AppUpdateItemModel> list;
 
   @override
   Widget build(BuildContext context) {
@@ -170,5 +179,11 @@ class NNListUpdateAppWidget extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<AppUpdateItemModel>('list', list));
   }
 }

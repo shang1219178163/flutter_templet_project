@@ -26,4 +26,10 @@ class ErrorCustomWidget extends StatelessWidget {
       // ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FlutterErrorDetails>('details', details));
+  }
 }

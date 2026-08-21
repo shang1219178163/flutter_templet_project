@@ -9,12 +9,18 @@
 import 'package:flutter/material.dart';
 
 class TimelineStep extends StatefulWidget {
-  final String? title;
 
   const TimelineStep({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TimelineStepState createState() => _TimelineStepState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TimelineStepState extends State<TimelineStep> {

@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 
 class AppAudioPlayer {
-  static final AppAudioPlayer _instance = AppAudioPlayer._();
 
   factory AppAudioPlayer() => _instance;
 
   AppAudioPlayer._();
+  static final AppAudioPlayer _instance = AppAudioPlayer._();
 
   final player = AudioPlayer();
   final List<StreamSubscription> _subscriptions = [];

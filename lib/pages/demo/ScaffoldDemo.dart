@@ -21,6 +21,12 @@ class ScaffoldDemo extends StatefulWidget {
 
   @override
   State<ScaffoldDemo> createState() => _ScaffoldDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ScaffoldDemoState extends State<ScaffoldDemo> with SingleTickerProviderStateMixin {
@@ -140,5 +146,11 @@ class _ScaffoldDemoState extends State<ScaffoldDemo> with SingleTickerProviderSt
         children: [Expanded(child: TextField()), TextButton(onPressed: () {}, child: Text("发送"))],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<({BottomNavigationBarItem barItem, Widget page})>('pages', pages));
   }
 }

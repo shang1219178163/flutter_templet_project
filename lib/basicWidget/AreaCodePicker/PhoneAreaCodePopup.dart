@@ -45,6 +45,13 @@ class PhoneAreaCodePopup extends StatefulWidget {
 
   @override
   State<PhoneAreaCodePopup> createState() => _PhoneAreaCodePopupState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<AreaCodeEntity>('list', list));
+    properties.add(ObjectFlagProperty<ValueChanged<AreaCodeEntity>>.has('onChange', onChange));
+  }
 }
 
 class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
@@ -152,9 +159,23 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<AreaCodeEntity>('models', models));
+  }
 }
 
 class AreaCodeEntity extends ISuspensionBean {
+
+  AreaCodeEntity.fromJson(Map<String, dynamic> json) {
+    englishName = json['english_name'];
+    chineseName = json['chinese_name'];
+    countryCode = json['country_code'];
+    phoneCode = json['phone_code'];
+    tag = json['tag'];
+  }
   AreaCodeEntity({
     this.englishName,
     this.chineseName,
@@ -175,14 +196,6 @@ class AreaCodeEntity extends ISuspensionBean {
   @override
   String getSuspensionTag() {
     return tag ?? "#";
-  }
-
-  AreaCodeEntity.fromJson(Map<String, dynamic> json) {
-    englishName = json['english_name'];
-    chineseName = json['chinese_name'];
-    countryCode = json['country_code'];
-    phoneCode = json['phone_code'];
-    tag = json['tag'];
   }
 
   Map<String, dynamic> toJson() {

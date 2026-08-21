@@ -8,6 +8,12 @@ class GlowingOverscrollIndicatorDemo extends StatefulWidget {
   @override
   State<GlowingOverscrollIndicatorDemo> createState() =>
       _GlowingOverscrollIndicatorDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _GlowingOverscrollIndicatorDemoState
@@ -42,7 +48,7 @@ class _GlowingOverscrollIndicatorDemoState
     var top = MediaQuery.of(context).padding.top;
     final leadingPaintOffset = top + AppBar().preferredSize.height;
     return NotificationListener<OverscrollIndicatorNotification>(
-      onNotification: (OverscrollIndicatorNotification notification) {
+      onNotification: (notification) {
         if (notification.leading) {
           notification.paintOffset = leadingPaintOffset;
         }
@@ -67,7 +73,7 @@ class _GlowingOverscrollIndicatorDemoState
 
   Widget buildPage2() {
     return NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
         return const <Widget>[
           SliverAppBar(title: Text('Custom NestedScrollViews')),
         ];

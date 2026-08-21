@@ -17,6 +17,12 @@ class ThemeColorDemo extends StatefulWidget {
 
   @override
   _ThemeColorDemoState createState() => _ThemeColorDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ThemeColorDemoState extends State<ThemeColorDemo> {

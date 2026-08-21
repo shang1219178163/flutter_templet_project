@@ -9,6 +9,29 @@
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class UserModel with SelectableMixin {
+
+  UserModel.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    id = json['id'];
+    avatar = json['avatar'];
+    name = json['name'];
+    nickName = json['nickName'];
+    sex = json['sex'];
+    age = json['age'];
+    birthYear = json['birthYear'];
+    desc = json['desc'];
+
+    jobTitle = json['jobTitle'];
+    email = json['email'];
+    address = json['address'] != null ? AddressDetailModel.fromJson(json['address']) : null;
+    phone = json['phone'];
+    website = json['website'];
+    company = json['company'] != null ? Company.fromJson(json['company']) : null;
+    tag = json['tag'];
+
+    isSelected = json['isSelected'] ?? false;
+  }
   UserModel({
     this.id,
     this.avatar,
@@ -50,29 +73,6 @@ class UserModel with SelectableMixin {
   @override
   String get selectableName => name ?? "";
 
-  UserModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    id = json['id'];
-    avatar = json['avatar'];
-    name = json['name'];
-    nickName = json['nickName'];
-    sex = json['sex'];
-    age = json['age'];
-    birthYear = json['birthYear'];
-    desc = json['desc'];
-
-    jobTitle = json['jobTitle'];
-    email = json['email'];
-    address = json['address'] != null ? AddressDetailModel.fromJson(json['address']) : null;
-    phone = json['phone'];
-    website = json['website'];
-    company = json['company'] != null ? Company.fromJson(json['company']) : null;
-    tag = json['tag'];
-
-    isSelected = json['isSelected'] ?? false;
-  }
-
   @override
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();
@@ -107,11 +107,6 @@ class UserModel with SelectableMixin {
 }
 
 class AddressDetailModel {
-  String? street;
-  String? suite;
-  String? city;
-  String? zipcode;
-  Coordinate? geo;
 
   AddressDetailModel({this.street, this.suite, this.city, this.zipcode, this.geo});
 
@@ -122,6 +117,11 @@ class AddressDetailModel {
     zipcode = json['zipcode'];
     geo = json['geo'] != null ? Coordinate.fromJson(json['geo']) : null;
   }
+  String? street;
+  String? suite;
+  String? city;
+  String? zipcode;
+  Coordinate? geo;
 
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();
@@ -137,8 +137,6 @@ class AddressDetailModel {
 }
 
 class Coordinate {
-  String? lat;
-  String? lng;
 
   Coordinate({this.lat, this.lng});
 
@@ -146,6 +144,8 @@ class Coordinate {
     lat = json['lat'];
     lng = json['lng'];
   }
+  String? lat;
+  String? lng;
 
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();
@@ -156,9 +156,6 @@ class Coordinate {
 }
 
 class Company {
-  String? name;
-  String? catchPhrase;
-  String? bs;
 
   Company({this.name, this.catchPhrase, this.bs});
 
@@ -167,6 +164,9 @@ class Company {
     catchPhrase = json['catchPhrase'];
     bs = json['bs'];
   }
+  String? name;
+  String? catchPhrase;
+  String? bs;
 
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();

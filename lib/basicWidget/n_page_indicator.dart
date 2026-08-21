@@ -54,7 +54,7 @@ class NPageIndicator extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: ValueListenableBuilder(
           valueListenable: currentPage,
-          builder: (BuildContext context, dynamic value, Widget? child) {
+          builder: (context, dynamic value, child) {
             return Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -88,5 +88,18 @@ class NPageIndicator extends StatelessWidget {
             );
     });
     return list;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('currentPage', currentPage));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('margin', margin));
+    properties.add(IntProperty('itemCount', itemCount));
+    properties.add(DiagnosticsProperty<Size>('itemSize', itemSize));
+    properties.add(ObjectFlagProperty<NPageIndicatorItemBuilder?>.has('itemBuilder', itemBuilder));
+    properties.add(ColorProperty('normalColor', normalColor));
+    properties.add(ColorProperty('selectedColor', selectedColor));
+    properties.add(DiagnosticsProperty<bool>('hidesForSinglePage', hidesForSinglePage));
   }
 }

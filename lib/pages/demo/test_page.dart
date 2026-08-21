@@ -21,6 +21,12 @@ class TestPage extends StatefulWidget {
 
   @override
   _TestPageState createState() => _TestPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin {
@@ -169,5 +175,13 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final bytes = await file.finalize().toBytes();
     final xFile = XFile.fromData(bytes, name: file.filename ?? "unknown_file");
     return xFile;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<({VoidCallback action, String name})>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<TextStyle>('textStyle', textStyle));
   }
 }

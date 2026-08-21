@@ -31,6 +31,20 @@ class NDashDecoration extends Decoration {
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) =>
       _DashBoxPainter(this);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Gradient?>('gradient', gradient));
+    properties.add(ColorProperty('color', color));
+    properties.add(DoubleProperty('step', step));
+    properties.add(DoubleProperty('span', span));
+    properties.add(IntProperty('pointCount', pointCount));
+    properties.add(DoubleProperty('pointWidth', pointWidth));
+    properties.add(DiagnosticsProperty<Radius?>('radius', radius));
+    properties.add(DoubleProperty('strokeWidth', strokeWidth));
+    properties.add(ColorProperty('strokeColor', strokeColor));
+  }
 }
 
 class _DashBoxPainter extends BoxPainter {
@@ -113,7 +127,7 @@ class _DashPainter {
     final partLength =
         step + span * (pointCount + 1) + pointCount * pointLineLength;
 
-    pms.forEach((PathMetric pm) {
+    for (final pm in pms) {
       final count = pm.length ~/ partLength;
       for (var i = 0; i < count; i++) {
         canvas.drawPath(
@@ -131,6 +145,6 @@ class _DashPainter {
       }
       final tail = pm.length % partLength;
       canvas.drawPath(pm.extractPath(pm.length - tail, pm.length), paint);
-    });
+    }
   }
 }

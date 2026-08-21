@@ -9,6 +9,12 @@ class NeumorphismDemo extends StatefulWidget {
 
   @override
   _NeumorphismDemoState createState() => _NeumorphismDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NeumorphismDemoState extends State<NeumorphismDemo> {

@@ -15,6 +15,12 @@ class GetxControllerDemo extends StatefulWidget {
 
   @override
   State<GetxControllerDemo> createState() => _GetxControllerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _GetxControllerDemoState extends State<GetxControllerDemo> {
@@ -139,5 +145,15 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
     final tagController = Get.put(TagGetxController());
     final tagController1 = Get.put(TagGetxController());
     DLog.d([tagController, tagController1, tagController == tagController1].asMap());
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(DiagnosticsProperty<TagGetxController>('tagController', tagController));
+    properties.add(IterableProperty<ActionRecord>('items', items));
   }
 }

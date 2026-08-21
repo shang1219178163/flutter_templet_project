@@ -37,6 +37,16 @@ class UploadButton extends StatefulWidget {
 
   @override
   _UploadButtonState createState() => _UploadButtonState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('deteleWidth', deteleWidth));
+    properties.add(DoubleProperty('deteleHeight', deteleHeight));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onPressed', onPressed));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDetele', onDetele));
+    properties.add(ColorProperty('color', color));
+  }
 }
 
 class _UploadButtonState extends State<UploadButton> {

@@ -301,4 +301,16 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('hourse', hourse));
+    properties.add(StringProperty('minute', minute));
+    properties.add(IterableProperty<>('listTime', listTime));
+    properties.add(IterableProperty<List<Object>>('timeData', timeData));
+    properties.add(IterableProperty<List<String>>('timeData2', timeData2));
+    properties.add(IterableProperty<List<String>>('timeData3', timeData3));
+    properties.add(IterableProperty<>('timeData2Select', timeData2Select));
+  }
 }

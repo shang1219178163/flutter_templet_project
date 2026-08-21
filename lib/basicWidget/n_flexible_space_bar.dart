@@ -77,6 +77,17 @@ class NFlexibleSpaceBar extends StatefulWidget {
 
   @override
   State<NFlexibleSpaceBar> createState() => _NFlexibleSpaceBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<FractionalBuilder?>.has('titleIconBuilder', titleIconBuilder));
+    properties.add(DiagnosticsProperty<bool?>('centerTitle', centerTitle));
+    properties.add(EnumProperty<CollapseMode>('collapseMode', collapseMode));
+    properties.add(IterableProperty<StretchMode>('stretchModes', stretchModes));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('titlePadding', titlePadding));
+    properties.add(DoubleProperty('expandedTitleScale', expandedTitleScale));
+  }
 }
 
 class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
@@ -124,7 +135,7 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final settings = context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
 
         final children = <Widget>[];
@@ -245,7 +256,7 @@ class _NFlexibleSpaceBarState extends State<NFlexibleSpaceBar> {
                         child: DefaultTextStyle(
                           style: titleStyle,
                           child: LayoutBuilder(
-                            builder: (BuildContext context, BoxConstraints constraints) {
+                            builder: (context, constraints) {
                               return Container(
                                 width: constraints.maxWidth / scaleValue,
                                 alignment: titleAlignment,

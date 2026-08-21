@@ -10,6 +10,12 @@ class AppBarDemo extends StatefulWidget {
 
   @override
   _AppBarDemoState createState() => _AppBarDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateMixin {
@@ -161,4 +167,14 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }
 
   onPressed() {}
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<MediaQueryData>('mq', mq));
+    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('tabIndex', tabIndex));
+  }
 }

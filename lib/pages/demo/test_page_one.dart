@@ -11,6 +11,12 @@ class TestPageOne extends StatefulWidget {
 
   @override
   _TestPageOneState createState() => _TestPageOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TestPageOneState extends State<TestPageOne> {

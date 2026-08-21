@@ -12,6 +12,12 @@ class KeyboardObserverDemo extends StatefulWidget {
 
   @override
   State<KeyboardObserverDemo> createState() => _KeyboardObserverDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _KeyboardObserverDemoState extends State<KeyboardObserverDemo> {
@@ -78,5 +84,13 @@ class _KeyboardObserverDemoState extends State<KeyboardObserverDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<ValueNotifier<Set<LogicalKeyboardKey>>>('pressedKeysVN', pressedKeysVN));
   }
 }

@@ -29,6 +29,12 @@ class LayoutLogPrint<T> extends StatelessWidget {
       return child;
     });
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<T?>('tag', tag));
+  }
 }
 
 // class SliverLayoutLogPrint<T> extends StatelessWidget {

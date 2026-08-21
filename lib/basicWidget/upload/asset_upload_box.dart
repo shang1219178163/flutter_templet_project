@@ -114,6 +114,30 @@ class AssetUploadBox extends StatefulWidget {
 
   @override
   AssetUploadBoxState createState() => AssetUploadBoxState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AssetUploadBoxController?>('controller', controller));
+    properties.add(IterableProperty<AssetUploadModel>('items', items));
+    properties.add(ObjectFlagProperty<ValueChanged<List<AssetUploadModel>>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onStart', onStart));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(IntProperty('maxCount', maxCount));
+    properties.add(IntProperty('rowCount', rowCount));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+    properties.add(DoubleProperty('itemWidth', itemWidth));
+    properties.add(DoubleProperty('itemHeight', itemHeight));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(DiagnosticsProperty<bool>('canTakePhoto', canTakePhoto));
+    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
+    properties.add(ObjectFlagProperty<Widget Function(String url)?>.has('imgBuilder', imgBuilder));
+    properties.add(ObjectFlagProperty<void Function(List<String> urls, int index)?>.has('onTap', onTap));
+    properties.add(ObjectFlagProperty<Future<void> Function(int maxCount)?>.has('onPickRequest', onPickRequest));
+    properties.add(DiagnosticsProperty<bool>('showFileSize', showFileSize));
+    properties.add(DiagnosticsProperty<bool>('hasTakePhoto', hasTakePhoto));
+  }
 }
 
 class AssetUploadBoxState extends State<AssetUploadBox> {
@@ -175,7 +199,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     bool canEdit = true,
   }) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
         // print("itemWidth: $itemWidth");
         return Wrap(spacing: spacing, runSpacing: runSpacing, alignment: WrapAlignment.start, children: [
@@ -304,7 +328,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
               selectedAssets: selectedEntitys,
               maxAssets: maxCount,
               specialItemPosition: SpecialItemPosition.prepend,
-              specialItemBuilder: (context, AssetPathEntity? path, int length) {
+              specialItemBuilder: (context, path, length) {
                 if (path?.isAll != true) {
                   return null;
                 }
@@ -442,6 +466,13 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
 
   showToast({required String message}) {
     Text(message).toShowCupertinoDialog(context: context);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<AssetUploadModel>('selectedModels', selectedModels));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isAllUploadFinished', isAllUploadFinished));
   }
 }
 

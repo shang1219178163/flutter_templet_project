@@ -29,6 +29,12 @@ class NOriginSheet extends StatefulWidget {
 
   @override
   State<NOriginSheet> createState() => NOriginSheetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<void Function(AppEnv env, String origin)?>.has('onChanged', onChanged));
+  }
 }
 
 class NOriginSheetState extends State<NOriginSheet> {
@@ -105,7 +111,7 @@ class NOriginSheetState extends State<NOriginSheet> {
                 onTap: () {
                   // DLog.d("edit");
 
-                  showAlertTextField(onChanged: (String value) {
+                  showAlertTextField(onChanged: (value) {
                     DLog.d("showAlertTextField $value");
                     onUpdate(env: AppEnv.dev, origin: value);
                   });
@@ -164,10 +170,10 @@ class NOriginSheetState extends State<NOriginSheet> {
             ),
             isCollapsed: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            onChanged: (String value) {
+            onChanged: (value) {
               // DLog.d("onChanged $value");
             },
-            onSubmitted: (String value) {
+            onSubmitted: (value) {
               // DLog.d("onSubmitted $value");
             },
           ),
@@ -205,5 +211,12 @@ class NOriginSheetState extends State<NOriginSheet> {
     setState(() {});
 
     widget.onChanged?.call(env, origin);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('textController', textController));
+    properties.add(EnumProperty<AppEnv>('currentEnv', currentEnv));
   }
 }

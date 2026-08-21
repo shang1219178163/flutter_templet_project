@@ -15,6 +15,12 @@ class TooltipDemo extends StatefulWidget {
 
   @override
   _TooltipDemoState createState() => _TooltipDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TooltipDemoState extends State<TooltipDemo> {

@@ -13,12 +13,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/model/git_repo_model.dart';
 
 class FutureBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const FutureBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _FutureBuilderDemoState createState() => _FutureBuilderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
@@ -60,7 +66,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     return Center(
       child: FutureBuilder<dynamic>(
         future: _res,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (context, snapshot) {
           // 请求已结束
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
@@ -161,5 +167,12 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
 
     // var users = (response.data ?? []).map((e) => UserModel.fromJson(e)).toList();
     // debugPrint("users: ${users.first.runtimeType}");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<GitRepoModel>>>('dataList', dataList));
   }
 }

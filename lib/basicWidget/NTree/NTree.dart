@@ -33,6 +33,15 @@ class NTree extends StatefulWidget {
 
   @override
   _NTreeState createState() => _NTreeState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<NTreeNodeModel>('list', list));
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('iconColor', iconColor));
+    properties.add(DoubleProperty('indent', indent));
+  }
 }
 
 class _NTreeState extends State<NTree> {
@@ -162,9 +171,9 @@ class _NTreeState extends State<NTree> {
   recursion({required NTreeNodeModel e, required void Function(NTreeNodeModel e) cb}) {
     cb(e);
     debugPrint("item:${e.name} ${e.isSelected}");
-    e.items.forEach((item) {
+    for (final item in e.items) {
       recursion(e: item, cb: cb);
-    });
+    }
   }
 }
 
@@ -204,8 +213,8 @@ class NTreeNodeModel {
   recursion(void Function(NTreeNodeModel e)? cb) {
     cb?.call(this);
     debugPrint("item:$name $isSelected");
-    items.forEach((item) {
+    for (final item in items) {
       recursion(cb);
-    });
+    }
   }
 }

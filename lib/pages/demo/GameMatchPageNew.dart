@@ -12,6 +12,12 @@ class GameMatchPageNew extends StatefulWidget {
 
   @override
   State<GameMatchPageNew> createState() => _GameMatchPageNewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _GameMatchPageNewState extends State<GameMatchPageNew> {
@@ -65,6 +71,15 @@ class _GameMatchPageNewState extends State<GameMatchPageNew> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }
 

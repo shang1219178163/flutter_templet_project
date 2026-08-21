@@ -11,6 +11,12 @@ class RefreshListView extends StatefulWidget {
 
   @override
   _RefreshListViewState createState() => _RefreshListViewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _RefreshListViewState extends State<RefreshListView> {
@@ -72,14 +78,14 @@ class _RefreshListViewState extends State<RefreshListView> {
             return ListView.separated(
               physics: physics,
               itemCount: list.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 final e = list[index];
                 return ListTile(
                   leading: Icon(Icons.ac_unit),
                   title: Text(e),
                 );
               },
-              separatorBuilder: (BuildContext context, int index) {
+              separatorBuilder: (context, index) {
                 return Divider();
               },
             );
@@ -119,7 +125,7 @@ class _RefreshListViewState extends State<RefreshListView> {
           return ListView.separated(
             // physics: physics,
             itemCount: list.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (context, index) {
               final e = list[index];
 
               final controller = TextEditingController();
@@ -152,13 +158,19 @@ class _RefreshListViewState extends State<RefreshListView> {
                 ],
               );
             },
-            separatorBuilder: (BuildContext context, int index) {
+            separatorBuilder: (context, index) {
               return Divider();
             },
           );
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<List<String>>>('items', items));
   }
 }
 

@@ -26,6 +26,12 @@ class SegmentVerticalDemo extends StatefulWidget {
 
   @override
   State<SegmentVerticalDemo> createState() => _SegmentVerticalDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
@@ -79,7 +85,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
       ),
       child: ValueListenableBuilder(
         valueListenable: leftItems,
-        builder: (context, List<SelectableMixin> list, child) {
+        builder: (context, list, child) {
           if (isLoadding.value) {
             return const NSkeletonScreen();
           }
@@ -91,7 +97,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
             children: [
               leftList(
                 list: list,
-                onChanged: (SelectableMixin e) {
+                onChanged: (e) {
                   DLog.d("onChanged $e");
                 },
               ),
@@ -113,7 +119,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
       child: MediaQuery.removePadding(
         removeTop: true,
         context: context,
-        child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        child: StatefulBuilder(builder: (context, setState) {
           return ListView.builder(
             physics: const ClampingScrollPhysics(),
             itemBuilder: (context, index) {
@@ -196,5 +202,16 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
             ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isLoadding', isLoadding));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<SelectableMixin>>>('leftItems', leftItems));
+    properties.add(DiagnosticsProperty<SelectableMixin?>('selectedModel', selectedModel));
   }
 }

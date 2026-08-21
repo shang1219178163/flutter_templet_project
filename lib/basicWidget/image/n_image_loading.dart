@@ -36,7 +36,7 @@ class NImageLoading extends StatelessWidget {
           child: frame != null ? child : placeholder,
         );
       },
-      loadingBuilder: (context, child, ImageChunkEvent? loadingProgress) {
+      loadingBuilder: (context, child, loadingProgress) {
         var val = 0.0;
         if (loadingProgress != null &&
             loadingProgress.cumulativeBytesLoaded != 0 &&
@@ -51,5 +51,12 @@ class NImageLoading extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ImageProvider<Object>>('image', image));
+    properties.add(StringProperty('title', title));
   }
 }

@@ -17,6 +17,12 @@ class ReflectDemo extends StatefulWidget {
 
   @override
   _ReflectDemoState createState() => _ReflectDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ReflectDemoState extends State<ReflectDemo> {

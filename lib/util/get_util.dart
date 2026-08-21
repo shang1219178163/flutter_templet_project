@@ -371,6 +371,13 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})> extends State
       child: child ?? const NText('取消'),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<T>('actions', actions));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+  }
 }
 
 /// 弹窗内容显示组件
@@ -474,6 +481,18 @@ class NDialogBox extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<BuildContext>('context', context));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
+    properties.add(StringProperty('title', title));
+    properties.add(StringProperty('message', message));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('messagePadding', messagePadding));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
+  }
 }
 
 /// 输入框带取消确认按钮
@@ -561,8 +580,8 @@ class NBottomInputBox extends StatelessWidget {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(lengthLimit),
                   ],
-                  onChanged: (String value) {},
-                  onSubmitted: (String value) {},
+                  onChanged: (value) {},
+                  onSubmitted: (value) {},
                 ),
               ],
             ),
@@ -592,5 +611,16 @@ class NBottomInputBox extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
+    properties.add(StringProperty('title', title));
+    properties.add(IntProperty('lengthLimit', lengthLimit));
+    properties.add(DiagnosticsProperty<EdgeInsets>('textFieldPadding', textFieldPadding));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
   }
 }

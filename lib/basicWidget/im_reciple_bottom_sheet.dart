@@ -198,4 +198,15 @@ class IMRecipleBottomSheet extends StatelessWidget {
           )),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<ui.VoidCallback>.has('onWestMedicine', onWestMedicine));
+    properties.add(ObjectFlagProperty<ui.VoidCallback>.has('onJC', onJC));
+    properties.add(ObjectFlagProperty<ui.VoidCallback>.has('onMedicalAppliancee', onMedicalAppliancee));
+    properties.add(ObjectFlagProperty<ui.VoidCallback>.has('onChineseMedicinee', onChineseMedicinee));
+    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onBefore', onBefore));
+    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onAfter', onAfter));
+  }
 }

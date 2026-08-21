@@ -8,6 +8,12 @@ class PhysicalModelDemo extends StatefulWidget {
 
   @override
   _PhysicalModelDemoState createState() => _PhysicalModelDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _PhysicalModelDemoState extends State<PhysicalModelDemo> {

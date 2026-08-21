@@ -75,6 +75,14 @@ class LiveStreamEnterEffectCard extends StatelessWidget {
     //   ),
     // );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('imagePath', imagePath));
+    properties.add(StringProperty('text', text));
+    properties.add(DoubleProperty('scale', scale));
+  }
 }
 
 /// 进场特效测试组件

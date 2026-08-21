@@ -36,6 +36,12 @@ class DataTypeDemo extends StatefulWidget {
 
   @override
   State<DataTypeDemo> createState() => _DataTypeDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver, AppLifecycleStateOriginMixin {
@@ -270,7 +276,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     SnackUtil.show(d2);
 
     var j = 0; //第n次匹配
-    String pigLatin(String words) => words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false), (Match m) {
+    String pigLatin(String words) => words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false), (m) {
           for (var i = 0; i < m.groupCount; i++) {
             DLog.d("${j}_m[$i]/${m.groupCount - 1}: ${m[i]}");
             j++;
@@ -683,6 +689,15 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     // 如果所有部分都相等，则返回 0
     return 0;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(IterableProperty<ActionRecord>('specialItems', specialItems));
+    properties.add(IterableProperty<ActionRecord>('items', items));
+    properties.add(IterableProperty<ActionRecord>('others', others));
   }
 }
 

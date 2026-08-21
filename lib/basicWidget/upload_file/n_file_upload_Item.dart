@@ -63,6 +63,19 @@ class NFileUploadItem extends StatefulWidget {
 
   @override
   NFileUploadItemState createState() => NFileUploadItemState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NFileUploadModel>('model', model));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('urlBlock', urlBlock));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDelete', onDelete));
+    properties.add(DiagnosticsProperty<bool>('showFileSize', showFileSize));
+    properties.add(ColorProperty('borderColor', borderColor));
+    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
+    properties.add(ObjectFlagProperty<NFileUploadItemBuilder?>.has('builder', builder));
+  }
 }
 
 class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliveClientMixin {
@@ -257,7 +270,7 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
   }) async {
     var res = await OssUtil.upload(
       filePath: path,
-      onSendProgress: (int count, int total) {
+      onSendProgress: (count, total) {
         final percent = (count / total);
         if (percent >= 0.99) {
           _percentVN.value = 0.99;
@@ -265,7 +278,7 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
           _percentVN.value = percent;
         }
       },
-      onReceiveProgress: (int count, int total) {
+      onReceiveProgress: (count, total) {
         _percentVN.value = 1;
       },
     );
@@ -346,4 +359,11 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('filePath', filePath));
+    properties.add(StringProperty('fileName', fileName));
+  }
 }

@@ -13,6 +13,12 @@ class KeyboardShortcutsDemo extends StatefulWidget {
 
   @override
   State<KeyboardShortcutsDemo> createState() => _KeyboardShortcutsDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _KeyboardShortcutsDemoState extends State<KeyboardShortcutsDemo> {
@@ -89,6 +95,13 @@ class _KeyboardShortcutsDemoState extends State<KeyboardShortcutsDemo> {
     if (text.isNotEmpty) {
       controller.text = text;
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
   }
 }
 

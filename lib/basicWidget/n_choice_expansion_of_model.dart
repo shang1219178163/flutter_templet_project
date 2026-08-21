@@ -154,6 +154,23 @@ class NChoiceExpansionOfModel<T> extends StatefulWidget {
   @override
   _NChoiceExpansionOfModelState<T> createState() =>
       _NChoiceExpansionOfModelState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<TextStyle?>('titleStyle', titleStyle));
+    properties.add(IterableProperty<T>('items', items));
+    properties.add(DiagnosticsProperty<bool>('isSingle', isSingle));
+    properties.add(ObjectFlagProperty<String Function(T e)>.has('idCb', idCb));
+    properties.add(ObjectFlagProperty<String Function(T e)>.has('titleCb', titleCb));
+    properties.add(ObjectFlagProperty<bool Function(T e)>.has('selectedCb', selectedCb));
+    properties.add(ObjectFlagProperty<ValueChanged<List<T>>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<ValueChanged<T?>?>.has('onSingleChanged', onSingleChanged));
+    properties.add(ObjectFlagProperty<Widget Function(T e, bool isSelected)?>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)?>.has('headerBuilder', headerBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)?>.has('footerBuilder', footerBuilder));
+  }
 }
 
 class _NChoiceExpansionOfModelState<T>

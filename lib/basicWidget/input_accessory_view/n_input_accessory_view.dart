@@ -64,7 +64,7 @@ class NInputAccessoryView extends StatelessWidget {
       hideBarrier: true,
       barrierDismissible: false,
       from: Alignment.bottomCenter,
-      builder: (BuildContext c) {
+      builder: (c) {
         final bottom = MediaQuery.of(c).viewInsets.bottom;
         DLog.d("NOverlayDialog.show $bottom");
         return Padding(
@@ -163,5 +163,19 @@ class NInputAccessoryView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
+    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
+    properties.add(StringProperty('hintText', hintText));
+    properties.add(IntProperty('maxLines', maxLines));
+    properties.add(IntProperty('maxLength', maxLength));
+    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
+    properties.add(ObjectFlagProperty<TextField Function(TextField v)?>.has('textFieldBuilder', textFieldBuilder));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onConfirm', onConfirm));
   }
 }

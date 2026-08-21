@@ -36,6 +36,18 @@ class NChoiceBoxHorizontal<T> extends StatefulWidget {
 
   @override
   _NChoiceBoxHorizontalState<T> createState() => _NChoiceBoxHorizontalState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<ChoiceBoxModel<T>>('items', items));
+    properties.add(ObjectFlagProperty<ValueChanged<List<ChoiceBoxModel<T>>>>.has('onChanged', onChanged));
+    properties.add(DiagnosticsProperty<bool>('isSingle', isSingle));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(ColorProperty('itemColor', itemColor));
+    properties.add(ColorProperty('itemSelectedColor', itemSelectedColor));
+    properties.add(ObjectFlagProperty<Widget? Function(T e, bool isSelected)?>.has('itemBuilder', itemBuilder));
+  }
 }
 
 class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
@@ -109,7 +121,7 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
         selected: e.isSelected == true,
         selectedColor: widget.itemSelectedColor,
         backgroundColor: widget.itemColor,
-        onSelected: (bool selected) {
+        onSelected: (selected) {
           for (final element in widget.items) {
             if (element.id == e.id) {
               element.isSelected = selected;
@@ -125,6 +137,13 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<ChoiceBoxModel<T>>('seletectedItems', seletectedItems));
+    properties.add(IterableProperty<String>('seletectedItemNames', seletectedItemNames));
   }
 }
 

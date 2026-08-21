@@ -23,6 +23,12 @@ class NScanPhotoDemo extends StatefulWidget {
 
   @override
   State<NScanPhotoDemo> createState() => _NScanPhotoDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _NScanPhotoDemoState extends State<NScanPhotoDemo> with PhotoPickerMixin {
@@ -63,5 +69,13 @@ class _NScanPhotoDemoState extends State<NScanPhotoDemo> with PhotoPickerMixin {
 
   Future<void> onAction() async {
     await Future.delayed(Duration(milliseconds: 3000));
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty<File?>('file', file));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onScanStop', onScanStop));
   }
 }

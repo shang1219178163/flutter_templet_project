@@ -43,4 +43,12 @@ class NBackButton extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('size', size));
+    properties.add(ColorProperty('color', color));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
+  }
 }

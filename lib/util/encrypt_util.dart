@@ -4,7 +4,6 @@ import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart';
 
 class EncryptUtil {
-  static final EncryptUtil _instance = EncryptUtil._internal();
 
   factory EncryptUtil() {
     return _instance;
@@ -15,6 +14,7 @@ class EncryptUtil {
     final key = Key.fromUtf8('2b3<94B5->884=F0');
     _encrypter = Encrypter(AES(key, mode: AESMode.cbc));
   }
+  static final EncryptUtil _instance = EncryptUtil._internal();
 
   late final Encrypter _encrypter;
   // 初始化向量

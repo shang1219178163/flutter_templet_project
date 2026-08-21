@@ -17,6 +17,12 @@ class AssetUploadBoxDemo extends StatefulWidget {
 
   @override
   _AssetUploadBoxDemoState createState() => _AssetUploadBoxDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
@@ -138,7 +144,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     double runSpacing = 10,
     bool hasAddBtn = false,
   }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: runSpacing, children: [
@@ -219,5 +225,12 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
         builder: (context) => NImagePreview(urls: urls, index: index),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<AssetUploadModel>('selectedModels', selectedModels));
+    properties.add(IterableProperty<String>('urls', urls));
   }
 }

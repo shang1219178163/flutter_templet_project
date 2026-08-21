@@ -16,6 +16,12 @@ class PageLifecycleFuncTest extends StatefulWidget {
 
   @override
   _PageLifecycleFuncTestState createState() => _PageLifecycleFuncTestState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
@@ -79,5 +85,11 @@ class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
       titleVN.value += "z_";
     }
     titleVN.value += "_${titleVN.value.length}";
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('titleVN', titleVN));
   }
 }

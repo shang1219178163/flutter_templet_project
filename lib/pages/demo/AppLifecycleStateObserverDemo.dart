@@ -12,6 +12,12 @@ class AppLifecycleStateObserverDemo extends StatefulWidget {
 
   @override
   State<AppLifecycleStateObserverDemo> createState() => _AppLifecycleStateObserverDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserverDemo> with AppLifecycleObserverMixin {
@@ -117,7 +123,7 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
 
   timeUpdate() {
     timeReset();
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       var now = DateTime.now();
       var duration = now.difference(_startTime);
       durationVN.value = duration;
@@ -131,5 +137,12 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
   @override
   void onAppLifecycleStateChanged(AppLifecycleState state) {
     DLog.d("$widget ${state.name}");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('countVN', countVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<Duration>>('durationVN', durationVN));
   }
 }

@@ -9,15 +9,6 @@
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class OrderModel with SelectableMixin {
-  OrderModel({
-    required this.id,
-    required this.name,
-    required this.price,
-  });
-
-  int id = 0;
-  String name = '';
-  double price = 0;
 
   OrderModel.fromJson(Map json) {
     if (json.isEmpty) {
@@ -27,6 +18,15 @@ class OrderModel with SelectableMixin {
     price = json["price"];
     name = json["name"];
   }
+  OrderModel({
+    required this.id,
+    required this.name,
+    required this.price,
+  });
+
+  int id = 0;
+  String name = '';
+  double price = 0;
 
   @override
   Map<String, dynamic> toJson() {

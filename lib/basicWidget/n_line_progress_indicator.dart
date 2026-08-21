@@ -48,4 +48,13 @@ class NLineProgressIndicator extends StatelessWidget {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progress', progress));
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(DoubleProperty('minHeight', minHeight));
+  }
 }

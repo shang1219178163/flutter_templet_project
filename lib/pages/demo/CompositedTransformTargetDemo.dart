@@ -13,6 +13,12 @@ class CompositedTransformTargetDemo extends StatefulWidget {
 
   @override
   _CompositedTransformTargetDemoState createState() => _CompositedTransformTargetDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _CompositedTransformTargetDemoState extends State<CompositedTransformTargetDemo> {
@@ -119,7 +125,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
             buildListViewHorizontal(
               title: "Target:",
               items: items,
-              onChanged: (int value) {
+              onChanged: (value) {
                 targetAnchor = AlignmentExt.allCases[value];
                 debugPrint("targetAnchor: $targetAnchor");
                 _overlayEntry.markNeedsBuild();
@@ -128,7 +134,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
             buildListViewHorizontal(
               title: "Follower:",
               items: items,
-              onChanged: (int value) {
+              onChanged: (value) {
                 followerAnchor = AlignmentExt.allCases[value];
                 debugPrint("followerAnchor: $followerAnchor");
                 _overlayEntry.markNeedsBuild();
@@ -138,7 +144,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
               title: "Rotation:",
               items: rotations.map((e) => e.toString()).toList(),
               index: rotations.indexOf(0),
-              onChanged: (int value) {
+              onChanged: (value) {
                 followerRotation = rotations[value];
                 _overlayEntry.markNeedsBuild();
               },
@@ -185,7 +191,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   OverlayEntry createOverlayEntry(Offset localPosition) {
     indicatorOffset = localPosition;
     return OverlayEntry(
-      builder: (BuildContext context) => UnconstrainedBox(
+      builder: (context) => UnconstrainedBox(
         child: CompositedTransformFollower(
           link: layerLink,
           // offset: indicatorOffset,
@@ -215,6 +221,17 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<LayerLink>('layerLink', layerLink));
+    properties.add(DiagnosticsProperty<bool>('show', show));
+    properties.add(DiagnosticsProperty<Offset>('indicatorOffset', indicatorOffset));
+    properties.add(DiagnosticsProperty<Alignment>('followerAnchor', followerAnchor));
+    properties.add(DiagnosticsProperty<Alignment>('targetAnchor', targetAnchor));
+    properties.add(DoubleProperty('followerRotation', followerRotation));
   }
 }
 
@@ -277,7 +294,7 @@ class _CustomSlideDemoState extends State {
   void showIndicator(DragStartDetails details) {
     indicatorOffset = getIndicatorOffset(details.localPosition);
     _overlayEntry = OverlayEntry(
-      builder: (BuildContext context) {
+      builder: (context) {
         return Positioned(
           top: 0.0,
           left: 0.0,
@@ -304,5 +321,16 @@ class _CustomSlideDemoState extends State {
 
   void hideIndicator(DragEndDetails details) {
     _overlayEntry?.remove();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('indicatorWidth', indicatorWidth));
+    properties.add(DoubleProperty('indicatorHeight', indicatorHeight));
+    properties.add(DoubleProperty('slideHeight', slideHeight));
+    properties.add(DoubleProperty('slideWidth', slideWidth));
+    properties.add(DiagnosticsProperty<LayerLink>('layerLink', layerLink));
+    properties.add(DiagnosticsProperty<Offset>('indicatorOffset', indicatorOffset));
   }
 }

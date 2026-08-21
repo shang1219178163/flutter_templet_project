@@ -15,6 +15,12 @@ class MenuDemo extends StatefulWidget {
 
   @override
   State<MenuDemo> createState() => _MenuDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MenuDemoState extends State<MenuDemo> {

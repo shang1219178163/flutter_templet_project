@@ -1,12 +1,4 @@
 class AppDetailRootModel {
-  AppDetailRootModel({
-    this.resultCount,
-    this.results,
-  });
-
-  int? resultCount;
-
-  List<ResultsModel>? results;
 
   AppDetailRootModel.fromJson(Map<String, dynamic> json) {
     resultCount = json['resultCount'];
@@ -15,6 +7,14 @@ class AppDetailRootModel {
       results = List<ResultsModel>.from(array);
     }
   }
+  AppDetailRootModel({
+    this.resultCount,
+    this.results,
+  });
+
+  int? resultCount;
+
+  List<ResultsModel>? results;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -27,6 +27,67 @@ class AppDetailRootModel {
 }
 
 class ResultsModel {
+
+  ResultsModel.fromJson(Map<String, dynamic> json) {
+    // if (json['ipadScreenshotUrls'] != null) {
+    //   final array =
+    //       (json['ipadScreenshotUrls'] as List).map((e) => Null.fromJson(e));
+    //   ipadScreenshotUrls = List<Null>.from(array);
+    // }
+    // if (json['appletvScreenshotUrls'] != null) {
+    //   final array =
+    //       (json['appletvScreenshotUrls'] as List).map((e) => Null.fromJson(e));
+    //   appletvScreenshotUrls = List<Null>.from(array);
+    // }
+    artworkUrl60 = json['artworkUrl60'];
+    artworkUrl512 = json['artworkUrl512'];
+    artworkUrl100 = json['artworkUrl100'];
+    artistViewUrl = json['artistViewUrl'];
+    screenshotUrls = List<String>.from(json['screenshotUrls'] ?? []);
+    supportedDevices = List<String>.from(json['supportedDevices'] ?? []);
+    // if (json['advisories'] != null) {
+    //   final array = (json['advisories'] as List).map((e) => Null.fromJson(e));
+    //   advisories = List<Null>.from(array);
+    // }
+    isGameCenterEnabled = json['isGameCenterEnabled'];
+    kind = json['kind'];
+    // if (json['features'] != null) {
+    //   final array = (json['features'] as List).map((e) => Null.fromJson(e));
+    //   features = List<Null>.from(array);
+    // }
+    trackCensoredName = json['trackCensoredName'];
+    languageCodesISO2A = List<String>.from(json['languageCodesISO2A'] ?? []);
+    fileSizeBytes = json['fileSizeBytes'];
+    sellerUrl = json['sellerUrl'];
+    contentAdvisoryRating = json['contentAdvisoryRating'];
+    averageUserRatingForCurrentVersion = json['averageUserRatingForCurrentVersion'];
+    userRatingCountForCurrentVersion = json['userRatingCountForCurrentVersion'];
+    averageUserRating = json['averageUserRating'];
+    trackViewUrl = json['trackViewUrl'];
+    trackContentRating = json['trackContentRating'];
+    trackId = json['trackId'];
+    trackName = json['trackName'];
+    releaseDate = json['releaseDate'];
+    genreIds = List<String>.from(json['genreIds'] ?? []);
+    formattedPrice = json['formattedPrice'];
+    primaryGenreName = json['primaryGenreName'];
+    minimumOsVersion = json['minimumOsVersion'];
+    isVppDeviceBasedLicensingEnabled = json['isVppDeviceBasedLicensingEnabled'];
+    sellerName = json['sellerName'];
+    currentVersionReleaseDate = json['currentVersionReleaseDate'];
+    releaseNotes = json['releaseNotes'];
+    primaryGenreId = json['primaryGenreId'];
+    currency = json['currency'];
+    version = json['version'];
+    wrapperType = json['wrapperType'];
+    artistId = json['artistId'];
+    artistName = json['artistName'];
+    genres = List<String>.from(json['genres'] ?? []);
+    price = json['price'];
+    description = json['description'];
+    bundleId = json['bundleId'];
+    userRatingCount = json['userRatingCount'];
+  }
   ResultsModel({
     // this.ipadScreenshotUrls,
     // this.appletvScreenshotUrls,
@@ -161,67 +222,6 @@ class ResultsModel {
   String? bundleId;
 
   int? userRatingCount;
-
-  ResultsModel.fromJson(Map<String, dynamic> json) {
-    // if (json['ipadScreenshotUrls'] != null) {
-    //   final array =
-    //       (json['ipadScreenshotUrls'] as List).map((e) => Null.fromJson(e));
-    //   ipadScreenshotUrls = List<Null>.from(array);
-    // }
-    // if (json['appletvScreenshotUrls'] != null) {
-    //   final array =
-    //       (json['appletvScreenshotUrls'] as List).map((e) => Null.fromJson(e));
-    //   appletvScreenshotUrls = List<Null>.from(array);
-    // }
-    artworkUrl60 = json['artworkUrl60'];
-    artworkUrl512 = json['artworkUrl512'];
-    artworkUrl100 = json['artworkUrl100'];
-    artistViewUrl = json['artistViewUrl'];
-    screenshotUrls = List<String>.from(json['screenshotUrls'] ?? []);
-    supportedDevices = List<String>.from(json['supportedDevices'] ?? []);
-    // if (json['advisories'] != null) {
-    //   final array = (json['advisories'] as List).map((e) => Null.fromJson(e));
-    //   advisories = List<Null>.from(array);
-    // }
-    isGameCenterEnabled = json['isGameCenterEnabled'];
-    kind = json['kind'];
-    // if (json['features'] != null) {
-    //   final array = (json['features'] as List).map((e) => Null.fromJson(e));
-    //   features = List<Null>.from(array);
-    // }
-    trackCensoredName = json['trackCensoredName'];
-    languageCodesISO2A = List<String>.from(json['languageCodesISO2A'] ?? []);
-    fileSizeBytes = json['fileSizeBytes'];
-    sellerUrl = json['sellerUrl'];
-    contentAdvisoryRating = json['contentAdvisoryRating'];
-    averageUserRatingForCurrentVersion = json['averageUserRatingForCurrentVersion'];
-    userRatingCountForCurrentVersion = json['userRatingCountForCurrentVersion'];
-    averageUserRating = json['averageUserRating'];
-    trackViewUrl = json['trackViewUrl'];
-    trackContentRating = json['trackContentRating'];
-    trackId = json['trackId'];
-    trackName = json['trackName'];
-    releaseDate = json['releaseDate'];
-    genreIds = List<String>.from(json['genreIds'] ?? []);
-    formattedPrice = json['formattedPrice'];
-    primaryGenreName = json['primaryGenreName'];
-    minimumOsVersion = json['minimumOsVersion'];
-    isVppDeviceBasedLicensingEnabled = json['isVppDeviceBasedLicensingEnabled'];
-    sellerName = json['sellerName'];
-    currentVersionReleaseDate = json['currentVersionReleaseDate'];
-    releaseNotes = json['releaseNotes'];
-    primaryGenreId = json['primaryGenreId'];
-    currency = json['currency'];
-    version = json['version'];
-    wrapperType = json['wrapperType'];
-    artistId = json['artistId'];
-    artistName = json['artistName'];
-    genres = List<String>.from(json['genres'] ?? []);
-    price = json['price'];
-    description = json['description'];
-    bundleId = json['bundleId'];
-    userRatingCount = json['userRatingCount'];
-  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

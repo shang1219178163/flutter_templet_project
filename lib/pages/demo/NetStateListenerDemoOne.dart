@@ -18,6 +18,12 @@ class NetStateListenerDemoOne extends StatefulWidget {
   @override
   _NetStateListenerDemoOneState createState() =>
       _NetStateListenerDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne>
@@ -90,5 +96,11 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne>
   @override
   void onNetStateChaneged(bool onLine) {
     netConnectResult.value = onLine;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('netConnectResult', netConnectResult));
   }
 }

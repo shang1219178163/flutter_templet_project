@@ -76,4 +76,18 @@ class AeTimeChooseItem extends StatelessWidget {
       rightIconPath: "assets/images/icon_time_long_one.png",
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<DateTime?>('minDateTime', minDateTime));
+    properties.add(DiagnosticsProperty<DateTime?>('maxDateTime', maxDateTime));
+    properties.add(DiagnosticsProperty<ValueNotifier<DateTime?>>('selectVN', selectVN));
+    properties.add(ObjectFlagProperty<String Function(DateTime e)?>.has('convertCb', convertCb));
+    properties.add(ObjectFlagProperty<ValueChanged<DateTime>?>.has('onChanged', onChanged));
+    properties.add(DiagnosticsProperty<bool>('enable', enable));
+    properties.add(ColorProperty('disableBgColor', disableBgColor));
+    properties.add(ColorProperty('disableTextColor', disableTextColor));
+  }
 }

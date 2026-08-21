@@ -18,6 +18,12 @@ class FlexibleSpaceDemo extends StatefulWidget {
 
   @override
   _FlexibleSpaceDemoState createState() => _FlexibleSpaceDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
@@ -111,7 +117,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
             ],
           ),
           SliverList.separated(
-            itemBuilder: (context, int index) {
+            itemBuilder: (context, index) {
               return Container(
                 height: 70,
                 // color: ColorExt.random,
@@ -120,7 +126,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
                 ),
               );
             },
-            separatorBuilder: (context, int index) {
+            separatorBuilder: (context, index) {
               return Divider(
                 height: 1,
               );

@@ -179,6 +179,53 @@ class NTextField extends StatefulWidget {
 
   @override
   _NTextFieldState createState() => _NTextFieldState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('value', value));
+    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
+    properties.add(ObjectFlagProperty<EditableTextContextMenuBuilder?>.has('contextMenuBuilder', contextMenuBuilder));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
+    properties.add(ObjectFlagProperty<TapRegionCallback?>.has('onTapOutside', onTapOutside));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onSubmitted', onSubmitted));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(EnumProperty<TextAlign>('textAlign', textAlign));
+    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
+    properties.add(DiagnosticsProperty<bool?>('obscureText', obscureText));
+    properties.add(StringProperty('hintText', hintText));
+    properties.add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle));
+    properties.add(IntProperty('minLines', minLines));
+    properties.add(IntProperty('maxLines', maxLines));
+    properties.add(IntProperty('maxLength', maxLength));
+    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
+    properties.add(EnumProperty<TextInputAction?>('textInputAction', textInputAction));
+    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('contentPadding', contentPadding));
+    properties.add(ColorProperty('fillColor', fillColor));
+    properties.add(ColorProperty('focusColor', focusColor));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(DoubleProperty('borderWidth', borderWidth));
+    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>?>('hasFocusVN', hasFocusVN));
+    properties.add(DiagnosticsProperty<InputBorder?>('border', border));
+    properties.add(DiagnosticsProperty<InputBorder?>('enabledBorder', enabledBorder));
+    properties.add(DiagnosticsProperty<InputBorder?>('focusedBorder', focusedBorder));
+    properties.add(ObjectFlagProperty<Widget Function(bool isFocus)?>.has('prefixIconBuilder', prefixIconBuilder));
+    properties.add(ObjectFlagProperty<Widget? Function(bool isFocus)?>.has('suffixIconBuilder', suffixIconBuilder));
+    properties.add(DiagnosticsProperty<BoxConstraints?>('prefixIconConstraints', prefixIconConstraints));
+    properties.add(DiagnosticsProperty<BoxConstraints?>('suffixIconConstraints', suffixIconConstraints));
+    properties.add(DiagnosticsProperty<bool?>('isCollapsed', isCollapsed));
+    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
+    properties.add(DiagnosticsProperty<ScrollPhysics?>('scrollPhysics', scrollPhysics));
+    properties.add(DiagnosticsProperty<bool>('hidePrefix', hidePrefix));
+    properties.add(DiagnosticsProperty<bool>('hideSuffix', hideSuffix));
+    properties.add(DiagnosticsProperty<bool>('hideClear', hideClear));
+    properties.add(DiagnosticsProperty<AssetImage?>('prefixImage', prefixImage));
+    properties.add(DiagnosticsProperty<AssetImage?>('suffixImage', suffixImage));
+    properties.add(ObjectFlagProperty<InputDecoration Function(InputDecoration decoration)?>.has('decorationBuilder', decorationBuilder));
+  }
 }
 
 class _NTextFieldState extends State<NTextField> {
@@ -370,5 +417,14 @@ class _NTextFieldState extends State<NTextField> {
         width: 1, //边线宽度为1
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('current', current));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('hasFocusVN', hasFocusVN));
+    properties.add(DiagnosticsProperty<bool>('isCloseEye', isCloseEye));
   }
 }

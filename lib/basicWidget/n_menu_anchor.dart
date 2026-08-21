@@ -74,7 +74,7 @@ class NMenuAnchor<E> extends StatelessWidget {
     var selectedItem = initialItem;
 
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
+      builder: (context, setState) {
         // 点击子项
         onItem(E e) {
           selectedItem = e;
@@ -116,7 +116,7 @@ class NMenuAnchor<E> extends StatelessWidget {
           ),
           child: MenuAnchor(
             controller: controller,
-            builder: (context, MenuController controller, Widget? child) {
+            builder: (context, controller, child) {
               final defaultName = selectedItem == null ? placeholder : cbName(selectedItem);
 
               return builder?.call(controller, selectedItem) ??
@@ -189,5 +189,26 @@ class NMenuAnchor<E> extends StatelessWidget {
               child: scrollView,
             ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<MenuController?>('controller', controller));
+    properties.add(DiagnosticsProperty<MenuStyle?>('style', style));
+    properties.add(DiagnosticsProperty<ButtonStyle?>('dropButtonStyle', dropButtonStyle));
+    properties.add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<BoxConstraints?>('constraints', constraints));
+    properties.add(DiagnosticsProperty<BoxDecoration?>('decoration', decoration));
+    properties.add(IterableProperty<E>('values', values));
+    properties.add(DiagnosticsProperty<E?>('initialItem', initialItem));
+    properties.add(ObjectFlagProperty<Widget Function(MenuController controller, E? selectedItem)?>.has('builder', builder));
+    properties.add(ObjectFlagProperty<Widget Function(E e, bool isSelected)?>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<ValueChanged<E>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<bool Function(E a, E? b)>.has('equal', equal));
+    properties.add(ObjectFlagProperty<String Function(E? e)>.has('cbName', cbName));
+    properties.add(StringProperty('placeholder', placeholder));
+    properties.add(ObjectFlagProperty<Widget Function(bool isSelected)?>.has('leadingIconBuilder', leadingIconBuilder));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('dropItemPadding', dropItemPadding));
   }
 }

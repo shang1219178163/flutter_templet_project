@@ -21,6 +21,12 @@ class CustomTabbarPage extends StatefulWidget {
 
   @override
   State<CustomTabbarPage> createState() => _CustomTabbarPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProviderStateMixin {
@@ -135,7 +141,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                 //   fontWeight: FontWeight.w600,
                 // ),
                 // backgroundColor: ,
-                onChanged: (int v) {
+                onChanged: (v) {
                   DLog.d(v);
                   indexVN.value = v;
                 },
@@ -266,7 +272,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
               title: "NSlidableTabbar",
               child: NSlidableTabbar(
                 items: List.generate(3, (i) => "选项$i"),
-                onChanged: (int v) {
+                onChanged: (v) {
                   DLog.d(v);
                 },
               ),
@@ -303,7 +309,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                 minimumSize: const Size(50, 26),
                 foregroundColor: foregroundColor,
                 side: BorderSide(color: foregroundColor, width: 1),
-                backgroundBuilder: (context, Set<WidgetState> states, Widget? child) {
+                backgroundBuilder: (context, states, child) {
                   return DecoratedBox(
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -343,7 +349,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                       minimumSize: const Size(50, 26),
                       foregroundColor: foregroundColor,
                       side: BorderSide(color: foregroundColor, width: 1),
-                      backgroundBuilder: (context, Set<WidgetState> states, Widget? child) {
+                      backgroundBuilder: (context, states, child) {
                         return DecoratedBox(
                           decoration: BoxDecoration(
                             color: Colors.transparent,
@@ -508,5 +514,20 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
+    properties.add(DiagnosticsProperty<TabBarThemeData>('tabBarTheme', tabBarTheme));
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<NChromeTabController>('chromeTabController', chromeTabController));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
+    properties.add(IterableProperty<NTabbarDataModel>('items', items));
+    properties.add(IterableProperty<String>('titles', titles));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('titleIndexVN', titleIndexVN));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

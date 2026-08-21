@@ -11,6 +11,12 @@ class TextThemeDemo extends StatefulWidget {
 
   @override
   State<TextThemeDemo> createState() => _TextThemeDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _TextThemeDemoState extends State<TextThemeDemo> {
@@ -86,5 +92,12 @@ class _TextThemeDemoState extends State<TextThemeDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

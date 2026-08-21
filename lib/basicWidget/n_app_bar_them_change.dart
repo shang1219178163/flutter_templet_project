@@ -27,6 +27,15 @@ class NAppBarThemChange extends StatefulWidget {
 
   @override
   State<NAppBarThemChange> createState() => _NAppBarThemChangeState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('offsetY', offsetY));
+    properties.add(DiagnosticsProperty<bool>('isDefault', isDefault));
+    properties.add(DiagnosticsProperty<ThemeData?>('defaultThemeData', defaultThemeData));
+    properties.add(DiagnosticsProperty<ThemeData?>('themeData', themeData));
+  }
 }
 
 class _NAppBarThemChangeState extends State<NAppBarThemChange> {
@@ -117,6 +126,12 @@ class _NAppBarThemChangeState extends State<NAppBarThemChange> {
       setState(() {});
     }
     return true;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('noDefault', noDefault));
   }
 }
 

@@ -19,6 +19,13 @@ class NEnsureVisible extends StatefulWidget {
 
   @override
   State<NEnsureVisible> createState() => _NEnsureVisibleState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Duration>('delayed', delayed));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+  }
 }
 
 class _NEnsureVisibleState extends State<NEnsureVisible> with WidgetsBindingObserver {
@@ -56,5 +63,12 @@ class _NEnsureVisibleState extends State<NEnsureVisible> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     return widget.child;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Duration>('delayed', delayed));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
   }
 }

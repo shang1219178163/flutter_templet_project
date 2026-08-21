@@ -17,6 +17,12 @@ class DirectoryTestDemo extends StatefulWidget {
 
   @override
   State<DirectoryTestDemo> createState() => _DirectoryTestDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
@@ -99,4 +105,11 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
   }
 
   Future<void> listAssets() async {}
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(IterableProperty<ActionRecord>('items', items));
+  }
 }

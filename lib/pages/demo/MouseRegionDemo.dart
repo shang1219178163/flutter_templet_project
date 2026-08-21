@@ -10,12 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class MouseRegionDemo extends StatefulWidget {
-  final String? title;
 
   MouseRegionDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _MouseRegionDemoState createState() => _MouseRegionDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MouseRegionDemoState extends State<MouseRegionDemo> {
@@ -53,14 +59,14 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
         title: Text(demoTitle ?? widget.title ?? "$widget"),
         actions: [
           MouseRegion(
-              onEnter: (PointerEvent details) {
+              onEnter: (details) {
                 setState(() {
                   setState(() => DLog.d(details));
                   demoTitle = "onEnter";
                   _isVisible = true;
                 });
               },
-              onExit: (PointerEvent details) {
+              onExit: (details) {
                 setState(() {
                   setState(() => DLog.d(details));
                   demoTitle = "onExit";
@@ -168,5 +174,13 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('x', x));
+    properties.add(DoubleProperty('y', y));
+    properties.add(StringProperty('demoTitle', demoTitle));
   }
 }

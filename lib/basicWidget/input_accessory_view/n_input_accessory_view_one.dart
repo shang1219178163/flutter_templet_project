@@ -301,6 +301,23 @@ class NInputAccessoryViewOne extends StatefulWidget {
 
   @override
   State<NInputAccessoryViewOne> createState() => _NInputAccessoryViewOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller));
+    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
+    properties.add(StringProperty('hintText', hintText));
+    properties.add(IntProperty('maxLines', maxLines));
+    properties.add(IntProperty('maxLength', maxLength));
+    properties.add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters));
+    properties.add(ObjectFlagProperty<TextField Function(TextField v)?>.has('textFieldBuilder', textFieldBuilder));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onConfirm', onConfirm));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPhoto', onPhoto));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onEmoji', onEmoji));
+    properties.add(IterableProperty<AssetUploadModel>('selectedModels', selectedModels));
+  }
 }
 
 class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
@@ -333,8 +350,8 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
   void syncSelectedModels(List<AssetUploadModel> models) {
     selectedModels = List<AssetUploadModel>.from(models);
     urls = selectedModels
-        .where((AssetUploadModel model) => model.url?.startsWith('http') == true)
-        .map((AssetUploadModel model) => model.url ?? '')
+        .where((model) => model.url?.startsWith('http') == true)
+        .map((model) => model.url ?? '')
         .toList();
   }
 
@@ -422,8 +439,8 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
                     radius: 4,
                     items: selectedModels,
                     canTakePhoto: true,
-                    onPickRequest: (int maxCount) => NInputAccessoryViewOne.executePickAssets(maxCount: maxCount),
-                    onChanged: (List<AssetUploadModel> items) {
+                    onPickRequest: (maxCount) => NInputAccessoryViewOne.executePickAssets(maxCount: maxCount),
+                    onChanged: (items) {
                       updateSessionSelectedModels(items);
                     },
                     onTap: (urls, index) async {
@@ -519,6 +536,16 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
+    properties.add(EnumProperty<InputType>('inputType', inputType));
+    properties.add(DiagnosticsProperty<AssetUploadBoxController>('uploadController', uploadController));
+    properties.add(IterableProperty<AssetUploadModel>('selectedModels', selectedModels));
+    properties.add(IterableProperty<String>('urls', urls));
   }
 }
 

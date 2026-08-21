@@ -8,6 +8,12 @@ class RegExpDemo extends StatefulWidget {
 
   @override
   _RegExpDemoState createState() => _RegExpDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _RegExpDemoState extends State<RegExpDemo> {

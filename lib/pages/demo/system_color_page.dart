@@ -112,6 +112,14 @@ class _SystemColorPageState extends State<SystemColorPage> {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('editingController', editingController));
+    properties.add(IterableProperty<>('keys', keys));
+    properties.add(IterableProperty<>('searchResults', searchResults));
+  }
 }
 
 Map<String, dynamic> kColorDic = {

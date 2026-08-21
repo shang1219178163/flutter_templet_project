@@ -93,4 +93,15 @@ class NAvatarGroup extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String?>('avatars', avatars));
+    properties.add(DiagnosticsProperty<AssetImage>('placehorder', placehorder));
+    properties.add(DiagnosticsProperty<bool>('isRevered', isRevered));
+    properties.add(DoubleProperty('itemWidth', itemWidth));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('itemPadding', itemPadding));
+    properties.add(DoubleProperty('scale', scale));
+  }
 }

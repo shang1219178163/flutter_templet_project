@@ -16,6 +16,12 @@ class DialogChoiceChipDemo extends StatefulWidget {
 
   @override
   _DialogChoiceChipDemoState createState() => _DialogChoiceChipDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
@@ -165,7 +171,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
                         backgroundColor: AppColor.bgColorF9F9F9,
-                        onSelected: (bool selected) {
+                        onSelected: (selected) {
                           for (final element in tags) {
                             if (element.data?.id == e.data?.id) {
                               element.isSelected = selected;
@@ -288,7 +294,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
                         backgroundColor: AppColor.bgColorF9F9F9,
-                        onSelected: (bool selected) {
+                        onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
                               element.isSelected = selected;
@@ -377,7 +383,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
                         backgroundColor: AppColor.bgColorF9F9F9,
-                        onSelected: (bool selected) {
+                        onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
                               element.isSelected = selected;
@@ -445,7 +451,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                 children: tags
                     .map((e) => Material(
                           color: Colors.transparent,
-                          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                          child: StatefulBuilder(builder: (context, setState) {
                             return InkWell(
                               onTap: () {
                                 e.isSelected = !e.isSelected!;
@@ -839,5 +845,18 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     for (final element in tags) {
       element.isSelected = ids.contains(element.id);
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<int>('nums', nums));
+    properties.add(DiagnosticsProperty<Map<String, VoidCallback>>('funcMap', funcMap));
+    properties.add(IterableProperty<Tuple3<String, String, String>>('items', items));
+    properties.add(IterableProperty<SelectModel<FakeDataModel>>('tags', tags));
+    properties.add(IterableProperty<SelectModel<FakeDataModel>>('selectedTags', selectedTags));
+    properties.add(IterableProperty<SelectModel<FakeDataModel>>('selectedTagsTmp', selectedTagsTmp));
+    properties.add(IterableProperty<String>('selectedTagsNames', selectedTagsNames));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('info', info));
   }
 }

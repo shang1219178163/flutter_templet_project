@@ -20,6 +20,12 @@ class TagSortPage extends StatefulWidget {
 
   @override
   State<TagSortPage> createState() => _TagSortPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _TagSortPageState extends State<TagSortPage> with TickerProviderStateMixin {
@@ -127,7 +133,7 @@ class _TagSortPageState extends State<TagSortPage> with TickerProviderStateMixin
       ("读取", onRead),
     ];
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
@@ -166,5 +172,18 @@ class _TagSortPageState extends State<TagSortPage> with TickerProviderStateMixin
     final list = await NewsHomeProvider.instance.readCatalogs();
     final result = jsonEncode(list);
     DLog.d(result);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IntProperty('acceptedData', acceptedData));
+    properties.add(IterableProperty<String>('tags', tags));
+    properties.add(IterableProperty<String>('others', others));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
+    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
+    properties.add(DiagnosticsProperty<NewsHomeProvider>('newsProvider', newsProvider));
   }
 }

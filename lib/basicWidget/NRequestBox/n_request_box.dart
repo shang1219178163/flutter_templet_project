@@ -117,6 +117,17 @@ class NRequestBox extends StatefulWidget {
 
   @override
   _NRequestBoxState createState() => _NRequestBoxState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('placeholder', placeholder));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onSearchChanged', onSearchChanged));
+    properties.add(ObjectFlagProperty<ToggleWidgetBuilder?>.has('btnBuilder', btnBuilder));
+    properties.add(ObjectFlagProperty<bool Function()?>.has('dropViewCancel', dropViewCancel));
+    properties.add(ObjectFlagProperty<bool Function()?>.has('dropViewConfirm', dropViewConfirm));
+    properties.add(DiagnosticsProperty<Decoration?>('bodyDecoration', bodyDecoration));
+  }
 }
 
 class _NRequestBoxState extends State<NRequestBox> {

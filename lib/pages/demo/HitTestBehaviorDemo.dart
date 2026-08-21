@@ -8,6 +8,12 @@ class HitTestBehaviorDemo extends StatefulWidget {
 
   @override
   State<HitTestBehaviorDemo> createState() => _HitTestBehaviorDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _HitTestBehaviorDemoState extends State<HitTestBehaviorDemo> {
@@ -97,5 +103,11 @@ enum HitTestBehavior {
         DLog.d("$widget ${behavior.name}");
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('message', message));
   }
 }

@@ -55,4 +55,14 @@ class NFilter extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
+    properties.add(DiagnosticsProperty<CustomClipper<ui.RRect>?>('clipper', clipper));
+    properties.add(EnumProperty<ui.Clip>('clipBehavior', clipBehavior));
+    properties.add(DiagnosticsProperty<ui.ImageFilter?>('fgFilter', fgFilter));
+    properties.add(DiagnosticsProperty<ui.ImageFilter?>('filter', filter));
+  }
 }

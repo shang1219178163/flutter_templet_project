@@ -27,6 +27,15 @@ class NRefreshIndicator extends StatefulWidget {
 
   @override
   State<NRefreshIndicator> createState() => _NRefreshIndicatorState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<IndicatorController?>('controller', controller));
+    properties.add(DoubleProperty('offsetY', offsetY));
+    properties.add(ObjectFlagProperty<AsyncCallback>.has('onRefresh', onRefresh));
+    properties.add(ObjectFlagProperty<IndicatorBuilder?>.has('builder', builder));
+  }
 }
 
 class _NRefreshIndicatorState extends State<NRefreshIndicator> {
@@ -52,7 +61,7 @@ class _NRefreshIndicatorState extends State<NRefreshIndicator> {
 
     return CustomRefreshIndicator(
       onRefresh: widget.onRefresh,
-      builder: (BuildContext context, Widget child, IndicatorController controller) {
+      builder: (context, child, controller) {
         final state = controller.state;
         final progress = controller.value; // 0~1
         const tabHeight = 44.0;

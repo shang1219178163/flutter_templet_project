@@ -50,4 +50,11 @@ class GoodsTags<T> extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<T>('items', items));
+    properties.add(ObjectFlagProperty<String Function(T e)>.has('nameCb', nameCb));
+  }
 }

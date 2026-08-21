@@ -85,4 +85,13 @@ class NStadiumButton extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('titlePadding', titlePadding));
+    properties.add(ColorProperty('color', color));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
+  }
 }

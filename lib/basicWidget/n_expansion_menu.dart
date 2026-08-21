@@ -49,6 +49,21 @@ class NExpansionMenu extends StatefulWidget {
 
   @override
   NExpansionMenuState createState() => NExpansionMenuState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onExpansionChanged', onExpansionChanged));
+    properties.add(ColorProperty('color', color));
+    properties.add(DiagnosticsProperty<bool>('disable', disable));
+    properties.add(ObjectFlagProperty<Widget Function(bool isExpand)?>.has('indicatorBuilder', indicatorBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(bool isExpand)?>.has('trailingBuilder', trailingBuilder));
+    properties.add(ObjectFlagProperty<ExpansionWidgetBuilder?>.has('header', header));
+    properties.add(ObjectFlagProperty<ExpansionWidgetBuilder?>.has('childrenHeader', childrenHeader));
+    properties.add(ObjectFlagProperty<ExpansionWidgetBuilder?>.has('childrenFooter', childrenFooter));
+  }
 }
 
 class NExpansionMenuState extends State<NExpansionMenu> {

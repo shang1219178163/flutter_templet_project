@@ -177,4 +177,16 @@ class NCrossFadeMask<T> extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<T>('items', items));
+    properties.add(IntProperty('max', max));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(StringProperty('expandTitle', expandTitle));
+    properties.add(StringProperty('collapseTitle', collapseTitle));
+    properties.add(ObjectFlagProperty<Widget Function(int limit)>.has('first', first));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)>.has('secondChild', secondChild));
+  }
 }

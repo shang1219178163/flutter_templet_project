@@ -82,7 +82,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
   }
 
   Widget buildAudioControls() {
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -233,5 +233,12 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> with SafeSetStateMixi
     }
 
     return lyrics;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Duration>('totalDuration', totalDuration));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('loopVN', loopVN));
   }
 }

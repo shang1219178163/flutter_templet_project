@@ -22,6 +22,12 @@ class ContainerComparePage extends StatefulWidget {
 
   @override
   State<ContainerComparePage> createState() => _ContainerComparePageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ContainerComparePageState extends State<ContainerComparePage> {
@@ -334,5 +340,24 @@ class _ContainerComparePageState extends State<ContainerComparePage> {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: Text(text, style: const TextStyle(fontSize: 15)),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
+    properties.add(DiagnosticsProperty<bool>('enableMargin', enableMargin));
+    properties.add(DiagnosticsProperty<bool>('enablePadding', enablePadding));
+    properties.add(DiagnosticsProperty<bool>('enableDecoration', enableDecoration));
+    properties.add(DiagnosticsProperty<bool>('enableBorderRadius', enableBorderRadius));
+    properties.add(DiagnosticsProperty<bool>('enableForegroundDecoration', enableForegroundDecoration));
+    properties.add(DiagnosticsProperty<bool>('enableForegroundPadding', enableForegroundPadding));
+    properties.add(DiagnosticsProperty<bool>('enableOpacity', enableOpacity));
+    properties.add(DiagnosticsProperty<bool>('enableIgnoring', enableIgnoring));
+    properties.add(DiagnosticsProperty<bool>('enableOffstage', enableOffstage));
+    properties.add(DiagnosticsProperty<bool>('enableSafeArea', enableSafeArea));
+    properties.add(DiagnosticsProperty<BoxDecoration>('decoration', decoration));
+    properties.add(DiagnosticsProperty<BoxDecoration>('foregroundDecoration', foregroundDecoration));
   }
 }

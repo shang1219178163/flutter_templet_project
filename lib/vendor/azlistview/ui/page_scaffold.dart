@@ -17,6 +17,12 @@ class PageScaffold extends StatelessWidget {
       body: body,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class PageInfo {
@@ -56,5 +62,11 @@ class ListPage extends StatelessWidget {
         onTap: () => _openPage(context, page),
       );
     }).toList();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<PageInfo>('children', children));
   }
 }

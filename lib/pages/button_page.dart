@@ -23,12 +23,18 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 class ButtonPage extends StatefulWidget {
-  final String? title;
 
   const ButtonPage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ButtonPageState createState() => _ButtonPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ButtonPageState extends State<ButtonPage> {
@@ -70,7 +76,7 @@ class _ButtonPageState extends State<ButtonPage> {
     return TextButton(
       onPressed: () {},
       style: ButtonStyle(
-        foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
           if (states.contains(WidgetState.pressed)) {
             return Colors.green;
           }
@@ -131,7 +137,7 @@ class _ButtonPageState extends State<ButtonPage> {
             NSectionBox(
               title: "AfterLayoutBuilder",
               child: AfterLayoutBuilder(
-                builder: (BuildContext context, Widget? child, Size? size) {
+                builder: (context, child, size) {
                   debugPrint("AfterLayoutBuilder size:$size");
                   if (size == null) {
                     return child ?? SizedBox();
@@ -732,7 +738,7 @@ class _ButtonPageState extends State<ButtonPage> {
                   ),
 
                   NScaleButton(
-                    builder: (AnimationController controller) {
+                    builder: (controller) {
                       return ElevatedButton(
                         onPressed: () {
                           DLog.d('NScaleButton');
@@ -743,7 +749,7 @@ class _ButtonPageState extends State<ButtonPage> {
                   ),
                   NScaleButton(
                     enabled: false,
-                    builder: (AnimationController controller) {
+                    builder: (controller) {
                       return ElevatedButton(
                         onPressed: null,
                         child: const Text('NScaleButton'),
@@ -820,7 +826,7 @@ class _ButtonPageState extends State<ButtonPage> {
   }
 
   Widget buildNButton() {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 3.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -1225,7 +1231,7 @@ class _ButtonPageState extends State<ButtonPage> {
         // Down Arrow
         icon: const Icon(Icons.keyboard_arrow_down),
         // Array list of
-        items: items.map((String items) {
+        items: items.map((items) {
           return DropdownMenuItem(
             value: items,
             child: Text(items),
@@ -1233,7 +1239,7 @@ class _ButtonPageState extends State<ButtonPage> {
         }).toList(),
         // After selecting the desired option,it will
         // change button value to selected
-        onChanged: (String? value) {
+        onChanged: (value) {
           setState(() {
             dropdownvalue = value!;
           });
@@ -1247,11 +1253,11 @@ class _ButtonPageState extends State<ButtonPage> {
 
   Widget buildPopupMenuButtonExt() {
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
+      builder: (context, setState) {
         return Column(
           children: [
             PopupMenuButton(
-              itemBuilder: (BuildContext context) => list.map((e) {
+              itemBuilder: (context) => list.map((e) {
                 return PopupMenuItem(value: e, child: Text(e.key));
               }).toList(),
               offset: Offset(0, 30),
@@ -1271,7 +1277,7 @@ class _ButtonPageState extends State<ButtonPage> {
             ),
             SizedBox(height: 8),
             PopupMenuButton(
-              itemBuilder: (BuildContext context) => list.map((e) {
+              itemBuilder: (context) => list.map((e) {
                 return CheckedPopupMenuItem(
                   checked: e == selectedValue,
                   value: e,
@@ -1496,5 +1502,17 @@ class _ButtonPageState extends State<ButtonPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ThemeData>('theme', theme));
+    properties.add(DiagnosticsProperty<bool>('isDark', isDark));
+    properties.add(ColorProperty('primary', primary));
+    properties.add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
+    properties.add(StringProperty('dropdownvalue', dropdownvalue));
+    properties.add(IterableProperty<MapEntry<String, String>>('list', list));
+    properties.add(DiagnosticsProperty<MapEntry<String, String>>('selectedValue', selectedValue));
   }
 }

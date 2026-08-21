@@ -304,6 +304,22 @@ class EnStepper extends StatefulWidget {
 
   @override
   State<EnStepper> createState() => _EnStepperState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<EnStep>('steps', steps));
+    properties.add(DoubleProperty('stepIconSize', stepIconSize));
+    properties.add(DiagnosticsProperty<ScrollPhysics?>('physics', physics));
+    properties.add(EnumProperty<StepperType>('type', type));
+    properties.add(EnumProperty<HorizontalTitlePosition>('horizontalTitlePosition', horizontalTitlePosition));
+    properties.add(EnumProperty<HorizontalLinePosition>('horizontalLinePosition', horizontalLinePosition));
+    properties.add(IntProperty('currentStep', currentStep));
+    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onStepTapped', onStepTapped));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onStepContinue', onStepContinue));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onStepCancel', onStepCancel));
+    properties.add(ObjectFlagProperty<ControlsWidgetBuilder?>.has('controlsBuilder', controlsBuilder));
+  }
 }
 
 class _EnStepperState extends State<EnStepper> with TickerProviderStateMixin {
@@ -315,7 +331,7 @@ class _EnStepperState extends State<EnStepper> with TickerProviderStateMixin {
     super.initState();
     _keys = List<GlobalKey>.generate(
       widget.steps.length,
-      (int i) => GlobalKey(),
+      (i) => GlobalKey(),
     );
 
     for (var i = 0; i < widget.steps.length; i += 1) {
@@ -500,12 +516,12 @@ class _EnStepperState extends State<EnStepper> with TickerProviderStateMixin {
             TextButton(
               onPressed: widget.onStepContinue,
               style: ButtonStyle(
-                foregroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+                foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
                   return states.contains(WidgetState.disabled)
                       ? null
                       : (_isDark() ? colorScheme.onSurface : colorScheme.onPrimary);
                 }),
-                backgroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+                backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
                   return _isDark() || states.contains(WidgetState.disabled) ? null : colorScheme.primary;
                 }),
                 padding: WidgetStateProperty.all<EdgeInsetsGeometry>(buttonPadding),

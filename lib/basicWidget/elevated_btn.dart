@@ -97,4 +97,21 @@ class ElevatedBtn extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('padding', padding));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(DiagnosticsProperty<Gradient?>('gradient', gradient));
+    properties.add(ColorProperty('disabledFgColor', disabledFgColor));
+    properties.add(ColorProperty('disabledBgColor', disabledBgColor));
+    properties.add(ColorProperty('disabledFgColorDark', disabledFgColorDark));
+    properties.add(ColorProperty('disabledBgColorDark', disabledBgColorDark));
+    properties.add(StringProperty('title', title));
+    properties.add(ColorProperty('titleColor', titleColor));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
+  }
 }

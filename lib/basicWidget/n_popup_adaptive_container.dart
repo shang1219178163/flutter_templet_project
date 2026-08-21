@@ -99,4 +99,16 @@ class NPopupAdaptiveContainer extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('topControlColor', topControlColor));
+    properties.add(DiagnosticsProperty<bool>('isScrollControlled', isScrollControlled));
+    properties.add(DoubleProperty('maxHeight', maxHeight));
+    properties.add(DoubleProperty('minHeight', minHeight));
+    properties.add(DoubleProperty('heightFactor', heightFactor));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(DoubleProperty('raius', raius));
+  }
 }

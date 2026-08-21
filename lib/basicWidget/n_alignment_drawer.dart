@@ -36,6 +36,17 @@ class NAlignmentDrawer extends StatefulWidget {
 
   @override
   State<NAlignmentDrawer> createState() => _NAlignmentDrawerState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
+    properties.add(ColorProperty('barrierColor', barrierColor));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onBarrier', onBarrier));
+    properties.add(DiagnosticsProperty<bool>('hasFade', hasFade));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onHide)?>.has('builder', builder));
+  }
 }
 
 class _NAlignmentDrawerState extends State<NAlignmentDrawer>
@@ -162,5 +173,14 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer>
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Tween<Offset>>('tween', tween));
+    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
+    properties.add(DiagnosticsProperty<Animation<Offset>>('offsetAnimation', offsetAnimation));
+    properties.add(DiagnosticsProperty<Animation<double>>('fadeAnimation', fadeAnimation));
   }
 }

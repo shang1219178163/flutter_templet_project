@@ -40,4 +40,11 @@ class NSecureKeyboardFocus extends StatelessWidget {
       child: child,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isObscure', isObscure));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
+  }
 }

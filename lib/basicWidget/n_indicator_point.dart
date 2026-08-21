@@ -32,6 +32,13 @@ class NIndicatorPoint extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('color', color));
+    properties.add(DoubleProperty('size', size));
+  }
 }
 
 class NIndicatorPointNew extends StatelessWidget {
@@ -71,6 +78,15 @@ class NIndicatorPointNew extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('innerColor', innerColor));
+    properties.add(DoubleProperty('size', size));
+    properties.add(DoubleProperty('innerSize', innerSize));
   }
 }
 
@@ -117,6 +133,17 @@ class NIndicatorCircle extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('size', size));
+    properties.add(DoubleProperty('borderWidth', borderWidth));
+    properties.add(DoubleProperty('borderWidthSelected', borderWidthSelected));
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('colorSelected', colorSelected));
+    properties.add(DiagnosticsProperty<bool>('isSelected', isSelected));
+  }
 }
 
 class NIndicatorDoubleCirlce extends StatelessWidget {
@@ -156,5 +183,14 @@ class NIndicatorDoubleCirlce extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('innerColor', innerColor));
+    properties.add(DoubleProperty('size', size));
+    properties.add(DoubleProperty('innerSize', innerSize));
   }
 }

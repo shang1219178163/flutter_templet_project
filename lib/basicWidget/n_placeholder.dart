@@ -66,4 +66,13 @@ class NPlaceholder extends StatelessWidget {
           )),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AssetImage>('placeholder', placeholder));
+    properties.add(StringProperty('message', message));
+    properties.add(DoubleProperty('imageAndTextSpacing', imageAndTextSpacing));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
+  }
 }

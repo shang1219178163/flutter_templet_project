@@ -66,6 +66,22 @@ class IMTextfieldBar extends StatefulWidget {
 
   @override
   _IMTextfieldBarState createState() => _IMTextfieldBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onSubmitted', onSubmitted));
+    properties.add(StringProperty('hintText', hintText));
+    properties.add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType));
+    properties.add(ObjectFlagProperty<EventWidgetBuilder?>.has('footerBuilder', footerBuilder));
+    properties.add(DoubleProperty('footerMinHeight', footerMinHeight));
+    properties.add(DoubleProperty('footerMaxHeight', footerMaxHeight));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+    properties.add(DiagnosticsProperty<bool>('isVoice', isVoice));
+  }
 }
 
 class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObserver {
@@ -146,7 +162,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
         // debugPrint("${DateTime.now()} onRecordStart");
         // await soundStartRecord();
       },
-      onRecordEnd: (bool isCancel) async {
+      onRecordEnd: (isCancel) async {
         // debugPrint("${DateTime.now()} onRecordEnd");
         // final fileURL = await stopSoundRecorder();
         // debugPrint("${DateTime.now()} onRecordEnd fileURL: $fileURL");
@@ -276,5 +292,15 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isExpand', isExpand));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isExpandEmoji', isExpandEmoji));
+    properties.add(DiagnosticsProperty<bool>('isVoice', isVoice));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isKeyboardVisibleVN', isKeyboardVisibleVN));
+    properties.add(DoubleProperty('bottom', bottom));
   }
 }

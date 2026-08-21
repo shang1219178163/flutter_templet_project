@@ -35,6 +35,17 @@ class DiscussLikeBtn extends StatefulWidget {
 
   @override
   State<DiscussLikeBtn> createState() => _DiscussLikeBtnState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('likeNumberZeroStr', likeNumberZeroStr));
+    properties.add(IntProperty('likeNumber', likeNumber));
+    properties.add(DiagnosticsProperty<bool>('like', like));
+    properties.add(ObjectFlagProperty<Future<Map<String, dynamic>> Function()>.has('onLike', onLike));
+    properties.add(DiagnosticsProperty<bool>('disable', disable));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDisable', onDisable));
+  }
 }
 
 class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
@@ -85,7 +96,7 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
       icon: NScaleButton(
         enabled: !widget.disable,
         tween: Tween<double>(begin: 1.0, end: 1.5),
-        builder: (AnimationController controller) {
+        builder: (controller) {
           return GestureDetector(
             onTap: onTap,
             child: Container(
@@ -128,5 +139,13 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
     like = map["like"] ?? false;
     likeNumber = map["likeNumber"] ?? 0;
     setState(() {});
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('likeNumber', likeNumber));
+    properties.add(DiagnosticsProperty<bool>('like', like));
+    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
   }
 }

@@ -27,6 +27,16 @@ class AnimatedSlider extends StatefulWidget {
 
   @override
   State<AnimatedSlider> createState() => _AnimatedSliderState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AnimatedSliderController?>('controller', controller));
+    properties.add(DoubleProperty('value', value));
+    properties.add(DoubleProperty('min', min));
+    properties.add(DoubleProperty('max', max));
+    properties.add(ObjectFlagProperty<ValueChanged<double>?>.has('onChanged', onChanged));
+  }
 }
 
 class _AnimatedSliderState extends State<AnimatedSlider> with SingleTickerProviderStateMixin {

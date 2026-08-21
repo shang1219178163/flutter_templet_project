@@ -315,6 +315,11 @@ class DashedDecoration extends Decoration {
         defaultValue: null));
     properties.add(EnumProperty<BoxShape>('shape', shape,
         defaultValue: BoxShape.rectangle));
+        properties.add(EnumProperty<BlendMode?>('backgroundBlendMode', backgroundBlendMode));
+        properties.add(DoubleProperty('strokeHeight', strokeHeight));
+        properties.add(DoubleProperty('gap', gap));
+        properties.add(ColorProperty('dashedColor', dashedColor));
+        properties.add(DiagnosticsProperty<bool?>('dawDashed', dawDashed));
   }
 
   @override

@@ -30,6 +30,15 @@ class SectionListView<H, E> extends StatefulWidget {
 
   @override
   _SectionListViewState createState() => _SectionListViewState<H, E>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<H>('headerList', headerList));
+    properties.add(IterableProperty<List<E>>('itemList', itemList));
+    properties.add(ObjectFlagProperty<Widget Function(H e)>.has('headerBuilder', headerBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(int section, int row, E e)>.has('itemBuilder', itemBuilder));
+  }
 }
 
 class _SectionListViewState<H, E> extends State<SectionListView<H, E>> {
@@ -68,7 +77,7 @@ class _SectionListViewState<H, E> extends State<SectionListView<H, E>> {
   Widget buildSliverList({required int section, required List<E> list}) {
     final items = widget.itemList[section];
     return SliverList(
-      delegate: SliverChildBuilderDelegate((_, int index) => widget.itemBuilder(section, index, items[index]),
+      delegate: SliverChildBuilderDelegate((_, index) => widget.itemBuilder(section, index, items[index]),
           childCount: items.length),
     );
   }

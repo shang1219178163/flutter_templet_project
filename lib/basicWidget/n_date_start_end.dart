@@ -37,6 +37,15 @@ class NDateStartEnd extends StatefulWidget {
 
   @override
   State<NDateStartEnd> createState() => _NDateStartEndState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<String? Function()?>.has('startDate', startDate));
+    properties.add(ObjectFlagProperty<String? Function()?>.has('endDate', endDate));
+    properties.add(ObjectFlagProperty<void Function(String dateStr)?>.has('onStart', onStart));
+    properties.add(ObjectFlagProperty<void Function(String dateStr)?>.has('onEnd', onEnd));
+  }
 }
 
 class _NDateStartEndState extends State<NDateStartEnd> {
@@ -143,10 +152,18 @@ class _NDateStartEndState extends State<NDateStartEnd> {
       selectDate: selectDate == null ? null : PDuration.parse(selectDate),
       minDateTime: minDateTimeNew,
       maxDateTime: PDuration.now(),
-      confirm: (PDuration pDate, String date) {
+      confirm: (pDate, date) {
         // debugPrint('日期选择：$date');
         onConfirm(pDate.toDate());
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<DateTime>('now', now));
+    properties.add(StringProperty('startDate', startDate));
+    properties.add(StringProperty('endDate', endDate));
   }
 }

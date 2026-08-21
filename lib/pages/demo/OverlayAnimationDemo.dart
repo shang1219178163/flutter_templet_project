@@ -18,6 +18,12 @@ class OverlayAnimationDemo extends StatefulWidget {
 
   @override
   State<OverlayAnimationDemo> createState() => _OverlayAnimationDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with AutomaticKeepAliveClientMixin {
@@ -340,5 +346,12 @@ class _OverlayAnimationDemoState extends State<OverlayAnimationDemo> with Automa
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('initialIndex', initialIndex));
+    properties.add(IterableProperty<Tuple2<Tab, Widget>>('items', items));
   }
 }

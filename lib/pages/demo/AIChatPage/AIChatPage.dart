@@ -17,6 +17,12 @@ class AIChatPage extends StatefulWidget {
 
   @override
   State<AIChatPage> createState() => _AIChatPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AIChatPageState extends State<AIChatPage> {

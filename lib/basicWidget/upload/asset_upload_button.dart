@@ -58,6 +58,20 @@ class AssetUploadButton extends StatefulWidget {
 
   @override
   _AssetUploadButtonState createState() => _AssetUploadButtonState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AssetUploadModel>('model', model));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('urlBlock', urlBlock));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDelete', onDelete));
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(ObjectFlagProperty<Widget Function(String url)?>.has('imgBuilder', imgBuilder));
+    properties.add(ObjectFlagProperty<String Function(Map<String, dynamic> res)?>.has('urlConvert', urlConvert));
+    properties.add(DiagnosticsProperty<bool>('showFileSize', showFileSize));
+  }
 }
 
 class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKeepAliveClientMixin {
@@ -320,11 +334,11 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       // return "";//调试代码,勿删!!!
       return uploadFile(
         filePath: path,
-        onSendProgress: (int count, int total) {
+        onSendProgress: (count, total) {
           final percent = (count / total);
           _percentVN.value = percent.clamp(0, 0.99); // dio 上传进度和返回 url 有时间差
         },
-        onReceiveProgress: (int count, int total) {
+        onReceiveProgress: (count, total) {
           final receiveProgress = (count / total);
           _percentVN.value = 1; // dio 上传进度和返回 url 有时间差
           // LogUtil.d("${fileName}__receiveProgress: ${_percentVN.value}");

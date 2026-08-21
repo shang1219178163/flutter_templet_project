@@ -29,6 +29,16 @@ class EmojiPage extends StatefulWidget {
 
   @override
   _EmojiPageState createState() => _EmojiPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideAppBar', hideAppBar));
+    properties.add(DiagnosticsProperty<bool>('hideSelected', hideSelected));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onSend', onSend));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDelete', onDelete));
+  }
 }
 
 class _EmojiPageState extends State<EmojiPage> {
@@ -279,6 +289,13 @@ class _EmojiPageState extends State<EmojiPage> {
     debugPrint("list: $list");
 
     currentVN.value = list.join();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, String>>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('currentVN', currentVN));
   }
 
   // allMatche(String text) {

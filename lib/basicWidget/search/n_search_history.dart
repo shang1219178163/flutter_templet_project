@@ -28,6 +28,14 @@ class NSearchHistory extends StatefulWidget {
 
   @override
   State<NSearchHistory> createState() => _NSearchHistoryState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(ObjectFlagProperty<void Function(String v)>.has('onSelected', onSelected));
+    properties.add(ObjectFlagProperty<void Function()>.has('onClear', onClear));
+  }
 }
 
 class _NSearchHistoryState extends State<NSearchHistory> {
@@ -62,7 +70,7 @@ class _NSearchHistoryState extends State<NSearchHistory> {
               crossAxisAlignment: WrapCrossAlignment.start,
               children: List.generate(
                 widget.items.length,
-                (int index) {
+                (index) {
                   final item = widget.items[index];
                   return GestureDetector(
                     onTap: () {

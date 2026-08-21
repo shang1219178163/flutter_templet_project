@@ -10,12 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ListDismissibleDemo extends StatefulWidget {
-  final String? title;
 
   const ListDismissibleDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ListDismissibleDemoState createState() => _ListDismissibleDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
@@ -246,5 +252,13 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('editingController', editingController));
+    properties.add(DiagnosticsProperty<DateTime>('selectedDate', selectedDate));
+    properties.add(IterableProperty<String>('list', list));
   }
 }

@@ -153,4 +153,14 @@ class AePatientCard extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(StringProperty('avatar', avatar));
+    properties.add(StringProperty('remark', remark));
+    properties.add(StringProperty('section', section));
+    properties.add(StringProperty('status', status));
+  }
 }

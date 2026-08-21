@@ -53,6 +53,19 @@ class AssetUploadDocumentButton extends StatefulWidget {
 
   @override
   AssetUploadDocumentButtonState createState() => AssetUploadDocumentButtonState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AssetUploadDocumentModel>('model', model));
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('urlBlock', urlBlock));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onDelete', onDelete));
+    properties.add(DiagnosticsProperty<bool>('showFileSize', showFileSize));
+    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
+  }
 }
 
 class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton> with AutomaticKeepAliveClientMixin {
@@ -250,11 +263,11 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton> wi
   }) async {
     var res = await OssUtil.upload(
       filePath: path,
-      onSendProgress: (int count, int total) {
+      onSendProgress: (count, total) {
         final percent = (count / total);
         _percentVN.value = percent.clamp(0, 0.99); // dio 上传进度和返回 url 有时间差
       },
-      onReceiveProgress: (int count, int total) {
+      onReceiveProgress: (count, total) {
         _percentVN.value = 1;
       },
       needCompress: false,
@@ -320,4 +333,11 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton> wi
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('filePath', filePath));
+    properties.add(StringProperty('fileName', fileName));
+  }
 }

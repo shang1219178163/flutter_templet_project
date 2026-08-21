@@ -57,6 +57,13 @@ class NSliverSectionListView<T> extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<NSliverSectionModel<T>>('items', items));
+    properties.add(ObjectFlagProperty<Widget Function(NSliverSectionModel<T> model)>.has('sectionBuilder', sectionBuilder));
+  }
 }
 
 /// 基于 SliverList 的分组组件
@@ -87,6 +94,16 @@ class NSliverSection<T> extends StatefulWidget {
 
   @override
   State<NSliverSection<T>> createState() => _NSliverSectionState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NSliverSectionModel<T>>('model', model));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(DoubleProperty('headerHeight', headerHeight));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, double offset, bool overlapsContent)?>.has('headerBuilder', headerBuilder));
+    properties.add(ObjectFlagProperty<NullableIndexedWidgetBuilder>.has('itembuilder', itembuilder));
+  }
 }
 
 class _NSliverSectionState<T> extends State<NSliverSection<T>> {
@@ -100,7 +117,7 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
           pinned: true,
           min: widget.headerHeight,
           max: widget.headerHeight,
-          builder: (context, double shrinkOffset, bool overlapsContent) {
+          builder: (context, shrinkOffset, overlapsContent) {
             final header = widget.headerBuilder?.call(context, shrinkOffset, overlapsContent) ??
                 Container(
                   alignment: Alignment.centerLeft,
@@ -128,5 +145,11 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
   }
 }

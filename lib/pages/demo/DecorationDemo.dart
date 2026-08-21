@@ -11,6 +11,12 @@ class DecorationDemo extends StatefulWidget {
 
   @override
   _DecorationDemoState createState() => _DecorationDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DecorationDemoState extends State<DecorationDemo> {
@@ -133,5 +139,11 @@ class _DecorationDemoState extends State<DecorationDemo> {
       width: width,
       height: height,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isFlag', isFlag));
   }
 }

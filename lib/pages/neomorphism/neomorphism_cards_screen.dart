@@ -331,4 +331,12 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('status', status));
+    properties.add(IterableProperty<Tuple3<int, bool, Icon>>('items', items));
+    properties.add(IntProperty('selectedIndex', selectedIndex));
+  }
 }

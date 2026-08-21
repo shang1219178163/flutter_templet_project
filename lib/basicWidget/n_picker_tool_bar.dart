@@ -90,6 +90,18 @@ class NPickerToolBar extends StatelessWidget {
     );
   }
 
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(StringProperty('title', title));
+    properties.add(StringProperty('cancelTitle', cancelTitle));
+    properties.add(StringProperty('confirmTitle', confirmTitle));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
+  }
+
   // buildTitleBar({
   //   String title = '请选择',
   //   List<String> actionTitles = const ['取消', '确定'],

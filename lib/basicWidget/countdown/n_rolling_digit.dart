@@ -69,4 +69,11 @@ class NRollingDigit extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('value', value));
+    properties.add(ObjectFlagProperty<Widget Function(String v)>.has('builder', builder));
+  }
 }

@@ -65,6 +65,17 @@ class _StackPopup extends StatefulWidget {
 
   @override
   State<_StackPopup> createState() => _StackPopupState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Alignment>('from', from));
+    properties.add(ObjectFlagProperty<WidgetBuilder>.has('builder', builder));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(DiagnosticsProperty<Curve>('curve', curve));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onDismiss', onDismiss));
+  }
 }
 
 class _StackPopupState extends State<_StackPopup> with SingleTickerProviderStateMixin {

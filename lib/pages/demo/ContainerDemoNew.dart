@@ -11,6 +11,12 @@ class ContainerDemoNew extends StatefulWidget {
 
   @override
   State<ContainerDemoNew> createState() => _ContainerDemoNewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ContainerDemoNewState extends State<ContainerDemoNew> with AutomaticKeepAliveClientMixin {
@@ -112,5 +118,13 @@ class _ContainerDemoNewState extends State<ContainerDemoNew> with AutomaticKeepA
         ].map((e) => SliverToBoxAdapter(child: e)).toList(),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('initialIndex', initialIndex));
+    properties.add(IterableProperty<(Tab, Widget)>('items', items));
+    properties.add(DiagnosticsProperty<bool>('isSliver', isSliver));
   }
 }

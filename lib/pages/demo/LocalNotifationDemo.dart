@@ -154,12 +154,18 @@
 import 'package:flutter/material.dart';
 
 class LocalNotifationDemo extends StatefulWidget {
-  final String? title;
 
   const LocalNotifationDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _LocalNotifationDemoState createState() => _LocalNotifationDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _LocalNotifationDemoState extends State<LocalNotifationDemo> {

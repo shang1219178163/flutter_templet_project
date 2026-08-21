@@ -36,6 +36,15 @@ class RadialButton extends StatefulWidget {
 
   @override
   _RadialButtonState createState() => _RadialButtonState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
+    properties.add(DiagnosticsProperty<Alignment>('center', center));
+    properties.add(ObjectFlagProperty<GestureTapCallback?>.has('onTap', onTap));
+  }
 }
 
 class _RadialButtonState extends State<RadialButton> {

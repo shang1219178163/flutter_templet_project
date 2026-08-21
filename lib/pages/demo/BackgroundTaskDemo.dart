@@ -12,6 +12,12 @@ class BackgroundTaskDemo extends StatefulWidget {
 
   @override
   State<BackgroundTaskDemo> createState() => _BackgroundTaskDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _BackgroundTaskDemoState extends State<BackgroundTaskDemo> {
@@ -72,5 +78,15 @@ class _BackgroundTaskDemoState extends State<BackgroundTaskDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(DiagnosticsProperty<Map<String, String>>('linkMap', linkMap));
   }
 }

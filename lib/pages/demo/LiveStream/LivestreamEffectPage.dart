@@ -27,6 +27,12 @@ class LivestreamEffectPage extends StatefulWidget {
 
   @override
   State<LivestreamEffectPage> createState() => _LivestreamEffectPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
@@ -313,5 +319,16 @@ class _LivestreamEffectPageState extends State<LivestreamEffectPage> {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(IntProperty('selectedIndex', selectedIndex));
+    properties.add(StringProperty('current', current));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('countVN', countVN));
   }
 }

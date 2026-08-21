@@ -6,12 +6,18 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class WrapDemo extends StatefulWidget {
-  final String? title;
 
   const WrapDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _WrapDemoState createState() => _WrapDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _WrapDemoState extends State<WrapDemo> {
@@ -161,5 +167,12 @@ class _WrapDemoState extends State<WrapDemo> {
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Color>('items', items));
+    properties.add(IterableProperty<String>('imageUrls', imageUrls));
   }
 }

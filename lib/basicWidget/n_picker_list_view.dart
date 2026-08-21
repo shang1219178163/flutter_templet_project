@@ -74,6 +74,17 @@ class NPickerListView<E> extends StatefulWidget {
 
   @override
   NPickerListViewState<E> createState() => NPickerListViewState<E>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
+    properties.add(IterableProperty<E>('items', items));
+    properties.add(ObjectFlagProperty<Widget? Function(BuildContext context, int index, List<E> items)>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<bool Function(E element, String search)?>.has('filterCb', filterCb));
+  }
 }
 
 class NPickerListViewState<E> extends State<NPickerListView<E>> {
@@ -102,7 +113,7 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
             child: NSearchTextField(
               placeholder: '请输入',
               backgroundColor: Color(0xffEDEDED),
-              onChanged: (String value) {
+              onChanged: (value) {
                 searchVN.value = value;
                 DLog.d("onChanged: $value, ${searchVN.value}, ");
               },
@@ -149,5 +160,12 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
       ),
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('searchVN', searchVN));
   }
 }

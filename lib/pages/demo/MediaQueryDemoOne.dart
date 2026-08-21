@@ -17,6 +17,12 @@ class MediaQueryDemoOne extends StatefulWidget {
 
   @override
   _MediaQueryDemoOneState createState() => _MediaQueryDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
@@ -103,6 +109,14 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
     Tuple2("devicePixelRatio", "单位逻辑像素的物理像素数量，即设备像素比。"),
     Tuple2("textScaleFactor", "单位逻辑像素字体像素数，如果设置为1.5则比指定的字体大50%。"),
   ];
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('labelText', labelText));
+    properties.add(IterableProperty<Tuple3<String, String, String>>('tips', tips));
+    properties.add(IterableProperty<Tuple2<String, String>>('items', items));
+  }
 }
 
 bool isTuple(Object? obj) {

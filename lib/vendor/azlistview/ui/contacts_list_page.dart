@@ -24,9 +24,9 @@ class _ContactListPageState extends State<ContactListPage> {
     //加载联系人列表
     rootBundle.loadString('assets/data/contacts.json').then((value) {
       List list = jsonDecode(value);
-      list.forEach((v) {
+      for (final v in list) {
         _contacts.add(ContactInfo.fromJson(v));
-      });
+      }
       _handleList(_contacts);
     });
   }
@@ -148,12 +148,12 @@ class _ContactListPageState extends State<ContactListPage> {
       physics: AlwaysScrollableScrollPhysics(),
       data: _contacts,
       itemCount: _contacts.length,
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         // if (index == 0) return _buildHeader();
         var model = _contacts[index];
         return buildListItem(model);
       },
-      susItemBuilder: (BuildContext context, int index) {
+      susItemBuilder: (context, index) {
         var model = _contacts[index];
         final str = "section${model.getSuspensionTag()}";
         return Container(
@@ -188,5 +188,11 @@ class _ContactListPageState extends State<ContactListPage> {
         downDecoration: getIndexBarDecoration(Colors.grey[200]!),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('susItemHeight', susItemHeight));
   }
 }

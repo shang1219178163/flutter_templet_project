@@ -22,6 +22,12 @@ class SliverPersistentHeaderDemoTwo extends StatefulWidget {
 
   @override
   State<SliverPersistentHeaderDemoTwo> createState() => _SliverPersistentHeaderDemoTwoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDemoTwo> {
@@ -53,7 +59,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
 
   Widget buildBody() {
     return NestedScrollView(
-      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
           buildPersistentHeader(bgUrl: AppRes.image.urls[6]),
         ];
@@ -82,13 +88,13 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
 
   Widget buildBodyNew() {
     return NestedScrollView(
-      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
           buildPersistentHeader(bgUrl: AppRes.image.urls[5]),
         ];
       },
       body: NCustomScrollView<String>(
-        onRequest: (bool isRefresh, int page, int pageSize, pres) async {
+        onRequest: (isRefresh, page, pageSize, pres) async {
           final length = isRefresh ? 0 : pres.length;
           await Future.delayed(Duration(milliseconds: 1000));
           final list = List<String>.generate(pageSize, (i) => "item${length + i}");
@@ -126,7 +132,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
       floating: floating,
       min: min,
       max: max,
-      builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+      builder: (context, shrinkOffset, overlapsContent) {
         // 根据 shrinkOffset 动态调整标题内容大小
         var sizeFactor = 1 - (shrinkOffset / (max - min));
         var titleSize = 30 * sizeFactor; // 标题文字的动态大小
@@ -287,5 +293,13 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
         onChanged: onChanged,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EasyRefreshController>('refreshController', refreshController));
+    properties.add(DiagnosticsProperty<bool>('pinned', pinned));
+    properties.add(DiagnosticsProperty<bool>('floating', floating));
   }
 }

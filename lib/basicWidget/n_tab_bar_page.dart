@@ -43,6 +43,20 @@ class NTabBarPage extends StatefulWidget {
 
   @override
   State<NTabBarPage> createState() => _NTabBarPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
+    properties.add(DiagnosticsProperty<Alignment>('tabBarAlignment', tabBarAlignment));
+    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
+    properties.add(DiagnosticsProperty<bool>('isThemeBg', isThemeBg));
+    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onTabBar', onTabBar));
+    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('headerBuilder', headerBuilder));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('middleBuilder', middleBuilder));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('footerBuilder', footerBuilder));
+  }
 }
 
 class _NTabBarPageState extends State<NTabBarPage>
@@ -165,5 +179,16 @@ class _NTabBarPageState extends State<NTabBarPage>
     //   controller: tabController,
     //   children: items.map((e) => e.item2).toList(),
     // );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('tabBarIndex', tabBarIndex));
+    properties.add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
+    properties.add(ColorProperty('textColor', textColor));
+    properties.add(ColorProperty('bgColor', bgColor));
   }
 }

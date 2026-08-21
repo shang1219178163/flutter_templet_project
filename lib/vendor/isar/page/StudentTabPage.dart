@@ -14,6 +14,12 @@ class StudentTabPage extends StatefulWidget {
 
   @override
   State<StudentTabPage> createState() => _StudentTabPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _StudentTabPageState extends State<StudentTabPage> {
@@ -45,5 +51,11 @@ class _StudentTabPageState extends State<StudentTabPage> {
       case 1:
         context.read<DBGenericProvider<DBStudent>>().notify();
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<(String, Widget)>('items', items));
   }
 }

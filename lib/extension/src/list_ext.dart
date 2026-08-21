@@ -230,7 +230,7 @@ extension ListExt<T, E> on List<E> {
   /// 多参数排序，按 [descriptors] 顺序依次比较；返回新列表，不修改原集合
   /// [ascending] 为 true 升序，false 降序
   void sortByMultiple(List<SortDescriptor<E>> descriptors) {
-    sort((E a, E b) {
+    sort((a, b) {
       for (final d in descriptors) {
         final va = d.selector(a);
         final vb = d.selector(b);

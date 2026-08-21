@@ -8,6 +8,12 @@ class MediaQueryScreeenDemo extends StatefulWidget {
 
   @override
   _MediaQueryScreeenDemoState createState() => _MediaQueryScreeenDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
@@ -256,5 +262,19 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
     debugPrint("bottomBarHeight:${bottomBarHeight.toString()}");
     debugPrint("safeContentHeight:${safeContentHeight.toString()}");
     debugPrint("safeHeight:${safeHeight.toString()}");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<MediaQueryData>('mq', mq));
+    properties.add(DoubleProperty('pixelRatio', pixelRatio));
+    properties.add(DoubleProperty('screenWidth', screenWidth));
+    properties.add(DoubleProperty('screenHeight', screenHeight));
+    properties.add(DoubleProperty('statusBarHeight', statusBarHeight));
+    properties.add(DoubleProperty('bottomBarHeight', bottomBarHeight));
+    properties.add(DoubleProperty('iosTabHeight', iosTabHeight));
+    properties.add(DoubleProperty('safeContentHeight', safeContentHeight));
+    properties.add(DoubleProperty('safeHeight', safeHeight));
   }
 }

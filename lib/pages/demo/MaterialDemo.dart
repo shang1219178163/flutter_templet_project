@@ -7,6 +7,12 @@ class MaterialDemo extends StatefulWidget {
 
   @override
   _MaterialDemoState createState() => _MaterialDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderStateMixin {
@@ -129,5 +135,14 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
             ),
           )),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<MaterialType>('types', types));
+    properties.add(EnumProperty<MaterialType>('type', type));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<MaterialType>>('typeVN', typeVN));
   }
 }

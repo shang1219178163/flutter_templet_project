@@ -560,4 +560,11 @@ class _ArticleDetailPageState extends State<ArticleDetailPage>
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
+    properties.add(DiagnosticsProperty<ArticleDetailModel?>('detail', detail));
+  }
 }

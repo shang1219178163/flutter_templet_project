@@ -12,6 +12,12 @@ class TabBarViewDemo extends StatefulWidget {
 
   @override
   State<TabBarViewDemo> createState() => _TabBarViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProviderStateMixin {
@@ -78,7 +84,7 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
                 .map((e) => Tab(
                       child: ValueListenableBuilder<int>(
                           valueListenable: tabIndex,
-                          builder: (BuildContext context, int value, Widget? child) {
+                          builder: (context, value, child) {
                             final index = titles.indexOf(e);
                             if (index != 1) {
                               if (index == 2) {
@@ -123,5 +129,16 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('currentIndex', currentIndex));
+    properties.add(IntProperty('selectedIndex', selectedIndex));
+    properties.add(IterableProperty<String>('titles', titles));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('tabIndex', tabIndex));
+    properties.add(ColorProperty('primary', primary));
   }
 }

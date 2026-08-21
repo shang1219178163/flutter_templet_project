@@ -4,28 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
-  /// Public properties, set on constructor
-  final bool value;
-  final double height;
-  final double fontSize;
-  final ValueChanged<bool> onChanged;
-  final Color activeColor;
-  final Color inactiveColor;
-  final String activeText;
-  final String inactiveText;
-  final Color activeTextColor;
-  final Color inactiveTextColor;
-  final Color activeThumbColor;
-  final Color inactiveThumbColor;
-  final String activeTooltip;
-  final String inactiveTooltip;
-  final Widget? activeThumbIcon;
-  final Widget? inactiveThumbIcon;
-
-  // Private widgets created from properties in constructor.
-  late final Text _activeTextWidget;
-  late final Text _inactiveTextWidget;
-  late final double _spaceRequiredForText;
 
   CustomSwitch({
     Key? key,
@@ -68,6 +46,28 @@ class CustomSwitch extends StatefulWidget {
     _spaceRequiredForText = max(textSize(_activeTextWidget).width,
         textSize(_inactiveTextWidget).width);
   }
+  /// Public properties, set on constructor
+  final bool value;
+  final double height;
+  final double fontSize;
+  final ValueChanged<bool> onChanged;
+  final Color activeColor;
+  final Color inactiveColor;
+  final String activeText;
+  final String inactiveText;
+  final Color activeTextColor;
+  final Color inactiveTextColor;
+  final Color activeThumbColor;
+  final Color inactiveThumbColor;
+  final String activeTooltip;
+  final String inactiveTooltip;
+  final Widget? activeThumbIcon;
+  final Widget? inactiveThumbIcon;
+
+  // Private widgets created from properties in constructor.
+  late final Text _activeTextWidget;
+  late final Text _inactiveTextWidget;
+  late final double _spaceRequiredForText;
 
   @override
   State<CustomSwitch> createState() => _CustomSwitchState();
@@ -80,6 +80,25 @@ class CustomSwitch extends StatefulWidget {
         textDirection: TextDirection.ltr)
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('value', value));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('fontSize', fontSize));
+    properties.add(ObjectFlagProperty<ValueChanged<bool>>.has('onChanged', onChanged));
+    properties.add(ColorProperty('activeColor', activeColor));
+    properties.add(ColorProperty('inactiveColor', inactiveColor));
+    properties.add(StringProperty('activeText', activeText));
+    properties.add(StringProperty('inactiveText', inactiveText));
+    properties.add(ColorProperty('activeTextColor', activeTextColor));
+    properties.add(ColorProperty('inactiveTextColor', inactiveTextColor));
+    properties.add(ColorProperty('activeThumbColor', activeThumbColor));
+    properties.add(ColorProperty('inactiveThumbColor', inactiveThumbColor));
+    properties.add(StringProperty('activeTooltip', activeTooltip));
+    properties.add(StringProperty('inactiveTooltip', inactiveTooltip));
   }
 }
 

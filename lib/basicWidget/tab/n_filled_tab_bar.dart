@@ -48,6 +48,22 @@ class NFilledTabBar<E> extends StatefulWidget {
 
   @override
   State<NFilledTabBar<E>> createState() => _NFilledTabBarState<E>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TabController?>('controller', controller));
+    properties.add(IterableProperty<E>('items', items));
+    properties.add(ObjectFlagProperty<String Function(E e)>.has('nameCb', nameCb));
+    properties.add(ObjectFlagProperty<LinearGradient Function(E e)?>.has('gradientCb', gradientCb));
+    properties.add(DoubleProperty('height', height));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('itemPadding', itemPadding));
+    properties.add(DiagnosticsProperty<TextStyle?>('labelStyle', labelStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('unselectedLabelStyle', unselectedLabelStyle));
+    properties.add(ObjectFlagProperty<ValueChanged<int>?>.has('onChanged', onChanged));
+  }
 }
 
 class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProviderStateMixin {
@@ -119,7 +135,7 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
               iconOpacity: 1,
               height: height,
               indicatorSize: Size.fromWidth(constraints.maxWidth / widget.items.length),
-              iconBuilder: (int i) {
+              iconBuilder: (i) {
                 final isSelected = i == value;
                 final textStyle = isSelected ? labelStyle : unselectedLabelStyle;
 
@@ -169,5 +185,11 @@ class _NFilledTabBarState<E> extends State<NFilledTabBar<E>> with TickerProvider
         );
       }),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TabController?>('tabController', tabController));
   }
 }

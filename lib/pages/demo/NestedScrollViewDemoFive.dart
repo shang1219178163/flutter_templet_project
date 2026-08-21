@@ -22,6 +22,12 @@ class NestedScrollViewDemoFive extends StatefulWidget {
 
   @override
   _NestedScrollViewDemoFiveState createState() => _NestedScrollViewDemoFiveState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> with SingleTickerProviderStateMixin {
@@ -187,7 +193,7 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
           fit: BoxFit.cover,
         ),
       ),
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (context, constraints) {
         var top = constraints.maxHeight;
         final fixedHeight = statusBarHeight + tabBarHeight;
         var opacity = ((top - fixedHeight - kToolbarHeight) / (expandedHeight - fixedHeight)).clamp(0.0, 1.0);
@@ -257,5 +263,14 @@ class _NestedScrollViewDemoFiveState extends State<NestedScrollViewDemoFive> wit
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<String>('tabTitles', tabTitles));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(IterableProperty<int>('items', items));
   }
 }

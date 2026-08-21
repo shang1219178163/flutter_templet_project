@@ -15,6 +15,12 @@ class OverflowDemo extends StatefulWidget {
 
   @override
   _OverflowDemoState createState() => _OverflowDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _OverflowDemoState extends State<OverflowDemo> {

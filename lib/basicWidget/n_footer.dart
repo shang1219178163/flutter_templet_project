@@ -70,4 +70,18 @@ class NFooter extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(DoubleProperty('btnHeight', btnHeight));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('btnColor', btnColor));
+    properties.add(DoubleProperty('btnElevation', btnElevation));
+  }
 }

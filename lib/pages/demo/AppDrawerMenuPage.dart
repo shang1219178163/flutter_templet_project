@@ -17,6 +17,12 @@ class AppDrawerMenuPage extends StatefulWidget {
 
   @override
   _AppDrawerMenuPageState createState() => _AppDrawerMenuPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
@@ -63,7 +69,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
                     return Column(
                       children: [
                         StatefulBuilder(
-                          builder: (BuildContext context, StateSetter setState) {
+                          builder: (context, setState) {
                             final open = e.isOpen ?? false;
                             return ListTile(
                               dense: false,
@@ -74,7 +80,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
                               ),
                               title: Text(e.title, style: TextStyle(fontSize: 16.0)),
                               trailing: Switch(
-                                onChanged: (bool value) {
+                                onChanged: (value) {
                                   e.isOpen = !open;
                                   setState(() {});
                                   CacheService().setBool(CacheKey.recoverLastPageRoute.name, e.isOpen);
@@ -222,7 +228,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
       ),
       title: Text("灰色滤镜", style: TextStyle(fontSize: 16.0)),
       trailing: Switch(
-        onChanged: (bool value) {
+        onChanged: (value) {
           isGrey = !isGrey;
           debugPrint("isGrey:$isGrey");
           final color = value ? Colors.grey : Colors.transparent;
@@ -237,5 +243,14 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
         DLog.d("退出");
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<CellModel>('items', items));
+    properties.add(DiagnosticsProperty<bool>('isGrey', isGrey));
+    properties.add(DiagnosticsProperty('textStyle', textStyle));
+    properties.add(DiagnosticsProperty('themeTitle', themeTitle));
   }
 }

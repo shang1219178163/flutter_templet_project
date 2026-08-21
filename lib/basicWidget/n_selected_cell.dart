@@ -34,6 +34,13 @@ class NSelectedCell extends StatefulWidget {
 
   @override
   State<NSelectedCell> createState() => _NSelectedCellState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isSelected', isSelected));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onToggle', onToggle));
+  }
 }
 
 class _NSelectedCellState extends State<NSelectedCell> {

@@ -37,4 +37,12 @@ class RedPacketLayer extends StatelessWidget {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<RedPacketController>('controller', controller));
+    properties.add(DiagnosticsProperty<Size>('screenSize', screenSize));
+    properties.add(ObjectFlagProperty<void Function(RedPacketModel model, Offset global)>.has('onSelected', onSelected));
+  }
 }

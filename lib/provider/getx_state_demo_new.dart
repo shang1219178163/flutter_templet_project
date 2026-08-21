@@ -16,6 +16,12 @@ class GetxStateDemoNew extends StatefulWidget {
 
   @override
   State<GetxStateDemoNew> createState() => _GetxStateDemoNewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _GetxStateDemoNewState extends State<GetxStateDemoNew> {
@@ -84,5 +90,12 @@ class _GetxStateDemoNewState extends State<GetxStateDemoNew> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<RxInt>('count', count));
+    properties.add(DiagnosticsProperty<RxString>('desc', desc));
   }
 }

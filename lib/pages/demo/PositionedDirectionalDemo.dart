@@ -9,12 +9,18 @@
 import 'package:flutter/material.dart';
 
 class PositionedDirectionalDemo extends StatefulWidget {
-  final String? title;
 
   const PositionedDirectionalDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _PositionedDirectionalDemoState createState() => _PositionedDirectionalDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _PositionedDirectionalDemoState extends State<PositionedDirectionalDemo> {

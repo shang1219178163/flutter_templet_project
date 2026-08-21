@@ -225,9 +225,22 @@ class _SinglePickerPageState extends State<SinglePickerPage> {
         debugPrint('数据发生改变：$p');
         debugPrint('longer >>> 返回数据下标：$position');
       },
-      onCancel: (bool isCancel) {
+      onCancel: (isCancel) {
         debugPrint('longer >>> 点击了取消,是否是通过点击按钮取消：$isCancel');
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('selectSex', selectSex));
+    properties.add(StringProperty('selectEdu', selectEdu));
+    properties.add(StringProperty('selectSubject', selectSubject));
+    properties.add(StringProperty('selectConstellation', selectConstellation));
+    properties.add(StringProperty('selectZodiac', selectZodiac));
+    properties.add(StringProperty('selectHeight', selectHeight));
+    properties.add(StringProperty('selectEthnicity', selectEthnicity));
+    properties.add(StringProperty('initData', initData));
   }
 }

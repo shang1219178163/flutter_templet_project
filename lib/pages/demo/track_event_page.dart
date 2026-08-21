@@ -24,6 +24,12 @@ class TrackEventPage extends StatefulWidget {
 
   @override
   State<TrackEventPage> createState() => _TrackEventPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _TrackEventPageState extends State<TrackEventPage> {
@@ -150,5 +156,13 @@ class _TrackEventPageState extends State<TrackEventPage> {
 
   void onCollect() {
     DLog.d("3");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
   }
 }

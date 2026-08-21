@@ -29,6 +29,20 @@ class SearchResultsListView extends StatefulWidget {
 
   @override
   _SearchResultsListViewState createState() => _SearchResultsListViewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('map', map));
+    properties.add(StringProperty('hintText', hintText));
+    properties.add(DiagnosticsProperty<bool?>('isSort', isSort));
+    properties.add(DiagnosticsProperty<TextEditingController>('editingController', editingController));
+    properties.add(ObjectFlagProperty<Widget Function(String key)?>.has('leadingBuilder', leadingBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, int index, List searchResults)?>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('separatorBuilder', separatorBuilder));
+    properties.add(ObjectFlagProperty<void Function(String value)?>.has('searchCallback', searchCallback));
+    properties.add(ObjectFlagProperty<void Function(dynamic obj)>.has('tap', tap));
+  }
 }
 
 class _SearchResultsListViewState extends State<SearchResultsListView> {
@@ -146,5 +160,12 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
       }
       // DLog.d("_changeValue:${value} searchResults:${searchResults}");
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<>('keys', keys));
+    properties.add(IterableProperty<>('searchResults', searchResults));
   }
 }

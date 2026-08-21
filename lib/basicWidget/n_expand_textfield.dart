@@ -52,6 +52,20 @@ class NExpandTextfield extends StatefulWidget {
 
   @override
   _NExpandTextfieldState createState() => _NExpandTextfieldState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('text', text));
+    properties.add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(IntProperty('expandMaxLine', expandMaxLine));
+    properties.add(IntProperty('expandMinLine', expandMinLine));
+    properties.add(IntProperty('maxLength', maxLength));
+    properties.add(ColorProperty('fillColor', fillColor));
+    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
+    properties.add(ObjectFlagProperty<Widget Function(bool isExpand, int expandMinLine)?>.has('textBuilder', textBuilder));
+  }
 }
 
 class _NExpandTextfieldState extends State<NExpandTextfield> {
@@ -74,7 +88,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final textPainter = TextPainterExt.getTextPainter(
           text: widget.text,
           textStyle: widget.textStyle,
@@ -87,7 +101,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
         var isBeyond = textPainter.didExceedMaxLines;
 
         return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+          builder: (context, setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
             final toggleImage = AssetImage((isExpand) ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown);
@@ -234,7 +248,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
     }
 
     return ShaderMask(
-      shaderCallback: (Rect bounds) {
+      shaderCallback: (bounds) {
         return LinearGradient(
           colors: colors,
           begin: Alignment.topCenter,
@@ -245,5 +259,13 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
       blendMode: BlendMode.srcATop,
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('wordCount', wordCount));
   }
 }

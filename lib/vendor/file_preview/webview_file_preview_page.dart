@@ -28,6 +28,13 @@ class WebviewFilePreviewPage extends StatefulWidget {
 
   @override
   _WebviewFilePreviewPageState createState() => _WebviewFilePreviewPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('url', url));
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {

@@ -19,6 +19,12 @@ class ColorSchemeDemo extends StatefulWidget {
 
   @override
   State<ColorSchemeDemo> createState() => _ColorSchemeDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ColorSchemeDemoState extends State<ColorSchemeDemo> {
@@ -130,5 +136,14 @@ class _ColorSchemeDemoState extends State<ColorSchemeDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<ImageProvider<Object>>('assetsImage', assetsImage));
+    properties.add(IntProperty('activeIndex', activeIndex));
+    properties.add(ColorProperty('activeColor', activeColor));
   }
 }

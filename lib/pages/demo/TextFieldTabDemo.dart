@@ -18,6 +18,12 @@ class TextFieldTabDemo extends StatefulWidget {
 
   @override
   State<TextFieldTabDemo> createState() => _TextFieldTabDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
@@ -59,5 +65,12 @@ class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
     return NTabBarPage(
       items: items,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
   }
 }

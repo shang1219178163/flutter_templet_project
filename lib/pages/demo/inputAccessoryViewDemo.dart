@@ -16,6 +16,12 @@ class InputAccessoryViewDemo extends StatefulWidget {
 
   @override
   State<InputAccessoryViewDemo> createState() => _InputAccessoryViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _InputAccessoryViewDemoState extends State<InputAccessoryViewDemo> {
@@ -162,5 +168,16 @@ class _InputAccessoryViewDemoState extends State<InputAccessoryViewDemo> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
+    properties.add(DiagnosticsProperty<TextEditingController>('textController', textController));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNodeNew', focusNodeNew));
+    properties.add(DiagnosticsProperty<KeyboardAccessoryController>('keyboardAccessoryController', keyboardAccessoryController));
   }
 }

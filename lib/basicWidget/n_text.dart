@@ -56,4 +56,22 @@ class NText extends StatelessWidget {
           ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('data', data));
+    properties.add(EnumProperty<TextAlign?>('textAlign', textAlign));
+    properties.add(IntProperty('maxLines', maxLines));
+    properties.add(EnumProperty<TextOverflow?>('overflow', overflow));
+    properties.add(DiagnosticsProperty<bool?>('softWrap', softWrap));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(DoubleProperty('fontSize', fontSize));
+    properties.add(DiagnosticsProperty<FontWeight?>('fontWeight', fontWeight));
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(DoubleProperty('letterSpacing', letterSpacing));
+    properties.add(DoubleProperty('wordSpacing', wordSpacing));
+    properties.add(DiagnosticsProperty<TextDecoration?>('decoration', decoration));
+  }
 }

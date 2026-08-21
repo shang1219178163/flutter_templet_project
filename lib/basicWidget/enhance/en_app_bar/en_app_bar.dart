@@ -729,6 +729,35 @@ class EnAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   State<EnAppBar> createState() => _EnAppBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('automaticallyImplyLeading', automaticallyImplyLeading));
+    properties.add(DoubleProperty('elevation', elevation));
+    properties.add(DoubleProperty('scrolledUnderElevation', scrolledUnderElevation));
+    properties.add(ObjectFlagProperty<ScrollNotificationPredicate>.has('notificationPredicate', notificationPredicate));
+    properties.add(ColorProperty('shadowColor', shadowColor));
+    properties.add(ColorProperty('surfaceTintColor', surfaceTintColor));
+    properties.add(DiagnosticsProperty<ShapeBorder?>('shape', shape));
+    properties.add(ObjectFlagProperty<Color Function()?>.has('backgroundColor', backgroundColor));
+    properties.add(ColorProperty('foregroundColor', foregroundColor));
+    properties.add(DiagnosticsProperty<IconThemeData?>('iconTheme', iconTheme));
+    properties.add(DiagnosticsProperty<IconThemeData?>('actionsIconTheme', actionsIconTheme));
+    properties.add(DiagnosticsProperty<bool>('primary', primary));
+    properties.add(DiagnosticsProperty<bool?>('centerTitle', centerTitle));
+    properties.add(DiagnosticsProperty<bool>('excludeHeaderSemantics', excludeHeaderSemantics));
+    properties.add(DoubleProperty('titleSpacing', titleSpacing));
+    properties.add(DoubleProperty('toolbarOpacity', toolbarOpacity));
+    properties.add(DoubleProperty('bottomOpacity', bottomOpacity));
+    properties.add(DoubleProperty('toolbarHeight', toolbarHeight));
+    properties.add(DoubleProperty('leadingWidth', leadingWidth));
+    properties.add(DiagnosticsProperty<TextStyle?>('toolbarTextStyle', toolbarTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('titleTextStyle', titleTextStyle));
+    properties.add(DiagnosticsProperty<SystemUiOverlayStyle?>('systemOverlayStyle', systemOverlayStyle));
+    properties.add(DiagnosticsProperty<bool>('forceMaterialTransparency', forceMaterialTransparency));
+    properties.add(EnumProperty<Clip?>('clipBehavior', clipBehavior));
+  }
 }
 
 class _EnAppBarState extends State<EnAppBar> {
@@ -1868,6 +1897,43 @@ class EnSliverAppBar extends StatefulWidget {
 
   @override
   State<EnSliverAppBar> createState() => _EnSliverAppBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('automaticallyImplyLeading', automaticallyImplyLeading));
+    properties.add(DoubleProperty('elevation', elevation));
+    properties.add(DoubleProperty('scrolledUnderElevation', scrolledUnderElevation));
+    properties.add(ColorProperty('shadowColor', shadowColor));
+    properties.add(ColorProperty('surfaceTintColor', surfaceTintColor));
+    properties.add(DiagnosticsProperty<bool>('forceElevated', forceElevated));
+    properties.add(ObjectFlagProperty<Color Function()?>.has('backgroundColor', backgroundColor));
+    properties.add(ColorProperty('foregroundColor', foregroundColor));
+    properties.add(DiagnosticsProperty<IconThemeData?>('iconTheme', iconTheme));
+    properties.add(DiagnosticsProperty<IconThemeData?>('actionsIconTheme', actionsIconTheme));
+    properties.add(DiagnosticsProperty<bool>('primary', primary));
+    properties.add(DiagnosticsProperty<bool?>('centerTitle', centerTitle));
+    properties.add(DiagnosticsProperty<bool>('excludeHeaderSemantics', excludeHeaderSemantics));
+    properties.add(DoubleProperty('titleSpacing', titleSpacing));
+    properties.add(DoubleProperty('collapsedHeight', collapsedHeight));
+    properties.add(DoubleProperty('expandedHeight', expandedHeight));
+    properties.add(DiagnosticsProperty<bool>('floating', floating));
+    properties.add(DiagnosticsProperty<bool>('pinned', pinned));
+    properties.add(DiagnosticsProperty<ShapeBorder?>('shape', shape));
+    properties.add(DiagnosticsProperty<bool>('snap', snap));
+    properties.add(DiagnosticsProperty<bool>('stretch', stretch));
+    properties.add(DoubleProperty('stretchTriggerOffset', stretchTriggerOffset));
+    properties.add(ObjectFlagProperty<AsyncCallback?>.has('onStretchTrigger', onStretchTrigger));
+    properties.add(DoubleProperty('toolbarHeight', toolbarHeight));
+    properties.add(DoubleProperty('leadingWidth', leadingWidth));
+    properties.add(DiagnosticsProperty<TextStyle?>('toolbarTextStyle', toolbarTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('titleTextStyle', titleTextStyle));
+    properties.add(DiagnosticsProperty<SystemUiOverlayStyle?>('systemOverlayStyle', systemOverlayStyle));
+    properties.add(DiagnosticsProperty<bool>('forceMaterialTransparency', forceMaterialTransparency));
+    properties.add(EnumProperty<Clip?>('clipBehavior', clipBehavior));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>?>('progress', progress));
+    properties.add(ObjectFlagProperty<bool Function(double progress)?>.has('progressUpdate', progressUpdate));
+  }
 }
 
 // This class is only Stateful because it owns the TickerProvider used
@@ -2136,6 +2202,15 @@ class _ScrollUnderFlexibleSpace extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('foregroundColor', foregroundColor));
+    properties.add(ObjectFlagProperty<_FlexibleConfigBuilder>.has('configBuilder', configBuilder));
+    properties.add(DiagnosticsProperty<TextStyle?>('titleTextStyle', titleTextStyle));
+    properties.add(DoubleProperty('bottomHeight', bottomHeight));
+  }
 }
 
 // A widget that bottom-start aligns its child (the expanded title widget), and
@@ -2173,6 +2248,13 @@ class _ExpandedTitleWithPadding extends SingleChildRenderObjectWidget {
       ..padding = padding.resolve(textDirection)
       ..titleAlignment = AlignmentDirectional.bottomStart.resolve(textDirection)
       ..maxExtent = maxExtent;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
+    properties.add(DoubleProperty('maxExtent', maxExtent));
   }
 }
 
@@ -2275,6 +2357,14 @@ class _RenderExpandedTitleBox extends RenderShiftedBox {
     final childParentData = child.parentData! as BoxParentData;
     childParentData.offset = Offset(offsetX, offsetY);
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(DiagnosticsProperty<Alignment>('titleAlignment', titleAlignment));
+    properties.add(DoubleProperty('maxExtent', maxExtent));
+  }
 }
 
 mixin _ScrollUnderFlexibleConfig {
@@ -2311,6 +2401,12 @@ class _AppBarDefaultsM2 extends AppBarTheme {
 
   @override
   TextStyle? get titleTextStyle => _theme.textTheme.titleLarge;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<BuildContext>('context', context));
+  }
 }
 
 // BEGIN GENERATED TOKEN PROPERTIES - AppBar
@@ -2363,6 +2459,12 @@ class _AppBarDefaultsM3 extends AppBarTheme {
 
   @override
   TextStyle? get titleTextStyle => _textTheme.titleLarge;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<BuildContext>('context', context));
+  }
 }
 
 // Variant configuration

@@ -312,6 +312,12 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Alignment>('topAlignment', topAlignment));
+  }
 }
 
 /// 旋风拖拽按钮
@@ -327,6 +333,13 @@ class NFloatingButtonTest extends StatefulWidget {
 
   @override
   State<NFloatingButtonTest> createState() => _NFloatingButtonTestState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isLeft', isLeft));
+    properties.add(DiagnosticsProperty<Size>('childSize', childSize));
+  }
 }
 
 class _NFloatingButtonTestState extends State<NFloatingButtonTest> {

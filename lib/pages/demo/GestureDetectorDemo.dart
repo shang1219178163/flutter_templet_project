@@ -14,6 +14,12 @@ class GestureDetectorDemo extends StatefulWidget {
 
   @override
   _GestureDetectorDemoState createState() => _GestureDetectorDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundStateMixin {
@@ -142,7 +148,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         // debugPrint("${DateTime.now()} onRecordStart");
         await soundStartRecord();
       },
-      onRecordEnd: (bool isCancel) async {
+      onRecordEnd: (isCancel) async {
         // debugPrint("${DateTime.now()} onRecordEnd");
         final fileURL = await stopSoundRecorder();
         debugPrint("${DateTime.now()} onRecordEnd fileURL: $fileURL");
@@ -252,5 +258,13 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
             ),
           );
         });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('cancelVN', cancelVN));
+    properties.add(DiagnosticsProperty<Size>('screeenSize', screeenSize));
+    properties.add(DoubleProperty('bottomBarHeight', bottomBarHeight));
   }
 }

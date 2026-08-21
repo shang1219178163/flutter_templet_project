@@ -28,6 +28,17 @@ class NColorFlashAnim extends StatefulWidget {
 
   @override
   State<NColorFlashAnim> createState() => _NColorFlashAnimState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NColorFlashAnimController?>('controller', controller));
+    properties.add(DiagnosticsProperty<ColorTween?>('tween', tween));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(IntProperty('repeatCount', repeatCount));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onFinish', onFinish));
+    properties.add(ObjectFlagProperty<AnimatedBuilder Function(AnimationController animationController, Animation<Color?> animation)>.has('builder', builder));
+  }
 }
 
 class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProviderStateMixin {
@@ -122,6 +133,14 @@ class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProv
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('currentCount', currentCount));
+    properties.add(DiagnosticsProperty<bool>('isRunning', isRunning));
+    properties.add(DiagnosticsProperty<ColorTween>('tween', tween));
   }
 }
 

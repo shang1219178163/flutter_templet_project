@@ -2,15 +2,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class SnowEffect extends StatefulWidget {
-  final double animationSpeed;
 
   const SnowEffect({
     super.key,
     this.animationSpeed = 1.0,
   });
+  final double animationSpeed;
 
   @override
   State<SnowEffect> createState() => _SnowEffectState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('animationSpeed', animationSpeed));
+  }
 }
 
 class _SnowEffectState extends State<SnowEffect>
@@ -77,17 +83,16 @@ class _SnowEffectState extends State<SnowEffect>
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Snowflake>('snowflakes', snowflakes));
+    properties.add(DiagnosticsProperty<Random>('random', random));
+  }
 }
 
 class Snowflake {
-  double x;
-  double y;
-  double size;
-  double speed;
-  double swingRange; // 摆动幅度
-  double swingSpeed; // 摆动速度
-  double angle; // 当前角度
-  double opacity;
 
   Snowflake({
     required this.x,
@@ -99,12 +104,20 @@ class Snowflake {
     required this.angle,
     required this.opacity,
   });
+  double x;
+  double y;
+  double size;
+  double speed;
+  double swingRange; // 摆动幅度
+  double swingSpeed; // 摆动速度
+  double angle; // 当前角度
+  double opacity;
 }
 
 class SnowPainter extends CustomPainter {
-  final List<Snowflake> snowflakes;
 
   SnowPainter(this.snowflakes);
+  final List<Snowflake> snowflakes;
 
   @override
   void paint(Canvas canvas, Size size) {

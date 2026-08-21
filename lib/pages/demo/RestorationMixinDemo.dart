@@ -159,6 +159,12 @@ class _RestorationMixinDemoState extends State<RestorationMixinDemo> with Restor
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('tips', tips));
+  }
 }
 
 class RestorableUser extends RestorableValue<UserModel> {

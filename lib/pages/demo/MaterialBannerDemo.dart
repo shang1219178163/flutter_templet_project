@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
 class MaterialBannerDemo extends StatefulWidget {
-  final String? title;
 
   const MaterialBannerDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _MaterialBannerDemoState createState() => _MaterialBannerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _MaterialBannerDemoState extends State<MaterialBannerDemo> {

@@ -68,4 +68,13 @@ class NLinearGradientProgressIndicator extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('value', value));
+    properties.add(EnumProperty<Axis>('direction', direction));
+    properties.add(ObjectFlagProperty<Widget Function(double progress)?>.has('start', start));
+    properties.add(ObjectFlagProperty<Widget Function(double progress)?>.has('end', end));
+  }
 }

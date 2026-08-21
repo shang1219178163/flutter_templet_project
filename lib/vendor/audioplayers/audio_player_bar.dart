@@ -28,6 +28,14 @@ class AudioPlayerBar extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _AudioPlayerBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('url', url));
+    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
+    properties.add(ObjectFlagProperty<ValueChanged<Duration>?>.has('onDuration', onDuration));
+  }
 }
 
 class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObserver {
@@ -243,5 +251,11 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
     _playerState = PlayerState.stopped;
     _position = Duration.zero;
     setState(() {});
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AudioPlayer>('player', player));
   }
 }

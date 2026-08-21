@@ -74,4 +74,11 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
         _index, (context, animation) => buildItem(context, item, animation));
     list.removeAt(_index);
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<GlobalKey<SliverAnimatedListState>>('listKey', listKey));
+    properties.add(IterableProperty<int>('list', list));
+  }
 }

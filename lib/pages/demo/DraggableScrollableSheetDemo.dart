@@ -14,12 +14,18 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class DraggableScrollableSheetDemo extends StatefulWidget {
-  final String? title;
 
   const DraggableScrollableSheetDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DraggableScrollableSheetDemoState createState() => _DraggableScrollableSheetDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetDemo> {
@@ -192,7 +198,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             ),
           ),
           NotificationListener<DraggableScrollableNotification>(
-            onNotification: (DraggableScrollableNotification e) {
+            onNotification: (e) {
               // doing this in setState breaks DraggableScrollableSheet behaviour
               DLog.d("e: $e");
               extentVN.value = e.extent;
@@ -210,7 +216,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: 20,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (context, index) {
                       return ListTile(
                         title: Text('Item $index'),
                       );
@@ -239,13 +245,13 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
       child: SizedBox.expand(
         child: DraggableScrollableSheet(
           controller: draggableController,
-          builder: (BuildContext context, ScrollController scrollController) {
+          builder: (context, scrollController) {
             return Container(
               color: Colors.white,
               child: ListView.builder(
                 controller: scrollController,
                 itemCount: 25,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   return Container(
                     height: 75,
                     child: Column(
@@ -269,5 +275,14 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<DraggableScrollableController>('draggableController', draggableController));
+    properties.add(DoubleProperty('minExtent', minExtent));
+    properties.add(DoubleProperty('extent', extent));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('extentVN', extentVN));
   }
 }

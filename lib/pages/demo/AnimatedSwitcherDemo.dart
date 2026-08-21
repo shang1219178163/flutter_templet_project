@@ -11,12 +11,18 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
 
 class AnimatedSwitcherDemo extends StatefulWidget {
-  final String? title;
 
   const AnimatedSwitcherDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _AnimatedSwitcherDemoState createState() => _AnimatedSwitcherDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
@@ -64,7 +70,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
           AnimatedSwitcher(
             duration: Duration(milliseconds: 200),
             child: child,
-            transitionBuilder: (Widget child, Animation<double> animation) {
+            transitionBuilder: (child, animation) {
               // var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
 
               // return ScaleTransition(scale: animation, child: child);
@@ -85,6 +91,12 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<AxisDirection>>('selectedItemVN', selectedItemVN));
   }
 }
 
@@ -114,5 +126,12 @@ class LineSlideTransition extends AnimatedWidget {
       transformHitTests: transformHitTests,
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('transformHitTests', transformHitTests));
+    properties.add(DiagnosticsProperty<Animation<Offset>>('position', position));
   }
 }

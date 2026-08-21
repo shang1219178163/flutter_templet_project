@@ -31,6 +31,12 @@ class AudioVisualizerDemo extends StatefulWidget {
 
   @override
   State<AudioVisualizerDemo> createState() => _AudioVisualizerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _AudioVisualizerDemoState extends State<AudioVisualizerDemo> {
@@ -288,6 +294,18 @@ class _AudioVisualizerDemoState extends State<AudioVisualizerDemo> {
     setState(() {
       isRecording = true;
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<PCMVisualizer>('pcmVisualizer', pcmVisualizer));
+    properties.add(DiagnosticsProperty<VisualizerPlayer>('audioPlayer', audioPlayer));
+    properties.add(DiagnosticsProperty<AudioRecorder>('record', record));
+    properties.add(DiagnosticsProperty<bool>('isRecording', isRecording));
+    properties.add(DiagnosticsProperty<AudioVisualizer>('source', source));
   }
 }
 

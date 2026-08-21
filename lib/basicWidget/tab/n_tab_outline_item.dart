@@ -76,4 +76,15 @@ class NTabOutlineItem extends StatelessWidget {
       child: builder?.call(context, child) ?? child,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<bool>('isSelected', isSelected));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('padding', padding));
+    properties.add(ColorProperty('fontColor', fontColor));
+    properties.add(ColorProperty('unselectedFontColor', unselectedFontColor));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, Widget child)?>.has('builder', builder));
+  }
 }

@@ -43,6 +43,17 @@ class NChromeSegment extends StatefulWidget {
 
   @override
   State<NChromeSegment> createState() => _NChromeSegmentState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<ChromeSegmentRecord>('items', items));
+    properties.add(IntProperty('currentIndex', currentIndex));
+    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onChanged', onChanged));
+    properties.add(ColorProperty('selectedBgColor', selectedBgColor));
+    properties.add(ColorProperty('bgColor', bgColor));
+    properties.add(DoubleProperty('radius', radius));
+  }
 }
 
 class _NChromeSegmentState extends State<NChromeSegment> {
@@ -183,5 +194,13 @@ class _NChromeSegmentState extends State<NChromeSegment> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('currentIndex', currentIndex));
+    properties.add(ColorProperty('selectedBgColor', selectedBgColor));
+    properties.add(ColorProperty('unselectedBgColor', unselectedBgColor));
   }
 }

@@ -15,6 +15,13 @@ class NAnimatedBreathing extends StatefulWidget {
 
   @override
   State<NAnimatedBreathing> createState() => _NAnimatedBreathingState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+  }
 }
 
 class _NAnimatedBreathingState extends State<NAnimatedBreathing>

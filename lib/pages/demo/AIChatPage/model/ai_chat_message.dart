@@ -2,6 +2,16 @@ import 'package:flutter_templet_project/pages/demo/AIChatPage/enum/ai_chat_role.
 
 /// 单条聊天消息（content / isStreaming 可变，供流式更新）
 class AiChatMessage {
+
+  factory AiChatMessage.fromJson(Map<String, dynamic> json) {
+    final roleName = json['role'] as String? ?? 'user';
+    final role = AiChatRole.values.asNameMap()[roleName] ?? AiChatRole.user;
+    return AiChatMessage(
+      id: json['id'] as String? ?? '',
+      role: role,
+      content: json['content'] as String? ?? '',
+    );
+  }
   AiChatMessage({
     required this.id,
     required this.role,
@@ -24,14 +34,4 @@ class AiChatMessage {
         'role': role.name,
         'content': content,
       };
-
-  factory AiChatMessage.fromJson(Map<String, dynamic> json) {
-    final roleName = json['role'] as String? ?? 'user';
-    final role = AiChatRole.values.asNameMap()[roleName] ?? AiChatRole.user;
-    return AiChatMessage(
-      id: json['id'] as String? ?? '',
-      role: role,
-      content: json['content'] as String? ?? '',
-    );
-  }
 }

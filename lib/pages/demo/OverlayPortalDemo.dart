@@ -8,6 +8,12 @@ class OverlayPortalDemo extends StatefulWidget {
 
   @override
   State<OverlayPortalDemo> createState() => _OverlayPortalDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
@@ -53,7 +59,7 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
         onPressed: portalController.toggle,
         child: OverlayPortal(
           controller: portalController,
-          overlayChildBuilder: (BuildContext context) {
+          overlayChildBuilder: (context) {
             return Positioned(
               right: 30,
               bottom: 30,
@@ -69,6 +75,13 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<OverlayPortalController>('portalController', portalController));
   }
 
   // /// Flutter3.38

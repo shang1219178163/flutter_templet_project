@@ -8,6 +8,12 @@ class SystemCurvesPage extends StatefulWidget {
 
   @override
   _SystemCurvesPageState createState() => _SystemCurvesPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _SystemCurvesPageState extends State<SystemCurvesPage> {
@@ -121,6 +127,12 @@ class _SystemCurvesPageState extends State<SystemCurvesPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('items', items));
   }
 
   // buildBody() {

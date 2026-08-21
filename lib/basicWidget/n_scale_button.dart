@@ -16,6 +16,14 @@ class NScaleButton extends StatefulWidget {
 
   @override
   State<NScaleButton> createState() => _NScaleButtonState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('enabled', enabled));
+    properties.add(DiagnosticsProperty<Tween<double>?>('tween', tween));
+    properties.add(ObjectFlagProperty<Widget Function(AnimationController animationController)>.has('builder', builder));
+  }
 }
 
 class _NScaleButtonState extends State<NScaleButton> with SingleTickerProviderStateMixin {

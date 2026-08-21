@@ -20,6 +20,12 @@ class NChoiceExpansionDemo extends StatefulWidget {
 
   @override
   State<NChoiceExpansionDemo> createState() => _NChoiceExpansionDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
@@ -86,7 +92,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
               height: 25,
               child: CupertinoSwitch(
                 value: isSingle,
-                onChanged: (bool val) {
+                onChanged: (val) {
                   isSingle = val;
                   setState(() {});
                 },
@@ -201,5 +207,18 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         color: textColor,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty<bool>('isSingle', isSingle));
+    properties.add(IterableProperty<TagDetailModel>('tags', tags));
+    properties.add(IterableProperty<TagDetailModel>('selectedTags', selectedTags));
+    properties.add(IterableProperty<UserModel>('users', users));
+    properties.add(IterableProperty<UserModel>('selectedUsers', selectedUsers));
+    properties.add(DiagnosticsProperty<TagDetailModel?>('selectTag', selectTag));
   }
 }

@@ -84,6 +84,28 @@ class NCollectionNavWidget extends StatefulWidget {
 
   @override
   _NCollectionNavWidgetState createState() => _NCollectionNavWidgetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(IterableProperty<AttrNavItem>('items', items));
+    properties.add(ObjectFlagProperty<void Function(AttrNavItem e)>.has('onItem', onItem));
+    properties.add(EnumProperty<PageViewScrollType>('scrollType', scrollType));
+    properties.add(IntProperty('pageRowNum', pageRowNum));
+    properties.add(IntProperty('pageColumnNum', pageColumnNum));
+    properties.add(DoubleProperty('iconSize', iconSize));
+    properties.add(DoubleProperty('textHeight', textHeight));
+    properties.add(DoubleProperty('textGap', textGap));
+    properties.add(DoubleProperty('columnSpacing', columnSpacing));
+    properties.add(DoubleProperty('rowSpacing', rowSpacing));
+    properties.add(DiagnosticsProperty<bool>('autoAdjustHeight', autoAdjustHeight));
+    properties.add(DoubleProperty('indicatorItemHeight', indicatorItemHeight));
+    properties.add(DoubleProperty('indicatorItemWidth', indicatorItemWidth));
+    properties.add(DoubleProperty('indicatorGap', indicatorGap));
+    properties.add(IterableProperty<BoxShadow>('boxShadows', boxShadows));
+    properties.add(DiagnosticsProperty<bool>('isDebug', isDebug));
+  }
 }
 
 class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
@@ -414,9 +436,30 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('pageCount', pageCount));
+    properties.add(DiagnosticsProperty<PageController?>('controller', controller));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('scrollOffset', scrollOffset));
+    properties.add(DoubleProperty('itemHeight', itemHeight));
+    properties.add(IntProperty('pageNum', pageNum));
+    properties.add(DiagnosticsProperty<bool>('pageSnap', pageSnap));
+    properties.add(DiagnosticsProperty<EdgeInsets>('marginTotal', marginTotal));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+  }
 }
 
 class AttrNavItem {
+
+  AttrNavItem({
+    this.id,
+    this.icon,
+    this.name,
+    this.url,
+    this.cornerMarker,
+  });
   // 唯一标识
   int? id;
   // 图片
@@ -427,14 +470,6 @@ class AttrNavItem {
   String? url;
   // 角标类型
   int? cornerMarker;
-
-  AttrNavItem({
-    this.id,
-    this.icon,
-    this.name,
-    this.url,
-    this.cornerMarker,
-  });
 
   static AttrNavItem? fromJson(json) {
     if (json is! Map) {

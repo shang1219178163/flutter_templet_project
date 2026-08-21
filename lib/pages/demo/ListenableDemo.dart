@@ -22,6 +22,12 @@ class ListenableDemo extends StatefulWidget {
 
   @override
   State<ListenableDemo> createState() => _ListenableDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ListenableDemoState extends State<ListenableDemo> {
@@ -45,18 +51,18 @@ class _ListenableDemoState extends State<ListenableDemo> {
 
   @override
   void dispose() {
-    items.forEach((e) {
+    for (final e in items) {
       e.focusNode.removeListener(onKeyborad);
-    });
+    }
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    items.forEach((e) {
+    for (final e in items) {
       e.focusNode.addListener(onKeyborad);
-    });
+    }
   }
 
   void onKeyborad() {
@@ -239,5 +245,13 @@ class _ListenableDemoState extends State<ListenableDemo> {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CounterChangeNotifier>('counter', counter));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<({TextEditingController controller, FocusNode focusNode})>('items', items));
   }
 }

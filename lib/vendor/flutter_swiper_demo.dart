@@ -4,12 +4,18 @@ import 'package:flutter_templet_project/basicWidget/custom_swiper.dart';
 import 'package:tuple/tuple.dart';
 
 class FlutterSwiperDemo extends StatefulWidget {
-  final String? title;
 
   const FlutterSwiperDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _FlutterSwiperDemoState createState() => _FlutterSwiperDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FlutterSwiperDemoState extends State<FlutterSwiperDemo> {
@@ -99,7 +105,7 @@ class ExampleHorizontal extends StatelessWidget {
           title: Text("ExampleHorizontal"),
         ),
         body: Swiper(
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             return CustomSwiperItem(
               url: images[index],
               color: index.isEven ? Colors.green : Colors.yellow,
@@ -126,7 +132,7 @@ class ExampleVertical extends StatelessWidget {
           title: Text("ExampleVertical"),
         ),
         body: Swiper(
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             return CustomSwiperItem(
               url: images[index],
               color: index.isEven ? Colors.green : Colors.yellow,
@@ -169,7 +175,7 @@ class ExampleFraction extends StatelessWidget {
   _buildSwiper() {
     return Expanded(
         child: Swiper(
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         return Container(
           child: CustomSwiperItem(
             url: images[index],
@@ -190,7 +196,7 @@ class ExampleFraction extends StatelessWidget {
   _buildSwiper1() {
     return Expanded(
         child: Swiper(
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         var left = index == 0 ? 20.0 : 0.0;
         var right = index == (images.length - 1) ? 20.0 : 0.0;
 
@@ -220,7 +226,7 @@ class ExampleFraction extends StatelessWidget {
   _buildSwiper2() {
     return Expanded(
         child: Swiper(
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         return CustomSwiperItem(
           url: images[index],
           color: index.isEven ? Colors.green : Colors.yellow,
@@ -238,7 +244,7 @@ class ExampleFraction extends StatelessWidget {
   _buildSwiper25() {
     return Expanded(
         child: Swiper(
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         return CustomSwiperItem(
           url: images[index],
           color: index.isEven ? Colors.green : Colors.yellow,
@@ -256,7 +262,7 @@ class ExampleFraction extends StatelessWidget {
   _buildSwiper3() {
     return Expanded(
       child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           return CustomSwiperItem(
             url: images[index],
             color: index.isEven ? Colors.green : Colors.yellow,
@@ -300,7 +306,7 @@ class ExampleFraction extends StatelessWidget {
                 [Offset(-370.0, -40.0), Offset(0.0, 0.0), Offset(370.0, -40.0)]),
         itemWidth: 300.0,
         itemHeight: 200.0,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           return CustomSwiperItem(
             url: images[index],
             color: index.isEven ? Colors.green : Colors.yellow,
@@ -315,7 +321,7 @@ class ExampleFraction extends StatelessWidget {
     return Expanded(
       child: CustomSwipper(
         images: images,
-        onTap: (int index) {
+        onTap: (index) {
           debugPrint('CustomBanner 当前 page 为 $index');
         },
         // itemBuilder: (BuildContext context, int index) {
@@ -339,7 +345,7 @@ class ExampleCustomPagination extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Swiper(
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   return Image.asset(
                     images[index],
                     fit: BoxFit.fill,
@@ -349,7 +355,7 @@ class ExampleCustomPagination extends StatelessWidget {
                 itemCount: images.length,
                 pagination: SwiperPagination(
                     margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
+                    builder: SwiperCustomPagination(builder: (context, config) {
                       return ConstrainedBox(
                         constraints: BoxConstraints.expand(height: 50.0),
                         child: Container(
@@ -365,7 +371,7 @@ class ExampleCustomPagination extends StatelessWidget {
             ),
             Expanded(
               child: Swiper(
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   return Image.asset(
                     images[index],
                     fit: BoxFit.fill,
@@ -375,7 +381,7 @@ class ExampleCustomPagination extends StatelessWidget {
                 itemCount: images.length,
                 pagination: SwiperPagination(
                     margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
+                    builder: SwiperCustomPagination(builder: (context, config) {
                       return ConstrainedBox(
                         constraints: BoxConstraints.expand(height: 50.0),
                         child: Row(
@@ -463,6 +469,12 @@ class ScaffoldWidget extends StatelessWidget {
       body: child,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class CustomSwiperItem extends StatelessWidget {
@@ -491,5 +503,14 @@ class CustomSwiperItem extends StatelessWidget {
         fit: BoxFit.fill,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('url', url));
+    properties.add(ColorProperty('color', color));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin));
   }
 }

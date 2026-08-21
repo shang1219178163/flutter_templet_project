@@ -23,10 +23,10 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart' as get_navigation;
 
 class RequestManager extends BaseRequestAPI {
+  factory RequestManager() => _instance;
   // 私有构造器
   RequestManager._();
   static final RequestManager _instance = RequestManager._();
-  factory RequestManager() => _instance;
 
   String? get token => CacheService().token;
 
@@ -67,16 +67,16 @@ class RequestManager extends BaseRequestAPI {
     dio.options = options;
 
     final interceptor = QueuedInterceptorsWrapper(
-      onRequest: (RequestOptions options, handler) {
+      onRequest: (options, handler) {
         // print("请求之前");
         return handler.next(options);
       },
-      onResponse: (Response response, handler) {
+      onResponse: (response, handler) {
         // print("响应之前");
         // DLog.d(response.toDescription());
         return handler.next(response);
       },
-      onError: (DioException e, handler) async {
+      onError: (e, handler) async {
         return handler.next(e);
       },
     );

@@ -24,6 +24,12 @@ class SystemIconsPage extends StatefulWidget {
 
   @override
   _SystemIconsPageState createState() => _SystemIconsPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideAppBar', hideAppBar));
+  }
 }
 
 class _SystemIconsPageState extends State<SystemIconsPage> {
@@ -152,7 +158,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     searchResults.sort((a, b) => a.compareTo(b));
     return GridView.builder(
       itemCount: searchResults.length,
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         final item = searchResults[index];
         return Container(
           padding: EdgeInsets.all(8),
@@ -227,5 +233,15 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     } catch (e) {
       debugPrint("生成失败 $e");
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('editingController', editingController));
+    properties.add(IterableProperty<String>('list', list));
+    properties.add(IterableProperty<String>('searchResults', searchResults));
+    properties.add(DiagnosticsProperty<bool>('isGrid', isGrid));
+    properties.add(StringProperty('actionTitle', actionTitle));
   }
 }

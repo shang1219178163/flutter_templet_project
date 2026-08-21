@@ -21,6 +21,12 @@ class PageRouteDemo extends StatefulWidget {
 
   @override
   State<PageRouteDemo> createState() => _PageRouteDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _PageRouteDemoState extends State<PageRouteDemo> {
@@ -156,7 +162,7 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
     Navigator.push(
       context,
       NFadePageRoute(
-        builder: (BuildContext context) {
+        builder: (context) {
           return page;
         },
       ),
@@ -203,5 +209,13 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }

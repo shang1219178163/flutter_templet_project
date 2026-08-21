@@ -78,6 +78,29 @@ class NChoiceBoxOne<T> extends StatefulWidget {
 
   @override
   State<NChoiceBoxOne<T>> createState() => _NChoiceBoxOneState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<T>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<T?>>('selectedItem', selectedItem));
+    properties.add(ObjectFlagProperty<String Function(T e)>.has('itemNameCb', itemNameCb));
+    properties.add(IntProperty('numPerRow', numPerRow));
+    properties.add(ColorProperty('primaryColor', primaryColor));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('itemPadding', itemPadding));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('contentPadding', contentPadding));
+    properties.add(ObjectFlagProperty<ValueChanged<T>?>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<bool Function(T value, ChoiceSelectedType<T> p1)?>.has('canChanged', canChanged));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(DiagnosticsProperty<TextStyle?>('styleSelected', styleSelected));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(ColorProperty('selectedColor', selectedColor));
+    properties.add(ColorProperty('disabledColor', disabledColor));
+    properties.add(ColorProperty('disabledAvatarColor', disabledAvatarColor));
+    properties.add(DiagnosticsProperty<bool>('enable', enable));
+  }
 }
 
 class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
@@ -222,5 +245,12 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
     widget.selectedItem.value = e;
     widget.onChanged?.call(widget.selectedItem.value as T);
     setState(() {});
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('rowNum', rowNum));
+    properties.add(IntProperty('numPerPage', numPerPage));
   }
 }

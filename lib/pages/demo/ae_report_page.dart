@@ -380,7 +380,7 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                 }).toList(),
                 AeAddressChooseItem(
                   selectVN: addressVN,
-                  convertCb: (AddressPickerModel e) {
+                  convertCb: (e) {
                     return [e.province, e.city, e.town].where((e) => e?.isNotEmpty == true).join();
                   },
                   onChanged: (e) {
@@ -550,10 +550,70 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   Future<void> onSubmit(String btnTitle) async {
     AppService.unfocus();
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map>('arguments', arguments));
+    properties.add(StringProperty('userId', userId));
+    properties.add(StringProperty('userNo', userNo));
+    properties.add(StringProperty('aeId', aeId));
+    properties.add(StringProperty('from', from));
+    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
+    properties.add(StringProperty('title', title));
+    properties.add(DiagnosticsProperty<AdverseEventRecord>('aeModel', aeModel));
+    properties.add(IterableProperty<AssetUploadModel>('selectedModels', selectedModels));
+    properties.add(DiagnosticsProperty<TextEditingController>('aeNameController', aeNameController));
+    properties.add(DiagnosticsProperty<TextEditingController>('aeLevelController', aeLevelController));
+    properties.add(DiagnosticsProperty<ValueNotifier<ActivityType?>>('drugRelated', drugRelated));
+    properties.add(DiagnosticsProperty<ValueNotifier<ActivityType?>>('drugMeasures', drugMeasures));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<ActivityType>?>>('aePrognosisMuti', aePrognosisMuti));
+    properties.add(DiagnosticsProperty<ValueNotifier<ActivityType?>>('aePrognosis', aePrognosis));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<ActivityType>?>>('aePrognosisNew', aePrognosisNew));
+    properties.add(IterableProperty<List<String>>('weightData', weightData));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<String>?>>('weightDataVN', weightDataVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<DateTime?>>('dateBegin', dateBegin));
+    properties.add(DiagnosticsProperty<ValueNotifier<DateTime?>>('dateEnd', dateEnd));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool?>>('isTakeMeasures', isTakeMeasures));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool?>>('isSae', isSae));
+    properties.add(IterableProperty<ChooseItemRecord<ValueNotifier<bool?>>>('judgeItems', judgeItems));
+    properties.add(DiagnosticsProperty<TextEditingController>('remarkController', remarkController));
+    properties.add(DiagnosticsProperty<ValueNotifier<AddressPickerModel?>>('addressVN', addressVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isUploading', isUploading));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isUploadingDoc', isUploadingDoc));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<AssetUploadModel>>>('selectedModelsVN', selectedModelsVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<AssetUploadDocumentModel>>>('selectedModelsDocVN', selectedModelsDocVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isLoading', isLoading));
+  }
 }
 
 /// 不良事件详情
 class AdverseEventRecord {
+
+  AdverseEventRecord.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    createTime = json['createTime'];
+    updateTime = json['updateTime'];
+    createBy = json['createBy'];
+    updateBy = json['updateBy'];
+    remark = json['remark'];
+    adverseEventId = json['adverseEventId'];
+    aeName = json['aeName'];
+    startTime = json['startTime'];
+    endTime = json['endTime'];
+    aePrognosis = json['aePrognosis'];
+    aeLevel = json['aeLevel'];
+    drugCorrelation = json['drugCorrelation'];
+    takenForDrugUse = json['takenForDrugUse'];
+    isTakeAction = json['isTakeAction'];
+    isSae = json['isSae'];
+    if (json['imageUrls'] != null) {
+      imageUrls = <ProofDetailModel>[];
+      for (final v in (json['imageUrls'] as List)) {
+        imageUrls!.add(ProofDetailModel.fromJson(v as Map<String, dynamic>));
+      }
+    }
+  }
   AdverseEventRecord({
     this.id,
     this.createTime,
@@ -610,31 +670,6 @@ class AdverseEventRecord {
     return result;
   }
 
-  AdverseEventRecord.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    createTime = json['createTime'];
-    updateTime = json['updateTime'];
-    createBy = json['createBy'];
-    updateBy = json['updateBy'];
-    remark = json['remark'];
-    adverseEventId = json['adverseEventId'];
-    aeName = json['aeName'];
-    startTime = json['startTime'];
-    endTime = json['endTime'];
-    aePrognosis = json['aePrognosis'];
-    aeLevel = json['aeLevel'];
-    drugCorrelation = json['drugCorrelation'];
-    takenForDrugUse = json['takenForDrugUse'];
-    isTakeAction = json['isTakeAction'];
-    isSae = json['isSae'];
-    if (json['imageUrls'] != null) {
-      imageUrls = <ProofDetailModel>[];
-      (json['imageUrls'] as List).forEach((v) {
-        imageUrls!.add(ProofDetailModel.fromJson(v as Map<String, dynamic>));
-      });
-    }
-  }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
@@ -663,6 +698,11 @@ class AdverseEventRecord {
 
 /// 上传凭证
 class ProofDetailModel {
+
+  ProofDetailModel.fromJson(Map<String, dynamic> json) {
+    name = (json['name'] as String?);
+    url = (json['url'] as String?);
+  }
   ProofDetailModel({
     this.name,
     this.url,
@@ -682,11 +722,6 @@ class ProofDetailModel {
       name: name ?? this.name,
       url: url ?? this.url,
     );
-  }
-
-  ProofDetailModel.fromJson(Map<String, dynamic> json) {
-    name = (json['name'] as String?);
-    url = (json['url'] as String?);
   }
 
   Map<String, dynamic> toJson() {

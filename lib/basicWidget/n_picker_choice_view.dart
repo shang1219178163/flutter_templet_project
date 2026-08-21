@@ -50,6 +50,17 @@ class NPickerChoiceView<E> extends StatefulWidget {
 
   @override
   NPickerChoiceViewState<E> createState() => NPickerChoiceViewState<E>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onConfirm', onConfirm));
+    properties.add(IterableProperty<E>('items', items));
+    properties.add(ObjectFlagProperty<Widget? Function(BuildContext context, int index)>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<bool Function(E element, String search)?>.has('filterCb', filterCb));
+  }
 }
 
 class NPickerChoiceViewState<E> extends State<NPickerChoiceView<E>> {
@@ -109,5 +120,12 @@ class NPickerChoiceViewState<E> extends State<NPickerChoiceView<E>> {
       ),
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('searchVN', searchVN));
   }
 }

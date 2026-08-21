@@ -19,4 +19,10 @@ class NSliverAxisGroup extends StatelessWidget {
     }
     return SliverMainAxisGroup(slivers: slivers);
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<Axis?>('axis', axis));
+  }
 }

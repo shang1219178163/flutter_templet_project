@@ -74,4 +74,11 @@ class NAlertDialog extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
+    properties.add(ColorProperty('dividerColor', dividerColor));
+  }
 }

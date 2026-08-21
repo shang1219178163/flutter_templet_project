@@ -21,6 +21,12 @@ class CurvedNavigationBarDemo extends StatefulWidget {
 
   @override
   State<CurvedNavigationBarDemo> createState() => _CurvedNavigationBarDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _CurvedNavigationBarDemoState extends State<CurvedNavigationBarDemo> {
@@ -78,5 +84,14 @@ class _CurvedNavigationBarDemoState extends State<CurvedNavigationBarDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('tabIndex', tabIndex));
   }
 }

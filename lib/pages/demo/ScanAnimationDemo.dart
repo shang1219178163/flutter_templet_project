@@ -15,6 +15,12 @@ class ScanAnimationDemo extends StatefulWidget {
 
   @override
   State<ScanAnimationDemo> createState() => _ScanAnimationDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ScanAnimationDemoState extends State<ScanAnimationDemo> with SingleTickerProviderStateMixin, PhotoPickerMixin {
@@ -86,5 +92,11 @@ class _ScanAnimationDemoState extends State<ScanAnimationDemo> with SingleTicker
         }
       }),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<File?>('image', image));
   }
 }

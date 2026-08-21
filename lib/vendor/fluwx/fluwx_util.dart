@@ -14,9 +14,9 @@ final _debounce = Debounce();
 
 /// fluwx 功能封装类
 class FluwxUtil {
-  static final FluwxUtil _instance = FluwxUtil._();
   FluwxUtil._();
   factory FluwxUtil() => _instance;
+  static final FluwxUtil _instance = FluwxUtil._();
   static FluwxUtil get instance => _instance;
 
   static const weChatAppKey = 'wxdf948255a98cb714';

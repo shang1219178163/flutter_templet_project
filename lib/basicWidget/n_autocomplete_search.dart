@@ -30,6 +30,18 @@ class NAutocompleteSearch<T extends Object> extends StatefulWidget {
 
   @override
   State<NAutocompleteSearch<T>> createState() => _NAutocompleteSearchState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<AutocompleteFieldViewBuilder?>.has('fieldViewBuilder', fieldViewBuilder));
+    properties.add(ObjectFlagProperty<String Function(T option)>.has('displayStringForOption', displayStringForOption));
+    properties.add(ObjectFlagProperty<FutureOr<Iterable<T>> Function(TextEditingValue v)>.has('optionsBuilder', optionsBuilder));
+    properties.add(ObjectFlagProperty<IndexedWidgetBuilder?>.has('optionsItemBuilder', optionsItemBuilder));
+    properties.add(ObjectFlagProperty<ValueChanged<T>?>.has('onSelected', onSelected));
+  }
 }
 
 class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSearch<T>> with SafeSetStateMixin {
@@ -51,7 +63,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
       displayStringForOption: widget.displayStringForOption,
       fieldViewBuilder: widget.fieldViewBuilder ?? buildFieldView,
       onSelected: widget.onSelected,
-      optionsBuilder: (TextEditingValue textEditingValue) {
+      optionsBuilder: (textEditingValue) {
         _textEditingValue = textEditingValue;
         final text = textEditingValue.text;
         if (text.isEmpty) {

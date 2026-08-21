@@ -9,12 +9,18 @@
 import 'package:flutter/material.dart';
 
 class ColoredBoxDemo extends StatefulWidget {
-  final String? title;
 
   const ColoredBoxDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ColoredBoxDemoState createState() => _ColoredBoxDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ColoredBoxDemoState extends State<ColoredBoxDemo> {

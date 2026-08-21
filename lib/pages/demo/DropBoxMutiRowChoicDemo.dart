@@ -20,6 +20,12 @@ class DropBoxMutiRowChoicDemo extends StatefulWidget {
 
   @override
   _DropBoxMutiRowChoicDemoState createState() => _DropBoxMutiRowChoicDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
@@ -188,13 +194,13 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
         placeholder: placeholder,
         placeholderStyle: TextStyle(fontSize: 15.sp, color: AppColor.fontColorBCBFC2),
         decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4.w)), color: AppColor.bgColor),
-        onChanged: (String value) {
+        onChanged: (value) {
           _debounce(() {
             debugPrint('searchText: $value');
             cb?.call(value);
           });
         },
-        onSubmitted: (String value) {
+        onSubmitted: (value) {
           _debounce(() {
             debugPrint('onSubmitted: $value');
             cb?.call(value);
@@ -298,9 +304,9 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
 
   /// 重置过滤参数
   onFitlerReset() {
-    mutiRowItems.forEach((item) {
+    for (final item in mutiRowItems) {
       item.selectedModelsTmp = [];
-    });
+    }
 
     onFitlerConfirm();
     //请求
@@ -310,16 +316,16 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   onFitlerConfirm() {
     closeDropBox();
 
-    mutiRowItems.forEach((item) {
+    for (final item in mutiRowItems) {
       item.selectedModels = item.selectedModelsTmp;
-    });
+    }
 
-    mutiRowItems.forEach((item) {
+    for (final item in mutiRowItems) {
       debugPrint("""-------------------------------------------
 title: ${item.title},
 selectedModelsTmp: ${item.selectedModelsTmp.map((e) => e.name).toList()},
 selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
-    });
+    }
     //请求
   }
 
@@ -461,5 +467,19 @@ selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
 
   closeKeyboard() {
     FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<int>('items', items));
+    properties.add(StringProperty('searchText', searchText));
+    properties.add(DiagnosticsProperty<TextEditingController>('searchtEditingController', searchtEditingController));
+    properties.add(DiagnosticsProperty<NFilterDropBoxController>('dropBoxController', dropBoxController));
+    properties.add(IterableProperty<FakeDataModel>('models', models));
+    properties.add(IterableProperty<FakeDataModel>('item1Models', item1Models));
+    properties.add(IterableProperty<FakeDataModel>('item2Models', item2Models));
+    properties.add(IterableProperty<FakeDataModel>('item3Models', item3Models));
+    properties.add(IterableProperty<NChoiceBoxHorizontalModel<FakeDataModel>>('mutiRowItems', mutiRowItems));
   }
 }

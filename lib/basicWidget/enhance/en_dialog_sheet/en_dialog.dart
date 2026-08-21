@@ -353,7 +353,7 @@ class DialogRouteNew<T> extends RawDialogRouteNew<T> {
     super.anchorPoint,
     super.right,
   }) : super(
-          pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+          pageBuilder: (buildContext, animation, secondaryAnimation) {
             final Widget pageChild = Builder(builder: builder);
             var dialog = themes?.wrap(pageChild) ?? pageChild;
             if (useSafeArea) {

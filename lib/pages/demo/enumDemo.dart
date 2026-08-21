@@ -12,6 +12,12 @@ class EnumDemo extends StatefulWidget {
 
   @override
   _EnumDemoState createState() => _EnumDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _EnumDemoState extends State<EnumDemo> {

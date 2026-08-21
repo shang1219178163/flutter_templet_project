@@ -19,12 +19,18 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RichTextDemo extends StatefulWidget {
-  final String? title;
 
   const RichTextDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _RichTextDemoState createState() => _RichTextDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _RichTextDemoState extends State<RichTextDemo> {
@@ -445,5 +451,15 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<({VoidCallback action, String title})>('records', records));
+    properties.add(DiagnosticsProperty<Map<String, String>>('linkMap', linkMap));
+    properties.add(StringProperty('autoLinkText', autoLinkText));
+    properties.add(StringProperty('text', text));
+    properties.add(IterableProperty<TextSpan>('textSpans', textSpans));
   }
 }

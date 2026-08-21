@@ -10,12 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/hud/progress_hud_popup.dart';
 
 class ProgressHudDemo extends StatefulWidget {
-  final String? title;
 
   const ProgressHudDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ProgressHudDemoState createState() => _ProgressHudDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ProgressHudDemoState extends State<ProgressHudDemo> {
@@ -116,5 +122,11 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
             .toList(),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ButtonStyle>('buttonStyle', buttonStyle));
   }
 }

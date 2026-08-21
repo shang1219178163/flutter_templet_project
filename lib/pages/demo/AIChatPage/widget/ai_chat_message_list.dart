@@ -49,4 +49,12 @@ class AiChatMessageList extends StatelessWidget {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AiChatController>('controller', controller));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onResend', onResend));
+  }
 }

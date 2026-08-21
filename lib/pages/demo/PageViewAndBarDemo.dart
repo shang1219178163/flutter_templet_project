@@ -8,6 +8,12 @@ class PageViewAndBarDemo extends StatefulWidget {
 
   @override
   _PageViewAndBarDemoState createState() => _PageViewAndBarDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _PageViewAndBarDemoState extends State<PageViewAndBarDemo> {
@@ -57,14 +63,14 @@ class _PageViewAndBarDemoState extends State<PageViewAndBarDemo> {
                     alignment: Alignment.center,
                     child: Text("第 $i 页"),
                   )).toList(),
-          onPageChanged: (int index) {
+          onPageChanged: (index) {
             _currentIndex = index;
             setState(() {});
           },
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: tabBarItems,
-          onTap: (int index) {
+          onTap: (index) {
             _pageController.jumpToPage(index);
             // _pageController.animateToPage(index,
             //     duration: Duration(milliseconds: 400),
@@ -77,5 +83,11 @@ class _PageViewAndBarDemoState extends State<PageViewAndBarDemo> {
           selectedLabelStyle: TextStyle(fontSize: 12),
           unselectedLabelStyle: TextStyle(fontSize: 12),
         ));
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<BottomNavigationBarItem>('tabBarItems', tabBarItems));
   }
 }

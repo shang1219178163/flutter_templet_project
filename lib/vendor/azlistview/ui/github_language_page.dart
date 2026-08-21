@@ -14,6 +14,12 @@ class GitHubLanguagePage extends StatefulWidget {
 
   @override
   _GitHubLanguagePageState createState() => _GitHubLanguagePageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('fromType', fromType));
+  }
 }
 
 class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
@@ -164,12 +170,12 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
                 data: dataList,
                 physics: AlwaysScrollableScrollPhysics(),
                 itemCount: dataList.length,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   var model = dataList[index];
                   return getListItem(context, model);
                 },
                 itemScrollController: itemScrollController,
-                susItemBuilder: (BuildContext context, int index) {
+                susItemBuilder: (context, index) {
                   var model = dataList[index];
                   return getSusItem(context, model.getSuspensionTag());
                 },
@@ -196,5 +202,14 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ItemScrollController>('itemScrollController', itemScrollController));
+    properties.add(IterableProperty<Languages>('originList', originList));
+    properties.add(IterableProperty<Languages>('dataList', dataList));
+    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
   }
 }

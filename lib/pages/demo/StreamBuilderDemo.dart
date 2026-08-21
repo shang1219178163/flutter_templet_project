@@ -14,12 +14,18 @@ import 'package:flutter_templet_project/util/debounce_text_controller.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class StreamBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const StreamBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StreamBuilderDemoState createState() => _StreamBuilderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
@@ -32,7 +38,7 @@ class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
   // );
 
   late final textController = TextEditingController().debounce(
-    onChanged: (String v) {
+    onChanged: (v) {
       searchVN.value = v;
     },
   );
@@ -123,6 +129,14 @@ UI 事件：onPressed, TextField.onChanged → 都是 Stream。
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('textController', textController));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('searchVN', searchVN));
+    properties.add(StringProperty('message', message));
   }
 }
 

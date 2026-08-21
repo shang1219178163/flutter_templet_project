@@ -15,6 +15,12 @@ class TweenSequenceDemo extends StatefulWidget {
 
   @override
   State<TweenSequenceDemo> createState() => _TweenSequenceDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _TweenSequenceDemoState extends State<TweenSequenceDemo>
@@ -369,5 +375,14 @@ class _TweenSequenceDemoState extends State<TweenSequenceDemo>
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('initialIndex', initialIndex));
+    properties.add(IterableProperty<({Widget child, Tab tab})>('items', items));
+    properties.add(StringProperty('message', message));
+    properties.add(IterableProperty<String>('tweenTypes', tweenTypes));
   }
 }

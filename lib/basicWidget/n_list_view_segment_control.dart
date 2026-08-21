@@ -58,6 +58,26 @@ class NListViewSegmentControl extends StatefulWidget {
 
   @override
   _NListViewSegmentControlState createState() => _NListViewSegmentControlState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(IterableProperty<double>('itemWidths', itemWidths));
+    properties.add(IntProperty('selectedIndex', selectedIndex));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('itemPadding', itemPadding));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('itemMargin', itemMargin));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DoubleProperty('itemWidth', itemWidth));
+    properties.add(DoubleProperty('itemRadius', itemRadius));
+    properties.add(DiagnosticsProperty<TextStyle>('itemTextStyle', itemTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('itemSelectedTextStyle', itemSelectedTextStyle));
+    properties.add(ColorProperty('itemBgColor', itemBgColor));
+    properties.add(ColorProperty('itemSelectedBgColor', itemSelectedBgColor));
+    properties.add(ObjectFlagProperty<void Function(int value)>.has('onValueChanged', onValueChanged));
+  }
 }
 
 class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
@@ -167,6 +187,16 @@ class FoldMenu extends StatefulWidget {
 
   @override
   _FoldMenuState createState() => _FoldMenuState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isVisible', isVisible));
+    properties.add(DoubleProperty('itemWidth', itemWidth));
+    properties.add(IntProperty('foldCount', foldCount));
+    properties.add(IterableProperty<Tuple2<List<String>, int>>('children', children));
+    properties.add(ObjectFlagProperty<void Function(int row, int index, List<int> indexs)>.has('onValueChanged', onValueChanged));
+  }
 }
 
 class _FoldMenuState extends State<FoldMenu> {
@@ -222,5 +252,11 @@ class _FoldMenuState extends State<FoldMenu> {
           // DLog.d("${row}, ${index}, ${_indexs}");
           widget.onValueChanged(row, index, _indexs);
         });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isVisible', isVisible));
   }
 }

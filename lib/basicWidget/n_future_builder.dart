@@ -18,7 +18,7 @@ class NFutureBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<T>(
       future: future,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return errorBuilder?.call(snapshot.error) ?? const Placeholder();
@@ -37,5 +37,14 @@ class NFutureBuilder<T> extends StatelessWidget {
         return loadingBuilder?.call() ?? indicator;
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Future<T>?>('future', future));
+    properties.add(ObjectFlagProperty<Widget Function(T data)>.has('builder', builder));
+    properties.add(ObjectFlagProperty<Widget Function(Object? error)?>.has('errorBuilder', errorBuilder));
+    properties.add(ObjectFlagProperty<Widget Function()?>.has('loadingBuilder', loadingBuilder));
   }
 }

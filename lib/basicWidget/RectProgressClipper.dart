@@ -68,12 +68,21 @@ class RectProgressIndicator extends StatelessWidget {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('progressVN', progressVN));
+    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
+  }
 }
 
 class RectProgressClipper extends CustomClipper<Path> {
-  final double progress;
 
   RectProgressClipper({this.progress = 0});
+  final double progress;
 
   @override
   Path getClip(Size size) {

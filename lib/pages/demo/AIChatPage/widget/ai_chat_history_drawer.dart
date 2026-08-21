@@ -84,6 +84,12 @@ class AiChatHistoryDrawer extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AiChatController>('controller', controller));
+  }
 }
 
 class _SessionTile extends StatelessWidget {
@@ -122,5 +128,14 @@ class _SessionTile extends StatelessWidget {
       ),
       onTap: onTap,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AiChatSession>('session', session));
+    properties.add(DiagnosticsProperty<bool>('selected', selected));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onDelete', onDelete));
   }
 }

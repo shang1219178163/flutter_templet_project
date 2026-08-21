@@ -8,6 +8,12 @@ class BatterLevelPage extends StatefulWidget {
 
   @override
   _BatterLevelPageState createState() => _BatterLevelPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _BatterLevelPageState extends State<BatterLevelPage> {

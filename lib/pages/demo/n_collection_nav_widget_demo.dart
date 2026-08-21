@@ -19,6 +19,12 @@ class NCollectionNavWidgetDemo extends StatefulWidget {
 
   @override
   _NCollectionNavWidgetDemoState createState() => _NCollectionNavWidgetDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
@@ -163,6 +169,19 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             scrollType: _collectionNavModel.scrollType,
           );
         });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('imgUrls', imgUrls));
+    properties.add(IntProperty('pageRowNum', pageRowNum));
+    properties.add(IntProperty('pageColumnNum', pageColumnNum));
+    properties.add(DoubleProperty('iconSize', iconSize));
+    properties.add(DoubleProperty('columnSpacing', columnSpacing));
+    properties.add(DoubleProperty('rowSpacing', rowSpacing));
+    properties.add(DoubleProperty('textOffset', textOffset));
+    properties.add(IterableProperty<Tuple4<String, int, int, void Function(int p1)>>('tuples', tuples));
   }
 }
 

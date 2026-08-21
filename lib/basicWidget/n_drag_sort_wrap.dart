@@ -24,6 +24,17 @@ class NDragSortWrap<T extends Object> extends StatefulWidget {
 
   @override
   State<NDragSortWrap<T>> createState() => _NDragSortWrapState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<T>('items', items));
+    properties.add(ObjectFlagProperty<bool Function(BuildContext context, T item)?>.has('enableBuilder', enableBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, T item, bool isDragging)>.has('itemBuilder', itemBuilder));
+    properties.add(ObjectFlagProperty<void Function(List<T> newList)?>.has('onChanged', onChanged));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+  }
 }
 
 class _NDragSortWrapState<T extends Object> extends State<NDragSortWrap<T>> {

@@ -9,6 +9,12 @@ class VisibilityDemo extends StatefulWidget {
 
   @override
   _VisibilityDemoState createState() => _VisibilityDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _VisibilityDemoState extends State<VisibilityDemo> {
@@ -45,7 +51,7 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
                   ),
                   NResizeSwitch(
                     value: isVisible,
-                    onChanged: (bool value) {
+                    onChanged: (value) {
                       isVisible = value;
                       setState(() {});
                     },
@@ -104,5 +110,11 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isVisible', isVisible));
   }
 }

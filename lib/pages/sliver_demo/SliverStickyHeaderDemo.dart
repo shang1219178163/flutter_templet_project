@@ -12,6 +12,12 @@ class SliverStickyHeaderDemo extends StatefulWidget {
 
   @override
   State<SliverStickyHeaderDemo> createState() => _SliverStickyHeaderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _SliverStickyHeaderDemoState extends State<SliverStickyHeaderDemo> {
@@ -48,6 +54,13 @@ class _SliverStickyHeaderDemoState extends State<SliverStickyHeaderDemo> {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<StickyHeaderController>('stickyHeaderController', stickyHeaderController));
+  }
 }
 
 class _StickyHeaderList extends StatelessWidget {
@@ -81,14 +94,19 @@ class _StickyHeaderList extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('index', index));
+    properties.add(DiagnosticsProperty<StickyHeaderController?>('controller', controller));
+  }
 }
 
 class _Header extends StatelessWidget {
   const _Header({
     Key? key,
     this.index,
-    this.title,
-    this.color = Colors.lightBlue,
   }) : super(key: key);
 
   final String? title;
@@ -112,5 +130,13 @@ class _Header extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(IntProperty('index', index));
+    properties.add(ColorProperty('color', color));
   }
 }

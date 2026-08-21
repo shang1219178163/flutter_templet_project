@@ -53,7 +53,7 @@ class NScrollBar extends StatelessWidget {
         );
 
     if (isVertical) {
-      return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      return LayoutBuilder(builder: (context, constraints) {
         final lengthNew = (length ?? constraints.maxHeight).truncateToDouble();
 
         return Stack(
@@ -102,7 +102,7 @@ class NScrollBar extends StatelessWidget {
         );
       });
     }
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final lengthNew = length ?? constraints.maxWidth;
 
       return Stack(
@@ -158,5 +158,18 @@ class NScrollBar extends StatelessWidget {
         ],
       );
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('controller', controller));
+    properties.add(EnumProperty<Axis>('scrollDirection', scrollDirection));
+    properties.add(DiagnosticsProperty<bool>('scrollStopHide', scrollStopHide));
+    properties.add(DoubleProperty('length', length));
+    properties.add(DoubleProperty('indicatorLength', indicatorLength));
+    properties.add(DiagnosticsProperty<Decoration?>('indicator', indicator));
+    properties.add(DiagnosticsProperty<Decoration?>('indicatorBg', indicatorBg));
+    properties.add(DoubleProperty('thickness', thickness));
   }
 }

@@ -25,9 +25,9 @@ class _CarModelsPageState extends State<CarModelsPage> {
   Future<void> loadData() async {
     rootBundle.loadString('assets/data/car_models.json').then((value) {
       List list = jsonDecode(value);
-      list.forEach((v) {
+      for (final v in list) {
         contactList.add(ContactInfo.fromJson(v));
-      });
+      }
 //      contactList = contactList.reversed.toList();
 //      log('$contactList');
       _handleList(contactList);
@@ -92,13 +92,13 @@ class _CarModelsPageState extends State<CarModelsPage> {
       body: AzListView(
         data: contactList,
         itemCount: contactList.length,
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           // if (index == 0) return customHeader();
           var model = contactList[index];
           return Utils.getWeChatListItem(context, model, susHeight: susItemHeight);
         },
         susItemHeight: susItemHeight,
-        susItemBuilder: (BuildContext context, int index) {
+        susItemBuilder: (context, index) {
           var model = contactList[index];
           if ('选' == model.getSuspensionTag()) {
             return Container();
@@ -111,7 +111,7 @@ class _CarModelsPageState extends State<CarModelsPage> {
         },
         // indexBarData: ['选', ...kIndexBarData],
         indexBarData: [...SuspensionUtil.getTagIndexList(contactList)],
-        indexHintBuilder: (BuildContext context, String tag) {
+        indexHintBuilder: (context, tag) {
           return SizedBox();
         },
         indexBarOptions: IndexBarOptions(
@@ -132,5 +132,12 @@ class _CarModelsPageState extends State<CarModelsPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<ContactInfo>('contactList', contactList));
+    properties.add(DoubleProperty('susItemHeight', susItemHeight));
   }
 }

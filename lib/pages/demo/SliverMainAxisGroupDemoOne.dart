@@ -174,4 +174,10 @@ class _SliverMainAxisGroupDemoOneState extends State<SliverMainAxisGroupDemoOne>
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<NSliverSectionModel<String>>('dataList', dataList));
+  }
 }

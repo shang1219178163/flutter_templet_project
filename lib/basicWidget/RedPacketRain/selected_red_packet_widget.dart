@@ -18,6 +18,14 @@ class SelectedRedPacketWidget extends StatefulWidget {
 
   @override
   State<SelectedRedPacketWidget> createState() => _SelectedRedPacketWidgetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Offset>('from', from));
+    properties.add(DoubleProperty('size', size));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onFinish', onFinish));
+  }
 }
 
 class _SelectedRedPacketWidgetState extends State<SelectedRedPacketWidget> with SingleTickerProviderStateMixin {

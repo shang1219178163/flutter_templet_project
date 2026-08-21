@@ -54,6 +54,12 @@ class _CupertinoTabScaffoldDemoState extends State {
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<BottomNavigationBarItem, Widget>>('items', items));
+  }
 }
 
 class OnePage extends StatelessWidget {

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
 class ModalBarrierDemo extends StatefulWidget {
-  final String? title;
 
   const ModalBarrierDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ModalBarrierDemoState createState() => _ModalBarrierDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ModalBarrierDemoState extends State<ModalBarrierDemo> {

@@ -9,13 +9,19 @@
 import 'package:flutter/material.dart';
 
 class ValueListenableBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const ValueListenableBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ValueListenableBuilderDemoState createState() =>
       _ValueListenableBuilderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ValueListenableBuilderDemoState
@@ -36,7 +42,7 @@ class _ValueListenableBuilderDemoState
             const Text('You have pushed the button this many times:'),
             ValueListenableBuilder<int>(
               valueListenable: _counter,
-              builder: (BuildContext context, int value, Widget? child) {
+              builder: (context, value, child) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -77,6 +83,12 @@ class _ValueListenableBuilderDemoState
         child: const Icon(Icons.plus_one),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<MyResult>>('netState', netState));
   }
 }
 

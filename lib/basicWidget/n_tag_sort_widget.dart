@@ -47,6 +47,16 @@ class NTagSortWidget<T extends NTagSortMixin> extends StatefulWidget {
 
   @override
   State<NTagSortWidget<T>> createState() => _NTagSortWidgetState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<T>('tags', tags));
+    properties.add(IterableProperty<T>('others', others));
+    properties.add(DiagnosticsProperty<bool>('showTab', showTab));
+    properties.add(ObjectFlagProperty<void Function(List<T> tags, List<T> others)>.has('onFinish', onFinish));
+    properties.add(ObjectFlagProperty<void Function(T e)?>.has('onTap', onTap));
+  }
 }
 
 class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget<T>> with TickerProviderStateMixin {
@@ -150,7 +160,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
           Container(
             padding: EdgeInsets.only(top: 5, bottom: 15),
             child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
+              builder: (context, constraints) {
                 const spacing = 8.0;
                 const rowCount = 4.0;
                 final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
@@ -209,7 +219,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
           Container(
             padding: EdgeInsets.only(top: 5, bottom: 15),
             child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
+              builder: (context, constraints) {
                 const spacing = 8.0;
                 const rowCount = 4.0;
                 final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
@@ -374,7 +384,7 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
   Widget buildWrap() {
     final list = List.generate(8, (i) => i);
 
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       final spacing = 8.0;
       final rowCount = 4.0;
       final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -399,5 +409,14 @@ class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget
         ],
       );
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<T>('tags', tags));
+    properties.add(IterableProperty<T>('others', others));
+    properties.add(DiagnosticsProperty<TabController?>('tabController', tabController));
+    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
   }
 }

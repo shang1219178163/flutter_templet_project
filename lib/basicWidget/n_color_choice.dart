@@ -35,6 +35,14 @@ class NColorChoice extends StatefulWidget {
 
   @override
   State<NColorChoice> createState() => _NColorChoiceState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Color>('colors', colors));
+    properties.add(DiagnosticsProperty<ValueNotifier<Color>>('selectedColorVN', selectedColorVN));
+    properties.add(ObjectFlagProperty<ValueChanged<Color>?>.has('onChanged', onChanged));
+  }
 }
 
 class _NColorChoiceState extends State<NColorChoice> {

@@ -2,12 +2,18 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class DismissibleDemo extends StatefulWidget {
-  final String? title;
 
   const DismissibleDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DismissibleDemoState createState() => _DismissibleDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DismissibleDemoState extends State<DismissibleDemo> {
@@ -29,7 +35,7 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
   Widget buildBody() {
     return ListView.builder(
       itemCount: _list.length,
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         final item = _list[index];
         return Dismissible(
           key: UniqueKey(),

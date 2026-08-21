@@ -193,15 +193,15 @@ class _TableComplexExampleState extends State<TableComplexExample> {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('canClearSelection', canClearSelection));
+  }
 }
 
 class _CalendarHeader extends StatelessWidget {
-  final DateTime focusedDay;
-  final VoidCallback onLeftArrowTap;
-  final VoidCallback onRightArrowTap;
-  final VoidCallback onTodayButtonTap;
-  final VoidCallback onClearButtonTap;
-  final bool clearButtonVisible;
 
   const _CalendarHeader({
     Key? key,
@@ -212,6 +212,12 @@ class _CalendarHeader extends StatelessWidget {
     required this.onClearButtonTap,
     required this.clearButtonVisible,
   }) : super(key: key);
+  final DateTime focusedDay;
+  final VoidCallback onLeftArrowTap;
+  final VoidCallback onRightArrowTap;
+  final VoidCallback onTodayButtonTap;
+  final VoidCallback onClearButtonTap;
+  final bool clearButtonVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -252,5 +258,16 @@ class _CalendarHeader extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<DateTime>('focusedDay', focusedDay));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onLeftArrowTap', onLeftArrowTap));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onRightArrowTap', onRightArrowTap));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onTodayButtonTap', onTodayButtonTap));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onClearButtonTap', onClearButtonTap));
+    properties.add(DiagnosticsProperty<bool>('clearButtonVisible', clearButtonVisible));
   }
 }

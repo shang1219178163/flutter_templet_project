@@ -6,12 +6,18 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class StackDemo extends StatefulWidget {
-  final String? title;
 
   const StackDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StackDemoState createState() => _StackDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _StackDemoState extends State<StackDemo> with SingleTickerProviderStateMixin {
@@ -49,7 +55,7 @@ class _StackDemoState extends State<StackDemo> with SingleTickerProviderStateMix
                       borderRadius: BorderRadius.all(Radius.circular(0)),
                     ),
                   ),
-                  builder: (BuildContext context) {
+                  builder: (context) {
                     final items = List.generate(10, (i) => i);
                     return Container(
                       decoration: BoxDecoration(
@@ -204,5 +210,12 @@ class _StackDemoState extends State<StackDemo> with SingleTickerProviderStateMix
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
   }
 }

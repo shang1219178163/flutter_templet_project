@@ -158,4 +158,11 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
       },
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
+    properties.add(DiagnosticsProperty<BallCategoryProvider>('provider', provider));
+  }
 }

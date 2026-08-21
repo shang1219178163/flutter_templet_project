@@ -9,12 +9,18 @@
 import 'package:flutter/material.dart';
 
 class TimePickerDemo extends StatefulWidget {
-  final String? title;
 
   const TimePickerDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TimePickerDemoState createState() => _TimePickerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TimePickerDemoState extends State<TimePickerDemo> {

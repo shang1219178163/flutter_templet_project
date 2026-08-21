@@ -27,6 +27,15 @@ class PlayerRatingsStar extends StatefulWidget {
 
   @override
   State<PlayerRatingsStar> createState() => _PlayerRatingsStarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<int, int>>('starMap', starMap));
+    properties.add(IntProperty('myScore', myScore));
+    properties.add(ObjectFlagProperty<Future<PlayerScoreItemModel> Function(BuildContext context, double v)>.has('onRequestRatings', onRequestRatings));
+    properties.add(ObjectFlagProperty<ValueChanged<PlayerScoreItemModel>?>.has('onStarChanged', onStarChanged));
+  }
 }
 
 class _PlayerRatingsStarState extends State<PlayerRatingsStar> {
@@ -273,5 +282,14 @@ class _PlayerRatingsStarState extends State<PlayerRatingsStar> {
     setState(() {});
     widget.onStarChanged?.call(modelNew);
     // DLog.d([ratingsInfoModel.toJson(), widget.item.scoreTimes!.toJson()]);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
+    properties.add(DiagnosticsProperty<Map<int, int>>('starMap', starMap));
+    properties.add(IntProperty('myScore', myScore));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('ratingsStarVN', ratingsStarVN));
   }
 }

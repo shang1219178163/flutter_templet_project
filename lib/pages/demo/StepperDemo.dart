@@ -165,7 +165,7 @@ class _StepperDemoState extends State<StepperDemo> {
             _index = index;
           });
         },
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
+        controlsBuilder: (context, details) {
           return Row(
             children: [
               SizedBox(
@@ -234,7 +234,7 @@ class _StepperDemoState extends State<StepperDemo> {
             _index = index;
           });
         },
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
+        controlsBuilder: (context, details) {
           return Row(
             children: [
               SizedBox(
@@ -273,5 +273,12 @@ class _StepperDemoState extends State<StepperDemo> {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('groupValue', groupValue));
+    properties.add(IterableProperty<Tuple2>('tuples', tuples));
   }
 }

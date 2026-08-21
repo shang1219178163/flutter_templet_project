@@ -13,6 +13,12 @@ class ComponentMiddlePage extends StatefulWidget {
 
   @override
   State<ComponentMiddlePage> createState() => _ComponentMiddlePageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
@@ -111,5 +117,12 @@ class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
               ),
             ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onSkip', onSkip));
   }
 }

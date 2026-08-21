@@ -20,6 +20,12 @@ class TestFunction extends StatefulWidget {
 
   @override
   _TestFunctionState createState() => _TestFunctionState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TestFunctionState extends State<TestFunction> with DebounceStreamMixin<TestFunction, int> {
@@ -241,6 +247,13 @@ class _TestFunctionState extends State<TestFunction> with DebounceStreamMixin<Te
   void fn2() {
     final index = IntExt.random(max: 1000);
     DLog.d("fn2 index: $index");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<({VoidCallback action, String name})>('items', items));
+    properties.add(ObjectFlagProperty<ValueChanged<int>>.has('onValueChanged', onValueChanged));
   }
 }
 

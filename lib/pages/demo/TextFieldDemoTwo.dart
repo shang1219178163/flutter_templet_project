@@ -23,6 +23,12 @@ class TextFieldDemoTwo extends StatefulWidget {
 
   @override
   State<TextFieldDemoTwo> createState() => _TextFieldDemoTwoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerProviderStateMixin {
@@ -217,4 +223,15 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
   }
 
   onPressed() {}
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('readOnly', readOnly));
+    properties.add(IterableProperty<({Function() action, String name})>('items', items));
+    properties.add(DiagnosticsProperty<TextEditingController>('textEditingController', textEditingController));
+    properties.add(StringProperty('messgae', messgae));
+  }
 }

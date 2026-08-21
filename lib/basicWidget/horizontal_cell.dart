@@ -135,6 +135,16 @@ class HorizontalCell extends StatelessWidget {
     );
   }
 
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('margin', margin));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('padding', padding));
+    properties.add(DiagnosticsProperty<Decoration?>('decoration', decoration));
+    properties.add(DiagnosticsProperty<bool>('useIntrinsicHeight', useIntrinsicHeight));
+  }
+
   /// 自定义 Cell
   // Widget buildHorizontalCell({
   //   required Text title,

@@ -31,6 +31,18 @@ class ChioceList extends StatefulWidget {
 
   @override
   _ChioceListState createState() => _ChioceListState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<int>('indexs', indexs));
+    properties.add(IterableProperty<ChioceDataModel>('children', children));
+    properties.add(ObjectFlagProperty<void Function(List<int> indexs)>.has('callback', callback));
+    properties.add(ColorProperty('backgroudColor', backgroudColor));
+    properties.add(DiagnosticsProperty<bool>('canScroll', canScroll));
+    properties.add(DiagnosticsProperty<bool>('isMutiple', isMutiple));
+    properties.add(DoubleProperty('rowHeight', rowHeight));
+  }
 }
 
 class _ChioceListState extends State<ChioceList> {
@@ -54,7 +66,7 @@ class _ChioceListState extends State<ChioceList> {
               physics: NeverScrollableScrollPhysics(), //禁止滑动
               itemExtent: widget.rowHeight,
               itemCount: widget.children.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 final e = widget.children[index];
                 return Container(
                   decoration: BoxDecoration(
@@ -130,5 +142,11 @@ class _ChioceListState extends State<ChioceList> {
       widget.indexs.sort((a, b) => a.compareTo(b));
       widget.callback(widget.indexs);
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }

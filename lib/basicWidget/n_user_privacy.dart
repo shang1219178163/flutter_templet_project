@@ -36,6 +36,17 @@ class NUserPrivacy extends StatefulWidget {
 
   @override
   _NUserPrivacyState createState() => _NUserPrivacyState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onCancel', onCancel));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onConfirm', onConfirm));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(ObjectFlagProperty<WidgetBuilder?>.has('cancellBuilder', cancellBuilder));
+    properties.add(ObjectFlagProperty<WidgetBuilder?>.has('confirmBuilder', confirmBuilder));
+    properties.add(ObjectFlagProperty<WidgetBuilder?>.has('bottomBuilder', bottomBuilder));
+  }
 }
 
 class _NUserPrivacyState extends State<NUserPrivacy> {
@@ -158,5 +169,11 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
 
   Color _getConfirmBtnTextColor() {
     return !isScrollBottom ? Colors.black87 : Colors.white;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isScrollBottom', isScrollBottom));
   }
 }

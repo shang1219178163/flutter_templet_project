@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ShortcutsDemo extends StatefulWidget {
-  final String? title;
 
   const ShortcutsDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ShortcutsDemoState createState() => _ShortcutsDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ShortcutsDemoState extends State<ShortcutsDemo> {
@@ -28,12 +34,12 @@ class _ShortcutsDemoState extends State<ShortcutsDemo> {
           child: Actions(
             actions: <Type, Action<Intent>>{
               IncrementIntent: CallbackAction<IncrementIntent>(
-                onInvoke: (IncrementIntent intent) => setState(() {
+                onInvoke: (intent) => setState(() {
                   count++;
                 }),
               ),
               DecrementIntent: CallbackAction<DecrementIntent>(
-                onInvoke: (DecrementIntent intent) => setState(() {
+                onInvoke: (intent) => setState(() {
                   count--;
                 }),
               ),
@@ -51,6 +57,12 @@ class _ShortcutsDemoState extends State<ShortcutsDemo> {
             ),
           ),
         ));
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('count', count));
   }
 }
 

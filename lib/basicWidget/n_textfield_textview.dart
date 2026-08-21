@@ -67,6 +67,28 @@ class TextfieldTextview extends StatefulWidget {
 
   @override
   State<TextfieldTextview> createState() => _TextfieldTextviewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool?>('enabled', enabled));
+    properties.add(StringProperty('text', text));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<TapRegionCallback?>.has('onTapOutside', onTapOutside));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('contentPadding', contentPadding));
+    properties.add(StringProperty('hintText', hintText));
+    properties.add(DiagnosticsProperty<TextStyle?>('hintStyle', hintStyle));
+    properties.add(ColorProperty('fillColor', fillColor));
+    properties.add(DiagnosticsProperty<InputBorder?>('border', border));
+    properties.add(DiagnosticsProperty<bool>('readOnly', readOnly));
+    properties.add(IntProperty('maxLength', maxLength));
+    properties.add(IntProperty('maxLines', maxLines));
+    properties.add(IntProperty('minLines', minLines));
+    properties.add(DoubleProperty('borderRadius', borderRadius));
+    properties.add(ObjectFlagProperty<InputDecoration Function(InputDecoration d)?>.has('decorationbuilder', decorationbuilder));
+  }
 }
 
 class _TextfieldTextviewState extends State<TextfieldTextview> {
@@ -141,5 +163,11 @@ class _TextfieldTextviewState extends State<TextfieldTextview> {
       maxLines: widget.maxLines,
       decoration: widget.decorationbuilder?.call(decoration) ?? decoration,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController>('controllerNew', controllerNew));
   }
 }

@@ -16,12 +16,18 @@ import 'package:tuple/tuple.dart';
 final GlobalKey _globalKey = GlobalKey();
 
 class ProgressHudDemoNew extends StatefulWidget {
-  final String? title;
 
   const ProgressHudDemoNew({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ProgressHudDemoNewState createState() => _ProgressHudDemoNewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
@@ -133,6 +139,14 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
               ))
           .toList(),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('titles', titles));
+    properties.add(IterableProperty<String>('list', list));
+    properties.add(DiagnosticsProperty<bool>('isFlag', isFlag));
   }
 }
 
@@ -327,6 +341,14 @@ class _ToastContextState extends State<ToastContext> {
   removeAllQueuedToasts() {
     fToast.removeQueuedCustomToasts();
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ButtonStyle>('buttonStyle', buttonStyle));
+    properties.add(DiagnosticsProperty<FToast>('fToast', fToast));
+    properties.add(IterableProperty<Tuple2<String, VoidCallback>>('list', list));
+  }
 }
 
 class ToastNoContext extends StatefulWidget {
@@ -517,5 +539,12 @@ class _ToastNoContextState extends State<ToastNoContext> {
 
   void cancelToast() {
     Fluttertoast.cancel();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, VoidCallback>>('list', list));
+    properties.add(DiagnosticsProperty<bool>('isFlag', isFlag));
   }
 }

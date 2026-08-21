@@ -26,6 +26,14 @@ class NFlipCard extends StatefulWidget {
 
   @override
   State<NFlipCard> createState() => _NFlipCardState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<Axis>('axis', axis));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)?>.has('fontBuilder', fontBuilder));
+    properties.add(ObjectFlagProperty<Widget Function(VoidCallback onToggle)?>.has('backBuilder', backBuilder));
+  }
 }
 
 class _NFlipCardState extends State<NFlipCard> {

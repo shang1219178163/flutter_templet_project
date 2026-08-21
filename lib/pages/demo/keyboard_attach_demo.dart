@@ -15,6 +15,12 @@ class KeyboardAttachDemo extends StatefulWidget {
 
   @override
   _KeyboardAttachDemoState createState() => _KeyboardAttachDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBindingObserver {
@@ -215,11 +221,11 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
       context: context,
       isScrollControlled: true, // !important
       barrierColor: Colors.transparent,
-      builder: (BuildContext context) {
+      builder: (context) {
         return Container(
           // height: viewInsets.bottom,
           color: Colors.white,
-          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+          child: StatefulBuilder(builder: (context, setState) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -281,5 +287,13 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isKeyboardVisibleVN', isKeyboardVisibleVN));
+    properties.add(IterableProperty<Tuple2<int, String>>('items', items));
+    properties.add(DiagnosticsProperty<Object?>('selectedIndex', selectedIndex));
   }
 }

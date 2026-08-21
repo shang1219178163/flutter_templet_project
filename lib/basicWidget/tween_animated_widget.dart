@@ -23,6 +23,14 @@ class TweenAnimatedWidget<T extends Object?> extends StatefulWidget {
 
   @override
   _TweenAnimatedWidgetState<T> createState() => _TweenAnimatedWidgetState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Duration?>('duration', duration));
+    properties.add(DiagnosticsProperty<Tween<T>>('tween', tween));
+    properties.add(ObjectFlagProperty<TweenAnimatedBuilder<T>>.has('builder', builder));
+  }
 }
 
 class _TweenAnimatedWidgetState<T extends Object?> extends State<TweenAnimatedWidget<T>>
@@ -48,10 +56,17 @@ class _TweenAnimatedWidgetState<T extends Object?> extends State<TweenAnimatedWi
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animation,
-      builder: (BuildContext ctx, child) {
+      builder: (ctx, child) {
         return widget.builder(ctx, child, animation);
       },
       child: widget.child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
+    properties.add(DiagnosticsProperty<Animation<T>>('animation', animation));
   }
 }

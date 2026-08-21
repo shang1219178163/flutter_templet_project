@@ -97,6 +97,20 @@ class NTabIndicatorFixed extends Decoration {
   Path getClipPath(Rect rect, TextDirection textDirection) {
     return Path()..addRect(_indicatorRectFor(rect, textDirection));
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<BorderSide>('borderSide', borderSide));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('insets', insets));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
+    properties.add(ColorProperty('color', color));
+    properties.add(ColorProperty('shadowColor', shadowColor));
+    properties.add(DoubleProperty('shadowElevation', shadowElevation));
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+  }
 }
 
 class _UnderlinePainter extends BoxPainter {

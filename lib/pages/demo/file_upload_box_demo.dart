@@ -24,6 +24,12 @@ class FileUploadBoxDemo extends StatefulWidget {
 
   @override
   State<FileUploadBoxDemo> createState() => _FileUploadBoxDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
@@ -83,7 +89,7 @@ class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
                 ],
                 items: selectedFiles,
                 // showFileSize: true,
-                onChanged: (List<NFileUploadModel> value) {
+                onChanged: (value) {
                   selectedFiles = value;
                   DLog.d("$widget selectedFiles: $selectedFiles");
                   isAllUploadFinished.value = true;
@@ -100,5 +106,14 @@ class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<NFileUploadBoxController>('fileUploadBoxController', fileUploadBoxController));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isAllUploadFinished', isAllUploadFinished));
+    properties.add(IterableProperty<NFileUploadModel>('selectedFiles', selectedFiles));
   }
 }

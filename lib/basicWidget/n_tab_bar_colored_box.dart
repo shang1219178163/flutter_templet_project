@@ -63,6 +63,17 @@ class NTabBarColoredBox extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('padding', padding));
+    properties.add(DiagnosticsProperty<Decoration?>('decoration', decoration));
+    properties.add(ColorProperty('labelColor', labelColor));
+    properties.add(ColorProperty('backgroudColor', backgroudColor));
+  }
 }
 
 /// 原 MyTabBar
@@ -145,5 +156,21 @@ class NTabBar extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TabController?>('tabController', tabController));
+    properties.add(DiagnosticsProperty<bool>('isScrollable', isScrollable));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('padding', padding));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('indicatorPadding', indicatorPadding));
+    properties.add(ColorProperty('indicatorColor', indicatorColor));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('indicatorMargin', indicatorMargin));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('labelPadding', labelPadding));
+    properties.add(ColorProperty('labelColor', labelColor));
+    properties.add(DiagnosticsProperty<TextStyle?>('labelStyle', labelStyle));
+    properties.add(ColorProperty('unselectedLabelColor', unselectedLabelColor));
+    properties.add(DiagnosticsProperty<TextStyle?>('unselectedLabelStyle', unselectedLabelStyle));
   }
 }

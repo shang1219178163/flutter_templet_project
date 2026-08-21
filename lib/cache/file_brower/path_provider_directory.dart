@@ -11,6 +11,13 @@ import 'package:path_provider/path_provider.dart';
 
 /// 沙盒文件路径
 class PathProviderDirectory {
+
+  PathProviderDirectory({
+    required this.name,
+    required this.func,
+    required this.desc,
+    this.custom,
+  });
   static PathProviderDirectory get temporaryDirectory => PathProviderDirectory(
         name: "temporaryDirectory",
         func: getTemporaryDirectory,
@@ -76,13 +83,6 @@ class PathProviderDirectory {
         externalStorageDirectories,
         downloadsDirectory,
       ];
-
-  PathProviderDirectory({
-    required this.name,
-    required this.func,
-    required this.desc,
-    this.custom,
-  });
 
   final String name;
   final Future<Object?> Function() func;

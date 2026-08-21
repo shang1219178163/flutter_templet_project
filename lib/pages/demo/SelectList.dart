@@ -55,10 +55,17 @@ class _SelectListPageState extends State<SelectListPage> {
     return SelectList(
       models: models,
       isMultiple: isMultiple,
-      onSelected: (List<UserModel> items) {
+      onSelected: (items) {
         DLog.d(items.map((e) => (e.name,)));
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isMultiple', isMultiple));
+    properties.add(IterableProperty<UserModel>('models', models));
   }
 }
 
@@ -78,6 +85,14 @@ class SelectList extends StatefulWidget {
 
   @override
   State<SelectList> createState() => _SelectListState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isMultiple', isMultiple));
+    properties.add(IterableProperty<UserModel>('models', models));
+    properties.add(ObjectFlagProperty<ValueChanged<List<UserModel>>>.has('onSelected', onSelected));
+  }
 }
 
 class _SelectListState extends State<SelectList> {
@@ -124,9 +139,9 @@ class _SelectListState extends State<SelectList> {
               updateSelectedCount();
 
               if (!widget.isMultiple) {
-                dataList.value.forEach((item) {
+                for (final item in dataList.value) {
                   item.isSelected = (e == item);
-                });
+                }
                 widget.onSelected([e]);
               }
             }
@@ -145,7 +160,7 @@ class _SelectListState extends State<SelectList> {
                       ListTile(
                         leading: Checkbox(
                           value: e.isSelected == true,
-                          onChanged: (bool? value) {
+                          onChanged: (value) {
                             onTap();
                           },
                         ),
@@ -201,15 +216,15 @@ class _SelectListState extends State<SelectList> {
               //     .map((e) => (e.name, e.isSelected)).toList());
 
               if (isAll) {
-                dataList.value.forEach((e) {
+                for (final e in dataList.value) {
                   e.isSelected = false;
                   // e.isSelected = !isAll;
-                });
+                }
               } else {
-                dataList.value.forEach((e) {
+                for (final e in dataList.value) {
                   e.isSelected = true;
                   // e.isSelected = !isAll;
-                });
+                }
               }
               setState(() {});
               updateSelectedCount();
@@ -261,5 +276,15 @@ class _SelectListState extends State<SelectList> {
 
   updateSelectedCount() {
     selectedCount.value = selectedItems.length;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<UserModel>('models', models));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<UserModel>>>('dataList', dataList));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('selectedCount', selectedCount));
+    properties.add(DiagnosticsProperty<bool>('isAll', isAll));
+    properties.add(IterableProperty<UserModel>('selectedItems', selectedItems));
   }
 }

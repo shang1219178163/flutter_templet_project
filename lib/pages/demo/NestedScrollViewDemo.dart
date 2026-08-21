@@ -15,13 +15,19 @@ class NestedScrollViewDemo extends StatefulWidget {
 
   @override
   _NestedScrollViewDemoState createState() => _NestedScrollViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
         return <Widget>[
           // SliverAppBar(title: Text("hello title")),
           SliverAppBar(
@@ -44,7 +50,7 @@ class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
         removeTop: true,
         child: ListView.builder(
           itemCount: 50,
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             return Material(
               child: Container(
                 height: 60,

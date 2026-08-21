@@ -15,6 +15,12 @@ class NTargetFollowerDemo extends StatefulWidget {
 
   @override
   _NTargetFollowerDemoState createState() => _NTargetFollowerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
@@ -121,7 +127,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                                   },
                                   child: NLongPressMenu(
                                       items: items.map((e) => Tuple2(e.item1, AssetImage(e.item2))).toList(),
-                                      onItem: (Tuple2<String, AssetImage> t) {
+                                      onItem: (t) {
                                         onHide();
                                         debugPrint("onChanged_$t");
                                         ToastUtil.show(t.item1);
@@ -248,5 +254,12 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
 
   onQuote(String val) {
     debugPrint("${DateTime.now()}: $val");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, String>>('items', items));
+    properties.add(IterableProperty<OverlayEntry>('entries', entries));
   }
 }

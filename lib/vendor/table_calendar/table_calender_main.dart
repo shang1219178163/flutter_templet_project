@@ -13,6 +13,12 @@ class TableCalenderMain extends StatefulWidget {
 
   @override
   _TableCalenderMainState createState() => _TableCalenderMainState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TableCalenderMainState extends State<TableCalenderMain> {

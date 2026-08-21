@@ -10,6 +10,18 @@ import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 /// 受试者分组
 class SectionRootModel {
+
+  SectionRootModel.fromJson(Map<String, dynamic> json) {
+    code = (json['code'] as String?);
+    errorCode = (json['errorCode'] as String?);
+    if (json['result'] != null) {
+      final array = (json['result'] as List).map((e) => SectionDetailModel.fromJson(e));
+      result = List<SectionDetailModel>.from(array);
+    }
+    application = (json['application'] as String?);
+    traceId = (json['traceId'] as String?);
+    message = (json['message'] as String?);
+  }
   SectionRootModel({
     this.code,
     this.errorCode,
@@ -31,18 +43,6 @@ class SectionRootModel {
 
   String? message;
 
-  SectionRootModel.fromJson(Map<String, dynamic> json) {
-    code = (json['code'] as String?);
-    errorCode = (json['errorCode'] as String?);
-    if (json['result'] != null) {
-      final array = (json['result'] as List).map((e) => SectionDetailModel.fromJson(e));
-      result = List<SectionDetailModel>.from(array);
-    }
-    application = (json['application'] as String?);
-    traceId = (json['traceId'] as String?);
-    message = (json['message'] as String?);
-  }
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['code'] = code;
@@ -59,6 +59,20 @@ class SectionRootModel {
 
 /// 受试者分组详情
 class SectionDetailModel with SelectableMixin {
+
+  SectionDetailModel.fromJson(Map<String, dynamic> json) {
+    id = (json['id'] as String?);
+    projectId = (json['projectId'] as String?);
+    code = (json['code'] as String?);
+    name = (json['name'] as String?);
+    lockStatus = (json['lockStatus'] as String?);
+    createBy = (json['createBy'] as String?);
+    createTime = (json['createTime'] as int?);
+    updateBy = (json['updateBy'] as String?);
+    updateTime = (json['updateTime'] as int?);
+    remark = (json['remark'] as String?);
+    subjectUserCount = (json['subjectUserCount'] as int?);
+  }
   SectionDetailModel({
     this.id,
     this.projectId,
@@ -106,20 +120,6 @@ class SectionDetailModel with SelectableMixin {
 
   @override
   bool get enable => !isLockStatus;
-
-  SectionDetailModel.fromJson(Map<String, dynamic> json) {
-    id = (json['id'] as String?);
-    projectId = (json['projectId'] as String?);
-    code = (json['code'] as String?);
-    name = (json['name'] as String?);
-    lockStatus = (json['lockStatus'] as String?);
-    createBy = (json['createBy'] as String?);
-    createTime = (json['createTime'] as int?);
-    updateBy = (json['updateBy'] as String?);
-    updateTime = (json['updateTime'] as int?);
-    remark = (json['remark'] as String?);
-    subjectUserCount = (json['subjectUserCount'] as int?);
-  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -12,6 +12,12 @@ class WechatAssetsPickerDemo extends StatefulWidget {
 
   @override
   _WechatAssetsPickerDemoState createState() => _WechatAssetsPickerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
@@ -53,7 +59,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
     int rowCount = 3,
     double spacing = 10,
   }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: spacing, children: [
@@ -109,6 +115,13 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
     }
     setState(() {});
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('maxCount', maxCount));
+    properties.add(IterableProperty<AssetEntity>('selectedAssets', selectedAssets));
+  }
 }
 
 class WechatPhotoPickerDemo extends StatefulWidget {
@@ -118,6 +131,12 @@ class WechatPhotoPickerDemo extends StatefulWidget {
 
   @override
   _WechatPhotoPickerDemoState createState() => _WechatPhotoPickerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
@@ -148,7 +167,7 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
             WechatPhotoPicker(
               key: _globalKey,
               rowCount: 4,
-              onChanged: (List<AssetEntity> assets) {
+              onChanged: (assets) {
                 debugPrint("onChanged assets: ${assets.length}");
                 selectedAssets = assets;
               },
@@ -165,6 +184,13 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
   onPicker() async {
     _globalKey.currentState?.onPicker();
     debugPrint("onPicker:${selectedAssets.length}");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('maxCount', maxCount));
+    properties.add(IterableProperty<AssetEntity>('selectedAssets', selectedAssets));
   }
 }
 
@@ -208,6 +234,19 @@ class WechatPhotoPicker extends StatefulWidget {
 
   @override
   WechatPhotoPickerState createState() => WechatPhotoPickerState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('maxCount', maxCount));
+    properties.add(IntProperty('rowCount', rowCount));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DiagnosticsProperty<BoxDecoration?>('decoration', decoration));
+    properties.add(DiagnosticsProperty<ImageProvider<Object>>('placeholder', placeholder));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, double itemWidth)?>.has('addBuilder', addBuilder));
+    properties.add(ObjectFlagProperty<void Function(List<AssetEntity> assets)>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<Future<List<AssetEntity>?> Function()?>.has('onPicker', onPicker));
+  }
 }
 
 class WechatPhotoPickerState extends State<WechatPhotoPicker> {
@@ -231,7 +270,7 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
     int rowCount = 3,
     double spacing = 10,
   }) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: spacing, children: [
@@ -286,5 +325,11 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
     selectedAssets = result ?? [];
     widget.onChanged(selectedAssets);
     setState(() {});
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<AssetEntity>('selectedAssets', selectedAssets));
   }
 }

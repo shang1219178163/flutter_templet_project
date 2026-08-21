@@ -27,6 +27,12 @@ class ShareDataWidget extends InheritedWidget {
   bool updateShouldNotify(ShareDataWidget oldWidget) {
     return oldWidget.data != data;
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('data', data));
+  }
 }
 
 class TestWidget extends StatefulWidget {
@@ -89,5 +95,11 @@ class _InheritedWidgetDemoState extends State<InheritedWidgetDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('count', count));
   }
 }

@@ -44,6 +44,17 @@ class NExpandTextVertical extends StatefulWidget {
 
   @override
   NExpandTextVerticalState createState() => NExpandTextVerticalState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('text', text));
+    properties.add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle));
+    properties.add(IntProperty('expandMinLine', expandMinLine));
+    properties.add(DiagnosticsProperty<bool>('disableExpand', disableExpand));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
+    properties.add(DoubleProperty('tailingWidth', tailingWidth));
+  }
 }
 
 class NExpandTextVerticalState extends State<NExpandTextVertical> {
@@ -106,7 +117,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
     }
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final textPainter = TextPainterExt.getTextPainter(
           text: text,
           textStyle: textStyle,
@@ -125,7 +136,7 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
         // ].asMap().toString());
 
         return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+          builder: (context, setState) {
             // final btnTitle = isExpand ? "收起" : "展开";
 
             final arrowImageName = isExpand ? Assets.imagesIconExpandArrowUp : Assets.imagesIconExpandArrowDown;
@@ -272,5 +283,12 @@ class NExpandTextVerticalState extends State<NExpandTextVertical> {
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('weChatTitleColor', weChatTitleColor));
+    properties.add(DiagnosticsProperty<bool>('isExpand', isExpand));
   }
 }

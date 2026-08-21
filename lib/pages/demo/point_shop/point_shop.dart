@@ -33,6 +33,12 @@ class PointShop extends StatefulWidget {
 
   @override
   State<PointShop> createState() => _PointShopState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _PointShopState extends State<PointShop> with TickerProviderStateMixin {
@@ -533,5 +539,19 @@ class _PointShopState extends State<PointShop> with TickerProviderStateMixin {
     }
     final rootModel = ShopGoodsRootModel.fromJson(map);
     return rootModel.data;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<ItemScrollController>('itemScrollController', itemScrollController));
+    properties.add(DiagnosticsProperty<ItemPositionsListener>('itemPositionsListener', itemPositionsListener));
+    properties.add(DiagnosticsProperty<EasyRefreshController>('refreshController', refreshController));
+    properties.add(IterableProperty<ShopGoodsCategoryModel>('categorys', categorys));
+    properties.add(DoubleProperty('tabHeight', tabHeight));
+    properties.add(DiagnosticsProperty<TabController?>('tabController', tabController));
+    properties.add(DiagnosticsProperty<MediaQueryData>('mediaData', mediaData));
+    properties.add(DiagnosticsProperty<ThemeProvider>('themeProvider', themeProvider));
   }
 }

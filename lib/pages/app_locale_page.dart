@@ -14,6 +14,12 @@ class AppLocalePage extends StatefulWidget {
 
   @override
   State<AppLocalePage> createState() => _AppLocalePageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _AppLocalePageState extends State<AppLocalePage> {
@@ -96,5 +102,14 @@ class _AppLocalePageState extends State<AppLocalePage> {
         itemCount: context.supportedLocales.length + 1,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }

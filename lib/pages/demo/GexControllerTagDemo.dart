@@ -20,6 +20,12 @@ class GexControllerTagDemo extends StatefulWidget {
 
   @override
   State<GexControllerTagDemo> createState() => _GexControllerTagDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _GexControllerTagDemoState extends State<GexControllerTagDemo> {
@@ -82,5 +88,14 @@ class _GexControllerTagDemoState extends State<GexControllerTagDemo> {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('controllerTag', controllerTag));
+    properties.add(StringProperty('controllerTagOne', controllerTagOne));
+    properties.add(DiagnosticsProperty<TagGetxController>('moduleController', moduleController));
+    properties.add(DiagnosticsProperty<TagGetxController>('moduleControllerOne', moduleControllerOne));
   }
 }

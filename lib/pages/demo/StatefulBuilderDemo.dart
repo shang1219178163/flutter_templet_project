@@ -10,12 +10,18 @@
 import 'package:flutter/material.dart';
 
 class StatefulBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const StatefulBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StatefulBuilderDemoState createState() => _StatefulBuilderDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _StatefulBuilderDemoState extends State<StatefulBuilderDemo> {
@@ -42,19 +48,19 @@ class _StatefulBuilderDemoState extends State<StatefulBuilderDemo> {
   showDialogAlert() async {
     await showDialog<void>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         int? selectedRadio = 0;
         return AlertDialog(
           content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
-                children: List<Widget>.generate(3, (int index) {
+                children: List<Widget>.generate(3, (index) {
                   return ListTile(
                     leading: Radio<int>(
                       value: index,
                       groupValue: selectedRadio,
-                      onChanged: (int? value) {
+                      onChanged: (value) {
                         setState(() => selectedRadio = value);
                       },
                     ),

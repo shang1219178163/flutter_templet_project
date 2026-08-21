@@ -205,6 +205,30 @@ class NSearchTextField extends StatelessWidget {
     //   );
     // }
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TextEditingController?>('controller', controller));
+    properties.add(StringProperty('placeholder', placeholder));
+    properties.add(DiagnosticsProperty<TextStyle?>('style', style));
+    properties.add(DiagnosticsProperty<TextStyle?>('placeholderStyle', placeholderStyle));
+    properties.add(EnumProperty<TextAlign>('textAlign', textAlign));
+    properties.add(EnumProperty<OverlayVisibilityMode>('suffixMode', suffixMode));
+    properties.add(DiagnosticsProperty<BoxDecoration?>('decoration', decoration));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(DiagnosticsProperty<bool>('hidePrefixIcon', hidePrefixIcon));
+    properties.add(DiagnosticsProperty<BorderRadius?>('borderRadius', borderRadius));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
+    properties.add(DiagnosticsProperty<Duration?>('debounceDuration', debounceDuration));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<ValueChanged<String>?>.has('onSubmitted', onSubmitted));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onSuffixTap', onSuffixTap));
+    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onFocus', onFocus));
+    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
+    properties.add(DiagnosticsProperty<bool>('enabled', enabled));
+  }
 }
 
 /// 搜索框 + 取消按钮
@@ -259,5 +283,14 @@ class NSearchBar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('placeholder', placeholder));
+    properties.add(DiagnosticsProperty<BoxDecoration?>('decoration', decoration));
+    properties.add(ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onCancel', onCancel));
   }
 }

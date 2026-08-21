@@ -65,4 +65,13 @@ class OrderItem extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<DBOrder>('model', model));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onToggle', onToggle));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onEdit', onEdit));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onDelete', onDelete));
+  }
 }

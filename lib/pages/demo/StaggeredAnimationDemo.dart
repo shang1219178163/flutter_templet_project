@@ -10,6 +10,12 @@ class StaggeredAnimationDemo extends StatefulWidget {
 
   @override
   State<StaggeredAnimationDemo> createState() => _StaggeredAnimationDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _StaggeredAnimationDemoState extends State<StaggeredAnimationDemo> with SingleTickerProviderStateMixin {
@@ -59,23 +65,16 @@ class _StaggeredAnimationDemoState extends State<StaggeredAnimationDemo> with Si
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+  }
 }
 
 class StaggeredAnimationWidget extends StatelessWidget {
-  final Animation<double> controller;
-  final Animation<double> width;
-  final Animation<double> height;
-  final Animation<Color?> color;
-  final Animation<EdgeInsets> padding;
-  final Animation<BorderRadius?> borderRadius;
-  final Animation<double> elevation;
-  final Animation<TextStyle>? style;
-
-  final Animation<double>? opacity;
-  final Animation<Offset>? slide;
-  final Animation<double>? scale;
-  final Animation<double>? rotation;
-  final Widget child;
 
   StaggeredAnimationWidget({
     Key? key,
@@ -188,6 +187,20 @@ class StaggeredAnimationWidget extends StatelessWidget {
           ),
         ),
         super(key: key);
+  final Animation<double> controller;
+  final Animation<double> width;
+  final Animation<double> height;
+  final Animation<Color?> color;
+  final Animation<EdgeInsets> padding;
+  final Animation<BorderRadius?> borderRadius;
+  final Animation<double> elevation;
+  final Animation<TextStyle>? style;
+
+  final Animation<double>? opacity;
+  final Animation<Offset>? slide;
+  final Animation<double>? scale;
+  final Animation<double>? rotation;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -255,5 +268,22 @@ class StaggeredAnimationWidget extends StatelessWidget {
         return content;
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Animation<double>>('controller', controller));
+    properties.add(DiagnosticsProperty<Animation<double>>('width', width));
+    properties.add(DiagnosticsProperty<Animation<double>>('height', height));
+    properties.add(DiagnosticsProperty<Animation<Color?>>('color', color));
+    properties.add(DiagnosticsProperty<Animation<EdgeInsets>>('padding', padding));
+    properties.add(DiagnosticsProperty<Animation<BorderRadius?>>('borderRadius', borderRadius));
+    properties.add(DiagnosticsProperty<Animation<double>>('elevation', elevation));
+    properties.add(DiagnosticsProperty<Animation<TextStyle>?>('style', style));
+    properties.add(DiagnosticsProperty<Animation<double>?>('opacity', opacity));
+    properties.add(DiagnosticsProperty<Animation<Offset>?>('slide', slide));
+    properties.add(DiagnosticsProperty<Animation<double>?>('scale', scale));
+    properties.add(DiagnosticsProperty<Animation<double>?>('rotation', rotation));
   }
 }

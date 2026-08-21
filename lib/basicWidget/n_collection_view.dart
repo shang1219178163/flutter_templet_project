@@ -52,6 +52,22 @@ class NCollectionView extends StatefulWidget {
 
   @override
   _NCollectionViewStateNew createState() => _NCollectionViewStateNew();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('length', length));
+    properties.add(IntProperty('page', page));
+    properties.add(IntProperty('rowNum', rowNum));
+    properties.add(IntProperty('numPerRow', numPerRow));
+    properties.add(ObjectFlagProperty<Widget Function(BuildContext context, int index)>.has('itemBuilder', itemBuilder));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+    properties.add(DiagnosticsProperty<EdgeInsets?>('contentPadding', contentPadding));
+    properties.add(DoubleProperty('indicatorBottom', indicatorBottom));
+    properties.add(ColorProperty('indicatorColor', indicatorColor));
+    properties.add(ColorProperty('indicatorColorActive', indicatorColorActive));
+  }
 }
 
 class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerProviderStateMixin {
@@ -85,7 +101,7 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
           onPageChanged: (index) {
             indexVN.value = index;
           },
-          itemBuilder: (BuildContext context, int pageIndex) {
+          itemBuilder: (context, pageIndex) {
             return Container(
               padding: widget.contentPadding,
               // alignment: Alignment.center,
@@ -138,5 +154,12 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
           ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('indexVN', indexVN));
+    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
   }
 }

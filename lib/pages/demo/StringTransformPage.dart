@@ -12,6 +12,12 @@ class StringTransformPage extends StatefulWidget {
 
   @override
   _StringTransformPageState createState() => _StringTransformPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _StringTransformPageState extends State<StringTransformPage> {
@@ -131,5 +137,11 @@ class _StringTransformPageState extends State<StringTransformPage> {
   underScoreCaseToCamel() {
     final tmp = _editingController.text;
     _editingController.text = tmp.toCamlCase("_");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple2<String, VoidCallback>>('items', items));
   }
 }

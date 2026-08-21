@@ -7,6 +7,12 @@ class FlexibleDemo extends StatefulWidget {
 
   @override
   _FlexibleDemoState createState() => _FlexibleDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FlexibleDemoState extends State<FlexibleDemo> {

@@ -23,6 +23,12 @@ class DropBoxChoicDemoNew extends StatefulWidget {
 
   @override
   _DropBoxChoicDemoNewState createState() => _DropBoxChoicDemoNewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
@@ -151,7 +157,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
             child: NSearchTextField(
               placeholder: "搜索",
               backgroundColor: AppColor.white,
-              onChanged: (String value) {},
+              onChanged: (value) {},
             ),
           ),
           SizedBox(width: 8),
@@ -215,7 +221,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
     return NRefreshListView<UserModel>(
       controller: refreshViewController,
       // tag: "${tabIndex.value}",
-      onRequest: (bool isRefresh, int page, int pageSize, last) async {
+      onRequest: (isRefresh, page, pageSize, last) async {
         return requestList(
           pageNo: page,
           pageSize: pageSize,
@@ -228,7 +234,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
           indent: 16,
         );
       },
-      itemBuilder: (BuildContext context, int index, e) {
+      itemBuilder: (context, index, e) {
         return InkWell(
           onTap: () {
             DLog.d("${e.toJson()}");
@@ -265,5 +271,20 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
   refreshFilter() async {
     hasFilter.value = filterModel.choices.where((e) => e.isNotEmpty).isNotEmpty;
     debugPrint("hasFilter:${hasFilter.value}");
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NListRefreshController<UserModel>>('refreshViewController', refreshViewController));
+    properties.add(IterableProperty<int>('items', items));
+    properties.add(StringProperty('searchText', searchText));
+    properties.add(DiagnosticsProperty<TextEditingController>('searchtEditingController', searchtEditingController));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('hasFilter', hasFilter));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isHighlight', isHighlight));
+    properties.add(DiagnosticsProperty<ChoiceFilterBoxController>('patientFilterController', patientFilterController));
+    properties.add(DiagnosticsProperty<NFilterDropBoxController?>('filterController', filterController));
+    properties.add(DiagnosticsProperty<NChoiceFilterBoxModel>('filterModel', filterModel));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('filterDesc', filterDesc));
   }
 }

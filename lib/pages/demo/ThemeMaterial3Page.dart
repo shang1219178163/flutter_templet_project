@@ -12,6 +12,12 @@ class ThemeMaterial3Page extends StatefulWidget {
 
   @override
   State<ThemeMaterial3Page> createState() => _ThemeMaterial3PageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
@@ -329,5 +335,12 @@ class _ThemeMaterial3PageState extends State<ThemeMaterial3Page> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
   }
 }

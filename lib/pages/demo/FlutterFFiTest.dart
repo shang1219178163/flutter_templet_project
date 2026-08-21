@@ -11,6 +11,12 @@ class FlutterFFiTest extends StatefulWidget {
 
   @override
   State<FlutterFFiTest> createState() => _FlutterFFiTestState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _FlutterFFiTestState extends State<FlutterFFiTest> {

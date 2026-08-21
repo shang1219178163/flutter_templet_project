@@ -18,12 +18,18 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 class ExpandIconDemo extends StatefulWidget {
-  final String? title;
 
   const ExpandIconDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ExpandIconDemoState createState() => _ExpandIconDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ExpandIconDemoState extends State<ExpandIconDemo> {
@@ -371,6 +377,17 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       onChanged: onChanged,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Color>('colors', colors));
+    properties.add(DiagnosticsProperty<ValueNotifier<Color>>('selectedColor', selectedColor));
+    properties.add(DiagnosticsProperty<bool>('isVisible', isVisible));
+    properties.add(IterableProperty<TagDetailModel>('tagModels', tagModels));
+    properties.add(DiagnosticsProperty<TagDetailModel?>('selectedTagModel', selectedTagModel));
+    properties.add(DiagnosticsProperty<TagDetailModel?>('selectedTagModelTmp', selectedTagModelTmp));
+  }
 }
 
 class ExpansionTileCard extends StatefulWidget {
@@ -380,6 +397,12 @@ class ExpansionTileCard extends StatefulWidget {
 
   @override
   _ExpansionTileCardState createState() => _ExpansionTileCardState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ExpansionTileCardState extends State<ExpansionTileCard> {
@@ -521,5 +544,11 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isExpanded', isExpanded));
   }
 }

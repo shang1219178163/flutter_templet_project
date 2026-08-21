@@ -149,4 +149,19 @@ class NTagBox<E> extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('keywords', keywords));
+    properties.add(IterableProperty<E>('items', items));
+    properties.add(ObjectFlagProperty<String Function(E e)>.has('titleCb', titleCb));
+    properties.add(ObjectFlagProperty<ValueChanged<E>>.has('onDelete', onDelete));
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onAdd', onAdd));
+    properties.add(ObjectFlagProperty<ValueChanged<List<E>>?>.has('onChanged', onChanged));
+    properties.add(DiagnosticsProperty<Radius>('radius', radius));
+    properties.add(ColorProperty('tagColor', tagColor));
+    properties.add(ColorProperty('tagAddColor', tagAddColor));
+    properties.add(IntProperty('max', max));
+  }
 }

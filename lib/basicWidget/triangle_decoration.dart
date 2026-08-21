@@ -16,6 +16,13 @@ class TriangleDecoration extends Decoration {
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     return _TriangleShapePainter(color: color, size: size);
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty('color', color));
+    properties.add(DoubleProperty('size', size));
+  }
 }
 
 class _TriangleShapePainter extends BoxPainter {

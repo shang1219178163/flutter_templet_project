@@ -115,4 +115,15 @@ class LiveStreamGiftSendCard extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('avatar', avatar));
+    properties.add(StringProperty('name', name));
+    properties.add(StringProperty('giftName', giftName));
+    properties.add(StringProperty('giftUrl', giftUrl));
+    properties.add(ColorProperty('giftColor', giftColor));
+    properties.add(IntProperty('giftCount', giftCount));
+  }
 }

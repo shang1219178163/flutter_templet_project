@@ -20,6 +20,12 @@ class DividerDemo extends StatefulWidget {
 
   @override
   State<DividerDemo> createState() => _DividerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _DividerDemoState extends State<DividerDemo> {
@@ -136,5 +142,16 @@ class _DividerDemoState extends State<DividerDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('heightVN', heightVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('thicknessVN', thicknessVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('indentVN', indentVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('endIndentVN', endIndentVN));
   }
 }

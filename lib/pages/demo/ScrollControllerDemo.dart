@@ -7,6 +7,12 @@ class ScrollControllerDemo extends StatefulWidget {
 
   @override
   _ScrollControllerDemoState createState() => _ScrollControllerDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
@@ -49,5 +55,11 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
         leading: Text('page $page item $i'),
       );
     }).toList();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<TrackingScrollController>('trackingScrollController', trackingScrollController));
   }
 }

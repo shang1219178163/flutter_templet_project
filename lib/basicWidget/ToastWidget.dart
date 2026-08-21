@@ -24,6 +24,18 @@ class ToastWidget extends StatefulWidget {
 
   @override
   State<ToastWidget> createState() => _ToastWidgetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('text', text));
+    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
+    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(ObjectFlagProperty<StatefulWidgetBuilder?>.has('builder', builder));
+    properties.add(DiagnosticsProperty<Duration>('duration', duration));
+    properties.add(DiagnosticsProperty<Duration>('transitionDuration', transitionDuration));
+  }
 }
 
 class _ToastWidgetState extends State<ToastWidget> with SingleTickerProviderStateMixin {
@@ -87,5 +99,11 @@ class _ToastWidgetState extends State<ToastWidget> with SingleTickerProviderStat
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AnimationController>('opacityAnim', opacityAnim));
   }
 }

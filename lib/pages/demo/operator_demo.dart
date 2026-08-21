@@ -7,6 +7,12 @@ class OperatorDemo extends StatefulWidget {
 
   @override
   _OperatorDemoState createState() => _OperatorDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _OperatorDemoState extends State<OperatorDemo> {

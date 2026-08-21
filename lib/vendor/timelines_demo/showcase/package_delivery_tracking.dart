@@ -74,6 +74,12 @@ class _OrderTitle extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<_OrderInfo>('orderInfo', orderInfo));
+  }
 }
 
 class _InnerTimeline extends StatelessWidget {
@@ -122,6 +128,12 @@ class _InnerTimeline extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<_DeliveryMessage>('messages', messages));
   }
 }
 
@@ -199,6 +211,12 @@ class _DeliveryProcesses extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<_DeliveryProcess>('processes', processes));
+  }
 }
 
 class _OnTimeBar extends StatelessWidget {
@@ -245,6 +263,12 @@ class _OnTimeBar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<_DriverInfo>('driver', driver));
   }
 }
 

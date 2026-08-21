@@ -45,7 +45,7 @@ class XCollectionNavWidget extends StatelessWidget {
 
   Widget buildSwiper() {
     return Swiper(
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         return CustomSwiperItem(
           url: images[index],
           color: index.isEven ? Colors.green : Colors.yellow,
@@ -63,7 +63,7 @@ class XCollectionNavWidget extends StatelessWidget {
 
   Widget buildBody() {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         var edgeHorizontal = spacing * 0.5;
         var itemWidth = (constraints.maxWidth - spacing * (rowCount - 1) - edgeHorizontal * 2) / rowCount;
         // var itemWidthNew = 48;
@@ -147,6 +147,20 @@ class XCollectionNavWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties.add(DiagnosticsProperty<EdgeInsets>('margin', margin));
+    properties.add(DoubleProperty('spacing', spacing));
+    properties.add(DoubleProperty('runSpacing', runSpacing));
+    properties.add(EnumProperty<Axis>('direction', direction));
+    properties.add(IntProperty('rowCount', rowCount));
   }
 
   // buildBodySwiper() {

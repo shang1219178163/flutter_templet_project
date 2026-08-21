@@ -22,6 +22,12 @@ class SuffixTransitionDemo extends StatefulWidget {
 
   @override
   State<SuffixTransitionDemo> createState() => _SuffixTransitionDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with AutomaticKeepAliveClientMixin {
@@ -510,7 +516,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
               children: [
                 MatrixTransition(
                   animation: animation,
-                  onTransform: (double value) {
+                  onTransform: (value) {
                     return Matrix4.identity()
                       ..setEntry(3, 2, 0.004)
                       ..rotateY(pi * 2.0 * value);
@@ -539,7 +545,7 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
       child: Column(
         children: [
           StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+            builder: (context, setState) {
               final axis = isHorizal ? Axis.horizontal : Axis.vertical;
               return Column(
                 children: [
@@ -690,5 +696,12 @@ class _SuffixTransitionDemoState extends State<SuffixTransitionDemo> with Automa
         );
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('initialIndex', initialIndex));
+    properties.add(IterableProperty<({Widget child, Tab tab})>('items', items));
   }
 }

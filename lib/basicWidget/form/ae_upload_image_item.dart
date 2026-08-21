@@ -108,4 +108,16 @@ class AeUploadImageItem extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AssetUploadBoxController?>('uploadBoxController', uploadBoxController));
+    properties.add(StringProperty('title', title));
+    properties.add(IntProperty('maxCount', maxCount));
+    properties.add(IterableProperty<AssetUploadModel>('selectedModels', selectedModels));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isUploading', isUploading));
+    properties.add(ObjectFlagProperty<ValueChanged<List<AssetUploadModel>>?>.has('onUpload', onUpload));
+    properties.add(DiagnosticsProperty<bool>('enable', enable));
+  }
 }

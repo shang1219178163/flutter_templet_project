@@ -17,12 +17,18 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 class ChipDemo extends StatefulWidget {
-  final String? title;
 
   const ChipDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ChipDemoState createState() => _ChipDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
@@ -232,7 +238,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                           label: Text('Choice_$e'),
                           // padding: EdgeInsets.only(left: 8, right: 8),
                           selected: _value == e,
-                          onSelected: (bool selected) {
+                          onSelected: (selected) {
                             DLog.d(e);
                             _value = selected ? e : null;
                             setState(() {});
@@ -307,7 +313,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
     return NSectionBox(
       title: "NTagBox",
       crossAxisAlignment: CrossAxisAlignment.start,
-      child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+      child: StatefulBuilder(builder: (context, setState) {
         return NTagBox<(int, String)>(
             keywords: "初步诊断",
             items: tuples,
@@ -361,6 +367,15 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
           }),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<(int, String)>('tuples', tuples));
+    properties.add(IterableProperty<Tuple2<int, String>>('tuplesNew', tuplesNew));
+    properties.add(IterableProperty<Tuple2<String, String>>('items', items));
+    properties.add(DiagnosticsProperty<ValueNotifier<Tuple2<String, String>>>('itemCurrent', itemCurrent));
+  }
 }
 
 class ActorFilterEntry {
@@ -394,7 +409,7 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
           avatar: CircleAvatar(child: Text(actor.initials)),
           label: Text(actor.name),
           selected: _filters.map((e) => e.name).contains(actor.name),
-          onSelected: (bool value) {
+          onSelected: (value) {
             if (value) {
               _filters.add(actor);
             } else {
@@ -428,5 +443,11 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Widget>('actorWidgets', actorWidgets));
   }
 }

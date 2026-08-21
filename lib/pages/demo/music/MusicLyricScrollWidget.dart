@@ -15,6 +15,14 @@ class LyricScrollWidget extends StatefulWidget {
 
   @override
   _LyricScrollWidgetState createState() => _LyricScrollWidgetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<LyricLine>('lyrics', lyrics));
+    properties.add(DiagnosticsProperty<Stream<Duration>>('positionStream', positionStream));
+    properties.add(ObjectFlagProperty<Function(Duration position)>.has('onSeek', onSeek));
+  }
 }
 
 class _LyricScrollWidgetState extends State<LyricScrollWidget> {

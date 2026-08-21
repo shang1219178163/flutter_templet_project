@@ -11,6 +11,12 @@ class AppRouteAwareDemo extends StatefulWidget {
 
   @override
   _AppRouteAwareDemoState createState() => _AppRouteAwareDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AppRouteAwareDemoState extends State<AppRouteAwareDemo> with RouteAware {

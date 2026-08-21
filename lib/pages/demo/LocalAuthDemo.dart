@@ -23,6 +23,12 @@ class LocalAuthDemo extends StatefulWidget {
 
   @override
   State<LocalAuthDemo> createState() => _LocalAuthDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _LocalAuthDemoState extends State<LocalAuthDemo> {
@@ -103,5 +109,14 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     }
     DLog.d("availableBiometrics: $availableBiometrics");
     return true;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }

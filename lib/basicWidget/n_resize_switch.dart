@@ -33,6 +33,15 @@ class NResizeSwitch extends StatefulWidget {
 
   @override
   State<NResizeSwitch> createState() => _NResizeSwitchState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('width', width));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<bool>('value', value));
+    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onChanged', onChanged));
+  }
 }
 
 class _NResizeSwitchState extends State<NResizeSwitch> {
@@ -71,5 +80,11 @@ class _NResizeSwitchState extends State<NResizeSwitch> {
             ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('switchValue', switchValue));
   }
 }

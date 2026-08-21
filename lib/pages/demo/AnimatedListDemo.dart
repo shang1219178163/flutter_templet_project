@@ -15,6 +15,12 @@ class AnimatedListDemo extends StatefulWidget {
 
   @override
   _AnimatedListDemoState createState() => _AnimatedListDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AnimatedListDemoState extends State<AnimatedListDemo> {
@@ -64,9 +70,9 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
           key: globalKey,
           initialItemCount: data.length,
           itemBuilder: (
-            BuildContext context,
-            int index,
-            Animation<double> animation,
+            context,
+            index,
+            animation,
           ) {
             //添加列表项时会执行渐显动画
             return FadeTransition(
@@ -143,5 +149,13 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
         duration: Duration(milliseconds: 200), // 动画时间为 200 ms
       );
     });
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('data', data));
+    properties.add(IntProperty('counter', counter));
+    properties.add(DiagnosticsProperty<GlobalKey<AnimatedListState>>('globalKey', globalKey));
   }
 }

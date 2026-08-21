@@ -17,6 +17,12 @@ class NChoiceBoxOneDemo extends StatefulWidget {
 
   @override
   State<NChoiceBoxOneDemo> createState() => _NChoiceBoxOneDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
@@ -314,6 +320,18 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<Tuple3<String, String, String>>('rpItems', rpItems));
+    properties.add(DiagnosticsProperty<ValueNotifier<Tuple3<String, String, String>>>('rpItemCurrent', rpItemCurrent));
+    properties.add(DiagnosticsProperty<bool>('canChange', canChange));
+    properties.add(IterableProperty<TagDetailModel>('tags', tags));
+    properties.add(IterableProperty<TagDetailModel>('selectedTags', selectedTags));
+    properties.add(IterableProperty<OrderModel>('orders', orders));
+    properties.add(IterableProperty<OrderModel>('selectedOrders', selectedOrders));
   }
 }
 

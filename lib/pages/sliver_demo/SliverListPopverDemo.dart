@@ -10,12 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SliverListPopverDemo extends StatefulWidget {
-  final String? title;
 
   const SliverListPopverDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SliverListPopverDemoState createState() => _SliverListPopverDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
@@ -173,5 +179,12 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('btnIdx', btnIdx));
+    properties.add(DiagnosticsProperty<bool>('isVisible', isVisible));
   }
 }

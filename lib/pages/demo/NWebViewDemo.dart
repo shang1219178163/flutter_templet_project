@@ -8,6 +8,12 @@ class NWebViewDemo extends StatefulWidget {
 
   @override
   State<NWebViewDemo> createState() => _NWebViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NWebViewDemoState extends State<NWebViewDemo> {
@@ -34,5 +40,11 @@ class _NWebViewDemoState extends State<NWebViewDemo> {
       url: initialUrl,
       title: initialUrl,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('initialUrl', initialUrl));
   }
 }

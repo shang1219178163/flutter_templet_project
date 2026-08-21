@@ -19,6 +19,12 @@ class CarouselViewDemo extends StatefulWidget {
 
   @override
   State<CarouselViewDemo> createState() => _CarouselViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _CarouselViewDemoState extends State<CarouselViewDemo> {
@@ -62,7 +68,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
                 itemExtent: 300.0, // 每个子项的宽度
                 shrinkExtent: 50.0, // 子项缩小后的宽度
                 itemSnapping: true,
-                children: List<Widget>.generate(20, (int index) {
+                children: List<Widget>.generate(20, (index) {
                   return UncontainedLayoutCard(index: index, label: 'Item $index');
                 }),
               ),
@@ -71,6 +77,15 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
   }
 }
 
@@ -97,5 +112,12 @@ class UncontainedLayoutCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('index', index));
+    properties.add(StringProperty('label', label));
   }
 }

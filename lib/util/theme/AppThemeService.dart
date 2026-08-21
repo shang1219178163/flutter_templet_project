@@ -19,12 +19,12 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class AppThemeService {
-  static final AppThemeService _instance = AppThemeService._();
   factory AppThemeService() => _instance;
 
   AppThemeService._() {
     _init();
   }
+  static final AppThemeService _instance = AppThemeService._();
 
   _init() {
     final cacheColorStr = CacheService().getString(CacheKey.seedColor.name);

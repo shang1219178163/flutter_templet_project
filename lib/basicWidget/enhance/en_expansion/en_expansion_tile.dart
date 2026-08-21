@@ -278,6 +278,29 @@ class EnExpansionTile extends StatefulWidget {
 
   @override
   State<EnExpansionTile> createState() => _EnExpansionTileState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onExpansionChanged', onExpansionChanged));
+    properties.add(ObjectFlagProperty<ExpansionWidgetBuilder?>.has('header', header));
+    properties.add(ObjectFlagProperty<ExpansionWidgetBuilder?>.has('childrenHeader', childrenHeader));
+    properties.add(ObjectFlagProperty<ExpansionWidgetBuilder?>.has('childrenFooter', childrenFooter));
+    properties.add(DiagnosticsProperty<BorderRadiusGeometry?>('borderRadius', borderRadius));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(ColorProperty('collapsedBackgroundColor', collapsedBackgroundColor));
+    properties.add(DiagnosticsProperty<bool>('initiallyExpanded', initiallyExpanded));
+    properties.add(DiagnosticsProperty<bool>('maintainState', maintainState));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('tilePadding', tilePadding));
+    properties.add(DiagnosticsProperty<Alignment?>('expandedAlignment', expandedAlignment));
+    properties.add(EnumProperty<CrossAxisAlignment?>('expandedCrossAxisAlignment', expandedCrossAxisAlignment));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('childrenPadding', childrenPadding));
+    properties.add(ColorProperty('iconColor', iconColor));
+    properties.add(ColorProperty('collapsedIconColor', collapsedIconColor));
+    properties.add(ColorProperty('textColor', textColor));
+    properties.add(ColorProperty('collapsedTextColor', collapsedTextColor));
+    properties.add(EnumProperty<ListTileControlAffinity?>('controlAffinity', controlAffinity));
+  }
 }
 
 class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProviderStateMixin {
@@ -329,7 +352,7 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
       if (_isExpanded) {
         _controller.forward();
       } else {
-        _controller.reverse().then<void>((void value) {
+        _controller.reverse().then<void>((value) {
           if (!mounted) {
             return;
           }

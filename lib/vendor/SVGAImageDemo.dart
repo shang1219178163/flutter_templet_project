@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:svgaplayer_flutter/svgaplayer_flutter.dart';
 
 class SvgaImageDemo extends StatefulWidget {
-  final String? title;
 
   const SvgaImageDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SvgaImageDemoState createState() => _SvgaImageDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _SvgaImageDemoState extends State<SvgaImageDemo> {

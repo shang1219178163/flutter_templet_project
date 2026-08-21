@@ -56,4 +56,12 @@ class NTicketDivder extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('halfCircleWidth', halfCircleWidth));
+    properties.add(DoubleProperty('halfCircleHeight', halfCircleHeight));
+    properties.add(ColorProperty('halfCircleColor', halfCircleColor));
+  }
 }

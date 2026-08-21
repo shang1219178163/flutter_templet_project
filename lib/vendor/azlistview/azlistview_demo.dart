@@ -16,6 +16,12 @@ class AzlistviewDemo extends StatefulWidget {
 
   @override
   _AzlistviewDemoState createState() => _AzlistviewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AzlistviewDemoState extends State<AzlistviewDemo> {

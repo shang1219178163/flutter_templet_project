@@ -8,8 +8,8 @@
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
+import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
@@ -24,6 +24,12 @@ class PageRouteAnimationDemo extends StatefulWidget {
 
   @override
   State<PageRouteAnimationDemo> createState() => _PageRouteAnimationDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
@@ -81,10 +87,10 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
               ...list.map((e) {
                 final i = list.indexOf(e);
                 return _NOpenContainer<bool>(
-                  openBuilder: (BuildContext _, VoidCallback openContainer) {
+                  openBuilder: (_, openContainer) {
                     return ButtonPage();
                   },
-                  closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                  closedBuilder: (_, openContainer) {
                     return buildCard(
                       onTap: openContainer,
                       url: e,
@@ -190,6 +196,15 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty('id', id));
+    properties.add(IterableProperty<String>('items', items));
+  }
 }
 
 class _NOpenContainer<T> extends StatelessWidget {
@@ -216,5 +231,14 @@ class _NOpenContainer<T> extends StatelessWidget {
       tappable: false,
       closedBuilder: closedBuilder,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<OpenContainerBuilder<T>>.has('openBuilder', openBuilder));
+    properties.add(ObjectFlagProperty<CloseContainerBuilder>.has('closedBuilder', closedBuilder));
+    properties.add(EnumProperty<ContainerTransitionType>('transitionType', transitionType));
+    properties.add(ObjectFlagProperty<ClosedCallback<T?>>.has('onClosed', onClosed));
   }
 }

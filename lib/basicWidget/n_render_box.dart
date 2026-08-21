@@ -45,4 +45,12 @@ class _NRenderBoxState extends State<NRenderBox> {
       child: widget.child,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<GlobalKey<State<StatefulWidget>>>('renderKey', renderKey));
+    properties.add(DiagnosticsProperty<RenderBox?>('renderBox', renderBox));
+    properties.add(DiagnosticsProperty<Offset?>('renderPosition', renderPosition));
+  }
 }

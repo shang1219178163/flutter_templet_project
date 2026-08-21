@@ -10,6 +10,12 @@ class AutoLayoutDemo extends StatefulWidget {
 
   @override
   _AutoLayoutDemoState createState() => _AutoLayoutDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _AutoLayoutDemoState extends State<AutoLayoutDemo> {

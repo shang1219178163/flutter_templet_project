@@ -29,12 +29,18 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
 class TextFieldDemo extends StatefulWidget {
-  final String? title;
 
   const TextFieldDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TextFieldDemoState createState() => _TextFieldDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
@@ -155,7 +161,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                         onTap: () {
                           PhoneAreaCodePopup.show(
                             context,
-                            onChange: (AreaCodeEntity e) {
+                            onChange: (e) {
                               DLog.d(e.toJson());
                               valueVN.value = e;
                             },
@@ -208,12 +214,12 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(4)),
                   ),
-                  onChanged: (String value) {
+                  onChanged: (value) {
                     // debugPrint('onChanged: $value');
                     delayed(() => debugPrint('delayed: $value'));
                     // _debounce(() => debugPrint( 'delayed: $value' ));
                   },
-                  onSubmitted: (String value) {
+                  onSubmitted: (value) {
                     debugPrint('onSubmitted: $value');
                   },
                 ),
@@ -676,5 +682,21 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
         width: borderWidth, //宽度为1
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<TextEditingController>('editingController', editingController));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNode1', focusNode1));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNode2', focusNode2));
+    properties.add(DiagnosticsProperty<bool>('isEye', isEye));
+    properties.add(DiagnosticsProperty<bool>('isBtnEnabled', isBtnEnabled));
+    properties.add(DiagnosticsProperty<bool>('showLoading', showLoading));
+    properties.add(DiagnosticsProperty<Debouncer>('delayed', delayed));
+    properties.add(DiagnosticsProperty<Throttle>('throttle', throttle));
+    properties.add(IterableProperty<String>('tips', tips));
+    properties.add(DiagnosticsProperty<ValueNotifier<AreaCodeEntity?>>('valueVN', valueVN));
   }
 }

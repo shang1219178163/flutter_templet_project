@@ -11,12 +11,18 @@ import 'package:flutter_templet_project/basicWidget/n_drag_sort_wrap.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class DraggableDemo extends StatefulWidget {
-  final String? title;
 
   const DraggableDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DraggableDemoState createState() => _DraggableDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateMixin {
@@ -90,9 +96,9 @@ class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateM
         ),
         DragTarget<int>(
           builder: (
-            BuildContext context,
-            List<dynamic> accepted,
-            List<dynamic> rejected,
+            context,
+            accepted,
+            rejected,
           ) {
             return Container(
               height: 100.0,
@@ -125,7 +131,7 @@ class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateM
 
   Widget buildDragSortWrap() {
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
+      builder: (context, setState) {
         tabController = TabController(length: tags.length, vsync: this);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,5 +304,16 @@ class _DraggableDemoState extends State<DraggableDemo> with TickerProviderStateM
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IntProperty('acceptedData', acceptedData));
+    properties.add(IterableProperty<String>('tags', tags));
+    properties.add(IterableProperty<String>('others', others));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<bool>('canEdit', canEdit));
   }
 }

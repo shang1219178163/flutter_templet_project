@@ -56,21 +56,23 @@ class NImageIndicator extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<PageController>('controller', controller));
+    properties.add(IntProperty('itemCount', itemCount));
+    properties.add(ColorProperty('indicatorColor', indicatorColor));
+    properties.add(ColorProperty('indicatorOtherColor', indicatorOtherColor));
+    properties.add(DoubleProperty('maxSize', maxSize));
+    properties.add(DoubleProperty('minSize', minSize));
+    properties.add(DoubleProperty('space', space));
+  }
 }
 
 const _kMaxCircleCount = 3;
 
 class ImageIndicatorPainter extends CustomPainter {
-  final int? itemCount;
-  final Color? indicatorColor;
-  final Color? indicatorOtherColor;
-  final double? maxSize;
-  final double? minSize;
-  final int? pageIndex;
-  final double? pageOffset;
-  final double? space;
-  final bool? isStart;
-  final bool? isEnd;
 
   const ImageIndicatorPainter(
       {this.itemCount,
@@ -83,6 +85,16 @@ class ImageIndicatorPainter extends CustomPainter {
       this.pageOffset,
       this.isStart,
       this.isEnd});
+  final int? itemCount;
+  final Color? indicatorColor;
+  final Color? indicatorOtherColor;
+  final double? maxSize;
+  final double? minSize;
+  final int? pageIndex;
+  final double? pageOffset;
+  final double? space;
+  final bool? isStart;
+  final bool? isEnd;
 
   @override
   void paint(Canvas canvas, Size size) {

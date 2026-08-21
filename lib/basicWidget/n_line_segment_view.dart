@@ -17,6 +17,22 @@ enum NLineSegmentStyle {
 
 ///线条指示器分段组件
 class NLineSegmentView<T> extends StatefulWidget {
+
+  NLineSegmentView({
+    Key? key,
+    required this.children,
+    required this.groupValue,
+    this.style = NLineSegmentStyle.bottom,
+    this.backgroundColor = CupertinoColors.tertiarySystemFill,
+    this.lineColor = Colors.blue,
+    this.lineWidth,
+    this.lineHeight = 2,
+    this.height = 36,
+    this.padding = const EdgeInsets.symmetric(horizontal: 0),
+    this.margin = const EdgeInsets.symmetric(horizontal: 15),
+    this.radius = const Radius.circular(4),
+    required this.onValueChanged,
+  }) : super(key: key);
   final Map<T, Widget> children;
 
   final T? groupValue;
@@ -37,24 +53,25 @@ class NLineSegmentView<T> extends StatefulWidget {
 
   final void Function(T value) onValueChanged;
 
-  NLineSegmentView({
-    Key? key,
-    required this.children,
-    required this.groupValue,
-    this.style = NLineSegmentStyle.bottom,
-    this.backgroundColor = CupertinoColors.tertiarySystemFill,
-    this.lineColor = Colors.blue,
-    this.lineWidth,
-    this.lineHeight = 2,
-    this.height = 36,
-    this.padding = const EdgeInsets.symmetric(horizontal: 0),
-    this.margin = const EdgeInsets.symmetric(horizontal: 15),
-    this.radius = const Radius.circular(4),
-    required this.onValueChanged,
-  }) : super(key: key);
-
   @override
   _NLineSegmentViewState<T> createState() => _NLineSegmentViewState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<T, Widget>>('children', children));
+    properties.add(DiagnosticsProperty<T?>('groupValue', groupValue));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin));
+    properties.add(EnumProperty<NLineSegmentStyle>('style', style));
+    properties.add(ColorProperty('backgroundColor', backgroundColor));
+    properties.add(ColorProperty('lineColor', lineColor));
+    properties.add(DoubleProperty('lineWidth', lineWidth));
+    properties.add(DoubleProperty('lineHeight', lineHeight));
+    properties.add(DoubleProperty('height', height));
+    properties.add(DiagnosticsProperty<Radius>('radius', radius));
+    properties.add(ObjectFlagProperty<void Function(T value)>.has('onValueChanged', onValueChanged));
+  }
 }
 
 class _NLineSegmentViewState<T> extends State<NLineSegmentView<T>> {
@@ -121,5 +138,11 @@ class _NLineSegmentViewState<T> extends State<NLineSegmentView<T>> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<T?>('groupValue', groupValue));
   }
 }

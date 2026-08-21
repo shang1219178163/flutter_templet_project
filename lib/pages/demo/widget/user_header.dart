@@ -61,4 +61,12 @@ class UserHeader extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsets?>('margin', margin));
+    properties.add(DiagnosticsProperty<BoxConstraints?>('constraints', constraints));
+    properties.add(DiagnosticsProperty<Decoration?>('decoration', decoration));
+  }
 }

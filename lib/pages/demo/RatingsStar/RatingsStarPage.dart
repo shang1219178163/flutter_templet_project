@@ -13,6 +13,12 @@ class RatingsStarPage extends StatefulWidget {
 
   @override
   State<RatingsStarPage> createState() => _RatingsStarPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _RatingsStarPageState extends State<RatingsStarPage> {
@@ -160,5 +166,14 @@ class _RatingsStarPageState extends State<RatingsStarPage> {
     }
     setState(() {});
     return model;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IntProperty('myScore', myScore));
+    properties.add(DiagnosticsProperty<PlayerScoreItemModel>('item', item));
   }
 }

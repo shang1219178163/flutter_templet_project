@@ -7,6 +7,12 @@ class DisplayFeatureDemo extends StatefulWidget {
 
   @override
   State<DisplayFeatureDemo> createState() => _DisplayFeatureDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _DisplayFeatureDemoState extends State<DisplayFeatureDemo> {

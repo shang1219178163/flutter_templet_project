@@ -18,6 +18,12 @@ class JsonToModel extends StatefulWidget {
 
   @override
   _JsonToModelState createState() => _JsonToModelState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _JsonToModelState extends State<JsonToModel> {
@@ -285,7 +291,7 @@ class _JsonToModelState extends State<JsonToModel> {
                     height: 25,
                     child: CupertinoSwitch(
                       value: hasCopyWithFunc,
-                      onChanged: (bool val) {
+                      onChanged: (val) {
                         hasCopyWithFunc = val;
                         setState(() {});
                         onGenerate();
@@ -306,7 +312,7 @@ class _JsonToModelState extends State<JsonToModel> {
                     height: 25,
                     child: CupertinoSwitch(
                       value: hasTypeConversion,
-                      onChanged: (bool val) {
+                      onChanged: (val) {
                         hasTypeConversion = val;
                         setState(() {});
                         onGenerate();
@@ -544,6 +550,18 @@ class _JsonToModelState extends State<JsonToModel> {
     // var str1 = str.toUncamlCase();
     // debugPrint("str1: $str1");
     onGenerate();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('rootClassNameStr', rootClassNameStr));
+    properties.add(StringProperty('classPrefix', classPrefix));
+    properties.add(StringProperty('classSuffix', classSuffix));
+    properties.add(DiagnosticsProperty<bool>('hasCopyWithFunc', hasCopyWithFunc));
+    properties.add(DiagnosticsProperty<bool>('hasTypeConversion', hasTypeConversion));
+    properties.add(StringProperty('jsonStr', jsonStr));
+    properties.add(DiagnosticsProperty<ValueNotifier<String>>('outVN', outVN));
   }
 }
 

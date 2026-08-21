@@ -10,6 +10,12 @@ class FontFeatureDemo extends StatefulWidget {
 
   @override
   State<FontFeatureDemo> createState() => _FontFeatureDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _FontFeatureDemoState extends State<FontFeatureDemo> {
@@ -186,6 +192,12 @@ class _FontFeatureDemoState extends State<FontFeatureDemo> {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
   }
 }
 

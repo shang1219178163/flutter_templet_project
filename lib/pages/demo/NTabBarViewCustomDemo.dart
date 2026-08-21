@@ -18,6 +18,12 @@ class NTabBarViewCustomDemo extends StatefulWidget {
 
   @override
   State<NTabBarViewCustomDemo> createState() => _NTabBarViewCustomDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _NTabBarViewCustomDemoState extends State<NTabBarViewCustomDemo> {
@@ -122,9 +128,16 @@ class _NTabBarViewCustomDemoState extends State<NTabBarViewCustomDemo> {
           title: Text("${prefix}_$index"),
         );
       },
-      separatorBuilder: (BuildContext context, int index) {
+      separatorBuilder: (context, index) {
         return Divider();
       },
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<({Widget child, AssetImage selected, AssetImage unselected})>('items', items));
+    properties.add(DiagnosticsProperty<bool>('isThemeBg', isThemeBg));
   }
 }

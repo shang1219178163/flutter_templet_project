@@ -12,6 +12,12 @@ class ScrollablePositionedListDemo extends StatefulWidget {
 
   @override
   State<ScrollablePositionedListDemo> createState() => _ScrollablePositionedListDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _ScrollablePositionedListDemoState extends State<ScrollablePositionedListDemo>
@@ -119,7 +125,7 @@ class _ScrollablePositionedListDemoState extends State<ScrollablePositionedListD
 
   Widget buildHeader({bool isWrap = true}) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (context, constraints) {
         final spacing = 8.0;
         final rowCount = 4.0;
         final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
@@ -185,6 +191,18 @@ class _ScrollablePositionedListDemoState extends State<ScrollablePositionedListD
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<ItemScrollController>('itemScrollController', itemScrollController));
+    properties.add(DiagnosticsProperty<ItemPositionsListener>('itemPositionsListener', itemPositionsListener));
+    properties.add(IterableProperty<({Alignment alignment, String title})>('alignments', alignments));
+    properties.add(DiagnosticsProperty<ValueNotifier<({Alignment alignment, String title})>>('alignmentVN', alignmentVN));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(IterableProperty<String>('items', items));
   }
 }
 

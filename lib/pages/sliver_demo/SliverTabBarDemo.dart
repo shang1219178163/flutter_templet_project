@@ -14,6 +14,12 @@ class SliverTabBarDemo extends StatefulWidget {
 
   @override
   State<SliverTabBarDemo> createState() => _SliverTabBarDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerProviderStateMixin {
@@ -173,5 +179,15 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
             }),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(IterableProperty<Tuple2<String, Widget>>('items', items));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(DiagnosticsProperty<ValueNotifier<double>>('offsetY', offsetY));
   }
 }

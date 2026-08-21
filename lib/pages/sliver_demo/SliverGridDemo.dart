@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
 class SliverGridDemo extends StatefulWidget {
-  final String? title;
 
   const SliverGridDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SliverGridDemoState createState() => _SliverGridDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _SliverGridDemoState extends State<SliverGridDemo> {

@@ -27,6 +27,12 @@ class NRefreshViewDemo extends StatefulWidget {
 
   @override
   State<NRefreshViewDemo> createState() => _NRefreshViewDemoState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, dynamic>?>('arguments', arguments));
+  }
 }
 
 class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
@@ -120,11 +126,11 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
               return NRefreshListView<UserModel>(
                 controller: refreshViewController,
                 page: 10,
-                onRequest: (bool isRefresh, int page, int pageSize, last) async {
+                onRequest: (isRefresh, page, pageSize, last) async {
                   return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
                 },
-                itemBuilder: (BuildContext context, int index, e) {
-                  return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                itemBuilder: (context, index, e) {
+                  return StatefulBuilder(builder: (context, setState) {
                     void onTap() {
                       DLog.d("onSelected: ${e.toJson()}");
                     }
@@ -220,5 +226,16 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
       tmp += "${chars.characterAt(IntExt.random(max: chars.length))}";
     }
     return tmp;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('hideApp', hideApp));
+    properties.add(DiagnosticsProperty<Map<String, dynamic>>('arguments', arguments));
+    properties.add(DiagnosticsProperty<NListRefreshController<UserModel>>('refreshViewController', refreshViewController));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<UserModel>>>('dataList', dataList));
+    properties.add(DiagnosticsProperty<ValueNotifier<bool>>('isEditVN', isEditVN));
+    properties.add(DiagnosticsProperty<ValueNotifier<List<UserModel>>>('selectedList', selectedList));
   }
 }

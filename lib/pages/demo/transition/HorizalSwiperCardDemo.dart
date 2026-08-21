@@ -188,4 +188,14 @@ class _HorizalSwiperCardDemoState extends State<HorizalSwiperCardDemo> with Sing
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<MaterialColor>('items', items));
+    properties.add(IntProperty('currentIndex', currentIndex));
+    properties.add(DiagnosticsProperty<Offset>('offset', offset));
+    properties.add(DiagnosticsProperty<AnimationController>('controller', controller));
+    properties.add(DiagnosticsProperty<Animation<Offset>?>('animation', animation));
+  }
 }

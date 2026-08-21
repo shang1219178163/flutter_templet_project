@@ -46,6 +46,13 @@ class _EnCupertinoSliverRefresh extends SingleChildRenderObjectWidget {
       ..refreshIndicatorLayoutExtent = refreshIndicatorLayoutExtent
       ..hasLayoutExtent = hasLayoutExtent;
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('refreshIndicatorLayoutExtent', refreshIndicatorLayoutExtent));
+    properties.add(DiagnosticsProperty<bool>('hasLayoutExtent', hasLayoutExtent));
+  }
 }
 
 // RenderSliver object that gives its child RenderBox object space to paint
@@ -181,6 +188,14 @@ class _RenderEnCupertinoSliverRefresh extends RenderSliver with RenderObjectWith
   // exactly between paintOrigin and paintExtent.
   @override
   void applyPaintTransform(RenderObject child, Matrix4 transform) {}
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('refreshIndicatorLayoutExtent', refreshIndicatorLayoutExtent));
+    properties.add(DiagnosticsProperty<bool>('hasLayoutExtent', hasLayoutExtent));
+    properties.add(DoubleProperty('layoutExtentOffsetCompensation', layoutExtentOffsetCompensation));
+  }
 }
 
 /// The current state of the refresh control.
@@ -430,6 +445,15 @@ class EnCupertinoSliverRefreshControl extends StatefulWidget {
 
   @override
   State<EnCupertinoSliverRefreshControl> createState() => _EnCupertinoSliverRefreshControlState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('refreshTriggerPullDistance', refreshTriggerPullDistance));
+    properties.add(DoubleProperty('refreshIndicatorExtent', refreshIndicatorExtent));
+    properties.add(ObjectFlagProperty<EnRefreshControlIndicatorBuilder?>.has('builder', builder));
+    properties.add(ObjectFlagProperty<RefreshCallback?>.has('onRefresh', onRefresh));
+  }
 }
 
 class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefreshControl> {
@@ -469,7 +493,7 @@ class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefre
       if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.idle) {
         setState(() => hasSliverLayoutExtent = false);
       } else {
-        SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
+        SchedulerBinding.instance.addPostFrameCallback((timestamp) {
           setState(() => hasSliverLayoutExtent = false);
         }, debugLabel: 'Refresh.goToDone');
       }
@@ -495,7 +519,7 @@ class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefre
             // Call onRefresh after this frame finished since the function is
             // user supplied and we're always here in the middle of the sliver's
             // performLayout.
-            SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
+            SchedulerBinding.instance.addPostFrameCallback((timestamp) {
               refreshTask = widget.onRefresh!()
                 ..whenComplete(() {
                   if (mounted) {
@@ -556,7 +580,7 @@ class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefre
       // A LayoutBuilder lets the sliver's layout changes be fed back out to
       // its owner to trigger state changes.
       child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+        builder: (context, constraints) {
           latestIndicatorBoxExtent = constraints.maxHeight;
           refreshState = transitionNextState();
           if (widget.builder != null && latestIndicatorBoxExtent > 0) {
@@ -572,5 +596,14 @@ class _EnCupertinoSliverRefreshControlState extends State<EnCupertinoSliverRefre
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<EnRefreshIndicatorMode>('refreshState', refreshState));
+    properties.add(DiagnosticsProperty<Future<void>?>('refreshTask', refreshTask));
+    properties.add(DoubleProperty('latestIndicatorBoxExtent', latestIndicatorBoxExtent));
+    properties.add(DiagnosticsProperty<bool>('hasSliverLayoutExtent', hasSliverLayoutExtent));
   }
 }

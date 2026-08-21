@@ -530,4 +530,24 @@ class DiscussListItem extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<NewsDiscussDetailModel>('model', model));
+    properties.add(DiagnosticsProperty<bool>('hideFollow', hideFollow));
+    properties.add(DiagnosticsProperty<bool>('hideReplyOther', hideReplyOther));
+    properties.add(DiagnosticsProperty<bool>('hideReplyText', hideReplyText));
+    properties.add(DiagnosticsProperty<bool>('hideScore', hideScore));
+    properties.add(DiagnosticsProperty<bool>('likeTop', likeTop));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTapParent', onTapParent));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTapFollow', onTapFollow));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onRely', onRely));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onMakeHot', onMakeHot));
+    properties.add(ObjectFlagProperty<Future<Map<String, dynamic>> Function()>.has('onLike', onLike));
+    properties.add(ObjectFlagProperty<ValueChanged<List<String>>?>.has('onParentLink', onParentLink));
+    properties.add(ObjectFlagProperty<ValueChanged<List<String>>?>.has('onLink', onLink));
+    properties.add(DiagnosticsProperty<bool>('isDebug', isDebug));
+  }
 }

@@ -13,6 +13,12 @@ class PageViewDemoOne extends StatefulWidget {
 
   @override
   _PageViewDemoOneState createState() => _PageViewDemoOneState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
+  }
 }
 
 class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProviderStateMixin {
@@ -81,7 +87,7 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
                 buildTab(
                   controller: tabController,
                   tabs: _tabItems.map((e) => Tab(text: e.item1)).toList(),
-                  onTap: (int index) async {
+                  onTap: (index) async {
                     // debugPrint("buildTab: $index");
                     tabIndex.value = index;
                     pageController.jumpToPage(index);
@@ -220,6 +226,16 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
       return;
     }
     pageController.jumpToPage(page);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController));
+    properties.add(IterableProperty<Tuple3<String, Widget, List<ItemModel>>>('tabItems', tabItems));
+    properties.add(DiagnosticsProperty<ValueNotifier<int>>('tabIndex', tabIndex));
+    properties.add(DiagnosticsProperty<TabController>('tabController', tabController));
+    properties.add(DiagnosticsProperty<PageController>('pageController', pageController));
   }
 }
 

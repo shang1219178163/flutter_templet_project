@@ -132,4 +132,21 @@ class AppButton extends StatelessWidget {
     }
     return button;
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<AppButtonType>('type', type));
+    properties.add(DiagnosticsProperty<ButtonStyle?>('style', style));
+    properties.add(DoubleProperty('radius', radius));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onLongPress', onLongPress));
+    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onHover', onHover));
+    properties.add(ObjectFlagProperty<ValueChanged<bool>?>.has('onFocusChange', onFocusChange));
+    properties.add(EnumProperty<Clip?>('clipBehavior', clipBehavior));
+    properties.add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode));
+    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus));
+    properties.add(DiagnosticsProperty<bool?>('isSemanticButton', isSemanticButton));
+    properties.add(EnumProperty<IconAlignment>('iconAlignment', iconAlignment));
+  }
 }
