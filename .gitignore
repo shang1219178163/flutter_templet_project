@@ -52,3 +52,6 @@ app.*.map.json
 
 # Blog / docs generated
 doc/
+
+# Graphify 生成产物
+graphify-out/

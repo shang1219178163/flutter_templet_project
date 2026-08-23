@@ -11,7 +11,7 @@ analyzer:
     - "windows/**"
     - "web/**"
     - "assets/images/**"
-    - "graphify-out/**"
+    - "**/graphify-out/**"
     # 嵌套工程：macos/ 下误含完整 Flutter 工程（含 android/ios/windows/lib/pubspec.yaml）
     - "macos/**"
     - "apps/**"
