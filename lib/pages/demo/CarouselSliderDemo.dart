@@ -9,9 +9,11 @@
 // import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
+import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// 构造方式
@@ -95,7 +97,9 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
+      backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
           ? null
           : AppBar(
@@ -103,7 +107,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               actions: [
                 TextButton(
                   onPressed: onReset,
-                  child: const Text('重置', style: TextStyle(color: Colors.white)),
+                  child: Text('重置', style: TextStyle(color: scheme.onPrimary)),
                 ),
               ],
             ),
@@ -112,161 +116,76 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildBody() {
-    return Column(
-      children: [
-        buildPreview(),
-        Expanded(
-          child: Scrollbar(
-            controller: scrollController,
-            child: SingleChildScrollView(
+    final scheme = Theme.of(context).colorScheme;
+    return ColoredBox(
+      color: scheme.surfaceContainerLowest,
+      child: Column(
+        children: [
+          buildPreview(),
+          Expanded(
+            child: Scrollbar(
               controller: scrollController,
-              padding: const EdgeInsets.only(bottom: 24),
-              child: Column(
-                children: [
-                  buildChoiceChips(
-                    title: '构造方式',
-                    items: _SliderKind.values,
-                    value: kind,
-                    nameOf: (e) => e == _SliderKind.items ? 'CarouselSlider' : 'CarouselSlider.builder',
-                    onChanged: onKind,
-                  ),
-                  buildChoiceChips(
-                    title: 'scrollDirection 滚动方向',
-                    items: Axis.values,
-                    value: scrollDirection,
-                    nameOf: (e) => e.name,
-                    onChanged: onScrollDirection,
-                  ),
-                  buildChoiceChips(
-                    title: 'enlargeStrategy 中间放大',
-                    items: CenterPageEnlargeStrategy.values,
-                    value: enlargeStrategy,
-                    nameOf: (e) => e.name,
-                    onChanged: onEnlargeStrategy,
-                  ),
-                  buildChoiceChips(
-                    title: 'autoPlayCurve 动画曲线',
-                    items: curvePresets,
-                    value: curvePresets.firstWhere((e) => e.$2 == autoPlayCurve, orElse: () => curvePresets.first),
-                    nameOf: (e) => e.$1,
-                    onChanged: onAutoPlayCurve,
-                  ),
-                  buildChoiceChips(
-                    title: 'clipBehavior 裁剪',
-                    items: const [Clip.none, Clip.hardEdge, Clip.antiAlias, Clip.antiAliasWithSaveLayer],
-                    value: clipBehavior,
-                    nameOf: (e) => e.name,
-                    onChanged: onClipBehavior,
-                  ),
-                  buildChoiceChips(
-                    title: 'scrollPhysics 滚动物理',
-                    items: _PhysicsKind.values,
-                    value: physicsKind,
-                    nameOf: (e) => e.name,
-                    onChanged: onPhysicsKind,
-                  ),
-                  buildSwitch(title: 'useHeight 使用 height（覆盖 aspectRatio）', value: useHeight, onChanged: onUseHeight),
-                  if (useHeight)
-                    buildSlider(label: 'height', value: height, min: 120, max: 400, onChanged: onHeight)
-                  else
-                    buildSlider(
-                      label: 'aspectRatio',
-                      value: aspectRatio,
-                      min: 0.5,
-                      max: 2.5,
-                      onChanged: onAspectRatio,
-                      format: (v) => v.toStringAsFixed(2),
+              child: SingleChildScrollView(
+                controller: scrollController,
+                padding: const EdgeInsets.only(bottom: 24),
+                child: Column(
+                  children: [
+                    const NDescriptionCard(
+                      comparedTo: 'CarouselSlider',
+                      initialLang: NLangEnum.zh,
+                      items: [
+                        {
+                          NLangEnum.en: 'Pin a live preview while you tune every CarouselOptions argument below.',
+                          NLangEnum.zh: '上方固定预览，下方调节全部 CarouselOptions 参数并即时生效。',
+                        },
+                        {
+                          NLangEnum.en:
+                              'Switch between CarouselSlider and CarouselSlider.builder without losing the original images.',
+                          NLangEnum.zh: '可切换 CarouselSlider 与 CarouselSlider.builder，保留原 Demo 图片。',
+                        },
+                        {
+                          NLangEnum.en: 'Expose enlarge, autoplay, physics, clipping, snapping, and gesture options.',
+                          NLangEnum.zh: '覆盖中间放大、自动播放、滚动物理、裁剪、吸附与手势。',
+                        },
+                      ],
                     ),
-                  buildSlider(
-                    label: 'viewportFraction',
-                    value: viewportFraction,
-                    min: 0.3,
-                    max: 1.0,
-                    onChanged: onViewportFraction,
-                    format: (v) => v.toStringAsFixed(2),
-                  ),
-                  buildSlider(
-                    label: 'enlargeFactor',
-                    value: enlargeFactor,
-                    min: 0,
-                    max: 1,
-                    onChanged: onEnlargeFactor,
-                    format: (v) => v.toStringAsFixed(2),
-                  ),
-                  buildSlider(
-                    label: 'autoPlayInterval',
-                    value: autoPlayIntervalSec,
-                    min: 1,
-                    max: 10,
-                    onChanged: onAutoPlayIntervalSec,
-                    format: (v) => '${v.round()}s',
-                  ),
-                  buildSlider(
-                    label: 'autoPlayAnim',
-                    value: autoPlayAnimationMs,
-                    min: 200,
-                    max: 2000,
-                    onChanged: onAutoPlayAnimationMs,
-                    format: (v) => '${v.round()}ms',
-                  ),
-                  buildSlider(
-                    label: 'initialPage',
-                    value: initialPage.toDouble(),
-                    min: 0,
-                    max: (imgList.length - 1).toDouble(),
-                    onChanged: onInitialPage,
-                  ),
-                  buildSwitch(title: 'autoPlay 自动播放', value: autoPlay, onChanged: onAutoPlay),
-                  buildSwitch(
-                      title: 'enlargeCenterPage 中间放大', value: enlargeCenterPage, onChanged: onEnlargeCenterPage),
-                  buildSwitch(
-                      title: 'enableInfiniteScroll 无限循环',
-                      value: enableInfiniteScroll,
-                      onChanged: onEnableInfiniteScroll),
-                  buildSwitch(title: 'animateToClosest 滚到最近页', value: animateToClosest, onChanged: onAnimateToClosest),
-                  buildSwitch(title: 'reverse 反向', value: reverse, onChanged: onReverse),
-                  buildSwitch(title: 'pageSnapping 整页吸附', value: pageSnapping, onChanged: onPageSnapping),
-                  buildSwitch(
-                      title: 'pauseAutoPlayOnTouch 触摸暂停',
-                      value: pauseAutoPlayOnTouch,
-                      onChanged: onPauseAutoPlayOnTouch),
-                  buildSwitch(
-                    title: 'pauseAutoPlayOnManualNavigate 手动切换暂停',
-                    value: pauseAutoPlayOnManualNavigate,
-                    onChanged: onPauseAutoPlayOnManualNavigate,
-                  ),
-                  buildSwitch(
-                    title: 'pauseAutoPlayInFiniteScroll 有限滚动到底暂停',
-                    value: pauseAutoPlayInFiniteScroll,
-                    onChanged: onPauseAutoPlayInFiniteScroll,
-                  ),
-                  buildSwitch(title: 'disableCenter 取消居中', value: disableCenter, onChanged: onDisableCenter),
-                  buildSwitch(title: 'padEnds 两端留白', value: padEnds, onChanged: onPadEnds),
-                  buildSwitch(title: 'disableGesture 禁用手势', value: disableGesture, onChanged: onDisableGesture),
-                ],
+                    buildConstructCard(),
+                    buildSizeCard(),
+                    buildSurfaceCard(),
+                    buildPlayCard(),
+                    buildBehaviorCard(),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget buildPreview() {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.04),
-        border: Border(bottom: BorderSide(color: Colors.blue.withValues(alpha: 0.25))),
+        color: scheme.surfaceContainerHighest.withValues(alpha: 0.35),
+        border: Border(
+          bottom: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.65)),
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           buildCarousel(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
               'onPageChanged: $currentPage  ${pageChangedReason?.name ?? ''}',
-              style: const TextStyle(fontSize: 12),
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: scheme.onSurfaceVariant,
+                fontFamily: 'monospace',
+              ),
             ),
           ),
         ],
@@ -383,30 +302,264 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     );
   }
 
+  Widget buildConstructCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.account_tree_rounded),
+      title: '构造',
+      subtitle: 'constructor · scrollDirection',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildField(
+            label: '构造方式',
+            child: buildChoiceChips(
+              values: _SliderKind.values,
+              isSelected: (e) => kind == e,
+              labelOf: (e) => e == _SliderKind.items ? 'CarouselSlider' : 'CarouselSlider.builder',
+              onChanged: onKind,
+            ),
+          ),
+          buildField(
+            label: 'scrollDirection',
+            showTopGap: true,
+            child: buildChoiceChips(
+              values: Axis.values,
+              isSelected: (e) => scrollDirection == e,
+              labelOf: (e) => e.name,
+              onChanged: onScrollDirection,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSizeCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.straighten_rounded),
+      title: '尺寸',
+      subtitle: 'height · aspectRatio · viewportFraction · initialPage',
+      child: Column(
+        children: [
+          buildSwitch(title: 'useHeight 使用 height（覆盖 aspectRatio）', value: useHeight, onChanged: onUseHeight),
+          if (useHeight)
+            buildSlider(label: 'height', value: height, min: 120, max: 400, onChanged: onHeight)
+          else
+            buildSlider(
+              label: 'aspectRatio',
+              value: aspectRatio,
+              min: 0.5,
+              max: 2.5,
+              onChanged: onAspectRatio,
+              format: (v) => v.toStringAsFixed(2),
+            ),
+          buildSlider(
+            label: 'viewportFraction',
+            value: viewportFraction,
+            min: 0.3,
+            max: 1.0,
+            onChanged: onViewportFraction,
+            format: (v) => v.toStringAsFixed(2),
+          ),
+          buildSlider(
+            label: 'initialPage',
+            value: initialPage.toDouble(),
+            min: 0,
+            max: (imgList.length - 1).toDouble(),
+            onChanged: onInitialPage,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSurfaceCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.palette_outlined),
+      title: '表面',
+      subtitle: 'enlargeCenterPage · enlargeStrategy · enlargeFactor · clipBehavior',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildSwitch(title: 'enlargeCenterPage 中间放大', value: enlargeCenterPage, onChanged: onEnlargeCenterPage),
+          if (enlargeCenterPage) ...[
+            buildField(
+              label: 'enlargeStrategy',
+              showTopGap: true,
+              child: buildChoiceChips(
+                values: CenterPageEnlargeStrategy.values,
+                isSelected: (e) => enlargeStrategy == e,
+                labelOf: (e) => e.name,
+                onChanged: onEnlargeStrategy,
+              ),
+            ),
+            buildSlider(
+              label: 'enlargeFactor',
+              value: enlargeFactor,
+              min: 0,
+              max: 1,
+              onChanged: onEnlargeFactor,
+              format: (v) => v.toStringAsFixed(2),
+            ),
+          ],
+          buildField(
+            label: 'clipBehavior',
+            showTopGap: true,
+            child: buildChoiceChips(
+              values: const [Clip.none, Clip.hardEdge, Clip.antiAlias, Clip.antiAliasWithSaveLayer],
+              isSelected: (e) => clipBehavior == e,
+              labelOf: (e) => e.name,
+              onChanged: onClipBehavior,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildPlayCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.play_circle_outline_rounded),
+      title: '播放',
+      subtitle: 'autoPlay · autoPlayInterval · autoPlayCurve',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildSwitch(title: 'autoPlay 自动播放', value: autoPlay, onChanged: onAutoPlay),
+          if (autoPlay) ...[
+            buildSlider(
+              label: 'autoPlayInterval',
+              value: autoPlayIntervalSec,
+              min: 1,
+              max: 10,
+              onChanged: onAutoPlayIntervalSec,
+              format: (v) => '${v.round()}s',
+            ),
+            buildSlider(
+              label: 'autoPlayAnim',
+              value: autoPlayAnimationMs,
+              min: 200,
+              max: 2000,
+              onChanged: onAutoPlayAnimationMs,
+              format: (v) => '${v.round()}ms',
+            ),
+            buildField(
+              label: 'autoPlayCurve',
+              showTopGap: true,
+              child: buildChoiceChips(
+                values: curvePresets,
+                isSelected: (e) => e.$2 == autoPlayCurve,
+                labelOf: (e) => e.$1,
+                onChanged: onAutoPlayCurve,
+              ),
+            ),
+            buildSwitch(title: 'pauseAutoPlayOnTouch 触摸暂停', value: pauseAutoPlayOnTouch, onChanged: onPauseAutoPlayOnTouch),
+            buildSwitch(
+              title: 'pauseAutoPlayOnManualNavigate 手动切换暂停',
+              value: pauseAutoPlayOnManualNavigate,
+              onChanged: onPauseAutoPlayOnManualNavigate,
+            ),
+            buildSwitch(
+              title: 'pauseAutoPlayInFiniteScroll 有限滚动到底暂停',
+              value: pauseAutoPlayInFiniteScroll,
+              onChanged: onPauseAutoPlayInFiniteScroll,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget buildBehaviorCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.tune_rounded),
+      title: '行为',
+      subtitle: 'scrollPhysics · reverse · pageSnapping · padEnds',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildField(
+            label: 'scrollPhysics',
+            child: buildChoiceChips(
+              values: _PhysicsKind.values,
+              isSelected: (e) => physicsKind == e,
+              labelOf: (e) => e.name,
+              onChanged: onPhysicsKind,
+            ),
+          ),
+          buildSwitch(title: 'enableInfiniteScroll 无限循环', value: enableInfiniteScroll, onChanged: onEnableInfiniteScroll),
+          buildSwitch(title: 'animateToClosest 滚到最近页', value: animateToClosest, onChanged: onAnimateToClosest),
+          buildSwitch(title: 'reverse 反向', value: reverse, onChanged: onReverse),
+          buildSwitch(title: 'pageSnapping 整页吸附', value: pageSnapping, onChanged: onPageSnapping),
+          buildSwitch(title: 'disableCenter 取消居中', value: disableCenter, onChanged: onDisableCenter),
+          buildSwitch(title: 'padEnds 两端留白', value: padEnds, onChanged: onPadEnds),
+          buildSwitch(title: 'disableGesture 禁用手势', value: disableGesture, onChanged: onDisableGesture),
+        ],
+      ),
+    );
+  }
+
+  Widget buildField({
+    required String label,
+    required Widget child,
+    bool showTopGap = false,
+  }) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (showTopGap) const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(
+            label,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: scheme.onSurface,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'monospace',
+              fontSize: 12.5,
+            ),
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+
   Widget buildChoiceChips<T>({
-    required String title,
-    required List<T> items,
-    required T value,
-    required String Function(T e) nameOf,
+    required List<T> values,
+    required bool Function(T value) isSelected,
+    required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    return NSectionBox(
-      title: title,
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: items.map((e) {
-          return ChoiceChip(
-            label: Text(nameOf(e)),
-            selected: value == e,
-            onSelected: (selected) {
-              if (selected) {
-                onChanged(e);
-              }
-            },
-          );
-        }).toList(),
-      ),
+    final scheme = Theme.of(context).colorScheme;
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: values.map((e) {
+        final selected = isSelected(e);
+        return ChoiceChip(
+          label: Text(labelOf(e)),
+          selected: selected,
+          showCheckmark: false,
+          selectedColor: scheme.primaryContainer,
+          labelStyle: TextStyle(
+            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+            fontFamily: 'monospace',
+            fontSize: 12.5,
+          ),
+          side: BorderSide(
+            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
+          ),
+          onSelected: (on) {
+            if (on) {
+              onChanged(e);
+            }
+          },
+        );
+      }).toList(),
     );
   }
 
@@ -418,19 +571,40 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     required ValueChanged<double> onChanged,
     String Function(double value)? format,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: NSlider(
-        leading: SizedBox(width: 120, child: Text(label)),
-        min: min,
-        max: max,
-        value: value,
-        onChanged: onChanged,
-        inactiveColor: Colors.black12,
-        trailingBuilder: format == null
-            ? null
-            : (context, v) => SizedBox(width: 48, child: Text(format(v), textAlign: TextAlign.end)),
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return NSlider(
+      leading: SizedBox(
+        width: 120,
+        child: Text(
+          label,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: scheme.onSurface,
+            fontFamily: 'monospace',
+            fontSize: 12.5,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
+      min: min,
+      max: max,
+      value: value,
+      onChanged: onChanged,
+      activeColor: scheme.primary,
+      inactiveColor: scheme.outlineVariant.withValues(alpha: 0.55),
+      trailingBuilder: format == null
+          ? null
+          : (context, v) => SizedBox(
+                width: 48,
+                child: Text(
+                  format(v),
+                  textAlign: TextAlign.end,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
+                ),
+              ),
     );
   }
 
@@ -439,12 +613,21 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
-      title: Text(title),
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        title,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: scheme.onSurface,
+          fontSize: 13.5,
+        ),
+      ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: Colors.black12,
+      inactiveTrackColor: scheme.outlineVariant.withValues(alpha: 0.55),
     );
   }
 
@@ -634,8 +817,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
 
   void onItemTap(int index) {
     DLog.d('CarouselSlider onTap: $index');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('onTap No. $index image'), duration: const Duration(milliseconds: 800)),
-    );
+    SnackUtil.show('onTap No. $index image');
   }
 }
