@@ -30,6 +30,7 @@ class AppRouter {
   static const String mediaQueryVsScreenManager = '/mediaQueryVsScreenManager';
 
   static const String autoLayoutDemo = '/AutoLayoutDemo';
+  static const String afterLayoutDemo = '/AfterLayoutDemo';
   static const String appBarDemo = '/appBarDemo';
   static const String textDemo = '/textDemo';
 
@@ -66,7 +67,6 @@ class AppRouter {
   static const String animatedBuilderDemo = '/animatedBuilderDemo';
   static const String animatedListSample = '/animatedListSample';
   static const String animatedSizeDemo = '/animatedSizeDemo';
-  static const String animatedSizeDemoOne = '/animatedSizeDemoOne';
 
   static const String textlessDemo = '/textlessDemo';
   static const String alertDialogDemo = '/AlertDialogDemo';
@@ -101,6 +101,7 @@ class AppRouter {
   static const String containerComparePage = '/containerComparePage';
   static const String containerDemoNew = '/containerDemoNew';
   static const String animatedContainerDemo = '/animatedContainerDemo';
+  static const String animatedContainerExample = '/animatedContainerExample';
   static const String draggableDemo = '/DraggableDemo';
   static const String forgetPasswordPage = '/ForgetPasswordPage';
   static const String dataTableDemo = '/DataTableDemo';
@@ -176,6 +177,7 @@ class AppRouter {
   static const String offstageDemo = '/OffstageDemo';
   static const String bottomAppBarDemo = '/bottomAppBarDemo';
   static const String calendarDatePickerDemo = '/CalendarDatePickerDemo';
+  static const String callbackShortcutsDemo = '/CallbackShortcutsDemo';
   static const String chipDemo = '/ChipDemo';
   static const String chipFilterDemo = '/chipFilterDemo';
   static const String bottomSheetDemo = '/bottomSheetDemo';
@@ -214,7 +216,6 @@ class AppRouter {
   static const String dragAndDropDemo = '/dragAndDropDemo';
   static const String transformDemo = '/transformDemo';
   static const String fittedBoxDemo = '/fittedBoxDemo';
-  static const String coloredBoxDemo = '/coloredBoxDemo';
   static const String positionedDirectionalDemo = '/positionedDirectionalDemo';
   static const String statefulBuilderDemo = '/statefulBuilderDemo';
   static const String valueListenableBuilderDemo = '/valueListenableBuilderDemo';
@@ -444,7 +445,6 @@ class AppRouter {
   static const String webviewDemo = '/webviewDemo';
   static const String secureKeyboardDemo = '/secureKeyboardDemo';
   static const String popScopeDemo = '/popScopeDemo';
-  static const String popScopeDemoOne = '/popScopeDemoOne';
   static const String nestedScrollViewDemoHome = '/nestedScrollViewDemoHome';
   static const String nestedScrollViewDemoFive = '/nestedScrollViewDemoFive';
   static const String nestedScrollViewDemoSix = '/nestedScrollViewDemoSix';

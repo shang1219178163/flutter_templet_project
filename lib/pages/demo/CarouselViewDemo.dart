@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 /// CarouselView 构造方式
@@ -77,16 +78,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     [3, 2, 1],
     [1, 7, 1, 1],
     [1, 2, 3, 2, 1],
-  ];
-
-  final colorOptions = <Color?>[
-    null,
-    Colors.white,
-    Colors.blue.shade100,
-    Colors.teal,
-    Colors.orange,
-    Colors.deepPurple,
-    Colors.blueGrey,
   ];
 
   @override
@@ -469,7 +460,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: colorOptions.map((e) {
+      children: AppColor.colorOptions.map((e) {
         final selected = value == e;
         return Material(
           color: Colors.transparent,

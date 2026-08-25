@@ -48,6 +48,18 @@ class AppColor {
   /// 阴影 #B5B5B5
   static const Color shadowColor = Color(0x08000000);
 
+  /// 效果展示页色点，含 null 表示主题默认
+  static const colorOptions = <Color?>[
+    null,
+    Colors.white,
+    Colors.black,
+    Colors.blue,
+    Colors.teal,
+    Colors.deepPurple,
+    Colors.orange,
+    Colors.pink,
+  ];
+
 // static const Color primary = Color(0xFF1565C0);
 // static const Color primaryLight = Color(0xFF1E88E5);
 // static const Color primaryDark = Color(0xFF0D47A1);

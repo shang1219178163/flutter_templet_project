@@ -1,5 +1,6 @@
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/CirclePainter.dart';
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
 import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
@@ -16,7 +17,6 @@ import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/count_down_timer_mixin.dart';
-import 'package:flutter_templet_project/pages/demo/CirclePainter.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';

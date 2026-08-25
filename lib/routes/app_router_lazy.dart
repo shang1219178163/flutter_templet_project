@@ -10,12 +10,14 @@ import 'package:flutter_templet_project/pages/app_locale_page.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/AIChatPage/AIChatSettingPage.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AfterLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlignmentDrawDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedContainerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedContainerExample.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
@@ -23,7 +25,6 @@ import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedPositionedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
-import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedToggleSwitchDemo.dart';
@@ -53,6 +54,7 @@ import 'package:flutter_templet_project/pages/demo/BoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CallbackShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CarouselSliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CarouselViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCaculator.dart';
@@ -62,7 +64,6 @@ import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorFilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
-import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CompareToPage.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
@@ -250,7 +251,6 @@ import 'package:flutter_templet_project/pages/demo/PageViewVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
-import 'package:flutter_templet_project/pages/demo/PopScopeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PreferredSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
@@ -473,6 +473,10 @@ class AppRouterLazy {
       page: () => AutoLayoutDemo(),
     ),
     GetPage(
+      name: AppRouter.afterLayoutDemo,
+      page: () => AfterLayoutDemo(),
+    ),
+    GetPage(
       name: AppRouter.textDemo,
       page: () => TextDemo(),
     ),
@@ -629,6 +633,10 @@ class AppRouterLazy {
       page: () => AnimatedContainerDemo(),
     ),
     GetPage(
+      name: AppRouter.animatedContainerExample,
+      page: () => AnimatedContainerExample(),
+    ),
+    GetPage(
       name: AppRouter.draggableDemo,
       page: () => DraggableDemo(),
     ),
@@ -731,10 +739,6 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.animatedSizeDemo,
       page: () => AnimatedSizeDemo(),
-    ),
-    GetPage(
-      name: AppRouter.animatedSizeDemoOne,
-      page: () => AnimatedSizeDemoOne(),
     ),
     GetPage(
       name: AppRouter.futureBuilderDemo,
@@ -893,6 +897,10 @@ class AppRouterLazy {
       page: () => CalendarDatePickerDemo(),
     ),
     GetPage(
+      name: AppRouter.callbackShortcutsDemo,
+      page: () => CallbackShortcutsDemo(),
+    ),
+    GetPage(
       name: AppRouter.chipDemo,
       page: () => ChipDemo(),
     ),
@@ -1031,10 +1039,6 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.fittedBoxDemo,
       page: () => FittedBoxDemo(),
-    ),
-    GetPage(
-      name: AppRouter.coloredBoxDemo,
-      page: () => ColoredBoxDemo(),
     ),
     GetPage(
       name: AppRouter.positionedDirectionalDemo,
@@ -1911,10 +1915,6 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.popScopeDemo,
       page: () => PopScopeDemo(),
-    ),
-    GetPage(
-      name: AppRouter.popScopeDemoOne,
-      page: () => PopScopeDemoOne(),
     ),
     GetPage(
       name: AppRouter.nestedScrollViewDemoHome,

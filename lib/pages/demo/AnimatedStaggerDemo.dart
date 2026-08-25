@@ -7,8 +7,7 @@ class AnimatedStaggerDemo extends StatefulWidget {
   _AnimatedStaggerDemoState createState() => _AnimatedStaggerDemoState();
 }
 
-class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
-    with TickerProviderStateMixin {
+class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo> with TickerProviderStateMixin {
   late final _controller = AnimationController(
     duration: const Duration(milliseconds: 2000),
     vsync: this,
@@ -59,7 +58,7 @@ class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
                 ),
               ),
               //调用我们定义的交错动画Widget
-              child: AnimatedStagger(controller: _controller),
+              child: NAnimatedStagger(controller: _controller),
             ),
           ],
         ),
@@ -68,8 +67,8 @@ class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
   }
 }
 
-class AnimatedStagger extends StatelessWidget {
-  AnimatedStagger({
+class NAnimatedStagger extends StatelessWidget {
+  NAnimatedStagger({
     Key? key,
     required this.controller,
   }) : super(key: key) {

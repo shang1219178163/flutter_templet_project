@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// shape 预设
+enum ShapeKind { none, rounded, stadium }
+
+/// clipBehavior 含 null
+enum ClipKind { nil, none, hardEdge, antiAlias, antiAliasWithSaveLayer }
+
+/// systemOverlayStyle 预设
+enum OverlayKind { none, light, dark }
+
 /// 统一风格卡片：渐变顶条、圆角描边、标题区 + 内容。
 class NStyleCard extends StatelessWidget {
   const NStyleCard({
@@ -33,6 +42,38 @@ class NStyleCard extends StatelessWidget {
 
   /// 卡片内、内边距外的底部内容。
   final Widget? footer;
+
+  /// 效果展示页常用 Curve
+  static const curvePresets = <Curve>[
+    Curves.fastOutSlowIn,
+    Curves.linear,
+    Curves.easeIn,
+    Curves.easeInOut,
+    Curves.easeOut,
+    Curves.bounceOut,
+  ];
+
+  static String nameOfCurve(Curve curve) {
+    if (identical(curve, Curves.fastOutSlowIn)) {
+      return 'fastOutSlowIn';
+    }
+    if (identical(curve, Curves.linear)) {
+      return 'linear';
+    }
+    if (identical(curve, Curves.easeIn)) {
+      return 'easeIn';
+    }
+    if (identical(curve, Curves.easeInOut)) {
+      return 'easeInOut';
+    }
+    if (identical(curve, Curves.easeOut)) {
+      return 'easeOut';
+    }
+    if (identical(curve, Curves.bounceOut)) {
+      return 'bounceOut';
+    }
+    return '$curve';
+  }
 
   @override
   Widget build(BuildContext context) {

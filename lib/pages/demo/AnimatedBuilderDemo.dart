@@ -50,13 +50,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           children: [
             buildAnimatedBuilder(),
             buildTweenAnimatedWidget(),
-          ]
-              .map(
-                (e) => Expanded(
-                  child: e,
-                ),
-              )
-              .toList(),
+          ].map((e) => Expanded(child: e)).toList(),
         ));
   }
 
