@@ -11,20 +11,24 @@ export 'n_lang_segment_control.dart' show NLangEnum, NLangSegmentControl;
 class NDescriptionCard extends StatefulWidget {
   const NDescriptionCard({
     super.key,
-    required this.comparedTo,
-    required this.items,
     this.initialLang = NLangEnum.en,
+    required this.title,
+    this.subtitle,
+    required this.items,
     this.child,
   });
 
-  /// Official widget this enhances, e.g. `BottomNavigationBar`.
-  final String comparedTo;
+  /// Defaults to English.
+  final NLangEnum initialLang;
+
+  /// 主色标题，按语言取文案。
+  final Map<NLangEnum, String> title;
+
+  /// 副标题，按语言取文案。
+  final Map<NLangEnum, String>? subtitle;
 
   /// Bilingual enhancement bullets keyed by [NLangEnum].
   final List<Map<NLangEnum, String>> items;
-
-  /// Defaults to English.
-  final NLangEnum initialLang;
 
   /// Optional property panel wrapped by this card.
   final Widget? child;
@@ -36,21 +40,11 @@ class NDescriptionCard extends StatefulWidget {
 class _NDescriptionCardState extends State<NDescriptionCard> {
   late NLangEnum _lang = widget.initialLang;
 
-  String get _eyebrow => switch (_lang) {
-        NLangEnum.en => 'Enhancements',
-        NLangEnum.zh => '说明',
-      };
-
-  String get _comparedPrefix => switch (_lang) {
-        NLangEnum.en => 'Compared with',
-        NLangEnum.zh => '对比组件',
-      };
-
-  void _setLanguage(NLangEnum language) {
-    if (_lang == language) {
+  void onChangedLang(NLangEnum v) {
+    if (_lang == v) {
       return;
     }
-    setState(() => _lang = language);
+    setState(() => _lang = v);
   }
 
   @override
@@ -67,40 +61,31 @@ class _NDescriptionCardState extends State<NDescriptionCard> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              _eyebrow,
+              widget.title[_lang] ?? '',
               style: theme.textTheme.labelLarge?.copyWith(
                 color: scheme.primary,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.2,
               ),
             ),
-            const SizedBox(height: 4),
-            Text.rich(
-              TextSpan(
+            if (widget.subtitle != null) ...[
+              const SizedBox(height: 4),
+              Text(
+                widget.subtitle![_lang] ?? '',
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: scheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                  fontSize: 12.5,
                   height: 1.35,
                 ),
-                children: [
-                  TextSpan(text: '$_comparedPrefix '),
-                  TextSpan(
-                    text: widget.comparedTo,
-                    style: TextStyle(
-                      color: scheme.onSurface,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'monospace',
-                      fontSize: 12.5,
-                    ),
-                  ),
-                ],
               ),
-            ),
+            ],
           ],
         ),
       ),
       trailing: NLangSegmentControl(
         value: _lang,
-        onChanged: _setLanguage,
+        onChanged: onChangedLang,
       ),
       footer: widget.child,
       child: AnimatedSwitcher(

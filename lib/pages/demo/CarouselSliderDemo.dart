@@ -7,6 +7,8 @@
 //
 
 // import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
+import 'dart:math' as math;
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
@@ -80,7 +82,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   bool disableGesture = false;
 
   double height = 200;
-  double aspectRatio = 1.20;
+  double aspectRatio = 2.0;
   double viewportFraction = 0.8;
   double enlargeFactor = 0.3;
   double autoPlayIntervalSec = 4;
@@ -119,54 +121,75 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     final scheme = Theme.of(context).colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
-      child: Column(
-        children: [
-          buildPreview(),
-          Expanded(
-            child: Scrollbar(
-              controller: scrollController,
-              child: SingleChildScrollView(
-                controller: scrollController,
-                padding: const EdgeInsets.only(bottom: 24),
-                child: Column(
-                  children: [
-                    const NDescriptionCard(
-                      comparedTo: 'CarouselSlider',
-                      initialLang: NLangEnum.zh,
-                      items: [
-                        {
-                          NLangEnum.en: 'Pin a live preview while you tune every CarouselOptions argument below.',
-                          NLangEnum.zh: '上方固定预览，下方调节全部 CarouselOptions 参数并即时生效。',
-                        },
-                        {
-                          NLangEnum.en:
-                              'Switch between CarouselSlider and CarouselSlider.builder without losing the original images.',
-                          NLangEnum.zh: '可切换 CarouselSlider 与 CarouselSlider.builder，保留原 Demo 图片。',
-                        },
-                        {
-                          NLangEnum.en: 'Expose enlarge, autoplay, physics, clipping, snapping, and gesture options.',
-                          NLangEnum.zh: '覆盖中间放大、自动播放、滚动物理、裁剪、吸附与手势。',
-                        },
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            children: [
+              buildPreview(constraints),
+              Expanded(
+                child: Scrollbar(
+                  controller: scrollController,
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: Column(
+                      children: [
+                        const NDescriptionCard(
+                          initialLang: NLangEnum.zh,
+                          title: {
+                            NLangEnum.en: 'Description',
+                            NLangEnum.zh: '说明',
+                          },
+                          subtitle: {
+                            NLangEnum.en: 'Widget CarouselSlider',
+                            NLangEnum.zh: '组件 CarouselSlider',
+                          },
+                          items: [
+                            {
+                              NLangEnum.en: 'Pin a live preview while you tune every CarouselOptions argument below.',
+                              NLangEnum.zh: '上方固定预览，下方调节全部 CarouselOptions 参数并即时生效。',
+                            },
+                            {
+                              NLangEnum.en:
+                                  'Switch between CarouselSlider and CarouselSlider.builder without losing the original images.',
+                              NLangEnum.zh: '可切换 CarouselSlider 与 CarouselSlider.builder，保留原 Demo 图片。',
+                            },
+                            {
+                              NLangEnum.en:
+                                  'Expose enlarge, autoplay, physics, clipping, snapping, and gesture options.',
+                              NLangEnum.zh: '覆盖中间放大、自动播放、滚动物理、裁剪、吸附与手势。',
+                            },
+                          ],
+                        ),
+                        buildConstructCard(),
+                        buildSizeCard(),
+                        buildSurfaceCard(),
+                        buildPlayCard(),
+                        buildBehaviorCard(),
                       ],
                     ),
-                    buildConstructCard(),
-                    buildSizeCard(),
-                    buildSurfaceCard(),
-                    buildPlayCard(),
-                    buildBehaviorCard(),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
 
-  Widget buildPreview() {
+  double previewCarouselHeight(BoxConstraints constraints) {
+    const statusExtent = 52.0;
+    const minPanel = 180.0;
+    final maxCarousel = math.max(120.0, constraints.maxHeight - statusExtent - minPanel);
+    final wanted = useHeight ? height : constraints.maxWidth / aspectRatio;
+    return wanted.clamp(120.0, maxCarousel);
+  }
+
+  Widget buildPreview(BoxConstraints constraints) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    final carouselHeight = previewCarouselHeight(constraints);
     return DecoratedBox(
       decoration: BoxDecoration(
         color: scheme.surfaceContainerHighest.withValues(alpha: 0.35),
@@ -177,7 +200,11 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          buildCarousel(),
+          SizedBox(
+            height: carouselHeight,
+            width: double.infinity,
+            child: buildCarousel(carouselHeight),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
@@ -193,9 +220,9 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     );
   }
 
-  Widget buildCarousel() {
+  Widget buildCarousel(double carouselHeight) {
     final options = CarouselOptions(
-      height: useHeight ? height : null,
+      height: carouselHeight,
       aspectRatio: aspectRatio,
       viewportFraction: viewportFraction,
       initialPage: initialPage,
@@ -453,7 +480,8 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
                 onChanged: onAutoPlayCurve,
               ),
             ),
-            buildSwitch(title: 'pauseAutoPlayOnTouch 触摸暂停', value: pauseAutoPlayOnTouch, onChanged: onPauseAutoPlayOnTouch),
+            buildSwitch(
+                title: 'pauseAutoPlayOnTouch 触摸暂停', value: pauseAutoPlayOnTouch, onChanged: onPauseAutoPlayOnTouch),
             buildSwitch(
               title: 'pauseAutoPlayOnManualNavigate 手动切换暂停',
               value: pauseAutoPlayOnManualNavigate,
@@ -487,7 +515,8 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               onChanged: onPhysicsKind,
             ),
           ),
-          buildSwitch(title: 'enableInfiniteScroll 无限循环', value: enableInfiniteScroll, onChanged: onEnableInfiniteScroll),
+          buildSwitch(
+              title: 'enableInfiniteScroll 无限循环', value: enableInfiniteScroll, onChanged: onEnableInfiniteScroll),
           buildSwitch(title: 'animateToClosest 滚到最近页', value: animateToClosest, onChanged: onAnimateToClosest),
           buildSwitch(title: 'reverse 反向', value: reverse, onChanged: onReverse),
           buildSwitch(title: 'pageSnapping 整页吸附', value: pageSnapping, onChanged: onPageSnapping),

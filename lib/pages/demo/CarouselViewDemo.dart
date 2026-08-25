@@ -139,8 +139,15 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
                 child: Column(
                   children: [
                     const NDescriptionCard(
-                      comparedTo: 'CarouselView',
                       initialLang: NLangEnum.zh,
+                      title: {
+                        NLangEnum.en: 'Description',
+                        NLangEnum.zh: '说明',
+                      },
+                      subtitle: {
+                        NLangEnum.en: 'Widget CarouselView',
+                        NLangEnum.zh: '组件 CarouselView',
+                      },
                       items: [
                         {
                           NLangEnum.en: 'Pin a live preview while you tune every constructor argument below.',
