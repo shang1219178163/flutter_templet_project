@@ -13,7 +13,7 @@ class CupertinoFormDemo extends StatefulWidget {
 }
 
 class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
-  late final TextEditingController _textController = TextEditingController(text: 'initial text');
+  late final _textController = TextEditingController(text: 'initial text');
 
   bool isSwitch = true;
 
@@ -25,78 +25,55 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: buildCupertinoForm(context),
+      body: buildBody(),
       // body: buildbody(context),
     );
   }
 
-  Widget buildCupertinoForm(BuildContext context) {
+  Widget buildBody() {
     return SingleChildScrollView(
       child: Container(
         // padding: EdgeInsets.all(15),
         child: Form(
           child: Column(
             children: [
-              CupertinoFormSection.insetGrouped(header: Text('SECTION 1'), children: [
-                CupertinoFormRow(
-                  padding: EdgeInsets.all(15),
-                  child: InkWell(
-                    onTap: () {
-                      DLog.d("buildSubtitleRow");
-                    },
-                    child: buildSubtitleRow(context),
-                  ),
-                ),
-                CupertinoFormRow(
-                  child: InkWell(
-                    onTap: () {
-                      DLog.d("buildRightButtonRow");
-                    },
-                    child: buildRightButtonRow(context),
-                  ),
-                ),
-                CupertinoFormRow(
-                  child: InkWell(
-                    onTap: () {
-                      DLog.d("buildSwitchRow");
-                    },
-                    child: buildSwitchRow(context),
-                  ),
-                ),
-                CupertinoFormRow(
-                  child: InkWell(
-                    onTap: () {
-                      showDatePicker(context);
-                    },
-                    child: buildDatePickerRow(context),
-                  ),
-                ),
-                CupertinoTextFormFieldRow(
-                  prefix: Text('TextField'),
-                  placeholder: 'Enter text',
-                  textAlign: TextAlign.end,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a value';
-                    }
-                    if (value.length < 6) {
-                      return '长度不能小于6';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    DLog.d(value);
-                    setState(() {});
-                  },
-                  onEditingComplete: () {
-                    DLog.d("onEditingComplete");
-                  },
-                ),
-              ]),
               CupertinoFormSection.insetGrouped(
-                header: Text('SECTION 2'),
-                children: List<Widget>.generate(5, (index) {
-                  return CupertinoTextFormFieldRow(
+                header: Text('SECTION 1'),
+                children: [
+                  CupertinoFormRow(
+                    padding: EdgeInsets.all(15),
+                    child: InkWell(
+                      onTap: () {
+                        DLog.d("buildSubtitleRow");
+                      },
+                      child: buildSubtitleRow(context),
+                    ),
+                  ),
+                  CupertinoFormRow(
+                    child: InkWell(
+                      onTap: () {
+                        DLog.d("buildRightButtonRow");
+                      },
+                      child: buildRightButtonRow(context),
+                    ),
+                  ),
+                  CupertinoFormRow(
+                    child: InkWell(
+                      onTap: () {
+                        DLog.d("buildSwitchRow");
+                      },
+                      child: buildSwitchRow(context),
+                    ),
+                  ),
+                  CupertinoFormRow(
+                    child: InkWell(
+                      onTap: () {
+                        showDatePicker(context);
+                      },
+                      child: buildDatePickerRow(context),
+                    ),
+                  ),
+                  CupertinoTextFormFieldRow(
                     prefix: Text('TextField'),
                     placeholder: 'Enter text',
                     textAlign: TextAlign.end,
@@ -104,10 +81,39 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a value';
                       }
+                      if (value.length < 6) {
+                        return '长度不能小于6';
+                      }
                       return null;
                     },
-                  );
-                }),
+                    onChanged: (value) {
+                      DLog.d(value);
+                      setState(() {});
+                    },
+                    onEditingComplete: () {
+                      DLog.d("onEditingComplete");
+                    },
+                  ),
+                ],
+              ),
+              CupertinoFormSection.insetGrouped(
+                header: Text('SECTION 2'),
+                children: List<Widget>.generate(
+                  5,
+                  (index) {
+                    return CupertinoTextFormFieldRow(
+                      prefix: Text('TextField'),
+                      placeholder: 'Enter text',
+                      textAlign: TextAlign.end,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a value';
+                        }
+                        return null;
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -131,9 +137,11 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
 
   Widget buildSubtitleRow(BuildContext context) {
     return Row(children: <Widget>[
-      buildLogo(FlutterLogo(
-        size: 30,
-      )),
+      buildLogo(
+        FlutterLogo(
+          size: 30,
+        ),
+      ),
       Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, //垂直方向居中对⻬
@@ -166,10 +174,13 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
           ],
         ),
       ),
-      Text(dateTime.toString() == "null" ? "choose" : dateTime.toString().split(".").first, maxLines: 1),
+      Text(
+        dateTime.toString() == "null" ? "choose" : dateTime.toString().split(".").first,
+        maxLines: 1,
+      ),
       // TextButton(
       //   onPressed: onPressed,
-      //   child: Text(dateTime.toString() == "null" ? "choose" : dateTime.toString().split(".").first, maxLines: 1),),
+      //   child: Text(dateTime.toString() == "null" ? "choose" : dateTime.toString().split(".").first, maxLines: 1,),),
       Padding(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Icon(
@@ -181,66 +192,71 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
   }
 
   Widget buildSwitchRow(BuildContext context) {
-    return Row(children: <Widget>[
-      // buildLogo(FlutterLogo(size: 30,)),
-      Expanded(
-        child: Text(
-          "title",
-          style: TextStyle(fontSize: 16, color: Colors.black),
+    return Row(
+      children: <Widget>[
+        // buildLogo(FlutterLogo(size: 30,)),
+        Expanded(
+          child: Text(
+            "title",
+            style: TextStyle(fontSize: 16, color: Colors.black),
+          ),
         ),
-      ),
-      CupertinoSwitch(
+        CupertinoSwitch(
           value: isSwitch,
           onChanged: (value) {
-            setState(() {
-              isSwitch = !isSwitch;
-            });
-          }),
-    ]);
+            isSwitch = !isSwitch;
+            setState(() {});
+          },
+        ),
+      ],
+    );
   }
 
   Widget buildRightButtonRow(BuildContext context) {
-    return Row(children: <Widget>[
-      // buildLogo(FlutterLogo(size: 30,)),
-      Expanded(
-        child: Text(
-          "title",
+    return Row(
+      children: <Widget>[
+        // buildLogo(FlutterLogo(size: 30,)),
+        Expanded(
+          child: Text(
+            "title",
+          ),
         ),
-      ),
-      TextButton(
-        onPressed: () {
-          DLog.d("button");
-        },
-        child: Text(
-          "button",
-          style: TextStyle(color: Colors.blue),
+        TextButton(
+          onPressed: () {
+            DLog.d("button");
+          },
+          child: Text(
+            "button",
+            style: TextStyle(color: Colors.blue),
+          ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 
   ///显示时间选择器
   void showDatePicker(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return NDatePicker(
-            // mode: CupertinoDatePickerMode.time,
-            onDateTimeChanged: (val) {
-              DLog.d(val.toString());
-              dateTime = val;
-            },
-            confirmOnPressed: () {
-              DLog.d("confirm");
-              setState(() {});
+      context: context,
+      builder: (context) {
+        return NDatePicker(
+          // mode: CupertinoDatePickerMode.time,
+          onChanged: (val) {
+            DLog.d(val.toString());
+            dateTime = val;
+          },
+          onConfirm: () {
+            DLog.d("confirm");
+            setState(() {});
 
-              Navigator.of(context).pop();
-            },
-            cancellOnPressed: () {
-              DLog.d("cancell");
-              Navigator.of(context).pop();
-            },
-          );
-        });
+            Navigator.of(context).pop();
+          },
+          onCancell: () {
+            DLog.d("cancell");
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
   }
 }

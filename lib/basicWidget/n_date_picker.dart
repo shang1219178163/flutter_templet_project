@@ -8,11 +8,11 @@ class NDatePicker extends StatelessWidget {
   final DateTime? initialDateTime;
   final DateTime? minimumDate;
   final DateTime? maximumDate;
-  final ValueChanged<DateTime> onDateTimeChanged;
+  final ValueChanged<DateTime> onChanged;
   final Widget? cancellChild;
   final Widget? confirmChild;
-  final VoidCallback cancellOnPressed;
-  final VoidCallback confirmOnPressed;
+  final VoidCallback onCancell;
+  final VoidCallback onConfirm;
 
   final double? datePickerHeight;
 
@@ -27,9 +27,9 @@ class NDatePicker extends StatelessWidget {
     this.maximumDate,
     this.cancellChild,
     this.confirmChild,
-    required this.onDateTimeChanged,
-    required this.cancellOnPressed,
-    required this.confirmOnPressed,
+    required this.onChanged,
+    required this.onCancell,
+    required this.onConfirm,
   }) : assert(datePickerHeight != null);
 
   @override
@@ -44,7 +44,7 @@ class NDatePicker extends StatelessWidget {
             children: [
               CupertinoButton(
                 // onPressed: () => Navigator.of(ctx).pop(),
-                onPressed: cancellOnPressed,
+                onPressed: onCancell,
                 child: cancellChild ?? Text("取消"),
               ),
               Expanded(
@@ -60,7 +60,7 @@ class NDatePicker extends StatelessWidget {
               )),
               CupertinoButton(
                 // onPressed: () => Navigator.of(ctx).pop(),
-                onPressed: confirmOnPressed,
+                onPressed: onConfirm,
                 child: confirmChild ?? Text("确定"),
               ),
             ],
@@ -74,7 +74,7 @@ class NDatePicker extends StatelessWidget {
               initialDateTime: initialDateTime,
               minimumDate: minimumDate,
               maximumDate: maximumDate,
-              onDateTimeChanged: onDateTimeChanged,
+              onDateTimeChanged: onChanged,
             ),
           ),
         ],
