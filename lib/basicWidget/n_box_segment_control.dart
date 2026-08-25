@@ -11,7 +11,7 @@ typedef NBoxSegmentItemBuilder<T> = Widget Function(
 class NBoxSegmentControl<T> extends StatefulWidget {
   const NBoxSegmentControl({
     super.key,
-    required this.labels,
+    required this.items,
     required this.itemBuilder,
     required this.index,
     required this.onChanged,
@@ -21,9 +21,9 @@ class NBoxSegmentControl<T> extends StatefulWidget {
   });
 
   /// Segment values (width follows each built child).
-  final List<T> labels;
+  final List<T> items;
 
-  /// Builds the visible content for each [labels] item.
+  /// Builds the visible content for each [items] item.
   final NBoxSegmentItemBuilder<T> itemBuilder;
 
   /// Currently selected index.
@@ -40,14 +40,14 @@ class NBoxSegmentControl<T> extends StatefulWidget {
 }
 
 class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
-  late List<GlobalKey> _itemKeys = List.generate(widget.labels.length, (_) => GlobalKey());
+  late List<GlobalKey> _itemKeys = List.generate(widget.items.length, (_) => GlobalKey());
   List<double> _widths = const [];
 
   @override
   void didUpdateWidget(covariant NBoxSegmentControl<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.labels.length != widget.labels.length) {
-      _itemKeys = List.generate(widget.labels.length, (_) => GlobalKey());
+    if (oldWidget.items.length != widget.items.length) {
+      _itemKeys = List.generate(widget.items.length, (_) => GlobalKey());
       _widths = const [];
     }
     WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
@@ -99,7 +99,7 @@ class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
     return _widths[widget.index];
   }
 
-  bool get _ready => _widths.length == widget.labels.length && _widths.every((w) => w > 0);
+  bool get _ready => _widths.length == widget.items.length && _widths.every((w) => w > 0);
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +139,7 @@ class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  for (var i = 0; i < widget.labels.length; i++)
+                  for (var i = 0; i < widget.items.length; i++)
                     KeyedSubtree(
                       key: _itemKeys[i],
                       child: _NBoxSegmentControlItem(
@@ -149,7 +149,7 @@ class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
                         onTap: () => widget.onChanged(i),
                         child: widget.itemBuilder(
                           context,
-                          widget.labels[i],
+                          widget.items[i],
                           widget.index == i,
                         ),
                       ),
