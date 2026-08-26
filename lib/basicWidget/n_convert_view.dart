@@ -201,9 +201,9 @@ class NConvertViewState extends State<NConvertView> {
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bgColorEDEDED,
+        fillColor: AppColor.bgEDEDED,
         filled: true,
-        hoverColor: AppColor.bgColorEDEDED,
+        hoverColor: AppColor.bgEDEDED,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,
         ),

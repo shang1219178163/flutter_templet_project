@@ -199,7 +199,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with Fil
                 height: itemWidth,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: AppColor.bgColorF9F9F9,
+                  color: AppColor.bgF9F9F9,
                   borderRadius: BorderRadius.circular(radius),
                 ),
                 child: Image(

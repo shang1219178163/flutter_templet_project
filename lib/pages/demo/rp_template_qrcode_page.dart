@@ -47,7 +47,7 @@ class _QrcodePageState extends State<QrcodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgColor,
+      backgroundColor: AppColor.bg,
       appBar: AppBar(
         title: Text('二维码'),
       ),
@@ -181,7 +181,7 @@ class _QrcodePageState extends State<QrcodePage> {
                 e.item1,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
-                color: AppColor.fontColor777777,
+                color: AppColor.font777777,
               ),
             ),
           );

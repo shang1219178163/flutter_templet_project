@@ -50,7 +50,7 @@ class NTextField extends StatefulWidget {
     this.autofocus = false,
     this.obscureText = false,
     this.contentPadding,
-    this.fillColor = AppColor.bgColor,
+    this.fillColor = AppColor.bg,
     this.focusColor = Colors.white,
     this.radius = 4,
     this.borderWidth = 1,
@@ -351,7 +351,7 @@ class _NTextFieldState extends State<NTextField> {
           const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: AppColor.fontColor,
+            color: AppColor.font,
           ),
       inputFormatters: widget.inputFormatters ??
           [
@@ -362,13 +362,10 @@ class _NTextFieldState extends State<NTextField> {
     );
   }
 
-  InputBorder buildEnabledBorder({Color color = AppColor.divider, double radius = 4}) {
+  InputBorder buildEnabledBorder({Color? color, double radius = 4}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
-      borderSide: BorderSide(
-        color: color, //边线颜色为白色
-        width: 1, //边线宽度为1
-      ),
+      borderSide: Divider.createBorderSide(context, width: 1.0),
     );
   }
 }

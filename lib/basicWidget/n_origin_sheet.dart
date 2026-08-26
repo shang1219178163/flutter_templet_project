@@ -160,7 +160,7 @@ class NOriginSheetState extends State<NOriginSheet> {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: AppColor.fontColor,
+              color: AppColor.font,
             ),
             isCollapsed: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

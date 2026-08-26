@@ -106,7 +106,7 @@ class NFileUploadHandle {
           child: const NText(
             "选择文件并上传",
             fontSize: 14,
-            color: AppColor.fontColor5D6D7E,
+            color: AppColor.font5D6D7E,
           ),
         ),
       ),

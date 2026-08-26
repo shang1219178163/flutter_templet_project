@@ -71,7 +71,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 9, right: 9),
-                child: NText('第三方登录', fontSize: 14, color: AppColor.fontColorB3B3B3),
+                child: NText('第三方登录', fontSize: 14, color: AppColor.fontB3B3B3),
               ),
               const Expanded(
                 child: Divider(

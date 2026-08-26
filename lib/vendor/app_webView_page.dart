@@ -182,7 +182,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
           widget.title ?? value,
           style: TextStyle(
             fontSize: 18,
-            color: AppColor.fontColor,
+            color: AppColor.font,
             fontWeight: FontWeight.w500,
           ),
           maxLines: 1,

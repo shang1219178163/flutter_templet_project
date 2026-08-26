@@ -31,7 +31,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgColor,
+      backgroundColor: AppColor.bg,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -183,7 +183,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: AppColor.fontColor777777,
+          unselectedLabelColor: AppColor.font777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,

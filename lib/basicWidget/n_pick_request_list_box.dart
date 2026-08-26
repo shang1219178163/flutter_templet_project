@@ -108,7 +108,7 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
             ),
             child: NSearchBar(
               placeholder: widget.placeholder,
-              backgroundColor: AppColor.bgColorF3F3F3,
+              backgroundColor: AppColor.bgF3F3F3,
               onChanged: (val) {
                 search = val;
                 refreshViewController.onRefresh();
@@ -143,7 +143,7 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
-            color: AppColor.fontColor737373,
+            color: AppColor.font737373,
           ),
         ),
       ),
@@ -164,7 +164,7 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
       },
       itemBuilder: (context, index, model) {
         final isSelected = widget.selected(widget.items, model);
-        final textColor = isSelected ? primary : AppColor.fontColor;
+        final textColor = isSelected ? primary : AppColor.font;
         final color = isSelected ? primary : Colors.transparent;
 
         final name = widget.cbName(model);

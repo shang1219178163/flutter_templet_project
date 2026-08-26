@@ -109,7 +109,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
   }) {
     return Container(
       width: 98,
-      color: AppColor.bgColor,
+      color: AppColor.bg,
       child: MediaQuery.removePadding(
         removeTop: true,
         context: context,
@@ -147,7 +147,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
   }) {
     final model = list[index];
     var isSelected = model.selectableId == selectedModel?.selectableId;
-    var bgColor = isSelected ? AppColor.white : AppColor.bgColorF9F9F9;
+    var bgColor = isSelected ? AppColor.white : AppColor.bgF9F9F9;
     // bgColor = isSelected ? white : Colors.green;
 
     var name = model.selectableName;
@@ -177,7 +177,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                       name,
                       style: TextStyle(
                         fontSize: 14,
-                        color: isSelected ? context.themeData.colorScheme.primary : AppColor.fontColor737373,
+                        color: isSelected ? context.themeData.colorScheme.primary : AppColor.font737373,
                         fontWeight: FontWeight.w500,
                       ),
                       maxLines: 1,

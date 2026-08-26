@@ -143,7 +143,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
             ),
             Container(
               decoration: BoxDecoration(
-                color: AppColor.bgColorF7F7F7,
+                color: AppColor.bgF7F7F7,
               ),
               child: NSectionBox(
                 hide: true,
@@ -154,7 +154,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                   items: items,
                   indexVN: indexVN,
                   // onChanged: (v) {},
-                  bgColor: AppColor.bgColorF7F7F7,
+                  bgColor: AppColor.bgF7F7F7,
                   selectedBgColor: Colors.white,
                 ),
               ),
@@ -292,7 +292,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
               final hideSeperator = e == items.last;
               final i = items.indexOf(e);
               final isSelected = i == indexVN.value;
-              final foregroundColor = isSelected ? theme.colorScheme.primary : AppColor.fontColor999999;
+              final foregroundColor = isSelected ? theme.colorScheme.primary : AppColor.font999999;
               final gradient = isSelected
                   ? LinearGradient(colors: [Colors.red, Colors.purple])
                   : LinearGradient(colors: [Colors.grey, Colors.grey]);

@@ -218,7 +218,7 @@ class _HotScreenViewThreeState extends State<HotScreenViewThree> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColor.bgColor,
+        color: AppColor.bg,
         border: Border.all(color: Colors.blue),
       ),
       child: Column(

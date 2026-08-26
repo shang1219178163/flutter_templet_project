@@ -27,7 +27,7 @@ class AeSingleChooseItem<T> extends StatelessWidget {
     this.enable = true,
     this.header,
     this.footer,
-    this.disableTextColor = AppColor.fontColor,
+    this.disableTextColor = AppColor.font,
     this.disableBgColor,
   });
 
@@ -73,7 +73,7 @@ class AeSingleChooseItem<T> extends StatelessWidget {
   }
 
   Widget buildBody() {
-    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgColorEDEDED;
+    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgEDEDED;
 
     return GestureDetector(
       onTap: onPicker,
@@ -102,8 +102,8 @@ class AeSingleChooseItem<T> extends StatelessWidget {
                 builder: (context, value, child) {
                   var name = value == null ? '请选择' : convertCb(value);
                   final color = enable
-                      ? (value != null ? AppColor.fontColor : AppColor.fontColorB3B3B3)
-                      : (disableTextColor ?? AppColor.fontColorB3B3B3);
+                      ? (value != null ? AppColor.font : AppColor.fontB3B3B3)
+                      : (disableTextColor ?? AppColor.fontB3B3B3);
                   if (value == null && !enable) {
                     name = "--";
                   }
@@ -121,7 +121,7 @@ class AeSingleChooseItem<T> extends StatelessWidget {
                 image: AssetImage(Assets.imagesIconArrowDown),
                 width: 12,
                 height: 12,
-                color: AppColor.fontColorB3B3B3,
+                color: AppColor.fontB3B3B3,
                 // color: primary,
               ),
           ],

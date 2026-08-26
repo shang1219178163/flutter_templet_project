@@ -621,7 +621,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: AppColor.fontColor737373,
+              color: AppColor.font737373,
               // fontStyle: FontStyle.italic,
             ),
           ),
@@ -633,7 +633,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: AppColor.fontColor737373,
+              color: AppColor.font737373,
               // fontStyle: FontStyle.italic,
             ),
           ),
@@ -645,7 +645,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: AppColor.fontColor737373,
+              color: AppColor.font737373,
               // fontStyle: FontStyle.italic,
             ),
           ),

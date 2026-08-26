@@ -49,7 +49,7 @@ class AppThemeService {
 
   SystemUiOverlayStyle get overlayStyle {
     return (isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark).copyWith(
-      systemNavigationBarColor: isDark ? AppColor.bgColor : AppColor.white,
+      systemNavigationBarColor: isDark ? AppColor.bg : AppColor.white,
     );
   }
 

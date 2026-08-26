@@ -74,7 +74,7 @@ class _ScaffoldDemoState extends State<ScaffoldDemo> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldStateKey,
-      backgroundColor: AppColor.bgColor,
+      backgroundColor: AppColor.bg,
       resizeToAvoidBottomInset: true,
       primary: true,
       extendBody: false,

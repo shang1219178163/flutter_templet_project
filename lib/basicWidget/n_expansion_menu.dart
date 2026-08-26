@@ -74,8 +74,8 @@ class NExpansionMenuState extends State<NExpansionMenu> {
                 isExpand: widget.isExpand,
                 color: widget.color,
               ),
-        collapsedTextColor: AppColor.fontColor,
-        textColor: AppColor.fontColor,
+        collapsedTextColor: AppColor.font,
+        textColor: AppColor.font,
         iconColor: widget.color,
         collapsedIconColor: widget.color,
         title: Row(
@@ -85,7 +85,7 @@ class NExpansionMenuState extends State<NExpansionMenu> {
               child: Text(
                 widget.title,
                 style: const TextStyle(
-                  color: AppColor.fontColor,
+                  color: AppColor.font,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),

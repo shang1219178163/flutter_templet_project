@@ -305,7 +305,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
                   '查看更多群成员',
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
-                  color: AppColor.fontColor737373,
+                  color: AppColor.font737373,
                 ),
                 Image(
                   image: AssetImage(Assets.imagesIconArrowRight),

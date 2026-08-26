@@ -137,7 +137,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                         ),
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         minimumSize: const WidgetStatePropertyAll(Size(20, 18)),
-                        backgroundColor: WidgetStateProperty.all(AppColor.bgColor),
+                        backgroundColor: WidgetStateProperty.all(AppColor.bg),
                       ),
                       constraints: constraints,
                       builder: (controller, selectedItem) {
@@ -184,7 +184,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                         );
                       },
                       itemBuilder: (e, isSelected) {
-                        final textColor = isSelected ? primary : AppColor.fontColor;
+                        final textColor = isSelected ? primary : AppColor.font;
                         final iconColor = isSelected ? primary : Colors.transparent;
 
                         var name = getName(e) ?? "";
@@ -227,13 +227,13 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
     if (name?.isNotEmpty != true) {
       return const TextStyle(
         fontSize: 15,
-        color: AppColor.fontColorB3B3B3,
+        color: AppColor.fontB3B3B3,
         fontWeight: FontWeight.w400,
       );
     }
     return const TextStyle(
       fontSize: 15,
-      color: AppColor.fontColor,
+      color: AppColor.font,
       fontWeight: FontWeight.w400,
     );
   }

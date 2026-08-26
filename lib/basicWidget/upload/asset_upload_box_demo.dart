@@ -73,7 +73,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     return AppBar(
       backgroundColor: Colors.white,
       iconTheme: const IconThemeData(
-        color: AppColor.fontColor,
+        color: AppColor.font,
         // size: 20,
       ),
       elevation: 0,

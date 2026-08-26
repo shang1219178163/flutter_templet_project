@@ -112,7 +112,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
             ),
             Container(
               decoration: BoxDecoration(
-                color: AppColor.bgColor,
+                color: AppColor.bg,
               ),
               child: NSectionBox(
                 title: "填空组件封装 - 白底",

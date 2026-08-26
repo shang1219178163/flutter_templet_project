@@ -80,7 +80,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   child: buildNTextField(
                     hideSuffix: true,
                     decorationBuilder: (dt) {
-                      return dt.copyWith(fillColor: AppColor.bgColor);
+                      return dt.copyWith(fillColor: AppColor.bg);
                     },
                   ),
                 ),
@@ -164,7 +164,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   title: "NSearchBar ",
                   child: NSearchBar(
                     decoration: BoxDecoration(
-                      color: AppColor.bgColor,
+                      color: AppColor.bg,
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
                     onChanged: (value) {},

@@ -59,7 +59,7 @@ class ImGroupAvatar extends StatelessWidget {
               child: NText(
                 title,
                 fontSize: 11,
-                color: AppColor.fontColor737373,
+                color: AppColor.font737373,
                 maxLines: 1,
               ),
             ),
@@ -67,7 +67,7 @@ class ImGroupAvatar extends StatelessWidget {
               NText(
                 subtitle,
                 fontSize: 11,
-                color: AppColor.fontColor737373,
+                color: AppColor.font737373,
                 maxLines: 1,
               ),
           ],

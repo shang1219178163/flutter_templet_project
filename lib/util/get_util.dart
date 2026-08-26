@@ -319,7 +319,7 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})> extends State
                       child: e.child,
                     ))
                 .toList(),
-            Container(height: 8, color: AppColor.bgColor),
+            Container(height: 8, color: AppColor.bg),
             buildActionCancel(
               onTap: onCancel ?? () => Navigator.of(context).maybePop(),
             ),
@@ -536,7 +536,7 @@ class NBottomInputBox extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  color: AppColor.fontColor,
+                  color: AppColor.font,
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -552,7 +552,7 @@ class NBottomInputBox extends StatelessWidget {
                 NTextField(
                   controller: controller,
                   hintText: '请输入...',
-                  hintStyle: TextStyle(fontSize: 14, color: AppColor.fontColor),
+                  hintStyle: TextStyle(fontSize: 14, color: AppColor.font),
                   minLines: 5,
                   maxLines: 10,
                   autofocus: true,

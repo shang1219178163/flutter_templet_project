@@ -251,7 +251,7 @@ class FlutterPickerUtil {
 
   static Widget buildTextButton({
     required String title,
-    Color? textColor = AppColor.fontColor737373,
+    Color? textColor = AppColor.font737373,
     VoidCallback? onPressed,
   }) {
     return InkWell(

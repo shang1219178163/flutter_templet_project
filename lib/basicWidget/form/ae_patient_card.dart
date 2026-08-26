@@ -83,7 +83,7 @@ class AePatientCard extends StatelessWidget {
                     spacing: 2,
                     icon: NText(
                       title,
-                      color: AppColor.fontColor,
+                      color: AppColor.font,
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
                     ),
@@ -91,7 +91,7 @@ class AePatientCard extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 9),
                       child: NText(
                         remark,
-                        color: AppColor.fontColorB3B3B3,
+                        color: AppColor.fontB3B3B3,
                         fontSize: 12,
                       ),
                     ),

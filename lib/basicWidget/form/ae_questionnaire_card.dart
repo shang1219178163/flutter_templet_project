@@ -86,7 +86,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               child: NText(
                 e.title,
                 fontSize: 14,
-                color: AppColor.fontColor,
+                color: AppColor.font,
                 maxLines: 1,
               ),
             ),

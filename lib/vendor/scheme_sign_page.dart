@@ -69,7 +69,7 @@ class SchemeSignPageState extends State<SchemeSignPage> {
                 onPressed: () => Get.back(),
                 icon: const Icon(
                   Icons.arrow_back_ios_new,
-                  color: AppColor.fontColor,
+                  color: AppColor.font,
                   size: 24,
                 ),
               ),

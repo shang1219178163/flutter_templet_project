@@ -55,7 +55,7 @@ class NSearchBar extends StatelessWidget {
             child: const NText(
               '取消',
               fontSize: 15,
-              color: AppColor.fontColor,
+              color: AppColor.font,
             ),
           ),
         ),

@@ -111,7 +111,7 @@ class DiscussListItem extends StatelessWidget {
     const nameStyle = TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: AppColor.fontColor999999,
+      color: AppColor.font999999,
     );
 
     final messageStyle = TextStyle(
@@ -121,7 +121,7 @@ class DiscussListItem extends StatelessWidget {
       color: themeProvider.titleColor,
     );
 
-    final linkStyle = messageStyle.copyWith(color: AppColor.fontColor666666);
+    final linkStyle = messageStyle.copyWith(color: AppColor.font666666);
 
     Border? border = Border.all(color: Colors.blue, width: 0.5);
     border = null;
@@ -322,7 +322,7 @@ class DiscussListItem extends StatelessWidget {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "PingFang SC",
-                                        color: AppColor.fontColor666666,
+                                        color: AppColor.font666666,
                                       ),
                                     ),
                                 ],
@@ -339,7 +339,7 @@ class DiscussListItem extends StatelessWidget {
                             // decoration: BoxDecoration(
                             //   border: Border.all(color: Colors.blue),
                             // ),
-                            child: const Icon(Icons.more_vert, size: 13, color: AppColor.fontColor999999),
+                            child: const Icon(Icons.more_vert, size: 13, color: AppColor.font999999),
                           ),
                         ),
                       ],

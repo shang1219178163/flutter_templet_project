@@ -130,7 +130,7 @@ class NSearchTextField extends StatelessWidget {
         theme?.style ??
         TextStyle(
           fontSize: 15,
-          color: AppColor.fontColor,
+          color: AppColor.font,
           fontWeight: FontWeight.w400,
         );
 
@@ -140,7 +140,7 @@ class NSearchTextField extends StatelessWidget {
         image: const AssetImage("assets/images/icon_search.png"),
         width: 16,
         height: 16,
-        color: AppColor.fontColor,
+        color: AppColor.font,
       ),
     );
 
@@ -253,7 +253,7 @@ class NSearchBar extends StatelessWidget {
             child: const NText(
               '取消',
               fontSize: 15,
-              color: AppColor.fontColor,
+              color: AppColor.font,
             ),
           ),
         ),

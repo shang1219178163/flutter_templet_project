@@ -343,7 +343,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                       if (files.isEmpty)
                         NText(
                           "拖拽文件",
-                          style: TextStyle(color: AppColor.fontColor737373),
+                          style: TextStyle(color: AppColor.font737373),
                         ),
                     ],
                   ),

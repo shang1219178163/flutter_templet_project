@@ -224,7 +224,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       decoration: BoxDecoration(
-        color: AppColor.bgColor,
+        color: AppColor.bg,
         // border: Border.all(color: Colors.blue),
       ),
       child: Container(

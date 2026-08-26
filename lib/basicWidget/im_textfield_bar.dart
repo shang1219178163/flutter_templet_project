@@ -162,7 +162,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
     );
 
     return Container(
-      color: AppColor.bgColor,
+      color: AppColor.bg,
       // padding: EdgeInsets.all(8),
       child: StatefulBuilder(
         builder: (context, setState) {

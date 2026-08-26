@@ -139,7 +139,7 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
-                              color: AppColor.fontColor,
+                              color: AppColor.font,
                             ),
                           ),
                         ),

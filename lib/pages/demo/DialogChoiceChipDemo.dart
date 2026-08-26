@@ -158,13 +158,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         side: BorderSide(color: Color(0xfff3f3f3)),
                         label: Text(e.name ?? "-"),
                         labelStyle: TextStyle(
-                          color: e.isSelected == true ? Colors.white : AppColor.fontColor,
+                          color: e.isSelected == true ? Colors.white : AppColor.font,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: AppColor.bgColorF9F9F9,
+                        backgroundColor: AppColor.bgF9F9F9,
                         onSelected: (selected) {
                           for (final element in tags) {
                             if (element.data?.id == e.data?.id) {
@@ -271,7 +271,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                               TextSpan(
                                 text: (e.name ?? "-") * 5 + '一二三四五六七八九十'.substring(0, 3),
                                 style: TextStyle(
-                                  color: e.isSelected == true ? Colors.white : AppColor.fontColor,
+                                  color: e.isSelected == true ? Colors.white : AppColor.font,
                                 ),
                               ),
                             ],
@@ -281,13 +281,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         labelStyle: TextStyle(
-                          color: e.isSelected == true ? Colors.white : AppColor.fontColor,
+                          color: e.isSelected == true ? Colors.white : AppColor.font,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: AppColor.bgColorF9F9F9,
+                        backgroundColor: AppColor.bgF9F9F9,
                         onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
@@ -360,7 +360,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                               TextSpan(
                                 text: (e.name ?? "-") * 5 + '一二三四五六七八九十'.substring(0, 3),
                                 style: TextStyle(
-                                  color: e.isSelected == true ? Colors.white : AppColor.fontColor,
+                                  color: e.isSelected == true ? Colors.white : AppColor.font,
                                 ),
                               ),
                             ],
@@ -370,13 +370,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         labelStyle: TextStyle(
-                          color: e.isSelected == true ? Colors.white : AppColor.fontColor,
+                          color: e.isSelected == true ? Colors.white : AppColor.font,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: AppColor.bgColorF9F9F9,
+                        backgroundColor: AppColor.bgF9F9F9,
                         onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
@@ -474,7 +474,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                                 //   shape: StadiumBorder(),
                                 // ),
                                 decoration: ShapeDecoration(
-                                  color: e.isSelected == true ? Theme.of(context).primaryColor : AppColor.bgColorF9F9F9,
+                                  color: e.isSelected == true ? Theme.of(context).primaryColor : AppColor.bgF9F9F9,
                                   shape: StadiumBorder(side: BorderSide(color: Color(0xfff3f3f3))),
                                 ),
                                 child: Text(
@@ -483,7 +483,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                                   softWrap: true,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    color: e.isSelected == true ? Colors.white : AppColor.fontColor,
+                                    color: e.isSelected == true ? Colors.white : AppColor.font,
                                   ),
                                 ),
                               ),
@@ -738,7 +738,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColor.fontColor,
+              color: AppColor.font,
             ),
           ),
         ),

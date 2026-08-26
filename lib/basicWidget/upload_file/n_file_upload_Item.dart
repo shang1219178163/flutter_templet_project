@@ -127,14 +127,14 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
           child: NText(
             fileNameNew,
             fontSize: 14,
-            color: AppColor.fontColor737373,
+            color: AppColor.font737373,
             maxLines: 1,
           ),
         ),
         NText(
           ".$ext",
           fontSize: 14,
-          color: AppColor.fontColor737373,
+          color: AppColor.font737373,
           maxLines: 1,
         ),
       ],
@@ -151,7 +151,7 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
         right: 12,
       ),
       decoration: const BoxDecoration(
-        color: AppColor.bgColor,
+        color: AppColor.bg,
         // border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),

@@ -94,7 +94,7 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: AppColor.fontColor,
+            color: AppColor.font,
           ),
         ),
       ),

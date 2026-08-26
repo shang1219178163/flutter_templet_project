@@ -309,7 +309,7 @@ class _ImChatPageState extends State<ImChatPage>
     final name = model.nickName ?? "";
     final timeStr = model.timeDes ?? "";
 
-    final contentBgColor = isOwner ? context.themeData.colorScheme.primary : AppColor.bgColor;
+    final contentBgColor = isOwner ? context.themeData.colorScheme.primary : AppColor.bg;
     final contentFontColor = Colors.white;
 
     Widget buildAvatar({required String imgUrl, VoidCallback? onTap}) {
@@ -773,7 +773,7 @@ class _ImChatPageState extends State<ImChatPage>
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.fontColor,
+                          color: AppColor.font,
                         ),
                       ),
                     ),

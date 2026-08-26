@@ -186,8 +186,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
         prefixInsets: EdgeInsets.only(left: 14.w, top: 5, bottom: 5, right: 6.w),
         // padding: EdgeInsets.only(left: 3, top: 5, bottom: 5, right: 5),
         placeholder: placeholder,
-        placeholderStyle: TextStyle(fontSize: 15.sp, color: AppColor.fontColorBCBFC2),
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4.w)), color: AppColor.bgColor),
+        placeholderStyle: TextStyle(fontSize: 15.sp, color: AppColor.fontBCBFC2),
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4.w)), color: AppColor.bg),
         onChanged: (value) {
           _debounce(() {
             debugPrint('searchText: $value');

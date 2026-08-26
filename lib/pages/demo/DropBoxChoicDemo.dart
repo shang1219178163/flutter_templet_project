@@ -247,7 +247,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             child: Text(
               "入组时间",
               style: TextStyle(
-                color: AppColor.fontColor,
+                color: AppColor.font,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),
@@ -457,14 +457,14 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                 isExpand: isExpand,
                 color: color,
               ),
-        collapsedTextColor: AppColor.fontColor,
-        textColor: AppColor.fontColor,
+        collapsedTextColor: AppColor.font,
+        textColor: AppColor.font,
         iconColor: color,
         collapsedIconColor: color,
         title: Text(
           title,
           style: TextStyle(
-            color: AppColor.fontColor,
+            color: AppColor.font,
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),

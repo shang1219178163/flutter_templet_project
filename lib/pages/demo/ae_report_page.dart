@@ -132,16 +132,16 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgColor,
+      backgroundColor: AppColor.bg,
       appBar: AppBar(
         title: Text(title),
         titleTextStyle: TextStyle(
-          color: AppColor.fontColor,
+          color: AppColor.font,
           fontWeight: FontWeight.w500,
         ),
-        iconTheme: const IconThemeData(color: AppColor.fontColor, size: 20),
+        iconTheme: const IconThemeData(color: AppColor.font, size: 20),
         elevation: 0.0,
-        backgroundColor: AppColor.bgColor,
+        backgroundColor: AppColor.bg,
         actions: [
           IconButton(
             onPressed: () {

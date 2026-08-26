@@ -172,7 +172,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
               child: NText(
                 widget.title,
                 fontSize: 14,
-                color: AppColor.fontColor737373,
+                color: AppColor.font737373,
               ),
             ),
         ...selectedModels.map((e) {
@@ -223,7 +223,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
                 child: NText(
                   widget.description,
                   fontSize: 12,
-                  color: AppColor.fontColorB3B3B3,
+                  color: AppColor.fontB3B3B3,
                 ),
               ),
         ),
@@ -251,7 +251,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           child: NText(
             "选择文件并上传",
             fontSize: 14,
-            color: AppColor.fontColorB3B3B3,
+            color: AppColor.fontB3B3B3,
           ),
         ),
       ),

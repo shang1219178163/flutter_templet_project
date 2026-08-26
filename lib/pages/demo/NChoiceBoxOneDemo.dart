@@ -301,7 +301,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           NText(detailTitle ?? "",
-                              color: AppColor.fontColorBCBFC2, fontSize: 12, fontWeight: FontWeight.w500),
+                              color: AppColor.fontBCBFC2, fontSize: 12, fontWeight: FontWeight.w500),
                         ],
                       ),
                   ],

@@ -152,7 +152,7 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
     double size = 50,
     double strokeWidth = 4,
     Color color = AppColor.error,
-    Color backgroundColor = AppColor.bgColor,
+    Color backgroundColor = AppColor.bg,
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),

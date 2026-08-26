@@ -33,8 +33,10 @@ class IMSoundRecordingPage extends StatelessWidget {
     return ValueListenableBuilder<bool>(
       valueListenable: cancelVN,
       builder: (context, isCancel, child) {
-        final closeButtonIconName = isCancel ? Assets.imagesImgSoundOverlayButtonCancel : Assets.imagesImgSoundOverlayButton;
-        final bottomBarIconName = isCancel ? Assets.imagesImgSoundOverlayBottomCancel : Assets.imagesImgSoundOverlayBottom;
+        final closeButtonIconName =
+            isCancel ? Assets.imagesImgSoundOverlayButtonCancel : Assets.imagesImgSoundOverlayButton;
+        final bottomBarIconName =
+            isCancel ? Assets.imagesImgSoundOverlayBottomCancel : Assets.imagesImgSoundOverlayBottom;
 
         return Container(
           color: Colors.black.withValues(alpha: 0.5),
@@ -74,7 +76,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                   child: Text(
                     "松开 取消",
                     style: TextStyle(
-                      color: AppColor.fontColor,
+                      color: AppColor.font,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
@@ -98,7 +100,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                   child: Text(
                     "松开 发送",
                     style: TextStyle(
-                      color: AppColor.fontColorB3B3B3,
+                      color: AppColor.fontB3B3B3,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),

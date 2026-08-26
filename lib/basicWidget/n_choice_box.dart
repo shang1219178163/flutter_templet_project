@@ -109,7 +109,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
       return SizedBox();
     }
 
-    final textColor = e.isSelected ? widget.itemSelectedColor : AppColor.fontColor;
+    final textColor = e.isSelected ? widget.itemSelectedColor : AppColor.font;
 
     final bgColor = e.isSelected ? widget.itemSelectedColor.withValues(alpha: 0.08) : widget.itemColor;
 

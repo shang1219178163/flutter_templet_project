@@ -99,7 +99,7 @@ class AeDateChooseItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: enable ? AppColor.white : disableBgColor ?? AppColor.bgColorEDEDED,
+          color: enable ? AppColor.white : disableBgColor ?? AppColor.bgEDEDED,
           border: Border.all(color: const Color(0xFFE6E6E6), width: 0.5),
           boxShadow: const [
             BoxShadow(
@@ -117,8 +117,8 @@ class AeDateChooseItem extends StatelessWidget {
                 builder: (context, value, child) {
                   var name = value == null ? '请选择' : convertCb?.call(value) ?? convert(value);
                   final color = enable
-                      ? (value != null ? AppColor.fontColor : AppColor.fontColorB3B3B3)
-                      : (disableTextColor ?? AppColor.fontColorB3B3B3);
+                      ? (value != null ? AppColor.font : AppColor.fontB3B3B3)
+                      : (disableTextColor ?? AppColor.fontB3B3B3);
                   if (value == null && !enable) {
                     name = "--";
                   }

@@ -151,7 +151,7 @@ class _PointShopState extends State<PointShop> with TickerProviderStateMixin {
       child: TabBar(
         controller: tabController!,
         labelColor: Colors.pink,
-        unselectedLabelColor: AppColor.fontColor737373,
+        unselectedLabelColor: AppColor.font737373,
         tabs: categorys.map((e) => Tab(text: e.categoryName ?? "-")).toList(),
         // labelPadding: const EdgeInsets.symmetric(horizontal: 2),
         // indicatorPadding: const EdgeInsets.only(bottom: 8),

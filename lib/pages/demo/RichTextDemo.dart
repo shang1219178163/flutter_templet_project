@@ -190,7 +190,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
       TextSpan(
         style: TextStyle(
           fontSize: 16,
-          color: AppColor.fontColor,
+          color: AppColor.font,
           height: 1.6,
         ),
         children: RichTextExt.createTextSpansByRegExp(
@@ -356,7 +356,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
                 text: departmentDesc,
                 style: TextStyle(
                   fontSize: 14,
-                  color: AppColor.fontColor737373,
+                  color: AppColor.font737373,
                   // height: 1.5,
                 ),
               ),

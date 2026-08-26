@@ -54,7 +54,7 @@ class _NSlidableTabbarState extends State<NSlidableTabbar> with TickerProviderSt
         dividerHeight: 0,
         labelColor: widget.color,
         labelStyle: widget.labelStyle ?? TextStyle(fontSize: 12),
-        unselectedLabelStyle: widget.unselectedLabelStyle ?? TextStyle(fontSize: 12, color: AppColor.fontColor333333),
+        unselectedLabelStyle: widget.unselectedLabelStyle ?? TextStyle(fontSize: 12, color: AppColor.font333333),
         tabAlignment: TabAlignment.fill,
         indicatorSize: TabBarIndicatorSize.tab,
         labelPadding: const EdgeInsets.symmetric(horizontal: 0),

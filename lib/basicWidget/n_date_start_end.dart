@@ -63,7 +63,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
               ),
               child: NText(
                 startDate == null ? "开始时间" : (startDate ?? "").split(" ").firstOrNull ?? "",
-                color: startDate == null ? AppColor.fontColorB3B3B3 : AppColor.fontColor737373,
+                color: startDate == null ? AppColor.fontB3B3B3 : AppColor.font737373,
                 fontSize: 14,
               ),
             ),
@@ -73,7 +73,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
           padding: EdgeInsets.symmetric(horizontal: 7),
           child: NText(
             "－",
-            color: AppColor.fontColor999999,
+            color: AppColor.font999999,
             fontSize: 14,
           ),
         ),
@@ -91,7 +91,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
               ),
               child: NText(
                 endDate == null ? "结束时间" : (endDate ?? "").split(" ").firstOrNull ?? "",
-                color: endDate == null ? AppColor.fontColorB3B3B3 : AppColor.fontColor737373,
+                color: endDate == null ? AppColor.fontB3B3B3 : AppColor.font737373,
                 fontSize: 14,
               ),
             ),

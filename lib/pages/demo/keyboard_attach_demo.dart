@@ -54,7 +54,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgColor,
+      backgroundColor: AppColor.bg,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -135,7 +135,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
           fontSize: fontSize,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bgColor,
+        fillColor: AppColor.bg,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

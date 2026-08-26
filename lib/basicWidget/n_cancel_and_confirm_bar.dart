@@ -13,7 +13,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
     this.dividerTop,
     this.cancelTextStyle,
     this.confirmTextStyle,
-    this.cancelBgColor = AppColor.bgColor,
+    this.cancelBgColor = AppColor.bg,
     this.confirmBgColor = Colors.blueAccent,
     required this.onCancel,
     required this.onConfirm,
@@ -95,7 +95,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
                                   TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: AppColor.fontColor777777,
+                                    color: AppColor.font777777,
                                   ),
                             ),
                           ),

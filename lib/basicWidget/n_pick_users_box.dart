@@ -86,13 +86,13 @@ class NPickUsersBox extends NPickRequestListBox<UserModel> {
                   child: NText(
                     name,
                     fontSize: 16,
-                    color: AppColor.fontColor,
+                    color: AppColor.font,
                   ),
                 ),
                 NText(
                   desc,
                   fontSize: 16,
-                  color: AppColor.fontColor999999,
+                  color: AppColor.font999999,
                 ),
               ],
             );

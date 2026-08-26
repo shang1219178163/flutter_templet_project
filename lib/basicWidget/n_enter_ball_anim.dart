@@ -24,7 +24,7 @@ class NEnterBallAnim extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final fontColor = isDark ? AppColor.white : AppColor.fontColor;
+    final fontColor = isDark ? AppColor.white : AppColor.font;
 
     return ValueListenableBuilder(
       valueListenable: valueListenable,

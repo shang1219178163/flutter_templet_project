@@ -9,7 +9,7 @@ class NChoiceBoxHorizontal<T> extends StatefulWidget {
     required this.items,
     required this.onChanged,
     this.isSingle = false,
-    this.itemColor = AppColor.bgColor,
+    this.itemColor = AppColor.bg,
     this.itemSelectedColor = Colors.blue,
     this.spacing = 8,
     this.itemBuilder,
@@ -101,7 +101,7 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
         label: Text(
           e.title,
           style: TextStyle(
-            color: e.isSelected == true ? Colors.white : AppColor.fontColor,
+            color: e.isSelected == true ? Colors.white : AppColor.font,
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),

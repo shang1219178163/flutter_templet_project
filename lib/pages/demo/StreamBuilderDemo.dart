@@ -73,7 +73,7 @@ UI 事件：onPressed, TextField.onChanged → 都是 Stream。
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgColorF9F9F9,
+      backgroundColor: AppColor.bgF9F9F9,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),

@@ -101,9 +101,9 @@ class _NImagePreviewState extends State<NImagePreview> {
 
   late final barcodeScanner = BarcodeScanner();
 
-  Color get bgColor => widget.isBlackBackgroud ? AppColor.fontColor181818 : Colors.white;
+  Color get bgColor => widget.isBlackBackgroud ? AppColor.font181818 : Colors.white;
 
-  Color get textColor => widget.isBlackBackgroud ? Colors.white : AppColor.fontColor181818;
+  Color get textColor => widget.isBlackBackgroud ? Colors.white : AppColor.font181818;
 
   @override
   void dispose() {
@@ -157,7 +157,7 @@ class _NImagePreviewState extends State<NImagePreview> {
       body: Stack(
         children: [
           Container(
-            color: AppColor.fontColor181818,
+            color: AppColor.font181818,
             child: GestureDetector(
               onTapUp: (v) async {
                 onBack();
@@ -323,7 +323,7 @@ class _NImagePreviewState extends State<NImagePreview> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: const BoxDecoration(
-                  color: AppColor.fontColor181818,
+                  color: AppColor.font181818,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

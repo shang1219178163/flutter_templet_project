@@ -141,7 +141,7 @@ class LoginInput extends StatefulWidget {
     this.isFocusClear = false,
     this.showEyeIcon = false,
     this.keyboardType,
-    this.fillColor = AppColor.bgColor,
+    this.fillColor = AppColor.bg,
     this.focusColor = Colors.white,
     this.radius = 30,
     this.inputFormatters,
@@ -277,7 +277,7 @@ class _LoginInputState extends State<LoginInput> {
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: IconButton(
-                  focusColor: AppColor.fontColorF9F9F9,
+                  focusColor: AppColor.fontF9F9F9,
                   icon: Image.asset(
                     isCloseEye ? 'assets/images/icon_eye_close.png' : 'assets/images/icon_eye_open.png',
                     width: 20,
@@ -305,7 +305,7 @@ class _LoginInputState extends State<LoginInput> {
       style: TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w400,
-        color: AppColor.fontColor,
+        color: AppColor.font,
       ),
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
@@ -317,7 +317,7 @@ class _LoginInputState extends State<LoginInput> {
         enabledBorder: buildBorder(color: AppColor.divider),
         focusedBorder: buildBorder(color: primaryColor),
         hintText: widget.hint,
-        hintStyle: TextStyle(fontSize: 16.sp, color: AppColor.fontColorF9F9F9),
+        hintStyle: TextStyle(fontSize: 16.sp, color: AppColor.fontF9F9F9),
         prefixIcon: IconButton(
           focusColor: primaryColor,
           icon: widget.image == null

@@ -245,7 +245,7 @@ class TagGetApi extends BaseRequestAPI{
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bgColor,
+        fillColor: AppColor.bg,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

@@ -166,7 +166,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
             child: NText(
               _positionText ?? "",
               fontSize: 14,
-              color: AppColor.fontColor737373,
+              color: AppColor.font737373,
             ),
           ),
           Expanded(
@@ -192,7 +192,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
           NText(
             totalDesc,
             fontSize: 14,
-            color: AppColor.fontColor737373,
+            color: AppColor.font737373,
           ),
         ],
       ),

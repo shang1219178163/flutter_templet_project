@@ -92,7 +92,7 @@ class AeJudgeItem extends StatelessWidget {
       numPerRow: numPerRow,
       itemPadding: itemPadding,
       style: const TextStyle(
-        color: AppColor.fontColorB3B3B3,
+        color: AppColor.fontB3B3B3,
         fontSize: 14,
       ),
       styleSelected: TextStyle(
@@ -122,14 +122,14 @@ class AeJudgeItem extends StatelessWidget {
             padding: EdgeInsets.only(right: 8.0),
             child: NIndicatorCircle(
               isSelected: true,
-              colorSelected: AppColor.fontColorB3B3B3,
+              colorSelected: AppColor.fontB3B3B3,
             ),
           ),
           Flexible(
             child: Text(
               title,
               style: const TextStyle(
-                color: AppColor.fontColor,
+                color: AppColor.font,
               ),
             ),
           ),

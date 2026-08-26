@@ -55,7 +55,7 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgColorF9F9F9,
+      backgroundColor: AppColor.bgF9F9F9,
       appBar: AppBar(
         // backgroundColor: bgColorF9F9F9,
         title: Text(title ?? "通话记录"),
@@ -158,7 +158,7 @@ class MediaRecordCard extends StatelessWidget {
                     ),
                     child: NText(
                       timeLongDesc,
-                      color: AppColor.fontColor5D6D7E,
+                      color: AppColor.font5D6D7E,
                       maxLines: 1,
                       fontSize: 14,
                     ),

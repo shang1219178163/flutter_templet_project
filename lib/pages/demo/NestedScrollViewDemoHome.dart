@@ -76,7 +76,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
     var expandedHeight = 338.0 + 13;
 
     return Scaffold(
-      backgroundColor: AppColor.bgColor,
+      backgroundColor: AppColor.bg,
       body: buildNestedScrollViewPage(
         expandedHeight: expandedHeight,
         collapsedHeight: collapsedHeight,
@@ -118,7 +118,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
               snap: false,
               primary: true,
               backgroundColor: () {
-                final color = scrollProgress.value > 0.65 ? collapsedBackgroundColor : AppColor.bgColor;
+                final color = scrollProgress.value > 0.65 ? collapsedBackgroundColor : AppColor.bg;
                 return color;
               },
               title: ListenableBuilder(
@@ -490,7 +490,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                 NText(
                   DateTime.now().toString().split(" ").first,
                   fontSize: 14,
-                  color: AppColor.fontColor737373,
+                  color: AppColor.font737373,
                 ),
                 const SizedBox(
                   width: 6,
@@ -499,7 +499,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                   image: AssetImage(Assets.imagesIconArrowRight),
                   width: 14,
                   height: 14,
-                  color: AppColor.fontColor737373,
+                  color: AppColor.font737373,
                 )
               ],
             ),
@@ -616,7 +616,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                         NText(
                           subText,
                           fontSize: 12,
-                          color: AppColor.fontColor737373,
+                          color: AppColor.font737373,
                         ),
                       ],
                     ),

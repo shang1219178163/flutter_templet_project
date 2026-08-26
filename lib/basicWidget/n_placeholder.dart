@@ -58,7 +58,7 @@ class NPlaceholder extends StatelessWidget {
                   Text(
                     message ?? "暂无数据",
                     style: TextStyle(
-                      color: AppColor.fontColor999999,
+                      color: AppColor.font999999,
                       fontSize: 14.sp,
                     ),
                   )

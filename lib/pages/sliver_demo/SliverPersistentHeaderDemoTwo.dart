@@ -43,7 +43,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgColorF9F9F9,
+      backgroundColor: AppColor.bgF9F9F9,
       appBar: AppBar(
         title: Text(widget.toString()),
       ),

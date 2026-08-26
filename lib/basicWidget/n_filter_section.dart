@@ -149,14 +149,14 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
           borderColor: color.withValues(alpha: 0.2),
           hide: disable,
         ),
-        collapsedTextColor: AppColor.fontColor,
-        textColor: AppColor.fontColor,
+        collapsedTextColor: AppColor.font,
+        textColor: AppColor.font,
         iconColor: color,
         collapsedIconColor: color,
         title: Text(
           title,
           style: TextStyle(
-            color: AppColor.fontColor,
+            color: AppColor.font,
             fontSize: 15,
             fontWeight: FontWeight.w500,
           ),
@@ -178,7 +178,8 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
       return const SizedBox();
     }
 
-    final tuple = isExpand ? (title: "收起", image: Assets.imagesIconArrowUp) : (title: "展开", image: Assets.imagesIconArrowDown);
+    final tuple =
+        isExpand ? (title: "收起", image: Assets.imagesIconArrowUp) : (title: "展开", image: Assets.imagesIconArrowDown);
 
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 6, top: 4, bottom: 4),

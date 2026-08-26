@@ -225,7 +225,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
     return NFilterDropBox(
       controller: filterController,
       sections: sections,
-      barrierColor: AppColor.bgColor000000.withValues(alpha: 0.52),
+      barrierColor: AppColor.bg000000.withValues(alpha: 0.52),
       onVisible: (visible) {
         widget.onClose?.call();
       },
@@ -269,7 +269,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
             child: Text(
               "入组时间",
               style: TextStyle(
-                color: AppColor.fontColor,
+                color: AppColor.font,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),

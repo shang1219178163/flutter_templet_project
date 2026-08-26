@@ -458,7 +458,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
-                    color: AppColor.fontColor,
+                    color: AppColor.font,
                   ),
                 ),
               ),
@@ -667,12 +667,12 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   InputBorder buildFocusedBorder({
     double radus = 4,
     double borderWidth = 1,
-    color = AppColor.divider,
+    Color? color,
   }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
       borderSide: BorderSide(
-        color: color, //边框颜色为白色
+        color: color ?? AppColor.divider, //边框颜色为白色
         width: borderWidth, //宽度为1
       ),
     );

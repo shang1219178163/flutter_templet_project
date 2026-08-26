@@ -142,7 +142,7 @@ class IMRecipleBottomSheet extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColor.fontColor,
+                        color: AppColor.font,
                       ),
                     ),
                   ),

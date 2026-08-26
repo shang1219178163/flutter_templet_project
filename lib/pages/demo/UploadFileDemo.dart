@@ -26,7 +26,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
-          color: AppColor.fontColor,
+          color: AppColor.font,
           // size: 20,
         ),
         elevation: 0,
@@ -35,7 +35,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
         titleTextStyle: const TextTheme(
           titleMedium: TextStyle(
             // headline6 is used for setting title's theme
-            color: AppColor.fontColor,
+            color: AppColor.font,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -43,7 +43,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
         toolbarTextStyle: const TextTheme(
           titleMedium: TextStyle(
             // headline6 is used for setting title's theme
-            color: AppColor.fontColor,
+            color: AppColor.font,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),

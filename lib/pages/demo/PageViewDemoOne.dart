@@ -123,7 +123,7 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: AppColor.fontColor777777,
+          unselectedLabelColor: AppColor.font777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,

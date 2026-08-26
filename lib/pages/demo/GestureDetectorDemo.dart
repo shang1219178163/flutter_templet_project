@@ -88,7 +88,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         child: Text(
           "按住说话",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.fontColor),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.font),
         ),
       ),
     );
@@ -130,7 +130,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         child: Text(
           "按住说话",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.fontColor),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.font),
         ),
       ),
     );
@@ -164,7 +164,8 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         builder: (context, isCancel, child) {
           final closeButtonIconName =
               isCancel ? Assets.imagesImgSoundOverlayButtonCancel : Assets.imagesImgSoundOverlayButton;
-          final bottombarIconName = isCancel ? Assets.imagesImgSoundOverlayBottomCancel : Assets.imagesImgSoundOverlayBottom;
+          final bottombarIconName =
+              isCancel ? Assets.imagesImgSoundOverlayBottomCancel : Assets.imagesImgSoundOverlayBottom;
 
           return Material(
             type: MaterialType.transparency,
@@ -205,7 +206,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                       child: Text(
                         "松开 取消",
                         style: TextStyle(
-                          color: AppColor.fontColorB3B3B3,
+                          color: AppColor.fontB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -229,7 +230,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                       child: Text(
                         "松开 发送",
                         style: TextStyle(
-                          color: AppColor.fontColorB3B3B3,
+                          color: AppColor.fontB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),

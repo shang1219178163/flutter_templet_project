@@ -140,7 +140,7 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
         final name = selectedItem?.name;
         final nameStyle = TextStyle(
           fontSize: 15,
-          color: AppColor.fontColor,
+          color: AppColor.font,
           fontWeight: FontWeight.w400,
         );
         return InkWell(

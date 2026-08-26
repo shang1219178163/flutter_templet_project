@@ -135,7 +135,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     return Container(
       decoration: widget.bodyDecoration ??
           BoxDecoration(
-            color: AppColor.bgColor,
+            color: AppColor.bg,
             // border: Border.all(color: Colors.blue),
             // borderRadius: BorderRadius.all(Radius.circular(0.w)),
           ),

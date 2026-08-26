@@ -140,7 +140,7 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
                           widget.cbName?.call(e) ?? "-",
                           style: const TextStyle(
                             fontSize: 18,
-                            color: AppColor.fontColor,
+                            color: AppColor.font,
                           ),
                         ),
                       ),

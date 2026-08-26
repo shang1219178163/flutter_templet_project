@@ -146,7 +146,7 @@ class IMConversationCell extends StatelessWidget {
                                   text: TextSpan(
                                     text: '',
                                     style: const TextStyle(
-                                      color: AppColor.fontColor,
+                                      color: AppColor.font,
                                       fontSize: 17,
                                     ),
                                     children: [
@@ -154,7 +154,7 @@ class IMConversationCell extends StatelessWidget {
                                         return TextSpan(
                                             text: e,
                                             style: TextStyle(
-                                              color: e == highlightContent ? AppColor.primary : AppColor.fontColor,
+                                              color: e == highlightContent ? AppColor.primary : AppColor.font,
                                               fontSize: 17,
                                             ));
                                       }).toList()
@@ -163,7 +163,7 @@ class IMConversationCell extends StatelessWidget {
                                 )
                               : NText(
                                   title,
-                                  color: AppColor.fontColor,
+                                  color: AppColor.font,
                                   fontSize: 17,
                                   fontWeight: FontWeight.normal,
                                   maxLines: 1,
@@ -197,7 +197,7 @@ class IMConversationCell extends StatelessWidget {
                               textAlign: TextAlign.left,
                               maxLines: 1,
                               fontWeight: FontWeight.w400,
-                              color: AppColor.fontColor,
+                              color: AppColor.font,
                               fontSize: 14,
                             ),
                           ),

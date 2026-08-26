@@ -184,7 +184,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: AppColor.fontColor,
+                color: AppColor.font,
               ),
             ),
           ),
@@ -344,7 +344,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
             value:
                 drugPlanSelected?.strategy?.drugs.map((e) => e.remark ?? "").where((e) => e.isNotEmpty).join("、") ?? "",
             hitText: "",
-            textColor: AppColor.fontColor737373,
+            textColor: AppColor.font737373,
             maxLines: 10,
             onChanged: (value) {
               DLog.d("剂量公式：$value");
@@ -364,7 +364,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
                 value: "${dosage ?? ""}",
                 unit: "mg",
                 hitText: "",
-                textColor: AppColor.fontColor737373,
+                textColor: AppColor.font737373,
                 readOnly: true,
                 onChanged: (value) {
                   DLog.d("推荐剂量：$value");

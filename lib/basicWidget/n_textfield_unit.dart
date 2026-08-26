@@ -38,8 +38,8 @@ class NTextfieldUnit extends StatelessWidget {
     this.showClear = true,
     this.onClear,
     this.readOnly = false,
-    this.readOnlyFillColor = AppColor.bgColorF3F3F3,
-    this.readOnlyBorderColor = AppColor.divider,
+    this.readOnlyFillColor = AppColor.bgF3F3F3,
+    this.readOnlyBorderColor = AppColor.dividerLight,
     this.radius = 4,
     this.keyboardType,
     this.inputFormatters,
@@ -153,13 +153,13 @@ class NTextfieldUnit extends StatelessWidget {
       style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: textColor ?? AppColor.fontColor,
+        color: textColor ?? AppColor.font,
       ),
       hintText: hitText,
       hintStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: hintTextColor ?? AppColor.fontColorB3B3B3,
+        color: hintTextColor ?? AppColor.fontB3B3B3,
       ),
       suffixIconBuilder: (isFocus) {
         if (hideSuffix) {
@@ -193,7 +193,7 @@ class NTextfieldUnit extends StatelessWidget {
               unit ?? "",
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: AppColor.fontColor737373,
+              color: AppColor.font737373,
             ),
           );
         }
@@ -276,7 +276,7 @@ class NTextfieldUnit extends StatelessWidget {
       children: [
         NText(
           name,
-          color: AppColor.fontColor737373,
+          color: AppColor.font737373,
         ),
         Expanded(
           child: child,
@@ -294,13 +294,13 @@ class _NTextField extends StatefulWidget {
     this.controller,
     this.onTap,
     required this.onChanged,
-    this.style = const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColor.fontColor),
+    this.style = const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColor.font),
     this.readOnly = false,
     this.hintText = "请输入",
-    this.hintStyle = const TextStyle(fontSize: 16, color: AppColor.fontColorB3B3B3),
+    this.hintStyle = const TextStyle(fontSize: 16, color: AppColor.fontB3B3B3),
     this.maxLines = 1,
     this.contentPadding,
-    this.fillColor = AppColor.bgColor,
+    this.fillColor = AppColor.bg,
     this.borderWidth = 1,
     this.suffixIconBuilder,
     this.suffixIconConstraints,
@@ -557,10 +557,7 @@ class _NTextFieldState extends State<_NTextField> {
       borderRadius: BorderRadius.all(
         Radius.circular(radus), //边角
       ),
-      borderSide: BorderSide(
-        color: AppColor.divider, //边线颜色为白色
-        width: borderWidth, //边线宽度为1
-      ),
+      borderSide: Divider.createBorderSide(context, width: 1.0),
     );
   }
 

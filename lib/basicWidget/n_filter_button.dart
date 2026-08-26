@@ -19,7 +19,7 @@ class NFilterButton extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 10),
     this.title = "筛选",
     this.image = const AssetImage("assets/images/icon_filter.png"),
-    this.color = AppColor.fontColor,
+    this.color = AppColor.font,
     this.onPressed,
   });
 

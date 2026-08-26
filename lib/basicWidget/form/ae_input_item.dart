@@ -119,8 +119,8 @@ class AeInputItem extends StatelessWidget {
         offset: Offset(0, 5),
       )
     ];
-    final textColor = enable ? AppColor.fontColor : (disableTextColor ?? AppColor.fontColorB3B3B3);
-    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgColorEDEDED;
+    final textColor = enable ? AppColor.font : (disableTextColor ?? AppColor.fontB3B3B3);
+    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgEDEDED;
 
     final style = TextStyle(
       color: textColor,
