@@ -54,6 +54,7 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
         child: Column(
           children: [
             ListView(
+              primary: false,
               shrinkWrap: true,
               padding: EdgeInsets.zero, //去掉顶部灰色部分
               children: <Widget>[

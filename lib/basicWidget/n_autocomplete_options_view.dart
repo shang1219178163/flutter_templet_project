@@ -12,7 +12,7 @@ import 'package:flutter/scheduler.dart';
 // typedef OptionWidgetBuilder<T extends Object> = Widget Function(T option);
 
 /// Autocomplete 组件的 optionsViewBuilder 返回视图
-class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
+class NAutocompleteOptionsView<T extends Object> extends StatefulWidget {
   const NAutocompleteOptionsView({
     Key? key,
     required this.displayStringForOption,
@@ -34,6 +34,19 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
   final IndexedWidgetBuilder? itemBuilder;
 
   @override
+  State<NAutocompleteOptionsView<T>> createState() => _NAutocompleteOptionsViewState<T>();
+}
+
+class _NAutocompleteOptionsViewState<T extends Object> extends State<NAutocompleteOptionsView<T>> {
+  final scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // TextFieldTapRegion：点击候选项时不让 TextField 失焦，否则 overlay 会先被拆掉，onTap 来不及触发。
     return TextFieldTapRegion(
@@ -42,18 +55,19 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
         child: Material(
           elevation: 4.0,
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: maxHeight),
+            constraints: BoxConstraints(maxHeight: widget.maxHeight),
             child: Scrollbar(
+              controller: scrollController,
               child: ListView.builder(
+                controller: scrollController,
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
-                itemCount: options.length,
+                itemCount: widget.options.length,
                 itemBuilder: (context, index) {
-                  final option = options.elementAt(index);
-
+                  final option = widget.options.elementAt(index);
                   return InkWell(
-                    onTap: () => onSelected(option),
-                    child: itemBuilder?.call(context, index) ??
+                    onTap: () => widget.onSelected(option),
+                    child: widget.itemBuilder?.call(context, index) ??
                         Builder(builder: (context) {
                           final highlight = AutocompleteHighlightedOption.of(context) == index;
                           if (highlight) {
@@ -64,7 +78,7 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
                           return Container(
                             color: highlight ? Theme.of(context).focusColor : null,
                             padding: const EdgeInsets.all(16.0),
-                            child: Text(displayStringForOption(option)),
+                            child: Text(widget.displayStringForOption(option)),
                           );
                         }),
                   );

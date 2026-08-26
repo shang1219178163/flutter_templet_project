@@ -39,6 +39,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     Tuple2('icon搜索', buildPage1()),
   ];
 
+  /// TabBarView 相邻页会同时挂到路由的 PrimaryScrollController，Scrollbar 会断言
+  late final tabPrimaryControllers = List.generate(items.length, (_) => ScrollController());
+
   @override
   void initState() {
     super.initState();
@@ -47,6 +50,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   void dispose() {
+    for (final e in tabPrimaryControllers) {
+      e.dispose();
+    }
     _tabController.dispose();
     super.dispose();
   }
@@ -93,7 +99,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
       body: TabBarView(
         controller: _tabController,
-        children: items.map((e) => e.item2).toList(),
+        children: [
+          for (var i = 0; i < items.length; i++)
+            PrimaryScrollController(
+              controller: tabPrimaryControllers[i],
+              child: items[i].item2,
+            ),
+        ],
       ),
       // floatingActionButton: FloatingActionButton(
       //   tooltip: 'Increment',

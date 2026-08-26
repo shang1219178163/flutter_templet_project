@@ -28,6 +28,7 @@ class SystemIconsPage extends StatefulWidget {
 
 class _SystemIconsPageState extends State<SystemIconsPage> {
   TextEditingController editingController = TextEditingController();
+  final scrollController = ScrollController();
 
   final List<String> list = List<String>.from(kIConMap.keys);
   List<String> searchResults = List<String>.from(kIConMap.keys);
@@ -35,6 +36,12 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   bool isGrid = false;
 
   String get actionTitle => isGrid ? 'List' : 'Grid';
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +127,10 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   Widget buildListView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return CupertinoScrollbar(
+      controller: scrollController,
       thumbVisibility: false,
       child: ListView.separated(
+        controller: scrollController,
         itemCount: searchResults.length,
         itemBuilder: (context, index) {
           final item = searchResults[index];
@@ -147,6 +156,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   Widget buildGridView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return GridView.builder(
+      controller: scrollController,
       itemCount: searchResults.length,
       itemBuilder: (context, index) {
         final item = searchResults[index];
