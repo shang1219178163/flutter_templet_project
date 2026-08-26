@@ -43,7 +43,6 @@ class _AnimatedContainerExampleState extends State<AnimatedContainerExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.bg,
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: [

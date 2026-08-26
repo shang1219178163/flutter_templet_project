@@ -7,41 +7,74 @@ class AppColor {
   /// 是否暗黑模式
   static bool get isDark => AppThemeService().isDark;
 
+  /// 品牌主色
+  static const Color primary = Colors.blueAccent;
+
+  /// 透明
+  static const Color transparent = Colors.transparent;
+
   /// 纯白
   static const Color white = Color(0xFFFFFFFF);
 
   /// 纯黑
   static const Color black = Color(0xFF000000);
 
-  /// 透明
-  static const Color transparent = Colors.transparent;
+  /// 页面底（浅色）#F6F6F6
+  static const Color backgroundLight = Color(0xFFF6F6F6);
 
-  /// 品牌主色
-  static const Color primary = Colors.blueAccent;
+  /// 页面底（深色）#181818
+  static const Color backgroundDark = Color(0xFF181818);
+
+  /// 卡片底（浅色）纯白
+  static const Color cardLight = Color(0xFFFFFFFF);
+
+  /// 卡片底（深色）#242434
+  static const Color cardDark = Color(0xFF242434);
+
+  /// 主文字（浅色）纯黑
+  static const Color textLight = Color(0xFF000000);
+
+  /// 主文字（深色）纯白
+  static const Color textDark = Color(0xFFFFFFFF);
+
+  /// 次要文字（浅色）60% 黑
+  static const Color textSecondaryLight = Color(0x99000000);
+
+  /// 次要文字（深色）60% 白
+  static const Color textSecondaryDark = Color(0x99FFFFFF);
+
+  /// 提示文字（浅色）30% 黑
+  static const Color textHintLight = Color(0x4c000000);
+
+  /// 提示文字（深色）30% 白
+  static const Color textHintDark = Color(0x4cFFFFFF);
+
+  /// 分割线（浅色）#E4E4E4
+  static const Color dividerLight = Color(0xFFE4E4E4);
+
+  /// 分割线（深色）6% 白
+  static const Color dividerDark = Color(0x0FFFFFFF);
 
   /// 错误/危险
   static const Color error = Color(0xFFD32F2F);
 
-  /// 当前反色
-  static Color get inverse => isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+  /// 当前页面底色
+  static Color get background => isDark ? backgroundDark : backgroundLight;
 
-  /// 当前主题页面背景
-  static Color get page => isDark ? const Color(0xFF181818) : const Color(0xFFF6F6F6);
+  /// 当前卡片底色
+  static Color get card => isDark ? cardDark : cardLight;
 
-  /// 当前主题卡片/表面
-  static Color get card => isDark ? const Color(0xFF242434) : const Color(0xFFFFFFFF);
+  /// 当前主文字色
+  static Color get text => isDark ? textDark : textLight;
 
-  /// 当前主题主文本
-  static Color get text => isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+  /// 当前次要文字色
+  static Color get textSecondary => isDark ? textSecondaryDark : textSecondaryLight;
 
-  /// 当前主题次要文本
-  static Color get textSecondary => isDark ? const Color(0x99FFFFFF) : const Color(0x99000000);
+  /// 当前提示文字色
+  static Color get textHint => isDark ? textHintDark : textHintLight;
 
-  /// 当前主题提示/占位
-  static Color get textHint => isDark ? const Color(0x4cFFFFFF) : const Color(0x4c000000);
-
-  /// 当前主题分割线
-  static Color get divider => isDark ? const Color(0x0FFFFFFF) : const Color(0xFFE4E4E4);
+  /// 当前分割线色
+  static Color get divider => isDark ? dividerDark : dividerLight;
 
   /// 默认字体色 #1A1A1A
   static const Color font = Color(0xFF1A1A1A);

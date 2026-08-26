@@ -48,8 +48,11 @@ class AppThemeService {
   }
 
   SystemUiOverlayStyle get overlayStyle {
+    // light 预设 = 浅色图标（深色/品牌色顶栏）；dark 预设 = 深色图标（浅色顶栏）
     return (isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark).copyWith(
-      systemNavigationBarColor: isDark ? AppColor.bg : AppColor.white,
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: isDark ? AppColor.backgroundDark : AppColor.white,
+      systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     );
   }
 
@@ -132,19 +135,19 @@ class AppThemeService {
       brightness: brightness,
     );
     // 暗色 surface 用中性灰 0xFF242424（R=G=B），避免旧值 0xFF242434 发紫。
-    final isLight = brightness == Brightness.light;
-    final surfaceBase = isLight ? Colors.white : const Color(0xFF242424);
+    final isDark = brightness == Brightness.dark;
+    final surfaceBase = isDark ? AppColor.cardDark : AppColor.cardLight;
     final primaryContainer = Color.alphaBlend(
-      seedColor.withValues(alpha: isLight ? 0.12 : 0.24),
+      seedColor.withValues(alpha: isDark ? 0.24 : 0.12),
       surfaceBase,
     );
-    if (isLight) {
+    if (isDark) {
       // surface* 全部中性化：M3 BottomNavigationBar 默认用 surfaceContainer，fromSeed 蓝色会偏紫
       return baseScheme.copyWith(
         primary: seedColor,
         onPrimary: Colors.white,
         primaryContainer: primaryContainer,
-        onPrimaryContainer: seedColor,
+        onPrimaryContainer: Colors.white,
         secondary: seedColor,
         onSecondary: Colors.white,
         secondaryContainer: seedColor.withValues(alpha: 0.2),
@@ -155,25 +158,26 @@ class AppThemeService {
         onError: Colors.white,
         inversePrimary: seedColor,
         surface: surfaceBase,
-        onSurface: Colors.black,
-        onSurfaceVariant: Colors.black.withValues(alpha: 0.6),
-        surfaceBright: surfaceBase,
-        surfaceDim: const Color(0xFFF6F6F6),
-        surfaceContainerLowest: surfaceBase,
+        onSurface: Colors.white,
+        onSurfaceVariant: Colors.white.withValues(alpha: 0.6),
+        surfaceBright: const Color(0xFF2C2C2C),
+        surfaceDim: const Color(0xFF1A1A1A),
+        surfaceContainerLowest: const Color(0xFF1A1A1A),
         surfaceContainerLow: surfaceBase,
         surfaceContainer: surfaceBase,
-        surfaceContainerHigh: const Color(0xFFF6F6F6),
-        surfaceContainerHighest: const Color(0xFFF7F7F7),
-        outline: const Color(0xFFE4E4E4),
-        outlineVariant: const Color(0xFFE4E4E4),
+        surfaceContainerHigh: const Color(0xFF2C2C2C),
+        surfaceContainerHighest: const Color(0xFF333333),
+        outline: Colors.white.withValues(alpha: 0.12),
+        outlineVariant: Colors.white.withValues(alpha: 0.08),
         surfaceTint: Colors.transparent,
       );
     }
+
     return baseScheme.copyWith(
       primary: seedColor,
       onPrimary: Colors.white,
       primaryContainer: primaryContainer,
-      onPrimaryContainer: Colors.white,
+      onPrimaryContainer: seedColor,
       secondary: seedColor,
       onSecondary: Colors.white,
       secondaryContainer: seedColor.withValues(alpha: 0.2),
@@ -184,17 +188,17 @@ class AppThemeService {
       onError: Colors.white,
       inversePrimary: seedColor,
       surface: surfaceBase,
-      onSurface: Colors.white,
-      onSurfaceVariant: Colors.white.withValues(alpha: 0.6),
-      surfaceBright: const Color(0xFF2C2C2C),
-      surfaceDim: const Color(0xFF1A1A1A),
-      surfaceContainerLowest: const Color(0xFF1A1A1A),
+      onSurface: Colors.black,
+      onSurfaceVariant: Colors.black.withValues(alpha: 0.6),
+      surfaceBright: surfaceBase,
+      surfaceDim: const Color(0xFFF6F6F6),
+      surfaceContainerLowest: surfaceBase,
       surfaceContainerLow: surfaceBase,
       surfaceContainer: surfaceBase,
-      surfaceContainerHigh: const Color(0xFF2C2C2C),
-      surfaceContainerHighest: const Color(0xFF333333),
-      outline: Colors.white.withValues(alpha: 0.12),
-      outlineVariant: Colors.white.withValues(alpha: 0.08),
+      surfaceContainerHigh: const Color(0xFFF6F6F6),
+      surfaceContainerHighest: const Color(0xFFF7F7F7),
+      outline: const Color(0xFFE4E4E4),
+      outlineVariant: const Color(0xFFE4E4E4),
       surfaceTint: Colors.transparent,
     );
   }
@@ -213,10 +217,17 @@ class AppThemeService {
       splashFactory: NoSplash.splashFactory,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      // 浅色用抬高层灰底做列表间隔；暗色用 colorScheme.surface (0xFF242424)
-      scaffoldBackgroundColor: isLight ? colorScheme.surfaceContainerHighest : colorScheme.surface,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      scaffoldBackgroundColor: isLight ? AppColor.backgroundLight : AppColor.backgroundDark,
+      cardColor: isLight ? AppColor.cardLight : AppColor.cardDark,
       // —— 组件 Theme（次级）：颜色尽量取自 colorScheme ——
       indicatorColor: onPrimary,
+      dividerColor: colorScheme.outlineVariant,
+      dividerTheme: DividerThemeData(
+        color: colorScheme.outlineVariant,
+        space: 0.5,
+        thickness: 1,
+      ),
       tabBarTheme: TabBarThemeData(
         indicatorColor: onPrimary,
         labelColor: onPrimary,
@@ -228,7 +239,9 @@ class AppThemeService {
         backgroundColor: colorScheme.primary,
         foregroundColor: onPrimary,
         surfaceTintColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+          statusBarColor: Colors.transparent,
+        ),
         titleTextStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w500,
@@ -245,12 +258,6 @@ class AppThemeService {
           size: 24.0,
           opacity: 0.8,
         ),
-      ),
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      dividerTheme: DividerThemeData(
-        color: colorScheme.outlineVariant,
-        space: 0.5,
-        thickness: 1,
       ),
       badgeTheme: BadgeThemeData(
         offset: const Offset(-1, -4),

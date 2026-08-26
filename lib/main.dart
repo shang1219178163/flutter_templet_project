@@ -155,8 +155,9 @@ Future<void> main() async {
     NFileRegistry.registerDefaults();
   });
 
-  var systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  // 启动图 Info.plist UIStatusBarHidden=true，进 Flutter 后要重新显示电池栏
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setSystemUIOverlayStyle(AppThemeService().overlayStyle);
 }
 
 void setCustomErrorPage() {
@@ -216,9 +217,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    AppThemeService().brightness = theme.brightness;
-
     final app = GetMaterialApp(
       popGesture: true, //swipe back
       navigatorKey: AppService.navigatorKey,
