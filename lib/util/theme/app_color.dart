@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class AppColor {
   /// 方便浅色主题适配
@@ -10,19 +11,26 @@ class AppColor {
 
   ///主色调
   static const Color primary = Colors.blueAccent;
-  static const Color page = Color(0xFFF6F6F6);
+  static const Color pageLight = Color(0xFFF6F6F6);
   static const Color pageDark = Color(0xFF181818);
-  static const Color card = Color(0xFFFFFFFF);
+  static const Color cardLight = Color(0xFFFFFFFF);
   static const Color cardDark = Color(0xFF242434);
-  static const Color textPrimary = Color(0xFF000000);
-  static const Color textPrimaryDark = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0x99000000);
+  static const Color textLight = Color(0xFF000000);
+  static const Color textDark = Color(0xFFFFFFFF);
+  static const Color textSecondaryLight = Color(0x99000000);
   static const Color textSecondaryDark = Color(0x99FFFFFF);
-  static const Color textHint = Color(0x4c000000);
+  static const Color textHintLight = Color(0x4c000000);
   static const Color textHintDark = Color(0x4cFFFFFF);
-  static const Color divider = Color(0xFFE4E4E4);
+  static const Color dividerLight = Color(0xFFE4E4E4);
   static const Color dividerDark = Color(0x0FFFFFFF);
   static const Color error = Color(0xFFD32F2F);
+
+  static Color page = AppThemeService().isDark ? pageDark : pageLight;
+  static Color card = AppThemeService().isDark ? cardDark : cardLight;
+  static Color text = AppThemeService().isDark ? textDark : textLight;
+  static Color textSecondary = AppThemeService().isDark ? textSecondaryDark : textSecondaryLight;
+  static Color textHint = AppThemeService().isDark ? textHintDark : textHintLight;
+  static Color divider = AppThemeService().isDark ? dividerDark : dividerLight;
 
   /// 默认字体颜色 #1A1A1A
   static const Color fontColor = Color(0xFF1A1A1A);
@@ -54,10 +62,16 @@ class AppColor {
     Colors.white,
     Colors.black,
     Colors.blue,
+    Colors.cyan,
     Colors.teal,
-    Colors.deepPurple,
+    Colors.green,
+    Colors.yellow,
+    Colors.amber,
     Colors.orange,
+    Colors.deepOrange,
+    Colors.red,
     Colors.pink,
+    Colors.deepPurple,
   ];
 
 // static const Color primary = Color(0xFF1565C0);

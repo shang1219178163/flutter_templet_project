@@ -165,8 +165,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
                           NLangEnum.zh: '打开 bottom 会把原 Demo 的 TabBar 放到 AppBar 上。滚动面板可看 scrolledUnderElevation。',
                         },
                         {
-                          NLangEnum.en:
-                              'The page has a Drawer, so automaticallyImplyLeading can show a menu button.',
+                          NLangEnum.en: 'The page has a Drawer, so automaticallyImplyLeading can show a menu button.',
                           NLangEnum.zh: '页面带 Drawer，automaticallyImplyLeading 为 true 时会显示菜单按钮。',
                         },
                       ],
@@ -717,7 +716,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               duration: const Duration(milliseconds: 180),
               width: 32,
               height: 32,
-                alignment: Alignment.center,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: e ?? scheme.surfaceContainerHighest,
                 shape: BoxShape.circle,
@@ -750,8 +749,8 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
                       : null,
             ),
           ),
-              );
-            }).toList(),
+        );
+      }).toList(),
     );
   }
 

@@ -224,9 +224,9 @@ class FlutterPickerUtil {
       itemOverlay: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Divider(height: 0.5, color: AppColor.divider),
+          const Divider(height: 0.5),
           Expanded(child: Container()),
-          const Divider(height: 0.5, color: AppColor.divider),
+          const Divider(height: 0.5),
         ],
       ),
       cancelButton: buildTextButton(title: "取消"),

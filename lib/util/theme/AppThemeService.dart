@@ -19,49 +19,109 @@ import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class AppThemeService {
-  static final AppThemeService _instance = AppThemeService._();
-  factory AppThemeService() => _instance;
-
   AppThemeService._() {
     _init();
   }
+  factory AppThemeService() => _instance;
+  static final AppThemeService _instance = AppThemeService._();
 
-  _init() {
+  VoidCallback? onThemeChanged;
+  static const _legacyThemeModeKey = "themeModel";
+
+  Color seedColor = AppColor.primary;
+  Brightness brightness = Brightness.light;
+  ThemeMode _themeMode = ThemeMode.system;
+
+  bool get isDark => brightness == Brightness.dark;
+
+  ThemeMode get themeMode => _themeMode;
+  set themeMode(ThemeMode value) {
+    if (_themeMode == value) {
+      return;
+    }
+    _themeMode = value;
+    brightness = _brightnessOf(_themeMode);
+    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+    _syncToGet();
+    Get.changeThemeMode(_themeMode);
+    _save();
+  }
+
+  SystemUiOverlayStyle get overlayStyle {
+    return (isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark).copyWith(
+      systemNavigationBarColor: isDark ? AppColor.bgColor : AppColor.white,
+    );
+  }
+
+  void _init() {
     final cacheColorStr = CacheService().getString(CacheKey.seedColor.name);
     if (cacheColorStr != null) {
       seedColor = ColorExt.fromHex(cacheColorStr) ?? Colors.blue;
     }
-
-    final cacheBrightness = CacheService().getString(CacheKey.brightness.name);
-    if (cacheBrightness != null) {
-      brightness = cacheBrightness.contains("light") == true ? Brightness.light : Brightness.dark;
-      themeMode = brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
-    }
+    _themeMode = _loadThemeMode();
+    brightness = _brightnessOf(_themeMode);
+    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
     DLog.d([this, cacheColorStr, seedColor, brightness, themeMode].asMap());
   }
 
-  Future<void> _cacheTheme({required ThemeData result}) async {
-    themeMode = result.brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark;
-    await CacheService().setString(CacheKey.seedColor.name, result.colorScheme.primary.toHex());
-    await CacheService().setString(CacheKey.brightness.name, result.colorScheme.brightness.toString());
-    // _init();
+  Brightness _brightnessOf(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.light:
+        return Brightness.light;
+      case ThemeMode.dark:
+        return Brightness.dark;
+      case ThemeMode.system:
+        return WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    }
   }
 
-  var themeMode = ThemeMode.system;
+  ThemeMode _loadThemeMode() {
+    final modeName = CacheService().getString(CacheKey.themeMode.name);
+    if (modeName != null) {
+      for (final e in ThemeMode.values) {
+        if (e.name == modeName) {
+          return e;
+        }
+      }
+    }
+    final oldIndex = CacheService().getInt(_legacyThemeModeKey);
+    if (oldIndex != null && oldIndex >= 0 && oldIndex < ThemeMode.values.length) {
+      return ThemeMode.values[oldIndex];
+    }
+    final cacheBrightness = CacheService().getString(CacheKey.brightness.name);
+    if (cacheBrightness != null) {
+      return cacheBrightness.contains("light") ? ThemeMode.light : ThemeMode.dark;
+    }
+    return ThemeMode.system;
+  }
 
-  Color seedColor = Colors.blue;
-  Brightness brightness = Brightness.light;
+  void _save() {
+    CacheService().setString(CacheKey.seedColor.name, seedColor.toHex());
+    CacheService().setString(CacheKey.brightness.name, brightness.toString());
+    CacheService().setString(CacheKey.themeMode.name, _themeMode.name);
+  }
 
-  bool get isDark => brightness == Brightness.dark;
+  void _syncToGet() {
+    final controller = Get.rootController;
+    controller.theme = lightTheme;
+    controller.darkTheme = darkTheme;
+    controller.update();
+    onThemeChanged?.call();
+  }
 
-  /// 反色, isDark ? Colors.white : Colors.black;
-  Color get inverseColor => isDark ? Colors.white : Colors.black;
+  void applySeedColor(Color color) {
+    seedColor = color;
+    _syncToGet();
+    _save();
+  }
 
-  // // 基于种子颜色和亮度生成配色方案
-  // ColorScheme get colorScheme => ColorScheme.fromSeed(
-  //       seedColor: seedColor,
-  //       brightness: brightness,
-  //     );
+  void toggleTheme() {
+    themeMode = Get.isDarkMode ? ThemeMode.light : ThemeMode.dark;
+  }
+
+  ThemeData get lightTheme => buildTheme(Brightness.light);
+
+  ThemeData get darkTheme => buildTheme(Brightness.dark);
 
   /// Material 3 配色源：组件优先读 [ColorScheme]，再覆盖组件 Theme。
   ///
@@ -69,6 +129,7 @@ class AppThemeService {
   /// - 强制品牌 [seedColor] 为 primary/secondary，避免 fromSeed 偏紫/暗色提亮
   /// - [surfaceTint] 置透明，避免 Card/AppBar 等叠加色调
   ColorScheme buildColorScheme(Brightness brightness) {
+    // 基于种子颜色和亮度生成配色方案
     final baseScheme = ColorScheme.fromSeed(
       seedColor: seedColor,
       brightness: brightness,
@@ -140,55 +201,6 @@ class AppThemeService {
       surfaceTint: Colors.transparent,
     );
   }
-
-  /// SystemUiOverlayStyle.light
-  SystemUiOverlayStyle get overlayStyleLight =>
-      SystemUiOverlayStyle.light.copyWith(systemNavigationBarColor: AppColor.bgColor);
-
-  /// SystemUiOverlayStyle.dark
-  SystemUiOverlayStyle get overlayStyleDark =>
-      SystemUiOverlayStyle.dark.copyWith(systemNavigationBarColor: AppColor.white);
-
-  /// isDark ? overlayStyleLight : overlayStyleDark;
-  SystemUiOverlayStyle get overlayStyle => isDark ? overlayStyleLight : overlayStyleDark;
-
-  void changeTheme(ThemeData theme) {
-    DLog.d("changeTheme $theme");
-    seedColor = theme.colorScheme.primary;
-    brightness = theme.brightness;
-    syncThemesToGet();
-    _cacheTheme(result: theme);
-  }
-
-  /// 应用种子色并同步浅色/深色两套主题到 GetX
-  void applySeedColor(Color color) {
-    seedColor = color;
-    syncThemesToGet();
-    _cacheTheme(result: isDark ? darkTheme : lightTheme);
-  }
-
-  /// 同步浅色/深色主题到 GetX 控制器
-  ///
-  /// Get.changeTheme 在 darkTheme 未初始化时只会更新 theme，
-  /// 暗色模式下 MaterialApp 仍使用 widget.darkTheme，导致改色不生效。
-  void syncThemesToGet() {
-    final controller = Get.rootController;
-    controller.theme = lightTheme;
-    controller.darkTheme = darkTheme;
-    controller.update();
-  }
-
-  void toggleTheme() {
-    themeMode = Get.isDarkMode ? ThemeMode.light : ThemeMode.dark;
-    brightness = themeMode == ThemeMode.dark ? Brightness.dark : Brightness.light;
-    syncThemesToGet();
-    Get.changeThemeMode(themeMode);
-    _cacheTheme(result: isDark ? darkTheme : lightTheme);
-  }
-
-  ThemeData get lightTheme => buildTheme(Brightness.light);
-
-  ThemeData get darkTheme => buildTheme(Brightness.dark);
 
   /// 基于 [buildColorScheme] 构建主题；组件 Theme 仅做结构/交互次级覆盖。
   ThemeData buildTheme(Brightness brightness) {
@@ -484,8 +496,6 @@ class AppThemeService {
     }));
   }
 
-  late ScrollController? actionScrollController = ScrollController();
-
   /// 选择主题
   Future showSeedColorPicker({
     required BuildContext context,
@@ -533,7 +543,7 @@ class AppThemeService {
                     onColorChanged?.call(v);
                     applySeedColor(v);
                   },
-                  brightness: isDark ? Brightness.dark : Brightness.light,
+                  brightness: brightness,
                   onBrightnessChanged: (v) async {
                     if (dismiss) {
                       Navigator.of(context).pop();
@@ -550,83 +560,4 @@ class AppThemeService {
       },
     );
   }
-
-  /// 兼容旧调用；请优先使用 [lightTheme] / [darkTheme] / [buildTheme]。
-  ThemeData buildMaterial3Theme() => buildTheme(Brightness.light);
-
-  final inputDecorationThemeDark = InputDecorationTheme(
-    isCollapsed: true,
-    contentPadding: const EdgeInsets.symmetric(vertical: 11),
-    filled: true,
-    fillColor: Colors.white.withValues(alpha: 0.05),
-    hintStyle: TextStyle(
-      fontSize: 14,
-      color: Colors.white.withValues(alpha: 0.4),
-      fontWeight: FontWeight.w400,
-    ),
-    labelStyle: TextStyle(
-      fontSize: 14,
-      color: Colors.red.withValues(alpha: 0.9),
-      fontWeight: FontWeight.w400,
-    ),
-    prefixIconColor: Color(0xFF7C7C85),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        width: 1,
-        color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
-      ),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        width: 1,
-        color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        width: 1,
-        color: const Color(0xFFA79AF8).withValues(alpha: 0.1),
-      ),
-    ),
-  );
-
-  final inputDecorationThemeLight = InputDecorationTheme(
-    isCollapsed: true,
-    contentPadding: const EdgeInsets.symmetric(vertical: 11),
-    filled: true,
-    fillColor: Colors.white,
-    hintStyle: const TextStyle(
-      fontSize: 14,
-      color: Color(0xFFA7A7AE),
-      fontWeight: FontWeight.w400,
-    ),
-    labelStyle: const TextStyle(
-      fontSize: 14,
-      color: Colors.red,
-      fontWeight: FontWeight.w400,
-    ),
-    floatingLabelStyle: TextStyle(color: Colors.red, fontSize: 12),
-    prefixIconColor: Color(0xFF7C7C85),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        width: 1,
-        color: Colors.white,
-      ),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(width: 1, color: Colors.white),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        width: 1,
-        color: Colors.white,
-      ),
-    ),
-  );
 }

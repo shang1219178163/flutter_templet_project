@@ -345,7 +345,7 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})> extends State
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (hasDivider) const Divider(height: 0.5, color: AppColor.divider),
+          if (hasDivider) const Divider(height: 0.5),
           Container(
             width: double.infinity,
             alignment: Alignment.center,

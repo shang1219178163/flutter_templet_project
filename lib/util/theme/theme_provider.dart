@@ -1,213 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
-import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  static final ThemeProvider _instance = ThemeProvider._();
-  ThemeProvider._() {
-    init();
-  }
   factory ThemeProvider() => _instance;
+  static final ThemeProvider _instance = ThemeProvider._();
   static ThemeProvider get instance => _instance;
-
-  static const themeKey = "themeModel"; // 存储 key
-
-  init() {
-    var themeMode = ThemeMode.values[_loadThemeFromPreferences()];
-    toggleTheme(themeMode);
+  ThemeProvider._() {
+    AppThemeService().onThemeChanged = notifyListeners;
   }
 
-  /// 本地缓存
-  late ThemeMode themeModeTarget = ThemeMode.light;
-  // 当前主题索引
-  ThemeMode get themeMode => AppThemeService().themeMode;
+  AppThemeService get _theme => AppThemeService();
 
-  bool get isDarkSystem => WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark;
+  ThemeMode get themeMode => _theme.themeMode;
+  bool get isDark => _theme.isDark;
+  Color get primary => _theme.seedColor;
 
-  bool get isDark => [
-        themeMode == ThemeMode.dark,
-        themeModeTarget == ThemeMode.dark,
-        themeModeTarget == ThemeMode.system && isDarkSystem,
-      ].contains(true);
+  void toggleTheme(ThemeMode v) => _theme.themeMode = v;
 
-  /// 当前主题模型
-  ThemeDataModel get themeDataModel => themeDataModels.firstWhere((e) => e.value == themeMode);
-
-  /// 主题模型数据
-  List<ThemeDataModel> themeDataModels = [
-    ThemeDataModel(
-      icon: "assets/images/ic_mode_day_black.png",
-      example: "assets/images/ic_mode_dark_example.png",
-      name: "深色",
-      value: ThemeMode.dark,
-    ),
-    ThemeDataModel(
-      icon: "assets/images/ic_mode_night_white.png",
-      example: "assets/images/ic_mode_light_example.png",
-      name: "浅色",
-      value: ThemeMode.light,
-    ),
-    ThemeDataModel(
-      icon: "assets/images/ic_mode_follow_black.png",
-      example: "assets/images/ic_mode_follow_example.png",
-      name: "跟随系统",
-      value: ThemeMode.system,
-    ),
-  ];
-
-  /// 修改主题
-  void toggleTheme(ThemeMode v) {
-    AppThemeService().themeMode = v;
-    notifyListeners();
-    CacheService().setInt(themeKey, themeMode.index);
-    _setCurrentSystemChrome();
-  }
-
-  /// 切换主题
-  void exchangeTheme({bool showToast = true}) {
-    if (themeMode == ThemeMode.system) {
-      if (showToast) {
-        ToastUtil.show("跟随系统模式不支持手动切换");
-      }
-      return;
-    }
-    // debugPrint("主题切换");
-    switch (themeMode) {
-      // case ThemeMode.system:
-      //   {
-      //     final model = isDarkSystem ? ThemeMode.light : ThemeMode.dark;
-      //     toggleTheme(model);
-      //   }
-      //   break;
-      case ThemeMode.light:
-        {
-          toggleTheme(ThemeMode.dark);
-        }
-        break;
-      case ThemeMode.dark:
-        {
-          toggleTheme(ThemeMode.light);
-        }
-        break;
-      default:
-        break;
-    }
-  }
-
-  // 获取当前主题
-  int _loadThemeFromPreferences() {
-    final themeModelIndex = CacheService().getInt(themeKey) ?? 2;
-    return themeModelIndex;
-  }
-
-  void _setCurrentSystemChrome() {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); //home Indicator一直显示
-
-    if (themeMode == ThemeMode.dark) {
-      SystemChrome.setSystemUIOverlayStyle(overlayStyleLight);
-    } else {
-      SystemChrome.setSystemUIOverlayStyle(overlayStyleDark);
-    }
-  }
-
-  /// SystemUiOverlayStyle.light
-  SystemUiOverlayStyle get overlayStyleLight =>
-      SystemUiOverlayStyle.light.copyWith(systemNavigationBarColor: AppColor.bgColor);
-
-  /// SystemUiOverlayStyle.dark
-  SystemUiOverlayStyle get overlayStyleDark =>
-      SystemUiOverlayStyle.dark.copyWith(systemNavigationBarColor: AppColor.white);
-
-  /// isDark ? overlayStyleLight : overlayStyleDark;
-  SystemUiOverlayStyle get overlayStyle => isDark ? overlayStyleLight : overlayStyleDark;
-
-  Color get primary => AppThemeService().seedColor;
-
-  /// 页面背景色(isDark ? Color(0xFF181829) : Color(0xFFF6F6F6))
-  Color get scaffoldBackgroundColor => isDark ? Color(0xFF181829) : Color(0xFFF6F6F6);
-
-  /// 背景色
   Color get itemBgColor => isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white;
-
-  /// 标题
-  Color get titleColor => isDark ? Colors.white.withValues(alpha: 0.9) : Color(0xFF313135);
-
-  /// 副标题
-  Color get subtitleColor => isDark ? Colors.white.withValues(alpha: 0.6) : Color(0xFF7C7C85);
-
-  /// 输入框占位颜色
-  Color get placeholderColor => isDark ? Colors.white.withValues(alpha: 0.4) : Color(0xFFA7A7AE);
-
-  /// 箭头颜色
-  Color get arrowColor => isDark ? Colors.white.withValues(alpha: 0.5) : Color(0xFFA7A7AE);
-
-  /// 分割线颜色
-  Color get lineColor => isDark ? Colors.white.withValues(alpha: 0.05) : Color(0xFFDEDEDE);
-
-  /// 边框线
+  Color get titleColor => isDark ? Colors.white.withValues(alpha: 0.9) : const Color(0xFF313135);
+  Color get subtitleColor => isDark ? Colors.white.withValues(alpha: 0.6) : const Color(0xFF7C7C85);
+  Color get placeholderColor => isDark ? Colors.white.withValues(alpha: 0.4) : const Color(0xFFA7A7AE);
+  Color get arrowColor => isDark ? Colors.white.withValues(alpha: 0.5) : const Color(0xFFA7A7AE);
+  Color get lineColor => isDark ? Colors.white.withValues(alpha: 0.05) : const Color(0xFFDEDEDE);
   Color get borderColor => isDark ? Colors.white.withValues(alpha: 0.04) : Colors.transparent;
-
-  Color get color181829OrF6F6F6 => isDark ? Color(0xFF181829) : Color(0xFFF6F6F6);
-
-  Color get color242434OrF6F6F6 => isDark ? Color(0xFF242434) : Color(0xFFF6F6F6);
-
-  Color get color242434OrWhite => isDark ? Color(0xFF242434) : Colors.white;
-
-  /// 反色, isDark ? Colors.white : Colors.black;
-  Color get inverseColor => isDark ? Colors.white : Colors.black;
-}
-
-/// 主题模型
-class ThemeDataModel {
-  ThemeDataModel({
-    required this.icon,
-    required this.example,
-    required this.name,
-    required this.value,
-  });
-
-  /// 我的页面切换icon
-  String icon;
-
-  /// 设置页面弹窗主题设置示意图
-  String example;
-
-  /// 文字描述
-  String name;
-
-  /// 主题枚举值
-  ThemeMode value;
-
-  Map<String, dynamic> toJson() {
-    return {
-      "color": icon,
-      "stop": example,
-      "name": name,
-      "value": value,
-    };
-  }
-
-  @override
-  String toString() {
-    return toJson().toString();
-  }
-}
-
-extension ThemeStringExt on String {
-  /// 根据 isDark 获取对应的本地图片
-  String get orLight {
-    if (!startsWith('assets/images/')) {
-      return this;
-    }
-
-    if (ThemeProvider().isDark) {
-      return this;
-    }
-    final result = replaceFirst(".", "_light.");
-    // DLog.d(result);
-    return result;
-  }
+  Color get color181829OrF6F6F6 => isDark ? const Color(0xFF181829) : const Color(0xFFF6F6F6);
+  Color get color242434OrF6F6F6 => isDark ? const Color(0xFF242434) : const Color(0xFFF6F6F6);
+  Color get color242434OrWhite => isDark ? const Color(0xFF242434) : Colors.white;
 }

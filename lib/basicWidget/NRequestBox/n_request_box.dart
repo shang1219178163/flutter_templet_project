@@ -307,10 +307,7 @@ class _NRequestBoxState extends State<NRequestBox> {
             ]),
         child: Column(
           children: [
-            Divider(
-              height: 1.h,
-              color: AppColor.divider,
-            ),
+            Divider(height: 1),
             Expanded(
               child: CupertinoScrollbar(
                 controller: controller,
@@ -365,10 +362,7 @@ class _NRequestBoxState extends State<NRequestBox> {
               ]),
           child: Column(
             children: [
-              Divider(
-                height: 1.h,
-                color: AppColor.divider,
-              ),
+              Divider(height: 1),
               Expanded(
                 child: CupertinoScrollbar(
                   controller: controller,

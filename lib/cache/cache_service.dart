@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum CacheKey {
   seedColor(needLogin: false, desc: "主题色"),
   brightness(needLogin: false, desc: "亮度"),
+  themeMode(needLogin: false, desc: "主题模式"),
 
   localOperateLog(needLogin: false, desc: "本地操作日志缓存"),
   requestEnv(needLogin: false, desc: "请求环境"),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:tuple/tuple.dart';
 
 class NestedScrollViewDemoSeven extends StatefulWidget {
@@ -172,7 +171,7 @@ class _NestedScrollViewDemoSevenState extends State<NestedScrollViewDemoSeven> w
         },
         separatorBuilder: (_, index) {
           // return SizedBox(height: 8);
-          return Divider(height: 0.5, color: AppColor.divider);
+          return Divider(height: 0.5);
         },
         itemCount: 20,
       ),

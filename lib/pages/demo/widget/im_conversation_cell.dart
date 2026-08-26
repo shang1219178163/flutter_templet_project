@@ -214,8 +214,6 @@ class IMConversationCell extends StatelessWidget {
         Divider(
           height: 1,
           indent: (imgGap + imgSize) + 1,
-          // indent:12,
-          color: AppColor.divider,
         ),
       ],
     );
