@@ -63,12 +63,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
         return buildListTile(index: index, addDismissible: true);
       },
       separatorBuilder: (context, index) {
-        return Divider(
-          height: .5,
-          indent: 15,
-          endIndent: 15,
-          color: Color(0xFFDDDDDD),
-        );
+        return Divider(indent: 16, endIndent: 16);
       },
     );
   }

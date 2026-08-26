@@ -77,12 +77,9 @@ class AppThemeService {
 
   ThemeMode _loadThemeMode() {
     final modeName = CacheService().getString(CacheKey.themeMode.name);
-    if (modeName != null) {
-      for (final e in ThemeMode.values) {
-        if (e.name == modeName) {
-          return e;
-        }
-      }
+    final target = ThemeMode.values.where((e) => e.name == modeName).firstOrNull;
+    if (modeName != null && target != null) {
+      return target;
     }
     final oldIndex = CacheService().getInt(_legacyThemeModeKey);
     if (oldIndex != null && oldIndex >= 0 && oldIndex < ThemeMode.values.length) {

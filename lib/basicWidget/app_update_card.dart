@@ -161,13 +161,7 @@ class NNListUpdateAppWidget extends StatelessWidget {
         return AppUpdateCard(data: data);
       },
       separatorBuilder: (context, index) {
-        return Divider(
-          height: 0,
-          indent: 15,
-          endIndent: 15,
-          color: Color(0xFFDDDDDD),
-          // color: Colors.red,
-        );
+        return Divider(indent: 16, endIndent: 16);
       },
     );
   }

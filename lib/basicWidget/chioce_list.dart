@@ -101,12 +101,7 @@ class _ChioceListState extends State<ChioceList> {
           );
         },
         separatorBuilder: (context, index) {
-          return Divider(
-            height: .5,
-            indent: 15,
-            endIndent: 15,
-            color: Color(0xFFe4e4e4),
-          );
+          return Divider(indent: 16, endIndent: 16);
         },
       ).toCupertinoScrollbar(),
     );

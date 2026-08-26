@@ -142,11 +142,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return Divider(
-                    height: 16.w,
-                    indent: 16.w,
-                    endIndent: 16.w,
-                  );
+                  return Divider(height: 16, indent: 16, endIndent: 16);
                 },
               ),
             ),

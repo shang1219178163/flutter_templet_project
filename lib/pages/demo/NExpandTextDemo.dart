@@ -157,9 +157,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox(
-                  height: 8,
-                );
+                return SizedBox(height: 8);
               },
             ),
           ),

@@ -120,32 +120,28 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   Widget buildListView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return CupertinoScrollbar(
-        thumbVisibility: false,
-        child: ListView.separated(
-          itemCount: searchResults.length,
-          itemBuilder: (context, index) {
-            final item = searchResults[index];
-            return ListTile(
-              leading: Icon(kIConMap[item]),
-              title: Text(item),
-              // subtitle: Text(array[0]),
-              onTap: () {
-                DLog.d(item);
-                // Clipboard.setData(ClipboardData(text: "$item"));
-                editingController.text = item.split('.').last;
-                onChanged(editingController.text);
-              },
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Divider(
-              height: .5,
-              indent: 15,
-              endIndent: 15,
-              color: Color(0xFFDDDDDD),
-            );
-          },
-        ));
+      thumbVisibility: false,
+      child: ListView.separated(
+        itemCount: searchResults.length,
+        itemBuilder: (context, index) {
+          final item = searchResults[index];
+          return ListTile(
+            leading: Icon(kIConMap[item]),
+            title: Text(item),
+            // subtitle: Text(array[0]),
+            onTap: () {
+              DLog.d(item);
+              // Clipboard.setData(ClipboardData(text: "$item"));
+              editingController.text = item.split('.').last;
+              onChanged(editingController.text);
+            },
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(indent: 16, endIndent: 16);
+        },
+      ),
+    );
   }
 
   Widget buildGridView() {

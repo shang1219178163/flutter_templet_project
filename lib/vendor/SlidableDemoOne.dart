@@ -89,10 +89,7 @@ class _SlidableDemoOneState extends State<SlidableDemoOne> {
           );
         },
         separatorBuilder: (context, index) {
-          return Divider(
-            height: 1,
-            color: Color(0xffe4e4e4),
-          );
+          return Divider();
         },
       ),
     );

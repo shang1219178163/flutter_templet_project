@@ -169,25 +169,26 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
 
   List<Tuple2<String, Widget>> items = [
     Tuple2(
-        '升级列表(新)',
-        ListView.separated(
-          cacheExtent: 180,
-          itemCount: kUpdateAppList.length,
-          itemBuilder: (context, index) {
-            final data = kUpdateAppList[index];
-            if (index == 0) {
-              return AppUpdateCard(
-                data: data,
-                isExpand: true,
-                showExpand: false,
-              );
-            }
-            return AppUpdateCard(data: data);
-          },
-          separatorBuilder: (context, index) {
-            return Divider();
-          },
-        )),
+      '升级列表(新)',
+      ListView.separated(
+        cacheExtent: 180,
+        itemCount: kUpdateAppList.length,
+        itemBuilder: (context, index) {
+          final data = kUpdateAppList[index];
+          if (index == 0) {
+            return AppUpdateCard(
+              data: data,
+              isExpand: true,
+              showExpand: false,
+            );
+          }
+          return AppUpdateCard(data: data);
+        },
+        separatorBuilder: (context, index) {
+          return Divider();
+        },
+      ),
+    ),
     Tuple2(
       '列表(泛型)',
       SectionListView<String, Tuple2<String, String>>(

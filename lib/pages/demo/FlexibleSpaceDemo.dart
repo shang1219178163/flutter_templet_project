@@ -121,9 +121,7 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
               );
             },
             separatorBuilder: (context, index) {
-              return Divider(
-                height: 1,
-              );
+              return Divider();
             },
           )
         ],

@@ -105,9 +105,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
             );
           },
           separatorBuilder: (context, index) {
-            return Divider(
-              height: 1,
-            );
+            return Divider();
           },
         ),
       ),
