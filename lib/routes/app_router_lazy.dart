@@ -241,6 +241,7 @@ import 'package:flutter_templet_project/pages/demo/OverlayEntryPage.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
+import 'package:flutter_templet_project/pages/demo/PlatformDispatcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageRouteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageTopBackgroudImageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
@@ -539,6 +540,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.mediaQueryDemoOne,
       page: () => MediaQueryDemoOne(),
+    ),
+    GetPage(
+      name: AppRouter.platformDispatcherDemo,
+      page: () => PlatformDispatcherDemo(),
     ),
     GetPage(
       name: AppRouter.alertDialogDemo,

@@ -56,6 +56,7 @@ class AppRouter {
   static const String pageLifecycleFuncTest = '/pageLifecycleFuncTest';
   static const String mediaQueryDemo = '/mediaQueryDemo';
   static const String mediaQueryDemoOne = '/mediaQueryDemoOne';
+  static const String platformDispatcherDemo = '/PlatformDispatcherDemo';
 
   static const String tabBarDemo = '/TabBarDemo';
   static const String widgetListPage = '/WidgetListPage';

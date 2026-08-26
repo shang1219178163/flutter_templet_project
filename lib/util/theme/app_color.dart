@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class AppColor {
+  /// 是否暗黑模式
+  static bool get isDark => AppThemeService().isDark;
+
   /// 纯白
   static const Color white = Color(0xFFFFFFFF);
 
@@ -20,25 +23,25 @@ class AppColor {
   static const Color error = Color(0xFFD32F2F);
 
   /// 当前反色
-  static Color get inverse => AppThemeService().isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+  static Color get inverse => isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
 
   /// 当前主题页面背景
-  static Color get page => AppThemeService().isDark ? const Color(0xFF181818) : const Color(0xFFF6F6F6);
+  static Color get page => isDark ? const Color(0xFF181818) : const Color(0xFFF6F6F6);
 
   /// 当前主题卡片/表面
-  static Color get card => AppThemeService().isDark ? const Color(0xFF242434) : const Color(0xFFFFFFFF);
+  static Color get card => isDark ? const Color(0xFF242434) : const Color(0xFFFFFFFF);
 
   /// 当前主题主文本
-  static Color get text => AppThemeService().isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+  static Color get text => isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
 
   /// 当前主题次要文本
-  static Color get textSecondary => AppThemeService().isDark ? const Color(0x99FFFFFF) : const Color(0x99000000);
+  static Color get textSecondary => isDark ? const Color(0x99FFFFFF) : const Color(0x99000000);
 
   /// 当前主题提示/占位
-  static Color get textHint => AppThemeService().isDark ? const Color(0x4cFFFFFF) : const Color(0x4c000000);
+  static Color get textHint => isDark ? const Color(0x4cFFFFFF) : const Color(0x4c000000);
 
   /// 当前主题分割线
-  static Color get divider => AppThemeService().isDark ? const Color(0x0FFFFFFF) : const Color(0xFFE4E4E4);
+  static Color get divider => isDark ? const Color(0x0FFFFFFF) : const Color(0xFFE4E4E4);
 
   /// 默认字体色 #1A1A1A
   static const Color font = Color(0xFF1A1A1A);

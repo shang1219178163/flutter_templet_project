@@ -33,6 +33,11 @@ extension SizeExt on Size {
     return Size(widthNew, height);
   }
 
+  String toStringAsFixed({int fractionDigits = 0, String separator = ","}) {
+    final result = '${width.toStringAsFixed(fractionDigits)}$separator${height.toStringAsFixed(fractionDigits)}';
+    return result;
+  }
+
   Map<String, dynamic> toJson() => {'width': width, 'height': height};
 
   static Size fromJson(Map<String, dynamic> json) {

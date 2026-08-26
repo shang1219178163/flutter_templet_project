@@ -404,6 +404,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.operatorDemo, "特殊操作符"),
   Tuple2(AppRouter.mediaQueryDemo, "mediaQuery"),
   Tuple2(AppRouter.mediaQueryDemoOne, "mediaQuery键盘"),
+  Tuple2(AppRouter.platformDispatcherDemo, "PlatformDispatcher"),
   Tuple2(AppRouter.appRouteObserverDemo, "页面路由监听"),
   Tuple2(AppRouter.appRouteObserverDemoOne, "页面路由监听1"),
   Tuple2(AppRouter.pageLifecycleObserverDemo, "页面生命周期监听"),
