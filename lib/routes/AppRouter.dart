@@ -140,6 +140,9 @@ class AppRouter {
   static const String textFieldDemoOne = '/TextFieldDemoOne';
   static const String textFieldDemoTwo = '/textFieldDemoTwo';
   static const String textFieldWidgetDemo = '/TextFieldWidgetDemo';
+  static const String editableTextDemo = '/EditableTextDemo';
+  static const String uint8ListDemo = '/Uint8ListDemo';
+  static const String extendedImageDemo = '/ExtendedImageDemo';
 
   static const String cupertinoFormDemo = '/CupertinoFormDemo';
   static const String contextMenuActionDemo = '/ContextMenuActionDemo';

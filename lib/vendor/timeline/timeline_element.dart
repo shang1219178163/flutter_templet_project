@@ -1,27 +1,26 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/vendor/timeline/common/colors.dart';
 import 'package:flutter_templet_project/vendor/timeline/common/font_const.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_painter.dart';
 import 'package:flutter_templet_project/vendor/timeline/triangle_painter.dart';
 
 ///构建timeline 组件Widget
 class TimelineElement extends StatelessWidget {
-  TimelineElement(
-      {Key? key,
-      required this.lineColor,
-      required this.backgroundColor,
-      required this.model,
-      required this.controller,
-      this.firstElement = true,
-      this.lastElement = false,
-      this.titleStyle,
-      this.subtitleStyle,
-      this.descriptionStyle,
-      this.leftContent = true,
-      this.height = 80.0})
-      : super(key: key);
+  TimelineElement({
+    super.key,
+    required this.lineColor,
+    required this.backgroundColor,
+    required this.model,
+    required this.controller,
+    this.firstElement = true,
+    this.lastElement = false,
+    this.titleStyle,
+    this.subtitleStyle,
+    this.descriptionStyle,
+    this.leftContent = true,
+    this.height = 80.0,
+  });
 
   final Color lineColor;
   final Color backgroundColor;
@@ -51,20 +50,22 @@ class TimelineElement extends StatelessWidget {
     );
   }
 
-  Widget bubble() {
+  Widget bubble(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final bubbleColor = scheme.surface;
     return Stack(
       children: <Widget>[
         Container(
           padding: EdgeInsets.symmetric(horizontal: 7.5, vertical: 7.5),
           margin: EdgeInsets.only(top: 5),
           alignment: Alignment.topLeft,
-          color: WBColors.color_F4F7FF,
+          color: bubbleColor,
           child: Text(
             model['remark'],
             style: TextStyle(
                 fontFamily: FontConst.pingFangSC_Regular,
                 fontSize: 12,
-                color: WBColors.color_666666,
+                color: scheme.onSurfaceVariant,
                 fontWeight: FontWeight.w400),
             maxLines: 2,
           ),
@@ -78,8 +79,7 @@ class TimelineElement extends StatelessWidget {
               width: 8,
               height: 7.5,
               child: CustomPaint(
-                painter:
-                    TrianglePainter(color: WBColors.color_F4F7FF, path: Path()),
+                painter: TrianglePainter(color: bubbleColor, path: Path()),
               ),
             ))
       ],
@@ -88,6 +88,7 @@ class TimelineElement extends StatelessWidget {
 
   ///构建时间线右侧Widget
   Widget _buildContentRightColumn(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Container(
         // color: Colors.green,
         padding: const EdgeInsets.only(top: 8.0, bottom: 5.0, right: 10),
@@ -100,13 +101,11 @@ class TimelineElement extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  model['title'].length > 47
-                      ? model['title'].substring(0, 47) + "..."
-                      : model['title'],
+                  model['title'].length > 47 ? model['title'].substring(0, 47) + "..." : model['title'],
                   style: titleStyle ??
                       TextStyle(
                           fontFamily: FontConst.pingFangSC_Medium,
-                          color: WBColors.color_333333,
+                          color: scheme.onSurface,
                           fontWeight: FontWeight.w500,
                           fontSize: 14),
                 ),
@@ -115,9 +114,10 @@ class TimelineElement extends StatelessWidget {
                         model['subtitle'],
                         style: subtitleStyle ??
                             TextStyle(
-                                fontFamily: FontConst.pingFangSC_Regular,
-                                color: WBColors.color_999999,
-                                fontSize: 12),
+                              fontFamily: FontConst.pingFangSC_Regular,
+                              color: scheme.outline,
+                              fontSize: 12,
+                            ),
                         maxLines: 2,
                       )
                     : Text('')
@@ -127,21 +127,20 @@ class TimelineElement extends StatelessWidget {
             ///时间轴timeline详情描述
             Expanded(
                 child: model['remark'] != null
-                    ? bubble()
+                    ? bubble(context)
                     : Padding(
                         padding: EdgeInsets.only(top: 6),
                         child: Text(
                           model['description'] != null
                               ? model['description'].length > 50
-                                  ? model['description'].substring(0, 47) +
-                                      '...'
+                                  ? model['description'].substring(0, 47) + '...'
                                   : model['description']
                               : "", // To prevent overflowing of text to the next element, the text is truncated if greater than 75 characters
                           style: descriptionStyle ??
                               TextStyle(
                                   fontSize: 12,
                                   fontFamily: FontConst.pingFangSC_Regular,
-                                  color: WBColors.color_666666),
+                                  color: scheme.onSurfaceVariant),
                           maxLines: 2,
                         ),
                       ))
@@ -151,6 +150,7 @@ class TimelineElement extends StatelessWidget {
 
   ///构建时间线左侧Widget
   Widget _buildContentLeftColumn(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Container(
         padding: const EdgeInsets.only(top: 8.0, left: 8.0),
         child: Column(
@@ -158,10 +158,7 @@ class TimelineElement extends StatelessWidget {
           children: <Widget>[
             Text(
               model['day'],
-              style: TextStyle(
-                  color: WBColors.color_666666,
-                  fontSize: 13,
-                  fontFamily: FontConst.pingFangSC_Regular),
+              style: TextStyle(color: scheme.onSurfaceVariant, fontSize: 13, fontFamily: FontConst.pingFangSC_Regular),
               maxLines: 2,
             ),
             SizedBox(
@@ -169,10 +166,7 @@ class TimelineElement extends StatelessWidget {
             ),
             Text(
               model['time'],
-              style: TextStyle(
-                  color: WBColors.color_AAAAAA,
-                  fontSize: 12,
-                  fontFamily: FontConst.pingFangSC_Regular),
+              style: TextStyle(color: scheme.outline, fontSize: 12, fontFamily: FontConst.pingFangSC_Regular),
               maxLines: 2,
             )
           ],
@@ -192,10 +186,7 @@ class TimelineElement extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              if (leftContent != null)
-                _buildContentLeftColumn(context)
-              else
-                Text(''),
+              if (leftContent != null) _buildContentLeftColumn(context) else Text(''),
               AnimatedBuilder(
                 builder: (context, child) => _buildLine(context, child),
                 animation: controller,

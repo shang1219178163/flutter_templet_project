@@ -94,11 +94,10 @@ class _StringTransformPageState extends State<StringTransformPage> {
         contentPadding: EdgeInsets.all(12),
         hintText: hintText,
         hintStyle: TextStyle(
-          color: const Color(0xff999999),
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bg,
+        fillColor: AppColor.card,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

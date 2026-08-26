@@ -34,10 +34,23 @@ class NAutocompleteSearch<T extends Object> extends StatefulWidget {
 
 class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSearch<T>> with SafeSetStateMixin {
   var _textEditingValue = TextEditingValue();
+  late final TextEditingController _fallbackController;
+  late final FocusNode _focusNode;
+
+  TextEditingController get _effectiveController => widget.controller ?? _fallbackController;
 
   @override
   void initState() {
     super.initState();
+    _fallbackController = TextEditingController();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _fallbackController.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,7 +60,9 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
 
   @override
   Widget build(BuildContext context) {
-    return Autocomplete<T>(
+    return RawAutocomplete<T>(
+      textEditingController: _effectiveController,
+      focusNode: _focusNode,
       displayStringForOption: widget.displayStringForOption,
       fieldViewBuilder: widget.fieldViewBuilder ?? buildFieldView,
       onSelected: widget.onSelected,
@@ -130,7 +145,6 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
     FocusNode focusNode,
     VoidCallback onFieldSubmitted,
   ) {
-    final controllerNew = widget.controller ?? controller;
     final border = UnderlineInputBorder(
       borderSide: Divider.createBorderSide(context, width: 1.0), // 聚焦状态颜色
     );
@@ -138,7 +152,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
     return TextField(
       textInputAction: TextInputAction.next,
       // style: const TextStyle(color: Colors.white),
-      controller: controllerNew,
+      controller: controller,
       focusNode: focusNode,
       // onFieldSubmitted: (String value) {
       //   debugPrint("Field: $value");
@@ -170,7 +184,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
         prefixIcon: Icon(Icons.search),
         //输入文字后面的小图标
         suffixIcon: ValueListenableBuilder<TextEditingValue>(
-          valueListenable: controllerNew,
+          valueListenable: controller,
           builder: (context, textEditingValue, child) {
             final value = textEditingValue.text;
             if (value.isEmpty) {
@@ -178,7 +192,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
             }
             return IconButton(
               onPressed: () {
-                controllerNew.clear();
+                controller.clear();
               },
               icon: Icon(Icons.cancel, color: Colors.grey),
             );

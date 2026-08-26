@@ -5,12 +5,12 @@ class TimelineComponent extends StatefulWidget {
   ///timeline 数据实体list
   final List timelineList;
 
-  ///时间轴颜色
-  final Color lineColor;
+  ///时间轴颜色，null 使用 ColorScheme.outlineVariant
+  final Color? lineColor;
   final double? height;
 
-  ///组件背景颜色 默认white
-  final Color backgroundColor;
+  ///组件背景颜色，null 使用 ColorScheme.surface
+  final Color? backgroundColor;
 
   ///标题样式
   final TextStyle? titleStyle;
@@ -28,8 +28,8 @@ class TimelineComponent extends StatefulWidget {
   const TimelineComponent({
     Key? key,
     required this.timelineList,
-    this.lineColor = Colors.black12,
-    this.backgroundColor = Colors.white,
+    this.lineColor,
+    this.backgroundColor,
     this.titleStyle,
     this.subtitleStyle,
     this.descriptionStyle,
@@ -68,6 +68,9 @@ class TimelineComponentState extends State<TimelineComponent>
   ///构建timeline Widget实体
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final lineColor = widget.lineColor ?? scheme.outlineVariant;
+    final backgroundColor = widget.backgroundColor ?? scheme.surface;
     return Container(
       clipBehavior: Clip.none,
       child: ListView.builder(
@@ -79,8 +82,8 @@ class TimelineComponentState extends State<TimelineComponent>
         itemCount: widget.timelineList.length,
         itemBuilder: (_, index) {
           return TimelineElement(
-            lineColor: widget.lineColor,
-            backgroundColor: widget.backgroundColor,
+            lineColor: lineColor,
+            backgroundColor: backgroundColor,
             model: widget.timelineList[index],
             firstElement: index == 0,
             lastElement: widget.timelineList.length == index + 1,

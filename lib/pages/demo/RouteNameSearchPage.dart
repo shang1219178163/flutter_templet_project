@@ -20,25 +20,43 @@ class RouteNameSearchPage extends StatefulWidget {
 
 class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
   var _useFieldViewBuilder = false;
+  var _showRouteList = false;
+  final _searchController = TextEditingController();
+
+  List<GetPage> _sortedRoutes = [];
 
   @override
   void initState() {
     super.initState();
+    refreshRoutes();
     AppRouter.lazyLoadRoutes().then((_) {
       if (mounted) {
+        refreshRoutes();
         setState(() {});
       }
     });
   }
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void refreshRoutes() {
+    _sortedRoutes = List<GetPage>.of(Get.routeTree.routes);
+    _sortedRoutes.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.hideAppBar ? null : AppBar(title: Text(widget.title ?? "$widget")),
-      body: CustomScrollView(
-        slivers: [
+      body: Column(
+        children: [
           buildExpandMenu(),
           NAutocompleteSearch<String>(
+            controller: _searchController,
             fieldViewBuilder: _useFieldViewBuilder ? buildFieldView : null,
             displayStringForOption: (e) => e,
             optionsBuilder: (v) {
@@ -46,7 +64,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
               if (query.isEmpty) {
                 return const <String>[];
               }
-              return Get.routeTree.routes
+              return _sortedRoutes
                   .where((e) {
                     final name = e.name.toLowerCase();
                     final title = (e.title ?? e.name.split('/').last).toLowerCase();
@@ -57,7 +75,18 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
             },
             onSelected: (e) => Get.toNamed(e),
           ),
-        ].map((e) => SliverToBoxAdapter(child: e)).toList(),
+          ValueListenableBuilder<TextEditingValue>(
+            valueListenable: _searchController,
+            child: buildRouteList(),
+            builder: (context, value, child) {
+              final showList = _showRouteList && value.text.isEmpty;
+              if (!showList) {
+                return const SizedBox.shrink();
+              }
+              return Expanded(child: child!);
+            },
+          ),
+        ],
       ),
     );
   }
@@ -86,8 +115,36 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
               setState(() {});
             },
           ),
+          SwitchListTile(
+            inactiveThumbColor: Colors.white,
+            inactiveTrackColor: Colors.black.withValues(alpha: 0.1),
+            title: Text('展示路由列表', style: TextStyle(color: colorScheme.onSurface)),
+            value: _showRouteList,
+            onChanged: (v) {
+              _showRouteList = v;
+              setState(() {});
+            },
+          ),
         ],
       ),
+    );
+  }
+
+  Widget buildRouteList() {
+    final routes = _sortedRoutes;
+    return ListView.separated(
+      itemCount: routes.length,
+      separatorBuilder: (context, index) => Divider(indent: 16),
+      itemBuilder: (context, index) {
+        final e = routes[index];
+        final title = e.title ?? e.name.split('/').last;
+        return ListTile(
+          dense: true,
+          title: Text(e.name),
+          subtitle: title == e.name ? null : Text(title),
+          onTap: () => Get.toNamed(e.name),
+        );
+      },
     );
   }
 

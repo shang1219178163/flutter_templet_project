@@ -101,6 +101,7 @@ import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
+import 'package:flutter_templet_project/pages/demo/EditableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemoNew.dart';
@@ -332,6 +333,7 @@ import 'package:flutter_templet_project/pages/demo/TracelessLoadDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TranslationTextPage.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/Uint8ListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UrlLauncherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UserDetailPage.dart';
@@ -407,6 +409,7 @@ import 'package:flutter_templet_project/provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/provider/state_manager_demo.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/vendor/ExtendedImageDemo.dart';
 import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
@@ -792,6 +795,18 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.textFieldWidgetDemo,
       page: () => TextFieldWidgetDemo(),
+    ),
+    GetPage(
+      name: AppRouter.editableTextDemo,
+      page: () => EditableTextDemo(),
+    ),
+    GetPage(
+      name: AppRouter.uint8ListDemo,
+      page: () => Uint8ListDemo(),
+    ),
+    GetPage(
+      name: AppRouter.extendedImageDemo,
+      page: () => ExtendedImageDemo(),
     ),
     GetPage(
       name: AppRouter.cupertinoFormDemo,

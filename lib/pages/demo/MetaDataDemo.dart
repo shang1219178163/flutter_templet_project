@@ -6,45 +6,14 @@
 //  Copyright © 2025/3/27 shang. All rights reserved.
 //
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
+import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
-class MetaDataDemoNew extends StatelessWidget {
-  const MetaDataDemoNew({
-    super.key,
-    this.arguments,
-  });
-
-  final Map<String, dynamic>? arguments;
-
-  @override
-  Widget build(BuildContext context) {
-    // dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("$this"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => debugPrint(e),
-                ))
-            .toList(),
-      ),
-      body: Text(arguments.toString()),
-    );
-  }
-}
+/// metaData 预设
+enum _MetaKind { map, text, nil }
 
 class MetaDataDemo extends StatefulWidget {
   const MetaDataDemo({
@@ -63,109 +32,275 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
 
   final scrollController = ScrollController();
 
-  late final items = <ActionRecord>[
-    (e: "onTest", action: onTest),
-  ];
+  /// 原 Demo MetaData 自定义 Map
+  _MetaKind metaKind = _MetaKind.map;
+  HitTestBehavior behavior = HitTestBehavior.deferToChild;
+  String lastEvent = '—';
 
   @override
-  void didUpdateWidget(covariant MetaDataDemo oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
+      backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
           ? null
           : AppBar(
-              title: Text("$widget"),
+              title: Text('$widget'),
+              actions: [
+                TextButton(
+                  onPressed: onReset,
+                  child: Text('重置', style: TextStyle(color: scheme.onPrimary)),
+                ),
+              ],
             ),
       body: buildBody(),
     );
   }
 
   Widget buildBody() {
-    return Scrollbar(
-      controller: scrollController,
-      child: SingleChildScrollView(
-        controller: scrollController,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildSectionBox(items: items),
-              MetaData(
-                metaData: {'key': 'MetaData', 'value': 'MetaData自定义数据'},
-                child: Builder(
-                  builder: (context) {
-                    // 通过 context 获取 MetaData
-                    final metaData = context.findAncestorWidgetOfExactType<MetaData>()?.metaData;
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            DLog.d('MetaData 参数: $metaData');
-                          },
-                          child: Text('打印 MetaData'),
-                        ),
-                        SizedBox(height: 20),
-                        Text('MetaData: ${metaData ?? "-"}'),
+    final scheme = Theme.of(context).colorScheme;
+    return ColoredBox(
+      color: scheme.surfaceContainerLowest,
+      child: Column(
+        children: [
+          buildPreview(),
+          Expanded(
+            child: Scrollbar(
+              controller: scrollController,
+              child: SingleChildScrollView(
+                controller: scrollController,
+                padding: const EdgeInsets.only(bottom: 24),
+                child: Column(
+                  children: [
+                    const NDescriptionCard(
+                      initialLang: NLangEnum.zh,
+                      title: {
+                        NLangEnum.en: 'Description',
+                        NLangEnum.zh: '说明',
+                      },
+                      subtitle: {
+                        NLangEnum.en: 'Widget MetaData',
+                        NLangEnum.zh: '组件 MetaData',
+                      },
+                      items: [
+                        {
+                          NLangEnum.en: 'metaData is opaque to the render tree. Read it with findAncestorWidgetOfExactType.',
+                          NLangEnum.zh: 'metaData 对渲染树透明。用 findAncestorWidgetOfExactType 读取。',
+                        },
+                        {
+                          NLangEnum.en: 'The print button is the original Demo child.',
+                          NLangEnum.zh: '「打印 MetaData」就是原来 Demo 的 child。',
+                        },
                       ],
-                    );
-                  },
+                    ),
+                    buildConstructCard(),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildPreview() {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerHighest.withValues(alpha: 0.35),
+        border: Border(
+          bottom: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.65)),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+        child: Column(
+          children: [
+            Text(
+              lastEvent,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: scheme.onSurfaceVariant,
+                fontFamily: 'monospace',
+              ),
+            ),
+            if (widget.arguments != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text('${widget.arguments}'),
+              ),
+            const SizedBox(height: 12),
+            MetaData(
+              metaData: metaDataOf(),
+              behavior: behavior,
+              child: Builder(
+                builder: (context) {
+                  final metaData = context.findAncestorWidgetOfExactType<MetaData>()?.metaData;
+                  return Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          onPrint(metaData);
+                        },
+                        child: const Text('打印 MetaData'),
+                      ),
+                      const SizedBox(height: 12),
+                      Text('MetaData: ${metaData ?? "-"}'),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget buildSectionBox({
-    required List<ActionRecord> items,
+  Widget buildConstructCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.account_tree_rounded),
+      title: '构造',
+      subtitle: 'metaData · behavior',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildField(
+            label: 'metaData',
+            child: buildChoiceChips(
+              values: _MetaKind.values,
+              isSelected: (e) => metaKind == e,
+              labelOf: (e) {
+                switch (e) {
+                  case _MetaKind.map:
+                    return '{key, value}';
+                  case _MetaKind.text:
+                    return 'String';
+                  case _MetaKind.nil:
+                    return 'null';
+                }
+              },
+              onChanged: onMetaKind,
+            ),
+          ),
+          buildField(
+            label: 'behavior',
+            showTopGap: true,
+            child: buildChoiceChips(
+              values: HitTestBehavior.values,
+              isSelected: (e) => behavior == e,
+              labelOf: (e) => e.name,
+              onChanged: onBehavior,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildField({
+    required String label,
+    required Widget child,
+    bool showTopGap = false,
   }) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (showTopGap) const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(
+            label,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: scheme.onSurface,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'monospace',
+              fontSize: 12.5,
+            ),
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+
+  Widget buildChoiceChips<T>({
+    required List<T> values,
+    required bool Function(T value) isSelected,
+    required String Function(T value) labelOf,
+    required ValueChanged<T> onChanged,
+  }) {
+    final scheme = Theme.of(context).colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: items.map((e) {
-        return InkWell(
-          onTap: e.action,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(color: Colors.blue),
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-            ),
-            child: NText(
-              e.e,
-              color: context.themeData.colorScheme.primary,
-            ),
+      children: values.map((e) {
+        final selected = isSelected(e);
+        return ChoiceChip(
+          label: Text(labelOf(e)),
+          selected: selected,
+          showCheckmark: false,
+          selectedColor: scheme.primaryContainer,
+          labelStyle: TextStyle(
+            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+            fontFamily: 'monospace',
+            fontSize: 12.5,
           ),
+          side: BorderSide(
+            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
+          ),
+          onSelected: (on) {
+            if (on) {
+              onChanged(e);
+            }
+          },
         );
       }).toList(),
     );
   }
 
-  void onTest() {
-    // DLog.d("AAA");
-    DLog.enableColor = true;
-    try {
-      var map = {};
-      jsonDecode(map["a"]);
-    } catch (e) {
-      debugPrint("$this $e"); //flutter: _MetaDataDemoState#d5486 type 'Null' is not a subtype of type 'String'
-      DLog.d(
-          "$e"); //[log] [2025-03-27 10:13:00.725182][DEBUG][ios][_MetaDataDemoState.onTest Line:161]: type 'Null' is not a subtype of type 'String'
-      DLog.i(
-          "$e"); //[log] [2025-03-27 10:13:00.725901][INFO][ios][_MetaDataDemoState.onTest Line:162]: type 'Null' is not a subtype of type 'String'
-      DLog.w(
-          "$e"); //[log] [2025-03-27 10:13:00.726502][WARN][ios][_MetaDataDemoState.onTest Line:163]: type 'Null' is not a subtype of type 'String'
-      DLog.e(
-          "$e"); //[log] [2025-03-27 10:13:00.727041][ERROR][ios][_MetaDataDemoState.onTest Line:164]: type 'Null' is not a subtype of type 'String'
+  dynamic metaDataOf() {
+    switch (metaKind) {
+      case _MetaKind.map:
+        return {'key': 'MetaData', 'value': 'MetaData自定义数据'};
+      case _MetaKind.text:
+        return 'MetaData自定义数据';
+      case _MetaKind.nil:
+        return null;
     }
+  }
+
+  void onPrint(dynamic metaData) {
+    lastEvent = 'onPressed $metaData';
+    DLog.d('MetaData 参数: $metaData');
+    setState(() {});
+  }
+
+  void onMetaKind(_MetaKind value) {
+    metaKind = value;
+    setState(() {});
+  }
+
+  void onBehavior(HitTestBehavior value) {
+    behavior = value;
+    setState(() {});
+  }
+
+  void onReset() {
+    metaKind = _MetaKind.map;
+    behavior = HitTestBehavior.deferToChild;
+    lastEvent = '—';
+    setState(() {});
   }
 }

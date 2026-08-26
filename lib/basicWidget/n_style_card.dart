@@ -81,7 +81,7 @@ class NStyleCard extends StatelessWidget {
     final scheme = theme.colorScheme;
     return Card(
       margin: const EdgeInsets.fromLTRB(16, 12, 16, 4),
-      color: scheme.surface,
+      color: theme.cardColor,
       surfaceTintColor: Colors.transparent,
       elevation: 2,
       shadowColor: scheme.shadow,

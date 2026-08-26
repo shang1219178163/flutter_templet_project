@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/vendor/timeline/common/colors.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
 
 class TimelineDemo extends StatefulWidget {
@@ -28,7 +27,6 @@ class _TimelineDemoState extends State<TimelineDemo> {
       ),
       body: TimelineComponent(
         timelineList: listData,
-        lineColor: WBColors.color_cccccc,
         leftContent: true,
       ),
     );
