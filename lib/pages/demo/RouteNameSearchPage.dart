@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_search.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/pages/home_page.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
@@ -21,109 +19,52 @@ class RouteNameSearchPage extends StatefulWidget {
 }
 
 class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
-  final _params = <ParamModel>[
-    ParamModel(name: "fieldViewBuilder", isOpen: false),
-  ];
+  var _useFieldViewBuilder = false;
 
-  final textFieldVN = ValueNotifier("");
-
-  /// 每次从 tuples 读取，避免热重载后仍用旧缓存
-  List<OptionModel> get _routeOptions {
-    return tuples.expand((e) => e.item2).map((e) => OptionModel(name: e.item1, desc: e.item2)).toList();
+  @override
+  void initState() {
+    super.initState();
+    AppRouter.lazyLoadRoutes().then((_) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.hideAppBar
-          ? null
-          : AppBar(
-              title: Text(widget.title ?? "$widget"),
-            ),
+      appBar: widget.hideAppBar ? null : AppBar(title: Text(widget.title ?? "$widget")),
       body: CustomScrollView(
         slivers: [
-          ...buildHeader(),
-          NAutocompleteSearch(
-            displayStringForOption: (option) => option.name,
-            optionsBuilder: (textEditingValue) {
-              final query = textEditingValue.text.trim().toLowerCase();
+          buildExpandMenu(),
+          NAutocompleteSearch<String>(
+            fieldViewBuilder: _useFieldViewBuilder ? buildFieldView : null,
+            displayStringForOption: (e) => e,
+            optionsBuilder: (v) {
+              final query = v.text.trim().toLowerCase();
               if (query.isEmpty) {
-                return const <OptionModel>[];
+                return const <String>[];
               }
-              return _routeOptions.where((e) {
-                final name = e.name.toLowerCase();
-                final desc = (e.desc ?? '').toLowerCase();
-                return name.contains(query) || desc.contains(query);
-              }).toList();
+              return Get.routeTree.routes
+                  .where((e) {
+                    final name = e.name.toLowerCase();
+                    final title = (e.title ?? e.name.split('/').last).toLowerCase();
+                    return name.contains(query) || title.contains(query);
+                  })
+                  .map((e) => e.name)
+                  .toList();
             },
-            onSelected: (e) {
-              debugPrint('onChoosed: ${e.name}');
-              Get.toNamed(e.name, arguments: e.toJson());
-            },
+            onSelected: (e) => Get.toNamed(e),
           ),
         ].map((e) => SliverToBoxAdapter(child: e)).toList(),
       ),
     );
   }
 
-  List<Widget> buildHeader() {
-    return [
-      // buildExpandColor(),
-      buildExpandMenu(),
-      // Divider(),
-    ];
-  }
-
-  var colors = Colors.primaries;
-  // final selectedColor = ValueNotifier(Colors.lightBlue);
-  final selectedColor = Colors.lightBlue.vn;
-
-  Widget buildExpandColor() {
-    return ExpansionTile(
-      leading: Icon(
-        Icons.color_lens,
-        color: selectedColor.value,
-      ),
-      title: Text(
-        '颜色',
-        style: TextStyle(color: selectedColor.value),
-      ),
-      initiallyExpanded: false,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: colors.map((e) {
-              return InkWell(
-                onTap: () {
-                  selectedColor.value = e;
-                  setState(() {});
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  color: e,
-                  child: selectedColor.value == e
-                      ? Icon(
-                          Icons.done,
-                          color: Colors.white,
-                        )
-                      : null,
-                ),
-              );
-            }).toList(),
-          ),
-        )
-      ],
-    );
-  }
-
   Widget buildExpandMenu() {
     final colorScheme = Theme.of(context).colorScheme;
     return Theme(
-      // 保留当前明暗主题，仅去掉分割线；勿用 ThemeData() 重置为浅色
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         tilePadding: EdgeInsets.symmetric(horizontal: 10),
@@ -131,90 +72,35 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
         textColor: colorScheme.onSurface,
         iconColor: colorScheme.primary,
         collapsedIconColor: colorScheme.primary,
-        leading: Icon(
-          Icons.ac_unit,
-          color: colorScheme.primary,
-        ),
-        title: Text(
-          '配置',
-          style: TextStyle(
-            color: colorScheme.onSurface,
-          ),
-        ),
+        leading: Icon(Icons.ac_unit, color: colorScheme.primary),
+        title: Text('配置', style: TextStyle(color: colorScheme.onSurface)),
         initiallyExpanded: false,
-        children: <Widget>[
-          Column(
-            children: _params.map((e) {
-              return SwitchListTile(
-                inactiveThumbColor: Colors.white,
-                inactiveTrackColor: Colors.black.withValues(alpha: 0.1),
-                title: Text(
-                  e.name,
-                  style: TextStyle(color: colorScheme.onSurface),
-                ),
-                value: e.isOpen,
-                onChanged: (value) {
-                  e.isOpen = value;
-                  setState(() {});
-                },
-              );
-            }).toList(),
+        children: [
+          SwitchListTile(
+            inactiveThumbColor: Colors.white,
+            inactiveTrackColor: Colors.black.withValues(alpha: 0.1),
+            title: Text('fieldViewBuilder', style: TextStyle(color: colorScheme.onSurface)),
+            value: _useFieldViewBuilder,
+            onChanged: (v) {
+              _useFieldViewBuilder = v;
+              setState(() {});
+            },
           ),
         ],
       ),
     );
   }
-}
 
-class OptionModel {
-  OptionModel({
-    required this.name,
-    this.desc = "",
-    this.children = const [],
-  });
-
-  String name;
-  String? desc;
-
-  List<OptionModel> children;
-
-  static OptionModel? fromJson(Map<String, dynamic> json) {
-    return OptionModel(
-      name: json['name'],
-      desc: json['desc'],
-      children: List<OptionModel>.from(
-        ((json["children"] as List<dynamic>?) ?? <dynamic>[]).map(
-          (e) => OptionModel.fromJson(e as Map<String, dynamic>),
-        ),
+  Widget buildFieldView(context, controller, focusNode, onFieldSubmitted) {
+    return TextField(
+      controller: controller,
+      focusNode: focusNode,
+      onSubmitted: (v) => onFieldSubmitted(),
+      decoration: InputDecoration(
+        hintText: '请输入关键词',
+        prefixIcon: Icon(Icons.search),
+        border: OutlineInputBorder(),
       ),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['name'] = name;
-    data['desc'] = desc;
-    data['children'] = children.map((v) => v.toJson()).toList();
-    return data;
-  }
-
-  @override
-  String toString() {
-    return '$this ${toJson()}';
-  }
-}
-
-class ParamModel {
-  ParamModel({
-    this.name = '',
-    this.isOpen = false,
-  });
-
-  String name;
-  bool isOpen;
-
-  @override
-  String toString() {
-    return '$this{ name: $name, isOpen: $isOpen, }';
   }
 }

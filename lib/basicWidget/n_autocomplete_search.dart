@@ -132,7 +132,7 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
   ) {
     final controllerNew = widget.controller ?? controller;
     final border = UnderlineInputBorder(
-      borderSide: BorderSide(color: Color(0xFFE4E4E4), width: 1), // 聚焦状态颜色
+      borderSide: Divider.createBorderSide(context, width: 1.0), // 聚焦状态颜色
     );
 
     return TextField(
