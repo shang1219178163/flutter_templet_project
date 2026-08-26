@@ -81,30 +81,30 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
                 child: Column(
                   children: [
                     const NDescriptionCard(
-                          initialLang: NLangEnum.zh,
-                          title: {
-                            NLangEnum.en: 'Description',
-                            NLangEnum.zh: '说明',
-                          },
-                          subtitle: {
-                            NLangEnum.en: 'Widget WillPopScope',
-                            NLangEnum.zh: '组件 WillPopScope',
-                          },
-                          items: [
-                            {
-                              NLangEnum.en: 'WillPopScope only has child and onWillPop.',
-                              NLangEnum.zh: 'WillPopScope 只有 child 与 onWillPop 两个参数。',
-                            },
-                            {
-                              NLangEnum.en: 'onWillPop null allows the route to pop. false vetoes; true allows.',
-                              NLangEnum.zh: 'onWillPop 为 null 可直接返回；返回 false 拦截，true 放行。',
-                            },
-                            {
-                              NLangEnum.en: 'Press system back or maybePop to see the callback.',
-                              NLangEnum.zh: '按系统返回或点击 maybePop 查看回调。',
-                            },
-                          ],
-                        ),
+                      initialLang: NLangEnum.zh,
+                      title: {
+                        NLangEnum.en: 'Description',
+                        NLangEnum.zh: '说明',
+                      },
+                      subtitle: {
+                        NLangEnum.en: 'Widget WillPopScope',
+                        NLangEnum.zh: '组件 WillPopScope',
+                      },
+                      items: [
+                        {
+                          NLangEnum.en: 'WillPopScope only has child and onWillPop.',
+                          NLangEnum.zh: 'WillPopScope 只有 child 与 onWillPop 两个参数。',
+                        },
+                        {
+                          NLangEnum.en: 'onWillPop null allows the route to pop. false vetoes; true allows.',
+                          NLangEnum.zh: 'onWillPop 为 null 可直接返回；返回 false 拦截，true 放行。',
+                        },
+                        {
+                          NLangEnum.en: 'Press system back or maybePop to see the callback.',
+                          NLangEnum.zh: '按系统返回或点击 maybePop 查看回调。',
+                        },
+                      ],
+                    ),
                     buildConstructCard(),
                     buildBehaviorCard(),
                   ],

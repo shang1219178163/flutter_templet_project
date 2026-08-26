@@ -19,8 +19,6 @@ class AnnotatedRegionPage extends StatefulWidget {
 class _AnnotatedRegionPageState extends State<AnnotatedRegionPage> {
   final scrollController = ScrollController();
 
-  Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
-
   final currIndexVN = ValueNotifier(0);
 
   @override

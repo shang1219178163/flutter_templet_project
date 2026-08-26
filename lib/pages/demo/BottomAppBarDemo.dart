@@ -209,28 +209,28 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
 
   Widget buildBarChild() {
     return IconTheme(
-      data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
-      child: Row(
+        data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+        child: Row(
         children: [
-          if (fabLocation == FloatingActionButtonLocation.startDocked) const Spacer(),
-          IconButton(
-            tooltip: 'Open navigation menu',
-            icon: const Icon(Icons.menu),
+            if (fabLocation == FloatingActionButtonLocation.startDocked) const Spacer(),
+            IconButton(
+              tooltip: 'Open navigation menu',
+              icon: const Icon(Icons.menu),
             onPressed: onMenu,
-          ),
-          IconButton(
-            tooltip: 'Open navigation menu',
-            icon: const Icon(Icons.photo),
+            ),
+            IconButton(
+              tooltip: 'Open navigation menu',
+              icon: const Icon(Icons.photo),
             onPressed: onPhoto,
-          ),
-          IconButton(
-            tooltip: 'Search',
-            icon: const Icon(Icons.search),
+            ),
+            IconButton(
+              tooltip: 'Search',
+              icon: const Icon(Icons.search),
             onPressed: onSearch,
-          ),
-          IconButton(
-            tooltip: 'Favorite',
-            icon: const Icon(Icons.favorite),
+            ),
+            IconButton(
+              tooltip: 'Favorite',
+              icon: const Icon(Icons.favorite),
             onPressed: onFavorite,
           ),
         ],
