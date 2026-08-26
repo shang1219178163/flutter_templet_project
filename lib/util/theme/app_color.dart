@@ -4,59 +4,97 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class AppColor {
-  /// 方便浅色主题适配
+  /// 纯白
   static const Color white = Color(0xFFFFFFFF);
+
+  /// 纯黑
   static const Color black = Color(0xFF000000);
+
+  /// 透明
   static const Color transparent = Colors.transparent;
 
-  ///主色调
+  /// 品牌主色
   static const Color primary = Colors.blueAccent;
-  static const Color pageLight = Color(0xFFF6F6F6);
-  static const Color pageDark = Color(0xFF181818);
-  static const Color cardLight = Color(0xFFFFFFFF);
-  static const Color cardDark = Color(0xFF242434);
-  static const Color textLight = Color(0xFF000000);
-  static const Color textDark = Color(0xFFFFFFFF);
-  static const Color textSecondaryLight = Color(0x99000000);
-  static const Color textSecondaryDark = Color(0x99FFFFFF);
-  static const Color textHintLight = Color(0x4c000000);
-  static const Color textHintDark = Color(0x4cFFFFFF);
-  static const Color dividerLight = Color(0xFFE4E4E4);
-  static const Color dividerDark = Color(0x0FFFFFFF);
+
+  /// 错误/危险
   static const Color error = Color(0xFFD32F2F);
 
-  static Color page = AppThemeService().isDark ? pageDark : pageLight;
-  static Color card = AppThemeService().isDark ? cardDark : cardLight;
-  static Color text = AppThemeService().isDark ? textDark : textLight;
-  static Color textSecondary = AppThemeService().isDark ? textSecondaryDark : textSecondaryLight;
-  static Color textHint = AppThemeService().isDark ? textHintDark : textHintLight;
-  static Color divider = AppThemeService().isDark ? dividerDark : dividerLight;
+  /// 当前反色
+  static Color get inverse => AppThemeService().isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
 
-  /// 默认字体颜色 #1A1A1A
+  /// 当前主题页面背景
+  static Color get page => AppThemeService().isDark ? const Color(0xFF181818) : const Color(0xFFF6F6F6);
+
+  /// 当前主题卡片/表面
+  static Color get card => AppThemeService().isDark ? const Color(0xFF242434) : const Color(0xFFFFFFFF);
+
+  /// 当前主题主文本
+  static Color get text => AppThemeService().isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+
+  /// 当前主题次要文本
+  static Color get textSecondary => AppThemeService().isDark ? const Color(0x99FFFFFF) : const Color(0x99000000);
+
+  /// 当前主题提示/占位
+  static Color get textHint => AppThemeService().isDark ? const Color(0x4cFFFFFF) : const Color(0x4c000000);
+
+  /// 当前主题分割线
+  static Color get divider => AppThemeService().isDark ? const Color(0x0FFFFFFF) : const Color(0xFFE4E4E4);
+
+  /// 默认字体色 #1A1A1A
   static const Color font = Color(0xFF1A1A1A);
+
+  /// 字体色 #181818
   static const Color font181818 = Color(0xff181818);
+
+  /// 字体色 #BCBFC2
   static const Color fontBCBFC2 = Color(0xffBCBFC2);
+
+  /// 字体色 #333333
   static const Color font333333 = Color(0xff333333);
+
+  /// 字体色 #5D6D7E
   static const Color font5D6D7E = Color(0xff5D6D7E);
+
+  /// 字体色 #666666
   static const Color font666666 = Color(0xff666666);
+
+  /// 字体色 #737373
   static const Color font737373 = Color(0xff737373);
+
+  /// 字体色 #777777
   static const Color font777777 = Color(0xff777777);
+
+  /// 字体色 #999999
   static const Color font999999 = Color(0xff999999);
+
+  /// 字体色 #B3B3B3
   static const Color fontB3B3B3 = Color(0xffB3B3B3);
+
+  /// 字体色 #F9F9F9
   static const Color fontF9F9F9 = Color(0xffF9F9F9);
 
-  ///背景色 #F3F3F3
+  /// 默认背景 #F3F3F3
   static const Color bg = Color(0xffF3F3F3);
+
+  /// 背景 #EDEDED
   static const Color bgEDEDED = Color(0xffEDEDED);
+
+  /// 背景 #F3F3F3
   static const Color bgF3F3F3 = Color(0xffF3F3F3);
+
+  /// 背景 #F7F7F7
   static const Color bgF7F7F7 = Color(0xFFF7F7F7);
+
+  /// 背景 #F9F9F9
   static const Color bgF9F9F9 = Color(0xffF9F9F9);
+
+  /// 背景纯黑
   static const Color bg000000 = Color(0xFF000000);
 
-  /// 阴影 #B5B5B5
+  /// 阴影（3% 黑）
   static const Color shadow = Color(0x08000000);
 
-  /// 效果展示页色点，含 null 表示主题默认
+  /// 效果展示页色点，null 表示主题默认
   static const colorOptions = <Color?>[
     null,
     Colors.white,

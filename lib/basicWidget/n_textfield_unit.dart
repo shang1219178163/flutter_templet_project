@@ -39,7 +39,7 @@ class NTextfieldUnit extends StatelessWidget {
     this.onClear,
     this.readOnly = false,
     this.readOnlyFillColor = AppColor.bgF3F3F3,
-    this.readOnlyBorderColor = AppColor.dividerLight,
+    this.readOnlyBorderColor = const Color(0xFFE4E4E4),
     this.radius = 4,
     this.keyboardType,
     this.inputFormatters,
