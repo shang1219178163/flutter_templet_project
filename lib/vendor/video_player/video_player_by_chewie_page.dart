@@ -27,7 +27,7 @@ class VideoPlayerByChewiePage extends StatefulWidget {
 }
 
 class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
-  Map arguments = Get.arguments;
+  final Map arguments = Get.arguments ?? {};
 
   String get videoTitle => arguments["videoTitle"] ?? "";
 
@@ -39,7 +39,7 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
   late final bool hideDownload = arguments["hideDownload"] ?? false;
 
   final TargetPlatform? _platform = TargetPlatform.iOS;
-  late VideoPlayerController _videoPlayerController;
+  VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
   int? bufferDelay = 0;
 
@@ -51,14 +51,17 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
+    _videoPlayerController?.dispose();
     _chewieController?.dispose();
     super.dispose();
   }
 
   Future<void> initPlayer() async {
+    if (videoUrl.isEmpty) {
+      return;
+    }
     _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(videoUrl));
-    await _videoPlayerController.initialize();
+    await _videoPlayerController!.initialize();
 
     _createChewieController();
     setState(() {});
@@ -66,7 +69,7 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
 
   void _createChewieController() {
     _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController,
+      videoPlayerController: _videoPlayerController!,
       autoPlay: true,
       looping: false,
       progressIndicatorDelay: bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
@@ -96,7 +99,7 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
   }
 
   Future<void> toggleVideo() async {
-    await _videoPlayerController.pause();
+    await _videoPlayerController?.pause();
     await initPlayer();
   }
 
@@ -154,12 +157,16 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
                   ? Chewie(
                       controller: _chewieController!,
                     )
-                  : const Column(
+                  : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircularProgressIndicator(),
-                        SizedBox(height: 20),
-                        Text('Loading'),
+                        if (videoUrl.isEmpty)
+                          const Text('缺少 videoUrl')
+                        else ...[
+                          const CircularProgressIndicator(),
+                          const SizedBox(height: 20),
+                          const Text('Loading'),
+                        ],
                       ],
                     ),
             ),
