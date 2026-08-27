@@ -26,27 +26,49 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
 
   static const _bannerDismissDuration = Duration(milliseconds: 250);
 
+  /// 正在退出路由
   bool _isLeaving = false;
+  /// 最近事件
   String lastEvent = '—';
+  /// 是否显示 leading
   bool useLeading = true;
+  /// 是否传入 contentTextStyle
   bool useContentTextStyle = false;
+  /// 是否传入 elevation
   bool useElevation = false;
+  /// 是否传入 padding
   bool usePadding = false;
+  /// 是否传入 margin
   bool useMargin = false;
+  /// 是否传入 leadingPadding
   bool useLeadingPadding = false;
+  /// 操作按钮强制换行
   bool forceActionsBelow = false;
+  /// 只显示一个操作按钮
   bool singleAction = false;
+  /// 溢出操作栏对齐
   OverflowBarAlignment overflowAlignment = OverflowBarAlignment.end;
+  /// 海拔阴影
   double elevation = 0;
+  /// 操作栏最小高度
   double minActionBarHeight = 52;
+  /// 内边距
   double paddingAll = 16;
+  /// 外边距
   double marginAll = 10;
+  /// leading 右侧间距
   double leadingPaddingEnd = 16;
+  /// 正文文字字号
   double contentFontSize = 14;
+  /// 背景色
   Color? backgroundColor;
+  /// 表面色调
   Color? surfaceTintColor;
+  /// 阴影色
   Color? shadowColor;
+  /// 分割线颜色
   Color? dividerColor;
+  /// 正文文字颜色
   Color? contentTextColor;
 
   ScaffoldMessengerState? get pageMessenger => _scaffoldMessengerKey.currentState;

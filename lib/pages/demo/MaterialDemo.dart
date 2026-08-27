@@ -20,21 +20,37 @@ class _MaterialDemoState extends State<MaterialDemo> {
 
   final scrollController = ScrollController();
 
+  /// 最近事件
   String lastEvent = '—';
+  /// 材质类型
   MaterialType type = MaterialType.canvas;
+  /// 海拔阴影
   double elevation = 10;
+  /// 填充色
   Color? color = Colors.red;
+  /// 阴影色
   Color? shadowColor = Colors.blue;
+  /// 表面色调
   Color? surfaceTintColor;
+  /// 是否传入 textStyle
   bool useTextStyle = false;
+  /// 文字字号
   double textFontSize = 14;
+  /// 文字颜色
   Color? textColor;
+  /// 是否传入 borderRadius
   bool useBorderRadius = false;
+  /// 圆角半径
   double borderRadius = 8;
+  /// 外形
   ShapeKind shapeKind = ShapeKind.none;
+  /// 外形圆角
   double shapeRadius = 8;
+  /// 边框画在前景
   bool borderOnForeground = true;
+  /// 裁剪
   ClipKind clipKind = ClipKind.none;
+  /// 动画时长（毫秒）
   double animMs = 200;
 
   bool get isCircle => type == MaterialType.circle;

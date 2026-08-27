@@ -76,69 +76,133 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   final fieldScrollController = ScrollController();
   final undoController = UndoHistoryController();
 
+  /// 是否只读
   bool readOnly = false;
+  /// 是否密文
   bool obscureText = false;
+  /// 密文字符
   String obscuringCharacter = '•';
+  /// 是否自动纠正
   bool autocorrect = true;
+  /// 智能破折号
   SmartDashesType smartDashesType = SmartDashesType.enabled;
+  /// 智能引号
   SmartQuotesType smartQuotesType = SmartQuotesType.enabled;
+  /// 是否显示输入建议
   bool enableSuggestions = true;
+  /// 字号
   double fontSize = 16;
+  /// 文字颜色
   Color? styleColor;
+  /// 字重
   FontWeight fontWeight = FontWeight.w400;
+  /// 光标颜色
   Color cursorColor = Colors.blue;
+  /// 背景光标颜色
   Color backgroundCursorColor = Colors.grey;
+  /// 文字对齐
   TextAlign textAlign = TextAlign.start;
+  /// 文字方向
   _DirKind dirKind = _DirKind.nil;
+  /// 语言
   _LocaleKind localeKind = _LocaleKind.nil;
+  /// 文字缩放
   _ScalerKind scalerKind = _ScalerKind.nil;
+  /// 线性缩放系数
   double scalerFactor = 1.5;
+  /// 最大行数
   double maxLines = 1;
+  /// 最小行数，0 表示 null
   double minLines = 0;
+  /// 是否撑满父布局
   bool expands = false;
+  /// 是否强制换行
   bool forceLine = true;
+  /// 是否传入 textHeightBehavior
   bool useTextHeightBehavior = false;
+  /// 首行 ascent 是否应用行高
   bool applyHeightToFirstAscent = true;
+  /// 末行 descent 是否应用行高
   bool applyHeightToLastDescent = true;
+  /// 宽度计算基准
   TextWidthBasis textWidthBasis = TextWidthBasis.parent;
+  /// 是否自动聚焦
   bool autofocus = false;
+  /// 是否显示光标
   _Tri showCursorKind = _Tri.nil;
+  /// 是否显示选区手柄
   bool showSelectionHandles = false;
+  /// 选区颜色
   Color? selectionColor;
+  /// 键盘类型
   _KeyboardKind keyboardKind = _KeyboardKind.auto;
+  /// 键盘动作
   _ActionKind actionKind = _ActionKind.nil;
+  /// 大小写
   TextCapitalization textCapitalization = TextCapitalization.none;
+  /// 输入格式化
   _FormatterKind formatterKind = _FormatterKind.nil;
+  /// 指针样式
   _MouseKind mouseKind = _MouseKind.nil;
+  /// 渲染层是否忽略指针
   bool rendererIgnoresPointer = false;
+  /// 光标宽度
   double cursorWidth = 2;
+  /// 光标高度，0 表示 null
   double cursorHeight = 0;
+  /// 光标圆角，0 表示 null
   double cursorRadius = 0;
+  /// 光标透明度动画
   bool cursorOpacityAnimates = false;
+  /// 是否传入 cursorOffset
   bool useCursorOffset = false;
+  /// 光标水平偏移
   double cursorOffsetDx = 0;
+  /// 光标垂直偏移
   double cursorOffsetDy = 0;
+  /// 光标画在文字上方
   bool paintCursorAboveText = false;
+  /// 选区高度样式
   BoxHeightStyle selectionHeightStyle = BoxHeightStyle.tight;
+  /// 选区宽度样式
   BoxWidthStyle selectionWidthStyle = BoxWidthStyle.tight;
+  /// 滚动内边距
   double scrollPadding = 20;
+  /// 键盘外观
   Brightness keyboardAppearance = Brightness.light;
+  /// 拖动手势起点
   DragStartBehavior dragStartBehavior = DragStartBehavior.start;
+  /// 是否可交互
   _Tri interactiveKind = _Tri.nil;
+  /// 是否传入 scrollController
   bool useScrollController = false;
+  /// 滚动物理
   _PhysicsKind physicsKind = _PhysicsKind.platform;
+  /// 自动纠正矩形颜色
   Color? autocorrectionTextRectColor;
+  /// 自动填充
   _AutofillKind autofillKind = _AutofillKind.empty;
+  /// 裁剪
   Clip clipBehavior = Clip.hardEdge;
+  /// 是否传入 restorationId
   bool useRestorationId = false;
+  /// 是否传入 scrollBehavior
   bool useScrollBehavior = false;
+  /// 是否启用 Scribble
   bool scribbleEnabled = true;
+  /// 是否允许 IME 个性化学习
   bool enableIMEPersonalizedLearning = true;
+  /// 是否自定义上下文菜单
   bool useContextMenu = false;
+  /// 是否自定义放大镜
   bool useMagnifier = false;
+  /// 是否传入 undoController
   bool useUndoController = false;
+  /// strut 预设
   _StrutKind strutKind = _StrutKind.nil;
+  /// 是否自定义 groupId
   bool useCustomGroupId = false;
+  /// 最近事件
   String lastEvent = '—';
 
   @override

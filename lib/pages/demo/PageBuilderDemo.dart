@@ -29,22 +29,37 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
 
   final scrollController = ScrollController();
 
-  /// 原 Demo 第一项 OpenUpwardsPageTransitionsBuilder
+  /// 转场类型，原 Demo 第一项 OpenUpwardsPageTransitionsBuilder
   _TransitionKind transitionKind = _TransitionKind.openUpwards;
+  /// Zoom 转场是否允许快照
   bool zoomAllowSnapshotting = true;
+  /// Zoom 进入路由是否允许快照
   bool zoomAllowEnterRouteSnapshotting = true;
+  /// Zoom 转场背景色
   Color? zoomBackgroundColor;
+  /// 正向动画时长（毫秒）
   double durationMs = 300;
+  /// 反向动画时长（毫秒）
   double reverseDurationMs = 300;
+  /// 是否不透明
   bool opaque = true;
+  /// 点击遮罩可关闭
   bool barrierDismissible = false;
+  /// 遮罩颜色
   Color? barrierColor;
+  /// 遮罩语义标签
   _BarrierLabelKind barrierLabelKind = _BarrierLabelKind.nil;
+  /// 离开后是否保持状态
   bool maintainState = true;
+  /// 是否全屏对话框
   bool fullscreenDialog = false;
+  /// 是否允许快照
   bool allowSnapshotting = true;
+  /// 是否请求焦点
   _Tri requestFocusKind = _Tri.nil;
+  /// 是否传入 RouteSettings
   bool useSettings = false;
+  /// 最近事件
   String lastEvent = '—';
 
   @override

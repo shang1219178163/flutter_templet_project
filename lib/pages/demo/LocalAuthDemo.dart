@@ -48,15 +48,25 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
 
   final auth = LocalAuthentication();
 
+  /// 失败时弹出系统错误对话框
   bool useErrorDialogs = true;
+  /// 应用切后台后保持认证
   bool stickyAuth = false;
+  /// 敏感交易（平台可能加强校验）
   bool sensitiveTransaction = true;
+  /// 仅生物识别，不用设备密码
   bool biometricOnly = false;
+  /// 是否自定义平台文案
   bool useCustomMessages = false;
+  /// 认证进行中
   bool busy = false;
+  /// 设备是否支持
   bool? isDeviceSupported;
+  /// 是否可检测生物识别
   bool? canCheckBiometrics;
+  /// 可用生物识别类型
   List<BiometricType> availableBiometrics = [];
+  /// 最近事件
   String lastEvent = '—';
 
   @override

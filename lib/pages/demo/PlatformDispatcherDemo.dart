@@ -53,8 +53,11 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
 
   final scrollController = ScrollController();
   final propertyScrollController = ScrollController();
+  /// 各通知是否监听
   final listen = <_ListenKind, bool>{for (final e in _ListenKind.values) e: true};
+  /// 事件日志
   final events = <String>[];
+  /// 最近事件
   String lastEvent = '—';
   VoidCallback? _prevPlatformConfig;
   VoidCallback? _prevSystemFont;

@@ -32,9 +32,11 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
 
   final scrollController = ScrollController();
 
-  /// 原 Demo MetaData 自定义 Map
+  /// metaData 预设，原 Demo 为自定义 Map
   _MetaKind metaKind = _MetaKind.map;
+  /// 命中测试行为
   HitTestBehavior behavior = HitTestBehavior.deferToChild;
+  /// 最近事件
   String lastEvent = '—';
 
   @override

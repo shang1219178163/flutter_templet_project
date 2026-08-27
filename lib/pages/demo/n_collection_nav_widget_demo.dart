@@ -31,22 +31,39 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   final scrollController = ScrollController();
   final imgUrls = AppRes.image.urls;
 
+  /// 滚动方式
   PageViewScrollType scrollType = PageViewScrollType.full;
+  /// 每页行数
   int pageRowNum = 2;
+  /// 每页列数
   int pageColumnNum = 5;
+  /// 图标高度
   double iconSize = 68;
+  /// 标题高度
   double textHeight = 16;
+  /// 图标与文字间距
   double textGap = 5;
+  /// 垂直间距
   double columnSpacing = 16;
+  /// 水平间距
   double rowSpacing = 8;
+  /// 是否自适应高度
   bool autoAdjustHeight = true;
+  /// 指示器高度
   double indicatorItemHeight = 2;
+  /// 指示器宽度
   double indicatorItemWidth = 12;
+  /// 指示器与标题间距
   double indicatorGap = 8;
+  /// 是否显示阴影
   bool useBoxShadows = false;
+  /// 阴影色
   Color? shadowColor;
+  /// 调试色块
   bool isDebug = true;
+  /// 子项数量
   late int itemCount = imgUrls.length;
+  /// 最近事件
   String lastEvent = '—';
   int remountEpoch = 0;
 

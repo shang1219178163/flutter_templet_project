@@ -29,6 +29,7 @@ class NCollectionNavWidget extends StatefulWidget {
   /// 当前页面数据
   final List<AttrNavItem> items;
 
+  /// 点击回调
   final void Function(AttrNavItem e) onItem;
 
   /// 滚动方式

@@ -43,15 +43,23 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
 
   final scrollController = ScrollController();
 
-  /// 原 Demo NumberFormat("#,##0.00", "en_US")
+  /// 工厂类型，原 Demo NumberFormat("#,##0.00", "en_US")
   _FormatKind formatKind = _FormatKind.custom;
+  /// 格式模式
   String? pattern = '#,##0.00';
+  /// 语言区域
   String? locale = 'en_US';
+  /// 货币代码
   String? name;
+  /// 货币符号
   String? symbol;
+  /// 自定义货币模式
   String? customPattern;
+  /// 是否传入小数位数
   bool useDecimalDigits = false;
+  /// 小数位数
   double decimalDigits = 2;
+  /// 正数是否显示符号
   bool explicitSign = false;
 
   /// 预览可调输入，默认对齐 Eg. 1

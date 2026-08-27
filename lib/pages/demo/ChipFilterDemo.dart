@@ -44,53 +44,100 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     _ActorFilterEntry('James Madison', 'JM'),
   ];
 
+  /// 已选中的演员
   final _filters = <_ActorFilterEntry>[];
 
+  /// 构造方式
   _ChipKind kind = _ChipKind.flat;
+  /// 是否显示头像
   bool useAvatar = true;
+  /// 是否显示删除按钮
   bool useDelete = false;
+  /// 是否可用
   bool enabled = true;
+  /// 是否自动聚焦
   bool autofocus = false;
+  /// 是否显示 tooltip
   bool useTooltip = false;
+  /// 是否传入 padding
   bool usePadding = false;
+  /// 是否传入 labelPadding
   bool useLabelPadding = false;
+  /// 是否传入 elevation
   bool useElevation = false;
+  /// 是否传入 pressElevation
   bool usePressElevation = false;
+  /// 是否传入边框
   bool useSide = false;
+  /// 是否传入 labelStyle
   bool useLabelStyle = false;
+  /// 是否传入 iconTheme
   bool useIconTheme = false;
+  /// 是否传入 avatarBoxConstraints
   bool useAvatarConstraints = false;
+  /// 是否传入 deleteIconBoxConstraints
   bool useDeleteConstraints = false;
+  /// 是否传入 animationStyle
   bool useAnimationStyle = false;
+  /// 是否显示勾选标记
   bool? showCheckmark;
+  /// 裁剪
   Clip clipBehavior = Clip.none;
+  /// 外形
   ShapeKind shapeKind = ShapeKind.none;
+  /// 外形圆角
   double shapeRadius = 8;
+  /// 内边距
   double padding = 8;
+  /// 标签内边距
   double labelPadding = 8;
+  /// 海拔阴影
   double elevation = 0;
+  /// 按下海拔
   double pressElevation = 8;
+  /// 边框宽度
   double sideWidth = 1;
+  /// 标签字号
   double labelFontSize = 14;
+  /// 图标尺寸
   double iconThemeSize = 18;
+  /// 头像约束
   double avatarConstraint = 32;
+  /// 删除图标约束
   double deleteConstraint = 18;
+  /// 动画时长（毫秒）
   double animMs = 195;
+  /// 背景色
   Color? backgroundColor;
+  /// 选中色
   Color? selectedColor;
+  /// 禁用色
   Color? disabledColor;
+  /// Chip 主题色
   Color? chipColor;
+  /// 阴影色
   Color? shadowColor;
+  /// 表面色调
   Color? surfaceTintColor;
+  /// 选中阴影色
   Color? selectedShadowColor;
+  /// 勾选标记色
   Color? checkmarkColor;
+  /// 删除图标色
   Color? deleteIconColor;
+  /// 边框色
   Color? sideColor;
+  /// 标签文字色
   Color? labelColor;
+  /// 图标色
   Color? iconThemeColor;
+  /// 视觉密度
   VisualDensity? visualDensity;
+  /// 点击目标尺寸
   MaterialTapTargetSize? materialTapTargetSize;
+  /// 头像边框形状
   ShapeKind avatarBorderKind = ShapeKind.none;
+  /// 最近事件
   String lastEvent = '—';
 
   @override

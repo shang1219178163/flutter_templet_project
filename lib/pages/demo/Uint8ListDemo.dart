@@ -23,9 +23,11 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
 
   final scrollController = ScrollController();
 
-  /// 原 Demo [63, 158, 184, 82]
+  /// 源字节，原 Demo [63, 158, 184, 82]
   List<int> source = [63, 158, 184, 82];
+  /// 视图类型
   _ViewKind viewKind = _ViewKind.int8;
+  /// 最近事件
   String lastEvent = '—';
 
   @override
