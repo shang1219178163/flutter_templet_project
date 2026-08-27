@@ -41,6 +41,7 @@ class _MenuBarDemoState extends State<MenuBarDemo> {
         title: Text(widget.title ?? "$widget"),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MenuBar(children: buildMenus()),
           Expanded(
@@ -112,8 +113,7 @@ class _MenuBarDemoState extends State<MenuBarDemo> {
       const SingleActivator(LogicalKeyboardKey.keyS, control: true): VoidCallbackIntent(onToggleMessage),
       for (final e in _colors)
         SingleActivator(e.$3, control: true): VoidCallbackIntent(() => onBackgroundColor(e.$1, e.$2)),
-      if (showingMessage)
-        const SingleActivator(LogicalKeyboardKey.escape): VoidCallbackIntent(onResetMessage),
+      if (showingMessage) const SingleActivator(LogicalKeyboardKey.escape): VoidCallbackIntent(onResetMessage),
     });
   }
 
