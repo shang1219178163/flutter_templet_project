@@ -298,7 +298,6 @@ class AppRouter {
   static const String collectionNavWidgetDemo = '/collectionNavWidgetDemo';
   static const String materialDemo = '/materialDemo';
   static const String flexibleSpaceDemo = '/flexibleSpaceDemo';
-  static const String operatorDemo = '/operatorDemo';
   static const String nnHorizontalScrollWidgetDemo = '/nnHorizontalScrollWidgetDemo';
   static const String netStateListenerDemo = '/netStateListenerDemo';
   static const String netStateListenerDemoOne = '/netStateListenerDemoOne';

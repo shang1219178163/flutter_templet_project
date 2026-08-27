@@ -366,7 +366,6 @@ import 'package:flutter_templet_project/pages/demo/music/MusicPlayerPage.dart';
 import 'package:flutter_templet_project/pages/demo/n_collection_nav_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/n_horizontal_scroll_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/navgation_bar_demo.dart';
-import 'package:flutter_templet_project/pages/demo/operator_demo.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/point_shop.dart';
 import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
 import 'package:flutter_templet_project/pages/demo/scroll_physics_page.dart';
@@ -1338,10 +1337,6 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.flexibleSpaceDemo,
       page: () => FlexibleSpaceDemo(),
-    ),
-    GetPage(
-      name: AppRouter.operatorDemo,
-      page: () => OperatorDemo(),
     ),
     GetPage(
       name: AppRouter.netStateListenerDemo,

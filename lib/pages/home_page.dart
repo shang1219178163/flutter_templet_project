@@ -412,7 +412,6 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.themeColorDemo, "themeColor"),
   Tuple2(AppRouter.themeColorSchemePage, "themeColorSchemePage"),
   Tuple2(AppRouter.emojiPage, "emoji"),
-  Tuple2(AppRouter.operatorDemo, "特殊操作符"),
   Tuple2(AppRouter.mediaQueryDemo, "mediaQuery"),
   Tuple2(AppRouter.mediaQueryDemoOne, "mediaQuery键盘"),
   Tuple2(AppRouter.platformDispatcherDemo, "PlatformDispatcher"),
