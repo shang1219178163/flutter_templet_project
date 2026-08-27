@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/TextInputFormatter/int_clamp_text_input_formatter.dart';
-import 'package:flutter_templet_project/util/dlog.dart';
 
 ///自定义数值增减 Stepper
 class NumberStepper extends StatefulWidget {
@@ -24,9 +23,7 @@ class NumberStepper extends StatefulWidget {
     this.readOnly = false,
     this.radius = 5.0,
     this.wraps = true,
-    this.style = const TextStyle(
-      fontSize: 20,
-    ),
+    this.style = const TextStyle(fontSize: 20),
     required this.onChanged,
   });
 
@@ -58,127 +55,64 @@ class NumberStepper extends StatefulWidget {
   final double radius;
 
   /// 字体样式
-  final TextStyle? style;
+  final TextStyle style;
 
   /// 回调
   final ValueChanged<int> onChanged;
 
   @override
-  _NumberStepperState createState() => _NumberStepperState();
+  State<NumberStepper> createState() => _NumberStepperState();
 }
 
 class _NumberStepperState extends State<NumberStepper> {
-  // 控制器
-  final _textController = TextEditingController();
-  // 焦点
-  final focusNode1 = FocusNode();
-
-  // late int current = widget.value;
-  late int _current = widget.value;
-
-  set current(val) {
-    _current = val;
-    _textController.text = "$_current";
-  }
-
-  int get current {
-    return _current;
-  }
-
-  Color centerColor = Color(0xffEDEDED);
+  late final _textController = TextEditingController(text: '${widget.value}');
+  late int current = widget.value;
 
   @override
-  void initState() {
-    _textController.text = "$current";
-    super.initState();
+  void didUpdateWidget(NumberStepper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.value != widget.value && widget.value != current) {
+      onValue(widget.value);
+    }
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return buildTexfieldStyle();
-
-    // if (widget.canEdit) {
-    //   return buildTexfieldStyle();
-    // }
-    // return buildSystemStyle();
-  }
-
-  // Widget buildSystemStyle() {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: [
-  //       buildIconButton(
-  //         onPressed: () {
-  //           go(-widget.step);
-  //         },
-  //         child: Icon(Icons.remove, size: widget.iconSize),
-  //       ),
-  //       Container(
-  //         width: widget.max.toString().length*16*widget.iconSize/30,
-  //         height: widget.iconSize,
-  //         alignment: Alignment.center,
-  //         decoration: BoxDecoration(
-  //           color: centerColor,
-  //         ),
-  //         child: Text('$current',
-  //           style: widget.style ?? TextStyle(
-  //             fontSize: widget.iconSize * 0.7,
-  //           ),
-  //           textAlign: TextAlign.center,
-  //         ),
-  //       ),
-  //       buildIconButton(
-  //         onPressed: () {
-  //           go(widget.step);
-  //         },
-  //         child: Icon(Icons.add, size: widget.iconSize),
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  Widget buildTexfieldStyle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildIconButton(
-          onPressed: () {
-            go(-widget.step);
-          },
-          child: Icon(Icons.remove, size: widget.iconSize),
+        buildButton(Icons.remove, -widget.step),
+        SizedBox(
+          width: widget.max.toString().length * 16 * widget.iconSize / 15,
+          child: buildField(),
         ),
-        Container(
-          // margin: EdgeInsets.symmetric(horizontal: 4),
-          width: widget.max.toString().length * 16 * widget.iconSize / 30,
-          // width: widget.iconSize + 20,
-          child: buildTexfield(),
-        ),
-        buildIconButton(
-          onPressed: () {
-            go(widget.step);
-          },
-          child: Icon(Icons.add, size: widget.iconSize),
-        ),
+        buildButton(Icons.add, widget.step),
       ],
     );
   }
 
-  Widget buildIconButton({
-    required VoidCallback? onPressed,
-    required Widget child,
-  }) {
+  Widget buildButton(IconData icon, int delta) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: Size(widget.iconSize, widget.iconSize),
+        backgroundColor: widget.color,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius)),
       ),
-      onPressed: onPressed,
-      child: child,
+      onPressed: () => go(delta),
+      child: Icon(icon, size: widget.iconSize),
     );
   }
 
-  Widget buildTexfield() {
+  Widget buildField() {
     return TextField(
       controller: _textController,
       readOnly: widget.readOnly,
@@ -186,55 +120,46 @@ class _NumberStepperState extends State<NumberStepper> {
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.center,
       enableInteractiveSelection: false,
-      // toolbarOptions: ToolbarOptions(
-      //   copy:false,
-      //   paste: false,
-      //   cut: false,
-      //   selectAll: false,
-      //   //by default all are disabled 'false'
-      // ),
-      style: widget.style ??
-          const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w400,
-          ),
-      decoration: InputDecoration(
-        hintText: "",
+      style: widget.style,
+      decoration: const InputDecoration(
         isCollapsed: true,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
         border: InputBorder.none,
-        filled: true,
-        fillColor: Color(0xffEDEDED),
-        // labelText: "请输入内容",//输入框内无文字时提示内容，有内容时会自动浮在内容上方
-        // helperText: "随便输入文字或数字", //输入框底部辅助性说明文字
       ),
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
-        LengthLimitingTextInputFormatter("${widget.max}".length),
+        LengthLimitingTextInputFormatter('${widget.max}'.length),
         IntClampTextInputFormatter(max: widget.max, min: widget.min),
       ],
+      onChanged: onText,
     );
   }
 
-  void go(int stepValue) {
-    if (stepValue < 0 && (current == widget.min || current + stepValue < widget.min)) {
-      DLog.d("it's minValue!");
-      if (widget.wraps) {
-        current = widget.max;
-      }
-      widget.onChanged(current);
+  void onText(String value) {
+    final n = int.tryParse(value);
+    if (n == null || n == current) {
       return;
     }
-    if (stepValue > 0 && (current == widget.max || current + stepValue > widget.max)) {
-      DLog.d("it's maxValue!");
-      if (widget.wraps) {
-        current = widget.min;
-      }
-      widget.onChanged(current);
+    current = n;
+    widget.onChanged(current);
+  }
+
+  void onValue(int value) {
+    current = value;
+    _textController.text = '$current';
+  }
+
+  void go(int delta) {
+    var next = current + delta;
+    if (next < widget.min) {
+      next = widget.wraps ? widget.max : widget.min;
+    } else if (next > widget.max) {
+      next = widget.wraps ? widget.min : widget.max;
+    }
+    if (next == current) {
       return;
     }
-    current += stepValue;
-    setState(() {});
+    onValue(next);
     widget.onChanged(current);
   }
 }
