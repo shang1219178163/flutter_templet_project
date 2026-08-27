@@ -461,7 +461,6 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

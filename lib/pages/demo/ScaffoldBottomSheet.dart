@@ -50,17 +50,16 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
       body: Column(children: [
         buildInputBar(),
         Expanded(
-            child: ListView(
-          children: list.map((e) {
-            return buildCell(
-                onDismissed: (direction) {
-                  list.remove(e);
-                },
-                child: ListTile(
-                  title: Text(e),
-                ));
-          }).toList(),
-        )),
+          child: ListView(
+            children: list.map((e) {
+              return buildCell(
+                  onDismissed: (direction) {
+                    list.remove(e);
+                  },
+                  child: ListTile(title: Text(e)));
+            }).toList(),
+          ),
+        ),
       ]),
     );
   }

@@ -32,50 +32,48 @@ class _PageViewAndBarDemoState extends State<PageViewAndBarDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => debugPrint(e),
-                  ))
-              .toList(),
-        ),
-        body: PageView(
-          physics: ClampingScrollPhysics(),
-          // 也可以选择BouncingScrollPhysics，如果你希望到达边界还能滚动回弹的话
-          controller: _pageController,
-          children: List.generate(
-              tabBarItems.length,
-              (i) => Container(
-                    color: ColorExt.random,
-                    alignment: Alignment.center,
-                    child: Text("第 $i 页"),
-                  )).toList(),
-          onPageChanged: (index) {
-            _currentIndex = index;
-            setState(() {});
-          },
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: tabBarItems,
-          onTap: (index) {
-            _pageController.jumpToPage(index);
-            // _pageController.animateToPage(index,
-            //     duration: Duration(milliseconds: 400),
-            //     curve: Curves.easeInOutQuart
-            // );
-            _currentIndex = index;
-            setState(() {});
-          },
-          currentIndex: _currentIndex,
-          selectedLabelStyle: TextStyle(fontSize: 12),
-          unselectedLabelStyle: TextStyle(fontSize: 12),
-        ));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: PageView(
+        physics: ClampingScrollPhysics(),
+        // 也可以选择BouncingScrollPhysics，如果你希望到达边界还能滚动回弹的话
+        controller: _pageController,
+        children: buildPages(),
+        onPageChanged: (index) {
+          _currentIndex = index;
+          setState(() {});
+        },
+      ),
+      bottomNavigationBar: buildTabBar(),
+    );
+  }
+
+  List<Widget> buildPages() {
+    return List.generate(
+        tabBarItems.length,
+        (i) => Container(
+              color: ColorExt.random,
+              alignment: Alignment.center,
+              child: Text("第 $i 页"),
+            )).toList();
+  }
+
+  Widget buildTabBar() {
+    return BottomNavigationBar(
+      items: tabBarItems,
+      onTap: (index) {
+        _pageController.jumpToPage(index);
+        // _pageController.animateToPage(index,
+        //     duration: Duration(milliseconds: 400),
+        //     curve: Curves.easeInOutQuart
+        // );
+        _currentIndex = index;
+        setState(() {});
+      },
+      currentIndex: _currentIndex,
+      selectedLabelStyle: TextStyle(fontSize: 12),
+      unselectedLabelStyle: TextStyle(fontSize: 12),
+    );
   }
 }

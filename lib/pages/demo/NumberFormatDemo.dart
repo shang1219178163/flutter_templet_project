@@ -447,7 +447,6 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
       value: value,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
       trailingBuilder: digits == null
           ? null
           : (context, v) {

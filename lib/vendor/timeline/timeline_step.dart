@@ -441,7 +441,6 @@ class _TimelineStepState extends State<TimelineStep> {
       value: value,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

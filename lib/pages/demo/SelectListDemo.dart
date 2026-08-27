@@ -1,21 +1,19 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 /// 单选/多选模型
-class SelectListPage extends StatefulWidget {
-  SelectListPage({
+class SelectListDemo extends StatefulWidget {
+  SelectListDemo({
     super.key,
   });
 
   @override
-  State<SelectListPage> createState() => _SelectListPageState();
+  State<SelectListDemo> createState() => _SelectListDemoState();
 }
 
-class _SelectListPageState extends State<SelectListPage> {
+class _SelectListDemoState extends State<SelectListDemo> {
   final _scrollController = ScrollController();
 
   bool isMultiple = true;
@@ -81,6 +79,10 @@ class SelectList extends StatefulWidget {
 }
 
 class _SelectListState extends State<SelectList> {
+  late final themeData = Theme.of(context);
+  late final primary = themeData.colorScheme.primary;
+  late final isDark = themeData.brightness == Brightness.dark;
+
   final _scrollController = ScrollController();
 
   late final List<UserModel> models = widget.models;
@@ -110,7 +112,7 @@ class _SelectListState extends State<SelectList> {
     return Container(
       child: Scrollbar(
         controller: _scrollController,
-        child: ListView.builder(
+        child: ListView.separated(
           controller: _scrollController,
           itemCount: dataList.value.length,
           itemBuilder: (context, i) {
@@ -131,35 +133,20 @@ class _SelectListState extends State<SelectList> {
               }
             }
 
-            return InkWell(
+            return ListTile(
+              dense: true,
               onTap: onTap,
-              child: Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    // border: Border.all(color: Colors.blue),
-                    // borderRadius: BorderRadius.all(Radius.circular(0)),
-                  ),
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: Checkbox(
-                          value: e.isSelected == true,
-                          onChanged: (value) {
-                            onTap();
-                          },
-                        ),
-                        title: NText(e.name ?? "--"),
-                        subtitle: NText("第$i位候选人"),
-                      ),
-                      Divider(
-                        indent: 70,
-                        height: 1,
-                      ),
-                    ],
-                  )),
+              leading: Checkbox(
+                value: e.isSelected == true,
+                onChanged: (value) {
+                  onTap();
+                },
+              ),
+              title: NText(e.name ?? "--"),
+              subtitle: NText("第$i位候选人"),
             );
           },
+          separatorBuilder: (_, i) => Divider(),
         ),
       ),
     );
@@ -172,21 +159,14 @@ class _SelectListState extends State<SelectList> {
 
     return Container(
       height: 65,
-      padding: EdgeInsets.only(
-        left: 16,
-        top: 12,
-        right: 16,
-        bottom: max(12, MediaQuery.of(context).padding.bottom),
-      ),
       decoration: BoxDecoration(
-        color: Colors.transparent,
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(0)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // CheckboxListTile
+          SizedBox(width: 16),
           TextButton(
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
@@ -226,34 +206,43 @@ class _SelectListState extends State<SelectList> {
             ),
           ),
           AnimatedBuilder(
-              animation: Listenable.merge([
-                selectedCount,
-                dataList,
-              ]),
-              builder: (context, child) {
-                return Container(
-                  width: 70,
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    // border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
-                  ),
-                  child: NText("(${selectedCount.value}/${dataList.value.length})"),
-                );
-              }),
-          SizedBox(
-            width: 30,
+            animation: Listenable.merge([
+              selectedCount,
+              dataList,
+            ]),
+            builder: (context, child) {
+              return Container(
+                width: 70,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                child: NText("(${selectedCount.value}/${dataList.value.length})"),
+              );
+            },
           ),
+          SizedBox(width: 30),
           Expanded(
-            child: ElevatedButton(
-              onPressed: () {
-                widget.onSelected(selectedItems);
-              },
-              child: Text("确定"),
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: primary,
+                // border: Border.all(color: Colors.blue),
+              ),
+              child: Text(
+                "确定",
+                style: TextStyle(
+                  color: themeData.colorScheme.onPrimary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'PingFang SC',
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -106,8 +106,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
         initiallyExpanded: false,
         children: [
           SwitchListTile(
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.black.withValues(alpha: 0.1),
+            dense: true,
             title: Text('fieldViewBuilder', style: TextStyle(color: colorScheme.onSurface)),
             value: _useFieldViewBuilder,
             onChanged: (v) {
@@ -116,8 +115,7 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
             },
           ),
           SwitchListTile(
-            inactiveThumbColor: Colors.white,
-            inactiveTrackColor: Colors.black.withValues(alpha: 0.1),
+            dense: true,
             title: Text('展示路由列表', style: TextStyle(color: colorScheme.onSurface)),
             value: _showRouteList,
             onChanged: (v) {

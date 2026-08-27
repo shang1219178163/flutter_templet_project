@@ -336,7 +336,6 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

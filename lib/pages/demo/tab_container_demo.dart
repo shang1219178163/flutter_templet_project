@@ -370,17 +370,9 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 50.0),
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
-                    ),
-              ),
+              child: Text(title),
             ),
-            Text(
-              content,
-              style: TextStyle(color: Colors.white),
-            ),
+            Text(content),
           ],
         ),
       );
@@ -424,7 +416,6 @@ Donec ac libero arcu. Pellentesque sollicitudin mi et lectus interdum, sit amet 
             fontSize: 15.0,
           ),
           unselectedTextStyle: const TextStyle(
-            color: Colors.black,
             fontSize: 13.0,
           ),
           children: _getTabs4().map((e) => e.page).toList(),

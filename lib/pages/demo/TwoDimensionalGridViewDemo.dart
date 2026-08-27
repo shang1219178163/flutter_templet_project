@@ -451,7 +451,6 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

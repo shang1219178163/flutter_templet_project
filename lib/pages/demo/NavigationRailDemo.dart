@@ -559,7 +559,6 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
       trailingBuilder: fraction
           ? (context, v) {
               return Text(

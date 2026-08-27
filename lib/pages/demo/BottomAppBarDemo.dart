@@ -510,7 +510,6 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
       value: value,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

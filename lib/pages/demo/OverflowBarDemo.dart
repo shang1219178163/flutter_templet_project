@@ -318,7 +318,6 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

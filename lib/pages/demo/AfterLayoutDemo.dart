@@ -483,7 +483,6 @@ class _AfterLayoutDemoState extends State<AfterLayoutDemo> {
       value: value,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

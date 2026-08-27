@@ -16,27 +16,15 @@ import 'package:flutter_templet_project/basicWidget/n_tab_indicator_box.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
-class UserDetailPage extends StatelessWidget {
-  const UserDetailPage({super.key});
+class UserDetailPage extends StatefulWidget {
+  const UserDetailPage();
 
   @override
-  Widget build(BuildContext context) {
-    var height = 30;
-    return _HeadView(height);
-  }
+  State<UserDetailPage> createState() => _UserDetailPageState();
 }
 
-class _HeadView extends StatefulWidget {
-  const _HeadView(this.height);
-
-  final int height;
-
-  @override
-  State<_HeadView> createState() => _HeadViewState();
-}
-
-class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixin {
-  late final TabController _tabController = TabController(length: 2, vsync: this);
+class _UserDetailPageState extends State<UserDetailPage> with SingleTickerProviderStateMixin {
+  late final TabController tabController = TabController(length: 2, vsync: this);
 
   ValueNotifier<bool> isCheckPrediction = ValueNotifier(true);
 
@@ -45,20 +33,20 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
 
   final ValueNotifier<double> _opacity = ValueNotifier(1);
 
-  final tabList = ["向左", "向右"];
+  final tabItems = ["向左", "向右"];
+
+  var height = 30;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => measureHeaderHeight(overlapHeight: widget.height));
+    WidgetsBinding.instance.addPostFrameCallback((_) => measureHeaderHeight(overlapHeight: height));
   }
 
   @override
-  void didUpdateWidget(covariant _HeadView oldWidget) {
+  void didUpdateWidget(covariant UserDetailPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.height != widget.height && widget.height > oldWidget.height) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => measureHeaderHeight(overlapHeight: widget.height));
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) => measureHeaderHeight(overlapHeight: height));
   }
 
   final avatar = AppRes.image.urls[3];
@@ -67,7 +55,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
 
   @override
   void dispose() {
-    _tabController.dispose();
+    tabController.dispose();
     super.dispose();
   }
 
@@ -109,41 +97,39 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                           alignment: Alignment.topCenter,
                           children: [
                             child!,
-                            Opacity(
-                              opacity: value,
-                              child: Container(
-                                padding: EdgeInsets.only(top: data.padding.top, left: 60),
-                                decoration: BoxDecoration(
-                                    // color: Colors.red,
-                                    // border: Border.all(color: Colors.blue),
-                                    ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        // color: Colors.red,
-                                        border: Border.all(color: Colors.blue),
-                                      ),
-                                      child: AvatarView(
-                                        isDark: false,
-                                        avatar: avatar,
-                                        isAnchor: true,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: Text(
-                                        "意难平",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
+                            IgnorePointer(
+                              child: Opacity(
+                                opacity: value,
+                                child: Container(
+                                  padding: EdgeInsets.only(top: data.padding.top, left: 60),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          // color: Colors.red,
+                                          border: Border.all(color: Colors.blue),
+                                        ),
+                                        child: AvatarView(
+                                          isDark: false,
+                                          avatar: avatar,
+                                          isAnchor: true,
                                         ),
                                       ),
-                                    )
-                                  ],
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Text(
+                                          "意难平",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -176,16 +162,16 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                     ),
                     // padding: const EdgeInsets.only(bottom: 2),
                     child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.red),
-                      ),
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(color: Colors.red),
+                      // ),
                       child: TabBar(
-                        controller: _tabController,
-                        tabs: tabList.map((v) => Tab(text: v)).toList(),
-
+                        controller: tabController,
+                        tabs: tabItems.map((v) => Tab(text: v)).toList(),
                         // dividerColor: Colors.transparent,
                         indicator: const NTabIndicatorFixedWidth(
-                          width: 16,
+                          width: 30,
+                          height: 2,
                           gradient: LinearGradient(
                             colors: [Color(0xffE44554), Color(0xff6040FF)], //
                           ),
@@ -204,9 +190,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
               SliverOverlapAbsorber(
                 handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: SliverToBoxAdapter(
-                  child: Container(
-                      // height: 0,
-                      ),
+                  child: Container(),
                 ),
               ),
             ];
@@ -222,24 +206,21 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                 children: [
                   Expanded(
                     child: TabBarView(
-                      controller: _tabController,
+                      controller: tabController,
                       children: [
-                        Container(
-                          height: 500,
-                          decoration: BoxDecoration(
-                            color: Colors.orangeAccent,
-                            border: Border.all(color: Colors.blue),
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
-                          ),
-                        ),
-                        Container(
-                          height: 500,
-                          decoration: BoxDecoration(
-                            color: Colors.yellow,
-                            border: Border.all(color: Colors.blue),
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
-                          ),
-                        ),
+                        ...tabItems.map((e) {
+                          final i = tabItems.indexOf(e);
+                          return Container(
+                            height: 500,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              // color: Colors.green,
+                              // border: Border.all(color: Colors.blue),
+                              borderRadius: BorderRadius.all(Radius.circular(0)),
+                            ),
+                            child: Text("$i"),
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -310,7 +291,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    alignment: Alignment.center,
+                    // alignment: Alignment.center,
                     decoration: BoxDecoration(
                         // border: Border.all(color: Colors.blue),
                         ),
@@ -371,9 +352,9 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
               right: 0,
               child: actionView(
                 isFollow: isFollow,
-                followCallback: onFollow,
-                personalLetterCallback: onPersonalLetter,
-                reportCallback: onReport,
+                onFollow: onFollow,
+                onMessage: onPersonalLetter,
+                onReport: onReport,
               ),
             ),
             Positioned(
@@ -432,9 +413,9 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
 
   Widget actionView({
     required bool isFollow,
-    void Function()? followCallback,
-    void Function()? personalLetterCallback,
-    void Function()? reportCallback,
+    void Function()? onFollow,
+    void Function()? onMessage,
+    void Function()? onReport,
   }) {
     return Container(
       height: 60,
@@ -450,7 +431,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           GestureDetector(
-            onTap: followCallback,
+            onTap: onFollow,
             child: Container(
               width: 60,
               height: 28,
@@ -473,7 +454,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
           ),
           const SizedBox(width: 8),
           GestureDetector(
-            onTap: personalLetterCallback,
+            onTap: onMessage,
             child: Container(
               width: 60,
               height: 28,
@@ -506,7 +487,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
           ),
           const SizedBox(width: 8),
           GestureDetector(
-            onTap: reportCallback,
+            onTap: onReport,
             child: Container(
               alignment: Alignment.center,
               width: 28,
@@ -561,12 +542,12 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                   children: [
                     Text(
                       name,
-                      style: TextStyle(fontWeight: FontWeight.w600, color: titleColor, fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       "AutoScrollWidget",
-                      style: TextStyle(fontWeight: FontWeight.w600, color: titleColor, fontSize: 18),
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
@@ -576,7 +557,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                 children: [
                   Text(
                     '$follow',
-                    style: TextStyle(color: titleColor, fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                   Text(
                     '关注',
@@ -597,11 +578,11 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
                 children: [
                   Text(
                     '$vermicelli',
-                    style: TextStyle(color: titleColor, fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                   Text(
                     '粉丝',
-                    style: TextStyle(color: titleColor, fontSize: 12),
+                    style: TextStyle(fontSize: 12),
                   ),
                 ],
               ),
@@ -611,7 +592,7 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(
               "description",
-              style: TextStyle(color: titleColor, fontSize: 12),
+              style: TextStyle(fontSize: 12),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

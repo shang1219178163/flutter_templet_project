@@ -450,7 +450,6 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
       trailingBuilder: durationLabel
           ? (context, v) {
               final ms = v.round();

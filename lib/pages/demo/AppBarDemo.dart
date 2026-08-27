@@ -782,7 +782,6 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
       value: value,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
       trailingBuilder: fractionDigits > 0
           ? (context, v) {
               return Text(

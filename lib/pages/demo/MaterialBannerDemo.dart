@@ -518,7 +518,6 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

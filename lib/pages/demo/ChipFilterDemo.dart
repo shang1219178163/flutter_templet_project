@@ -828,7 +828,6 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
       trailingBuilder: durationLabel
           ? (context, v) {
               final ms = v.round();

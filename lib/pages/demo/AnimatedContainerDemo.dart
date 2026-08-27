@@ -639,7 +639,6 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
       value: value,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
       trailingBuilder: durationLabel
           ? (context, v) {
               final ms = v.round();

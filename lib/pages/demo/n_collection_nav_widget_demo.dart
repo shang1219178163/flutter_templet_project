@@ -534,7 +534,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       divisions: divisions ?? 100,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

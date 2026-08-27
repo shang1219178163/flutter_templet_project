@@ -479,7 +479,6 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
       value: value,
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
     );
   }
 

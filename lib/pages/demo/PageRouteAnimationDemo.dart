@@ -8,8 +8,9 @@
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/pages/button_page.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
@@ -95,9 +96,7 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
                   onClosed: (isMarkedAsDone) {
                     DLog.d("isMarkedAsDone: $isMarkedAsDone");
                     if (isMarkedAsDone ?? false) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Marked as done!'),
-                      ));
+                      SnackBarExt.show(context, message: 'Marked as done!');
                     }
                   },
                 );
@@ -121,19 +120,15 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
         footer: Container(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: Colors.white,
-            // border: Border.all(color: Colors.blue),
-          ),
+              // color: Colors.white,
+              // border: Border.all(color: Colors.blue),
+              ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-              ),
-              Text(
-                subtitle,
-              ),
+              Text(title),
+              Text(subtitle),
             ],
           ),
         ),
@@ -144,7 +139,7 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
           child: NNetworkImage(
             url: url,
             width: 64,
-            fit: BoxFit.contain,
+            // fit: BoxFit.contain,
           ),
         ),
       ),

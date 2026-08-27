@@ -59,6 +59,7 @@ class AppRouter {
   static const String platformDispatcherDemo = '/PlatformDispatcherDemo';
 
   static const String tabBarDemo = '/TabBarDemo';
+  static const String tabContainerDemo = '/tabContainerDemo';
   static const String widgetListPage = '/WidgetListPage';
   static const String animatedDemo = '/AnimatedDemo';
   static const String animatedWidgetDemo = '/AnimatedWidgetDemo';
@@ -252,6 +253,7 @@ class AppRouter {
   static const String homeSrollDemo = '/homeSrollDemo';
   static const String homeNavDemo = '/homeNavDemo';
   static const String wrapDemo = '/wrapDemo';
+  static const String nWrapPageViewDemo = '/nWrapPageViewDemo';
   static const String boxConstraintsDemo = '/boxConstraintsDemo';
   static const String gradientDemo = '/gradientDemo';
   static const String imageBlendModeDemo = '/imageBlendModeDemo';
@@ -366,7 +368,6 @@ class AppRouter {
   static const String dashLineDemo = '/dashLineDemo';
   static const String scaffoldBottomSheet = '/scaffoldBottomSheet';
   static const String floatingActionButtonDemo = '/floatingActionButtonDemo';
-  static const String weatherInfoPage = '/weatherInfoPage';
   static const String flutterPickersDemo = '/flutterPickersDemo';
   static const String imageStretchDemo = '/imageStretchDemo';
   static const String dropdownMenuDemo = '/dropdownMenuDemo';
@@ -387,7 +388,7 @@ class AppRouter {
   static const String menuBarDemo = '/MenuBarDemo';
   static const String choiceBoxOneDemo = '/choiceBoxOneDemo';
   static const String apiConvertPage = '/apiConvertPage';
-  static const String selectListPage = '/selectListPage';
+  static const String selectListDemo = '/selectListDemo';
   static const String avatarGroupDemo = '/avatarGroupDemo';
   static const String overlayPortalDemo = '/overlayPortalDemo';
   static const String appBarColorChangerDemo = '/appBarColorChangerDemo';
@@ -486,6 +487,7 @@ class AppRouter {
   static const String animatedToggleSwitchDemo = '/animatedToggleSwitchDemo';
   static const String customTabbarPage = '/customTabbarPage';
   static const String pageRouteDemo = '/pageRouteDemo';
+  static const String pageRouteAnimationDemo = '/pageRouteAnimationDemo';
   static const String fontFeatureDemo = '/fontFeatureDemo';
   static const String colorAnimationDemo = '/colorAnimationDemo';
   static const String restorationMixinDemo = '/restorationMixinDemo';

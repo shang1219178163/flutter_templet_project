@@ -30,10 +30,13 @@ class _PageTopBackgroudImageDemoState extends State<PageTopBackgroudImageDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final primary = themeData.colorScheme.primary;
+    final isDark = themeData.brightness == Brightness.dark;
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.blue),
-        color: Theme.of(context).scaffoldBackgroundColor,
+        // border: Border.all(color: Colors.blue),
+        color: themeData.scaffoldBackgroundColor,
         image: DecorationImage(
           alignment: Alignment.topCenter,
           image: AssetImage("assets/images/bg_page_top_light.png"),

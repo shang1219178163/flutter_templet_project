@@ -30,19 +30,6 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
       // backgroundColor: Colors.black.withValues(alpha: 0.1),
       appBar: AppBar(
         title: Text("$widget"),
-        actions: [
-          'done',
-        ]
-            .map(
-              (e) => TextButton(
-                onPressed: () => debugPrint("done"),
-                child: Text(
-                  e,
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            )
-            .toList(),
       ),
       body: SafeArea(
         child: LayoutBuilder(builder: (context, constraints) {

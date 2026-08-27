@@ -470,7 +470,6 @@ class _MaterialDemoState extends State<MaterialDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: Colors.black12,
       trailingBuilder: durationLabel
           ? (context, v) {
               final ms = v.round();

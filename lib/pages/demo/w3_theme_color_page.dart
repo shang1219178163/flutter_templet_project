@@ -79,6 +79,7 @@ class _W3ThemeColorPageState extends State<W3ThemeColorPage> {
         color: color,
       ),
       child: ListTile(
+        dense: true,
         onTap: () => copy(item.desc),
         onLongPress: () => copy(item.name),
         title: Text(
