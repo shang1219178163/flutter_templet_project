@@ -29,8 +29,6 @@
 		<array/>
 		<key>CFBundleVersion</key>
 		<string>202111231509</string>
-		<key>FLTEnableImpeller</key>
-		<false/>
 		<key>ITSAppUsesNonExemptEncryption</key>
 		<false/>
 		<key>LSApplicationQueriesSchemes</key>
