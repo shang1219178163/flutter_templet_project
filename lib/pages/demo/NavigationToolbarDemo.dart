@@ -56,12 +56,7 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
             debugPrint("leading");
           },
         ),
-        middle: IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () {
-            debugPrint("middle");
-          },
-        ),
+        middle: Text("请选择"),
         trailing: IconButton(
           icon: Icon(Icons.home),
           onPressed: () {

@@ -34,10 +34,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
                     ),
                     Text(
                       "Login",
-                      style: TextStyle(
-                          color: Color(0xFF4D70A6),
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Color(0xFF4D70A6), fontSize: 26, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 170.h,
@@ -87,18 +84,21 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
   /// 内外阴影
   Decoration buildShadowDecoration({double radius = 10}) {
     return BoxDecoration(
-        color: Color(0xFFF1F3F6),
-        borderRadius: BorderRadius.all(Radius.circular(radius)),
-        boxShadow: [
-          BoxShadow(
-              offset: Offset(10, 10),
-              color: Color(0xFF4D70A6).withValues(alpha: 0.2),
-              blurRadius: 16),
-          BoxShadow(
-              offset: Offset(-10, -10),
-              color: Color.fromARGB(170, 255, 255, 255),
-              blurRadius: 10),
-        ]);
+      color: Color(0xFFF1F3F6),
+      borderRadius: BorderRadius.all(Radius.circular(radius)),
+      boxShadow: [
+        BoxShadow(
+          offset: Offset(10, 10),
+          color: Color(0xFF4D70A6).withValues(alpha: 0.2),
+          blurRadius: 16,
+        ),
+        BoxShadow(
+          offset: Offset(-10, -10),
+          color: Color.fromARGB(170, 255, 255, 255),
+          blurRadius: 10,
+        ),
+      ],
+    );
   }
 
   List<Widget> buildAccountBox() {
@@ -108,11 +108,12 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
           TextField(
             style: TextStyle(color: Color(0xFF4D70A6)),
             decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF4D70A6), width: 2),
-                ),
-                labelText: "Username",
-                labelStyle: TextStyle(color: Color(0xFF4D70A6), fontSize: 14)),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF4D70A6), width: 2),
+              ),
+              labelText: "Username",
+              labelStyle: TextStyle(color: Color(0xFF4D70A6), fontSize: 14),
+            ),
           ),
           Positioned(
             right: 1,
@@ -129,62 +130,47 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
           ),
         ],
       ),
-      SizedBox(
-        height: 100.h,
-      ),
+      SizedBox(height: 100),
       TextField(
         style: TextStyle(color: Color(0xFF4D70A6)),
         decoration: InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFF4D70A6), width: 2),
-            ),
-            labelText: "Password",
-            labelStyle: TextStyle(color: Color(0xFF4D70A6), fontSize: 14)),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF4D70A6), width: 2),
+          ),
+          labelText: "Password",
+          labelStyle: TextStyle(color: Color(0xFF4D70A6), fontSize: 14),
+        ),
       ),
-      SizedBox(
-        height: 70.h,
-      ),
-      Row(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                /*boxShadow: [
-                        BoxShadow(
-                            offset: Offset(5, 5),
-                            color: Color(0xFF4D70A6).withValues(alpha: 0.2),
-                            blurRadius: 16),
-                        BoxShadow(
-                            offset: Offset(-10, -10),
-                            color: Color.fromARGB(170, 255, 255, 255),
-                            blurRadius: 10),
-                      ]*/
-                ),
-            child: CustomSwitch(
+      SizedBox(height: 70),
+      FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            CustomSwitch(
               activeColor: Color(0xFFF1F3F6),
               value: status,
               onChanged: (value) {
-                setState(() {
-                  status = value;
-                });
+                status = value;
+                setState(() {});
               },
             ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Text(
-            "Remember me",
-            style: TextStyle(color: Colors.grey, fontSize: 14),
-          ),
-          Spacer(),
-          Text(
-            "Forgot Password?",
-            style: TextStyle(
-              color: Color(0xFF4D70A6),
-              fontSize: 14,
+            const SizedBox(width: 10),
+            Text(
+              "Remember me",
+              style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
-          ),
-        ],
+            const SizedBox(width: 8),
+            Text(
+              "Forgot Password?",
+              style: TextStyle(
+                color: Color(0xFF4D70A6),
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
       ),
     ];
   }
@@ -193,8 +179,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
     return [
       GestureDetector(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => NeomorphismCardsScreen()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => NeomorphismCardsScreen()));
         },
         child: Container(
           width: double.infinity,
@@ -210,13 +195,12 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
       ),
       Center(
         child: RichText(
-          text: TextSpan(children: <TextSpan>[
-            TextSpan(
-                text: "Don't have an account?",
-                style: TextStyle(color: Colors.grey)),
-            TextSpan(
-                text: " Sign Up", style: TextStyle(color: Color(0xFF4D70A6))),
-          ]),
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(text: "Don't have an account?", style: TextStyle(color: Colors.grey)),
+              TextSpan(text: " Sign Up", style: TextStyle(color: Color(0xFF4D70A6))),
+            ],
+          ),
         ),
       ),
     ];

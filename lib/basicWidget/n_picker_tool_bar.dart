@@ -43,6 +43,11 @@ class NPickerToolBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final primary = themeData.colorScheme.primary;
+    final onPrimary = themeData.colorScheme.onPrimary;
+    final isDark = themeData.brightness == Brightness.dark;
+
     return SizedBox(
       width: width ?? double.infinity,
       height: height ?? 50,
@@ -66,7 +71,7 @@ class NPickerToolBar extends StatelessWidget {
                 child: Text(
                   cancelTitle,
                   style: TextStyle(
-                    color: Colors.black54,
+                    color: onPrimary.withValues(alpha: 0.5),
                   ),
                 ),
               ),
