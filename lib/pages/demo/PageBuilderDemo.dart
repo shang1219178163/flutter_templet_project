@@ -521,7 +521,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: Colors.black12,
     );
   }
 

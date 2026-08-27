@@ -146,7 +146,6 @@ class AppRouter {
 
   static const String cupertinoFormDemo = '/CupertinoFormDemo';
   static const String contextMenuActionDemo = '/ContextMenuActionDemo';
-  static const String menuDemo = '/MenuDemo';
   static const String providerRoute = '/ProviderRoute';
   static const String providerListDemo = '/providerListDemo';
   static const String sliverPersistentHeaderDemo = '/SliverPersistentHeaderDemo';
@@ -190,7 +189,6 @@ class AppRouter {
   static const String blurViewDemo = '/blurViewDemo';
   static const String boxDemo = '/BoxDemo';
   static const String mouseRegionDemo = '/MouseRegionDemo';
-  static const String localImagePage = '/LocalImagePage';
   static const String timelineDemo = '/timelineDemo';
   static const String timelinesDemo = '/timelinesDemo';
   static const String hitTest = '/hitTest';
@@ -387,7 +385,7 @@ class AppRouter {
   static const String hitTestBehaviorDemo = '/hitTestBehaviorDemo';
   static const String qrcodePage = '/qrcodePage';
   static const String menuAnchorDemo = '/menuAnchorDemo';
-  static const String myMenuBarDemo = '/myMenuBarDemo';
+  static const String menuBarDemo = '/MenuBarDemo';
   static const String choiceBoxOneDemo = '/choiceBoxOneDemo';
   static const String apiConvertPage = '/apiConvertPage';
   static const String selectListPage = '/selectListPage';

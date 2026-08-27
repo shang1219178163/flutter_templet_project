@@ -238,6 +238,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       title: '构造',
       subtitle: 'scrollType · items',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildField(
             label: 'scrollType',
@@ -267,6 +268,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       title: '网格',
       subtitle: 'pageRowNum · pageColumnNum',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildSlider(
             label: 'pageRowNum',
@@ -295,6 +297,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       title: '单元格',
       subtitle: 'iconSize · textHeight · spacing',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildSlider(label: 'iconSize', value: iconSize, min: 24, max: 80, onChanged: onIconSize),
           buildSlider(label: 'textHeight', value: textHeight, min: 10, max: 28, onChanged: onTextHeight),
@@ -312,6 +315,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       title: '指示器',
       subtitle: 'indicatorItemHeight · Width · Gap',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildSlider(
             label: 'indicatorItemHeight',
@@ -339,6 +343,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       title: '表面',
       subtitle: 'isDebug · boxShadows',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildSwitch(title: 'isDebug', value: isDebug, onChanged: onIsDebug),
           buildSwitch(title: 'boxShadows', value: useBoxShadows, onChanged: onUseBoxShadows),
@@ -535,7 +540,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: Colors.black12,
     );
   }
 

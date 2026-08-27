@@ -59,6 +59,7 @@ import 'package:flutter_templet_project/pages/demo/CarouselSliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CarouselViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCaculator.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ChipFilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClickNotificationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorAnimationDemo.dart';
@@ -175,7 +176,6 @@ import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart'
 import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LiveStream/LivestreamEffectPage.dart';
 import 'package:flutter_templet_project/pages/demo/LocalAuthDemo.dart';
-import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LocalNotifationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
@@ -186,8 +186,7 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryVsScreenManager.dart';
 import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
-import 'package:flutter_templet_project/pages/demo/MenuDemo.dart';
-import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MenuBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MergeableMaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MetaDataDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
@@ -817,10 +816,6 @@ class AppRouterLazy {
       page: () => ContextMenuActionDemo(),
     ),
     GetPage(
-      name: AppRouter.menuDemo,
-      page: () => MenuDemo(),
-    ),
-    GetPage(
       name: AppRouter.gridPaperDemo,
       page: () => GridPaperDemo(),
     ),
@@ -951,10 +946,6 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.mouseRegionDemo,
       page: () => MouseRegionDemo(),
-    ),
-    GetPage(
-      name: AppRouter.localImagePage,
-      page: () => LocalImagePage(),
     ),
     GetPage(
       name: AppRouter.timelineDemo,
@@ -1697,8 +1688,8 @@ class AppRouterLazy {
       page: () => MenuAnchorDemo(),
     ),
     GetPage(
-      name: AppRouter.myMenuBarDemo,
-      page: () => MyMenuBarDemo(),
+      name: AppRouter.menuBarDemo,
+      page: () => MenuBarDemo(),
     ),
     GetPage(
       name: AppRouter.choiceBoxOneDemo,

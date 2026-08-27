@@ -32,6 +32,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
@@ -52,8 +53,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
 
   onPressed() {
     const str = "streetAddressLine2";
-    final result =
-        str.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}");
+    final result = str.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}");
     debugPrint("result: $result");
   }
 
@@ -69,33 +69,34 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 autofillHints: const <String>[AutofillHints.streetAddressLine1],
                 decoration: buildInputDecoration(
                   textEditingController: shippingAddress1,
-                  hintText: AutofillHints.streetAddressLine1.splitMapJoin(
-                      RegExp('[A-Z]'),
-                      onMatch: (m) => " ${m[0]}"),
+                  hintText: AutofillHints.streetAddressLine1.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
                 ),
               ),
+              SizedBox(height: 8),
               TextField(
                 controller: shippingAddress2,
                 autofillHints: const <String>[AutofillHints.streetAddressLine2],
                 decoration: buildInputDecoration(
                   textEditingController: shippingAddress2,
-                  hintText: AutofillHints.streetAddressLine2.splitMapJoin(
-                      RegExp('[A-Z]'),
-                      onMatch: (m) => " ${m[0]}"),
+                  hintText: AutofillHints.streetAddressLine2.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
                 ),
               ),
             ],
           ),
         ),
-        const Text('Billing address'),
-        Checkbox(
-          value: isSameAddress,
-          onChanged: (newValue) {
-            if (newValue != null) {
-              isSameAddress = newValue;
-              setState(() {});
-            }
-          },
+        Row(
+          children: [
+            const Text('Billing address'),
+            Checkbox(
+              value: isSameAddress,
+              onChanged: (newValue) {
+                if (newValue != null) {
+                  isSameAddress = newValue;
+                  setState(() {});
+                }
+              },
+            ),
+          ],
         ),
         if (!isSameAddress)
           AutofillGroup(
@@ -108,9 +109,8 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                   ],
                   decoration: buildInputDecoration(
                     textEditingController: billingAddress1,
-                    hintText: AutofillHints.streetAddressLine1.splitMapJoin(
-                        RegExp('[A-Z]'),
-                        onMatch: (m) => " ${m[0]}"),
+                    hintText:
+                        AutofillHints.streetAddressLine1.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
                   ),
                 ),
                 TextField(
@@ -120,9 +120,8 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                   ],
                   decoration: buildInputDecoration(
                     textEditingController: billingAddress2,
-                    hintText: AutofillHints.streetAddressLine2.splitMapJoin(
-                        RegExp('[A-Z]'),
-                        onMatch: (m) => " ${m[0]}"),
+                    hintText:
+                        AutofillHints.streetAddressLine2.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
                   ),
                 ),
               ],
@@ -137,10 +136,9 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 autofillHints: const <String>[AutofillHints.creditCardNumber],
                 decoration: buildInputDecoration(
                     textEditingController: creditCardNumber,
-                    hintText: AutofillHints.creditCardNumber.splitMapJoin(
-                        RegExp('[A-Z]'),
-                        onMatch: (m) => " ${m[0]}")),
+                    hintText: AutofillHints.creditCardNumber.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}")),
               ),
+              SizedBox(height: 8),
               TextField(
                 controller: creditCardSecurityCode,
                 autofillHints: const <String>[
@@ -148,9 +146,8 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 ],
                 decoration: buildInputDecoration(
                     textEditingController: billingAddress2,
-                    hintText: AutofillHints.creditCardSecurityCode.splitMapJoin(
-                        RegExp('[A-Z]'),
-                        onMatch: (m) => " ${m[0]}")),
+                    hintText:
+                        AutofillHints.creditCardSecurityCode.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}")),
               ),
             ],
           ),
@@ -161,8 +158,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
           autofillHints: const <String>[AutofillHints.telephoneNumber],
           decoration: buildInputDecoration(
             textEditingController: phoneNumber,
-            hintText: AutofillHints.telephoneNumber
-                .splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
+            hintText: AutofillHints.telephoneNumber.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
           ),
         ),
       ],
@@ -181,8 +177,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
             ? null
             : OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide:
-                    const BorderSide(width: 1.5, color: Colors.lightBlue),
+                borderSide: const BorderSide(width: 1.5, color: Colors.lightBlue),
               ));
 
     return InputDecoration(

@@ -166,9 +166,10 @@ class _LocalNotifationDemoState extends State<LocalNotifationDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Text('11111'));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Text('11111'),
+    );
   }
 }

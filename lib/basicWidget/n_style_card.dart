@@ -170,7 +170,10 @@ class NStyleCard extends StatelessWidget {
                   thickness: 1,
                   color: scheme.outlineVariant.withValues(alpha: 0.55),
                 ),
-                child,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: child,
+                ),
               ],
             ),
           ),

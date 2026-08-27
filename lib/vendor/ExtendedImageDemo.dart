@@ -779,7 +779,6 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: Colors.black12,
     );
   }
 

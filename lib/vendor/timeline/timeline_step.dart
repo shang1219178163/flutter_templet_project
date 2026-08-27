@@ -464,7 +464,6 @@ class _TimelineStepState extends State<TimelineStep> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: Colors.black12,
     );
   }
 

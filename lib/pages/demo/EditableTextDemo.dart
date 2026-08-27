@@ -977,7 +977,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: Colors.black12,
     );
   }
 

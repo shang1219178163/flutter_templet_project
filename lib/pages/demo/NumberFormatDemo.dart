@@ -473,7 +473,6 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: Colors.black12,
     );
   }
 
