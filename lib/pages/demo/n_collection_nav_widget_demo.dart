@@ -8,9 +8,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_nav_widget.dart';
-import 'package:flutter_templet_project/basicWidget/number_stepper.dart';
+import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
+import 'package:flutter_templet_project/basicWidget/n_slider.dart';
+import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
-import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:get/get.dart';
 
 class NCollectionNavWidgetDemo extends StatefulWidget {
   const NCollectionNavWidgetDemo({Key? key, this.title}) : super(key: key);
@@ -18,184 +22,674 @@ class NCollectionNavWidgetDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _NCollectionNavWidgetDemoState createState() => _NCollectionNavWidgetDemoState();
+  State<NCollectionNavWidgetDemo> createState() => _NCollectionNavWidgetDemoState();
 }
 
 class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
-  List<String> imgUrls = AppRes.image.urls;
+  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
-  var _items = <AttrNavItem>[];
+  final scrollController = ScrollController();
+  final imgUrls = AppRes.image.urls;
 
-  ///金刚区每页行数
+  PageViewScrollType scrollType = PageViewScrollType.full;
   int pageRowNum = 2;
-
-  ///金刚区每页列数
   int pageColumnNum = 5;
-
-  /// 图标默认高度
-  double iconSize = DEFALUT_ICON_SIZE;
-
-  /// 垂直间距
+  double iconSize = 68;
+  double textHeight = 16;
+  double textGap = 5;
   double columnSpacing = 16;
-
-  /// 水平间距
-  double rowSpacing = SPACING;
-
-  /// 文字间距
-  double textOffset = 5;
-
-  var tuples = <Tuple4<String, int, int, void Function(int)>>[];
-
-  // List<Function> get notifiers => tuples.map((e) => e.item4).toList();
-  /// viewModel
-  final _collectionNavModel = NNCollectionNavNotify();
+  double rowSpacing = 8;
+  bool autoAdjustHeight = true;
+  double indicatorItemHeight = 2;
+  double indicatorItemWidth = 12;
+  double indicatorGap = 8;
+  bool useBoxShadows = false;
+  Color? shadowColor;
+  bool isDebug = true;
+  late int itemCount = imgUrls.length;
+  String lastEvent = '—';
+  int remountEpoch = 0;
 
   @override
-  void initState() {
-    _items = List.generate(
-        imgUrls.length,
-        (index) => AttrNavItem(
-              icon: imgUrls[index],
-              // name: "标题_${index}",
-              name: "测试标题啊",
-            ));
-
-    tuples = [
-      Tuple4("列数 row", 1, 5, _collectionNavModel.changePageRowNum),
-      Tuple4("行数 column", 1, 5, _collectionNavModel.changePageColumnNum),
-      Tuple4("划动方式", 0, 2, _collectionNavModel.changeScrollTypeIndex),
-      // Tuple4("行数", 1, 2, ValueNotifier(2)),
-    ];
-
-    super.initState();
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  onPressed: onPressed,
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
-      ),
-      body: ListView(children: [
-        Column(
-          children: [
-            ...buildHeader(),
-            Container(
-              margin: EdgeInsets.all(12),
-              child: buildAnimatedBuilder(),
+      backgroundColor: scheme.surfaceContainerLowest,
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text(widget.title ?? "$widget"),
+              actions: [
+                TextButton(
+                  onPressed: onReset,
+                  child: Text('重置', style: TextStyle(color: scheme.onPrimary)),
+                ),
+              ],
             ),
-          ],
-        )
-      ]),
+      body: buildBody(),
     );
   }
 
-  onPressed() {
-    debugPrint("枚举值索引: ${PageViewScrollType.full.index}");
-    debugPrint("枚举值字符串: ${PageViewScrollType.drag.toString()}");
-    debugPrint("枚举值集合: ${PageViewScrollType.values}");
-    debugPrint("int 转枚举: ${0.toPageViewScrollType()}");
-    final result = [1, 7, 3, 6, 5, 6].sublist(1).reduce((value, element) => value + element);
-    debugPrint("result: $result");
-
-    debugPrint("result: ${[1, 7, 3, 6, 5, 6].sublist(0, 1)}");
-    debugPrint("result: ${[1, 7, 3, 6, 5, 6].sublist(1 + 1)}");
-  }
-
-  /// 多值变化
-  List<Widget> buildHeader() {
-    return tuples
-        .map((e) => Container(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    e.item1,
-                    style: TextStyle(fontSize: 20),
+  Widget buildBody() {
+    final scheme = Theme.of(context).colorScheme;
+    return ColoredBox(
+      color: scheme.surfaceContainerLowest,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final previewMax = (constraints.maxHeight * 0.48).clamp(220.0, 400.0);
+          return Column(
+            children: [
+              buildPreview(previewMax),
+              Expanded(
+                child: Scrollbar(
+                  controller: scrollController,
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: Column(
+                      children: [
+                        const NDescriptionCard(
+                          initialLang: NLangEnum.zh,
+                          title: {
+                            NLangEnum.en: 'Description',
+                            NLangEnum.zh: '说明',
+                          },
+                          subtitle: {
+                            NLangEnum.en: 'Widget NCollectionNavWidget',
+                            NLangEnum.zh: '组件 NCollectionNavWidget',
+                          },
+                          items: [
+                            {
+                              NLangEnum.en: 'Pin a live preview while you tune every constructor argument below.',
+                              NLangEnum.zh: '上方固定预览，下方调节全部构造参数并即时生效。',
+                            },
+                            {
+                              NLangEnum.en:
+                                  'Original demo used 2 rows, 5 columns, iconSize 68, textGap 5, isDebug true.',
+                              NLangEnum.zh: '原 Demo 为 2 行 5 列、iconSize 68、textGap 5、isDebug true。',
+                            },
+                            {
+                              NLangEnum.en: 'Tap an item to fire onItem. scrollType none keeps a single page.',
+                              NLangEnum.zh: '点击格子触发 onItem。scrollType 为 none 时仅一页不可滑。',
+                            },
+                          ],
+                        ),
+                        buildConstructCard(),
+                        buildGridCard(),
+                        buildCellCard(),
+                        buildIndicatorCard(),
+                        buildSurfaceCard(),
+                        buildBehaviorCard(),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  NumberStepper(
-                    min: e.item2,
-                    max: e.item3,
-                    step: 1,
-                    iconSize: 30,
-                    value: e.item3,
-                    color: Theme.of(context).primaryColor,
-                    readOnly: false,
-                    onChanged: (value) {
-                      e.item4(value);
-                    },
-                  ),
-                ],
+                ),
               ),
-            ))
-        .toList();
-  }
-
-  /// 多值监听
-  Widget buildAnimatedBuilder() {
-    return AnimatedBuilder(
-        animation: _collectionNavModel,
-        builder: (context, child) {
-          debugPrint("AnimatedBuilder");
-          return NCollectionNavWidget(
-            isDebug: true,
-            items: _items,
-            onItem: (e) => debugPrint(e.toString()),
-            iconSize: 68,
-            textGap: 5,
-            pageColumnNum: _collectionNavModel.pageColumnNum,
-            pageRowNum: _collectionNavModel.pageRowNum,
-            scrollType: _collectionNavModel.scrollType,
+            ],
           );
-        });
-  }
-}
-
-/// ChangeNotifier(不推荐使用,麻烦)
-class NNCollectionNavNotify extends ChangeNotifier {
-  ///金刚区每页行数
-  int pageRowNum = 2;
-
-  ///金刚区每页列数
-  int pageColumnNum = 5;
-
-  ///金刚区每页列数
-  int scrollTypeIndex = 0;
-
-  PageViewScrollType get scrollType => PageViewScrollType.values[scrollTypeIndex];
-
-  void changePageRowNum(int value) {
-    pageRowNum = value;
-    notifyListeners();
+        },
+      ),
+    );
   }
 
-  void changePageColumnNum(int value) {
-    pageColumnNum = value;
-    notifyListeners();
+  Widget buildPreview(double maxHeight) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerHighest.withValues(alpha: 0.35),
+        border: Border(
+          bottom: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.65)),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: previewExtent > maxHeight ? maxHeight : previewExtent,
+              width: double.infinity,
+              child: previewExtent > maxHeight ? SingleChildScrollView(child: buildNav()) : buildNav(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                lastEvent,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
-  void changeScrollTypeIndex(int value) {
-    scrollTypeIndex = value;
-    notifyListeners();
+  Widget buildNav() {
+    final child = NCollectionNavWidget(
+      key: ValueKey('nav-$remountEpoch-$scrollType-$pageRowNum-$pageColumnNum-$itemCount-$autoAdjustHeight'),
+      items: buildItems(),
+      onItem: onItem,
+      scrollType: scrollType,
+      pageRowNum: pageRowNum,
+      pageColumnNum: pageColumnNum,
+      iconSize: iconSize,
+      textHeight: textHeight,
+      textGap: textGap,
+      columnSpacing: columnSpacing,
+      rowSpacing: rowSpacing,
+      autoAdjustHeight: autoAdjustHeight,
+      indicatorItemHeight: indicatorItemHeight,
+      indicatorItemWidth: indicatorItemWidth,
+      indicatorGap: indicatorGap,
+      boxShadows: buildBoxShadows(),
+      isDebug: isDebug,
+    );
+    if (autoAdjustHeight) {
+      return child;
+    }
+    return SizedBox(height: previewExtent, child: child);
   }
 
-  @override
-  String toString() {
-    return "${runtimeType}_pageRowNum:${pageRowNum}_pageColumnNum:${pageColumnNum}_scrollType:$scrollType";
+  List<AttrNavItem> buildItems() {
+    final urls = imgUrls;
+    final count = itemCount.clamp(1, urls.length);
+    return List.generate(count, (index) {
+      return AttrNavItem(
+        icon: urls[index],
+        name: '测试标题啊',
+      );
+    });
+  }
+
+  List<BoxShadow>? buildBoxShadows() {
+    if (!useBoxShadows) {
+      return null;
+    }
+    return [
+      BoxShadow(
+        color: (shadowColor ?? Colors.black).withValues(alpha: 0.28),
+        blurRadius: 8,
+        offset: const Offset(0, 2),
+      ),
+    ];
+  }
+
+  double get previewExtent {
+    final rows = pageRowNum;
+    final itemH = iconSize + textGap + textHeight;
+    final gapCount = rows > 0 ? rows - 1 : 0;
+    return itemH * rows + columnSpacing * gapCount + indicatorGap + indicatorItemHeight;
+  }
+
+  Widget buildConstructCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.account_tree_rounded),
+      title: '构造',
+      subtitle: 'scrollType · items',
+      child: Column(
+        children: [
+          buildField(
+            label: 'scrollType',
+            child: buildChoiceChips(
+              values: PageViewScrollType.values,
+              isSelected: (e) => scrollType == e,
+              labelOf: nameOfScrollType,
+              onChanged: onScrollType,
+            ),
+          ),
+          buildSlider(
+            label: 'itemCount',
+            value: itemCount.toDouble(),
+            min: 1,
+            max: imgUrls.length.toDouble(),
+            divisions: imgUrls.length - 1,
+            onChanged: onItemCount,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildGridCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.grid_view_rounded),
+      title: '网格',
+      subtitle: 'pageRowNum · pageColumnNum',
+      child: Column(
+        children: [
+          buildSlider(
+            label: 'pageRowNum',
+            value: pageRowNum.toDouble(),
+            min: 1,
+            max: 5,
+            divisions: 4,
+            onChanged: onPageRowNum,
+          ),
+          buildSlider(
+            label: 'pageColumnNum',
+            value: pageColumnNum.toDouble(),
+            min: 1,
+            max: 5,
+            divisions: 4,
+            onChanged: onPageColumnNum,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildCellCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.straighten_rounded),
+      title: '单元格',
+      subtitle: 'iconSize · textHeight · spacing',
+      child: Column(
+        children: [
+          buildSlider(label: 'iconSize', value: iconSize, min: 24, max: 80, onChanged: onIconSize),
+          buildSlider(label: 'textHeight', value: textHeight, min: 10, max: 28, onChanged: onTextHeight),
+          buildSlider(label: 'textGap', value: textGap, min: 0, max: 16, onChanged: onTextGap),
+          buildSlider(label: 'columnSpacing', value: columnSpacing, min: 0, max: 32, onChanged: onColumnSpacing),
+          buildSlider(label: 'rowSpacing', value: rowSpacing, min: 0, max: 24, onChanged: onRowSpacing),
+        ],
+      ),
+    );
+  }
+
+  Widget buildIndicatorCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.more_horiz_rounded),
+      title: '指示器',
+      subtitle: 'indicatorItemHeight · Width · Gap',
+      child: Column(
+        children: [
+          buildSlider(
+            label: 'indicatorItemHeight',
+            value: indicatorItemHeight,
+            min: 1,
+            max: 8,
+            onChanged: onIndicatorItemHeight,
+          ),
+          buildSlider(
+            label: 'indicatorItemWidth',
+            value: indicatorItemWidth,
+            min: 4,
+            max: 24,
+            onChanged: onIndicatorItemWidth,
+          ),
+          buildSlider(label: 'indicatorGap', value: indicatorGap, min: 0, max: 24, onChanged: onIndicatorGap),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSurfaceCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.palette_outlined),
+      title: '表面',
+      subtitle: 'isDebug · boxShadows',
+      child: Column(
+        children: [
+          buildSwitch(title: 'isDebug', value: isDebug, onChanged: onIsDebug),
+          buildSwitch(title: 'boxShadows', value: useBoxShadows, onChanged: onUseBoxShadows),
+          if (useBoxShadows)
+            buildField(
+              label: 'boxShadows.color',
+              showTopGap: true,
+              child: buildColorDots(value: shadowColor, onChanged: onShadowColor),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildBehaviorCard() {
+    return NStyleCard(
+      icon: const Icon(Icons.tune_rounded),
+      title: '行为',
+      subtitle: 'autoAdjustHeight',
+      child: buildSwitch(title: 'autoAdjustHeight', value: autoAdjustHeight, onChanged: onAutoAdjustHeight),
+    );
+  }
+
+  Widget buildField({
+    required String label,
+    required Widget child,
+    bool showTopGap = false,
+  }) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (showTopGap) const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(
+            label,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: scheme.onSurface,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'monospace',
+              fontSize: 12.5,
+            ),
+          ),
+        ),
+        child,
+      ],
+    );
+  }
+
+  Widget buildChoiceChips<T>({
+    required List<T> values,
+    required bool Function(T value) isSelected,
+    required String Function(T value) labelOf,
+    required ValueChanged<T> onChanged,
+  }) {
+    final scheme = Theme.of(context).colorScheme;
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: values.map((e) {
+        final selected = isSelected(e);
+        return ChoiceChip(
+          label: Text(labelOf(e)),
+          selected: selected,
+          showCheckmark: false,
+          selectedColor: scheme.primaryContainer,
+          labelStyle: TextStyle(
+            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+            fontFamily: 'monospace',
+            fontSize: 12.5,
+          ),
+          side: BorderSide(
+            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
+          ),
+          onSelected: (on) {
+            if (on) {
+              onChanged(e);
+            }
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  Widget buildColorDots({
+    required Color? value,
+    required ValueChanged<Color?> onChanged,
+  }) {
+    final scheme = Theme.of(context).colorScheme;
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: AppColor.colorOptions.map((e) {
+        final selected = value == e;
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => onChanged(e),
+            customBorder: const CircleBorder(),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              width: 32,
+              height: 32,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: e ?? scheme.surfaceContainerHighest,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
+                  width: selected ? 2 : 1,
+                ),
+                boxShadow: selected
+                    ? [
+                        BoxShadow(
+                          color: scheme.primary.withValues(alpha: 0.28),
+                          blurRadius: 8,
+                        ),
+                      ]
+                    : null,
+              ),
+              child: e == null
+                  ? Text(
+                      '默',
+                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
+                    )
+                  : selected
+                      ? Icon(
+                          Icons.check_rounded,
+                          size: 16,
+                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
+                              ? Colors.white
+                              : Colors.black87,
+                        )
+                      : null,
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget buildSlider({
+    required String label,
+    required double value,
+    required double min,
+    required double max,
+    required ValueChanged<double> onChanged,
+    int? divisions,
+  }) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return NSlider(
+      leading: SizedBox(
+        width: 108,
+        child: Text(
+          label,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: scheme.onSurface,
+            fontFamily: 'monospace',
+            fontSize: 12.5,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      min: min,
+      max: max,
+      value: value.clamp(min, max),
+      divisions: divisions ?? 100,
+      onChanged: onChanged,
+      activeColor: scheme.primary,
+      inactiveColor: Colors.black12,
+    );
+  }
+
+  Widget buildSwitch({
+    required String title,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+  }) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return SwitchListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        title,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          color: scheme.onSurface,
+          fontSize: 13.5,
+        ),
+      ),
+      value: value,
+      onChanged: onChanged,
+      inactiveTrackColor: Colors.black12,
+    );
+  }
+
+  String nameOfScrollType(PageViewScrollType type) {
+    switch (type) {
+      case PageViewScrollType.full:
+        return 'full';
+      case PageViewScrollType.drag:
+        return 'drag';
+      case PageViewScrollType.none:
+        return 'none';
+    }
+  }
+
+  void bumpRemount() {
+    remountEpoch++;
+  }
+
+  void onScrollType(PageViewScrollType value) {
+    scrollType = value;
+    lastEvent = 'scrollType ${nameOfScrollType(value)}';
+    bumpRemount();
+    setState(() {});
+  }
+
+  void onItemCount(double value) {
+    itemCount = value.round().clamp(1, imgUrls.length);
+    lastEvent = 'itemCount $itemCount';
+    bumpRemount();
+    setState(() {});
+  }
+
+  void onPageRowNum(double value) {
+    pageRowNum = value.round().clamp(1, 5);
+    lastEvent = 'pageRowNum $pageRowNum';
+    bumpRemount();
+    setState(() {});
+  }
+
+  void onPageColumnNum(double value) {
+    pageColumnNum = value.round().clamp(1, 5);
+    lastEvent = 'pageColumnNum $pageColumnNum';
+    bumpRemount();
+    setState(() {});
+  }
+
+  void onIconSize(double value) {
+    iconSize = value;
+    lastEvent = 'iconSize ${iconSize.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onTextHeight(double value) {
+    textHeight = value;
+    lastEvent = 'textHeight ${textHeight.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onTextGap(double value) {
+    textGap = value;
+    lastEvent = 'textGap ${textGap.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onColumnSpacing(double value) {
+    columnSpacing = value;
+    lastEvent = 'columnSpacing ${columnSpacing.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onRowSpacing(double value) {
+    rowSpacing = value;
+    lastEvent = 'rowSpacing ${rowSpacing.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onIndicatorItemHeight(double value) {
+    indicatorItemHeight = value;
+    lastEvent = 'indicatorItemHeight ${indicatorItemHeight.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onIndicatorItemWidth(double value) {
+    indicatorItemWidth = value;
+    lastEvent = 'indicatorItemWidth ${indicatorItemWidth.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onIndicatorGap(double value) {
+    indicatorGap = value;
+    lastEvent = 'indicatorGap ${indicatorGap.toStringAsFixed(1)}';
+    setState(() {});
+  }
+
+  void onIsDebug(bool value) {
+    isDebug = value;
+    lastEvent = 'isDebug $isDebug';
+    setState(() {});
+  }
+
+  void onUseBoxShadows(bool value) {
+    useBoxShadows = value;
+    lastEvent = 'boxShadows ${useBoxShadows ? 'on' : 'null'}';
+    setState(() {});
+  }
+
+  void onShadowColor(Color? value) {
+    shadowColor = value;
+    lastEvent = 'boxShadows.color ${value ?? 'null'}';
+    setState(() {});
+  }
+
+  void onAutoAdjustHeight(bool value) {
+    autoAdjustHeight = value;
+    lastEvent = 'autoAdjustHeight $autoAdjustHeight';
+    bumpRemount();
+    setState(() {});
+  }
+
+  void onItem(AttrNavItem e) {
+    lastEvent = 'onItem ${e.name ?? e.icon ?? ''}';
+    DLog.d(lastEvent);
+    setState(() {});
+    final scheme = Theme.of(context).colorScheme;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(lastEvent),
+        duration: const Duration(milliseconds: 800),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: scheme.inverseSurface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    );
+  }
+
+  void onReset() {
+    scrollType = PageViewScrollType.full;
+    pageRowNum = 2;
+    pageColumnNum = 5;
+    iconSize = 68;
+    textHeight = 16;
+    textGap = 5;
+    columnSpacing = 16;
+    rowSpacing = 8;
+    autoAdjustHeight = true;
+    indicatorItemHeight = 2;
+    indicatorItemWidth = 12;
+    indicatorGap = 8;
+    useBoxShadows = false;
+    shadowColor = null;
+    isDebug = true;
+    itemCount = imgUrls.length;
+    lastEvent = '—';
+    bumpRemount();
+    setState(() {});
   }
 }

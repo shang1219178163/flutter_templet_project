@@ -1,39 +1,30 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/generated/assets.dart';
-
-/// 默认图标大小
-const double DEFALUT_ICON_SIZE = 44;
-
-/// 默认间距
-const double SPACING = 10;
 
 /// 图文导航
 class NCollectionNavWidget extends StatefulWidget {
   NCollectionNavWidget({
-    Key? key,
-    this.title,
+    super.key,
     required this.items,
     required this.onItem,
     this.scrollType = PageViewScrollType.full,
     this.pageRowNum = 2,
     this.pageColumnNum = 5,
-    this.iconSize = DEFALUT_ICON_SIZE,
+    this.iconSize = 44,
     this.textHeight = 16,
     this.textGap = 0,
     this.columnSpacing = 16,
-    this.rowSpacing = SPACING,
+    this.rowSpacing = 8,
     this.autoAdjustHeight = true,
     this.indicatorItemHeight = 2,
     this.indicatorItemWidth = 12,
     this.indicatorGap = 8,
     this.boxShadows,
     this.isDebug = false,
-  }) : super(key: key);
-
-  final String? title;
+  });
 
   /// 当前页面数据
   final List<AttrNavItem> items;
@@ -87,330 +78,204 @@ class NCollectionNavWidget extends StatefulWidget {
 }
 
 class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
-  /// 当前页面数据
-  List<AttrNavItem> _items = [];
+  late final _controller = PageController();
+  final _scrollOffset = ValueNotifier(0.0);
 
-  ///金刚区页数
-  int pageCount = 1;
+  List<AttrNavItem> get _items => widget.items;
 
-  /// 滑动控制器
-  PageController? controller;
+  double get _itemHeight => widget.iconSize + widget.textGap + widget.textHeight;
 
-  /// 监听滚动偏移量
-  var scrollOffset = ValueNotifier(0.0);
+  int get _pageCapacity => widget.pageRowNum * widget.pageColumnNum;
 
-  /// 子项高度
-  double get itemHeight => widget.iconSize + widget.textGap + widget.textHeight;
+  bool get _pageSnap => widget.scrollType == PageViewScrollType.full;
 
-  /// 传入的每页最大数量
-  int get pageNum => widget.pageRowNum * widget.pageColumnNum;
-
-  // /// 整个视图总高度
-  // double get totalHeight {
-  //   var height = itemHeight * widget.pageRowNum + widget.columnSpacing * (widget.pageRowNum - 1) + widget.indicatorGap + widget.indicatorItemHeight;
-  //   return height;
-  // }
-
-  ///是否支持整屏滑动
-  bool get pageSnap {
-    return (widget.scrollType == PageViewScrollType.full);
-  }
-
-  /// 包含外观 margin + BoxShadow 的 margin 总和
-  EdgeInsets get marginTotal {
-    var edge = EdgeInsets.zero;
-
-    if (widget.boxShadows != null && widget.boxShadows!.isNotEmpty) {
-      var shadow = widget.boxShadows![0];
-
-      /// 留出阴影空间
-      edge = edge.mergeShadow(shadow: shadow);
+  int get _visibleCount {
+    if (widget.scrollType == PageViewScrollType.none) {
+      return min(_items.length, _pageCapacity);
     }
-    return edge;
+    return _items.length;
   }
 
-  /// item行间距(和h5渲染原理不同,需预留阴影外壳的外间距)
-  double get runSpacing {
-    final vertical = (marginTotal.top + marginTotal.bottom);
-    if (widget.rowSpacing <= vertical) {
-      return 8;
+  int get _pageCount {
+    if (widget.scrollType == PageViewScrollType.none) {
+      return 1;
     }
-    final result = (widget.rowSpacing - vertical).truncateToDouble();
-    return result;
+    if (_visibleCount == 0 || _pageCapacity == 0) {
+      return 0;
+    }
+    return (_visibleCount / _pageCapacity).ceil();
   }
 
-  @override
-  void dispose() {
-    controller?.dispose();
+  int get _layoutRowCount {
+    if (_pageCapacity >= _items.length) {
+      final n = _visibleCount;
+      if (widget.pageColumnNum == 0) {
+        return widget.pageRowNum;
+      }
+      return (n + widget.pageColumnNum - 1) ~/ widget.pageColumnNum;
+    }
+    return widget.pageRowNum;
+  }
 
-    super.dispose();
+  double get _totalHeight {
+    final rows = max(_layoutRowCount, 0);
+    final gapCount = max(rows - 1, 0);
+    return _itemHeight * rows + widget.columnSpacing * gapCount + widget.indicatorGap + widget.indicatorItemHeight;
   }
 
   @override
   void initState() {
-    controller = PageController();
-    controller!.addListener(() {
-      scrollOffset.value = controller!.offset;
-      // print("scrollOffset:${scrollOffset.value}");
-    });
-
-    initailData();
-
     super.initState();
+    _controller.addListener(() {
+      _scrollOffset.value = _controller.offset;
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _scrollOffset.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var totalCount = _items.length; //展示总数
-
-    if (widget.scrollType == PageViewScrollType.none) {
-      pageCount = 1;
-      totalCount = min(totalCount, pageNum);
-    } else {
-      pageCount = (totalCount / pageNum).ceil();
-    }
-    // 整个视图总高度
-    var totalHeight = itemHeight * widget.pageRowNum +
-        widget.columnSpacing * (widget.pageRowNum - 1) +
-        widget.indicatorGap +
-        widget.indicatorItemHeight;
-    if (pageNum >= _items.length) {
-      /// 实际 pageRowNum
-      final num = (totalCount % widget.pageColumnNum) == 0
-          ? totalCount ~/ widget.pageColumnNum
-          : totalCount ~/ widget.pageColumnNum + 1;
-      totalHeight =
-          itemHeight * num + widget.columnSpacing * (num - 1) + widget.indicatorGap + widget.indicatorItemHeight;
-    }
-
-    var margin = EdgeInsets.zero;
-
-    var container = Container(
-      // color: widget.isDebug ? Colors.green : null,
-      height: widget.autoAdjustHeight ? totalHeight : null,
-      child: LayoutBuilder(builder: (context, constraints) {
-        return Stack(
+    return LayoutBuilder(builder: (context, constraints) {
+      final edge = widget.rowSpacing * 0.5;
+      var itemWidth =
+          (constraints.maxWidth - widget.rowSpacing * (widget.pageColumnNum - 1) - edge * 2) / widget.pageColumnNum;
+      if (!itemWidth.isFinite || itemWidth < 0) {
+        itemWidth = 0;
+      }
+      return SizedBox(
+        height: widget.autoAdjustHeight ? _totalHeight : null,
+        child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
-          children: <Widget>[
+          children: [
             Container(
               color: widget.isDebug ? ColorExt.random : null,
-              margin: margin,
               width: constraints.maxWidth,
-              child: _pageContent(),
+              child: PageView.builder(
+                key: const PageStorageKey('CollectionNavWidget'),
+                itemCount: _pageCount,
+                controller: _controller,
+                pageSnapping: _pageSnap,
+                physics: _pageCount == 1 ? const NeverScrollableScrollPhysics() : null,
+                itemBuilder: (context, pageIndex) {
+                  return Padding(
+                    padding: EdgeInsets.only(left: edge),
+                    child: Wrap(
+                      spacing: widget.rowSpacing,
+                      runSpacing: widget.columnSpacing,
+                      children: _pageItems(pageIndex, itemWidth),
+                    ),
+                  );
+                },
+              ),
             ),
             Positioned(
               bottom: 0,
-              child: Container(
+              child: SizedBox(
                 height: widget.indicatorItemHeight,
-                child: Center(
-                  child: _scrollerIndicator(
-                    width: constraints.maxWidth,
-                    indicatorItemHeight: widget.indicatorItemHeight,
-                    indicatorItemWidth: widget.indicatorItemWidth,
-                  ),
-                ),
-              ),
-            )
-          ],
-        );
-      }),
-    );
-    return container;
-  }
-
-  /// 数据初始化
-  initailData() {
-    _items = widget.items;
-  }
-
-  /// 每页的内容容器
-  Widget _pageContent() {
-    return LayoutBuilder(builder: (context, constraints) {
-      var edgeHorizontal = widget.rowSpacing * 0.5;
-      var itemWidth = (constraints.maxWidth - widget.rowSpacing * (widget.pageColumnNum - 1) - edgeHorizontal * 2) /
-          widget.pageColumnNum;
-
-      return PageView.builder(
-        key: const PageStorageKey('CollectionNavWidget'),
-        itemCount: pageCount,
-        controller: controller,
-        pageSnapping: pageSnap,
-        physics: pageCount == 1 ? NeverScrollableScrollPhysics() : null,
-        // clipBehavior: Clip.none,
-        itemBuilder: (context, pageIndex) {
-          return Container(
-            // color: ColorExt.random,//add test
-            padding: EdgeInsets.only(left: edgeHorizontal),
-            child: Wrap(
-              key: Key("Wrap_$pageIndex"),
-              spacing: widget.rowSpacing,
-              runSpacing: widget.columnSpacing,
-              children: _getChildren(
-                pageIndex: pageIndex,
-                pageTotal: widget.pageRowNum * widget.pageColumnNum,
-                width: itemWidth,
+                child: Center(child: _indicator(constraints.maxWidth)),
               ),
             ),
-          );
-        },
+          ],
+        ),
       );
     });
   }
 
-  /// item 数组集合
-  List<Widget> _getChildren({required int pageIndex, required int pageTotal, required double width}) {
-    return List.generate(
-        pageTotal,
-        (i) => Container(
-              // color: i % 2 == 0 ? Colors.green : Colors.yellow,
-              constraints: BoxConstraints(maxWidth: width),
-              child: _getItem(
-                ctx: context,
-                index: pageTotal * pageIndex + i,
-                imgWidth: width,
-              ),
-            )).toList();
+  List<Widget> _pageItems(int pageIndex, double width) {
+    final start = _pageCapacity * pageIndex;
+    final end = min(start + _pageCapacity, _visibleCount);
+    return [
+      for (var i = start; i < end; i++) SizedBox(width: width, child: _item(i, width)),
+    ];
   }
 
-  /// item 组件
-  Widget _getItem({required BuildContext ctx, required int index, required double imgWidth}) {
-    if (index >= _items.length) {
-      return SizedBox();
-    }
-
-    var model = _items[index];
-
-    var iconUrl = model.icon ?? '';
-
-    var imgBorderRadius = BorderRadius.all(Radius.circular(10)); //add test
-
-    // var imgBoxShadow = widget.attr?.itemImg?.shadow?.boxShadows;//图文导航子项没有阴影设置
-
-    final child = Container(
-      color: widget.isDebug ? ColorExt.random : null, //add test
-      // width: imgWidth,
-      child: Column(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                // color: Colors.green,//add test
-                // boxShadow: imgBoxShadow,
-                ),
-            child: ClipRRect(
-              borderRadius: imgBorderRadius,
-              child: FadeInImage(
-                placeholder: AssetImage(Assets.imagesImgPlaceholder),
-                image: NetworkImage(iconUrl),
-                fit: BoxFit.fill,
-                width: widget.iconSize,
-                height: widget.iconSize,
+  Widget _item(int index, double imgWidth) {
+    final model = _items[index];
+    final iconSize = min(widget.iconSize, imgWidth);
+    return InkWell(
+      onTap: () => widget.onItem(model),
+      child: Container(
+        color: widget.isDebug ? ColorExt.random : null,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            NNetworkImage(
+              url: model.icon ?? '',
+              width: iconSize,
+              height: iconSize,
+              radius: 10,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: widget.textGap),
+              child: SizedBox(
+                height: widget.textHeight,
+                child: Center(child: _title(model)),
               ),
             ),
-          ),
-          Container(
-              margin: EdgeInsets.only(top: widget.textGap),
-              height: widget.textHeight,
-              child: Center(
-                child: _getItemTitle(
-                  model: model,
-                  imgWidth: imgWidth,
-                  index: index,
-                  addFittedBox: true,
-                ),
-              )),
-        ],
+          ],
+        ),
       ),
-    );
-
-    return InkWell(
-      onTap: () {
-        // print("InkWell: ${model.name}");
-        widget.onItem(model);
-      },
-      child: child,
     );
   }
 
-  /// 标题
-  Widget _getItemTitle({
-    required AttrNavItem model,
-    required double imgWidth,
-    required int index,
-    bool addFittedBox = false,
-  }) {
+  Widget _title(AttrNavItem model) {
     var name = model.name ?? '';
     if (name.isEmpty) {
-      return Container();
+      return const SizedBox();
     }
-
-    var textLimit = 5.toInt();
-    if (textLimit < name.length) {
-      name = name.substring(0, textLimit);
+    if (name.length > 5) {
+      name = name.substring(0, 5);
     }
-
-    // if (index <= 1) {//add test
-    //   name += "啊";
-    // }
-    Widget textWidget = Text(
+    Widget text = Text(
       name,
       maxLines: 1,
-      overflow: TextOverflow.visible,
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 13,
-      ),
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(color: Colors.black, fontSize: 13),
     );
-
     if (widget.isDebug) {
-      textWidget = ColoredBox(color: ColorExt.random, child: textWidget);
+      text = ColoredBox(color: ColorExt.random, child: text);
     }
-
-    if (addFittedBox) {
-      return FittedBox(
-        fit: BoxFit.none,
-        child: textWidget,
-      );
-    }
-    return textWidget;
+    return FittedBox(fit: BoxFit.scaleDown, child: text);
   }
 
-  /// 自定义滚动条
-  Widget _scrollerIndicator({
-    required double width,
-    double indicatorItemHeight = 2,
-    double indicatorItemWidth = 120,
-  }) {
-    if (pageCount < 2) {
-      return Container();
+  Widget _indicator(double width) {
+    if (_pageCount < 2) {
+      return const SizedBox();
     }
+    final itemW = widget.indicatorItemWidth;
+    final itemH = widget.indicatorItemHeight;
     return Stack(
-      children: <Widget>[
+      children: [
         ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(1)),
+          borderRadius: BorderRadius.circular(1),
           child: Container(
-            height: indicatorItemHeight,
-            width: indicatorItemWidth.toDouble() * pageCount,
+            height: itemH,
+            width: itemW * _pageCount,
             color: Colors.black.withValues(alpha: 0.08),
           ),
         ),
         ValueListenableBuilder<double>(
-            valueListenable: scrollOffset,
-            builder: (context, value, child) {
-              final offset = (value / width) * indicatorItemWidth;
-              // print("ValueListenableBuilder: ${value}_${offset}");
-
-              return Positioned(
-                  left: offset,
-                  child: Container(
-                    height: indicatorItemHeight,
-                    width: indicatorItemWidth,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFBE965A),
-                      // color: Colors.red,
-                      borderRadius: BorderRadius.circular(1),
-                    ),
-                  ));
-            }),
+          valueListenable: _scrollOffset,
+          builder: (context, value, child) {
+            final offset = width == 0 ? 0.0 : (value / width) * itemW;
+            return Positioned(
+              left: offset,
+              child: Container(
+                height: itemH,
+                width: itemW,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFBE965A),
+                  borderRadius: BorderRadius.circular(1),
+                ),
+              ),
+            );
+          },
+        ),
       ],
     );
   }
@@ -474,25 +339,15 @@ enum PageViewScrollType {
   drag,
 
   /// 禁用滑动
-  none,
-}
+  none;
 
-extension PageViewScrollTypeExt on int {
   /// int 转枚举
-  PageViewScrollType? toPageViewScrollType([bool isClamp = true]) {
-    const allCases = PageViewScrollType.values;
-    var index = this;
+  PageViewScrollType indexOf(int index, [bool isClamp = true]) {
+    var i = index;
     if (isClamp) {
-      index = clamp(0, allCases.length - 1).toInt();
+      i = i.clamp(0, values.length - 1).toInt();
     }
-    return allCases.by((e) => e.index == index);
-  }
-
-  /// int 转枚举
-  PageViewScrollType get pageViewScrollType {
-    const allCases = PageViewScrollType.values;
-    // final index = this.clamp(0, allCases.length - 1);
-    // return allCases[index];
-    return toPageViewScrollType(true) ?? allCases.first;
+    final result = values.where((e) => e.index == i).firstOrNull ?? this;
+    return result;
   }
 }
