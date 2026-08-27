@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
@@ -148,7 +148,7 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.memory_rounded),
       title: '视图',
       subtitle: 'buffer.asXxxList',

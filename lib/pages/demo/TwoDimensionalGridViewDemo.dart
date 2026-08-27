@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
@@ -230,7 +230,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'mainAxis · primary · diagonalDragBehavior',
@@ -272,7 +272,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
   }
 
   Widget buildSizeCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
       title: '尺寸',
       subtitle: 'itemWidth · itemHeight · cacheExtent · maxIndex',
@@ -290,7 +290,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'physics · reverse · clip · drag · keyboard · hitTest',

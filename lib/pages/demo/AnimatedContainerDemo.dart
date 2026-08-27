@@ -9,9 +9,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
@@ -348,7 +348,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'alignment · color · decoration · child',
@@ -392,7 +392,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '表面',
       subtitle: 'foregroundDecoration · clipBehavior · transform',
@@ -435,7 +435,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   Widget buildSizeCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
       title: '尺寸',
       subtitle: 'width · height · padding · margin',
@@ -460,7 +460,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'duration · curve · onEnd',
@@ -479,9 +479,9 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             label: 'curve',
             showTopGap: true,
             child: buildChoiceChips(
-              values: NStyleCard.curvePresets,
+              values: NDecorationCard.curvePresets,
               isSelected: (e) => identical(curve, e),
-              labelOf: NStyleCard.nameOfCurve,
+              labelOf: NDecorationCard.nameOfCurve,
               onChanged: onCurve,
             ),
           ),

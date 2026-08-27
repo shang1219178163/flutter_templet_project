@@ -9,9 +9,9 @@ enum ClipKind { nil, none, hardEdge, antiAlias, antiAliasWithSaveLayer }
 /// systemOverlayStyle 预设
 enum OverlayKind { none, light, dark }
 
-/// 统一风格卡片：渐变顶条、圆角描边、标题区 + 内容。
-class NStyleCard extends StatelessWidget {
-  const NStyleCard({
+/// 装饰卡片：渐变顶条、圆角描边、标题区 + 内容。
+class NDecorationCard extends StatelessWidget {
+  const NDecorationCard({
     super.key,
     required this.icon,
     this.title = '',

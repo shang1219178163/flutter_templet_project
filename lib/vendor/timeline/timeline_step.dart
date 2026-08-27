@@ -7,9 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
@@ -225,7 +225,7 @@ class _TimelineStepState extends State<TimelineStep> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'timelineList · leftContent · height',
@@ -256,7 +256,7 @@ class _TimelineStepState extends State<TimelineStep> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.layers_rounded),
       title: '表面',
       subtitle: 'lineColor · backgroundColor',
@@ -278,7 +278,7 @@ class _TimelineStepState extends State<TimelineStep> {
   }
 
   Widget buildStyleCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.text_fields_rounded),
       title: '样式',
       subtitle: 'titleStyle · subtitleStyle · descriptionStyle',

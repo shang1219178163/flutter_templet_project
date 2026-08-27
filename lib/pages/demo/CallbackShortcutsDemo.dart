@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
@@ -255,7 +255,7 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'bindings · child',
@@ -277,7 +277,7 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
   }
 
   Widget buildActivatorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.keyboard_rounded),
       title: 'SingleActivator',
       subtitle: 'trigger · control · shift · alt · meta · includeRepeats',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
@@ -195,7 +195,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'child · alignment · clipBehavior',
@@ -233,7 +233,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'duration · reverseDuration · curve · onEnd',
@@ -266,9 +266,9 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
             label: 'curve',
             showTopGap: true,
             child: buildChoiceChips(
-              values: NStyleCard.curvePresets,
+              values: NDecorationCard.curvePresets,
               isSelected: (e) => identical(curve, e),
-              labelOf: NStyleCard.nameOfCurve,
+              labelOf: NDecorationCard.nameOfCurve,
               onChanged: onCurve,
             ),
           ),

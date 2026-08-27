@@ -9,9 +9,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:get/get.dart';
 
@@ -237,7 +237,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'filter · child',
@@ -269,7 +269,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
   }
 
   Widget buildFilterCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.blur_on_rounded),
       title: '滤镜',
       subtitle: 'ImageFilter.blur / dilate / erode',
@@ -328,7 +328,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'blendMode · enabled',

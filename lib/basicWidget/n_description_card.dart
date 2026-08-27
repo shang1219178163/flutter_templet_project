@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_lang_segment_control.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 
 export 'n_lang_segment_control.dart' show NLangEnum, NLangSegmentControl;
 
@@ -52,7 +52,7 @@ class _NDescriptionCardState extends State<NDescriptionCard> {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final isZh = _lang == NLangEnum.zh;
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.auto_awesome_rounded),
       header: AnimatedSwitcher(
         duration: const Duration(milliseconds: 180),

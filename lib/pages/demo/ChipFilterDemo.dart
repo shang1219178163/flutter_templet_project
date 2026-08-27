@@ -7,9 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -424,7 +424,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'FilterChip · FilterChip.elevated',
@@ -441,7 +441,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   }
 
   Widget buildContentCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.person_outline_rounded),
       title: '内容',
       subtitle: 'avatar · delete · tooltip · enabled',
@@ -475,7 +475,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '表面',
       subtitle: 'color · shape · side · clipBehavior',
@@ -554,7 +554,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   }
 
   Widget buildSizeCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
       title: '尺寸',
       subtitle: 'padding · elevation · density',
@@ -642,7 +642,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'checkmark · autofocus · chipAnimationStyle',

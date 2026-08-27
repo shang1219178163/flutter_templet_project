@@ -11,9 +11,9 @@ import 'dart:math' as math;
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
@@ -330,7 +330,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'constructor · scrollDirection',
@@ -362,7 +362,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildSizeCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
       title: '尺寸',
       subtitle: 'height · aspectRatio · viewportFraction · initialPage',
@@ -401,7 +401,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '表面',
       subtitle: 'enlargeCenterPage · enlargeStrategy · enlargeFactor · clipBehavior',
@@ -445,7 +445,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildPlayCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.play_circle_outline_rounded),
       title: '播放',
       subtitle: 'autoPlay · autoPlayInterval · autoPlayCurve',
@@ -499,7 +499,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'scrollPhysics · reverse · pageSnapping · padEnds',

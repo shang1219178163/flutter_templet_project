@@ -8,9 +8,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_nav_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
@@ -250,7 +250,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'scrollType · items',
@@ -280,7 +280,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildGridCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.grid_view_rounded),
       title: '网格',
       subtitle: 'pageRowNum · pageColumnNum',
@@ -309,7 +309,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildCellCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
       title: '单元格',
       subtitle: 'iconSize · textHeight · spacing',
@@ -327,7 +327,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildIndicatorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.more_horiz_rounded),
       title: '指示器',
       subtitle: 'indicatorItemHeight · Width · Gap',
@@ -355,7 +355,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '表面',
       subtitle: 'isDebug · boxShadows',
@@ -376,7 +376,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'autoAdjustHeight',

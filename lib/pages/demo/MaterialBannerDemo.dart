@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -259,7 +259,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
   }
 
   Widget buildContentCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.notes_outlined),
       title: '内容',
       subtitle: 'content  contentTextStyle  leading  leadingPadding',
@@ -314,7 +314,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
   }
 
   Widget buildActionsCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.smart_button_outlined),
       title: '操作',
       subtitle: 'actions  forceActionsBelow  overflowAlignment  minActionBarHeight',
@@ -351,7 +351,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.layers_outlined),
       title: '表面',
       subtitle: 'elevation  backgroundColor  surfaceTintColor  shadowColor  dividerColor  padding  margin',

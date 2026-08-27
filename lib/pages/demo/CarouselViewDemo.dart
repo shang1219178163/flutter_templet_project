@@ -10,9 +10,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -269,7 +269,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'constructor · scrollDirection · flexWeights',
@@ -312,7 +312,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '表面',
       subtitle: 'shape · backgroundColor · overlayColor · elevation',
@@ -347,7 +347,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   Widget buildSizeCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
       title: '尺寸',
       subtitle: 'itemExtent · shrinkExtent · padding · itemCount',
@@ -372,7 +372,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'itemSnapping · reverse · enableSplash · consumeMaxWeight',

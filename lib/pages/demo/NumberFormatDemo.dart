@@ -7,9 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -238,7 +238,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'factory · pattern · locale · name · symbol · decimalDigits',
@@ -334,7 +334,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   }
 
   Widget buildValueCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '输入',
       subtitle: 'NumberFormat.format',

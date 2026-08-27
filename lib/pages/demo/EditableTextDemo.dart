@@ -3,9 +3,9 @@ import 'dart:ui' show BoxHeightStyle, BoxWidthStyle;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -426,7 +426,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'readOnly · obscureText · keyboardType · inputFormatters',
@@ -524,7 +524,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   Widget buildStyleCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.text_fields_rounded),
       title: '样式',
       subtitle: 'style · textAlign · textScaler · strutStyle',
@@ -640,7 +640,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   Widget buildCursorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.highlight_alt_rounded),
       title: '光标与选区',
       subtitle: 'cursorColor · selectionColor · showCursor',
@@ -753,7 +753,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   Widget buildLayoutCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.space_dashboard_rounded),
       title: '布局',
       subtitle: 'maxLines · minLines · expands · clipBehavior',
@@ -802,7 +802,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'autofocus · magnifier · undoController · onChanged',

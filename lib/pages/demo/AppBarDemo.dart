@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -363,7 +363,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'leading · title · actions · flexibleSpace · bottom',
@@ -422,7 +422,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '表面',
       subtitle: 'color · shape · elevation · overlay',
@@ -542,7 +542,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }
 
   Widget buildSizeCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
       title: '尺寸',
       subtitle: 'toolbarHeight · leadingWidth · titleSpacing · opacity',
@@ -581,7 +581,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'primary · centerTitle · notificationPredicate',

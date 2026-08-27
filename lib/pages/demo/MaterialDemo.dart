@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -241,7 +241,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.layers_outlined),
       title: '表面',
       subtitle: 'type  elevation  color  shadowColor  surfaceTintColor',
@@ -272,7 +272,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
 
   Widget buildShapeCard() {
     final clipValues = ClipKind.values.where((e) => e != ClipKind.nil).toList();
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.rounded_corner_outlined),
       title: '形状',
       subtitle: 'shape  borderRadius  clipBehavior  borderOnForeground  textStyle  animationDuration',

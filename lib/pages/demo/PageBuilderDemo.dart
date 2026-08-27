@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -184,7 +184,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'transitionsBuilder',
@@ -223,7 +223,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.layers_rounded),
       title: '表面',
       subtitle: 'opaque · barrierDismissible · barrierColor · barrierLabel',
@@ -264,7 +264,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   Widget buildDurationCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.timer_outlined),
       title: '时长',
       subtitle: 'transitionDuration · reverseTransitionDuration',
@@ -293,7 +293,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'maintainState · fullscreenDialog · allowSnapshotting · requestFocus · settings',

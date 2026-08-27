@@ -9,8 +9,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
@@ -259,7 +259,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
   }
 
   Widget buildListenCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.sensors_rounded),
       title: '监听',
       subtitle: 'WidgetsBindingObserver · unused dispatcher callbacks',
@@ -288,7 +288,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
   }
 
   Widget buildLogCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.receipt_long_rounded),
       title: '事件',
       subtitle: '最近 20 条',
@@ -364,7 +364,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
       );
     }
 
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.data_object_rounded),
       title: '属性',
       subtitle: 'PlatformDispatcher + views.first',

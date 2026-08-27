@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
@@ -234,7 +234,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
   }
 
   Widget buildAuthCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.fingerprint_rounded),
       title: '认证文案',
       subtitle: 'localizedReason',
@@ -258,7 +258,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
   }
 
   Widget buildOptionsCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '选项',
       subtitle: 'AuthenticationOptions',
@@ -275,7 +275,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
   }
 
   Widget buildMessagesCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.message_outlined),
       title: '对话框文案',
       subtitle: 'authMessages',

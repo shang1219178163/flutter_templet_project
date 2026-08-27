@@ -7,10 +7,10 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
@@ -235,7 +235,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'child · transitionBuilder · layoutBuilder',
@@ -295,7 +295,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'duration · reverseDuration · switchInCurve · switchOutCurve',
@@ -328,9 +328,9 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
             label: 'switchInCurve',
             showTopGap: true,
             child: buildChoiceChips(
-              values: NStyleCard.curvePresets,
+              values: NDecorationCard.curvePresets,
               isSelected: (e) => identical(switchInCurve, e),
-              labelOf: NStyleCard.nameOfCurve,
+              labelOf: NDecorationCard.nameOfCurve,
               onChanged: onSwitchInCurve,
             ),
           ),
@@ -338,9 +338,9 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
             label: 'switchOutCurve',
             showTopGap: true,
             child: buildChoiceChips(
-              values: NStyleCard.curvePresets,
+              values: NDecorationCard.curvePresets,
               isSelected: (e) => identical(switchOutCurve, e),
-              labelOf: NStyleCard.nameOfCurve,
+              labelOf: NDecorationCard.nameOfCurve,
               onChanged: onSwitchOutCurve,
             ),
           ),

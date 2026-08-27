@@ -1,8 +1,8 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -298,7 +298,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'url · fit · alignment · repeat · filterQuality · clipBehavior · shape · mode',
@@ -407,7 +407,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   }
 
   Widget buildSurfaceCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '外观',
       subtitle: 'width · height · color · colorBlendMode · border · layoutInsets',
@@ -495,7 +495,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   }
 
   Widget buildNetworkCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.cloud_download_outlined),
       title: '网络',
       subtitle: 'cache · scale · retries · enableLoadState · loadStateChanged · memory',
@@ -553,7 +553,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   }
 
   Widget buildBehaviorCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'gaplessPlayback · semantics · isAntiAlias · onDoubleTap',

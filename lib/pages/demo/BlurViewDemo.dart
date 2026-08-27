@@ -10,9 +10,9 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_blur_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/basicWidget/n_style_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:get/get.dart';
 
@@ -259,7 +259,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
   }
 
   Widget buildConstructCard() {
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'borderRadius · clipper · clipBehavior · child · backdropFilter · blur',
@@ -328,7 +328,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     if (!useBackdropFilter) {
       return const SizedBox.shrink();
     }
-    return NStyleCard(
+    return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
       title: 'backdropFilter',
       subtitle: 'filter · blendMode · enabled',
