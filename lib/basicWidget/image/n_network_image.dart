@@ -82,19 +82,22 @@ class NNetworkImage extends StatelessWidget {
     // 只约束宽度，保留比例，避免宽高同时指定导致异常放大解码
     final cacheWidth = cachePx(logicalWidth, dpr) ?? cachePx(screenSize.width, dpr);
     final requestUrl = resolveRequestUrl(url, cacheWidth);
+    // OSS 已按显示宽度出图，再套 cacheWidth 会二次解码失败
+    final useOssThumb = requestUrl.contains('x-oss-process=image/resize');
     final borderRadius = BorderRadius.circular(radius);
-
     return ClipRRect(
       borderRadius: borderRadius,
       child: ExtendedImage.network(
         requestUrl,
-        key: ValueKey(requestUrl),
         width: width,
         height: height,
-        cacheWidth: cacheWidth,
+        cacheWidth: useOssThumb ? null : cacheWidth,
         fit: fit,
         cache: cache,
         mode: mode,
+        printError: false,
+        gaplessPlayback: true,
+        timeRetry: const Duration(milliseconds: 300),
         clearMemoryCacheWhenDispose: clearMemoryCacheWhenDispose,
         clearMemoryCacheIfFailed: true,
         borderRadius: borderRadius,
@@ -151,6 +154,13 @@ class NNetworkImage extends StatelessWidget {
     if (px <= 0) {
       return null;
     }
-    return px.clamp(1, maxCachePx);
+    final clamped = px.clamp(1, maxCachePx);
+    const steps = [64, 128, 192, 256, 384, 512, 768, 1024];
+    for (final step in steps) {
+      if (clamped <= step) {
+        return step;
+      }
+    }
+    return maxCachePx;
   }
 }
