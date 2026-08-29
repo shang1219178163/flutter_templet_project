@@ -45,36 +45,28 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
   }
 
   Widget buildAnimatedList() {
-    if (data.isEmpty) {
-      return Center(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.all_inclusive),
-              Text("暂无数据"),
-            ],
-          ),
-        ),
-      );
-    }
     return Stack(
       children: [
         AnimatedList(
           key: globalKey,
           initialItemCount: data.length,
-          itemBuilder: (
-            context,
-            index,
-            animation,
-          ) {
-            //添加列表项时会执行渐显动画
+          itemBuilder: (context, index, animation) {
             return FadeTransition(
               opacity: animation,
-              child: buildItem(context, index),
+              child: buildItem(data[index], index: index),
             );
           },
         ),
+        if (data.isEmpty)
+          const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.all_inclusive),
+                Text("暂无数据"),
+              ],
+            ),
+          ),
         buildAddBtn(),
       ],
     );
@@ -99,49 +91,37 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
     );
   }
 
-  // 构建列表项
-  Widget buildItem(context, index) {
-    var char = data[index];
-    debugPrint("buildItem: ${data.length}, $index");
+  Widget buildItem(String char, {int? index}) {
     return ListTile(
-      //数字不会重复，所以作为Key
       key: ValueKey(char),
       title: Text(char),
       trailing: IconButton(
-        icon: Icon(Icons.delete),
-        // 点击时删除
-        onPressed: () => onDelete(context, index),
+        icon: const Icon(Icons.delete),
+        onPressed: index == null ? null : () => onDelete(index),
       ),
     );
   }
 
-  void onDelete(context, index) {
-    // 待实现
-    setState(() {
-      globalKey.currentState!.removeItem(
-        index,
-        (context, animation) {
-          // 删除过程执行的是反向动画，animation.value 会从1变为0
-          var item = buildItem(context, index);
-          debugPrint('删除 ${data[index]}');
-          data.removeAt(index);
-          // 删除动画是一个合成动画：渐隐 + 缩小列表项告诉
-          return FadeTransition(
-            opacity: CurvedAnimation(
-              parent: animation,
-              //让透明度变化的更快一些
-              curve: const Interval(0.5, 1.0),
-            ),
-            // 不断缩小列表项的高度
-            child: SizeTransition(
-              sizeFactor: animation,
-              axisAlignment: 0.0,
-              child: item,
-            ),
-          );
-        },
-        duration: Duration(milliseconds: 200), // 动画时间为 200 ms
-      );
-    });
+  void onDelete(int index) {
+    final char = data.removeAt(index);
+    debugPrint('删除 $char');
+    globalKey.currentState!.removeItem(
+      index,
+      (context, animation) {
+        return FadeTransition(
+          opacity: CurvedAnimation(
+            parent: animation,
+            curve: const Interval(0.5, 1.0),
+          ),
+          child: SizeTransition(
+            sizeFactor: animation,
+            axisAlignment: 0.0,
+            child: buildItem(char),
+          ),
+        );
+      },
+      duration: const Duration(milliseconds: 200),
+    );
+    setState(() {});
   }
 }
