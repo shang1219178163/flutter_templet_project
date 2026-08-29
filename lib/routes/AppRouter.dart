@@ -445,6 +445,7 @@ class AppRouter {
   static const String nestedNavigatorDemo = '/nestedNavigatorDemo';
   static const String nTweenTransitionDemo = '/nTweenTransitionDemo';
   static const String hapticFeedbackDemo = '/hapticFeedbackDemo';
+  static const String audioVisualizerDemo = '/audioVisualizerDemo';
   static const String webviewDemo = '/webviewDemo';
   static const String secureKeyboardDemo = '/secureKeyboardDemo';
   static const String popScopeDemo = '/popScopeDemo';

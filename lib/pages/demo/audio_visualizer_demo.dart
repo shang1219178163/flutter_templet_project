@@ -93,9 +93,8 @@ class _AudioVisualizerDemoState extends State<AudioVisualizerDemo> {
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: Column(
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                spacing: 8,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -137,12 +136,7 @@ class _AudioVisualizerDemoState extends State<AudioVisualizerDemo> {
                     },
                     child: const Text('Asset'),
                   ),
-                ]
-                    .map((e) => Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: e,
-                        ))
-                    .toList(),
+                ],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

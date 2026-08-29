@@ -346,6 +346,7 @@ import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/ae_report_page.dart';
+import 'package:flutter_templet_project/pages/demo/audio_visualizer_demo.dart';
 import 'package:flutter_templet_project/pages/demo/ball/GradientPlaygroundPage.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
@@ -1920,6 +1921,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.hapticFeedbackDemo,
       page: () => HapticFeedbackDemo(),
+    ),
+    GetPage(
+      name: AppRouter.audioVisualizerDemo,
+      page: () => AudioVisualizerDemo(),
     ),
     GetPage(
       name: AppRouter.webviewDemo,

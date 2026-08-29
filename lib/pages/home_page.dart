@@ -375,6 +375,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.nestedNavigatorDemo, "nestedNavigatorDemo"),
   Tuple2(AppRouter.nTweenTransitionDemo, "nTweenTransitionDemo"),
   Tuple2(AppRouter.hapticFeedbackDemo, "hapticFeedbackDemo"),
+  Tuple2(AppRouter.audioVisualizerDemo, "audioVisualizerDemo"),
   Tuple2(AppRouter.webviewDemo, "webviewDemo"),
   Tuple2(AppRouter.secureKeyboardDemo, "secureKeyboardDemo"),
   Tuple2(AppRouter.popScopeDemo, "popScopeDemo"),
