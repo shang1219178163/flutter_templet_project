@@ -59,14 +59,14 @@ class _CompareToPageState extends State<CompareToPage> {
     final matchScoreDataModel = MatchMemberScoreDataModel.fromJson(map['data']);
     teams = [matchScoreDataModel.home!, matchScoreDataModel.away!];
     players = matchScoreDataModel.playerScoreItem ?? [];
-    players.forEach((p) {
+    for (final p in players) {
       final team = teams.where((e) => e.id == p.teamId).firstOrNull;
       p.teamName = team?.name;
       p.teamLogo = team?.logo;
       if (!teams.map((e) => e.id).contains(p.teamId)) {
         DLog.d([p.shortName, p.teamName]);
       }
-    });
+    }
     players.sort(comparePlayer);
 
     sortKeys = players.first.toJson().keys.toList();

@@ -107,9 +107,9 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
 
       return result;
     }).toList();
-    list.forEach((e) {
+    for (final e in list) {
       toCreateDartFile(fileName: e);
-    });
+    }
   }
 
   /// 生成模型文件

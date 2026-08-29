@@ -115,15 +115,15 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
     draftTimestamp = json['draftTimestamp'];
     if (json['markList'] != null) {
       markList = List.empty(growable: true);
-      (json['markList'] as List).forEach((v) {
+      for (final v in json['markList'] as List) {
         markList?.add(v as int?);
-      });
+      }
     }
     if (json['conversationGroupList'] != null) {
       conversationGroupList = List.empty(growable: true);
-      (json['conversationGroupList'] as List).forEach((v) {
+      for (final v in json['conversationGroupList'] as List) {
         conversationGroupList?.add(v as String?);
-      });
+      }
     }
 
     try {

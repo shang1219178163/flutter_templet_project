@@ -45,18 +45,18 @@ class _ListenableDemoState extends State<ListenableDemo> {
 
   @override
   void dispose() {
-    items.forEach((e) {
+    for (final e in items) {
       e.focusNode.removeListener(onKeyborad);
-    });
+    }
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    items.forEach((e) {
+    for (final e in items) {
       e.focusNode.addListener(onKeyborad);
-    });
+    }
   }
 
   void onKeyborad() {

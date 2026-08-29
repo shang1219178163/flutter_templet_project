@@ -124,9 +124,9 @@ class _SelectListState extends State<SelectList> {
               updateSelectedCount();
 
               if (!widget.isMultiple) {
-                dataList.value.forEach((item) {
+                for (final item in dataList.value) {
                   item.isSelected = (e == item);
-                });
+                }
                 widget.onSelected([e]);
               }
             }
@@ -179,15 +179,15 @@ class _SelectListState extends State<SelectList> {
               //     .map((e) => (e.name, e.isSelected)).toList());
 
               if (isAll) {
-                dataList.value.forEach((e) {
+                for (final e in dataList.value) {
                   e.isSelected = false;
                   // e.isSelected = !isAll;
-                });
+                }
               } else {
-                dataList.value.forEach((e) {
+                for (final e in dataList.value) {
                   e.isSelected = true;
                   // e.isSelected = !isAll;
-                });
+                }
               }
               setState(() {});
               updateSelectedCount();

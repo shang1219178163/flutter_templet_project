@@ -16,9 +16,9 @@ class TagsRootModel {
     code = json['code'];
     if (json['result'] != null) {
       result = <TagDetailModel>[];
-      (json['result'] as List).forEach((v) {
+      for (final v in json['result'] as List) {
         result!.add(TagDetailModel.fromJson(v as Map<String, dynamic>));
-      });
+      }
     }
     application = json['application'];
     traceId = json['traceId'];

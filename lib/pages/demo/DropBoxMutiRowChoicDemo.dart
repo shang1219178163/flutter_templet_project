@@ -298,9 +298,9 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
 
   /// 重置过滤参数
   onFitlerReset() {
-    mutiRowItems.forEach((item) {
+    for (final item in mutiRowItems) {
       item.selectedModelsTmp = [];
-    });
+    }
 
     onFitlerConfirm();
     //请求
@@ -310,16 +310,16 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   onFitlerConfirm() {
     closeDropBox();
 
-    mutiRowItems.forEach((item) {
+    for (final item in mutiRowItems) {
       item.selectedModels = item.selectedModelsTmp;
-    });
+    }
 
-    mutiRowItems.forEach((item) {
+    for (final item in mutiRowItems) {
       debugPrint("""-------------------------------------------
 title: ${item.title},
 selectedModelsTmp: ${item.selectedModelsTmp.map((e) => e.name).toList()},
 selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
-    });
+    }
     //请求
   }
 

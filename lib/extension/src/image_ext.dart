@@ -148,9 +148,9 @@ extension ImageCacheExt on ImageCache {
 
   /// evict images
   static evictImages(List<String> urls) {
-    urls.forEach((e) {
+    for (final e in urls) {
       Object key = NetworkImage(e, scale: 1.0);
       PaintingBinding.instance.imageCache.evict(key, includeLive: true);
-    });
+    }
   }
 }

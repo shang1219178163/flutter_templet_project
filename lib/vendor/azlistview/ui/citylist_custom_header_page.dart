@@ -29,9 +29,9 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
       cityList.clear();
       Map countyMap = jsonDecode(value);
       List list = countyMap['china'];
-      list.forEach((v) {
+      for (final v in list) {
         cityList.add(CityModel.fromJson(v));
-      });
+      }
       _handleList(cityList);
     });
   }

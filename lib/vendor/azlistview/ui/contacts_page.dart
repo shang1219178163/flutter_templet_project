@@ -44,9 +44,9 @@ class _ContactsPageState extends State<ContactsPage> {
     //加载联系人列表
     rootBundle.loadString('assets/data/car_models.json').then((value) {
       List list = jsonDecode(value);
-      list.forEach((v) {
+      for (final v in list) {
         contactList.add(ContactInfo.fromJson(v));
-      });
+      }
       _handleList(contactList);
     });
   }

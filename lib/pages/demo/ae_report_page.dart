@@ -574,9 +574,9 @@ class AdverseEventRecord {
     isSae = json['isSae'];
     if (json['imageUrls'] != null) {
       imageUrls = <ProofDetailModel>[];
-      (json['imageUrls'] as List).forEach((v) {
+      for (final v in json['imageUrls'] as List) {
         imageUrls!.add(ProofDetailModel.fromJson(v as Map<String, dynamic>));
-      });
+      }
     }
   }
   AdverseEventRecord({

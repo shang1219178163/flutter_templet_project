@@ -25,9 +25,9 @@ class _CarModelsPageState extends State<CarModelsPage> {
   Future<void> loadData() async {
     rootBundle.loadString('assets/data/car_models.json').then((value) {
       List list = jsonDecode(value);
-      list.forEach((v) {
+      for (final v in list) {
         contactList.add(ContactInfo.fromJson(v));
-      });
+      }
 //      contactList = contactList.reversed.toList();
 //      log('$contactList');
       _handleList(contactList);

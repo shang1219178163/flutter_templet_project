@@ -5,9 +5,9 @@ class AppstoreAppDetailRootModel {
     resultCount = json['resultCount'];
     if (json['results'] != null) {
       results = <AppstoreAppDetailModel>[];
-      (json['results'] as List).forEach((v) {
+      for (final v in json['results'] as List) {
         results!.add(AppstoreAppDetailModel.fromJson(v as Map<String, dynamic>));
-      });
+      }
     }
   }
   AppstoreAppDetailRootModel({

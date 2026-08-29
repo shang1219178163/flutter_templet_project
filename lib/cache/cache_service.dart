@@ -349,9 +349,9 @@ extension CacheServiceExt on CacheService {
 
     onDone();
 
-    tuples.forEach((e) {
+    for (final e in tuples) {
       CacheService().set(e.$1, e.$2);
-    });
+    }
   }
 
   List<String> get noClearKeys {
