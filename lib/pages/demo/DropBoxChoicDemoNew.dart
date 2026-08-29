@@ -11,7 +11,6 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
@@ -32,8 +31,6 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
 
   var searchText = "";
   late final searchtEditingController = TextEditingController();
-
-  final _debounce = Debounce(delay: Duration(milliseconds: 500));
 
   ///显示筛选按钮
   final hasFilter = ValueNotifier(false);

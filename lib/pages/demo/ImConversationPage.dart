@@ -38,8 +38,6 @@ class ImConversationPage extends StatefulWidget {
 class _ImConversationPageState extends State<ImConversationPage> with AssetResourceMixin {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
-  final _scrollController = ScrollController();
-
   final refreshViewController = NListRefreshController<ImConversationDetailModel>();
 
   // 创建一个随机数生成器

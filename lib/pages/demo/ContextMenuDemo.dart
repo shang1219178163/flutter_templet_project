@@ -14,10 +14,6 @@ class ContextMenuDemo extends StatefulWidget {
 }
 
 class _ContextMenuDemoState extends State<ContextMenuDemo> {
-  static const String route = 'anywhere';
-  static const String title = 'Context Menu Anywhere Example';
-  static const String subtitle = 'A context menu outside of a text field';
-
   final _materialController = TextEditingController(
     text: 'TextField shows the default menu still.',
   );

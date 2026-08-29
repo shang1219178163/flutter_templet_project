@@ -19,7 +19,7 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
 
   late AppLifecycleListener _lifecycleListener;
 
-  late Timer _timer;
+  Timer? _timer;
   late DateTime _startTime;
   final countVN = ValueNotifier(0);
 
@@ -27,7 +27,7 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _timer?.cancel();
     _lifecycleListener.dispose();
     super.dispose();
   }
@@ -117,6 +117,7 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
 
   timeUpdate() {
     timeReset();
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       var now = DateTime.now();
       var duration = now.difference(_startTime);

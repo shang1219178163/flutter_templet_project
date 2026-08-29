@@ -4,14 +4,9 @@ import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:get/get.dart';
 
 /// 浮层工具类
 class NOverlay {
-  static final _globalContext = Get.context;
-
-  static final _overlayState = Overlay.of(_globalContext!);
-
   /// overlay 层集合
   static final List<OverlayEntry> _entriesList = [];
 

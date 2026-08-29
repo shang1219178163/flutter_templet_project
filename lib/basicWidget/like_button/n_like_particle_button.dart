@@ -70,7 +70,7 @@ class _NLikeParticleButtonState extends State<NLikeParticleButton> with SingleTi
         _Particle(
           position: center,
           direction: direction,
-          speed: baseSpeed,
+          speed: baseSpeed * (0.6 + _random.nextDouble() * 0.8),
           life: 1.0,
           radius: 2.5,
           color: Colors.pinkAccent,

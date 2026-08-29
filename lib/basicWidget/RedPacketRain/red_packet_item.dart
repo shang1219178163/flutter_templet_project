@@ -23,7 +23,6 @@ class RedPacketItem extends StatefulWidget {
 
 class _RedPacketItemState extends State<RedPacketItem> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<double> _y;
 
   @override
   void dispose() {
@@ -38,11 +37,6 @@ class _RedPacketItemState extends State<RedPacketItem> with SingleTickerProvider
       duration: widget.model.duration,
       vsync: this,
     );
-
-    _y = Tween<double>(
-      begin: widget.model.startY,
-      end: widget.screenSize.height + 100,
-    ).animate(_controller);
 
     _controller.addStatusListener((s) {
       if (s == AnimationStatus.completed) {

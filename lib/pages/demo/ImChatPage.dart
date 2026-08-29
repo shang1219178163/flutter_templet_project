@@ -53,7 +53,6 @@ class _ImChatPageState extends State<ImChatPage>
   var dataList = ValueNotifier(<IMMsgDetailModel>[]);
 
   late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
-  final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
 
   // late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 200.0).animate(_controller);
   // late final Animation<double> _heightFactorNew = _controller.drive(_easeInTween);
@@ -71,9 +70,6 @@ class _ImChatPageState extends State<ImChatPage>
     const Tuple3("其他1", Icons.access_alarm, ""),
     const Tuple3("其他2", Icons.color_lens_outlined, ""),
   ];
-
-  static final RegExp emojiReg =
-      RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
 
   /// 长按菜单专用
   final List<OverlayEntry> longPressEntries = [];

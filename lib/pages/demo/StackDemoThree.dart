@@ -24,15 +24,12 @@ class _StackDemoThreeState extends State<StackDemoThree> {
   final _minTop = -1.0;
   final double _maxTop = 200.0;
 
-  // bool _isExpanded = false;
-  bool _isDragging = false;
   bool _userTouching = false;
 
   // bool isExpanded = false;
   // double topOffset = -1;
 
   void handleDrag(DragUpdateDetails details) {
-    _isDragging = true;
     _topOffset += details.delta.dy;
     // _topOffset = _topOffset.clamp(_maxTop, _minTop);
 
@@ -40,7 +37,6 @@ class _StackDemoThreeState extends State<StackDemoThree> {
   }
 
   void handleDragEnd(DragEndDetails details) {
-    _isDragging = false;
     if (_topOffset < _minTop / 2) {
       expand();
     } else {
@@ -59,26 +55,21 @@ class _StackDemoThreeState extends State<StackDemoThree> {
     debugPrint("_collapseEnd=$_minTop");
   }
 
-  double _lastScrollOffset = 0.0;
   bool _readyToCollapse = false;
 
   bool onScrollNotification(ScrollNotification n) {
     DLog.d(n.runtimeType);
 
     if (n is ScrollStartNotification) {
-      _isDragging = true;
       _userTouching = n.dragDetails != null;
     } else if (n is ScrollEndNotification) {
-      _isDragging = false;
       _userTouching = false;
     }
 
-    // 记录最近滚动位置
     if (n is ScrollUpdateNotification) {
       if (n.metrics.pixels > 0) {
         _readyToCollapse = false; // 离开顶部就重置
       }
-      _lastScrollOffset = n.metrics.pixels;
     }
 
     // 没滚动但有下拉动作（Overscroll）

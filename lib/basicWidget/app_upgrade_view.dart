@@ -72,11 +72,6 @@ class AppUpgradeView extends StatefulWidget {
 }
 
 class _AppUpgradeWidget extends State<AppUpgradeView> {
-  static const String _downloadApkName = 'temp.apk';
-
-  /// 下载进度
-  final double _downloadProgress = 0.0;
-
   // DownloadStatus _downloadStatus = DownloadStatus.none;
 
   @override

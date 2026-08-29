@@ -27,8 +27,6 @@ class ExpandIconDemo extends StatefulWidget {
 }
 
 class _ExpandIconDemoState extends State<ExpandIconDemo> {
-  late final bool _isExpanded = false;
-
   List<Color> colors = [
     Colors.black,
     Colors.pink,
@@ -51,8 +49,6 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   ];
 
   var selectedColor = ValueNotifier(Colors.black);
-
-  final List<int> _foldIndexs = List.generate(5, (index) => index);
 
   // List<Tuple2<List<String>, int>> foldList = _foldIndexs.map((e){
   //   final i = _foldIndexs.indexOf(e);

@@ -24,8 +24,6 @@ class OrderListPage extends StatefulWidget {
 }
 
 class _OrderListPageState extends State<OrderListPage> with DBDialogMixin {
-  final _scrollController = ScrollController();
-
   final titleController = TextEditingController();
 
   bool isAllChoic = false;

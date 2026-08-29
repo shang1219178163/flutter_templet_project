@@ -22,8 +22,6 @@ class SegmentedPageViewDemo extends StatefulWidget {
 class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
-  final _scrollController = ScrollController();
-
   late final pageController = PageController(initialPage: 0, keepPage: true);
 
   late final items = <({

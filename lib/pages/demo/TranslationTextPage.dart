@@ -28,7 +28,6 @@ class _TranslationTextPageState extends State<TranslationTextPage> {
   );
 
   final _languageIdentifier = LanguageIdentifier(confidenceThreshold: 0.5);
-  var _identifiedLanguage = '';
 
   final _textController = TextEditingController();
   String _translatedText = '';
@@ -71,7 +70,6 @@ class _TranslationTextPageState extends State<TranslationTextPage> {
     } catch (e) {
       language = 'error: ${e.toString()}';
     }
-    _identifiedLanguage = language;
     sourceLanguage = BCP47Code.fromRawValue(language);
     DLog.d([language, sourceLanguage].asMap());
     // setState(() {});

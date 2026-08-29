@@ -579,8 +579,6 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
     );
   }
 
-  late final ScrollController _scrollController = ScrollController();
-
   ///设置单个宽度
   Widget buildListViewHorizontal() {
     var items = List.generate(8, (index) => "item_$index");

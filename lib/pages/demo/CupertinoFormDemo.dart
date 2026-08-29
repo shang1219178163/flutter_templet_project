@@ -20,6 +20,12 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
   DateTime? dateTime;
 
   @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -74,6 +80,7 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
                     ),
                   ),
                   CupertinoTextFormFieldRow(
+                    controller: _textController,
                     prefix: Text('TextField'),
                     placeholder: 'Enter text',
                     textAlign: TextAlign.end,

@@ -15,7 +15,6 @@ class BallTeamView extends StatefulWidget {
 
 class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMixin, SafeSetStateMixin {
   TabController? _tabController;
-  int _selectedLeftNavIndex = 0;
 
   late ThemeProvider themeProvider = context.watch<ThemeProvider>();
   late BallCategoryProvider provider = context.read<BallCategoryProvider>();
@@ -56,7 +55,6 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
       if (_tabController!.indexIsChanging) {
         return;
       }
-      _selectedLeftNavIndex = 0;
       setState(() {});
     });
   }

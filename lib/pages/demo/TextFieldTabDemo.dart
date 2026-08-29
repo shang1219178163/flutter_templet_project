@@ -24,8 +24,6 @@ class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
-  final _scrollController = ScrollController();
-
   final List<Tuple2<String, Widget>> items = [
     Tuple2("TextFieldDemo", TextFieldDemo()),
     Tuple2("TextFieldDemoOne", TextFieldDemoOne()),

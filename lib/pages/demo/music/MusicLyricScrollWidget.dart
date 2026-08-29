@@ -22,27 +22,11 @@ class _LyricScrollWidgetState extends State<LyricScrollWidget> {
   final _itemPositionsListener = ItemPositionsListener.create();
 
   int _currentIndex = 0;
-  bool _isScrolling = false;
-
-  @override
-  void dispose() {
-    _itemPositionsListener.itemPositions.removeListener(onScroll);
-    super.dispose();
-  }
 
   @override
   void initState() {
     super.initState();
-    _itemPositionsListener.itemPositions.addListener(onScroll);
     widget.positionStream.listen(onPosition);
-  }
-
-  void onScroll() {
-    if (_itemPositionsListener.itemPositions.value.isNotEmpty) {
-      final firstVisible = _itemPositionsListener.itemPositions.value.first;
-      _isScrolling = firstVisible.itemLeadingEdge != 0;
-      setState(() {});
-    }
   }
 
   void onPosition(Duration position) {

@@ -25,8 +25,6 @@ class SliverPersistentHeaderDemoTwo extends StatefulWidget {
 }
 
 class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDemoTwo> {
-  final _scrollController = ScrollController();
-
   late final refreshController = EasyRefreshController(
     controlFinishRefresh: true,
     controlFinishLoad: true,

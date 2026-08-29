@@ -32,8 +32,6 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
   final controller = FilePreviewController();
 
   final _progressVN = ValueNotifier(0.0);
-  // 加载
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +75,6 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
         path: widget.path,
         callBack: FilePreviewCallBack(
           onShow: () {
-            _isLoading = true;
             setState(() {});
           },
           onFail: (code, msg) {

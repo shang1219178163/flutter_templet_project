@@ -55,8 +55,6 @@ class _EmojiPageState extends State<EmojiPage> {
   static final RegExp emojiReg =
       RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
 
-  static final RegExp textReg = RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]");
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

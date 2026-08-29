@@ -23,8 +23,6 @@ class DraggableScrollableSheetDemo extends StatefulWidget {
 }
 
 class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetDemo> {
-  final _scrollController = ScrollController();
-
   final draggableController = DraggableScrollableController();
 
   double minExtent = 0.15;

@@ -36,8 +36,6 @@ class FileBrowserPage extends StatefulWidget {
 }
 
 class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheetMixin {
-  final _scrollController = ScrollController();
-
   Directory? currentDirectory;
   List<FileSystemEntity> files = [];
 

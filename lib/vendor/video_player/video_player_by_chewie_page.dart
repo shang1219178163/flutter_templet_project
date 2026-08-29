@@ -38,7 +38,6 @@ class _VideoPlayerByChewiePageState extends State<VideoPlayerByChewiePage> {
   late final VoidCallback? onBackNew = widget.onBack ?? arguments["onBack"];
   late final bool hideDownload = arguments["hideDownload"] ?? false;
 
-  final TargetPlatform? _platform = TargetPlatform.iOS;
   VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
   int? bufferDelay = 0;

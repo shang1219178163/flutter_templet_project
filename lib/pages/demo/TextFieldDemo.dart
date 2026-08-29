@@ -20,7 +20,6 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_unit.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
-import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
@@ -46,7 +45,6 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   // 控制器
   final _unameController = TextEditingController();
   final _pwdController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   // 焦点
   final focusNode1 = FocusNode();
@@ -59,7 +57,6 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   final _pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //密码正则
 
   final delayed = Debouncer(delay: Duration(milliseconds: 1000));
-  final _debounce = Debounce();
 
   final throttle = Throttle();
 

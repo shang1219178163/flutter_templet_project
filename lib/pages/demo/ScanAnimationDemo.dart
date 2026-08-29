@@ -18,8 +18,6 @@ class ScanAnimationDemo extends StatefulWidget {
 }
 
 class _ScanAnimationDemoState extends State<ScanAnimationDemo> with SingleTickerProviderStateMixin, PhotoPickerMixin {
-  final _scrollController = ScrollController();
-
   File? image;
 
   @override

@@ -34,8 +34,6 @@ class NestedScrollViewDemoHome extends StatefulWidget {
 }
 
 class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoHome> {
-  final _homeController = Get.put(HomeController(), permanent: true);
-
   /// 嵌套滚动
   final scrollControllerNew = ScrollController();
   final scrollProgress = ValueNotifier(0.0);
@@ -56,6 +54,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
 
   @override
   void initState() {
+    Get.put(HomeController(), permanent: true);
     scrollControllerNew.addListener(onScrollerLtr);
     super.initState();
   }

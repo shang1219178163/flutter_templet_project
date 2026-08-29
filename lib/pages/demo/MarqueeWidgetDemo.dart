@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_marquee_widget.dart';
@@ -18,11 +16,7 @@ class MarqueeWidgetDemo extends StatefulWidget {
 }
 
 class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
-  final _globalKey = GlobalKey();
-
   final offset = ValueNotifier(0.0);
-
-  Timer? _timer;
 
   var items = [
     Tuple4(

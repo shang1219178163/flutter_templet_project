@@ -34,8 +34,6 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMixin {
 
   late final hideAppBar = arguments["hideAppBar"] as bool?;
 
-  final _scrollController = ScrollController();
-
   final titleController = TextEditingController();
 
   bool isAllChoic = false;

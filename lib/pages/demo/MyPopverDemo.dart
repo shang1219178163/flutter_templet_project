@@ -137,14 +137,6 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
     );
   }
 
-  final OutlineInputBorder _border = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(4.0),
-    borderSide: BorderSide(
-      color: Colors.grey,
-      width: 1.0,
-    ),
-  );
-
   Widget buildDemo() {
     return Column(children: [
       LayoutBuilder(builder: (context, constraints) {

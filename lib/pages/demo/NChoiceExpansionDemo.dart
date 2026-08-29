@@ -25,8 +25,6 @@ class NChoiceExpansionDemo extends StatefulWidget {
 class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
-  final _scrollController = ScrollController();
-
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
   bool isSingle = false;

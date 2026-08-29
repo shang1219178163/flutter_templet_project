@@ -33,8 +33,6 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMixin {
 
   late final hideAppBar = arguments["hideAppBar"] as bool?;
 
-  final _scrollController = ScrollController();
-
   final titleController = TextEditingController();
 
   bool isAllChoic = false;

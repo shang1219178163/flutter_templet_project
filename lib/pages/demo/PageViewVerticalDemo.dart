@@ -28,8 +28,6 @@ class PageViewVerticalDemo extends StatefulWidget {
 class _PageViewVerticalDemoState extends State<PageViewVerticalDemo> with SingleTickerProviderStateMixin {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
-  final _scrollController = ScrollController();
-
   late final items = <({String name, Widget child})>[
     (
       name: '宝贝',

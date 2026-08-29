@@ -30,8 +30,6 @@ class PageRouteAnimationDemo extends StatefulWidget {
 class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
-  final _scrollController = ScrollController();
-
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
   /// id

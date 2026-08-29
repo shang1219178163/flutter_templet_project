@@ -20,8 +20,6 @@ class MediaQueryDemoOne extends StatefulWidget {
 }
 
 class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
-  final _textcontroller = TextEditingController();
-
   var labelText = "";
 
   @override

@@ -14,12 +14,6 @@ class NewsHomeProvider extends ChangeNotifier {
   static final NewsHomeProvider _instance = NewsHomeProvider._();
   static NewsHomeProvider get instance => _instance;
 
-  /// 本地固定写死
-  final _localCatalogs = [
-    NewsCatalogModel(id: 0, name: "最新", mine: 1, tagEnable: false),
-    NewsCatalogModel(id: 1, name: "热门", mine: 1, tagEnable: false),
-  ];
-
   /// 分类
   List<NewsCatalogModel> get catalogs => _catalogs;
   var _catalogs = <NewsCatalogModel>[];

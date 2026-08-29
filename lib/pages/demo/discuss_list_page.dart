@@ -40,8 +40,6 @@ class DiscussListPage extends StatefulWidget {
 
 class _DiscussListPageState extends State<DiscussListPage>
     with SingleTickerProviderStateMixin, NInputAccessoryViewOneMixin {
-  static const double _tabBarTrailingWidth = 120;
-
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final refreshController = NListRefreshController<NewsDiscussDetailModel>();

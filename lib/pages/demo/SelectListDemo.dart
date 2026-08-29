@@ -14,8 +14,6 @@ class SelectListDemo extends StatefulWidget {
 }
 
 class _SelectListDemoState extends State<SelectListDemo> {
-  final _scrollController = ScrollController();
-
   bool isMultiple = true;
 
   late final List<UserModel> models = List.generate(20, (i) {

@@ -25,7 +25,6 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   GlobalKey repaintBoundaryKey3 = GlobalKey(debugLabel: 'gk3');
 
   Widget? imageMerged;
-  ImageProvider? _imageProvider;
 
   @override
   Widget build(BuildContext context) {

@@ -128,8 +128,6 @@ class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProv
 class NColorFlashAnimController {
   _NColorFlashAnimState? _anchor;
 
-  VoidCallback? _startAnim;
-
   void _attach(_NColorFlashAnimState anchor) {
     _anchor = anchor;
   }

@@ -10,23 +10,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/api/token_refersh_api.dart';
 
-class _RequestCompleter {
-  _RequestCompleter(
-    this.options,
-    this.handler,
-  );
-
-  final RequestOptions options;
-  final ErrorInterceptorHandler handler;
-}
-
 /// token 刷新拦截器
 class TokenInterceptor extends QueuedInterceptor {
   TokenInterceptor({required this.dio});
 
   final Dio dio;
   bool isRefreshing = false;
-  final List<_RequestCompleter> _requestQueue = [];
 
   @override
   Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {

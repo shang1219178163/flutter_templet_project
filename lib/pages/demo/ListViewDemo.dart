@@ -30,7 +30,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
   ];
 
   final _scrollController = ScrollController();
-  final _scrollController1 = ScrollController();
 
   final _globalKey = GlobalKey();
   final _globalKey2 = GlobalKey();

@@ -29,10 +29,6 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
   var classPrefix = "YY";
   var classSuffix = "Model";
 
-  late final _nameController = TextEditingController(text: rootClassNameStr);
-  late final _prefixController = TextEditingController(text: classPrefix);
-  late final _suffixController = TextEditingController(text: classSuffix);
-
   final _scrollController = ScrollController();
 
   var jsonStr = "";

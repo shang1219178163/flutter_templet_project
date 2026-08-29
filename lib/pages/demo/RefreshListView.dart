@@ -21,9 +21,6 @@ class _RefreshListViewState extends State<RefreshListView> {
 
   final items = ValueNotifier(<String>[]);
 
-  /// 首次加载
-  var _isFirstLoad = true;
-
   @override
   void initState() {
     super.initState();
@@ -95,7 +92,6 @@ class _RefreshListViewState extends State<RefreshListView> {
     items.value = result;
 
     debugPrint("onRefresh");
-    _isFirstLoad = false;
     _easyRefreshController.finishRefresh();
     // setState(() {});
   }
