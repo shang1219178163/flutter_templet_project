@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/pages/demo/AnimatedContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedContainerExample.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedHaloPage.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedModalBarrierDemo.dart';
@@ -747,6 +748,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.animatedSizeDemo,
       page: () => AnimatedSizeDemo(),
+    ),
+    GetPage(
+      name: AppRouter.animatedHaloPage,
+      page: () => AnimatedHaloPage(),
     ),
     GetPage(
       name: AppRouter.futureBuilderDemo,

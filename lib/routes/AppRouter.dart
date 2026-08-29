@@ -69,6 +69,7 @@ class AppRouter {
   static const String animatedBuilderDemo = '/animatedBuilderDemo';
   static const String animatedListSample = '/animatedListSample';
   static const String animatedSizeDemo = '/animatedSizeDemo';
+  static const String animatedHaloPage = '/animatedHaloPage';
 
   static const String textlessDemo = '/textlessDemo';
   static const String alertDialogDemo = '/AlertDialogDemo';

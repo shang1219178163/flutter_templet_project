@@ -488,6 +488,7 @@ var specials = <Tuple2<String, String>>[
 var animateds = <Tuple2<String, String>>[
   // Tuple2(AppRouter.animatedIconDemo, "AnimatedIconDemo", ),
   Tuple2(AppRouter.animatedDemo, "animatedDemo"),
+  Tuple2(AppRouter.animatedHaloPage, "AnimatedHalo 光晕"),
   Tuple2(AppRouter.animatedSwitcherDemo, "animatedSwitcherDemo"),
   Tuple2(AppRouter.animatedWidgetDemo, "animatedWidgetDemo"),
   Tuple2(AppRouter.animatedGroupDemo, "animatedGroupDemo"),
