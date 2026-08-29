@@ -20,7 +20,9 @@ Future<void> main() async {
   while (env == null) {
     stdout.write('请选择环境: 1:test  2:pre  0:prod\n');
     env = envs[stdin.readLineSync()?.trim()];
-    if (env == null) stdout.writeln('请输入有效的选项 (1 或 2 或 0)');
+    if (env == null) {
+      stdout.writeln('请输入有效的选项 (1 或 2 或 0)');
+    }
   }
 
   const dir = 'build/app/outputs/flutter-apk';

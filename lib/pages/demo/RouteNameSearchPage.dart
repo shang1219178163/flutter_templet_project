@@ -146,7 +146,12 @@ class _RouteNameSearchPageState extends State<RouteNameSearchPage> {
     );
   }
 
-  Widget buildFieldView(context, controller, focusNode, onFieldSubmitted) {
+  Widget buildFieldView(
+    BuildContext context,
+    TextEditingController controller,
+    FocusNode focusNode,
+    VoidCallback onFieldSubmitted,
+  ) {
     return TextField(
       controller: controller,
       focusNode: focusNode,

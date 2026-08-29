@@ -380,7 +380,7 @@ class NButton extends StatelessWidget {
       buttonStyle,
       fallbackForeground: this.primary == null ? null : primary,
     );
-    buttonStyle = mergePrimaryBackgroundStyle(buttonStyle, primary.withOpacity(0.16));
+    buttonStyle = mergePrimaryBackgroundStyle(buttonStyle, primary.withValues(alpha: 0.16));
     buttonStyle = mergeGradientTransparentStyle(buttonStyle);
     return buttonStyle;
   }

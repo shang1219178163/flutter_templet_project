@@ -13,6 +13,11 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeMode get themeMode => _theme.themeMode;
   set themeMode(ThemeMode v) => _theme.themeMode = v;
+
+  /// 指定 [mode] 时切到该模式；省略则在 light/dark 间切换。
+  void toggleTheme([ThemeMode? mode]) {
+    themeMode = mode ?? (isDark ? ThemeMode.light : ThemeMode.dark);
+  }
   bool get isDark => _theme.isDark;
   Color get primary => _theme.seedColor;
 

@@ -43,7 +43,7 @@ class NScanPhoto extends StatefulWidget {
 class _NScanPhotoState extends State<NScanPhoto> with SingleTickerProviderStateMixin {
   //扫描动画
   AnimationController? _controller;
-  Animation? _animation;
+  late Animation<double> _animation;
 
   late final isScaning = ValueNotifier(false);
 
@@ -90,7 +90,7 @@ class _NScanPhotoState extends State<NScanPhoto> with SingleTickerProviderStateM
                     height: 53,
                     margin: EdgeInsets.fromLTRB(
                       0,
-                      0.0 + _animation!.value,
+                      0.0 + _animation.value,
                       0,
                       0,
                     ),

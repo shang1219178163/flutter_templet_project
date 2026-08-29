@@ -54,7 +54,7 @@ class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?._attach = this;
 
     _controller = AnimationController(
       vsync: this,
@@ -101,7 +101,7 @@ class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProv
 class NColorFlashAnimController {
   _NColorFlashAnimState? _anchor;
 
-  void _attach(_NColorFlashAnimState anchor) {
+  set _attach(_NColorFlashAnimState anchor) {
     _anchor = anchor;
   }
 

@@ -62,7 +62,11 @@ extension SelectableRegionExt on SelectableRegion {
       children: [
         CupertinoTextSelectionToolbarButton.text(
           onPressed: () {
-            state.copySelection(SelectionChangedCause.toolbar);
+            state.contextMenuButtonItems
+                .where((e) => e.type == ContextMenuButtonType.copy)
+                .firstOrNull
+                ?.onPressed
+                ?.call();
           },
           text: '复制',
         ),

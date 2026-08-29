@@ -48,9 +48,6 @@ abstract final class AiChatError {
             return format(inner);
           }
           return _matchMessage(error.message) ?? '网络异常，请重试';
-        case DioExceptionType.transformTimeout:
-          // TODO: Handle this case.
-          throw UnimplementedError();
       }
     }
     if (error is SocketException) {
