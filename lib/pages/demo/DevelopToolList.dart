@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:tuple/tuple.dart';
 import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 /// 开发工具列表
 class DevelopToolList extends StatefulWidget {
