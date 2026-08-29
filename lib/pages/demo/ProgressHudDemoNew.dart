@@ -16,9 +16,9 @@ import 'package:tuple/tuple.dart';
 final GlobalKey _globalKey = GlobalKey();
 
 class ProgressHudDemoNew extends StatefulWidget {
-  final String? title;
 
   const ProgressHudDemoNew({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ProgressHudDemoNewState createState() => _ProgressHudDemoNewState();

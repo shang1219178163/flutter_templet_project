@@ -18,9 +18,9 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 class ExpandIconDemo extends StatefulWidget {
-  final String? title;
 
   const ExpandIconDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ExpandIconDemoState createState() => _ExpandIconDemoState();

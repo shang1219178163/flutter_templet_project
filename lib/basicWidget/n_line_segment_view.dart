@@ -17,6 +17,22 @@ enum NLineSegmentStyle {
 
 ///线条指示器分段组件
 class NLineSegmentView<T> extends StatefulWidget {
+
+  NLineSegmentView({
+    Key? key,
+    required this.children,
+    required this.groupValue,
+    this.style = NLineSegmentStyle.bottom,
+    this.backgroundColor = CupertinoColors.tertiarySystemFill,
+    this.lineColor = Colors.blue,
+    this.lineWidth,
+    this.lineHeight = 2,
+    this.height = 36,
+    this.padding = const EdgeInsets.symmetric(horizontal: 0),
+    this.margin = const EdgeInsets.symmetric(horizontal: 15),
+    this.radius = const Radius.circular(4),
+    required this.onValueChanged,
+  }) : super(key: key);
   final Map<T, Widget> children;
 
   final T? groupValue;
@@ -36,22 +52,6 @@ class NLineSegmentView<T> extends StatefulWidget {
   final Radius radius;
 
   final void Function(T value) onValueChanged;
-
-  NLineSegmentView({
-    Key? key,
-    required this.children,
-    required this.groupValue,
-    this.style = NLineSegmentStyle.bottom,
-    this.backgroundColor = CupertinoColors.tertiarySystemFill,
-    this.lineColor = Colors.blue,
-    this.lineWidth,
-    this.lineHeight = 2,
-    this.height = 36,
-    this.padding = const EdgeInsets.symmetric(horizontal: 0),
-    this.margin = const EdgeInsets.symmetric(horizontal: 15),
-    this.radius = const Radius.circular(4),
-    required this.onValueChanged,
-  }) : super(key: key);
 
   @override
   _NLineSegmentViewState<T> createState() => _NLineSegmentViewState<T>();

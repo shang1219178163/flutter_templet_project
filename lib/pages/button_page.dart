@@ -23,9 +23,9 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 class ButtonPage extends StatefulWidget {
-  final String? title;
 
   const ButtonPage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ButtonPageState createState() => _ButtonPageState();

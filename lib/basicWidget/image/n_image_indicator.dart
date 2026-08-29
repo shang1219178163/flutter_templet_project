@@ -61,16 +61,6 @@ class NImageIndicator extends StatelessWidget {
 const _kMaxCircleCount = 3;
 
 class ImageIndicatorPainter extends CustomPainter {
-  final int? itemCount;
-  final Color? indicatorColor;
-  final Color? indicatorOtherColor;
-  final double? maxSize;
-  final double? minSize;
-  final int? pageIndex;
-  final double? pageOffset;
-  final double? space;
-  final bool? isStart;
-  final bool? isEnd;
 
   const ImageIndicatorPainter(
       {this.itemCount,
@@ -83,6 +73,16 @@ class ImageIndicatorPainter extends CustomPainter {
       this.pageOffset,
       this.isStart,
       this.isEnd});
+  final int? itemCount;
+  final Color? indicatorColor;
+  final Color? indicatorOtherColor;
+  final double? maxSize;
+  final double? minSize;
+  final int? pageIndex;
+  final double? pageOffset;
+  final double? space;
+  final bool? isStart;
+  final bool? isEnd;
 
   @override
   void paint(Canvas canvas, Size size) {

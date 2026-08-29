@@ -12,6 +12,34 @@ import 'package:flutter/foundation.dart';
 
 /// 高德地图定位模型(省市区信息 android上只有通过[AMapLocationOption.needAddress]为true时才有可能返回值)
 class LocationDetailModel {
+
+  LocationDetailModel.fromJson(Map<String, dynamic> json) {
+    locTime = json['locTime'];
+    callbackTime = json['callbackTime'];
+    speed = json['speed'];
+    bearing = json['bearing'];
+    accuracy = json['accuracy'];
+    adCode = json['adCode'];
+    altitude = json['altitude'];
+    locationType = json['locationType'];
+
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+
+    country = json['country'];
+    province = json['province'];
+    district = json['district'];
+    cityCode = json['cityCode'];
+    cityCodeNew = (adCode != null && adCode!.length > 4)
+        ? "${adCode?.substring(0, 4)}00"
+        : null;
+    city = json['city'];
+    street = json['street'];
+    streetNumber = json['streetNumber'];
+
+    address = json['address'];
+    description = json['description'];
+  }
   LocationDetailModel(
       {this.callbackTime,
       this.locTime,
@@ -93,34 +121,6 @@ class LocationDetailModel {
 
   /// 位置语义
   String? description;
-
-  LocationDetailModel.fromJson(Map<String, dynamic> json) {
-    locTime = json['locTime'];
-    callbackTime = json['callbackTime'];
-    speed = json['speed'];
-    bearing = json['bearing'];
-    accuracy = json['accuracy'];
-    adCode = json['adCode'];
-    altitude = json['altitude'];
-    locationType = json['locationType'];
-
-    latitude = json['latitude'];
-    longitude = json['longitude'];
-
-    country = json['country'];
-    province = json['province'];
-    district = json['district'];
-    cityCode = json['cityCode'];
-    cityCodeNew = (adCode != null && adCode!.length > 4)
-        ? "${adCode?.substring(0, 4)}00"
-        : null;
-    city = json['city'];
-    street = json['street'];
-    streetNumber = json['streetNumber'];
-
-    address = json['address'];
-    description = json['description'];
-  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

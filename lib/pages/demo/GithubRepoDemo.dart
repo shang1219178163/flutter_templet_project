@@ -15,9 +15,9 @@ import 'package:flutter_templet_project/network/RequestManager.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 
 class GithubRepoDemo extends StatefulWidget {
-  final String? title;
 
   const GithubRepoDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _GithubRepoDemoState createState() => _GithubRepoDemoState();

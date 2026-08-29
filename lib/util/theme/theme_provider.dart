@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  factory ThemeProvider() => _instance;
-  static final ThemeProvider _instance = ThemeProvider._();
-  static ThemeProvider get instance => _instance;
   ThemeProvider._() {
     AppThemeService().onThemeChanged = notifyListeners;
   }
+  factory ThemeProvider() => _instance;
+  static final ThemeProvider _instance = ThemeProvider._();
+  static ThemeProvider get instance => _instance;
 
   AppThemeService get _theme => AppThemeService();
 

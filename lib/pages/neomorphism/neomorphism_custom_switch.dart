@@ -4,28 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
-  /// Public properties, set on constructor
-  final bool value;
-  final double height;
-  final double fontSize;
-  final ValueChanged<bool> onChanged;
-  final Color activeColor;
-  final Color inactiveColor;
-  final String activeText;
-  final String inactiveText;
-  final Color activeTextColor;
-  final Color inactiveTextColor;
-  final Color activeThumbColor;
-  final Color inactiveThumbColor;
-  final String activeTooltip;
-  final String inactiveTooltip;
-  final Widget? activeThumbIcon;
-  final Widget? inactiveThumbIcon;
-
-  // Private widgets created from properties in constructor.
-  late final Text _activeTextWidget;
-  late final Text _inactiveTextWidget;
-  late final double _spaceRequiredForText;
 
   CustomSwitch({
     Key? key,
@@ -68,6 +46,28 @@ class CustomSwitch extends StatefulWidget {
     _spaceRequiredForText = max(textSize(_activeTextWidget).width,
         textSize(_inactiveTextWidget).width);
   }
+  /// Public properties, set on constructor
+  final bool value;
+  final double height;
+  final double fontSize;
+  final ValueChanged<bool> onChanged;
+  final Color activeColor;
+  final Color inactiveColor;
+  final String activeText;
+  final String inactiveText;
+  final Color activeTextColor;
+  final Color inactiveTextColor;
+  final Color activeThumbColor;
+  final Color inactiveThumbColor;
+  final String activeTooltip;
+  final String inactiveTooltip;
+  final Widget? activeThumbIcon;
+  final Widget? inactiveThumbIcon;
+
+  // Private widgets created from properties in constructor.
+  late final Text _activeTextWidget;
+  late final Text _inactiveTextWidget;
+  late final double _spaceRequiredForText;
 
   @override
   State<CustomSwitch> createState() => _CustomSwitchState();

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class AppCupertinoLocalizations extends CupertinoLocalizations {
-  final CupertinoLocalizations localizations;
 
   AppCupertinoLocalizations(this.localizations);
+  final CupertinoLocalizations localizations;
 
   //只改此处，其它的都原数据返回
   @override

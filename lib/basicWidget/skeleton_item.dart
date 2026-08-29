@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 /// Skeleton list item.
 class SkeletonItem extends StatelessWidget {
-  /// Scrollable direction.
-  final Axis direction;
 
   const SkeletonItem({
     super.key,
     this.direction = Axis.vertical,
   });
+  /// Scrollable direction.
+  final Axis direction;
 
   @override
   Widget build(BuildContext context) {

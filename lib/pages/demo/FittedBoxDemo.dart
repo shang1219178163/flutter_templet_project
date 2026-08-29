@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 
 class FittedBoxDemo extends StatefulWidget {
-  final String? title;
 
   const FittedBoxDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _FittedBoxDemoState createState() => _FittedBoxDemoState();

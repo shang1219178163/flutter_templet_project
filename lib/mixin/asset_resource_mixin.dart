@@ -45,14 +45,6 @@ mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
 
 /// 本地文件路径
 class AssetResourceMixinModel {
-  /// 文件路径
-  String path = "";
-
-  /// 文件内容
-  String? content;
-
-  /// 异常
-  String? exception;
 
   AssetResourceMixinModel({required this.path, this.content, this.exception});
 
@@ -61,6 +53,14 @@ class AssetResourceMixinModel {
     content = json['content'];
     exception = json['exception'];
   }
+  /// 文件路径
+  String path = "";
+
+  /// 文件内容
+  String? content;
+
+  /// 异常
+  String? exception;
 
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();

@@ -7,9 +7,9 @@ import 'package:tuple/tuple.dart';
 typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 
 class ListViewDemo extends StatefulWidget {
-  final String? title;
 
   const ListViewDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ListViewDemoState createState() => _ListViewDemoState();

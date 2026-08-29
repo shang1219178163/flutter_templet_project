@@ -8,6 +8,19 @@ import "package:flutter_templet_project/pages/demo/RatingsStar/ratings_level_enu
 
 /// 比赛成员评分
 class MatchMemberScoreDataModel {
+
+  MatchMemberScoreDataModel.fromJson(Map<String, dynamic> json) {
+    if (json['playerScoreItem'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['playerScoreItem'] ?? []);
+      playerScoreItem = array.map((e) => PlayerScoreItemModel.fromJson(e)).toList();
+    }
+    if (json['overView'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['overView'] ?? []);
+      overView = array.map((e) => PlayerScoreItemModel.fromJson(e)).toList();
+    }
+    home = json['home'] != null ? Team.fromJson(json['home'] as Map<String, dynamic>) : null;
+    away = json['away'] != null ? Team.fromJson(json['away'] as Map<String, dynamic>) : null;
+  }
   MatchMemberScoreDataModel({
     this.playerScoreItem = const [],
     this.overView = const [],
@@ -22,19 +35,6 @@ class MatchMemberScoreDataModel {
   Team? home;
 
   Team? away;
-
-  MatchMemberScoreDataModel.fromJson(Map<String, dynamic> json) {
-    if (json['playerScoreItem'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['playerScoreItem'] ?? []);
-      playerScoreItem = array.map((e) => PlayerScoreItemModel.fromJson(e)).toList();
-    }
-    if (json['overView'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['overView'] ?? []);
-      overView = array.map((e) => PlayerScoreItemModel.fromJson(e)).toList();
-    }
-    home = json['home'] != null ? Team.fromJson(json['home'] as Map<String, dynamic>) : null;
-    away = json['away'] != null ? Team.fromJson(json['away'] as Map<String, dynamic>) : null;
-  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -51,6 +51,40 @@ class MatchMemberScoreDataModel {
 }
 
 class PlayerScoreItemModel {
+
+  PlayerScoreItemModel.fromJson(Map<String, dynamic> json) {
+    sportId = json['sportId'];
+    id = json['id'];
+    type = json['type'];
+    teamId = json['teamId'];
+    teamLogo = json['teamLogo'];
+    teamName = json['teamName'];
+
+    shortName = json['shortName'];
+    logo = json['logo'];
+    totalTime = json['totalTime'];
+    shirtNumber = json['shirtNumber'];
+    attendType = json['attendType'];
+    attendTime = json['attendTime'];
+    leaveTime = json['leaveTime'];
+    red = json['red'] ?? 0;
+    yellow = json['yellow'] ?? 0;
+    score = json['score'] ?? 0;
+    scorePenalty = json['scorePenalty'] ?? 0;
+    assists = json['assists'] ?? 0;
+    rebounds = json['rebounds'] ?? 0;
+    myScore = json['myScore'] ?? 0;
+    mediaRating = json['mediaRating'];
+    plateRating = json['plateRating'];
+    scoreTimes =
+        json['scoreTimes'] != null ? ScoreTimesModel.fromJson(json['scoreTimes'] as Map<String, dynamic>) : null;
+    showType = json['showType'];
+    position = json['position'];
+    countryLogo = json['countryLogo'];
+    countryName = json['countryName'];
+    age = json['age'];
+    hot = json['hot'];
+  }
   PlayerScoreItemModel({
     this.sportId,
     this.id,
@@ -177,40 +211,6 @@ class PlayerScoreItemModel {
   /// 0:媒体评分;1:平台(看比赛)评分
   String? get showTypeDesc => {0: "媒体评分", 1: "看比赛评分"}[showType] ?? "";
 
-  PlayerScoreItemModel.fromJson(Map<String, dynamic> json) {
-    sportId = json['sportId'];
-    id = json['id'];
-    type = json['type'];
-    teamId = json['teamId'];
-    teamLogo = json['teamLogo'];
-    teamName = json['teamName'];
-
-    shortName = json['shortName'];
-    logo = json['logo'];
-    totalTime = json['totalTime'];
-    shirtNumber = json['shirtNumber'];
-    attendType = json['attendType'];
-    attendTime = json['attendTime'];
-    leaveTime = json['leaveTime'];
-    red = json['red'] ?? 0;
-    yellow = json['yellow'] ?? 0;
-    score = json['score'] ?? 0;
-    scorePenalty = json['scorePenalty'] ?? 0;
-    assists = json['assists'] ?? 0;
-    rebounds = json['rebounds'] ?? 0;
-    myScore = json['myScore'] ?? 0;
-    mediaRating = json['mediaRating'];
-    plateRating = json['plateRating'];
-    scoreTimes =
-        json['scoreTimes'] != null ? ScoreTimesModel.fromJson(json['scoreTimes'] as Map<String, dynamic>) : null;
-    showType = json['showType'];
-    position = json['position'];
-    countryLogo = json['countryLogo'];
-    countryName = json['countryName'];
-    age = json['age'];
-    hot = json['hot'];
-  }
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['sportId'] = sportId;
@@ -244,6 +244,13 @@ class PlayerScoreItemModel {
 }
 
 class Team {
+
+  factory Team.fromJson(Map<dynamic, dynamic> json) => Team(
+        name: json["name"],
+        logo: json["logo"],
+        id: json["id"],
+        position: json["position"],
+      );
   Team({
     required this.name,
     required this.logo,
@@ -256,13 +263,6 @@ class Team {
   int id;
   String? position;
 
-  factory Team.fromJson(Map<dynamic, dynamic> json) => Team(
-        name: json["name"],
-        logo: json["logo"],
-        id: json["id"],
-        position: json["position"],
-      );
-
   Map<dynamic, dynamic> toJson() => {
         "name": name,
         "logo": logo,
@@ -273,6 +273,14 @@ class Team {
 
 /// 1-5颗星评分及对应的数量
 class ScoreTimesModel {
+
+  ScoreTimesModel.fromJson(Map<String, dynamic> json) {
+    s1 = json['1'];
+    s2 = json['2'];
+    s3 = json['3'];
+    s4 = json['4'];
+    s5 = json['5'];
+  }
   ScoreTimesModel({
     this.s1,
     this.s2,
@@ -301,14 +309,6 @@ class ScoreTimesModel {
 
   /// 粉丝点评信息模型
   RatingsInfoModel get ratingsModel => RatingsInfoModel.calculateRating(starMap: ratingsMap);
-
-  ScoreTimesModel.fromJson(Map<String, dynamic> json) {
-    s1 = json['1'];
-    s2 = json['2'];
-    s3 = json['3'];
-    s4 = json['4'];
-    s5 = json['5'];
-  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

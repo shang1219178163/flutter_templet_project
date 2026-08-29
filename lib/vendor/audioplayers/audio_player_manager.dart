@@ -20,12 +20,12 @@ const hang_up_mp3 = "https://yl-oss.yljt.cn/hang_up.mp3";
 
 /// 声音播放管理器
 class AudioPlayerManager {
+  factory AudioPlayerManager() => _instance;
   AudioPlayerManager._() {
     init();
   }
 
   static final AudioPlayerManager _instance = AudioPlayerManager._();
-  factory AudioPlayerManager() => _instance;
 
   late final _audioPlayer = AudioPlayer();
 

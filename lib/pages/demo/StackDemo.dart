@@ -6,9 +6,9 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class StackDemo extends StatefulWidget {
-  final String? title;
 
   const StackDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StackDemoState createState() => _StackDemoState();

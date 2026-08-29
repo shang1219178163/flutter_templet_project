@@ -7,11 +7,6 @@ import 'package:just_audio/just_audio.dart';
 
 /// 此功能依赖 just_audio: ^0.10.5
 class AudioDetailModel {
-  final String image;
-  final String name;
-  final String artist;
-  final String url;
-  final AudioSource audioSource;
 
   AudioDetailModel({
     required this.image,
@@ -29,6 +24,11 @@ class AudioDetailModel {
       url: url,
     );
   }
+  final String image;
+  final String name;
+  final String artist;
+  final String url;
+  final AudioSource audioSource;
 
   Map<String, dynamic> toJson() {
     return {
@@ -46,11 +46,11 @@ class AudioDetailModel {
 }
 
 class JustAudioManager {
+
+  factory JustAudioManager() => _instance;
   JustAudioManager._();
 
   static final JustAudioManager _instance = JustAudioManager._();
-
-  factory JustAudioManager() => _instance;
 
   static JustAudioManager get instance => _instance;
 

@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 
 class ValueListenableBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const ValueListenableBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ValueListenableBuilderDemoState createState() =>

@@ -14,9 +14,9 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
 
 class ProviderListDemo extends StatefulWidget {
-  final String? title;
 
   const ProviderListDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ProviderListDemoState createState() => _ProviderListDemoState();
@@ -369,8 +369,6 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 }
 
 class ValueNotifierModel {
-  String name = "";
-  ValueNotifier? notifier;
   // ChangeNotifier? notifier;
 
   ValueNotifierModel({
@@ -385,6 +383,8 @@ class ValueNotifierModel {
     notifier = json["notifier"] as ValueNotifier?;
     name = json["name"] as String? ?? "";
   }
+  String name = "";
+  ValueNotifier? notifier;
 
   Map<String, dynamic> toJson() {
     var json = Map<String, dynamic>();

@@ -229,9 +229,9 @@ class PriceTagPainter extends CustomPainter {
 }
 
 class CameraClosePainter extends CustomPainter {
-  final double cornerRadius;
 
   CameraClosePainter({this.cornerRadius = 10.0});
+  final double cornerRadius;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -287,9 +287,9 @@ class CameraClosePainter extends CustomPainter {
 }
 
 class RightArrowPainter extends CustomPainter {
-  final double cornerRadius;
 
   RightArrowPainter({this.cornerRadius = 10.0});
+  final double cornerRadius;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -406,12 +406,6 @@ extension _OffsetExtensions on Offset {
 }
 
 class ArcPainter extends CustomPainter {
-  final Color color;
-  final Offset startPoint;
-  final double radius;
-  final double startAngle;
-  final double sweepAngle;
-  final Color backgroundColor;
 
   ArcPainter({
     this.color = Colors.blue,
@@ -421,6 +415,12 @@ class ArcPainter extends CustomPainter {
     this.sweepAngle = pi / 2, // 默认为90度
     this.backgroundColor = Colors.green,
   });
+  final Color color;
+  final Offset startPoint;
+  final double radius;
+  final double startAngle;
+  final double sweepAngle;
+  final Color backgroundColor;
 
   @override
   void paint(Canvas canvas, Size size) {

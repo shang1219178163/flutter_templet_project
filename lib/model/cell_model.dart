@@ -9,6 +9,14 @@
 import 'package:flutter/cupertino.dart';
 
 class CellModel {
+
+  CellModel.fromJson(Map<String, dynamic> json) {
+    icon = json['icon'];
+    title = json['title'];
+    subtitle = json['subtitle'];
+    isOpen = json['isOpen'];
+    arguments = json['arguments'];
+  }
   CellModel({
     this.icon,
     required this.title,
@@ -23,14 +31,6 @@ class CellModel {
   bool? isOpen;
 
   Map<String, dynamic>? arguments;
-
-  CellModel.fromJson(Map<String, dynamic> json) {
-    icon = json['icon'];
-    title = json['title'];
-    subtitle = json['subtitle'];
-    isOpen = json['isOpen'];
-    arguments = json['arguments'];
-  }
 
   Map<String, dynamic> toJson() {
     return {

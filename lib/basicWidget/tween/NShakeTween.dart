@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 /// 左右抖动
 class NShakeTween extends Animatable<Offset> {
-  final Offset center;
-  final double amplitude;
 
   NShakeTween({
     this.center = Offset.zero,
     required this.amplitude,
   });
+  final Offset center;
+  final double amplitude;
 
   @override
   Offset transform(double t) {

@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_element.dart';
 
 class TimelineComponent extends StatefulWidget {
+
+  ///参数实例化
+  const TimelineComponent({
+    Key? key,
+    required this.timelineList,
+    this.lineColor,
+    this.backgroundColor,
+    this.titleStyle,
+    this.subtitleStyle,
+    this.descriptionStyle,
+    this.leftContent,
+    this.height,
+  }) : super(key: key);
   ///timeline 数据实体list
   final List timelineList;
 
@@ -23,19 +36,6 @@ class TimelineComponent extends StatefulWidget {
 
   ///时间轴左侧是否展示
   final bool? leftContent;
-
-  ///参数实例化
-  const TimelineComponent({
-    Key? key,
-    required this.timelineList,
-    this.lineColor,
-    this.backgroundColor,
-    this.titleStyle,
-    this.subtitleStyle,
-    this.descriptionStyle,
-    this.leftContent,
-    this.height,
-  }) : super(key: key);
 
   @override
   TimelineComponentState createState() {

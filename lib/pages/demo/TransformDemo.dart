@@ -6,9 +6,9 @@ import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class TransformDemo extends StatefulWidget {
-  final String? title;
 
   const TransformDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TransformDemoState createState() => _TransformDemoState();

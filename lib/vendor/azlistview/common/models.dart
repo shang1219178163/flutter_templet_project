@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:github_language_colors/github_language_colors.dart';
 
 class CityModel extends ISuspensionBean {
-  String name;
-  String? tagIndex;
-  String? namePinyin;
 
   CityModel({
     required this.name,
@@ -16,6 +13,9 @@ class CityModel extends ISuspensionBean {
   });
 
   CityModel.fromJson(Map<String, dynamic> json) : name = json['name'];
+  String name;
+  String? tagIndex;
+  String? namePinyin;
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -32,16 +32,6 @@ class CityModel extends ISuspensionBean {
 }
 
 class ContactInfo extends ISuspensionBean {
-  String name;
-  String? tagIndex;
-  String? namePinyin;
-
-  Color? bgColor;
-  IconData? iconData;
-
-  String? img;
-  String? id;
-  String? firstLetter;
 
   ContactInfo({
     required this.name,
@@ -59,6 +49,16 @@ class ContactInfo extends ISuspensionBean {
         img = json['img'],
         id = json['id']?.toString(),
         firstLetter = json['firstLetter'];
+  String name;
+  String? tagIndex;
+  String? namePinyin;
+
+  Color? bgColor;
+  IconData? iconData;
+
+  String? img;
+  String? id;
+  String? firstLetter;
 
   Map<String, dynamic> toJson() => {
 //        'id': id,
@@ -78,11 +78,11 @@ class ContactInfo extends ISuspensionBean {
 }
 
 class Languages extends GithubLanguage with ISuspensionBean {
+
+  Languages.fromJson(Map<String, dynamic> json) : super.fromJson(json);
   String? tagIndex;
   String? pinyin;
   String? shortPinyin;
-
-  Languages.fromJson(Map<String, dynamic> json) : super.fromJson(json);
 
   @override
   Map<String, dynamic> toJson() {

@@ -1,4 +1,11 @@
 class SongDetailModel {
+
+  SongDetailModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    lyric = json['sportId'];
+    logo = json['logo'];
+    name = json['names'];
+  }
   SongDetailModel({
     this.id,
     this.lyric,
@@ -13,13 +20,6 @@ class SongDetailModel {
   String? logo;
 
   String? name;
-
-  SongDetailModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    lyric = json['sportId'];
-    logo = json['logo'];
-    name = json['names'];
-  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

@@ -18,9 +18,9 @@ import 'package:path_provider/path_provider.dart';
 
 /// 数据库管理类
 class DBManager {
+  factory DBManager() => instance;
   DBManager._();
   static final DBManager instance = DBManager._();
-  factory DBManager() => instance;
 
   /// GetX 控制器统一 tag，页面用 [findController]
   static const String controllerTag = 'db_manager';

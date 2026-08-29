@@ -3,9 +3,6 @@
 import 'package:flutter/material.dart';
 
 class AnchoredOverlay extends StatelessWidget {
-  final bool showOverlay;
-  final Widget Function(BuildContext, Offset anchor) overlayBuilder;
-  final Widget child;
 
   AnchoredOverlay({
     super.key,
@@ -13,6 +10,9 @@ class AnchoredOverlay extends StatelessWidget {
     required this.overlayBuilder,
     required this.child,
   });
+  final bool showOverlay;
+  final Widget Function(BuildContext, Offset anchor) overlayBuilder;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,6 @@ class AnchoredOverlay extends StatelessWidget {
 }
 
 class OverlayBuilder extends StatefulWidget {
-  final bool showOverlay;
-  final WidgetBuilder overlayBuilder;
-  final Widget child;
 
   OverlayBuilder({
     super.key,
@@ -44,6 +41,9 @@ class OverlayBuilder extends StatefulWidget {
     required this.overlayBuilder,
     required this.child,
   });
+  final bool showOverlay;
+  final WidgetBuilder overlayBuilder;
+  final Widget child;
 
   @override
   _OverlayBuilderState createState() => _OverlayBuilderState();
@@ -112,14 +112,14 @@ class _OverlayBuilderState extends State<OverlayBuilder> {
 }
 
 class CenterAbout extends StatelessWidget {
-  final Offset position;
-  final Widget child;
 
   CenterAbout({
     super.key,
     required this.position,
     required this.child,
   });
+  final Offset position;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

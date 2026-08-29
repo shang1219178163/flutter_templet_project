@@ -3,18 +3,6 @@ import 'package:flutter/material.dart';
 
 ///时间选择器
 class NDatePicker extends StatelessWidget {
-  final String? title;
-  final CupertinoDatePickerMode? mode;
-  final DateTime? initialDateTime;
-  final DateTime? minimumDate;
-  final DateTime? maximumDate;
-  final ValueChanged<DateTime> onChanged;
-  final Widget? cancellChild;
-  final Widget? confirmChild;
-  final VoidCallback onCancell;
-  final VoidCallback onConfirm;
-
-  final double? datePickerHeight;
 
   ///时间选择器
   const NDatePicker({
@@ -31,6 +19,18 @@ class NDatePicker extends StatelessWidget {
     required this.onCancell,
     required this.onConfirm,
   }) : assert(datePickerHeight != null);
+  final String? title;
+  final CupertinoDatePickerMode? mode;
+  final DateTime? initialDateTime;
+  final DateTime? minimumDate;
+  final DateTime? maximumDate;
+  final ValueChanged<DateTime> onChanged;
+  final Widget? cancellChild;
+  final Widget? confirmChild;
+  final VoidCallback onCancell;
+  final VoidCallback onConfirm;
+
+  final double? datePickerHeight;
 
   @override
   Widget build(BuildContext context) {

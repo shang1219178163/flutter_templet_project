@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class DismissibleDemo extends StatefulWidget {
-  final String? title;
 
   const DismissibleDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DismissibleDemoState createState() => _DismissibleDemoState();

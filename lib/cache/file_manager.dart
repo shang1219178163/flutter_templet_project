@@ -19,9 +19,9 @@ import 'package:path_provider/path_provider.dart';
 
 /// 文件管理类
 class FileManager {
-  static final FileManager _instance = FileManager._();
   FileManager._();
   factory FileManager() => _instance;
+  static final FileManager _instance = FileManager._();
   static FileManager get instance => _instance;
 
   ///获取缓存目录路径

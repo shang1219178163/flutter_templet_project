@@ -360,12 +360,12 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
 
 ///单选菜单
 class RadioTileSexWidget extends StatefulWidget {
-  final Object selectedIndex;
 
   RadioTileSexWidget({
     Key? key,
     required this.selectedIndex,
   }) : super(key: key);
+  final Object selectedIndex;
 
   @override
   _RadioTileSexWidgetState createState() => _RadioTileSexWidgetState();

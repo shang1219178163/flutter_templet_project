@@ -196,12 +196,6 @@ class _TableComplexExampleState extends State<TableComplexExample> {
 }
 
 class _CalendarHeader extends StatelessWidget {
-  final DateTime focusedDay;
-  final VoidCallback onLeftArrowTap;
-  final VoidCallback onRightArrowTap;
-  final VoidCallback onTodayButtonTap;
-  final VoidCallback onClearButtonTap;
-  final bool clearButtonVisible;
 
   const _CalendarHeader({
     Key? key,
@@ -212,6 +206,12 @@ class _CalendarHeader extends StatelessWidget {
     required this.onClearButtonTap,
     required this.clearButtonVisible,
   }) : super(key: key);
+  final DateTime focusedDay;
+  final VoidCallback onLeftArrowTap;
+  final VoidCallback onRightArrowTap;
+  final VoidCallback onTodayButtonTap;
+  final VoidCallback onClearButtonTap;
+  final bool clearButtonVisible;
 
   @override
   Widget build(BuildContext context) {

@@ -144,14 +144,14 @@ class TournamentView extends StatelessWidget {
 
 /// 单场比赛卡片
 class MatchCard extends StatelessWidget {
-  final Map<String, dynamic> team1;
-  final Map<String, dynamic> team2;
 
   const MatchCard({
     super.key,
     required this.team1,
     required this.team2,
   });
+  final Map<String, dynamic> team1;
+  final Map<String, dynamic> team2;
 
   @override
   Widget build(BuildContext context) {
@@ -294,14 +294,14 @@ class BracketHorLinePainter extends CustomPainter {
 }
 
 class NetworkImageWithText extends StatefulWidget {
-  final String imageUrl;
-  final String text;
 
   const NetworkImageWithText({
     super.key,
     required this.imageUrl,
     required this.text,
   });
+  final String imageUrl;
+  final String text;
 
   @override
   State<NetworkImageWithText> createState() => _NetworkImageWithTextState();
@@ -352,10 +352,10 @@ class _NetworkImageWithTextState extends State<NetworkImageWithText> {
 }
 
 class _ImageTextPainter extends CustomPainter {
-  final ui.Image? image;
-  final String text;
 
   _ImageTextPainter(this.image, this.text);
+  final ui.Image? image;
+  final String text;
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SliverGridDemo extends StatefulWidget {
-  final String? title;
 
   const SliverGridDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SliverGridDemoState createState() => _SliverGridDemoState();

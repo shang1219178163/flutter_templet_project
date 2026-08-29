@@ -10,9 +10,9 @@
 import 'package:flutter/material.dart';
 
 class ShowSearchDemo extends StatefulWidget {
-  final String? title;
 
   const ShowSearchDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ShowSearchDemoState createState() => _ShowSearchDemoState();

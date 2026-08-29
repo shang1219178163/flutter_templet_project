@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ListDismissibleDemo extends StatefulWidget {
-  final String? title;
 
   const ListDismissibleDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ListDismissibleDemoState createState() => _ListDismissibleDemoState();

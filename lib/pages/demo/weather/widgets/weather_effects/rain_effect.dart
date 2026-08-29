@@ -2,12 +2,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RainEffect extends StatefulWidget {
-  final double animationSpeed;
 
   const RainEffect({
     super.key,
     this.animationSpeed = 1.0,
   });
+  final double animationSpeed;
 
   @override
   State<RainEffect> createState() => _RainEffectState();
@@ -70,11 +70,6 @@ class _RainEffectState extends State<RainEffect>
 }
 
 class RainDrop {
-  double x;
-  double y;
-  double length;
-  double speed;
-  double opacity;
 
   RainDrop({
     required this.x,
@@ -83,12 +78,17 @@ class RainDrop {
     required this.speed,
     required this.opacity,
   });
+  double x;
+  double y;
+  double length;
+  double speed;
+  double opacity;
 }
 
 class RainPainter extends CustomPainter {
-  final List<RainDrop> raindrops;
 
   RainPainter(this.raindrops);
+  final List<RainDrop> raindrops;
 
   @override
   void paint(Canvas canvas, Size size) {

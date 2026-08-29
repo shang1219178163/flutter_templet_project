@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class NavgationBarDemo extends StatefulWidget {
-  final String? title;
 
   const NavgationBarDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _NavgationBarDemoState createState() => _NavgationBarDemoState();

@@ -438,12 +438,6 @@ class SchemeMatchWidget extends StatelessWidget {
 }
 
 class SchemeMatchEntity {
-  int? matchId;
-  String? competitionShortName;
-  String? matchTimeStr;
-  int? matchTime;
-  String? homeTeamName;
-  String? awayTeamName;
 
   SchemeMatchEntity({
     this.matchId,
@@ -462,6 +456,12 @@ class SchemeMatchEntity {
     homeTeamName = json['homeTeamName'];
     awayTeamName = json['awayTeamName'];
   }
+  int? matchId;
+  String? competitionShortName;
+  String? matchTimeStr;
+  int? matchTime;
+  String? homeTeamName;
+  String? awayTeamName;
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

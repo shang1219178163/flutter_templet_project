@@ -33,9 +33,9 @@ const policy =
 const String url = 'https://yourBucketName.oss-cn-hangzhou.aliyuncs.com';
 
 class UploadSevice {
-  static final UploadSevice _instance = UploadSevice._();
   UploadSevice._();
   factory UploadSevice() => _instance;
+  static final UploadSevice _instance = UploadSevice._();
   static UploadSevice get instance => _instance;
 
   ///上传图片到阿里云OSS

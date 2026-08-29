@@ -14,9 +14,9 @@ import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class TextFieldDemoOne extends StatefulWidget {
-  final String? title;
 
   const TextFieldDemoOne({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TextFieldDemoOneState createState() => _TextFieldDemoOneState();

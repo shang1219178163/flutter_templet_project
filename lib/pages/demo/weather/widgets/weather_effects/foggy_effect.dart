@@ -2,12 +2,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class FoggyEffect extends StatefulWidget {
-  final double animationSpeed;
 
   const FoggyEffect({
     super.key,
     this.animationSpeed = 1.0,
   });
+  final double animationSpeed;
 
   @override
   State<FoggyEffect> createState() => _FoggyEffectState();
@@ -106,15 +106,6 @@ class _FoggyEffectState extends State<FoggyEffect>
 }
 
 class FogCloud {
-  double x;
-  double y;
-  double yOffset = 0;
-  final Size size;
-  final double opacity;
-  final double speed;
-  final double wiggleAmount;
-  final double wiggleSpeed;
-  final double phase;
 
   FogCloud({
     required this.x,
@@ -126,16 +117,25 @@ class FogCloud {
     required this.wiggleSpeed,
     required this.phase,
   });
+  double x;
+  double y;
+  double yOffset = 0;
+  final Size size;
+  final double opacity;
+  final double speed;
+  final double wiggleAmount;
+  final double wiggleSpeed;
+  final double phase;
 }
 
 class NewFogPainter extends CustomPainter {
-  final List<FogCloud> fogClouds;
-  final double animationValue;
 
   NewFogPainter({
     required this.fogClouds,
     required this.animationValue,
   });
+  final List<FogCloud> fogClouds;
+  final double animationValue;
 
   @override
   void paint(Canvas canvas, Size size) {

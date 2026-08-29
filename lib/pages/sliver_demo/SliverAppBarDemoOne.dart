@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class SliverAppBarDemoOne extends StatefulWidget {
-  final String? title;
 
   const SliverAppBarDemoOne({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SliverAppBarDemoOneState createState() => _SliverAppBarDemoOneState();

@@ -5,8 +5,8 @@ import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class ListViewOffsetPage extends StatefulWidget {
-  final String? title;
   const ListViewOffsetPage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ListViewOffsetPageState createState() => _ListViewOffsetPageState();

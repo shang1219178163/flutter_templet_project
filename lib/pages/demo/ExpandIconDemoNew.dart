@@ -183,12 +183,6 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
 
 // stores ExpansionPanel state information
 class ExpandedItem<E> {
-  int index;
-  String expandedValue;
-  String headerValue;
-  bool isExpanded;
-
-  List<E> items;
 
   ExpandedItem({
     required this.index,
@@ -197,6 +191,12 @@ class ExpandedItem<E> {
     required this.items,
     this.isExpanded = false,
   });
+  int index;
+  String expandedValue;
+  String headerValue;
+  bool isExpanded;
+
+  List<E> items;
 }
 
 ///自定义视图

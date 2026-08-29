@@ -246,12 +246,6 @@ class _GameMatchHorizalPageState extends State<GameMatchHorizalPage> {
 /// 连线
 ///
 class BracketPainter extends CustomPainter {
-  final List<List<BracketMatch>> rounds;
-
-  final double cardWidth;
-  final double cardHeight;
-  final double roundWidth;
-  final double leftPadding;
 
   BracketPainter({
     required this.rounds,
@@ -260,6 +254,12 @@ class BracketPainter extends CustomPainter {
     required this.roundWidth,
     required this.leftPadding,
   });
+  final List<List<BracketMatch>> rounds;
+
+  final double cardWidth;
+  final double cardHeight;
+  final double roundWidth;
+  final double leftPadding;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -305,14 +305,6 @@ class BracketPainter extends CustomPainter {
 /// 球队卡片
 ///
 class TeamCard extends StatelessWidget {
-  final double width;
-  final double height;
-
-  final Team? team;
-
-  final bool selected;
-
-  final VoidCallback onTap;
 
   const TeamCard({
     super.key,
@@ -322,6 +314,14 @@ class TeamCard extends StatelessWidget {
     required this.selected,
     required this.onTap,
   });
+  final double width;
+  final double height;
+
+  final Team? team;
+
+  final bool selected;
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -370,6 +370,8 @@ class TeamCard extends StatelessWidget {
 /// Match
 ///
 class BracketMatch {
+
+  BracketMatch({this.topTeam, this.bottomTeam});
   Team? topTeam;
   Team? bottomTeam;
   Team? winner;
@@ -377,8 +379,6 @@ class BracketMatch {
   late double topCenterY;
   late double bottomCenterY;
   late double centerY;
-
-  BracketMatch({this.topTeam, this.bottomTeam});
 
   Map<String, dynamic> toJson() {
     return {
@@ -396,11 +396,11 @@ class BracketMatch {
 /// Team
 ///
 class Team {
+
+  Team({required this.id, required this.name, required this.flag});
   final String id;
   final String name;
   final String flag;
-
-  Team({required this.id, required this.name, required this.flag});
 
   Map<String, dynamic> toJson() {
     return {'id': id, 'name': name, 'flag': flag};

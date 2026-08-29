@@ -4,9 +4,9 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 /// 曝光检测
 class VisibilityDetectorDemo extends StatefulWidget {
-  final String? title;
 
   const VisibilityDetectorDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _VisibilityDetectorDemoState createState() => _VisibilityDetectorDemoState();

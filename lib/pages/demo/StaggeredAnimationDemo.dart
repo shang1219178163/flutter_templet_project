@@ -62,20 +62,6 @@ class _StaggeredAnimationDemoState extends State<StaggeredAnimationDemo> with Si
 }
 
 class StaggeredAnimationWidget extends StatelessWidget {
-  final Animation<double> controller;
-  final Animation<double> width;
-  final Animation<double> height;
-  final Animation<Color?> color;
-  final Animation<EdgeInsets> padding;
-  final Animation<BorderRadius?> borderRadius;
-  final Animation<double> elevation;
-  final Animation<TextStyle>? style;
-
-  final Animation<double>? opacity;
-  final Animation<Offset>? slide;
-  final Animation<double>? scale;
-  final Animation<double>? rotation;
-  final Widget child;
 
   StaggeredAnimationWidget({
     Key? key,
@@ -188,6 +174,20 @@ class StaggeredAnimationWidget extends StatelessWidget {
           ),
         ),
         super(key: key);
+  final Animation<double> controller;
+  final Animation<double> width;
+  final Animation<double> height;
+  final Animation<Color?> color;
+  final Animation<EdgeInsets> padding;
+  final Animation<BorderRadius?> borderRadius;
+  final Animation<double> elevation;
+  final Animation<TextStyle>? style;
+
+  final Animation<double>? opacity;
+  final Animation<Offset>? slide;
+  final Animation<double>? scale;
+  final Animation<double>? rotation;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

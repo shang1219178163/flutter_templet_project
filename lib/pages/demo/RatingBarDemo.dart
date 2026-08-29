@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class RatingBarDemo extends StatefulWidget {
-  final String? title;
 
   const RatingBarDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _RatingBarDemoState createState() => _RatingBarDemoState();

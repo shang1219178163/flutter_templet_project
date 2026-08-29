@@ -39,12 +39,6 @@ class NTabIndicatorFixedWidth extends Decoration {
 }
 
 class _RoundedPainter extends BoxPainter {
-  final Color? color;
-  final Gradient? gradient;
-  final double width;
-  final double height;
-  final double topMargin;
-  final double borderRadius;
 
   _RoundedPainter({
     this.color,
@@ -54,6 +48,12 @@ class _RoundedPainter extends BoxPainter {
     required this.topMargin,
     required this.borderRadius,
   });
+  final Color? color;
+  final Gradient? gradient;
+  final double width;
+  final double height;
+  final double topMargin;
+  final double borderRadius;
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {

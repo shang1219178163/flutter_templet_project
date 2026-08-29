@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 class NotificationListenerDemo extends StatefulWidget {
-  final String? title;
 
   const NotificationListenerDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _NotificationListenerDemoState createState() => _NotificationListenerDemoState();

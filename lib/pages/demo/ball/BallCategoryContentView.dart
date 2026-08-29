@@ -10,9 +10,9 @@ import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class BallCategoryContentView extends StatefulWidget {
-  final List<CategoryItem> leftNavItems;
 
   const BallCategoryContentView({super.key, required this.leftNavItems});
+  final List<CategoryItem> leftNavItems;
 
   @override
   State<BallCategoryContentView> createState() => _BallCategoryContentViewState();

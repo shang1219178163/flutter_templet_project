@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class StaggeredGridViewDemo extends StatefulWidget {
-  final String? title;
 
   const StaggeredGridViewDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StaggeredGridViewDemoState createState() => _StaggeredGridViewDemoState();

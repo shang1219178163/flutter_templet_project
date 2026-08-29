@@ -449,6 +449,15 @@ class AppWebViewPageController {
 
 /// 视频标签<Video>模型
 class VideoElementDetailModel {
+
+  VideoElementDetailModel.fromJson(Map<String, dynamic> json) {
+    src = json['src'];
+    type = json['type'];
+    poster = json['poster'];
+    controls = json['controls'];
+    width = json['width'];
+    height = json['height'];
+  }
   VideoElementDetailModel({
     this.src,
     this.type,
@@ -469,15 +478,6 @@ class VideoElementDetailModel {
   bool get isHorizontal {
     final result = (width ?? "auto").compareTo(height ?? "auto") >= 0;
     return result;
-  }
-
-  VideoElementDetailModel.fromJson(Map<String, dynamic> json) {
-    src = json['src'];
-    type = json['type'];
-    poster = json['poster'];
-    controls = json['controls'];
-    width = json['width'];
-    height = json['height'];
   }
 
   Map<String, dynamic> toJson() {

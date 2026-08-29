@@ -113,10 +113,10 @@ class InterceptChainHandler<T> {
 }
 
 class DialogPass {
-  String? msg;
-  int passType = 0;
 
   DialogPass(this.msg, this.passType);
+  String? msg;
+  int passType = 0;
 }
 
 class TipsIntercept extends InterceptChain<DialogPass> {

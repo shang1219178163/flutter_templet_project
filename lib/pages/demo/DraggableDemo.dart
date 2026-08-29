@@ -11,9 +11,9 @@ import 'package:flutter_templet_project/basicWidget/n_drag_sort_wrap.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class DraggableDemo extends StatefulWidget {
-  final String? title;
 
   const DraggableDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DraggableDemoState createState() => _DraggableDemoState();

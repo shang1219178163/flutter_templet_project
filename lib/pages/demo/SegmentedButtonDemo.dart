@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 
 class SegmentedButtonDemo extends StatefulWidget {
-  final String? title;
 
   const SegmentedButtonDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SegmentedButtonDemoState createState() => _SegmentedButtonDemoState();

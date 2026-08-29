@@ -554,6 +554,31 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
 
 /// 不良事件详情
 class AdverseEventRecord {
+
+  AdverseEventRecord.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    createTime = json['createTime'];
+    updateTime = json['updateTime'];
+    createBy = json['createBy'];
+    updateBy = json['updateBy'];
+    remark = json['remark'];
+    adverseEventId = json['adverseEventId'];
+    aeName = json['aeName'];
+    startTime = json['startTime'];
+    endTime = json['endTime'];
+    aePrognosis = json['aePrognosis'];
+    aeLevel = json['aeLevel'];
+    drugCorrelation = json['drugCorrelation'];
+    takenForDrugUse = json['takenForDrugUse'];
+    isTakeAction = json['isTakeAction'];
+    isSae = json['isSae'];
+    if (json['imageUrls'] != null) {
+      imageUrls = <ProofDetailModel>[];
+      (json['imageUrls'] as List).forEach((v) {
+        imageUrls!.add(ProofDetailModel.fromJson(v as Map<String, dynamic>));
+      });
+    }
+  }
   AdverseEventRecord({
     this.id,
     this.createTime,
@@ -610,31 +635,6 @@ class AdverseEventRecord {
     return result;
   }
 
-  AdverseEventRecord.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    createTime = json['createTime'];
-    updateTime = json['updateTime'];
-    createBy = json['createBy'];
-    updateBy = json['updateBy'];
-    remark = json['remark'];
-    adverseEventId = json['adverseEventId'];
-    aeName = json['aeName'];
-    startTime = json['startTime'];
-    endTime = json['endTime'];
-    aePrognosis = json['aePrognosis'];
-    aeLevel = json['aeLevel'];
-    drugCorrelation = json['drugCorrelation'];
-    takenForDrugUse = json['takenForDrugUse'];
-    isTakeAction = json['isTakeAction'];
-    isSae = json['isSae'];
-    if (json['imageUrls'] != null) {
-      imageUrls = <ProofDetailModel>[];
-      (json['imageUrls'] as List).forEach((v) {
-        imageUrls!.add(ProofDetailModel.fromJson(v as Map<String, dynamic>));
-      });
-    }
-  }
-
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
@@ -663,6 +663,11 @@ class AdverseEventRecord {
 
 /// 上传凭证
 class ProofDetailModel {
+
+  ProofDetailModel.fromJson(Map<String, dynamic> json) {
+    name = (json['name'] as String?);
+    url = (json['url'] as String?);
+  }
   ProofDetailModel({
     this.name,
     this.url,
@@ -682,11 +687,6 @@ class ProofDetailModel {
       name: name ?? this.name,
       url: url ?? this.url,
     );
-  }
-
-  ProofDetailModel.fromJson(Map<String, dynamic> json) {
-    name = (json['name'] as String?);
-    url = (json['url'] as String?);
   }
 
   Map<String, dynamic> toJson() {

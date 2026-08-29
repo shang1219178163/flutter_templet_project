@@ -10,9 +10,9 @@
 import 'package:flutter/material.dart';
 
 class StatefulBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const StatefulBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StatefulBuilderDemoState createState() => _StatefulBuilderDemoState();

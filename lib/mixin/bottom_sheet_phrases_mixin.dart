@@ -207,6 +207,13 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
 }
 
 class IMPhrasesDetailModel {
+
+  IMPhrasesDetailModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    phrases = json['phrases'];
+    orderNum = json['orderNum'];
+    createBy = json['createBy'];
+  }
   IMPhrasesDetailModel({
     this.id,
     this.phrases,
@@ -218,13 +225,6 @@ class IMPhrasesDetailModel {
   String? phrases;
   int? orderNum;
   String? createBy;
-
-  IMPhrasesDetailModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    phrases = json['phrases'];
-    orderNum = json['orderNum'];
-    createBy = json['createBy'];
-  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();

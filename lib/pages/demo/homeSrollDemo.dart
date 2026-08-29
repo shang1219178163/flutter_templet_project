@@ -6,9 +6,9 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:tuple/tuple.dart';
 
 class HomeSrollDemo extends StatefulWidget {
-  final String? title;
 
   const HomeSrollDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _HomeSrollDemoState createState() => _HomeSrollDemoState();

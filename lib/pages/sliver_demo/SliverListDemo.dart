@@ -5,9 +5,9 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class SliverListDemo extends StatefulWidget {
-  final String? title;
 
   const SliverListDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SliverListDemoState createState() => _SliverListDemoState();

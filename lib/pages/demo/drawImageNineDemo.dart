@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DrawImageNineDemo extends StatefulWidget {
-  final String? title;
 
   const DrawImageNineDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DrawImageNineDemoState createState() => _DrawImageNineDemoState();
@@ -70,11 +70,11 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
 }
 
 class ImageEditor extends CustomPainter {
-  ui.Image image;
 
   ImageEditor({
     required this.image,
   });
+  ui.Image image;
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 
 class NavigationToolbarDemo extends StatefulWidget {
-  final String? title;
 
   const NavigationToolbarDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _NavigationToolbarDemoState createState() => _NavigationToolbarDemoState();

@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RxDartProviderDemo extends StatefulWidget {
-  final String? title;
 
   const RxDartProviderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _RxDartProviderDemoState createState() => _RxDartProviderDemoState();

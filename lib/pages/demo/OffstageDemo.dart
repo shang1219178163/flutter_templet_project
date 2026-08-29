@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 
 class OffstageDemo extends StatefulWidget {
-  final String? title;
 
   const OffstageDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _OffstageDemoState createState() => _OffstageDemoState();

@@ -630,11 +630,6 @@ class LoadingView extends StatelessWidget {
 }
 
 class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  final ValueChanged<double>? onHeightChanged;
 
   SliverAppBarDelegate({
     required this.minHeight,
@@ -642,6 +637,11 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     required this.child,
     this.onHeightChanged,
   });
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  final ValueChanged<double>? onHeightChanged;
 
   @override
   double get minExtent => minHeight;

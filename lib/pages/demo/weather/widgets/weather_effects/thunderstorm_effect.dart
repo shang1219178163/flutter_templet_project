@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/pages/demo/weather/widgets/weather_effects/rain_effect.dart';
 
 class ThunderstormEffect extends StatefulWidget {
-  final double animationSpeed;
 
   const ThunderstormEffect({
     super.key,
     this.animationSpeed = 1.0,
   });
+  final double animationSpeed;
 
   @override
   State<ThunderstormEffect> createState() => _ThunderstormEffectState();
@@ -129,11 +129,6 @@ class _ThunderstormEffectState extends State<ThunderstormEffect> with SingleTick
 }
 
 class Cloud {
-  double x;
-  double y;
-  double width;
-  double height;
-  double opacity;
 
   Cloud({
     required this.x,
@@ -142,15 +137,14 @@ class Cloud {
     required this.height,
     required this.opacity,
   });
+  double x;
+  double y;
+  double width;
+  double height;
+  double opacity;
 }
 
 class Lightning {
-  double startX;
-  double startY;
-  int segments;
-  double width;
-  double opacity;
-  List<Offset> path = [];
 
   Lightning({
     required this.startX,
@@ -161,6 +155,12 @@ class Lightning {
   }) {
     regenerate(Random());
   }
+  double startX;
+  double startY;
+  int segments;
+  double width;
+  double opacity;
+  List<Offset> path = [];
 
   void regenerate(Random random) {
     path.clear();
@@ -178,12 +178,6 @@ class Lightning {
 }
 
 class ThunderstormPainter extends CustomPainter {
-  final List<RainDrop> raindrops;
-  final List<Lightning> lightnings;
-  final List<Cloud> clouds;
-  final bool showLightning;
-  final double ambientDarkness;
-  final Random random = Random();
 
   ThunderstormPainter({
     required this.raindrops,
@@ -192,6 +186,12 @@ class ThunderstormPainter extends CustomPainter {
     required this.showLightning,
     required this.ambientDarkness,
   });
+  final List<RainDrop> raindrops;
+  final List<Lightning> lightnings;
+  final List<Cloud> clouds;
+  final bool showLightning;
+  final double ambientDarkness;
+  final Random random = Random();
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -14,9 +14,9 @@ import 'package:flutter_templet_project/util/debounce_text_controller.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 
 class StreamBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const StreamBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StreamBuilderDemoState createState() => _StreamBuilderDemoState();

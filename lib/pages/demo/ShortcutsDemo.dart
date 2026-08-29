@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ShortcutsDemo extends StatefulWidget {
-  final String? title;
 
   const ShortcutsDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ShortcutsDemoState createState() => _ShortcutsDemoState();

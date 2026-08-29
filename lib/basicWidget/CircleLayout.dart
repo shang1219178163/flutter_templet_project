@@ -5,16 +5,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CircleLayout extends StatelessWidget {
-  final List<Widget> children;
-
-  /// 初始角度
-  final double initAngle;
-
-  /// 排列方向
-  final bool reverse;
-
-  /// 缩放子部件圆心到容器圆心的距离
-  final double radiusRatio;
 
   /// 一个使子组件呈现圆状布局的Layout
   ///
@@ -33,6 +23,16 @@ class CircleLayout extends StatelessWidget {
   })  : assert(0.0 <= radiusRatio && radiusRatio <= 1.0),
         assert(0 <= initAngle && initAngle <= 360),
         super(key: key);
+  final List<Widget> children;
+
+  /// 初始角度
+  final double initAngle;
+
+  /// 排列方向
+  final bool reverse;
+
+  /// 缩放子部件圆心到容器圆心的距离
+  final double radiusRatio;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +51,6 @@ class CircleLayout extends StatelessWidget {
 }
 
 class _RingDelegate extends MultiChildLayoutDelegate {
-  final double initAngle;
-  final bool reverse;
-  final int count;
-  final double radiusRatio;
 
   _RingDelegate({
     required this.initAngle,
@@ -62,6 +58,10 @@ class _RingDelegate extends MultiChildLayoutDelegate {
     required this.count,
     required this.radiusRatio,
   });
+  final double initAngle;
+  final bool reverse;
+  final int count;
+  final double radiusRatio;
 
   @override
   void performLayout(Size size) {

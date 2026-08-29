@@ -74,13 +74,13 @@ class ProviderDemoOne extends StatelessWidget {
 }
 
 class ToggleNotifier extends ChangeNotifier {
+
+  ToggleNotifier({required this.val, required this.val1});
   dynamic val;
   dynamic val1;
 
   dynamic _current;
   dynamic get current => _current;
-
-  ToggleNotifier({required this.val, required this.val1});
 
   void update() {
     _current = _current == val ? val1 : val;

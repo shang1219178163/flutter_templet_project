@@ -13,8 +13,8 @@ import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class SliderDemo extends StatefulWidget {
-  final String? title;
   const SliderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _SliderDemoState createState() => _SliderDemoState();

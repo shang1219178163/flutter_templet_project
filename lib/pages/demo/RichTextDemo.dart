@@ -19,9 +19,9 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RichTextDemo extends StatefulWidget {
-  final String? title;
 
   const RichTextDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _RichTextDemoState createState() => _RichTextDemoState();

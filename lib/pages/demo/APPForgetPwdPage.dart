@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 
 class APPForgetPwdPage extends StatefulWidget {
-  final String? title;
 
   const APPForgetPwdPage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _APPForgetPwdPageState createState() => _APPForgetPwdPageState();

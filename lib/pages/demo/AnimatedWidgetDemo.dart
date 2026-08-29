@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 
 class AnimatedWidgetDemo extends StatefulWidget {
-  final String? title;
 
   const AnimatedWidgetDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _AnimatedWidgetDemoState createState() => _AnimatedWidgetDemoState();

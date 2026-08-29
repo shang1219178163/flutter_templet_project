@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class _AppLocalizationsResoure {
-  static final _AppLocalizationsResoure _instance = _AppLocalizationsResoure._();
   _AppLocalizationsResoure._();
   factory _AppLocalizationsResoure() => _instance;
+  static final _AppLocalizationsResoure _instance = _AppLocalizationsResoure._();
   static _AppLocalizationsResoure get instance => _instance;
 
   Map<String, String> map = {};

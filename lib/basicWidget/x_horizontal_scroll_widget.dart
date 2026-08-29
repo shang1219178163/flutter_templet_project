@@ -11,27 +11,6 @@ typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index
 typedef XHomeSwiperItemWidgetBuilder = Widget Function(int index);
 
 class XHorizontalScrollWidget extends StatelessWidget {
-  final String? title;
-  final List<Tuple4<String, String, String, bool>> items;
-
-  final double width;
-  final double height;
-  final EdgeInsets padding;
-  final EdgeInsets margin;
-
-  final ImageProvider? bg;
-  final XHomeSwiperItemWidgetBuilder? itemBuilder;
-  final XHomeSwiperBGWidgetBuilder? bgBuilder;
-
-  final double showCount;
-  final double startLeft;
-  final double endRight;
-  final double gap;
-  final Radius radius;
-  final bool isSwiper;
-  final List<BoxShadow>? boxShadow;
-
-  final void Function(Tuple4<String, String, String, bool> e) onTap;
 
   XHorizontalScrollWidget({
     super.key,
@@ -53,6 +32,27 @@ class XHorizontalScrollWidget extends StatelessWidget {
     this.isSwiper = false,
     required this.onTap,
   });
+  final String? title;
+  final List<Tuple4<String, String, String, bool>> items;
+
+  final double width;
+  final double height;
+  final EdgeInsets padding;
+  final EdgeInsets margin;
+
+  final ImageProvider? bg;
+  final XHomeSwiperItemWidgetBuilder? itemBuilder;
+  final XHomeSwiperBGWidgetBuilder? bgBuilder;
+
+  final double showCount;
+  final double startLeft;
+  final double endRight;
+  final double gap;
+  final Radius radius;
+  final bool isSwiper;
+  final List<BoxShadow>? boxShadow;
+
+  final void Function(Tuple4<String, String, String, bool> e) onTap;
 
   double getItemWidth() {
     var w = width - padding.left - padding.right;

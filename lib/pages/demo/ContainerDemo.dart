@@ -10,9 +10,9 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class ContainerDemo extends StatefulWidget {
-  final String? title;
 
   const ContainerDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ContainerDemoState createState() => _ContainerDemoState();

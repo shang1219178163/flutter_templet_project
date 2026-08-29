@@ -12,9 +12,9 @@ import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class StateManagerDemo extends StatefulWidget {
-  final String? title;
 
   const StateManagerDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _StateManagerDemoState createState() => _StateManagerDemoState();

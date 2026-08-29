@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class IndexedStackDemo extends StatefulWidget {
-  final String? title;
 
   const IndexedStackDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _IndexedStackDemoState createState() => _IndexedStackDemoState();

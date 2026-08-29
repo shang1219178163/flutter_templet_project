@@ -24,9 +24,9 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class BoxDemo extends StatefulWidget {
-  final String? title;
 
   const BoxDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _BoxDemoState createState() => _BoxDemoState();

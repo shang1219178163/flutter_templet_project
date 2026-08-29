@@ -29,9 +29,9 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
 class TextFieldDemo extends StatefulWidget {
-  final String? title;
 
   const TextFieldDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TextFieldDemoState createState() => _TextFieldDemoState();

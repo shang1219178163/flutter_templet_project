@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class BuilderDemo extends StatefulWidget {
-  final String? title;
 
   const BuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _BuilderDemoState createState() => _BuilderDemoState();

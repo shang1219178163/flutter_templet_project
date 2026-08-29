@@ -7,11 +7,11 @@ import 'package:path_provider/path_provider.dart';
 
 ///缓存媒体文件
 class AssetCacheService {
+
+  factory AssetCacheService() => _instance;
   AssetCacheService._();
 
   static final AssetCacheService _instance = AssetCacheService._();
-
-  factory AssetCacheService() => _instance;
 
   Directory? _dir;
 

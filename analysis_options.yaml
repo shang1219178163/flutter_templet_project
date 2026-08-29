@@ -3,6 +3,8 @@
 # 遇到不会解决的规则，可以在该网站找到解决方式：https://dart-lang.github.io/linter/lints/
 
 analyzer:
+  errors:
+    unused_local_variable: ignore
   exclude:
     - "build/**"
     - ".dart_tool/**"

@@ -144,12 +144,12 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
 }
 
 class NNListUpdateAppWidget extends StatelessWidget {
-  final List<AppUpdateItemModel> list;
 
   const NNListUpdateAppWidget({
     Key? key,
     required this.list,
   }) : super(key: key);
+  final List<AppUpdateItemModel> list;
 
   @override
   Widget build(BuildContext context) {

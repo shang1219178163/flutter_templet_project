@@ -45,9 +45,9 @@ List<UserModel> models = [
 ];
 
 class DataTableDemo extends StatefulWidget {
-  final String? title;
 
   const DataTableDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DataTableDemoState createState() => _DataTableDemoState();

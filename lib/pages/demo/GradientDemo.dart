@@ -9,9 +9,9 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/GradientOfRadialDemo.dart';
 
 class GradientDemo extends StatefulWidget {
-  final String? title;
 
   const GradientDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _GradientDemoState createState() => _GradientDemoState();

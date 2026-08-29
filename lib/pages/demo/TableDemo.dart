@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 
 class TableDemo extends StatefulWidget {
-  final String? title;
 
   const TableDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TableDemoState createState() => _TableDemoState();

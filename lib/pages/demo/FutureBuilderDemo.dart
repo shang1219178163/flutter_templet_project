@@ -13,9 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/model/git_repo_model.dart';
 
 class FutureBuilderDemo extends StatefulWidget {
-  final String? title;
 
   const FutureBuilderDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _FutureBuilderDemoState createState() => _FutureBuilderDemoState();

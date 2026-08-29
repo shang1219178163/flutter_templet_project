@@ -74,9 +74,9 @@ class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget> wit
 }
 
 class _CircleFlow extends FlowDelegate {
-  final double radius;
 
   _CircleFlow(this.radius);
+  final double radius;
 
   @override
   void paintChildren(FlowPaintingContext context) {
@@ -97,9 +97,9 @@ class _CircleFlow extends FlowDelegate {
 /// desc:
 ///
 class DelayTween extends Tween<double> {
-  final double delay;
 
   DelayTween({required double begin, required double end, required this.delay}) : super(begin: begin, end: end);
+  final double delay;
 
   @override
   double lerp(double t) {

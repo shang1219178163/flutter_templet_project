@@ -3,9 +3,9 @@ import 'package:flutter_templet_project/basicWidget/custom_swiper.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 
 class CustomSwipperDemo extends StatefulWidget {
-  final String? title;
 
   const CustomSwipperDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _CustomSwipperDemoState createState() => _CustomSwipperDemoState();

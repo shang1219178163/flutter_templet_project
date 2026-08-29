@@ -14,9 +14,9 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class DraggableScrollableSheetDemo extends StatefulWidget {
-  final String? title;
 
   const DraggableScrollableSheetDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _DraggableScrollableSheetDemoState createState() => _DraggableScrollableSheetDemoState();

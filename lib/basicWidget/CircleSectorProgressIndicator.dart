@@ -74,11 +74,11 @@ class CircleSectorProgressIndicator extends StatelessWidget {
 
 /// 扇形进度条
 class CircleSectorProgressClipper extends CustomClipper<Path> {
-  final double progress;
 
   CircleSectorProgressClipper({
     this.progress = 0,
   });
+  final double progress;
 
   @override
   Path getClip(Size size) {

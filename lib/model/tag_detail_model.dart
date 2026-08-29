@@ -11,6 +11,20 @@ import 'dart:convert';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class TagsRootModel {
+
+  TagsRootModel.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    if (json['result'] != null) {
+      result = <TagDetailModel>[];
+      (json['result'] as List).forEach((v) {
+        result!.add(TagDetailModel.fromJson(v as Map<String, dynamic>));
+      });
+    }
+    application = json['application'];
+    traceId = json['traceId'];
+    message = json['message'];
+    isSelected = json['isSelected'];
+  }
   TagsRootModel({
     this.code,
     this.result,
@@ -33,20 +47,6 @@ class TagsRootModel {
   List<String> get tagNames =>
       (result ?? []).where((e) => e.name != null && e.name!.isNotEmpty).map((e) => e.name!).toList();
 
-  TagsRootModel.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    if (json['result'] != null) {
-      result = <TagDetailModel>[];
-      (json['result'] as List).forEach((v) {
-        result!.add(TagDetailModel.fromJson(v as Map<String, dynamic>));
-      });
-    }
-    application = json['application'];
-    traceId = json['traceId'];
-    message = json['message'];
-    isSelected = json['isSelected'];
-  }
-
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['code'] = code;
@@ -62,6 +62,15 @@ class TagsRootModel {
 }
 
 class TagDetailModel with SelectableMixin {
+
+  TagDetailModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'] ?? json['tagsId'];
+    createTime = json['createTime'];
+    updateTime = json['updateTime'];
+    name = json['name'] ?? json['tagsName'];
+    color = json['color'] ?? json['tagsColor'];
+    isSelected = json['isSelected'];
+  }
   TagDetailModel({
     this.id,
     this.createTime,
@@ -75,15 +84,6 @@ class TagDetailModel with SelectableMixin {
   int? updateTime;
   String? name;
   String? color;
-
-  TagDetailModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'] ?? json['tagsId'];
-    createTime = json['createTime'];
-    updateTime = json['updateTime'];
-    name = json['name'] ?? json['tagsName'];
-    color = json['color'] ?? json['tagsColor'];
-    isSelected = json['isSelected'];
-  }
 
   @override
   Map<String, dynamic> toJson() {

@@ -10,9 +10,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextViewDemo extends StatefulWidget {
-  final String? title;
 
   const TextViewDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TextViewDemoState createState() => _TextViewDemoState();

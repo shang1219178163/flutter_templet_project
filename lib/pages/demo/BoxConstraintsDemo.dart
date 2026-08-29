@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class BoxConstraintsDemo extends StatefulWidget {
-  final String? title;
 
   const BoxConstraintsDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _BoxConstraintsDemoState createState() => _BoxConstraintsDemoState();

@@ -3,9 +3,9 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:scribble/scribble.dart';
 
 class ScribbleDemo extends StatefulWidget {
-  final String? title;
 
   const ScribbleDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ScribbleDemoState createState() => _ScribbleDemoState();

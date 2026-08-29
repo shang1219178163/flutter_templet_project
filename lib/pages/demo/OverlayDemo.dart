@@ -17,9 +17,9 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 class OverlayDemo extends StatefulWidget {
-  final String? title;
 
   const OverlayDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _OverlayDemoState createState() => _OverlayDemoState();

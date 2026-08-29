@@ -85,24 +85,24 @@ class GlobalIsolate {
 
 ///通知子isolate工作
 class SendMessage {
-  int id;
-  Map<String, dynamic> params;
-  Future Function(Map<String, dynamic> params) work;
 
   SendMessage({
     required this.id,
     required this.params,
     required this.work,
   });
+  int id;
+  Map<String, dynamic> params;
+  Future Function(Map<String, dynamic> params) work;
 }
 
 ///通知main isolate,活干完了,给你结果
 class ReceiveMessage {
-  int id;
-  dynamic result;
 
   ReceiveMessage({
     required this.id,
     this.result,
   });
+  int id;
+  dynamic result;
 }

@@ -93,11 +93,6 @@ class ChatInputEmoji extends StatelessWidget {
 }
 
 class ChatExpression extends StatelessWidget {
-  final String emoji;
-
-  final double bigSizeRatio;
-
-  final EmojiClick? emojiClicked;
 
   const ChatExpression(
     this.emoji,
@@ -105,6 +100,11 @@ class ChatExpression extends StatelessWidget {
     this.emojiClicked, {
     super.key,
   });
+  final String emoji;
+
+  final double bigSizeRatio;
+
+  final EmojiClick? emojiClicked;
 
   @override
   Widget build(BuildContext context) {

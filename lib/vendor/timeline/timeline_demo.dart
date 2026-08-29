@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
 
 class TimelineDemo extends StatefulWidget {
-  final String? title;
 
   const TimelineDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _TimelineDemoState createState() => _TimelineDemoState();

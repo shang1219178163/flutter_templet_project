@@ -12,9 +12,9 @@ import 'package:flutter_templet_project/basicWidget/triangle_path.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 class ClipDemo extends StatefulWidget {
-  final String? title;
 
   const ClipDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _ClipDemoState createState() => _ClipDemoState();

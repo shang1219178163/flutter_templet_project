@@ -9,9 +9,9 @@
 import 'package:flutter/material.dart';
 
 class BannerDemo extends StatefulWidget {
-  final String? title;
 
   const BannerDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _BannerDemoState createState() => _BannerDemoState();

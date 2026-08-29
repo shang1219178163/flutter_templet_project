@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class OverlayToast {
-  static final OverlayToast _instance = OverlayToast._();
   OverlayToast._();
   factory OverlayToast() => _instance;
+  static final OverlayToast _instance = OverlayToast._();
   static OverlayToast get instance => _instance;
 
   OverlayEntry? _entry;

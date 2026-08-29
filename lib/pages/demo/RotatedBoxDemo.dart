@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RotatedBoxDemo extends StatefulWidget {
-  final String? title;
 
   const RotatedBoxDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _RotatedBoxDemoState createState() => _RotatedBoxDemoState();

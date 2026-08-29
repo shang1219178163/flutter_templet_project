@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class InternetConnectionService {
+
+  factory InternetConnectionService() => _instance;
   InternetConnectionService._() {
     try {
       _createChecker().onStatusChange.listen((event) {
@@ -22,8 +24,6 @@ class InternetConnectionService {
   }
 
   static final _instance = InternetConnectionService._();
-
-  factory InternetConnectionService() => _instance;
 
   /// 是否联网; 可通过 ValueListenableBuilder 监听网络状态改变
   final onLine = ValueNotifier<bool>(true);

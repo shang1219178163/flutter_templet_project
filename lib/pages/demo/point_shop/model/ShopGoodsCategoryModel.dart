@@ -14,6 +14,17 @@ import 'package:flutter_templet_project/pages/demo/point_shop/model/ShopGoodsDet
 
 /// 熊猫币礼物分类
 class ShopGoodsCategoryModel {
+
+  ShopGoodsCategoryModel.fromJson(Map<String, dynamic> json) {
+    balance = json['balance'];
+    categoryId = json['categoryId'];
+    categoryName = json['categoryName'];
+    categoryCode = json['categoryCode'];
+    if (json['goodsList'] != null) {
+      final array = List<Map<String, dynamic>>.from(json['goodsList'] ?? []);
+      goodsList = array.map((e) => ShopGoodsDetailModel.fromJson(e)).toList();
+    }
+  }
   ShopGoodsCategoryModel({
     this.balance,
     this.categoryId,
@@ -48,17 +59,6 @@ class ShopGoodsCategoryModel {
     }
     target.categoryCode = categoryCode;
     return target;
-  }
-
-  ShopGoodsCategoryModel.fromJson(Map<String, dynamic> json) {
-    balance = json['balance'];
-    categoryId = json['categoryId'];
-    categoryName = json['categoryName'];
-    categoryCode = json['categoryCode'];
-    if (json['goodsList'] != null) {
-      final array = List<Map<String, dynamic>>.from(json['goodsList'] ?? []);
-      goodsList = array.map((e) => ShopGoodsDetailModel.fromJson(e)).toList();
-    }
   }
 
   Map<String, dynamic> toJson() {

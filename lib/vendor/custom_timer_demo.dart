@@ -2,9 +2,9 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 
 class CustomTimerDemo extends StatefulWidget {
-  final String? title;
 
   const CustomTimerDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _CustomTimerDemoState createState() => _CustomTimerDemoState();
@@ -121,11 +121,11 @@ class _CustomTimerDemoState extends State<CustomTimerDemo> with SingleTickerProv
 }
 
 class RoundedButton extends StatelessWidget {
+
+  RoundedButton({super.key, required this.text, required this.color, this.onPressed});
   final String text;
   final Color color;
   final void Function()? onPressed;
-
-  RoundedButton({super.key, required this.text, required this.color, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

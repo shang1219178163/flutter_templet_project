@@ -33,13 +33,13 @@ enum TTSManagerPlayerState {
 
 /// 文字转语音
 class TTSManager {
-  static final TTSManager _instance = TTSManager._();
 
   TTSManager._() {
     // init();
   }
 
   factory TTSManager() => _instance;
+  static final TTSManager _instance = TTSManager._();
 
   static TTSManager get instance => _instance;
 

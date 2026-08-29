@@ -283,6 +283,14 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
 }
 
 class AttrNavItem {
+
+  AttrNavItem({
+    this.id,
+    this.icon,
+    this.name,
+    this.url,
+    this.cornerMarker,
+  });
   // 唯一标识
   int? id;
   // 图片
@@ -293,14 +301,6 @@ class AttrNavItem {
   String? url;
   // 角标类型
   int? cornerMarker;
-
-  AttrNavItem({
-    this.id,
-    this.icon,
-    this.name,
-    this.url,
-    this.cornerMarker,
-  });
 
   static AttrNavItem? fromJson(json) {
     if (json is! Map) {

@@ -8,9 +8,9 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 
 class MergeImagesDemo extends StatefulWidget {
-  final String? title;
 
   const MergeImagesDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _MergeImagesDemoState createState() => _MergeImagesDemoState();

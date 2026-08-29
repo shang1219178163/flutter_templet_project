@@ -71,9 +71,9 @@ class RectProgressIndicator extends StatelessWidget {
 }
 
 class RectProgressClipper extends CustomClipper<Path> {
-  final double progress;
 
   RectProgressClipper({this.progress = 0});
+  final double progress;
 
   @override
   Path getClip(Size size) {

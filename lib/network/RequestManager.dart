@@ -23,10 +23,10 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart' as get_navigation;
 
 class RequestManager extends BaseRequestAPI {
+  factory RequestManager() => _instance;
   // 私有构造器
   RequestManager._();
   static final RequestManager _instance = RequestManager._();
-  factory RequestManager() => _instance;
 
   String? get token => CacheService().token;
 

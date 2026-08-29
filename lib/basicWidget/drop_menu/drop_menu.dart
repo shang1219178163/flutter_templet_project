@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 
 /// 下拉菜单
 class DropMenu {
-  static final DropMenu _instance = DropMenu._();
   DropMenu._();
   factory DropMenu() => _instance;
+  static final DropMenu _instance = DropMenu._();
   static DropMenu get instance => _instance;
 
   final LayerLink _layerLink = LayerLink();

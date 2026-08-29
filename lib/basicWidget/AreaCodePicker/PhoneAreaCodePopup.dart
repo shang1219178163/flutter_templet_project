@@ -155,6 +155,14 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
 }
 
 class AreaCodeEntity extends ISuspensionBean {
+
+  AreaCodeEntity.fromJson(Map<String, dynamic> json) {
+    englishName = json['english_name'];
+    chineseName = json['chinese_name'];
+    countryCode = json['country_code'];
+    phoneCode = json['phone_code'];
+    tag = json['tag'];
+  }
   AreaCodeEntity({
     this.englishName,
     this.chineseName,
@@ -175,14 +183,6 @@ class AreaCodeEntity extends ISuspensionBean {
   @override
   String getSuspensionTag() {
     return tag ?? "#";
-  }
-
-  AreaCodeEntity.fromJson(Map<String, dynamic> json) {
-    englishName = json['english_name'];
-    chineseName = json['chinese_name'];
-    countryCode = json['country_code'];
-    phoneCode = json['phone_code'];
-    tag = json['tag'];
   }
 
   Map<String, dynamic> toJson() {

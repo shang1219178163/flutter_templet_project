@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrFlutterDemo extends StatefulWidget {
-  final String? title;
 
   const QrFlutterDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _QrFlutterDemoState createState() => _QrFlutterDemoState();

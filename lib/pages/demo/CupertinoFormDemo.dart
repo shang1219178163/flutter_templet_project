@@ -4,9 +4,9 @@ import 'package:flutter_templet_project/basicWidget/n_date_picker.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class CupertinoFormDemo extends StatefulWidget {
-  final String? title;
 
   const CupertinoFormDemo({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _CupertinoFormDemoState createState() => _CupertinoFormDemoState();

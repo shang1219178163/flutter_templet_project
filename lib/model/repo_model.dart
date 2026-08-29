@@ -3,96 +3,18 @@ part 'repo_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RepoModel {
-  List<RepoModelData> data;
-  int code;
-  int message;
   RepoModel({required this.data, required this.code, required this.message});
 
   factory RepoModel.fromJson(Map<String, dynamic> json) =>
       _$RepoModelFromJson(json);
+  List<RepoModelData> data;
+  int code;
+  int message;
   Map<String, dynamic> toJson() => _$RepoModelToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
 class RepoModelData {
-  int? id;
-  String? nodeId;
-  String? name;
-  String? fullName;
-  bool? private;
-  OwnerData? owner;
-  String? htmlUrl;
-  String? description;
-  bool? fork;
-  String? url;
-  String? forksUrl;
-  String? keysUrl;
-  String? collaboratorsUrl;
-  String? teamsUrl;
-  String? hooksUrl;
-  String? issueEventsUrl;
-  String? eventsUrl;
-  String? assigneesUrl;
-  String? branchesUrl;
-  String? tagsUrl;
-  String? blobsUrl;
-  String? gitTagsUrl;
-  String? gitRefsUrl;
-  String? treesUrl;
-  String? statusesUrl;
-  String? languagesUrl;
-  String? stargazersUrl;
-  String? contributorsUrl;
-  String? subscribersUrl;
-  String? subscriptionUrl;
-  String? commitsUrl;
-  String? gitCommitsUrl;
-  String? commentsUrl;
-  String? issueCommentUrl;
-  String? contentsUrl;
-  String? compareUrl;
-  String? mergesUrl;
-  String? archiveUrl;
-  String? downloadsUrl;
-  String? issuesUrl;
-  String? pullsUrl;
-  String? milestonesUrl;
-  String? notificationsUrl;
-  String? labelsUrl;
-  String? releasesUrl;
-  String? deploymentsUrl;
-  String? createdAt;
-  String? updatedAt;
-  String? pushedAt;
-  String? gitUrl;
-  String? sshUrl;
-  String? cloneUrl;
-  String? svnUrl;
-  String? homepage;
-  int? size;
-  int? stargazersCount;
-  int? watchersCount;
-  String? language;
-  bool? hasIssues;
-  bool? hasProjects;
-  bool? hasDownloads;
-  bool? hasWiki;
-  bool? hasPages;
-  int? forksCount;
-  String? mirrorUrl;
-  bool? archived;
-  bool? disabled;
-  int? openIssuesCount;
-  LicenseData? license;
-  bool? allowForking;
-  bool? isTemplate;
-  List<String> topics;
-  String? visibility;
-  int? forks;
-  int? openIssues;
-  int? watchers;
-  String? defaultBranch;
-  PermissionsData? permissions;
 
   RepoModelData({
     this.id,
@@ -177,16 +99,89 @@ class RepoModelData {
 
   factory RepoModelData.fromJson(Map<String, dynamic> json) =>
       _$RepoModelDataFromJson(json);
+  int? id;
+  String? nodeId;
+  String? name;
+  String? fullName;
+  bool? private;
+  OwnerData? owner;
+  String? htmlUrl;
+  String? description;
+  bool? fork;
+  String? url;
+  String? forksUrl;
+  String? keysUrl;
+  String? collaboratorsUrl;
+  String? teamsUrl;
+  String? hooksUrl;
+  String? issueEventsUrl;
+  String? eventsUrl;
+  String? assigneesUrl;
+  String? branchesUrl;
+  String? tagsUrl;
+  String? blobsUrl;
+  String? gitTagsUrl;
+  String? gitRefsUrl;
+  String? treesUrl;
+  String? statusesUrl;
+  String? languagesUrl;
+  String? stargazersUrl;
+  String? contributorsUrl;
+  String? subscribersUrl;
+  String? subscriptionUrl;
+  String? commitsUrl;
+  String? gitCommitsUrl;
+  String? commentsUrl;
+  String? issueCommentUrl;
+  String? contentsUrl;
+  String? compareUrl;
+  String? mergesUrl;
+  String? archiveUrl;
+  String? downloadsUrl;
+  String? issuesUrl;
+  String? pullsUrl;
+  String? milestonesUrl;
+  String? notificationsUrl;
+  String? labelsUrl;
+  String? releasesUrl;
+  String? deploymentsUrl;
+  String? createdAt;
+  String? updatedAt;
+  String? pushedAt;
+  String? gitUrl;
+  String? sshUrl;
+  String? cloneUrl;
+  String? svnUrl;
+  String? homepage;
+  int? size;
+  int? stargazersCount;
+  int? watchersCount;
+  String? language;
+  bool? hasIssues;
+  bool? hasProjects;
+  bool? hasDownloads;
+  bool? hasWiki;
+  bool? hasPages;
+  int? forksCount;
+  String? mirrorUrl;
+  bool? archived;
+  bool? disabled;
+  int? openIssuesCount;
+  LicenseData? license;
+  bool? allowForking;
+  bool? isTemplate;
+  List<String> topics;
+  String? visibility;
+  int? forks;
+  int? openIssues;
+  int? watchers;
+  String? defaultBranch;
+  PermissionsData? permissions;
   Map<String, dynamic> toJson() => _$RepoModelDataToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
 class PermissionsData {
-  bool? admin;
-  bool? maintain;
-  bool? push;
-  bool? triage;
-  bool? pull;
 
   PermissionsData({
     this.admin,
@@ -198,16 +193,16 @@ class PermissionsData {
 
   factory PermissionsData.fromJson(Map<String, dynamic> json) =>
       _$PermissionsDataFromJson(json);
+  bool? admin;
+  bool? maintain;
+  bool? push;
+  bool? triage;
+  bool? pull;
   Map<String, dynamic> toJson() => _$PermissionsDataToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
 class LicenseData {
-  String? key;
-  String? name;
-  String? spdxId;
-  String? url;
-  String? nodeId;
 
   LicenseData({
     this.key,
@@ -219,29 +214,16 @@ class LicenseData {
 
   factory LicenseData.fromJson(Map<String, dynamic> json) =>
       _$LicenseDataFromJson(json);
+  String? key;
+  String? name;
+  String? spdxId;
+  String? url;
+  String? nodeId;
   Map<String, dynamic> toJson() => _$LicenseDataToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
 class OwnerData {
-  String? login;
-  int id;
-  String? nodeId;
-  String? avatarUrl;
-  String? gravatarId;
-  String? url;
-  String? htmlUrl;
-  String? followersUrl;
-  String? followingUrl;
-  String? gistsUrl;
-  String? starredUrl;
-  String? subscriptionsUrl;
-  String? organizationsUrl;
-  String? reposUrl;
-  String? eventsUrl;
-  String? receivedEventsUrl;
-  String? type;
-  bool? siteAdmin;
 
   OwnerData({
     this.login,
@@ -266,5 +248,23 @@ class OwnerData {
 
   factory OwnerData.fromJson(Map<String, dynamic> json) =>
       _$OwnerDataFromJson(json);
+  String? login;
+  int id;
+  String? nodeId;
+  String? avatarUrl;
+  String? gravatarId;
+  String? url;
+  String? htmlUrl;
+  String? followersUrl;
+  String? followingUrl;
+  String? gistsUrl;
+  String? starredUrl;
+  String? subscriptionsUrl;
+  String? organizationsUrl;
+  String? reposUrl;
+  String? eventsUrl;
+  String? receivedEventsUrl;
+  String? type;
+  bool? siteAdmin;
   Map<String, dynamic> toJson() => _$OwnerDataToJson(this);
 }
