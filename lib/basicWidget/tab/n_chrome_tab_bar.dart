@@ -85,7 +85,7 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
   @override
   void initState() {
     super.initState();
-    widget.controller?.attach(this);
+    widget.controller?.attach = this;
     widget.indexVN.addListener(onIndexLtr);
   }
 
@@ -110,7 +110,7 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
         oldWidget.unselectedLabelStyle != widget.unselectedLabelStyle) {
       if (widget.controller != null && oldWidget.controller != widget.controller) {
         oldWidget.controller?.detach(this);
-        widget.controller?.attach(this);
+        widget.controller?.attach = this;
       }
       setState(() {});
     }
@@ -226,7 +226,7 @@ class _NChromeTabBarState extends State<NChromeTabBar> {
 class NChromeTabController<T extends _NChromeTabBarState> {
   T? _anchor;
 
-  void attach(T anchor) {
+  set attach(T anchor) {
     _anchor = anchor;
   }
 

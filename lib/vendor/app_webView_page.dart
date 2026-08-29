@@ -129,7 +129,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     videoModels = parserVideoTags(widget.htmlContent ?? "");
   }
 
@@ -432,10 +432,6 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
 
 class AppWebViewPageController {
   _AppWebViewPageState? _anchor;
-
-  void _attach(_AppWebViewPageState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_AppWebViewPageState anchor) {
     if (_anchor == anchor) {

@@ -139,7 +139,7 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
       list = List.generate(pageSize, (i) => "item_${i}");
       page++;
 
-      loadController.resetState(noMore: false);
+      loadController.resetState = false;
     } else {
       var items = List.generate(pageSize, (i) => "item_${list.length + i}");
       list.addAll(items);
@@ -148,7 +148,7 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
       var noMore = items.length < pageSize;
       noMore = list.length > 59;
       debugPrint([items.length, list.length, noMore].join("_"));
-      loadController.resetState(noMore: noMore);
+      loadController.resetState = noMore;
     }
     setState(() {});
   }

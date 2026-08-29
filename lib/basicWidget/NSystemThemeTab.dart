@@ -126,7 +126,7 @@ class _NSystemThemeTabState extends State<NSystemThemeTab> {
               return GestureDetector(
                 onTap: () {
                   index = i;
-                  themeProvider.toggleTheme(e.value);
+                  themeProvider.themeMode = e.value;
                   widget.onChanged(e.value);
                 },
                 child: Container(

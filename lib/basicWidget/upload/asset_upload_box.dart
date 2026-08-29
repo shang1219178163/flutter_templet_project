@@ -133,7 +133,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
   @override
   void initState() {
     initData();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     super.initState();
   }
 
@@ -448,10 +448,6 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
 /// AssetUploadBox 组件控制器
 class AssetUploadBoxController {
   AssetUploadBoxState? _anchor;
-
-  void _attach(AssetUploadBoxState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(AssetUploadBoxState anchor) {
     if (_anchor == anchor) {

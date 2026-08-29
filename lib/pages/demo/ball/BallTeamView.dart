@@ -34,7 +34,7 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
   Future<void> initData() async {
     await provider.fetchData(sportType: "football");
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      themeProvider.toggleTheme(ThemeMode.light);
+      themeProvider.themeMode = ThemeMode.light;
     });
   }
 

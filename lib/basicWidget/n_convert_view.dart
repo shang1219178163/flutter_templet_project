@@ -76,7 +76,7 @@ class NConvertViewState extends State<NConvertView> {
   void initState() {
     super.initState();
 
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
   }
 
   @override
@@ -84,7 +84,7 @@ class NConvertViewState extends State<NConvertView> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
       oldWidget.controller?._detach(this);
-      widget.controller?._attach(this);
+      widget.controller?._anchor = this;
       setState(() {});
     }
   }
@@ -306,10 +306,6 @@ class NConvertViewState extends State<NConvertView> {
 
 class NTransformViewController {
   NConvertViewState? _anchor;
-
-  void _attach(NConvertViewState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(NConvertViewState anchor) {
     if (_anchor == anchor) {

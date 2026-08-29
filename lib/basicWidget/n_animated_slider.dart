@@ -45,7 +45,7 @@ class _AnimatedSliderState extends State<AnimatedSlider> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     _annmController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -90,10 +90,6 @@ class _AnimatedSliderState extends State<AnimatedSlider> with SingleTickerProvid
 
 class AnimatedSliderController {
   _AnimatedSliderState? _anchor;
-
-  void _attach(_AnimatedSliderState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_AnimatedSliderState anchor) {
     if (_anchor == anchor) {

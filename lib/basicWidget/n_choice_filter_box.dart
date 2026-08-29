@@ -197,7 +197,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     initData();
   }
 
@@ -214,7 +214,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
     if (!isChange) {
       return;
     }
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     setState(() {});
   }
 
@@ -426,10 +426,6 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
 class ChoiceFilterBoxController {
   _NChoiceFilterBoxState? _anchor;
   _NChoiceFilterBoxState? get anchor => _anchor;
-
-  void _attach(_NChoiceFilterBoxState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_NChoiceFilterBoxState anchor) {
     if (_anchor == anchor) {

@@ -62,11 +62,11 @@ class _NAccountSheetNewState<E extends MapEntry<String, dynamic>> extends State<
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
 
     var map = CacheService().getMap(cacheKey) ?? <String, dynamic>{};
     if (map.isNotEmpty) {
-      updateItems(map.entries.toList() as List<E>);
+      items = map.entries.toList() as List<E>;
     }
   }
 
@@ -139,10 +139,6 @@ class _NAccountSheetNewState<E extends MapEntry<String, dynamic>> extends State<
     ).toShowCupertinoModalPopup(context: context);
   }
 
-  void updateItems(List<E> value) {
-    items = value;
-  }
-
   void updateCurrent(E e) {
     current = e;
     debugPrint("current: $current");
@@ -151,10 +147,6 @@ class _NAccountSheetNewState<E extends MapEntry<String, dynamic>> extends State<
 
 class NAccountSheetNewController<E extends MapEntry<String, dynamic>> {
   _NAccountSheetNewState? _anchor;
-
-  void _attach(_NAccountSheetNewState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_NAccountSheetNewState anchor) {
     if (_anchor == anchor) {
@@ -169,7 +161,7 @@ class NAccountSheetNewController<E extends MapEntry<String, dynamic>> {
 
   void updateItems(List<MapEntry<String, dynamic>> items) {
     assert(_anchor != null);
-    _anchor!.updateItems(items.reversed.toList());
+    _anchor!.items = items.reversed.toList();
   }
 
   /// 添加账户

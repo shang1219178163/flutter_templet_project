@@ -73,7 +73,7 @@ class _AppVideoPlayerState extends State<AppVideoPlayer>
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initPlayer();
@@ -265,10 +265,6 @@ class _AppVideoPlayerState extends State<AppVideoPlayer>
 
 class AppVideoPlayerController {
   _AppVideoPlayerState? _anchor;
-
-  void _attach(_AppVideoPlayerState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_AppVideoPlayerState anchor) {
     if (_anchor == anchor) {

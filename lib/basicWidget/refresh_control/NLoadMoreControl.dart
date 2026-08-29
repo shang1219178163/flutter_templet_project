@@ -67,7 +67,7 @@ class _NLoadMoreControlState extends State<NLoadMoreControl> {
   void initState() {
     super.initState();
     // widget.controller.addListener(_onScroll);
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
   }
 
   @override
@@ -76,7 +76,7 @@ class _NLoadMoreControlState extends State<NLoadMoreControl> {
     if (oldWidget.controller != widget.controller) {
       // oldWidget.controller.removeListener(_onScroll);
       // widget.controller.addListener(_onScroll);
-      widget.controller?._attach(this);
+      widget.controller?._anchor = this;
     }
   }
 
@@ -126,12 +126,6 @@ class _NLoadMoreControlState extends State<NLoadMoreControl> {
     _loading = false;
   }
 
-  /// 重置状态
-  /// hasMore 是否有更多页
-  void resetState({required bool noMore}) {
-    _noMore = noMore;
-  }
-
   @override
   Widget build(BuildContext context) {
     if (widget.builder != null) {
@@ -157,17 +151,13 @@ class _NLoadMoreControlState extends State<NLoadMoreControl> {
 class NLoadMoreController {
   _NLoadMoreControlState? _anchor;
 
-  void _attach(_NLoadMoreControlState anchor) {
-    _anchor = anchor;
-  }
-
   void _detach(_NLoadMoreControlState anchor) {
     if (_anchor == anchor) {
       _anchor = null;
     }
   }
 
-  void resetState({required bool noMore}) {
-    _anchor!.resetState(noMore: noMore);
+  set resetState(bool noMore) {
+    _anchor!._noMore = noMore;
   }
 }

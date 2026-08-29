@@ -65,7 +65,7 @@ class _NRefreshControlState extends State<NRefreshControl> {
   void initState() {
     super.initState();
     // widget.controller.addListener(_onScroll);
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
   }
 
   @override
@@ -74,7 +74,7 @@ class _NRefreshControlState extends State<NRefreshControl> {
     if (oldWidget.controller != widget.controller) {
       // oldWidget.controller.removeListener(_onScroll);
       // widget.controller.addListener(_onScroll);
-      widget.controller?._attach(this);
+      widget.controller?._anchor = this;
     }
   }
 
@@ -151,10 +151,6 @@ class _NRefreshControlState extends State<NRefreshControl> {
 
 class CupertinoRefreshController {
   _NRefreshControlState? _anchor;
-
-  void _attach(_NRefreshControlState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_NRefreshControlState anchor) {
     if (_anchor == anchor) {

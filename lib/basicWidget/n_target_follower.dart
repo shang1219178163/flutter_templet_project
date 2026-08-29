@@ -84,7 +84,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
 
   @override
   void initState() {
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     super.initState();
   }
 
@@ -101,7 +101,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
     if (!canUpdate) {
       return;
     }
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     setState(() {});
   }
 
@@ -174,10 +174,6 @@ class _NTargetFollowerState extends State<NTargetFollower> {
 
 class NTargetFollowerController {
   _NTargetFollowerState? _anchor;
-
-  void _attach(_NTargetFollowerState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_NTargetFollowerState anchor) {
     if (_anchor == anchor) {

@@ -104,7 +104,7 @@ class CardUploadBoxState extends State<CardUploadBox> {
   @override
   void initState() {
     initData();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     super.initState();
   }
 
@@ -404,10 +404,6 @@ class CardUploadBoxState extends State<CardUploadBox> {
 /// CardUploadBox 组件控制器
 class CardUploadBoxController {
   CardUploadBoxState? _anchor;
-
-  void _attach(CardUploadBoxState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(CardUploadBoxState anchor) {
     if (_anchor == anchor) {

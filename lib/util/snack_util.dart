@@ -8,8 +8,8 @@ class SnackUtil {
   static BuildContext? _context;
 
   /// 注册全局 context，例如：
-  /// `SnackUtil.register(AppService.navigatorKey.currentContext);`
-  static void register(BuildContext? context) {
+  /// `SnackUtil.register = AppService.navigatorKey.currentContext;`
+  static set register(BuildContext? context) {
     _context = context;
   }
 

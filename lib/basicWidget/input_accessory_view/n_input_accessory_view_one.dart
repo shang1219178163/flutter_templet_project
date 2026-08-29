@@ -351,10 +351,6 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
     }
   }
 
-  void updateSessionInputText(String v) {
-    accessorySession.inputText = v;
-  }
-
   void updateSessionSelectedModels(List<AssetUploadModel> models) {
     syncSelectedModels(models);
     accessorySession.selectedModels = List<AssetUploadModel>.from(models);
@@ -501,7 +497,7 @@ class _NInputAccessoryViewOneState extends State<NInputAccessoryViewOne> {
           valueListenable: widget.controller,
           builder: (context, value, child) {
             final disable = value.text.isEmpty;
-            updateSessionInputText(value.text);
+            accessorySession.inputText = value.text;
             return ElevatedBtn(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               radius: 4,

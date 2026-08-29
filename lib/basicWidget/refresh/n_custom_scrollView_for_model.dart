@@ -89,7 +89,7 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   void initState() {
     super.initState();
-    widget.controller?.attach(this);
+    widget.controller?.attach = this;
 
     initData();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -109,7 +109,7 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
       oldWidget.controller?.detach(this);
-      widget.controller?.attach(this);
+      widget.controller?.attach = this;
     }
     onRequest = widget.onRequest;
   }

@@ -211,7 +211,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      SnackUtil.register(AppService.navigatorKey.currentContext);
+      SnackUtil.register = AppService.navigatorKey.currentContext;
     });
   }
 

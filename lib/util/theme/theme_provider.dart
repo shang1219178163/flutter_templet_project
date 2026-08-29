@@ -12,10 +12,9 @@ class ThemeProvider extends ChangeNotifier {
   AppThemeService get _theme => AppThemeService();
 
   ThemeMode get themeMode => _theme.themeMode;
+  set themeMode(ThemeMode v) => _theme.themeMode = v;
   bool get isDark => _theme.isDark;
   Color get primary => _theme.seedColor;
-
-  void toggleTheme(ThemeMode v) => _theme.themeMode = v;
 
   Color get itemBgColor => isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white;
   Color get titleColor => isDark ? Colors.white.withValues(alpha: 0.9) : const Color(0xFF313135);

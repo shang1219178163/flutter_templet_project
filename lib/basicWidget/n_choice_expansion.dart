@@ -90,7 +90,7 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
 
   @override
   void initState() {
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
     super.initState();
   }
 
@@ -239,10 +239,6 @@ class NChoiceExpansionController {
   Widget buildExpandButton() {
     assert(_anchor != null);
     return _anchor!.buildExpandButton();
-  }
-
-  void _attach(_NChoiceExpansionState anchor) {
-    _anchor = anchor;
   }
 
   void _detach(_NChoiceExpansionState anchor) {

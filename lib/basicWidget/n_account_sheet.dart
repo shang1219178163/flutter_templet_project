@@ -62,7 +62,7 @@ class _NAccountSheetState extends State<NAccountSheet> {
   @override
   void initState() {
     super.initState();
-    widget.controller?._attach(this);
+    widget.controller?._anchor = this;
 
     var map = CacheService().getMap(cacheKey) ?? <String, dynamic>{};
     if (map.isNotEmpty) {
@@ -187,10 +187,6 @@ class NAccountSheetController {
   _NAccountSheetState? _anchor;
 
   String get cacheKey => CacheKey.accountList.name;
-
-  void _attach(_NAccountSheetState anchor) {
-    _anchor = anchor;
-  }
 
   void _detach(_NAccountSheetState anchor) {
     if (_anchor == anchor) {

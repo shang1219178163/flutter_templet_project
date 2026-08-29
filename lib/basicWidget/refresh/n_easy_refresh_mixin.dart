@@ -251,7 +251,7 @@ mixin NListRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NListRefr
 class NListRefreshController<T> {
   NListRefreshable<T>? _anchor;
 
-  void attach(NListRefreshable<T> anchor) {
+  set attach(NListRefreshable<T> anchor) {
     _anchor = anchor;
   }
 
@@ -413,7 +413,7 @@ mixin NRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRefresh
 class NRefreshController<T> {
   NModelRefreshable<T>? _anchor;
 
-  void attach(NModelRefreshable<T> anchor) {
+  set attach(NModelRefreshable<T> anchor) {
     _anchor = anchor;
   }
 
