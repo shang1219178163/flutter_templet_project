@@ -489,33 +489,5 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
       size: 24,
       color: color,
     );
-
-    return Container(
-      width: 66,
-      height: 30,
-      // color: Colors.red,
-      padding: EdgeInsets.only(left: 8, right: 4, top: 2, bottom: 2),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-        border: Border.all(color: color),
-      ),
-      child: Row(
-        children: [
-          Text(
-            tuple.title,
-            style: TextStyle(
-              color: color,
-              fontSize: 14,
-            ),
-          ),
-          SizedBox(width: 0),
-          Icon(
-            tuple.icon,
-            size: 24,
-            color: color,
-          ),
-        ],
-      ),
-    );
   }
 }

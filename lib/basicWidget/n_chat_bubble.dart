@@ -73,17 +73,6 @@ class NChatBubbleMetrics {
   /// 👉 计算 centerSlice（永远在安全拉伸区中心）
   Rect calcCenterSlice() {
     return Rect.fromLTWH(safeInset.left, safeInset.top, 1, 1);
-
-    final left = safeInset.left;
-    final top = safeInset.top;
-
-    final right = imageSize.width - safeInset.right;
-    final bottom = imageSize.height - safeInset.bottom;
-
-    final cx = (left + right) / 2;
-    final cy = (top + bottom) / 2;
-
-    return Rect.fromLTWH(cx, cy, 1, 1);
   }
 
   /// 👉 padding（略小于 safeInset，让文字更贴合）

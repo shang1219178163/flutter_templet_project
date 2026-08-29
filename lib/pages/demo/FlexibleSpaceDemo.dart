@@ -24,26 +24,6 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
   @override
   Widget build(BuildContext context) {
     return buildPage();
-
-    return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text(
-              "FlexibleSpace",
-              style: TextStyle(color: Colors.black),
-            ),
-            // collapseMode: CollapseMode.pin,
-            background: Image.network(
-                "https://p3-passport.byteimg.com/img/user-avatar/af5f7ee5f0c449f25fc0b32c050bf100~180x180.awebp",
-                fit: BoxFit.cover),
-            stretchModes: [
-              // StretchMode.fadeTitle,
-              // StretchMode.blurBackground,
-              StretchMode.zoomBackground
-            ],
-          ),
-        ),
-        body: buildBody());
   }
 
   Widget buildBody() {

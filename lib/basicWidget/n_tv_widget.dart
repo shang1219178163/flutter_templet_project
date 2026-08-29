@@ -123,7 +123,6 @@ class NTVWidgetState extends State<NTVWidget> with SafeSetStateMixin {
       default:
         return KeyEventResult.ignored;
     }
-    return KeyEventResult.ignored;
   }
 
   @override

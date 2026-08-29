@@ -208,17 +208,6 @@ class _TweenSequenceColorAnimationState extends State<TweenSequenceColorAnimatio
       builder: (context, child) {
         final color = _animation.value;
         return widget.builder(color, _animation);
-        return Container(
-          width: 200,
-          height: 200,
-          color: _animation.value,
-          child: Center(
-            child: Text(
-              '多颜色序列动画',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          ),
-        );
       },
     );
   }

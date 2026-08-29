@@ -293,7 +293,6 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     a1.isNotEmpty;
 
     DLog.d("a1.isNotEmptyNew: ${a1.isNotEmpty}");
-    return;
 
     // String a5 = a4.or(Text(e));
     // final a13 = a3.map((e) => Text(e));
@@ -440,7 +439,6 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     // 转换为查询字符串
     var queryString = params.toQueryString();
     DLog.d('Query String: $queryString');
-    return;
 
     mapSorted();
   }
@@ -624,8 +622,6 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     //     return;
     //   }
     // }
-
-    return;
 
     final array1 = nums.map((e) => "$e").toList();
     final result = array1.reduce((v, e) => v + e);

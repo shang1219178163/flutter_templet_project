@@ -140,7 +140,6 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                                         }
                                       }),
                                 );
-                                return buildFollowerDefault(onHide: onHide, index: i);
                               }),
                     ),
                   );

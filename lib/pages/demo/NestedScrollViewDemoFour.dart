@@ -128,16 +128,6 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
             pinned: true,
             builder: (context, shrinkOffset, overlapsContent) {
               return buildTabBar();
-              return PreferredSize(
-                preferredSize: Size.fromHeight(35.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.blue),
-                  ),
-                  child: buildTabBar(),
-                ),
-              );
             },
           ),
 

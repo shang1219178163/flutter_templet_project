@@ -72,24 +72,6 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
         );
       },
     );
-
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: NSliverPersistentHeaderDelegate(
-        max: 30,
-        min: 30,
-        builder: (context, shrinkOffset, overlapsContent) {
-          return Container(
-            height: 30,
-            color: Colors.purple[100],
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: child,
-            ),
-          );
-        },
-      ),
-    );
   }
 
   Widget buildGroup({required String name, required Widget child, Widget? header, Widget? footer}) {

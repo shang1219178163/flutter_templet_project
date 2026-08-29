@@ -66,17 +66,6 @@ class _NColorAnimationState extends State<NColorAnimation> with SingleTickerProv
       builder: (context, child) {
         final color = _getCurrentColor();
         return widget.builder(color, _anim);
-        return Container(
-          width: 200,
-          height: 200,
-          color: _getCurrentColor(),
-          child: Center(
-            child: Text(
-              '自定义颜色动画',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          ),
-        );
       },
     );
   }

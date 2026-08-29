@@ -55,18 +55,6 @@ class _WebviewDemoState extends State<WebviewDemo> {
 
   Widget buildBody() {
     return buildWevView();
-
-    return Scrollbar(
-      controller: _scrollController,
-      child: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            Text("$widget"),
-          ],
-        ),
-      ),
-    );
   }
 
   Widget buildWevView() {

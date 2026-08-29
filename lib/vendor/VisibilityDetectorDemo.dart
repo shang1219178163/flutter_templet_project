@@ -36,9 +36,6 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
       },
       child: buildPage1(),
     );
-
-    // return _buildPage();
-    return buildPage1();
   }
 
   Widget buildPage() {

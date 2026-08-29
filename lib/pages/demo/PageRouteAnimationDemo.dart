@@ -142,46 +142,6 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
         ),
       ),
     );
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            color: Colors.black38,
-            height: 150,
-            child: Center(
-              child: Image.asset(
-                'assets/images/img_placeholder_doctor.png',
-                width: 80,
-              ),
-            ),
-          ),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }
 

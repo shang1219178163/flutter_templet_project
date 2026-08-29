@@ -117,8 +117,6 @@ class _PageRouteDemoState extends State<PageRouteDemo> {
         ),
       ),
     );
-
-    HapticFeedback.heavyImpact();
   }
 
   Widget buildPage() {

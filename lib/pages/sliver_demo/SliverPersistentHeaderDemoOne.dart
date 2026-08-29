@@ -60,16 +60,6 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       //   ].map((e) => SliverToBoxAdapter(child: e)).toList());
       // },
     );
-
-    return CustomScrollView(
-      slivers: <Widget>[
-        buildSliverList(list: data),
-        buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
-        buildSliverList(list: data1),
-        buildPersistentHeader("section1"),
-        buildSliverList(list: data2),
-      ],
-    );
   }
 
   // 构建颜色列表

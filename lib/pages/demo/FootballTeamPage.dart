@@ -43,28 +43,5 @@ class _FootballTeamPageState extends State<FootballTeamPage> {
 
   Widget buildBody() {
     return BallTeamView();
-
-    return Scrollbar(
-      controller: scrollController,
-      child: SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          children: [
-            Text("$widget"),
-            ElevatedButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return BallTeamView();
-                  },
-                );
-              },
-              child: Text("footBall"),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

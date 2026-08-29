@@ -294,10 +294,6 @@ class MarqueeSimpleWidget extends StatelessWidget {
         debugPrint("MarqueeWidget indexNew: $index $indexNew");
         final e = Text("真实索引:${index}_item索引:${indexNew}_AAAAAAAAAAAAAAAAAAAAA");
         return itemBuilder(context, indexNew, constraints);
-        return Container(
-          color: Colors.green,
-          child: e,
-        );
       },
     );
   }

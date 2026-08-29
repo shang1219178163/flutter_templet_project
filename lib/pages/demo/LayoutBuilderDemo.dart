@@ -103,10 +103,5 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
         width: 100,
         height: 100,
         child: Center(child: Text(text)));
-    return Center(
-      child: CircularProgressIndicator(
-        value: loadingProgress.current,
-      ),
-    );
   }
 }

@@ -95,33 +95,6 @@ class _NColorFlashAnimState extends State<NColorFlashAnim> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     return widget.builder(_controller, _colorAnim);
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (_, __) {
-        var color = _colorAnim.value ?? Colors.transparent;
-        if (_controller.isCompleted) {
-          color = Colors.transparent;
-        }
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: color,
-              width: 3,
-            ),
-          ),
-          child: GestureDetector(
-            onTap: startAnim,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-              ),
-              child: Text("NColorAnim_$currentCount, $isRunning"),
-            ),
-          ),
-        );
-      },
-    );
   }
 }
 

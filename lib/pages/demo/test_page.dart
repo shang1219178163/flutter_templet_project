@@ -136,8 +136,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   void onSplit() {}
 
   onTime() {
-    const a = true;
-    final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
+    final b = "nested strings be wrapped by a double quote";
 
     final val = "1# 8ji#2_3I  ".toInt();
     DLog.d("val: $val");

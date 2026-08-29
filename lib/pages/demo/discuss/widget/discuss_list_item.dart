@@ -127,8 +127,7 @@ class DiscussListItem extends StatelessWidget {
     border = null;
 
     /// 生产环境隐藏(点赞超多一千自动热门)
-    var showMakeHot = RequestConfig.current != AppEnv.prod;
-    showMakeHot = false;
+    final showMakeHot = RequestConfig.current != AppEnv.prod;
 
     if (hideReplyOther) {
       // replyOther.clear();

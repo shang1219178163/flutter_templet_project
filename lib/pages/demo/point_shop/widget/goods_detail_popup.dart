@@ -166,15 +166,12 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
       void onLiveTab() {}
 
       if (widget.categoryEnum == GoodsCategoryEnum.gift) {
-        // final enable = (UserInfoController.instance.balance ?? 0) > (widget.model.price ?? 0);
-        final enable = true;
-        final btnTitle = !enable ? "熊猫币不足 去赚熊猫币" : "可在直播间赠送该礼物";
         return ElevatedBtn(
           radius: 8,
           gradient: lightGradient,
           // disabledBgColor: Color(0xFFE91025).withValues(alpha: 0.1),
           // disabledFgColor: Colors.white,
-          title: btnTitle,
+          title: "可在直播间赠送该礼物",
           titleColor: Color(0xFFE91025),
           onPressed: onLiveTab,
         );
@@ -184,44 +181,30 @@ class _GoodsDetailPopupState extends State<GoodsDetailPopup> {
       switch (widget.model.goodsStatusEnum) {
         case GoodsStatusEnum.not_owned:
           {
-            // final enable = (UserInfoController.instance.balance ?? 0) > (widget.model.price ?? 0);
-            final enable = true;
-            if (!enable) {
-              child = ElevatedBtn(
-                radius: 8,
-                gradient: lightGradient,
-                // disabledBgColor: Color(0xFFE91025).withValues(alpha: 0.1),
-                // disabledFgColor: Colors.white,
-                title: "熊猫币不足 去赚熊猫币",
-                titleColor: Color(0xFFE91025),
-                onPressed: onLiveTab,
-              );
-            } else {
-              child = ElevatedBtn(
-                radius: 8,
-                gradient: gradient,
-                // disabledBgColor: const Color(0xFFF38791),
-                // disabledFgColor: Colors.white,
-                title: "兑换",
-                onPressed: () async {
-                  DLog.d("兑换");
-                  // final orderResultModel = await requestGoodsExchange(
-                  //   categoryCode: widget.categoryEnum.code,
-                  //   goodsId: widget.model.goodsId,
-                  // );
-                  // final isSuccess = orderResultModel?.balance != null;
-                  // if (isSuccess == true) {
-                  //   if (widget.model.goodsStatus == GoodsStatusEnum.not_owned.name) {
-                  //     widget.model.goodsStatus = GoodsStatusEnum.owned.name;
-                  //   }
-                  //   ToastUtil.show("兑换成功");
-                  //   UserInfoController.instance.balance = orderResultModel?.balance;
-                  //   // GoodsDetailPopup.dismiss();
-                  //   setState(() {});
-                  // }
-                },
-              );
-            }
+            child = ElevatedBtn(
+              radius: 8,
+              gradient: gradient,
+              // disabledBgColor: const Color(0xFFF38791),
+              // disabledFgColor: Colors.white,
+              title: "兑换",
+              onPressed: () async {
+                DLog.d("兑换");
+                // final orderResultModel = await requestGoodsExchange(
+                //   categoryCode: widget.categoryEnum.code,
+                //   goodsId: widget.model.goodsId,
+                // );
+                // final isSuccess = orderResultModel?.balance != null;
+                // if (isSuccess == true) {
+                //   if (widget.model.goodsStatus == GoodsStatusEnum.not_owned.name) {
+                //     widget.model.goodsStatus = GoodsStatusEnum.owned.name;
+                //   }
+                //   ToastUtil.show("兑换成功");
+                //   UserInfoController.instance.balance = orderResultModel?.balance;
+                //   // GoodsDetailPopup.dismiss();
+                //   setState(() {});
+                // }
+              },
+            );
           }
           break;
         case GoodsStatusEnum.owned:

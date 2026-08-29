@@ -80,7 +80,6 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
                             height: 16,
                             fit: BoxFit.fill,
                           );
-                          return FlutterLogo();
                         },
                       ),
                     ),
@@ -230,11 +229,6 @@ class _RotatingCircularProgressState extends State<RotatingCircularProgress> wit
             strokeWidth: 12,
           );
           return progress;
-
-          return Transform.rotate(
-            angle: _controller.value * 2 * pi, // Rotate whole indicator
-            child: progress,
-          );
         },
       ),
     );

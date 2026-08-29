@@ -390,7 +390,6 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
             ],
           );
         }
-        break;
       case 2:
         {
           return Row(
@@ -406,7 +405,6 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
             ],
           );
         }
-        break;
       default:
         break;
     }

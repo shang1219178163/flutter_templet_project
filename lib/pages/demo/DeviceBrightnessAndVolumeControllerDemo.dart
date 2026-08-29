@@ -116,16 +116,5 @@ class _DeviceBrightnessAndVolumeControllerDemoState extends State<DeviceBrightne
         ),
       ),
     );
-    return Scrollbar(
-      controller: scrollController,
-      child: SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          children: [
-            Text("$widget"),
-          ],
-        ),
-      ),
-    );
   }
 }

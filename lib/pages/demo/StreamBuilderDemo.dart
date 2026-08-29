@@ -110,7 +110,6 @@ UI 事件：onPressed, TextField.onChanged → 都是 Stream。
                 case ConnectionState.done:
                   return Text('Stream 已关闭');
               }
-              return Text('0'); // unreachable
             },
           ),
           Divider(),

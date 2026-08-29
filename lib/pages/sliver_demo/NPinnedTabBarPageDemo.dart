@@ -76,27 +76,6 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with Sing
         tabItems: tabItems,
       ),
     );
-
-    return Scaffold(
-      body: buildPinnedTabBar(
-        title: Text("buildPinnedTabBar"),
-        expandedHeight: 300,
-        expandedHeader: Container(
-          decoration: BoxDecoration(
-            color: Colors.yellow,
-            border: Border.all(color: Colors.blue),
-          ),
-          child: Text(
-            "Collapsing Toolbar",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-            ),
-          ),
-        ),
-        tabItems: tabItems,
-      ),
-    );
   }
 
   Widget buildPinnedTabBar({
@@ -179,7 +158,6 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with Sing
                 removeTop: true,
                 child: Builder(builder: (context) {
                   return e.child;
-                  return buildList(tabIndex: tabController.index);
                 }),
               );
             }).toList(),

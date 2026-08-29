@@ -105,40 +105,6 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
                   final icon = isSelecetd ? e.icon : e.icon;
 
                   return Text(e.title);
-                  return Container(
-                    height: 32,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      // border: Border.all(color: Colors.blue),
-                      // borderRadius: BorderRadius.all(Radius.circular(0)),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (icon.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(right: 4),
-                            child: Image(
-                              image: AssetImage(icon),
-                              width: 12,
-                              height: 14,
-                              color: color,
-                            ),
-                          ),
-                        if (e.title.isNotEmpty)
-                          Flexible(
-                            child: Text(
-                              e.title,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: color,
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  );
                 },
               );
 

@@ -37,12 +37,6 @@ class AppVideoPlayerService {
     }
     final mapJson = jsonEncode(result);
     return mapJson;
-
-    final map = controllerMap.map(
-      (k, v) => MapEntry(k, [v.hashCode, v.dataSource]),
-    );
-    final mapJsonNew = jsonEncode(map);
-    return mapJsonNew;
   }
 
   /// 有缓存控制器

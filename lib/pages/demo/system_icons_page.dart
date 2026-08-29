@@ -225,11 +225,6 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
       final genFile = await FileManager().createFile(fileName: fileName, content: content);
       DLog.d(genFile.path);
       return;
-
-      // final out = File("icons_map_output.dart");
-      // await out.writeAsString(content);
-
-      debugPrint("生成成功 → icons_map_output.dart");
     } catch (e) {
       debugPrint("生成失败 $e");
     }

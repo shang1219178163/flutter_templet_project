@@ -35,14 +35,6 @@ class _NestedScrollViewDemoSixState extends State<NestedScrollViewDemoSix> with 
   @override
   Widget build(BuildContext context) {
     return buildBody();
-    return Scaffold(
-      appBar: hideApp
-          ? null
-          : AppBar(
-              title: Text("$widget"),
-            ),
-      body: buildBody(),
-    );
   }
 
   Widget buildBody() {

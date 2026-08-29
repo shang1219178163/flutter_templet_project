@@ -58,6 +58,5 @@ mixin CreateFileMixin<T extends StatefulWidget> on State<T> {
     } else {
       throw 'Could not launch $uri';
     }
-    return false;
   }
 }

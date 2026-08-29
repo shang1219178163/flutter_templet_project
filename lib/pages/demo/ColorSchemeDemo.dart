@@ -89,46 +89,5 @@ class _ColorSchemeDemoState extends State<ColorSchemeDemo> {
         );
       },
     );
-    return Scrollbar(
-      controller: scrollController,
-      child: SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                ListView.builder(
-                  itemCount: assetsImage.length,
-                  itemBuilder: (_, i) {
-                    final imageProvider = assetsImage[i];
-                    final isSelected = i == activeIndex;
-                    final radius = BorderRadius.circular(6);
-                    final border = Border.all(color: activeColor, width: 2);
-
-                    return Row(
-                      children: [
-                        Container(
-                          height: 80,
-                          padding: EdgeInsets.all(1),
-                          decoration: BoxDecoration(borderRadius: radius, border: border),
-                          child: ClipRRect(
-                            borderRadius: radius,
-                            child: Image(
-                              image: imageProvider,
-                              height: 80,
-                              width: 120,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
   }
 }

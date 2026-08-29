@@ -187,7 +187,6 @@ class RequestManager extends BaseRequestAPI {
               cancelToken: api?.cancelToken,
             );
           }
-          break;
       }
     } on DioException {
       // final message = RequestMsg.statusCodeMap['${e.response?.statusCode}']

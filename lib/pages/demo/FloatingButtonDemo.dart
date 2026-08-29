@@ -60,24 +60,6 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
             DLog.d("onChanged: $v");
           },
         );
-
-    return super.floatingButtonConfig.copyWith(
-          button: (onToggle) => Material(
-            color: Colors.transparent,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-              ),
-              child: Icon(
-                Icons.circle_notifications_rounded,
-                color: Colors.white,
-                size: 40,
-              ),
-            ),
-          ),
-          expandedButtonSize: Size(120, 60),
-        );
   }
 
   @override

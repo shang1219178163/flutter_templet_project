@@ -65,18 +65,6 @@ class _CarModelsPageState extends State<CarModelsPage> {
       height: susItemHeight,
       color: Colors.green,
     );
-    return Column(
-      children: <Widget>[
-        Container(
-          color: Colors.white,
-          padding: EdgeInsets.only(left: 32, top: 20, right: 32, bottom: 16),
-          child: Image.asset(
-            Utils.getImgPath('bg_jiguang'),
-            fit: BoxFit.contain,
-          ),
-        ),
-      ],
-    );
   }
 
   @override

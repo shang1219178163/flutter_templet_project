@@ -42,15 +42,6 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
   @override
   Widget build(BuildContext context) {
     return buildPage1();
-    return buildScaffold();
-    return Scaffold(
-      appBar: hideApp
-          ? null
-          : AppBar(
-              title: Text("$widget"),
-            ),
-      body: buildBody(),
-    );
   }
 
   Widget buildBody() {

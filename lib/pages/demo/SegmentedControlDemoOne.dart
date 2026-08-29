@@ -69,32 +69,6 @@ class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
 
   Widget buildBody() {
     return buildSegmentControlEmojView();
-
-    return Scrollbar(
-      controller: _scrollController,
-      child: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 15),
-            //   child: buildSegmentControl(),
-            // ),
-            // NSegmentControlEmoji(
-            //   items: items,
-            //   onChanged: (int value) {  },
-            // ),
-            Container(
-              height: double.maxFinite,
-              child: NSegmentControlEmojView(
-                items: items,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   Widget buildSegmentControl({

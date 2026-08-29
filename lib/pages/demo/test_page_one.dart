@@ -81,12 +81,7 @@ class _TestPageOneState extends State<TestPageOne> {
 
     String? userId;
     // userId = "111";
-
-    if (userId?.isNotEmpty == true) {
-      debugPrint("userId isNotEmpty");
-    } else {
-      debugPrint("userId isEmpty");
-    }
+    debugPrint("userId isEmpty"); // userId 未赋值
 
     var list1 = <int>[1, 2, 3];
     var list2 = <int>[1, 2, 3];

@@ -112,13 +112,6 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
               canTapOnHeader: true,
               headerBuilder: (context, isExpanded) {
                 return CustomExpansionTile();
-                return Container(
-                  color: Colors.green,
-                  child: ListTile(
-                    title: Text(item.headerValue),
-                    subtitle: Text("subtitle"),
-                  ),
-                );
                 // return ListTile(
                 //   title: Text(item.headerValue),
                 //   subtitle: Text("subtitle"),

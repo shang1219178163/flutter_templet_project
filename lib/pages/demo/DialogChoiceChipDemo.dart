@@ -203,22 +203,6 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
               child: box,
             ),
           );
-          return Material(
-            color: Colors.black.withValues(alpha: 0.01),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-                // AppUti.unfocus();
-              },
-              child: Container(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  child: Align(
-                    alignment: alignment,
-                    child: box,
-                  )),
-            ),
-          );
-          return box;
         });
   }
 

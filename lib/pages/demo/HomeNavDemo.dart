@@ -71,10 +71,6 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
             width: context.screenSize.width - 24,
             rowCount: 3,
           ));
-          return CustomSwiperItem(
-            url: images[index],
-            color: index.isEven ? Colors.green : Colors.yellow,
-          );
         },
         indicatorLayout: PageIndicatorLayout.COLOR,
         autoplay: true,

@@ -51,67 +51,6 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
               ),
             ],
           );
-          return ListView.separated(
-            itemCount: _count,
-            separatorBuilder: (context, index) {
-              return SizedBox(height: _spacing);
-            },
-            itemBuilder: (_, index) {
-              var margin = EdgeInsets.symmetric(horizontal: _spacing);
-              if (index == 0) {
-                margin = margin.copyWith(
-                  top: _spacing,
-                );
-              } else if (index == _count - 1) {
-                margin = margin.copyWith(
-                  bottom: _spacing,
-                );
-              }
-
-              return Container(
-                height: 190,
-                margin: margin,
-                width: constraints.maxWidth,
-                child: CustomPaint(
-                  painter: NTicketDividerPainter(
-                    // borderColor: Colors.black.withValues(alpha: 0.5),
-                    borderColor: Colors.blue,
-                    borderStrokeWidth: 1,
-                    bgColor: Colors.red,
-                    cutoutRadius: 15,
-                  ),
-                  child: StatefulBuilder(builder: (context, setState) {
-                    return Container(
-                      padding: const EdgeInsets.all(16),
-                      // color: Colors.green.withValues(alpha: 0.7),
-                      decoration: BoxDecoration(
-                        // color: Colors.white,
-                        // border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(16.r)),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 8.w),
-                            blurRadius: 8.w,
-                            color: Colors.black.withValues(alpha: 0.3),
-                          )
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          buildHeadder(),
-                          const SizedBox(height: 16),
-                          buildBodyRow1(),
-                          buildBodyRow2(),
-                          const Spacer(),
-                          buildFooter(),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              );
-            },
-          );
         }),
       ),
     );

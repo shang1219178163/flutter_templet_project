@@ -331,7 +331,6 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       debugPrint(e.toString());
       return Future.error(e);
     }
-    return null;
   }
 }
 

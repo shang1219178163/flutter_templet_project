@@ -202,53 +202,6 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
         ),
       ),
     );
-
-    return Stack(
-      children: [
-        Image.asset(
-          'assets/images/image_header_bg2.webp',
-          fit: BoxFit.fitWidth,
-        ),
-        Positioned.fill(
-          child: VisibilityDetector(
-            key: const ValueKey('HomePiPage'),
-            onVisibilityChanged: (info) {
-              if (info.visibleFraction == 1.0 && _visibleFraction != 1.0) {
-                refresh();
-              }
-              if (info.visibleFraction == 1.0 || info.visibleFraction == 0.0) {
-                _visibleFraction = info.visibleFraction;
-              }
-            },
-            child: GetBuilder<HomeController>(builder: (controller) {
-              return EasyRefresh(
-                onRefresh: refresh,
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    margin: EdgeInsets.only(top: context.mediaQueryData.padding.top),
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 13),
-                        buildUserBar(),
-                        const SizedBox(height: 6),
-                        buildProjectBox(),
-                        const SizedBox(height: 11),
-                        headerCountWidget(),
-                        const SizedBox(height: 10),
-                        buildSystemMessage(),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }),
-          ),
-        ),
-      ],
-    );
   }
 
   Widget buildUserBar() {
