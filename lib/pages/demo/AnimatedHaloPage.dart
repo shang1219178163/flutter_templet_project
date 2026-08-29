@@ -43,6 +43,8 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
 
   /// 内环线宽
   double innerStrokeWidth = 4;
+  /// 一轮动画时长
+  double durationMs = 1483;
 
   /// 中间圆形网络图
   String? imageUrl = _imageUrl;
@@ -162,6 +164,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
                     spacing: spacing,
                     strokeWidth: strokeWidth,
                     innerStrokeWidth: innerStrokeWidth,
+                    duration: Duration(milliseconds: durationMs.round()),
                     child: NNetworkImage(
                       url: imageUrl ?? "",
                       fit: BoxFit.cover,
@@ -191,7 +194,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
     return NDecorationCard(
       icon: const Icon(Icons.straighten_outlined),
       title: '尺寸',
-      subtitle: 'size  spacing  strokeWidth  innerStrokeWidth  child',
+      subtitle: 'size  spacing  strokeWidth  innerStrokeWidth  duration  child',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -225,6 +228,14 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
             max: 8,
             fractionDigits: 1,
             onChanged: (v) => onMark('innerStrokeWidth ${v.toStringAsFixed(1)}', () => innerStrokeWidth = v),
+          ),
+          buildSlider(
+            label: 'duration',
+            value: durationMs,
+            min: 200,
+            max: 4000,
+            durationLabel: true,
+            onChanged: (v) => onMark('duration ${v.round()}ms', () => durationMs = v),
           ),
           const Text('child'),
           buildImageChips(),
@@ -332,6 +343,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
     required double max,
     required ValueChanged<double> onChanged,
     int fractionDigits = 0,
+    bool durationLabel = false,
   }) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
@@ -353,8 +365,11 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
       onChanged: onChanged,
       activeColor: scheme.primary,
       trailingBuilder: (context, v) {
+        final text = durationLabel
+            ? (v.round() >= 1000 ? '${(v / 1000).toStringAsFixed(v.round() % 1000 == 0 ? 0 : 1)}s' : '${v.round()}ms')
+            : v.toStringAsFixed(fractionDigits);
         return Text(
-          v.toStringAsFixed(fractionDigits),
+          text,
           style: theme.textTheme.bodySmall?.copyWith(
             color: scheme.onSurfaceVariant,
             fontFamily: 'monospace',
@@ -379,6 +394,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
     spacing = 6;
     strokeWidth = 2;
     innerStrokeWidth = 4;
+    durationMs = 1483;
     imageUrl = _imageUrl;
     setState(() {});
   }

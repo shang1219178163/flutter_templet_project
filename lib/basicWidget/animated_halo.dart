@@ -14,35 +14,52 @@ class AnimatedHalo extends StatefulWidget {
     this.spacing = 6,
     this.strokeWidth = 2,
     this.innerStrokeWidth = 4,
+    this.duration = const Duration(milliseconds: 1483),
     required this.child,
   });
 
   /// 画布边长，对应稿 72。
   final double size;
+
   /// 外环描边色。
   final Color color;
+
   /// 内环描边色。
   final Color innerColor;
+
   /// 外环相对内环的半径增量，稿面默认 6。
   final double spacing;
+
   /// 外环线宽。
   final double strokeWidth;
+
   /// 内环线宽。
   final double innerStrokeWidth;
+
+  /// 一轮动画时长，稿面 1483ms。
+  final Duration duration;
   /// 中间内容，会被裁成圆形。
   final Widget child;
-
-  static const Duration duration = Duration(milliseconds: 1483);
 
   @override
   State<AnimatedHalo> createState() => _AnimatedHaloState();
 }
 
 class _AnimatedHaloState extends State<AnimatedHalo> with SingleTickerProviderStateMixin {
-  late final AnimationController controller = AnimationController(
+  late final controller = AnimationController(
     vsync: this,
-    duration: AnimatedHalo.duration,
+    duration: widget.duration,
   )..repeat();
+
+  @override
+  void didUpdateWidget(covariant AnimatedHalo oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.duration != widget.duration) {
+      controller
+        ..duration = widget.duration
+        ..repeat();
+    }
+  }
 
   @override
   void dispose() {
