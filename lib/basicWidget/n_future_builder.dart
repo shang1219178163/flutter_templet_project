@@ -23,7 +23,7 @@ class NFutureBuilder<T> extends StatelessWidget {
           if (snapshot.hasError) {
             return errorBuilder?.call(snapshot.error) ?? const Placeholder();
           }
-          return builder(snapshot.data!);
+          return builder(snapshot.data as T);
           // // 请求成功，显示数据
           // final response = snapshot.data/(1024 *1024);
           // final desc = response.toStringAsFixed(2) + "MB";

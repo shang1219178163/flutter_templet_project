@@ -9,7 +9,7 @@ library;
 
 import 'dart:developer' as developer;
 import 'dart:math' as math;
-import 'dart:ui' as ui show FlutterView, Image;
+import 'dart:ui' as ui show Image;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

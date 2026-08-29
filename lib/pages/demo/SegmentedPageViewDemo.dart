@@ -101,9 +101,6 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
                   // pageController.jumpToPage(index);
                 },
                 itemBuilder: (({String icon, String title}) e, isSelecetd) {
-                  final color = isSelecetd ? Colors.white : Color(0xff737373);
-                  final icon = isSelecetd ? e.icon : e.icon;
-
                   return Text(e.title);
                 },
               );

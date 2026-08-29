@@ -22,8 +22,6 @@ class WebviewDemo extends StatefulWidget {
 }
 
 class _WebviewDemoState extends State<WebviewDemo> {
-  final _scrollController = ScrollController();
-
   final fullUrl =
       "https://kp-test.yljk.cn/?articleId=608705053087371264&sourceType=APP_PATIENT";
 

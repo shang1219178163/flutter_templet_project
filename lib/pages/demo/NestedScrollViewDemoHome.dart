@@ -37,9 +37,6 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
   final scrollControllerNew = ScrollController();
   final scrollProgress = ValueNotifier(0.0);
 
-  /// 用于记录页面可见度变化
-  double _visibleFraction = 0.0;
-
   @override
   void onBarTap(int index) {
     // TODO: implement onBarTap
@@ -60,10 +57,6 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
 
   onScrollerLtr() {
     scrollProgress.value = scrollControllerNew.position.progress;
-  }
-
-  refresh() {
-    DLog.d("$this refresh");
   }
 
   final topKey = GlobalKey(debugLabel: "topKey");

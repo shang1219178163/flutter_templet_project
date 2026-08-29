@@ -121,7 +121,7 @@ class NButton extends StatelessWidget {
   final Clip? clipBehavior;
 
   /// 按钮状态控制器。
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
 
   /// 是否为语义化按钮，仅 [NButtonType.text] 生效。
   final bool? isSemanticButton;

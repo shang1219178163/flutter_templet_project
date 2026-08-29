@@ -27,8 +27,6 @@ class SegmentedControlDemoOne extends StatefulWidget {
 class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
-  final _scrollController = ScrollController();
-
   final items = [
     SegmentEmojiModel(
       iconPath: Assets.imagesIconSegmentEmoji,

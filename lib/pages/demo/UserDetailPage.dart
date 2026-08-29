@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 
 class UserDetailPage extends StatefulWidget {
-  const UserDetailPage();
+  const UserDetailPage({super.key});
 
   @override
   State<UserDetailPage> createState() => _UserDetailPageState();

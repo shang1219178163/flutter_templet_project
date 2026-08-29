@@ -40,8 +40,6 @@ class ExceptionInterceptor extends QueuedInterceptor {
         throw ConnectionErrorException(err.requestOptions);
       case DioExceptionType.unknown:
         throw NoInternetConnectionException(err.requestOptions);
-      default:
-        break;
     }
 
     return handler.next(err);

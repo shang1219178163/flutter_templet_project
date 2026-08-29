@@ -20,9 +20,6 @@ class TicketUiDemo extends StatefulWidget {
 }
 
 class _TicketUiDemoState extends State<TicketUiDemo> {
-  final int _count = 3;
-  final double _spacing = 12;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
