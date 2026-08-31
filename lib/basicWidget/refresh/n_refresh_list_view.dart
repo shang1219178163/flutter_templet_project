@@ -1,50 +1,9 @@
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 
-/// 使用示例:
-//   buildBody() {
-//     return NRefreshListView<DepartmentPageDetailModel>(
-//       pageSize: 2,
-//       onRequest: (bool isRefresh, int page, int pageSize, last) async {
-//         return await requestList(pageNo: page, pageSize: pageSize);
-//       },
-//       itemBuilder: (BuildContext context, int index, e) {
-//         return InkWell(
-//           onTap: () {
-//             DLog.d("${e.toJson()}");
-//           },
-//           child: PatientSchemeCell(model: e, index: index),
-//         );
-//       },
-//     );
-//   }
-//
-//   /// 列表数据请求
-//   Future<List<DepartmentPageDetailModel>> requestList({
-//     required int pageNo,
-//     int pageSize = 20,
-//   }) async {
-//     var api = SchemePageApi(
-//       ownerId: arguments['userId'] ?? '',
-//       pageNo: pageNo,
-//       pageSize: pageSize,
-//     );
-//
-//     Map<String, dynamic>? response = await api.startRequest();
-//     if (response['code'] != 'OK') {
-//       return [];
-//     }
-//
-//     final rootModel = DepartmentPageRootModel.fromJson(response ?? {});
-//     var list = rootModel.result?.content ?? [];
-//     return list;
-//   }
-// }
-
-/// 刷新组件,对标 NCustomScrollView
+/// 刷新组件,对标 NCustomScrollView。用法见 NRefreshable.md
 class NRefreshListView<T> extends StatefulWidget {
   const NRefreshListView({
     super.key,
@@ -121,12 +80,6 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   @override
   bool get wantKeepAlive => true;
 
-  // @override
-  // late RequestListCallback<T> onRequest = widget.onRequest;
-
-  // @override
-  // late List<T> firstPageItems = widget.firstPageItems;
-
   @override
   void dispose() {
     widget.controller?.detach(this);
@@ -135,17 +88,15 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
 
   @override
   void initState() {
-    initData();
+    pageConfig(
+      onRequest: widget.onRequest,
+      page: widget.page,
+      pageSize: widget.pageSize,
+      pageInitial: widget.pageInitial,
+      firstPageItems: widget.firstPageItems,
+    );
     super.initState();
     widget.controller?.attach(this);
-  }
-
-  initData() {
-    onRequest = widget.onRequest;
-    page = widget.page;
-    pageSize = widget.pageSize;
-    pageInitial = widget.pageInitial;
-    firstPageItems = widget.firstPageItems;
   }
 
   @override
@@ -156,12 +107,23 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
       widget.controller?.attach(this);
     }
     onRequest = widget.onRequest;
-    final shouldReload = oldWidget.page != widget.page ||
-        oldWidget.pageSize != widget.pageSize ||
-        oldWidget.pageInitial != widget.pageInitial ||
-        !listEquals(oldWidget.firstPageItems, widget.firstPageItems);
-    if (shouldReload) {
-      initData();
+    if (pageChanged(
+      page: widget.page,
+      pageSize: widget.pageSize,
+      pageInitial: widget.pageInitial,
+      firstPageItems: widget.firstPageItems,
+      oldPage: oldWidget.page,
+      oldPageSize: oldWidget.pageSize,
+      oldPageInitial: oldWidget.pageInitial,
+      oldFirstPageItems: oldWidget.firstPageItems,
+    )) {
+      pageConfig(
+        onRequest: widget.onRequest,
+        page: widget.page,
+        pageSize: widget.pageSize,
+        pageInitial: widget.pageInitial,
+        firstPageItems: widget.firstPageItems,
+      );
       onRefresh();
     }
   }

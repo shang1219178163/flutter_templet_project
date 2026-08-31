@@ -7,6 +7,7 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// 带数据的自定义 itemBuilder
@@ -78,89 +79,68 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
     controlFinishLoad: true,
   );
 
-  /// 请求方式
-  late RequestListCallback<T> _onRequest = throw UnimplementedError("onRequest");
-  RequestListCallback<T> get onRequest => _onRequest;
-  set onRequest(RequestListCallback<T> value) {
-    _onRequest = value;
-  }
-
-  /// 请求方式
-  List<T> _firstPageItems = [];
+  late RequestListCallback<T> onRequest;
   @override
-  List<T> get firstPageItems => _firstPageItems;
+  List<T> firstPageItems = [];
   @override
-  set firstPageItems(List<T> value) {
-    _firstPageItems = value;
-  }
-
-  /// 数据列表
-  List<T> _items = [];
+  List<T> items = [];
   @override
-  List<T> get items => _items;
+  int page = 1;
   @override
-  set items(List<T> value) {
-    _items = value;
-  }
-
-  int _page = 1;
+  int pageInitial = 1;
   @override
-  int get page => _page;
+  int pageSize = 20;
   @override
-  set page(int value) {
-    _page = value;
-  }
-
-  /// 刷新时重置到的起始页码，默认 1
-  int _pageInitial = 1;
-  @override
-  int get pageInitial => _pageInitial;
-  @override
-  set pageInitial(int value) {
-    _pageInitial = value;
-  }
-
-  int _pageSize = 20;
-  @override
-  int get pageSize => _pageSize;
-  @override
-  set pageSize(int value) {
-    _pageSize = value;
-  }
-
-  IndicatorResult _indicator = IndicatorResult.success;
-  @override
-  IndicatorResult get indicator => _indicator;
-  @override
-  set indicator(IndicatorResult value) {
-    _indicator = value;
-  }
-
+  IndicatorResult indicator = IndicatorResult.success;
   @override
   bool isFirstLoad = true;
-
-  bool _isLoading = false;
   @override
-  bool get isLoading => _isLoading;
-  @override
-  set isLoading(bool value) {
-    _isLoading = value;
-  }
+  bool isLoading = false;
 
   bool get hasMore => indicator != IndicatorResult.noMore;
 
+  /// 同步分页配置
+  void pageConfig({
+    required RequestListCallback<T> onRequest,
+    required int page,
+    required int pageSize,
+    required int pageInitial,
+    required List<T> firstPageItems,
+  }) {
+    this.onRequest = onRequest;
+    this.page = page;
+    this.pageSize = pageSize;
+    this.pageInitial = pageInitial;
+    this.firstPageItems = firstPageItems;
+  }
+
+  /// 分页参数是否变化（需重新请求）
+  bool pageChanged({
+    required int page,
+    required int pageSize,
+    required int pageInitial,
+    required List<T> firstPageItems,
+    required int oldPage,
+    required int oldPageSize,
+    required int oldPageInitial,
+    required List<T> oldFirstPageItems,
+  }) {
+    return page != oldPage ||
+        pageSize != oldPageSize ||
+        pageInitial != oldPageInitial ||
+        !listEquals(firstPageItems, oldFirstPageItems);
+  }
+
   @override
   Future<void> onRefresh() async {
-    try {
-      if (isLoading) {
-        refreshController.finishRefresh();
-        return;
-      }
-      isLoading = true;
+    if (isLoading) {
+      return;
+    }
+    isLoading = true;
 
+    try {
       page = pageInitial;
       final list = firstPageItems.isNotEmpty ? firstPageItems : await onRequest(true, page, pageSize, <T>[]);
-      // items.replaceRange(0, items.length, list);
       items = [...list];
       page++;
 
@@ -183,17 +163,15 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
       return;
     }
 
-    try {
-      if (isLoading) {
-        refreshController.finishLoad(indicator);
-        return;
-      }
-      isLoading = true;
+    if (isLoading) {
+      return;
+    }
+    isLoading = true;
 
+    try {
       final start = (items.length - pageSize).clamp(0, pageSize);
       final prePages = items.sublist(start);
       final list = await onRequest(false, page, pageSize, prePages);
-      // items.addAll(list);
       items = [...items, ...list];
       page++;
 
@@ -261,6 +239,7 @@ mixin NListRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NListRefr
 class NListRefreshController<T> {
   NListRefreshable<T>? _anchor;
 
+  // ignore: use_setters_to_change_properties
   void attach(NListRefreshable<T> anchor) {
     _anchor = anchor;
   }
@@ -334,22 +313,15 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
     controlFinishLoad: true,
   );
 
-  /// 请求方式
-  late RequestModelCallback<T> _onRequest;
-  RequestModelCallback<T> get onRequest => _onRequest;
-  set onRequest(RequestModelCallback<T> value) {
-    _onRequest = value;
-  }
-
-  /// 数据列表
+  late RequestModelCallback<T> onRequest;
   @override
   T? item;
-
   @override
   var indicator = IndicatorResult.success;
-
   @override
   bool isLoading = false;
+  @override
+  bool isFirstLoad = true;
 
   @override
   Future<void> onRefresh() async {
@@ -368,6 +340,7 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
       refreshController.finishRefresh(IndicatorResult.fail);
     } finally {
       isLoading = false;
+      isFirstLoad = false;
       updateUI();
     }
   }
@@ -423,6 +396,7 @@ mixin NModelRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRe
 class NModelRefreshController<T> {
   NModelRefreshable<T>? _anchor;
 
+  // ignore: use_setters_to_change_properties
   void attach(NModelRefreshable<T> anchor) {
     _anchor = anchor;
   }

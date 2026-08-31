@@ -20,7 +20,7 @@ class NCustomScrollViewForModel<T> extends StatefulWidget {
     this.controller,
     this.scrollController,
     this.notRefresh = false,
-    this.notLoad = false,
+    this.notLoad = true,
     this.placeholder = const NPlaceholder(),
     this.skeletonScreen = const NSkeletonScreen(),
     this.contentDecoration = const BoxDecoration(),
@@ -77,13 +77,6 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   bool get wantKeepAlive => true;
 
-  // @override
-  // late RequestModelCallback<T> onRequest = widget.onRequest;
-
-  /// 首次加载
-  @override
-  var isFirstLoad = true;
-
   @override
   void dispose() {
     widget.controller?.detach(this);
@@ -94,17 +87,6 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   void initState() {
     super.initState();
     widget.controller?.attach(this);
-
-    initData();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (item == null) {
-        await onRefresh();
-        isFirstLoad = false;
-      }
-    });
-  }
-
-  initData() {
     onRequest = widget.onRequest;
   }
 
@@ -163,10 +145,5 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
         sliver: widget.builder(context, item as T),
       ),
     );
-  }
-
-  @override
-  void updateUI() {
-    setState(() {});
   }
 }

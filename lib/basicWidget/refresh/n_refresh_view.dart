@@ -18,7 +18,7 @@ class NRefreshView<T> extends StatefulWidget {
     this.controller,
     this.scrollController,
     this.notRefresh = false,
-    this.notLoad = false,
+    this.notLoad = true,
     required this.onRequest,
     required this.placeholder,
     this.skeletonScreen = const NSkeletonScreen(),
@@ -55,11 +55,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   @override
   bool get wantKeepAlive => true;
 
-  final scrollController = ScrollController();
-
-  /// 首次加载
-  var isFirstLoad = true;
-
   @override
   void dispose() {
     widget.controller?.detach(this);
@@ -71,7 +66,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     super.initState();
     widget.controller?.attach(this);
     onRequest = widget.onRequest;
-    initData();
   }
 
   @override
@@ -82,14 +76,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
       widget.controller?.attach(this);
     }
     onRequest = widget.onRequest;
-  }
-
-  Future<void> initData() async {
-    await onRefresh();
-    if (mounted) {
-      isFirstLoad = false;
-      setState(() {});
-    }
   }
 
   @override
@@ -110,6 +96,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
       onRefresh: widget.notRefresh ? null : onRefresh,
       onLoad: widget.notLoad || indicator == IndicatorResult.noMore ? null : onLoad,
       notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
+      notLoadFooter: widget.notLoad ? const NotLoadFooter(clamping: true) : null,
       child: widget.child,
     );
   }

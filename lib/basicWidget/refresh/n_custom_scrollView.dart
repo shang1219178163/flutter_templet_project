@@ -7,7 +7,6 @@
 //
 
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
@@ -93,12 +92,6 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   @override
   bool get wantKeepAlive => true;
 
-  // @override
-  // late RequestListCallback<T> onRequest = widget.onRequest;
-  //
-  // @override
-  // late List<T> firstPageItems = widget.firstPageItems;
-
   @override
   void dispose() {
     widget.controller?.detach(this);
@@ -107,17 +100,15 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
 
   @override
   void initState() {
-    initData();
+    pageConfig(
+      onRequest: widget.onRequest,
+      page: widget.page,
+      pageSize: widget.pageSize,
+      pageInitial: widget.pageInitial,
+      firstPageItems: widget.firstPageItems,
+    );
     super.initState();
     widget.controller?.attach(this);
-  }
-
-  initData() {
-    onRequest = widget.onRequest;
-    page = widget.page;
-    pageSize = widget.pageSize;
-    pageInitial = widget.pageInitial;
-    firstPageItems = widget.firstPageItems;
   }
 
   @override
@@ -128,12 +119,23 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       widget.controller?.attach(this);
     }
     onRequest = widget.onRequest;
-    final shouldReload = oldWidget.page != widget.page ||
-        oldWidget.pageSize != widget.pageSize ||
-        oldWidget.pageInitial != widget.pageInitial ||
-        !listEquals(oldWidget.firstPageItems, widget.firstPageItems);
-    if (shouldReload) {
-      initData();
+    if (pageChanged(
+      page: widget.page,
+      pageSize: widget.pageSize,
+      pageInitial: widget.pageInitial,
+      firstPageItems: widget.firstPageItems,
+      oldPage: oldWidget.page,
+      oldPageSize: oldWidget.pageSize,
+      oldPageInitial: oldWidget.pageInitial,
+      oldFirstPageItems: oldWidget.firstPageItems,
+    )) {
+      pageConfig(
+        onRequest: widget.onRequest,
+        page: widget.page,
+        pageSize: widget.pageSize,
+        pageInitial: widget.pageInitial,
+        firstPageItems: widget.firstPageItems,
+      );
       onRefresh();
     }
   }
@@ -186,10 +188,5 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
       separatorBuilder: (_, i) => widget.separatorBuilder?.call(context, i) ?? const SizedBox(),
       itemCount: items.length,
     );
-  }
-
-  @override
-  void updateUI() {
-    setState(() {});
   }
 }
