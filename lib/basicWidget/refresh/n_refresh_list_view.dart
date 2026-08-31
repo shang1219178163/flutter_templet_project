@@ -137,7 +137,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   void initState() {
     initData();
     super.initState();
-    widget.controller?.attach = this;
+    widget.controller?.attach(this);
   }
 
   initData() {
@@ -153,7 +153,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
       oldWidget.controller?.detach(this);
-      widget.controller?.attach = this;
+      widget.controller?.attach(this);
     }
     onRequest = widget.onRequest;
     final shouldReload = oldWidget.page != widget.page ||
@@ -214,10 +214,5 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
       );
     }
     return child;
-  }
-
-  @override
-  void updateUI() {
-    setState(() {});
   }
 }

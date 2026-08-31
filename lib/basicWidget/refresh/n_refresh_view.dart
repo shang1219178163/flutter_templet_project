@@ -69,7 +69,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   @override
   void initState() {
     super.initState();
-    widget.controller?.attach = this;
+    widget.controller?.attach(this);
     onRequest = widget.onRequest;
     initData();
   }
@@ -79,7 +79,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
       oldWidget.controller?.detach(this);
-      widget.controller?.attach = this;
+      widget.controller?.attach(this);
     }
     onRequest = widget.onRequest;
   }
@@ -112,10 +112,5 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
       notRefreshHeader: widget.notRefresh ? const NotRefreshHeader(clamping: true) : null,
       child: widget.child,
     );
-  }
-
-  @override
-  void updateUI() {
-    setState(() {});
   }
 }

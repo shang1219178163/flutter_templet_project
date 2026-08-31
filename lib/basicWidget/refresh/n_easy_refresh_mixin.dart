@@ -12,9 +12,6 @@ import 'package:flutter/material.dart';
 /// 带数据的自定义 itemBuilder
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T data);
 
-/// 请求模型回调
-typedef RequestModelCallback<T> = Future<T> Function();
-
 /// 请求列表回调
 typedef RequestListCallback<T> = Future<List<T>> Function(
   bool isRefresh,
@@ -23,7 +20,15 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
   List<T> pres,
 );
 
+/// 请求模型回调
+typedef RequestModelCallback<T> = Future<T?> Function();
+
+/// 刷新混入 mixin
 abstract interface class NRefreshable {
+  /// 首次请求
+  bool get isFirstLoad;
+  set isFirstLoad(bool value);
+
   bool get isLoading;
   set isLoading(bool value);
 
@@ -131,6 +136,9 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
     _indicator = value;
   }
 
+  @override
+  bool isFirstLoad = true;
+
   bool _isLoading = false;
   @override
   bool get isLoading => _isLoading;
@@ -163,6 +171,7 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
       refreshController.finishRefresh(IndicatorResult.fail);
     } finally {
       isLoading = false;
+      isFirstLoad = false;
       updateUI();
     }
   }
@@ -194,6 +203,7 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
       refreshController.finishLoad(IndicatorResult.fail);
     } finally {
       isLoading = false;
+      isFirstLoad = false;
       updateUI();
     }
   }
@@ -251,7 +261,7 @@ mixin NListRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NListRefr
 class NListRefreshController<T> {
   NListRefreshable<T>? _anchor;
 
-  set attach(NListRefreshable<T> anchor) {
+  void attach(NListRefreshable<T> anchor) {
     _anchor = anchor;
   }
 
@@ -413,7 +423,7 @@ mixin NModelRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRe
 class NModelRefreshController<T> {
   NModelRefreshable<T>? _anchor;
 
-  set attach(NModelRefreshable<T> anchor) {
+  void attach(NModelRefreshable<T> anchor) {
     _anchor = anchor;
   }
 

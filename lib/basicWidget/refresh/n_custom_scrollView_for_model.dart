@@ -57,7 +57,7 @@ class NCustomScrollViewForModel<T> extends StatefulWidget {
   /// 请求方法
   final RequestModelCallback<T> onRequest;
 
-  final Widget Function(BuildContext context, T? model) builder;
+  final Widget Function(BuildContext context, T model) builder;
 
   /// 表头
   final List<Widget> Function(BuildContext context, T? m)? headerBuilder;
@@ -81,6 +81,7 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   // late RequestModelCallback<T> onRequest = widget.onRequest;
 
   /// 首次加载
+  @override
   var isFirstLoad = true;
 
   @override
@@ -92,7 +93,7 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   @override
   void initState() {
     super.initState();
-    widget.controller?.attach = this;
+    widget.controller?.attach(this);
 
     initData();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -112,7 +113,7 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
       oldWidget.controller?.detach(this);
-      widget.controller?.attach = this;
+      widget.controller?.attach(this);
     }
     onRequest = widget.onRequest;
   }
@@ -159,7 +160,7 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
       decoration: widget.contentDecoration,
       sliver: SliverPadding(
         padding: widget.contentPadding,
-        sliver: widget.builder(context, item),
+        sliver: widget.builder(context, item as T),
       ),
     );
   }
