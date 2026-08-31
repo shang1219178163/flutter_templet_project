@@ -34,7 +34,7 @@ class PickerDrugBox extends NPickRequestListBox<TagDetailModel> {
               onModel: (e) => TagDetailModel.fromJson(e),
             );
 
-            final list = tuple.result;
+            final list = tuple.value;
             // DLog.d("$widget requestList: ${list.length}");
             return list;
           },

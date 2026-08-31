@@ -3,6 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
+/// api 网络请求结果元祖
+typedef ApiResponseRecord<T> = ({bool isSuccess, String message, T value});
+
+/// 网络请求方式
 enum HttpMethod {
   GET,
   PUT,
@@ -96,46 +100,58 @@ class BaseRequestAPI {
     return response;
   }
 
+  /// code 请求成功对应的值
+  dynamic get codeSucess => "OK";
+
+  /// code 键
+  String get codeKey => "code";
+
+  /// message 键
+  String get messageKey => "message";
+
+  /// value 键
+  String get valueKey => "result";
+
   /// 数据请求
   ///
-  /// onResult 根据 response 返回和泛型 T 对应的值(默认值取 response["result"])
+  /// onValue 根据 response 返回和泛型 T 对应的值(默认值取 response[valueKey])
   /// defaultValue 默认值
   ///
   /// return (请求是否成功, 提示语)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, T result})> fetchResult<T>({
-    T Function(Map<String, dynamic> response)? onResult,
+  Future<ApiResponseRecord<T>> fetchValue<T>({
+    T Function(Map<String, dynamic> res)? onValue,
     required T defaultValue,
   }) async {
     var api = this;
     final response = await api.fetch();
     if (response.isEmpty) {
-      return (isSuccess: false, message: "", result: defaultValue); //断网
+      return (isSuccess: false, message: "", value: defaultValue); //断网
     }
-    var isSuccess = response["code"] == "OK";
-    String message = response["message"] ?? "";
-    final resultNew = onResult?.call(response) ?? (response["data"] as T?) ?? defaultValue;
-    return (isSuccess: isSuccess, message: message, result: resultNew);
+    var isSuccess = response[codeKey] == codeSucess;
+    String message = response[messageKey] ?? "";
+    final valueNew = onValue?.call(response) ?? (response[valueKey] as T?) ?? defaultValue;
+    return (isSuccess: isSuccess, message: message, value: valueNew);
   }
 
   /// 返回布尔值的数据请求
   ///
-  /// onTrue 根据字典返回 true 的判断条件(默认判断 response["result"] 布尔值真假)
+  /// onTrue 根据字典返回 true 的判断条件(默认判断 response[valueKey] 布尔值真假)
   /// defaultValue 默认值 false,
   /// hasLoading 是否展示 loading
   ///
-  /// return (请求是否成功, 提示语, response["result"]对应的值,为空返回默认值)
+  /// return (请求是否成功, 提示语, response[valueKey]对应的值,为空返回默认值)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, bool result})> fetchBool({
-    bool Function(Map<String, dynamic> response)? onTrue,
+  Future<ApiResponseRecord<bool>> fetchBool({
+    bool Function(Map<String, dynamic> res)? onTrue,
     bool defaultValue = false,
     bool hasLoading = true,
   }) async {
     if (hasLoading) {
       ToastUtil.loading("请求中");
     }
-    final tuple = await fetchResult<bool>(
-      onResult: onTrue,
+    final tuple = await fetchValue<bool>(
+      onValue: onTrue,
       defaultValue: defaultValue,
     );
     if (hasLoading) {
@@ -146,22 +162,18 @@ class BaseRequestAPI {
 
   /// 返回列表类型请求接口(T 只能是基础类型,不能是模型)
   ///
-  /// onList 根据字典返回数组;(默认取 response["result"] 对应的数组值)
+  /// onList 根据字典返回数组;(默认取 response[valueKey] 对应的数组值)
   /// defaultValue 默认值空数组
   ///
   /// return (请求是否成功, 提示语, 数组)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, List<T> result})> fetchList<T extends Map<String, dynamic>>({
-    List<T> Function(Map<String, dynamic> response)? onList,
-    required List<dynamic> Function(Map<String, dynamic> response) onValue,
+  Future<ApiResponseRecord<List<T>>> fetchList<T extends Map<String, dynamic>>({
+    List<T> Function(Map<String, dynamic> res)? onList,
+    required List<dynamic> Function(Map<String, dynamic> res) onValue,
     List<T> defaultValue = const [],
   }) async {
-    final tuple = await fetchResult<List<T>>(
-      onResult: onList ??
-          (response) {
-            final result = onValue(response);
-            return List<T>.from(result);
-          },
+    final tuple = await fetchValue<List<T>>(
+      onValue: onList ?? (res) => List<T>.from(onValue(res)),
       defaultValue: defaultValue,
     );
     return tuple;
@@ -169,15 +181,15 @@ class BaseRequestAPI {
 
   /// 返回模型列表类型请求接口
   ///
-  /// onList 根据字典返回数组;(默认取 response["result"] 对应的数组值)
+  /// onList 根据字典返回数组;(默认取 response[valueKey] 对应的数组值)
   /// defaultValue 默认值空数组
   /// onModel 字典转模型
   ///
   /// return (请求是否成功, 提示语, 模型数组)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, List<M> result})> fetchModels<M>({
-    required List<Map<String, dynamic>> Function(Map<String, dynamic> response) onValue,
-    List<Map<String, dynamic>> Function(Map<String, dynamic> response)? onList,
+  Future<ApiResponseRecord<List<M>>> fetchModels<M>({
+    required List<Map<String, dynamic>> Function(Map<String, dynamic> res) onValue,
+    List<Map<String, dynamic>> Function(Map<String, dynamic> res)? onList,
     List<Map<String, dynamic>> defaultValue = const [],
     required M Function(Map<String, dynamic> json) onModel,
   }) async {
@@ -186,9 +198,9 @@ class BaseRequestAPI {
       onValue: onValue,
       defaultValue: defaultValue,
     );
-    final list = tuple.result;
+    final list = tuple.value;
     final models = list.map(onModel).toList();
-    return (isSuccess: tuple.isSuccess, message: tuple.message, result: models);
+    return (isSuccess: tuple.isSuccess, message: tuple.message, value: models);
   }
 }
 
@@ -242,34 +254,34 @@ class BaseListApi extends BaseRequestAPI {
 
 /// 根模型
 class BaseRootModel<T> {
-
-  BaseRootModel.fromJson(Map<String, dynamic> json) {
-    code = (json['code'] as String?);
-    message = (json['message'] as String?);
-    result = onResult?.call(json);
-  }
   BaseRootModel({
     this.code,
     this.message,
-    this.result,
-    this.onResult,
-    this.resultJson,
+    this.value,
+    this.onValue,
+    this.valueJson,
   });
 
   String? code;
 
   String? message;
 
-  T? result;
+  T? value;
 
-  T Function(Map<String, dynamic> response)? onResult;
-  Map<String, dynamic>? resultJson;
+  T Function(Map<String, dynamic> response)? onValue;
+  Map<String, dynamic>? valueJson;
+
+  BaseRootModel.fromJson(Map<String, dynamic> json) {
+    code = (json['code'] as String?);
+    message = (json['message'] as String?);
+    value = onValue?.call(json);
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['code'] = code;
     map['message'] = message;
-    map['result'] = resultJson;
+    map['value'] = valueJson;
     return map;
   }
 }

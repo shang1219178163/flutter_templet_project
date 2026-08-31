@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/api/tag_clear_api.dart';
 import 'package:flutter_templet_project/network/api/tag_list_api.dart';
 import 'package:flutter_templet_project/network/api/tag_set_api.dart';
+import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 /// 标签管理器
@@ -38,8 +39,7 @@ class TagViewModel extends ChangeNotifier {
   }
 
   /// 获取标签
-  Future<({bool isSuccess, String message, List<TagDetailModel> result})>
-      requestTagList({
+  Future<ApiResponseRecord<List<TagDetailModel>>> requestTagList({
     required String departmentId,
   }) async {
     var api = TagListApi(
@@ -55,16 +55,15 @@ class TagViewModel extends ChangeNotifier {
     // );
 
     var tuple = await api.fetchModels(
-      onValue: (response) =>
-          List<Map<String, dynamic>>.from(response["result"] ?? []),
+      onValue: (response) => List<Map<String, dynamic>>.from(response["result"] ?? []),
       onModel: (json) => TagDetailModel.fromJson(json), //dart 泛型传递有问题,必须声明一下
     );
-    list = tuple.result;
+    list = tuple.value;
     return tuple;
   }
 
   /// 更新标签
-  Future<({bool isSuccess, String message, bool result})> requestUpdateTag({
+  Future<ApiResponseRecord<bool>> requestUpdateTag({
     required List<TagDetailModel> selectTags,
     required String? userId,
   }) async {
@@ -85,7 +84,7 @@ class TagViewModel extends ChangeNotifier {
     if (tuple.isSuccess == false) {
       ToastUtil.show(tuple.message);
     }
-    isUpdate = tuple.isSuccess && tuple.result;
+    isUpdate = tuple.isSuccess && tuple.value;
     return tuple;
   }
 }

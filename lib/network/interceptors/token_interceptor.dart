@@ -23,8 +23,8 @@ class TokenInterceptor extends QueuedInterceptor {
     if (err.response?.statusCode == 403) {
       try {
         final api = TokenRefreshApi();
-        final res = await api.fetchResult<String>(defaultValue: "");
-        var newAccessToken = res.result;
+        final res = await api.fetchValue<String>(defaultValue: "");
+        var newAccessToken = res.value;
         if (newAccessToken.isEmpty) {
           super.onError(err, handler);
         }
