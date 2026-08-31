@@ -287,45 +287,45 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   Widget buildSlide({required String url, required int index}) {
     return InkWell(
       onTap: () => onItemTap(index),
-            child: Container(
+      child: Container(
         margin: const EdgeInsets.all(5.0),
-              child: ClipRRect(
+        child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                child: Stack(
+          child: Stack(
             fit: StackFit.expand,
-                  children: [
-                    FadeInImage(
+            children: [
+              FadeInImage(
                 image: NetworkImage(url),
                 placeholder: const AssetImage('assets/images/img_placeholder.png'),
                 fit: BoxFit.cover,
-                    ),
-                    Positioned(
-                      bottom: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                      child: Container(
+              ),
+              Positioned(
+                bottom: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
                   decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color.fromARGB(200, 0, 0, 0), Color.fromARGB(0, 0, 0, 0)],
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                          ),
-                        ),
+                    gradient: LinearGradient(
+                      colors: [Color.fromARGB(200, 0, 0, 0), Color.fromARGB(0, 0, 0, 0)],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
                   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                        child: Text(
+                  child: Text(
                     'No. $index image',
                     style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -468,7 +468,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               min: 200,
               max: 2000,
               onChanged: onAutoPlayAnimationMs,
-              format: (v) => '${v.round()}ms',
+              format: (v) => '${(v / 1000).round().toStringAsFixed(1)}s',
             ),
             buildField(
               label: 'autoPlayCurve',
@@ -615,7 +615,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       valueBuilder: format == null
           ? null
           : (context, v) => SizedBox(
-                width: 48,
+                width: 36,
                 child: Text(
                   format(v),
                   textAlign: TextAlign.end,

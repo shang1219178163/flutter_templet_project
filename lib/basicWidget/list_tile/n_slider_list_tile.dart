@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 /// 类似 [SwitchListTile]，用 [Slider] 代替 [Switch]。
 ///
-/// 标题、副标题与 [Slider] 同一行；滑条宽度由 [FractionallySizedBox] 按 [sliderWidthFactor] 计算。
+/// 标题、副标题与 [Slider] 同一行；滑条宽度为组件整宽的 [sliderWidthFactor]。
 class NSliderListTile extends StatelessWidget {
   const NSliderListTile({
     super.key,
@@ -41,7 +41,7 @@ class NSliderListTile extends StatelessWidget {
     this.trailing,
     this.valueBuilder,
     this.showValue = true,
-    this.sliderWidthFactor = 0.8,
+    this.sliderWidthFactor = 0.5,
     this.isThreeLine = false,
     this.dense,
     this.contentPadding,
@@ -143,7 +143,7 @@ class NSliderListTile extends StatelessWidget {
   /// 是否显示默认数值
   final bool showValue;
 
-  /// 滑条占剩余宽度的比例，0～1；由 [FractionallySizedBox] 生效
+  /// 滑条占组件整宽的比例，0～1
   final double sliderWidthFactor;
 
   /// 三行布局
@@ -193,53 +193,73 @@ class NSliderListTile extends StatelessWidget {
     final valueWidget = buildValue(context, theme);
     final pad = contentPadding ?? EdgeInsets.zero;
     final gap = horizontalTitleGap ?? 8;
-    final vPad = minVerticalPadding ?? (dense == true ? 0.0 : 4.0);
+    final vPad = minVerticalPadding ?? (dense == true ? 8.0 : 16.0);
+    final hPad = dense == true ? 0.0 : 24.0;
     return MergeSemantics(
       child: Material(
         color: selected ? (selectedTileColor ?? theme.colorScheme.primaryContainer) : (tileColor ?? Colors.transparent),
         shape: shape,
         child: Padding(
-          padding: pad.add(EdgeInsets.symmetric(vertical: vPad)),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (secondary != null) ...[
-                SizedBox(
-                  width: minLeadingWidth,
-                  child: secondary,
-                ),
-                SizedBox(width: gap),
-              ],
-              if (title != null) ...[
-                DefaultTextStyle(
-                  style: titleStyleOf(context, theme),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  child: title!,
-                ),
-                const SizedBox(width: 8),
-              ],
-              if (subtitle != null) ...[
-                const SizedBox(width: 8),
-                DefaultTextStyle.merge(
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: enabled ? theme.colorScheme.onSurfaceVariant : theme.disabledColor,
-                    fontSize: dense == true ? 12 : null,
-                    height: 1,
+          padding: pad.add(EdgeInsets.symmetric(vertical: vPad, horizontal: hPad)),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final sliderW = constraints.maxWidth * sliderWidthFactor;
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (secondary != null) ...[
+                    SizedBox(
+                      width: minLeadingWidth,
+                      child: secondary,
+                    ),
+                    SizedBox(width: gap),
+                  ],
+                  if (title != null || subtitle != null)
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (title != null)
+                              DefaultTextStyle(
+                                style: titleStyleOf(context, theme),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                                child: title!,
+                              ),
+                            if (subtitle != null)
+                              DefaultTextStyle(
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: enabled ? theme.colorScheme.onSurfaceVariant : theme.disabledColor,
+                                      fontSize: dense == true ? 12 : null,
+                                      height: 1,
+                                    ) ??
+                                    const TextStyle(height: 1),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                                child: subtitle!,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  SizedBox(
+                    width: sliderW,
+                    child: Row(
+                      children: [
+                        Expanded(child: buildSlider(theme)),
+                        if (valueWidget != null) valueWidget,
+                        if (trailing != null) trailing!,
+                      ],
+                    ),
                   ),
-                  child: subtitle!,
-                ),
-              ],
-              Expanded(
-                child: FractionallySizedBox(
-                  widthFactor: sliderWidthFactor,
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: buildSlider(theme),
-                ),
-              ),
-              if (valueWidget != null) valueWidget,
-              if (trailing != null) trailing!,
-            ],
+                ],
+              );
+            },
           ),
         ),
       ),

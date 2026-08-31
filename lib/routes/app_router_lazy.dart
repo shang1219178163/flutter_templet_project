@@ -169,6 +169,7 @@ import 'package:flutter_templet_project/pages/demo/LinkifyPage.dart';
 import 'package:flutter_templet_project/pages/demo/ListBodyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListDismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListTilePage.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewSeparatedDemo.dart';
@@ -1394,6 +1395,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.listTileDemo,
       page: () => ListTileDemo(),
+    ),
+    GetPage(
+      name: AppRouter.listTilePage,
+      page: () => ListTilePage(),
     ),
     GetPage(
       name: AppRouter.refreshIndicatorDemo,
