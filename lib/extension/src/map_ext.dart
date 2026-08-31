@@ -77,6 +77,10 @@ extension MapExt on Map<String, dynamic> {
   /// return (请求是否成功, 提示语)
   /// 备注: isSuccess == false 且 message为空一般为断网
   Future<({bool isSuccess, String message, T? result})> fetchResult<T>({
+    String codeKey = "code",
+    dynamic codeSucess = "OK",
+    String messageKey = "message",
+    String valueKey = "data",
     required T Function(Map<String, dynamic> response)? onResult,
     required T? defaultValue,
   }) async {
@@ -84,9 +88,9 @@ extension MapExt on Map<String, dynamic> {
     if (response.isEmpty) {
       return (isSuccess: false, message: "", result: defaultValue); //断网
     }
-    var isSuccess = response['code'] == "OK";
-    var message = response["message"] as String? ?? "";
-    final resultNew = onResult?.call(response) ?? response["result"] as T? ?? defaultValue;
+    var isSuccess = response[codeKey] == codeSucess;
+    var message = response[messageKey] as String? ?? "";
+    final resultNew = onResult?.call(response) ?? response[valueKey] as T? ?? defaultValue;
     return (isSuccess: isSuccess, message: message, result: resultNew);
   }
 
