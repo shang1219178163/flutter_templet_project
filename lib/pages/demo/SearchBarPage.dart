@@ -8,9 +8,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
@@ -50,166 +50,247 @@ class _SearchBarPageState extends State<SearchBarPage> {
 
   /// 最近事件
   String lastEvent = '—';
+
   /// 构造方式
   _SearchKind kind = _SearchKind.searchBar;
+
   /// SearchAnchor.builder
   _AnchorBuilderKind anchorBuilderKind = _AnchorBuilderKind.searchBar;
+
   /// 提示文案
   String? hintText = 'Search';
+
   /// 视图提示
   String? viewHintText;
+
   /// 是否启用
   bool enabled = true;
+
   /// 自动聚焦
   bool autoFocus = false;
+
   /// 是否传入 controller
   bool useController = true;
+
   /// 是否传入 focusNode
   bool useFocusNode = false;
+
   /// 是否传入 onTap
   bool useOnTap = true;
+
   /// 是否传入 onTapOutside
   bool useOnTapOutside = true;
+
   /// 是否传入 onChanged
   bool useOnChanged = true;
+
   /// 是否传入 onSubmitted
   bool useOnSubmitted = true;
+
   /// 是否传入 leading
   bool useLeading = true;
+
   /// 是否传入 trailing
   bool useTrailing = true;
+
   /// 是否传入 elevation
   bool useElevation = false;
+
   /// 海拔
   double elevation = 6;
+
   /// 是否传入 constraints
   bool useConstraints = true;
+
   /// 最小高度
   double minHeight = 56;
+
   /// 最大宽度
   double maxWidth = 800;
+
   /// 是否传入 padding
   bool usePadding = false;
+
   /// 水平内边距
   double paddingH = 16;
+
   /// 垂直内边距
   double paddingV = 0;
+
   /// 是否传入 side
   bool useSide = false;
+
   /// 描边宽度
   double sideWidth = 1;
+
   /// 描边色
   Color? sideColor;
+
   /// 形状
   ShapeKind shapeKind = ShapeKind.none;
+
   /// 圆角
   double shapeRadius = 28;
+
   /// 背景色
   Color? backgroundColor;
+
   /// 阴影色
   Color? shadowColor;
+
   /// 表面色调
   Color? surfaceTintColor;
+
   /// 水波纹色
   Color? overlayColor;
+
   /// 是否传入 textStyle
   bool useTextStyle = false;
+
   /// 字号
   double fontSize = 16;
+
   /// 文字色
   Color? textStyleColor;
+
   /// 是否传入 hintStyle
   bool useHintStyle = false;
+
   /// 提示色
   Color? hintStyleColor;
+
   /// 大小写
   TextCapitalization? textCapitalization;
+
   /// 键盘动作
   TextInputAction? textInputAction;
+
   /// 键盘类型
   TextInputType? keyboardType;
+
   /// 滚动内边距
   double scrollPaddingAll = 20;
+
   /// 是否传入系统菜单
   bool useContextMenuBuilder = true;
+
   /// 是否全屏
   bool? isFullScreen;
+
   /// 是否传入 viewBuilder
   bool useViewBuilder = false;
+
   /// 是否传入 viewLeading
   bool useViewLeading = false;
+
   /// 是否传入 viewTrailing
   bool useViewTrailing = false;
+
   /// 是否传入 viewConstraints
   bool useViewConstraints = true;
+
   /// 视图最大高度
   double viewMaxHeight = 280;
+
   /// 是否传入 headerHeight
   bool useHeaderHeight = false;
+
   /// 头部高度
   double headerHeight = 56;
+
   /// 是否传入 viewElevation
   bool useViewElevation = false;
+
   /// 视图海拔
   double viewElevation = 6;
+
   /// 视图背景
   Color? viewBackgroundColor;
+
   /// 视图色调
   Color? viewSurfaceTintColor;
+
   /// 分割线色
   Color? dividerColor;
+
   /// 视图描边
   bool useViewSide = false;
+
   /// 视图形状
   ShapeKind viewShapeKind = ShapeKind.none;
+
   /// 视图圆角
   double viewShapeRadius = 28;
+
   /// Cupertino 占位
   String? placeholder = 'Search';
+
   /// 图标色
   Color itemColor = CupertinoColors.secondaryLabel;
+
   /// 图标尺寸
   double itemSize = 20;
+
   /// 圆角
   double borderRadius = 9;
+
   /// 是否传入 decoration
   bool useDecoration = false;
+
   /// suffix 可见
   OverlayVisibilityMode suffixMode = OverlayVisibilityMode.editing;
+
   /// 是否传入 onSuffixTap
   bool useOnSuffixTap = false;
+
   /// 是否传入 restorationId
   bool useRestorationId = false;
+
   /// 智能引号
   SmartQuotesType? smartQuotesType;
+
   /// 智能破折号
   SmartDashesType? smartDashesType;
+
   /// IME 个性化
   bool enableIMEPersonalizedLearning = true;
+
   /// 自动纠正
   bool autocorrect = true;
+
   /// Cupertino enabled
   bool? cupertinoEnabled;
+
   /// 自定义 prefix
   bool usePrefixIcon = false;
+
   /// 自定义 suffix
   bool useSuffixIcon = false;
+
   /// prefix 起始内边距
   double prefixStart = 6;
+
   /// suffix 末尾内边距
   double suffixEnd = 5;
+
   /// 内边距垂直
   double cupertinoPadV = 8;
+
   /// showSearch 初始 query
   String query = '';
+
   /// 根导航
   bool useRootNavigator = false;
+
   /// 保活
   bool maintainState = false;
+
   /// 搜索框标签
   String? searchFieldLabel = 'Search';
+
   /// Delegate 外观
   _SearchFieldLook searchFieldLook = _SearchFieldLook.none;
+
   /// 联想
   bool enableSuggestions = true;
 
@@ -218,7 +299,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
   bool get isAnchorBar => kind == _SearchKind.searchAnchorBar;
   bool get isCupertino => kind == _SearchKind.cupertino;
   bool get isShowSearch => kind == _SearchKind.showSearch;
-  bool get showBarSurface => isSearchBar || isAnchorBar || (isAnchor && anchorBuilderKind == _AnchorBuilderKind.searchBar);
+  bool get showBarSurface =>
+      isSearchBar || isAnchorBar || (isAnchor && anchorBuilderKind == _AnchorBuilderKind.searchBar);
 
   @override
   void dispose() {
@@ -278,7 +360,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
                         {
                           NLangEnum.en:
                               'All Flutter SDK search fields: SearchBar, SearchAnchor / .bar, CupertinoSearchTextField, and showSearch + SearchDelegate.',
-                          NLangEnum.zh: '覆盖 Flutter SDK 全部搜索框：SearchBar、SearchAnchor / .bar、CupertinoSearchTextField，以及 showSearch + SearchDelegate。',
+                          NLangEnum.zh:
+                              '覆盖 Flutter SDK 全部搜索框：SearchBar、SearchAnchor / .bar、CupertinoSearchTextField，以及 showSearch + SearchDelegate。',
                         },
                       ],
                     ),
@@ -503,9 +586,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
         prefixInsets: EdgeInsetsDirectional.fromSTEB(prefixStart, 0, 0, 3),
         prefixIcon: usePrefixIcon ? const Icon(Icons.search) : const Icon(CupertinoIcons.search),
         suffixInsets: EdgeInsetsDirectional.fromSTEB(0, 0, suffixEnd, 2),
-        suffixIcon: useSuffixIcon
-            ? const Icon(Icons.cancel)
-            : const Icon(CupertinoIcons.xmark_circle_fill),
+        suffixIcon: useSuffixIcon ? const Icon(Icons.cancel) : const Icon(CupertinoIcons.xmark_circle_fill),
         suffixMode: suffixMode,
         onSuffixTap: useOnSuffixTap ? onSuffixTap : null,
         restorationId: useRestorationId ? 'searchBarPage' : null,
@@ -739,14 +820,27 @@ class _SearchBarPageState extends State<SearchBarPage> {
             ),
             const Text('textInputAction'),
             buildChoiceChips(
-              values: const [null, TextInputAction.search, TextInputAction.done, TextInputAction.next, TextInputAction.go],
+              values: const [
+                null,
+                TextInputAction.search,
+                TextInputAction.done,
+                TextInputAction.next,
+                TextInputAction.go
+              ],
               value: textInputAction,
               labelOf: (e) => e?.name ?? '默',
               onChanged: (e) => onMark('textInputAction ${e?.name ?? 'null'}', () => textInputAction = e),
             ),
             const Text('keyboardType'),
             buildChoiceChips(
-              values: const [null, TextInputType.text, TextInputType.number, TextInputType.emailAddress, TextInputType.url, TextInputType.phone],
+              values: const [
+                null,
+                TextInputType.text,
+                TextInputType.number,
+                TextInputType.emailAddress,
+                TextInputType.url,
+                TextInputType.phone
+              ],
               value: keyboardType,
               labelOf: nameOfKeyboard,
               onChanged: (e) => onMark('keyboardType ${nameOfKeyboard(e)}', () => keyboardType = e),
@@ -1003,12 +1097,16 @@ class _SearchBarPageState extends State<SearchBarPage> {
               ),
               buildColorRow('sideColor', sideColor, (v) => onMark('sideColor ${v ?? 'null'}', () => sideColor = v)),
             ],
-            buildColorRow('backgroundColor', backgroundColor, (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
+            buildColorRow('backgroundColor', backgroundColor,
+                (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
             if (isSearchBar)
-              buildColorRow('shadowColor', shadowColor, (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v)),
+              buildColorRow(
+                  'shadowColor', shadowColor, (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v)),
             if (isSearchBar)
-              buildColorRow('surfaceTintColor', surfaceTintColor, (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v)),
-            buildColorRow('overlayColor', overlayColor, (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v)),
+              buildColorRow('surfaceTintColor', surfaceTintColor,
+                  (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v)),
+            buildColorRow(
+                'overlayColor', overlayColor, (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v)),
             buildSwitch(
               title: 'textStyle',
               value: useTextStyle,
@@ -1022,7 +1120,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 max: 22,
                 onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
               ),
-              buildColorRow('textStyle.color', textStyleColor, (v) => onMark('textStyle.color ${v ?? 'null'}', () => textStyleColor = v)),
+              buildColorRow('textStyle.color', textStyleColor,
+                  (v) => onMark('textStyle.color ${v ?? 'null'}', () => textStyleColor = v)),
             ],
             buildSwitch(
               title: 'hintStyle',
@@ -1030,7 +1129,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (v) => onMark('hintStyle ${v ? 'on' : 'null'}', () => useHintStyle = v),
             ),
             if (useHintStyle)
-              buildColorRow('hintStyle.color', hintStyleColor, (v) => onMark('hintStyle.color ${v ?? 'null'}', () => hintStyleColor = v)),
+              buildColorRow('hintStyle.color', hintStyleColor,
+                  (v) => onMark('hintStyle.color ${v ?? 'null'}', () => hintStyleColor = v)),
           ],
           if (isAnchor || isAnchorBar) ...[
             buildSwitch(
@@ -1046,10 +1146,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 max: 16,
                 onChanged: (v) => onMark('viewElevation ${v.toStringAsFixed(1)}', () => viewElevation = v),
               ),
-            buildColorRow('viewBackgroundColor', viewBackgroundColor, (v) => onMark('viewBackgroundColor ${v ?? 'null'}', () => viewBackgroundColor = v)),
+            buildColorRow('viewBackgroundColor', viewBackgroundColor,
+                (v) => onMark('viewBackgroundColor ${v ?? 'null'}', () => viewBackgroundColor = v)),
             if (isAnchor)
-              buildColorRow('viewSurfaceTintColor', viewSurfaceTintColor, (v) => onMark('viewSurfaceTintColor ${v ?? 'null'}', () => viewSurfaceTintColor = v)),
-            buildColorRow('dividerColor', dividerColor, (v) => onMark('dividerColor ${v ?? 'null'}', () => dividerColor = v)),
+              buildColorRow('viewSurfaceTintColor', viewSurfaceTintColor,
+                  (v) => onMark('viewSurfaceTintColor ${v ?? 'null'}', () => viewSurfaceTintColor = v)),
+            buildColorRow(
+                'dividerColor', dividerColor, (v) => onMark('dividerColor ${v ?? 'null'}', () => dividerColor = v)),
             const Text('viewShape'),
             buildChoiceChips(
               values: ShapeKind.values,
@@ -1091,8 +1194,10 @@ class _SearchBarPageState extends State<SearchBarPage> {
               max: 32,
               onChanged: (v) => onMark('itemSize ${v.round()}', () => itemSize = v),
             ),
-            buildColorRow('backgroundColor', backgroundColor, (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
-            buildColorRow('itemColor', itemColor, (v) => onMark('itemColor ${v ?? 'null'}', () => itemColor = v ?? CupertinoColors.secondaryLabel)),
+            buildColorRow('backgroundColor', backgroundColor,
+                (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
+            buildColorRow('itemColor', itemColor,
+                (v) => onMark('itemColor ${v ?? 'null'}', () => itemColor = v ?? CupertinoColors.secondaryLabel)),
             buildSwitch(
               title: 'style',
               value: useTextStyle,
@@ -1106,7 +1211,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 max: 22,
                 onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
               ),
-              buildColorRow('style.color', textStyleColor, (v) => onMark('style.color ${v ?? 'null'}', () => textStyleColor = v)),
+              buildColorRow(
+                  'style.color', textStyleColor, (v) => onMark('style.color ${v ?? 'null'}', () => textStyleColor = v)),
             ],
             buildSwitch(
               title: 'placeholderStyle',
@@ -1114,7 +1220,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (v) => onMark('placeholderStyle ${v ? 'on' : 'null'}', () => useHintStyle = v),
             ),
             if (useHintStyle)
-              buildColorRow('placeholderStyle', hintStyleColor, (v) => onMark('placeholderStyle ${v ?? 'null'}', () => hintStyleColor = v)),
+              buildColorRow('placeholderStyle', hintStyleColor,
+                  (v) => onMark('placeholderStyle ${v ?? 'null'}', () => hintStyleColor = v)),
           ],
         ],
       ),
@@ -1373,7 +1480,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
                     ? Icon(
                         Icons.check_rounded,
                         size: 16,
-                        color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
+                        color:
+                            ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
                       )
                     : null,
           ),
@@ -1391,19 +1499,10 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    return NSlider(
-      leading: SizedBox(
-        width: 108,
-        child: Text(
-          label,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: scheme.onSurface,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+    return NSliderListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      title: Text(label),
       min: min,
       max: max,
       value: value.clamp(min, max),
@@ -1417,18 +1516,10 @@ class _SearchBarPageState extends State<SearchBarPage> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
       contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
+      title: Text(title),
       value: value,
       onChanged: onChanged,
     );
