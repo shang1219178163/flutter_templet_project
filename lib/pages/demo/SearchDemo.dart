@@ -174,15 +174,18 @@ class _SearchDemoState extends State<SearchDemo> {
       },
       viewBuilder: (suggestions) {
         return Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               child: Text("${suggestions.length}"),
             ),
-            ...suggestions.toList(),
-            Expanded(child: SizedBox()),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: suggestions.toList(),
+              ),
+            ),
           ],
         );
       },
