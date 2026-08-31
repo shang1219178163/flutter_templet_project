@@ -386,7 +386,7 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
 }
 
 /// EasyRefresh刷新 mixin, StatefulWidget 详情页使用
-mixin NRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRefreshMixin<T> {
+mixin NModelRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRefreshMixin<T> {
   @override
   void dispose() {
     refreshController.dispose();
@@ -410,7 +410,7 @@ mixin NRefreshStateMixin<W extends StatefulWidget, T> on State<W>, NModelRefresh
 }
 
 /// 列表刷新控制器,配和 NModelRefreshable 使用
-class NRefreshController<T> {
+class NModelRefreshController<T> {
   NModelRefreshable<T>? _anchor;
 
   set attach(NModelRefreshable<T> anchor) {

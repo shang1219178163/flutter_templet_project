@@ -26,7 +26,7 @@ class NRefreshView<T> extends StatefulWidget {
   });
 
   /// 控制器
-  final NRefreshController<T>? controller;
+  final NModelRefreshController<T>? controller;
 
   final ScrollController? scrollController;
 
@@ -51,7 +51,7 @@ class NRefreshView<T> extends StatefulWidget {
 }
 
 class NRefreshViewState<T> extends State<NRefreshView<T>>
-    with AutomaticKeepAliveClientMixin, NModelRefreshMixin<T>, NRefreshStateMixin<NRefreshView<T>, T> {
+    with AutomaticKeepAliveClientMixin, NModelRefreshMixin<T>, NModelRefreshStateMixin<NRefreshView<T>, T> {
   @override
   bool get wantKeepAlive => true;
 

@@ -33,7 +33,7 @@ class NCustomScrollViewForModel<T> extends StatefulWidget {
   });
 
   /// 刷新控制器
-  final NRefreshController<T>? controller;
+  final NModelRefreshController<T>? controller;
 
   final ScrollController? scrollController;
 
@@ -70,7 +70,10 @@ class NCustomScrollViewForModel<T> extends StatefulWidget {
 }
 
 class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel<T>>
-    with AutomaticKeepAliveClientMixin, NModelRefreshMixin<T>, NRefreshStateMixin<NCustomScrollViewForModel<T>, T> {
+    with
+        AutomaticKeepAliveClientMixin,
+        NModelRefreshMixin<T>,
+        NModelRefreshStateMixin<NCustomScrollViewForModel<T>, T> {
   @override
   bool get wantKeepAlive => true;
 
