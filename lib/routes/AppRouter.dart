@@ -373,6 +373,7 @@ class AppRouter {
   static const String imageStretchDemo = '/imageStretchDemo';
   static const String dropdownMenuDemo = '/dropdownMenuDemo';
   static const String searchDemo = '/searchDemo';
+  static const String searchBarPage = '/searchBarPage';
   static const String switchDemo = '/switchDemo';
   static const String gestureDetectorDemo = '/gestureDetectorDemo';
   static const String compositedTransformTargetDemo = '/compositedTransformTargetDemo';

@@ -285,6 +285,7 @@ import 'package:flutter_templet_project/pages/demo/ScrollControllerDemoOne.dart'
 import 'package:flutter_templet_project/pages/demo/ScrollControllerDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollablePositionedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SearchBarPage.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
@@ -1641,6 +1642,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.searchDemo,
       page: () => SearchDemo(),
+    ),
+    GetPage(
+      name: AppRouter.searchBarPage,
+      page: () => SearchBarPage(),
     ),
     GetPage(
       name: AppRouter.switchDemo,

@@ -328,6 +328,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.floatingActionButtonDemo, "floatingActionButtonDemo"),
   Tuple2(AppRouter.dropdownMenuDemo, "dropdownMenuDemo"),
   Tuple2(AppRouter.searchDemo, "searchDemo"),
+  Tuple2(AppRouter.searchBarPage, "searchBarPage"),
   Tuple2(AppRouter.switchDemo, "switchDemo"),
   Tuple2(AppRouter.gestureDetectorDemo, "gestureDetectorDemo"),
   Tuple2(AppRouter.compositedTransformTargetDemo, "compositedTransformTargetDemo"),
