@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 
 class GradientPlaygroundPage extends StatefulWidget {
   const GradientPlaygroundPage({super.key});
@@ -169,22 +170,15 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
     required double value,
     required ValueChanged<double> onChanged,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('$label: ${value.toStringAsFixed(2)}'),
-          Slider(
-            value: value,
-            min: -1,
-            max: 1,
-            divisions: 100,
-            label: value.toStringAsFixed(2),
-            onChanged: onChanged,
-          ),
-        ],
-      ),
+    return NSliderListTile(
+      dense: true,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+      title: Text(label),
+      min: -1,
+      max: 1,
+      divisions: 100,
+      value: value.clamp(-1, 1),
+      onChanged: onChanged,
     );
   }
 }

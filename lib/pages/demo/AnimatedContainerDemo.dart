@@ -9,9 +9,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
@@ -621,25 +621,16 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    return NSlider(
-      leading: SizedBox(
-        width: 108,
-        child: Text(
-          label,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: scheme.onSurface,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+    return NSliderListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      title: Text(label),
       min: min,
       max: max,
-      value: value,
+      value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      trailingBuilder: durationLabel
+      valueBuilder: durationLabel
           ? (context, v) {
               final ms = v.round();
               final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';

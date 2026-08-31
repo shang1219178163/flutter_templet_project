@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -764,25 +764,16 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    return NSlider(
-      leading: SizedBox(
-        width: 108,
-        child: Text(
-          label,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: scheme.onSurface,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+    return NSliderListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      title: Text(label),
       min: min,
       max: max,
-      value: value,
+      value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      trailingBuilder: fractionDigits > 0
+      valueBuilder: fractionDigits > 0
           ? (context, v) {
               return Text(
                 v.toStringAsFixed(fractionDigits),
