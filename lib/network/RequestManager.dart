@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
+import 'package:flutter_templet_project/network/interceptors/debug_log_interceptor.dart';
 import 'package:flutter_templet_project/network/interceptors/token_interceptor.dart';
 import 'package:flutter_templet_project/network/interceptors/validate_interceptor.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
@@ -66,25 +67,11 @@ class RequestManager extends BaseRequestAPI {
     };
     dio.options = options;
 
-    final interceptor = QueuedInterceptorsWrapper(
-      onRequest: (options, handler) {
-        // print("请求之前");
-        return handler.next(options);
-      },
-      onResponse: (response, handler) {
-        // print("响应之前");
-        // DLog.d(response.toDescription());
-        return handler.next(response);
-      },
-      onError: (e, handler) async {
-        return handler.next(e);
-      },
-    );
     if (api != null) {
       dio.interceptors.add(ValidateInterceptor(api: api));
     }
     dio.interceptors.add(TokenInterceptor(dio: dio));
-    dio.interceptors.add(interceptor);
+    dio.interceptors.add(DebugLogInterceptor());
     dio.interceptors.add(cacheInterceptor);
 
     return dio;

@@ -21,18 +21,25 @@ extension RequestOptionsExt on RequestOptions {
       paramsStr = e.toString();
     }
 
-    return """----------------------------------
-requestUrl: $pathNew
-method: $method
-header: ${jsonEncode(headers)}
-params: $paramsStr
-""";
+    return [
+      "----------------------------------",
+      "requestUrl: $pathNew",
+      "method: $method",
+      "header: ${jsonEncode(headers)}",
+      "params: $paramsStr",
+    ].join("\n");
+//     return """----------------------------------
+// requestUrl: $pathNew
+// method: $method
+// header: ${jsonEncode(headers)}
+// params: $paramsStr
+// """;
   }
 }
 
 extension ResponseExt on Response {
   /// 请求调试信息
-  String toDescription() {
+  String toDescription({bool hasRequestOptions = true}) {
     var jsonStr = data;
     try {
       jsonStr = jsonEncode(data);
@@ -40,11 +47,34 @@ extension ResponseExt on Response {
       jsonStr = e.toString();
     }
 
-    return """----------------------------------
-${requestOptions.toDescription()}
-jsonStr: 
-$jsonStr
-""";
+    final list = ["jsonStr: ", "$jsonStr"];
+    if (!hasRequestOptions) {
+      return list.join("\n");
+    }
+    return [
+      "----------------------------------",
+      requestOptions.toDescription(),
+      ...list,
+    ].join("\n");
+//     return """----------------------------------
+// ${requestOptions.toDescription()}
+// jsonStr:
+// $jsonStr
+// """;
+  }
+}
+
+extension DioExceptionExt on DioException {
+  /// 错误调试信息
+  String toDescription() {
+    final map = {
+      "type": type,
+      "code": response?.statusCode,
+      "message": message,
+      "data": response?.data,
+    };
+    final encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
+    return encoder.convert(map);
   }
 }
 
