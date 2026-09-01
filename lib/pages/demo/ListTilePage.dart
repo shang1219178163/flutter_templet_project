@@ -31,6 +31,7 @@ enum _TileKind {
   radioAdaptive(label: 'Radio.adaptive'),
   slider(label: 'Slider'),
   cupertino(label: 'Cupertino');
+
   const _TileKind({required this.label});
   final String label;
 }
@@ -58,96 +59,142 @@ class _ListTilePageState extends State<ListTilePage> {
 
   /// 最近事件
   String lastEvent = '—';
+
   /// 构造方式
   _TileKind kind = _TileKind.gallery;
+
   /// 标题
   String titleText = '标题';
+
   /// 是否显示副标题
   bool useSubtitle = true;
+
   /// 副标题
   String subtitleText = '副标题';
+
   /// 三行
   bool isThreeLine = false;
+
   /// 紧凑
   bool? dense;
+
   /// 选中
   bool selected = false;
+
   /// 是否启用
   bool enabled = true;
+
   /// 是否传入 onChanged / onTap
   bool useOnChanged = true;
+
   /// 左侧图标
   bool useSecondary = true;
+
   /// ListTile trailing
   bool useTrailing = true;
+
   /// 自动聚焦
   bool autofocus = false;
+
   /// 是否传入 focusNode
   bool useFocusNode = false;
+
   /// 是否传入 contentPadding
   bool usePadding = false;
+
   /// 水平内边距
   double padH = 16;
+
   /// 垂直内边距
   double padV = 0;
+
   /// 形状
   ShapeKind shapeKind = ShapeKind.none;
+
   /// 圆角
   double shapeRadius = 12;
+
   /// 控件位置
   ListTileControlAffinity? controlAffinity;
+
   /// 标题对齐
   ListTileTitleAlignment? titleAlignment;
+
   /// 视觉密度
   VisualDensity? visualDensity;
+
   /// 点击目标
   MaterialTapTargetSize? materialTapTargetSize;
+
   /// 反馈
   bool? enableFeedback;
+
   /// ListTile 样式
   ListTileStyle? listTileStyle;
+
   /// 背景色
   Color? tileColor;
+
   /// 选中背景色
   Color? selectedTileColor;
+
   /// 激活色
   Color? activeColor;
+
   /// 悬停色
   Color? hoverColor;
+
   /// 开关值
   bool switchValue = true;
+
   /// 拖动手势
   DragStartBehavior dragStartBehavior = DragStartBehavior.start;
+
   /// adaptive 是否应用 Cupertino 主题
   bool? applyCupertinoTheme;
+
   /// 勾选值
   bool? checkboxValue = true;
+
   /// 三态
   bool tristate = false;
+
   /// 错误态
   bool isError = false;
+
   /// 勾选缩放
   double checkboxScaleFactor = 1;
+
   /// 勾选色
   Color? checkColor;
+
   /// 单选组
   String? radioGroup = 'A';
+
   /// 允许取消选中
   bool toggleable = false;
+
   /// Cupertino 单选勾
   bool useCupertinoCheckmarkStyle = false;
+
   /// 滑条值
   double sliderValue = 0.6;
+
   /// 滑条最小
   double sliderMin = 0;
+
   /// 滑条最大
   double sliderMax = 1;
+
   /// 是否显示数值
   bool showValue = true;
+
   /// 滑条宽度比例
   double sliderWidthFactor = 0.5;
+
   /// Cupertino 是否 notched
   bool cupertinoNotched = false;
+
   /// Cupertino additionalInfo
   bool useAdditionalInfo = true;
 
@@ -325,9 +372,7 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildListTile() {
-    final subtitle = (!useSubtitle && !isThreeLine)
-        ? null
-        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final subtitle = (!useSubtitle && !isThreeLine) ? null : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     return ListTile(
       leading: useSecondary ? const Icon(Icons.notifications_outlined) : null,
       title: Text(titleText),
@@ -354,12 +399,9 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildSwitchTile({required bool adaptive}) {
-    final title = Text(kind == _TileKind.gallery
-        ? (adaptive ? 'SwitchListTile.adaptive' : 'SwitchListTile')
-        : titleText);
-    final subtitle = (!useSubtitle && !isThreeLine)
-        ? null
-        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final title =
+        Text(kind == _TileKind.gallery ? (adaptive ? 'SwitchListTile.adaptive' : 'SwitchListTile') : titleText);
+    final subtitle = (!useSubtitle && !isThreeLine) ? null : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     final onChanged = enabled && useOnChanged ? (v) => onMark('Switch $v', () => switchValue = v) : null;
     if (adaptive) {
       return SwitchListTile.adaptive(
@@ -413,12 +455,9 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildCheckboxTile({required bool adaptive}) {
-    final title = Text(kind == _TileKind.gallery
-        ? (adaptive ? 'CheckboxListTile.adaptive' : 'CheckboxListTile')
-        : titleText);
-    final subtitle = (!useSubtitle && !isThreeLine)
-        ? null
-        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final title =
+        Text(kind == _TileKind.gallery ? (adaptive ? 'CheckboxListTile.adaptive' : 'CheckboxListTile') : titleText);
+    final subtitle = (!useSubtitle && !isThreeLine) ? null : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     final onChanged = enabled && useOnChanged ? (v) => onMark('Checkbox $v', () => checkboxValue = v) : null;
     if (adaptive) {
       return CheckboxListTile.adaptive(
@@ -480,9 +519,7 @@ class _ListTilePageState extends State<ListTilePage> {
 
   List<Widget> buildRadioTiles({required bool adaptive}) {
     const options = ['A', 'B'];
-    final subtitle = (!useSubtitle && !isThreeLine)
-        ? null
-        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final subtitle = (!useSubtitle && !isThreeLine) ? null : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     final onChanged = enabled && useOnChanged ? (v) => onMark('Radio $v', () => radioGroup = v) : null;
     return options.map((e) {
       final title = kind == _TileKind.gallery || kind == _TileKind.radio || kind == _TileKind.radioAdaptive
@@ -545,12 +582,11 @@ class _ListTilePageState extends State<ListTilePage> {
   Widget buildSliderTile() {
     final lo = sliderMin <= sliderMax ? sliderMin : sliderMax;
     final hi = sliderMax >= sliderMin ? sliderMax : sliderMin;
-    final subtitle = (!useSubtitle && !isThreeLine)
-        ? null
-        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final subtitle = (!useSubtitle && !isThreeLine) ? null : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     return NSliderListTile(
       value: sliderValue.clamp(lo, hi),
-      onChanged: enabled && useOnChanged ? (v) => onMark('Slider ${v.toStringAsFixed(2)}', () => sliderValue = v) : null,
+      onChanged:
+          enabled && useOnChanged ? (v) => onMark('Slider ${v.toStringAsFixed(2)}', () => sliderValue = v) : null,
       min: lo,
       max: hi,
       activeColor: activeColor,
@@ -575,9 +611,7 @@ class _ListTilePageState extends State<ListTilePage> {
 
   Widget buildCupertinoTile() {
     final title = Text(kind == _TileKind.gallery ? 'CupertinoListTile' : titleText);
-    final subtitle = (!useSubtitle && !isThreeLine)
-        ? null
-        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final subtitle = (!useSubtitle && !isThreeLine) ? null : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     final leading = useSecondary ? const Icon(CupertinoIcons.bell) : null;
     final trailing = useTrailing ? const CupertinoListTileChevron() : null;
     final info = useAdditionalInfo ? const Text('Info') : null;

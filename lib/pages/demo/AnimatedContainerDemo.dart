@@ -41,50 +41,73 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
 
   /// 原 Demo 起始 200×200 lightBlue topLeft
   double width = 200;
+
   /// 高度
   double height = 200;
+
   /// 填充色
   Color? color = Colors.lightBlue;
+
   /// 对齐
   Alignment alignment = Alignment.topLeft;
+
   /// 动画曲线
   Curve curve = Curves.fastOutSlowIn;
+
   /// 动画时长（毫秒）
   double durationMs = 1000;
+
   /// 裁剪
   Clip clipBehavior = Clip.none;
+
   /// 是否显示 child
   bool useChild = true;
+
   /// 是否传入 padding
   bool usePadding = false;
+
   /// 水平内边距
   double padH = 12;
+
   /// 垂直内边距
   double padV = 12;
+
   /// 是否传入 margin
   bool useMargin = false;
+
   /// 水平外边距
   double marginH = 8;
+
   /// 垂直外边距
   double marginV = 8;
+
   /// 是否用 decoration 代替 color
   bool useDecoration = false;
+
   /// 外形
   ShapeKind shapeKind = ShapeKind.rounded;
+
   /// 外形圆角
   double shapeRadius = 16;
+
   /// 是否传入前景装饰
   bool useForeground = false;
+
   /// 前景色
   Color? foregroundColor;
+
   /// 是否传入 transform
   bool useTransform = false;
+
   /// 旋转角度
   double rotateDeg = 0;
+
   /// transform 对齐
   Alignment transformAlignment = Alignment.center;
+
   /// 搜索条是否展开
   bool searchExpanded = false;
+
   /// 最近事件
   String lastEvent = '—';
 

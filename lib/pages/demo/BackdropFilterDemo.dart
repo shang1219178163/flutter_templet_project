@@ -54,6 +54,7 @@ enum _ChildKind {
   overlay(label: 'overlay'),
   hello(label: 'hello'),
   none(label: 'none');
+
   const _ChildKind({required this.label});
   final String label;
 }
@@ -290,9 +291,9 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 return Text(
                   v.toStringAsFixed(1),
                   style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
                 );
               },
             ),
@@ -309,9 +310,9 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 return Text(
                   v.toStringAsFixed(1),
                   style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
                 );
               },
             ),
@@ -338,9 +339,9 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 return Text(
                   v.toStringAsFixed(1),
                   style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
                 );
               },
             ),
@@ -357,9 +358,9 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 return Text(
                   v.toStringAsFixed(1),
                   style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
                 );
               },
             ),
@@ -385,7 +386,10 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(title: const Text('enabled 应用滤镜'), value: enabled, onChanged: (v) => onMark('enabled $v', () => enabled = v)),
+          NSwitchListTile(
+              title: const Text('enabled 应用滤镜'),
+              value: enabled,
+              onChanged: (v) => onMark('enabled $v', () => enabled = v)),
           const SizedBox(height: 8),
           NChoiceChipListItem<BlendMode>(
             title: const Text('blendMode'),
@@ -398,7 +402,6 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       ),
     );
   }
-
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();
