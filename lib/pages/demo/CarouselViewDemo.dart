@@ -12,8 +12,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -312,7 +312,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             onChanged: onScrollDirection,
           ),
           if (kind == _CarouselKind.uncontained)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('itemExtent'),
@@ -322,7 +322,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
               onChanged: (v) => onMark('itemExtent ${v.round()}', () => itemExtent = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('shrinkExtent'),
@@ -332,7 +332,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             onChanged: (v) => onMark('shrinkExtent ${v.round()}', () => shrinkExtent = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('padding'),
@@ -342,7 +342,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             onChanged: (v) => onMark('padding ${v.round()}', () => padding = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('viewport 高度'),
@@ -352,7 +352,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             onChanged: (v) => onMark('viewport ${v.round()}', () => viewportExtent = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('itemCount'),
@@ -362,7 +362,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             onChanged: onItemCount,
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('initialItem'),
@@ -393,7 +393,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
           ),
           if (shapeKind == ShapeKind.rounded)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('borderRadius'),
@@ -403,7 +403,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
               onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('elevation'),
@@ -425,19 +425,19 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             value: overlayColor,
             onChanged: (e) => onMark('overlayColor $e', () => overlayColor = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('itemSnapping 吸附'),
             value: itemSnapping,
             onChanged: (v) => onMark('itemSnapping $v', () => itemSnapping = v),
           ),
-          NSwitchListTile(title: const Text('reverse 反向滚动'), value: reverse, onChanged: onReverse),
-          NSwitchListTile(
+          NSwitchListItem(title: const Text('reverse 反向滚动'), value: reverse, onChanged: onReverse),
+          NSwitchListItem(
             title: const Text('enableSplash 水波纹'),
             value: enableSplash,
             onChanged: (v) => onMark('enableSplash $v', () => enableSplash = v),
           ),
           if (kind == _CarouselKind.weighted)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('consumeMaxWeight 可撑满最大权重'),
               value: consumeMaxWeight,
               onChanged: (v) => onMark('consumeMaxWeight $v', () => consumeMaxWeight = v),

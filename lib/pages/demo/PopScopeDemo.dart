@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -172,7 +172,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'canPop',
-      child: NSwitchListTile(title: const Text('canPop'), value: canPop, onChanged: onCanPop),
+      child: NSwitchListItem(title: const Text('canPop'), value: canPop, onChanged: onCanPop),
     );
   }
 

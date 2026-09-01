@@ -11,8 +11,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -253,9 +253,9 @@ class _ListTilePageState extends State<ListTilePage> {
                       items: [
                         {
                           NLangEnum.en:
-                              'ListTile, SwitchListTile / .adaptive, CheckboxListTile / .adaptive, RadioListTile / .adaptive, NSliderListTile, CupertinoListTile.',
+                              'ListTile, SwitchListTile / .adaptive, CheckboxListTile / .adaptive, RadioListTile / .adaptive, NSliderListItem, CupertinoListTile.',
                           NLangEnum.zh:
-                              '统一展示 ListTile、SwitchListTile / .adaptive、CheckboxListTile / .adaptive、RadioListTile / .adaptive、NSliderListTile、CupertinoListTile。',
+                              '统一展示 ListTile、SwitchListTile / .adaptive、CheckboxListTile / .adaptive、RadioListTile / .adaptive、NSliderListItem、CupertinoListTile。',
                         },
                       ],
                     ),
@@ -583,7 +583,7 @@ class _ListTilePageState extends State<ListTilePage> {
     final lo = sliderMin <= sliderMax ? sliderMin : sliderMax;
     final hi = sliderMax >= sliderMin ? sliderMax : sliderMin;
     final subtitle = (!useSubtitle && !isThreeLine) ? null : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
-    return NSliderListTile(
+    return NSliderListItem(
       value: sliderValue.clamp(lo, hi),
       onChanged:
           enabled && useOnChanged ? (v) => onMark('Slider ${v.toStringAsFixed(2)}', () => sliderValue = v) : null,
@@ -591,7 +591,7 @@ class _ListTilePageState extends State<ListTilePage> {
       max: hi,
       activeColor: activeColor,
       tileColor: tileColor,
-      title: Text(kind == _TileKind.gallery ? 'NSliderListTile' : titleText),
+      title: Text(kind == _TileKind.gallery ? 'NSliderListItem' : titleText),
       subtitle: subtitle,
       secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
       showValue: showValue,
@@ -666,7 +666,7 @@ class _ListTilePageState extends State<ListTilePage> {
             labelOf: (e) => e,
             onChanged: (e) => onMark('title $e', () => titleText = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('subtitle'),
             value: useSubtitle,
             onChanged: (v) => onMark('subtitle ${v ? 'on' : 'null'}', () => useSubtitle = v),
@@ -680,7 +680,7 @@ class _ListTilePageState extends State<ListTilePage> {
               onChanged: (e) => onMark('subtitleText $e', () => subtitleText = e),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('isThreeLine'),
             value: isThreeLine,
             onChanged: (v) => onMark('isThreeLine $v', () {
@@ -697,39 +697,39 @@ class _ListTilePageState extends State<ListTilePage> {
             labelOf: (e) => e == null ? '默' : '$e',
             onChanged: (e) => onMark('dense ${e ?? 'null'}', () => dense = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('selected'),
             value: selected,
             onChanged: (v) => onMark('selected $v', () => selected = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('enabled'),
             value: enabled,
             onChanged: (v) => onMark('enabled $v', () => enabled = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onChanged / onTap'),
             value: useOnChanged,
             onChanged: (v) => onMark('onChanged ${v ? 'on' : 'null'}', () => useOnChanged = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('secondary / leading'),
             value: useSecondary,
             onChanged: (v) => onMark('secondary ${v ? 'on' : 'null'}', () => useSecondary = v),
           ),
           if (kind == _TileKind.listTile || kind == _TileKind.cupertino || kind == _TileKind.gallery)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('trailing'),
               value: useTrailing,
               onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v),
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('contentPadding'),
             value: usePadding,
             onChanged: (v) => onMark('contentPadding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('paddingH'),
@@ -739,7 +739,7 @@ class _ListTilePageState extends State<ListTilePage> {
               onChanged: (v) => onMark('paddingH ${v.round()}', () => padH = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('paddingV'),
@@ -763,7 +763,7 @@ class _ListTilePageState extends State<ListTilePage> {
             }),
           ),
           if (shapeKind == ShapeKind.rounded)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('shapeRadius'),
@@ -831,12 +831,12 @@ class _ListTilePageState extends State<ListTilePage> {
               onChanged: (e) => onMark('style ${e?.name ?? 'null'}', () => listTileStyle = e),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('focusNode'),
             value: useFocusNode,
             onChanged: (v) => onMark('focusNode ${v ? 'on' : 'null'}', () => useFocusNode = v),
@@ -881,7 +881,7 @@ class _ListTilePageState extends State<ListTilePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showSwitch) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('Switch.value'),
               value: switchValue,
               onChanged: (v) => onMark('switch $v', () => switchValue = v),
@@ -918,7 +918,7 @@ class _ListTilePageState extends State<ListTilePage> {
               labelOf: (e) => e == null ? 'null' : '$e',
               onChanged: (e) => onMark('checkbox $e', () => checkboxValue = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('tristate'),
               value: tristate,
               onChanged: (v) => onMark('tristate $v', () {
@@ -928,12 +928,12 @@ class _ListTilePageState extends State<ListTilePage> {
                 }
               }),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('isError'),
               value: isError,
               onChanged: (v) => onMark('isError $v', () => isError = v),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('checkboxScaleFactor'),
@@ -957,20 +957,20 @@ class _ListTilePageState extends State<ListTilePage> {
               labelOf: (e) => e ?? 'null',
               onChanged: (e) => onMark('radio $e', () => radioGroup = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('toggleable'),
               value: toggleable,
               onChanged: (v) => onMark('toggleable $v', () => toggleable = v),
             ),
             if (kind == _TileKind.radioAdaptive || kind == _TileKind.gallery)
-              NSwitchListTile(
+              NSwitchListItem(
                 title: const Text('useCupertinoCheckmarkStyle'),
                 value: useCupertinoCheckmarkStyle,
                 onChanged: (v) => onMark('useCupertinoCheckmarkStyle $v', () => useCupertinoCheckmarkStyle = v),
               ),
           ],
           if (showSlider) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('value'),
@@ -980,12 +980,12 @@ class _ListTilePageState extends State<ListTilePage> {
               onChanged: (v) => onMark('slider ${v.toStringAsFixed(2)}', () => sliderValue = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('showValue'),
               value: showValue,
               onChanged: (v) => onMark('showValue $v', () => showValue = v),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('sliderWidthFactor'),
@@ -997,12 +997,12 @@ class _ListTilePageState extends State<ListTilePage> {
             ),
           ],
           if (kind == _TileKind.cupertino || kind == _TileKind.gallery) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('notched'),
               value: cupertinoNotched,
               onChanged: (v) => onMark('notched $v', () => cupertinoNotched = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('additionalInfo'),
               value: useAdditionalInfo,
               onChanged: (v) => onMark('additionalInfo ${v ? 'on' : 'null'}', () => useAdditionalInfo = v),

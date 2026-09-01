@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/animated_halo.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
@@ -198,7 +198,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('size'),
@@ -208,7 +208,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
             onChanged: (v) => onMark('size ${v.round()}', () => size = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('spacing'),
@@ -227,7 +227,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
               );
             },
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('strokeWidth'),
@@ -246,7 +246,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
               );
             },
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('innerStrokeWidth'),
@@ -265,7 +265,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
               );
             },
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('duration'),

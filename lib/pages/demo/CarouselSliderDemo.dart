@@ -12,8 +12,8 @@ import 'dart:math' as math;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -331,10 +331,10 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
             labelOf: (e) => e.name,
             onChanged: onScrollDirection,
           ),
-          NSwitchListTile(
+          NSwitchListItem(
               title: const Text('useHeight 使用 height（覆盖 aspectRatio）'), value: useHeight, onChanged: onUseHeight),
           if (useHeight)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('height'),
@@ -345,7 +345,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               activeColor: theme.colorScheme.primary,
             )
           else
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('aspectRatio'),
@@ -366,7 +366,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
                 ),
               ),
             ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('viewportFraction'),
@@ -387,7 +387,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               ),
             ),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('initialPage'),
@@ -410,7 +410,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('enlargeCenterPage 中间放大'),
             value: enlargeCenterPage,
             onChanged: (v) => onMark('enlargeCenterPage $v', () => enlargeCenterPage = v),
@@ -424,7 +424,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               labelOf: (e) => e.name,
               onChanged: (e) => onMark('enlargeStrategy ${e.name}', () => enlargeStrategy = e),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('enlargeFactor'),
@@ -454,13 +454,13 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('autoPlay 自动播放'),
             value: autoPlay,
             onChanged: (v) => onMark('autoPlay $v', () => autoPlay = v),
           ),
           if (autoPlay) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('autoPlayInterval'),
@@ -481,7 +481,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
                 ),
               ),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('autoPlayAnim'),
@@ -510,17 +510,17 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               labelOf: (e) => NDecorationCard.nameOfCurve(e),
               onChanged: (e) => onMark('autoPlayCurve ${NDecorationCard.nameOfCurve(e)}', () => autoPlayCurve = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('pauseAutoPlayOnTouch 触摸暂停'),
               value: pauseAutoPlayOnTouch,
               onChanged: (v) => onMark('pauseAutoPlayOnTouch $v', () => pauseAutoPlayOnTouch = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('pauseAutoPlayOnManualNavigate 手动切换暂停'),
               value: pauseAutoPlayOnManualNavigate,
               onChanged: (v) => onMark('pauseAutoPlayOnManualNavigate $v', () => pauseAutoPlayOnManualNavigate = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('pauseAutoPlayInFiniteScroll 有限滚动到底暂停'),
               value: pauseAutoPlayInFiniteScroll,
               onChanged: (v) => onMark('pauseAutoPlayInFiniteScroll $v', () => pauseAutoPlayInFiniteScroll = v),
@@ -546,32 +546,32 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('scrollPhysics ${e.label}', () => physicsKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
               title: const Text('enableInfiniteScroll 无限循环'),
               value: enableInfiniteScroll,
               onChanged: onEnableInfiniteScroll),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('animateToClosest 滚到最近页'),
             value: animateToClosest,
             onChanged: (v) => onMark('animateToClosest $v', () => animateToClosest = v),
           ),
-          NSwitchListTile(title: const Text('reverse 反向'), value: reverse, onChanged: onReverse),
-          NSwitchListTile(
+          NSwitchListItem(title: const Text('reverse 反向'), value: reverse, onChanged: onReverse),
+          NSwitchListItem(
             title: const Text('pageSnapping 整页吸附'),
             value: pageSnapping,
             onChanged: (v) => onMark('pageSnapping $v', () => pageSnapping = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('disableCenter 取消居中'),
             value: disableCenter,
             onChanged: (v) => onMark('disableCenter $v', () => disableCenter = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('padEnds 两端留白'),
             value: padEnds,
             onChanged: (v) => onMark('padEnds $v', () => padEnds = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('disableGesture 禁用手势'),
             value: disableGesture,
             onChanged: (v) => onMark('disableGesture $v', () => disableGesture = v),

@@ -9,7 +9,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -278,7 +278,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
             ),
           ),
           ..._ListenKind.values.map((e) {
-            return NSwitchListTile(
+            return NSwitchListItem(
               title: Text('${e.label}  ${e.callback}'),
               value: listen[e] ?? true,
               onChanged: (v) => onListen(e, v),

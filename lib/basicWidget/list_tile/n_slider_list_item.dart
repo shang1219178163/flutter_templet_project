@@ -1,5 +1,5 @@
 //
-//  NSliderListTile.dart
+//  NSliderListItem.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2026/8/31.
@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 /// 类似 [SwitchListTile]，用 [Slider] 代替 [Switch]。
 ///
 /// 标题、副标题与 [Slider] 同一行；滑条宽度为组件整宽的 [sliderWidthFactor]。
-class NSliderListTile extends StatelessWidget {
-  const NSliderListTile({
+class NSliderListItem extends StatelessWidget {
+  const NSliderListItem({
     super.key,
     required this.value,
     required this.onChanged,

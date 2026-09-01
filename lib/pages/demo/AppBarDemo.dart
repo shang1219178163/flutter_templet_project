@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -360,12 +360,12 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             onChanged: (e) => onMark('leading ${e.label}', () => leadingKind = e),
           ),
           if (leadingKind == _LeadingKind.imply)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('automaticallyImplyLeading'),
               value: automaticallyImplyLeading,
               onChanged: (v) => onMark('automaticallyImplyLeading $v', () => automaticallyImplyLeading = v),
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('title 显示标题'),
             value: useTitle,
             onChanged: (v) => onMark('title ${v ? 'on' : 'null'}', () => useTitle = v),
@@ -394,7 +394,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('bottom ${e.label}', () => bottomKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('primary 预留状态栏'),
             value: primary,
             onChanged: (v) => onMark('primary $v', () => primary = v),
@@ -407,12 +407,12 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             labelOf: (e) => e == null ? '默' : '$e',
             onChanged: (e) => onMark('centerTitle ${e ?? 'null'}', () => centerTitle = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('excludeHeaderSemantics'),
             value: excludeHeaderSemantics,
             onChanged: (v) => onMark('excludeHeaderSemantics $v', () => excludeHeaderSemantics = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('forceMaterialTransparency'),
             value: forceMaterialTransparency,
             onChanged: (v) => onMark('forceMaterialTransparency $v', () => forceMaterialTransparency = v),
@@ -475,7 +475,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             }),
           ),
           if (shapeKind == ShapeKind.rounded)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('shapeRadius'),
@@ -501,13 +501,13 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('systemOverlayStyle ${e.label}', () => overlayKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('elevation 指定高度'),
             value: useElevation,
             onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
           ),
           if (useElevation)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('elevation'),
@@ -517,13 +517,13 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               onChanged: (v) => onMark('elevation ${v.toStringAsFixed(0)}', () => elevation = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('scrolledUnderElevation 指定高度'),
             value: useScrolledUnder,
             onChanged: (v) => onMark('scrolledUnderElevation ${v ? 'on' : 'null'}', () => useScrolledUnder = v),
           ),
           if (useScrolledUnder)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('scrolledUnder'),
@@ -533,7 +533,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               onChanged: (v) => onMark('scrolledUnder ${v.toStringAsFixed(0)}', () => scrolledUnderElevation = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('iconTheme 自定义'),
             value: useIconTheme,
             onChanged: (v) => onMark('iconTheme ${v ? 'on' : 'null'}', () => useIconTheme = v),
@@ -545,7 +545,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               value: iconColor,
               onChanged: (e) => onMark('iconTheme.color ${e ?? 'null'}', () => iconColor = e),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('iconTheme.size'),
@@ -557,7 +557,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             ),
           ],
           if (actionsKind == _ActionsKind.pair)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('actionsIconTheme 自定义'),
               value: useActionsIconTheme,
               onChanged: (v) => onMark('actionsIconTheme ${v ? 'on' : 'null'}', () => useActionsIconTheme = v),
@@ -569,7 +569,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               value: actionsIconColor,
               onChanged: (e) => onMark('actionsIconTheme.color ${e ?? 'null'}', () => actionsIconColor = e),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('actionsIcon.size'),
@@ -580,13 +580,13 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               activeColor: theme.colorScheme.primary,
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('toolbarTextStyle 自定义'),
             value: useToolbarTextStyle,
             onChanged: (v) => onMark('toolbarTextStyle ${v ? 'on' : 'null'}', () => useToolbarTextStyle = v),
           ),
           if (useToolbarTextStyle)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('toolbarFontSize'),
@@ -596,13 +596,13 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               onChanged: (v) => onMark('toolbarFontSize ${v.toStringAsFixed(0)}', () => toolbarFontSize = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('titleTextStyle 自定义'),
             value: useTitleTextStyle,
             onChanged: (v) => onMark('titleTextStyle ${v ? 'on' : 'null'}', () => useTitleTextStyle = v),
           ),
           if (useTitleTextStyle)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('titleFontSize'),
@@ -625,13 +625,13 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('toolbarHeight 指定高度'),
             value: useToolbarHeight,
             onChanged: (v) => onMark('toolbarHeight ${v ? 'on' : 'null'}', () => useToolbarHeight = v),
           ),
           if (useToolbarHeight)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('toolbarHeight'),
@@ -641,13 +641,13 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               onChanged: (v) => onMark('toolbarHeight ${v.toStringAsFixed(0)}', () => toolbarHeight = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('leadingWidth 指定宽度'),
             value: useLeadingWidth,
             onChanged: (v) => onMark('leadingWidth ${v ? 'on' : 'null'}', () => useLeadingWidth = v),
           ),
           if (useLeadingWidth)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('leadingWidth'),
@@ -657,13 +657,13 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               onChanged: (v) => onMark('leadingWidth ${v.toStringAsFixed(0)}', () => leadingWidth = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('titleSpacing 指定间距'),
             value: useTitleSpacing,
             onChanged: (v) => onMark('titleSpacing ${v ? 'on' : 'null'}', () => useTitleSpacing = v),
           ),
           if (useTitleSpacing)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('titleSpacing'),
@@ -673,7 +673,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
               onChanged: (v) => onMark('titleSpacing ${v.toStringAsFixed(0)}', () => titleSpacing = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('toolbarOpacity'),
@@ -693,7 +693,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             },
           ),
           if (bottomKind == _BottomKind.tabBar)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('bottomOpacity'),

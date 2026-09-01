@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -293,11 +293,11 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
             labelOf: (e) => e.$1,
             onChanged: (e) => onMark('trigger ${e.$1}', () => trigger = e.$2),
           ),
-          NSwitchListTile(title: const Text('control'), value: control, onChanged: (v) => onMark('control $v', () => control = v)),
-          NSwitchListTile(title: const Text('shift'), value: shift, onChanged: (v) => onMark('shift $v', () => shift = v)),
-          NSwitchListTile(title: const Text('alt'), value: alt, onChanged: (v) => onMark('alt $v', () => alt = v)),
-          NSwitchListTile(title: const Text('meta'), value: meta, onChanged: (v) => onMark('meta $v', () => meta = v)),
-          NSwitchListTile(title: const Text('includeRepeats'), value: includeRepeats, onChanged: (v) => onMark('includeRepeats $v', () => includeRepeats = v)),
+          NSwitchListItem(title: const Text('control'), value: control, onChanged: (v) => onMark('control $v', () => control = v)),
+          NSwitchListItem(title: const Text('shift'), value: shift, onChanged: (v) => onMark('shift $v', () => shift = v)),
+          NSwitchListItem(title: const Text('alt'), value: alt, onChanged: (v) => onMark('alt $v', () => alt = v)),
+          NSwitchListItem(title: const Text('meta'), value: meta, onChanged: (v) => onMark('meta $v', () => meta = v)),
+          NSwitchListItem(title: const Text('includeRepeats'), value: includeRepeats, onChanged: (v) => onMark('includeRepeats $v', () => includeRepeats = v)),
         ],
       ),
     );

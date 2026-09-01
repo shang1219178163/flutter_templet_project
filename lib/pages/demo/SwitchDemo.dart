@@ -3,8 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize.dart';
@@ -346,12 +346,12 @@ class _SwitchDemoState extends State<SwitchDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('kind ${e.label}', () => kind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('value'),
             value: value,
             onChanged: onValue,
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onChanged'),
             value: useOnChanged,
             onChanged: (v) => onMark('onChanged ${v ? 'on' : 'null'}', () => useOnChanged = v),
@@ -363,7 +363,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('thumbIcon ${e.label}', () => thumbIconKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('thumbImage'),
             value: useThumbImage,
             onChanged: (v) => onMark('thumbImage ${v ? 'on' : 'null'}', () => useThumbImage = v),
@@ -389,13 +389,13 @@ class _SwitchDemoState extends State<SwitchDemo> {
             labelOf: nameOfMouse,
             onChanged: (e) => onMark('mouseCursor ${nameOfMouse(e)}', () => mouseCursor = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('padding'),
             value: usePadding,
             onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding'),
@@ -405,17 +405,17 @@ class _SwitchDemoState extends State<SwitchDemo> {
               onChanged: (v) => onMark('padding ${v.round()}', () => paddingAll = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('focusNode'),
             value: useFocusNode,
             onChanged: (v) => onMark('focusNode ${v ? 'on' : 'null'}', () => useFocusNode = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onFocusChange'),
             value: useOnFocusChange,
             onChanged: (v) => onMark('onFocusChange ${v ? 'on' : 'null'}', () => useOnFocusChange = v),
@@ -491,13 +491,13 @@ class _SwitchDemoState extends State<SwitchDemo> {
             value: overlayColor,
             onChanged: (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('splashRadius'),
             value: useSplashRadius,
             onChanged: (v) => onMark('splashRadius ${v ? 'on' : 'null'}', () => useSplashRadius = v),
           ),
           if (useSplashRadius)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('splashRadius'),
@@ -507,13 +507,13 @@ class _SwitchDemoState extends State<SwitchDemo> {
               onChanged: (v) => onMark('splashRadius ${v.round()}', () => splashRadius = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('trackOutlineWidth'),
             value: useTrackOutlineWidth,
             onChanged: (v) => onMark('trackOutlineWidth ${v ? 'on' : 'null'}', () => useTrackOutlineWidth = v),
           ),
           if (useTrackOutlineWidth)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('trackOutlineWidth'),

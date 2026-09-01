@@ -58,6 +58,9 @@ class AppColor {
   /// 错误/危险
   static const Color error = Color(0xFFD32F2F);
 
+  /// 反色, isDark ? Colors.white : Colors.black;
+  static Color get inverseColor => isDark ? Colors.white : Colors.black;
+
   /// 当前页面底色
   static Color get background => isDark ? backgroundDark : backgroundLight;
 

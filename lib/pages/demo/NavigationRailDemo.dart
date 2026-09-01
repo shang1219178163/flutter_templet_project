@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -269,7 +269,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('destinations'),
@@ -284,9 +284,9 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             }),
             activeColor: theme.colorScheme.primary,
           ),
-          NSwitchListTile(title: const Text('selectedIndex'), value: useSelected, onChanged: (v) => onMark('selectedIndex ${v ? 'on' : 'null'}', () => useSelected = v)),
+          NSwitchListItem(title: const Text('selectedIndex'), value: useSelected, onChanged: (v) => onMark('selectedIndex ${v ? 'on' : 'null'}', () => useSelected = v)),
           if (useSelected)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('selectedIndex'),
@@ -296,10 +296,10 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
               onChanged: (v) => onSelected(v.round()),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(title: const Text('onDestinationSelected'), value: useOnSelected, onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v)),
-          NSwitchListTile(title: const Text('extended'), value: extended, onChanged: onExtended),
-          NSwitchListTile(title: const Text('leading'), value: useLeading, onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v)),
-          NSwitchListTile(title: const Text('trailing'), value: useTrailing, onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v)),
+          NSwitchListItem(title: const Text('onDestinationSelected'), value: useOnSelected, onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v)),
+          NSwitchListItem(title: const Text('extended'), value: extended, onChanged: onExtended),
+          NSwitchListItem(title: const Text('leading'), value: useLeading, onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v)),
+          NSwitchListItem(title: const Text('trailing'), value: useTrailing, onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v)),
           NChoiceChipListItem<NavigationRailLabelType?>(
             title: const Text('labelType'),
             values: [null, ...NavigationRailLabelType.values],
@@ -307,9 +307,9 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             labelOf: (e) => e?.name ?? '默',
             onChanged: onLabelType,
           ),
-          NSwitchListTile(title: const Text('groupAlignment'), value: useGroupAlignment, onChanged: (v) => onMark('groupAlignment ${v ? 'on' : 'null'}', () => useGroupAlignment = v)),
+          NSwitchListItem(title: const Text('groupAlignment'), value: useGroupAlignment, onChanged: (v) => onMark('groupAlignment ${v ? 'on' : 'null'}', () => useGroupAlignment = v)),
           if (useGroupAlignment)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('groupAlignment'),
@@ -338,9 +338,9 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             value: backgroundColor,
             onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
           ),
-          NSwitchListTile(title: const Text('elevation'), value: useElevation, onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v)),
+          NSwitchListItem(title: const Text('elevation'), value: useElevation, onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v)),
           if (useElevation)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('elevation'),
@@ -350,9 +350,9 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
               onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(title: const Text('minWidth'), value: useMinWidth, onChanged: (v) => onMark('minWidth ${v ? 'on' : 'null'}', () => useMinWidth = v)),
+          NSwitchListItem(title: const Text('minWidth'), value: useMinWidth, onChanged: (v) => onMark('minWidth ${v ? 'on' : 'null'}', () => useMinWidth = v)),
           if (useMinWidth)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('minWidth'),
@@ -362,9 +362,9 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
               onChanged: onMinWidth,
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(title: const Text('minExtendedWidth'), value: useMinExtendedWidth, onChanged: (v) => onMark('minExtendedWidth ${v ? 'on' : 'null'}', () => useMinExtendedWidth = v)),
+          NSwitchListItem(title: const Text('minExtendedWidth'), value: useMinExtendedWidth, onChanged: (v) => onMark('minExtendedWidth ${v ? 'on' : 'null'}', () => useMinExtendedWidth = v)),
           if (useMinExtendedWidth)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('minExtendedWidth'),
@@ -399,7 +399,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             }),
           ),
           if (shapeKind == ShapeKind.rounded)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('shapeRadius'),
@@ -429,9 +429,9 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             value: unselectedIconColor,
             onChanged: (v) => onMark('unselectedIconTheme ${v ?? 'null'}', () => unselectedIconColor = v),
           ),
-          NSwitchListTile(title: const Text('iconTheme.size'), value: useIconSize, onChanged: (v) => onMark('iconTheme.size ${v ? 'on' : 'null'}', () => useIconSize = v)),
+          NSwitchListItem(title: const Text('iconTheme.size'), value: useIconSize, onChanged: (v) => onMark('iconTheme.size ${v ? 'on' : 'null'}', () => useIconSize = v)),
           if (useIconSize)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('iconSize'),

@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
 
 class GradientPlaygroundPage extends StatefulWidget {
   const GradientPlaygroundPage({super.key});
@@ -170,7 +170,7 @@ class _GradientPlaygroundPageState extends State<GradientPlaygroundPage> {
     required double value,
     required ValueChanged<double> onChanged,
   }) {
-    return NSliderListTile(
+    return NSliderListItem(
       dense: true,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       title: Text(label),

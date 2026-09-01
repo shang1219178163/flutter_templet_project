@@ -10,8 +10,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_blur_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
@@ -282,7 +282,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
               }),
             ),
             if (shapeKind == ShapeKind.rounded)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('radius'),
@@ -309,7 +309,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('blur'),
@@ -341,13 +341,13 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('backdropFilter'),
             value: useBackdropFilter,
             onChanged: (v) => onMark('backdropFilter $v', () => useBackdropFilter = v),
           ),
           if (useBackdropFilter) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('enabled'),
               value: filterEnabled,
               onChanged: (v) => onMark('enabled $v', () => filterEnabled = v),

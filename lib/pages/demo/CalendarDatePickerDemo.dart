@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -371,7 +371,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
               bumpPicker();
             }),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('firstDate.year'),
@@ -385,7 +385,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
             }),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('firstDate.month'),
@@ -399,7 +399,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
             }),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('lastDate.year'),
@@ -413,7 +413,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
             }),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('lastDate.month'),

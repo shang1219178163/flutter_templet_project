@@ -11,8 +11,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -390,7 +390,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('child 显示按钮'),
             value: useChild,
             onChanged: (v) => onMark('useChild $v', () => useChild = v),
@@ -402,7 +402,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             labelOf: (e) => e.toString().split('.').last,
             onChanged: (e) => onMark('alignment $e', () => alignment = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('decoration 代替 color'),
             value: useDecoration,
             onChanged: (v) => onMark('useDecoration $v', () => useDecoration = v),
@@ -416,7 +416,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
               onChanged: (e) => onMark('shapeKind ${e.label}', () => shapeKind = e),
             ),
             if (shapeKind == ShapeKind.rounded)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('shapeRadius'),
@@ -432,7 +432,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             value: color,
             onChanged: (e) => onMark('color ${e ?? 'null'}', () => color = e),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('width'),
@@ -442,7 +442,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             onChanged: (v) => onMark('width ${v.round()}', () => width = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('height'),
@@ -452,13 +452,13 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             onChanged: (v) => onMark('height ${v.round()}', () => height = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('padding 指定内边距'),
             value: usePadding,
             onChanged: (v) => onMark('usePadding $v', () => usePadding = v),
           ),
           if (usePadding) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding H'),
@@ -468,7 +468,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
               onChanged: (v) => onMark('padH ${v.round()}', () => padH = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding V'),
@@ -479,13 +479,13 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
               activeColor: theme.colorScheme.primary,
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('margin 指定外边距'),
             value: useMargin,
             onChanged: (v) => onMark('useMargin $v', () => useMargin = v),
           ),
           if (useMargin) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('margin H'),
@@ -495,7 +495,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
               onChanged: (v) => onMark('marginH ${v.round()}', () => marginH = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('margin V'),
@@ -526,7 +526,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('foregroundDecoration'),
             value: useForeground,
             onChanged: (v) => onMark('useForeground $v', () => useForeground = v),
@@ -538,13 +538,13 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
               onChanged: (e) => onMark('foregroundColor ${e ?? 'null'}', () => foregroundColor = e),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('transform 旋转'),
             value: useTransform,
             onChanged: (v) => onMark('useTransform $v', () => useTransform = v),
           ),
           if (useTransform) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('rotateDeg'),
@@ -562,7 +562,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
               onChanged: (e) => onMark('transformAlignment $e', () => transformAlignment = e),
             ),
           ],
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('duration'),

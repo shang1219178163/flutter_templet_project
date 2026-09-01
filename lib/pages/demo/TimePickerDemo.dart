@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -186,7 +186,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('initialTime.hour'),
@@ -196,7 +196,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
             onChanged: (v) => onMark('hour ${v.round()}', () => hour = v.round()),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('initialTime.minute'),
@@ -220,7 +220,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
             labelOf: (e) => e?.name ?? '默',
             onChanged: (e) => onMark('orientation ${e?.name ?? 'null'}', () => orientation = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('barrierDismissible'),
             value: barrierDismissible,
             onChanged: (v) => onMark('barrierDismissible $v', () => barrierDismissible = v),
@@ -231,38 +231,38 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
             value: barrierColor,
             onChanged: (v) => onMark('barrierColor ${v ?? 'null'}', () => barrierColor = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('barrierLabel'),
             value: useBarrierLabel,
             onChanged: (v) => onMark('barrierLabel ${v ? 'dismiss' : 'null'}', () => useBarrierLabel = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('useRootNavigator'),
             value: useRootNavigator,
             onChanged: (v) => onMark('useRootNavigator $v', () => useRootNavigator = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('builder 24h'),
             value: use24Hour,
             onChanged: (v) => onMark('builder ${v ? '24h' : 'null'}', () => use24Hour = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onEntryModeChanged'),
             value: useOnEntryModeChanged,
             onChanged: (v) => onMark('onEntryModeChanged ${v ? 'on' : 'null'}', () => useOnEntryModeChanged = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('routeSettings'),
             value: useRouteSettings,
             onChanged: (v) => onMark('routeSettings ${v ? 'on' : 'null'}', () => useRouteSettings = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('anchorPoint'),
             value: useAnchorPoint,
             onChanged: (v) => onMark('anchorPoint ${v ? 'on' : 'null'}', () => useAnchorPoint = v),
           ),
           if (useAnchorPoint) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('anchorPoint.dx'),
@@ -272,7 +272,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
               onChanged: (v) => onMark('anchorPoint.dx ${v.round()}', () => anchorX = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('anchorPoint.dy'),
@@ -283,32 +283,32 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
               activeColor: theme.colorScheme.primary,
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('cancelText'),
             value: useCancelText,
             onChanged: (v) => onMark('cancelText ${v ? '取消' : 'null'}', () => useCancelText = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('confirmText'),
             value: useConfirmText,
             onChanged: (v) => onMark('confirmText ${v ? '确定' : 'null'}', () => useConfirmText = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('helpText'),
             value: useHelpText,
             onChanged: (v) => onMark('helpText ${v ? '选择时间' : 'null'}', () => useHelpText = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('errorInvalidText'),
             value: useErrorInvalidText,
             onChanged: (v) => onMark('errorInvalidText ${v ? '无效时间' : 'null'}', () => useErrorInvalidText = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('hourLabelText'),
             value: useHourLabelText,
             onChanged: (v) => onMark('hourLabelText ${v ? '时' : 'null'}', () => useHourLabelText = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('minuteLabelText'),
             value: useMinuteLabelText,
             onChanged: (v) => onMark('minuteLabelText ${v ? '分' : 'null'}', () => useMinuteLabelText = v),

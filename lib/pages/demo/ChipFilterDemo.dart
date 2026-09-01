@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -426,7 +426,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('constructor ${e.label}', () => kind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('avatar'),
             value: useAvatar,
             onChanged: (v) => onMark('avatar ${v ? 'on' : 'null'}', () => useAvatar = v),
@@ -441,7 +441,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (e) => onMark('avatarBorder ${e == ShapeKind.none ? 'circle' : e.name}', () => avatarBorderKind = e),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onDeleted'),
             value: useDelete,
             onChanged: (v) => onMark('onDeleted ${v ? 'on' : 'null'}', () => useDelete = v),
@@ -454,12 +454,12 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (e) => onMark('deleteIconColor ${e ?? 'null'}', () => deleteIconColor = e),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('tooltip'),
             value: useTooltip,
             onChanged: (v) => onMark('tooltip ${v ? 'on' : 'null'}', () => useTooltip = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onSelected'),
             value: enabled,
             onChanged: (v) => onMark('onSelected ${v ? 'on' : 'null'}', () => enabled = v),
@@ -478,18 +478,18 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
             value: checkmarkColor,
             onChanged: (e) => onMark('checkmarkColor ${e ?? 'null'}', () => checkmarkColor = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('chipAnimationStyle'),
             value: useAnimationStyle,
             onChanged: (v) => onMark('chipAnimationStyle ${v ? 'on' : 'null'}', () => useAnimationStyle = v),
           ),
           if (useAnimationStyle)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('animation.duration'),
@@ -575,7 +575,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
             onChanged: (e) => onMark('shape ${e.label}', () => shapeKind = e),
           ),
           if (shapeKind == ShapeKind.rounded)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('shape.radius'),
@@ -585,7 +585,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (v) => onMark('shape.radius ${v.toStringAsFixed(1)}', () => shapeRadius = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('side'),
             value: useSide,
             onChanged: (v) => onMark('side ${v ? 'on' : 'null'}', () => useSide = v),
@@ -597,7 +597,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               value: sideColor,
               onChanged: (e) => onMark('side.color ${e ?? 'null'}', () => sideColor = e),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('side.width'),
@@ -629,13 +629,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('padding'),
             value: usePadding,
             onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding'),
@@ -645,13 +645,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (v) => onMark('padding ${v.toStringAsFixed(1)}', () => padding = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('labelPadding'),
             value: useLabelPadding,
             onChanged: (v) => onMark('labelPadding ${v ? 'on' : 'null'}', () => useLabelPadding = v),
           ),
           if (useLabelPadding)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('labelPadding'),
@@ -661,13 +661,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (v) => onMark('labelPadding ${v.toStringAsFixed(1)}', () => labelPadding = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('labelStyle'),
             value: useLabelStyle,
             onChanged: (v) => onMark('labelStyle ${v ? 'on' : 'null'}', () => useLabelStyle = v),
           ),
           if (useLabelStyle) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('labelStyle.fontSize'),
@@ -684,13 +684,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (e) => onMark('labelStyle.color ${e ?? 'null'}', () => labelColor = e),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('elevation'),
             value: useElevation,
             onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
           ),
           if (useElevation)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('elevation'),
@@ -700,13 +700,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('pressElevation'),
             value: usePressElevation,
             onChanged: (v) => onMark('pressElevation ${v ? 'on' : 'null'}', () => usePressElevation = v),
           ),
           if (usePressElevation)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('pressElevation'),
@@ -741,13 +741,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
             labelOf: (e) => e?.name ?? '默',
             onChanged: (e) => onMark('materialTapTargetSize ${e?.name ?? 'null'}', () => materialTapTargetSize = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('avatarBoxConstraints'),
             value: useAvatarConstraints,
             onChanged: (v) => onMark('avatarBoxConstraints ${v ? 'on' : 'null'}', () => useAvatarConstraints = v),
           ),
           if (useAvatarConstraints)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('avatarBoxConstraints'),
@@ -757,13 +757,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (v) => onMark('avatarBoxConstraints ${v.toStringAsFixed(1)}', () => avatarConstraint = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('deleteIconBoxConstraints'),
             value: useDeleteConstraints,
             onChanged: (v) => onMark('deleteIconBoxConstraints ${v ? 'on' : 'null'}', () => useDeleteConstraints = v),
           ),
           if (useDeleteConstraints)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('deleteIconBoxConstraints'),
@@ -773,13 +773,13 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               onChanged: (v) => onMark('deleteIconBoxConstraints ${v.toStringAsFixed(1)}', () => deleteConstraint = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('iconTheme'),
             value: useIconTheme,
             onChanged: (v) => onMark('iconTheme ${v ? 'on' : 'null'}', () => useIconTheme = v),
           ),
           if (useIconTheme) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('iconTheme.size'),

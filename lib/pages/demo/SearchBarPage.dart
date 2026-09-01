@@ -10,8 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -668,28 +668,28 @@ class _SearchBarPageState extends State<SearchBarPage> {
               labelOf: (e) => e == null ? '默' : '$e',
               onChanged: (e) => onMark('isFullScreen ${e ?? 'null'}', () => isFullScreen = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('viewBuilder'),
               value: useViewBuilder,
               onChanged: (v) => onMark('viewBuilder ${v ? 'on' : 'null'}', () => useViewBuilder = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('viewLeading'),
               value: useViewLeading,
               onChanged: (v) => onMark('viewLeading ${v ? 'on' : 'null'}', () => useViewLeading = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('viewTrailing'),
               value: useViewTrailing,
               onChanged: (v) => onMark('viewTrailing ${v ? 'on' : 'null'}', () => useViewTrailing = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('viewConstraints'),
               value: useViewConstraints,
               onChanged: (v) => onMark('viewConstraints ${v ? 'on' : 'null'}', () => useViewConstraints = v),
             ),
             if (useViewConstraints)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('viewMaxHeight'),
@@ -699,13 +699,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 onChanged: (v) => onMark('viewMaxHeight ${v.round()}', () => viewMaxHeight = v),
                 activeColor: theme.colorScheme.primary,
               ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('headerHeight'),
               value: useHeaderHeight,
               onChanged: (v) => onMark('headerHeight ${v ? 'on' : 'null'}', () => useHeaderHeight = v),
             ),
             if (useHeaderHeight)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('headerHeight'),
@@ -717,61 +717,61 @@ class _SearchBarPageState extends State<SearchBarPage> {
               ),
           ],
           if (isSearchBar || isCupertino) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('controller'),
               value: useController,
               onChanged: (v) => onMark('controller ${v ? 'on' : 'null'}', () => useController = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('focusNode'),
               value: useFocusNode,
               onChanged: (v) => onMark('focusNode ${v ? 'on' : 'null'}', () => useFocusNode = v),
             ),
           ],
           if (isSearchBar || isAnchorBar) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('leading'),
               value: useLeading,
               onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('trailing'),
               value: useTrailing,
               onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v),
             ),
           ],
           if (!isShowSearch) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('onChanged'),
               value: useOnChanged,
               onChanged: (v) => onMark('onChanged ${v ? 'on' : 'null'}', () => useOnChanged = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('onSubmitted'),
               value: useOnSubmitted,
               onChanged: (v) => onMark('onSubmitted ${v ? 'on' : 'null'}', () => useOnSubmitted = v),
             ),
           ],
           if (isSearchBar || isAnchorBar || isCupertino)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('onTap'),
               value: useOnTap,
               onChanged: (v) => onMark('onTap ${v ? 'on' : 'null'}', () => useOnTap = v),
             ),
           if (isSearchBar)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('onTapOutside'),
               value: useOnTapOutside,
               onChanged: (v) => onMark('onTapOutside ${v ? 'on' : 'null'}', () => useOnTapOutside = v),
             ),
           if (isSearchBar || isAnchor)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('enabled'),
               value: enabled,
               onChanged: (v) => onMark('enabled $v', () => enabled = v),
             ),
           if (isSearchBar || isCupertino)
-            NSwitchListTile(
+            NSwitchListItem(
               title: Text(isCupertino ? 'autofocus' : 'autoFocus'),
               value: autoFocus,
               onChanged: (v) => onMark('autoFocus $v', () => autoFocus = v),
@@ -817,7 +817,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
             onChanged: (e) => onMark('keyboardType ${nameOfKeyboard(e)}', () => keyboardType = e),
           ),
           if (isSearchBar || isAnchorBar) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('scrollPadding'),
@@ -827,7 +827,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (v) => onMark('scrollPadding ${v.round()}', () => scrollPaddingAll = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('contextMenuBuilder'),
               value: useContextMenuBuilder,
               onChanged: (v) => onMark('contextMenuBuilder ${v ? 'on' : 'off'}', () => useContextMenuBuilder = v),
@@ -841,22 +841,22 @@ class _SearchBarPageState extends State<SearchBarPage> {
               labelOf: (e) => e.name,
               onChanged: (e) => onMark('suffixMode ${e.name}', () => suffixMode = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('onSuffixTap'),
               value: useOnSuffixTap,
               onChanged: (v) => onMark('onSuffixTap ${v ? 'on' : 'null'}', () => useOnSuffixTap = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('prefixIcon'),
               value: usePrefixIcon,
               onChanged: (v) => onMark('prefixIcon ${v ? 'Icons.search' : 'default'}', () => usePrefixIcon = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('suffixIcon'),
               value: useSuffixIcon,
               onChanged: (v) => onMark('suffixIcon ${v ? 'Icons.cancel' : 'default'}', () => useSuffixIcon = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('restorationId'),
               value: useRestorationId,
               onChanged: (v) => onMark('restorationId ${v ? 'on' : 'null'}', () => useRestorationId = v),
@@ -875,12 +875,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
               labelOf: (e) => e?.name ?? '默',
               onChanged: (e) => onMark('smartDashesType ${e?.name ?? 'null'}', () => smartDashesType = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('enableIMEPersonalizedLearning'),
               value: enableIMEPersonalizedLearning,
               onChanged: (v) => onMark('enableIMEPersonalizedLearning $v', () => enableIMEPersonalizedLearning = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('autocorrect'),
               value: autocorrect,
               onChanged: (v) => onMark('autocorrect $v', () => autocorrect = v),
@@ -892,7 +892,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
               labelOf: (e) => e == null ? '默' : '$e',
               onChanged: (e) => onMark('enabled ${e ?? 'null'}', () => cupertinoEnabled = e),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('prefixInsets'),
@@ -902,7 +902,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (v) => onMark('prefixInsets ${v.round()}', () => prefixStart = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('suffixInsets'),
@@ -912,7 +912,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (v) => onMark('suffixInsets ${v.round()}', () => suffixEnd = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding'),
@@ -931,12 +931,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
               labelOf: (e) => e.isEmpty ? "''" : e,
               onChanged: (e) => onMark('query $e', () => query = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('useRootNavigator'),
               value: useRootNavigator,
               onChanged: (v) => onMark('useRootNavigator $v', () => useRootNavigator = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('maintainState'),
               value: maintainState,
               onChanged: (v) => onMark('maintainState $v', () => maintainState = v),
@@ -950,12 +950,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
               labelOf: (e) => e.label,
               onChanged: (e) => onMark('searchFieldLook ${e.label}', () => searchFieldLook = e),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('autocorrect'),
               value: autocorrect,
               onChanged: (v) => onMark('autocorrect $v', () => autocorrect = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('enableSuggestions'),
               value: enableSuggestions,
               onChanged: (v) => onMark('enableSuggestions $v', () => enableSuggestions = v),
@@ -975,13 +975,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showBarSurface) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('elevation'),
               value: useElevation,
               onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
             ),
             if (useElevation)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('elevation'),
@@ -991,13 +991,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
                 activeColor: theme.colorScheme.primary,
               ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('constraints'),
               value: useConstraints,
               onChanged: (v) => onMark('constraints ${v ? 'on' : 'null'}', () => useConstraints = v),
             ),
             if (useConstraints) ...[
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('minHeight'),
@@ -1007,7 +1007,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 onChanged: (v) => onMark('minHeight ${v.round()}', () => minHeight = v),
                 activeColor: theme.colorScheme.primary,
               ),
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('maxWidth'),
@@ -1018,13 +1018,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 activeColor: theme.colorScheme.primary,
               ),
             ],
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('padding'),
               value: usePadding,
               onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
             ),
             if (usePadding) ...[
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('paddingH'),
@@ -1034,7 +1034,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 onChanged: (v) => onMark('paddingH ${v.round()}', () => paddingH = v),
                 activeColor: theme.colorScheme.primary,
               ),
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('paddingV'),
@@ -1053,7 +1053,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (e) => onMark('shape ${e.label}', () => shapeKind = e),
             ),
             if (shapeKind == ShapeKind.rounded)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('shapeRadius'),
@@ -1063,13 +1063,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
                 activeColor: theme.colorScheme.primary,
               ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('side'),
               value: useSide,
               onChanged: (v) => onMark('side ${v ? 'on' : 'null'}', () => useSide = v),
             ),
             if (useSide) ...[
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('sideWidth'),
@@ -1115,13 +1115,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
             ),
           ],
           if (isAnchor || isAnchorBar) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('viewElevation'),
               value: useViewElevation,
               onChanged: (v) => onMark('viewElevation ${v ? 'on' : 'null'}', () => useViewElevation = v),
             ),
             if (useViewElevation)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('viewElevation'),
@@ -1155,7 +1155,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (e) => onMark('viewShape ${e.label}', () => viewShapeKind = e),
             ),
             if (viewShapeKind == ShapeKind.rounded)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('viewShapeRadius'),
@@ -1165,19 +1165,19 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 onChanged: (v) => onMark('viewShapeRadius ${v.round()}', () => viewShapeRadius = v),
                 activeColor: theme.colorScheme.primary,
               ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('viewSide'),
               value: useViewSide,
               onChanged: (v) => onMark('viewSide ${v ? 'on' : 'null'}', () => useViewSide = v),
             ),
           ],
           if (isCupertino) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('decoration'),
               value: useDecoration,
               onChanged: (v) => onMark('decoration ${v ? 'on' : 'null'}', () => useDecoration = v),
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('borderRadius'),
@@ -1187,7 +1187,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('itemSize'),
@@ -1360,13 +1360,13 @@ class _SearchBarPageState extends State<SearchBarPage> {
     required String hintColorLabel,
   }) {
     return [
-      NSwitchListTile(
+      NSwitchListItem(
         title: Text(styleTitle),
         value: useTextStyle,
         onChanged: (v) => onMark('$styleTitle ${v ? 'on' : 'null'}', () => useTextStyle = v),
       ),
       if (useTextStyle) ...[
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('fontSize'),
@@ -1382,7 +1382,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
           onChanged: (v) => onMark('$colorLabel ${v ?? 'null'}', () => textStyleColor = v),
         ),
       ],
-      NSwitchListTile(
+      NSwitchListItem(
         title: Text(hintTitle),
         value: useHintStyle,
         onChanged: (v) => onMark('$hintTitle ${v ? 'on' : 'null'}', () => useHintStyle = v),

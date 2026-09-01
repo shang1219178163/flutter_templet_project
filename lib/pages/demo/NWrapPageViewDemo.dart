@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_wrap_page_view.dart';
@@ -198,7 +198,7 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('items'),
@@ -208,7 +208,7 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
             onChanged: (v) => onMark('items ${v.round()}', () => itemCount = v.round()),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('crossAxisCount'),
@@ -218,7 +218,7 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
             onChanged: (v) => onMark('crossAxisCount ${v.round()}', () => crossAxisCount = v.round()),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('rowCount'),
@@ -228,7 +228,7 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
             onChanged: (v) => onMark('rowCount ${v.round()}', () => rowCount = v.round()),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('spacing'),
@@ -238,7 +238,7 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
             onChanged: (v) => onMark('spacing ${v.round()}', () => spacing = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('runSpacing'),
@@ -248,13 +248,13 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
             onChanged: (v) => onMark('runSpacing ${v.round()}', () => runSpacing = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('height'),
             value: useHeight,
             onChanged: (v) => onMark('height ${v ? 'on' : 'null'}', () => useHeight = v),
           ),
           if (useHeight)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('height'),
@@ -264,13 +264,13 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
               onChanged: (v) => onMark('height ${v.round()}', () => height = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('padding'),
             value: usePadding,
             onChanged: (v) => onMark('padding ${v ? 'on' : 'zero'}', () => usePadding = v),
           ),
           if (usePadding)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding'),
@@ -280,12 +280,12 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
               onChanged: (v) => onMark('padding ${v.round()}', () => paddingAll = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onPageChanged'),
             value: useOnPageChanged,
             onChanged: (v) => onMark('onPageChanged ${v ? 'on' : 'null'}', () => useOnPageChanged = v),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('indicatorMargin.top'),
@@ -295,7 +295,7 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
             onChanged: (v) => onMark('indicatorMargin.top ${v.round()}', () => indicatorMarginTop = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('indicatorItemSize.w'),
@@ -305,7 +305,7 @@ class _NWrapPageViewDemoState extends State<NWrapPageViewDemo> {
             onChanged: (v) => onMark('indicatorItemSize.w ${v.round()}', () => indicatorW = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('indicatorItemSize.h'),

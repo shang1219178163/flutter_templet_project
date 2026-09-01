@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -553,7 +553,7 @@ class _BorderDemoState extends State<BorderDemo> {
               onChanged: (e) => onMark('color', () => sideColor = e),
             ),
           ],
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('width'),
@@ -597,7 +597,7 @@ class _BorderDemoState extends State<BorderDemo> {
     final children = <Widget>[];
     if (usesRadius) {
       children.add(
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('borderRadius'),
@@ -611,7 +611,7 @@ class _BorderDemoState extends State<BorderDemo> {
     }
     if (kind == _Kind.circle) {
       children.add(
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('eccentricity'),
@@ -634,15 +634,15 @@ class _BorderDemoState extends State<BorderDemo> {
     }
     if (kind == _Kind.linear) {
       children.addAll([
-        NSwitchListTile(title: const Text('start'), value: linearStart, onChanged: (v) => onMark('start $v', () => linearStart = v)),
-        NSwitchListTile(title: const Text('end'), value: linearEnd, onChanged: (v) => onMark('end $v', () => linearEnd = v)),
-        NSwitchListTile(title: const Text('top'), value: linearTop, onChanged: (v) => onMark('top $v', () => linearTop = v)),
-        NSwitchListTile(
+        NSwitchListItem(title: const Text('start'), value: linearStart, onChanged: (v) => onMark('start $v', () => linearStart = v)),
+        NSwitchListItem(title: const Text('end'), value: linearEnd, onChanged: (v) => onMark('end $v', () => linearEnd = v)),
+        NSwitchListItem(title: const Text('top'), value: linearTop, onChanged: (v) => onMark('top $v', () => linearTop = v)),
+        NSwitchListItem(
           title: const Text('bottom'),
           value: linearBottom,
           onChanged: (v) => onMark('bottom $v', () => linearBottom = v),
         ),
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('edge.size'),
@@ -661,7 +661,7 @@ class _BorderDemoState extends State<BorderDemo> {
             );
           },
         ),
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('edge.alignment'),
@@ -684,7 +684,7 @@ class _BorderDemoState extends State<BorderDemo> {
     }
     if (kind == _Kind.star || kind == _Kind.starPolygon) {
       children.add(
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: Text(kind == _Kind.starPolygon ? 'sides' : 'points'),
@@ -709,7 +709,7 @@ class _BorderDemoState extends State<BorderDemo> {
       );
       if (kind == _Kind.star) {
         children.add(
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('innerRadiusRatio'),
@@ -731,7 +731,7 @@ class _BorderDemoState extends State<BorderDemo> {
         );
       }
       children.add(
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('pointRounding'),
@@ -758,7 +758,7 @@ class _BorderDemoState extends State<BorderDemo> {
       );
       if (kind == _Kind.star) {
         children.add(
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('valleyRounding'),
@@ -785,7 +785,7 @@ class _BorderDemoState extends State<BorderDemo> {
         );
       }
       children.add(
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('rotation'),
@@ -797,7 +797,7 @@ class _BorderDemoState extends State<BorderDemo> {
         ),
       );
       children.add(
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('squash'),
@@ -820,7 +820,7 @@ class _BorderDemoState extends State<BorderDemo> {
     }
     if (kind == _Kind.underlineTab) {
       children.addAll([
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('insets.left'),
@@ -830,7 +830,7 @@ class _BorderDemoState extends State<BorderDemo> {
           onChanged: (v) => onMark('insets.left ${v.round()}', () => insetL = v),
           activeColor: theme.colorScheme.primary,
         ),
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('insets.top'),
@@ -840,7 +840,7 @@ class _BorderDemoState extends State<BorderDemo> {
           onChanged: (v) => onMark('insets.top ${v.round()}', () => insetT = v),
           activeColor: theme.colorScheme.primary,
         ),
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('insets.right'),
@@ -850,7 +850,7 @@ class _BorderDemoState extends State<BorderDemo> {
           onChanged: (v) => onMark('insets.right ${v.round()}', () => insetR = v),
           activeColor: theme.colorScheme.primary,
         ),
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('insets.bottom'),
@@ -860,7 +860,7 @@ class _BorderDemoState extends State<BorderDemo> {
           onChanged: (v) => onMark('insets.bottom ${v.round()}', () => insetB = v),
           activeColor: theme.colorScheme.primary,
         ),
-        NSwitchListTile(
+        NSwitchListItem(
           title: const Text('borderRadius'),
           value: useTabRadius,
           onChanged: (v) => onMark('borderRadius $v', () => useTabRadius = v),
@@ -868,7 +868,7 @@ class _BorderDemoState extends State<BorderDemo> {
       ]);
       if (useTabRadius) {
         children.add(
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('borderRadius'),
@@ -883,7 +883,7 @@ class _BorderDemoState extends State<BorderDemo> {
     }
     if (kind == _Kind.outlineInput) {
       children.add(
-        NSliderListTile(
+        NSliderListItem(
           dense: true,
           contentPadding: EdgeInsets.zero,
           title: const Text('gapPadding'),

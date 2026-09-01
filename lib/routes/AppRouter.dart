@@ -313,6 +313,7 @@ class AppRouter {
   static const String navigationRailDemo = '/navigationRailDemo';
   static const String listTileDemo = '/listTileDemo';
   static const String listTilePage = '/listTilePage';
+  static const String nListItemDemo = '/nListItemDemo';
   static const String refreshIndicatorDemo = '/refreshIndicatorDemo';
   static const String refreshIndicatorDemoOne = '/refreshIndicatorDemoOne';
   static const String tooltipDemo = '/tooltipDemo';

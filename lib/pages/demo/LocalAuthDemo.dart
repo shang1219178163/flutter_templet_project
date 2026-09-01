@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_text_field_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
@@ -240,22 +240,22 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
             controller: reasonController,
             onChanged: (v) => onMark('localizedReason $v'),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('useErrorDialogs'),
             value: useErrorDialogs,
             onChanged: (v) => onMark('useErrorDialogs $v', () => useErrorDialogs = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('stickyAuth'),
             value: stickyAuth,
             onChanged: (v) => onMark('stickyAuth $v', () => stickyAuth = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('sensitiveTransaction'),
             value: sensitiveTransaction,
             onChanged: (v) => onMark('sensitiveTransaction $v', () => sensitiveTransaction = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('biometricOnly'),
             value: biometricOnly,
             onChanged: (v) => onMark('biometricOnly $v', () => biometricOnly = v),
@@ -273,7 +273,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('authMessages 自定义'),
             value: useCustomMessages,
             onChanged: (v) => onMark('authMessages ${v ? 'custom' : 'default'}', () => useCustomMessages = v),

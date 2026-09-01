@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -273,13 +273,13 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
               isDense: true,
             ),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('contentTextStyle'),
             value: useContentTextStyle,
             onChanged: (v) => onMark('contentTextStyle ${v ? 'on' : 'null'}', () => useContentTextStyle = v),
           ),
           if (useContentTextStyle) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('fontSize'),
@@ -295,18 +295,18 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
               onChanged: (v) => onMark('contentTextStyle.color ${v ?? 'null'}', () => contentTextColor = v),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('leading'),
             value: useLeading,
             onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('leadingPadding'),
             value: useLeadingPadding,
             onChanged: (v) => onMark('leadingPadding ${v ? 'on' : 'null'}', () => useLeadingPadding = v),
           ),
           if (useLeadingPadding)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('end'),
@@ -316,12 +316,12 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
               onChanged: (v) => onMark('leadingPadding.end ${v.round()}', () => leadingPaddingEnd = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('单按钮 actions'),
             value: singleAction,
             onChanged: (v) => onMark('actions ${v ? 1 : 2}', () => singleAction = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('forceActionsBelow'),
             value: forceActionsBelow,
             onChanged: (v) => onMark('forceActionsBelow $v', () => forceActionsBelow = v),
@@ -333,7 +333,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('overflowAlignment ${e.name}', () => overflowAlignment = e),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('minActionBarHeight'),
@@ -356,13 +356,13 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('elevation'),
             value: useElevation,
             onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
           ),
           if (useElevation)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('elevation'),
@@ -392,13 +392,13 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
             value: dividerColor,
             onChanged: (v) => onMark('dividerColor ${v ?? 'null'}', () => dividerColor = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('padding'),
             value: usePadding,
             onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding'),
@@ -408,13 +408,13 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
               onChanged: (v) => onMark('padding ${v.round()}', () => paddingAll = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('margin'),
             value: useMargin,
             onChanged: (v) => onMark('margin ${v ? 'on' : 'null'}', () => useMargin = v),
           ),
           if (useMargin)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('margin'),

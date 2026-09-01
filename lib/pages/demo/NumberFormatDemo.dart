@@ -8,8 +8,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:get/get.dart';
@@ -394,13 +394,13 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
             ),
           ],
           if (showDecimalDigits)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('decimalDigits'),
               value: useDecimalDigits,
               onChanged: (v) => onMark('decimalDigits ${v ? 'on' : 'null'}', () => useDecimalDigits = v),
             ),
           if (showDecimalDigits && useDecimalDigits)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('decimalDigits'),
@@ -411,7 +411,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
               activeColor: theme.colorScheme.primary,
             ),
           if (showExplicitSign)
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('explicitSign'),
               value: explicitSign,
               onChanged: (v) => onMark('explicitSign $v', () => explicitSign = v),
@@ -429,7 +429,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('value'),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -235,7 +235,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
               }
             }),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('elevation'),
@@ -287,7 +287,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
               }),
             ),
             if (shapeKind == ShapeKind.rounded)
-              NSliderListTile(
+              NSliderListItem(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 title: const Text('shapeRadius'),
@@ -298,13 +298,13 @@ class _MaterialDemoState extends State<MaterialDemo> {
                 activeColor: theme.colorScheme.primary,
               ),
             if (shapeKind == ShapeKind.none) ...[
-              NSwitchListTile(
+              NSwitchListItem(
                 title: const Text('borderRadius'),
                 value: useBorderRadius,
                 onChanged: (v) => onMark('borderRadius ${v ? 'on' : 'null'}', () => useBorderRadius = v),
               ),
               if (useBorderRadius)
-                NSliderListTile(
+                NSliderListItem(
                   dense: true,
                   contentPadding: EdgeInsets.zero,
                   title: const Text('borderRadius'),
@@ -329,18 +329,18 @@ class _MaterialDemoState extends State<MaterialDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('clipBehavior ${e.label}', () => clipKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('borderOnForeground'),
             value: borderOnForeground,
             onChanged: (v) => onMark('borderOnForeground $v', () => borderOnForeground = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('textStyle'),
             value: useTextStyle,
             onChanged: (v) => onMark('textStyle ${v ? 'on' : 'null'}', () => useTextStyle = v),
           ),
           if (useTextStyle) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('fontSize'),
@@ -356,7 +356,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
               onChanged: (v) => onMark('textStyle.color ${v ?? 'null'}', () => textColor = v),
             ),
           ],
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('animationDuration'),

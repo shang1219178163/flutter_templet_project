@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -208,7 +208,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('destinations'),
@@ -223,7 +223,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
             }),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('selectedIndex'),
@@ -233,18 +233,18 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
             onChanged: (v) => onMark('selectedIndex ${v.round()}', () => currentPageIndex = v.round()),
             activeColor: theme.colorScheme.primary,
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('onDestinationSelected'),
             value: useOnSelected,
             onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('animationDuration'),
             value: useAnim,
             onChanged: (v) => onMark('animationDuration ${v ? 'on' : 'null'}', () => useAnim = v),
           ),
           if (useAnim)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('animationDuration'),
@@ -291,13 +291,13 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
             value: backgroundColor,
             onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('elevation'),
             value: useElevation,
             onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
           ),
           if (useElevation)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('elevation'),
@@ -335,7 +335,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
             }),
           ),
           if (shapeKind == ShapeKind.rounded)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('shapeRadius'),
@@ -345,13 +345,13 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
               onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('height'),
             value: useHeight,
             onChanged: (v) => onMark('height ${v ? 'on' : 'null'}', () => useHeight = v),
           ),
           if (useHeight)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('height'),
@@ -361,7 +361,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
               onChanged: (v) => onMark('height ${v.round()}', () => height = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('overlayColor'),
             value: useOverlay,
             onChanged: (v) => onMark('overlayColor ${v ? 'on' : 'null'}', () => useOverlay = v),

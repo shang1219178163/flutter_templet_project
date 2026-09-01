@@ -10,8 +10,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
@@ -278,7 +278,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
             onChanged: (e) => onMark('filter ${e.label}', () => filterKind = e),
           ),
           if (filterKind == _FilterKind.blur) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('sigmaX'),
@@ -297,7 +297,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 );
               },
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('sigmaY'),
@@ -326,7 +326,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
             ),
           ],
           if (filterKind != _FilterKind.blur) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('radiusX'),
@@ -345,7 +345,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 );
               },
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('radiusY'),
@@ -386,7 +386,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
               title: const Text('enabled 应用滤镜'),
               value: enabled,
               onChanged: (v) => onMark('enabled $v', () => enabled = v)),

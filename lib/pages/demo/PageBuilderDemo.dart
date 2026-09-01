@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -209,12 +209,12 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
             onChanged: (e) => onMark('transitionsBuilder ${e.label}', () => transitionKind = e),
           ),
           if (transitionKind == _TransitionKind.zoom) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('Zoom.allowSnapshotting'),
               value: zoomAllowSnapshotting,
               onChanged: (v) => onMark('Zoom.allowSnapshotting $v', () => zoomAllowSnapshotting = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('Zoom.allowEnterRouteSnapshotting'),
               value: zoomAllowEnterRouteSnapshotting,
               onChanged: (v) => onMark('Zoom.allowEnterRouteSnapshotting $v', () => zoomAllowEnterRouteSnapshotting = v),
@@ -239,8 +239,8 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(title: const Text('opaque'), value: opaque, onChanged: (v) => onMark('opaque $v', () => opaque = v)),
-          NSwitchListTile(
+          NSwitchListItem(title: const Text('opaque'), value: opaque, onChanged: (v) => onMark('opaque $v', () => opaque = v)),
+          NSwitchListItem(
             title: const Text('barrierDismissible'),
             value: barrierDismissible,
             onChanged: (v) => onMark('barrierDismissible $v', () => barrierDismissible = v),
@@ -259,7 +259,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('barrierLabel ${e.label}', () => barrierLabelKind = e),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('transitionDuration'),
@@ -280,7 +280,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
               );
             },
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('reverseTransitionDuration'),
@@ -314,17 +314,17 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('maintainState'),
             value: maintainState,
             onChanged: (v) => onMark('maintainState $v', () => maintainState = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('fullscreenDialog'),
             value: fullscreenDialog,
             onChanged: (v) => onMark('fullscreenDialog $v', () => fullscreenDialog = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('allowSnapshotting'),
             value: allowSnapshotting,
             onChanged: (v) => onMark('allowSnapshotting $v', () => allowSnapshotting = v),
@@ -337,7 +337,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
             labelOf: (e) => e == null ? 'null' : '$e',
             onChanged: (e) => onMark('requestFocus $e', () => requestFocus = e),
           ),
-          NSwitchListTile(title: const Text('settings'), value: useSettings, onChanged: (v) => onMark('settings $v', () => useSettings = v)),
+          NSwitchListItem(title: const Text('settings'), value: useSettings, onChanged: (v) => onMark('settings $v', () => useSettings = v)),
         ],
       ),
     );

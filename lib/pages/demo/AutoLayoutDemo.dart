@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_flexible_cell.dart';
@@ -280,11 +280,11 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('prefix ${e.name}', () => prefixKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
               title: const Text('suffix 后缀图标'),
               value: useSuffix,
               onChanged: (v) => onMark('suffix $v', () => useSuffix = v)),
-          NSwitchListTile(
+          NSwitchListItem(
               title: const Text('decoration 自定义装饰'),
               value: useDecoration,
               onChanged: (v) => onMark('decoration $v', () => useDecoration = v)),
@@ -307,7 +307,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('padding H'),
@@ -317,7 +317,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             onChanged: (v) => onMark('paddingH ${v.round()}', () => padH = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('padding V'),
@@ -327,7 +327,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             onChanged: (v) => onMark('paddingV ${v.round()}', () => padV = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('minWidth'),
@@ -337,7 +337,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             onChanged: onMinWidth,
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('maxWidth'),
@@ -347,7 +347,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             onChanged: onMaxWidth,
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('fontSize'),
@@ -357,7 +357,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('maxLines'),
@@ -367,7 +367,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             onChanged: (v) => onMark('maxLines ${v.round()}', () => maxLines = v.round().clamp(1, 8)),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('itemCount'),
@@ -378,7 +378,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             activeColor: theme.colorScheme.primary,
           ),
           if (useDecoration)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('borderRadius'),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -200,7 +200,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('child'),
             value: useChild,
             onChanged: (v) => onMark('child $v', () => useChild = v),
@@ -234,7 +234,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('duration'),
@@ -255,13 +255,13 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
               );
             },
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('reverseDuration'),
             value: useReverseDuration,
             onChanged: (v) => onMark('reverseDuration $v', () => useReverseDuration = v),
           ),
           if (useReverseDuration)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('reverseDuration'),

@@ -8,8 +8,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
@@ -251,7 +251,7 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('kind ${e.label}', () => kind = e),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('min'),
@@ -261,7 +261,7 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
             onChanged: onMin,
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('max'),
@@ -271,12 +271,12 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
             onChanged: onMax,
             activeColor: theme.colorScheme.primary,
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('pinned'),
             value: pinned,
             onChanged: (v) => onMark('pinned $v', () => pinned = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('floating'),
             value: floating,
             onChanged: (v) => onMark('floating $v', () => floating = v),

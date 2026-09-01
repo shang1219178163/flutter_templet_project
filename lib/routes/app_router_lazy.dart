@@ -203,6 +203,7 @@ import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFingerViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFlexSeparatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NListItemDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
@@ -1399,6 +1400,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.listTilePage,
       page: () => ListTilePage(),
+    ),
+    GetPage(
+      name: AppRouter.nListItemDemo,
+      page: () => const NListItemDemo(),
     ),
     GetPage(
       name: AppRouter.refreshIndicatorDemo,

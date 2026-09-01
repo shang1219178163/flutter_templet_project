@@ -305,6 +305,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.navigationRailDemo, "navigationRailDemo"),
   Tuple2(AppRouter.listTileDemo, "listTileDemo"),
   Tuple2(AppRouter.listTilePage, "listTilePage"),
+  Tuple2(AppRouter.nListItemDemo, "nListItemDemo"),
   Tuple2(AppRouter.refreshIndicatorDemo, "refreshIndicatorDemo"),
   Tuple2(AppRouter.refreshIndicatorDemoOne, "refreshIndicatorDemoOne"),
   Tuple2(AppRouter.showSearchDemo, "showSearchDemo"),

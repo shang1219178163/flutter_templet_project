@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -239,7 +239,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('diagonalDragBehavior ${e.name}', () => diagonalDragBehavior = e),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('itemWidth'),
@@ -249,7 +249,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             onChanged: (v) => onMark('itemWidth ${v.round()}', () => itemWidth = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('itemHeight'),
@@ -259,7 +259,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             onChanged: (v) => onMark('itemHeight ${v.round()}', () => itemHeight = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('maxXIndex'),
@@ -269,7 +269,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             onChanged: (v) => onMark('maxXIndex ${v.round()}', () => maxXIndex = v.round().clamp(0, 19)),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('maxYIndex'),
@@ -280,7 +280,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             activeColor: theme.colorScheme.primary,
           ),
           if (useCacheExtent)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('cacheExtent'),
@@ -342,27 +342,27 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('hitTestBehavior ${e.name}', () => hitTestBehavior = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('verticalDetails.reverse'),
             value: verticalReverse,
             onChanged: (v) => onMark('verticalReverse $v', () => verticalReverse = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('horizontalDetails.reverse'),
             value: horizontalReverse,
             onChanged: (v) => onMark('horizontalReverse $v', () => horizontalReverse = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('cacheExtent 传入数值'),
             value: useCacheExtent,
             onChanged: (v) => onMark('useCacheExtent $v', () => useCacheExtent = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('addRepaintBoundaries'),
             value: addRepaintBoundaries,
             onChanged: (v) => onMark('addRepaintBoundaries $v', () => addRepaintBoundaries = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('addAutomaticKeepAlives'),
             value: addAutomaticKeepAlives,
             onChanged: (v) => onMark('addAutomaticKeepAlives $v', () => addAutomaticKeepAlives = v),

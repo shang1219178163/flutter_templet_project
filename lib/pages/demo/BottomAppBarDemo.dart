@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -280,18 +280,18 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('shapeKind ${e.label}', () => shapeKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('child 显示图标'),
             value: useChild,
             onChanged: (v) => onMark('useChild $v', () => useChild = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('elevation 指定高度'),
             value: useElevation,
             onChanged: (v) => onMark('useElevation $v', () => useElevation = v),
           ),
           if (useElevation)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('elevation'),
@@ -331,13 +331,13 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('height 指定高度'),
             value: useHeight,
             onChanged: (v) => onMark('useHeight $v', () => useHeight = v),
           ),
           if (useHeight)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('height'),
@@ -347,13 +347,13 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
               onChanged: (v) => onMark('height ${v.round()}', () => height = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('padding 指定内边距'),
             value: usePadding,
             onChanged: (v) => onMark('usePadding $v', () => usePadding = v),
           ),
           if (usePadding) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding H'),
@@ -363,7 +363,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
               onChanged: (v) => onMark('padH ${v.round()}', () => padH = v),
               activeColor: theme.colorScheme.primary,
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('padding V'),
@@ -375,7 +375,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
             ),
           ],
           if (shapeKind != _ShapeKind.none)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('notchMargin'),
@@ -385,7 +385,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
               onChanged: (v) => onMark('notchMargin ${v.round()}', () => notchMargin = v),
               activeColor: theme.colorScheme.primary,
             ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('showFab 显示浮动按钮'),
             value: showFab,
             onChanged: (v) => onMark('showFab $v', () => showFab = v),

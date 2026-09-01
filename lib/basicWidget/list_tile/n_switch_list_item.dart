@@ -1,5 +1,5 @@
 //
-//  NSwitchListTile.dart
+//  NSwitchListItem.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2026/9/1.
@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 /// 效果展示用的紧凑 [SwitchListTile]：`dense` + 零内边距 + 统一标题样式。
 ///
 /// 不要设置 `inactiveTrackColor`。
-class NSwitchListTile extends StatelessWidget {
-  const NSwitchListTile({
+class NSwitchListItem extends StatelessWidget {
+  const NSwitchListItem({
     super.key,
     required this.value,
     required this.onChanged,

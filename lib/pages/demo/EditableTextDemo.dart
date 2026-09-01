@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -532,12 +532,12 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('readOnly'),
             value: readOnly,
             onChanged: (v) => onMark('readOnly $v', () => readOnly = v),
           ),
-          NSwitchListTile(title: const Text('obscureText'), value: obscureText, onChanged: onObscureText),
+          NSwitchListItem(title: const Text('obscureText'), value: obscureText, onChanged: onObscureText),
           if (obscureText) ...[
             const SizedBox(height: 8),
             NChoiceChipListItem(
@@ -548,12 +548,12 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               onChanged: (v) => onMark('obscuringCharacter $v', () => obscuringCharacter = v),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('autocorrect'),
             value: autocorrect,
             onChanged: (v) => onMark('autocorrect $v', () => autocorrect = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('enableSuggestions'),
             value: enableSuggestions,
             onChanged: (v) => onMark('enableSuggestions $v', () => enableSuggestions = v),
@@ -627,7 +627,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('style.fontSize'),
@@ -684,7 +684,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             onChanged: (e) => onMark('textScaler ${e.name}', () => scalerKind = e),
           ),
           if (scalerKind == _ScalerKind.linear)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('textScaler.linear'),
@@ -719,23 +719,23 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('textWidthBasis ${e.name}', () => textWidthBasis = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('forceLine'),
             value: forceLine,
             onChanged: (v) => onMark('forceLine $v', () => forceLine = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('textHeightBehavior'),
             value: useTextHeightBehavior,
             onChanged: (v) => onMark('textHeightBehavior $v', () => useTextHeightBehavior = v),
           ),
           if (useTextHeightBehavior) ...[
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('applyHeightToFirstAscent'),
               value: applyHeightToFirstAscent,
               onChanged: (v) => onMark('applyHeightToFirstAscent $v', () => applyHeightToFirstAscent = v),
             ),
-            NSwitchListTile(
+            NSwitchListItem(
               title: const Text('applyHeightToLastDescent'),
               value: applyHeightToLastDescent,
               onChanged: (v) => onMark('applyHeightToLastDescent $v', () => applyHeightToLastDescent = v),
@@ -775,7 +775,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             labelOf: (e) => e == null ? '默' : '$e',
             onChanged: (e) => onMark('showCursor ${e ?? 'null'}', () => showCursor = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('showSelectionHandles'),
             value: showSelectionHandles,
             onChanged: (v) => onMark('showSelectionHandles $v', () => showSelectionHandles = v),
@@ -788,7 +788,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             labelOf: (e) => e == null ? '默' : '$e',
             onChanged: (e) => onMark('enableInteractiveSelection ${e ?? 'null'}', () => enableInteractiveSelection = e),
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('cursorWidth'),
@@ -798,7 +798,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             onChanged: (v) => onMark('cursorWidth ${v.round()}', () => cursorWidth = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('cursorHeight'),
@@ -808,7 +808,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             onChanged: (v) => onMark('cursorHeight ${v.round()}', () => cursorHeight = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('cursorRadius'),
@@ -818,18 +818,18 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             onChanged: (v) => onMark('cursorRadius ${v.round()}', () => cursorRadius = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('cursorOpacityAnimates'),
             value: cursorOpacityAnimates,
             onChanged: (v) => onMark('cursorOpacityAnimates $v', () => cursorOpacityAnimates = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('cursorOffset'),
             value: useCursorOffset,
             onChanged: (v) => onMark('cursorOffset $v', () => useCursorOffset = v),
           ),
           if (useCursorOffset) ...[
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('cursorOffset.dx'),
@@ -848,7 +848,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                 );
               },
             ),
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('cursorOffset.dy'),
@@ -868,7 +868,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               },
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('paintCursorAboveText'),
             value: paintCursorAboveText,
             onChanged: (v) => onMark('paintCursorAboveText $v', () => paintCursorAboveText = v),
@@ -902,9 +902,9 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(title: const Text('expands'), value: expands, onChanged: onExpands),
+          NSwitchListItem(title: const Text('expands'), value: expands, onChanged: onExpands),
           if (!expands && !obscureText)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('maxLines'),
@@ -915,7 +915,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               activeColor: theme.colorScheme.primary,
             ),
           if (!expands && !obscureText)
-            NSliderListTile(
+            NSliderListItem(
               dense: true,
               contentPadding: EdgeInsets.zero,
               title: const Text('minLines'),
@@ -925,7 +925,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               onChanged: onMinLines,
               activeColor: theme.colorScheme.primary,
             ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('scrollPadding'),
@@ -951,57 +951,57 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             labelOf: (e) => e.label,
             onChanged: (e) => onMark('scrollPhysics ${e.name}', () => physicsKind = e),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('scrollController'),
             value: useScrollController,
             onChanged: (v) => onMark('scrollController $v', () => useScrollController = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('scrollBehavior'),
             value: useScrollBehavior,
             onChanged: (v) => onMark('scrollBehavior $v', () => useScrollBehavior = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('rendererIgnoresPointer'),
             value: rendererIgnoresPointer,
             onChanged: (v) => onMark('rendererIgnoresPointer $v', () => rendererIgnoresPointer = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('scribbleEnabled'),
             value: scribbleEnabled,
             onChanged: (v) => onMark('scribbleEnabled $v', () => scribbleEnabled = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('enableIMEPersonalizedLearning'),
             value: enableIMEPersonalizedLearning,
             onChanged: (v) => onMark('enableIMEPersonalizedLearning $v', () => enableIMEPersonalizedLearning = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('contextMenuBuilder'),
             value: useContextMenu,
             onChanged: (v) => onMark('contextMenuBuilder $v', () => useContextMenu = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('magnifierConfiguration'),
             value: useMagnifier,
             onChanged: (v) => onMark('magnifierConfiguration $v', () => useMagnifier = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('undoController'),
             value: useUndoController,
             onChanged: (v) => onMark('undoController $v', () => useUndoController = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('restorationId'),
             value: useRestorationId,
             onChanged: (v) => onMark('restorationId $v', () => useRestorationId = v),
           ),
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('groupId 自定义'),
             value: useCustomGroupId,
             onChanged: (v) => onMark('groupId $v', () => useCustomGroupId = v),

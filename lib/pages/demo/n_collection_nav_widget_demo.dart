@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
-import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_nav_widget.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
@@ -256,7 +256,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             labelOf: (e) => e.name,
             onChanged: onScrollType,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('itemCount'),
@@ -266,7 +266,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: onItemCount,
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('pageRowNum'),
@@ -276,7 +276,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: onPageRowNum,
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('pageColumnNum'),
@@ -299,7 +299,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('iconSize'),
@@ -309,7 +309,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: (v) => onMark('iconSize ${v.toStringAsFixed(1)}', () => iconSize = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('textHeight'),
@@ -319,7 +319,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: (v) => onMark('textHeight ${v.toStringAsFixed(1)}', () => textHeight = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('textGap'),
@@ -329,7 +329,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: (v) => onMark('textGap ${v.toStringAsFixed(1)}', () => textGap = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('columnSpacing'),
@@ -339,7 +339,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: (v) => onMark('columnSpacing ${v.toStringAsFixed(1)}', () => columnSpacing = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('rowSpacing'),
@@ -349,7 +349,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: (v) => onMark('rowSpacing ${v.toStringAsFixed(1)}', () => rowSpacing = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('indicatorItemHeight'),
@@ -359,7 +359,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: (v) => onMark('indicatorItemHeight ${v.toStringAsFixed(1)}', () => indicatorItemHeight = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('indicatorItemWidth'),
@@ -369,7 +369,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             onChanged: (v) => onMark('indicatorItemWidth ${v.toStringAsFixed(1)}', () => indicatorItemWidth = v),
             activeColor: theme.colorScheme.primary,
           ),
-          NSliderListTile(
+          NSliderListItem(
             dense: true,
             contentPadding: EdgeInsets.zero,
             title: const Text('indicatorGap'),
@@ -392,8 +392,8 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListTile(title: const Text('isDebug'), value: isDebug, onChanged: (v) => onMark('isDebug $v', () => isDebug = v)),
-          NSwitchListTile(
+          NSwitchListItem(title: const Text('isDebug'), value: isDebug, onChanged: (v) => onMark('isDebug $v', () => isDebug = v)),
+          NSwitchListItem(
             title: const Text('boxShadows'),
             value: useBoxShadows,
             onChanged: (v) => onMark('boxShadows ${v ? 'on' : 'null'}', () => useBoxShadows = v),
@@ -406,7 +406,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
               onChanged: (e) => onMark('boxShadows.color ${e ?? 'null'}', () => shadowColor = e),
             ),
           ],
-          NSwitchListTile(
+          NSwitchListItem(
             title: const Text('autoAdjustHeight'),
             value: autoAdjustHeight,
             onChanged: onAutoAdjustHeight,
