@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class MaterialBannerDemo extends StatefulWidget {
@@ -271,62 +273,75 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
               isDense: true,
             ),
           ),
-          buildSwitch(
-            title: 'contentTextStyle',
+          NSwitchListTile(
+            title: const Text('contentTextStyle'),
             value: useContentTextStyle,
             onChanged: (v) => onMark('contentTextStyle ${v ? 'on' : 'null'}', () => useContentTextStyle = v),
           ),
           if (useContentTextStyle) ...[
-            buildSlider(
-              label: 'fontSize',
-              value: contentFontSize,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('fontSize'),
               min: 12,
               max: 22,
+              value: contentFontSize.clamp(12, 22),
               onChanged: (v) => onMark('fontSize ${v.toStringAsFixed(1)}', () => contentFontSize = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildColorRow('color', contentTextColor, (v) => onMark('contentTextStyle.color ${v ?? 'null'}', () => contentTextColor = v)),
+            NChoiceColorListItem(
+              title: const Text('color'),
+              value: contentTextColor,
+              onChanged: (v) => onMark('contentTextStyle.color ${v ?? 'null'}', () => contentTextColor = v),
+            ),
           ],
-          buildSwitch(
-            title: 'leading',
+          NSwitchListTile(
+            title: const Text('leading'),
             value: useLeading,
             onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v),
           ),
-          buildSwitch(
-            title: 'leadingPadding',
+          NSwitchListTile(
+            title: const Text('leadingPadding'),
             value: useLeadingPadding,
             onChanged: (v) => onMark('leadingPadding ${v ? 'on' : 'null'}', () => useLeadingPadding = v),
           ),
           if (useLeadingPadding)
-            buildSlider(
-              label: 'end',
-              value: leadingPaddingEnd,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('end'),
               min: 0,
               max: 32,
+              value: leadingPaddingEnd.clamp(0, 32),
               onChanged: (v) => onMark('leadingPadding.end ${v.round()}', () => leadingPaddingEnd = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: '单按钮 actions',
+          NSwitchListTile(
+            title: const Text('单按钮 actions'),
             value: singleAction,
             onChanged: (v) => onMark('actions ${v ? 1 : 2}', () => singleAction = v),
           ),
-          buildSwitch(
-            title: 'forceActionsBelow',
+          NSwitchListTile(
+            title: const Text('forceActionsBelow'),
             value: forceActionsBelow,
             onChanged: (v) => onMark('forceActionsBelow $v', () => forceActionsBelow = v),
           ),
-          const Text('overflowAlignment'),
-          buildChoiceChips(
+          NChoiceChipListItem<OverflowBarAlignment>(
+            title: const Text('overflowAlignment'),
             values: OverflowBarAlignment.values,
             value: overflowAlignment,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('overflowAlignment ${e.name}', () => overflowAlignment = e),
           ),
-          buildSlider(
-            label: 'minActionBarHeight',
-            value: minActionBarHeight,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('minActionBarHeight'),
             min: 36,
             max: 80,
+            value: minActionBarHeight.clamp(36, 80),
             onChanged: (v) => onMark('minActionBarHeight ${v.round()}', () => minActionBarHeight = v),
+            activeColor: theme.colorScheme.primary,
           ),
         ],
       ),
@@ -341,179 +356,79 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'elevation',
+          NSwitchListTile(
+            title: const Text('elevation'),
             value: useElevation,
             onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
           ),
           if (useElevation)
-            buildSlider(
-              label: 'elevation',
-              value: elevation,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('elevation'),
               min: 0,
               max: 16,
+              value: elevation.clamp(0, 16),
               onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildColorRow('backgroundColor', backgroundColor, (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
-          buildColorRow('surfaceTintColor', surfaceTintColor, (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v)),
-          buildColorRow('shadowColor', shadowColor, (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v)),
-          buildColorRow('dividerColor', dividerColor, (v) => onMark('dividerColor ${v ?? 'null'}', () => dividerColor = v)),
-          buildSwitch(
-            title: 'padding',
+          NChoiceColorListItem(
+            title: const Text('backgroundColor'),
+            value: backgroundColor,
+            onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('surfaceTintColor'),
+            value: surfaceTintColor,
+            onChanged: (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('shadowColor'),
+            value: shadowColor,
+            onChanged: (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('dividerColor'),
+            value: dividerColor,
+            onChanged: (v) => onMark('dividerColor ${v ?? 'null'}', () => dividerColor = v),
+          ),
+          NSwitchListTile(
+            title: const Text('padding'),
             value: usePadding,
             onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding)
-            buildSlider(
-              label: 'padding',
-              value: paddingAll,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding'),
               min: 0,
               max: 32,
+              value: paddingAll.clamp(0, 32),
               onChanged: (v) => onMark('padding ${v.round()}', () => paddingAll = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'margin',
+          NSwitchListTile(
+            title: const Text('margin'),
             value: useMargin,
             onChanged: (v) => onMark('margin ${v ? 'on' : 'null'}', () => useMargin = v),
           ),
           if (useMargin)
-            buildSlider(
-              label: 'margin',
-              value: marginAll,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('margin'),
               min: 0,
               max: 24,
+              value: marginAll.clamp(0, 24),
               onChanged: (v) => onMark('margin ${v.round()}', () => marginAll = v),
+              activeColor: theme.colorScheme.primary,
             ),
         ],
       ),
     );
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   Future<void> popAfterDismissBanner([Object? result]) async {
     if (_isLeaving) {

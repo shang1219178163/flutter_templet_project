@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class NavigationBarDemo extends StatefulWidget {
@@ -17,6 +19,7 @@ class NavigationBarDemo extends StatefulWidget {
 
 class _NavigationBarDemoState extends State<NavigationBarDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -84,7 +87,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -123,7 +126,6 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
   }
 
   Widget buildPanelPage() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
@@ -173,6 +175,7 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
   }
 
   Widget buildBar() {
+    final indicatorShape = shapeKind.shape(roundedRadius: shapeRadius);
     return NavigationBar(
       animationDuration: useAnim ? Duration(milliseconds: animMs.round()) : null,
       selectedIndex: currentPageIndex.clamp(0, items.length - 1),
@@ -190,22 +193,11 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
       indicatorColor: indicatorColor,
-      indicatorShape: buildIndicatorShape(),
+      indicatorShape: indicatorShape,
       height: useHeight ? height : null,
       labelBehavior: labelBehavior,
       overlayColor: useOverlay ? WidgetStatePropertyAll(overlayColor) : null,
     );
-  }
-
-  ShapeBorder? buildIndicatorShape() {
-    switch (shapeKind) {
-      case ShapeKind.none:
-        return null;
-      case ShapeKind.rounded:
-        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius));
-      case ShapeKind.stadium:
-        return const StadiumBorder();
-    }
   }
 
   Widget buildBehaviorCard() {
@@ -216,46 +208,65 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'destinations',
-            value: destinationCount.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('destinations'),
             min: 2,
             max: 5,
+            value: destinationCount.toDouble().clamp(2, 5),
             onChanged: (v) => onMark('destinations ${v.round()}', () {
               destinationCount = v.round();
               if (currentPageIndex >= destinationCount) {
                 currentPageIndex = destinationCount - 1;
               }
             }),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'selectedIndex',
-            value: currentPageIndex.toDouble().clamp(0, destinationCount - 1),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('selectedIndex'),
             min: 0,
             max: (destinationCount - 1).toDouble(),
+            value: currentPageIndex.toDouble().clamp(0.0, (destinationCount - 1).toDouble()),
             onChanged: (v) => onMark('selectedIndex ${v.round()}', () => currentPageIndex = v.round()),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSwitch(
-            title: 'onDestinationSelected',
+          NSwitchListTile(
+            title: const Text('onDestinationSelected'),
             value: useOnSelected,
             onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v),
           ),
-          buildSwitch(
-            title: 'animationDuration',
+          NSwitchListTile(
+            title: const Text('animationDuration'),
             value: useAnim,
             onChanged: (v) => onMark('animationDuration ${v ? 'on' : 'null'}', () => useAnim = v),
           ),
           if (useAnim)
-            buildSlider(
-              label: 'animationDuration',
-              value: animMs,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('animationDuration'),
               min: 100,
               max: 1000,
-              durationLabel: true,
+              value: animMs.clamp(100, 1000),
               onChanged: (v) => onMark('animationDuration ${v.round()}ms', () => animMs = v),
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                final ms = v.round();
+                final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+                return Text(
+                  text,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
-          const Text('labelBehavior'),
-          buildChoiceChips(
+          NChoiceChipListItem<NavigationDestinationLabelBehavior?>(
+            title: const Text('labelBehavior'),
             values: [null, ...NavigationDestinationLabelBehavior.values],
             value: labelBehavior,
             labelOf: (e) => e?.name ?? '默',
@@ -275,209 +286,97 @@ class _NavigationBarDemoState extends State<NavigationBarDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildColorRow('backgroundColor', backgroundColor,
-              (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
-          buildSwitch(
-            title: 'elevation',
+          NChoiceColorListItem(
+            title: const Text('backgroundColor'),
+            value: backgroundColor,
+            onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
+          ),
+          NSwitchListTile(
+            title: const Text('elevation'),
             value: useElevation,
             onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
           ),
           if (useElevation)
-            buildSlider(
-              label: 'elevation',
-              value: elevation,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('elevation'),
               min: 0,
               max: 16,
+              value: elevation.clamp(0, 16),
               onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildColorRow('shadowColor', shadowColor, (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v)),
-          buildColorRow('surfaceTintColor', surfaceTintColor,
-              (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v)),
-          buildColorRow('indicatorColor', indicatorColor,
-              (v) => onMark('indicatorColor ${v ?? 'null'}', () => indicatorColor = v)),
-          const Text('indicatorShape'),
-          buildChoiceChips(
+          NChoiceColorListItem(
+            title: const Text('shadowColor'),
+            value: shadowColor,
+            onChanged: (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('surfaceTintColor'),
+            value: surfaceTintColor,
+            onChanged: (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('indicatorColor'),
+            value: indicatorColor,
+            onChanged: (v) => onMark('indicatorColor ${v ?? 'null'}', () => indicatorColor = v),
+          ),
+          NChoiceChipListItem<ShapeKind>(
+            title: const Text('indicatorShape'),
             values: ShapeKind.values,
             value: shapeKind,
-            labelOf: (e) => e == ShapeKind.none ? 'null' : e.name,
-            onChanged: (e) => onMark('indicatorShape ${e == ShapeKind.none ? 'null' : e.name}', () => shapeKind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('indicatorShape ${e.label}', () {
+              shapeKind = e;
+              if (e == ShapeKind.rounded) {
+                shapeRadius = e.radius;
+              }
+            }),
           ),
           if (shapeKind == ShapeKind.rounded)
-            buildSlider(
-              label: 'shapeRadius',
-              value: shapeRadius,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('shapeRadius'),
               min: 0,
               max: 32,
+              value: shapeRadius.clamp(0, 32),
               onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'height',
+          NSwitchListTile(
+            title: const Text('height'),
             value: useHeight,
             onChanged: (v) => onMark('height ${v ? 'on' : 'null'}', () => useHeight = v),
           ),
           if (useHeight)
-            buildSlider(
-              label: 'height',
-              value: height,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('height'),
               min: 56,
               max: 96,
+              value: height.clamp(56, 96),
               onChanged: (v) => onMark('height ${v.round()}', () => height = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'overlayColor',
+          NSwitchListTile(
+            title: const Text('overlayColor'),
             value: useOverlay,
             onChanged: (v) => onMark('overlayColor ${v ? 'on' : 'null'}', () => useOverlay = v),
           ),
           if (useOverlay)
-            buildColorRow(
-                'overlayColor', overlayColor, (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v)),
+            NChoiceColorListItem(
+              title: const Text('overlayColor'),
+              value: overlayColor,
+              onChanged: (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v),
+            ),
         ],
       ),
     );
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color:
-                            ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    bool durationLabel = false,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: durationLabel
-          ? (context, v) {
-              final ms = v.round();
-              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
-              return Text(
-                text,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();

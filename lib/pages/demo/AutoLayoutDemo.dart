@@ -1,16 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_flexible_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// prefix 传值方式
-enum _PrefixKind { widgetDefault, hidden, logo }
+enum _PrefixKind {
+  none(
+    label: 'none',
+    widget: null,
+  ),
+  notice(
+    label: 'Icon',
+    widget: Padding(
+      padding: EdgeInsets.only(right: 6),
+      child: Icon(Icons.notifications_active),
+    ),
+  ),
+  logo(
+    label: 'FlutterLogo',
+    widget: Padding(
+      padding: EdgeInsets.only(right: 6),
+      child: FlutterLogo(size: 16),
+    ),
+  );
+
+  const _PrefixKind({
+    required this.label,
+    required this.widget,
+  });
+
+  /// Chip 文案
+  final String label;
+
+  /// 对应 prefix；[none] 为 null（走组件默认图标）
+  final Widget? widget;
+}
 
 class AutoLayoutDemo extends StatefulWidget {
   AutoLayoutDemo({Key? key, this.title}) : super(key: key);
@@ -28,29 +61,41 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   final scrollController = ScrollController();
 
   /// prefix 传值
-  _PrefixKind prefixKind = _PrefixKind.widgetDefault;
+  _PrefixKind prefixKind = _PrefixKind.none;
+
   /// 是否显示 suffix
   bool useSuffix = true;
+
   /// 是否自定义 decoration
   bool useDecoration = true;
+
   /// 水平内边距
   double padH = 16;
+
   /// 垂直内边距
   double padV = 7;
+
   /// 最小宽度
   double minWidth = 100;
+
   /// 最大宽度
   double maxWidth = 300;
+
   /// 圆角
   double borderRadius = 16;
+
   /// 字号
   double fontSize = 16;
+
   /// 预览条数
   int itemCount = 3;
+
   /// 最大行数
   int maxLines = 6;
+
   /// 背景色
   Color? backgroundColor = Colors.orange;
+
   /// 最近事件
   String lastEvent = '—';
 
@@ -150,8 +195,13 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
                   child: NFlexibleCell(
                     padding: EdgeInsets.symmetric(horizontal: padH, vertical: padV),
                     constraints: BoxConstraints(minWidth: minWidth, maxWidth: maxWidth),
-                    decoration: buildDecoration(),
-                    prefix: buildPrefix(),
+                    decoration: useDecoration
+                        ? BoxDecoration(
+                            color: backgroundColor ?? Colors.orange,
+                            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                          )
+                        : null,
+                    prefix: prefixKind.widget,
                     suffix: buildSuffix(),
                     content: NText(
                       '自适应横向布局' * i,
@@ -179,27 +229,6 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
         ),
       ),
     );
-  }
-
-  Decoration? buildDecoration() {
-    if (!useDecoration) {
-      return null;
-    }
-    return BoxDecoration(
-      color: backgroundColor ?? Colors.orange,
-      borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-    );
-  }
-
-  Widget? buildPrefix() {
-    return switch (prefixKind) {
-      _PrefixKind.widgetDefault => null,
-      _PrefixKind.hidden => const SizedBox.shrink(),
-      _PrefixKind.logo => const Padding(
-          padding: EdgeInsets.only(right: 6),
-          child: FlutterLogo(size: 16),
-        ),
-    };
   }
 
   Widget? buildSuffix() {
@@ -244,28 +273,26 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'prefix',
-            child: buildChoiceChips(
-              values: _PrefixKind.values,
-              isSelected: (e) => prefixKind == e,
-              labelOf: (e) => switch (e) {
-                _PrefixKind.widgetDefault => 'null / 默认图标',
-                _PrefixKind.hidden => 'SizedBox.shrink',
-                _PrefixKind.logo => 'FlutterLogo',
-              },
-              onChanged: (e) => onMark('prefix ${e.name}', () => prefixKind = e),
-            ),
+          NChoiceChipListItem<_PrefixKind>(
+            title: const Text('prefix'),
+            values: _PrefixKind.values,
+            value: prefixKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('prefix ${e.name}', () => prefixKind = e),
           ),
-          buildSwitch(title: 'suffix 后缀图标', value: useSuffix, onChanged: (v) => onMark('suffix $v', () => useSuffix = v)),
-          buildSwitch(title: 'decoration 自定义装饰', value: useDecoration, onChanged: (v) => onMark('decoration $v', () => useDecoration = v)),
+          NSwitchListTile(
+              title: const Text('suffix 后缀图标'),
+              value: useSuffix,
+              onChanged: (v) => onMark('suffix $v', () => useSuffix = v)),
+          NSwitchListTile(
+              title: const Text('decoration 自定义装饰'),
+              value: useDecoration,
+              onChanged: (v) => onMark('decoration $v', () => useDecoration = v)),
           if (useDecoration)
-            buildField(
-              label: 'backgroundColor',
-              child: buildColorDots(
-                value: backgroundColor,
-                onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
-              ),
+            NChoiceColorListItem(
+              title: const Text('backgroundColor'),
+              value: backgroundColor,
+              onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
             ),
         ],
       ),
@@ -280,188 +307,89 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(label: 'padding H', value: padH, min: 0, max: 32, onChanged: (v) => onMark('paddingH ${v.round()}', () => padH = v)),
-          buildSlider(label: 'padding V', value: padV, min: 0, max: 24, onChanged: (v) => onMark('paddingV ${v.round()}', () => padV = v)),
-          buildSlider(label: 'minWidth', value: minWidth, min: 0, max: 200, onChanged: onMinWidth),
-          buildSlider(label: 'maxWidth', value: maxWidth, min: 80, max: 400, onChanged: onMaxWidth),
-          buildSlider(label: 'fontSize', value: fontSize, min: 12, max: 22, onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v)),
-          buildSlider(
-            label: 'maxLines',
-            value: maxLines.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('padding H'),
+            min: 0,
+            max: 32,
+            value: padH.clamp(0, 32),
+            onChanged: (v) => onMark('paddingH ${v.round()}', () => padH = v),
+            activeColor: theme.colorScheme.primary,
+          ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('padding V'),
+            min: 0,
+            max: 24,
+            value: padV.clamp(0, 24),
+            onChanged: (v) => onMark('paddingV ${v.round()}', () => padV = v),
+            activeColor: theme.colorScheme.primary,
+          ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('minWidth'),
+            min: 0,
+            max: 200,
+            value: minWidth.clamp(0, 200),
+            onChanged: onMinWidth,
+            activeColor: theme.colorScheme.primary,
+          ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('maxWidth'),
+            min: 80,
+            max: 400,
+            value: maxWidth.clamp(80, 400),
+            onChanged: onMaxWidth,
+            activeColor: theme.colorScheme.primary,
+          ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('fontSize'),
+            min: 12,
+            max: 22,
+            value: fontSize.clamp(12, 22),
+            onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
+            activeColor: theme.colorScheme.primary,
+          ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('maxLines'),
             min: 1,
             max: 8,
+            value: maxLines.toDouble().clamp(1, 8),
             onChanged: (v) => onMark('maxLines ${v.round()}', () => maxLines = v.round().clamp(1, 8)),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'itemCount',
-            value: itemCount.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('itemCount'),
             min: 1,
             max: 3,
+            value: itemCount.toDouble().clamp(1, 3),
             onChanged: (v) => onMark('itemCount ${v.round()}', () => itemCount = v.round().clamp(1, 3)),
+            activeColor: theme.colorScheme.primary,
           ),
           if (useDecoration)
-            buildSlider(label: 'borderRadius', value: borderRadius, min: 0, max: 28, onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v)),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('borderRadius'),
+              min: 0,
+              max: 28,
+              value: borderRadius.clamp(0, 28),
+              onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v),
+              activeColor: theme.colorScheme.primary,
+            ),
         ],
       ),
-    );
-  }
-
-  Widget buildField({
-    required String label,
-    required Widget child,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        Widget? mark;
-        if (e == null) {
-          mark = Text(
-            '默',
-            style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-          );
-        } else if (selected) {
-          mark = Icon(
-            Icons.check_rounded,
-            size: 16,
-            color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-          );
-        }
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onChanged(e),
-            customBorder: const CircleBorder(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: e ?? scheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
-                  width: selected ? 2 : 1,
-                ),
-                boxShadow: selected
-                    ? [
-                        BoxShadow(
-                          color: scheme.primary.withValues(alpha: 0.28),
-                          blurRadius: 8,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: mark,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
     );
   }
 
@@ -566,31 +494,18 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
 
   void onTapFlexibleText() {
     DLog.d('onTap');
-    onSnack('Flexible 行 onTap');
+    onMark('Flexible 行 onTap');
+    SnackUtil.show('Flexible 行 onTap');
   }
 
   void onTapOutlined() {
     DLog.d('OutlinedButton');
-    onSnack('OutlinedButton');
-  }
-
-  void onSnack(String message) {
-    lastEvent = message;
-    final scheme = theme.colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(milliseconds: 800),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: scheme.inverseSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
-    setState(() {});
+    onMark('OutlinedButton');
+    SnackUtil.show('OutlinedButton');
   }
 
   void onReset() {
-    prefixKind = _PrefixKind.widgetDefault;
+    prefixKind = _PrefixKind.none;
     useSuffix = true;
     useDecoration = true;
     padH = 16;

@@ -7,11 +7,13 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 /// 原 Demo 各节对应的边框构造
@@ -511,69 +513,80 @@ class _BorderDemoState extends State<BorderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'kind',
-            child: buildChoiceChips(
-              values: _Kind.values,
-              isSelected: (e) => kind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('kind ${e.name}', () => applyKindDefaults(e)),
-            ),
+          NChoiceChipListItem(
+            title: const Text('kind'),
+            values: _Kind.values,
+            value: kind,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('kind ${e.name}', () => applyKindDefaults(e)),
           ),
           if (kind == _Kind.shapeSides) ...[
-            buildField(
-              label: 'top.color',
-              showTopGap: true,
-              child: buildColorDots(value: topColor, onChanged: (e) => onMark('top.color', () => topColor = e)),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('top.color'),
+              value: topColor,
+              onChanged: (e) => onMark('top.color', () => topColor = e),
             ),
-            buildField(
-              label: 'right.color',
-              showTopGap: true,
-              child: buildColorDots(value: rightColor, onChanged: (e) => onMark('right.color', () => rightColor = e)),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('right.color'),
+              value: rightColor,
+              onChanged: (e) => onMark('right.color', () => rightColor = e),
             ),
-            buildField(
-              label: 'bottom.color',
-              showTopGap: true,
-              child: buildColorDots(value: bottomColor, onChanged: (e) => onMark('bottom.color', () => bottomColor = e)),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('bottom.color'),
+              value: bottomColor,
+              onChanged: (e) => onMark('bottom.color', () => bottomColor = e),
             ),
-            buildField(
-              label: 'left.color',
-              showTopGap: true,
-              child: buildColorDots(value: leftColor, onChanged: (e) => onMark('left.color', () => leftColor = e)),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('left.color'),
+              value: leftColor,
+              onChanged: (e) => onMark('left.color', () => leftColor = e),
             ),
-          ] else
-            buildField(
-              label: 'color',
-              showTopGap: true,
-              child: buildColorDots(value: sideColor, onChanged: (e) => onMark('color', () => sideColor = e)),
+          ] else ...[
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('color'),
+              value: sideColor,
+              onChanged: (e) => onMark('color', () => sideColor = e),
             ),
-          buildSlider(
-            label: 'width',
-            value: sideWidth,
+          ],
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('width'),
             min: 0,
             max: 12,
+            value: sideWidth.clamp(0, 12),
             onChanged: (v) => onMark('width ${v.toStringAsFixed(1)}', () => sideWidth = v),
-            fractionDigits: 1,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(1),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
-          buildField(
-            label: 'style',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: BorderStyle.values,
-              isSelected: (e) => sideStyle == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('style ${e.name}', () => sideStyle = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('style'),
+            values: BorderStyle.values,
+            value: sideStyle,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('style ${e.name}', () => sideStyle = e),
           ),
-          buildField(
-            label: 'strokeAlign',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _strokeAligns,
-              isSelected: (e) => strokeAlign == e.$2,
-              labelOf: (e) => e.$1,
-              onChanged: (e) => onMark('strokeAlign ${e.$1}', () => strokeAlign = e.$2),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('strokeAlign'),
+            values: _strokeAligns,
+            onEqual: (e) => strokeAlign == e.$2,
+            labelOf: (e) => e.$1,
+            onChanged: (e) => onMark('strokeAlign ${e.$1}', () => strokeAlign = e.$2),
           ),
         ],
       ),
@@ -584,190 +597,310 @@ class _BorderDemoState extends State<BorderDemo> {
     final children = <Widget>[];
     if (usesRadius) {
       children.add(
-        buildSlider(
-          label: 'borderRadius',
-          value: radius,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('borderRadius'),
           min: 0,
           max: 100,
+          value: radius.clamp(0, 100),
           onChanged: (v) => onMark('borderRadius ${v.round()}', () => radius = v),
+          activeColor: theme.colorScheme.primary,
         ),
       );
     }
     if (kind == _Kind.circle) {
       children.add(
-        buildSlider(
-          label: 'eccentricity',
-          value: eccentricity,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('eccentricity'),
           min: 0,
           max: 1,
+          value: eccentricity.clamp(0, 1),
           onChanged: (v) => onMark('eccentricity ${v.toStringAsFixed(2)}', () => eccentricity = v),
-          fractionDigits: 2,
+          activeColor: theme.colorScheme.primary,
+          valueBuilder: (context, v) {
+            return Text(
+              v.toStringAsFixed(2),
+              style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+            );
+          },
         ),
       );
     }
     if (kind == _Kind.linear) {
       children.addAll([
-        buildSwitch(title: 'start', value: linearStart, onChanged: (v) => onMark('start $v', () => linearStart = v)),
-        buildSwitch(title: 'end', value: linearEnd, onChanged: (v) => onMark('end $v', () => linearEnd = v)),
-        buildSwitch(title: 'top', value: linearTop, onChanged: (v) => onMark('top $v', () => linearTop = v)),
-        buildSwitch(
-          title: 'bottom',
+        NSwitchListTile(title: const Text('start'), value: linearStart, onChanged: (v) => onMark('start $v', () => linearStart = v)),
+        NSwitchListTile(title: const Text('end'), value: linearEnd, onChanged: (v) => onMark('end $v', () => linearEnd = v)),
+        NSwitchListTile(title: const Text('top'), value: linearTop, onChanged: (v) => onMark('top $v', () => linearTop = v)),
+        NSwitchListTile(
+          title: const Text('bottom'),
           value: linearBottom,
           onChanged: (v) => onMark('bottom $v', () => linearBottom = v),
         ),
-        buildSlider(
-          label: 'edge.size',
-          value: linearSize,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('edge.size'),
           min: 0,
           max: 1,
+          value: linearSize.clamp(0, 1),
           onChanged: (v) => onMark('edge.size ${v.toStringAsFixed(2)}', () => linearSize = v),
-          fractionDigits: 2,
+          activeColor: theme.colorScheme.primary,
+          valueBuilder: (context, v) {
+            return Text(
+              v.toStringAsFixed(2),
+              style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+            );
+          },
         ),
-        buildSlider(
-          label: 'edge.alignment',
-          value: linearAlign,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('edge.alignment'),
           min: -1,
           max: 1,
+          value: linearAlign.clamp(-1, 1),
           onChanged: (v) => onMark('edge.alignment ${v.toStringAsFixed(2)}', () => linearAlign = v),
-          fractionDigits: 2,
+          activeColor: theme.colorScheme.primary,
+          valueBuilder: (context, v) {
+            return Text(
+              v.toStringAsFixed(2),
+              style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+            );
+          },
         ),
       ]);
     }
     if (kind == _Kind.star || kind == _Kind.starPolygon) {
       children.add(
-        buildSlider(
-          label: kind == _Kind.starPolygon ? 'sides' : 'points',
-          value: points,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: Text(kind == _Kind.starPolygon ? 'sides' : 'points'),
           min: 2,
           max: 12,
+          value: points.clamp(2, 12),
           onChanged: (v) {
             final name = kind == _Kind.starPolygon ? 'sides' : 'points';
             onMark('$name ${v.toStringAsFixed(1)}', () => points = v);
           },
-          fractionDigits: 1,
+          activeColor: theme.colorScheme.primary,
+          valueBuilder: (context, v) {
+            return Text(
+              v.toStringAsFixed(1),
+              style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+            );
+          },
         ),
       );
       if (kind == _Kind.star) {
         children.add(
-          buildSlider(
-            label: 'innerRadiusRatio',
-            value: innerRadiusRatio,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('innerRadiusRatio'),
             min: 0,
             max: 1,
+            value: innerRadiusRatio.clamp(0, 1),
             onChanged: (v) => onMark('innerRadiusRatio ${v.toStringAsFixed(2)}', () => innerRadiusRatio = v),
-            fractionDigits: 2,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(2),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
         );
       }
       children.add(
-        buildSlider(
-          label: 'pointRounding',
-          value: pointRounding,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('pointRounding'),
           min: 0,
           max: 1,
+          value: pointRounding.clamp(0, 1),
           onChanged: (v) => onMark('pointRounding ${v.toStringAsFixed(2)}', () {
             pointRounding = v;
             if (pointRounding + valleyRounding > 1) {
               valleyRounding = 1 - pointRounding;
             }
           }),
-          fractionDigits: 2,
+          activeColor: theme.colorScheme.primary,
+          valueBuilder: (context, v) {
+            return Text(
+              v.toStringAsFixed(2),
+              style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+            );
+          },
         ),
       );
       if (kind == _Kind.star) {
         children.add(
-          buildSlider(
-            label: 'valleyRounding',
-            value: valleyRounding,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('valleyRounding'),
             min: 0,
             max: 1,
+            value: valleyRounding.clamp(0, 1),
             onChanged: (v) => onMark('valleyRounding ${v.toStringAsFixed(2)}', () {
               valleyRounding = v;
               if (pointRounding + valleyRounding > 1) {
                 pointRounding = 1 - valleyRounding;
               }
             }),
-            fractionDigits: 2,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(2),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
         );
       }
       children.add(
-        buildSlider(
-          label: 'rotation',
-          value: rotation,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('rotation'),
           min: 0,
           max: 360,
+          value: rotation.clamp(0, 360),
           onChanged: (v) => onMark('rotation ${v.round()}', () => rotation = v),
+          activeColor: theme.colorScheme.primary,
         ),
       );
       children.add(
-        buildSlider(
-          label: 'squash',
-          value: squash,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('squash'),
           min: 0,
           max: 1,
+          value: squash.clamp(0, 1),
           onChanged: (v) => onMark('squash ${v.toStringAsFixed(2)}', () => squash = v),
-          fractionDigits: 2,
+          activeColor: theme.colorScheme.primary,
+          valueBuilder: (context, v) {
+            return Text(
+              v.toStringAsFixed(2),
+              style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+            );
+          },
         ),
       );
     }
     if (kind == _Kind.underlineTab) {
       children.addAll([
-        buildSlider(
-          label: 'insets.left',
-          value: insetL,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('insets.left'),
           min: 0,
           max: 24,
+          value: insetL.clamp(0, 24),
           onChanged: (v) => onMark('insets.left ${v.round()}', () => insetL = v),
+          activeColor: theme.colorScheme.primary,
         ),
-        buildSlider(
-          label: 'insets.top',
-          value: insetT,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('insets.top'),
           min: 0,
           max: 24,
+          value: insetT.clamp(0, 24),
           onChanged: (v) => onMark('insets.top ${v.round()}', () => insetT = v),
+          activeColor: theme.colorScheme.primary,
         ),
-        buildSlider(
-          label: 'insets.right',
-          value: insetR,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('insets.right'),
           min: 0,
           max: 24,
+          value: insetR.clamp(0, 24),
           onChanged: (v) => onMark('insets.right ${v.round()}', () => insetR = v),
+          activeColor: theme.colorScheme.primary,
         ),
-        buildSlider(
-          label: 'insets.bottom',
-          value: insetB,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('insets.bottom'),
           min: 0,
           max: 24,
+          value: insetB.clamp(0, 24),
           onChanged: (v) => onMark('insets.bottom ${v.round()}', () => insetB = v),
+          activeColor: theme.colorScheme.primary,
         ),
-        buildSwitch(
-          title: 'borderRadius',
+        NSwitchListTile(
+          title: const Text('borderRadius'),
           value: useTabRadius,
           onChanged: (v) => onMark('borderRadius $v', () => useTabRadius = v),
         ),
       ]);
       if (useTabRadius) {
         children.add(
-          buildSlider(
-            label: 'borderRadius',
-            value: tabRadius,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('borderRadius'),
             min: 0,
             max: 24,
+            value: tabRadius.clamp(0, 24),
             onChanged: (v) => onMark('tabRadius ${v.round()}', () => tabRadius = v),
+            activeColor: theme.colorScheme.primary,
           ),
         );
       }
     }
     if (kind == _Kind.outlineInput) {
       children.add(
-        buildSlider(
-          label: 'gapPadding',
-          value: gapPadding,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('gapPadding'),
           min: 0,
           max: 24,
+          value: gapPadding.clamp(0, 24),
           onChanged: (v) => onMark('gapPadding ${v.toStringAsFixed(1)}', () => gapPadding = v),
-          fractionDigits: 1,
+          activeColor: theme.colorScheme.primary,
+          valueBuilder: (context, v) {
+            return Text(
+              v.toStringAsFixed(1),
+              style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+            );
+          },
         ),
       );
     }
@@ -798,178 +931,6 @@ class _BorderDemoState extends State<BorderDemo> {
         _ => false,
       };
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onChanged(e),
-            customBorder: const CircleBorder(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: e ?? scheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
-                  width: selected ? 2 : 1,
-                ),
-                boxShadow: selected
-                    ? [
-                        BoxShadow(
-                          color: scheme.primary.withValues(alpha: 0.28),
-                          blurRadius: 8,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: e == null
-                  ? Text(
-                      '默',
-                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                    )
-                  : selected
-                      ? Icon(
-                          Icons.check_rounded,
-                          size: 16,
-                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        )
-                      : null,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    int fractionDigits = 0,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: fractionDigits > 0
-          ? (context, v) {
-              return Text(
-                v.toStringAsFixed(fractionDigits),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void applyKindDefaults(_Kind value) {
     kind = value;

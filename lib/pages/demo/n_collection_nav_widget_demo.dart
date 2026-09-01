@@ -7,13 +7,16 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_nav_widget.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 class NCollectionNavWidgetDemo extends StatefulWidget {
@@ -186,6 +189,15 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildNav() {
+    final boxShadows = useBoxShadows
+        ? [
+            BoxShadow(
+              color: (shadowColor ?? Colors.black).withValues(alpha: 0.28),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ]
+        : null;
     final child = NCollectionNavWidget(
       key: ValueKey('nav-$remountEpoch-$scrollType-$pageRowNum-$pageColumnNum-$itemCount-$autoAdjustHeight'),
       items: buildItems(),
@@ -202,7 +214,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       indicatorItemHeight: indicatorItemHeight,
       indicatorItemWidth: indicatorItemWidth,
       indicatorGap: indicatorGap,
-      boxShadows: buildBoxShadows(),
+      boxShadows: boxShadows,
       isDebug: isDebug,
     );
     if (autoAdjustHeight) {
@@ -222,19 +234,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     });
   }
 
-  List<BoxShadow>? buildBoxShadows() {
-    if (!useBoxShadows) {
-      return null;
-    }
-    return [
-      BoxShadow(
-        color: (shadowColor ?? Colors.black).withValues(alpha: 0.28),
-        blurRadius: 8,
-        offset: const Offset(0, 2),
-      ),
-    ];
-  }
-
   double get previewExtent {
     final rows = pageRowNum;
     final itemH = iconSize + textGap + textHeight;
@@ -250,38 +249,42 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'scrollType',
-            child: buildChoiceChips(
-              values: PageViewScrollType.values,
-              isSelected: (e) => scrollType == e,
-              labelOf: (e) => e.name,
-              onChanged: onScrollType,
-            ),
+          NChoiceChipListItem<PageViewScrollType>(
+            title: const Text('scrollType'),
+            values: PageViewScrollType.values,
+            value: scrollType,
+            labelOf: (e) => e.name,
+            onChanged: onScrollType,
           ),
-          buildSlider(
-            label: 'itemCount',
-            value: itemCount.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('itemCount'),
             min: 1,
             max: imgUrls.length.toDouble(),
-            divisions: imgUrls.length - 1,
+            value: itemCount.toDouble().clamp(1, imgUrls.length.toDouble()),
             onChanged: onItemCount,
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'pageRowNum',
-            value: pageRowNum.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('pageRowNum'),
             min: 1,
             max: 5,
-            divisions: 4,
+            value: pageRowNum.toDouble().clamp(1, 5),
             onChanged: onPageRowNum,
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'pageColumnNum',
-            value: pageColumnNum.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('pageColumnNum'),
             min: 1,
             max: 5,
-            divisions: 4,
+            value: pageColumnNum.toDouble().clamp(1, 5),
             onChanged: onPageColumnNum,
+            activeColor: theme.colorScheme.primary,
           ),
         ],
       ),
@@ -296,61 +299,85 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'iconSize',
-            value: iconSize,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('iconSize'),
             min: 24,
             max: 80,
+            value: iconSize.clamp(24, 80),
             onChanged: (v) => onMark('iconSize ${v.toStringAsFixed(1)}', () => iconSize = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'textHeight',
-            value: textHeight,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('textHeight'),
             min: 10,
             max: 28,
+            value: textHeight.clamp(10, 28),
             onChanged: (v) => onMark('textHeight ${v.toStringAsFixed(1)}', () => textHeight = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'textGap',
-            value: textGap,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('textGap'),
             min: 0,
             max: 16,
+            value: textGap.clamp(0, 16),
             onChanged: (v) => onMark('textGap ${v.toStringAsFixed(1)}', () => textGap = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'columnSpacing',
-            value: columnSpacing,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('columnSpacing'),
             min: 0,
             max: 32,
+            value: columnSpacing.clamp(0, 32),
             onChanged: (v) => onMark('columnSpacing ${v.toStringAsFixed(1)}', () => columnSpacing = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'rowSpacing',
-            value: rowSpacing,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('rowSpacing'),
             min: 0,
             max: 24,
+            value: rowSpacing.clamp(0, 24),
             onChanged: (v) => onMark('rowSpacing ${v.toStringAsFixed(1)}', () => rowSpacing = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'indicatorItemHeight',
-            value: indicatorItemHeight,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('indicatorItemHeight'),
             min: 1,
             max: 8,
+            value: indicatorItemHeight.clamp(1, 8),
             onChanged: (v) => onMark('indicatorItemHeight ${v.toStringAsFixed(1)}', () => indicatorItemHeight = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'indicatorItemWidth',
-            value: indicatorItemWidth,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('indicatorItemWidth'),
             min: 4,
             max: 24,
+            value: indicatorItemWidth.clamp(4, 24),
             onChanged: (v) => onMark('indicatorItemWidth ${v.toStringAsFixed(1)}', () => indicatorItemWidth = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'indicatorGap',
-            value: indicatorGap,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('indicatorGap'),
             min: 0,
             max: 24,
+            value: indicatorGap.clamp(0, 24),
             onChanged: (v) => onMark('indicatorGap ${v.toStringAsFixed(1)}', () => indicatorGap = v),
+            activeColor: theme.colorScheme.primary,
           ),
         ],
       ),
@@ -365,23 +392,22 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'isDebug', value: isDebug, onChanged: (v) => onMark('isDebug $v', () => isDebug = v)),
-          buildSwitch(
-            title: 'boxShadows',
+          NSwitchListTile(title: const Text('isDebug'), value: isDebug, onChanged: (v) => onMark('isDebug $v', () => isDebug = v)),
+          NSwitchListTile(
+            title: const Text('boxShadows'),
             value: useBoxShadows,
             onChanged: (v) => onMark('boxShadows ${v ? 'on' : 'null'}', () => useBoxShadows = v),
           ),
-          if (useBoxShadows)
-            buildField(
-              label: 'boxShadows.color',
-              showTopGap: true,
-              child: buildColorDots(
-                value: shadowColor,
-                onChanged: (e) => onMark('boxShadows.color ${e ?? 'null'}', () => shadowColor = e),
-              ),
+          if (useBoxShadows) ...[
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('boxShadows.color'),
+              value: shadowColor,
+              onChanged: (e) => onMark('boxShadows.color ${e ?? 'null'}', () => shadowColor = e),
             ),
-          buildSwitch(
-            title: 'autoAdjustHeight',
+          ],
+          NSwitchListTile(
+            title: const Text('autoAdjustHeight'),
             value: autoAdjustHeight,
             onChanged: onAutoAdjustHeight,
           ),
@@ -390,168 +416,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onChanged(e),
-            customBorder: const CircleBorder(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: e ?? scheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
-                  width: selected ? 2 : 1,
-                ),
-                boxShadow: selected
-                    ? [
-                        BoxShadow(
-                          color: scheme.primary.withValues(alpha: 0.28),
-                          blurRadius: 8,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: e == null
-                  ? Text(
-                      '默',
-                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                    )
-                  : selected
-                      ? Icon(
-                          Icons.check_rounded,
-                          size: 16,
-                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        )
-                      : null,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    int? divisions,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      divisions: divisions ?? 100,
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void bumpRemount() {
     remountEpoch++;
@@ -603,16 +467,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     lastEvent = 'onItem ${e.name ?? e.icon ?? ''}';
     DLog.d(lastEvent);
     setState(() {});
-    final scheme = theme.colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(lastEvent),
-        duration: const Duration(milliseconds: 800),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: scheme.inverseSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
+    SnackUtil.show(lastEvent);
   }
 
   void onReset() {

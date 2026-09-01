@@ -11,7 +11,9 @@ import 'dart:math' as math;
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -19,10 +21,13 @@ import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// 构造方式
-enum _SliderKind { items, builder }
+enum _SliderKind {
+  items(label: 'CarouselSlider'),
+  builder(label: 'CarouselSlider.builder');
 
-/// 滚动物理
-enum _PhysicsKind { platform, bouncing, clamping, never }
+  const _SliderKind({required this.label});
+  final String label;
+}
 
 class CarouselSliderDemo extends StatefulWidget {
   const CarouselSliderDemo({
@@ -58,7 +63,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   Axis scrollDirection = Axis.horizontal;
   CenterPageEnlargeStrategy enlargeStrategy = CenterPageEnlargeStrategy.height;
   Clip clipBehavior = Clip.hardEdge;
-  _PhysicsKind physicsKind = _PhysicsKind.platform;
+  PhysicsKind physicsKind = PhysicsKind.platform;
   Curve autoPlayCurve = Curves.fastOutSlowIn;
 
   bool useHeight = false;
@@ -231,7 +236,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       disableCenter: disableCenter,
       padEnds: padEnds,
       clipBehavior: clipBehavior,
-      scrollPhysics: buildScrollPhysics(),
+      scrollPhysics: physicsKind.physics,
       onPageChanged: onPageChanged,
     );
     final key = ValueKey('$kind-$scrollDirection-$reverse-$initialPage-$useHeight');
@@ -256,19 +261,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
         return buildSlide(url: imgList[index], index: index);
       }),
     );
-  }
-
-  ScrollPhysics? buildScrollPhysics() {
-    switch (physicsKind) {
-      case _PhysicsKind.platform:
-        return null;
-      case _PhysicsKind.bouncing:
-        return const BouncingScrollPhysics();
-      case _PhysicsKind.clamping:
-        return const ClampingScrollPhysics();
-      case _PhysicsKind.never:
-        return const NeverScrollableScrollPhysics();
-    }
   }
 
   Widget buildSlide({required String url, required int index}) {
@@ -324,57 +316,86 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: '构造方式',
-            child: buildChoiceChips(
-              values: _SliderKind.values,
-              isSelected: (e) => kind == e,
-              labelOf: (e) => e == _SliderKind.items ? 'CarouselSlider' : 'CarouselSlider.builder',
-              onChanged: onKind,
-            ),
+          NChoiceChipListItem(
+            title: const Text('构造方式'),
+            values: _SliderKind.values,
+            value: kind,
+            labelOf: (e) => e.label,
+            onChanged: onKind,
           ),
-          buildField(
-            label: 'scrollDirection',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: Axis.values,
-              isSelected: (e) => scrollDirection == e,
-              labelOf: (e) => e.name,
-              onChanged: onScrollDirection,
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('scrollDirection'),
+            values: Axis.values,
+            value: scrollDirection,
+            labelOf: (e) => e.name,
+            onChanged: onScrollDirection,
           ),
-          buildSwitch(title: 'useHeight 使用 height（覆盖 aspectRatio）', value: useHeight, onChanged: onUseHeight),
+          NSwitchListTile(
+              title: const Text('useHeight 使用 height（覆盖 aspectRatio）'), value: useHeight, onChanged: onUseHeight),
           if (useHeight)
-            buildSlider(
-              label: 'height',
-              value: height,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('height'),
               min: 120,
               max: 400,
+              value: height.clamp(120, 400),
               onChanged: (v) => onMark('height ${v.round()}', () => height = v),
+              activeColor: theme.colorScheme.primary,
             )
           else
-            buildSlider(
-              label: 'aspectRatio',
-              value: aspectRatio,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('aspectRatio'),
               min: 0.5,
               max: 2.5,
+              value: aspectRatio.clamp(0.5, 2.5),
               onChanged: (v) => onMark('aspectRatio ${v.toStringAsFixed(2)}', () => aspectRatio = v),
-              format: (v) => v.toStringAsFixed(2),
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) => SizedBox(
+                width: 36,
+                child: Text(
+                  v.toStringAsFixed(2),
+                  textAlign: TextAlign.end,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
+                ),
+              ),
             ),
-          buildSlider(
-            label: 'viewportFraction',
-            value: viewportFraction,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('viewportFraction'),
             min: 0.3,
             max: 1.0,
+            value: viewportFraction.clamp(0.3, 1.0),
             onChanged: (v) => onMark('viewportFraction ${v.toStringAsFixed(2)}', () => viewportFraction = v),
-            format: (v) => v.toStringAsFixed(2),
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) => SizedBox(
+              width: 36,
+              child: Text(
+                v.toStringAsFixed(2),
+                textAlign: TextAlign.end,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ),
           ),
-          buildSlider(
-            label: 'initialPage',
-            value: initialPage.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('initialPage'),
             min: 0,
             max: (imgList.length - 1).toDouble(),
+            value: initialPage.toDouble().clamp(0, (imgList.length - 1).toDouble()),
             onChanged: onInitialPage,
+            activeColor: theme.colorScheme.primary,
           ),
         ],
       ),
@@ -389,85 +410,118 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'enlargeCenterPage 中间放大',
+          NSwitchListTile(
+            title: const Text('enlargeCenterPage 中间放大'),
             value: enlargeCenterPage,
             onChanged: (v) => onMark('enlargeCenterPage $v', () => enlargeCenterPage = v),
           ),
           if (enlargeCenterPage) ...[
-            buildField(
-              label: 'enlargeStrategy',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: CenterPageEnlargeStrategy.values,
-                isSelected: (e) => enlargeStrategy == e,
-                labelOf: (e) => e.name,
-                onChanged: (e) => onMark('enlargeStrategy ${e.name}', () => enlargeStrategy = e),
-              ),
+            const SizedBox(height: 8),
+            NChoiceChipListItem(
+              title: const Text('enlargeStrategy'),
+              values: CenterPageEnlargeStrategy.values,
+              value: enlargeStrategy,
+              labelOf: (e) => e.name,
+              onChanged: (e) => onMark('enlargeStrategy ${e.name}', () => enlargeStrategy = e),
             ),
-            buildSlider(
-              label: 'enlargeFactor',
-              value: enlargeFactor,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('enlargeFactor'),
               min: 0,
               max: 1,
+              value: enlargeFactor.clamp(0, 1),
               onChanged: (v) => onMark('enlargeFactor ${v.toStringAsFixed(2)}', () => enlargeFactor = v),
-              format: (v) => v.toStringAsFixed(2),
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) => SizedBox(
+                width: 36,
+                child: Text(
+                  v.toStringAsFixed(2),
+                  textAlign: TextAlign.end,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
+                ),
+              ),
             ),
           ],
-          buildField(
-            label: 'clipBehavior',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const [Clip.none, Clip.hardEdge, Clip.antiAlias, Clip.antiAliasWithSaveLayer],
-              isSelected: (e) => clipBehavior == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('clipBehavior'),
+            values: const [Clip.none, Clip.hardEdge, Clip.antiAlias, Clip.antiAliasWithSaveLayer],
+            value: clipBehavior,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
-          buildSwitch(
-            title: 'autoPlay 自动播放',
+          NSwitchListTile(
+            title: const Text('autoPlay 自动播放'),
             value: autoPlay,
             onChanged: (v) => onMark('autoPlay $v', () => autoPlay = v),
           ),
           if (autoPlay) ...[
-            buildSlider(
-              label: 'autoPlayInterval',
-              value: autoPlayIntervalSec,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('autoPlayInterval'),
               min: 1,
               max: 10,
+              value: autoPlayIntervalSec.clamp(1, 10),
               onChanged: (v) => onMark('autoPlayInterval ${v.round()}s', () => autoPlayIntervalSec = v),
-              format: (v) => '${v.round()}s',
-            ),
-            buildSlider(
-              label: 'autoPlayAnim',
-              value: autoPlayAnimationMs,
-              min: 200,
-              max: 2000,
-              onChanged: (v) => onMark('autoPlayAnim ${v.round()}ms', () => autoPlayAnimationMs = v),
-              format: (v) => '${(v / 1000).round().toStringAsFixed(1)}s',
-            ),
-            buildField(
-              label: 'autoPlayCurve',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: NDecorationCard.curvePresets,
-                isSelected: (e) => e == autoPlayCurve,
-                labelOf: (e) => NDecorationCard.nameOfCurve(e),
-                onChanged: (e) => onMark('autoPlayCurve ${NDecorationCard.nameOfCurve(e)}', () => autoPlayCurve = e),
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) => SizedBox(
+                width: 36,
+                child: Text(
+                  '${v.round()}s',
+                  textAlign: TextAlign.end,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
+                ),
               ),
             ),
-            buildSwitch(
-              title: 'pauseAutoPlayOnTouch 触摸暂停',
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('autoPlayAnim'),
+              min: 200,
+              max: 2000,
+              value: autoPlayAnimationMs.clamp(200, 2000),
+              onChanged: (v) => onMark('autoPlayAnim ${v.round()}ms', () => autoPlayAnimationMs = v),
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) => SizedBox(
+                width: 36,
+                child: Text(
+                  '${(v / 1000).round().toStringAsFixed(1)}s',
+                  textAlign: TextAlign.end,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            NChoiceChipListItem(
+              title: const Text('autoPlayCurve'),
+              values: NDecorationCard.curvePresets,
+              value: autoPlayCurve,
+              labelOf: (e) => NDecorationCard.nameOfCurve(e),
+              onChanged: (e) => onMark('autoPlayCurve ${NDecorationCard.nameOfCurve(e)}', () => autoPlayCurve = e),
+            ),
+            NSwitchListTile(
+              title: const Text('pauseAutoPlayOnTouch 触摸暂停'),
               value: pauseAutoPlayOnTouch,
               onChanged: (v) => onMark('pauseAutoPlayOnTouch $v', () => pauseAutoPlayOnTouch = v),
             ),
-            buildSwitch(
-              title: 'pauseAutoPlayOnManualNavigate 手动切换暂停',
+            NSwitchListTile(
+              title: const Text('pauseAutoPlayOnManualNavigate 手动切换暂停'),
               value: pauseAutoPlayOnManualNavigate,
               onChanged: (v) => onMark('pauseAutoPlayOnManualNavigate $v', () => pauseAutoPlayOnManualNavigate = v),
             ),
-            buildSwitch(
-              title: 'pauseAutoPlayInFiniteScroll 有限滚动到底暂停',
+            NSwitchListTile(
+              title: const Text('pauseAutoPlayInFiniteScroll 有限滚动到底暂停'),
               value: pauseAutoPlayInFiniteScroll,
               onChanged: (v) => onMark('pauseAutoPlayInFiniteScroll $v', () => pauseAutoPlayInFiniteScroll = v),
             ),
@@ -485,162 +539,45 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'scrollPhysics',
-            child: buildChoiceChips(
-              values: _PhysicsKind.values,
-              isSelected: (e) => physicsKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('scrollPhysics ${e.name}', () => physicsKind = e),
-            ),
+          NChoiceChipListItem(
+            title: const Text('scrollPhysics'),
+            values: PhysicsKind.values,
+            value: physicsKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('scrollPhysics ${e.label}', () => physicsKind = e),
           ),
-          buildSwitch(title: 'enableInfiniteScroll 无限循环', value: enableInfiniteScroll, onChanged: onEnableInfiniteScroll),
-          buildSwitch(
-            title: 'animateToClosest 滚到最近页',
+          NSwitchListTile(
+              title: const Text('enableInfiniteScroll 无限循环'),
+              value: enableInfiniteScroll,
+              onChanged: onEnableInfiniteScroll),
+          NSwitchListTile(
+            title: const Text('animateToClosest 滚到最近页'),
             value: animateToClosest,
             onChanged: (v) => onMark('animateToClosest $v', () => animateToClosest = v),
           ),
-          buildSwitch(title: 'reverse 反向', value: reverse, onChanged: onReverse),
-          buildSwitch(
-            title: 'pageSnapping 整页吸附',
+          NSwitchListTile(title: const Text('reverse 反向'), value: reverse, onChanged: onReverse),
+          NSwitchListTile(
+            title: const Text('pageSnapping 整页吸附'),
             value: pageSnapping,
             onChanged: (v) => onMark('pageSnapping $v', () => pageSnapping = v),
           ),
-          buildSwitch(
-            title: 'disableCenter 取消居中',
+          NSwitchListTile(
+            title: const Text('disableCenter 取消居中'),
             value: disableCenter,
             onChanged: (v) => onMark('disableCenter $v', () => disableCenter = v),
           ),
-          buildSwitch(
-            title: 'padEnds 两端留白',
+          NSwitchListTile(
+            title: const Text('padEnds 两端留白'),
             value: padEnds,
             onChanged: (v) => onMark('padEnds $v', () => padEnds = v),
           ),
-          buildSwitch(
-            title: 'disableGesture 禁用手势',
+          NSwitchListTile(
+            title: const Text('disableGesture 禁用手势'),
             value: disableGesture,
             onChanged: (v) => onMark('disableGesture $v', () => disableGesture = v),
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    String Function(double value)? format,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: format == null
-          ? null
-          : (context, v) => SizedBox(
-                width: 36,
-                child: Text(
-                  format(v),
-                  textAlign: TextAlign.end,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: scheme.onSurfaceVariant,
-                    fontFamily: 'monospace',
-                  ),
-                ),
-              ),
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
     );
   }
 
@@ -660,7 +597,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     scrollDirection = Axis.horizontal;
     enlargeStrategy = CenterPageEnlargeStrategy.height;
     clipBehavior = Clip.hardEdge;
-    physicsKind = _PhysicsKind.platform;
+    physicsKind = PhysicsKind.platform;
     autoPlayCurve = Curves.fastOutSlowIn;
     useHeight = false;
     reverse = false;

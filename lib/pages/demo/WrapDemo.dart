@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 class WrapDemo extends StatefulWidget {
@@ -18,6 +20,7 @@ class WrapDemo extends StatefulWidget {
 
 class _WrapDemoState extends State<WrapDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -65,7 +68,7 @@ class _WrapDemoState extends State<WrapDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -84,7 +87,7 @@ class _WrapDemoState extends State<WrapDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -129,7 +132,6 @@ class _WrapDemoState extends State<WrapDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final previewHeight = direction == Axis.vertical ? 280.0 : 240.0;
     return DecoratedBox(
@@ -164,7 +166,7 @@ class _WrapDemoState extends State<WrapDemo> {
                     crossAxisAlignment: crossAxisAlignment,
                     textDirection: textDirection,
                     verticalDirection: verticalDirection,
-                    clipBehavior: clipOf(),
+                    clipBehavior: clipKind.clip,
                     children: List.generate(childCount, (index) {
                       final url = imageUrls[index % imageUrls.length];
                       return GestureDetector(
@@ -210,15 +212,6 @@ class _WrapDemoState extends State<WrapDemo> {
     );
   }
 
-  Clip clipOf() {
-    return switch (clipKind) {
-      ClipKind.hardEdge => Clip.hardEdge,
-      ClipKind.antiAlias => Clip.antiAlias,
-      ClipKind.antiAliasWithSaveLayer => Clip.antiAliasWithSaveLayer,
-      ClipKind.nil || ClipKind.none => Clip.none,
-    };
-  }
-
   Widget buildLayoutCard() {
     return NDecorationCard(
       icon: const Icon(Icons.wrap_text),
@@ -227,40 +220,49 @@ class _WrapDemoState extends State<WrapDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('direction'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('direction'),
             values: Axis.values,
             value: direction,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('direction ${e.name}', () => direction = e),
           ),
-          buildSlider(
-            label: 'children',
-            value: childCount.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('children'),
             min: 1,
             max: 16,
+            value: childCount.toDouble().clamp(1, 16),
             onChanged: (v) => onMark('children ${v.round()}', () => childCount = v.round()),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'spacing',
-            value: spacing,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('spacing'),
             min: 8,
             max: 32,
+            value: spacing.clamp(8, 32),
             onChanged: (v) => onMark('spacing ${v.round()}', () => spacing = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'runSpacing',
-            value: runSpacing,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('runSpacing'),
             min: 8,
             max: 32,
+            value: runSpacing.clamp(8, 32),
             onChanged: (v) => onMark('runSpacing ${v.round()}', () => runSpacing = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          const Text('clipBehavior'),
-          buildChoiceChips(
-            values: ClipKind.values.where((e) => e != ClipKind.nil).toList(),
-            value: clipKind == ClipKind.nil ? ClipKind.none : clipKind,
-            labelOf: (e) => e.name,
-            onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipKind = e),
+          NChoiceChipListItem(
+            title: const Text('clipBehavior'),
+            values: ClipKind.values,
+            value: clipKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('clipBehavior ${e.label}', () => clipKind = e),
           ),
         ],
       ),
@@ -275,36 +277,36 @@ class _WrapDemoState extends State<WrapDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('alignment'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('alignment'),
             values: WrapAlignment.values,
             value: alignment,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('alignment ${e.name}', () => alignment = e),
           ),
-          const Text('runAlignment'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('runAlignment'),
             values: WrapAlignment.values,
             value: runAlignment,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('runAlignment ${e.name}', () => runAlignment = e),
           ),
-          const Text('crossAxisAlignment'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('crossAxisAlignment'),
             values: WrapCrossAlignment.values,
             value: crossAxisAlignment,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('crossAxisAlignment ${e.name}', () => crossAxisAlignment = e),
           ),
-          const Text('textDirection'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('textDirection'),
             values: const [null, TextDirection.ltr, TextDirection.rtl],
             value: textDirection,
             labelOf: (e) => e?.name ?? '默',
             onChanged: (e) => onMark('textDirection ${e?.name ?? 'null'}', () => textDirection = e),
           ),
-          const Text('verticalDirection'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('verticalDirection'),
             values: VerticalDirection.values,
             value: verticalDirection,
             labelOf: (e) => e.name,
@@ -312,63 +314,6 @@ class _WrapDemoState extends State<WrapDemo> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
     );
   }
 
@@ -397,9 +342,7 @@ class _WrapDemoState extends State<WrapDemo> {
   void onTap(String name) {
     lastEvent = 'onTap $name';
     DLog.d(lastEvent);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(lastEvent), duration: const Duration(milliseconds: 800)),
-    );
+    SnackUtil.show(lastEvent);
     setState(() {});
   }
 }

@@ -3,7 +3,10 @@ import 'dart:ui' show BoxHeightStyle, BoxWidthStyle;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -12,45 +15,151 @@ import 'package:get/get.dart';
 
 /// 键盘类型，auto 表示交给构造函数推断
 enum _KeyboardKind {
-  auto,
-  text,
-  multiline,
-  number,
-  phone,
-  datetime,
-  emailAddress,
-  url,
-  visiblePassword,
-  name,
-  none,
+  auto(label: 'auto', keyboardType: null),
+  text(label: 'text', keyboardType: TextInputType.text),
+  multiline(label: 'multiline', keyboardType: TextInputType.multiline),
+  number(label: 'number', keyboardType: TextInputType.number),
+  phone(label: 'phone', keyboardType: TextInputType.phone),
+  datetime(label: 'datetime', keyboardType: TextInputType.datetime),
+  emailAddress(label: 'emailAddress', keyboardType: TextInputType.emailAddress),
+  url(label: 'url', keyboardType: TextInputType.url),
+  visiblePassword(label: 'visiblePassword', keyboardType: TextInputType.visiblePassword),
+  name(label: 'name', keyboardType: TextInputType.name),
+  none(label: 'none', keyboardType: TextInputType.none);
+
+  const _KeyboardKind({required this.label, required this.keyboardType});
+  /// Chip 文案
+  final String label;
+  /// 对应 keyboardType；auto 为 null
+  final TextInputType? keyboardType;
 }
 
 /// 键盘动作，nil 表示 null
-enum _ActionKind { nil, none, unspecified, done, go, search, send, next, previous, newline }
+enum _ActionKind {
+  nil(label: 'nil', textInputAction: null),
+  none(label: 'none', textInputAction: TextInputAction.none),
+  unspecified(label: 'unspecified', textInputAction: TextInputAction.unspecified),
+  done(label: 'done', textInputAction: TextInputAction.done),
+  go(label: 'go', textInputAction: TextInputAction.go),
+  search(label: 'search', textInputAction: TextInputAction.search),
+  send(label: 'send', textInputAction: TextInputAction.send),
+  next(label: 'next', textInputAction: TextInputAction.next),
+  previous(label: 'previous', textInputAction: TextInputAction.previous),
+  newline(label: 'newline', textInputAction: TextInputAction.newline);
+
+  const _ActionKind({required this.label, required this.textInputAction});
+  /// Chip 文案
+  final String label;
+  /// 对应 textInputAction；nil 为 null
+  final TextInputAction? textInputAction;
+}
 
 /// 文本方向
-enum _DirKind { nil, ltr, rtl }
+enum _DirKind {
+  nil(label: 'nil', direction: null),
+  ltr(label: 'ltr', direction: TextDirection.ltr),
+  rtl(label: 'rtl', direction: TextDirection.rtl);
 
-/// 滚动物理
-enum _PhysicsKind { platform, bouncing, clamping, never }
+  const _DirKind({required this.label, required this.direction});
+  /// Chip 文案
+  final String label;
+  /// 对应 textDirection；nil 为 null
+  final TextDirection? direction;
+}
+
 
 /// 指针样式
-enum _MouseKind { nil, text, basic, click, forbidden, grab }
+enum _MouseKind {
+  nil(label: 'nil', cursor: null),
+  text(label: 'text', cursor: SystemMouseCursors.text),
+  basic(label: 'basic', cursor: SystemMouseCursors.basic),
+  click(label: 'click', cursor: SystemMouseCursors.click),
+  forbidden(label: 'forbidden', cursor: SystemMouseCursors.forbidden),
+  grab(label: 'grab', cursor: SystemMouseCursors.grab);
+
+  const _MouseKind({required this.label, required this.cursor});
+  /// Chip 文案
+  final String label;
+  /// 对应 mouseCursor；nil 为 null
+  final MouseCursor? cursor;
+}
 
 /// 文本缩放
-enum _ScalerKind { nil, noScaling, linear }
+enum _ScalerKind {
+  nil(label: 'nil'),
+  noScaling(label: 'noScaling'),
+  linear(label: 'linear');
+
+  const _ScalerKind({required this.label});
+  /// Chip 文案
+  final String label;
+
+  /// 对应 textScaler；linear 使用 [factor]
+  TextScaler? textScaler(double factor) => switch (this) {
+        _ScalerKind.nil => null,
+        _ScalerKind.noScaling => TextScaler.noScaling,
+        _ScalerKind.linear => TextScaler.linear(factor),
+      };
+}
 
 /// strut 预设
-enum _StrutKind { nil, disabled, force }
+enum _StrutKind {
+  nil(label: 'nil', strutStyle: null),
+  disabled(label: 'disabled', strutStyle: StrutStyle.disabled),
+  force(label: 'force', strutStyle: StrutStyle(forceStrutHeight: true));
+
+  const _StrutKind({required this.label, required this.strutStyle});
+  /// Chip 文案
+  final String label;
+  /// 对应 strutStyle；nil 为 null
+  final StrutStyle? strutStyle;
+}
 
 /// 输入格式化
-enum _FormatterKind { nil, digits, length }
+enum _FormatterKind {
+  nil(label: 'nil'),
+  digits(label: 'digits'),
+  length(label: 'length');
+
+  const _FormatterKind({required this.label});
+  /// Chip 文案
+  final String label;
+
+  /// 对应 inputFormatters
+  List<TextInputFormatter>? get formatters => switch (this) {
+        _FormatterKind.nil => null,
+        _FormatterKind.digits => [FilteringTextInputFormatter.digitsOnly],
+        _FormatterKind.length => [LengthLimitingTextInputFormatter(10)],
+      };
+}
 
 /// 自动填充
-enum _AutofillKind { empty, email, username, password, telephone }
+enum _AutofillKind {
+  empty(label: 'empty', hints: <String>[]),
+  email(label: 'email', hints: [AutofillHints.email]),
+  username(label: 'username', hints: [AutofillHints.username]),
+  password(label: 'password', hints: [AutofillHints.password]),
+  telephone(label: 'telephone', hints: [AutofillHints.telephoneNumber]);
+
+  const _AutofillKind({required this.label, required this.hints});
+  /// Chip 文案
+  final String label;
+  /// 对应 autofillHints
+  final Iterable<String> hints;
+}
 
 /// 语言
-enum _LocaleKind { nil, en, zh }
+enum _LocaleKind {
+  nil(label: 'nil', locale: null),
+  en(label: 'en', locale: Locale('en')),
+  zh(label: 'zh', locale: Locale('zh'));
+
+  const _LocaleKind({required this.label, required this.locale});
+  /// Chip 文案
+  final String label;
+  /// 对应 locale；nil 为 null
+  final Locale? locale;
+}
 
 class EditableTextDemo extends StatefulWidget {
   EditableTextDemo({Key? key, this.title}) : super(key: key);
@@ -175,7 +284,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   /// 是否传入 scrollController
   bool useScrollController = false;
   /// 滚动物理
-  _PhysicsKind physicsKind = _PhysicsKind.platform;
+  PhysicsKind physicsKind = PhysicsKind.platform;
   /// 自动纠正矩形颜色
   Color? autocorrectionTextRectColor;
   /// 自动填充
@@ -356,13 +465,13 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       smartQuotesType: smartQuotesType,
       enableSuggestions: enableSuggestions,
       style: styleOf(),
-      strutStyle: strutStyleOf(),
+      strutStyle: strutKind.strutStyle,
       cursorColor: cursorColor,
       backgroundCursorColor: backgroundCursorColor,
       textAlign: textAlign,
-      textDirection: textDirectionOf(),
-      locale: localeOf(),
-      textScaler: textScalerOf(),
+      textDirection: dirKind.direction,
+      locale: localeKind.locale,
+      textScaler: scalerKind.textScaler(scalerFactor),
       maxLines: maxLinesOf(),
       minLines: minLinesOf(),
       expands: expands,
@@ -373,8 +482,8 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       showCursor: showCursor,
       showSelectionHandles: showSelectionHandles,
       selectionColor: selectionColor,
-      keyboardType: keyboardTypeOf(),
-      textInputAction: textInputActionOf(),
+      keyboardType: keyboardKind.keyboardType,
+      textInputAction: actionKind.textInputAction,
       textCapitalization: textCapitalization,
       onChanged: (v) => onMark('onChanged $v'),
       onEditingComplete: () => onMark('onEditingComplete'),
@@ -385,8 +494,8 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       onSelectionHandleTapped: () => onMark('onSelectionHandleTapped'),
       groupId: useCustomGroupId ? this : EditableText,
       onTapOutside: onTapOutside,
-      inputFormatters: inputFormattersOf(),
-      mouseCursor: mouseCursorOf(),
+      inputFormatters: formatterKind.formatters,
+      mouseCursor: mouseKind.cursor,
       rendererIgnoresPointer: rendererIgnoresPointer,
       cursorWidth: cursorWidth,
       cursorHeight: cursorHeight > 0 ? cursorHeight : null,
@@ -401,9 +510,9 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       dragStartBehavior: dragStartBehavior,
       enableInteractiveSelection: enableInteractiveSelection,
       scrollController: useScrollController ? fieldScrollController : null,
-      scrollPhysics: scrollPhysicsOf(),
+      scrollPhysics: physicsKind.physics,
       autocorrectionTextRectColor: autocorrectionTextRectColor,
-      autofillHints: autofillHintsOf(),
+      autofillHints: autofillKind.hints,
       clipBehavior: clipBehavior,
       restorationId: useRestorationId ? 'editableTextDemo' : null,
       scrollBehavior: useScrollBehavior ? const MaterialScrollBehavior() : null,
@@ -423,102 +532,87 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'readOnly',
+          NSwitchListTile(
+            title: const Text('readOnly'),
             value: readOnly,
             onChanged: (v) => onMark('readOnly $v', () => readOnly = v),
           ),
-          buildSwitch(title: 'obscureText', value: obscureText, onChanged: onObscureText),
-          if (obscureText)
-            buildField(
-              label: 'obscuringCharacter',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: const ['•', '*', '●'],
-                isSelected: (e) => obscuringCharacter == e,
-                labelOf: (e) => e,
-                onChanged: (v) => onMark('obscuringCharacter $v', () => obscuringCharacter = v),
-              ),
+          NSwitchListTile(title: const Text('obscureText'), value: obscureText, onChanged: onObscureText),
+          if (obscureText) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem(
+              title: const Text('obscuringCharacter'),
+              values: const ['•', '*', '●'],
+              onEqual: (e) => obscuringCharacter == e,
+              labelOf: (e) => e,
+              onChanged: (v) => onMark('obscuringCharacter $v', () => obscuringCharacter = v),
             ),
-          buildSwitch(
-            title: 'autocorrect',
+          ],
+          NSwitchListTile(
+            title: const Text('autocorrect'),
             value: autocorrect,
             onChanged: (v) => onMark('autocorrect $v', () => autocorrect = v),
           ),
-          buildSwitch(
-            title: 'enableSuggestions',
+          NSwitchListTile(
+            title: const Text('enableSuggestions'),
             value: enableSuggestions,
             onChanged: (v) => onMark('enableSuggestions $v', () => enableSuggestions = v),
           ),
-          buildField(
-            label: 'smartDashesType',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: SmartDashesType.values,
-              isSelected: (e) => smartDashesType == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('smartDashesType ${e.name}', () => smartDashesType = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('smartDashesType'),
+            values: SmartDashesType.values,
+            onEqual: (e) => smartDashesType == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('smartDashesType ${e.name}', () => smartDashesType = e),
           ),
-          buildField(
-            label: 'smartQuotesType',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: SmartQuotesType.values,
-              isSelected: (e) => smartQuotesType == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('smartQuotesType ${e.name}', () => smartQuotesType = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('smartQuotesType'),
+            values: SmartQuotesType.values,
+            onEqual: (e) => smartQuotesType == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('smartQuotesType ${e.name}', () => smartQuotesType = e),
           ),
-          buildField(
-            label: 'keyboardType',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _KeyboardKind.values,
-              isSelected: (e) => keyboardKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('keyboardType ${e.name}', () => keyboardKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('keyboardType'),
+            values: _KeyboardKind.values,
+            onEqual: (e) => keyboardKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('keyboardType ${e.name}', () => keyboardKind = e),
           ),
-          buildField(
-            label: 'textInputAction',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _ActionKind.values,
-              isSelected: (e) => actionKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('textInputAction ${e.name}', () => actionKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('textInputAction'),
+            values: _ActionKind.values,
+            onEqual: (e) => actionKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('textInputAction ${e.name}', () => actionKind = e),
           ),
-          buildField(
-            label: 'textCapitalization',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: TextCapitalization.values,
-              isSelected: (e) => textCapitalization == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('textCapitalization ${e.name}', () => textCapitalization = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('textCapitalization'),
+            values: TextCapitalization.values,
+            onEqual: (e) => textCapitalization == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('textCapitalization ${e.name}', () => textCapitalization = e),
           ),
-          buildField(
-            label: 'autofillHints',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _AutofillKind.values,
-              isSelected: (e) => autofillKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('autofillHints ${e.name}', () => autofillKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('autofillHints'),
+            values: _AutofillKind.values,
+            onEqual: (e) => autofillKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('autofillHints ${e.name}', () => autofillKind = e),
           ),
-          buildField(
-            label: 'inputFormatters',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _FormatterKind.values,
-              isSelected: (e) => formatterKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('inputFormatters ${e.name}', () => formatterKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('inputFormatters'),
+            values: _FormatterKind.values,
+            onEqual: (e) => formatterKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('inputFormatters ${e.name}', () => formatterKind = e),
           ),
         ],
       ),
@@ -533,254 +627,267 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'style.fontSize',
-            value: fontSize,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('style.fontSize'),
             min: 10,
             max: 32,
+            value: fontSize.clamp(10, 32),
             onChanged: (v) => onMark('style.fontSize ${v.round()}', () => fontSize = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildField(
-            label: 'style.color',
-            showTopGap: true,
-            child: buildColorDots(
-              value: styleColor,
-              onChanged: (v) => onMark('style.color ${v ?? 'null'}', () => styleColor = v),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('style.color'),
+            value: styleColor,
+            onChanged: (v) => onMark('style.color ${v ?? 'null'}', () => styleColor = v),
           ),
-          buildField(
-            label: 'style.fontWeight',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const [FontWeight.w300, FontWeight.w400, FontWeight.w500, FontWeight.w600, FontWeight.w700],
-              isSelected: (e) => fontWeight == e,
-              labelOf: (e) => e.toString().split('.').last,
-              onChanged: (e) => onMark('style.fontWeight ${e.toString().split('.').last}', () => fontWeight = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('style.fontWeight'),
+            values: const [FontWeight.w300, FontWeight.w400, FontWeight.w500, FontWeight.w600, FontWeight.w700],
+            onEqual: (e) => fontWeight == e,
+            labelOf: (e) => e.toString().split('.').last,
+            onChanged: (e) => onMark('style.fontWeight ${e.toString().split('.').last}', () => fontWeight = e),
           ),
-          buildField(
-            label: 'textAlign',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: TextAlign.values,
-              isSelected: (e) => textAlign == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('textAlign ${e.name}', () => textAlign = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('textAlign'),
+            values: TextAlign.values,
+            onEqual: (e) => textAlign == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('textAlign ${e.name}', () => textAlign = e),
           ),
-          buildField(
-            label: 'textDirection',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _DirKind.values,
-              isSelected: (e) => dirKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('textDirection ${e.name}', () => dirKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('textDirection'),
+            values: _DirKind.values,
+            onEqual: (e) => dirKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('textDirection ${e.name}', () => dirKind = e),
           ),
-          buildField(
-            label: 'locale',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _LocaleKind.values,
-              isSelected: (e) => localeKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('locale ${e.name}', () => localeKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('locale'),
+            values: _LocaleKind.values,
+            onEqual: (e) => localeKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('locale ${e.name}', () => localeKind = e),
           ),
-          buildField(
-            label: 'textScaler',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _ScalerKind.values,
-              isSelected: (e) => scalerKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('textScaler ${e.name}', () => scalerKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('textScaler'),
+            values: _ScalerKind.values,
+            onEqual: (e) => scalerKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('textScaler ${e.name}', () => scalerKind = e),
           ),
           if (scalerKind == _ScalerKind.linear)
-            buildSlider(
-              label: 'textScaler.linear',
-              value: scalerFactor,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('textScaler.linear'),
               min: 0.5,
               max: 2.5,
+              value: scalerFactor.clamp(0.5, 2.5),
               onChanged: (v) => onMark('textScaler.linear ${v.toStringAsFixed(2)}', () => scalerFactor = v),
-              fractionDigits: 2,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                return Text(
+                  v.toStringAsFixed(2),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
-          buildField(
-            label: 'strutStyle',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _StrutKind.values,
-              isSelected: (e) => strutKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('strutStyle ${e.name}', () => strutKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('strutStyle'),
+            values: _StrutKind.values,
+            onEqual: (e) => strutKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('strutStyle ${e.name}', () => strutKind = e),
           ),
-          buildField(
-            label: 'textWidthBasis',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: TextWidthBasis.values,
-              isSelected: (e) => textWidthBasis == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('textWidthBasis ${e.name}', () => textWidthBasis = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('textWidthBasis'),
+            values: TextWidthBasis.values,
+            onEqual: (e) => textWidthBasis == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('textWidthBasis ${e.name}', () => textWidthBasis = e),
           ),
-          buildSwitch(
-            title: 'forceLine',
+          NSwitchListTile(
+            title: const Text('forceLine'),
             value: forceLine,
             onChanged: (v) => onMark('forceLine $v', () => forceLine = v),
           ),
-          buildSwitch(
-            title: 'textHeightBehavior',
+          NSwitchListTile(
+            title: const Text('textHeightBehavior'),
             value: useTextHeightBehavior,
             onChanged: (v) => onMark('textHeightBehavior $v', () => useTextHeightBehavior = v),
           ),
           if (useTextHeightBehavior) ...[
-            buildSwitch(
-              title: 'applyHeightToFirstAscent',
+            NSwitchListTile(
+              title: const Text('applyHeightToFirstAscent'),
               value: applyHeightToFirstAscent,
               onChanged: (v) => onMark('applyHeightToFirstAscent $v', () => applyHeightToFirstAscent = v),
             ),
-            buildSwitch(
-              title: 'applyHeightToLastDescent',
+            NSwitchListTile(
+              title: const Text('applyHeightToLastDescent'),
               value: applyHeightToLastDescent,
               onChanged: (v) => onMark('applyHeightToLastDescent $v', () => applyHeightToLastDescent = v),
             ),
           ],
-          buildField(
-            label: 'cursorColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: cursorColor,
-              onChanged: (v) => onMark('cursorColor $v', () => cursorColor = v ?? Colors.blue),
-              allowNull: false,
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('cursorColor'),
+            value: cursorColor,
+            colors: AppColor.colorOptions.where((e) => e != null).toList(),
+            onChanged: (v) => onMark('cursorColor $v', () => cursorColor = v ?? Colors.blue),
           ),
-          buildField(
-            label: 'backgroundCursorColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: backgroundCursorColor,
-              onChanged: (v) => onMark('backgroundCursorColor $v', () => backgroundCursorColor = v ?? Colors.grey),
-              allowNull: false,
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('backgroundCursorColor'),
+            value: backgroundCursorColor,
+            colors: AppColor.colorOptions.where((e) => e != null).toList(),
+            onChanged: (v) => onMark('backgroundCursorColor $v', () => backgroundCursorColor = v ?? Colors.grey),
           ),
-          buildField(
-            label: 'selectionColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: selectionColor,
-              onChanged: (v) => onMark('selectionColor ${v ?? 'null'}', () => selectionColor = v),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('selectionColor'),
+            value: selectionColor,
+            onChanged: (v) => onMark('selectionColor ${v ?? 'null'}', () => selectionColor = v),
           ),
-          buildField(
-            label: 'autocorrectionTextRectColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: autocorrectionTextRectColor,
-              onChanged: (v) => onMark('autocorrectionTextRectColor ${v ?? 'null'}', () => autocorrectionTextRectColor = v),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('autocorrectionTextRectColor'),
+            value: autocorrectionTextRectColor,
+            onChanged: (v) => onMark('autocorrectionTextRectColor ${v ?? 'null'}', () => autocorrectionTextRectColor = v),
           ),
-          buildField(
-            label: 'showCursor',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const [null, true, false],
-              isSelected: (e) => showCursor == e,
-              labelOf: (e) => e == null ? '默' : '$e',
-              onChanged: (e) => onMark('showCursor ${e ?? 'null'}', () => showCursor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('showCursor'),
+            values: const [null, true, false],
+            onEqual: (e) => showCursor == e,
+            labelOf: (e) => e == null ? '默' : '$e',
+            onChanged: (e) => onMark('showCursor ${e ?? 'null'}', () => showCursor = e),
           ),
-          buildSwitch(
-            title: 'showSelectionHandles',
+          NSwitchListTile(
+            title: const Text('showSelectionHandles'),
             value: showSelectionHandles,
             onChanged: (v) => onMark('showSelectionHandles $v', () => showSelectionHandles = v),
           ),
-          buildField(
-            label: 'enableInteractiveSelection',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const [null, true, false],
-              isSelected: (e) => enableInteractiveSelection == e,
-              labelOf: (e) => e == null ? '默' : '$e',
-              onChanged: (e) => onMark('enableInteractiveSelection ${e ?? 'null'}', () => enableInteractiveSelection = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('enableInteractiveSelection'),
+            values: const [null, true, false],
+            onEqual: (e) => enableInteractiveSelection == e,
+            labelOf: (e) => e == null ? '默' : '$e',
+            onChanged: (e) => onMark('enableInteractiveSelection ${e ?? 'null'}', () => enableInteractiveSelection = e),
           ),
-          buildSlider(
-            label: 'cursorWidth',
-            value: cursorWidth,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('cursorWidth'),
             min: 1,
             max: 8,
+            value: cursorWidth.clamp(1, 8),
             onChanged: (v) => onMark('cursorWidth ${v.round()}', () => cursorWidth = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'cursorHeight',
-            value: cursorHeight,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('cursorHeight'),
             min: 0,
             max: 48,
+            value: cursorHeight.clamp(0, 48),
             onChanged: (v) => onMark('cursorHeight ${v.round()}', () => cursorHeight = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'cursorRadius',
-            value: cursorRadius,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('cursorRadius'),
             min: 0,
             max: 12,
+            value: cursorRadius.clamp(0, 12),
             onChanged: (v) => onMark('cursorRadius ${v.round()}', () => cursorRadius = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSwitch(
-            title: 'cursorOpacityAnimates',
+          NSwitchListTile(
+            title: const Text('cursorOpacityAnimates'),
             value: cursorOpacityAnimates,
             onChanged: (v) => onMark('cursorOpacityAnimates $v', () => cursorOpacityAnimates = v),
           ),
-          buildSwitch(
-            title: 'cursorOffset',
+          NSwitchListTile(
+            title: const Text('cursorOffset'),
             value: useCursorOffset,
             onChanged: (v) => onMark('cursorOffset $v', () => useCursorOffset = v),
           ),
           if (useCursorOffset) ...[
-            buildSlider(
-              label: 'cursorOffset.dx',
-              value: cursorOffsetDx,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('cursorOffset.dx'),
               min: -8,
               max: 8,
+              value: cursorOffsetDx.clamp(-8, 8),
               onChanged: (v) => onMark('cursorOffset.dx ${v.toStringAsFixed(1)}', () => cursorOffsetDx = v),
-              fractionDigits: 1,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                return Text(
+                  v.toStringAsFixed(1),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
-            buildSlider(
-              label: 'cursorOffset.dy',
-              value: cursorOffsetDy,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('cursorOffset.dy'),
               min: -8,
               max: 8,
+              value: cursorOffsetDy.clamp(-8, 8),
               onChanged: (v) => onMark('cursorOffset.dy ${v.toStringAsFixed(1)}', () => cursorOffsetDy = v),
-              fractionDigits: 1,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                return Text(
+                  v.toStringAsFixed(1),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
           ],
-          buildSwitch(
-            title: 'paintCursorAboveText',
+          NSwitchListTile(
+            title: const Text('paintCursorAboveText'),
             value: paintCursorAboveText,
             onChanged: (v) => onMark('paintCursorAboveText $v', () => paintCursorAboveText = v),
           ),
-          buildField(
-            label: 'selectionHeightStyle',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: BoxHeightStyle.values,
-              isSelected: (e) => selectionHeightStyle == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('selectionHeightStyle ${e.name}', () => selectionHeightStyle = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('selectionHeightStyle'),
+            values: BoxHeightStyle.values,
+            onEqual: (e) => selectionHeightStyle == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('selectionHeightStyle ${e.name}', () => selectionHeightStyle = e),
           ),
-          buildField(
-            label: 'selectionWidthStyle',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: BoxWidthStyle.values,
-              isSelected: (e) => selectionWidthStyle == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('selectionWidthStyle ${e.name}', () => selectionWidthStyle = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('selectionWidthStyle'),
+            values: BoxWidthStyle.values,
+            onEqual: (e) => selectionWidthStyle == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('selectionWidthStyle ${e.name}', () => selectionWidthStyle = e),
           ),
         ],
       ),
@@ -795,301 +902,141 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'expands', value: expands, onChanged: onExpands),
+          NSwitchListTile(title: const Text('expands'), value: expands, onChanged: onExpands),
           if (!expands && !obscureText)
-            buildSlider(label: 'maxLines', value: maxLines, min: 0, max: 8, onChanged: onMaxLines),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('maxLines'),
+              min: 0,
+              max: 8,
+              value: maxLines.clamp(0, 8),
+              onChanged: onMaxLines,
+              activeColor: theme.colorScheme.primary,
+            ),
           if (!expands && !obscureText)
-            buildSlider(label: 'minLines', value: minLines, min: 0, max: 8, onChanged: onMinLines),
-          buildSlider(
-            label: 'scrollPadding',
-            value: scrollPadding,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('minLines'),
+              min: 0,
+              max: 8,
+              value: minLines.clamp(0, 8),
+              onChanged: onMinLines,
+              activeColor: theme.colorScheme.primary,
+            ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('scrollPadding'),
             min: 0,
             max: 48,
+            value: scrollPadding.clamp(0, 48),
             onChanged: (v) => onMark('scrollPadding ${v.round()}', () => scrollPadding = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildField(
-            label: 'clipBehavior',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: Clip.values,
-              isSelected: (e) => clipBehavior == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('clipBehavior'),
+            values: Clip.values,
+            onEqual: (e) => clipBehavior == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
-          buildField(
-            label: 'scrollPhysics',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _PhysicsKind.values,
-              isSelected: (e) => physicsKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('scrollPhysics ${e.name}', () => physicsKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('scrollPhysics'),
+            values: PhysicsKind.values,
+            onEqual: (e) => physicsKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('scrollPhysics ${e.name}', () => physicsKind = e),
           ),
-          buildSwitch(
-            title: 'scrollController',
+          NSwitchListTile(
+            title: const Text('scrollController'),
             value: useScrollController,
             onChanged: (v) => onMark('scrollController $v', () => useScrollController = v),
           ),
-          buildSwitch(
-            title: 'scrollBehavior',
+          NSwitchListTile(
+            title: const Text('scrollBehavior'),
             value: useScrollBehavior,
             onChanged: (v) => onMark('scrollBehavior $v', () => useScrollBehavior = v),
           ),
-          buildSwitch(
-            title: 'autofocus',
+          NSwitchListTile(
+            title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          buildSwitch(
-            title: 'rendererIgnoresPointer',
+          NSwitchListTile(
+            title: const Text('rendererIgnoresPointer'),
             value: rendererIgnoresPointer,
             onChanged: (v) => onMark('rendererIgnoresPointer $v', () => rendererIgnoresPointer = v),
           ),
-          buildSwitch(
-            title: 'scribbleEnabled',
+          NSwitchListTile(
+            title: const Text('scribbleEnabled'),
             value: scribbleEnabled,
             onChanged: (v) => onMark('scribbleEnabled $v', () => scribbleEnabled = v),
           ),
-          buildSwitch(
-            title: 'enableIMEPersonalizedLearning',
+          NSwitchListTile(
+            title: const Text('enableIMEPersonalizedLearning'),
             value: enableIMEPersonalizedLearning,
             onChanged: (v) => onMark('enableIMEPersonalizedLearning $v', () => enableIMEPersonalizedLearning = v),
           ),
-          buildSwitch(
-            title: 'contextMenuBuilder',
+          NSwitchListTile(
+            title: const Text('contextMenuBuilder'),
             value: useContextMenu,
             onChanged: (v) => onMark('contextMenuBuilder $v', () => useContextMenu = v),
           ),
-          buildSwitch(
-            title: 'magnifierConfiguration',
+          NSwitchListTile(
+            title: const Text('magnifierConfiguration'),
             value: useMagnifier,
             onChanged: (v) => onMark('magnifierConfiguration $v', () => useMagnifier = v),
           ),
-          buildSwitch(
-            title: 'undoController',
+          NSwitchListTile(
+            title: const Text('undoController'),
             value: useUndoController,
             onChanged: (v) => onMark('undoController $v', () => useUndoController = v),
           ),
-          buildSwitch(
-            title: 'restorationId',
+          NSwitchListTile(
+            title: const Text('restorationId'),
             value: useRestorationId,
             onChanged: (v) => onMark('restorationId $v', () => useRestorationId = v),
           ),
-          buildSwitch(
-            title: 'groupId 自定义',
+          NSwitchListTile(
+            title: const Text('groupId 自定义'),
             value: useCustomGroupId,
             onChanged: (v) => onMark('groupId $v', () => useCustomGroupId = v),
           ),
-          buildField(
-            label: 'mouseCursor',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _MouseKind.values,
-              isSelected: (e) => mouseKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('mouseCursor ${e.name}', () => mouseKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('mouseCursor'),
+            values: _MouseKind.values,
+            onEqual: (e) => mouseKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('mouseCursor ${e.name}', () => mouseKind = e),
           ),
-          buildField(
-            label: 'keyboardAppearance',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: Brightness.values,
-              isSelected: (e) => keyboardAppearance == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('keyboardAppearance ${e.name}', () => keyboardAppearance = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('keyboardAppearance'),
+            values: Brightness.values,
+            onEqual: (e) => keyboardAppearance == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('keyboardAppearance ${e.name}', () => keyboardAppearance = e),
           ),
-          buildField(
-            label: 'dragStartBehavior',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: DragStartBehavior.values,
-              isSelected: (e) => dragStartBehavior == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('dragStartBehavior ${e.name}', () => dragStartBehavior = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('dragStartBehavior'),
+            values: DragStartBehavior.values,
+            onEqual: (e) => dragStartBehavior == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('dragStartBehavior ${e.name}', () => dragStartBehavior = e),
           ),
         ],
       ),
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
 
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
 
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-    bool allowNull = true,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.where((e) => allowNull || e != null).map((e) {
-        final selected = value == e;
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onChanged(e),
-            customBorder: const CircleBorder(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: e ?? scheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
-                  width: selected ? 2 : 1,
-                ),
-                boxShadow: selected
-                    ? [
-                        BoxShadow(
-                          color: scheme.primary.withValues(alpha: 0.28),
-                          blurRadius: 8,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: e == null
-                  ? Text(
-                      '默',
-                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                    )
-                  : selected
-                      ? Icon(
-                          Icons.check_rounded,
-                          size: 16,
-                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        )
-                      : null,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    int fractionDigits = 0,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: fractionDigits > 0
-          ? (context, v) {
-              return Text(
-                v.toStringAsFixed(fractionDigits),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   Widget buildContextMenu(context, editableTextState) {
     return AdaptiveTextSelectionToolbar.editableText(
@@ -1127,38 +1074,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     return min;
   }
 
-  TextDirection? textDirectionOf() {
-    return switch (dirKind) {
-      _DirKind.nil => null,
-      _DirKind.ltr => TextDirection.ltr,
-      _DirKind.rtl => TextDirection.rtl,
-    };
-  }
-
-  Locale? localeOf() {
-    return switch (localeKind) {
-      _LocaleKind.nil => null,
-      _LocaleKind.en => const Locale('en'),
-      _LocaleKind.zh => const Locale('zh'),
-    };
-  }
-
-  TextScaler? textScalerOf() {
-    return switch (scalerKind) {
-      _ScalerKind.nil => null,
-      _ScalerKind.noScaling => TextScaler.noScaling,
-      _ScalerKind.linear => TextScaler.linear(scalerFactor),
-    };
-  }
-
-  StrutStyle? strutStyleOf() {
-    return switch (strutKind) {
-      _StrutKind.nil => null,
-      _StrutKind.disabled => StrutStyle.disabled,
-      _StrutKind.force => const StrutStyle(forceStrutHeight: true),
-    };
-  }
-
   TextHeightBehavior? textHeightBehaviorOf() {
     if (!useTextHeightBehavior) {
       return null;
@@ -1167,75 +1082,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       applyHeightToFirstAscent: applyHeightToFirstAscent,
       applyHeightToLastDescent: applyHeightToLastDescent,
     );
-  }
-
-  TextInputType? keyboardTypeOf() {
-    return switch (keyboardKind) {
-      _KeyboardKind.auto => null,
-      _KeyboardKind.text => TextInputType.text,
-      _KeyboardKind.multiline => TextInputType.multiline,
-      _KeyboardKind.number => TextInputType.number,
-      _KeyboardKind.phone => TextInputType.phone,
-      _KeyboardKind.datetime => TextInputType.datetime,
-      _KeyboardKind.emailAddress => TextInputType.emailAddress,
-      _KeyboardKind.url => TextInputType.url,
-      _KeyboardKind.visiblePassword => TextInputType.visiblePassword,
-      _KeyboardKind.name => TextInputType.name,
-      _KeyboardKind.none => TextInputType.none,
-    };
-  }
-
-  TextInputAction? textInputActionOf() {
-    return switch (actionKind) {
-      _ActionKind.nil => null,
-      _ActionKind.none => TextInputAction.none,
-      _ActionKind.unspecified => TextInputAction.unspecified,
-      _ActionKind.done => TextInputAction.done,
-      _ActionKind.go => TextInputAction.go,
-      _ActionKind.search => TextInputAction.search,
-      _ActionKind.send => TextInputAction.send,
-      _ActionKind.next => TextInputAction.next,
-      _ActionKind.previous => TextInputAction.previous,
-      _ActionKind.newline => TextInputAction.newline,
-    };
-  }
-
-  List<TextInputFormatter>? inputFormattersOf() {
-    return switch (formatterKind) {
-      _FormatterKind.nil => null,
-      _FormatterKind.digits => [FilteringTextInputFormatter.digitsOnly],
-      _FormatterKind.length => [LengthLimitingTextInputFormatter(10)],
-    };
-  }
-
-  MouseCursor? mouseCursorOf() {
-    return switch (mouseKind) {
-      _MouseKind.nil => null,
-      _MouseKind.text => SystemMouseCursors.text,
-      _MouseKind.basic => SystemMouseCursors.basic,
-      _MouseKind.click => SystemMouseCursors.click,
-      _MouseKind.forbidden => SystemMouseCursors.forbidden,
-      _MouseKind.grab => SystemMouseCursors.grab,
-    };
-  }
-
-  ScrollPhysics? scrollPhysicsOf() {
-    return switch (physicsKind) {
-      _PhysicsKind.platform => null,
-      _PhysicsKind.bouncing => const BouncingScrollPhysics(),
-      _PhysicsKind.clamping => const ClampingScrollPhysics(),
-      _PhysicsKind.never => const NeverScrollableScrollPhysics(),
-    };
-  }
-
-  Iterable<String> autofillHintsOf() {
-    return switch (autofillKind) {
-      _AutofillKind.empty => const <String>[],
-      _AutofillKind.email => const [AutofillHints.email],
-      _AutofillKind.username => const [AutofillHints.username],
-      _AutofillKind.password => const [AutofillHints.password],
-      _AutofillKind.telephone => const [AutofillHints.telephoneNumber],
-    };
   }
 
   void onMark(String event, [VoidCallback? apply]) {
@@ -1351,7 +1197,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     dragStartBehavior = DragStartBehavior.start;
     enableInteractiveSelection = null;
     useScrollController = false;
-    physicsKind = _PhysicsKind.platform;
+    physicsKind = PhysicsKind.platform;
     autocorrectionTextRectColor = null;
     autofillKind = _AutofillKind.empty;
     clipBehavior = Clip.hardEdge;

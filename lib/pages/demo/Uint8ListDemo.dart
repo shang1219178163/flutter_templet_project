@@ -1,13 +1,30 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// 视图类型
-enum _ViewKind { int8, uint8, uint16, uint32 }
+enum _ViewKind {
+  int8(label: 'int8'),
+  uint8(label: 'uint8'),
+  uint16(label: 'uint16'),
+  uint32(label: 'uint32'),
+  ;
+  const _ViewKind({required this.label});
+  final String label;
+  List<int> view(Uint8List bytes) {
+    return switch (this) {
+      _ViewKind.int8 => bytes.buffer.asInt8List(),
+      _ViewKind.uint8 => bytes.buffer.asUint8List(),
+      _ViewKind.uint16 => bytes.buffer.asUint16List(),
+      _ViewKind.uint32 => bytes.buffer.asUint32List(),
+    };
+  }
+}
 
 class Uint8ListDemo extends StatefulWidget {
   Uint8ListDemo({Key? key, this.title}) : super(key: key);
@@ -20,6 +37,8 @@ class Uint8ListDemo extends StatefulWidget {
 
 class _Uint8ListDemoState extends State<Uint8ListDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -38,7 +57,7 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -57,7 +76,7 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -100,10 +119,9 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final bytes = Uint8List.fromList(source);
-    final viewed = viewOf(bytes);
+    final viewed = viewKind.view(bytes);
     return DecoratedBox(
       decoration: BoxDecoration(
         color: scheme.surfaceContainerHighest.withValues(alpha: 0.35),
@@ -152,68 +170,20 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
       icon: const Icon(Icons.memory_rounded),
       title: '视图',
       subtitle: 'buffer.asXxxList',
-      child: buildChoiceChips(
+      child: NChoiceChipListItem<_ViewKind>(
+        title: const Text('buffer.asXxxList'),
         values: _ViewKind.values,
-        isSelected: (e) => viewKind == e,
-        labelOf: (e) => e.name,
+        value: viewKind,
+        labelOf: (e) => e.label,
         onChanged: onViewKind,
       ),
     );
   }
 
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  List<int> viewOf(Uint8List bytes) {
-    switch (viewKind) {
-      case _ViewKind.int8:
-        return bytes.buffer.asInt8List();
-      case _ViewKind.uint8:
-        return bytes.buffer.asUint8List();
-      case _ViewKind.uint16:
-        return bytes.buffer.asUint16List();
-      case _ViewKind.uint32:
-        return bytes.buffer.asUint32List();
-    }
-  }
-
   void onPress() {
     final bytes = Uint8List.fromList(source);
-    final viewed = viewOf(bytes);
-    lastEvent = '${viewKind.name} $viewed';
+    final viewed = viewKind.view(bytes);
+    lastEvent = '${viewKind.label} $viewed';
     DLog.d(lastEvent);
     setState(() {});
   }

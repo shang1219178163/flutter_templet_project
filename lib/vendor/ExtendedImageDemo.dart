@@ -21,6 +21,8 @@ class ExtendedImageDemo extends StatefulWidget {
 class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
 
   /// 原 Demo 使用网络图 + cache + BoxFit.fill + loadStateChanged
@@ -68,7 +70,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -87,7 +89,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -128,8 +130,8 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
                             },
                             {
                               NLangEnum.en:
-                                  'onDoubleTap fires in gesture mode. ShapeKind maps BoxShape and borderRadius. ClipKind.nil uses Clip.antiAlias.',
-                              NLangEnum.zh: 'onDoubleTap 仅在 gesture 模式触发。ShapeKind 映射 BoxShape/borderRadius。ClipKind.nil 按默认 Clip.antiAlias。',
+                                  'onDoubleTap fires in gesture mode. ShapeKind maps BoxShape and borderRadius.',
+                              NLangEnum.zh: 'onDoubleTap 仅在 gesture 模式触发。ShapeKind 映射 BoxShape/borderRadius。',
                             },
                           ],
                         ),
@@ -150,7 +152,6 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -257,20 +258,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     );
   }
 
-  Clip clipOf() {
-    switch (clipKind) {
-      case ClipKind.nil:
-        return Clip.antiAlias;
-      case ClipKind.none:
-        return Clip.none;
-      case ClipKind.hardEdge:
-        return Clip.hardEdge;
-      case ClipKind.antiAlias:
-        return Clip.antiAlias;
-      case ClipKind.antiAliasWithSaveLayer:
-        return Clip.antiAliasWithSaveLayer;
-    }
-  }
+  Clip clipOf() => clipKind.clip;
 
   BoxShape? shapeOf() {
     switch (shapeKind) {
@@ -360,7 +348,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
             child: buildChoiceChips(
               values: ClipKind.values,
               isSelected: (e) => clipKind == e,
-              labelOf: (e) => e == ClipKind.nil ? 'null' : e.name,
+              labelOf: (e) => e.label,
               onChanged: onClipKind,
             ),
           ),
@@ -601,7 +589,6 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -630,7 +617,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -664,7 +651,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -725,7 +712,6 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     required ValueChanged<double> onChanged,
     int fractionDigits = 0,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -755,7 +741,6 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,

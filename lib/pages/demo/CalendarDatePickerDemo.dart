@@ -7,20 +7,139 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
+/// 原 Demo 周五周六不可选
+bool _predicateOriginal(DateTime val) => val.weekday != 5 && val.weekday != 6;
+
+/// 仅工作日可选
+bool _predicateWeekend(DateTime val) => val.weekday != DateTime.saturday && val.weekday != DateTime.sunday;
+
 /// selectableDayPredicate 预设
-enum _PredicateKind { original, none, weekend }
+enum _PredicateKind {
+  none(label: 'none', predicate: null),
+  original(label: 'original', predicate: _predicateOriginal),
+  weekend(label: 'weekend', predicate: _predicateWeekend);
+
+  const _PredicateKind({required this.label, required this.predicate});
+
+  /// Chip 文案
+  final String label;
+
+  /// 可选日谓词；[none] 为 null
+  final SelectableDayPredicate? predicate;
+}
 
 /// initialDate 预设
-enum _InitialKind { today, none, first, last }
+enum _InitialKind {
+  today(label: 'today'),
+  none(label: 'none'),
+  first(label: 'first'),
+  last(label: 'last');
+
+  const _InitialKind({required this.label});
+
+  /// Chip 文案
+  final String label;
+
+  /// 构造 initialDate；边界与谓词由页面注入
+  DateTime? date({
+    required DateTime firstDate,
+    required DateTime lastDate,
+    SelectableDayPredicate? predicate,
+  }) {
+    return switch (this) {
+      _InitialKind.none => null,
+      _InitialKind.today => _selectableOrNull(
+          DateTime.now(),
+          firstDate: firstDate,
+          lastDate: lastDate,
+          predicate: predicate,
+        ),
+      _InitialKind.first => _selectableOrNull(
+          firstDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          predicate: predicate,
+        ),
+      _InitialKind.last => _selectableOrNull(
+          lastDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          predicate: predicate,
+        ),
+    };
+  }
+
+  /// 将 [raw] 钳到 [firstDate]～[lastDate]，并满足 [predicate]（若有）
+  DateTime? _selectableOrNull(
+    DateTime raw, {
+    required DateTime firstDate,
+    required DateTime lastDate,
+    SelectableDayPredicate? predicate,
+  }) {
+    var d = DateUtils.dateOnly(raw);
+    if (d.isBefore(firstDate)) {
+      d = firstDate;
+    }
+    if (d.isAfter(lastDate)) {
+      d = lastDate;
+    }
+    if (predicate == null) {
+      return d;
+    }
+    for (var i = 0; i < 60; i++) {
+      final next = d.add(Duration(days: i));
+      if (next.isAfter(lastDate)) {
+        break;
+      }
+      if (predicate(next)) {
+        return DateUtils.dateOnly(next);
+      }
+    }
+    for (var i = 1; i < 60; i++) {
+      final prev = d.subtract(Duration(days: i));
+      if (prev.isBefore(firstDate)) {
+        break;
+      }
+      if (predicate(prev)) {
+        return DateUtils.dateOnly(prev);
+      }
+    }
+    return null;
+  }
+}
 
 /// currentDate 预设
-enum _CurrentKind { defaults, today, first, last }
+enum _CurrentKind {
+  defaults(label: 'defaults'),
+  today(label: 'today'),
+  first(label: 'first'),
+  last(label: 'last');
+
+  const _CurrentKind({required this.label});
+
+  /// Chip 文案
+  final String label;
+
+  /// 构造 currentDate；边界由页面注入
+  DateTime? date({
+    required DateTime firstDate,
+    required DateTime lastDate,
+  }) {
+    return switch (this) {
+      _CurrentKind.defaults => null,
+      _CurrentKind.today => DateTime.now(),
+      _CurrentKind.first => firstDate,
+      _CurrentKind.last => lastDate,
+    };
+  }
+}
 
 class CalendarDatePickerDemo extends StatefulWidget {
   const CalendarDatePickerDemo({Key? key, this.title}) : super(key: key);
@@ -189,74 +308,19 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   Widget buildCalendarDatePicker() {
     return CalendarDatePicker(
       key: ValueKey(pickerEpoch),
-      initialDate: initialDateOf(),
+      initialDate: initialKind.date(
+        firstDate: firstDate,
+        lastDate: lastDate,
+        predicate: predicateKind.predicate,
+      ),
       firstDate: firstDate,
       lastDate: lastDate,
-      currentDate: currentDateOf(),
+      currentDate: currentKind.date(firstDate: firstDate, lastDate: lastDate),
       initialCalendarMode: initialCalendarMode,
-      selectableDayPredicate: predicateOf(),
+      selectableDayPredicate: predicateKind.predicate,
       onDateChanged: onDateChanged,
       onDisplayedMonthChanged: onDisplayedMonthChanged,
     );
-  }
-
-  DateTime? initialDateOf() {
-    return switch (initialKind) {
-      _InitialKind.none => null,
-      _InitialKind.today => selectableOrNull(DateTime.now()),
-      _InitialKind.first => selectableOrNull(firstDate),
-      _InitialKind.last => selectableOrNull(lastDate),
-    };
-  }
-
-  DateTime? currentDateOf() {
-    return switch (currentKind) {
-      _CurrentKind.defaults => null,
-      _CurrentKind.today => DateTime.now(),
-      _CurrentKind.first => firstDate,
-      _CurrentKind.last => lastDate,
-    };
-  }
-
-  SelectableDayPredicate? predicateOf() {
-    return switch (predicateKind) {
-      _PredicateKind.none => null,
-      _PredicateKind.original => (val) => val.weekday != 5 && val.weekday != 6,
-      _PredicateKind.weekend => (val) => val.weekday != DateTime.saturday && val.weekday != DateTime.sunday,
-    };
-  }
-
-  DateTime? selectableOrNull(DateTime raw) {
-    var d = DateUtils.dateOnly(raw);
-    if (d.isBefore(firstDate)) {
-      d = firstDate;
-    }
-    if (d.isAfter(lastDate)) {
-      d = lastDate;
-    }
-    final pred = predicateOf();
-    if (pred == null) {
-      return d;
-    }
-    for (var i = 0; i < 60; i++) {
-      final next = d.add(Duration(days: i));
-      if (next.isAfter(lastDate)) {
-        break;
-      }
-      if (pred(next)) {
-        return DateUtils.dateOnly(next);
-      }
-    }
-    for (var i = 1; i < 60; i++) {
-      final prev = d.subtract(Duration(days: i));
-      if (prev.isBefore(firstDate)) {
-        break;
-      }
-      if (pred(prev)) {
-        return DateUtils.dateOnly(prev);
-      }
-    }
-    return null;
   }
 
   void bumpPicker() {
@@ -278,84 +342,90 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'initialDate',
-            child: buildChoiceChips(
-              values: _InitialKind.values,
-              isSelected: (e) => initialKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('initialDate ${e.name}', () {
-                initialKind = e;
-                bumpPicker();
-              }),
-            ),
+          NChoiceChipListItem<_InitialKind>(
+            title: const Text('initialDate'),
+            values: _InitialKind.values,
+            value: initialKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('initialDate ${e.label}', () {
+              initialKind = e;
+              bumpPicker();
+            }),
           ),
-          buildField(
-            label: 'currentDate',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _CurrentKind.values,
-              isSelected: (e) => currentKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('currentDate ${e.name}', () => currentKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<_CurrentKind>(
+            title: const Text('currentDate'),
+            values: _CurrentKind.values,
+            value: currentKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('currentDate ${e.label}', () => currentKind = e),
           ),
-          buildField(
-            label: 'initialCalendarMode',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: DatePickerMode.values,
-              isSelected: (e) => initialCalendarMode == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('initialCalendarMode ${e.name}', () {
-                initialCalendarMode = e;
-                bumpPicker();
-              }),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<DatePickerMode>(
+            title: const Text('initialCalendarMode'),
+            values: DatePickerMode.values,
+            value: initialCalendarMode,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('initialCalendarMode ${e.name}', () {
+              initialCalendarMode = e;
+              bumpPicker();
+            }),
           ),
-          buildSlider(
-            label: 'firstDate.year',
-            value: firstYear.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('firstDate.year'),
             min: 2015,
             max: 2028,
+            value: firstYear.toDouble().clamp(2015, 2028),
             onChanged: (v) => onMark('firstDate.year ${v.round()}', () {
               firstYear = v.round();
               ensureRange();
               bumpPicker();
             }),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'firstDate.month',
-            value: firstMonth.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('firstDate.month'),
             min: 1,
             max: 12,
+            value: firstMonth.toDouble().clamp(1, 12),
             onChanged: (v) => onMark('firstDate.month ${v.round()}', () {
               firstMonth = v.round();
               ensureRange();
               bumpPicker();
             }),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'lastDate.year',
-            value: lastYear.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('lastDate.year'),
             min: 2020,
             max: 2040,
+            value: lastYear.toDouble().clamp(2020, 2040),
             onChanged: (v) => onMark('lastDate.year ${v.round()}', () {
               lastYear = v.round();
               ensureRange();
               bumpPicker();
             }),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'lastDate.month',
-            value: lastMonth.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('lastDate.month'),
             min: 1,
             max: 12,
+            value: lastMonth.toDouble().clamp(1, 12),
             onChanged: (v) => onMark('lastDate.month ${v.round()}', () {
               lastMonth = v.round();
               ensureRange();
               bumpPicker();
             }),
+            activeColor: theme.colorScheme.primary,
           ),
         ],
       ),
@@ -370,103 +440,18 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'selectableDayPredicate',
-            child: buildChoiceChips(
-              values: _PredicateKind.values,
-              isSelected: (e) => predicateKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('selectableDayPredicate ${e.name}', () {
-                predicateKind = e;
-                bumpPicker();
-              }),
-            ),
+          NChoiceChipListItem<_PredicateKind>(
+            title: const Text('selectableDayPredicate'),
+            values: _PredicateKind.values,
+            value: predicateKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('selectableDayPredicate ${e.label}', () {
+              predicateKind = e;
+              bumpPicker();
+            }),
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
     );
   }
 

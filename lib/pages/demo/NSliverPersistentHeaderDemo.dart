@@ -7,7 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
@@ -16,7 +18,12 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// 构造方式
-enum _HeaderKind { builder, delegate }
+enum _HeaderKind {
+  builder(label: 'builder'),
+  delegate(label: 'delegate');
+  const _HeaderKind({required this.label});
+  final String label;
+}
 
 class NSliverPersistentHeaderDemo extends StatefulWidget {
   const NSliverPersistentHeaderDemo({Key? key, this.title}) : super(key: key);
@@ -29,6 +36,7 @@ class NSliverPersistentHeaderDemo extends StatefulWidget {
 
 class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final previewController = ScrollController();
@@ -61,7 +69,7 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -80,7 +88,7 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -125,7 +133,6 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -237,34 +244,40 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('构造'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('构造'),
             values: _HeaderKind.values,
             value: kind,
-            labelOf: (e) => e.name,
-            onChanged: (e) => onMark('kind ${e.name}', () => kind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('kind ${e.label}', () => kind = e),
           ),
-          buildSlider(
-            label: 'min',
-            value: min,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('min'),
             min: 24,
             max: 120,
+            value: min.clamp(24, 120),
             onChanged: onMin,
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'max',
-            value: max,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('max'),
             min: 24,
             max: 200,
+            value: max.clamp(24, 200),
             onChanged: onMax,
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSwitch(
-            title: 'pinned',
+          NSwitchListTile(
+            title: const Text('pinned'),
             value: pinned,
             onChanged: (v) => onMark('pinned $v', () => pinned = v),
           ),
-          buildSwitch(
-            title: 'floating',
+          NSwitchListTile(
+            title: const Text('floating'),
             value: floating,
             onChanged: (v) => onMark('floating $v', () => floating = v),
           ),
@@ -273,84 +286,6 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
     );
   }
 
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();

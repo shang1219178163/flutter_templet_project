@@ -9,14 +9,16 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class AnimatedContainerDemo extends StatefulWidget {
@@ -252,18 +254,15 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     );
   }
 
+  /// decoration 模式：stadium 用 ShapeDecoration，其余用 BoxDecoration
   Decoration decorationOf() {
-    return switch (shapeKind) {
-      ShapeKind.none => BoxDecoration(color: color),
-      ShapeKind.rounded => BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(shapeRadius),
-        ),
-      ShapeKind.stadium => ShapeDecoration(
-          color: color,
-          shape: const StadiumBorder(),
-        ),
-    };
+    if (shapeKind == ShapeKind.stadium) {
+      return ShapeDecoration(color: color, shape: shapeKind.shape()!);
+    }
+    return BoxDecoration(
+      color: color,
+      borderRadius: shapeKind == ShapeKind.none ? null : shapeKind.borderRadius(roundedRadius: shapeRadius),
+    );
   }
 
   Widget searchContainer() {
@@ -368,96 +367,120 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'child 显示按钮',
+          NSwitchListTile(
+            title: const Text('child 显示按钮'),
             value: useChild,
             onChanged: (v) => onMark('useChild $v', () => useChild = v),
           ),
-          const Text('alignment'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('alignment'),
             values: AlignmentExt.allCases,
             value: alignment,
             labelOf: (e) => e.toString().split('.').last,
             onChanged: (e) => onMark('alignment $e', () => alignment = e),
           ),
-          buildSwitch(
-            title: 'decoration 代替 color',
+          NSwitchListTile(
+            title: const Text('decoration 代替 color'),
             value: useDecoration,
             onChanged: (v) => onMark('useDecoration $v', () => useDecoration = v),
           ),
           if (useDecoration) ...[
-            const Text('shape'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('shape'),
               values: ShapeKind.values,
               value: shapeKind,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('shapeKind ${e.name}', () => shapeKind = e),
+              labelOf: (e) => e.label,
+              onChanged: (e) => onMark('shapeKind ${e.label}', () => shapeKind = e),
             ),
             if (shapeKind == ShapeKind.rounded)
-              buildSlider(
-                label: 'shapeRadius',
-                value: shapeRadius,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('shapeRadius'),
                 min: 0,
                 max: 48,
+                value: shapeRadius.clamp(0, 48),
                 onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
+                activeColor: theme.colorScheme.primary,
               ),
           ],
-          const Text('color'),
-          buildColorDots(value: color, onChanged: (e) => onMark('color ${e ?? 'null'}', () => color = e)),
-          buildSlider(
-            label: 'width',
-            value: width,
+          NChoiceColorListItem(
+            title: const Text('color'),
+            value: color,
+            onChanged: (e) => onMark('color ${e ?? 'null'}', () => color = e),
+          ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('width'),
             min: 80,
             max: 400,
+            value: width.clamp(80, 400),
             onChanged: (v) => onMark('width ${v.round()}', () => width = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'height',
-            value: height,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('height'),
             min: 80,
             max: 400,
+            value: height.clamp(80, 400),
             onChanged: (v) => onMark('height ${v.round()}', () => height = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSwitch(
-            title: 'padding 指定内边距',
+          NSwitchListTile(
+            title: const Text('padding 指定内边距'),
             value: usePadding,
             onChanged: (v) => onMark('usePadding $v', () => usePadding = v),
           ),
           if (usePadding) ...[
-            buildSlider(
-              label: 'padding H',
-              value: padH,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding H'),
               min: 0,
               max: 32,
+              value: padH.clamp(0, 32),
               onChanged: (v) => onMark('padH ${v.round()}', () => padH = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'padding V',
-              value: padV,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding V'),
               min: 0,
               max: 32,
+              value: padV.clamp(0, 32),
               onChanged: (v) => onMark('padV ${v.round()}', () => padV = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
-          buildSwitch(
-            title: 'margin 指定外边距',
+          NSwitchListTile(
+            title: const Text('margin 指定外边距'),
             value: useMargin,
             onChanged: (v) => onMark('useMargin $v', () => useMargin = v),
           ),
           if (useMargin) ...[
-            buildSlider(
-              label: 'margin H',
-              value: marginH,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('margin H'),
               min: 0,
               max: 32,
+              value: marginH.clamp(0, 32),
               onChanged: (v) => onMark('marginH ${v.round()}', () => marginH = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'margin V',
-              value: marginV,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('margin V'),
               min: 0,
               max: 32,
+              value: marginV.clamp(0, 32),
               onChanged: (v) => onMark('marginV ${v.round()}', () => marginV = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
         ],
@@ -473,56 +496,72 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('clipBehavior'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('clipBehavior'),
             values: Clip.values,
             value: clipBehavior,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
-          buildSwitch(
-            title: 'foregroundDecoration',
+          NSwitchListTile(
+            title: const Text('foregroundDecoration'),
             value: useForeground,
             onChanged: (v) => onMark('useForeground $v', () => useForeground = v),
           ),
           if (useForeground) ...[
-            const Text('foregroundColor'),
-            buildColorDots(
+            NChoiceColorListItem(
+              title: const Text('foregroundColor'),
               value: foregroundColor,
               onChanged: (e) => onMark('foregroundColor ${e ?? 'null'}', () => foregroundColor = e),
             ),
           ],
-          buildSwitch(
-            title: 'transform 旋转',
+          NSwitchListTile(
+            title: const Text('transform 旋转'),
             value: useTransform,
             onChanged: (v) => onMark('useTransform $v', () => useTransform = v),
           ),
           if (useTransform) ...[
-            buildSlider(
-              label: 'rotateDeg',
-              value: rotateDeg,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('rotateDeg'),
               min: 0,
               max: 360,
+              value: rotateDeg.clamp(0, 360),
               onChanged: (v) => onMark('rotateDeg ${v.round()}', () => rotateDeg = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            const Text('transformAlignment'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('transformAlignment'),
               values: AlignmentExt.allCases,
               value: transformAlignment,
               labelOf: (e) => e.toString().split('.').last,
               onChanged: (e) => onMark('transformAlignment $e', () => transformAlignment = e),
             ),
           ],
-          buildSlider(
-            label: 'duration',
-            value: durationMs,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('duration'),
             min: 100,
             max: 3000,
+            value: durationMs.clamp(100, 3000),
             onChanged: (v) => onMark('durationMs ${v.round()}', () => durationMs = v),
-            durationLabel: true,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              final ms = v.round();
+              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+              return Text(
+                text,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
-          const Text('curve'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('curve'),
             values: NDecorationCard.curvePresets,
             value: curve,
             labelOf: NDecorationCard.nameOfCurve,
@@ -530,136 +569,6 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    bool durationLabel = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: durationLabel
-          ? (context, v) {
-              final ms = v.round();
-              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
-              return Text(
-                text,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
     );
   }
 

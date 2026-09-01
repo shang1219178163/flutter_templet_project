@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 /// transitionsBuilder 预设，对应 Material PageTransitionsBuilder
-enum _TransitionKind { openUpwards, zoom, cupertino, fadeUpwards, none, predictiveBack }
+enum _TransitionKind {
+  openUpwards(label: 'OpenUpwards'),
+  zoom(label: 'Zoom'),
+  cupertino(label: 'Cupertino'),
+  fadeUpwards(label: 'FadeUpwards'),
+  none(label: 'none'),
+  predictiveBack(label: 'PredictiveBack'),
+  ;
+  const _TransitionKind({required this.label});
+  final String label;
+}
 
 /// barrierLabel 预设
-enum _BarrierLabelKind { nil, dismiss }
+enum _BarrierLabelKind {
+  nil(label: 'null', value: null),
+  dismiss(label: 'dismiss', value: 'dismiss'),
+  ;
+  const _BarrierLabelKind({required this.label, required this.value});
+  final String label;
+  final String? value;
+}
 
 class PageBuilderDemo extends StatefulWidget {
   const PageBuilderDemo({Key? key, this.title}) : super(key: key);
@@ -151,7 +170,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
         child: Column(
           children: [
             Text(
-              nameOfKind(transitionKind),
+              transitionKind.label,
               style: theme.textTheme.titleSmall?.copyWith(color: scheme.onSurface),
             ),
             const SizedBox(height: 8),
@@ -182,33 +201,29 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'transitionsBuilder',
-            child: buildChoiceChips(
-              values: _TransitionKind.values,
-              isSelected: (e) => transitionKind == e,
-              labelOf: nameOfKind,
-              onChanged: (e) => onMark('transitionsBuilder ${nameOfKind(e)}', () => transitionKind = e),
-            ),
+          NChoiceChipListItem<_TransitionKind>(
+            title: const Text('transitionsBuilder'),
+            values: _TransitionKind.values,
+            value: transitionKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('transitionsBuilder ${e.label}', () => transitionKind = e),
           ),
           if (transitionKind == _TransitionKind.zoom) ...[
-            buildSwitch(
-              title: 'Zoom.allowSnapshotting',
+            NSwitchListTile(
+              title: const Text('Zoom.allowSnapshotting'),
               value: zoomAllowSnapshotting,
               onChanged: (v) => onMark('Zoom.allowSnapshotting $v', () => zoomAllowSnapshotting = v),
             ),
-            buildSwitch(
-              title: 'Zoom.allowEnterRouteSnapshotting',
+            NSwitchListTile(
+              title: const Text('Zoom.allowEnterRouteSnapshotting'),
               value: zoomAllowEnterRouteSnapshotting,
               onChanged: (v) => onMark('Zoom.allowEnterRouteSnapshotting $v', () => zoomAllowEnterRouteSnapshotting = v),
             ),
-            buildField(
-              label: 'Zoom.backgroundColor',
-              showTopGap: true,
-              child: buildColorDots(
-                value: zoomBackgroundColor,
-                onChanged: (e) => onMark('Zoom.backgroundColor ${e ?? 'null'}', () => zoomBackgroundColor = e),
-              ),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('Zoom.backgroundColor'),
+              value: zoomBackgroundColor,
+              onChanged: (e) => onMark('Zoom.backgroundColor ${e ?? 'null'}', () => zoomBackgroundColor = e),
             ),
           ],
         ],
@@ -224,48 +239,67 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'opaque', value: opaque, onChanged: (v) => onMark('opaque $v', () => opaque = v)),
-          buildSwitch(
-            title: 'barrierDismissible',
+          NSwitchListTile(title: const Text('opaque'), value: opaque, onChanged: (v) => onMark('opaque $v', () => opaque = v)),
+          NSwitchListTile(
+            title: const Text('barrierDismissible'),
             value: barrierDismissible,
             onChanged: (v) => onMark('barrierDismissible $v', () => barrierDismissible = v),
           ),
-          buildField(
-            label: 'barrierColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: barrierColor,
-              onChanged: (e) => onMark('barrierColor ${e ?? 'null'}', () => barrierColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('barrierColor'),
+            value: barrierColor,
+            onChanged: (e) => onMark('barrierColor ${e ?? 'null'}', () => barrierColor = e),
           ),
-          buildField(
-            label: 'barrierLabel',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _BarrierLabelKind.values,
-              isSelected: (e) => barrierLabelKind == e,
-              labelOf: (e) => switch (e) {
-                _BarrierLabelKind.nil => 'null',
-                _BarrierLabelKind.dismiss => 'dismiss',
-              },
-              onChanged: (e) => onMark('barrierLabel ${e.name}', () => barrierLabelKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<_BarrierLabelKind>(
+            title: const Text('barrierLabel'),
+            values: _BarrierLabelKind.values,
+            value: barrierLabelKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('barrierLabel ${e.label}', () => barrierLabelKind = e),
           ),
-          buildSlider(
-            label: 'transitionDuration',
-            value: durationMs,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('transitionDuration'),
             min: 0,
             max: 2000,
+            value: durationMs.clamp(0, 2000),
             onChanged: (v) => onMark('transitionDuration ${v.round()}ms', () => durationMs = v),
-            durationLabel: true,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              final ms = v.round();
+              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+              return Text(
+                text,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
-          buildSlider(
-            label: 'reverseTransitionDuration',
-            value: reverseDurationMs,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('reverseTransitionDuration'),
             min: 0,
             max: 2000,
+            value: reverseDurationMs.clamp(0, 2000),
             onChanged: (v) => onMark('reverseTransitionDuration ${v.round()}ms', () => reverseDurationMs = v),
-            durationLabel: true,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              final ms = v.round();
+              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+              return Text(
+                text,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -280,32 +314,30 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'maintainState',
+          NSwitchListTile(
+            title: const Text('maintainState'),
             value: maintainState,
             onChanged: (v) => onMark('maintainState $v', () => maintainState = v),
           ),
-          buildSwitch(
-            title: 'fullscreenDialog',
+          NSwitchListTile(
+            title: const Text('fullscreenDialog'),
             value: fullscreenDialog,
             onChanged: (v) => onMark('fullscreenDialog $v', () => fullscreenDialog = v),
           ),
-          buildSwitch(
-            title: 'allowSnapshotting',
+          NSwitchListTile(
+            title: const Text('allowSnapshotting'),
             value: allowSnapshotting,
             onChanged: (v) => onMark('allowSnapshotting $v', () => allowSnapshotting = v),
           ),
-          buildField(
-            label: 'requestFocus',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const [null, true, false],
-              isSelected: (e) => requestFocus == e,
-              labelOf: (e) => e == null ? 'null' : '$e',
-              onChanged: (e) => onMark('requestFocus $e', () => requestFocus = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<bool?>(
+            title: const Text('requestFocus'),
+            values: const [null, true, false],
+            value: requestFocus,
+            labelOf: (e) => e == null ? 'null' : '$e',
+            onChanged: (e) => onMark('requestFocus $e', () => requestFocus = e),
           ),
-          buildSwitch(title: 'settings', value: useSettings, onChanged: (v) => onMark('settings $v', () => useSettings = v)),
+          NSwitchListTile(title: const Text('settings'), value: useSettings, onChanged: (v) => onMark('settings $v', () => useSettings = v)),
         ],
       ),
     );
@@ -326,191 +358,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onChanged(e),
-            customBorder: const CircleBorder(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: e ?? scheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
-                  width: selected ? 2 : 1,
-                ),
-                boxShadow: selected
-                    ? [
-                        BoxShadow(
-                          color: scheme.primary.withValues(alpha: 0.28),
-                          blurRadius: 8,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: e == null
-                  ? Text(
-                      '默',
-                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                    )
-                  : selected
-                      ? Icon(
-                          Icons.check_rounded,
-                          size: 16,
-                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        )
-                      : null,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    bool durationLabel = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: durationLabel
-          ? (context, v) {
-              final ms = v.round();
-              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
-              return Text(
-                text,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
-
-  String nameOfKind(_TransitionKind kind) {
-    return switch (kind) {
-      _TransitionKind.openUpwards => 'OpenUpwards',
-      _TransitionKind.zoom => 'Zoom',
-      _TransitionKind.cupertino => 'Cupertino',
-      _TransitionKind.fadeUpwards => 'FadeUpwards',
-      _TransitionKind.none => 'none',
-      _TransitionKind.predictiveBack => 'PredictiveBack',
-    };
-  }
 
   PageTransitionsBuilder? pageTransitionsBuilderOf() {
     return switch (transitionKind) {
@@ -527,13 +374,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     };
   }
 
-  String? barrierLabelOf() {
-    return switch (barrierLabelKind) {
-      _BarrierLabelKind.nil => null,
-      _BarrierLabelKind.dismiss => 'dismiss',
-    };
-  }
-
   RouteSettings settingsOf() {
     final arguments = ModalRoute.of(context)?.settings.arguments ?? {'from': 'PageBuilderDemo'};
     if (!useSettings) {
@@ -546,7 +386,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   Future<void> onOpenNext() async {
-    lastEvent = 'push ${nameOfKind(transitionKind)}';
+    lastEvent = 'push ${transitionKind.label}';
     DLog.d(lastEvent);
     setState(() {});
     final result = await Navigator.of(context).push(
@@ -562,7 +402,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
         opaque: opaque,
         barrierDismissible: barrierDismissible,
         barrierColor: barrierColor,
-        barrierLabel: barrierLabelOf(),
+        barrierLabel: barrierLabelKind.value,
         maintainState: maintainState,
         fullscreenDialog: fullscreenDialog,
         allowSnapshotting: allowSnapshotting,

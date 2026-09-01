@@ -10,15 +10,23 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// CarouselView 构造方式
-enum _CarouselKind { uncontained, weighted }
+enum _CarouselKind {
+  uncontained(label: 'CarouselView'),
+  weighted(label: 'CarouselView.weighted');
+  const _CarouselKind({required this.label});
+  final String label;
+}
 
 class CarouselViewDemo extends StatefulWidget {
   const CarouselViewDemo({
@@ -195,6 +203,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   Widget buildCarousel() {
+    final shape = shapeKind.shape(roundedRadius: borderRadius)!;
     if (kind == _CarouselKind.weighted) {
       return CarouselView.weighted(
         key: ValueKey('weighted-$scrollDirection-$reverse-$initialItem'),
@@ -204,7 +213,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
         padding: EdgeInsets.all(padding),
         backgroundColor: backgroundColor,
         elevation: elevation,
-        shape: buildShape(),
+        shape: shape,
         overlayColor: buildOverlayColor(),
         itemSnapping: itemSnapping,
         shrinkExtent: shrinkExtent,
@@ -222,7 +231,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
       padding: EdgeInsets.all(padding),
       backgroundColor: backgroundColor,
       elevation: elevation,
-      shape: buildShape(),
+      shape: shape,
       overlayColor: buildOverlayColor(),
       itemSnapping: itemSnapping,
       shrinkExtent: shrinkExtent,
@@ -248,13 +257,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
         ),
       );
     });
-  }
-
-  ShapeBorder buildShape() {
-    return switch (shapeKind) {
-      ShapeKind.stadium => const StadiumBorder(),
-      ShapeKind.none || ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
-    };
   }
 
   WidgetStateProperty<Color?>? buildOverlayColor() {
@@ -284,72 +286,91 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: '构造方式',
-            child: buildChoiceChips(
-              values: _CarouselKind.values,
-              isSelected: (e) => kind == e,
-              labelOf: (e) => e == _CarouselKind.uncontained ? 'CarouselView' : 'CarouselView.weighted',
-              onChanged: onKind,
-            ),
+          NChoiceChipListItem(
+            title: const Text('构造方式'),
+            values: _CarouselKind.values,
+            value: kind,
+            labelOf: (e) => e.label,
+            onChanged: onKind,
           ),
-          if (kind == _CarouselKind.weighted)
-            buildField(
-              label: 'flexWeights',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: flexWeightPresets,
-                isSelected: (e) => listEquals(flexWeights, e),
-                labelOf: (e) => '$e',
-                onChanged: (e) => onMark('flexWeights $e', () => flexWeights = e),
-              ),
+          if (kind == _CarouselKind.weighted) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem(
+              title: const Text('flexWeights'),
+              values: flexWeightPresets,
+              onEqual: (e) => listEquals(flexWeights, e),
+              labelOf: (e) => '$e',
+              onChanged: (e) => onMark('flexWeights $e', () => flexWeights = e),
             ),
-          buildField(
-            label: 'scrollDirection',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: Axis.values,
-              isSelected: (e) => scrollDirection == e,
-              labelOf: (e) => e.name,
-              onChanged: onScrollDirection,
-            ),
+          ],
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('scrollDirection'),
+            values: Axis.values,
+            value: scrollDirection,
+            labelOf: (e) => e.name,
+            onChanged: onScrollDirection,
           ),
           if (kind == _CarouselKind.uncontained)
-            buildSlider(
-              label: 'itemExtent',
-              value: itemExtent,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('itemExtent'),
               min: 80,
               max: 400,
+              value: itemExtent.clamp(80, 400),
               onChanged: (v) => onMark('itemExtent ${v.round()}', () => itemExtent = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSlider(
-            label: 'shrinkExtent',
-            value: shrinkExtent,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('shrinkExtent'),
             min: 0,
             max: 200,
+            value: shrinkExtent.clamp(0, 200),
             onChanged: (v) => onMark('shrinkExtent ${v.round()}', () => shrinkExtent = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'padding',
-            value: padding,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('padding'),
             min: 0,
             max: 24,
+            value: padding.clamp(0, 24),
             onChanged: (v) => onMark('padding ${v.round()}', () => padding = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'viewport 高度',
-            value: viewportExtent,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('viewport 高度'),
             min: 120,
             max: 480,
+            value: viewportExtent.clamp(120, 480),
             onChanged: (v) => onMark('viewport ${v.round()}', () => viewportExtent = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(label: 'itemCount', value: itemCount.toDouble(), min: 3, max: 20, onChanged: onItemCount),
-          buildSlider(
-            label: 'initialItem',
-            value: initialItem.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('itemCount'),
+            min: 3,
+            max: 20,
+            value: itemCount.toDouble().clamp(3, 20),
+            onChanged: onItemCount,
+            activeColor: theme.colorScheme.primary,
+          ),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('initialItem'),
             min: 0,
             max: math.max(itemCount - 1, 1).toDouble(),
+            value: initialItem.toDouble().clamp(0, math.max(itemCount - 1, 1).toDouble()),
             onChanged: onInitialItem,
+            activeColor: theme.colorScheme.primary,
           ),
         ],
       ),
@@ -364,60 +385,60 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'shape',
-            child: buildChoiceChips(
-              values: const [ShapeKind.rounded, ShapeKind.stadium],
-              isSelected: (e) => shapeKind == e,
-              labelOf: (e) => e == ShapeKind.rounded ? 'RoundedRectangleBorder' : 'StadiumBorder',
-              onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
-            ),
+          NChoiceChipListItem(
+            title: const Text('shape'),
+            values: const [ShapeKind.rounded, ShapeKind.stadium],
+            value: shapeKind,
+            labelOf: (e) => e == ShapeKind.rounded ? 'RoundedRectangleBorder' : 'StadiumBorder',
+            onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
           ),
           if (shapeKind == ShapeKind.rounded)
-            buildSlider(
-              label: 'borderRadius',
-              value: borderRadius,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('borderRadius'),
               min: 0,
               max: 48,
+              value: borderRadius.clamp(0, 48),
               onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSlider(
-            label: 'elevation',
-            value: elevation,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('elevation'),
             min: 0,
             max: 16,
+            value: elevation.clamp(0, 16),
             onChanged: (v) => onMark('elevation ${v.round()}', () => elevation = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildField(
-            label: 'backgroundColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: backgroundColor,
-              onChanged: (e) => onMark('backgroundColor $e', () => backgroundColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('backgroundColor'),
+            value: backgroundColor,
+            onChanged: (e) => onMark('backgroundColor $e', () => backgroundColor = e),
           ),
-          buildField(
-            label: 'overlayColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: overlayColor,
-              onChanged: (e) => onMark('overlayColor $e', () => overlayColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('overlayColor'),
+            value: overlayColor,
+            onChanged: (e) => onMark('overlayColor $e', () => overlayColor = e),
           ),
-          buildSwitch(
-            title: 'itemSnapping 吸附',
+          NSwitchListTile(
+            title: const Text('itemSnapping 吸附'),
             value: itemSnapping,
             onChanged: (v) => onMark('itemSnapping $v', () => itemSnapping = v),
           ),
-          buildSwitch(title: 'reverse 反向滚动', value: reverse, onChanged: onReverse),
-          buildSwitch(
-            title: 'enableSplash 水波纹',
+          NSwitchListTile(title: const Text('reverse 反向滚动'), value: reverse, onChanged: onReverse),
+          NSwitchListTile(
+            title: const Text('enableSplash 水波纹'),
             value: enableSplash,
             onChanged: (v) => onMark('enableSplash $v', () => enableSplash = v),
           ),
           if (kind == _CarouselKind.weighted)
-            buildSwitch(
-              title: 'consumeMaxWeight 可撑满最大权重',
+            NSwitchListTile(
+              title: const Text('consumeMaxWeight 可撑满最大权重'),
               value: consumeMaxWeight,
               onChanged: (v) => onMark('consumeMaxWeight $v', () => consumeMaxWeight = v),
             ),
@@ -426,166 +447,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onChanged(e),
-            customBorder: const CircleBorder(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: e ?? scheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
-                  width: selected ? 2 : 1,
-                ),
-                boxShadow: selected
-                    ? [
-                        BoxShadow(
-                          color: scheme.primary.withValues(alpha: 0.28),
-                          blurRadius: 8,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: e == null
-                  ? Text(
-                      '默',
-                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                    )
-                  : selected
-                      ? Icon(
-                          Icons.check_rounded,
-                          size: 16,
-                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        )
-                      : null,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onResetCarouselController() {
     carouselController.removeListener(onCarouselScroll);
@@ -702,15 +563,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     lastEvent = 'onTap $index';
     setState(() {});
     DLog.d('CarouselView onTap: $index');
-    final scheme = theme.colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('onTap Item $index'),
-        duration: const Duration(milliseconds: 800),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: scheme.inverseSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
+    SnackUtil.show('onTap Item $index');
   }
 }

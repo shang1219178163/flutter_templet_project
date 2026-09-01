@@ -7,11 +7,13 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class NavigationRailDemo extends StatefulWidget {
@@ -137,6 +139,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
 
   Widget buildRail() {
     final index = selectedIndex.clamp(0, items.length - 1);
+    final indicatorShape = shapeKind.shape(roundedRadius: shapeRadius);
     return NavigationRail(
       backgroundColor: backgroundColor,
       extended: extended,
@@ -175,7 +178,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       minExtendedWidth: useMinExtendedWidth ? minExtendedWidth : null,
       useIndicator: useIndicator,
       indicatorColor: indicatorColor,
-      indicatorShape: buildIndicatorShape(),
+      indicatorShape: indicatorShape,
     );
   }
 
@@ -184,14 +187,6 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       return null;
     }
     return IconThemeData(color: color, size: useIconSize ? iconSize : null);
-  }
-
-  ShapeBorder? buildIndicatorShape() {
-    return switch (shapeKind) {
-      ShapeKind.none => null,
-      ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius)),
-      ShapeKind.stadium => const StadiumBorder(),
-    };
   }
 
   Widget buildPages() {
@@ -274,47 +269,55 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'destinations',
-            value: destinationCount.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('destinations'),
             min: 2,
             max: 6,
+            value: destinationCount.toDouble().clamp(2, 6),
             onChanged: (v) => onMark('destinations ${v.round()}', () {
               destinationCount = v.round();
               if (selectedIndex >= destinationCount) {
                 selectedIndex = destinationCount - 1;
               }
             }),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSwitch(title: 'selectedIndex', value: useSelected, onChanged: (v) => onMark('selectedIndex ${v ? 'on' : 'null'}', () => useSelected = v)),
+          NSwitchListTile(title: const Text('selectedIndex'), value: useSelected, onChanged: (v) => onMark('selectedIndex ${v ? 'on' : 'null'}', () => useSelected = v)),
           if (useSelected)
-            buildSlider(
-              label: 'selectedIndex',
-              value: selectedIndex.toDouble().clamp(0, destinationCount - 1),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('selectedIndex'),
               min: 0,
               max: (destinationCount - 1).toDouble(),
+              value: selectedIndex.toDouble().clamp(0.0, (destinationCount - 1).toDouble()),
               onChanged: (v) => onSelected(v.round()),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(title: 'onDestinationSelected', value: useOnSelected, onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v)),
-          buildSwitch(title: 'extended', value: extended, onChanged: onExtended),
-          buildSwitch(title: 'leading', value: useLeading, onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v)),
-          buildSwitch(title: 'trailing', value: useTrailing, onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v)),
-          const Text('labelType'),
-          buildChoiceChips(
+          NSwitchListTile(title: const Text('onDestinationSelected'), value: useOnSelected, onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v)),
+          NSwitchListTile(title: const Text('extended'), value: extended, onChanged: onExtended),
+          NSwitchListTile(title: const Text('leading'), value: useLeading, onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v)),
+          NSwitchListTile(title: const Text('trailing'), value: useTrailing, onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v)),
+          NChoiceChipListItem<NavigationRailLabelType?>(
+            title: const Text('labelType'),
             values: [null, ...NavigationRailLabelType.values],
             value: labelType,
             labelOf: (e) => e?.name ?? '默',
             onChanged: onLabelType,
           ),
-          buildSwitch(title: 'groupAlignment', value: useGroupAlignment, onChanged: (v) => onMark('groupAlignment ${v ? 'on' : 'null'}', () => useGroupAlignment = v)),
+          NSwitchListTile(title: const Text('groupAlignment'), value: useGroupAlignment, onChanged: (v) => onMark('groupAlignment ${v ? 'on' : 'null'}', () => useGroupAlignment = v)),
           if (useGroupAlignment)
-            buildSlider(
-              label: 'groupAlignment',
-              value: groupAlignment,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('groupAlignment'),
               min: -1,
               max: 1,
-              fraction: true,
+              value: groupAlignment.clamp(-1, 1),
               onChanged: (v) => onMark('groupAlignment ${v.toStringAsFixed(2)}', () => groupAlignment = v),
+              activeColor: theme.colorScheme.primary,
             ),
         ],
       ),
@@ -330,182 +333,119 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildColorRow('backgroundColor', backgroundColor, (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
-          buildSwitch(title: 'elevation', value: useElevation, onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v)),
+          NChoiceColorListItem(
+            title: const Text('backgroundColor'),
+            value: backgroundColor,
+            onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
+          ),
+          NSwitchListTile(title: const Text('elevation'), value: useElevation, onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v)),
           if (useElevation)
-            buildSlider(label: 'elevation', value: elevation, min: 1, max: 16, onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v)),
-          buildSwitch(title: 'minWidth', value: useMinWidth, onChanged: (v) => onMark('minWidth ${v ? 'on' : 'null'}', () => useMinWidth = v)),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('elevation'),
+              min: 1,
+              max: 16,
+              value: elevation.clamp(1, 16),
+              onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
+              activeColor: theme.colorScheme.primary,
+            ),
+          NSwitchListTile(title: const Text('minWidth'), value: useMinWidth, onChanged: (v) => onMark('minWidth ${v ? 'on' : 'null'}', () => useMinWidth = v)),
           if (useMinWidth)
-            buildSlider(label: 'minWidth', value: minWidth, min: 56, max: 120, onChanged: onMinWidth),
-          buildSwitch(title: 'minExtendedWidth', value: useMinExtendedWidth, onChanged: (v) => onMark('minExtendedWidth ${v ? 'on' : 'null'}', () => useMinExtendedWidth = v)),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('minWidth'),
+              min: 56,
+              max: 120,
+              value: minWidth.clamp(56, 120),
+              onChanged: onMinWidth,
+              activeColor: theme.colorScheme.primary,
+            ),
+          NSwitchListTile(title: const Text('minExtendedWidth'), value: useMinExtendedWidth, onChanged: (v) => onMark('minExtendedWidth ${v ? 'on' : 'null'}', () => useMinExtendedWidth = v)),
           if (useMinExtendedWidth)
-            buildSlider(label: 'minExtendedWidth', value: minExtendedWidth, min: 150, max: 400, onChanged: (v) => onMark('minExtendedWidth ${v.round()}', () => minExtendedWidth = v)),
-          const Text('useIndicator'),
-          buildChoiceChips(
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('minExtendedWidth'),
+              min: 150,
+              max: 400,
+              value: minExtendedWidth.clamp(150, 400),
+              onChanged: (v) => onMark('minExtendedWidth ${v.round()}', () => minExtendedWidth = v),
+              activeColor: theme.colorScheme.primary,
+            ),
+          NChoiceChipListItem<bool?>(
+            title: const Text('useIndicator'),
             values: const [null, true, false],
             value: useIndicator,
             labelOf: (e) => e == null ? '默' : '$e',
             onChanged: (e) => onMark('useIndicator ${e ?? 'null'}', () => useIndicator = e),
           ),
-          buildColorRow('indicatorColor', indicatorColor, (v) => onMark('indicatorColor ${v ?? 'null'}', () => indicatorColor = v)),
-          const Text('indicatorShape'),
-          buildChoiceChips(
+          NChoiceColorListItem(
+            title: const Text('indicatorColor'),
+            value: indicatorColor,
+            onChanged: (v) => onMark('indicatorColor ${v ?? 'null'}', () => indicatorColor = v),
+          ),
+          NChoiceChipListItem<ShapeKind>(
+            title: const Text('indicatorShape'),
             values: ShapeKind.values,
             value: shapeKind,
-            labelOf: (e) => e == ShapeKind.none ? 'null' : e.name,
-            onChanged: (e) => onMark('indicatorShape ${e == ShapeKind.none ? 'null' : e.name}', () => shapeKind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('indicatorShape ${e.label}', () {
+              shapeKind = e;
+              if (e == ShapeKind.rounded) {
+                shapeRadius = e.radius;
+              }
+            }),
           ),
           if (shapeKind == ShapeKind.rounded)
-            buildSlider(label: 'shapeRadius', value: shapeRadius, min: 0, max: 32, onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v)),
-          buildColorRow('selectedLabelTextStyle', selectedLabelColor, (v) => onMark('selectedLabelTextStyle ${v ?? 'null'}', () => selectedLabelColor = v)),
-          buildColorRow('unselectedLabelTextStyle', unselectedLabelColor, (v) => onMark('unselectedLabelTextStyle ${v ?? 'null'}', () => unselectedLabelColor = v)),
-          buildColorRow('selectedIconTheme', selectedIconColor, (v) => onMark('selectedIconTheme ${v ?? 'null'}', () => selectedIconColor = v)),
-          buildColorRow('unselectedIconTheme', unselectedIconColor, (v) => onMark('unselectedIconTheme ${v ?? 'null'}', () => unselectedIconColor = v)),
-          buildSwitch(title: 'iconTheme.size', value: useIconSize, onChanged: (v) => onMark('iconTheme.size ${v ? 'on' : 'null'}', () => useIconSize = v)),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('shapeRadius'),
+              min: 0,
+              max: 32,
+              value: shapeRadius.clamp(0, 32),
+              onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
+              activeColor: theme.colorScheme.primary,
+            ),
+          NChoiceColorListItem(
+            title: const Text('selectedLabelTextStyle'),
+            value: selectedLabelColor,
+            onChanged: (v) => onMark('selectedLabelTextStyle ${v ?? 'null'}', () => selectedLabelColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('unselectedLabelTextStyle'),
+            value: unselectedLabelColor,
+            onChanged: (v) => onMark('unselectedLabelTextStyle ${v ?? 'null'}', () => unselectedLabelColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('selectedIconTheme'),
+            value: selectedIconColor,
+            onChanged: (v) => onMark('selectedIconTheme ${v ?? 'null'}', () => selectedIconColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('unselectedIconTheme'),
+            value: unselectedIconColor,
+            onChanged: (v) => onMark('unselectedIconTheme ${v ?? 'null'}', () => unselectedIconColor = v),
+          ),
+          NSwitchListTile(title: const Text('iconTheme.size'), value: useIconSize, onChanged: (v) => onMark('iconTheme.size ${v ? 'on' : 'null'}', () => useIconSize = v)),
           if (useIconSize)
-            buildSlider(label: 'iconSize', value: iconSize, min: 16, max: 36, onChanged: (v) => onMark('iconSize ${v.round()}', () => iconSize = v)),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('iconSize'),
+              min: 16,
+              max: 36,
+              value: iconSize.clamp(16, 36),
+              onChanged: (v) => onMark('iconSize ${v.round()}', () => iconSize = v),
+              activeColor: theme.colorScheme.primary,
+            ),
         ],
       ),
     );
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        Widget? mark;
-        if (e == null) {
-          mark = Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600));
-        } else if (selected) {
-          mark = Icon(
-            Icons.check_rounded,
-            size: 16,
-            color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-          );
-        }
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: mark,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    bool fraction = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: fraction
-          ? (context, v) => Text(
-                v.toStringAsFixed(2),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              )
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();

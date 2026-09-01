@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 class MaterialDemo extends StatefulWidget {
@@ -190,38 +193,25 @@ class _MaterialDemoState extends State<MaterialDemo> {
   }
 
   Widget buildMaterial({required Widget child}) {
+    final baseStyle = theme.textTheme.bodyMedium!;
     return Material(
       type: type,
       elevation: elevation,
       color: color,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
-      textStyle: useTextStyle ? TextStyle(fontSize: textFontSize, color: textColor) : null,
+      textStyle: useTextStyle
+          ? baseStyle.copyWith(fontSize: textFontSize, color: textColor)
+          : baseStyle,
       borderRadius: (isCircle || shapeKind != ShapeKind.none || !useBorderRadius)
           ? null
           : BorderRadius.circular(borderRadius),
-      shape: buildShape(),
+      shape: isCircle ? null : shapeKind.shape(roundedRadius: shapeRadius),
       borderOnForeground: borderOnForeground,
-      clipBehavior: switch (clipKind) {
-        ClipKind.hardEdge => Clip.hardEdge,
-        ClipKind.antiAlias => Clip.antiAlias,
-        ClipKind.antiAliasWithSaveLayer => Clip.antiAliasWithSaveLayer,
-        ClipKind.nil || ClipKind.none => Clip.none,
-      },
+      clipBehavior: clipKind.clip,
       animationDuration: Duration(milliseconds: animMs.round()),
       child: child,
     );
-  }
-
-  ShapeBorder? buildShape() {
-    if (isCircle) {
-      return null;
-    }
-    return switch (shapeKind) {
-      ShapeKind.none => null,
-      ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius)),
-      ShapeKind.stadium => const StadiumBorder(),
-    };
   }
 
   Widget buildSurfaceCard() {
@@ -232,8 +222,8 @@ class _MaterialDemoState extends State<MaterialDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('type'),
-          buildChoiceChips(
+          NChoiceChipListItem<MaterialType>(
+            title: const Text('type'),
             values: MaterialType.values,
             value: type,
             labelOf: (e) => e.name,
@@ -245,16 +235,31 @@ class _MaterialDemoState extends State<MaterialDemo> {
               }
             }),
           ),
-          buildSlider(
-            label: 'elevation',
-            value: elevation,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('elevation'),
             min: 0,
             max: 24,
+            value: elevation.clamp(0, 24),
             onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildColorRow('color', color, (v) => color = v),
-          buildColorRow('shadowColor', shadowColor, (v) => shadowColor = v),
-          buildColorRow('surfaceTintColor', surfaceTintColor, (v) => surfaceTintColor = v),
+          NChoiceColorListItem(
+            title: const Text('color'),
+            value: color,
+            onChanged: (v) => onMark('color ${v ?? 'null'}', () => color = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('shadowColor'),
+            value: shadowColor,
+            onChanged: (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('surfaceTintColor'),
+            value: surfaceTintColor,
+            onChanged: (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v),
+          ),
         ],
       ),
     );
@@ -269,11 +274,11 @@ class _MaterialDemoState extends State<MaterialDemo> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isCircle) ...[
-            const Text('shape'),
-            buildChoiceChips(
+            NChoiceChipListItem<ShapeKind>(
+              title: const Text('shape'),
               values: ShapeKind.values,
               value: shapeKind,
-              labelOf: (e) => e == ShapeKind.none ? 'null' : e.name,
+              labelOf: (e) => e.label,
               onChanged: (e) => onMark('shape ${e == ShapeKind.none ? 'null' : e.name}', () {
                 shapeKind = e;
                 if (e != ShapeKind.none) {
@@ -282,26 +287,32 @@ class _MaterialDemoState extends State<MaterialDemo> {
               }),
             ),
             if (shapeKind == ShapeKind.rounded)
-              buildSlider(
-                label: 'shapeRadius',
-                value: shapeRadius,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('shapeRadius'),
                 min: 0,
                 max: 32,
+                value: shapeRadius.clamp(0, 32),
                 onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
+                activeColor: theme.colorScheme.primary,
               ),
             if (shapeKind == ShapeKind.none) ...[
-              buildSwitch(
-                title: 'borderRadius',
+              NSwitchListTile(
+                title: const Text('borderRadius'),
                 value: useBorderRadius,
                 onChanged: (v) => onMark('borderRadius ${v ? 'on' : 'null'}', () => useBorderRadius = v),
               ),
               if (useBorderRadius)
-                buildSlider(
-                  label: 'borderRadius',
-                  value: borderRadius,
+                NSliderListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('borderRadius'),
                   min: 0,
                   max: 32,
+                  value: borderRadius.clamp(0, 32),
                   onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v),
+                  activeColor: theme.colorScheme.primary,
                 ),
             ],
           ] else
@@ -311,190 +322,66 @@ class _MaterialDemoState extends State<MaterialDemo> {
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
             ),
-          const Text('clipBehavior'),
-          buildChoiceChips(
-            values: ClipKind.values.where((e) => e != ClipKind.nil).toList(),
-            value: clipKind == ClipKind.nil ? ClipKind.none : clipKind,
-            labelOf: (e) => e.name,
-            onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipKind = e),
+          NChoiceChipListItem<ClipKind>(
+            title: const Text('clipBehavior'),
+            values: ClipKind.values,
+            value: clipKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('clipBehavior ${e.label}', () => clipKind = e),
           ),
-          buildSwitch(
-            title: 'borderOnForeground',
+          NSwitchListTile(
+            title: const Text('borderOnForeground'),
             value: borderOnForeground,
             onChanged: (v) => onMark('borderOnForeground $v', () => borderOnForeground = v),
           ),
-          buildSwitch(
-            title: 'textStyle',
+          NSwitchListTile(
+            title: const Text('textStyle'),
             value: useTextStyle,
             onChanged: (v) => onMark('textStyle ${v ? 'on' : 'null'}', () => useTextStyle = v),
           ),
           if (useTextStyle) ...[
-            buildSlider(
-              label: 'fontSize',
-              value: textFontSize,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('fontSize'),
               min: 10,
               max: 22,
+              value: textFontSize.clamp(10, 22),
               onChanged: (v) => onMark('textStyle.fontSize ${v.toStringAsFixed(1)}', () => textFontSize = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildColorRow('textStyle.color', textColor, (v) => textColor = v),
+            NChoiceColorListItem(
+              title: const Text('textStyle.color'),
+              value: textColor,
+              onChanged: (v) => onMark('textStyle.color ${v ?? 'null'}', () => textColor = v),
+            ),
           ],
-          buildSlider(
-            label: 'animationDuration',
-            value: animMs,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('animationDuration'),
             min: 0,
             max: 1000,
-            durationLabel: true,
+            value: animMs.clamp(0, 1000),
             onChanged: (v) => onMark('animationDuration ${v.round()}ms', () => animMs = v),
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              final ms = v.round();
+              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+              return Text(
+                text,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
         ],
       ),
     );
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> assign) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(
-          value: value,
-          onChanged: (v) => onMark('$label ${v ?? 'null'}', () => assign(v)),
-        ),
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: switch ((e, selected)) {
-              (null, _) => Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600)),
-              (final Color c, true) => Icon(
-                  Icons.check_rounded,
-                  size: 16,
-                  color: ThemeData.estimateBrightnessForColor(c) == Brightness.dark ? Colors.white : Colors.black87,
-                ),
-              _ => null,
-            },
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    bool durationLabel = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: durationLabel
-          ? (context, v) {
-              final ms = v.round();
-              final text = ms < 1000
-                  ? '${ms}ms'
-                  : '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s';
-              return Text(
-                text,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();
@@ -524,9 +411,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
 
   void onTap(String event) {
     DLog.d(event);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(event), duration: const Duration(milliseconds: 800)),
-    );
+    SnackUtil.show(event);
     onMark(event);
   }
 }

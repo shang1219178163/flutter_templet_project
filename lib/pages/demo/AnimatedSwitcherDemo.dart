@@ -7,7 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
@@ -16,10 +18,21 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// transitionBuilder 预设
-enum _TransitionKind { slide, fade, scale }
+enum _TransitionKind {
+  slide(label: 'slide'),
+  fade(label: 'fade'),
+  scale(label: 'scale');
+  const _TransitionKind({required this.label});
+  final String label;
+}
 
 /// layoutBuilder 预设
-enum _LayoutKind { defaults, stack }
+enum _LayoutKind {
+  defaults(label: 'defaults'),
+  stack(label: 'stack');
+  const _LayoutKind({required this.label});
+  final String label;
+}
 
 class AnimatedSwitcherDemo extends StatefulWidget {
   const AnimatedSwitcherDemo({Key? key, this.title}) : super(key: key);
@@ -237,53 +250,47 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'child',
+          NSwitchListTile(
+            title: const Text('child'),
             value: useChild,
             onChanged: (v) => onMark('child $v', () => useChild = v),
           ),
-          buildField(
-            label: 'transitionBuilder',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _TransitionKind.values,
-              isSelected: (e) => transitionKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('transitionBuilder ${e.name}', () => transitionKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<_TransitionKind>(
+            title: const Text('transitionBuilder'),
+            values: _TransitionKind.values,
+            value: transitionKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('transitionBuilder ${e.label}', () => transitionKind = e),
           ),
-          if (transitionKind == _TransitionKind.slide)
-            buildField(
-              label: 'NSlideTransition.direction',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: AxisDirection.values,
-                isSelected: (e) => slideDirection == e,
-                labelOf: (e) => e.name,
-                onChanged: (e) => onMark('direction ${e.name}', () => slideDirection = e),
-              ),
-            ),
-          buildField(
-            label: 'layoutBuilder',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _LayoutKind.values,
-              isSelected: (e) => layoutKind == e,
+          if (transitionKind == _TransitionKind.slide) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem<AxisDirection>(
+              title: const Text('NSlideTransition.direction'),
+              values: AxisDirection.values,
+              value: slideDirection,
               labelOf: (e) => e.name,
-              onChanged: (e) => onMark('layoutBuilder ${e.name}', () => layoutKind = e),
+              onChanged: (e) => onMark('direction ${e.name}', () => slideDirection = e),
             ),
+          ],
+          const SizedBox(height: 8),
+          NChoiceChipListItem<_LayoutKind>(
+            title: const Text('layoutBuilder'),
+            values: _LayoutKind.values,
+            value: layoutKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('layoutBuilder ${e.label}', () => layoutKind = e),
           ),
-          if (layoutKind == _LayoutKind.stack)
-            buildField(
-              label: 'Stack.alignment',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: AlignmentExt.allCases,
-                isSelected: (e) => layoutAlignment == e,
-                labelOf: (e) => e.toString().split('.').last,
-                onChanged: (e) => onMark('alignment ${e.toString().split('.').last}', () => layoutAlignment = e),
-              ),
+          if (layoutKind == _LayoutKind.stack) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem<Alignment>(
+              title: const Text('Stack.alignment'),
+              values: AlignmentExt.allCases,
+              value: layoutAlignment,
+              labelOf: (e) => e.toString().split('.').last,
+              onChanged: (e) => onMark('alignment ${e.toString().split('.').last}', () => layoutAlignment = e),
             ),
+          ],
         ],
       ),
     );
@@ -297,170 +304,75 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'duration',
-            value: durationMs,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('duration'),
             min: 100,
             max: 3000,
+            value: durationMs.clamp(100, 3000),
             onChanged: (v) => onMark('duration ${v.round()}ms', () => durationMs = v),
-            durationLabel: true,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              final ms = v.round();
+              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+              return Text(
+                text,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
-          buildSwitch(
-            title: 'reverseDuration',
+          NSwitchListTile(
+            title: const Text('reverseDuration'),
             value: useReverseDuration,
             onChanged: (v) => onMark('reverseDuration $v', () => useReverseDuration = v),
           ),
           if (useReverseDuration)
-            buildSlider(
-              label: 'reverseDuration',
-              value: reverseDurationMs,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('reverseDuration'),
               min: 100,
               max: 3000,
+              value: reverseDurationMs.clamp(100, 3000),
               onChanged: (v) => onMark('reverseDuration ${v.round()}ms', () => reverseDurationMs = v),
-              durationLabel: true,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                final ms = v.round();
+                final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+                return Text(
+                  text,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
-          buildField(
-            label: 'switchInCurve',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: NDecorationCard.curvePresets,
-              isSelected: (e) => identical(switchInCurve, e),
-              labelOf: NDecorationCard.nameOfCurve,
-              onChanged: (e) => onMark('switchInCurve ${NDecorationCard.nameOfCurve(e)}', () => switchInCurve = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<Curve>(
+            title: const Text('switchInCurve'),
+            values: NDecorationCard.curvePresets,
+            onEqual: (e) => identical(switchInCurve, e),
+            labelOf: NDecorationCard.nameOfCurve,
+            onChanged: (e) => onMark('switchInCurve ${NDecorationCard.nameOfCurve(e)}', () => switchInCurve = e),
           ),
-          buildField(
-            label: 'switchOutCurve',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: NDecorationCard.curvePresets,
-              isSelected: (e) => identical(switchOutCurve, e),
-              labelOf: NDecorationCard.nameOfCurve,
-              onChanged: (e) => onMark('switchOutCurve ${NDecorationCard.nameOfCurve(e)}', () => switchOutCurve = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<Curve>(
+            title: const Text('switchOutCurve'),
+            values: NDecorationCard.curvePresets,
+            onEqual: (e) => identical(switchOutCurve, e),
+            labelOf: NDecorationCard.nameOfCurve,
+            onChanged: (e) => onMark('switchOutCurve ${NDecorationCard.nameOfCurve(e)}', () => switchOutCurve = e),
           ),
         ],
       ),
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    bool durationLabel = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: durationLabel
-          ? (context, v) {
-              final ms = v.round();
-              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
-              return Text(
-                text,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onPlus() {
     onMark('onPlus ${count + 1}', () => count += 1);

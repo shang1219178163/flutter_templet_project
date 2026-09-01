@@ -7,7 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:get/get.dart';
@@ -15,18 +17,103 @@ import 'package:intl/intl.dart';
 
 /// NumberFormat 工厂，对应 intl 非弃用构造
 enum _FormatKind {
-  custom,
-  decimalPattern,
-  decimalPatternDigits,
-  percentPattern,
-  decimalPercentPattern,
-  scientificPattern,
-  currency,
-  simpleCurrency,
-  compact,
-  compactLong,
-  compactCurrency,
-  compactSimpleCurrency,
+  custom(label: 'NumberFormat'),
+  decimalPattern(label: 'decimalPattern'),
+  decimalPatternDigits(label: 'decimalPatternDigits'),
+  percentPattern(label: 'percentPattern'),
+  decimalPercentPattern(label: 'decimalPercentPattern'),
+  scientificPattern(label: 'scientificPattern'),
+  currency(label: 'currency'),
+  simpleCurrency(label: 'simpleCurrency'),
+  compact(label: 'compact'),
+  compactLong(label: 'compactLong'),
+  compactCurrency(label: 'compactCurrency'),
+  compactSimpleCurrency(label: 'compactSimpleCurrency');
+  const _FormatKind({required this.label});
+  final String label;
+  NumberFormat numberFormatOf({
+    required String? pattern,
+    required String? locale,
+    required int? decimalDigits,
+    required String? name,
+    required String? symbol,
+    required String? customPattern,
+    required bool explicitSign,
+  }) {
+    switch (this) {
+      case _FormatKind.custom:
+        return NumberFormat(pattern, locale);
+      case _FormatKind.decimalPattern:
+        return NumberFormat.decimalPattern(locale);
+      case _FormatKind.decimalPatternDigits:
+        return NumberFormat.decimalPatternDigits(locale: locale, decimalDigits: decimalDigits);
+      case _FormatKind.percentPattern:
+        return NumberFormat.percentPattern(locale);
+      case _FormatKind.decimalPercentPattern:
+        return NumberFormat.decimalPercentPattern(locale: locale, decimalDigits: decimalDigits);
+      case _FormatKind.scientificPattern:
+        return NumberFormat.scientificPattern(locale);
+      case _FormatKind.currency:
+        return NumberFormat.currency(
+          locale: locale,
+          name: name,
+          symbol: symbol,
+          decimalDigits: decimalDigits,
+          customPattern: customPattern,
+        );
+      case _FormatKind.simpleCurrency:
+        return NumberFormat.simpleCurrency(locale: locale, name: name, decimalDigits: decimalDigits);
+      case _FormatKind.compact:
+        return NumberFormat.compact(locale: locale, explicitSign: explicitSign);
+      case _FormatKind.compactLong:
+        return NumberFormat.compactLong(locale: locale, explicitSign: explicitSign);
+      case _FormatKind.compactCurrency:
+        return NumberFormat.compactCurrency(
+          locale: locale,
+          name: name,
+          symbol: symbol,
+          decimalDigits: decimalDigits,
+        );
+      case _FormatKind.compactSimpleCurrency:
+        return NumberFormat.compactSimpleCurrency(locale: locale, name: name, decimalDigits: decimalDigits);
+    }
+  }
+  String ctorLabelOf({
+    required String pat,
+    required String loc,
+    required String digits,
+    required String named,
+    required String sym,
+    required String custom,
+    required bool explicitSign,
+  }) {
+    switch (this) {
+      case _FormatKind.custom:
+        return 'NumberFormat($pat, $loc)';
+      case _FormatKind.decimalPattern:
+        return 'NumberFormat.decimalPattern($loc)';
+      case _FormatKind.decimalPatternDigits:
+        return 'NumberFormat.decimalPatternDigits(locale: $loc, decimalDigits: $digits)';
+      case _FormatKind.percentPattern:
+        return 'NumberFormat.percentPattern($loc)';
+      case _FormatKind.decimalPercentPattern:
+        return 'NumberFormat.decimalPercentPattern(locale: $loc, decimalDigits: $digits)';
+      case _FormatKind.scientificPattern:
+        return 'NumberFormat.scientificPattern($loc)';
+      case _FormatKind.currency:
+        return 'NumberFormat.currency(locale: $loc, name: $named, symbol: $sym, decimalDigits: $digits, customPattern: $custom)';
+      case _FormatKind.simpleCurrency:
+        return 'NumberFormat.simpleCurrency(locale: $loc, name: $named, decimalDigits: $digits)';
+      case _FormatKind.compact:
+        return 'NumberFormat.compact(locale: $loc, explicitSign: $explicitSign)';
+      case _FormatKind.compactLong:
+        return 'NumberFormat.compactLong(locale: $loc, explicitSign: $explicitSign)';
+      case _FormatKind.compactCurrency:
+        return 'NumberFormat.compactCurrency(locale: $loc, name: $named, symbol: $sym, decimalDigits: $digits)';
+      case _FormatKind.compactSimpleCurrency:
+        return 'NumberFormat.compactSimpleCurrency(locale: $loc, name: $named, decimalDigits: $digits)';
+    }
+  }
 }
 
 class NumberFormatDemo extends StatefulWidget {
@@ -251,86 +338,81 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'factory',
-            child: buildChoiceChips(
-              values: _FormatKind.values,
-              isSelected: (e) => formatKind == e,
-              labelOf: nameOfKind,
-              onChanged: (e) => onMark('factory ${nameOfKind(e)}', () => formatKind = e),
-            ),
+          NChoiceChipListItem<_FormatKind>(
+            title: const Text('factory'),
+            values: _FormatKind.values,
+            value: formatKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('factory ${e.label}', () => formatKind = e),
           ),
-          if (showPattern)
-            buildField(
-              label: 'pattern',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: const <String?>['#,##0.00', '###.0#', null],
-                isSelected: (e) => pattern == e,
-                labelOf: (e) => e ?? 'null',
-                onChanged: (e) => onMark('pattern ${e ?? 'null'}', () => pattern = e),
-              ),
-            ),
-          buildField(
-            label: 'locale',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const <String?>['en_US', 'zh_CN', null],
-              isSelected: (e) => locale == e,
+          if (showPattern) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem<String?>(
+              title: const Text('pattern'),
+              values: const <String?>['#,##0.00', '###.0#', null],
+              value: pattern,
               labelOf: (e) => e ?? 'null',
-              onChanged: (e) => onMark('locale ${e ?? 'null'}', () => locale = e),
+              onChanged: (e) => onMark('pattern ${e ?? 'null'}', () => pattern = e),
             ),
+          ],
+          const SizedBox(height: 8),
+          NChoiceChipListItem<String?>(
+            title: const Text('locale'),
+            values: const <String?>['en_US', 'zh_CN', null],
+            value: locale,
+            labelOf: (e) => e ?? 'null',
+            onChanged: (e) => onMark('locale ${e ?? 'null'}', () => locale = e),
           ),
-          if (showName)
-            buildField(
-              label: 'name',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: const <String?>['USD', 'CNY', 'EUR', 'JPY', null],
-                isSelected: (e) => name == e,
-                labelOf: (e) => e ?? 'null',
-                onChanged: (e) => onMark('name ${e ?? 'null'}', () => name = e),
-              ),
+          if (showName) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem<String?>(
+              title: const Text('name'),
+              values: const <String?>['USD', 'CNY', 'EUR', 'JPY', null],
+              value: name,
+              labelOf: (e) => e ?? 'null',
+              onChanged: (e) => onMark('name ${e ?? 'null'}', () => name = e),
             ),
-          if (showSymbol)
-            buildField(
-              label: 'symbol',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: const <String?>[r'$', '€', '¥', null],
-                isSelected: (e) => symbol == e,
-                labelOf: (e) => e ?? 'null',
-                onChanged: (e) => onMark('symbol ${e ?? 'null'}', () => symbol = e),
-              ),
+          ],
+          if (showSymbol) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem<String?>(
+              title: const Text('symbol'),
+              values: const <String?>[r'$', '€', '¥', null],
+              value: symbol,
+              labelOf: (e) => e ?? 'null',
+              onChanged: (e) => onMark('symbol ${e ?? 'null'}', () => symbol = e),
             ),
-          if (showCustomPattern)
-            buildField(
-              label: 'customPattern',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: const <String?>['¤#,##0.00', '¤#,##0', null],
-                isSelected: (e) => customPattern == e,
-                labelOf: (e) => e ?? 'null',
-                onChanged: (e) => onMark('customPattern ${e ?? 'null'}', () => customPattern = e),
-              ),
+          ],
+          if (showCustomPattern) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem<String?>(
+              title: const Text('customPattern'),
+              values: const <String?>['¤#,##0.00', '¤#,##0', null],
+              value: customPattern,
+              labelOf: (e) => e ?? 'null',
+              onChanged: (e) => onMark('customPattern ${e ?? 'null'}', () => customPattern = e),
             ),
+          ],
           if (showDecimalDigits)
-            buildSwitch(
-              title: 'decimalDigits',
+            NSwitchListTile(
+              title: const Text('decimalDigits'),
               value: useDecimalDigits,
               onChanged: (v) => onMark('decimalDigits ${v ? 'on' : 'null'}', () => useDecimalDigits = v),
             ),
           if (showDecimalDigits && useDecimalDigits)
-            buildSlider(
-              label: 'decimalDigits',
-              value: decimalDigits,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('decimalDigits'),
               min: 0,
               max: 8,
+              value: decimalDigits.clamp(0, 8),
               onChanged: (v) => onMark('decimalDigits ${v.round()}', () => decimalDigits = v),
+              activeColor: theme.colorScheme.primary,
             ),
           if (showExplicitSign)
-            buildSwitch(
-              title: 'explicitSign',
+            NSwitchListTile(
+              title: const Text('explicitSign'),
               value: explicitSign,
               onChanged: (v) => onMark('explicitSign $v', () => explicitSign = v),
             ),
@@ -347,188 +429,46 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'value',
-            value: sampleValue,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('value'),
             min: 0,
             max: 123456789.75,
+            value: sampleValue.clamp(0, 123456789.75),
             onChanged: (v) => onMark('value ${v.toStringAsFixed(2)}', () => sampleValue = v),
-            fractionDigits: 2,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(2),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
         ],
       ),
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    int? fractionDigits,
-  }) {
-    final scheme = theme.colorScheme;
-    final digits = fractionDigits;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: digits == null
-          ? null
-          : (context, v) {
-              return Text(
-                v.toStringAsFixed(digits),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            },
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
-
-  String nameOfKind(_FormatKind kind) => switch (kind) {
-        _FormatKind.custom => 'NumberFormat',
-        _FormatKind.decimalPattern => 'decimalPattern',
-        _FormatKind.decimalPatternDigits => 'decimalPatternDigits',
-        _FormatKind.percentPattern => 'percentPattern',
-        _FormatKind.decimalPercentPattern => 'decimalPercentPattern',
-        _FormatKind.scientificPattern => 'scientificPattern',
-        _FormatKind.currency => 'currency',
-        _FormatKind.simpleCurrency => 'simpleCurrency',
-        _FormatKind.compact => 'compact',
-        _FormatKind.compactLong => 'compactLong',
-        _FormatKind.compactCurrency => 'compactCurrency',
-        _FormatKind.compactSimpleCurrency => 'compactSimpleCurrency',
-      };
-
-  String quoteOf(String? value) {
-    return value == null ? 'null' : '"$value"';
-  }
 
   String ctorLabelOf() {
-    final loc = quoteOf(locale);
-    final pat = quoteOf(pattern);
-    final digits = useDecimalDigits ? '${decimalDigits.round()}' : 'null';
-    final named = quoteOf(name);
-    final sym = quoteOf(symbol);
-    final custom = quoteOf(customPattern);
-    switch (formatKind) {
-      case _FormatKind.custom:
-        return 'NumberFormat($pat, $loc)';
-      case _FormatKind.decimalPattern:
-        return 'NumberFormat.decimalPattern($loc)';
-      case _FormatKind.decimalPatternDigits:
-        return 'NumberFormat.decimalPatternDigits(locale: $loc, decimalDigits: $digits)';
-      case _FormatKind.percentPattern:
-        return 'NumberFormat.percentPattern($loc)';
-      case _FormatKind.decimalPercentPattern:
-        return 'NumberFormat.decimalPercentPattern(locale: $loc, decimalDigits: $digits)';
-      case _FormatKind.scientificPattern:
-        return 'NumberFormat.scientificPattern($loc)';
-      case _FormatKind.currency:
-        return 'NumberFormat.currency(locale: $loc, name: $named, symbol: $sym, decimalDigits: $digits, customPattern: $custom)';
-      case _FormatKind.simpleCurrency:
-        return 'NumberFormat.simpleCurrency(locale: $loc, name: $named, decimalDigits: $digits)';
-      case _FormatKind.compact:
-        return 'NumberFormat.compact(locale: $loc, explicitSign: $explicitSign)';
-      case _FormatKind.compactLong:
-        return 'NumberFormat.compactLong(locale: $loc, explicitSign: $explicitSign)';
-      case _FormatKind.compactCurrency:
-        return 'NumberFormat.compactCurrency(locale: $loc, name: $named, symbol: $sym, decimalDigits: $digits)';
-      case _FormatKind.compactSimpleCurrency:
-        return 'NumberFormat.compactSimpleCurrency(locale: $loc, name: $named, decimalDigits: $digits)';
-    }
+    final pat = pattern == null ? 'null' : '"$pattern"';
+    final loc = locale == null ? 'null' : '"$locale"';
+    final named = name == null ? 'null' : '"$name"';
+    final sym = symbol == null ? 'null' : '"$symbol"';
+    final custom = customPattern == null ? 'null' : '"$customPattern"';
+    return formatKind.ctorLabelOf(
+      pat: pat,
+      loc: loc,
+      digits: useDecimalDigits ? '${decimalDigits.round()}' : 'null',
+      named: named,
+      sym: sym,
+      custom: custom,
+      explicitSign: explicitSign,
+    );
   }
 
   int? decimalDigitsOf() {
@@ -536,43 +476,15 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   }
 
   NumberFormat numberFormatOf() {
-    switch (formatKind) {
-      case _FormatKind.custom:
-        return NumberFormat(pattern, locale);
-      case _FormatKind.decimalPattern:
-        return NumberFormat.decimalPattern(locale);
-      case _FormatKind.decimalPatternDigits:
-        return NumberFormat.decimalPatternDigits(locale: locale, decimalDigits: decimalDigitsOf());
-      case _FormatKind.percentPattern:
-        return NumberFormat.percentPattern(locale);
-      case _FormatKind.decimalPercentPattern:
-        return NumberFormat.decimalPercentPattern(locale: locale, decimalDigits: decimalDigitsOf());
-      case _FormatKind.scientificPattern:
-        return NumberFormat.scientificPattern(locale);
-      case _FormatKind.currency:
-        return NumberFormat.currency(
-          locale: locale,
-          name: name,
-          symbol: symbol,
-          decimalDigits: decimalDigitsOf(),
-          customPattern: customPattern,
-        );
-      case _FormatKind.simpleCurrency:
-        return NumberFormat.simpleCurrency(locale: locale, name: name, decimalDigits: decimalDigitsOf());
-      case _FormatKind.compact:
-        return NumberFormat.compact(locale: locale, explicitSign: explicitSign);
-      case _FormatKind.compactLong:
-        return NumberFormat.compactLong(locale: locale, explicitSign: explicitSign);
-      case _FormatKind.compactCurrency:
-        return NumberFormat.compactCurrency(
-          locale: locale,
-          name: name,
-          symbol: symbol,
-          decimalDigits: decimalDigitsOf(),
-        );
-      case _FormatKind.compactSimpleCurrency:
-        return NumberFormat.compactSimpleCurrency(locale: locale, name: name, decimalDigits: decimalDigitsOf());
-    }
+    return formatKind.numberFormatOf(
+      pattern: pattern,
+      locale: locale,
+      decimalDigits: decimalDigitsOf(),
+      name: name,
+      symbol: symbol,
+      customPattern: customPattern,
+      explicitSign: explicitSign,
+    );
   }
 
   void onMark(String event, [VoidCallback? apply]) {

@@ -7,15 +7,23 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// FilterChip 构造方式
-enum _ChipKind { flat, elevated }
+enum _ChipKind {
+  flat(label: 'flat'),
+  elevated(label: 'elevated');
+  const _ChipKind({required this.label});
+  final String label;
+}
 
 class _ActorFilterEntry {
   const _ActorFilterEntry(this.name, this.initials);
@@ -268,6 +276,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   Widget buildFilterChip(_ActorFilterEntry actor) {
     final selected = _filters.any((e) => e.name == actor.name);
     final key = ValueKey('chip-$kind-${actor.name}');
+    final shape = shapeKind.outlinedBorder(roundedRadius: shapeRadius);
     if (kind == _ChipKind.elevated) {
       return Padding(
         padding: const EdgeInsets.all(4),
@@ -288,7 +297,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
           selectedColor: selectedColor,
           tooltip: useTooltip ? actor.name : null,
           side: buildSide(),
-          shape: buildShape(),
+          shape: shape,
           clipBehavior: clipBehavior,
           autofocus: autofocus,
           color: chipColor == null ? null : WidgetStateProperty.all(chipColor),
@@ -331,7 +340,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
         selectedColor: selectedColor,
         tooltip: useTooltip ? actor.name : null,
         side: buildSide(),
-        shape: buildShape(),
+        shape: shape,
         clipBehavior: clipBehavior,
         autofocus: autofocus,
         color: chipColor == null ? null : WidgetStateProperty.all(chipColor),
@@ -377,12 +386,6 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     return BorderSide(color: sideColor ?? Colors.black54, width: sideWidth);
   }
 
-  OutlinedBorder? buildShape() => switch (shapeKind) {
-        ShapeKind.none => null,
-        ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius)),
-        ShapeKind.stadium => const StadiumBorder(),
-      };
-
   ShapeBorder buildAvatarBorder() => switch (avatarBorderKind) {
         ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         _ => const CircleBorder(),
@@ -416,91 +419,96 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'constructor',
-            child: buildChoiceChips(
-              values: _ChipKind.values,
-              isSelected: (e) => kind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('constructor ${e.name}', () => kind = e),
-            ),
+          NChoiceChipListItem(
+            title: const Text('constructor'),
+            values: _ChipKind.values,
+            onEqual: (e) => kind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('constructor ${e.label}', () => kind = e),
           ),
-          buildSwitch(
-            title: 'avatar',
+          NSwitchListTile(
+            title: const Text('avatar'),
             value: useAvatar,
             onChanged: (v) => onMark('avatar ${v ? 'on' : 'null'}', () => useAvatar = v),
           ),
-          if (useAvatar)
-            buildField(
-              label: 'avatarBorder',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: const [ShapeKind.none, ShapeKind.rounded],
-                isSelected: (e) => avatarBorderKind == e,
-                labelOf: (e) => e == ShapeKind.none ? 'circle' : e.name,
-                onChanged: (e) => onMark('avatarBorder ${e == ShapeKind.none ? 'circle' : e.name}', () => avatarBorderKind = e),
-              ),
+          if (useAvatar) ...[
+            const SizedBox(height: 8),
+            NChoiceChipListItem(
+              title: const Text('avatarBorder'),
+              values: const [ShapeKind.none, ShapeKind.rounded],
+              onEqual: (e) => avatarBorderKind == e,
+              labelOf: (e) => e == ShapeKind.none ? 'circle' : e.name,
+              onChanged: (e) => onMark('avatarBorder ${e == ShapeKind.none ? 'circle' : e.name}', () => avatarBorderKind = e),
             ),
-          buildSwitch(
-            title: 'onDeleted',
+          ],
+          NSwitchListTile(
+            title: const Text('onDeleted'),
             value: useDelete,
             onChanged: (v) => onMark('onDeleted ${v ? 'on' : 'null'}', () => useDelete = v),
           ),
-          if (useDelete)
-            buildField(
-              label: 'deleteIconColor',
-              showTopGap: true,
-              child: buildColorDots(
-                value: deleteIconColor,
-                onChanged: (e) => onMark('deleteIconColor ${e ?? 'null'}', () => deleteIconColor = e),
-              ),
+          if (useDelete) ...[
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('deleteIconColor'),
+              value: deleteIconColor,
+              onChanged: (e) => onMark('deleteIconColor ${e ?? 'null'}', () => deleteIconColor = e),
             ),
-          buildSwitch(
-            title: 'tooltip',
+          ],
+          NSwitchListTile(
+            title: const Text('tooltip'),
             value: useTooltip,
             onChanged: (v) => onMark('tooltip ${v ? 'on' : 'null'}', () => useTooltip = v),
           ),
-          buildSwitch(
-            title: 'onSelected',
+          NSwitchListTile(
+            title: const Text('onSelected'),
             value: enabled,
             onChanged: (v) => onMark('onSelected ${v ? 'on' : 'null'}', () => enabled = v),
           ),
-          buildField(
-            label: 'showCheckmark',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const <bool?>[null, true, false],
-              isSelected: (e) => showCheckmark == e,
-              labelOf: (e) => e == null ? '默' : '$e',
-              onChanged: (e) => onMark('showCheckmark ${e ?? 'null'}', () => showCheckmark = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('showCheckmark'),
+            values: const <bool?>[null, true, false],
+            onEqual: (e) => showCheckmark == e,
+            labelOf: (e) => e == null ? '默' : '$e',
+            onChanged: (e) => onMark('showCheckmark ${e ?? 'null'}', () => showCheckmark = e),
           ),
-          buildField(
-            label: 'checkmarkColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: checkmarkColor,
-              onChanged: (e) => onMark('checkmarkColor ${e ?? 'null'}', () => checkmarkColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('checkmarkColor'),
+            value: checkmarkColor,
+            onChanged: (e) => onMark('checkmarkColor ${e ?? 'null'}', () => checkmarkColor = e),
           ),
-          buildSwitch(
-            title: 'autofocus',
+          NSwitchListTile(
+            title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          buildSwitch(
-            title: 'chipAnimationStyle',
+          NSwitchListTile(
+            title: const Text('chipAnimationStyle'),
             value: useAnimationStyle,
             onChanged: (v) => onMark('chipAnimationStyle ${v ? 'on' : 'null'}', () => useAnimationStyle = v),
           ),
           if (useAnimationStyle)
-            buildSlider(
-              label: 'animation.duration',
-              value: animMs,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('animation.duration'),
               min: 50,
               max: 800,
+              value: animMs.clamp(50, 800),
               onChanged: (v) => onMark('animation.duration ${v.round()}ms', () => animMs = v),
-              durationLabel: true,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                final ms = v.round();
+                final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+                return Text(
+                  text,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
         ],
       ),
@@ -515,111 +523,98 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'backgroundColor',
-            child: buildColorDots(
-              value: backgroundColor,
-              onChanged: (e) => onMark('backgroundColor ${e ?? 'null'}', () => backgroundColor = e),
-            ),
+          NChoiceColorListItem(
+            title: const Text('backgroundColor'),
+            value: backgroundColor,
+            onChanged: (e) => onMark('backgroundColor ${e ?? 'null'}', () => backgroundColor = e),
           ),
-          buildField(
-            label: 'selectedColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: selectedColor,
-              onChanged: (e) => onMark('selectedColor ${e ?? 'null'}', () => selectedColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('selectedColor'),
+            value: selectedColor,
+            onChanged: (e) => onMark('selectedColor ${e ?? 'null'}', () => selectedColor = e),
           ),
-          if (!enabled)
-            buildField(
-              label: 'disabledColor',
-              showTopGap: true,
-              child: buildColorDots(
-                value: disabledColor,
-                onChanged: (e) => onMark('disabledColor ${e ?? 'null'}', () => disabledColor = e),
-              ),
+          if (!enabled) ...[
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('disabledColor'),
+              value: disabledColor,
+              onChanged: (e) => onMark('disabledColor ${e ?? 'null'}', () => disabledColor = e),
             ),
-          buildField(
-            label: 'color',
-            showTopGap: true,
-            child: buildColorDots(
-              value: chipColor,
-              onChanged: (e) => onMark('color ${e ?? 'null'}', () => chipColor = e),
-            ),
+          ],
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('color'),
+            value: chipColor,
+            onChanged: (e) => onMark('color ${e ?? 'null'}', () => chipColor = e),
           ),
-          buildField(
-            label: 'shadowColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: shadowColor,
-              onChanged: (e) => onMark('shadowColor ${e ?? 'null'}', () => shadowColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('shadowColor'),
+            value: shadowColor,
+            onChanged: (e) => onMark('shadowColor ${e ?? 'null'}', () => shadowColor = e),
           ),
-          buildField(
-            label: 'surfaceTintColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: surfaceTintColor,
-              onChanged: (e) => onMark('surfaceTintColor ${e ?? 'null'}', () => surfaceTintColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('surfaceTintColor'),
+            value: surfaceTintColor,
+            onChanged: (e) => onMark('surfaceTintColor ${e ?? 'null'}', () => surfaceTintColor = e),
           ),
-          buildField(
-            label: 'selectedShadowColor',
-            showTopGap: true,
-            child: buildColorDots(
-              value: selectedShadowColor,
-              onChanged: (e) => onMark('selectedShadowColor ${e ?? 'null'}', () => selectedShadowColor = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('selectedShadowColor'),
+            value: selectedShadowColor,
+            onChanged: (e) => onMark('selectedShadowColor ${e ?? 'null'}', () => selectedShadowColor = e),
           ),
-          buildField(
-            label: 'shape',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: ShapeKind.values,
-              isSelected: (e) => shapeKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('shape'),
+            values: ShapeKind.values,
+            onEqual: (e) => shapeKind == e,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('shape ${e.label}', () => shapeKind = e),
           ),
           if (shapeKind == ShapeKind.rounded)
-            buildSlider(
-              label: 'shape.radius',
-              value: shapeRadius,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('shape.radius'),
               min: 0,
               max: 24,
+              value: shapeRadius.clamp(0, 24),
               onChanged: (v) => onMark('shape.radius ${v.toStringAsFixed(1)}', () => shapeRadius = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'side',
+          NSwitchListTile(
+            title: const Text('side'),
             value: useSide,
             onChanged: (v) => onMark('side ${v ? 'on' : 'null'}', () => useSide = v),
           ),
           if (useSide) ...[
-            buildField(
-              label: 'side.color',
-              showTopGap: true,
-              child: buildColorDots(
-                value: sideColor,
-                onChanged: (e) => onMark('side.color ${e ?? 'null'}', () => sideColor = e),
-              ),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('side.color'),
+              value: sideColor,
+              onChanged: (e) => onMark('side.color ${e ?? 'null'}', () => sideColor = e),
             ),
-            buildSlider(
-              label: 'side.width',
-              value: sideWidth,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('side.width'),
               min: 0.5,
               max: 4,
+              value: sideWidth.clamp(0.5, 4),
               onChanged: (v) => onMark('side.width ${v.toStringAsFixed(1)}', () => sideWidth = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
-          buildField(
-            label: 'clipBehavior',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: Clip.values,
-              isSelected: (e) => clipBehavior == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('clipBehavior'),
+            values: Clip.values,
+            onEqual: (e) => clipBehavior == e,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
         ],
       ),
@@ -634,155 +629,171 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'padding',
+          NSwitchListTile(
+            title: const Text('padding'),
             value: usePadding,
             onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding)
-            buildSlider(
-              label: 'padding',
-              value: padding,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding'),
               min: 0,
               max: 16,
+              value: padding.clamp(0, 16),
               onChanged: (v) => onMark('padding ${v.toStringAsFixed(1)}', () => padding = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'labelPadding',
+          NSwitchListTile(
+            title: const Text('labelPadding'),
             value: useLabelPadding,
             onChanged: (v) => onMark('labelPadding ${v ? 'on' : 'null'}', () => useLabelPadding = v),
           ),
           if (useLabelPadding)
-            buildSlider(
-              label: 'labelPadding',
-              value: labelPadding,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('labelPadding'),
               min: 0,
               max: 16,
+              value: labelPadding.clamp(0, 16),
               onChanged: (v) => onMark('labelPadding ${v.toStringAsFixed(1)}', () => labelPadding = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'labelStyle',
+          NSwitchListTile(
+            title: const Text('labelStyle'),
             value: useLabelStyle,
             onChanged: (v) => onMark('labelStyle ${v ? 'on' : 'null'}', () => useLabelStyle = v),
           ),
           if (useLabelStyle) ...[
-            buildSlider(
-              label: 'labelStyle.fontSize',
-              value: labelFontSize,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('labelStyle.fontSize'),
               min: 10,
               max: 22,
+              value: labelFontSize.clamp(10, 22),
               onChanged: (v) => onMark('labelStyle.fontSize ${v.toStringAsFixed(1)}', () => labelFontSize = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildField(
-              label: 'labelStyle.color',
-              showTopGap: true,
-              child: buildColorDots(
-                value: labelColor,
-                onChanged: (e) => onMark('labelStyle.color ${e ?? 'null'}', () => labelColor = e),
-              ),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('labelStyle.color'),
+              value: labelColor,
+              onChanged: (e) => onMark('labelStyle.color ${e ?? 'null'}', () => labelColor = e),
             ),
           ],
-          buildSwitch(
-            title: 'elevation',
+          NSwitchListTile(
+            title: const Text('elevation'),
             value: useElevation,
             onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
           ),
           if (useElevation)
-            buildSlider(
-              label: 'elevation',
-              value: elevation,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('elevation'),
               min: 0,
               max: 12,
+              value: elevation.clamp(0, 12),
               onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'pressElevation',
+          NSwitchListTile(
+            title: const Text('pressElevation'),
             value: usePressElevation,
             onChanged: (v) => onMark('pressElevation ${v ? 'on' : 'null'}', () => usePressElevation = v),
           ),
           if (usePressElevation)
-            buildSlider(
-              label: 'pressElevation',
-              value: pressElevation,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('pressElevation'),
               min: 0,
               max: 16,
+              value: pressElevation.clamp(0, 16),
               onChanged: (v) => onMark('pressElevation ${v.toStringAsFixed(1)}', () => pressElevation = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildField(
-            label: 'visualDensity',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const <VisualDensity?>[
-                null,
-                VisualDensity.standard,
-                VisualDensity.comfortable,
-                VisualDensity.compact
-              ],
-              isSelected: (e) => visualDensity == e,
-              labelOf: nameOfDensity,
-              onChanged: (e) => onMark('visualDensity ${nameOfDensity(e)}', () => visualDensity = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('visualDensity'),
+            values: const <VisualDensity?>[
+              null,
+              VisualDensity.standard,
+              VisualDensity.comfortable,
+              VisualDensity.compact
+            ],
+            onEqual: (e) => visualDensity == e,
+            labelOf: nameOfDensity,
+            onChanged: (e) => onMark('visualDensity ${nameOfDensity(e)}', () => visualDensity = e),
           ),
-          buildField(
-            label: 'materialTapTargetSize',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: const <MaterialTapTargetSize?>[
-                null,
-                MaterialTapTargetSize.padded,
-                MaterialTapTargetSize.shrinkWrap
-              ],
-              isSelected: (e) => materialTapTargetSize == e,
-              labelOf: (e) => e?.name ?? '默',
-              onChanged: (e) => onMark('materialTapTargetSize ${e?.name ?? 'null'}', () => materialTapTargetSize = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem(
+            title: const Text('materialTapTargetSize'),
+            values: const <MaterialTapTargetSize?>[
+              null,
+              MaterialTapTargetSize.padded,
+              MaterialTapTargetSize.shrinkWrap
+            ],
+            onEqual: (e) => materialTapTargetSize == e,
+            labelOf: (e) => e?.name ?? '默',
+            onChanged: (e) => onMark('materialTapTargetSize ${e?.name ?? 'null'}', () => materialTapTargetSize = e),
           ),
-          buildSwitch(
-            title: 'avatarBoxConstraints',
+          NSwitchListTile(
+            title: const Text('avatarBoxConstraints'),
             value: useAvatarConstraints,
             onChanged: (v) => onMark('avatarBoxConstraints ${v ? 'on' : 'null'}', () => useAvatarConstraints = v),
           ),
           if (useAvatarConstraints)
-            buildSlider(
-              label: 'avatarBoxConstraints',
-              value: avatarConstraint,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('avatarBoxConstraints'),
               min: 16,
               max: 48,
+              value: avatarConstraint.clamp(16, 48),
               onChanged: (v) => onMark('avatarBoxConstraints ${v.toStringAsFixed(1)}', () => avatarConstraint = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'deleteIconBoxConstraints',
+          NSwitchListTile(
+            title: const Text('deleteIconBoxConstraints'),
             value: useDeleteConstraints,
             onChanged: (v) => onMark('deleteIconBoxConstraints ${v ? 'on' : 'null'}', () => useDeleteConstraints = v),
           ),
           if (useDeleteConstraints)
-            buildSlider(
-              label: 'deleteIconBoxConstraints',
-              value: deleteConstraint,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('deleteIconBoxConstraints'),
               min: 12,
               max: 40,
+              value: deleteConstraint.clamp(12, 40),
               onChanged: (v) => onMark('deleteIconBoxConstraints ${v.toStringAsFixed(1)}', () => deleteConstraint = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'iconTheme',
+          NSwitchListTile(
+            title: const Text('iconTheme'),
             value: useIconTheme,
             onChanged: (v) => onMark('iconTheme ${v ? 'on' : 'null'}', () => useIconTheme = v),
           ),
           if (useIconTheme) ...[
-            buildSlider(
-              label: 'iconTheme.size',
-              value: iconThemeSize,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('iconTheme.size'),
               min: 12,
               max: 28,
+              value: iconThemeSize.clamp(12, 28),
               onChanged: (v) => onMark('iconTheme.size ${v.toStringAsFixed(1)}', () => iconThemeSize = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildField(
-              label: 'iconTheme.color',
-              showTopGap: true,
-              child: buildColorDots(
-                value: iconThemeColor,
-                onChanged: (e) => onMark('iconTheme.color ${e ?? 'null'}', () => iconThemeColor = e),
-              ),
+            const SizedBox(height: 8),
+            NChoiceColorListItem(
+              title: const Text('iconTheme.color'),
+              value: iconThemeColor,
+              onChanged: (e) => onMark('iconTheme.color ${e ?? 'null'}', () => iconThemeColor = e),
             ),
           ],
         ],
@@ -790,180 +801,8 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
 
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
 
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onChanged(e),
-            customBorder: const CircleBorder(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: e ?? scheme.surfaceContainerHighest,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? scheme.primary : scheme.outlineVariant.withValues(alpha: 0.65),
-                  width: selected ? 2 : 1,
-                ),
-                boxShadow: selected
-                    ? [
-                        BoxShadow(
-                          color: scheme.primary.withValues(alpha: 0.28),
-                          blurRadius: 8,
-                        ),
-                      ]
-                    : null,
-              ),
-              child: e == null
-                  ? Text(
-                      '默',
-                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                    )
-                  : selected
-                      ? Icon(
-                          Icons.check_rounded,
-                          size: 16,
-                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        )
-                      : null,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    bool durationLabel = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: durationLabel
-          ? (context, v) {
-              final ms = v.round();
-              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
-              return Text(
-                text,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   String nameOfDensity(VisualDensity? value) => switch (value) {
         null => '默',
@@ -988,32 +827,14 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     lastEvent = 'onSelected ${actor.name} $value';
     DLog.d(lastEvent);
     setState(() {});
-    final scheme = theme.colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(lastEvent),
-        duration: const Duration(milliseconds: 800),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: scheme.inverseSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
+    SnackUtil.show(lastEvent);
   }
 
   void onChipDeleted(_ActorFilterEntry actor) {
     lastEvent = 'onDeleted ${actor.name}';
     DLog.d(lastEvent);
     setState(() {});
-    final scheme = theme.colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(lastEvent),
-        duration: const Duration(milliseconds: 800),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: scheme.inverseSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
+    SnackUtil.show(lastEvent);
   }
 
   void onReset() {

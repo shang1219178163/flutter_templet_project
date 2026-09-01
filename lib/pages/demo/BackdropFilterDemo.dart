@@ -9,7 +9,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
@@ -17,10 +19,44 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// ImageFilter 预设，映射到 BackdropFilter.filter
-enum _FilterKind { blur, dilate, erode }
+enum _FilterKind {
+  blur(label: 'blur'),
+  dilate(label: 'dilate'),
+  erode(label: 'erode');
+
+  const _FilterKind({required this.label});
+
+  /// Chip 文案
+  final String label;
+
+  /// 构造 [ImageFilter]；参数由页面状态注入
+  ImageFilter filter({
+    required double sigmaX,
+    required double sigmaY,
+    required TileMode tileMode,
+    required double radiusX,
+    required double radiusY,
+  }) {
+    return switch (this) {
+      _FilterKind.blur => ImageFilter.blur(
+          sigmaX: sigmaX,
+          sigmaY: sigmaY,
+          tileMode: tileMode,
+        ),
+      _FilterKind.dilate => ImageFilter.dilate(radiusX: radiusX, radiusY: radiusY),
+      _FilterKind.erode => ImageFilter.erode(radiusX: radiusX, radiusY: radiusY),
+    };
+  }
+}
 
 /// child 预设
-enum _ChildKind { overlay, hello, none }
+enum _ChildKind {
+  overlay(label: 'overlay'),
+  hello(label: 'hello'),
+  none(label: 'none');
+  const _ChildKind({required this.label});
+  final String label;
+}
 
 class BackdropFilterDemo extends StatefulWidget {
   const BackdropFilterDemo({Key? key, this.title}) : super(key: key);
@@ -163,7 +199,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Text(
-              '${filterKind.name} · ${blendMode.name} · enabled $enabled · $lastEvent',
+              '${filterKind.label} · ${blendMode.name} · enabled $enabled · $lastEvent',
               textAlign: TextAlign.center,
               style: theme.textTheme.labelMedium?.copyWith(
                 color: scheme.onSurfaceVariant,
@@ -212,26 +248,17 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
 
   Widget buildFilter({required Widget? child}) {
     return BackdropFilter(
-      filter: filterOf(),
+      filter: filterKind.filter(
+        sigmaX: sigmaX,
+        sigmaY: sigmaY,
+        tileMode: tileMode,
+        radiusX: radiusX,
+        radiusY: radiusY,
+      ),
       blendMode: blendMode,
       enabled: enabled,
       child: child,
     );
-  }
-
-  ImageFilter filterOf() {
-    switch (filterKind) {
-      case _FilterKind.blur:
-        return ImageFilter.blur(
-          sigmaX: sigmaX,
-          sigmaY: sigmaY,
-          tileMode: tileMode,
-        );
-      case _FilterKind.dilate:
-        return ImageFilter.dilate(radiusX: radiusX, radiusY: radiusY);
-      case _FilterKind.erode:
-        return ImageFilter.erode(radiusX: radiusX, radiusY: radiusY);
-    }
   }
 
   Widget buildConstructCard() {
@@ -242,70 +269,108 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'filter',
-            child: buildChoiceChips(
-              values: _FilterKind.values,
-              isSelected: (e) => filterKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('filter ${e.name}', () => filterKind = e),
-            ),
+          NChoiceChipListItem<_FilterKind>(
+            title: const Text('filter'),
+            values: _FilterKind.values,
+            value: filterKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('filter ${e.label}', () => filterKind = e),
           ),
           if (filterKind == _FilterKind.blur) ...[
-            buildSlider(
-              label: 'sigmaX',
-              value: sigmaX,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('sigmaX'),
               min: 0,
               max: 20,
+              value: sigmaX.clamp(0, 20),
               onChanged: (v) => onMark('sigmaX ${v.toStringAsFixed(1)}', () => sigmaX = v),
-              fractionDigits: 1,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                return Text(
+                  v.toStringAsFixed(1),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
-            buildSlider(
-              label: 'sigmaY',
-              value: sigmaY,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('sigmaY'),
               min: 0,
               max: 20,
+              value: sigmaY.clamp(0, 20),
               onChanged: (v) => onMark('sigmaY ${v.toStringAsFixed(1)}', () => sigmaY = v),
-              fractionDigits: 1,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                return Text(
+                  v.toStringAsFixed(1),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
-            buildField(
-              label: 'tileMode',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: TileMode.values,
-                isSelected: (e) => tileMode == e,
-                labelOf: (e) => e.name,
-                onChanged: (e) => onMark('tileMode ${e.name}', () => tileMode = e),
-              ),
+            const SizedBox(height: 8),
+            NChoiceChipListItem<TileMode>(
+              title: const Text('tileMode'),
+              values: TileMode.values,
+              value: tileMode,
+              labelOf: (e) => e.name,
+              onChanged: (e) => onMark('tileMode ${e.name}', () => tileMode = e),
             ),
           ],
           if (filterKind != _FilterKind.blur) ...[
-            buildSlider(
-              label: 'radiusX',
-              value: radiusX,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('radiusX'),
               min: 0,
               max: 12,
+              value: radiusX.clamp(0, 12),
               onChanged: (v) => onMark('radiusX ${v.toStringAsFixed(1)}', () => radiusX = v),
-              fractionDigits: 1,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                return Text(
+                  v.toStringAsFixed(1),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
-            buildSlider(
-              label: 'radiusY',
-              value: radiusY,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('radiusY'),
               min: 0,
               max: 12,
+              value: radiusY.clamp(0, 12),
               onChanged: (v) => onMark('radiusY ${v.toStringAsFixed(1)}', () => radiusY = v),
-              fractionDigits: 1,
+              activeColor: theme.colorScheme.primary,
+              valueBuilder: (context, v) {
+                return Text(
+                  v.toStringAsFixed(1),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+                );
+              },
             ),
           ],
-          buildField(
-            label: 'child',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _ChildKind.values,
-              isSelected: (e) => childKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('child ${e.name}', () => childKind = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<_ChildKind>(
+            title: const Text('child'),
+            values: _ChildKind.values,
+            value: childKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('child ${e.label}', () => childKind = e),
           ),
         ],
       ),
@@ -320,137 +385,20 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'enabled 应用滤镜', value: enabled, onChanged: (v) => onMark('enabled $v', () => enabled = v)),
-          buildField(
-            label: 'blendMode',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: BlendMode.values,
-              isSelected: (e) => blendMode == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('blendMode ${e.name}', () => blendMode = e),
-            ),
+          NSwitchListTile(title: const Text('enabled 应用滤镜'), value: enabled, onChanged: (v) => onMark('enabled $v', () => enabled = v)),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<BlendMode>(
+            title: const Text('blendMode'),
+            values: BlendMode.values,
+            value: blendMode,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('blendMode ${e.name}', () => blendMode = e),
           ),
         ],
       ),
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    int fractionDigits = 0,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: fractionDigits > 0
-          ? (context, v) {
-              return Text(
-                v.toStringAsFixed(fractionDigits),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();

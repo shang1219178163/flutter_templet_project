@@ -9,7 +9,9 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_blur_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
@@ -17,8 +19,29 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
+/// 内缩圆角裁剪
+class _InsetRRectClipper extends CustomClipper<RRect> {
+  const _InsetRRectClipper();
+  @override
+  RRect getClip(Size size) {
+    return RRect.fromRectAndRadius(
+      Rect.fromLTWH(12, 12, size.width - 24, size.height - 24),
+      const Radius.circular(16),
+    );
+  }
+  @override
+  bool shouldReclip(covariant CustomClipper<RRect> oldClipper) => false;
+}
+
 /// clipper 预设
-enum _ClipperKind { none, inset }
+enum _ClipperKind {
+  none(label: 'none', clipper: null),
+  inset(label: 'inset', clipper: _InsetRRectClipper()),
+  ;
+  const _ClipperKind({required this.label, required this.clipper});
+  final String label;
+  final CustomClipper<RRect>? clipper;
+}
 
 class BlurViewDemo extends StatefulWidget {
   const BlurViewDemo({
@@ -41,7 +64,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
 
   /// 原 Demo BorderRadius.circular(16)、blur 25、Clip.antiAlias
   ShapeKind shapeKind = ShapeKind.rounded;
-  double shapeRadius = 16;
+  double shapeRadius = ShapeKind.rounded.radius;
   _ClipperKind clipperKind = _ClipperKind.none;
   Clip clipBehavior = Clip.antiAlias;
   double blur = 25;
@@ -175,7 +198,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Text(
-              'blur ${blur.toStringAsFixed(0)} · ${shapeKind.name} · ${clipBehavior.name} · $lastEvent',
+              'blur ${blur.toStringAsFixed(0)} · ${shapeKind.label} · ${clipBehavior.name} · $lastEvent',
               textAlign: TextAlign.center,
               style: theme.textTheme.labelMedium?.copyWith(
                 color: scheme.onSurfaceVariant,
@@ -191,8 +214,8 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
   Widget buildBlurView() {
     final frost = buildFrostChild();
     return NBlurView(
-      borderRadius: borderRadiusOf(),
-      clipper: clipperOf(),
+      borderRadius: shapeKind.borderRadius(roundedRadius: shapeRadius),
+      clipper: clipperKind.clipper,
       clipBehavior: clipBehavior,
       blur: blur,
       backdropFilter: useBackdropFilter
@@ -237,26 +260,6 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     );
   }
 
-  BorderRadiusGeometry borderRadiusOf() {
-    switch (shapeKind) {
-      case ShapeKind.none:
-        return BorderRadius.zero;
-      case ShapeKind.rounded:
-        return BorderRadius.circular(shapeRadius);
-      case ShapeKind.stadium:
-        return BorderRadius.circular(999);
-    }
-  }
-
-  CustomClipper<RRect>? clipperOf() {
-    switch (clipperKind) {
-      case _ClipperKind.none:
-        return null;
-      case _ClipperKind.inset:
-        return const _InsetRRectClipper();
-    }
-  }
-
   Widget buildConstructCard() {
     return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
@@ -266,51 +269,64 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (clipperKind == _ClipperKind.none) ...[
-            buildField(
-              label: 'borderRadius',
-              child: buildChoiceChips(
-                values: ShapeKind.values,
-                isSelected: (e) => shapeKind == e,
-                labelOf: (e) => e.name,
-                onChanged: (e) => onMark('borderRadius ${e.name}', () => shapeKind = e),
-              ),
+            NChoiceChipListItem<ShapeKind>(
+              title: const Text('borderRadius'),
+              values: ShapeKind.values,
+              value: shapeKind,
+              labelOf: (e) => e.label,
+              onChanged: (e) => onMark('borderRadius ${e.label}', () {
+                shapeKind = e;
+                if (e == ShapeKind.rounded) {
+                  shapeRadius = e.radius;
+                }
+              }),
             ),
             if (shapeKind == ShapeKind.rounded)
-              buildSlider(
-                label: 'radius',
-                value: shapeRadius,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('radius'),
                 min: 0,
                 max: 48,
+                value: shapeRadius.clamp(0, 48),
                 onChanged: (v) => onMark('radius ${v.round()}', () => shapeRadius = v),
+                activeColor: theme.colorScheme.primary,
               ),
+            const SizedBox(height: 8),
           ],
-          buildField(
-            label: 'clipper',
-            showTopGap: clipperKind == _ClipperKind.none,
-            child: buildChoiceChips(
-              values: _ClipperKind.values,
-              isSelected: (e) => clipperKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('clipper ${e.name}', () => clipperKind = e),
-            ),
+          NChoiceChipListItem<_ClipperKind>(
+            title: const Text('clipper'),
+            values: _ClipperKind.values,
+            value: clipperKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('clipper ${e.label}', () => clipperKind = e),
           ),
-          buildField(
-            label: 'clipBehavior',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: Clip.values,
-              isSelected: (e) => clipBehavior == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<Clip>(
+            title: const Text('clipBehavior'),
+            values: Clip.values,
+            value: clipBehavior,
+            labelOf: (e) => e.name,
+            onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
           ),
-          buildSlider(
-            label: 'blur',
-            value: blur,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('blur'),
             min: 0,
             max: 50,
+            value: blur.clamp(0, 50),
             onChanged: (v) => onMark('blur ${v.toStringAsFixed(1)}', () => blur = v),
-            fractionDigits: 1,
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(1),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -325,26 +341,24 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'backdropFilter',
+          NSwitchListTile(
+            title: const Text('backdropFilter'),
             value: useBackdropFilter,
             onChanged: (v) => onMark('backdropFilter $v', () => useBackdropFilter = v),
           ),
           if (useBackdropFilter) ...[
-            buildSwitch(
-              title: 'enabled',
+            NSwitchListTile(
+              title: const Text('enabled'),
               value: filterEnabled,
               onChanged: (v) => onMark('enabled $v', () => filterEnabled = v),
             ),
-            buildField(
-              label: 'blendMode',
-              showTopGap: true,
-              child: buildChoiceChips(
-                values: BlendMode.values,
-                isSelected: (e) => blendMode == e,
-                labelOf: (e) => e.name,
-                onChanged: (e) => onMark('blendMode ${e.name}', () => blendMode = e),
-              ),
+            const SizedBox(height: 8),
+            NChoiceChipListItem<BlendMode>(
+              title: const Text('blendMode'),
+              values: BlendMode.values,
+              value: blendMode,
+              labelOf: (e) => e.name,
+              onChanged: (e) => onMark('blendMode ${e.name}', () => blendMode = e),
             ),
           ],
         ],
@@ -352,121 +366,6 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    int fractionDigits = 0,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: fractionDigits > 0
-          ? (context, v) {
-              return Text(
-                v.toStringAsFixed(fractionDigits),
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
-              );
-            }
-          : null,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();
@@ -477,7 +376,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
 
   void onReset() {
     shapeKind = ShapeKind.rounded;
-    shapeRadius = 16;
+    shapeRadius = ShapeKind.rounded.radius;
     clipperKind = _ClipperKind.none;
     clipBehavior = Clip.antiAlias;
     blur = 25;
@@ -487,19 +386,4 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     lastEvent = '—';
     setState(() {});
   }
-}
-
-class _InsetRRectClipper extends CustomClipper<RRect> {
-  const _InsetRRectClipper();
-
-  @override
-  RRect getClip(Size size) {
-    return RRect.fromRectAndRadius(
-      Rect.fromLTWH(12, 12, size.width - 24, size.height - 24),
-      const Radius.circular(16),
-    );
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<RRect> oldClipper) => false;
 }

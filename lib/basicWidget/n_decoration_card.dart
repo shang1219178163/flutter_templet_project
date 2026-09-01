@@ -1,13 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-/// shape 预设
-enum ShapeKind { none, rounded, stadium }
+/// shape 预设（含默认半径；[rounded] 可被滑块覆盖）
+enum ShapeKind {
+  none(label: 'none', radius: 0),
+  rounded(label: 'rounded', radius: 16),
+  stadium(label: 'stadium', radius: 999);
 
-/// clipBehavior 含 null
-enum ClipKind { nil, none, hardEdge, antiAlias, antiAliasWithSaveLayer }
+  const ShapeKind({required this.label, required this.radius});
+
+  /// Chip 文案
+  final String label;
+
+  /// 默认圆角半径；[rounded] 可被调用方覆盖
+  final double radius;
+
+  /// [BorderRadius]；[rounded] 传 [roundedRadius] 覆盖默认 [radius]
+  BorderRadiusGeometry borderRadius({double? roundedRadius}) {
+    final r = this == ShapeKind.rounded ? (roundedRadius ?? radius) : radius;
+    return r <= 0 ? BorderRadius.zero : BorderRadius.circular(r);
+  }
+
+  /// [ShapeBorder]；[none] 为 null，[stadium] 为 [StadiumBorder]
+  ShapeBorder? shape({double? roundedRadius}) {
+    return switch (this) {
+      ShapeKind.none => null,
+      ShapeKind.rounded => RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(roundedRadius ?? radius),
+        ),
+      ShapeKind.stadium => const StadiumBorder(),
+    };
+  }
+
+  /// 轮廓描边场景（如 Chip.avatarBorder）
+  OutlinedBorder? outlinedBorder({double? roundedRadius}) {
+    final s = shape(roundedRadius: roundedRadius);
+    return s is OutlinedBorder ? s : null;
+  }
+}
+
+/// clipBehavior 预设
+enum ClipKind {
+  none(label: 'none', clip: Clip.none),
+  hardEdge(label: 'hardEdge', clip: Clip.hardEdge),
+  antiAlias(label: 'antiAlias', clip: Clip.antiAlias),
+  antiAliasWithSaveLayer(label: 'antiAliasWithSaveLayer', clip: Clip.antiAliasWithSaveLayer);
+
+  const ClipKind({required this.label, required this.clip});
+
+  /// Chip 文案
+  final String label;
+
+  /// 对应 [Clip]
+  final Clip clip;
+}
 
 /// systemOverlayStyle 预设
-enum OverlayKind { none, light, dark }
+enum OverlayKind {
+  none(label: 'none', style: null),
+  light(label: 'light', style: SystemUiOverlayStyle.light),
+  dark(label: 'dark', style: SystemUiOverlayStyle.dark);
+
+  const OverlayKind({required this.label, required this.style});
+
+  /// Chip 文案
+  final String label;
+
+  /// 对应 [SystemUiOverlayStyle]；[none] 为 null
+  final SystemUiOverlayStyle? style;
+}
+
+/// 滚动物理预设
+enum PhysicsKind {
+  platform(label: 'platform', physics: null),
+  always(label: 'always', physics: AlwaysScrollableScrollPhysics()),
+  bouncing(label: 'bouncing', physics: BouncingScrollPhysics()),
+  clamping(label: 'clamping', physics: ClampingScrollPhysics()),
+  never(label: 'never', physics: NeverScrollableScrollPhysics());
+
+  const PhysicsKind({required this.label, required this.physics});
+
+  /// Chip 文案
+  final String label;
+
+  /// 对应 [ScrollPhysics]；[platform] 为 null
+  final ScrollPhysics? physics;
+}
 
 /// 装饰卡片：渐变顶条、圆角描边、标题区 + 内容。
 class NDecorationCard extends StatelessWidget {

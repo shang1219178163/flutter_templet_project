@@ -7,13 +7,21 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// 弹出回调
-enum _PopCallbackKind { withResult, invoked, none }
+enum _PopCallbackKind {
+  withResult(label: 'onPopInvokedWithResult'),
+  invoked(label: 'onPopInvoked'),
+  none(label: 'null');
+  const _PopCallbackKind({required this.label});
+  final String label;
+}
 
 class PopScopeDemo extends StatefulWidget {
   const PopScopeDemo({
@@ -30,6 +38,8 @@ class PopScopeDemo extends StatefulWidget {
 class _PopScopeDemoState extends State<PopScopeDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
 
   bool canPop = false;
@@ -44,7 +54,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return PopScope(
       canPop: canPop,
       onPopInvokedWithResult: callbackKind == _PopCallbackKind.withResult ? onPopInvokedWithResult : null,
@@ -69,7 +79,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -121,7 +131,6 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -163,7 +172,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
       subtitle: 'canPop',
-      child: buildSwitch(title: 'canPop', value: canPop, onChanged: onCanPop),
+      child: NSwitchListTile(title: const Text('canPop'), value: canPop, onChanged: onCanPop),
     );
   }
 
@@ -172,112 +181,16 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
       icon: const Icon(Icons.tune_rounded),
       title: '行为',
       subtitle: 'onPopInvokedWithResult · onPopInvoked',
-      child: buildField(
-        label: 'callback',
-        child: buildChoiceChips(
-          values: _PopCallbackKind.values,
-          isSelected: (e) => callbackKind == e,
-          labelOf: (e) {
-            switch (e) {
-              case _PopCallbackKind.withResult:
-                return 'onPopInvokedWithResult';
-              case _PopCallbackKind.invoked:
-                return 'onPopInvoked';
-              case _PopCallbackKind.none:
-                return 'null';
-            }
-          },
-          onChanged: onCallbackKind,
-        ),
+      child: NChoiceChipListItem<_PopCallbackKind>(
+        title: const Text('callback'),
+        values: _PopCallbackKind.values,
+        value: callbackKind,
+        labelOf: (e) => e.label,
+        onChanged: onCallbackKind,
       ),
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   Future<void> onPopInvokedWithResult(bool didPop, Object? result) async {
     lastEvent = 'onPopInvokedWithResult didPop=$didPop result=$result';

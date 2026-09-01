@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 class AfterLayoutDemo extends StatefulWidget {
@@ -285,28 +286,37 @@ class _AfterLayoutDemoState extends State<AfterLayoutDemo> {
             labelOf: (e) => e ? 'Text' : 'null',
             onChanged: (e) => onMark('child ${e ? 'Text' : 'null'}', () => useChild = e),
           ),
-          buildSlider(
-            label: 'padding',
-            value: padding,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('padding'),
             min: 0,
             max: 32,
+            value: padding.clamp(0, 32),
             onChanged: (v) => onMark('padding ${v.round()}', () => padding = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'fontSize',
-            value: fontSize,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('fontSize'),
             min: 12,
             max: 28,
+            value: fontSize.clamp(12, 28),
             onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'maxWidth',
-            value: maxWidth,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('maxWidth'),
             min: 80,
             max: 320,
+            value: maxWidth.clamp(80, 320),
             onChanged: (v) => onMark('maxWidth ${v.round()}', () => maxWidth = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           NChoiceColorListItem(
             title: const Text('backgroundColor'),
             value: backgroundColor,
@@ -329,26 +339,6 @@ class _AfterLayoutDemoState extends State<AfterLayoutDemo> {
           child: const Text('追加字符串'),
         ),
       ),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
     );
   }
 
@@ -395,16 +385,7 @@ class _AfterLayoutDemoState extends State<AfterLayoutDemo> {
     final size = context.size;
     final sizeText = size?.toStringAsFixed(fractionDigits: 1, separator: ' × ') ?? '—';
     onMark('onTap $sizeText');
-    final scheme = theme.colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('context.size: $sizeText'),
-        duration: const Duration(milliseconds: 800),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: scheme.inverseSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
+    SnackUtil.show('context.size: $sizeText');
   }
 
   void onMark(String event, [VoidCallback? apply]) {

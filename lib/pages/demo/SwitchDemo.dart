@@ -1,21 +1,43 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 /// 构造方式
-enum _SwitchKind { material, adaptive }
+enum _SwitchKind {
+  material(label: 'material'),
+  adaptive(label: 'adaptive');
+  const _SwitchKind({required this.label});
+  final String label;
+}
 
 /// thumbIcon 预设
-enum _ThumbIconKind { none, checkClose, add }
+enum _ThumbIconKind {
+  none(label: 'none', fixedIcon: null, selectedIcon: null, unselectedIcon: null),
+  checkClose(label: 'check/close', fixedIcon: null, selectedIcon: Icons.check, unselectedIcon: Icons.close),
+  add(label: 'add', fixedIcon: Icons.add, selectedIcon: null, unselectedIcon: null),
+  ;
+  const _ThumbIconKind({
+    required this.label,
+    required this.fixedIcon,
+    required this.selectedIcon,
+    required this.unselectedIcon,
+  });
+  final String label;
+  final IconData? fixedIcon;
+  final IconData? selectedIcon;
+  final IconData? unselectedIcon;
+}
 
 class SwitchDemo extends StatefulWidget {
   const SwitchDemo({Key? key, this.title}) : super(key: key);
@@ -297,13 +319,16 @@ class _SwitchDemoState extends State<SwitchDemo> {
   }
 
   WidgetStateProperty<Icon?>? buildThumbIcon() {
-    return switch (thumbIconKind) {
-      _ThumbIconKind.none => null,
-      _ThumbIconKind.checkClose => WidgetStateProperty.resolveWith(
-          (states) => Icon(states.contains(WidgetState.selected) ? Icons.check : Icons.close),
-        ),
-      _ThumbIconKind.add => WidgetStateProperty.all(const Icon(Icons.add)),
-    };
+    final kind = thumbIconKind;
+    if (kind.fixedIcon != null) {
+      return WidgetStateProperty.all(Icon(kind.fixedIcon));
+    }
+    if (kind.selectedIcon != null) {
+      return WidgetStateProperty.resolveWith(
+        (states) => Icon(states.contains(WidgetState.selected) ? kind.selectedIcon : kind.unselectedIcon),
+      );
+    }
+    return null;
   }
 
   Widget buildBehaviorCard() {
@@ -314,93 +339,95 @@ class _SwitchDemoState extends State<SwitchDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('构造'),
-          buildChoiceChips(
+          NChoiceChipListItem<_SwitchKind>(
+            title: const Text('构造'),
             values: _SwitchKind.values,
             value: kind,
-            labelOf: (e) => e.name,
-            onChanged: (e) => onMark('kind ${e.name}', () => kind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('kind ${e.label}', () => kind = e),
           ),
-          buildSwitch(
-            title: 'value',
+          NSwitchListTile(
+            title: const Text('value'),
             value: value,
             onChanged: onValue,
           ),
-          buildSwitch(
-            title: 'onChanged',
+          NSwitchListTile(
+            title: const Text('onChanged'),
             value: useOnChanged,
             onChanged: (v) => onMark('onChanged ${v ? 'on' : 'null'}', () => useOnChanged = v),
           ),
-          const Text('thumbIcon'),
-          buildChoiceChips(
+          NChoiceChipListItem<_ThumbIconKind>(
+            title: const Text('thumbIcon'),
             values: _ThumbIconKind.values,
             value: thumbIconKind,
-            labelOf: (e) => e == _ThumbIconKind.checkClose ? 'check/close' : e.name,
-            onChanged: (e) => onMark('thumbIcon ${e.name}', () => thumbIconKind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('thumbIcon ${e.label}', () => thumbIconKind = e),
           ),
-          buildSwitch(
-            title: 'thumbImage',
+          NSwitchListTile(
+            title: const Text('thumbImage'),
             value: useThumbImage,
             onChanged: (v) => onMark('thumbImage ${v ? 'on' : 'null'}', () => useThumbImage = v),
           ),
-          const Text('dragStartBehavior'),
-          buildChoiceChips(
+          NChoiceChipListItem<DragStartBehavior>(
+            title: const Text('dragStartBehavior'),
             values: DragStartBehavior.values,
             value: dragStartBehavior,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('dragStartBehavior ${e.name}', () => dragStartBehavior = e),
           ),
-          const Text('materialTapTargetSize'),
-          buildChoiceChips(
+          NChoiceChipListItem<MaterialTapTargetSize?>(
+            title: const Text('materialTapTargetSize'),
             values: [null, ...MaterialTapTargetSize.values],
             value: materialTapTargetSize,
             labelOf: (e) => e?.name ?? '默',
             onChanged: (e) => onMark('materialTapTargetSize ${e?.name ?? 'null'}', () => materialTapTargetSize = e),
           ),
-          const Text('mouseCursor'),
-          buildChoiceChips(
+          NChoiceChipListItem<MouseCursor?>(
+            title: const Text('mouseCursor'),
             values: const [null, SystemMouseCursors.click, SystemMouseCursors.basic, SystemMouseCursors.forbidden],
             value: mouseCursor,
             labelOf: nameOfMouse,
             onChanged: (e) => onMark('mouseCursor ${nameOfMouse(e)}', () => mouseCursor = e),
           ),
-          buildSwitch(
-            title: 'padding',
+          NSwitchListTile(
+            title: const Text('padding'),
             value: usePadding,
             onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding)
-            buildSlider(
-              label: 'padding',
-              value: paddingAll,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding'),
               min: 0,
               max: 16,
+              value: paddingAll.clamp(0, 16),
               onChanged: (v) => onMark('padding ${v.round()}', () => paddingAll = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'autofocus',
+          NSwitchListTile(
+            title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          buildSwitch(
-            title: 'focusNode',
+          NSwitchListTile(
+            title: const Text('focusNode'),
             value: useFocusNode,
             onChanged: (v) => onMark('focusNode ${v ? 'on' : 'null'}', () => useFocusNode = v),
           ),
-          buildSwitch(
-            title: 'onFocusChange',
+          NSwitchListTile(
+            title: const Text('onFocusChange'),
             value: useOnFocusChange,
             onChanged: (v) => onMark('onFocusChange ${v ? 'on' : 'null'}', () => useOnFocusChange = v),
           ),
-          if (kind == _SwitchKind.adaptive) ...[
-            const Text('applyCupertinoTheme'),
-            buildChoiceChips(
+          if (kind == _SwitchKind.adaptive)
+            NChoiceChipListItem<bool?>(
+              title: const Text('applyCupertinoTheme'),
               values: const [null, true, false],
               value: applyCupertinoTheme,
               labelOf: (e) => e == null ? '默' : '$e',
               onChanged: (e) => onMark('applyCupertinoTheme ${e ?? 'null'}', () => applyCupertinoTheme = e),
             ),
-          ],
         ],
       ),
     );
@@ -414,41 +441,87 @@ class _SwitchDemoState extends State<SwitchDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildColorRow('activeColor', activeColor, (v) => activeColor = v),
-          buildColorRow('activeTrackColor', activeTrackColor, (v) => activeTrackColor = v),
-          buildColorRow('inactiveThumbColor', inactiveThumbColor, (v) => inactiveThumbColor = v),
-          buildColorRow('inactiveTrackColor', inactiveTrackColor, (v) => inactiveTrackColor = v),
-          buildColorRow('thumbColor', thumbColor, (v) => thumbColor = v),
-          buildColorRow('trackColor', trackColor, (v) => trackColor = v),
-          buildColorRow('trackOutlineColor', trackOutlineColor, (v) => trackOutlineColor = v),
-          buildColorRow('focusColor', focusColor, (v) => focusColor = v),
-          buildColorRow('hoverColor', hoverColor, (v) => hoverColor = v),
-          buildColorRow('overlayColor', overlayColor, (v) => overlayColor = v),
-          buildSwitch(
-            title: 'splashRadius',
+          NChoiceColorListItem(
+            title: const Text('activeColor'),
+            value: activeColor,
+            onChanged: (v) => onMark('activeColor ${v ?? 'null'}', () => activeColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('activeTrackColor'),
+            value: activeTrackColor,
+            onChanged: (v) => onMark('activeTrackColor ${v ?? 'null'}', () => activeTrackColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('inactiveThumbColor'),
+            value: inactiveThumbColor,
+            onChanged: (v) => onMark('inactiveThumbColor ${v ?? 'null'}', () => inactiveThumbColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('inactiveTrackColor'),
+            value: inactiveTrackColor,
+            onChanged: (v) => onMark('inactiveTrackColor ${v ?? 'null'}', () => inactiveTrackColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('thumbColor'),
+            value: thumbColor,
+            onChanged: (v) => onMark('thumbColor ${v ?? 'null'}', () => thumbColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('trackColor'),
+            value: trackColor,
+            onChanged: (v) => onMark('trackColor ${v ?? 'null'}', () => trackColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('trackOutlineColor'),
+            value: trackOutlineColor,
+            onChanged: (v) => onMark('trackOutlineColor ${v ?? 'null'}', () => trackOutlineColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('focusColor'),
+            value: focusColor,
+            onChanged: (v) => onMark('focusColor ${v ?? 'null'}', () => focusColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('hoverColor'),
+            value: hoverColor,
+            onChanged: (v) => onMark('hoverColor ${v ?? 'null'}', () => hoverColor = v),
+          ),
+          NChoiceColorListItem(
+            title: const Text('overlayColor'),
+            value: overlayColor,
+            onChanged: (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v),
+          ),
+          NSwitchListTile(
+            title: const Text('splashRadius'),
             value: useSplashRadius,
             onChanged: (v) => onMark('splashRadius ${v ? 'on' : 'null'}', () => useSplashRadius = v),
           ),
           if (useSplashRadius)
-            buildSlider(
-              label: 'splashRadius',
-              value: splashRadius,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('splashRadius'),
               min: 8,
               max: 40,
+              value: splashRadius.clamp(8, 40),
               onChanged: (v) => onMark('splashRadius ${v.round()}', () => splashRadius = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'trackOutlineWidth',
+          NSwitchListTile(
+            title: const Text('trackOutlineWidth'),
             value: useTrackOutlineWidth,
             onChanged: (v) => onMark('trackOutlineWidth ${v ? 'on' : 'null'}', () => useTrackOutlineWidth = v),
           ),
           if (useTrackOutlineWidth)
-            buildSlider(
-              label: 'trackOutlineWidth',
-              value: trackOutlineWidth,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('trackOutlineWidth'),
               min: 0,
               max: 4,
+              value: trackOutlineWidth.clamp(0, 4),
               onChanged: (v) => onMark('trackOutlineWidth ${v.toStringAsFixed(1)}', () => trackOutlineWidth = v),
+              activeColor: theme.colorScheme.primary,
             ),
         ],
       ),
@@ -465,134 +538,6 @@ class _SwitchDemoState extends State<SwitchDemo> {
     };
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> assign) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(
-          value: value,
-          onChanged: (v) => onMark('$label ${v ?? 'null'}', () => assign(v)),
-        ),
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: switch ((e, selected)) {
-              (null, _) => Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600)),
-              (final Color c, true) => Icon(
-                  Icons.check_rounded,
-                  size: 16,
-                  color: ThemeData.estimateBrightnessForColor(c) == Brightness.dark ? Colors.white : Colors.black87,
-                ),
-              _ => null,
-            },
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();

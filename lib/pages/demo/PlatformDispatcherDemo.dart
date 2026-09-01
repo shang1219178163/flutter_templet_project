@@ -9,6 +9,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -18,18 +19,18 @@ import 'package:get/get.dart';
 
 /// WidgetsBindingObserver 可接的 PlatformDispatcher 通知
 enum _ListenKind {
-  metrics('metrics', 'didChangeMetrics'),
-  brightness('brightness', 'didChangePlatformBrightness'),
-  textScale('textScale', 'didChangeTextScaleFactor'),
-  locales('locales', 'didChangeLocales'),
-  accessibility('accessibility', 'didChangeAccessibilityFeatures'),
-  lifecycle('lifecycle', 'didChangeAppLifecycleState'),
-  viewFocus('viewFocus', 'didChangeViewFocus'),
-  memory('memory', 'didHaveMemoryPressure'),
-  platformConfig('platformConfig', 'onPlatformConfigurationChanged'),
-  systemFont('systemFont', 'onSystemFontFamilyChanged');
+  metrics(label: 'metrics', callback: 'didChangeMetrics'),
+  brightness(label: 'brightness', callback: 'didChangePlatformBrightness'),
+  textScale(label: 'textScale', callback: 'didChangeTextScaleFactor'),
+  locales(label: 'locales', callback: 'didChangeLocales'),
+  accessibility(label: 'accessibility', callback: 'didChangeAccessibilityFeatures'),
+  lifecycle(label: 'lifecycle', callback: 'didChangeAppLifecycleState'),
+  viewFocus(label: 'viewFocus', callback: 'didChangeViewFocus'),
+  memory(label: 'memory', callback: 'didHaveMemoryPressure'),
+  platformConfig(label: 'platformConfig', callback: 'onPlatformConfigurationChanged'),
+  systemFont(label: 'systemFont', callback: 'onSystemFontFamilyChanged');
 
-  const _ListenKind(this.label, this.callback);
+  const _ListenKind({required this.label, required this.callback});
   final String label;
   final String callback;
 }
@@ -50,6 +51,8 @@ class PlatformDispatcherDemo extends StatefulWidget {
 
 class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with WidgetsBindingObserver {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final propertyScrollController = ScrollController();
@@ -94,7 +97,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -117,7 +120,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -174,7 +177,6 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
     final view = dispatcher.views.isEmpty ? null : dispatcher.views.first;
@@ -276,8 +278,8 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
             ),
           ),
           ..._ListenKind.values.map((e) {
-            return buildSwitch(
-              title: '${e.label}  ${e.callback}',
+            return NSwitchListTile(
+              title: Text('${e.label}  ${e.callback}'),
               value: listen[e] ?? true,
               onChanged: (v) => onListen(e, v),
             );
@@ -345,7 +347,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
     const nameW = 200.0;
     const valueW = 200.0;
     const commentW = 280.0;
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     Widget cell(String text, {bool header = false, bool mono = true, double width = 0, bool trailingGap = false}) {
       return SizedBox(
         width: width,
@@ -411,27 +413,6 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
     );
   }
 
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   List<String> accessibilityLabelsOf() {
     final f = dispatcher.accessibilityFeatures;

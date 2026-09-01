@@ -7,13 +7,21 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// metaData 预设
-enum _MetaKind { map, text, nil }
+enum _MetaKind {
+  map(label: '{key, value}', metaData: {'key': 'MetaData', 'value': 'MetaData自定义数据'}),
+  text(label: 'String', metaData: 'MetaData自定义数据'),
+  nil(label: 'null', metaData: null);
+  const _MetaKind({required this.label, required this.metaData});
+  final String label;
+  final dynamic metaData;
+}
 
 class MetaDataDemo extends StatefulWidget {
   const MetaDataDemo({
@@ -29,6 +37,8 @@ class MetaDataDemo extends StatefulWidget {
 
 class _MetaDataDemoState extends State<MetaDataDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -47,7 +57,7 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -66,7 +76,7 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -113,7 +123,6 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -141,7 +150,7 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
               ),
             const SizedBox(height: 12),
             MetaData(
-              metaData: metaDataOf(),
+              metaData: metaKind.metaData,
               behavior: behavior,
               child: Builder(
                 builder: (context) {
@@ -175,112 +184,24 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'metaData',
-            child: buildChoiceChips(
-              values: _MetaKind.values,
-              isSelected: (e) => metaKind == e,
-              labelOf: (e) {
-                switch (e) {
-                  case _MetaKind.map:
-                    return '{key, value}';
-                  case _MetaKind.text:
-                    return 'String';
-                  case _MetaKind.nil:
-                    return 'null';
-                }
-              },
-              onChanged: onMetaKind,
-            ),
+          NChoiceChipListItem<_MetaKind>(
+            title: const Text('metaData'),
+            values: _MetaKind.values,
+            value: metaKind,
+            labelOf: (e) => e.label,
+            onChanged: onMetaKind,
           ),
-          buildField(
-            label: 'behavior',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: HitTestBehavior.values,
-              isSelected: (e) => behavior == e,
-              labelOf: (e) => e.name,
-              onChanged: onBehavior,
-            ),
+          const SizedBox(height: 8),
+          NChoiceChipListItem<HitTestBehavior>(
+            title: const Text('behavior'),
+            values: HitTestBehavior.values,
+            value: behavior,
+            labelOf: (e) => e.name,
+            onChanged: onBehavior,
           ),
         ],
       ),
     );
-  }
-
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  dynamic metaDataOf() {
-    switch (metaKind) {
-      case _MetaKind.map:
-        return {'key': 'MetaData', 'value': 'MetaData自定义数据'};
-      case _MetaKind.text:
-        return 'MetaData自定义数据';
-      case _MetaKind.nil:
-        return null;
-    }
   }
 
   void onPrint(dynamic metaData) {

@@ -7,16 +7,29 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 /// shape 预设
-enum _ShapeKind { none, circular, automatic }
+enum _ShapeKind {
+  none(label: 'none', shape: null),
+  circular(label: 'circular', shape: CircularNotchedRectangle()),
+  automatic(
+    label: 'automatic',
+    shape: AutomaticNotchedShape(RoundedRectangleBorder(), StadiumBorder()),
+  ),
+  ;
+  const _ShapeKind({required this.label, required this.shape});
+  final String label;
+  final NotchedShape? shape;
+}
 
 class BottomAppBarDemo extends StatefulWidget {
   const BottomAppBarDemo({Key? key, this.title}) : super(key: key);
@@ -205,7 +218,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
     return BottomAppBar(
       color: color,
       elevation: useElevation ? elevation : null,
-      shape: shapeOf(),
+      shape: shapeKind.shape,
       clipBehavior: clipBehavior,
       notchMargin: notchMargin,
       padding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
@@ -247,17 +260,6 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
     );
   }
 
-  NotchedShape? shapeOf() {
-    return switch (shapeKind) {
-      _ShapeKind.none => null,
-      _ShapeKind.circular => const CircularNotchedRectangle(),
-      _ShapeKind.automatic => const AutomaticNotchedShape(
-          RoundedRectangleBorder(),
-          StadiumBorder(),
-        ),
-    };
-  }
-
   Widget buildSurfaceCard() {
     return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
@@ -266,42 +268,51 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('color'),
-          buildColorDots(value: color, onChanged: (e) => onMark('color ${e ?? 'null'}', () => color = e)),
-          const Text('shape'),
-          buildChoiceChips(
+          NChoiceColorListItem(
+            title: const Text('color'),
+            value: color,
+            onChanged: (e) => onMark('color ${e ?? 'null'}', () => color = e),
+          ),
+          NChoiceChipListItem(
+            title: const Text('shape'),
             values: _ShapeKind.values,
             value: shapeKind,
-            labelOf: (e) => e.name,
-            onChanged: (e) => onMark('shapeKind ${e.name}', () => shapeKind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('shapeKind ${e.label}', () => shapeKind = e),
           ),
-          buildSwitch(
-            title: 'child 显示图标',
+          NSwitchListTile(
+            title: const Text('child 显示图标'),
             value: useChild,
             onChanged: (v) => onMark('useChild $v', () => useChild = v),
           ),
-          buildSwitch(
-            title: 'elevation 指定高度',
+          NSwitchListTile(
+            title: const Text('elevation 指定高度'),
             value: useElevation,
             onChanged: (v) => onMark('useElevation $v', () => useElevation = v),
           ),
           if (useElevation)
-            buildSlider(
-              label: 'elevation',
-              value: elevation,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('elevation'),
               min: 0,
               max: 16,
+              value: elevation.clamp(0, 16),
               onChanged: (v) => onMark('elevation ${v.round()}', () => elevation = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          const Text('shadowColor'),
-          buildColorDots(value: shadowColor, onChanged: (e) => onMark('shadowColor ${e ?? 'null'}', () => shadowColor = e)),
-          const Text('surfaceTintColor'),
-          buildColorDots(
+          NChoiceColorListItem(
+            title: const Text('shadowColor'),
+            value: shadowColor,
+            onChanged: (e) => onMark('shadowColor ${e ?? 'null'}', () => shadowColor = e),
+          ),
+          NChoiceColorListItem(
+            title: const Text('surfaceTintColor'),
             value: surfaceTintColor,
             onChanged: (e) => onMark('surfaceTintColor ${e ?? 'null'}', () => surfaceTintColor = e),
           ),
-          const Text('clipBehavior'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('clipBehavior'),
             values: Clip.values,
             value: clipBehavior,
             labelOf: (e) => e.name,
@@ -320,55 +331,67 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'height 指定高度',
+          NSwitchListTile(
+            title: const Text('height 指定高度'),
             value: useHeight,
             onChanged: (v) => onMark('useHeight $v', () => useHeight = v),
           ),
           if (useHeight)
-            buildSlider(
-              label: 'height',
-              value: height,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('height'),
               min: 40,
               max: 120,
+              value: height.clamp(40, 120),
               onChanged: (v) => onMark('height ${v.round()}', () => height = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'padding 指定内边距',
+          NSwitchListTile(
+            title: const Text('padding 指定内边距'),
             value: usePadding,
             onChanged: (v) => onMark('usePadding $v', () => usePadding = v),
           ),
           if (usePadding) ...[
-            buildSlider(
-              label: 'padding H',
-              value: padH,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding H'),
               min: 0,
               max: 32,
+              value: padH.clamp(0, 32),
               onChanged: (v) => onMark('padH ${v.round()}', () => padH = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'padding V',
-              value: padV,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding V'),
               min: 0,
               max: 24,
+              value: padV.clamp(0, 24),
               onChanged: (v) => onMark('padV ${v.round()}', () => padV = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
           if (shapeKind != _ShapeKind.none)
-            buildSlider(
-              label: 'notchMargin',
-              value: notchMargin,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('notchMargin'),
               min: 0,
               max: 16,
+              value: notchMargin.clamp(0, 16),
               onChanged: (v) => onMark('notchMargin ${v.round()}', () => notchMargin = v),
+              activeColor: theme.colorScheme.primary,
             ),
-          buildSwitch(
-            title: 'showFab 显示浮动按钮',
+          NSwitchListTile(
+            title: const Text('showFab 显示浮动按钮'),
             value: showFab,
             onChanged: (v) => onMark('showFab $v', () => showFab = v),
           ),
-          const Text('fabLocation'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('fabLocation'),
             values: locations,
             value: fabLocation,
             labelOf: (e) => e.toString().split('.').last,
@@ -379,121 +402,6 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
     );
   }
 
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();

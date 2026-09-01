@@ -9,9 +9,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/button/n_button.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_text_field_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
@@ -232,34 +235,28 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'localizedReason',
-            child: TextField(
-              controller: reasonController,
-              decoration: const InputDecoration(
-                isDense: true,
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (v) => onMark('localizedReason $v'),
-            ),
+          NTextFieldListItem(
+            title: const Text('localizedReason'),
+            controller: reasonController,
+            onChanged: (v) => onMark('localizedReason $v'),
           ),
-          buildSwitch(
-            title: 'useErrorDialogs',
+          NSwitchListTile(
+            title: const Text('useErrorDialogs'),
             value: useErrorDialogs,
             onChanged: (v) => onMark('useErrorDialogs $v', () => useErrorDialogs = v),
           ),
-          buildSwitch(
-            title: 'stickyAuth',
+          NSwitchListTile(
+            title: const Text('stickyAuth'),
             value: stickyAuth,
             onChanged: (v) => onMark('stickyAuth $v', () => stickyAuth = v),
           ),
-          buildSwitch(
-            title: 'sensitiveTransaction',
+          NSwitchListTile(
+            title: const Text('sensitiveTransaction'),
             value: sensitiveTransaction,
             onChanged: (v) => onMark('sensitiveTransaction $v', () => sensitiveTransaction = v),
           ),
-          buildSwitch(
-            title: 'biometricOnly',
+          NSwitchListTile(
+            title: const Text('biometricOnly'),
             value: biometricOnly,
             onChanged: (v) => onMark('biometricOnly $v', () => biometricOnly = v),
           ),
@@ -276,63 +273,39 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(
-            title: 'authMessages 自定义',
+          NSwitchListTile(
+            title: const Text('authMessages 自定义'),
             value: useCustomMessages,
             onChanged: (v) => onMark('authMessages ${v ? 'custom' : 'default'}', () => useCustomMessages = v),
           ),
           if (useCustomMessages) ...[
-            buildField(
-              label: 'cancelButton',
+            NTextFieldListItem(
+              title: const Text('cancelButton'),
               showTopGap: true,
-              child: TextField(
-                controller: cancelController,
-                decoration: const InputDecoration(
-                  isDense: true,
-                  hintText: '默',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (v) => onMark('cancelButton $v'),
-              ),
+              controller: cancelController,
+              hintText: '默',
+              onChanged: (v) => onMark('cancelButton $v'),
             ),
-            buildField(
-              label: 'IOSAuthMessages.localizedFallbackTitle',
+            NTextFieldListItem(
+              title: const Text('IOSAuthMessages.localizedFallbackTitle'),
               showTopGap: true,
-              child: TextField(
-                controller: fallbackController,
-                decoration: const InputDecoration(
-                  isDense: true,
-                  hintText: '默',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (v) => onMark('localizedFallbackTitle $v'),
-              ),
+              controller: fallbackController,
+              hintText: '默',
+              onChanged: (v) => onMark('localizedFallbackTitle $v'),
             ),
-            buildField(
-              label: 'AndroidAuthMessages.signInTitle',
+            NTextFieldListItem(
+              title: const Text('AndroidAuthMessages.signInTitle'),
               showTopGap: true,
-              child: TextField(
-                controller: signInTitleController,
-                decoration: const InputDecoration(
-                  isDense: true,
-                  hintText: '默',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (v) => onMark('signInTitle $v'),
-              ),
+              controller: signInTitleController,
+              hintText: '默',
+              onChanged: (v) => onMark('signInTitle $v'),
             ),
-            buildField(
-              label: 'AndroidAuthMessages.biometricHint',
+            NTextFieldListItem(
+              title: const Text('AndroidAuthMessages.biometricHint'),
               showTopGap: true,
-              child: TextField(
-                controller: biometricHintController,
-                decoration: const InputDecoration(
-                  isDense: true,
-                  hintText: '默',
-                  border: OutlineInputBorder(),
-                ),
-                onChanged: (v) => onMark('biometricHint $v'),
-              ),
+              controller: biometricHintController,
+              hintText: '默',
+              onChanged: (v) => onMark('biometricHint $v'),
             ),
           ],
         ],
@@ -380,54 +353,6 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     return text;
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
-
   Future<void> onStart() async {
     busy = true;
     setState(() {});
@@ -437,7 +362,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       if (!supported) {
         lastEvent = 'isDeviceSupported false';
         DLog.d('设备不支持');
-        onSnack(lastEvent);
+        SnackUtil.show(lastEvent);
         return;
       }
       final canBio = await auth.canCheckBiometrics;
@@ -445,7 +370,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       if (!canBio) {
         lastEvent = 'canCheckBiometrics false';
         DLog.d('设备不支持1');
-        onSnack(lastEvent);
+        SnackUtil.show(lastEvent);
         return;
       }
       final types = await auth.getAvailableBiometrics();
@@ -453,16 +378,16 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       if (types.isEmpty) {
         lastEvent = 'availableBiometrics empty';
         DLog.d('不可用');
-        onSnack(lastEvent);
+        SnackUtil.show(lastEvent);
         return;
       }
       lastEvent = 'availableBiometrics: ${types.map((e) => e.name).join(', ')}';
       DLog.d(lastEvent);
-      onSnack(lastEvent);
+      SnackUtil.show(lastEvent);
     } on PlatformException catch (e) {
       lastEvent = 'onStart ${e.code} ${e.message}';
       DLog.d(lastEvent);
-      onSnack(lastEvent);
+      SnackUtil.show(lastEvent);
     } finally {
       busy = false;
       if (mounted) {
@@ -475,7 +400,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     final reason = reasonController.text.trim();
     if (reason.isEmpty) {
       lastEvent = 'localizedReason 不能为空';
-      onSnack(lastEvent);
+      SnackUtil.show(lastEvent);
       setState(() {});
       return;
     }
@@ -489,11 +414,11 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       );
       lastEvent = 'authenticate $ok';
       DLog.d(lastEvent);
-      onSnack(lastEvent);
+      SnackUtil.show(lastEvent);
     } on PlatformException catch (e) {
       lastEvent = 'authenticate ${e.code} ${e.message}';
       DLog.d(lastEvent);
-      onSnack(lastEvent);
+      SnackUtil.show(lastEvent);
     } finally {
       busy = false;
       if (mounted) {
@@ -509,11 +434,11 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       final ok = await auth.stopAuthentication();
       lastEvent = 'stopAuthentication $ok';
       DLog.d(lastEvent);
-      onSnack(lastEvent);
+      SnackUtil.show(lastEvent);
     } on PlatformException catch (e) {
       lastEvent = 'stopAuthentication ${e.code} ${e.message}';
       DLog.d(lastEvent);
-      onSnack(lastEvent);
+      SnackUtil.show(lastEvent);
     } finally {
       busy = false;
       if (mounted) {
@@ -526,22 +451,6 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     apply?.call();
     lastEvent = event;
     setState(() {});
-  }
-
-  void onSnack(String message) {
-    if (!mounted) {
-      return;
-    }
-    final scheme = theme.colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(milliseconds: 800),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: scheme.inverseSurface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
   }
 
   void onReset() {

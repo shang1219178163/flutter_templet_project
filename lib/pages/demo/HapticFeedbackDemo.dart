@@ -8,13 +8,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// HapticFeedback 静态方法
-enum _HapticKind { vibrate, lightImpact, mediumImpact, heavyImpact, selectionClick }
+enum _HapticKind {
+  vibrate(label: 'vibrate', run: HapticFeedback.vibrate),
+  lightImpact(label: 'lightImpact', run: HapticFeedback.lightImpact),
+  mediumImpact(label: 'mediumImpact', run: HapticFeedback.mediumImpact),
+  heavyImpact(label: 'heavyImpact', run: HapticFeedback.heavyImpact),
+  selectionClick(label: 'selectionClick', run: HapticFeedback.selectionClick),
+  ;
+  const _HapticKind({required this.label, required this.run});
+  final String label;
+  final Future<void> Function() run;
+}
 
 class HapticFeedbackDemo extends StatefulWidget {
   const HapticFeedbackDemo({
@@ -30,6 +42,8 @@ class HapticFeedbackDemo extends StatefulWidget {
 
 class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -51,7 +65,7 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -70,7 +84,7 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -118,7 +132,6 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -141,7 +154,7 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
                 children: _HapticKind.values.map((e) {
                   return ElevatedButton(
                     onPressed: () => onHaptic(e),
-                    child: Text(e.name),
+                    child: Text(e.label),
                   );
                 }).toList(),
               ),
@@ -168,77 +181,23 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
       icon: const Icon(Icons.vibration_outlined),
       title: '方法',
       subtitle: 'vibrate  lightImpact  mediumImpact  heavyImpact  selectionClick',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('HapticFeedback'),
-          buildChoiceChips(
-            values: _HapticKind.values,
-            value: kind,
-            labelOf: (e) => e.name,
-            onChanged: onHaptic,
-          ),
-        ],
+      child: NChoiceChipListItem<_HapticKind>(
+        title: const Text('HapticFeedback'),
+        values: _HapticKind.values,
+        value: kind,
+        labelOf: (e) => e.label,
+        onChanged: onHaptic,
       ),
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
     );
   }
 
   Future<void> onHaptic(_HapticKind value) async {
     kind = value;
-    lastEvent = 'HapticFeedback.${value.name}()';
+    lastEvent = 'HapticFeedback.${value.label}()';
     DLog.d(lastEvent);
     setState(() {});
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(lastEvent), duration: const Duration(milliseconds: 800)),
-    );
-    switch (value) {
-      case _HapticKind.vibrate:
-        await HapticFeedback.vibrate();
-      case _HapticKind.lightImpact:
-        await HapticFeedback.lightImpact();
-      case _HapticKind.mediumImpact:
-        await HapticFeedback.mediumImpact();
-      case _HapticKind.heavyImpact:
-        await HapticFeedback.heavyImpact();
-      case _HapticKind.selectionClick:
-        await HapticFeedback.selectionClick();
-    }
+    SnackUtil.show(lastEvent);
+    await value.run();
   }
 
   void onReset() {

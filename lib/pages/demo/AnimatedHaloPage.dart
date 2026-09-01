@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/animated_halo.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class AnimatedHaloPage extends StatefulWidget {
@@ -20,6 +20,7 @@ class AnimatedHaloPage extends StatefulWidget {
 
 class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -63,7 +64,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -82,7 +83,7 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -133,7 +134,6 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -198,44 +198,93 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'size',
-            value: size,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('size'),
             min: 24,
             max: 200,
+            value: size.clamp(24, 200),
             onChanged: (v) => onMark('size ${v.round()}', () => size = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'spacing',
-            value: spacing,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('spacing'),
             min: 0,
             max: 24,
-            fractionDigits: 1,
+            value: spacing.clamp(0, 24),
             onChanged: (v) => onMark('spacing ${v.toStringAsFixed(1)}', () => spacing = v),
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(1),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
-          buildSlider(
-            label: 'strokeWidth',
-            value: strokeWidth,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('strokeWidth'),
             min: 0.5,
             max: 8,
-            fractionDigits: 1,
+            value: strokeWidth.clamp(0.5, 8),
             onChanged: (v) => onMark('strokeWidth ${v.toStringAsFixed(1)}', () => strokeWidth = v),
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(1),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
-          buildSlider(
-            label: 'innerStrokeWidth',
-            value: innerStrokeWidth,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('innerStrokeWidth'),
             min: 0.5,
             max: 8,
-            fractionDigits: 1,
+            value: innerStrokeWidth.clamp(0.5, 8),
             onChanged: (v) => onMark('innerStrokeWidth ${v.toStringAsFixed(1)}', () => innerStrokeWidth = v),
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              return Text(
+                v.toStringAsFixed(1),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
-          buildSlider(
-            label: 'duration',
-            value: durationMs,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('duration'),
             min: 200,
             max: 4000,
-            durationLabel: true,
+            value: durationMs.clamp(200, 4000),
             onChanged: (v) => onMark('duration ${v.round()}ms', () => durationMs = v),
+            activeColor: theme.colorScheme.primary,
+            valueBuilder: (context, v) {
+              final ms = v.round();
+              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+              return Text(
+                text,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontFamily: 'monospace',
+                ),
+              );
+            },
           ),
           const Text('child'),
           buildImageChips(),
@@ -273,101 +322,25 @@ class _AnimatedHaloPageState extends State<AnimatedHaloPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildColorRow('color', color, _color, (v) => onMark('color ${v == _color ? '默' : v}', () => color = v)),
-          buildColorRow(
-            'innerColor',
-            innerColor,
-            _innerColor,
-            (v) => onMark('innerColor ${v == _innerColor ? '默' : v}', () => innerColor = v),
+          NChoiceColorListItem(
+            title: const Text('color'),
+            value: color == _color ? null : color,
+            onChanged: (e) {
+              final v = e ?? _color;
+              onMark('color ${v == _color ? '默' : v}', () => color = v);
+            },
+          ),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('innerColor'),
+            value: innerColor == _innerColor ? null : innerColor,
+            onChanged: (e) {
+              final v = e ?? _innerColor;
+              onMark('innerColor ${v == _innerColor ? '默' : v}', () => innerColor = v);
+            },
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildColorRow(String label, Color value, Color fallback, ValueChanged<Color> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(value: value, fallback: fallback, onChanged: onChanged),
-      ],
-    );
-  }
-
-  Widget buildColorDots({
-    required Color value,
-    required Color fallback,
-    required ValueChanged<Color> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = e == null ? value == fallback : value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e ?? fallback),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color:
-                            ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-    int fractionDigits = 0,
-    bool durationLabel = false,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-      valueBuilder: (context, v) {
-        final text = durationLabel
-            ? (v.round() >= 1000 ? '${(v / 1000).toStringAsFixed(v.round() % 1000 == 0 ? 0 : 1)}s' : '${v.round()}ms')
-            : v.toStringAsFixed(fractionDigits);
-        return Text(
-          text,
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: scheme.onSurfaceVariant,
-            fontFamily: 'monospace',
-          ),
-        );
-      },
     );
   }
 

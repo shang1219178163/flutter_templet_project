@@ -9,25 +9,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// ListTile 家族构造
 enum _TileKind {
-  gallery,
-  listTile,
-  switchTile,
-  switchAdaptive,
-  checkbox,
-  checkboxAdaptive,
-  radio,
-  radioAdaptive,
-  slider,
-  cupertino,
+  gallery(label: 'gallery'),
+  listTile(label: 'ListTile'),
+  switchTile(label: 'Switch'),
+  switchAdaptive(label: 'Switch.adaptive'),
+  checkbox(label: 'Checkbox'),
+  checkboxAdaptive(label: 'Checkbox.adaptive'),
+  radio(label: 'Radio'),
+  radioAdaptive(label: 'Radio.adaptive'),
+  slider(label: 'Slider'),
+  cupertino(label: 'Cupertino');
+  const _TileKind({required this.label});
+  final String label;
 }
 
 class ListTilePage extends StatefulWidget {
@@ -320,17 +325,20 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildListTile() {
+    final subtitle = (!useSubtitle && !isThreeLine)
+        ? null
+        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     return ListTile(
-      leading: secondaryOf(),
+      leading: useSecondary ? const Icon(Icons.notifications_outlined) : null,
       title: Text(titleText),
-      subtitle: subtitleOf(),
+      subtitle: subtitle,
       trailing: useTrailing ? const Icon(Icons.chevron_right) : null,
       isThreeLine: isThreeLine,
       dense: dense,
       visualDensity: visualDensity,
-      shape: shapeOf(),
+      shape: shapeKind.shape(roundedRadius: shapeRadius),
       style: listTileStyle,
-      contentPadding: paddingOf(),
+      contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
       enabled: enabled,
       onTap: useOnChanged && enabled ? () => onTap('ListTile') : null,
       onLongPress: useOnChanged && enabled ? () => onMark('onLongPress') : null,
@@ -349,7 +357,10 @@ class _ListTilePageState extends State<ListTilePage> {
     final title = Text(kind == _TileKind.gallery
         ? (adaptive ? 'SwitchListTile.adaptive' : 'SwitchListTile')
         : titleText);
-    final onChanged = onChangedOf<bool>((v) => onMark('Switch $v', () => switchValue = v));
+    final subtitle = (!useSubtitle && !isThreeLine)
+        ? null
+        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final onChanged = enabled && useOnChanged ? (v) => onMark('Switch $v', () => switchValue = v) : null;
     if (adaptive) {
       return SwitchListTile.adaptive(
         value: switchValue,
@@ -362,14 +373,14 @@ class _ListTilePageState extends State<ListTilePage> {
         applyCupertinoTheme: applyCupertinoTheme,
         tileColor: tileColor,
         title: title,
-        subtitle: subtitleOf(),
+        subtitle: subtitle,
         isThreeLine: isThreeLine,
         dense: dense,
-        contentPadding: paddingOf(),
-        secondary: secondaryOf(),
+        contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
+        secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
         selected: selected,
         controlAffinity: controlAffinity,
-        shape: shapeOf(),
+        shape: shapeKind.shape(roundedRadius: shapeRadius),
         selectedTileColor: selectedTileColor,
         visualDensity: visualDensity,
         enableFeedback: enableFeedback,
@@ -386,14 +397,14 @@ class _ListTilePageState extends State<ListTilePage> {
       autofocus: autofocus,
       tileColor: tileColor,
       title: title,
-      subtitle: subtitleOf(),
+      subtitle: subtitle,
       isThreeLine: isThreeLine,
       dense: dense,
-      contentPadding: paddingOf(),
-      secondary: secondaryOf(),
+      contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
+      secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
       selected: selected,
       controlAffinity: controlAffinity,
-      shape: shapeOf(),
+      shape: shapeKind.shape(roundedRadius: shapeRadius),
       selectedTileColor: selectedTileColor,
       visualDensity: visualDensity,
       enableFeedback: enableFeedback,
@@ -405,7 +416,10 @@ class _ListTilePageState extends State<ListTilePage> {
     final title = Text(kind == _TileKind.gallery
         ? (adaptive ? 'CheckboxListTile.adaptive' : 'CheckboxListTile')
         : titleText);
-    final onChanged = onChangedOf<bool?>((v) => onMark('Checkbox $v', () => checkboxValue = v));
+    final subtitle = (!useSubtitle && !isThreeLine)
+        ? null
+        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final onChanged = enabled && useOnChanged ? (v) => onMark('Checkbox $v', () => checkboxValue = v) : null;
     if (adaptive) {
       return CheckboxListTile.adaptive(
         value: checkboxValue,
@@ -417,18 +431,18 @@ class _ListTilePageState extends State<ListTilePage> {
         visualDensity: visualDensity,
         focusNode: useFocusNode ? focusNode : null,
         autofocus: autofocus,
-        shape: shapeOf(),
+        shape: shapeKind.shape(roundedRadius: shapeRadius),
         isError: isError,
         enabled: enabled,
         tileColor: tileColor,
         title: title,
-        subtitle: subtitleOf(),
+        subtitle: subtitle,
         isThreeLine: isThreeLine,
         dense: dense,
-        secondary: secondaryOf(),
+        secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
         selected: selected,
         controlAffinity: controlAffinity,
-        contentPadding: paddingOf(),
+        contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
         tristate: tristate,
         selectedTileColor: selectedTileColor,
         enableFeedback: enableFeedback,
@@ -445,18 +459,18 @@ class _ListTilePageState extends State<ListTilePage> {
       visualDensity: visualDensity,
       focusNode: useFocusNode ? focusNode : null,
       autofocus: autofocus,
-      shape: shapeOf(),
+      shape: shapeKind.shape(roundedRadius: shapeRadius),
       isError: isError,
       enabled: enabled,
       tileColor: tileColor,
       title: title,
-      subtitle: subtitleOf(),
+      subtitle: subtitle,
       isThreeLine: isThreeLine,
       dense: dense,
-      secondary: secondaryOf(),
+      secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
       selected: selected,
       controlAffinity: controlAffinity,
-      contentPadding: paddingOf(),
+      contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
       tristate: tristate,
       selectedTileColor: selectedTileColor,
       enableFeedback: enableFeedback,
@@ -466,7 +480,10 @@ class _ListTilePageState extends State<ListTilePage> {
 
   List<Widget> buildRadioTiles({required bool adaptive}) {
     const options = ['A', 'B'];
-    final onChanged = onChangedOf<String?>((v) => onMark('Radio $v', () => radioGroup = v));
+    final subtitle = (!useSubtitle && !isThreeLine)
+        ? null
+        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
+    final onChanged = enabled && useOnChanged ? (v) => onMark('Radio $v', () => radioGroup = v) : null;
     return options.map((e) {
       final title = kind == _TileKind.gallery || kind == _TileKind.radio || kind == _TileKind.radioAdaptive
           ? 'RadioListTile $e'
@@ -481,15 +498,15 @@ class _ListTilePageState extends State<ListTilePage> {
           hoverColor: hoverColor,
           materialTapTargetSize: materialTapTargetSize,
           title: Text(title),
-          subtitle: subtitleOf(),
+          subtitle: subtitle,
           isThreeLine: isThreeLine,
           dense: dense,
-          secondary: secondaryOf(),
+          secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
           selected: selected && radioGroup == e,
           controlAffinity: controlAffinity,
           autofocus: autofocus && e == 'A',
-          contentPadding: paddingOf(),
-          shape: shapeOf(),
+          contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
+          shape: shapeKind.shape(roundedRadius: shapeRadius),
           tileColor: tileColor,
           selectedTileColor: selectedTileColor,
           visualDensity: visualDensity,
@@ -507,15 +524,15 @@ class _ListTilePageState extends State<ListTilePage> {
         hoverColor: hoverColor,
         materialTapTargetSize: materialTapTargetSize,
         title: Text(title),
-        subtitle: subtitleOf(),
+        subtitle: subtitle,
         isThreeLine: isThreeLine,
         dense: dense,
-        secondary: secondaryOf(),
+        secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
         selected: selected && radioGroup == e,
         controlAffinity: controlAffinity,
         autofocus: autofocus && e == 'A',
-        contentPadding: paddingOf(),
-        shape: shapeOf(),
+        contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
+        shape: shapeKind.shape(roundedRadius: shapeRadius),
         tileColor: tileColor,
         selectedTileColor: selectedTileColor,
         visualDensity: visualDensity,
@@ -528,6 +545,9 @@ class _ListTilePageState extends State<ListTilePage> {
   Widget buildSliderTile() {
     final lo = sliderMin <= sliderMax ? sliderMin : sliderMax;
     final hi = sliderMax >= sliderMin ? sliderMax : sliderMin;
+    final subtitle = (!useSubtitle && !isThreeLine)
+        ? null
+        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     return NSliderListTile(
       value: sliderValue.clamp(lo, hi),
       onChanged: enabled && useOnChanged ? (v) => onMark('Slider ${v.toStringAsFixed(2)}', () => sliderValue = v) : null,
@@ -536,15 +556,15 @@ class _ListTilePageState extends State<ListTilePage> {
       activeColor: activeColor,
       tileColor: tileColor,
       title: Text(kind == _TileKind.gallery ? 'NSliderListTile' : titleText),
-      subtitle: subtitleOf(),
-      secondary: secondaryOf(),
+      subtitle: subtitle,
+      secondary: useSecondary ? const Icon(Icons.notifications_outlined) : null,
       showValue: showValue,
       sliderWidthFactor: sliderWidthFactor,
       isThreeLine: isThreeLine,
       dense: dense,
-      contentPadding: paddingOf(),
+      contentPadding: usePadding ? EdgeInsets.symmetric(horizontal: padH, vertical: padV) : null,
       selected: selected,
-      shape: shapeOf(),
+      shape: shapeKind.shape(roundedRadius: shapeRadius),
       selectedTileColor: selectedTileColor,
       visualDensity: visualDensity,
       enableFeedback: enableFeedback,
@@ -555,7 +575,9 @@ class _ListTilePageState extends State<ListTilePage> {
 
   Widget buildCupertinoTile() {
     final title = Text(kind == _TileKind.gallery ? 'CupertinoListTile' : titleText);
-    final subtitle = useSubtitle || isThreeLine ? Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText) : null;
+    final subtitle = (!useSubtitle && !isThreeLine)
+        ? null
+        : Text(isThreeLine ? '$subtitleText\n第三行' : subtitleText);
     final leading = useSecondary ? const Icon(CupertinoIcons.bell) : null;
     final trailing = useTrailing ? const CupertinoListTileChevron() : null;
     final info = useAdditionalInfo ? const Text('Info') : null;
@@ -596,36 +618,36 @@ class _ListTilePageState extends State<ListTilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('构造'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('构造'),
             values: _TileKind.values,
             value: kind,
-            labelOf: nameOfKind,
-            onChanged: (e) => onMark('kind ${nameOfKind(e)}', () => kind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('kind ${e.label}', () => kind = e),
           ),
-          const Text('title'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('title'),
             values: const ['标题', '消息通知', '同步'],
             value: titleText,
             labelOf: (e) => e,
             onChanged: (e) => onMark('title $e', () => titleText = e),
           ),
-          buildSwitch(
-            title: 'subtitle',
+          NSwitchListTile(
+            title: const Text('subtitle'),
             value: useSubtitle,
             onChanged: (v) => onMark('subtitle ${v ? 'on' : 'null'}', () => useSubtitle = v),
           ),
           if (useSubtitle || isThreeLine) ...[
-            const Text('subtitle 文案'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('subtitle 文案'),
               values: const ['副标题', '补充说明', '第二行文字较长时的效果'],
               value: subtitleText,
               labelOf: (e) => e,
               onChanged: (e) => onMark('subtitleText $e', () => subtitleText = e),
             ),
           ],
-          buildSwitch(
-            title: 'isThreeLine',
+          NSwitchListTile(
+            title: const Text('isThreeLine'),
             value: isThreeLine,
             onChanged: (v) => onMark('isThreeLine $v', () {
               isThreeLine = v;
@@ -634,79 +656,93 @@ class _ListTilePageState extends State<ListTilePage> {
               }
             }),
           ),
-          const Text('dense'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('dense'),
             values: const [null, true, false],
             value: dense,
             labelOf: (e) => e == null ? '默' : '$e',
             onChanged: (e) => onMark('dense ${e ?? 'null'}', () => dense = e),
           ),
-          buildSwitch(
-            title: 'selected',
+          NSwitchListTile(
+            title: const Text('selected'),
             value: selected,
             onChanged: (v) => onMark('selected $v', () => selected = v),
           ),
-          buildSwitch(
-            title: 'enabled',
+          NSwitchListTile(
+            title: const Text('enabled'),
             value: enabled,
             onChanged: (v) => onMark('enabled $v', () => enabled = v),
           ),
-          buildSwitch(
-            title: 'onChanged / onTap',
+          NSwitchListTile(
+            title: const Text('onChanged / onTap'),
             value: useOnChanged,
             onChanged: (v) => onMark('onChanged ${v ? 'on' : 'null'}', () => useOnChanged = v),
           ),
-          buildSwitch(
-            title: 'secondary / leading',
+          NSwitchListTile(
+            title: const Text('secondary / leading'),
             value: useSecondary,
             onChanged: (v) => onMark('secondary ${v ? 'on' : 'null'}', () => useSecondary = v),
           ),
           if (kind == _TileKind.listTile || kind == _TileKind.cupertino || kind == _TileKind.gallery)
-            buildSwitch(
-              title: 'trailing',
+            NSwitchListTile(
+              title: const Text('trailing'),
               value: useTrailing,
               onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v),
             ),
-          buildSwitch(
-            title: 'contentPadding',
+          NSwitchListTile(
+            title: const Text('contentPadding'),
             value: usePadding,
             onChanged: (v) => onMark('contentPadding ${v ? 'on' : 'null'}', () => usePadding = v),
           ),
           if (usePadding) ...[
-            buildSlider(
-              label: 'paddingH',
-              value: padH,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('paddingH'),
               min: 0,
               max: 32,
+              value: padH.clamp(0, 32),
               onChanged: (v) => onMark('paddingH ${v.round()}', () => padH = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'paddingV',
-              value: padV,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('paddingV'),
               min: 0,
               max: 16,
+              value: padV.clamp(0, 16),
               onChanged: (v) => onMark('paddingV ${v.round()}', () => padV = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
-          const Text('shape'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('shape'),
             values: ShapeKind.values,
             value: shapeKind,
-            labelOf: (e) => e.name,
-            onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('shape ${e.label}', () {
+              shapeKind = e;
+              if (e == ShapeKind.rounded) {
+                shapeRadius = e.radius;
+              }
+            }),
           ),
           if (shapeKind == ShapeKind.rounded)
-            buildSlider(
-              label: 'shapeRadius',
-              value: shapeRadius,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('shapeRadius'),
               min: 0,
               max: 28,
+              value: shapeRadius.clamp(0, 28),
               onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
+              activeColor: theme.colorScheme.primary,
             ),
           if (kind != _TileKind.cupertino) ...[
             if (kind != _TileKind.listTile && kind != _TileKind.slider) ...[
-              const Text('controlAffinity'),
-              buildChoiceChips(
+              NChoiceChipListItem(
+                title: const Text('controlAffinity'),
                 values: [null, ...ListTileControlAffinity.values],
                 value: controlAffinity,
                 labelOf: (e) => e?.name ?? '默',
@@ -714,23 +750,38 @@ class _ListTilePageState extends State<ListTilePage> {
               ),
             ],
             if (kind == _TileKind.listTile || kind == _TileKind.slider || kind == _TileKind.gallery) ...[
-              const Text('titleAlignment'),
-              buildChoiceChips(
+              NChoiceChipListItem(
+                title: const Text('titleAlignment'),
                 values: [null, ...ListTileTitleAlignment.values],
                 value: titleAlignment,
                 labelOf: (e) => e?.name ?? '默',
                 onChanged: (e) => onMark('titleAlignment ${e?.name ?? 'null'}', () => titleAlignment = e),
               ),
             ],
-            const Text('visualDensity'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('visualDensity'),
               values: const [null, VisualDensity.standard, VisualDensity.comfortable, VisualDensity.compact],
               value: visualDensity,
-              labelOf: nameOfDensity,
-              onChanged: (e) => onMark('visualDensity ${nameOfDensity(e)}', () => visualDensity = e),
+              labelOf: (e) => switch (e) {
+                null => '默',
+                VisualDensity.standard => 'standard',
+                VisualDensity.comfortable => 'comfortable',
+                VisualDensity.compact => 'compact',
+                _ => '$e',
+              },
+              onChanged: (e) => onMark(
+                'visualDensity ${switch (e) {
+                  null => '默',
+                  VisualDensity.standard => 'standard',
+                  VisualDensity.comfortable => 'comfortable',
+                  VisualDensity.compact => 'compact',
+                  _ => '$e',
+                }}',
+                () => visualDensity = e,
+              ),
             ),
-            const Text('enableFeedback'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('enableFeedback'),
               values: const [null, true, false],
               value: enableFeedback,
               labelOf: (e) => e == null ? '默' : '$e',
@@ -738,34 +789,46 @@ class _ListTilePageState extends State<ListTilePage> {
             ),
           ],
           if (showListStyle) ...[
-            const Text('style'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('style'),
               values: [null, ...ListTileStyle.values],
               value: listTileStyle,
               labelOf: (e) => e?.name ?? '默',
               onChanged: (e) => onMark('style ${e?.name ?? 'null'}', () => listTileStyle = e),
             ),
           ],
-          buildSwitch(
-            title: 'autofocus',
+          NSwitchListTile(
+            title: const Text('autofocus'),
             value: autofocus,
             onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
           ),
-          buildSwitch(
-            title: 'focusNode',
+          NSwitchListTile(
+            title: const Text('focusNode'),
             value: useFocusNode,
             onChanged: (v) => onMark('focusNode ${v ? 'on' : 'null'}', () => useFocusNode = v),
           ),
-          buildColorRow('tileColor', tileColor, (e) => onMark('tileColor', () => tileColor = e)),
-          buildColorRow(
-            'selectedTileColor',
-            selectedTileColor,
-            (e) => onMark('selectedTileColor', () => selectedTileColor = e),
+          NChoiceColorListItem(
+            title: const Text('tileColor'),
+            value: tileColor,
+            onChanged: (e) => onMark('tileColor', () => tileColor = e),
+          ),
+          NChoiceColorListItem(
+            title: const Text('selectedTileColor'),
+            value: selectedTileColor,
+            onChanged: (e) => onMark('selectedTileColor', () => selectedTileColor = e),
           ),
           if (kind != _TileKind.listTile && kind != _TileKind.cupertino)
-            buildColorRow('activeColor', activeColor, (e) => onMark('activeColor', () => activeColor = e)),
+            NChoiceColorListItem(
+              title: const Text('activeColor'),
+              value: activeColor,
+              onChanged: (e) => onMark('activeColor', () => activeColor = e),
+            ),
           if (kind != _TileKind.cupertino)
-            buildColorRow('hoverColor', hoverColor, (e) => onMark('hoverColor', () => hoverColor = e)),
+            NChoiceColorListItem(
+              title: const Text('hoverColor'),
+              value: hoverColor,
+              onChanged: (e) => onMark('hoverColor', () => hoverColor = e),
+            ),
         ],
       ),
     );
@@ -784,29 +847,29 @@ class _ListTilePageState extends State<ListTilePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showSwitch) ...[
-            buildSwitch(
-              title: 'Switch.value',
+            NSwitchListTile(
+              title: const Text('Switch.value'),
               value: switchValue,
               onChanged: (v) => onMark('switch $v', () => switchValue = v),
             ),
-            const Text('dragStartBehavior'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('dragStartBehavior'),
               values: DragStartBehavior.values,
               value: dragStartBehavior,
               labelOf: (e) => e.name,
               onChanged: (e) => onMark('dragStartBehavior ${e.name}', () => dragStartBehavior = e),
             ),
             if (kind == _TileKind.switchAdaptive || kind == _TileKind.gallery) ...[
-              const Text('applyCupertinoTheme'),
-              buildChoiceChips(
+              NChoiceChipListItem(
+                title: const Text('applyCupertinoTheme'),
                 values: const [null, true, false],
                 value: applyCupertinoTheme,
                 labelOf: (e) => e == null ? '默' : '$e',
                 onChanged: (e) => onMark('applyCupertinoTheme ${e ?? 'null'}', () => applyCupertinoTheme = e),
               ),
             ],
-            const Text('materialTapTargetSize'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('materialTapTargetSize'),
               values: const [null, MaterialTapTargetSize.padded, MaterialTapTargetSize.shrinkWrap],
               value: materialTapTargetSize,
               labelOf: (e) => e?.name ?? '默',
@@ -814,15 +877,15 @@ class _ListTilePageState extends State<ListTilePage> {
             ),
           ],
           if (showCheckbox) ...[
-            const Text('Checkbox.value'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('Checkbox.value'),
               values: tristate ? const [null, true, false] : const [true, false],
               value: checkboxValue,
               labelOf: (e) => e == null ? 'null' : '$e',
               onChanged: (e) => onMark('checkbox $e', () => checkboxValue = e),
             ),
-            buildSwitch(
-              title: 'tristate',
+            NSwitchListTile(
+              title: const Text('tristate'),
               value: tristate,
               onChanged: (v) => onMark('tristate $v', () {
                 tristate = v;
@@ -831,259 +894,88 @@ class _ListTilePageState extends State<ListTilePage> {
                 }
               }),
             ),
-            buildSwitch(
-              title: 'isError',
+            NSwitchListTile(
+              title: const Text('isError'),
               value: isError,
               onChanged: (v) => onMark('isError $v', () => isError = v),
             ),
-            buildSlider(
-              label: 'checkboxScaleFactor',
-              value: checkboxScaleFactor,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('checkboxScaleFactor'),
               min: 0.6,
               max: 1.6,
+              value: checkboxScaleFactor.clamp(0.6, 1.6),
               onChanged: (v) => onMark('checkboxScaleFactor ${v.toStringAsFixed(2)}', () => checkboxScaleFactor = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildColorRow('checkColor', checkColor, (e) => onMark('checkColor', () => checkColor = e)),
+            NChoiceColorListItem(
+              title: const Text('checkColor'),
+              value: checkColor,
+              onChanged: (e) => onMark('checkColor', () => checkColor = e),
+            ),
           ],
           if (showRadio) ...[
-            const Text('groupValue'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('groupValue'),
               values: const [null, 'A', 'B'],
               value: radioGroup,
               labelOf: (e) => e ?? 'null',
               onChanged: (e) => onMark('radio $e', () => radioGroup = e),
             ),
-            buildSwitch(
-              title: 'toggleable',
+            NSwitchListTile(
+              title: const Text('toggleable'),
               value: toggleable,
               onChanged: (v) => onMark('toggleable $v', () => toggleable = v),
             ),
             if (kind == _TileKind.radioAdaptive || kind == _TileKind.gallery)
-              buildSwitch(
-                title: 'useCupertinoCheckmarkStyle',
+              NSwitchListTile(
+                title: const Text('useCupertinoCheckmarkStyle'),
                 value: useCupertinoCheckmarkStyle,
                 onChanged: (v) => onMark('useCupertinoCheckmarkStyle $v', () => useCupertinoCheckmarkStyle = v),
               ),
           ],
           if (showSlider) ...[
-            buildSlider(
-              label: 'value',
-              value: sliderValue.clamp(sliderMin, sliderMax),
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('value'),
               min: sliderMin,
               max: sliderMax,
+              value: sliderValue.clamp(sliderMin, sliderMax),
               onChanged: (v) => onMark('slider ${v.toStringAsFixed(2)}', () => sliderValue = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSwitch(
-              title: 'showValue',
+            NSwitchListTile(
+              title: const Text('showValue'),
               value: showValue,
               onChanged: (v) => onMark('showValue $v', () => showValue = v),
             ),
-            buildSlider(
-              label: 'sliderWidthFactor',
-              value: sliderWidthFactor,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('sliderWidthFactor'),
               min: 0.2,
               max: 1,
+              value: sliderWidthFactor.clamp(0.2, 1),
               onChanged: (v) => onMark('sliderWidthFactor ${v.toStringAsFixed(2)}', () => sliderWidthFactor = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
           if (kind == _TileKind.cupertino || kind == _TileKind.gallery) ...[
-            buildSwitch(
-              title: 'notched',
+            NSwitchListTile(
+              title: const Text('notched'),
               value: cupertinoNotched,
               onChanged: (v) => onMark('notched $v', () => cupertinoNotched = v),
             ),
-            buildSwitch(
-              title: 'additionalInfo',
+            NSwitchListTile(
+              title: const Text('additionalInfo'),
               value: useAdditionalInfo,
               onChanged: (v) => onMark('additionalInfo ${v ? 'on' : 'null'}', () => useAdditionalInfo = v),
             ),
           ],
         ],
       ),
-    );
-  }
-
-  Widget? subtitleOf() {
-    if (!useSubtitle && !isThreeLine) {
-      return null;
-    }
-    if (isThreeLine) {
-      return Text('$subtitleText\n第三行');
-    }
-    return Text(subtitleText);
-  }
-
-  Widget? secondaryOf() {
-    if (!useSecondary) {
-      return null;
-    }
-    return const Icon(Icons.notifications_outlined);
-  }
-
-  EdgeInsetsGeometry? paddingOf() {
-    if (!usePadding) {
-      return null;
-    }
-    return EdgeInsets.symmetric(horizontal: padH, vertical: padV);
-  }
-
-  ShapeBorder? shapeOf() {
-    return switch (shapeKind) {
-      ShapeKind.none => null,
-      ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius)),
-      ShapeKind.stadium => const StadiumBorder(),
-    };
-  }
-
-  ValueChanged<T>? onChangedOf<T>(ValueChanged<T> cb) {
-    if (!enabled || !useOnChanged) {
-      return null;
-    }
-    return cb;
-  }
-
-  String nameOfKind(_TileKind value) {
-    return switch (value) {
-      _TileKind.gallery => 'gallery',
-      _TileKind.listTile => 'ListTile',
-      _TileKind.switchTile => 'Switch',
-      _TileKind.switchAdaptive => 'Switch.adaptive',
-      _TileKind.checkbox => 'Checkbox',
-      _TileKind.checkboxAdaptive => 'Checkbox.adaptive',
-      _TileKind.radio => 'Radio',
-      _TileKind.radioAdaptive => 'Radio.adaptive',
-      _TileKind.slider => 'Slider',
-      _TileKind.cupertino => 'Cupertino',
-    };
-  }
-
-  String nameOfDensity(VisualDensity? value) {
-    return switch (value) {
-      null => '默',
-      _ when value == VisualDensity.standard => 'standard',
-      _ when value == VisualDensity.comfortable => 'comfortable',
-      _ when value == VisualDensity.compact => 'compact',
-      _ => '$value',
-    };
-  }
-
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selectedChip = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selectedChip,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selectedChip ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selectedChip ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selectedChip ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selectedDot = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selectedDot ? scheme.primary : scheme.outlineVariant,
-                width: selectedDot ? 2 : 1,
-              ),
-            ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selectedDot
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color:
-                            ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(title),
-      value: value,
-      onChanged: onChanged,
     );
   }
 
@@ -1096,9 +988,7 @@ class _ListTilePageState extends State<ListTilePage> {
 
   void onTap(String name) {
     onMark('onTap $name');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('onTap $name'), duration: const Duration(milliseconds: 800)),
-    );
+    SnackUtil.show('onTap $name');
   }
 
   void onReset() {

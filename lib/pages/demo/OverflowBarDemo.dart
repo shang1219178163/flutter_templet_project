@@ -7,10 +7,12 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 class OverflowBarDemo extends StatefulWidget {
@@ -24,6 +26,7 @@ class OverflowBarDemo extends StatefulWidget {
 
 class _OverflowBarDemoState extends State<OverflowBarDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -50,7 +53,7 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -69,7 +72,7 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -113,7 +116,6 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final previewHeight = (248 + overflowSpacing * 2).clamp(248.0, 400.0);
     return DecoratedBox(
@@ -208,43 +210,49 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'spacing',
-            value: spacing,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('spacing'),
             min: 0,
             max: 32,
+            value: spacing.clamp(0, 32),
             onChanged: (v) => onMark('spacing ${v.round()}', () => spacing = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          const Text('alignment'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('alignment'),
             values: [null, ...MainAxisAlignment.values],
             value: alignment,
             labelOf: (e) => e?.name ?? '默',
             onChanged: (e) => onMark('alignment ${e?.name ?? 'null'}', () => alignment = e),
           ),
-          buildSlider(
-            label: 'overflowSpacing',
-            value: overflowSpacing,
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('overflowSpacing'),
             min: 0,
             max: 32,
+            value: overflowSpacing.clamp(0, 32),
             onChanged: (v) => onMark('overflowSpacing ${v.round()}', () => overflowSpacing = v),
+            activeColor: theme.colorScheme.primary,
           ),
-          const Text('overflowAlignment'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('overflowAlignment'),
             values: OverflowBarAlignment.values,
             value: overflowAlignment,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('overflowAlignment ${e.name}', () => overflowAlignment = e),
           ),
-          const Text('overflowDirection'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('overflowDirection'),
             values: VerticalDirection.values,
             value: overflowDirection,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('overflowDirection ${e.name}', () => overflowDirection = e),
           ),
-          const Text('textDirection'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('textDirection'),
             values: const [null, TextDirection.ltr, TextDirection.rtl],
             value: textDirection,
             labelOf: (e) => e?.name ?? '默',
@@ -252,63 +260,6 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
     );
   }
 
@@ -333,9 +284,7 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
   void onTap(String name) {
     lastEvent = 'onPressed $name';
     DLog.d(lastEvent);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(lastEvent), duration: const Duration(milliseconds: 800)),
-    );
+    SnackUtil.show(lastEvent);
     setState(() {});
   }
 }

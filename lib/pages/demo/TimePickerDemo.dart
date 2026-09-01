@@ -7,11 +7,13 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
 class TimePickerDemo extends StatefulWidget {
@@ -25,6 +27,7 @@ class TimePickerDemo extends StatefulWidget {
 
 class _TimePickerDemoState extends State<TimePickerDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -81,7 +84,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -139,7 +142,6 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -184,117 +186,130 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'initialTime.hour',
-            value: hour.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('initialTime.hour'),
             min: 0,
             max: 23,
+            value: hour.toDouble().clamp(0, 23),
             onChanged: (v) => onMark('hour ${v.round()}', () => hour = v.round()),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildSlider(
-            label: 'initialTime.minute',
-            value: minute.toDouble(),
+          NSliderListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('initialTime.minute'),
             min: 0,
             max: 59,
+            value: minute.toDouble().clamp(0, 59),
             onChanged: (v) => onMark('minute ${v.round()}', () => minute = v.round()),
+            activeColor: theme.colorScheme.primary,
           ),
-          buildChipRow(
-            label: 'initialEntryMode',
+          NChoiceChipListItem(
+            title: const Text('initialEntryMode'),
             values: TimePickerEntryMode.values,
             value: initialEntryMode,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('initialEntryMode ${e.name}', () => initialEntryMode = e),
           ),
-          buildChipRow(
-            label: 'orientation',
+          NChoiceChipListItem(
+            title: const Text('orientation'),
             values: [null, ...Orientation.values],
             value: orientation,
             labelOf: (e) => e?.name ?? '默',
             onChanged: (e) => onMark('orientation ${e?.name ?? 'null'}', () => orientation = e),
           ),
-          buildSwitch(
-            title: 'barrierDismissible',
+          NSwitchListTile(
+            title: const Text('barrierDismissible'),
             value: barrierDismissible,
             onChanged: (v) => onMark('barrierDismissible $v', () => barrierDismissible = v),
           ),
-          buildColorRow(
-            'barrierColor',
-            barrierColor,
-            (v) => onMark('barrierColor ${v ?? 'null'}', () => barrierColor = v),
+          const SizedBox(height: 8),
+          NChoiceColorListItem(
+            title: const Text('barrierColor'),
+            value: barrierColor,
+            onChanged: (v) => onMark('barrierColor ${v ?? 'null'}', () => barrierColor = v),
           ),
-          buildSwitch(
-            title: 'barrierLabel',
+          NSwitchListTile(
+            title: const Text('barrierLabel'),
             value: useBarrierLabel,
             onChanged: (v) => onMark('barrierLabel ${v ? 'dismiss' : 'null'}', () => useBarrierLabel = v),
           ),
-          buildSwitch(
-            title: 'useRootNavigator',
+          NSwitchListTile(
+            title: const Text('useRootNavigator'),
             value: useRootNavigator,
             onChanged: (v) => onMark('useRootNavigator $v', () => useRootNavigator = v),
           ),
-          buildSwitch(
-            title: 'builder 24h',
+          NSwitchListTile(
+            title: const Text('builder 24h'),
             value: use24Hour,
             onChanged: (v) => onMark('builder ${v ? '24h' : 'null'}', () => use24Hour = v),
           ),
-          buildSwitch(
-            title: 'onEntryModeChanged',
+          NSwitchListTile(
+            title: const Text('onEntryModeChanged'),
             value: useOnEntryModeChanged,
             onChanged: (v) => onMark('onEntryModeChanged ${v ? 'on' : 'null'}', () => useOnEntryModeChanged = v),
           ),
-          buildSwitch(
-            title: 'routeSettings',
+          NSwitchListTile(
+            title: const Text('routeSettings'),
             value: useRouteSettings,
             onChanged: (v) => onMark('routeSettings ${v ? 'on' : 'null'}', () => useRouteSettings = v),
           ),
-          buildSwitch(
-            title: 'anchorPoint',
+          NSwitchListTile(
+            title: const Text('anchorPoint'),
             value: useAnchorPoint,
             onChanged: (v) => onMark('anchorPoint ${v ? 'on' : 'null'}', () => useAnchorPoint = v),
           ),
           if (useAnchorPoint) ...[
-            buildSlider(
-              label: 'anchorPoint.dx',
-              value: anchorX,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('anchorPoint.dx'),
               min: 0,
               max: 400,
+              value: anchorX.clamp(0, 400),
               onChanged: (v) => onMark('anchorPoint.dx ${v.round()}', () => anchorX = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'anchorPoint.dy',
-              value: anchorY,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('anchorPoint.dy'),
               min: 0,
               max: 800,
+              value: anchorY.clamp(0, 800),
               onChanged: (v) => onMark('anchorPoint.dy ${v.round()}', () => anchorY = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
-          buildSwitch(
-            title: 'cancelText',
+          NSwitchListTile(
+            title: const Text('cancelText'),
             value: useCancelText,
             onChanged: (v) => onMark('cancelText ${v ? '取消' : 'null'}', () => useCancelText = v),
           ),
-          buildSwitch(
-            title: 'confirmText',
+          NSwitchListTile(
+            title: const Text('confirmText'),
             value: useConfirmText,
             onChanged: (v) => onMark('confirmText ${v ? '确定' : 'null'}', () => useConfirmText = v),
           ),
-          buildSwitch(
-            title: 'helpText',
+          NSwitchListTile(
+            title: const Text('helpText'),
             value: useHelpText,
             onChanged: (v) => onMark('helpText ${v ? '选择时间' : 'null'}', () => useHelpText = v),
           ),
-          buildSwitch(
-            title: 'errorInvalidText',
+          NSwitchListTile(
+            title: const Text('errorInvalidText'),
             value: useErrorInvalidText,
             onChanged: (v) => onMark('errorInvalidText ${v ? '无效时间' : 'null'}', () => useErrorInvalidText = v),
           ),
-          buildSwitch(
-            title: 'hourLabelText',
+          NSwitchListTile(
+            title: const Text('hourLabelText'),
             value: useHourLabelText,
             onChanged: (v) => onMark('hourLabelText ${v ? '时' : 'null'}', () => useHourLabelText = v),
           ),
-          buildSwitch(
-            title: 'minuteLabelText',
+          NSwitchListTile(
+            title: const Text('minuteLabelText'),
             value: useMinuteLabelText,
             onChanged: (v) => onMark('minuteLabelText ${v ? '分' : 'null'}', () => useMinuteLabelText = v),
           ),
@@ -348,149 +363,6 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
     onMark('onEntryModeChanged ${mode.name}');
   }
 
-  Widget buildChipRow<T>({
-    required String label,
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildChoiceChips(values: values, value: value, labelOf: labelOf, onChanged: onChanged),
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
-      ],
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = Theme.of(context).colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final theme = Theme.of(context);
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();

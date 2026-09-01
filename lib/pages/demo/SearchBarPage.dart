@@ -8,21 +8,43 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_color_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 /// SDK 搜索框构造
-enum _SearchKind { searchBar, searchAnchor, searchAnchorBar, cupertino, showSearch }
+enum _SearchKind {
+  searchBar(label: 'SearchBar'),
+  searchAnchor(label: 'SearchAnchor'),
+  searchAnchorBar(label: 'SearchAnchor.bar'),
+  cupertino(label: 'Cupertino'),
+  showSearch(label: 'showSearch');
+  const _SearchKind({required this.label});
+  final String label;
+}
 
 /// SearchAnchor.builder 返回值
-enum _AnchorBuilderKind { searchBar, icon }
+enum _AnchorBuilderKind {
+  searchBar(label: 'searchBar'),
+  icon(label: 'icon');
+  const _AnchorBuilderKind({required this.label});
+  final String label;
+}
 
 /// SearchDelegate 输入框外观
-enum _SearchFieldLook { none, style, decoration }
+enum _SearchFieldLook {
+  none(label: 'none'),
+  style(label: 'style'),
+  decoration(label: 'decoration');
+  const _SearchFieldLook({required this.label});
+  final String label;
+}
 
 const _kWords = <String>['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape', 'Honeydew'];
 
@@ -617,20 +639,20 @@ class _SearchBarPageState extends State<SearchBarPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('构造'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('构造'),
             values: _SearchKind.values,
             value: kind,
-            labelOf: nameOfKind,
-            onChanged: (e) => onMark('kind ${nameOfKind(e)}', () => kind = e),
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('kind ${e.label}', () => kind = e),
           ),
           if (isAnchor) ...[
-            const Text('builder'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('builder'),
               values: _AnchorBuilderKind.values,
               value: anchorBuilderKind,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('builder ${e.name}', () => anchorBuilderKind = e),
+              labelOf: (e) => e.label,
+              onChanged: (e) => onMark('builder ${e.label}', () => anchorBuilderKind = e),
             ),
           ],
           if (isSearchBar || isAnchorBar)
@@ -639,126 +661,132 @@ class _SearchBarPageState extends State<SearchBarPage> {
             buildStringChips('placeholder', placeholder, const [null, 'Search', '搜索'], (e) => placeholder = e),
           if (isAnchor || isAnchorBar) ...[
             buildStringChips('viewHintText', viewHintText, const [null, 'Search', '搜索'], (e) => viewHintText = e),
-            const Text('isFullScreen'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('isFullScreen'),
               values: const [null, true, false],
               value: isFullScreen,
               labelOf: (e) => e == null ? '默' : '$e',
               onChanged: (e) => onMark('isFullScreen ${e ?? 'null'}', () => isFullScreen = e),
             ),
-            buildSwitch(
-              title: 'viewBuilder',
+            NSwitchListTile(
+              title: const Text('viewBuilder'),
               value: useViewBuilder,
               onChanged: (v) => onMark('viewBuilder ${v ? 'on' : 'null'}', () => useViewBuilder = v),
             ),
-            buildSwitch(
-              title: 'viewLeading',
+            NSwitchListTile(
+              title: const Text('viewLeading'),
               value: useViewLeading,
               onChanged: (v) => onMark('viewLeading ${v ? 'on' : 'null'}', () => useViewLeading = v),
             ),
-            buildSwitch(
-              title: 'viewTrailing',
+            NSwitchListTile(
+              title: const Text('viewTrailing'),
               value: useViewTrailing,
               onChanged: (v) => onMark('viewTrailing ${v ? 'on' : 'null'}', () => useViewTrailing = v),
             ),
-            buildSwitch(
-              title: 'viewConstraints',
+            NSwitchListTile(
+              title: const Text('viewConstraints'),
               value: useViewConstraints,
               onChanged: (v) => onMark('viewConstraints ${v ? 'on' : 'null'}', () => useViewConstraints = v),
             ),
             if (useViewConstraints)
-              buildSlider(
-                label: 'viewMaxHeight',
-                value: viewMaxHeight,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('viewMaxHeight'),
                 min: 120,
                 max: 480,
+                value: viewMaxHeight.clamp(120, 480),
                 onChanged: (v) => onMark('viewMaxHeight ${v.round()}', () => viewMaxHeight = v),
+                activeColor: theme.colorScheme.primary,
               ),
-            buildSwitch(
-              title: 'headerHeight',
+            NSwitchListTile(
+              title: const Text('headerHeight'),
               value: useHeaderHeight,
               onChanged: (v) => onMark('headerHeight ${v ? 'on' : 'null'}', () => useHeaderHeight = v),
             ),
             if (useHeaderHeight)
-              buildSlider(
-                label: 'headerHeight',
-                value: headerHeight,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('headerHeight'),
                 min: 40,
                 max: 88,
+                value: headerHeight.clamp(40, 88),
                 onChanged: (v) => onMark('headerHeight ${v.round()}', () => headerHeight = v),
+                activeColor: theme.colorScheme.primary,
               ),
           ],
           if (isSearchBar || isCupertino) ...[
-            buildSwitch(
-              title: 'controller',
+            NSwitchListTile(
+              title: const Text('controller'),
               value: useController,
               onChanged: (v) => onMark('controller ${v ? 'on' : 'null'}', () => useController = v),
             ),
-            buildSwitch(
-              title: 'focusNode',
+            NSwitchListTile(
+              title: const Text('focusNode'),
               value: useFocusNode,
               onChanged: (v) => onMark('focusNode ${v ? 'on' : 'null'}', () => useFocusNode = v),
             ),
           ],
           if (isSearchBar || isAnchorBar) ...[
-            buildSwitch(
-              title: 'leading',
+            NSwitchListTile(
+              title: const Text('leading'),
               value: useLeading,
               onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v),
             ),
-            buildSwitch(
-              title: 'trailing',
+            NSwitchListTile(
+              title: const Text('trailing'),
               value: useTrailing,
               onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v),
             ),
           ],
           if (!isShowSearch) ...[
-            buildSwitch(
-              title: 'onChanged',
+            NSwitchListTile(
+              title: const Text('onChanged'),
               value: useOnChanged,
               onChanged: (v) => onMark('onChanged ${v ? 'on' : 'null'}', () => useOnChanged = v),
             ),
-            buildSwitch(
-              title: 'onSubmitted',
+            NSwitchListTile(
+              title: const Text('onSubmitted'),
               value: useOnSubmitted,
               onChanged: (v) => onMark('onSubmitted ${v ? 'on' : 'null'}', () => useOnSubmitted = v),
             ),
           ],
           if (isSearchBar || isAnchorBar || isCupertino)
-            buildSwitch(
-              title: 'onTap',
+            NSwitchListTile(
+              title: const Text('onTap'),
               value: useOnTap,
               onChanged: (v) => onMark('onTap ${v ? 'on' : 'null'}', () => useOnTap = v),
             ),
           if (isSearchBar)
-            buildSwitch(
-              title: 'onTapOutside',
+            NSwitchListTile(
+              title: const Text('onTapOutside'),
               value: useOnTapOutside,
               onChanged: (v) => onMark('onTapOutside ${v ? 'on' : 'null'}', () => useOnTapOutside = v),
             ),
           if (isSearchBar || isAnchor)
-            buildSwitch(
-              title: 'enabled',
+            NSwitchListTile(
+              title: const Text('enabled'),
               value: enabled,
               onChanged: (v) => onMark('enabled $v', () => enabled = v),
             ),
           if (isSearchBar || isCupertino)
-            buildSwitch(
-              title: isCupertino ? 'autofocus' : 'autoFocus',
+            NSwitchListTile(
+              title: Text(isCupertino ? 'autofocus' : 'autoFocus'),
               value: autoFocus,
               onChanged: (v) => onMark('autoFocus $v', () => autoFocus = v),
             ),
           if (!isShowSearch) ...[
-            const Text('textCapitalization'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('textCapitalization'),
               values: [null, ...TextCapitalization.values],
               value: textCapitalization,
               labelOf: (e) => e?.name ?? '默',
               onChanged: (e) => onMark('textCapitalization ${e?.name ?? 'null'}', () => textCapitalization = e),
             ),
           ],
-          const Text('textInputAction'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('textInputAction'),
             values: isShowSearch
                 ? const <TextInputAction?>[TextInputAction.search, TextInputAction.done, TextInputAction.go]
                 : const <TextInputAction?>[
@@ -772,8 +800,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
             labelOf: (e) => e?.name ?? '默',
             onChanged: (e) => onMark('textInputAction ${e?.name ?? 'null'}', () => textInputAction = e),
           ),
-          const Text('keyboardType'),
-          buildChoiceChips(
+          NChoiceChipListItem(
+            title: const Text('keyboardType'),
             values: isShowSearch
                 ? const [null, TextInputType.text, TextInputType.number, TextInputType.emailAddress]
                 : const [
@@ -789,134 +817,146 @@ class _SearchBarPageState extends State<SearchBarPage> {
             onChanged: (e) => onMark('keyboardType ${nameOfKeyboard(e)}', () => keyboardType = e),
           ),
           if (isSearchBar || isAnchorBar) ...[
-            buildSlider(
-              label: 'scrollPadding',
-              value: scrollPaddingAll,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('scrollPadding'),
               min: 0,
               max: 40,
+              value: scrollPaddingAll.clamp(0, 40),
               onChanged: (v) => onMark('scrollPadding ${v.round()}', () => scrollPaddingAll = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSwitch(
-              title: 'contextMenuBuilder',
+            NSwitchListTile(
+              title: const Text('contextMenuBuilder'),
               value: useContextMenuBuilder,
               onChanged: (v) => onMark('contextMenuBuilder ${v ? 'on' : 'off'}', () => useContextMenuBuilder = v),
             ),
           ],
           if (isCupertino) ...[
-            const Text('suffixMode'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('suffixMode'),
               values: OverlayVisibilityMode.values,
               value: suffixMode,
               labelOf: (e) => e.name,
               onChanged: (e) => onMark('suffixMode ${e.name}', () => suffixMode = e),
             ),
-            buildSwitch(
-              title: 'onSuffixTap',
+            NSwitchListTile(
+              title: const Text('onSuffixTap'),
               value: useOnSuffixTap,
               onChanged: (v) => onMark('onSuffixTap ${v ? 'on' : 'null'}', () => useOnSuffixTap = v),
             ),
-            buildSwitch(
-              title: 'prefixIcon',
+            NSwitchListTile(
+              title: const Text('prefixIcon'),
               value: usePrefixIcon,
               onChanged: (v) => onMark('prefixIcon ${v ? 'Icons.search' : 'default'}', () => usePrefixIcon = v),
             ),
-            buildSwitch(
-              title: 'suffixIcon',
+            NSwitchListTile(
+              title: const Text('suffixIcon'),
               value: useSuffixIcon,
               onChanged: (v) => onMark('suffixIcon ${v ? 'Icons.cancel' : 'default'}', () => useSuffixIcon = v),
             ),
-            buildSwitch(
-              title: 'restorationId',
+            NSwitchListTile(
+              title: const Text('restorationId'),
               value: useRestorationId,
               onChanged: (v) => onMark('restorationId ${v ? 'on' : 'null'}', () => useRestorationId = v),
             ),
-            const Text('smartQuotesType'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('smartQuotesType'),
               values: [null, ...SmartQuotesType.values],
               value: smartQuotesType,
               labelOf: (e) => e?.name ?? '默',
               onChanged: (e) => onMark('smartQuotesType ${e?.name ?? 'null'}', () => smartQuotesType = e),
             ),
-            const Text('smartDashesType'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('smartDashesType'),
               values: [null, ...SmartDashesType.values],
               value: smartDashesType,
               labelOf: (e) => e?.name ?? '默',
               onChanged: (e) => onMark('smartDashesType ${e?.name ?? 'null'}', () => smartDashesType = e),
             ),
-            buildSwitch(
-              title: 'enableIMEPersonalizedLearning',
+            NSwitchListTile(
+              title: const Text('enableIMEPersonalizedLearning'),
               value: enableIMEPersonalizedLearning,
               onChanged: (v) => onMark('enableIMEPersonalizedLearning $v', () => enableIMEPersonalizedLearning = v),
             ),
-            buildSwitch(
-              title: 'autocorrect',
+            NSwitchListTile(
+              title: const Text('autocorrect'),
               value: autocorrect,
               onChanged: (v) => onMark('autocorrect $v', () => autocorrect = v),
             ),
-            const Text('enabled'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('enabled'),
               values: const [null, true, false],
               value: cupertinoEnabled,
               labelOf: (e) => e == null ? '默' : '$e',
               onChanged: (e) => onMark('enabled ${e ?? 'null'}', () => cupertinoEnabled = e),
             ),
-            buildSlider(
-              label: 'prefixInsets',
-              value: prefixStart,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('prefixInsets'),
               min: 0,
               max: 16,
+              value: prefixStart.clamp(0, 16),
               onChanged: (v) => onMark('prefixInsets ${v.round()}', () => prefixStart = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'suffixInsets',
-              value: suffixEnd,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('suffixInsets'),
               min: 0,
               max: 16,
+              value: suffixEnd.clamp(0, 16),
               onChanged: (v) => onMark('suffixInsets ${v.round()}', () => suffixEnd = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'padding',
-              value: cupertinoPadV,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('padding'),
               min: 0,
               max: 16,
+              value: cupertinoPadV.clamp(0, 16),
               onChanged: (v) => onMark('padding ${v.round()}', () => cupertinoPadV = v),
+              activeColor: theme.colorScheme.primary,
             ),
           ],
           if (isShowSearch) ...[
-            const Text('query'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('query'),
               values: const ['', 'Apple', '搜索'],
               value: query,
               labelOf: (e) => e.isEmpty ? "''" : e,
               onChanged: (e) => onMark('query $e', () => query = e),
             ),
-            buildSwitch(
-              title: 'useRootNavigator',
+            NSwitchListTile(
+              title: const Text('useRootNavigator'),
               value: useRootNavigator,
               onChanged: (v) => onMark('useRootNavigator $v', () => useRootNavigator = v),
             ),
-            buildSwitch(
-              title: 'maintainState',
+            NSwitchListTile(
+              title: const Text('maintainState'),
               value: maintainState,
               onChanged: (v) => onMark('maintainState $v', () => maintainState = v),
             ),
             buildStringChips(
                 'searchFieldLabel', searchFieldLabel, const [null, 'Search', '搜索'], (e) => searchFieldLabel = e),
-            const Text('searchFieldLook'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('searchFieldLook'),
               values: _SearchFieldLook.values,
               value: searchFieldLook,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('searchFieldLook ${e.name}', () => searchFieldLook = e),
+              labelOf: (e) => e.label,
+              onChanged: (e) => onMark('searchFieldLook ${e.label}', () => searchFieldLook = e),
             ),
-            buildSwitch(
-              title: 'autocorrect',
+            NSwitchListTile(
+              title: const Text('autocorrect'),
               value: autocorrect,
               onChanged: (v) => onMark('autocorrect $v', () => autocorrect = v),
             ),
-            buildSwitch(
-              title: 'enableSuggestions',
+            NSwitchListTile(
+              title: const Text('enableSuggestions'),
               value: enableSuggestions,
               onChanged: (v) => onMark('enableSuggestions $v', () => enableSuggestions = v),
             ),
@@ -935,101 +975,138 @@ class _SearchBarPageState extends State<SearchBarPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showBarSurface) ...[
-            buildSwitch(
-              title: 'elevation',
+            NSwitchListTile(
+              title: const Text('elevation'),
               value: useElevation,
               onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
             ),
             if (useElevation)
-              buildSlider(
-                label: 'elevation',
-                value: elevation,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('elevation'),
                 min: 0,
                 max: 16,
+                value: elevation.clamp(0, 16),
                 onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
+                activeColor: theme.colorScheme.primary,
               ),
-            buildSwitch(
-              title: 'constraints',
+            NSwitchListTile(
+              title: const Text('constraints'),
               value: useConstraints,
               onChanged: (v) => onMark('constraints ${v ? 'on' : 'null'}', () => useConstraints = v),
             ),
             if (useConstraints) ...[
-              buildSlider(
-                label: 'minHeight',
-                value: minHeight,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('minHeight'),
                 min: 40,
                 max: 80,
+                value: minHeight.clamp(40, 80),
                 onChanged: (v) => onMark('minHeight ${v.round()}', () => minHeight = v),
+                activeColor: theme.colorScheme.primary,
               ),
-              buildSlider(
-                label: 'maxWidth',
-                value: maxWidth,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('maxWidth'),
                 min: 200,
                 max: 800,
+                value: maxWidth.clamp(200, 800),
                 onChanged: (v) => onMark('maxWidth ${v.round()}', () => maxWidth = v),
+                activeColor: theme.colorScheme.primary,
               ),
             ],
-            buildSwitch(
-              title: 'padding',
+            NSwitchListTile(
+              title: const Text('padding'),
               value: usePadding,
               onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
             ),
             if (usePadding) ...[
-              buildSlider(
-                label: 'paddingH',
-                value: paddingH,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('paddingH'),
                 min: 0,
                 max: 32,
+                value: paddingH.clamp(0, 32),
                 onChanged: (v) => onMark('paddingH ${v.round()}', () => paddingH = v),
+                activeColor: theme.colorScheme.primary,
               ),
-              buildSlider(
-                label: 'paddingV',
-                value: paddingV,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('paddingV'),
                 min: 0,
                 max: 16,
+                value: paddingV.clamp(0, 16),
                 onChanged: (v) => onMark('paddingV ${v.round()}', () => paddingV = v),
+                activeColor: theme.colorScheme.primary,
               ),
             ],
-            const Text('shape'),
-            buildChoiceChips(
+            NChoiceChipListItem(
+              title: const Text('shape'),
               values: ShapeKind.values,
               value: shapeKind,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
+              labelOf: (e) => e.label,
+              onChanged: (e) => onMark('shape ${e.label}', () => shapeKind = e),
             ),
             if (shapeKind == ShapeKind.rounded)
-              buildSlider(
-                label: 'shapeRadius',
-                value: shapeRadius,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('shapeRadius'),
                 min: 0,
                 max: 32,
+                value: shapeRadius.clamp(0, 32),
                 onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
+                activeColor: theme.colorScheme.primary,
               ),
-            buildSwitch(
-              title: 'side',
+            NSwitchListTile(
+              title: const Text('side'),
               value: useSide,
               onChanged: (v) => onMark('side ${v ? 'on' : 'null'}', () => useSide = v),
             ),
             if (useSide) ...[
-              buildSlider(
-                label: 'sideWidth',
-                value: sideWidth,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('sideWidth'),
                 min: 0.5,
                 max: 4,
+                value: sideWidth.clamp(0.5, 4),
                 onChanged: (v) => onMark('sideWidth ${v.toStringAsFixed(1)}', () => sideWidth = v),
+                activeColor: theme.colorScheme.primary,
               ),
-              buildColorRow('sideColor', sideColor, (v) => onMark('sideColor ${v ?? 'null'}', () => sideColor = v)),
+              NChoiceColorListItem(
+                title: const Text('sideColor'),
+                value: sideColor,
+                onChanged: (v) => onMark('sideColor ${v ?? 'null'}', () => sideColor = v),
+              ),
             ],
-            buildColorRow('backgroundColor', backgroundColor,
-                (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
+            NChoiceColorListItem(
+              title: const Text('backgroundColor'),
+              value: backgroundColor,
+              onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
+            ),
             if (isSearchBar) ...[
-              buildColorRow(
-                  'shadowColor', shadowColor, (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v)),
-              buildColorRow('surfaceTintColor', surfaceTintColor,
-                  (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v)),
+              NChoiceColorListItem(
+                title: const Text('shadowColor'),
+                value: shadowColor,
+                onChanged: (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v),
+              ),
+              NChoiceColorListItem(
+                title: const Text('surfaceTintColor'),
+                value: surfaceTintColor,
+                onChanged: (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v),
+              ),
             ],
-            buildColorRow(
-                'overlayColor', overlayColor, (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v)),
+            NChoiceColorListItem(
+              title: const Text('overlayColor'),
+              value: overlayColor,
+              onChanged: (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v),
+            ),
             ...buildStyleToggles(
               styleTitle: 'textStyle',
               hintTitle: 'hintStyle',
@@ -1038,71 +1115,98 @@ class _SearchBarPageState extends State<SearchBarPage> {
             ),
           ],
           if (isAnchor || isAnchorBar) ...[
-            buildSwitch(
-              title: 'viewElevation',
+            NSwitchListTile(
+              title: const Text('viewElevation'),
               value: useViewElevation,
               onChanged: (v) => onMark('viewElevation ${v ? 'on' : 'null'}', () => useViewElevation = v),
             ),
             if (useViewElevation)
-              buildSlider(
-                label: 'viewElevation',
-                value: viewElevation,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('viewElevation'),
                 min: 0,
                 max: 16,
+                value: viewElevation.clamp(0, 16),
                 onChanged: (v) => onMark('viewElevation ${v.toStringAsFixed(1)}', () => viewElevation = v),
+                activeColor: theme.colorScheme.primary,
               ),
-            buildColorRow('viewBackgroundColor', viewBackgroundColor,
-                (v) => onMark('viewBackgroundColor ${v ?? 'null'}', () => viewBackgroundColor = v)),
+            NChoiceColorListItem(
+              title: const Text('viewBackgroundColor'),
+              value: viewBackgroundColor,
+              onChanged: (v) => onMark('viewBackgroundColor ${v ?? 'null'}', () => viewBackgroundColor = v),
+            ),
             if (isAnchor)
-              buildColorRow('viewSurfaceTintColor', viewSurfaceTintColor,
-                  (v) => onMark('viewSurfaceTintColor ${v ?? 'null'}', () => viewSurfaceTintColor = v)),
-            buildColorRow(
-                'dividerColor', dividerColor, (v) => onMark('dividerColor ${v ?? 'null'}', () => dividerColor = v)),
-            const Text('viewShape'),
-            buildChoiceChips(
+              NChoiceColorListItem(
+                title: const Text('viewSurfaceTintColor'),
+                value: viewSurfaceTintColor,
+                onChanged: (v) => onMark('viewSurfaceTintColor ${v ?? 'null'}', () => viewSurfaceTintColor = v),
+              ),
+            NChoiceColorListItem(
+              title: const Text('dividerColor'),
+              value: dividerColor,
+              onChanged: (v) => onMark('dividerColor ${v ?? 'null'}', () => dividerColor = v),
+            ),
+            NChoiceChipListItem(
+              title: const Text('viewShape'),
               values: ShapeKind.values,
               value: viewShapeKind,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('viewShape ${e.name}', () => viewShapeKind = e),
+              labelOf: (e) => e.label,
+              onChanged: (e) => onMark('viewShape ${e.label}', () => viewShapeKind = e),
             ),
             if (viewShapeKind == ShapeKind.rounded)
-              buildSlider(
-                label: 'viewShapeRadius',
-                value: viewShapeRadius,
+              NSliderListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('viewShapeRadius'),
                 min: 0,
                 max: 32,
+                value: viewShapeRadius.clamp(0, 32),
                 onChanged: (v) => onMark('viewShapeRadius ${v.round()}', () => viewShapeRadius = v),
+                activeColor: theme.colorScheme.primary,
               ),
-            buildSwitch(
-              title: 'viewSide',
+            NSwitchListTile(
+              title: const Text('viewSide'),
               value: useViewSide,
               onChanged: (v) => onMark('viewSide ${v ? 'on' : 'null'}', () => useViewSide = v),
             ),
           ],
           if (isCupertino) ...[
-            buildSwitch(
-              title: 'decoration',
+            NSwitchListTile(
+              title: const Text('decoration'),
               value: useDecoration,
               onChanged: (v) => onMark('decoration ${v ? 'on' : 'null'}', () => useDecoration = v),
             ),
-            buildSlider(
-              label: 'borderRadius',
-              value: borderRadius,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('borderRadius'),
               min: 0,
               max: 24,
+              value: borderRadius.clamp(0, 24),
               onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildSlider(
-              label: 'itemSize',
-              value: itemSize,
+            NSliderListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              title: const Text('itemSize'),
               min: 12,
               max: 32,
+              value: itemSize.clamp(12, 32),
               onChanged: (v) => onMark('itemSize ${v.round()}', () => itemSize = v),
+              activeColor: theme.colorScheme.primary,
             ),
-            buildColorRow('backgroundColor', backgroundColor,
-                (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
-            buildColorRow('itemColor', itemColor,
-                (v) => onMark('itemColor ${v ?? 'null'}', () => itemColor = v ?? CupertinoColors.secondaryLabel)),
+            NChoiceColorListItem(
+              title: const Text('backgroundColor'),
+              value: backgroundColor,
+              onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
+            ),
+            NChoiceColorListItem(
+              title: const Text('itemColor'),
+              value: itemColor,
+              onChanged: (v) => onMark('itemColor ${v ?? 'null'}', () => itemColor = v ?? CupertinoColors.secondaryLabel),
+            ),
             ...buildStyleToggles(
               styleTitle: 'style',
               hintTitle: 'placeholderStyle',
@@ -1184,7 +1288,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   WidgetStateProperty<OutlinedBorder?>? shapeProp() {
-    final shape = outlinedOf(shapeKind, shapeRadius);
+    final shape = shapeKind.outlinedBorder(roundedRadius: shapeRadius);
     return shape == null ? null : WidgetStatePropertyAll(shape);
   }
 
@@ -1215,25 +1319,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   OutlinedBorder? viewShapeOf() {
-    return outlinedOf(viewShapeKind, viewShapeRadius);
-  }
-
-  OutlinedBorder? outlinedOf(ShapeKind kind, double radius) {
-    return switch (kind) {
-      ShapeKind.none => null,
-      ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
-      ShapeKind.stadium => const StadiumBorder(),
-    };
-  }
-
-  String nameOfKind(_SearchKind value) {
-    return switch (value) {
-      _SearchKind.searchBar => 'SearchBar',
-      _SearchKind.searchAnchor => 'SearchAnchor',
-      _SearchKind.searchAnchorBar => 'SearchAnchor.bar',
-      _SearchKind.cupertino => 'Cupertino',
-      _SearchKind.showSearch => 'showSearch',
-    };
+    return viewShapeKind.outlinedBorder(roundedRadius: viewShapeRadius);
   }
 
   String nameOfKeyboard(TextInputType? value) {
@@ -1258,17 +1344,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   Widget buildStringChips(String label, String? value, List<String?> values, ValueChanged<String?> onApply) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildChoiceChips(
-          values: values,
-          value: value,
-          labelOf: (e) => e ?? '默',
-          onChanged: (e) => onMark('$label ${e ?? 'null'}', () => onApply(e)),
-        ),
-      ],
+    return NChoiceChipListItem<String?>(
+      title: Text(label),
+      values: values,
+      value: value,
+      labelOf: (e) => e ?? '默',
+      onChanged: (e) => onMark('$label ${e ?? 'null'}', () => onApply(e)),
     );
   }
 
@@ -1279,108 +1360,43 @@ class _SearchBarPageState extends State<SearchBarPage> {
     required String hintColorLabel,
   }) {
     return [
-      buildSwitch(
-        title: styleTitle,
+      NSwitchListTile(
+        title: Text(styleTitle),
         value: useTextStyle,
         onChanged: (v) => onMark('$styleTitle ${v ? 'on' : 'null'}', () => useTextStyle = v),
       ),
       if (useTextStyle) ...[
-        buildSlider(
-          label: 'fontSize',
-          value: fontSize,
+        NSliderListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
+          title: const Text('fontSize'),
           min: 12,
           max: 22,
+          value: fontSize.clamp(12, 22),
           onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
+          activeColor: theme.colorScheme.primary,
         ),
-        buildColorRow(colorLabel, textStyleColor, (v) => onMark('$colorLabel ${v ?? 'null'}', () => textStyleColor = v)),
+        NChoiceColorListItem(
+          title: Text(colorLabel),
+          value: textStyleColor,
+          onChanged: (v) => onMark('$colorLabel ${v ?? 'null'}', () => textStyleColor = v),
+        ),
       ],
-      buildSwitch(
-        title: hintTitle,
+      NSwitchListTile(
+        title: Text(hintTitle),
         value: useHintStyle,
         onChanged: (v) => onMark('$hintTitle ${v ? 'on' : 'null'}', () => useHintStyle = v),
       ),
       if (useHintStyle)
-        buildColorRow(
-            hintColorLabel, hintStyleColor, (v) => onMark('$hintColorLabel ${v ?? 'null'}', () => hintStyleColor = v)),
+        NChoiceColorListItem(
+          title: Text(hintColorLabel),
+          value: hintStyleColor,
+          onChanged: (v) => onMark('$hintColorLabel ${v ?? 'null'}', () => hintStyleColor = v),
+        ),
     ];
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
-      ],
-    );
-  }
 
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required T value,
-    required String Function(T) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = e == value;
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildColorDots({
-    required Color? value,
-    required ValueChanged<Color?> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
-        final selected = value == e;
-        return GestureDetector(
-          onTap: () => onChanged(e),
-          child: Container(
-            width: 32,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: e ?? scheme.surfaceContainerHighest,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: selected ? scheme.primary : scheme.outlineVariant,
-                width: selected ? 2 : 1,
-              ),
-            ),
-            child: colorDotChild(e, selected, scheme),
-          ),
-        );
-      }).toList(),
-    );
-  }
 
   Widget? colorDotChild(Color? color, bool selected, ColorScheme scheme) {
     if (color == null) {
@@ -1393,39 +1409,6 @@ class _SearchBarPageState extends State<SearchBarPage> {
     return Icon(Icons.check_rounded, size: 16, color: dark ? Colors.white : Colors.black87);
   }
 
-  Widget buildSlider({
-    required String label,
-    required double value,
-    required double min,
-    required double max,
-    required ValueChanged<double> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return NSliderListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(label),
-      min: min,
-      max: max,
-      value: value.clamp(min, max),
-      onChanged: onChanged,
-      activeColor: scheme.primary,
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(title),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();
@@ -1436,9 +1419,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
 
   void onTap() {
     onMark('onTap');
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('onTap'), duration: Duration(milliseconds: 800)),
-    );
+    SnackUtil.show('onTap');
   }
 
   void onSuffixTap() {

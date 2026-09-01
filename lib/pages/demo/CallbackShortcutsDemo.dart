@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_choice_chip_list_item.dart';
+import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// bindings 是否挂上快捷键
-enum _BindingKind { original, empty }
+enum _BindingKind {
+  original(label: 'original'),
+  empty(label: 'empty');
+  const _BindingKind({required this.label});
+  final String label;
+}
 
 class CallbackShortcutsDemo extends StatefulWidget {
   const CallbackShortcutsDemo({
@@ -259,14 +266,12 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'bindings',
-            child: buildChoiceChips(
-              values: _BindingKind.values,
-              isSelected: (e) => bindingKind == e,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('bindings ${e.name}', () => bindingKind = e),
-            ),
+          NChoiceChipListItem<_BindingKind>(
+            title: const Text('bindings'),
+            values: _BindingKind.values,
+            value: bindingKind,
+            labelOf: (e) => e.label,
+            onChanged: (e) => onMark('bindings ${e.label}', () => bindingKind = e),
           ),
         ],
       ),
@@ -281,108 +286,23 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildField(
-            label: 'trigger',
-            child: buildChoiceChips(
-              values: triggers,
-              isSelected: (e) => identical(trigger, e.$2),
-              labelOf: (e) => e.$1,
-              onChanged: (e) => onMark('trigger ${e.$1}', () => trigger = e.$2),
-            ),
+          NChoiceChipListItem<(String, LogicalKeyboardKey)>(
+            title: const Text('trigger'),
+            values: triggers,
+            onEqual: (e) => identical(trigger, e.$2),
+            labelOf: (e) => e.$1,
+            onChanged: (e) => onMark('trigger ${e.$1}', () => trigger = e.$2),
           ),
-          buildSwitch(title: 'control', value: control, onChanged: (v) => onMark('control $v', () => control = v)),
-          buildSwitch(title: 'shift', value: shift, onChanged: (v) => onMark('shift $v', () => shift = v)),
-          buildSwitch(title: 'alt', value: alt, onChanged: (v) => onMark('alt $v', () => alt = v)),
-          buildSwitch(title: 'meta', value: meta, onChanged: (v) => onMark('meta $v', () => meta = v)),
-          buildSwitch(title: 'includeRepeats', value: includeRepeats, onChanged: (v) => onMark('includeRepeats $v', () => includeRepeats = v)),
+          NSwitchListTile(title: const Text('control'), value: control, onChanged: (v) => onMark('control $v', () => control = v)),
+          NSwitchListTile(title: const Text('shift'), value: shift, onChanged: (v) => onMark('shift $v', () => shift = v)),
+          NSwitchListTile(title: const Text('alt'), value: alt, onChanged: (v) => onMark('alt $v', () => alt = v)),
+          NSwitchListTile(title: const Text('meta'), value: meta, onChanged: (v) => onMark('meta $v', () => meta = v)),
+          NSwitchListTile(title: const Text('includeRepeats'), value: includeRepeats, onChanged: (v) => onMark('includeRepeats $v', () => includeRepeats = v)),
         ],
       ),
     );
   }
 
-  Widget buildField({
-    required String label,
-    required Widget child,
-    bool showTopGap = false,
-  }) {
-    final scheme = theme.colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showTopGap) const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'monospace',
-              fontSize: 12.5,
-            ),
-          ),
-        ),
-        child,
-      ],
-    );
-  }
-
-  Widget buildChoiceChips<T>({
-    required List<T> values,
-    required bool Function(T value) isSelected,
-    required String Function(T value) labelOf,
-    required ValueChanged<T> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: values.map((e) {
-        final selected = isSelected(e);
-        return ChoiceChip(
-          label: Text(labelOf(e)),
-          selected: selected,
-          showCheckmark: false,
-          selectedColor: scheme.primaryContainer,
-          labelStyle: TextStyle(
-            color: selected ? scheme.onPrimaryContainer : scheme.onSurface,
-            fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-            fontFamily: 'monospace',
-            fontSize: 12.5,
-          ),
-          side: BorderSide(
-            color: selected ? scheme.primary.withValues(alpha: 0.35) : scheme.outlineVariant.withValues(alpha: 0.65),
-          ),
-          onSelected: (on) {
-            if (on) {
-              onChanged(e);
-            }
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildSwitch({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    final scheme = theme.colorScheme;
-    return SwitchListTile(
-      dense: true,
-      contentPadding: EdgeInsets.zero,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: scheme.onSurface,
-          fontSize: 13.5,
-        ),
-      ),
-      value: value,
-      onChanged: onChanged,
-    );
-  }
 
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();
