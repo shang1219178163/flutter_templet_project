@@ -18,6 +18,8 @@ class MaterialDemo extends StatefulWidget {
 class _MaterialDemoState extends State<MaterialDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
 
   /// 最近事件
@@ -63,7 +65,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -82,7 +84,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -126,7 +128,6 @@ class _MaterialDemoState extends State<MaterialDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -195,48 +196,31 @@ class _MaterialDemoState extends State<MaterialDemo> {
       color: color,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
-      textStyle: useTextStyle
-          ? TextStyle(
-              fontSize: textFontSize,
-              color: textColor,
-            )
-          : null,
-      borderRadius: buildBorderRadius(),
+      textStyle: useTextStyle ? TextStyle(fontSize: textFontSize, color: textColor) : null,
+      borderRadius: (isCircle || shapeKind != ShapeKind.none || !useBorderRadius)
+          ? null
+          : BorderRadius.circular(borderRadius),
       shape: buildShape(),
       borderOnForeground: borderOnForeground,
-      clipBehavior: clipOf(),
+      clipBehavior: switch (clipKind) {
+        ClipKind.hardEdge => Clip.hardEdge,
+        ClipKind.antiAlias => Clip.antiAlias,
+        ClipKind.antiAliasWithSaveLayer => Clip.antiAliasWithSaveLayer,
+        ClipKind.nil || ClipKind.none => Clip.none,
+      },
       animationDuration: Duration(milliseconds: animMs.round()),
       child: child,
     );
-  }
-
-  BorderRadius? buildBorderRadius() {
-    if (isCircle || shapeKind != ShapeKind.none || !useBorderRadius) {
-      return null;
-    }
-    return BorderRadius.circular(borderRadius);
   }
 
   ShapeBorder? buildShape() {
     if (isCircle) {
       return null;
     }
-    switch (shapeKind) {
-      case ShapeKind.none:
-        return null;
-      case ShapeKind.rounded:
-        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius));
-      case ShapeKind.stadium:
-        return const StadiumBorder();
-    }
-  }
-
-  Clip clipOf() {
-    return switch (clipKind) {
-      ClipKind.hardEdge => Clip.hardEdge,
-      ClipKind.antiAlias => Clip.antiAlias,
-      ClipKind.antiAliasWithSaveLayer => Clip.antiAliasWithSaveLayer,
-      ClipKind.nil || ClipKind.none => Clip.none,
+    return switch (shapeKind) {
+      ShapeKind.none => null,
+      ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius)),
+      ShapeKind.stadium => const StadiumBorder(),
     };
   }
 
@@ -253,7 +237,13 @@ class _MaterialDemoState extends State<MaterialDemo> {
             values: MaterialType.values,
             value: type,
             labelOf: (e) => e.name,
-            onChanged: onType,
+            onChanged: (e) => onMark('type ${e.name}', () {
+              type = e;
+              if (e == MaterialType.circle) {
+                shapeKind = ShapeKind.none;
+                useBorderRadius = false;
+              }
+            }),
           ),
           buildSlider(
             label: 'elevation',
@@ -262,16 +252,15 @@ class _MaterialDemoState extends State<MaterialDemo> {
             max: 24,
             onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
           ),
-          buildColorRow('color', color, (v) => onMark('color ${v ?? 'null'}', () => color = v)),
-          buildColorRow('shadowColor', shadowColor, (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v)),
-          buildColorRow('surfaceTintColor', surfaceTintColor, (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v)),
+          buildColorRow('color', color, (v) => color = v),
+          buildColorRow('shadowColor', shadowColor, (v) => shadowColor = v),
+          buildColorRow('surfaceTintColor', surfaceTintColor, (v) => surfaceTintColor = v),
         ],
       ),
     );
   }
 
   Widget buildShapeCard() {
-    final clipValues = ClipKind.values.where((e) => e != ClipKind.nil).toList();
     return NDecorationCard(
       icon: const Icon(Icons.rounded_corner_outlined),
       title: '形状',
@@ -285,7 +274,12 @@ class _MaterialDemoState extends State<MaterialDemo> {
               values: ShapeKind.values,
               value: shapeKind,
               labelOf: (e) => e == ShapeKind.none ? 'null' : e.name,
-              onChanged: onShapeKind,
+              onChanged: (e) => onMark('shape ${e == ShapeKind.none ? 'null' : e.name}', () {
+                shapeKind = e;
+                if (e != ShapeKind.none) {
+                  useBorderRadius = false;
+                }
+              }),
             ),
             if (shapeKind == ShapeKind.rounded)
               buildSlider(
@@ -313,13 +307,13 @@ class _MaterialDemoState extends State<MaterialDemo> {
           ] else
             Text(
               'circle 下 shape / borderRadius 必须为 null',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+              style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
                   ),
             ),
           const Text('clipBehavior'),
           buildChoiceChips(
-            values: clipValues,
+            values: ClipKind.values.where((e) => e != ClipKind.nil).toList(),
             value: clipKind == ClipKind.nil ? ClipKind.none : clipKind,
             labelOf: (e) => e.name,
             onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipKind = e),
@@ -342,7 +336,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
               max: 22,
               onChanged: (v) => onMark('textStyle.fontSize ${v.toStringAsFixed(1)}', () => textFontSize = v),
             ),
-            buildColorRow('color', textColor, (v) => onMark('textStyle.color ${v ?? 'null'}', () => textColor = v)),
+            buildColorRow('textStyle.color', textColor, (v) => textColor = v),
           ],
           buildSlider(
             label: 'animationDuration',
@@ -357,12 +351,15 @@ class _MaterialDemoState extends State<MaterialDemo> {
     );
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
+  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> assign) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
+        buildColorDots(
+          value: value,
+          onChanged: (v) => onMark('$label ${v ?? 'null'}', () => assign(v)),
+        ),
       ],
     );
   }
@@ -373,7 +370,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
     required String Function(T) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -407,7 +404,7 @@ class _MaterialDemoState extends State<MaterialDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -427,15 +424,15 @@ class _MaterialDemoState extends State<MaterialDemo> {
                 width: selected ? 2 : 1,
               ),
             ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
+            child: switch ((e, selected)) {
+              (null, _) => Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600)),
+              (final Color c, true) => Icon(
+                  Icons.check_rounded,
+                  size: 16,
+                  color: ThemeData.estimateBrightnessForColor(c) == Brightness.dark ? Colors.white : Colors.black87,
+                ),
+              _ => null,
+            },
           ),
         );
       }).toList(),
@@ -450,7 +447,6 @@ class _MaterialDemoState extends State<MaterialDemo> {
     required ValueChanged<double> onChanged,
     bool durationLabel = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -464,7 +460,9 @@ class _MaterialDemoState extends State<MaterialDemo> {
       valueBuilder: durationLabel
           ? (context, v) {
               final ms = v.round();
-              final text = ms >= 1000 ? '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s' : '${ms}ms';
+              final text = ms < 1000
+                  ? '${ms}ms'
+                  : '${(ms / 1000).toStringAsFixed(ms % 1000 == 0 ? 0 : 1)}s';
               return Text(
                 text,
                 style: theme.textTheme.bodySmall?.copyWith(
@@ -482,7 +480,6 @@ class _MaterialDemoState extends State<MaterialDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -526,30 +523,10 @@ class _MaterialDemoState extends State<MaterialDemo> {
   }
 
   void onTap(String event) {
-    lastEvent = event;
     DLog.d(event);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(event), duration: const Duration(milliseconds: 800)),
     );
-    setState(() {});
-  }
-
-  void onType(MaterialType value) {
-    type = value;
-    if (value == MaterialType.circle) {
-      shapeKind = ShapeKind.none;
-      useBorderRadius = false;
-    }
-    lastEvent = 'type ${value.name}';
-    setState(() {});
-  }
-
-  void onShapeKind(ShapeKind value) {
-    shapeKind = value;
-    if (value != ShapeKind.none) {
-      useBorderRadius = false;
-    }
-    lastEvent = 'shape ${value == ShapeKind.none ? 'null' : value.name}';
-    setState(() {});
+    onMark(event);
   }
 }

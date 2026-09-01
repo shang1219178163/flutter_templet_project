@@ -32,6 +32,7 @@ class AnimatedSwitcherDemo extends StatefulWidget {
 
 class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -57,7 +58,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -76,7 +77,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -111,13 +112,8 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
                             },
                             {
                               NLangEnum.en:
-                                  'Original transition is NSlideTransition. fade is AnimatedSwitcher.defaultTransitionBuilder.',
-                              NLangEnum.zh: '原过渡是 NSlideTransition。fade 即 AnimatedSwitcher.defaultTransitionBuilder。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'layoutBuilder defaults to a centered Stack. reverseDuration is null unless enabled.',
-                              NLangEnum.zh: 'layoutBuilder 默认居中 Stack。未开启时 reverseDuration 为 null。',
+                                  'Original transition is NSlideTransition. reverseDuration is null unless enabled.',
+                              NLangEnum.zh: '原过渡是 NSlideTransition。未开启时 reverseDuration 为 null。',
                             },
                           ],
                         ),
@@ -136,7 +132,6 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -195,7 +190,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
           ? Text(
               '第 $count 相很长长长',
               key: ValueKey<int>(count),
-              style: Theme.of(context).textTheme.titleMedium,
+              style: theme.textTheme.titleMedium,
             )
           : null,
     );
@@ -245,7 +240,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
           buildSwitch(
             title: 'child',
             value: useChild,
-            onChanged: onUseChild,
+            onChanged: (v) => onMark('child $v', () => useChild = v),
           ),
           buildField(
             label: 'transitionBuilder',
@@ -254,7 +249,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
               values: _TransitionKind.values,
               isSelected: (e) => transitionKind == e,
               labelOf: (e) => e.name,
-              onChanged: onTransitionKind,
+              onChanged: (e) => onMark('transitionBuilder ${e.name}', () => transitionKind = e),
             ),
           ),
           if (transitionKind == _TransitionKind.slide)
@@ -265,7 +260,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
                 values: AxisDirection.values,
                 isSelected: (e) => slideDirection == e,
                 labelOf: (e) => e.name,
-                onChanged: onSlideDirection,
+                onChanged: (e) => onMark('direction ${e.name}', () => slideDirection = e),
               ),
             ),
           buildField(
@@ -275,7 +270,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
               values: _LayoutKind.values,
               isSelected: (e) => layoutKind == e,
               labelOf: (e) => e.name,
-              onChanged: onLayoutKind,
+              onChanged: (e) => onMark('layoutBuilder ${e.name}', () => layoutKind = e),
             ),
           ),
           if (layoutKind == _LayoutKind.stack)
@@ -286,7 +281,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
                 values: AlignmentExt.allCases,
                 isSelected: (e) => layoutAlignment == e,
                 labelOf: (e) => e.toString().split('.').last,
-                onChanged: onLayoutAlignment,
+                onChanged: (e) => onMark('alignment ${e.toString().split('.').last}', () => layoutAlignment = e),
               ),
             ),
         ],
@@ -307,13 +302,13 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
             value: durationMs,
             min: 100,
             max: 3000,
-            onChanged: onDurationMs,
+            onChanged: (v) => onMark('duration ${v.round()}ms', () => durationMs = v),
             durationLabel: true,
           ),
           buildSwitch(
             title: 'reverseDuration',
             value: useReverseDuration,
-            onChanged: onUseReverseDuration,
+            onChanged: (v) => onMark('reverseDuration $v', () => useReverseDuration = v),
           ),
           if (useReverseDuration)
             buildSlider(
@@ -321,7 +316,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
               value: reverseDurationMs,
               min: 100,
               max: 3000,
-              onChanged: onReverseDurationMs,
+              onChanged: (v) => onMark('reverseDuration ${v.round()}ms', () => reverseDurationMs = v),
               durationLabel: true,
             ),
           buildField(
@@ -331,7 +326,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
               values: NDecorationCard.curvePresets,
               isSelected: (e) => identical(switchInCurve, e),
               labelOf: NDecorationCard.nameOfCurve,
-              onChanged: onSwitchInCurve,
+              onChanged: (e) => onMark('switchInCurve ${NDecorationCard.nameOfCurve(e)}', () => switchInCurve = e),
             ),
           ),
           buildField(
@@ -341,7 +336,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
               values: NDecorationCard.curvePresets,
               isSelected: (e) => identical(switchOutCurve, e),
               labelOf: NDecorationCard.nameOfCurve,
-              onChanged: onSwitchOutCurve,
+              onChanged: (e) => onMark('switchOutCurve ${NDecorationCard.nameOfCurve(e)}', () => switchOutCurve = e),
             ),
           ),
         ],
@@ -354,7 +349,6 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,7 +377,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -421,7 +415,6 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
     required ValueChanged<double> onChanged,
     bool durationLabel = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -453,7 +446,6 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -471,59 +463,13 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
   }
 
   void onPlus() {
-    count += 1;
-    lastEvent = 'onPlus $count';
-    DLog.d(lastEvent);
-    setState(() {});
+    onMark('onPlus ${count + 1}', () => count += 1);
   }
 
-  void onUseChild(bool value) {
-    useChild = value;
-    setState(() {});
-  }
-
-  void onTransitionKind(_TransitionKind value) {
-    transitionKind = value;
-    setState(() {});
-  }
-
-  void onSlideDirection(AxisDirection value) {
-    slideDirection = value;
-    setState(() {});
-  }
-
-  void onLayoutKind(_LayoutKind value) {
-    layoutKind = value;
-    setState(() {});
-  }
-
-  void onLayoutAlignment(Alignment value) {
-    layoutAlignment = value;
-    setState(() {});
-  }
-
-  void onDurationMs(double value) {
-    durationMs = value;
-    setState(() {});
-  }
-
-  void onUseReverseDuration(bool value) {
-    useReverseDuration = value;
-    setState(() {});
-  }
-
-  void onReverseDurationMs(double value) {
-    reverseDurationMs = value;
-    setState(() {});
-  }
-
-  void onSwitchInCurve(Curve value) {
-    switchInCurve = value;
-    setState(() {});
-  }
-
-  void onSwitchOutCurve(Curve value) {
-    switchOutCurve = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 

@@ -25,6 +25,7 @@ class TwoDimensionalGridViewDemo extends StatefulWidget {
 
 class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -47,7 +48,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
   double cacheExtent = 250;
   int maxXIndex = 9;
   int maxYIndex = 9;
-  ChildVicinity? lastVicinity;
+  String lastEvent = '—';
 
   @override
   void dispose() {
@@ -57,7 +58,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -76,7 +77,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -109,18 +110,12 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
                               NLangEnum.zh: '二维 GridView，可按 DiagonalDragBehavior 斜向拖动。',
                             },
                             {
-                              NLangEnum.en:
-                                  'Tune item size, cacheExtent, clip, physics, reverse, and delegate indices.',
-                              NLangEnum.zh: '可调节格子尺寸、cacheExtent、裁剪、滚动物理、反向与行列上限。',
-                            },
-                            {
                               NLangEnum.en: 'Tap a cell to see ChildVicinity; original checkerboard colors are kept.',
                               NLangEnum.zh: '点击格子查看 ChildVicinity；保留原 Demo 的棋盘配色。',
                             },
                           ],
                         ),
                         buildConstructCard(),
-                        buildSizeCard(),
                         buildBehaviorCard(),
                       ],
                     ),
@@ -135,9 +130,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
   }
 
   Widget buildPreview(double height) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    final vicinity = lastVicinity;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: scheme.surfaceContainerHighest.withValues(alpha: 0.35),
@@ -185,9 +178,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              vicinity == null
-                  ? 'diagonalDragBehavior: ${diagonalDragBehavior.name}'
-                  : 'onTap Row ${vicinity.yIndex}: Column ${vicinity.xIndex}',
+              lastEvent,
               style: theme.textTheme.labelMedium?.copyWith(
                 color: scheme.onSurfaceVariant,
                 fontFamily: 'monospace',
@@ -217,23 +208,19 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
   }
 
   ScrollPhysics? buildPhysics() {
-    switch (physicsKind) {
-      case _PhysicsKind.platform:
-        return null;
-      case _PhysicsKind.bouncing:
-        return const BouncingScrollPhysics();
-      case _PhysicsKind.clamping:
-        return const ClampingScrollPhysics();
-      case _PhysicsKind.never:
-        return const NeverScrollableScrollPhysics();
-    }
+    return switch (physicsKind) {
+      _PhysicsKind.platform => null,
+      _PhysicsKind.bouncing => const BouncingScrollPhysics(),
+      _PhysicsKind.clamping => const ClampingScrollPhysics(),
+      _PhysicsKind.never => const NeverScrollableScrollPhysics(),
+    };
   }
 
   Widget buildConstructCard() {
     return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
-      subtitle: 'mainAxis · primary · diagonalDragBehavior',
+      subtitle: 'mainAxis · primary · diagonalDragBehavior · itemSize · maxIndex',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -243,7 +230,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: Axis.values,
               isSelected: (e) => mainAxis == e,
               labelOf: (e) => e.name,
-              onChanged: onMainAxis,
+              onChanged: (e) => onMark('mainAxis ${e.name}', () => mainAxis = e),
             ),
           ),
           buildField(
@@ -253,7 +240,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: const [null, true, false],
               isSelected: (e) => primary == e,
               labelOf: (e) => e == null ? 'null' : '$e',
-              onChanged: onPrimary,
+              onChanged: (e) => onMark('primary $e', () => primary = e),
             ),
           ),
           buildField(
@@ -263,27 +250,45 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: DiagonalDragBehavior.values,
               isSelected: (e) => diagonalDragBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onDiagonalDragBehavior,
+              onChanged: (e) => onMark('diagonalDragBehavior ${e.name}', () => diagonalDragBehavior = e),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildSizeCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.straighten_rounded),
-      title: '尺寸',
-      subtitle: 'itemWidth · itemHeight · cacheExtent · maxIndex',
-      child: Column(
-        children: [
-          buildSlider(label: 'itemWidth', value: itemWidth, min: 60, max: 240, onChanged: onItemWidth),
-          buildSlider(label: 'itemHeight', value: itemHeight, min: 32, max: 160, onChanged: onItemHeight),
-          buildSlider(label: 'maxXIndex', value: maxXIndex.toDouble(), min: 0, max: 19, onChanged: onMaxXIndex),
-          buildSlider(label: 'maxYIndex', value: maxYIndex.toDouble(), min: 0, max: 19, onChanged: onMaxYIndex),
+          buildSlider(
+            label: 'itemWidth',
+            value: itemWidth,
+            min: 60,
+            max: 240,
+            onChanged: (v) => onMark('itemWidth ${v.round()}', () => itemWidth = v),
+          ),
+          buildSlider(
+            label: 'itemHeight',
+            value: itemHeight,
+            min: 32,
+            max: 160,
+            onChanged: (v) => onMark('itemHeight ${v.round()}', () => itemHeight = v),
+          ),
+          buildSlider(
+            label: 'maxXIndex',
+            value: maxXIndex.toDouble(),
+            min: 0,
+            max: 19,
+            onChanged: (v) => onMark('maxXIndex ${v.round()}', () => maxXIndex = v.round().clamp(0, 19)),
+          ),
+          buildSlider(
+            label: 'maxYIndex',
+            value: maxYIndex.toDouble(),
+            min: 0,
+            max: 19,
+            onChanged: (v) => onMark('maxYIndex ${v.round()}', () => maxYIndex = v.round().clamp(0, 19)),
+          ),
           if (useCacheExtent)
-            buildSlider(label: 'cacheExtent', value: cacheExtent, min: 0, max: 500, onChanged: onCacheExtent),
+            buildSlider(
+              label: 'cacheExtent',
+              value: cacheExtent,
+              min: 0,
+              max: 500,
+              onChanged: (v) => onMark('cacheExtent ${v.round()}', () => cacheExtent = v),
+            ),
         ],
       ),
     );
@@ -303,7 +308,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: _PhysicsKind.values,
               isSelected: (e) => physicsKind == e,
               labelOf: (e) => e.name,
-              onChanged: onPhysicsKind,
+              onChanged: (e) => onMark('physics ${e.name}', () => physicsKind = e),
             ),
           ),
           buildField(
@@ -313,7 +318,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: const [Clip.none, Clip.hardEdge, Clip.antiAlias, Clip.antiAliasWithSaveLayer],
               isSelected: (e) => clipBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onClipBehavior,
+              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
             ),
           ),
           buildField(
@@ -323,7 +328,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: DragStartBehavior.values,
               isSelected: (e) => dragStartBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onDragStartBehavior,
+              onChanged: (e) => onMark('dragStartBehavior ${e.name}', () => dragStartBehavior = e),
             ),
           ),
           buildField(
@@ -333,7 +338,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: ScrollViewKeyboardDismissBehavior.values,
               isSelected: (e) => keyboardDismissBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onKeyboardDismissBehavior,
+              onChanged: (e) => onMark('keyboardDismissBehavior ${e.name}', () => keyboardDismissBehavior = e),
             ),
           ),
           buildField(
@@ -343,17 +348,33 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
               values: HitTestBehavior.values,
               isSelected: (e) => hitTestBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onHitTestBehavior,
+              onChanged: (e) => onMark('hitTestBehavior ${e.name}', () => hitTestBehavior = e),
             ),
           ),
-          buildSwitch(title: 'verticalDetails.reverse', value: verticalReverse, onChanged: onVerticalReverse),
-          buildSwitch(title: 'horizontalDetails.reverse', value: horizontalReverse, onChanged: onHorizontalReverse),
-          buildSwitch(title: 'cacheExtent 传入数值', value: useCacheExtent, onChanged: onUseCacheExtent),
-          buildSwitch(title: 'addRepaintBoundaries', value: addRepaintBoundaries, onChanged: onAddRepaintBoundaries),
+          buildSwitch(
+            title: 'verticalDetails.reverse',
+            value: verticalReverse,
+            onChanged: (v) => onMark('verticalReverse $v', () => verticalReverse = v),
+          ),
+          buildSwitch(
+            title: 'horizontalDetails.reverse',
+            value: horizontalReverse,
+            onChanged: (v) => onMark('horizontalReverse $v', () => horizontalReverse = v),
+          ),
+          buildSwitch(
+            title: 'cacheExtent 传入数值',
+            value: useCacheExtent,
+            onChanged: (v) => onMark('useCacheExtent $v', () => useCacheExtent = v),
+          ),
+          buildSwitch(
+            title: 'addRepaintBoundaries',
+            value: addRepaintBoundaries,
+            onChanged: (v) => onMark('addRepaintBoundaries $v', () => addRepaintBoundaries = v),
+          ),
           buildSwitch(
             title: 'addAutomaticKeepAlives',
             value: addAutomaticKeepAlives,
-            onChanged: onAddAutomaticKeepAlives,
+            onChanged: (v) => onMark('addAutomaticKeepAlives $v', () => addAutomaticKeepAlives = v),
           ),
         ],
       ),
@@ -365,7 +386,6 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -394,7 +414,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -431,7 +451,6 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -450,7 +469,6 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -467,101 +485,16 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
     );
   }
 
-  void onMainAxis(Axis value) {
-    mainAxis = value;
-    setState(() {});
-  }
-
-  void onPrimary(bool? value) {
-    primary = value;
-    setState(() {});
-  }
-
-  void onDiagonalDragBehavior(DiagonalDragBehavior value) {
-    diagonalDragBehavior = value;
-    setState(() {});
-  }
-
-  void onItemWidth(double value) {
-    itemWidth = value;
-    setState(() {});
-  }
-
-  void onItemHeight(double value) {
-    itemHeight = value;
-    setState(() {});
-  }
-
-  void onMaxXIndex(double value) {
-    maxXIndex = value.round().clamp(0, 19);
-    setState(() {});
-  }
-
-  void onMaxYIndex(double value) {
-    maxYIndex = value.round().clamp(0, 19);
-    setState(() {});
-  }
-
-  void onCacheExtent(double value) {
-    cacheExtent = value;
-    setState(() {});
-  }
-
-  void onPhysicsKind(_PhysicsKind value) {
-    physicsKind = value;
-    setState(() {});
-  }
-
-  void onClipBehavior(Clip value) {
-    clipBehavior = value;
-    setState(() {});
-  }
-
-  void onDragStartBehavior(DragStartBehavior value) {
-    dragStartBehavior = value;
-    setState(() {});
-  }
-
-  void onKeyboardDismissBehavior(ScrollViewKeyboardDismissBehavior value) {
-    keyboardDismissBehavior = value;
-    setState(() {});
-  }
-
-  void onHitTestBehavior(HitTestBehavior value) {
-    hitTestBehavior = value;
-    setState(() {});
-  }
-
-  void onVerticalReverse(bool value) {
-    verticalReverse = value;
-    setState(() {});
-  }
-
-  void onHorizontalReverse(bool value) {
-    horizontalReverse = value;
-    setState(() {});
-  }
-
-  void onUseCacheExtent(bool value) {
-    useCacheExtent = value;
-    setState(() {});
-  }
-
-  void onAddRepaintBoundaries(bool value) {
-    addRepaintBoundaries = value;
-    setState(() {});
-  }
-
-  void onAddAutomaticKeepAlives(bool value) {
-    addAutomaticKeepAlives = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
   void onCellTap(ChildVicinity vicinity) {
-    lastVicinity = vicinity;
-    setState(() {});
-    DLog.d('onTap Row ${vicinity.yIndex}: Column ${vicinity.xIndex}');
-    final scheme = Theme.of(context).colorScheme;
+    onMark('onTap Row ${vicinity.yIndex}: Column ${vicinity.xIndex}');
+    final scheme = theme.colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Row ${vicinity.yIndex}: Column ${vicinity.xIndex}'),
@@ -592,7 +525,7 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
     cacheExtent = 250;
     maxXIndex = 9;
     maxYIndex = 9;
-    lastVicinity = null;
+    lastEvent = '—';
     setState(() {});
   }
 }

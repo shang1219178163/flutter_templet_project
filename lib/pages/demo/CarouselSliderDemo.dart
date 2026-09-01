@@ -39,6 +39,8 @@ class CarouselSliderDemo extends StatefulWidget {
 class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
 
   CarouselSliderController carouselController = CarouselSliderController();
@@ -50,14 +52,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
     'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
     'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
-  ];
-
-  final curvePresets = <(String, Curve)>[
-    ('fastOutSlowIn', Curves.fastOutSlowIn),
-    ('linear', Curves.linear),
-    ('easeInOut', Curves.easeInOut),
-    ('easeOut', Curves.easeOut),
-    ('bounceOut', Curves.bounceOut),
   ];
 
   _SliderKind kind = _SliderKind.items;
@@ -90,6 +84,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   int initialPage = 0;
   int currentPage = 0;
   CarouselPageChangedReason? pageChangedReason;
+  String lastEvent = '—';
 
   @override
   void dispose() {
@@ -99,7 +94,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -118,7 +113,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -154,17 +149,10 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
                                   'Switch between CarouselSlider and CarouselSlider.builder without losing the original images.',
                               NLangEnum.zh: '可切换 CarouselSlider 与 CarouselSlider.builder，保留原 Demo 图片。',
                             },
-                            {
-                              NLangEnum.en:
-                                  'Expose enlarge, autoplay, physics, clipping, snapping, and gesture options.',
-                              NLangEnum.zh: '覆盖中间放大、自动播放、滚动物理、裁剪、吸附与手势。',
-                            },
                           ],
                         ),
                         buildConstructCard(),
-                        buildSizeCard(),
                         buildSurfaceCard(),
-                        buildPlayCard(),
                         buildBehaviorCard(),
                       ],
                     ),
@@ -187,7 +175,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   Widget buildPreview(BoxConstraints constraints) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final carouselHeight = previewCarouselHeight(constraints);
     return DecoratedBox(
@@ -208,7 +195,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              'onPageChanged: $currentPage  ${pageChangedReason?.name ?? ''}',
+              'onPageChanged: $currentPage  ${pageChangedReason?.name ?? ''} · $lastEvent',
               style: theme.textTheme.labelMedium?.copyWith(
                 color: scheme.onSurfaceVariant,
                 fontFamily: 'monospace',
@@ -332,8 +319,8 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   Widget buildConstructCard() {
     return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
-      title: '构造',
-      subtitle: 'constructor · scrollDirection',
+      title: '构造与尺寸',
+      subtitle: 'constructor · height · aspectRatio · viewportFraction',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -356,28 +343,22 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               onChanged: onScrollDirection,
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildSizeCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.straighten_rounded),
-      title: '尺寸',
-      subtitle: 'height · aspectRatio · viewportFraction · initialPage',
-      child: Column(
-        children: [
           buildSwitch(title: 'useHeight 使用 height（覆盖 aspectRatio）', value: useHeight, onChanged: onUseHeight),
           if (useHeight)
-            buildSlider(label: 'height', value: height, min: 120, max: 400, onChanged: onHeight)
+            buildSlider(
+              label: 'height',
+              value: height,
+              min: 120,
+              max: 400,
+              onChanged: (v) => onMark('height ${v.round()}', () => height = v),
+            )
           else
             buildSlider(
               label: 'aspectRatio',
               value: aspectRatio,
               min: 0.5,
               max: 2.5,
-              onChanged: onAspectRatio,
+              onChanged: (v) => onMark('aspectRatio ${v.toStringAsFixed(2)}', () => aspectRatio = v),
               format: (v) => v.toStringAsFixed(2),
             ),
           buildSlider(
@@ -385,7 +366,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
             value: viewportFraction,
             min: 0.3,
             max: 1.0,
-            onChanged: onViewportFraction,
+            onChanged: (v) => onMark('viewportFraction ${v.toStringAsFixed(2)}', () => viewportFraction = v),
             format: (v) => v.toStringAsFixed(2),
           ),
           buildSlider(
@@ -403,12 +384,16 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   Widget buildSurfaceCard() {
     return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
-      title: '表面',
-      subtitle: 'enlargeCenterPage · enlargeStrategy · enlargeFactor · clipBehavior',
+      title: '表面与播放',
+      subtitle: 'enlargeCenterPage · autoPlay · clipBehavior',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'enlargeCenterPage 中间放大', value: enlargeCenterPage, onChanged: onEnlargeCenterPage),
+          buildSwitch(
+            title: 'enlargeCenterPage 中间放大',
+            value: enlargeCenterPage,
+            onChanged: (v) => onMark('enlargeCenterPage $v', () => enlargeCenterPage = v),
+          ),
           if (enlargeCenterPage) ...[
             buildField(
               label: 'enlargeStrategy',
@@ -417,7 +402,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
                 values: CenterPageEnlargeStrategy.values,
                 isSelected: (e) => enlargeStrategy == e,
                 labelOf: (e) => e.name,
-                onChanged: onEnlargeStrategy,
+                onChanged: (e) => onMark('enlargeStrategy ${e.name}', () => enlargeStrategy = e),
               ),
             ),
             buildSlider(
@@ -425,7 +410,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               value: enlargeFactor,
               min: 0,
               max: 1,
-              onChanged: onEnlargeFactor,
+              onChanged: (v) => onMark('enlargeFactor ${v.toStringAsFixed(2)}', () => enlargeFactor = v),
               format: (v) => v.toStringAsFixed(2),
             ),
           ],
@@ -436,30 +421,21 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               values: const [Clip.none, Clip.hardEdge, Clip.antiAlias, Clip.antiAliasWithSaveLayer],
               isSelected: (e) => clipBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onClipBehavior,
+              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildPlayCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.play_circle_outline_rounded),
-      title: '播放',
-      subtitle: 'autoPlay · autoPlayInterval · autoPlayCurve',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildSwitch(title: 'autoPlay 自动播放', value: autoPlay, onChanged: onAutoPlay),
+          buildSwitch(
+            title: 'autoPlay 自动播放',
+            value: autoPlay,
+            onChanged: (v) => onMark('autoPlay $v', () => autoPlay = v),
+          ),
           if (autoPlay) ...[
             buildSlider(
               label: 'autoPlayInterval',
               value: autoPlayIntervalSec,
               min: 1,
               max: 10,
-              onChanged: onAutoPlayIntervalSec,
+              onChanged: (v) => onMark('autoPlayInterval ${v.round()}s', () => autoPlayIntervalSec = v),
               format: (v) => '${v.round()}s',
             ),
             buildSlider(
@@ -467,30 +443,33 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               value: autoPlayAnimationMs,
               min: 200,
               max: 2000,
-              onChanged: onAutoPlayAnimationMs,
+              onChanged: (v) => onMark('autoPlayAnim ${v.round()}ms', () => autoPlayAnimationMs = v),
               format: (v) => '${(v / 1000).round().toStringAsFixed(1)}s',
             ),
             buildField(
               label: 'autoPlayCurve',
               showTopGap: true,
               child: buildChoiceChips(
-                values: curvePresets,
-                isSelected: (e) => e.$2 == autoPlayCurve,
-                labelOf: (e) => e.$1,
-                onChanged: onAutoPlayCurve,
+                values: NDecorationCard.curvePresets,
+                isSelected: (e) => e == autoPlayCurve,
+                labelOf: (e) => NDecorationCard.nameOfCurve(e),
+                onChanged: (e) => onMark('autoPlayCurve ${NDecorationCard.nameOfCurve(e)}', () => autoPlayCurve = e),
               ),
             ),
             buildSwitch(
-                title: 'pauseAutoPlayOnTouch 触摸暂停', value: pauseAutoPlayOnTouch, onChanged: onPauseAutoPlayOnTouch),
+              title: 'pauseAutoPlayOnTouch 触摸暂停',
+              value: pauseAutoPlayOnTouch,
+              onChanged: (v) => onMark('pauseAutoPlayOnTouch $v', () => pauseAutoPlayOnTouch = v),
+            ),
             buildSwitch(
               title: 'pauseAutoPlayOnManualNavigate 手动切换暂停',
               value: pauseAutoPlayOnManualNavigate,
-              onChanged: onPauseAutoPlayOnManualNavigate,
+              onChanged: (v) => onMark('pauseAutoPlayOnManualNavigate $v', () => pauseAutoPlayOnManualNavigate = v),
             ),
             buildSwitch(
               title: 'pauseAutoPlayInFiniteScroll 有限滚动到底暂停',
               value: pauseAutoPlayInFiniteScroll,
-              onChanged: onPauseAutoPlayInFiniteScroll,
+              onChanged: (v) => onMark('pauseAutoPlayInFiniteScroll $v', () => pauseAutoPlayInFiniteScroll = v),
             ),
           ],
         ],
@@ -512,17 +491,36 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
               values: _PhysicsKind.values,
               isSelected: (e) => physicsKind == e,
               labelOf: (e) => e.name,
-              onChanged: onPhysicsKind,
+              onChanged: (e) => onMark('scrollPhysics ${e.name}', () => physicsKind = e),
             ),
           ),
+          buildSwitch(title: 'enableInfiniteScroll 无限循环', value: enableInfiniteScroll, onChanged: onEnableInfiniteScroll),
           buildSwitch(
-              title: 'enableInfiniteScroll 无限循环', value: enableInfiniteScroll, onChanged: onEnableInfiniteScroll),
-          buildSwitch(title: 'animateToClosest 滚到最近页', value: animateToClosest, onChanged: onAnimateToClosest),
+            title: 'animateToClosest 滚到最近页',
+            value: animateToClosest,
+            onChanged: (v) => onMark('animateToClosest $v', () => animateToClosest = v),
+          ),
           buildSwitch(title: 'reverse 反向', value: reverse, onChanged: onReverse),
-          buildSwitch(title: 'pageSnapping 整页吸附', value: pageSnapping, onChanged: onPageSnapping),
-          buildSwitch(title: 'disableCenter 取消居中', value: disableCenter, onChanged: onDisableCenter),
-          buildSwitch(title: 'padEnds 两端留白', value: padEnds, onChanged: onPadEnds),
-          buildSwitch(title: 'disableGesture 禁用手势', value: disableGesture, onChanged: onDisableGesture),
+          buildSwitch(
+            title: 'pageSnapping 整页吸附',
+            value: pageSnapping,
+            onChanged: (v) => onMark('pageSnapping $v', () => pageSnapping = v),
+          ),
+          buildSwitch(
+            title: 'disableCenter 取消居中',
+            value: disableCenter,
+            onChanged: (v) => onMark('disableCenter $v', () => disableCenter = v),
+          ),
+          buildSwitch(
+            title: 'padEnds 两端留白',
+            value: padEnds,
+            onChanged: (v) => onMark('padEnds $v', () => padEnds = v),
+          ),
+          buildSwitch(
+            title: 'disableGesture 禁用手势',
+            value: disableGesture,
+            onChanged: (v) => onMark('disableGesture $v', () => disableGesture = v),
+          ),
         ],
       ),
     );
@@ -533,7 +531,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -562,7 +559,7 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -600,7 +597,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     required ValueChanged<double> onChanged,
     String Function(double value)? format,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -611,7 +607,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: scheme.outlineVariant.withValues(alpha: 0.55),
       valueBuilder: format == null
           ? null
           : (context, v) => SizedBox(
@@ -633,7 +628,6 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -647,12 +641,18 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: scheme.outlineVariant.withValues(alpha: 0.55),
     );
   }
 
   void onResetCarouselController() {
     carouselController = CarouselSliderController();
+  }
+
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
+    setState(() {});
   }
 
   void onReset() {
@@ -684,149 +684,56 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
     initialPage = 0;
     currentPage = 0;
     pageChangedReason = null;
+    lastEvent = '—';
     onResetCarouselController();
     setState(() {});
   }
 
   void onKind(_SliderKind value) {
-    kind = value;
-    onResetCarouselController();
-    setState(() {});
+    onMark('kind ${value.name}', () {
+      kind = value;
+      onResetCarouselController();
+    });
   }
 
   void onScrollDirection(Axis value) {
-    scrollDirection = value;
-    if (value == Axis.vertical && !useHeight) {
-      useHeight = true;
-      height = 360;
-    }
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onEnlargeStrategy(CenterPageEnlargeStrategy value) {
-    enlargeStrategy = value;
-    setState(() {});
-  }
-
-  void onAutoPlayCurve((String, Curve) value) {
-    autoPlayCurve = value.$2;
-    setState(() {});
-  }
-
-  void onClipBehavior(Clip value) {
-    clipBehavior = value;
-    setState(() {});
-  }
-
-  void onPhysicsKind(_PhysicsKind value) {
-    physicsKind = value;
-    setState(() {});
+    onMark('scrollDirection ${value.name}', () {
+      scrollDirection = value;
+      if (value == Axis.vertical && !useHeight) {
+        useHeight = true;
+        height = 360;
+      }
+      onResetCarouselController();
+    });
   }
 
   void onUseHeight(bool value) {
-    useHeight = value;
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onHeight(double value) {
-    height = value;
-    setState(() {});
-  }
-
-  void onAspectRatio(double value) {
-    aspectRatio = value;
-    setState(() {});
-  }
-
-  void onViewportFraction(double value) {
-    viewportFraction = value;
-    setState(() {});
-  }
-
-  void onEnlargeFactor(double value) {
-    enlargeFactor = value;
-    setState(() {});
-  }
-
-  void onAutoPlayIntervalSec(double value) {
-    autoPlayIntervalSec = value;
-    setState(() {});
-  }
-
-  void onAutoPlayAnimationMs(double value) {
-    autoPlayAnimationMs = value;
-    setState(() {});
+    onMark('useHeight $value', () {
+      useHeight = value;
+      onResetCarouselController();
+    });
   }
 
   void onInitialPage(double value) {
-    initialPage = value.round().clamp(0, imgList.length - 1);
-    currentPage = initialPage;
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onAutoPlay(bool value) {
-    autoPlay = value;
-    setState(() {});
-  }
-
-  void onEnlargeCenterPage(bool value) {
-    enlargeCenterPage = value;
-    setState(() {});
+    onMark('initialPage ${value.round()}', () {
+      initialPage = value.round().clamp(0, imgList.length - 1);
+      currentPage = initialPage;
+      onResetCarouselController();
+    });
   }
 
   void onEnableInfiniteScroll(bool value) {
-    enableInfiniteScroll = value;
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onAnimateToClosest(bool value) {
-    animateToClosest = value;
-    setState(() {});
+    onMark('enableInfiniteScroll $value', () {
+      enableInfiniteScroll = value;
+      onResetCarouselController();
+    });
   }
 
   void onReverse(bool value) {
-    reverse = value;
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onPageSnapping(bool value) {
-    pageSnapping = value;
-    setState(() {});
-  }
-
-  void onPauseAutoPlayOnTouch(bool value) {
-    pauseAutoPlayOnTouch = value;
-    setState(() {});
-  }
-
-  void onPauseAutoPlayOnManualNavigate(bool value) {
-    pauseAutoPlayOnManualNavigate = value;
-    setState(() {});
-  }
-
-  void onPauseAutoPlayInFiniteScroll(bool value) {
-    pauseAutoPlayInFiniteScroll = value;
-    setState(() {});
-  }
-
-  void onDisableCenter(bool value) {
-    disableCenter = value;
-    setState(() {});
-  }
-
-  void onPadEnds(bool value) {
-    padEnds = value;
-    setState(() {});
-  }
-
-  void onDisableGesture(bool value) {
-    disableGesture = value;
-    setState(() {});
+    onMark('reverse $value', () {
+      reverse = value;
+      onResetCarouselController();
+    });
   }
 
   void onPageChanged(int index, CarouselPageChangedReason reason) {
@@ -836,7 +743,9 @@ class _CarouselSliderDemoState extends State<CarouselSliderDemo> {
   }
 
   void onItemTap(int index) {
+    lastEvent = 'onTap $index';
     DLog.d('CarouselSlider onTap: $index');
     SnackUtil.show('onTap No. $index image');
+    setState(() {});
   }
 }

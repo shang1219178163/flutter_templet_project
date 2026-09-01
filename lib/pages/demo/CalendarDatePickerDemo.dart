@@ -33,6 +33,7 @@ class CalendarDatePickerDemo extends StatefulWidget {
 
 class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -61,7 +62,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -80,7 +81,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -115,13 +116,8 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
                             },
                             {
                               NLangEnum.en:
-                                  'Changing initialDate or initialCalendarMode rebuilds the picker via a new Key. The button below is the original showDatePicker.',
+                                  'Changing initialDate or initialCalendarMode rebuilds the picker via a new Key. The button is the original showDatePicker.',
                               NLangEnum.zh: '改 initialDate 或 initialCalendarMode 会换 Key 重建。下方按钮是原来的 showDatePicker。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'onDateChanged and onDisplayedMonthChanged show under the preview. CupertinoDatePicker was unused and is not in the panel.',
-                              NLangEnum.zh: 'onDateChanged、onDisplayedMonthChanged 显示在预览下方。未使用的 CupertinoDatePicker 不进面板。',
                             },
                           ],
                         ),
@@ -140,7 +136,6 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -206,50 +201,29 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   }
 
   DateTime? initialDateOf() {
-    switch (initialKind) {
-      case _InitialKind.none:
-        return null;
-      case _InitialKind.today:
-        return selectableOrNull(DateTime.now());
-      case _InitialKind.first:
-        return selectableOrNull(firstDate);
-      case _InitialKind.last:
-        return selectableOrNull(lastDate);
-    }
+    return switch (initialKind) {
+      _InitialKind.none => null,
+      _InitialKind.today => selectableOrNull(DateTime.now()),
+      _InitialKind.first => selectableOrNull(firstDate),
+      _InitialKind.last => selectableOrNull(lastDate),
+    };
   }
 
   DateTime? currentDateOf() {
-    switch (currentKind) {
-      case _CurrentKind.defaults:
-        return null;
-      case _CurrentKind.today:
-        return DateTime.now();
-      case _CurrentKind.first:
-        return firstDate;
-      case _CurrentKind.last:
-        return lastDate;
-    }
+    return switch (currentKind) {
+      _CurrentKind.defaults => null,
+      _CurrentKind.today => DateTime.now(),
+      _CurrentKind.first => firstDate,
+      _CurrentKind.last => lastDate,
+    };
   }
 
   SelectableDayPredicate? predicateOf() {
-    switch (predicateKind) {
-      case _PredicateKind.none:
-        return null;
-      case _PredicateKind.original:
-        return (val) {
-          if (val.weekday == 5 || val.weekday == 6) {
-            return false;
-          }
-          return true;
-        };
-      case _PredicateKind.weekend:
-        return (val) {
-          if (val.weekday == DateTime.saturday || val.weekday == DateTime.sunday) {
-            return false;
-          }
-          return true;
-        };
-    }
+    return switch (predicateKind) {
+      _PredicateKind.none => null,
+      _PredicateKind.original => (val) => val.weekday != 5 && val.weekday != 6,
+      _PredicateKind.weekend => (val) => val.weekday != DateTime.saturday && val.weekday != DateTime.sunday,
+    };
   }
 
   DateTime? selectableOrNull(DateTime raw) {
@@ -310,7 +284,10 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
               values: _InitialKind.values,
               isSelected: (e) => initialKind == e,
               labelOf: (e) => e.name,
-              onChanged: onInitialKind,
+              onChanged: (e) => onMark('initialDate ${e.name}', () {
+                initialKind = e;
+                bumpPicker();
+              }),
             ),
           ),
           buildField(
@@ -320,7 +297,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
               values: _CurrentKind.values,
               isSelected: (e) => currentKind == e,
               labelOf: (e) => e.name,
-              onChanged: onCurrentKind,
+              onChanged: (e) => onMark('currentDate ${e.name}', () => currentKind = e),
             ),
           ),
           buildField(
@@ -330,7 +307,10 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
               values: DatePickerMode.values,
               isSelected: (e) => initialCalendarMode == e,
               labelOf: (e) => e.name,
-              onChanged: onInitialCalendarMode,
+              onChanged: (e) => onMark('initialCalendarMode ${e.name}', () {
+                initialCalendarMode = e;
+                bumpPicker();
+              }),
             ),
           ),
           buildSlider(
@@ -338,28 +318,44 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
             value: firstYear.toDouble(),
             min: 2015,
             max: 2028,
-            onChanged: onFirstYear,
+            onChanged: (v) => onMark('firstDate.year ${v.round()}', () {
+              firstYear = v.round();
+              ensureRange();
+              bumpPicker();
+            }),
           ),
           buildSlider(
             label: 'firstDate.month',
             value: firstMonth.toDouble(),
             min: 1,
             max: 12,
-            onChanged: onFirstMonth,
+            onChanged: (v) => onMark('firstDate.month ${v.round()}', () {
+              firstMonth = v.round();
+              ensureRange();
+              bumpPicker();
+            }),
           ),
           buildSlider(
             label: 'lastDate.year',
             value: lastYear.toDouble(),
             min: 2020,
             max: 2040,
-            onChanged: onLastYear,
+            onChanged: (v) => onMark('lastDate.year ${v.round()}', () {
+              lastYear = v.round();
+              ensureRange();
+              bumpPicker();
+            }),
           ),
           buildSlider(
             label: 'lastDate.month',
             value: lastMonth.toDouble(),
             min: 1,
             max: 12,
-            onChanged: onLastMonth,
+            onChanged: (v) => onMark('lastDate.month ${v.round()}', () {
+              lastMonth = v.round();
+              ensureRange();
+              bumpPicker();
+            }),
           ),
         ],
       ),
@@ -380,7 +376,10 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
               values: _PredicateKind.values,
               isSelected: (e) => predicateKind == e,
               labelOf: (e) => e.name,
-              onChanged: onPredicateKind,
+              onChanged: (e) => onMark('selectableDayPredicate ${e.name}', () {
+                predicateKind = e;
+                bumpPicker();
+              }),
             ),
           ),
         ],
@@ -393,7 +392,6 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -422,7 +420,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -459,7 +457,6 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -473,68 +470,12 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
     );
   }
 
-  void onInitialKind(_InitialKind value) {
-    initialKind = value;
-    bumpPicker();
-    setState(() {});
-  }
-
-  void onCurrentKind(_CurrentKind value) {
-    currentKind = value;
-    setState(() {});
-  }
-
-  void onInitialCalendarMode(DatePickerMode value) {
-    initialCalendarMode = value;
-    bumpPicker();
-    setState(() {});
-  }
-
-  void onFirstYear(double value) {
-    firstYear = value.round();
-    ensureRange();
-    bumpPicker();
-    setState(() {});
-  }
-
-  void onFirstMonth(double value) {
-    firstMonth = value.round();
-    ensureRange();
-    bumpPicker();
-    setState(() {});
-  }
-
-  void onLastYear(double value) {
-    lastYear = value.round();
-    ensureRange();
-    bumpPicker();
-    setState(() {});
-  }
-
-  void onLastMonth(double value) {
-    lastMonth = value.round();
-    ensureRange();
-    bumpPicker();
-    setState(() {});
-  }
-
-  void onPredicateKind(_PredicateKind value) {
-    predicateKind = value;
-    bumpPicker();
-    setState(() {});
-  }
-
   void onDateChanged(DateTime value) {
-    selectedDate = value;
-    lastEvent = 'onDateChanged ${DateUtils.dateOnly(value)}';
-    DLog.d(lastEvent);
-    setState(() {});
+    onMark('onDateChanged ${DateUtils.dateOnly(value)}', () => selectedDate = value);
   }
 
   void onDisplayedMonthChanged(DateTime value) {
-    lastEvent = 'onDisplayedMonthChanged ${value.year}-${value.month.toString().padLeft(2, '0')}';
-    DLog.d(lastEvent);
-    setState(() {});
+    onMark('onDisplayedMonthChanged ${value.year}-${value.month.toString().padLeft(2, '0')}');
   }
 
   Future<void> onSelectDate(BuildContext context) async {
@@ -545,11 +486,15 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
       lastDate: DateTime(2101),
     );
     if (picked != null && picked != selectedDate) {
-      selectedDate = picked;
-      lastEvent = 'onSelectDate ${DateUtils.dateOnly(picked)}';
-      DLog.d(lastEvent);
-      setState(() {});
+      onMark('onSelectDate ${DateUtils.dateOnly(picked)}', () => selectedDate = picked);
     }
+  }
+
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
+    setState(() {});
   }
 
   void onReset() {

@@ -27,6 +27,7 @@ class NCollectionNavWidgetDemo extends StatefulWidget {
 
 class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final imgUrls = AppRes.image.urls;
@@ -75,7 +76,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -94,7 +95,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -123,10 +124,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
                           },
                           items: [
                             {
-                              NLangEnum.en: 'Pin a live preview while you tune every constructor argument below.',
-                              NLangEnum.zh: '上方固定预览，下方调节全部构造参数并即时生效。',
-                            },
-                            {
                               NLangEnum.en:
                                   'Original demo used 2 rows, 5 columns, iconSize 68, textGap 5, isDebug true.',
                               NLangEnum.zh: '原 Demo 为 2 行 5 列、iconSize 68、textGap 5、isDebug true。',
@@ -138,11 +135,8 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
                           ],
                         ),
                         buildConstructCard(),
-                        buildGridCard(),
                         buildCellCard(),
-                        buildIndicatorCard(),
                         buildSurfaceCard(),
-                        buildBehaviorCard(),
                       ],
                     ),
                   ),
@@ -156,7 +150,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   }
 
   Widget buildPreview(double maxHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -253,7 +246,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
-      subtitle: 'scrollType · items',
+      subtitle: 'scrollType · items · pageRowNum · pageColumnNum',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -262,7 +255,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             child: buildChoiceChips(
               values: PageViewScrollType.values,
               isSelected: (e) => scrollType == e,
-              labelOf: nameOfScrollType,
+              labelOf: (e) => e.name,
               onChanged: onScrollType,
             ),
           ),
@@ -274,19 +267,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             divisions: imgUrls.length - 1,
             onChanged: onItemCount,
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildGridCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.grid_view_rounded),
-      title: '网格',
-      subtitle: 'pageRowNum · pageColumnNum',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
           buildSlider(
             label: 'pageRowNum',
             value: pageRowNum.toDouble(),
@@ -311,44 +291,67 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
   Widget buildCellCard() {
     return NDecorationCard(
       icon: const Icon(Icons.straighten_rounded),
-      title: '单元格',
-      subtitle: 'iconSize · textHeight · spacing',
+      title: '尺寸',
+      subtitle: 'iconSize · textHeight · spacing · indicator',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(label: 'iconSize', value: iconSize, min: 24, max: 80, onChanged: onIconSize),
-          buildSlider(label: 'textHeight', value: textHeight, min: 10, max: 28, onChanged: onTextHeight),
-          buildSlider(label: 'textGap', value: textGap, min: 0, max: 16, onChanged: onTextGap),
-          buildSlider(label: 'columnSpacing', value: columnSpacing, min: 0, max: 32, onChanged: onColumnSpacing),
-          buildSlider(label: 'rowSpacing', value: rowSpacing, min: 0, max: 24, onChanged: onRowSpacing),
-        ],
-      ),
-    );
-  }
-
-  Widget buildIndicatorCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.more_horiz_rounded),
-      title: '指示器',
-      subtitle: 'indicatorItemHeight · Width · Gap',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+          buildSlider(
+            label: 'iconSize',
+            value: iconSize,
+            min: 24,
+            max: 80,
+            onChanged: (v) => onMark('iconSize ${v.toStringAsFixed(1)}', () => iconSize = v),
+          ),
+          buildSlider(
+            label: 'textHeight',
+            value: textHeight,
+            min: 10,
+            max: 28,
+            onChanged: (v) => onMark('textHeight ${v.toStringAsFixed(1)}', () => textHeight = v),
+          ),
+          buildSlider(
+            label: 'textGap',
+            value: textGap,
+            min: 0,
+            max: 16,
+            onChanged: (v) => onMark('textGap ${v.toStringAsFixed(1)}', () => textGap = v),
+          ),
+          buildSlider(
+            label: 'columnSpacing',
+            value: columnSpacing,
+            min: 0,
+            max: 32,
+            onChanged: (v) => onMark('columnSpacing ${v.toStringAsFixed(1)}', () => columnSpacing = v),
+          ),
+          buildSlider(
+            label: 'rowSpacing',
+            value: rowSpacing,
+            min: 0,
+            max: 24,
+            onChanged: (v) => onMark('rowSpacing ${v.toStringAsFixed(1)}', () => rowSpacing = v),
+          ),
           buildSlider(
             label: 'indicatorItemHeight',
             value: indicatorItemHeight,
             min: 1,
             max: 8,
-            onChanged: onIndicatorItemHeight,
+            onChanged: (v) => onMark('indicatorItemHeight ${v.toStringAsFixed(1)}', () => indicatorItemHeight = v),
           ),
           buildSlider(
             label: 'indicatorItemWidth',
             value: indicatorItemWidth,
             min: 4,
             max: 24,
-            onChanged: onIndicatorItemWidth,
+            onChanged: (v) => onMark('indicatorItemWidth ${v.toStringAsFixed(1)}', () => indicatorItemWidth = v),
           ),
-          buildSlider(label: 'indicatorGap', value: indicatorGap, min: 0, max: 24, onChanged: onIndicatorGap),
+          buildSlider(
+            label: 'indicatorGap',
+            value: indicatorGap,
+            min: 0,
+            max: 24,
+            onChanged: (v) => onMark('indicatorGap ${v.toStringAsFixed(1)}', () => indicatorGap = v),
+          ),
         ],
       ),
     );
@@ -358,29 +361,32 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     return NDecorationCard(
       icon: const Icon(Icons.palette_outlined),
       title: '表面',
-      subtitle: 'isDebug · boxShadows',
+      subtitle: 'isDebug · boxShadows · autoAdjustHeight',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'isDebug', value: isDebug, onChanged: onIsDebug),
-          buildSwitch(title: 'boxShadows', value: useBoxShadows, onChanged: onUseBoxShadows),
+          buildSwitch(title: 'isDebug', value: isDebug, onChanged: (v) => onMark('isDebug $v', () => isDebug = v)),
+          buildSwitch(
+            title: 'boxShadows',
+            value: useBoxShadows,
+            onChanged: (v) => onMark('boxShadows ${v ? 'on' : 'null'}', () => useBoxShadows = v),
+          ),
           if (useBoxShadows)
             buildField(
               label: 'boxShadows.color',
               showTopGap: true,
-              child: buildColorDots(value: shadowColor, onChanged: onShadowColor),
+              child: buildColorDots(
+                value: shadowColor,
+                onChanged: (e) => onMark('boxShadows.color ${e ?? 'null'}', () => shadowColor = e),
+              ),
             ),
+          buildSwitch(
+            title: 'autoAdjustHeight',
+            value: autoAdjustHeight,
+            onChanged: onAutoAdjustHeight,
+          ),
         ],
       ),
-    );
-  }
-
-  Widget buildBehaviorCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.tune_rounded),
-      title: '行为',
-      subtitle: 'autoAdjustHeight',
-      child: buildSwitch(title: 'autoAdjustHeight', value: autoAdjustHeight, onChanged: onAutoAdjustHeight),
     );
   }
 
@@ -389,7 +395,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -418,7 +423,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -452,7 +457,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -513,7 +518,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     required ValueChanged<double> onChanged,
     int? divisions,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -533,7 +537,6 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -550,127 +553,57 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
     );
   }
 
-  String nameOfScrollType(PageViewScrollType type) {
-    switch (type) {
-      case PageViewScrollType.full:
-        return 'full';
-      case PageViewScrollType.drag:
-        return 'drag';
-      case PageViewScrollType.none:
-        return 'none';
-    }
-  }
-
   void bumpRemount() {
     remountEpoch++;
   }
 
-  void onScrollType(PageViewScrollType value) {
-    scrollType = value;
-    lastEvent = 'scrollType ${nameOfScrollType(value)}';
-    bumpRemount();
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
+  }
+
+  void onScrollType(PageViewScrollType value) {
+    onMark('scrollType ${value.name}', () {
+      scrollType = value;
+      bumpRemount();
+    });
   }
 
   void onItemCount(double value) {
-    itemCount = value.round().clamp(1, imgUrls.length);
-    lastEvent = 'itemCount $itemCount';
-    bumpRemount();
-    setState(() {});
+    onMark('itemCount ${value.round()}', () {
+      itemCount = value.round().clamp(1, imgUrls.length);
+      bumpRemount();
+    });
   }
 
   void onPageRowNum(double value) {
-    pageRowNum = value.round().clamp(1, 5);
-    lastEvent = 'pageRowNum $pageRowNum';
-    bumpRemount();
-    setState(() {});
+    onMark('pageRowNum ${value.round()}', () {
+      pageRowNum = value.round().clamp(1, 5);
+      bumpRemount();
+    });
   }
 
   void onPageColumnNum(double value) {
-    pageColumnNum = value.round().clamp(1, 5);
-    lastEvent = 'pageColumnNum $pageColumnNum';
-    bumpRemount();
-    setState(() {});
-  }
-
-  void onIconSize(double value) {
-    iconSize = value;
-    lastEvent = 'iconSize ${iconSize.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onTextHeight(double value) {
-    textHeight = value;
-    lastEvent = 'textHeight ${textHeight.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onTextGap(double value) {
-    textGap = value;
-    lastEvent = 'textGap ${textGap.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onColumnSpacing(double value) {
-    columnSpacing = value;
-    lastEvent = 'columnSpacing ${columnSpacing.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onRowSpacing(double value) {
-    rowSpacing = value;
-    lastEvent = 'rowSpacing ${rowSpacing.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onIndicatorItemHeight(double value) {
-    indicatorItemHeight = value;
-    lastEvent = 'indicatorItemHeight ${indicatorItemHeight.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onIndicatorItemWidth(double value) {
-    indicatorItemWidth = value;
-    lastEvent = 'indicatorItemWidth ${indicatorItemWidth.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onIndicatorGap(double value) {
-    indicatorGap = value;
-    lastEvent = 'indicatorGap ${indicatorGap.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onIsDebug(bool value) {
-    isDebug = value;
-    lastEvent = 'isDebug $isDebug';
-    setState(() {});
-  }
-
-  void onUseBoxShadows(bool value) {
-    useBoxShadows = value;
-    lastEvent = 'boxShadows ${useBoxShadows ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onShadowColor(Color? value) {
-    shadowColor = value;
-    lastEvent = 'boxShadows.color ${value ?? 'null'}';
-    setState(() {});
+    onMark('pageColumnNum ${value.round()}', () {
+      pageColumnNum = value.round().clamp(1, 5);
+      bumpRemount();
+    });
   }
 
   void onAutoAdjustHeight(bool value) {
-    autoAdjustHeight = value;
-    lastEvent = 'autoAdjustHeight $autoAdjustHeight';
-    bumpRemount();
-    setState(() {});
+    onMark('autoAdjustHeight $value', () {
+      autoAdjustHeight = value;
+      bumpRemount();
+    });
   }
 
   void onItem(AttrNavItem e) {
     lastEvent = 'onItem ${e.name ?? e.icon ?? ''}';
     DLog.d(lastEvent);
     setState(() {});
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(lastEvent),

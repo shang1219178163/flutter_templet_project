@@ -17,6 +17,7 @@ class MaterialBannerDemo extends StatefulWidget {
 
 class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final contentController = TextEditingController(text: 'Your account has been deleted.');
@@ -84,7 +85,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
@@ -120,7 +121,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -146,17 +147,13 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
                       },
                       items: [
                         {
-                          NLangEnum.en: 'Preview embeds MaterialBanner. Messenger 显示 uses ScaffoldMessenger; leaving hides it first.',
-                          NLangEnum.zh: '预览区嵌入 Banner；Messenger 显示走 ScaffoldMessenger，退出路由前先收起。',
-                        },
-                        {
-                          NLangEnum.en: 'animation is injected by ScaffoldMessenger; the static preview keeps it null.',
-                          NLangEnum.zh: 'animation 由 ScaffoldMessenger 注入，静态预览保持 null。',
+                          NLangEnum.en:
+                              'Preview embeds MaterialBanner. Messenger 显示 uses ScaffoldMessenger and hides it before leaving. animation is injected by ScaffoldMessenger; the static preview keeps it null.',
+                          NLangEnum.zh: '预览区嵌入 Banner；Messenger 显示走 ScaffoldMessenger，退出路由前先收起。animation 由 ScaffoldMessenger 注入，静态预览保持 null。',
                         },
                       ],
                     ),
                     buildContentCard(),
-                    buildActionsCard(),
                     buildSurfaceCard(),
                   ],
                 ),
@@ -169,7 +166,6 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -230,11 +226,11 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
       actions: [
         if (!singleAction)
           TextButton(
-            onPressed: onNo,
+            onPressed: () => onAction('NO'),
             child: const Text('NO'),
           ),
         TextButton(
-          onPressed: onYes,
+          onPressed: () => onAction('YES'),
           child: const Text('YES'),
         ),
       ],
@@ -262,7 +258,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
     return NDecorationCard(
       icon: const Icon(Icons.notes_outlined),
       title: '内容',
-      subtitle: 'content  contentTextStyle  leading  leadingPadding',
+      subtitle: 'content  leading  actions  overflowAlignment',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -308,19 +304,6 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
               max: 32,
               onChanged: (v) => onMark('leadingPadding.end ${v.round()}', () => leadingPaddingEnd = v),
             ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildActionsCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.smart_button_outlined),
-      title: '操作',
-      subtitle: 'actions  forceActionsBelow  overflowAlignment  minActionBarHeight',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
           buildSwitch(
             title: '单按钮 actions',
             value: singleAction,
@@ -422,7 +405,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
     required String Function(T) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -456,7 +439,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -498,7 +481,6 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -517,7 +499,6 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -619,8 +600,4 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
     pageMessenger?.hideCurrentMaterialBanner();
     setState(() {});
   }
-
-  void onNo() => onAction('NO');
-
-  void onYes() => onAction('YES');
 }

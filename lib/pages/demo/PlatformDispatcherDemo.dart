@@ -231,7 +231,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
                         if (mq != null) ...[
                           const SizedBox(height: 10),
                           Text(
-                            '${mq.size.width.toStringAsFixed(0)}×${mq.size.height.toStringAsFixed(0)}  dpr ${mq.devicePixelRatio}',
+                            '${mq.size.toStringAsFixed(separator: '×')}  dpr ${mq.devicePixelRatio}',
                             style: TextStyle(fontSize: 12 * scale),
                           ),
                         ],
@@ -328,7 +328,7 @@ class _PlatformDispatcherDemoState extends State<PlatformDispatcherDemo> with Wi
       ('displays', '${dispatcher.displays.length}', '显示器数量，平台可能隐瞒副屏'),
       ('frameNumber', '${dispatcher.frameData.frameNumber}', '当前帧号，单调递增'),
       if (mq != null) ...[
-        ('size', '${mq.size.width.toStringAsFixed(1)}×${mq.size.height.toStringAsFixed(1)}', 'views.first 逻辑尺寸'),
+        ('size', mq.size.toStringAsFixed(fractionDigits: 1, separator: '×'), 'views.first 逻辑尺寸'),
         ('devicePixelRatio', '${mq.devicePixelRatio}', '物理像素 / 逻辑像素'),
         ('padding', '${mq.padding}', '被系统 UI 挡住、可滚动区域要避开的边'),
         ('viewPadding', '${mq.viewPadding}', '不论键盘是否弹出的安全区'),

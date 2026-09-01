@@ -29,6 +29,8 @@ class SwitchDemo extends StatefulWidget {
 class _SwitchDemoState extends State<SwitchDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
   final focusNode = FocusNode();
 
@@ -100,7 +102,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -119,7 +121,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -164,7 +166,6 @@ class _SwitchDemoState extends State<SwitchDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -298,12 +299,9 @@ class _SwitchDemoState extends State<SwitchDemo> {
   WidgetStateProperty<Icon?>? buildThumbIcon() {
     return switch (thumbIconKind) {
       _ThumbIconKind.none => null,
-      _ThumbIconKind.checkClose => WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return const Icon(Icons.check);
-          }
-          return const Icon(Icons.close);
-        }),
+      _ThumbIconKind.checkClose => WidgetStateProperty.resolveWith(
+          (states) => Icon(states.contains(WidgetState.selected) ? Icons.check : Icons.close),
+        ),
       _ThumbIconKind.add => WidgetStateProperty.all(const Icon(Icons.add)),
     };
   }
@@ -416,16 +414,16 @@ class _SwitchDemoState extends State<SwitchDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildColorRow('activeColor', activeColor, (v) => onMark('activeColor ${v ?? 'null'}', () => activeColor = v)),
-          buildColorRow('activeTrackColor', activeTrackColor, (v) => onMark('activeTrackColor ${v ?? 'null'}', () => activeTrackColor = v)),
-          buildColorRow('inactiveThumbColor', inactiveThumbColor, (v) => onMark('inactiveThumbColor ${v ?? 'null'}', () => inactiveThumbColor = v)),
-          buildColorRow('inactiveTrackColor', inactiveTrackColor, (v) => onMark('inactiveTrackColor ${v ?? 'null'}', () => inactiveTrackColor = v)),
-          buildColorRow('thumbColor', thumbColor, (v) => onMark('thumbColor ${v ?? 'null'}', () => thumbColor = v)),
-          buildColorRow('trackColor', trackColor, (v) => onMark('trackColor ${v ?? 'null'}', () => trackColor = v)),
-          buildColorRow('trackOutlineColor', trackOutlineColor, (v) => onMark('trackOutlineColor ${v ?? 'null'}', () => trackOutlineColor = v)),
-          buildColorRow('focusColor', focusColor, (v) => onMark('focusColor ${v ?? 'null'}', () => focusColor = v)),
-          buildColorRow('hoverColor', hoverColor, (v) => onMark('hoverColor ${v ?? 'null'}', () => hoverColor = v)),
-          buildColorRow('overlayColor', overlayColor, (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v)),
+          buildColorRow('activeColor', activeColor, (v) => activeColor = v),
+          buildColorRow('activeTrackColor', activeTrackColor, (v) => activeTrackColor = v),
+          buildColorRow('inactiveThumbColor', inactiveThumbColor, (v) => inactiveThumbColor = v),
+          buildColorRow('inactiveTrackColor', inactiveTrackColor, (v) => inactiveTrackColor = v),
+          buildColorRow('thumbColor', thumbColor, (v) => thumbColor = v),
+          buildColorRow('trackColor', trackColor, (v) => trackColor = v),
+          buildColorRow('trackOutlineColor', trackOutlineColor, (v) => trackOutlineColor = v),
+          buildColorRow('focusColor', focusColor, (v) => focusColor = v),
+          buildColorRow('hoverColor', hoverColor, (v) => hoverColor = v),
+          buildColorRow('overlayColor', overlayColor, (v) => overlayColor = v),
           buildSwitch(
             title: 'splashRadius',
             value: useSplashRadius,
@@ -467,12 +465,15 @@ class _SwitchDemoState extends State<SwitchDemo> {
     };
   }
 
-  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
+  Widget buildColorRow(String label, Color? value, ValueChanged<Color?> assign) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        buildColorDots(value: value, onChanged: onChanged),
+        buildColorDots(
+          value: value,
+          onChanged: (v) => onMark('$label ${v ?? 'null'}', () => assign(v)),
+        ),
       ],
     );
   }
@@ -483,7 +484,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
     required String Function(T) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -517,7 +518,7 @@ class _SwitchDemoState extends State<SwitchDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -537,15 +538,15 @@ class _SwitchDemoState extends State<SwitchDemo> {
                 width: selected ? 2 : 1,
               ),
             ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
+            child: switch ((e, selected)) {
+              (null, _) => Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600)),
+              (final Color c, true) => Icon(
+                  Icons.check_rounded,
+                  size: 16,
+                  color: ThemeData.estimateBrightnessForColor(c) == Brightness.dark ? Colors.white : Colors.black87,
+                ),
+              _ => null,
+            },
           ),
         );
       }).toList(),
@@ -559,7 +560,6 @@ class _SwitchDemoState extends State<SwitchDemo> {
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -578,7 +578,6 @@ class _SwitchDemoState extends State<SwitchDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,

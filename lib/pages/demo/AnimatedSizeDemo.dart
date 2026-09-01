@@ -18,6 +18,8 @@ class AnimatedSizeDemo extends StatefulWidget {
 class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
 
   /// 原 Demo 琥珀色区域 100 ↔ 250，FlutterLogo 固定 100
@@ -41,7 +43,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -60,7 +62,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -90,19 +92,14 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
                           items: [
                             {
                               NLangEnum.en:
-                                  'Tap the amber box (or 切换尺寸) to toggle the container 100 ↔ 250. FlutterLogo stays 100. alignment places the logo in the box and the box during the size animation.',
+                                  'Tap the amber box (or 切换尺寸) to toggle the container 100 ↔ 250. FlutterLogo stays 100. alignment places the logo in the box and during the size animation.',
                               NLangEnum.zh:
-                                  '点琥珀色容器或「切换尺寸」只改容器 100 ↔ 250，FlutterLogo 固定 100。alignment 决定 Logo 在容器内的位置，以及尺寸动画过程中的对齐。',
+                                  '点琥珀色容器或「切换尺寸」只改容器 100 ↔ 250，FlutterLogo 固定 100。alignment 决定 Logo 在容器内及尺寸动画过程中的对齐。',
                             },
                             {
                               NLangEnum.en:
-                                  'Original curve is Curves.easeIn and duration is 1s. clipBehavior defaults to Clip.hardEdge.',
-                              NLangEnum.zh: '原 Demo 为 Curves.easeIn、duration 1s。clipBehavior 默认 Clip.hardEdge。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'onEnd fires when the size animation finishes. reverseDuration is null unless enabled.',
-                              NLangEnum.zh: '尺寸动画结束会触发 onEnd。未开启时 reverseDuration 为 null。',
+                                  'Original curve is Curves.easeIn, duration 1s, clipBehavior Clip.hardEdge. onEnd fires when the size animation finishes; reverseDuration is null unless enabled.',
+                              NLangEnum.zh: '原 Demo 为 Curves.easeIn、duration 1s、clipBehavior Clip.hardEdge。尺寸动画结束触发 onEnd；未开启时 reverseDuration 为 null。',
                             },
                           ],
                         ),
@@ -121,7 +118,6 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -205,7 +201,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
           buildSwitch(
             title: 'child',
             value: useChild,
-            onChanged: onUseChild,
+            onChanged: (v) => onMark('child $v', () => useChild = v),
           ),
           buildField(
             label: 'alignment',
@@ -214,7 +210,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
               values: AlignmentExt.allCases,
               isSelected: (e) => alignment == e,
               labelOf: (e) => e.toString().split('.').last,
-              onChanged: onAlignment,
+              onChanged: (e) => onMark('alignment ${e.toString().split('.').last}', () => alignment = e),
             ),
           ),
           buildField(
@@ -224,7 +220,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
               values: Clip.values,
               isSelected: (e) => clipBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onClipBehavior,
+              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
             ),
           ),
         ],
@@ -245,13 +241,13 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
             value: durationMs,
             min: 100,
             max: 3000,
-            onChanged: onDurationMs,
+            onChanged: (v) => onMark('duration ${v.round()}ms', () => durationMs = v),
             durationLabel: true,
           ),
           buildSwitch(
             title: 'reverseDuration',
             value: useReverseDuration,
-            onChanged: onUseReverseDuration,
+            onChanged: (v) => onMark('reverseDuration $v', () => useReverseDuration = v),
           ),
           if (useReverseDuration)
             buildSlider(
@@ -259,7 +255,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
               value: reverseDurationMs,
               min: 100,
               max: 3000,
-              onChanged: onReverseDurationMs,
+              onChanged: (v) => onMark('reverseDuration ${v.round()}ms', () => reverseDurationMs = v),
               durationLabel: true,
             ),
           buildField(
@@ -269,7 +265,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
               values: NDecorationCard.curvePresets,
               isSelected: (e) => identical(curve, e),
               labelOf: NDecorationCard.nameOfCurve,
-              onChanged: onCurve,
+              onChanged: (e) => onMark('curve ${NDecorationCard.nameOfCurve(e)}', () => curve = e),
             ),
           ),
         ],
@@ -282,7 +278,6 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,7 +306,7 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -349,7 +344,6 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     required ValueChanged<double> onChanged,
     bool durationLabel = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -381,7 +375,6 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -398,53 +391,21 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     );
   }
 
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
+    setState(() {});
+  }
+
   void onToggleSize() {
     large = !large;
     containerSize = large ? 250 : 100;
-    lastEvent = 'onToggleSize $containerSize';
-    DLog.d(lastEvent);
-    setState(() {});
+    onMark('onToggleSize $containerSize');
   }
 
   void onEnd() {
-    lastEvent = 'onEnd';
-    DLog.d('onEnd');
-    setState(() {});
-  }
-
-  void onUseChild(bool value) {
-    useChild = value;
-    setState(() {});
-  }
-
-  void onAlignment(Alignment value) {
-    alignment = value;
-    setState(() {});
-  }
-
-  void onClipBehavior(Clip value) {
-    clipBehavior = value;
-    setState(() {});
-  }
-
-  void onDurationMs(double value) {
-    durationMs = value;
-    setState(() {});
-  }
-
-  void onUseReverseDuration(bool value) {
-    useReverseDuration = value;
-    setState(() {});
-  }
-
-  void onReverseDurationMs(double value) {
-    reverseDurationMs = value;
-    setState(() {});
-  }
-
-  void onCurve(Curve value) {
-    curve = value;
-    setState(() {});
+    onMark('onEnd');
   }
 
   void onReset() {

@@ -40,6 +40,7 @@ class NumberFormatDemo extends StatefulWidget {
 
 class _NumberFormatDemoState extends State<NumberFormatDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -64,6 +65,8 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
 
   /// 预览可调输入，默认对齐 Eg. 1
   double sampleValue = 123456789.75;
+  /// 最近事件
+  String lastEvent = '—';
 
   /// 原 handleNumber 的 Eg. 1–5
   final examples = <(String, num)>[
@@ -104,7 +107,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -123,7 +126,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -159,15 +162,9 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
                             },
                             {
                               NLangEnum.en:
-                                  'Switch factories for decimal, percent, scientific, currency and compact. Locale null uses Intl.defaultLocale. Pattern null uses the basic format.',
+                                  'Switch factories for decimal, percent, scientific, currency and compact. Locale/pattern null use Intl.defaultLocale / basic format. currency exposes name, symbol, decimalDigits, customPattern; compact / compactLong expose explicitSign. Deprecated currencyPattern is omitted.',
                               NLangEnum.zh:
-                                  '可切换 decimal、percent、scientific、currency、compact 等工厂。locale 为 null 时用 Intl.defaultLocale。pattern 为 null 时用基础格式。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'currency exposes name, symbol, decimalDigits and customPattern. compact / compactLong expose explicitSign. Deprecated currencyPattern is omitted.',
-                              NLangEnum.zh:
-                                  'currency 含 name、symbol、decimalDigits、customPattern。compact / compactLong 含 explicitSign。已弃用的 currencyPattern 不展示。',
+                                  '可切换 decimal、percent、scientific、currency、compact 等工厂。locale/pattern 为 null 时用 Intl.defaultLocale / 基础格式。currency 含 name、symbol、decimalDigits、customPattern；compact / compactLong 含 explicitSign。已弃用的 currencyPattern 不展示。',
                             },
                           ],
                         ),
@@ -186,7 +183,6 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final format = numberFormatOf();
     final lines = [
@@ -229,6 +225,16 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
                     ),
                   );
                 }),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    'lastEvent: $lastEvent',
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: scheme.onSurfaceVariant,
+                      fontFamily: 'monospace',
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -251,7 +257,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
               values: _FormatKind.values,
               isSelected: (e) => formatKind == e,
               labelOf: nameOfKind,
-              onChanged: onFormatKind,
+              onChanged: (e) => onMark('factory ${nameOfKind(e)}', () => formatKind = e),
             ),
           ),
           if (showPattern)
@@ -262,7 +268,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
                 values: const <String?>['#,##0.00', '###.0#', null],
                 isSelected: (e) => pattern == e,
                 labelOf: (e) => e ?? 'null',
-                onChanged: onPattern,
+                onChanged: (e) => onMark('pattern ${e ?? 'null'}', () => pattern = e),
               ),
             ),
           buildField(
@@ -272,7 +278,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
               values: const <String?>['en_US', 'zh_CN', null],
               isSelected: (e) => locale == e,
               labelOf: (e) => e ?? 'null',
-              onChanged: onLocale,
+              onChanged: (e) => onMark('locale ${e ?? 'null'}', () => locale = e),
             ),
           ),
           if (showName)
@@ -283,7 +289,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
                 values: const <String?>['USD', 'CNY', 'EUR', 'JPY', null],
                 isSelected: (e) => name == e,
                 labelOf: (e) => e ?? 'null',
-                onChanged: onName,
+                onChanged: (e) => onMark('name ${e ?? 'null'}', () => name = e),
               ),
             ),
           if (showSymbol)
@@ -294,7 +300,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
                 values: const <String?>[r'$', '€', '¥', null],
                 isSelected: (e) => symbol == e,
                 labelOf: (e) => e ?? 'null',
-                onChanged: onSymbol,
+                onChanged: (e) => onMark('symbol ${e ?? 'null'}', () => symbol = e),
               ),
             ),
           if (showCustomPattern)
@@ -305,14 +311,14 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
                 values: const <String?>['¤#,##0.00', '¤#,##0', null],
                 isSelected: (e) => customPattern == e,
                 labelOf: (e) => e ?? 'null',
-                onChanged: onCustomPattern,
+                onChanged: (e) => onMark('customPattern ${e ?? 'null'}', () => customPattern = e),
               ),
             ),
           if (showDecimalDigits)
             buildSwitch(
               title: 'decimalDigits',
               value: useDecimalDigits,
-              onChanged: onUseDecimalDigits,
+              onChanged: (v) => onMark('decimalDigits ${v ? 'on' : 'null'}', () => useDecimalDigits = v),
             ),
           if (showDecimalDigits && useDecimalDigits)
             buildSlider(
@@ -320,13 +326,13 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
               value: decimalDigits,
               min: 0,
               max: 8,
-              onChanged: onDecimalDigits,
+              onChanged: (v) => onMark('decimalDigits ${v.round()}', () => decimalDigits = v),
             ),
           if (showExplicitSign)
             buildSwitch(
               title: 'explicitSign',
               value: explicitSign,
-              onChanged: onExplicitSign,
+              onChanged: (v) => onMark('explicitSign $v', () => explicitSign = v),
             ),
         ],
       ),
@@ -346,7 +352,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
             value: sampleValue,
             min: 0,
             max: 123456789.75,
-            onChanged: onSampleValue,
+            onChanged: (v) => onMark('value ${v.toStringAsFixed(2)}', () => sampleValue = v),
             fractionDigits: 2,
           ),
         ],
@@ -359,7 +365,6 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -388,7 +393,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -426,7 +431,6 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
     required ValueChanged<double> onChanged,
     int? fractionDigits,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final digits = fractionDigits;
     return NSliderListTile(
@@ -457,7 +461,6 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -474,34 +477,20 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
     );
   }
 
-  String nameOfKind(_FormatKind kind) {
-    switch (kind) {
-      case _FormatKind.custom:
-        return 'NumberFormat';
-      case _FormatKind.decimalPattern:
-        return 'decimalPattern';
-      case _FormatKind.decimalPatternDigits:
-        return 'decimalPatternDigits';
-      case _FormatKind.percentPattern:
-        return 'percentPattern';
-      case _FormatKind.decimalPercentPattern:
-        return 'decimalPercentPattern';
-      case _FormatKind.scientificPattern:
-        return 'scientificPattern';
-      case _FormatKind.currency:
-        return 'currency';
-      case _FormatKind.simpleCurrency:
-        return 'simpleCurrency';
-      case _FormatKind.compact:
-        return 'compact';
-      case _FormatKind.compactLong:
-        return 'compactLong';
-      case _FormatKind.compactCurrency:
-        return 'compactCurrency';
-      case _FormatKind.compactSimpleCurrency:
-        return 'compactSimpleCurrency';
-    }
-  }
+  String nameOfKind(_FormatKind kind) => switch (kind) {
+        _FormatKind.custom => 'NumberFormat',
+        _FormatKind.decimalPattern => 'decimalPattern',
+        _FormatKind.decimalPatternDigits => 'decimalPatternDigits',
+        _FormatKind.percentPattern => 'percentPattern',
+        _FormatKind.decimalPercentPattern => 'decimalPercentPattern',
+        _FormatKind.scientificPattern => 'scientificPattern',
+        _FormatKind.currency => 'currency',
+        _FormatKind.simpleCurrency => 'simpleCurrency',
+        _FormatKind.compact => 'compact',
+        _FormatKind.compactLong => 'compactLong',
+        _FormatKind.compactCurrency => 'compactCurrency',
+        _FormatKind.compactSimpleCurrency => 'compactSimpleCurrency',
+      };
 
   String quoteOf(String? value) {
     return value == null ? 'null' : '"$value"';
@@ -586,53 +575,9 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
     }
   }
 
-  void onFormatKind(_FormatKind value) {
-    formatKind = value;
-    setState(() {});
-  }
-
-  void onPattern(String? value) {
-    pattern = value;
-    setState(() {});
-  }
-
-  void onLocale(String? value) {
-    locale = value;
-    setState(() {});
-  }
-
-  void onName(String? value) {
-    name = value;
-    setState(() {});
-  }
-
-  void onSymbol(String? value) {
-    symbol = value;
-    setState(() {});
-  }
-
-  void onCustomPattern(String? value) {
-    customPattern = value;
-    setState(() {});
-  }
-
-  void onUseDecimalDigits(bool value) {
-    useDecimalDigits = value;
-    setState(() {});
-  }
-
-  void onDecimalDigits(double value) {
-    decimalDigits = value;
-    setState(() {});
-  }
-
-  void onExplicitSign(bool value) {
-    explicitSign = value;
-    setState(() {});
-  }
-
-  void onSampleValue(double value) {
-    sampleValue = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
     setState(() {});
   }
 
@@ -647,6 +592,7 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
     decimalDigits = 2;
     explicitSign = false;
     sampleValue = 123456789.75;
+    lastEvent = '—';
     setState(() {});
   }
 }

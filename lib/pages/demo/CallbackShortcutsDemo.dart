@@ -25,6 +25,8 @@ class CallbackShortcutsDemo extends StatefulWidget {
 class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
   final buttonFocusNode = FocusNode(debugLabel: 'Menu Button');
 
@@ -55,7 +57,7 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -74,7 +76,7 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -104,13 +106,9 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
                           items: [
                             {
                               NLangEnum.en:
-                                  'CallbackShortcuts only has bindings and child. Focus the preview, then press the shortcut (default Ctrl+S) to toggle the message.',
-                              NLangEnum.zh: 'CallbackShortcuts 只有 bindings 和 child。先点预览拿到焦点，再按快捷键（默认 Ctrl+S）切换文案。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'OPEN MENU / Show Message / Radio two are the original child. empty bindings means the shortcut does nothing.',
-                              NLangEnum.zh: 'OPEN MENU、Show Message、Radio two 是原来的 child。bindings 选 empty 时快捷键无效。',
+                                  'CallbackShortcuts only has bindings and child. Focus the preview, then press the shortcut (default Ctrl+S) to toggle the message. OPEN MENU / Show Message / Radio two are the original child; empty bindings means the shortcut does nothing.',
+                              NLangEnum.zh:
+                                  'CallbackShortcuts 只有 bindings 和 child。先点预览拿到焦点，再按快捷键（默认 Ctrl+S）切换文案。OPEN MENU、Show Message、Radio two 是原来的 child；bindings 选 empty 时快捷键无效。',
                             },
                           ],
                         ),
@@ -129,7 +127,6 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -180,13 +177,13 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
               menuChildren: [
                 CheckboxMenuButton(
                   value: showing,
-                  onChanged: onCheckbox,
+                  onChanged: (v) => onMark('onCheckbox ${v ?? false}', () => showing = v ?? false),
                   child: const Text('Show Message'),
                 ),
                 RadioMenuButton(
                   groupValue: 0,
                   value: 0,
-                  onChanged: onRadio,
+                  onChanged: (v) => onMark('onRadio $v'),
                   child: const Text('two'),
                 ),
               ],
@@ -205,7 +202,7 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
                   padding: const EdgeInsets.all(12),
                   child: Text(
                     showing ? widget.message : '',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: theme.textTheme.headlineSmall,
                   ),
                 ),
               ),
@@ -268,7 +265,7 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
               values: _BindingKind.values,
               isSelected: (e) => bindingKind == e,
               labelOf: (e) => e.name,
-              onChanged: onBindingKind,
+              onChanged: (e) => onMark('bindings ${e.name}', () => bindingKind = e),
             ),
           ),
         ],
@@ -290,14 +287,14 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
               values: triggers,
               isSelected: (e) => identical(trigger, e.$2),
               labelOf: (e) => e.$1,
-              onChanged: onTrigger,
+              onChanged: (e) => onMark('trigger ${e.$1}', () => trigger = e.$2),
             ),
           ),
-          buildSwitch(title: 'control', value: control, onChanged: onControl),
-          buildSwitch(title: 'shift', value: shift, onChanged: onShift),
-          buildSwitch(title: 'alt', value: alt, onChanged: onAlt),
-          buildSwitch(title: 'meta', value: meta, onChanged: onMeta),
-          buildSwitch(title: 'includeRepeats', value: includeRepeats, onChanged: onIncludeRepeats),
+          buildSwitch(title: 'control', value: control, onChanged: (v) => onMark('control $v', () => control = v)),
+          buildSwitch(title: 'shift', value: shift, onChanged: (v) => onMark('shift $v', () => shift = v)),
+          buildSwitch(title: 'alt', value: alt, onChanged: (v) => onMark('alt $v', () => alt = v)),
+          buildSwitch(title: 'meta', value: meta, onChanged: (v) => onMark('meta $v', () => meta = v)),
+          buildSwitch(title: 'includeRepeats', value: includeRepeats, onChanged: (v) => onMark('includeRepeats $v', () => includeRepeats = v)),
         ],
       ),
     );
@@ -308,7 +305,6 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -337,7 +333,7 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -372,7 +368,6 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -389,71 +384,26 @@ class _CallbackShortcutsDemoState extends State<CallbackShortcutsDemo> {
     );
   }
 
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
+    setState(() {});
+  }
+
   void onShortcut() {
     showing = !showing;
-    lastEvent = 'onShortcut $shortcutLabel';
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onCheckbox(bool? value) {
-    showing = value ?? false;
-    lastEvent = 'onCheckbox $showing';
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onRadio(int? value) {
-    lastEvent = 'onRadio $value';
-    DLog.d(lastEvent);
-    setState(() {});
+    onMark('onShortcut $shortcutLabel');
   }
 
   void onMenu(MenuController controller) {
     if (controller.isOpen) {
       controller.close();
-      lastEvent = 'onMenu close';
+      onMark('onMenu close');
     } else {
       controller.open();
-      lastEvent = 'onMenu open';
+      onMark('onMenu open');
     }
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onBindingKind(_BindingKind value) {
-    bindingKind = value;
-    setState(() {});
-  }
-
-  void onTrigger((String, LogicalKeyboardKey) value) {
-    trigger = value.$2;
-    setState(() {});
-  }
-
-  void onControl(bool value) {
-    control = value;
-    setState(() {});
-  }
-
-  void onShift(bool value) {
-    shift = value;
-    setState(() {});
-  }
-
-  void onAlt(bool value) {
-    alt = value;
-    setState(() {});
-  }
-
-  void onMeta(bool value) {
-    meta = value;
-    setState(() {});
-  }
-
-  void onIncludeRepeats(bool value) {
-    includeRepeats = value;
-    setState(() {});
   }
 
   void onReset() {

@@ -33,9 +33,12 @@ extension SizeExt on Size {
     return Size(widthNew, height);
   }
 
+  /// LTWH 的字符串描述
   String toStringAsFixed({int fractionDigits = 0, String separator = ","}) {
-    final result = '${width.toStringAsFixed(fractionDigits)}$separator${height.toStringAsFixed(fractionDigits)}';
-    return result;
+    return [
+      width,
+      height,
+    ].map((e) => e.toStringAsFixed(fractionDigits)).join(separator);
   }
 
   Map<String, dynamic> toJson() => {'width': width, 'height': height};
@@ -46,6 +49,16 @@ extension SizeExt on Size {
 }
 
 extension RectExt on Rect {
+  /// LTWH 的字符串描述
+  String toStringAsFixed({int fractionDigits = 0, String separator = ","}) {
+    return [
+      left,
+      top,
+      width,
+      height,
+    ].map((e) => e.toStringAsFixed(fractionDigits)).join(separator);
+  }
+
   Map<String, dynamic> toJson() => {
         'left': left,
         'top': top,

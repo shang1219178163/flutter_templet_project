@@ -23,22 +23,36 @@ class AutoLayoutDemo extends StatefulWidget {
 
 class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
+  /// prefix 传值
   _PrefixKind prefixKind = _PrefixKind.widgetDefault;
+  /// 是否显示 suffix
   bool useSuffix = true;
+  /// 是否自定义 decoration
   bool useDecoration = true;
-
+  /// 水平内边距
   double padH = 16;
+  /// 垂直内边距
   double padV = 7;
+  /// 最小宽度
   double minWidth = 100;
+  /// 最大宽度
   double maxWidth = 300;
+  /// 圆角
   double borderRadius = 16;
+  /// 字号
   double fontSize = 16;
+  /// 预览条数
   int itemCount = 3;
+  /// 最大行数
   int maxLines = 6;
+  /// 背景色
   Color? backgroundColor = Colors.orange;
+  /// 最近事件
+  String lastEvent = '—';
 
   @override
   void dispose() {
@@ -48,7 +62,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -67,7 +81,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -100,16 +114,10 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
                           NLangEnum.en: 'prefix defaults to a bell icon when null; suffix is omitted when null.',
                           NLangEnum.zh: 'prefix 为 null 时用默认铃铛；suffix 为 null 时不显示。',
                         },
-                        {
-                          NLangEnum.en: 'The bottom row keeps the original Flexible + OutlinedButton example.',
-                          NLangEnum.zh: '下方保留原 Demo 的 Flexible + OutlinedButton 横向自适应示例。',
-                        },
                       ],
                     ),
                     buildConstructCard(),
                     buildSizeCard(),
-                    if (useDecoration) buildSurfaceCard(),
-                    buildBehaviorCard(),
                   ],
                 ),
               ),
@@ -121,7 +129,6 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -160,7 +167,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
-                  'constraints: ${minWidth.round()} – ${maxWidth.round()}',
+                  'constraints: ${minWidth.round()} – ${maxWidth.round()} · $lastEvent',
                   style: theme.textTheme.labelMedium?.copyWith(
                     color: scheme.onSurfaceVariant,
                     fontFamily: 'monospace',
@@ -185,17 +192,14 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   }
 
   Widget? buildPrefix() {
-    switch (prefixKind) {
-      case _PrefixKind.widgetDefault:
-        return null;
-      case _PrefixKind.hidden:
-        return const SizedBox.shrink();
-      case _PrefixKind.logo:
-        return const Padding(
+    return switch (prefixKind) {
+      _PrefixKind.widgetDefault => null,
+      _PrefixKind.hidden => const SizedBox.shrink(),
+      _PrefixKind.logo => const Padding(
           padding: EdgeInsets.only(right: 6),
           child: FlutterLogo(size: 16),
-        );
-    }
+        ),
+    };
   }
 
   Widget? buildSuffix() {
@@ -245,21 +249,24 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             child: buildChoiceChips(
               values: _PrefixKind.values,
               isSelected: (e) => prefixKind == e,
-              labelOf: (e) {
-                switch (e) {
-                  case _PrefixKind.widgetDefault:
-                    return 'null / 默认图标';
-                  case _PrefixKind.hidden:
-                    return 'SizedBox.shrink';
-                  case _PrefixKind.logo:
-                    return 'FlutterLogo';
-                }
+              labelOf: (e) => switch (e) {
+                _PrefixKind.widgetDefault => 'null / 默认图标',
+                _PrefixKind.hidden => 'SizedBox.shrink',
+                _PrefixKind.logo => 'FlutterLogo',
               },
-              onChanged: onPrefixKind,
+              onChanged: (e) => onMark('prefix ${e.name}', () => prefixKind = e),
             ),
           ),
-          buildSwitch(title: 'suffix 后缀图标', value: useSuffix, onChanged: onUseSuffix),
-          buildSwitch(title: 'decoration 自定义装饰', value: useDecoration, onChanged: onUseDecoration),
+          buildSwitch(title: 'suffix 后缀图标', value: useSuffix, onChanged: (v) => onMark('suffix $v', () => useSuffix = v)),
+          buildSwitch(title: 'decoration 自定义装饰', value: useDecoration, onChanged: (v) => onMark('decoration $v', () => useDecoration = v)),
+          if (useDecoration)
+            buildField(
+              label: 'backgroundColor',
+              child: buildColorDots(
+                value: backgroundColor,
+                onChanged: (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v),
+              ),
+            ),
         ],
       ),
     );
@@ -271,44 +278,30 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       title: '尺寸',
       subtitle: 'padding · constraints · fontSize · maxLines',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(label: 'padding H', value: padH, min: 0, max: 32, onChanged: onPadH),
-          buildSlider(label: 'padding V', value: padV, min: 0, max: 24, onChanged: onPadV),
+          buildSlider(label: 'padding H', value: padH, min: 0, max: 32, onChanged: (v) => onMark('paddingH ${v.round()}', () => padH = v)),
+          buildSlider(label: 'padding V', value: padV, min: 0, max: 24, onChanged: (v) => onMark('paddingV ${v.round()}', () => padV = v)),
           buildSlider(label: 'minWidth', value: minWidth, min: 0, max: 200, onChanged: onMinWidth),
           buildSlider(label: 'maxWidth', value: maxWidth, min: 80, max: 400, onChanged: onMaxWidth),
-          buildSlider(label: 'fontSize', value: fontSize, min: 12, max: 22, onChanged: onFontSize),
-          buildSlider(label: 'maxLines', value: maxLines.toDouble(), min: 1, max: 8, onChanged: onMaxLines),
-          buildSlider(label: 'itemCount', value: itemCount.toDouble(), min: 1, max: 3, onChanged: onItemCount),
+          buildSlider(label: 'fontSize', value: fontSize, min: 12, max: 22, onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v)),
+          buildSlider(
+            label: 'maxLines',
+            value: maxLines.toDouble(),
+            min: 1,
+            max: 8,
+            onChanged: (v) => onMark('maxLines ${v.round()}', () => maxLines = v.round().clamp(1, 8)),
+          ),
+          buildSlider(
+            label: 'itemCount',
+            value: itemCount.toDouble(),
+            min: 1,
+            max: 3,
+            onChanged: (v) => onMark('itemCount ${v.round()}', () => itemCount = v.round().clamp(1, 3)),
+          ),
           if (useDecoration)
-            buildSlider(label: 'borderRadius', value: borderRadius, min: 0, max: 28, onChanged: onBorderRadius),
+            buildSlider(label: 'borderRadius', value: borderRadius, min: 0, max: 28, onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v)),
         ],
-      ),
-    );
-  }
-
-  Widget buildSurfaceCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.palette_outlined),
-      title: '表面',
-      subtitle: 'decoration color',
-      child: buildField(
-        label: 'backgroundColor',
-        child: buildColorDots(value: backgroundColor, onChanged: onBackgroundColor),
-      ),
-    );
-  }
-
-  Widget buildBehaviorCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.tune_rounded),
-      title: '行为',
-      subtitle: 'Flexible 行 onTap',
-      child: Text(
-        '点击预览中的绿色标签或 OutlinedButton，查看 SnackBar。',
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontSize: 13.5,
-            ),
       ),
     );
   }
@@ -316,14 +309,11 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   Widget buildField({
     required String label,
     required Widget child,
-    bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (showTopGap) const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
@@ -347,7 +337,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -381,12 +371,25 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: AppColor.colorOptions.map((e) {
         final selected = value == e;
+        Widget? mark;
+        if (e == null) {
+          mark = Text(
+            '默',
+            style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
+          );
+        } else if (selected) {
+          mark = Icon(
+            Icons.check_rounded,
+            size: 16,
+            color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
+          );
+        }
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -413,20 +416,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
                       ]
                     : null,
               ),
-              child: e == null
-                  ? Text(
-                      '默',
-                      style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                    )
-                  : selected
-                      ? Icon(
-                          Icons.check_rounded,
-                          size: 16,
-                          color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        )
-                      : null,
+              child: mark,
             ),
           ),
         );
@@ -441,7 +431,6 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -460,7 +449,6 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -551,70 +539,29 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
     );
   }
 
-  void onPrefixKind(_PrefixKind value) {
-    prefixKind = value;
-    setState(() {});
-  }
-
-  void onUseSuffix(bool value) {
-    useSuffix = value;
-    setState(() {});
-  }
-
-  void onUseDecoration(bool value) {
-    useDecoration = value;
-    setState(() {});
-  }
-
-  void onPadH(double value) {
-    padH = value;
-    setState(() {});
-  }
-
-  void onPadV(double value) {
-    padV = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
   void onMinWidth(double value) {
-    minWidth = value;
-    if (minWidth > maxWidth) {
-      maxWidth = minWidth;
-    }
-    setState(() {});
+    onMark('minWidth ${value.round()}', () {
+      minWidth = value;
+      if (minWidth > maxWidth) {
+        maxWidth = minWidth;
+      }
+    });
   }
 
   void onMaxWidth(double value) {
-    maxWidth = value;
-    if (maxWidth < minWidth) {
-      minWidth = maxWidth;
-    }
-    setState(() {});
-  }
-
-  void onFontSize(double value) {
-    fontSize = value;
-    setState(() {});
-  }
-
-  void onMaxLines(double value) {
-    maxLines = value.round().clamp(1, 8);
-    setState(() {});
-  }
-
-  void onItemCount(double value) {
-    itemCount = value.round().clamp(1, 3);
-    setState(() {});
-  }
-
-  void onBorderRadius(double value) {
-    borderRadius = value;
-    setState(() {});
-  }
-
-  void onBackgroundColor(Color? value) {
-    backgroundColor = value;
-    setState(() {});
+    onMark('maxWidth ${value.round()}', () {
+      maxWidth = value;
+      if (maxWidth < minWidth) {
+        minWidth = maxWidth;
+      }
+    });
   }
 
   void onTapFlexibleText() {
@@ -628,7 +575,8 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   }
 
   void onSnack(String message) {
-    final scheme = Theme.of(context).colorScheme;
+    lastEvent = message;
+    final scheme = theme.colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -638,6 +586,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
+    setState(() {});
   }
 
   void onReset() {
@@ -653,6 +602,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
     itemCount = 3;
     maxLines = 6;
     backgroundColor = Colors.orange;
+    lastEvent = '—';
     setState(() {});
   }
 }

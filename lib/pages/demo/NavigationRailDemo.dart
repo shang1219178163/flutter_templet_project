@@ -25,6 +25,7 @@ class NavigationRailDemo extends StatefulWidget {
 
 class _NavigationRailDemoState extends State<NavigationRailDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final pageController = PageController();
@@ -106,7 +107,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -198,7 +199,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       controller: pageController,
-      onPageChanged: onPageChanged,
+      onPageChanged: (i) => onMark('onPageChanged $i', () => selectedIndex = i),
       children: [
         for (var i = 0; i < items.length; i++) i == 0 ? buildPanelPage() : buildDataPage(items[i].color),
       ],
@@ -206,7 +207,6 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
   }
 
   Widget buildPanelPage() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
@@ -286,11 +286,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
               }
             }),
           ),
-          buildSwitch(
-            title: 'selectedIndex',
-            value: useSelected,
-            onChanged: (v) => onMark('selectedIndex ${v ? 'on' : 'null'}', () => useSelected = v),
-          ),
+          buildSwitch(title: 'selectedIndex', value: useSelected, onChanged: (v) => onMark('selectedIndex ${v ? 'on' : 'null'}', () => useSelected = v)),
           if (useSelected)
             buildSlider(
               label: 'selectedIndex',
@@ -299,26 +295,10 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
               max: (destinationCount - 1).toDouble(),
               onChanged: (v) => onSelected(v.round()),
             ),
-          buildSwitch(
-            title: 'onDestinationSelected',
-            value: useOnSelected,
-            onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v),
-          ),
-          buildSwitch(
-            title: 'extended',
-            value: extended,
-            onChanged: onExtended,
-          ),
-          buildSwitch(
-            title: 'leading',
-            value: useLeading,
-            onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v),
-          ),
-          buildSwitch(
-            title: 'trailing',
-            value: useTrailing,
-            onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v),
-          ),
+          buildSwitch(title: 'onDestinationSelected', value: useOnSelected, onChanged: (v) => onMark('onDestinationSelected ${v ? 'on' : 'null'}', () => useOnSelected = v)),
+          buildSwitch(title: 'extended', value: extended, onChanged: onExtended),
+          buildSwitch(title: 'leading', value: useLeading, onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v)),
+          buildSwitch(title: 'trailing', value: useTrailing, onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v)),
           const Text('labelType'),
           buildChoiceChips(
             values: [null, ...NavigationRailLabelType.values],
@@ -326,11 +306,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             labelOf: (e) => e?.name ?? '默',
             onChanged: onLabelType,
           ),
-          buildSwitch(
-            title: 'groupAlignment',
-            value: useGroupAlignment,
-            onChanged: (v) => onMark('groupAlignment ${v ? 'on' : 'null'}', () => useGroupAlignment = v),
-          ),
+          buildSwitch(title: 'groupAlignment', value: useGroupAlignment, onChanged: (v) => onMark('groupAlignment ${v ? 'on' : 'null'}', () => useGroupAlignment = v)),
           if (useGroupAlignment)
             buildSlider(
               label: 'groupAlignment',
@@ -354,47 +330,16 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildColorRow('backgroundColor', backgroundColor,
-              (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
-          buildSwitch(
-            title: 'elevation',
-            value: useElevation,
-            onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
-          ),
+          buildColorRow('backgroundColor', backgroundColor, (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
+          buildSwitch(title: 'elevation', value: useElevation, onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v)),
           if (useElevation)
-            buildSlider(
-              label: 'elevation',
-              value: elevation,
-              min: 1,
-              max: 16,
-              onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
-            ),
-          buildSwitch(
-            title: 'minWidth',
-            value: useMinWidth,
-            onChanged: (v) => onMark('minWidth ${v ? 'on' : 'null'}', () => useMinWidth = v),
-          ),
+            buildSlider(label: 'elevation', value: elevation, min: 1, max: 16, onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v)),
+          buildSwitch(title: 'minWidth', value: useMinWidth, onChanged: (v) => onMark('minWidth ${v ? 'on' : 'null'}', () => useMinWidth = v)),
           if (useMinWidth)
-            buildSlider(
-              label: 'minWidth',
-              value: minWidth,
-              min: 56,
-              max: 120,
-              onChanged: onMinWidth,
-            ),
-          buildSwitch(
-            title: 'minExtendedWidth',
-            value: useMinExtendedWidth,
-            onChanged: (v) => onMark('minExtendedWidth ${v ? 'on' : 'null'}', () => useMinExtendedWidth = v),
-          ),
+            buildSlider(label: 'minWidth', value: minWidth, min: 56, max: 120, onChanged: onMinWidth),
+          buildSwitch(title: 'minExtendedWidth', value: useMinExtendedWidth, onChanged: (v) => onMark('minExtendedWidth ${v ? 'on' : 'null'}', () => useMinExtendedWidth = v)),
           if (useMinExtendedWidth)
-            buildSlider(
-              label: 'minExtendedWidth',
-              value: minExtendedWidth,
-              min: 150,
-              max: 400,
-              onChanged: (v) => onMark('minExtendedWidth ${v.round()}', () => minExtendedWidth = v),
-            ),
+            buildSlider(label: 'minExtendedWidth', value: minExtendedWidth, min: 150, max: 400, onChanged: (v) => onMark('minExtendedWidth ${v.round()}', () => minExtendedWidth = v)),
           const Text('useIndicator'),
           buildChoiceChips(
             values: const [null, true, false],
@@ -402,8 +347,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             labelOf: (e) => e == null ? '默' : '$e',
             onChanged: (e) => onMark('useIndicator ${e ?? 'null'}', () => useIndicator = e),
           ),
-          buildColorRow('indicatorColor', indicatorColor,
-              (v) => onMark('indicatorColor ${v ?? 'null'}', () => indicatorColor = v)),
+          buildColorRow('indicatorColor', indicatorColor, (v) => onMark('indicatorColor ${v ?? 'null'}', () => indicatorColor = v)),
           const Text('indicatorShape'),
           buildChoiceChips(
             values: ShapeKind.values,
@@ -412,34 +356,14 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
             onChanged: (e) => onMark('indicatorShape ${e == ShapeKind.none ? 'null' : e.name}', () => shapeKind = e),
           ),
           if (shapeKind == ShapeKind.rounded)
-            buildSlider(
-              label: 'shapeRadius',
-              value: shapeRadius,
-              min: 0,
-              max: 32,
-              onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
-            ),
-          buildColorRow('selectedLabelTextStyle', selectedLabelColor,
-              (v) => onMark('selectedLabelTextStyle ${v ?? 'null'}', () => selectedLabelColor = v)),
-          buildColorRow('unselectedLabelTextStyle', unselectedLabelColor,
-              (v) => onMark('unselectedLabelTextStyle ${v ?? 'null'}', () => unselectedLabelColor = v)),
-          buildColorRow('selectedIconTheme', selectedIconColor,
-              (v) => onMark('selectedIconTheme ${v ?? 'null'}', () => selectedIconColor = v)),
-          buildColorRow('unselectedIconTheme', unselectedIconColor,
-              (v) => onMark('unselectedIconTheme ${v ?? 'null'}', () => unselectedIconColor = v)),
-          buildSwitch(
-            title: 'iconTheme.size',
-            value: useIconSize,
-            onChanged: (v) => onMark('iconTheme.size ${v ? 'on' : 'null'}', () => useIconSize = v),
-          ),
+            buildSlider(label: 'shapeRadius', value: shapeRadius, min: 0, max: 32, onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v)),
+          buildColorRow('selectedLabelTextStyle', selectedLabelColor, (v) => onMark('selectedLabelTextStyle ${v ?? 'null'}', () => selectedLabelColor = v)),
+          buildColorRow('unselectedLabelTextStyle', unselectedLabelColor, (v) => onMark('unselectedLabelTextStyle ${v ?? 'null'}', () => unselectedLabelColor = v)),
+          buildColorRow('selectedIconTheme', selectedIconColor, (v) => onMark('selectedIconTheme ${v ?? 'null'}', () => selectedIconColor = v)),
+          buildColorRow('unselectedIconTheme', unselectedIconColor, (v) => onMark('unselectedIconTheme ${v ?? 'null'}', () => unselectedIconColor = v)),
+          buildSwitch(title: 'iconTheme.size', value: useIconSize, onChanged: (v) => onMark('iconTheme.size ${v ? 'on' : 'null'}', () => useIconSize = v)),
           if (useIconSize)
-            buildSlider(
-              label: 'iconSize',
-              value: iconSize,
-              min: 16,
-              max: 36,
-              onChanged: (v) => onMark('iconSize ${v.round()}', () => iconSize = v),
-            ),
+            buildSlider(label: 'iconSize', value: iconSize, min: 16, max: 36, onChanged: (v) => onMark('iconSize ${v.round()}', () => iconSize = v)),
         ],
       ),
     );
@@ -461,7 +385,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     required String Function(T) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -495,12 +419,22 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: AppColor.colorOptions.map((e) {
         final selected = value == e;
+        Widget? mark;
+        if (e == null) {
+          mark = Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600));
+        } else if (selected) {
+          mark = Icon(
+            Icons.check_rounded,
+            size: 16,
+            color: ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
+          );
+        }
         return GestureDetector(
           onTap: () => onChanged(e),
           child: Container(
@@ -515,16 +449,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
                 width: selected ? 2 : 1,
               ),
             ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color:
-                            ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
+            child: mark,
           ),
         );
       }).toList(),
@@ -539,7 +464,6 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     required ValueChanged<double> onChanged,
     bool fraction = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -551,15 +475,13 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       onChanged: onChanged,
       activeColor: scheme.primary,
       valueBuilder: fraction
-          ? (context, v) {
-              return Text(
+          ? (context, v) => Text(
                 v.toStringAsFixed(2),
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: scheme.onSurfaceVariant,
                   fontFamily: 'monospace',
                 ),
-              );
-            }
+              )
           : null,
     );
   }
@@ -569,7 +491,6 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -589,6 +510,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
   void onMark(String event, [VoidCallback? apply]) {
     apply?.call();
     lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
@@ -655,16 +577,11 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
   }
 
   void onSelected(int index) {
-    selectedIndex = index;
-    lastEvent = 'onDestinationSelected $index';
-    DLog.d(lastEvent);
-    if (pageController.hasClients) {
-      pageController.jumpToPage(index);
-    }
-    setState(() {});
-  }
-
-  void onPageChanged(int index) {
-    onMark('onPageChanged $index', () => selectedIndex = index);
+    onMark('onDestinationSelected $index', () {
+      selectedIndex = index;
+      if (pageController.hasClients) {
+        pageController.jumpToPage(index);
+      }
+    });
   }
 }

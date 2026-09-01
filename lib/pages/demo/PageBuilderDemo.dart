@@ -9,9 +9,6 @@ import 'package:get/get.dart';
 /// transitionsBuilder 预设，对应 Material PageTransitionsBuilder
 enum _TransitionKind { openUpwards, zoom, cupertino, fadeUpwards, none, predictiveBack }
 
-/// requestFocus 三态
-enum _Tri { nil, yes, no }
-
 /// barrierLabel 预设
 enum _BarrierLabelKind { nil, dismiss }
 
@@ -26,6 +23,7 @@ class PageBuilderDemo extends StatefulWidget {
 
 class _PageBuilderDemoState extends State<PageBuilderDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -56,7 +54,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   /// 是否允许快照
   bool allowSnapshotting = true;
   /// 是否请求焦点
-  _Tri requestFocusKind = _Tri.nil;
+  bool? requestFocus;
   /// 是否传入 RouteSettings
   bool useSettings = false;
   /// 最近事件
@@ -70,7 +68,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -89,7 +87,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -121,11 +119,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
                         },
                         {
                           NLangEnum.en:
-                              'transitionsBuilder maps to PageTransitionsBuilder. none is the default jump cut.',
-                          NLangEnum.zh: 'transitionsBuilder 对应 Material 的 PageTransitionsBuilder。none 是默认无动画跳切。',
-                        },
-                        {
-                          NLangEnum.en:
                               'opaque false lets barrierColor show through a transparent next page. barrierDismissible pops on scrim tap.',
                           NLangEnum.zh: 'opaque 为 false 时下一页透明，才能看到 barrierColor。barrierDismissible 点遮罩可关闭。',
                         },
@@ -133,7 +126,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
                     ),
                     buildConstructCard(),
                     buildSurfaceCard(),
-                    buildDurationCard(),
                     buildBehaviorCard(),
                   ],
                 ),
@@ -146,7 +138,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -197,24 +188,27 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
               values: _TransitionKind.values,
               isSelected: (e) => transitionKind == e,
               labelOf: nameOfKind,
-              onChanged: onTransitionKind,
+              onChanged: (e) => onMark('transitionsBuilder ${nameOfKind(e)}', () => transitionKind = e),
             ),
           ),
           if (transitionKind == _TransitionKind.zoom) ...[
             buildSwitch(
               title: 'Zoom.allowSnapshotting',
               value: zoomAllowSnapshotting,
-              onChanged: onZoomAllowSnapshotting,
+              onChanged: (v) => onMark('Zoom.allowSnapshotting $v', () => zoomAllowSnapshotting = v),
             ),
             buildSwitch(
               title: 'Zoom.allowEnterRouteSnapshotting',
               value: zoomAllowEnterRouteSnapshotting,
-              onChanged: onZoomAllowEnterRouteSnapshotting,
+              onChanged: (v) => onMark('Zoom.allowEnterRouteSnapshotting $v', () => zoomAllowEnterRouteSnapshotting = v),
             ),
             buildField(
               label: 'Zoom.backgroundColor',
               showTopGap: true,
-              child: buildColorDots(value: zoomBackgroundColor, onChanged: onZoomBackgroundColor),
+              child: buildColorDots(
+                value: zoomBackgroundColor,
+                onChanged: (e) => onMark('Zoom.backgroundColor ${e ?? 'null'}', () => zoomBackgroundColor = e),
+              ),
             ),
           ],
         ],
@@ -226,20 +220,23 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     return NDecorationCard(
       icon: const Icon(Icons.layers_rounded),
       title: '表面',
-      subtitle: 'opaque · barrierDismissible · barrierColor · barrierLabel',
+      subtitle: 'opaque · barrier · duration',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'opaque', value: opaque, onChanged: onOpaque),
+          buildSwitch(title: 'opaque', value: opaque, onChanged: (v) => onMark('opaque $v', () => opaque = v)),
           buildSwitch(
             title: 'barrierDismissible',
             value: barrierDismissible,
-            onChanged: onBarrierDismissible,
+            onChanged: (v) => onMark('barrierDismissible $v', () => barrierDismissible = v),
           ),
           buildField(
             label: 'barrierColor',
             showTopGap: true,
-            child: buildColorDots(value: barrierColor, onChanged: onBarrierColor),
+            child: buildColorDots(
+              value: barrierColor,
+              onChanged: (e) => onMark('barrierColor ${e ?? 'null'}', () => barrierColor = e),
+            ),
           ),
           buildField(
             label: 'barrierLabel',
@@ -247,36 +244,19 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
             child: buildChoiceChips(
               values: _BarrierLabelKind.values,
               isSelected: (e) => barrierLabelKind == e,
-              labelOf: (e) {
-                switch (e) {
-                  case _BarrierLabelKind.nil:
-                    return 'null';
-                  case _BarrierLabelKind.dismiss:
-                    return 'dismiss';
-                }
+              labelOf: (e) => switch (e) {
+                _BarrierLabelKind.nil => 'null',
+                _BarrierLabelKind.dismiss => 'dismiss',
               },
-              onChanged: onBarrierLabelKind,
+              onChanged: (e) => onMark('barrierLabel ${e.name}', () => barrierLabelKind = e),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildDurationCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.timer_outlined),
-      title: '时长',
-      subtitle: 'transitionDuration · reverseTransitionDuration',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
           buildSlider(
             label: 'transitionDuration',
             value: durationMs,
             min: 0,
             max: 2000,
-            onChanged: onDurationMs,
+            onChanged: (v) => onMark('transitionDuration ${v.round()}ms', () => durationMs = v),
             durationLabel: true,
           ),
           buildSlider(
@@ -284,7 +264,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
             value: reverseDurationMs,
             min: 0,
             max: 2000,
-            onChanged: onReverseDurationMs,
+            onChanged: (v) => onMark('reverseTransitionDuration ${v.round()}ms', () => reverseDurationMs = v),
             durationLabel: true,
           ),
         ],
@@ -300,37 +280,32 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'maintainState', value: maintainState, onChanged: onMaintainState),
+          buildSwitch(
+            title: 'maintainState',
+            value: maintainState,
+            onChanged: (v) => onMark('maintainState $v', () => maintainState = v),
+          ),
           buildSwitch(
             title: 'fullscreenDialog',
             value: fullscreenDialog,
-            onChanged: onFullscreenDialog,
+            onChanged: (v) => onMark('fullscreenDialog $v', () => fullscreenDialog = v),
           ),
           buildSwitch(
             title: 'allowSnapshotting',
             value: allowSnapshotting,
-            onChanged: onAllowSnapshotting,
+            onChanged: (v) => onMark('allowSnapshotting $v', () => allowSnapshotting = v),
           ),
           buildField(
             label: 'requestFocus',
             showTopGap: true,
             child: buildChoiceChips(
-              values: _Tri.values,
-              isSelected: (e) => requestFocusKind == e,
-              labelOf: (e) {
-                switch (e) {
-                  case _Tri.nil:
-                    return 'null';
-                  case _Tri.yes:
-                    return 'true';
-                  case _Tri.no:
-                    return 'false';
-                }
-              },
-              onChanged: onRequestFocusKind,
+              values: const [null, true, false],
+              isSelected: (e) => requestFocus == e,
+              labelOf: (e) => e == null ? 'null' : '$e',
+              onChanged: (e) => onMark('requestFocus $e', () => requestFocus = e),
             ),
           ),
-          buildSwitch(title: 'settings', value: useSettings, onChanged: onUseSettings),
+          buildSwitch(title: 'settings', value: useSettings, onChanged: (v) => onMark('settings $v', () => useSettings = v)),
         ],
       ),
     );
@@ -356,7 +331,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,7 +359,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -419,7 +393,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -480,7 +454,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     required ValueChanged<double> onChanged,
     bool durationLabel = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -512,7 +485,6 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -530,61 +502,36 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
   }
 
   String nameOfKind(_TransitionKind kind) {
-    switch (kind) {
-      case _TransitionKind.openUpwards:
-        return 'OpenUpwards';
-      case _TransitionKind.zoom:
-        return 'Zoom';
-      case _TransitionKind.cupertino:
-        return 'Cupertino';
-      case _TransitionKind.fadeUpwards:
-        return 'FadeUpwards';
-      case _TransitionKind.none:
-        return 'none';
-      case _TransitionKind.predictiveBack:
-        return 'PredictiveBack';
-    }
+    return switch (kind) {
+      _TransitionKind.openUpwards => 'OpenUpwards',
+      _TransitionKind.zoom => 'Zoom',
+      _TransitionKind.cupertino => 'Cupertino',
+      _TransitionKind.fadeUpwards => 'FadeUpwards',
+      _TransitionKind.none => 'none',
+      _TransitionKind.predictiveBack => 'PredictiveBack',
+    };
   }
 
   PageTransitionsBuilder? pageTransitionsBuilderOf() {
-    switch (transitionKind) {
-      case _TransitionKind.openUpwards:
-        return const OpenUpwardsPageTransitionsBuilder();
-      case _TransitionKind.zoom:
-        return ZoomPageTransitionsBuilder(
+    return switch (transitionKind) {
+      _TransitionKind.openUpwards => const OpenUpwardsPageTransitionsBuilder(),
+      _TransitionKind.zoom => ZoomPageTransitionsBuilder(
           allowSnapshotting: zoomAllowSnapshotting,
           allowEnterRouteSnapshotting: zoomAllowEnterRouteSnapshotting,
           backgroundColor: zoomBackgroundColor,
-        );
-      case _TransitionKind.cupertino:
-        return const CupertinoPageTransitionsBuilder();
-      case _TransitionKind.fadeUpwards:
-        return const FadeUpwardsPageTransitionsBuilder();
-      case _TransitionKind.none:
-        return null;
-      case _TransitionKind.predictiveBack:
-        return const PredictiveBackPageTransitionsBuilder();
-    }
-  }
-
-  bool? requestFocusOf() {
-    switch (requestFocusKind) {
-      case _Tri.nil:
-        return null;
-      case _Tri.yes:
-        return true;
-      case _Tri.no:
-        return false;
-    }
+        ),
+      _TransitionKind.cupertino => const CupertinoPageTransitionsBuilder(),
+      _TransitionKind.fadeUpwards => const FadeUpwardsPageTransitionsBuilder(),
+      _TransitionKind.none => null,
+      _TransitionKind.predictiveBack => const PredictiveBackPageTransitionsBuilder(),
+    };
   }
 
   String? barrierLabelOf() {
-    switch (barrierLabelKind) {
-      case _BarrierLabelKind.nil:
-        return null;
-      case _BarrierLabelKind.dismiss:
-        return 'dismiss';
-    }
+    return switch (barrierLabelKind) {
+      _BarrierLabelKind.nil => null,
+      _BarrierLabelKind.dismiss => 'dismiss',
+    };
   }
 
   RouteSettings settingsOf() {
@@ -609,7 +556,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
           return buildNextPage();
         },
         settings: settingsOf(),
-        requestFocus: requestFocusOf(),
+        requestFocus: requestFocus,
         transitionDuration: Duration(milliseconds: durationMs.round()),
         reverseTransitionDuration: Duration(milliseconds: reverseDurationMs.round()),
         opaque: opaque,
@@ -629,78 +576,10 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     setState(() {});
   }
 
-  void onTransitionKind(_TransitionKind value) {
-    transitionKind = value;
-    setState(() {});
-  }
-
-  void onZoomAllowSnapshotting(bool value) {
-    zoomAllowSnapshotting = value;
-    setState(() {});
-  }
-
-  void onZoomAllowEnterRouteSnapshotting(bool value) {
-    zoomAllowEnterRouteSnapshotting = value;
-    setState(() {});
-  }
-
-  void onZoomBackgroundColor(Color? value) {
-    zoomBackgroundColor = value;
-    setState(() {});
-  }
-
-  void onDurationMs(double value) {
-    durationMs = value;
-    setState(() {});
-  }
-
-  void onReverseDurationMs(double value) {
-    reverseDurationMs = value;
-    setState(() {});
-  }
-
-  void onOpaque(bool value) {
-    opaque = value;
-    setState(() {});
-  }
-
-  void onBarrierDismissible(bool value) {
-    barrierDismissible = value;
-    setState(() {});
-  }
-
-  void onBarrierColor(Color? value) {
-    barrierColor = value;
-    setState(() {});
-  }
-
-  void onBarrierLabelKind(_BarrierLabelKind value) {
-    barrierLabelKind = value;
-    setState(() {});
-  }
-
-  void onMaintainState(bool value) {
-    maintainState = value;
-    setState(() {});
-  }
-
-  void onFullscreenDialog(bool value) {
-    fullscreenDialog = value;
-    setState(() {});
-  }
-
-  void onAllowSnapshotting(bool value) {
-    allowSnapshotting = value;
-    setState(() {});
-  }
-
-  void onRequestFocusKind(_Tri value) {
-    requestFocusKind = value;
-    setState(() {});
-  }
-
-  void onUseSettings(bool value) {
-    useSettings = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
@@ -718,7 +597,7 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     maintainState = true;
     fullscreenDialog = false;
     allowSnapshotting = true;
-    requestFocusKind = _Tri.nil;
+    requestFocus = null;
     useSettings = false;
     lastEvent = '—';
     setState(() {});

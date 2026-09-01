@@ -46,6 +46,7 @@ class ListTilePage extends StatefulWidget {
 
 class _ListTilePageState extends State<ListTilePage> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final focusNode = FocusNode();
@@ -154,7 +155,7 @@ class _ListTilePageState extends State<ListTilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -173,7 +174,7 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -206,7 +207,6 @@ class _ListTilePageState extends State<ListTilePage> {
                         },
                       ],
                     ),
-                    buildKindCard(),
                     buildTileCard(),
                     if (kind != _TileKind.listTile) buildControlCard(),
                   ],
@@ -220,7 +220,6 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final previewHeight = switch (kind) {
       _TileKind.gallery => 360.0,
@@ -347,10 +346,14 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildSwitchTile({required bool adaptive}) {
+    final title = Text(kind == _TileKind.gallery
+        ? (adaptive ? 'SwitchListTile.adaptive' : 'SwitchListTile')
+        : titleText);
+    final onChanged = onChangedOf<bool>((v) => onMark('Switch $v', () => switchValue = v));
     if (adaptive) {
       return SwitchListTile.adaptive(
         value: switchValue,
-        onChanged: onChangedOf(onSwitch),
+        onChanged: onChanged,
         activeColor: activeColor,
         dragStartBehavior: dragStartBehavior,
         materialTapTargetSize: materialTapTargetSize,
@@ -358,7 +361,7 @@ class _ListTilePageState extends State<ListTilePage> {
         autofocus: autofocus,
         applyCupertinoTheme: applyCupertinoTheme,
         tileColor: tileColor,
-        title: Text(kind == _TileKind.gallery ? 'SwitchListTile.adaptive' : titleText),
+        title: title,
         subtitle: subtitleOf(),
         isThreeLine: isThreeLine,
         dense: dense,
@@ -375,14 +378,14 @@ class _ListTilePageState extends State<ListTilePage> {
     }
     return SwitchListTile(
       value: switchValue,
-      onChanged: onChangedOf(onSwitch),
+      onChanged: onChanged,
       activeColor: activeColor,
       dragStartBehavior: dragStartBehavior,
       materialTapTargetSize: materialTapTargetSize,
       focusNode: useFocusNode ? focusNode : null,
       autofocus: autofocus,
       tileColor: tileColor,
-      title: Text(kind == _TileKind.gallery ? 'SwitchListTile' : titleText),
+      title: title,
       subtitle: subtitleOf(),
       isThreeLine: isThreeLine,
       dense: dense,
@@ -399,10 +402,14 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   Widget buildCheckboxTile({required bool adaptive}) {
+    final title = Text(kind == _TileKind.gallery
+        ? (adaptive ? 'CheckboxListTile.adaptive' : 'CheckboxListTile')
+        : titleText);
+    final onChanged = onChangedOf<bool?>((v) => onMark('Checkbox $v', () => checkboxValue = v));
     if (adaptive) {
       return CheckboxListTile.adaptive(
         value: checkboxValue,
-        onChanged: onChangedOf(onCheckbox),
+        onChanged: onChanged,
         activeColor: activeColor,
         checkColor: checkColor,
         hoverColor: hoverColor,
@@ -414,7 +421,7 @@ class _ListTilePageState extends State<ListTilePage> {
         isError: isError,
         enabled: enabled,
         tileColor: tileColor,
-        title: Text(kind == _TileKind.gallery ? 'CheckboxListTile.adaptive' : titleText),
+        title: title,
         subtitle: subtitleOf(),
         isThreeLine: isThreeLine,
         dense: dense,
@@ -430,7 +437,7 @@ class _ListTilePageState extends State<ListTilePage> {
     }
     return CheckboxListTile(
       value: checkboxValue,
-      onChanged: onChangedOf(onCheckbox),
+      onChanged: onChanged,
       activeColor: activeColor,
       checkColor: checkColor,
       hoverColor: hoverColor,
@@ -442,7 +449,7 @@ class _ListTilePageState extends State<ListTilePage> {
       isError: isError,
       enabled: enabled,
       tileColor: tileColor,
-      title: Text(kind == _TileKind.gallery ? 'CheckboxListTile' : titleText),
+      title: title,
       subtitle: subtitleOf(),
       isThreeLine: isThreeLine,
       dense: dense,
@@ -459,6 +466,7 @@ class _ListTilePageState extends State<ListTilePage> {
 
   List<Widget> buildRadioTiles({required bool adaptive}) {
     const options = ['A', 'B'];
+    final onChanged = onChangedOf<String?>((v) => onMark('Radio $v', () => radioGroup = v));
     return options.map((e) {
       final title = kind == _TileKind.gallery || kind == _TileKind.radio || kind == _TileKind.radioAdaptive
           ? 'RadioListTile $e'
@@ -467,7 +475,7 @@ class _ListTilePageState extends State<ListTilePage> {
         return RadioListTile<String>.adaptive(
           value: e,
           groupValue: radioGroup,
-          onChanged: onChangedOf(onRadio),
+          onChanged: onChanged,
           toggleable: toggleable,
           activeColor: activeColor,
           hoverColor: hoverColor,
@@ -493,7 +501,7 @@ class _ListTilePageState extends State<ListTilePage> {
       return RadioListTile<String>(
         value: e,
         groupValue: radioGroup,
-        onChanged: onChangedOf(onRadio),
+        onChanged: onChanged,
         toggleable: toggleable,
         activeColor: activeColor,
         hoverColor: hoverColor,
@@ -522,7 +530,7 @@ class _ListTilePageState extends State<ListTilePage> {
     final hi = sliderMax >= sliderMin ? sliderMax : sliderMin;
     return NSliderListTile(
       value: sliderValue.clamp(lo, hi),
-      onChanged: enabled && useOnChanged ? onSlider : null,
+      onChanged: enabled && useOnChanged ? (v) => onMark('Slider ${v.toStringAsFixed(2)}', () => sliderValue = v) : null,
       min: lo,
       max: hi,
       activeColor: activeColor,
@@ -574,16 +582,17 @@ class _ListTilePageState extends State<ListTilePage> {
             padding: padding,
           );
     return CupertinoTheme(
-      data: CupertinoThemeData(brightness: Theme.of(context).brightness),
+      data: CupertinoThemeData(brightness: theme.brightness),
       child: tile,
     );
   }
 
-  Widget buildKindCard() {
+  Widget buildTileCard() {
+    final showListStyle = kind == _TileKind.listTile || kind == _TileKind.gallery;
     return NDecorationCard(
-      icon: const Icon(Icons.view_agenda_outlined),
-      title: '样式',
-      subtitle: 'gallery  ListTile  Switch  Checkbox  Radio  Slider  Cupertino',
+      icon: const Icon(Icons.tune_outlined),
+      title: '属性',
+      subtitle: 'kind · title · dense · selected · shape',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -594,20 +603,6 @@ class _ListTilePageState extends State<ListTilePage> {
             labelOf: nameOfKind,
             onChanged: (e) => onMark('kind ${nameOfKind(e)}', () => kind = e),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildTileCard() {
-    final showListStyle = kind == _TileKind.listTile || kind == _TileKind.gallery;
-    return NDecorationCard(
-      icon: const Icon(Icons.tune_outlined),
-      title: '共用',
-      subtitle: 'title  subtitle  dense  selected  padding  shape',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
           const Text('title'),
           buildChoiceChips(
             values: const ['标题', '消息通知', '同步'],
@@ -709,26 +704,24 @@ class _ListTilePageState extends State<ListTilePage> {
               onChanged: (v) => onMark('shapeRadius ${v.round()}', () => shapeRadius = v),
             ),
           if (kind != _TileKind.cupertino) ...[
-          if (kind != _TileKind.cupertino &&
-              kind != _TileKind.listTile &&
-              kind != _TileKind.slider) ...[
-            const Text('controlAffinity'),
-            buildChoiceChips(
-              values: [null, ...ListTileControlAffinity.values],
-              value: controlAffinity,
-              labelOf: (e) => e?.name ?? '默',
-              onChanged: (e) => onMark('controlAffinity ${e?.name ?? 'null'}', () => controlAffinity = e),
-            ),
-          ],
-          if (kind == _TileKind.listTile || kind == _TileKind.slider || kind == _TileKind.gallery) ...[
-            const Text('titleAlignment'),
-            buildChoiceChips(
-              values: [null, ...ListTileTitleAlignment.values],
-              value: titleAlignment,
-              labelOf: (e) => e?.name ?? '默',
-              onChanged: (e) => onMark('titleAlignment ${e?.name ?? 'null'}', () => titleAlignment = e),
-            ),
-          ],
+            if (kind != _TileKind.listTile && kind != _TileKind.slider) ...[
+              const Text('controlAffinity'),
+              buildChoiceChips(
+                values: [null, ...ListTileControlAffinity.values],
+                value: controlAffinity,
+                labelOf: (e) => e?.name ?? '默',
+                onChanged: (e) => onMark('controlAffinity ${e?.name ?? 'null'}', () => controlAffinity = e),
+              ),
+            ],
+            if (kind == _TileKind.listTile || kind == _TileKind.slider || kind == _TileKind.gallery) ...[
+              const Text('titleAlignment'),
+              buildChoiceChips(
+                values: [null, ...ListTileTitleAlignment.values],
+                value: titleAlignment,
+                labelOf: (e) => e?.name ?? '默',
+                onChanged: (e) => onMark('titleAlignment ${e?.name ?? 'null'}', () => titleAlignment = e),
+              ),
+            ],
             const Text('visualDensity'),
             buildChoiceChips(
               values: const [null, VisualDensity.standard, VisualDensity.comfortable, VisualDensity.compact],
@@ -965,19 +958,13 @@ class _ListTilePageState extends State<ListTilePage> {
   }
 
   String nameOfDensity(VisualDensity? value) {
-    if (value == null) {
-      return '默';
-    }
-    if (value == VisualDensity.standard) {
-      return 'standard';
-    }
-    if (value == VisualDensity.comfortable) {
-      return 'comfortable';
-    }
-    if (value == VisualDensity.compact) {
-      return 'compact';
-    }
-    return '$value';
+    return switch (value) {
+      null => '默',
+      _ when value == VisualDensity.standard => 'standard',
+      _ when value == VisualDensity.comfortable => 'comfortable',
+      _ when value == VisualDensity.compact => 'compact',
+      _ => '$value',
+    };
   }
 
   Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
@@ -996,7 +983,7 @@ class _ListTilePageState extends State<ListTilePage> {
     required String Function(T) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -1030,7 +1017,7 @@ class _ListTilePageState extends State<ListTilePage> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -1073,7 +1060,7 @@ class _ListTilePageState extends State<ListTilePage> {
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
       contentPadding: EdgeInsets.zero,
@@ -1112,22 +1099,6 @@ class _ListTilePageState extends State<ListTilePage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('onTap $name'), duration: const Duration(milliseconds: 800)),
     );
-  }
-
-  void onSwitch(bool value) {
-    onMark('Switch $value', () => switchValue = value);
-  }
-
-  void onCheckbox(bool? value) {
-    onMark('Checkbox $value', () => checkboxValue = value);
-  }
-
-  void onRadio(String? value) {
-    onMark('Radio $value', () => radioGroup = value);
-  }
-
-  void onSlider(double value) {
-    onMark('Slider ${value.toStringAsFixed(2)}', () => sliderValue = value);
   }
 
   void onReset() {

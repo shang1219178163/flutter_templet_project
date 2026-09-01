@@ -10,9 +10,6 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/app_color.dart';
 import 'package:get/get.dart';
 
-/// 可空 bool
-enum _Tri { nil, yes, no }
-
 /// 键盘类型，auto 表示交给构造函数推断
 enum _KeyboardKind {
   auto,
@@ -66,6 +63,7 @@ class EditableTextDemo extends StatefulWidget {
 
 class _EditableTextDemoState extends State<EditableTextDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   /// 预览区初始文本
   static const _sampleText = 'Hello EditableText';
@@ -129,7 +127,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   /// 是否自动聚焦
   bool autofocus = false;
   /// 是否显示光标
-  _Tri showCursorKind = _Tri.nil;
+  bool? showCursor;
   /// 是否显示选区手柄
   bool showSelectionHandles = false;
   /// 选区颜色
@@ -173,7 +171,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   /// 拖动手势起点
   DragStartBehavior dragStartBehavior = DragStartBehavior.start;
   /// 是否可交互
-  _Tri interactiveKind = _Tri.nil;
+  bool? enableInteractiveSelection;
   /// 是否传入 scrollController
   bool useScrollController = false;
   /// 滚动物理
@@ -217,7 +215,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -236,7 +234,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -271,19 +269,11 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                               'obscureText forces maxLines=1. expands requires maxLines and minLines to be null.',
                           NLangEnum.zh: 'obscureText 为 true 时强制 maxLines=1；expands 为 true 时 maxLines/minLines 必须为 null。',
                         },
-                        {
-                          NLangEnum.en:
-                              'onChanged / onEditingComplete / onSubmitted / onSelectionChanged / onTapOutside update lastEvent.',
-                          NLangEnum.zh:
-                              'onChanged / onEditingComplete / onSubmitted / onSelectionChanged / onTapOutside 会更新 lastEvent。',
-                        },
                       ],
                     ),
-                    buildConstructCard(),
-                    buildStyleCard(),
-                    buildCursorCard(),
+                    buildInputCard(),
+                    buildLookCard(),
                     buildLayoutCard(),
-                    buildBehaviorCard(),
                   ],
                 ),
               ),
@@ -295,7 +285,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final arguments = ModalRoute.of(context)?.settings.arguments;
     final lines = maxLinesOf();
@@ -381,18 +370,19 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       textHeightBehavior: textHeightBehaviorOf(),
       textWidthBasis: textWidthBasis,
       autofocus: autofocus,
-      showCursor: showCursorOf(),
+      showCursor: showCursor,
       showSelectionHandles: showSelectionHandles,
       selectionColor: selectionColor,
       keyboardType: keyboardTypeOf(),
       textInputAction: textInputActionOf(),
       textCapitalization: textCapitalization,
-      onChanged: onChanged,
-      onEditingComplete: onEditingComplete,
-      onSubmitted: onSubmitted,
-      onAppPrivateCommand: onAppPrivateCommand,
-      onSelectionChanged: onSelectionChanged,
-      onSelectionHandleTapped: onSelectionHandleTapped,
+      onChanged: (v) => onMark('onChanged $v'),
+      onEditingComplete: () => onMark('onEditingComplete'),
+      onSubmitted: (v) => onMark('onSubmitted $v'),
+      onAppPrivateCommand: (action, data) => onMark('onAppPrivateCommand $action'),
+      onSelectionChanged: (selection, cause) =>
+          onMark('onSelectionChanged ${cause?.name} ${selection.baseOffset}-${selection.extentOffset}'),
+      onSelectionHandleTapped: () => onMark('onSelectionHandleTapped'),
       groupId: useCustomGroupId ? this : EditableText,
       onTapOutside: onTapOutside,
       inputFormatters: inputFormattersOf(),
@@ -409,7 +399,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       scrollPadding: EdgeInsets.all(scrollPadding),
       keyboardAppearance: keyboardAppearance,
       dragStartBehavior: dragStartBehavior,
-      enableInteractiveSelection: enableInteractiveSelectionOf(),
+      enableInteractiveSelection: enableInteractiveSelection,
       scrollController: useScrollController ? fieldScrollController : null,
       scrollPhysics: scrollPhysicsOf(),
       autocorrectionTextRectColor: autocorrectionTextRectColor,
@@ -425,15 +415,19 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     );
   }
 
-  Widget buildConstructCard() {
+  Widget buildInputCard() {
     return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
-      title: '构造',
+      title: '输入',
       subtitle: 'readOnly · obscureText · keyboardType · inputFormatters',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'readOnly', value: readOnly, onChanged: onReadOnly),
+          buildSwitch(
+            title: 'readOnly',
+            value: readOnly,
+            onChanged: (v) => onMark('readOnly $v', () => readOnly = v),
+          ),
           buildSwitch(title: 'obscureText', value: obscureText, onChanged: onObscureText),
           if (obscureText)
             buildField(
@@ -443,11 +437,19 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                 values: const ['•', '*', '●'],
                 isSelected: (e) => obscuringCharacter == e,
                 labelOf: (e) => e,
-                onChanged: onObscuringCharacter,
+                onChanged: (v) => onMark('obscuringCharacter $v', () => obscuringCharacter = v),
               ),
             ),
-          buildSwitch(title: 'autocorrect', value: autocorrect, onChanged: onAutocorrect),
-          buildSwitch(title: 'enableSuggestions', value: enableSuggestions, onChanged: onEnableSuggestions),
+          buildSwitch(
+            title: 'autocorrect',
+            value: autocorrect,
+            onChanged: (v) => onMark('autocorrect $v', () => autocorrect = v),
+          ),
+          buildSwitch(
+            title: 'enableSuggestions',
+            value: enableSuggestions,
+            onChanged: (v) => onMark('enableSuggestions $v', () => enableSuggestions = v),
+          ),
           buildField(
             label: 'smartDashesType',
             showTopGap: true,
@@ -455,7 +457,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: SmartDashesType.values,
               isSelected: (e) => smartDashesType == e,
               labelOf: (e) => e.name,
-              onChanged: onSmartDashesType,
+              onChanged: (e) => onMark('smartDashesType ${e.name}', () => smartDashesType = e),
             ),
           ),
           buildField(
@@ -465,7 +467,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: SmartQuotesType.values,
               isSelected: (e) => smartQuotesType == e,
               labelOf: (e) => e.name,
-              onChanged: onSmartQuotesType,
+              onChanged: (e) => onMark('smartQuotesType ${e.name}', () => smartQuotesType = e),
             ),
           ),
           buildField(
@@ -475,7 +477,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _KeyboardKind.values,
               isSelected: (e) => keyboardKind == e,
               labelOf: (e) => e.name,
-              onChanged: onKeyboardKind,
+              onChanged: (e) => onMark('keyboardType ${e.name}', () => keyboardKind = e),
             ),
           ),
           buildField(
@@ -485,7 +487,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _ActionKind.values,
               isSelected: (e) => actionKind == e,
               labelOf: (e) => e.name,
-              onChanged: onActionKind,
+              onChanged: (e) => onMark('textInputAction ${e.name}', () => actionKind = e),
             ),
           ),
           buildField(
@@ -495,7 +497,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: TextCapitalization.values,
               isSelected: (e) => textCapitalization == e,
               labelOf: (e) => e.name,
-              onChanged: onTextCapitalization,
+              onChanged: (e) => onMark('textCapitalization ${e.name}', () => textCapitalization = e),
             ),
           ),
           buildField(
@@ -505,7 +507,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _AutofillKind.values,
               isSelected: (e) => autofillKind == e,
               labelOf: (e) => e.name,
-              onChanged: onAutofillKind,
+              onChanged: (e) => onMark('autofillHints ${e.name}', () => autofillKind = e),
             ),
           ),
           buildField(
@@ -515,7 +517,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _FormatterKind.values,
               isSelected: (e) => formatterKind == e,
               labelOf: (e) => e.name,
-              onChanged: onFormatterKind,
+              onChanged: (e) => onMark('inputFormatters ${e.name}', () => formatterKind = e),
             ),
           ),
         ],
@@ -523,19 +525,28 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     );
   }
 
-  Widget buildStyleCard() {
+  Widget buildLookCard() {
     return NDecorationCard(
       icon: const Icon(Icons.text_fields_rounded),
-      title: '样式',
-      subtitle: 'style · textAlign · textScaler · strutStyle',
+      title: '外观',
+      subtitle: 'style · textAlign · cursorColor · selectionColor',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(label: 'style.fontSize', value: fontSize, min: 10, max: 32, onChanged: onFontSize),
+          buildSlider(
+            label: 'style.fontSize',
+            value: fontSize,
+            min: 10,
+            max: 32,
+            onChanged: (v) => onMark('style.fontSize ${v.round()}', () => fontSize = v),
+          ),
           buildField(
             label: 'style.color',
             showTopGap: true,
-            child: buildColorDots(value: styleColor, onChanged: onStyleColor),
+            child: buildColorDots(
+              value: styleColor,
+              onChanged: (v) => onMark('style.color ${v ?? 'null'}', () => styleColor = v),
+            ),
           ),
           buildField(
             label: 'style.fontWeight',
@@ -544,7 +555,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: const [FontWeight.w300, FontWeight.w400, FontWeight.w500, FontWeight.w600, FontWeight.w700],
               isSelected: (e) => fontWeight == e,
               labelOf: (e) => e.toString().split('.').last,
-              onChanged: onFontWeight,
+              onChanged: (e) => onMark('style.fontWeight ${e.toString().split('.').last}', () => fontWeight = e),
             ),
           ),
           buildField(
@@ -554,7 +565,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: TextAlign.values,
               isSelected: (e) => textAlign == e,
               labelOf: (e) => e.name,
-              onChanged: onTextAlign,
+              onChanged: (e) => onMark('textAlign ${e.name}', () => textAlign = e),
             ),
           ),
           buildField(
@@ -564,7 +575,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _DirKind.values,
               isSelected: (e) => dirKind == e,
               labelOf: (e) => e.name,
-              onChanged: onDirKind,
+              onChanged: (e) => onMark('textDirection ${e.name}', () => dirKind = e),
             ),
           ),
           buildField(
@@ -574,7 +585,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _LocaleKind.values,
               isSelected: (e) => localeKind == e,
               labelOf: (e) => e.name,
-              onChanged: onLocaleKind,
+              onChanged: (e) => onMark('locale ${e.name}', () => localeKind = e),
             ),
           ),
           buildField(
@@ -584,7 +595,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _ScalerKind.values,
               isSelected: (e) => scalerKind == e,
               labelOf: (e) => e.name,
-              onChanged: onScalerKind,
+              onChanged: (e) => onMark('textScaler ${e.name}', () => scalerKind = e),
             ),
           ),
           if (scalerKind == _ScalerKind.linear)
@@ -593,7 +604,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               value: scalerFactor,
               min: 0.5,
               max: 2.5,
-              onChanged: onScalerFactor,
+              onChanged: (v) => onMark('textScaler.linear ${v.toStringAsFixed(2)}', () => scalerFactor = v),
               fractionDigits: 2,
             ),
           buildField(
@@ -603,7 +614,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _StrutKind.values,
               isSelected: (e) => strutKind == e,
               labelOf: (e) => e.name,
-              onChanged: onStrutKind,
+              onChanged: (e) => onMark('strutStyle ${e.name}', () => strutKind = e),
             ),
           ),
           buildField(
@@ -613,104 +624,128 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: TextWidthBasis.values,
               isSelected: (e) => textWidthBasis == e,
               labelOf: (e) => e.name,
-              onChanged: onTextWidthBasis,
+              onChanged: (e) => onMark('textWidthBasis ${e.name}', () => textWidthBasis = e),
             ),
           ),
-          buildSwitch(title: 'forceLine', value: forceLine, onChanged: onForceLine),
+          buildSwitch(
+            title: 'forceLine',
+            value: forceLine,
+            onChanged: (v) => onMark('forceLine $v', () => forceLine = v),
+          ),
           buildSwitch(
             title: 'textHeightBehavior',
             value: useTextHeightBehavior,
-            onChanged: onUseTextHeightBehavior,
+            onChanged: (v) => onMark('textHeightBehavior $v', () => useTextHeightBehavior = v),
           ),
           if (useTextHeightBehavior) ...[
             buildSwitch(
               title: 'applyHeightToFirstAscent',
               value: applyHeightToFirstAscent,
-              onChanged: onApplyHeightToFirstAscent,
+              onChanged: (v) => onMark('applyHeightToFirstAscent $v', () => applyHeightToFirstAscent = v),
             ),
             buildSwitch(
               title: 'applyHeightToLastDescent',
               value: applyHeightToLastDescent,
-              onChanged: onApplyHeightToLastDescent,
+              onChanged: (v) => onMark('applyHeightToLastDescent $v', () => applyHeightToLastDescent = v),
             ),
           ],
-        ],
-      ),
-    );
-  }
-
-  Widget buildCursorCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.highlight_alt_rounded),
-      title: '光标与选区',
-      subtitle: 'cursorColor · selectionColor · showCursor',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
           buildField(
             label: 'cursorColor',
-            child: buildColorDots(value: cursorColor, onChanged: onCursorColor, allowNull: false),
+            showTopGap: true,
+            child: buildColorDots(
+              value: cursorColor,
+              onChanged: (v) => onMark('cursorColor $v', () => cursorColor = v ?? Colors.blue),
+              allowNull: false,
+            ),
           ),
           buildField(
             label: 'backgroundCursorColor',
             showTopGap: true,
             child: buildColorDots(
               value: backgroundCursorColor,
-              onChanged: onBackgroundCursorColor,
+              onChanged: (v) => onMark('backgroundCursorColor $v', () => backgroundCursorColor = v ?? Colors.grey),
               allowNull: false,
             ),
           ),
           buildField(
             label: 'selectionColor',
             showTopGap: true,
-            child: buildColorDots(value: selectionColor, onChanged: onSelectionColor),
+            child: buildColorDots(
+              value: selectionColor,
+              onChanged: (v) => onMark('selectionColor ${v ?? 'null'}', () => selectionColor = v),
+            ),
           ),
           buildField(
             label: 'autocorrectionTextRectColor',
             showTopGap: true,
-            child: buildColorDots(value: autocorrectionTextRectColor, onChanged: onAutocorrectionTextRectColor),
+            child: buildColorDots(
+              value: autocorrectionTextRectColor,
+              onChanged: (v) => onMark('autocorrectionTextRectColor ${v ?? 'null'}', () => autocorrectionTextRectColor = v),
+            ),
           ),
           buildField(
             label: 'showCursor',
             showTopGap: true,
             child: buildChoiceChips(
-              values: _Tri.values,
-              isSelected: (e) => showCursorKind == e,
-              labelOf: nameOfTri,
-              onChanged: onShowCursorKind,
+              values: const [null, true, false],
+              isSelected: (e) => showCursor == e,
+              labelOf: (e) => e == null ? '默' : '$e',
+              onChanged: (e) => onMark('showCursor ${e ?? 'null'}', () => showCursor = e),
             ),
           ),
           buildSwitch(
             title: 'showSelectionHandles',
             value: showSelectionHandles,
-            onChanged: onShowSelectionHandles,
+            onChanged: (v) => onMark('showSelectionHandles $v', () => showSelectionHandles = v),
           ),
           buildField(
             label: 'enableInteractiveSelection',
             showTopGap: true,
             child: buildChoiceChips(
-              values: _Tri.values,
-              isSelected: (e) => interactiveKind == e,
-              labelOf: nameOfTri,
-              onChanged: onInteractiveKind,
+              values: const [null, true, false],
+              isSelected: (e) => enableInteractiveSelection == e,
+              labelOf: (e) => e == null ? '默' : '$e',
+              onChanged: (e) => onMark('enableInteractiveSelection ${e ?? 'null'}', () => enableInteractiveSelection = e),
             ),
           ),
-          buildSlider(label: 'cursorWidth', value: cursorWidth, min: 1, max: 8, onChanged: onCursorWidth),
-          buildSlider(label: 'cursorHeight', value: cursorHeight, min: 0, max: 48, onChanged: onCursorHeight),
-          buildSlider(label: 'cursorRadius', value: cursorRadius, min: 0, max: 12, onChanged: onCursorRadius),
+          buildSlider(
+            label: 'cursorWidth',
+            value: cursorWidth,
+            min: 1,
+            max: 8,
+            onChanged: (v) => onMark('cursorWidth ${v.round()}', () => cursorWidth = v),
+          ),
+          buildSlider(
+            label: 'cursorHeight',
+            value: cursorHeight,
+            min: 0,
+            max: 48,
+            onChanged: (v) => onMark('cursorHeight ${v.round()}', () => cursorHeight = v),
+          ),
+          buildSlider(
+            label: 'cursorRadius',
+            value: cursorRadius,
+            min: 0,
+            max: 12,
+            onChanged: (v) => onMark('cursorRadius ${v.round()}', () => cursorRadius = v),
+          ),
           buildSwitch(
             title: 'cursorOpacityAnimates',
             value: cursorOpacityAnimates,
-            onChanged: onCursorOpacityAnimates,
+            onChanged: (v) => onMark('cursorOpacityAnimates $v', () => cursorOpacityAnimates = v),
           ),
-          buildSwitch(title: 'cursorOffset', value: useCursorOffset, onChanged: onUseCursorOffset),
+          buildSwitch(
+            title: 'cursorOffset',
+            value: useCursorOffset,
+            onChanged: (v) => onMark('cursorOffset $v', () => useCursorOffset = v),
+          ),
           if (useCursorOffset) ...[
             buildSlider(
               label: 'cursorOffset.dx',
               value: cursorOffsetDx,
               min: -8,
               max: 8,
-              onChanged: onCursorOffsetDx,
+              onChanged: (v) => onMark('cursorOffset.dx ${v.toStringAsFixed(1)}', () => cursorOffsetDx = v),
               fractionDigits: 1,
             ),
             buildSlider(
@@ -718,14 +753,14 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               value: cursorOffsetDy,
               min: -8,
               max: 8,
-              onChanged: onCursorOffsetDy,
+              onChanged: (v) => onMark('cursorOffset.dy ${v.toStringAsFixed(1)}', () => cursorOffsetDy = v),
               fractionDigits: 1,
             ),
           ],
           buildSwitch(
             title: 'paintCursorAboveText',
             value: paintCursorAboveText,
-            onChanged: onPaintCursorAboveText,
+            onChanged: (v) => onMark('paintCursorAboveText $v', () => paintCursorAboveText = v),
           ),
           buildField(
             label: 'selectionHeightStyle',
@@ -734,7 +769,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: BoxHeightStyle.values,
               isSelected: (e) => selectionHeightStyle == e,
               labelOf: (e) => e.name,
-              onChanged: onSelectionHeightStyle,
+              onChanged: (e) => onMark('selectionHeightStyle ${e.name}', () => selectionHeightStyle = e),
             ),
           ),
           buildField(
@@ -744,7 +779,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: BoxWidthStyle.values,
               isSelected: (e) => selectionWidthStyle == e,
               labelOf: (e) => e.name,
-              onChanged: onSelectionWidthStyle,
+              onChanged: (e) => onMark('selectionWidthStyle ${e.name}', () => selectionWidthStyle = e),
             ),
           ),
         ],
@@ -755,8 +790,8 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   Widget buildLayoutCard() {
     return NDecorationCard(
       icon: const Icon(Icons.space_dashboard_rounded),
-      title: '布局',
-      subtitle: 'maxLines · minLines · expands · clipBehavior',
+      title: '布局与行为',
+      subtitle: 'maxLines · expands · autofocus · magnifier · undoController',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -765,7 +800,13 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
             buildSlider(label: 'maxLines', value: maxLines, min: 0, max: 8, onChanged: onMaxLines),
           if (!expands && !obscureText)
             buildSlider(label: 'minLines', value: minLines, min: 0, max: 8, onChanged: onMinLines),
-          buildSlider(label: 'scrollPadding', value: scrollPadding, min: 0, max: 48, onChanged: onScrollPadding),
+          buildSlider(
+            label: 'scrollPadding',
+            value: scrollPadding,
+            min: 0,
+            max: 48,
+            onChanged: (v) => onMark('scrollPadding ${v.round()}', () => scrollPadding = v),
+          ),
           buildField(
             label: 'clipBehavior',
             showTopGap: true,
@@ -773,7 +814,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: Clip.values,
               isSelected: (e) => clipBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onClipBehavior,
+              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
             ),
           ),
           buildField(
@@ -783,45 +824,64 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _PhysicsKind.values,
               isSelected: (e) => physicsKind == e,
               labelOf: (e) => e.name,
-              onChanged: onPhysicsKind,
+              onChanged: (e) => onMark('scrollPhysics ${e.name}', () => physicsKind = e),
             ),
           ),
           buildSwitch(
             title: 'scrollController',
             value: useScrollController,
-            onChanged: onUseScrollController,
+            onChanged: (v) => onMark('scrollController $v', () => useScrollController = v),
           ),
           buildSwitch(
             title: 'scrollBehavior',
             value: useScrollBehavior,
-            onChanged: onUseScrollBehavior,
+            onChanged: (v) => onMark('scrollBehavior $v', () => useScrollBehavior = v),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildBehaviorCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.tune_rounded),
-      title: '行为',
-      subtitle: 'autofocus · magnifier · undoController · onChanged',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildSwitch(title: 'autofocus', value: autofocus, onChanged: onAutofocus),
-          buildSwitch(title: 'rendererIgnoresPointer', value: rendererIgnoresPointer, onChanged: onRendererIgnoresPointer),
-          buildSwitch(title: 'scribbleEnabled', value: scribbleEnabled, onChanged: onScribbleEnabled),
+          buildSwitch(
+            title: 'autofocus',
+            value: autofocus,
+            onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
+          ),
+          buildSwitch(
+            title: 'rendererIgnoresPointer',
+            value: rendererIgnoresPointer,
+            onChanged: (v) => onMark('rendererIgnoresPointer $v', () => rendererIgnoresPointer = v),
+          ),
+          buildSwitch(
+            title: 'scribbleEnabled',
+            value: scribbleEnabled,
+            onChanged: (v) => onMark('scribbleEnabled $v', () => scribbleEnabled = v),
+          ),
           buildSwitch(
             title: 'enableIMEPersonalizedLearning',
             value: enableIMEPersonalizedLearning,
-            onChanged: onEnableIMEPersonalizedLearning,
+            onChanged: (v) => onMark('enableIMEPersonalizedLearning $v', () => enableIMEPersonalizedLearning = v),
           ),
-          buildSwitch(title: 'contextMenuBuilder', value: useContextMenu, onChanged: onUseContextMenu),
-          buildSwitch(title: 'magnifierConfiguration', value: useMagnifier, onChanged: onUseMagnifier),
-          buildSwitch(title: 'undoController', value: useUndoController, onChanged: onUseUndoController),
-          buildSwitch(title: 'restorationId', value: useRestorationId, onChanged: onUseRestorationId),
-          buildSwitch(title: 'groupId 自定义', value: useCustomGroupId, onChanged: onUseCustomGroupId),
+          buildSwitch(
+            title: 'contextMenuBuilder',
+            value: useContextMenu,
+            onChanged: (v) => onMark('contextMenuBuilder $v', () => useContextMenu = v),
+          ),
+          buildSwitch(
+            title: 'magnifierConfiguration',
+            value: useMagnifier,
+            onChanged: (v) => onMark('magnifierConfiguration $v', () => useMagnifier = v),
+          ),
+          buildSwitch(
+            title: 'undoController',
+            value: useUndoController,
+            onChanged: (v) => onMark('undoController $v', () => useUndoController = v),
+          ),
+          buildSwitch(
+            title: 'restorationId',
+            value: useRestorationId,
+            onChanged: (v) => onMark('restorationId $v', () => useRestorationId = v),
+          ),
+          buildSwitch(
+            title: 'groupId 自定义',
+            value: useCustomGroupId,
+            onChanged: (v) => onMark('groupId $v', () => useCustomGroupId = v),
+          ),
           buildField(
             label: 'mouseCursor',
             showTopGap: true,
@@ -829,7 +889,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: _MouseKind.values,
               isSelected: (e) => mouseKind == e,
               labelOf: (e) => e.name,
-              onChanged: onMouseKind,
+              onChanged: (e) => onMark('mouseCursor ${e.name}', () => mouseKind = e),
             ),
           ),
           buildField(
@@ -839,7 +899,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: Brightness.values,
               isSelected: (e) => keyboardAppearance == e,
               labelOf: (e) => e.name,
-              onChanged: onKeyboardAppearance,
+              onChanged: (e) => onMark('keyboardAppearance ${e.name}', () => keyboardAppearance = e),
             ),
           ),
           buildField(
@@ -849,7 +909,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
               values: DragStartBehavior.values,
               isSelected: (e) => dragStartBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onDragStartBehavior,
+              onChanged: (e) => onMark('dragStartBehavior ${e.name}', () => dragStartBehavior = e),
             ),
           ),
         ],
@@ -862,7 +922,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -891,7 +950,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -926,7 +985,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     required ValueChanged<Color?> onChanged,
     bool allowNull = true,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -987,7 +1046,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     required ValueChanged<double> onChanged,
     int fractionDigits = 0,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -1017,7 +1075,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -1041,7 +1098,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   TextStyle styleOf() {
-    final theme = Theme.of(context);
     return (theme.textTheme.bodyLarge ?? const TextStyle()).copyWith(
       fontSize: fontSize,
       color: styleColor,
@@ -1071,70 +1127,36 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     return min;
   }
 
-  bool? showCursorOf() {
-    switch (showCursorKind) {
-      case _Tri.nil:
-        return null;
-      case _Tri.yes:
-        return true;
-      case _Tri.no:
-        return false;
-    }
-  }
-
-  bool? enableInteractiveSelectionOf() {
-    switch (interactiveKind) {
-      case _Tri.nil:
-        return null;
-      case _Tri.yes:
-        return true;
-      case _Tri.no:
-        return false;
-    }
-  }
-
   TextDirection? textDirectionOf() {
-    switch (dirKind) {
-      case _DirKind.nil:
-        return null;
-      case _DirKind.ltr:
-        return TextDirection.ltr;
-      case _DirKind.rtl:
-        return TextDirection.rtl;
-    }
+    return switch (dirKind) {
+      _DirKind.nil => null,
+      _DirKind.ltr => TextDirection.ltr,
+      _DirKind.rtl => TextDirection.rtl,
+    };
   }
 
   Locale? localeOf() {
-    switch (localeKind) {
-      case _LocaleKind.nil:
-        return null;
-      case _LocaleKind.en:
-        return const Locale('en');
-      case _LocaleKind.zh:
-        return const Locale('zh');
-    }
+    return switch (localeKind) {
+      _LocaleKind.nil => null,
+      _LocaleKind.en => const Locale('en'),
+      _LocaleKind.zh => const Locale('zh'),
+    };
   }
 
   TextScaler? textScalerOf() {
-    switch (scalerKind) {
-      case _ScalerKind.nil:
-        return null;
-      case _ScalerKind.noScaling:
-        return TextScaler.noScaling;
-      case _ScalerKind.linear:
-        return TextScaler.linear(scalerFactor);
-    }
+    return switch (scalerKind) {
+      _ScalerKind.nil => null,
+      _ScalerKind.noScaling => TextScaler.noScaling,
+      _ScalerKind.linear => TextScaler.linear(scalerFactor),
+    };
   }
 
   StrutStyle? strutStyleOf() {
-    switch (strutKind) {
-      case _StrutKind.nil:
-        return null;
-      case _StrutKind.disabled:
-        return StrutStyle.disabled;
-      case _StrutKind.force:
-        return const StrutStyle(forceStrutHeight: true);
-    }
+    return switch (strutKind) {
+      _StrutKind.nil => null,
+      _StrutKind.disabled => StrutStyle.disabled,
+      _StrutKind.force => const StrutStyle(forceStrutHeight: true),
+    };
   }
 
   TextHeightBehavior? textHeightBehaviorOf() {
@@ -1148,507 +1170,134 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
   }
 
   TextInputType? keyboardTypeOf() {
-    switch (keyboardKind) {
-      case _KeyboardKind.auto:
-        return null;
-      case _KeyboardKind.text:
-        return TextInputType.text;
-      case _KeyboardKind.multiline:
-        return TextInputType.multiline;
-      case _KeyboardKind.number:
-        return TextInputType.number;
-      case _KeyboardKind.phone:
-        return TextInputType.phone;
-      case _KeyboardKind.datetime:
-        return TextInputType.datetime;
-      case _KeyboardKind.emailAddress:
-        return TextInputType.emailAddress;
-      case _KeyboardKind.url:
-        return TextInputType.url;
-      case _KeyboardKind.visiblePassword:
-        return TextInputType.visiblePassword;
-      case _KeyboardKind.name:
-        return TextInputType.name;
-      case _KeyboardKind.none:
-        return TextInputType.none;
-    }
+    return switch (keyboardKind) {
+      _KeyboardKind.auto => null,
+      _KeyboardKind.text => TextInputType.text,
+      _KeyboardKind.multiline => TextInputType.multiline,
+      _KeyboardKind.number => TextInputType.number,
+      _KeyboardKind.phone => TextInputType.phone,
+      _KeyboardKind.datetime => TextInputType.datetime,
+      _KeyboardKind.emailAddress => TextInputType.emailAddress,
+      _KeyboardKind.url => TextInputType.url,
+      _KeyboardKind.visiblePassword => TextInputType.visiblePassword,
+      _KeyboardKind.name => TextInputType.name,
+      _KeyboardKind.none => TextInputType.none,
+    };
   }
 
   TextInputAction? textInputActionOf() {
-    switch (actionKind) {
-      case _ActionKind.nil:
-        return null;
-      case _ActionKind.none:
-        return TextInputAction.none;
-      case _ActionKind.unspecified:
-        return TextInputAction.unspecified;
-      case _ActionKind.done:
-        return TextInputAction.done;
-      case _ActionKind.go:
-        return TextInputAction.go;
-      case _ActionKind.search:
-        return TextInputAction.search;
-      case _ActionKind.send:
-        return TextInputAction.send;
-      case _ActionKind.next:
-        return TextInputAction.next;
-      case _ActionKind.previous:
-        return TextInputAction.previous;
-      case _ActionKind.newline:
-        return TextInputAction.newline;
-    }
+    return switch (actionKind) {
+      _ActionKind.nil => null,
+      _ActionKind.none => TextInputAction.none,
+      _ActionKind.unspecified => TextInputAction.unspecified,
+      _ActionKind.done => TextInputAction.done,
+      _ActionKind.go => TextInputAction.go,
+      _ActionKind.search => TextInputAction.search,
+      _ActionKind.send => TextInputAction.send,
+      _ActionKind.next => TextInputAction.next,
+      _ActionKind.previous => TextInputAction.previous,
+      _ActionKind.newline => TextInputAction.newline,
+    };
   }
 
   List<TextInputFormatter>? inputFormattersOf() {
-    switch (formatterKind) {
-      case _FormatterKind.nil:
-        return null;
-      case _FormatterKind.digits:
-        return [FilteringTextInputFormatter.digitsOnly];
-      case _FormatterKind.length:
-        return [LengthLimitingTextInputFormatter(10)];
-    }
+    return switch (formatterKind) {
+      _FormatterKind.nil => null,
+      _FormatterKind.digits => [FilteringTextInputFormatter.digitsOnly],
+      _FormatterKind.length => [LengthLimitingTextInputFormatter(10)],
+    };
   }
 
   MouseCursor? mouseCursorOf() {
-    switch (mouseKind) {
-      case _MouseKind.nil:
-        return null;
-      case _MouseKind.text:
-        return SystemMouseCursors.text;
-      case _MouseKind.basic:
-        return SystemMouseCursors.basic;
-      case _MouseKind.click:
-        return SystemMouseCursors.click;
-      case _MouseKind.forbidden:
-        return SystemMouseCursors.forbidden;
-      case _MouseKind.grab:
-        return SystemMouseCursors.grab;
-    }
+    return switch (mouseKind) {
+      _MouseKind.nil => null,
+      _MouseKind.text => SystemMouseCursors.text,
+      _MouseKind.basic => SystemMouseCursors.basic,
+      _MouseKind.click => SystemMouseCursors.click,
+      _MouseKind.forbidden => SystemMouseCursors.forbidden,
+      _MouseKind.grab => SystemMouseCursors.grab,
+    };
   }
 
   ScrollPhysics? scrollPhysicsOf() {
-    switch (physicsKind) {
-      case _PhysicsKind.platform:
-        return null;
-      case _PhysicsKind.bouncing:
-        return const BouncingScrollPhysics();
-      case _PhysicsKind.clamping:
-        return const ClampingScrollPhysics();
-      case _PhysicsKind.never:
-        return const NeverScrollableScrollPhysics();
-    }
+    return switch (physicsKind) {
+      _PhysicsKind.platform => null,
+      _PhysicsKind.bouncing => const BouncingScrollPhysics(),
+      _PhysicsKind.clamping => const ClampingScrollPhysics(),
+      _PhysicsKind.never => const NeverScrollableScrollPhysics(),
+    };
   }
 
   Iterable<String> autofillHintsOf() {
-    switch (autofillKind) {
-      case _AutofillKind.empty:
-        return const <String>[];
-      case _AutofillKind.email:
-        return const [AutofillHints.email];
-      case _AutofillKind.username:
-        return const [AutofillHints.username];
-      case _AutofillKind.password:
-        return const [AutofillHints.password];
-      case _AutofillKind.telephone:
-        return const [AutofillHints.telephoneNumber];
-    }
+    return switch (autofillKind) {
+      _AutofillKind.empty => const <String>[],
+      _AutofillKind.email => const [AutofillHints.email],
+      _AutofillKind.username => const [AutofillHints.username],
+      _AutofillKind.password => const [AutofillHints.password],
+      _AutofillKind.telephone => const [AutofillHints.telephoneNumber],
+    };
   }
 
-  String nameOfTri(_Tri kind) {
-    switch (kind) {
-      case _Tri.nil:
-        return 'null';
-      case _Tri.yes:
-        return 'true';
-      case _Tri.no:
-        return 'false';
-    }
-  }
-
-  void onChanged(value) {
-    lastEvent = 'onChanged $value';
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onEditingComplete() {
-    lastEvent = 'onEditingComplete';
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onSubmitted(value) {
-    lastEvent = 'onSubmitted $value';
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onAppPrivateCommand(action, data) {
-    lastEvent = 'onAppPrivateCommand $action';
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onSelectionChanged(TextSelection selection, SelectionChangedCause? cause) {
-    lastEvent = 'onSelectionChanged ${cause?.name} ${selection.baseOffset}-${selection.extentOffset}';
-    DLog.d(lastEvent);
-    setState(() {});
-  }
-
-  void onSelectionHandleTapped() {
-    lastEvent = 'onSelectionHandleTapped';
-    DLog.d(lastEvent);
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
   void onTapOutside(event) {
-    lastEvent = 'onTapOutside';
-    DLog.d(lastEvent);
-    focusNode.unfocus();
-    setState(() {});
-  }
-
-  void onReadOnly(value) {
-    readOnly = value;
-    setState(() {});
+    onMark('onTapOutside', () => focusNode.unfocus());
   }
 
   void onObscureText(value) {
-    obscureText = value;
-    if (value) {
-      expands = false;
-      maxLines = 1;
-      minLines = 0;
-      smartDashesType = SmartDashesType.disabled;
-      smartQuotesType = SmartQuotesType.disabled;
-    } else {
-      smartDashesType = SmartDashesType.enabled;
-      smartQuotesType = SmartQuotesType.enabled;
-    }
-    setState(() {});
-  }
-
-  void onObscuringCharacter(value) {
-    obscuringCharacter = value;
-    setState(() {});
-  }
-
-  void onAutocorrect(value) {
-    autocorrect = value;
-    setState(() {});
-  }
-
-  void onEnableSuggestions(value) {
-    enableSuggestions = value;
-    setState(() {});
-  }
-
-  void onSmartDashesType(value) {
-    smartDashesType = value;
-    setState(() {});
-  }
-
-  void onSmartQuotesType(value) {
-    smartQuotesType = value;
-    setState(() {});
-  }
-
-  void onKeyboardKind(value) {
-    keyboardKind = value;
-    setState(() {});
-  }
-
-  void onActionKind(value) {
-    actionKind = value;
-    setState(() {});
-  }
-
-  void onTextCapitalization(value) {
-    textCapitalization = value;
-    setState(() {});
-  }
-
-  void onAutofillKind(value) {
-    autofillKind = value;
-    setState(() {});
-  }
-
-  void onFormatterKind(value) {
-    formatterKind = value;
-    setState(() {});
-  }
-
-  void onFontSize(value) {
-    fontSize = value;
-    setState(() {});
-  }
-
-  void onStyleColor(value) {
-    styleColor = value;
-    setState(() {});
-  }
-
-  void onFontWeight(value) {
-    fontWeight = value;
-    setState(() {});
-  }
-
-  void onTextAlign(value) {
-    textAlign = value;
-    setState(() {});
-  }
-
-  void onDirKind(value) {
-    dirKind = value;
-    setState(() {});
-  }
-
-  void onLocaleKind(value) {
-    localeKind = value;
-    setState(() {});
-  }
-
-  void onScalerKind(value) {
-    scalerKind = value;
-    setState(() {});
-  }
-
-  void onScalerFactor(value) {
-    scalerFactor = value;
-    setState(() {});
-  }
-
-  void onStrutKind(value) {
-    strutKind = value;
-    setState(() {});
-  }
-
-  void onTextWidthBasis(value) {
-    textWidthBasis = value;
-    setState(() {});
-  }
-
-  void onForceLine(value) {
-    forceLine = value;
-    setState(() {});
-  }
-
-  void onUseTextHeightBehavior(value) {
-    useTextHeightBehavior = value;
-    setState(() {});
-  }
-
-  void onApplyHeightToFirstAscent(value) {
-    applyHeightToFirstAscent = value;
-    setState(() {});
-  }
-
-  void onApplyHeightToLastDescent(value) {
-    applyHeightToLastDescent = value;
-    setState(() {});
-  }
-
-  void onCursorColor(value) {
-    cursorColor = value ?? Colors.blue;
-    setState(() {});
-  }
-
-  void onBackgroundCursorColor(value) {
-    backgroundCursorColor = value ?? Colors.grey;
-    setState(() {});
-  }
-
-  void onSelectionColor(value) {
-    selectionColor = value;
-    setState(() {});
-  }
-
-  void onAutocorrectionTextRectColor(value) {
-    autocorrectionTextRectColor = value;
-    setState(() {});
-  }
-
-  void onShowCursorKind(value) {
-    showCursorKind = value;
-    setState(() {});
-  }
-
-  void onShowSelectionHandles(value) {
-    showSelectionHandles = value;
-    setState(() {});
-  }
-
-  void onInteractiveKind(value) {
-    interactiveKind = value;
-    setState(() {});
-  }
-
-  void onCursorWidth(value) {
-    cursorWidth = value;
-    setState(() {});
-  }
-
-  void onCursorHeight(value) {
-    cursorHeight = value;
-    setState(() {});
-  }
-
-  void onCursorRadius(value) {
-    cursorRadius = value;
-    setState(() {});
-  }
-
-  void onCursorOpacityAnimates(value) {
-    cursorOpacityAnimates = value;
-    setState(() {});
-  }
-
-  void onUseCursorOffset(value) {
-    useCursorOffset = value;
-    setState(() {});
-  }
-
-  void onCursorOffsetDx(value) {
-    cursorOffsetDx = value;
-    setState(() {});
-  }
-
-  void onCursorOffsetDy(value) {
-    cursorOffsetDy = value;
-    setState(() {});
-  }
-
-  void onPaintCursorAboveText(value) {
-    paintCursorAboveText = value;
-    setState(() {});
-  }
-
-  void onSelectionHeightStyle(value) {
-    selectionHeightStyle = value;
-    setState(() {});
-  }
-
-  void onSelectionWidthStyle(value) {
-    selectionWidthStyle = value;
-    setState(() {});
+    onMark('obscureText $value', () {
+      obscureText = value;
+      if (value) {
+        expands = false;
+        maxLines = 1;
+        minLines = 0;
+        smartDashesType = SmartDashesType.disabled;
+        smartQuotesType = SmartQuotesType.disabled;
+      } else {
+        smartDashesType = SmartDashesType.enabled;
+        smartQuotesType = SmartQuotesType.enabled;
+      }
+    });
   }
 
   void onExpands(value) {
-    expands = value;
-    if (value) {
-      obscureText = false;
-      maxLines = 0;
-      minLines = 0;
-    } else {
-      maxLines = 1;
-    }
-    setState(() {});
+    onMark('expands $value', () {
+      expands = value;
+      if (value) {
+        obscureText = false;
+        maxLines = 0;
+        minLines = 0;
+      } else {
+        maxLines = 1;
+      }
+    });
   }
 
-  void onMaxLines(value) {
-    maxLines = value;
-    final max = maxLinesOf();
-    final min = minLinesOf();
-    if (max != null && min != null && min > max) {
-      minLines = max.toDouble();
-    }
-    setState(() {});
+  void onMaxLines(double value) {
+    onMark('maxLines ${value.round()}', () {
+      maxLines = value;
+      final max = maxLinesOf();
+      final min = minLinesOf();
+      if (max != null && min != null && min > max) {
+        minLines = max.toDouble();
+      }
+    });
   }
 
-  void onMinLines(value) {
-    minLines = value;
-    final max = maxLinesOf();
-    final min = minLinesOf();
-    if (max != null && min != null && min > max) {
-      minLines = max.toDouble();
-    }
-    setState(() {});
-  }
-
-  void onScrollPadding(value) {
-    scrollPadding = value;
-    setState(() {});
-  }
-
-  void onClipBehavior(value) {
-    clipBehavior = value;
-    setState(() {});
-  }
-
-  void onPhysicsKind(value) {
-    physicsKind = value;
-    setState(() {});
-  }
-
-  void onUseScrollController(value) {
-    useScrollController = value;
-    setState(() {});
-  }
-
-  void onUseScrollBehavior(value) {
-    useScrollBehavior = value;
-    setState(() {});
-  }
-
-  void onAutofocus(value) {
-    autofocus = value;
-    setState(() {});
-  }
-
-  void onRendererIgnoresPointer(value) {
-    rendererIgnoresPointer = value;
-    setState(() {});
-  }
-
-  void onScribbleEnabled(value) {
-    scribbleEnabled = value;
-    setState(() {});
-  }
-
-  void onEnableIMEPersonalizedLearning(value) {
-    enableIMEPersonalizedLearning = value;
-    setState(() {});
-  }
-
-  void onUseContextMenu(value) {
-    useContextMenu = value;
-    setState(() {});
-  }
-
-  void onUseMagnifier(value) {
-    useMagnifier = value;
-    setState(() {});
-  }
-
-  void onUseUndoController(value) {
-    useUndoController = value;
-    setState(() {});
-  }
-
-  void onUseRestorationId(value) {
-    useRestorationId = value;
-    setState(() {});
-  }
-
-  void onUseCustomGroupId(value) {
-    useCustomGroupId = value;
-    setState(() {});
-  }
-
-  void onMouseKind(value) {
-    mouseKind = value;
-    setState(() {});
-  }
-
-  void onKeyboardAppearance(value) {
-    keyboardAppearance = value;
-    setState(() {});
-  }
-
-  void onDragStartBehavior(value) {
-    dragStartBehavior = value;
-    setState(() {});
+  void onMinLines(double value) {
+    onMark('minLines ${value.round()}', () {
+      minLines = value;
+      final max = maxLinesOf();
+      final min = minLinesOf();
+      if (max != null && min != null && min > max) {
+        minLines = max.toDouble();
+      }
+    });
   }
 
   void onReset() {
@@ -1678,7 +1327,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     applyHeightToLastDescent = true;
     textWidthBasis = TextWidthBasis.parent;
     autofocus = false;
-    showCursorKind = _Tri.nil;
+    showCursor = null;
     showSelectionHandles = false;
     selectionColor = null;
     keyboardKind = _KeyboardKind.auto;
@@ -1700,7 +1349,7 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
     scrollPadding = 20;
     keyboardAppearance = Brightness.light;
     dragStartBehavior = DragStartBehavior.start;
-    interactiveKind = _Tri.nil;
+    enableInteractiveSelection = null;
     useScrollController = false;
     physicsKind = _PhysicsKind.platform;
     autocorrectionTextRectColor = null;

@@ -20,9 +20,6 @@ import 'package:get/get.dart';
 /// CarouselView 构造方式
 enum _CarouselKind { uncontained, weighted }
 
-/// 卡片外形
-enum _ShapeKind { rounded, stadium }
-
 class CarouselViewDemo extends StatefulWidget {
   const CarouselViewDemo({
     super.key,
@@ -37,6 +34,8 @@ class CarouselViewDemo extends StatefulWidget {
 
 class _CarouselViewDemoState extends State<CarouselViewDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -63,10 +62,11 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   int itemCount = 12;
   int initialItem = 0;
   int currentIndex = 0;
+  String lastEvent = '—';
 
   Color? backgroundColor;
   Color? overlayColor;
-  _ShapeKind shapeKind = _ShapeKind.rounded;
+  ShapeKind shapeKind = ShapeKind.rounded;
   List<int> flexWeights = const [1, 7, 1];
 
   final flexWeightPresets = const <List<int>>[
@@ -96,7 +96,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -115,7 +115,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -148,17 +148,10 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
                           NLangEnum.en: 'Switch between CarouselView and CarouselView.weighted, including flexWeights.',
                           NLangEnum.zh: '可切换 CarouselView 与 CarouselView.weighted，并配置 flexWeights。',
                         },
-                        {
-                          NLangEnum.en:
-                              'Expose shape, colors, snapping, reverse, splash, consumeMaxWeight, and item count.',
-                          NLangEnum.zh: '覆盖外形、颜色、吸附、反向、水波纹、权重撑满与条目数量。',
-                        },
                       ],
                     ),
                     buildConstructCard(),
                     buildSurfaceCard(),
-                    buildSizeCard(),
-                    buildBehaviorCard(),
                   ],
                 ),
               ),
@@ -170,7 +163,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   Widget buildPreview() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: scheme.surfaceContainerHighest.withValues(alpha: 0.35),
@@ -178,10 +171,25 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
           bottom: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.65)),
         ),
       ),
-      child: SizedBox(
-        height: viewportExtent,
-        width: double.infinity,
-        child: buildCarousel(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: viewportExtent,
+            width: double.infinity,
+            child: buildCarousel(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              'item: $currentIndex · $lastEvent',
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: scheme.onSurfaceVariant,
+                fontFamily: 'monospace',
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -243,10 +251,10 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   }
 
   ShapeBorder buildShape() {
-    if (shapeKind == _ShapeKind.stadium) {
-      return const StadiumBorder();
-    }
-    return RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius));
+    return switch (shapeKind) {
+      ShapeKind.stadium => const StadiumBorder(),
+      ShapeKind.none || ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+    };
   }
 
   WidgetStateProperty<Color?>? buildOverlayColor() {
@@ -271,8 +279,8 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
   Widget buildConstructCard() {
     return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
-      title: '构造',
-      subtitle: 'constructor · scrollDirection · flexWeights',
+      title: '构造与尺寸',
+      subtitle: 'constructor · itemExtent · shrinkExtent · initialItem',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -293,7 +301,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
                 values: flexWeightPresets,
                 isSelected: (e) => listEquals(flexWeights, e),
                 labelOf: (e) => '$e',
-                onChanged: onFlexWeights,
+                onChanged: (e) => onMark('flexWeights $e', () => flexWeights = e),
               ),
             ),
           buildField(
@@ -306,58 +314,35 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
               onChanged: onScrollDirection,
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildSurfaceCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.palette_outlined),
-      title: '表面',
-      subtitle: 'shape · backgroundColor · overlayColor · elevation',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildField(
-            label: 'shape',
-            child: buildChoiceChips(
-              values: _ShapeKind.values,
-              isSelected: (e) => shapeKind == e,
-              labelOf: (e) => e == _ShapeKind.rounded ? 'RoundedRectangleBorder' : 'StadiumBorder',
-              onChanged: onShapeKind,
-            ),
-          ),
-          if (shapeKind == _ShapeKind.rounded)
-            buildSlider(label: 'borderRadius', value: borderRadius, min: 0, max: 48, onChanged: onBorderRadius),
-          buildSlider(label: 'elevation', value: elevation, min: 0, max: 16, onChanged: onElevation),
-          buildField(
-            label: 'backgroundColor',
-            showTopGap: true,
-            child: buildColorDots(value: backgroundColor, onChanged: onBackgroundColor),
-          ),
-          buildField(
-            label: 'overlayColor',
-            showTopGap: true,
-            child: buildColorDots(value: overlayColor, onChanged: onOverlayColor),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildSizeCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.straighten_rounded),
-      title: '尺寸',
-      subtitle: 'itemExtent · shrinkExtent · padding · itemCount',
-      child: Column(
-        children: [
           if (kind == _CarouselKind.uncontained)
-            buildSlider(label: 'itemExtent', value: itemExtent, min: 80, max: 400, onChanged: onItemExtent),
-          buildSlider(label: 'shrinkExtent', value: shrinkExtent, min: 0, max: 200, onChanged: onShrinkExtent),
-          buildSlider(label: 'padding', value: padding, min: 0, max: 24, onChanged: onPadding),
-          buildSlider(label: 'viewport 高度', value: viewportExtent, min: 120, max: 480, onChanged: onViewportExtent),
+            buildSlider(
+              label: 'itemExtent',
+              value: itemExtent,
+              min: 80,
+              max: 400,
+              onChanged: (v) => onMark('itemExtent ${v.round()}', () => itemExtent = v),
+            ),
+          buildSlider(
+            label: 'shrinkExtent',
+            value: shrinkExtent,
+            min: 0,
+            max: 200,
+            onChanged: (v) => onMark('shrinkExtent ${v.round()}', () => shrinkExtent = v),
+          ),
+          buildSlider(
+            label: 'padding',
+            value: padding,
+            min: 0,
+            max: 24,
+            onChanged: (v) => onMark('padding ${v.round()}', () => padding = v),
+          ),
+          buildSlider(
+            label: 'viewport 高度',
+            value: viewportExtent,
+            min: 120,
+            max: 480,
+            onChanged: (v) => onMark('viewport ${v.round()}', () => viewportExtent = v),
+          ),
           buildSlider(label: 'itemCount', value: itemCount.toDouble(), min: 3, max: 20, onChanged: onItemCount),
           buildSlider(
             label: 'initialItem',
@@ -371,18 +356,71 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     );
   }
 
-  Widget buildBehaviorCard() {
+  Widget buildSurfaceCard() {
     return NDecorationCard(
-      icon: const Icon(Icons.tune_rounded),
-      title: '行为',
-      subtitle: 'itemSnapping · reverse · enableSplash · consumeMaxWeight',
+      icon: const Icon(Icons.palette_outlined),
+      title: '表面与行为',
+      subtitle: 'shape · backgroundColor · itemSnapping · reverse',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'itemSnapping 吸附', value: itemSnapping, onChanged: onItemSnapping),
+          buildField(
+            label: 'shape',
+            child: buildChoiceChips(
+              values: const [ShapeKind.rounded, ShapeKind.stadium],
+              isSelected: (e) => shapeKind == e,
+              labelOf: (e) => e == ShapeKind.rounded ? 'RoundedRectangleBorder' : 'StadiumBorder',
+              onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
+            ),
+          ),
+          if (shapeKind == ShapeKind.rounded)
+            buildSlider(
+              label: 'borderRadius',
+              value: borderRadius,
+              min: 0,
+              max: 48,
+              onChanged: (v) => onMark('borderRadius ${v.round()}', () => borderRadius = v),
+            ),
+          buildSlider(
+            label: 'elevation',
+            value: elevation,
+            min: 0,
+            max: 16,
+            onChanged: (v) => onMark('elevation ${v.round()}', () => elevation = v),
+          ),
+          buildField(
+            label: 'backgroundColor',
+            showTopGap: true,
+            child: buildColorDots(
+              value: backgroundColor,
+              onChanged: (e) => onMark('backgroundColor $e', () => backgroundColor = e),
+            ),
+          ),
+          buildField(
+            label: 'overlayColor',
+            showTopGap: true,
+            child: buildColorDots(
+              value: overlayColor,
+              onChanged: (e) => onMark('overlayColor $e', () => overlayColor = e),
+            ),
+          ),
+          buildSwitch(
+            title: 'itemSnapping 吸附',
+            value: itemSnapping,
+            onChanged: (v) => onMark('itemSnapping $v', () => itemSnapping = v),
+          ),
           buildSwitch(title: 'reverse 反向滚动', value: reverse, onChanged: onReverse),
-          buildSwitch(title: 'enableSplash 水波纹', value: enableSplash, onChanged: onEnableSplash),
+          buildSwitch(
+            title: 'enableSplash 水波纹',
+            value: enableSplash,
+            onChanged: (v) => onMark('enableSplash $v', () => enableSplash = v),
+          ),
           if (kind == _CarouselKind.weighted)
-            buildSwitch(title: 'consumeMaxWeight 可撑满最大权重', value: consumeMaxWeight, onChanged: onConsumeMaxWeight),
+            buildSwitch(
+              title: 'consumeMaxWeight 可撑满最大权重',
+              value: consumeMaxWeight,
+              onChanged: (v) => onMark('consumeMaxWeight $v', () => consumeMaxWeight = v),
+            ),
         ],
       ),
     );
@@ -393,7 +431,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -422,7 +459,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -456,7 +493,7 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -516,7 +553,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -527,7 +563,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
       value: value.clamp(min, max),
       onChanged: onChanged,
       activeColor: scheme.primary,
-      inactiveColor: scheme.outlineVariant.withValues(alpha: 0.55),
     );
   }
 
@@ -536,7 +571,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -550,7 +584,6 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
       ),
       value: value,
       onChanged: onChanged,
-      inactiveTrackColor: scheme.outlineVariant.withValues(alpha: 0.55),
     );
   }
 
@@ -592,6 +625,13 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     setState(() {});
   }
 
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
+    setState(() {});
+  }
+
   void onReset() {
     kind = _CarouselKind.uncontained;
     scrollDirection = Axis.horizontal;
@@ -609,118 +649,60 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
     initialItem = 0;
     backgroundColor = null;
     overlayColor = null;
-    shapeKind = _ShapeKind.rounded;
+    shapeKind = ShapeKind.rounded;
     flexWeights = const [1, 7, 1];
+    lastEvent = '—';
     onResetCarouselController();
     setState(() {});
   }
 
   void onKind(_CarouselKind value) {
-    kind = value;
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onFlexWeights(List<int> value) {
-    flexWeights = value;
-    setState(() {});
+    onMark('kind ${value.name}', () {
+      kind = value;
+      onResetCarouselController();
+    });
   }
 
   void onScrollDirection(Axis value) {
-    scrollDirection = value;
-    if (value == Axis.vertical && viewportExtent < 320) {
-      viewportExtent = 360;
-    }
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onShapeKind(_ShapeKind value) {
-    shapeKind = value;
-    setState(() {});
-  }
-
-  void onBackgroundColor(Color? value) {
-    backgroundColor = value;
-    setState(() {});
-  }
-
-  void onOverlayColor(Color? value) {
-    overlayColor = value;
-    setState(() {});
-  }
-
-  void onItemExtent(double value) {
-    itemExtent = value;
-    setState(() {});
-  }
-
-  void onShrinkExtent(double value) {
-    shrinkExtent = value;
-    setState(() {});
-  }
-
-  void onPadding(double value) {
-    padding = value;
-    setState(() {});
-  }
-
-  void onElevation(double value) {
-    elevation = value;
-    setState(() {});
-  }
-
-  void onBorderRadius(double value) {
-    borderRadius = value;
-    setState(() {});
-  }
-
-  void onViewportExtent(double value) {
-    viewportExtent = value;
-    setState(() {});
+    onMark('scrollDirection ${value.name}', () {
+      scrollDirection = value;
+      if (value == Axis.vertical && viewportExtent < 320) {
+        viewportExtent = 360;
+      }
+      onResetCarouselController();
+    });
   }
 
   void onItemCount(double value) {
-    itemCount = value.round().clamp(3, 20);
-    if (initialItem >= itemCount) {
-      initialItem = itemCount - 1;
-      onResetCarouselController();
-    }
-    setState(() {});
+    onMark('itemCount ${value.round()}', () {
+      itemCount = value.round().clamp(3, 20);
+      if (initialItem >= itemCount) {
+        initialItem = itemCount - 1;
+        onResetCarouselController();
+      }
+    });
   }
 
   void onInitialItem(double value) {
-    initialItem = value.round().clamp(0, itemCount - 1);
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onItemSnapping(bool value) {
-    itemSnapping = value;
-    setState(() {});
+    onMark('initialItem ${value.round()}', () {
+      initialItem = value.round().clamp(0, itemCount - 1);
+      onResetCarouselController();
+    });
   }
 
   void onReverse(bool value) {
-    reverse = value;
-    onResetCarouselController();
-    setState(() {});
-  }
-
-  void onEnableSplash(bool value) {
-    enableSplash = value;
-    setState(() {});
-  }
-
-  void onConsumeMaxWeight(bool value) {
-    consumeMaxWeight = value;
-    setState(() {});
+    onMark('reverse $value', () {
+      reverse = value;
+      onResetCarouselController();
+    });
   }
 
   void onItemTap(int index) {
     currentIndex = index;
+    lastEvent = 'onTap $index';
     setState(() {});
     DLog.d('CarouselView onTap: $index');
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('onTap Item $index'),

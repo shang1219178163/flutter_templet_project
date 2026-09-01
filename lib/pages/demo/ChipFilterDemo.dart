@@ -34,6 +34,7 @@ class ChipFilterDemo extends StatefulWidget {
 
 class _ChipFilterDemoState extends State<ChipFilterDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
@@ -148,7 +149,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       appBar: hideApp
           ? null
@@ -166,7 +167,6 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (context, constraints) {
         final previewHeight = (constraints.maxHeight * 0.38).clamp(220.0, 320.0);
@@ -198,21 +198,14 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
                           },
                           {
                             NLangEnum.en:
-                                'Original demo listed four actors on a lightGreen canvas with CircleAvatar initials.',
-                            NLangEnum.zh: '原 Demo 为浅绿底上四位演员，带 CircleAvatar 缩写。',
-                          },
-                          {
-                            NLangEnum.en:
                                 'onSelected toggles filters. Switch to FilterChip.elevated for the raised variant.',
                             NLangEnum.zh: 'onSelected 切换筛选。可切换 FilterChip.elevated 凸起样式。',
                           },
                         ],
                       ),
-                      buildConstructCard(),
                       buildContentCard(),
                       buildSurfaceCard(),
                       buildSizeCard(),
-                      buildBehaviorCard(),
                     ],
                   ),
                 ),
@@ -225,7 +218,6 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final lookFor = _filters.map((e) => e.name).join(', ');
     return DecoratedBox(
@@ -385,23 +377,16 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     return BorderSide(color: sideColor ?? Colors.black54, width: sideWidth);
   }
 
-  OutlinedBorder? buildShape() {
-    switch (shapeKind) {
-      case ShapeKind.none:
-        return null;
-      case ShapeKind.rounded:
-        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius));
-      case ShapeKind.stadium:
-        return const StadiumBorder();
-    }
-  }
+  OutlinedBorder? buildShape() => switch (shapeKind) {
+        ShapeKind.none => null,
+        ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(shapeRadius)),
+        ShapeKind.stadium => const StadiumBorder(),
+      };
 
-  ShapeBorder buildAvatarBorder() {
-    if (avatarBorderKind == ShapeKind.rounded) {
-      return RoundedRectangleBorder(borderRadius: BorderRadius.circular(6));
-    }
-    return const CircleBorder();
-  }
+  ShapeBorder buildAvatarBorder() => switch (avatarBorderKind) {
+        ShapeKind.rounded => RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        _ => const CircleBorder(),
+      };
 
   IconThemeData? buildIconTheme() {
     if (!useIconTheme) {
@@ -423,32 +408,28 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     );
   }
 
-  Widget buildConstructCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.account_tree_rounded),
-      title: '构造',
-      subtitle: 'FilterChip · FilterChip.elevated',
-      child: buildField(
-        label: 'constructor',
-        child: buildChoiceChips(
-          values: _ChipKind.values,
-          isSelected: (e) => kind == e,
-          labelOf: (e) => e.name,
-          onChanged: onKind,
-        ),
-      ),
-    );
-  }
-
   Widget buildContentCard() {
     return NDecorationCard(
       icon: const Icon(Icons.person_outline_rounded),
-      title: '内容',
-      subtitle: 'avatar · delete · tooltip · enabled',
+      title: '构造与内容',
+      subtitle: 'constructor · avatar · delete · checkmark · animation',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'avatar', value: useAvatar, onChanged: onUseAvatar),
+          buildField(
+            label: 'constructor',
+            child: buildChoiceChips(
+              values: _ChipKind.values,
+              isSelected: (e) => kind == e,
+              labelOf: (e) => e.name,
+              onChanged: (e) => onMark('constructor ${e.name}', () => kind = e),
+            ),
+          ),
+          buildSwitch(
+            title: 'avatar',
+            value: useAvatar,
+            onChanged: (v) => onMark('avatar ${v ? 'on' : 'null'}', () => useAvatar = v),
+          ),
           if (useAvatar)
             buildField(
               label: 'avatarBorder',
@@ -457,18 +438,70 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
                 values: const [ShapeKind.none, ShapeKind.rounded],
                 isSelected: (e) => avatarBorderKind == e,
                 labelOf: (e) => e == ShapeKind.none ? 'circle' : e.name,
-                onChanged: onAvatarBorderKind,
+                onChanged: (e) => onMark('avatarBorder ${e == ShapeKind.none ? 'circle' : e.name}', () => avatarBorderKind = e),
               ),
             ),
-          buildSwitch(title: 'onDeleted', value: useDelete, onChanged: onUseDelete),
+          buildSwitch(
+            title: 'onDeleted',
+            value: useDelete,
+            onChanged: (v) => onMark('onDeleted ${v ? 'on' : 'null'}', () => useDelete = v),
+          ),
           if (useDelete)
             buildField(
               label: 'deleteIconColor',
               showTopGap: true,
-              child: buildColorDots(value: deleteIconColor, onChanged: onDeleteIconColor),
+              child: buildColorDots(
+                value: deleteIconColor,
+                onChanged: (e) => onMark('deleteIconColor ${e ?? 'null'}', () => deleteIconColor = e),
+              ),
             ),
-          buildSwitch(title: 'tooltip', value: useTooltip, onChanged: onUseTooltip),
-          buildSwitch(title: 'onSelected', value: enabled, onChanged: onEnabled),
+          buildSwitch(
+            title: 'tooltip',
+            value: useTooltip,
+            onChanged: (v) => onMark('tooltip ${v ? 'on' : 'null'}', () => useTooltip = v),
+          ),
+          buildSwitch(
+            title: 'onSelected',
+            value: enabled,
+            onChanged: (v) => onMark('onSelected ${v ? 'on' : 'null'}', () => enabled = v),
+          ),
+          buildField(
+            label: 'showCheckmark',
+            showTopGap: true,
+            child: buildChoiceChips(
+              values: const <bool?>[null, true, false],
+              isSelected: (e) => showCheckmark == e,
+              labelOf: (e) => e == null ? '默' : '$e',
+              onChanged: (e) => onMark('showCheckmark ${e ?? 'null'}', () => showCheckmark = e),
+            ),
+          ),
+          buildField(
+            label: 'checkmarkColor',
+            showTopGap: true,
+            child: buildColorDots(
+              value: checkmarkColor,
+              onChanged: (e) => onMark('checkmarkColor ${e ?? 'null'}', () => checkmarkColor = e),
+            ),
+          ),
+          buildSwitch(
+            title: 'autofocus',
+            value: autofocus,
+            onChanged: (v) => onMark('autofocus $v', () => autofocus = v),
+          ),
+          buildSwitch(
+            title: 'chipAnimationStyle',
+            value: useAnimationStyle,
+            onChanged: (v) => onMark('chipAnimationStyle ${v ? 'on' : 'null'}', () => useAnimationStyle = v),
+          ),
+          if (useAnimationStyle)
+            buildSlider(
+              label: 'animation.duration',
+              value: animMs,
+              min: 50,
+              max: 800,
+              onChanged: (v) => onMark('animation.duration ${v.round()}ms', () => animMs = v),
+              durationLabel: true,
+            ),
         ],
       ),
     );
@@ -484,38 +517,59 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
         children: [
           buildField(
             label: 'backgroundColor',
-            child: buildColorDots(value: backgroundColor, onChanged: onBackgroundColor),
+            child: buildColorDots(
+              value: backgroundColor,
+              onChanged: (e) => onMark('backgroundColor ${e ?? 'null'}', () => backgroundColor = e),
+            ),
           ),
           buildField(
             label: 'selectedColor',
             showTopGap: true,
-            child: buildColorDots(value: selectedColor, onChanged: onSelectedColor),
+            child: buildColorDots(
+              value: selectedColor,
+              onChanged: (e) => onMark('selectedColor ${e ?? 'null'}', () => selectedColor = e),
+            ),
           ),
           if (!enabled)
             buildField(
               label: 'disabledColor',
               showTopGap: true,
-              child: buildColorDots(value: disabledColor, onChanged: onDisabledColor),
+              child: buildColorDots(
+                value: disabledColor,
+                onChanged: (e) => onMark('disabledColor ${e ?? 'null'}', () => disabledColor = e),
+              ),
             ),
           buildField(
             label: 'color',
             showTopGap: true,
-            child: buildColorDots(value: chipColor, onChanged: onChipColor),
+            child: buildColorDots(
+              value: chipColor,
+              onChanged: (e) => onMark('color ${e ?? 'null'}', () => chipColor = e),
+            ),
           ),
           buildField(
             label: 'shadowColor',
             showTopGap: true,
-            child: buildColorDots(value: shadowColor, onChanged: onShadowColor),
+            child: buildColorDots(
+              value: shadowColor,
+              onChanged: (e) => onMark('shadowColor ${e ?? 'null'}', () => shadowColor = e),
+            ),
           ),
           buildField(
             label: 'surfaceTintColor',
             showTopGap: true,
-            child: buildColorDots(value: surfaceTintColor, onChanged: onSurfaceTintColor),
+            child: buildColorDots(
+              value: surfaceTintColor,
+              onChanged: (e) => onMark('surfaceTintColor ${e ?? 'null'}', () => surfaceTintColor = e),
+            ),
           ),
           buildField(
             label: 'selectedShadowColor',
             showTopGap: true,
-            child: buildColorDots(value: selectedShadowColor, onChanged: onSelectedShadowColor),
+            child: buildColorDots(
+              value: selectedShadowColor,
+              onChanged: (e) => onMark('selectedShadowColor ${e ?? 'null'}', () => selectedShadowColor = e),
+            ),
           ),
           buildField(
             label: 'shape',
@@ -524,19 +578,38 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               values: ShapeKind.values,
               isSelected: (e) => shapeKind == e,
               labelOf: (e) => e.name,
-              onChanged: onShapeKind,
+              onChanged: (e) => onMark('shape ${e.name}', () => shapeKind = e),
             ),
           ),
           if (shapeKind == ShapeKind.rounded)
-            buildSlider(label: 'shape.radius', value: shapeRadius, min: 0, max: 24, onChanged: onShapeRadius),
-          buildSwitch(title: 'side', value: useSide, onChanged: onUseSide),
+            buildSlider(
+              label: 'shape.radius',
+              value: shapeRadius,
+              min: 0,
+              max: 24,
+              onChanged: (v) => onMark('shape.radius ${v.toStringAsFixed(1)}', () => shapeRadius = v),
+            ),
+          buildSwitch(
+            title: 'side',
+            value: useSide,
+            onChanged: (v) => onMark('side ${v ? 'on' : 'null'}', () => useSide = v),
+          ),
           if (useSide) ...[
             buildField(
               label: 'side.color',
               showTopGap: true,
-              child: buildColorDots(value: sideColor, onChanged: onSideColor),
+              child: buildColorDots(
+                value: sideColor,
+                onChanged: (e) => onMark('side.color ${e ?? 'null'}', () => sideColor = e),
+              ),
             ),
-            buildSlider(label: 'side.width', value: sideWidth, min: 0.5, max: 4, onChanged: onSideWidth),
+            buildSlider(
+              label: 'side.width',
+              value: sideWidth,
+              min: 0.5,
+              max: 4,
+              onChanged: (v) => onMark('side.width ${v.toStringAsFixed(1)}', () => sideWidth = v),
+            ),
           ],
           buildField(
             label: 'clipBehavior',
@@ -545,7 +618,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               values: Clip.values,
               isSelected: (e) => clipBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onClipBehavior,
+              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
             ),
           ),
         ],
@@ -561,26 +634,80 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'padding', value: usePadding, onChanged: onUsePadding),
-          if (usePadding) buildSlider(label: 'padding', value: padding, min: 0, max: 16, onChanged: onPadding),
-          buildSwitch(title: 'labelPadding', value: useLabelPadding, onChanged: onUseLabelPadding),
+          buildSwitch(
+            title: 'padding',
+            value: usePadding,
+            onChanged: (v) => onMark('padding ${v ? 'on' : 'null'}', () => usePadding = v),
+          ),
+          if (usePadding)
+            buildSlider(
+              label: 'padding',
+              value: padding,
+              min: 0,
+              max: 16,
+              onChanged: (v) => onMark('padding ${v.toStringAsFixed(1)}', () => padding = v),
+            ),
+          buildSwitch(
+            title: 'labelPadding',
+            value: useLabelPadding,
+            onChanged: (v) => onMark('labelPadding ${v ? 'on' : 'null'}', () => useLabelPadding = v),
+          ),
           if (useLabelPadding)
-            buildSlider(label: 'labelPadding', value: labelPadding, min: 0, max: 16, onChanged: onLabelPadding),
-          buildSwitch(title: 'labelStyle', value: useLabelStyle, onChanged: onUseLabelStyle),
+            buildSlider(
+              label: 'labelPadding',
+              value: labelPadding,
+              min: 0,
+              max: 16,
+              onChanged: (v) => onMark('labelPadding ${v.toStringAsFixed(1)}', () => labelPadding = v),
+            ),
+          buildSwitch(
+            title: 'labelStyle',
+            value: useLabelStyle,
+            onChanged: (v) => onMark('labelStyle ${v ? 'on' : 'null'}', () => useLabelStyle = v),
+          ),
           if (useLabelStyle) ...[
             buildSlider(
-                label: 'labelStyle.fontSize', value: labelFontSize, min: 10, max: 22, onChanged: onLabelFontSize),
+              label: 'labelStyle.fontSize',
+              value: labelFontSize,
+              min: 10,
+              max: 22,
+              onChanged: (v) => onMark('labelStyle.fontSize ${v.toStringAsFixed(1)}', () => labelFontSize = v),
+            ),
             buildField(
               label: 'labelStyle.color',
               showTopGap: true,
-              child: buildColorDots(value: labelColor, onChanged: onLabelColor),
+              child: buildColorDots(
+                value: labelColor,
+                onChanged: (e) => onMark('labelStyle.color ${e ?? 'null'}', () => labelColor = e),
+              ),
             ),
           ],
-          buildSwitch(title: 'elevation', value: useElevation, onChanged: onUseElevation),
-          if (useElevation) buildSlider(label: 'elevation', value: elevation, min: 0, max: 12, onChanged: onElevation),
-          buildSwitch(title: 'pressElevation', value: usePressElevation, onChanged: onUsePressElevation),
+          buildSwitch(
+            title: 'elevation',
+            value: useElevation,
+            onChanged: (v) => onMark('elevation ${v ? 'on' : 'null'}', () => useElevation = v),
+          ),
+          if (useElevation)
+            buildSlider(
+              label: 'elevation',
+              value: elevation,
+              min: 0,
+              max: 12,
+              onChanged: (v) => onMark('elevation ${v.toStringAsFixed(1)}', () => elevation = v),
+            ),
+          buildSwitch(
+            title: 'pressElevation',
+            value: usePressElevation,
+            onChanged: (v) => onMark('pressElevation ${v ? 'on' : 'null'}', () => usePressElevation = v),
+          ),
           if (usePressElevation)
-            buildSlider(label: 'pressElevation', value: pressElevation, min: 0, max: 16, onChanged: onPressElevation),
+            buildSlider(
+              label: 'pressElevation',
+              value: pressElevation,
+              min: 0,
+              max: 16,
+              onChanged: (v) => onMark('pressElevation ${v.toStringAsFixed(1)}', () => pressElevation = v),
+            ),
           buildField(
             label: 'visualDensity',
             showTopGap: true,
@@ -593,7 +720,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               ],
               isSelected: (e) => visualDensity == e,
               labelOf: nameOfDensity,
-              onChanged: onVisualDensity,
+              onChanged: (e) => onMark('visualDensity ${nameOfDensity(e)}', () => visualDensity = e),
             ),
           ),
           buildField(
@@ -607,73 +734,57 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
               ],
               isSelected: (e) => materialTapTargetSize == e,
               labelOf: (e) => e?.name ?? '默',
-              onChanged: onMaterialTapTargetSize,
+              onChanged: (e) => onMark('materialTapTargetSize ${e?.name ?? 'null'}', () => materialTapTargetSize = e),
             ),
           ),
-          buildSwitch(title: 'avatarBoxConstraints', value: useAvatarConstraints, onChanged: onUseAvatarConstraints),
+          buildSwitch(
+            title: 'avatarBoxConstraints',
+            value: useAvatarConstraints,
+            onChanged: (v) => onMark('avatarBoxConstraints ${v ? 'on' : 'null'}', () => useAvatarConstraints = v),
+          ),
           if (useAvatarConstraints)
             buildSlider(
-                label: 'avatarBoxConstraints',
-                value: avatarConstraint,
-                min: 16,
-                max: 48,
-                onChanged: onAvatarConstraint),
+              label: 'avatarBoxConstraints',
+              value: avatarConstraint,
+              min: 16,
+              max: 48,
+              onChanged: (v) => onMark('avatarBoxConstraints ${v.toStringAsFixed(1)}', () => avatarConstraint = v),
+            ),
           buildSwitch(
-              title: 'deleteIconBoxConstraints', value: useDeleteConstraints, onChanged: onUseDeleteConstraints),
+            title: 'deleteIconBoxConstraints',
+            value: useDeleteConstraints,
+            onChanged: (v) => onMark('deleteIconBoxConstraints ${v ? 'on' : 'null'}', () => useDeleteConstraints = v),
+          ),
           if (useDeleteConstraints)
             buildSlider(
-                label: 'deleteIconBoxConstraints',
-                value: deleteConstraint,
-                min: 12,
-                max: 40,
-                onChanged: onDeleteConstraint),
-          buildSwitch(title: 'iconTheme', value: useIconTheme, onChanged: onUseIconTheme),
+              label: 'deleteIconBoxConstraints',
+              value: deleteConstraint,
+              min: 12,
+              max: 40,
+              onChanged: (v) => onMark('deleteIconBoxConstraints ${v.toStringAsFixed(1)}', () => deleteConstraint = v),
+            ),
+          buildSwitch(
+            title: 'iconTheme',
+            value: useIconTheme,
+            onChanged: (v) => onMark('iconTheme ${v ? 'on' : 'null'}', () => useIconTheme = v),
+          ),
           if (useIconTheme) ...[
-            buildSlider(label: 'iconTheme.size', value: iconThemeSize, min: 12, max: 28, onChanged: onIconThemeSize),
+            buildSlider(
+              label: 'iconTheme.size',
+              value: iconThemeSize,
+              min: 12,
+              max: 28,
+              onChanged: (v) => onMark('iconTheme.size ${v.toStringAsFixed(1)}', () => iconThemeSize = v),
+            ),
             buildField(
               label: 'iconTheme.color',
               showTopGap: true,
-              child: buildColorDots(value: iconThemeColor, onChanged: onIconThemeColor),
+              child: buildColorDots(
+                value: iconThemeColor,
+                onChanged: (e) => onMark('iconTheme.color ${e ?? 'null'}', () => iconThemeColor = e),
+              ),
             ),
           ],
-        ],
-      ),
-    );
-  }
-
-  Widget buildBehaviorCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.tune_rounded),
-      title: '行为',
-      subtitle: 'checkmark · autofocus · chipAnimationStyle',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildField(
-            label: 'showCheckmark',
-            child: buildChoiceChips(
-              values: const <bool?>[null, true, false],
-              isSelected: (e) => showCheckmark == e,
-              labelOf: (e) => e == null ? '默' : '$e',
-              onChanged: onShowCheckmark,
-            ),
-          ),
-          buildField(
-            label: 'checkmarkColor',
-            showTopGap: true,
-            child: buildColorDots(value: checkmarkColor, onChanged: onCheckmarkColor),
-          ),
-          buildSwitch(title: 'autofocus', value: autofocus, onChanged: onAutofocus),
-          buildSwitch(title: 'chipAnimationStyle', value: useAnimationStyle, onChanged: onUseAnimationStyle),
-          if (useAnimationStyle)
-            buildSlider(
-              label: 'animation.duration',
-              value: animMs,
-              min: 50,
-              max: 800,
-              onChanged: onAnimMs,
-              durationLabel: true,
-            ),
         ],
       ),
     );
@@ -684,7 +795,6 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -713,7 +823,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -747,7 +857,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -808,7 +918,6 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     required ValueChanged<double> onChanged,
     bool durationLabel = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -840,7 +949,6 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -857,289 +965,17 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     );
   }
 
-  String nameOfDensity(VisualDensity? value) {
-    if (value == null) {
-      return '默';
-    }
-    if (value == VisualDensity.standard) {
-      return 'standard';
-    }
-    if (value == VisualDensity.comfortable) {
-      return 'comfortable';
-    }
-    if (value == VisualDensity.compact) {
-      return 'compact';
-    }
-    return '$value';
-  }
+  String nameOfDensity(VisualDensity? value) => switch (value) {
+        null => '默',
+        _ when value == VisualDensity.standard => 'standard',
+        _ when value == VisualDensity.comfortable => 'comfortable',
+        _ when value == VisualDensity.compact => 'compact',
+        _ => '$value',
+      };
 
-  void onKind(_ChipKind value) {
-    kind = value;
-    lastEvent = 'constructor ${value.name}';
-    setState(() {});
-  }
-
-  void onUseAvatar(bool value) {
-    useAvatar = value;
-    lastEvent = 'avatar ${useAvatar ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onAvatarBorderKind(ShapeKind value) {
-    avatarBorderKind = value;
-    lastEvent = 'avatarBorder ${value == ShapeKind.none ? 'circle' : value.name}';
-    setState(() {});
-  }
-
-  void onUseDelete(bool value) {
-    useDelete = value;
-    lastEvent = 'onDeleted ${useDelete ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onDeleteIconColor(Color? value) {
-    deleteIconColor = value;
-    lastEvent = 'deleteIconColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onUseTooltip(bool value) {
-    useTooltip = value;
-    lastEvent = 'tooltip ${useTooltip ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onEnabled(bool value) {
-    enabled = value;
-    lastEvent = 'onSelected ${enabled ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onBackgroundColor(Color? value) {
-    backgroundColor = value;
-    lastEvent = 'backgroundColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onSelectedColor(Color? value) {
-    selectedColor = value;
-    lastEvent = 'selectedColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onDisabledColor(Color? value) {
-    disabledColor = value;
-    lastEvent = 'disabledColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onChipColor(Color? value) {
-    chipColor = value;
-    lastEvent = 'color ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onShadowColor(Color? value) {
-    shadowColor = value;
-    lastEvent = 'shadowColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onSurfaceTintColor(Color? value) {
-    surfaceTintColor = value;
-    lastEvent = 'surfaceTintColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onSelectedShadowColor(Color? value) {
-    selectedShadowColor = value;
-    lastEvent = 'selectedShadowColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onShapeKind(ShapeKind value) {
-    shapeKind = value;
-    lastEvent = 'shape ${value.name}';
-    setState(() {});
-  }
-
-  void onShapeRadius(double value) {
-    shapeRadius = value;
-    lastEvent = 'shape.radius ${shapeRadius.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onUseSide(bool value) {
-    useSide = value;
-    lastEvent = 'side ${useSide ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onSideColor(Color? value) {
-    sideColor = value;
-    lastEvent = 'side.color ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onSideWidth(double value) {
-    sideWidth = value;
-    lastEvent = 'side.width ${sideWidth.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onClipBehavior(Clip value) {
-    clipBehavior = value;
-    lastEvent = 'clipBehavior ${value.name}';
-    setState(() {});
-  }
-
-  void onUsePadding(bool value) {
-    usePadding = value;
-    lastEvent = 'padding ${usePadding ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onPadding(double value) {
-    padding = value;
-    lastEvent = 'padding ${padding.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onUseLabelPadding(bool value) {
-    useLabelPadding = value;
-    lastEvent = 'labelPadding ${useLabelPadding ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onLabelPadding(double value) {
-    labelPadding = value;
-    lastEvent = 'labelPadding ${labelPadding.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onUseLabelStyle(bool value) {
-    useLabelStyle = value;
-    lastEvent = 'labelStyle ${useLabelStyle ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onLabelFontSize(double value) {
-    labelFontSize = value;
-    lastEvent = 'labelStyle.fontSize ${labelFontSize.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onLabelColor(Color? value) {
-    labelColor = value;
-    lastEvent = 'labelStyle.color ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onUseElevation(bool value) {
-    useElevation = value;
-    lastEvent = 'elevation ${useElevation ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onElevation(double value) {
-    elevation = value;
-    lastEvent = 'elevation ${elevation.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onUsePressElevation(bool value) {
-    usePressElevation = value;
-    lastEvent = 'pressElevation ${usePressElevation ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onPressElevation(double value) {
-    pressElevation = value;
-    lastEvent = 'pressElevation ${pressElevation.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onVisualDensity(VisualDensity? value) {
-    visualDensity = value;
-    lastEvent = 'visualDensity ${nameOfDensity(value)}';
-    setState(() {});
-  }
-
-  void onMaterialTapTargetSize(MaterialTapTargetSize? value) {
-    materialTapTargetSize = value;
-    lastEvent = 'materialTapTargetSize ${value?.name ?? 'null'}';
-    setState(() {});
-  }
-
-  void onUseAvatarConstraints(bool value) {
-    useAvatarConstraints = value;
-    lastEvent = 'avatarBoxConstraints ${useAvatarConstraints ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onAvatarConstraint(double value) {
-    avatarConstraint = value;
-    lastEvent = 'avatarBoxConstraints ${avatarConstraint.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onUseDeleteConstraints(bool value) {
-    useDeleteConstraints = value;
-    lastEvent = 'deleteIconBoxConstraints ${useDeleteConstraints ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onDeleteConstraint(double value) {
-    deleteConstraint = value;
-    lastEvent = 'deleteIconBoxConstraints ${deleteConstraint.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onUseIconTheme(bool value) {
-    useIconTheme = value;
-    lastEvent = 'iconTheme ${useIconTheme ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onIconThemeSize(double value) {
-    iconThemeSize = value;
-    lastEvent = 'iconTheme.size ${iconThemeSize.toStringAsFixed(1)}';
-    setState(() {});
-  }
-
-  void onIconThemeColor(Color? value) {
-    iconThemeColor = value;
-    lastEvent = 'iconTheme.color ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onShowCheckmark(bool? value) {
-    showCheckmark = value;
-    lastEvent = 'showCheckmark ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onCheckmarkColor(Color? value) {
-    checkmarkColor = value;
-    lastEvent = 'checkmarkColor ${value ?? 'null'}';
-    setState(() {});
-  }
-
-  void onAutofocus(bool value) {
-    autofocus = value;
-    lastEvent = 'autofocus $autofocus';
-    setState(() {});
-  }
-
-  void onUseAnimationStyle(bool value) {
-    useAnimationStyle = value;
-    lastEvent = 'chipAnimationStyle ${useAnimationStyle ? 'on' : 'null'}';
-    setState(() {});
-  }
-
-  void onAnimMs(double value) {
-    animMs = value;
-    lastEvent = 'animation.duration ${animMs.round()}ms';
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
     setState(() {});
   }
 
@@ -1152,7 +988,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     lastEvent = 'onSelected ${actor.name} $value';
     DLog.d(lastEvent);
     setState(() {});
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(lastEvent),
@@ -1168,7 +1004,7 @@ class _ChipFilterDemoState extends State<ChipFilterDemo> {
     lastEvent = 'onDeleted ${actor.name}';
     DLog.d(lastEvent);
     setState(() {});
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(lastEvent),

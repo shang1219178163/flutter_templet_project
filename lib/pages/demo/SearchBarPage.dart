@@ -42,6 +42,7 @@ class SearchBarPage extends StatefulWidget {
 
 class _SearchBarPageState extends State<SearchBarPage> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final searchController = SearchController();
@@ -313,7 +314,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -332,7 +333,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: Column(
@@ -359,13 +360,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
                       items: [
                         {
                           NLangEnum.en:
-                              'All Flutter SDK search fields: SearchBar, SearchAnchor / .bar, CupertinoSearchTextField, and showSearch + SearchDelegate.',
+                              'SearchBar, SearchAnchor / .bar, CupertinoSearchTextField, showSearch + SearchDelegate.',
                           NLangEnum.zh:
-                              '覆盖 Flutter SDK 全部搜索框：SearchBar、SearchAnchor / .bar、CupertinoSearchTextField，以及 showSearch + SearchDelegate。',
+                              '覆盖 Flutter SDK 全部搜索框：SearchBar、SearchAnchor / .bar、CupertinoSearchTextField、showSearch + SearchDelegate。',
                         },
                       ],
                     ),
-                    buildKindCard(),
                     buildBehaviorCard(),
                     if (!isShowSearch) buildSurfaceCard(),
                   ],
@@ -379,7 +379,6 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   Widget buildPreview() {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final previewHeight = isShowSearch ? 168.0 : 132.0;
     return DecoratedBox(
@@ -436,18 +435,11 @@ class _SearchBarPageState extends State<SearchBarPage> {
       focusNode: useFocusNode ? focusNode : null,
       hintText: hintText,
       leading: useLeading ? const Icon(Icons.search) : null,
-      trailing: useTrailing
-          ? [
-              IconButton(
-                icon: const Icon(Icons.mic),
-                onPressed: () => onMark('trailing'),
-              ),
-            ]
-          : null,
+      trailing: useTrailing ? micButtons('trailing') : null,
       onTap: useOnTap ? onTap : null,
-      onTapOutside: useOnTapOutside ? onTapOutside : null,
-      onChanged: useOnChanged ? onChanged : null,
-      onSubmitted: useOnSubmitted ? onSubmitted : null,
+      onTapOutside: useOnTapOutside ? (_) => onMark('onTapOutside') : null,
+      onChanged: useOnChanged ? (v) => onMark('onChanged $v') : null,
+      onSubmitted: useOnSubmitted ? (v) => onMark('onSubmitted $v') : null,
       constraints: constraintsOf(),
       elevation: elevationProp(),
       backgroundColor: colorProp(backgroundColor),
@@ -476,14 +468,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
       searchController: searchController,
       viewBuilder: useViewBuilder ? onViewBuilder : null,
       viewLeading: useViewLeading ? const Icon(Icons.arrow_back) : null,
-      viewTrailing: useViewTrailing
-          ? [
-              IconButton(
-                icon: const Icon(Icons.mic),
-                onPressed: () => onMark('viewTrailing'),
-              ),
-            ]
-          : null,
+      viewTrailing: useViewTrailing ? micButtons('viewTrailing') : null,
       viewHintText: viewHintText,
       viewBackgroundColor: viewBackgroundColor,
       viewElevation: useViewElevation ? viewElevation : null,
@@ -496,8 +481,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
       dividerColor: dividerColor,
       viewConstraints: viewConstraintsOf(),
       textCapitalization: textCapitalization,
-      viewOnChanged: useOnChanged ? onChanged : null,
-      viewOnSubmitted: useOnSubmitted ? onSubmitted : null,
+      viewOnChanged: useOnChanged ? (v) => onMark('onChanged $v') : null,
+      viewOnSubmitted: useOnSubmitted ? (v) => onMark('onSubmitted $v') : null,
       builder: onAnchorBuilder,
       suggestionsBuilder: onSuggestions,
       textInputAction: textInputAction,
@@ -509,18 +494,11 @@ class _SearchBarPageState extends State<SearchBarPage> {
   Widget buildSearchAnchorBar() {
     return SearchAnchor.bar(
       barLeading: useLeading ? const Icon(Icons.search) : null,
-      barTrailing: useTrailing
-          ? [
-              IconButton(
-                icon: const Icon(Icons.mic),
-                onPressed: () => onMark('barTrailing'),
-              ),
-            ]
-          : null,
+      barTrailing: useTrailing ? micButtons('barTrailing') : null,
       barHintText: hintText,
       onTap: useOnTap ? onTap : null,
-      onSubmitted: useOnSubmitted ? onSubmitted : null,
-      onChanged: useOnChanged ? onChanged : null,
+      onSubmitted: useOnSubmitted ? (v) => onMark('onSubmitted $v') : null,
+      onChanged: useOnChanged ? (v) => onMark('onChanged $v') : null,
       barElevation: elevationProp(),
       barBackgroundColor: colorProp(backgroundColor),
       barOverlayColor: colorProp(overlayColor),
@@ -530,14 +508,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
       barTextStyle: textStyleProp(),
       barHintStyle: hintStyleProp(),
       viewLeading: useViewLeading ? const Icon(Icons.arrow_back) : null,
-      viewTrailing: useViewTrailing
-          ? [
-              IconButton(
-                icon: const Icon(Icons.mic),
-                onPressed: () => onMark('viewTrailing'),
-              ),
-            ]
-          : null,
+      viewTrailing: useViewTrailing ? micButtons('viewTrailing') : null,
       viewHintText: viewHintText,
       viewBackgroundColor: viewBackgroundColor,
       viewElevation: useViewElevation ? viewElevation : null,
@@ -566,8 +537,8 @@ class _SearchBarPageState extends State<SearchBarPage> {
       child: CupertinoSearchTextField(
         key: const ValueKey(_SearchKind.cupertino),
         controller: useController ? textController : null,
-        onChanged: useOnChanged ? onChanged : null,
-        onSubmitted: useOnSubmitted ? onSubmitted : null,
+        onChanged: useOnChanged ? (v) => onMark('onChanged $v') : null,
+        onSubmitted: useOnSubmitted ? (v) => onMark('onSubmitted $v') : null,
         style: useTextStyle ? TextStyle(color: textStyleColor, fontSize: fontSize) : null,
         placeholder: placeholder,
         placeholderStyle: useHintStyle ? TextStyle(color: hintStyleColor) : null,
@@ -603,7 +574,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   Widget buildShowSearchPreview() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Material(
       color: scheme.surface,
       elevation: 2,
@@ -638,11 +609,11 @@ class _SearchBarPageState extends State<SearchBarPage> {
     );
   }
 
-  Widget buildKindCard() {
+  Widget buildBehaviorCard() {
     return NDecorationCard(
-      icon: const Icon(Icons.search),
-      title: '样式',
-      subtitle: 'SearchBar  SearchAnchor  SearchAnchor.bar  CupertinoSearchTextField  showSearch',
+      icon: const Icon(Icons.tune_outlined),
+      title: '行为',
+      subtitle: '构造  hintText  enabled  keyboard  callbacks  SearchDelegate',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -662,45 +633,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
               onChanged: (e) => onMark('builder ${e.name}', () => anchorBuilderKind = e),
             ),
           ],
-        ],
-      ),
-    );
-  }
-
-  Widget buildBehaviorCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.tune_outlined),
-      title: '行为',
-      subtitle: 'hintText  enabled  keyboard  callbacks  SearchDelegate',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (isSearchBar || isAnchorBar) ...[
-            const Text('hintText'),
-            buildChoiceChips(
-              values: const [null, 'Search', '搜索', 'Hint'],
-              value: hintText,
-              labelOf: (e) => e ?? '默',
-              onChanged: (e) => onMark('hintText ${e ?? 'null'}', () => hintText = e),
-            ),
-          ],
-          if (isCupertino) ...[
-            const Text('placeholder'),
-            buildChoiceChips(
-              values: const [null, 'Search', '搜索'],
-              value: placeholder,
-              labelOf: (e) => e ?? '默',
-              onChanged: (e) => onMark('placeholder ${e ?? 'null'}', () => placeholder = e),
-            ),
-          ],
+          if (isSearchBar || isAnchorBar)
+            buildStringChips('hintText', hintText, const [null, 'Search', '搜索', 'Hint'], (e) => hintText = e),
+          if (isCupertino)
+            buildStringChips('placeholder', placeholder, const [null, 'Search', '搜索'], (e) => placeholder = e),
           if (isAnchor || isAnchorBar) ...[
-            const Text('viewHintText'),
-            buildChoiceChips(
-              values: const [null, 'Search', '搜索'],
-              value: viewHintText,
-              labelOf: (e) => e ?? '默',
-              onChanged: (e) => onMark('viewHintText ${e ?? 'null'}', () => viewHintText = e),
-            ),
+            buildStringChips('viewHintText', viewHintText, const [null, 'Search', '搜索'], (e) => viewHintText = e),
             const Text('isFullScreen'),
             buildChoiceChips(
               values: const [null, true, false],
@@ -750,42 +688,42 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 onChanged: (v) => onMark('headerHeight ${v.round()}', () => headerHeight = v),
               ),
           ],
-          if (isSearchBar || isCupertino)
+          if (isSearchBar || isCupertino) ...[
             buildSwitch(
               title: 'controller',
               value: useController,
               onChanged: (v) => onMark('controller ${v ? 'on' : 'null'}', () => useController = v),
             ),
-          if (isSearchBar || isCupertino)
             buildSwitch(
               title: 'focusNode',
               value: useFocusNode,
               onChanged: (v) => onMark('focusNode ${v ? 'on' : 'null'}', () => useFocusNode = v),
             ),
-          if (isSearchBar || isAnchorBar)
+          ],
+          if (isSearchBar || isAnchorBar) ...[
             buildSwitch(
               title: 'leading',
               value: useLeading,
               onChanged: (v) => onMark('leading ${v ? 'on' : 'null'}', () => useLeading = v),
             ),
-          if (isSearchBar || isAnchorBar)
             buildSwitch(
               title: 'trailing',
               value: useTrailing,
               onChanged: (v) => onMark('trailing ${v ? 'on' : 'null'}', () => useTrailing = v),
             ),
-          if (!isShowSearch)
+          ],
+          if (!isShowSearch) ...[
             buildSwitch(
               title: 'onChanged',
               value: useOnChanged,
               onChanged: (v) => onMark('onChanged ${v ? 'on' : 'null'}', () => useOnChanged = v),
             ),
-          if (!isShowSearch)
             buildSwitch(
               title: 'onSubmitted',
               value: useOnSubmitted,
               onChanged: (v) => onMark('onSubmitted ${v ? 'on' : 'null'}', () => useOnSubmitted = v),
             ),
+          ],
           if (isSearchBar || isAnchorBar || isCupertino)
             buildSwitch(
               title: 'onTap',
@@ -818,35 +756,39 @@ class _SearchBarPageState extends State<SearchBarPage> {
               labelOf: (e) => e?.name ?? '默',
               onChanged: (e) => onMark('textCapitalization ${e?.name ?? 'null'}', () => textCapitalization = e),
             ),
-            const Text('textInputAction'),
-            buildChoiceChips(
-              values: const [
-                null,
-                TextInputAction.search,
-                TextInputAction.done,
-                TextInputAction.next,
-                TextInputAction.go
-              ],
-              value: textInputAction,
-              labelOf: (e) => e?.name ?? '默',
-              onChanged: (e) => onMark('textInputAction ${e?.name ?? 'null'}', () => textInputAction = e),
-            ),
-            const Text('keyboardType'),
-            buildChoiceChips(
-              values: const [
-                null,
-                TextInputType.text,
-                TextInputType.number,
-                TextInputType.emailAddress,
-                TextInputType.url,
-                TextInputType.phone
-              ],
-              value: keyboardType,
-              labelOf: nameOfKeyboard,
-              onChanged: (e) => onMark('keyboardType ${nameOfKeyboard(e)}', () => keyboardType = e),
-            ),
           ],
-          if (isSearchBar || isAnchorBar)
+          const Text('textInputAction'),
+          buildChoiceChips(
+            values: isShowSearch
+                ? const <TextInputAction?>[TextInputAction.search, TextInputAction.done, TextInputAction.go]
+                : const <TextInputAction?>[
+                    null,
+                    TextInputAction.search,
+                    TextInputAction.done,
+                    TextInputAction.next,
+                    TextInputAction.go
+                  ],
+            value: isShowSearch ? (textInputAction ?? TextInputAction.search) : textInputAction,
+            labelOf: (e) => e?.name ?? '默',
+            onChanged: (e) => onMark('textInputAction ${e?.name ?? 'null'}', () => textInputAction = e),
+          ),
+          const Text('keyboardType'),
+          buildChoiceChips(
+            values: isShowSearch
+                ? const [null, TextInputType.text, TextInputType.number, TextInputType.emailAddress]
+                : const [
+                    null,
+                    TextInputType.text,
+                    TextInputType.number,
+                    TextInputType.emailAddress,
+                    TextInputType.url,
+                    TextInputType.phone
+                  ],
+            value: keyboardType,
+            labelOf: nameOfKeyboard,
+            onChanged: (e) => onMark('keyboardType ${nameOfKeyboard(e)}', () => keyboardType = e),
+          ),
+          if (isSearchBar || isAnchorBar) ...[
             buildSlider(
               label: 'scrollPadding',
               value: scrollPaddingAll,
@@ -854,12 +796,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
               max: 40,
               onChanged: (v) => onMark('scrollPadding ${v.round()}', () => scrollPaddingAll = v),
             ),
-          if (isSearchBar || isAnchorBar)
             buildSwitch(
               title: 'contextMenuBuilder',
               value: useContextMenuBuilder,
               onChanged: (v) => onMark('contextMenuBuilder ${v ? 'on' : 'off'}', () => useContextMenuBuilder = v),
             ),
+          ],
           if (isCupertino) ...[
             const Text('suffixMode'),
             buildChoiceChips(
@@ -959,33 +901,14 @@ class _SearchBarPageState extends State<SearchBarPage> {
               value: maintainState,
               onChanged: (v) => onMark('maintainState $v', () => maintainState = v),
             ),
-            const Text('searchFieldLabel'),
-            buildChoiceChips(
-              values: const [null, 'Search', '搜索'],
-              value: searchFieldLabel,
-              labelOf: (e) => e ?? '默',
-              onChanged: (e) => onMark('searchFieldLabel ${e ?? 'null'}', () => searchFieldLabel = e),
-            ),
+            buildStringChips(
+                'searchFieldLabel', searchFieldLabel, const [null, 'Search', '搜索'], (e) => searchFieldLabel = e),
             const Text('searchFieldLook'),
             buildChoiceChips(
               values: _SearchFieldLook.values,
               value: searchFieldLook,
               labelOf: (e) => e.name,
               onChanged: (e) => onMark('searchFieldLook ${e.name}', () => searchFieldLook = e),
-            ),
-            const Text('keyboardType'),
-            buildChoiceChips(
-              values: const [null, TextInputType.text, TextInputType.number, TextInputType.emailAddress],
-              value: keyboardType,
-              labelOf: nameOfKeyboard,
-              onChanged: (e) => onMark('keyboardType ${nameOfKeyboard(e)}', () => keyboardType = e),
-            ),
-            const Text('textInputAction'),
-            buildChoiceChips(
-              values: const [TextInputAction.search, TextInputAction.done, TextInputAction.go],
-              value: textInputAction ?? TextInputAction.search,
-              labelOf: (e) => e.name,
-              onChanged: (e) => onMark('textInputAction ${e.name}', () => textInputAction = e),
             ),
             buildSwitch(
               title: 'autocorrect',
@@ -1099,38 +1022,20 @@ class _SearchBarPageState extends State<SearchBarPage> {
             ],
             buildColorRow('backgroundColor', backgroundColor,
                 (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
-            if (isSearchBar)
+            if (isSearchBar) ...[
               buildColorRow(
                   'shadowColor', shadowColor, (v) => onMark('shadowColor ${v ?? 'null'}', () => shadowColor = v)),
-            if (isSearchBar)
               buildColorRow('surfaceTintColor', surfaceTintColor,
                   (v) => onMark('surfaceTintColor ${v ?? 'null'}', () => surfaceTintColor = v)),
+            ],
             buildColorRow(
                 'overlayColor', overlayColor, (v) => onMark('overlayColor ${v ?? 'null'}', () => overlayColor = v)),
-            buildSwitch(
-              title: 'textStyle',
-              value: useTextStyle,
-              onChanged: (v) => onMark('textStyle ${v ? 'on' : 'null'}', () => useTextStyle = v),
+            ...buildStyleToggles(
+              styleTitle: 'textStyle',
+              hintTitle: 'hintStyle',
+              colorLabel: 'textStyle.color',
+              hintColorLabel: 'hintStyle.color',
             ),
-            if (useTextStyle) ...[
-              buildSlider(
-                label: 'fontSize',
-                value: fontSize,
-                min: 12,
-                max: 22,
-                onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
-              ),
-              buildColorRow('textStyle.color', textStyleColor,
-                  (v) => onMark('textStyle.color ${v ?? 'null'}', () => textStyleColor = v)),
-            ],
-            buildSwitch(
-              title: 'hintStyle',
-              value: useHintStyle,
-              onChanged: (v) => onMark('hintStyle ${v ? 'on' : 'null'}', () => useHintStyle = v),
-            ),
-            if (useHintStyle)
-              buildColorRow('hintStyle.color', hintStyleColor,
-                  (v) => onMark('hintStyle.color ${v ?? 'null'}', () => hintStyleColor = v)),
           ],
           if (isAnchor || isAnchorBar) ...[
             buildSwitch(
@@ -1198,30 +1103,12 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 (v) => onMark('backgroundColor ${v ?? 'null'}', () => backgroundColor = v)),
             buildColorRow('itemColor', itemColor,
                 (v) => onMark('itemColor ${v ?? 'null'}', () => itemColor = v ?? CupertinoColors.secondaryLabel)),
-            buildSwitch(
-              title: 'style',
-              value: useTextStyle,
-              onChanged: (v) => onMark('style ${v ? 'on' : 'null'}', () => useTextStyle = v),
+            ...buildStyleToggles(
+              styleTitle: 'style',
+              hintTitle: 'placeholderStyle',
+              colorLabel: 'style.color',
+              hintColorLabel: 'placeholderStyle',
             ),
-            if (useTextStyle) ...[
-              buildSlider(
-                label: 'fontSize',
-                value: fontSize,
-                min: 12,
-                max: 22,
-                onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
-              ),
-              buildColorRow(
-                  'style.color', textStyleColor, (v) => onMark('style.color ${v ?? 'null'}', () => textStyleColor = v)),
-            ],
-            buildSwitch(
-              title: 'placeholderStyle',
-              value: useHintStyle,
-              onChanged: (v) => onMark('placeholderStyle ${v ? 'on' : 'null'}', () => useHintStyle = v),
-            ),
-            if (useHintStyle)
-              buildColorRow('placeholderStyle', hintStyleColor,
-                  (v) => onMark('placeholderStyle ${v ?? 'null'}', () => hintStyleColor = v)),
           ],
         ],
       ),
@@ -1238,14 +1125,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
           controller: controller,
           hintText: hintText,
           leading: useLeading ? const Icon(Icons.search) : null,
-          trailing: useTrailing
-              ? [
-                  IconButton(
-                    icon: const Icon(Icons.mic),
-                    onPressed: () => onMark('trailing'),
-                  ),
-                ]
-              : null,
+          trailing: useTrailing ? micButtons('trailing') : null,
           onTap: controller.openView,
           elevation: elevationProp(),
           backgroundColor: colorProp(backgroundColor),
@@ -1278,24 +1158,17 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   Widget onContextMenu(BuildContext context, EditableTextState state) {
-    if (!useContextMenuBuilder) {
-      return const SizedBox.shrink();
-    }
-    return AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+    return useContextMenuBuilder
+        ? AdaptiveTextSelectionToolbar.editableText(editableTextState: state)
+        : const SizedBox.shrink();
   }
 
   BoxConstraints? constraintsOf() {
-    if (!useConstraints) {
-      return null;
-    }
-    return BoxConstraints(minWidth: 0, minHeight: minHeight, maxWidth: maxWidth);
+    return useConstraints ? BoxConstraints(minWidth: 0, minHeight: minHeight, maxWidth: maxWidth) : null;
   }
 
   BoxConstraints? viewConstraintsOf() {
-    if (!useViewConstraints) {
-      return null;
-    }
-    return BoxConstraints.loose(Size.fromHeight(viewMaxHeight));
+    return useViewConstraints ? BoxConstraints.loose(Size.fromHeight(viewMaxHeight)) : null;
   }
 
   WidgetStateProperty<double?>? elevationProp() {
@@ -1307,10 +1180,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   WidgetStateProperty<BorderSide?>? sideProp() {
-    if (!useSide) {
-      return null;
-    }
-    return WidgetStatePropertyAll(BorderSide(color: sideColor ?? Colors.blue, width: sideWidth));
+    return useSide ? WidgetStatePropertyAll(BorderSide(color: sideColor ?? Colors.blue, width: sideWidth)) : null;
   }
 
   WidgetStateProperty<OutlinedBorder?>? shapeProp() {
@@ -1319,45 +1189,29 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   WidgetStateProperty<EdgeInsetsGeometry?>? paddingProp() {
-    if (!usePadding) {
-      return null;
-    }
-    return WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: paddingH, vertical: paddingV));
+    return usePadding
+        ? WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: paddingH, vertical: paddingV))
+        : null;
   }
 
   WidgetStateProperty<TextStyle?>? textStyleProp() {
-    if (!useTextStyle) {
-      return null;
-    }
-    return WidgetStatePropertyAll(TextStyle(color: textStyleColor, fontSize: fontSize));
+    return useTextStyle ? WidgetStatePropertyAll(TextStyle(color: textStyleColor, fontSize: fontSize)) : null;
   }
 
   WidgetStateProperty<TextStyle?>? hintStyleProp() {
-    if (!useHintStyle) {
-      return null;
-    }
-    return WidgetStatePropertyAll(TextStyle(color: hintStyleColor));
+    return useHintStyle ? WidgetStatePropertyAll(TextStyle(color: hintStyleColor)) : null;
   }
 
   TextStyle? headerTextStyleOf() {
-    if (!useTextStyle) {
-      return null;
-    }
-    return TextStyle(color: textStyleColor, fontSize: fontSize);
+    return useTextStyle ? TextStyle(color: textStyleColor, fontSize: fontSize) : null;
   }
 
   TextStyle? headerHintStyleOf() {
-    if (!useHintStyle) {
-      return null;
-    }
-    return TextStyle(color: hintStyleColor);
+    return useHintStyle ? TextStyle(color: hintStyleColor) : null;
   }
 
   BorderSide? viewSideOf() {
-    if (!useViewSide) {
-      return null;
-    }
-    return BorderSide(color: sideColor ?? Colors.blue, width: sideWidth);
+    return useViewSide ? BorderSide(color: sideColor ?? Colors.blue, width: sideWidth) : null;
   }
 
   OutlinedBorder? viewShapeOf() {
@@ -1383,25 +1237,72 @@ class _SearchBarPageState extends State<SearchBarPage> {
   }
 
   String nameOfKeyboard(TextInputType? value) {
-    if (value == null) {
-      return '默';
-    }
-    if (value == TextInputType.text) {
-      return 'text';
-    }
-    if (value == TextInputType.number) {
-      return 'number';
-    }
-    if (value == TextInputType.emailAddress) {
-      return 'email';
-    }
-    if (value == TextInputType.url) {
-      return 'url';
-    }
-    if (value == TextInputType.phone) {
-      return 'phone';
-    }
-    return '$value';
+    return switch (value) {
+      null => '默',
+      final v when v == TextInputType.text => 'text',
+      final v when v == TextInputType.number => 'number',
+      final v when v == TextInputType.emailAddress => 'email',
+      final v when v == TextInputType.url => 'url',
+      final v when v == TextInputType.phone => 'phone',
+      _ => '$value',
+    };
+  }
+
+  List<Widget> micButtons(String event) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.mic),
+        onPressed: () => onMark(event),
+      ),
+    ];
+  }
+
+  Widget buildStringChips(String label, String? value, List<String?> values, ValueChanged<String?> onApply) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label),
+        buildChoiceChips(
+          values: values,
+          value: value,
+          labelOf: (e) => e ?? '默',
+          onChanged: (e) => onMark('$label ${e ?? 'null'}', () => onApply(e)),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> buildStyleToggles({
+    required String styleTitle,
+    required String hintTitle,
+    required String colorLabel,
+    required String hintColorLabel,
+  }) {
+    return [
+      buildSwitch(
+        title: styleTitle,
+        value: useTextStyle,
+        onChanged: (v) => onMark('$styleTitle ${v ? 'on' : 'null'}', () => useTextStyle = v),
+      ),
+      if (useTextStyle) ...[
+        buildSlider(
+          label: 'fontSize',
+          value: fontSize,
+          min: 12,
+          max: 22,
+          onChanged: (v) => onMark('fontSize ${v.round()}', () => fontSize = v),
+        ),
+        buildColorRow(colorLabel, textStyleColor, (v) => onMark('$colorLabel ${v ?? 'null'}', () => textStyleColor = v)),
+      ],
+      buildSwitch(
+        title: hintTitle,
+        value: useHintStyle,
+        onChanged: (v) => onMark('$hintTitle ${v ? 'on' : 'null'}', () => useHintStyle = v),
+      ),
+      if (useHintStyle)
+        buildColorRow(
+            hintColorLabel, hintStyleColor, (v) => onMark('$hintColorLabel ${v ?? 'null'}', () => hintStyleColor = v)),
+    ];
   }
 
   Widget buildColorRow(String label, Color? value, ValueChanged<Color?> onChanged) {
@@ -1420,7 +1321,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
     required String Function(T) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -1454,7 +1355,7 @@ class _SearchBarPageState extends State<SearchBarPage> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -1474,20 +1375,22 @@ class _SearchBarPageState extends State<SearchBarPage> {
                 width: selected ? 2 : 1,
               ),
             ),
-            child: e == null
-                ? Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600))
-                : selected
-                    ? Icon(
-                        Icons.check_rounded,
-                        size: 16,
-                        color:
-                            ThemeData.estimateBrightnessForColor(e) == Brightness.dark ? Colors.white : Colors.black87,
-                      )
-                    : null,
+            child: colorDotChild(e, selected, scheme),
           ),
         );
       }).toList(),
     );
+  }
+
+  Widget? colorDotChild(Color? color, bool selected, ColorScheme scheme) {
+    if (color == null) {
+      return Text('默', style: TextStyle(fontSize: 10, color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600));
+    }
+    if (!selected) {
+      return null;
+    }
+    final dark = ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+    return Icon(Icons.check_rounded, size: 16, color: dark ? Colors.white : Colors.black87);
   }
 
   Widget buildSlider({
@@ -1497,7 +1400,6 @@ class _SearchBarPageState extends State<SearchBarPage> {
     required double max,
     required ValueChanged<double> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -1539,18 +1441,6 @@ class _SearchBarPageState extends State<SearchBarPage> {
     );
   }
 
-  void onTapOutside(PointerDownEvent event) {
-    onMark('onTapOutside');
-  }
-
-  void onChanged(String value) {
-    onMark('onChanged $value');
-  }
-
-  void onSubmitted(String value) {
-    onMark('onSubmitted $value');
-  }
-
   void onSuffixTap() {
     textController.clear();
     onMark('onSuffixTap');
@@ -1565,16 +1455,18 @@ class _SearchBarPageState extends State<SearchBarPage> {
       delegate: _DemoSearchDelegate(
         words: _kWords,
         searchFieldLabel: searchFieldLabel,
-        searchFieldStyle: searchFieldLook == _SearchFieldLook.style
-            ? TextStyle(color: textStyleColor ?? Colors.white, fontSize: fontSize)
-            : null,
-        searchFieldDecorationTheme: searchFieldLook == _SearchFieldLook.decoration
-            ? const InputDecorationTheme(
-                filled: true,
-                fillColor: Colors.white24,
-                border: InputBorder.none,
-              )
-            : null,
+        searchFieldStyle: switch (searchFieldLook) {
+          _SearchFieldLook.style => TextStyle(color: textStyleColor ?? Colors.white, fontSize: fontSize),
+          _ => null,
+        },
+        searchFieldDecorationTheme: switch (searchFieldLook) {
+          _SearchFieldLook.decoration => const InputDecorationTheme(
+              filled: true,
+              fillColor: Colors.white24,
+              border: InputBorder.none,
+            ),
+          _ => null,
+        },
         keyboardType: keyboardType,
         textInputAction: textInputAction ?? TextInputAction.search,
         autocorrect: autocorrect,

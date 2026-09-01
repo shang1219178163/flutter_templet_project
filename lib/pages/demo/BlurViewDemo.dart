@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_blur_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// clipper 预设
@@ -34,6 +35,8 @@ class BlurViewDemo extends StatefulWidget {
 class _BlurViewDemoState extends State<BlurViewDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
 
   /// 原 Demo BorderRadius.circular(16)、blur 25、Clip.antiAlias
@@ -45,6 +48,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
   bool useBackdropFilter = false;
   BlendMode blendMode = BlendMode.srcOver;
   bool filterEnabled = true;
+  String lastEvent = '—';
 
   static const _title = 'BackdropFilter class';
   static const _message =
@@ -59,7 +63,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -78,7 +82,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -108,18 +112,14 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
                           items: [
                             {
                               NLangEnum.en:
-                                  'NBlurView clips with ClipRRect then applies BackdropFilter. Default blur is 25 over Assets.imagesBg.',
-                              NLangEnum.zh: 'NBlurView 先 ClipRRect 再套 BackdropFilter。默认 blur 25，背景仍是 Assets.imagesBg。',
+                                  'NBlurView clips with ClipRRect then applies BackdropFilter. Default blur is 25 over Assets.imagesBg. A non-null clipper replaces borderRadius for the clip path.',
+                              NLangEnum.zh:
+                                  'NBlurView 先 ClipRRect 再套 BackdropFilter。默认 blur 25，背景仍是 Assets.imagesBg。clipper 非空时用它裁剪，不再用 borderRadius。',
                             },
                             {
                               NLangEnum.en:
                                   'If backdropFilter is set, blur is unused and the passed BackdropFilter must include its own child.',
                               NLangEnum.zh: '传入 backdropFilter 时 blur 不生效，且该 BackdropFilter 必须自带 child。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'A non-null clipper replaces borderRadius for the clip path.',
-                              NLangEnum.zh: 'clipper 非空时用它裁剪，不再用 borderRadius。',
                             },
                           ],
                         ),
@@ -138,7 +138,6 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -176,7 +175,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Text(
-              'blur ${blur.toStringAsFixed(0)} · ${shapeKind.name} · ${clipBehavior.name}',
+              'blur ${blur.toStringAsFixed(0)} · ${shapeKind.name} · ${clipBehavior.name} · $lastEvent',
               textAlign: TextAlign.center,
               style: theme.textTheme.labelMedium?.copyWith(
                 color: scheme.onSurfaceVariant,
@@ -262,7 +261,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     return NDecorationCard(
       icon: const Icon(Icons.account_tree_rounded),
       title: '构造',
-      subtitle: 'borderRadius · clipper · clipBehavior · child · backdropFilter · blur',
+      subtitle: 'borderRadius · clipper · clipBehavior · blur',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -273,7 +272,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
                 values: ShapeKind.values,
                 isSelected: (e) => shapeKind == e,
                 labelOf: (e) => e.name,
-                onChanged: onShapeKind,
+                onChanged: (e) => onMark('borderRadius ${e.name}', () => shapeKind = e),
               ),
             ),
             if (shapeKind == ShapeKind.rounded)
@@ -282,7 +281,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
                 value: shapeRadius,
                 min: 0,
                 max: 48,
-                onChanged: onShapeRadius,
+                onChanged: (v) => onMark('radius ${v.round()}', () => shapeRadius = v),
               ),
           ],
           buildField(
@@ -292,7 +291,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
               values: _ClipperKind.values,
               isSelected: (e) => clipperKind == e,
               labelOf: (e) => e.name,
-              onChanged: onClipperKind,
+              onChanged: (e) => onMark('clipper ${e.name}', () => clipperKind = e),
             ),
           ),
           buildField(
@@ -302,62 +301,52 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
               values: Clip.values,
               isSelected: (e) => clipBehavior == e,
               labelOf: (e) => e.name,
-              onChanged: onClipBehavior,
+              onChanged: (e) => onMark('clipBehavior ${e.name}', () => clipBehavior = e),
             ),
           ),
-          buildSwitch(
-            title: 'backdropFilter',
-            value: useBackdropFilter,
-            onChanged: onUseBackdropFilter,
+          buildSlider(
+            label: 'blur',
+            value: blur,
+            min: 0,
+            max: 50,
+            onChanged: (v) => onMark('blur ${v.toStringAsFixed(1)}', () => blur = v),
+            fractionDigits: 1,
           ),
-          if (!useBackdropFilter)
-            buildSlider(
-              label: 'blur',
-              value: blur,
-              min: 0,
-              max: 50,
-              onChanged: onBlur,
-              fractionDigits: 1,
-            ),
         ],
       ),
     );
   }
 
   Widget buildBehaviorCard() {
-    if (!useBackdropFilter) {
-      return const SizedBox.shrink();
-    }
     return NDecorationCard(
       icon: const Icon(Icons.tune_rounded),
-      title: 'backdropFilter',
-      subtitle: 'filter · blendMode · enabled',
+      title: '行为',
+      subtitle: 'backdropFilter · blendMode · enabled',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSlider(
-            label: 'blur',
-            value: blur,
-            min: 0,
-            max: 50,
-            onChanged: onBlur,
-            fractionDigits: 1,
-          ),
           buildSwitch(
-            title: 'enabled',
-            value: filterEnabled,
-            onChanged: onFilterEnabled,
+            title: 'backdropFilter',
+            value: useBackdropFilter,
+            onChanged: (v) => onMark('backdropFilter $v', () => useBackdropFilter = v),
           ),
-          buildField(
-            label: 'blendMode',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: BlendMode.values,
-              isSelected: (e) => blendMode == e,
-              labelOf: (e) => e.name,
-              onChanged: onBlendMode,
+          if (useBackdropFilter) ...[
+            buildSwitch(
+              title: 'enabled',
+              value: filterEnabled,
+              onChanged: (v) => onMark('enabled $v', () => filterEnabled = v),
             ),
-          ),
+            buildField(
+              label: 'blendMode',
+              showTopGap: true,
+              child: buildChoiceChips(
+                values: BlendMode.values,
+                isSelected: (e) => blendMode == e,
+                labelOf: (e) => e.name,
+                onChanged: (e) => onMark('blendMode ${e.name}', () => blendMode = e),
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -368,7 +357,6 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -397,7 +385,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -435,7 +423,6 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     required ValueChanged<double> onChanged,
     int fractionDigits = 0,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -465,7 +452,6 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -482,43 +468,10 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     );
   }
 
-  void onShapeKind(ShapeKind value) {
-    shapeKind = value;
-    setState(() {});
-  }
-
-  void onShapeRadius(double value) {
-    shapeRadius = value;
-    setState(() {});
-  }
-
-  void onClipperKind(_ClipperKind value) {
-    clipperKind = value;
-    setState(() {});
-  }
-
-  void onClipBehavior(Clip value) {
-    clipBehavior = value;
-    setState(() {});
-  }
-
-  void onUseBackdropFilter(bool value) {
-    useBackdropFilter = value;
-    setState(() {});
-  }
-
-  void onBlur(double value) {
-    blur = value;
-    setState(() {});
-  }
-
-  void onFilterEnabled(bool value) {
-    filterEnabled = value;
-    setState(() {});
-  }
-
-  void onBlendMode(BlendMode value) {
-    blendMode = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
@@ -531,6 +484,7 @@ class _BlurViewDemoState extends State<BlurViewDemo> {
     useBackdropFilter = false;
     blendMode = BlendMode.srcOver;
     filterEnabled = true;
+    lastEvent = '—';
     setState(() {});
   }
 }

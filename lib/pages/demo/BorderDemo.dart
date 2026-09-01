@@ -48,39 +48,68 @@ class BorderDemo extends StatefulWidget {
 
 class _BorderDemoState extends State<BorderDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
 
+  /// 边框种类
   _Kind kind = _Kind.borderSide;
+  /// 边颜色
   Color? sideColor = Colors.red;
+  /// 边宽度
   double sideWidth = 1;
+  /// 边样式
   BorderStyle sideStyle = BorderStyle.solid;
+  /// 描边对齐
   double strokeAlign = BorderSide.strokeAlignInside;
+  /// 圆角
   double radius = 0;
+  /// 椭圆离心率
   double eccentricity = 0;
+  /// Linear 起点边
   bool linearStart = false;
+  /// Linear 终点边
   bool linearEnd = false;
+  /// Linear 顶边
   bool linearTop = false;
+  /// Linear 底边
   bool linearBottom = true;
+  /// Linear 边长比例
   double linearSize = 1;
+  /// Linear 边对齐
   double linearAlign = 0;
+  /// 星形点数 / 多边形边数
   double points = 5;
+  /// 星形内径比
   double innerRadiusRatio = 0.4;
+  /// 尖角圆度
   double pointRounding = 0;
+  /// 谷底圆度
   double valleyRounding = 0;
+  /// 旋转角度
   double rotation = 0;
+  /// 压扁
   double squash = 0;
+  /// 上边颜色
   Color? topColor = Colors.red;
+  /// 右边颜色
   Color? rightColor = Colors.blue;
+  /// 下边颜色
   Color? bottomColor = Colors.yellow;
+  /// 左边颜色
   Color? leftColor = Colors.green;
+  /// Tab 指示器 insets
   double insetL = 0;
   double insetT = 0;
   double insetR = 0;
   double insetB = 10;
+  /// 是否使用 Tab 圆角
   bool useTabRadius = false;
+  /// Tab 圆角
   double tabRadius = 4;
+  /// Outline 缺口 padding
   double gapPadding = 4;
+  /// 最近事件
   String lastEvent = '—';
 
   static const _strokeAligns = <(String, double)>[
@@ -97,7 +126,7 @@ class _BorderDemoState extends State<BorderDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -116,7 +145,7 @@ class _BorderDemoState extends State<BorderDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -146,21 +175,11 @@ class _BorderDemoState extends State<BorderDemo> {
                           items: [
                             {
                               NLangEnum.en:
-                                  'Each chip is one original section. TextButton, BoxDecoration, and ShapeDecoration keep the same children.',
-                              NLangEnum.zh: '每种 Chip 对应原 Demo 一节。TextButton、BoxDecoration、ShapeDecoration 的 child 不变。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'BorderSide color/width/style/strokeAlign apply to the selected shape. Switch kind to load that section’s original defaults.',
-                              NLangEnum.zh: 'BorderSide 的颜色、宽度、style、strokeAlign 作用在当前形状上。切换种类会套用该节原来的默认值。',
-                            },
-                            {
-                              NLangEnum.en: 'StarBorder.polygon is the second constructor of StarBorder.',
-                              NLangEnum.zh: 'starPolygon 是 StarBorder.polygon 第二个构造。',
+                                  'Each chip is one original section. BorderSide applies to the selected shape; switching kind loads that section’s defaults. starPolygon is StarBorder.polygon.',
+                              NLangEnum.zh: '每种 Chip 对应原 Demo 一节。BorderSide 作用在当前形状上；切换种类会套用该节默认值。starPolygon 是 StarBorder.polygon。',
                             },
                           ],
                         ),
-                        buildConstructCard(),
                         buildSideCard(),
                         buildExtraCard(),
                       ],
@@ -176,7 +195,6 @@ class _BorderDemoState extends State<BorderDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -445,15 +463,13 @@ class _BorderDemoState extends State<BorderDemo> {
   }
 
   LinearBorder linearOf() {
-    LinearBorderEdge? edge() {
-      return LinearBorderEdge(size: linearSize, alignment: linearAlign);
-    }
+    final edge = LinearBorderEdge(size: linearSize, alignment: linearAlign);
     return LinearBorder(
       side: sideOf(),
-      start: linearStart ? edge() : null,
-      end: linearEnd ? edge() : null,
-      top: linearTop ? edge() : null,
-      bottom: linearBottom ? edge() : null,
+      start: linearStart ? edge : null,
+      end: linearEnd ? edge : null,
+      top: linearTop ? edge : null,
+      bottom: linearBottom ? edge : null,
     );
   }
 
@@ -487,59 +503,56 @@ class _BorderDemoState extends State<BorderDemo> {
     );
   }
 
-  Widget buildConstructCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.account_tree_rounded),
-      title: '构造',
-      subtitle: 'Border · OutlinedBorder · BoxBorder',
-      child: buildChoiceChips(
-        values: _Kind.values,
-        isSelected: (e) => kind == e,
-        labelOf: (e) => e.name,
-        onChanged: onKind,
-      ),
-    );
-  }
-
   Widget buildSideCard() {
     return NDecorationCard(
       icon: const Icon(Icons.border_color_rounded),
-      title: 'BorderSide',
-      subtitle: 'color · width · style · strokeAlign',
+      title: '边框',
+      subtitle: 'kind · BorderSide',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          buildField(
+            label: 'kind',
+            child: buildChoiceChips(
+              values: _Kind.values,
+              isSelected: (e) => kind == e,
+              labelOf: (e) => e.name,
+              onChanged: (e) => onMark('kind ${e.name}', () => applyKindDefaults(e)),
+            ),
+          ),
           if (kind == _Kind.shapeSides) ...[
             buildField(
               label: 'top.color',
-              child: buildColorDots(value: topColor, onChanged: onTopColor),
+              showTopGap: true,
+              child: buildColorDots(value: topColor, onChanged: (e) => onMark('top.color', () => topColor = e)),
             ),
             buildField(
               label: 'right.color',
               showTopGap: true,
-              child: buildColorDots(value: rightColor, onChanged: onRightColor),
+              child: buildColorDots(value: rightColor, onChanged: (e) => onMark('right.color', () => rightColor = e)),
             ),
             buildField(
               label: 'bottom.color',
               showTopGap: true,
-              child: buildColorDots(value: bottomColor, onChanged: onBottomColor),
+              child: buildColorDots(value: bottomColor, onChanged: (e) => onMark('bottom.color', () => bottomColor = e)),
             ),
             buildField(
               label: 'left.color',
               showTopGap: true,
-              child: buildColorDots(value: leftColor, onChanged: onLeftColor),
+              child: buildColorDots(value: leftColor, onChanged: (e) => onMark('left.color', () => leftColor = e)),
             ),
           ] else
             buildField(
               label: 'color',
-              child: buildColorDots(value: sideColor, onChanged: onSideColor),
+              showTopGap: true,
+              child: buildColorDots(value: sideColor, onChanged: (e) => onMark('color', () => sideColor = e)),
             ),
           buildSlider(
             label: 'width',
             value: sideWidth,
             min: 0,
             max: 12,
-            onChanged: onSideWidth,
+            onChanged: (v) => onMark('width ${v.toStringAsFixed(1)}', () => sideWidth = v),
             fractionDigits: 1,
           ),
           buildField(
@@ -549,7 +562,7 @@ class _BorderDemoState extends State<BorderDemo> {
               values: BorderStyle.values,
               isSelected: (e) => sideStyle == e,
               labelOf: (e) => e.name,
-              onChanged: onSideStyle,
+              onChanged: (e) => onMark('style ${e.name}', () => sideStyle = e),
             ),
           ),
           buildField(
@@ -559,7 +572,7 @@ class _BorderDemoState extends State<BorderDemo> {
               values: _strokeAligns,
               isSelected: (e) => strokeAlign == e.$2,
               labelOf: (e) => e.$1,
-              onChanged: onStrokeAlign,
+              onChanged: (e) => onMark('strokeAlign ${e.$1}', () => strokeAlign = e.$2),
             ),
           ),
         ],
@@ -576,7 +589,7 @@ class _BorderDemoState extends State<BorderDemo> {
           value: radius,
           min: 0,
           max: 100,
-          onChanged: onRadius,
+          onChanged: (v) => onMark('borderRadius ${v.round()}', () => radius = v),
         ),
       );
     }
@@ -587,23 +600,27 @@ class _BorderDemoState extends State<BorderDemo> {
           value: eccentricity,
           min: 0,
           max: 1,
-          onChanged: onEccentricity,
+          onChanged: (v) => onMark('eccentricity ${v.toStringAsFixed(2)}', () => eccentricity = v),
           fractionDigits: 2,
         ),
       );
     }
     if (kind == _Kind.linear) {
       children.addAll([
-        buildSwitch(title: 'start', value: linearStart, onChanged: onLinearStart),
-        buildSwitch(title: 'end', value: linearEnd, onChanged: onLinearEnd),
-        buildSwitch(title: 'top', value: linearTop, onChanged: onLinearTop),
-        buildSwitch(title: 'bottom', value: linearBottom, onChanged: onLinearBottom),
+        buildSwitch(title: 'start', value: linearStart, onChanged: (v) => onMark('start $v', () => linearStart = v)),
+        buildSwitch(title: 'end', value: linearEnd, onChanged: (v) => onMark('end $v', () => linearEnd = v)),
+        buildSwitch(title: 'top', value: linearTop, onChanged: (v) => onMark('top $v', () => linearTop = v)),
+        buildSwitch(
+          title: 'bottom',
+          value: linearBottom,
+          onChanged: (v) => onMark('bottom $v', () => linearBottom = v),
+        ),
         buildSlider(
           label: 'edge.size',
           value: linearSize,
           min: 0,
           max: 1,
-          onChanged: onLinearSize,
+          onChanged: (v) => onMark('edge.size ${v.toStringAsFixed(2)}', () => linearSize = v),
           fractionDigits: 2,
         ),
         buildSlider(
@@ -611,7 +628,7 @@ class _BorderDemoState extends State<BorderDemo> {
           value: linearAlign,
           min: -1,
           max: 1,
-          onChanged: onLinearAlign,
+          onChanged: (v) => onMark('edge.alignment ${v.toStringAsFixed(2)}', () => linearAlign = v),
           fractionDigits: 2,
         ),
       ]);
@@ -623,7 +640,10 @@ class _BorderDemoState extends State<BorderDemo> {
           value: points,
           min: 2,
           max: 12,
-          onChanged: onPoints,
+          onChanged: (v) {
+            final name = kind == _Kind.starPolygon ? 'sides' : 'points';
+            onMark('$name ${v.toStringAsFixed(1)}', () => points = v);
+          },
           fractionDigits: 1,
         ),
       );
@@ -634,7 +654,7 @@ class _BorderDemoState extends State<BorderDemo> {
             value: innerRadiusRatio,
             min: 0,
             max: 1,
-            onChanged: onInnerRadiusRatio,
+            onChanged: (v) => onMark('innerRadiusRatio ${v.toStringAsFixed(2)}', () => innerRadiusRatio = v),
             fractionDigits: 2,
           ),
         );
@@ -645,7 +665,12 @@ class _BorderDemoState extends State<BorderDemo> {
           value: pointRounding,
           min: 0,
           max: 1,
-          onChanged: onPointRounding,
+          onChanged: (v) => onMark('pointRounding ${v.toStringAsFixed(2)}', () {
+            pointRounding = v;
+            if (pointRounding + valleyRounding > 1) {
+              valleyRounding = 1 - pointRounding;
+            }
+          }),
           fractionDigits: 2,
         ),
       );
@@ -656,7 +681,12 @@ class _BorderDemoState extends State<BorderDemo> {
             value: valleyRounding,
             min: 0,
             max: 1,
-            onChanged: onValleyRounding,
+            onChanged: (v) => onMark('valleyRounding ${v.toStringAsFixed(2)}', () {
+              valleyRounding = v;
+              if (pointRounding + valleyRounding > 1) {
+                pointRounding = 1 - valleyRounding;
+              }
+            }),
             fractionDigits: 2,
           ),
         );
@@ -667,7 +697,7 @@ class _BorderDemoState extends State<BorderDemo> {
           value: rotation,
           min: 0,
           max: 360,
-          onChanged: onRotation,
+          onChanged: (v) => onMark('rotation ${v.round()}', () => rotation = v),
         ),
       );
       children.add(
@@ -676,22 +706,56 @@ class _BorderDemoState extends State<BorderDemo> {
           value: squash,
           min: 0,
           max: 1,
-          onChanged: onSquash,
+          onChanged: (v) => onMark('squash ${v.toStringAsFixed(2)}', () => squash = v),
           fractionDigits: 2,
         ),
       );
     }
     if (kind == _Kind.underlineTab) {
       children.addAll([
-        buildSlider(label: 'insets.left', value: insetL, min: 0, max: 24, onChanged: onInsetL),
-        buildSlider(label: 'insets.top', value: insetT, min: 0, max: 24, onChanged: onInsetT),
-        buildSlider(label: 'insets.right', value: insetR, min: 0, max: 24, onChanged: onInsetR),
-        buildSlider(label: 'insets.bottom', value: insetB, min: 0, max: 24, onChanged: onInsetB),
-        buildSwitch(title: 'borderRadius', value: useTabRadius, onChanged: onUseTabRadius),
+        buildSlider(
+          label: 'insets.left',
+          value: insetL,
+          min: 0,
+          max: 24,
+          onChanged: (v) => onMark('insets.left ${v.round()}', () => insetL = v),
+        ),
+        buildSlider(
+          label: 'insets.top',
+          value: insetT,
+          min: 0,
+          max: 24,
+          onChanged: (v) => onMark('insets.top ${v.round()}', () => insetT = v),
+        ),
+        buildSlider(
+          label: 'insets.right',
+          value: insetR,
+          min: 0,
+          max: 24,
+          onChanged: (v) => onMark('insets.right ${v.round()}', () => insetR = v),
+        ),
+        buildSlider(
+          label: 'insets.bottom',
+          value: insetB,
+          min: 0,
+          max: 24,
+          onChanged: (v) => onMark('insets.bottom ${v.round()}', () => insetB = v),
+        ),
+        buildSwitch(
+          title: 'borderRadius',
+          value: useTabRadius,
+          onChanged: (v) => onMark('borderRadius $v', () => useTabRadius = v),
+        ),
       ]);
       if (useTabRadius) {
         children.add(
-          buildSlider(label: 'borderRadius', value: tabRadius, min: 0, max: 24, onChanged: onTabRadius),
+          buildSlider(
+            label: 'borderRadius',
+            value: tabRadius,
+            min: 0,
+            max: 24,
+            onChanged: (v) => onMark('tabRadius ${v.round()}', () => tabRadius = v),
+          ),
         );
       }
     }
@@ -702,7 +766,7 @@ class _BorderDemoState extends State<BorderDemo> {
           value: gapPadding,
           min: 0,
           max: 24,
-          onChanged: onGapPadding,
+          onChanged: (v) => onMark('gapPadding ${v.toStringAsFixed(1)}', () => gapPadding = v),
           fractionDigits: 1,
         ),
       );
@@ -721,28 +785,24 @@ class _BorderDemoState extends State<BorderDemo> {
     );
   }
 
-  bool get usesRadius {
-    switch (kind) {
-      case _Kind.beveled:
-      case _Kind.continuous:
-      case _Kind.rounded:
-      case _Kind.shapeRounded:
-      case _Kind.shapeBeveled:
-      case _Kind.shapeUnderline:
-      case _Kind.outlineInput:
-      case _Kind.underlineInput:
-        return true;
-      default:
-        return false;
-    }
-  }
+  bool get usesRadius => switch (kind) {
+        _Kind.beveled ||
+        _Kind.continuous ||
+        _Kind.rounded ||
+        _Kind.shapeRounded ||
+        _Kind.shapeBeveled ||
+        _Kind.shapeUnderline ||
+        _Kind.outlineInput ||
+        _Kind.underlineInput =>
+          true,
+        _ => false,
+      };
 
   Widget buildField({
     required String label,
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -771,7 +831,7 @@ class _BorderDemoState extends State<BorderDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -805,7 +865,7 @@ class _BorderDemoState extends State<BorderDemo> {
     required Color? value,
     required ValueChanged<Color?> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -866,7 +926,6 @@ class _BorderDemoState extends State<BorderDemo> {
     required ValueChanged<double> onChanged,
     int fractionDigits = 0,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -896,7 +955,6 @@ class _BorderDemoState extends State<BorderDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -1010,166 +1068,15 @@ class _BorderDemoState extends State<BorderDemo> {
     }
   }
 
-  void onKind(_Kind value) {
-    applyKindDefaults(value);
-    setState(() {});
-  }
-
-  void onSideColor(Color? value) {
-    sideColor = value;
-    setState(() {});
-  }
-
-  void onTopColor(Color? value) {
-    topColor = value;
-    setState(() {});
-  }
-
-  void onRightColor(Color? value) {
-    rightColor = value;
-    setState(() {});
-  }
-
-  void onBottomColor(Color? value) {
-    bottomColor = value;
-    setState(() {});
-  }
-
-  void onLeftColor(Color? value) {
-    leftColor = value;
-    setState(() {});
-  }
-
-  void onSideWidth(double value) {
-    sideWidth = value;
-    setState(() {});
-  }
-
-  void onSideStyle(BorderStyle value) {
-    sideStyle = value;
-    setState(() {});
-  }
-
-  void onStrokeAlign((String, double) value) {
-    strokeAlign = value.$2;
-    setState(() {});
-  }
-
-  void onRadius(double value) {
-    radius = value;
-    setState(() {});
-  }
-
-  void onEccentricity(double value) {
-    eccentricity = value;
-    setState(() {});
-  }
-
-  void onLinearStart(bool value) {
-    linearStart = value;
-    setState(() {});
-  }
-
-  void onLinearEnd(bool value) {
-    linearEnd = value;
-    setState(() {});
-  }
-
-  void onLinearTop(bool value) {
-    linearTop = value;
-    setState(() {});
-  }
-
-  void onLinearBottom(bool value) {
-    linearBottom = value;
-    setState(() {});
-  }
-
-  void onLinearSize(double value) {
-    linearSize = value;
-    setState(() {});
-  }
-
-  void onLinearAlign(double value) {
-    linearAlign = value;
-    setState(() {});
-  }
-
-  void onPoints(double value) {
-    points = value;
-    setState(() {});
-  }
-
-  void onInnerRadiusRatio(double value) {
-    innerRadiusRatio = value;
-    setState(() {});
-  }
-
-  void onPointRounding(double value) {
-    pointRounding = value;
-    if (pointRounding + valleyRounding > 1) {
-      valleyRounding = 1 - pointRounding;
-    }
-    setState(() {});
-  }
-
-  void onValleyRounding(double value) {
-    valleyRounding = value;
-    if (pointRounding + valleyRounding > 1) {
-      pointRounding = 1 - valleyRounding;
-    }
-    setState(() {});
-  }
-
-  void onRotation(double value) {
-    rotation = value;
-    setState(() {});
-  }
-
-  void onSquash(double value) {
-    squash = value;
-    setState(() {});
-  }
-
-  void onInsetL(double value) {
-    insetL = value;
-    setState(() {});
-  }
-
-  void onInsetT(double value) {
-    insetT = value;
-    setState(() {});
-  }
-
-  void onInsetR(double value) {
-    insetR = value;
-    setState(() {});
-  }
-
-  void onInsetB(double value) {
-    insetB = value;
-    setState(() {});
-  }
-
-  void onUseTabRadius(bool value) {
-    useTabRadius = value;
-    setState(() {});
-  }
-
-  void onTabRadius(double value) {
-    tabRadius = value;
-    setState(() {});
-  }
-
-  void onGapPadding(double value) {
-    gapPadding = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
   void onPressed() {
-    lastEvent = 'onPressed ${kind.name}';
-    DLog.d(lastEvent);
-    setState(() {});
+    onMark('onPressed ${kind.name}');
   }
 
   void onReset() {

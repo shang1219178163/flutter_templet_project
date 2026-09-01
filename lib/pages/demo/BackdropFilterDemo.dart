@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_tile
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:get/get.dart';
 
 /// ImageFilter 预设，映射到 BackdropFilter.filter
@@ -33,6 +34,8 @@ class BackdropFilterDemo extends StatefulWidget {
 class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
+  late final theme = Theme.of(context);
+
   final scrollController = ScrollController();
 
   /// 原 Demo createBlurView(blur: 5) / ImageFilter.blur(5, 5)
@@ -45,6 +48,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
   BlendMode blendMode = BlendMode.srcOver;
   bool enabled = true;
   _ChildKind childKind = _ChildKind.overlay;
+  String lastEvent = '—';
 
   @override
   void dispose() {
@@ -54,7 +58,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -73,7 +77,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -103,13 +107,9 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                           items: [
                             {
                               NLangEnum.en:
-                                  'BackdropFilter only has filter, child, blendMode, and enabled. It blurs content already painted behind it.',
-                              NLangEnum.zh: 'BackdropFilter 只有 filter、child、blendMode、enabled。它模糊的是已经画在后面的内容。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'Default matches the live demo: full-image blur via StackExt.createBlurView(blur: 5).',
-                              NLangEnum.zh: '默认对齐当前页：整图模糊，等同 StackExt.createBlurView(blur: 5)。',
+                                  'BackdropFilter only has filter, child, blendMode, and enabled. It blurs content already painted behind it. Default matches the live demo: full-image blur via StackExt.createBlurView(blur: 5).',
+                              NLangEnum.zh:
+                                  'BackdropFilter 只有 filter、child、blendMode、enabled。它模糊的是已经画在后面的内容。默认对齐当前页：整图模糊，等同 StackExt.createBlurView(blur: 5)。',
                             },
                             {
                               NLangEnum.en:
@@ -119,7 +119,6 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                           ],
                         ),
                         buildConstructCard(),
-                        buildFilterCard(),
                         buildBehaviorCard(),
                       ],
                     ),
@@ -134,7 +133,6 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -165,7 +163,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Text(
-              '${filterKind.name} · ${blendMode.name} · enabled $enabled',
+              '${filterKind.name} · ${blendMode.name} · enabled $enabled · $lastEvent',
               textAlign: TextAlign.center,
               style: theme.textTheme.labelMedium?.copyWith(
                 color: scheme.onSurfaceVariant,
@@ -250,39 +248,16 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
               values: _FilterKind.values,
               isSelected: (e) => filterKind == e,
               labelOf: (e) => e.name,
-              onChanged: onFilterKind,
+              onChanged: (e) => onMark('filter ${e.name}', () => filterKind = e),
             ),
           ),
-          buildField(
-            label: 'child',
-            showTopGap: true,
-            child: buildChoiceChips(
-              values: _ChildKind.values,
-              isSelected: (e) => childKind == e,
-              labelOf: (e) => e.name,
-              onChanged: onChildKind,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildFilterCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.blur_on_rounded),
-      title: '滤镜',
-      subtitle: 'ImageFilter.blur / dilate / erode',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
           if (filterKind == _FilterKind.blur) ...[
             buildSlider(
               label: 'sigmaX',
               value: sigmaX,
               min: 0,
               max: 20,
-              onChanged: onSigmaX,
+              onChanged: (v) => onMark('sigmaX ${v.toStringAsFixed(1)}', () => sigmaX = v),
               fractionDigits: 1,
             ),
             buildSlider(
@@ -290,7 +265,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
               value: sigmaY,
               min: 0,
               max: 20,
-              onChanged: onSigmaY,
+              onChanged: (v) => onMark('sigmaY ${v.toStringAsFixed(1)}', () => sigmaY = v),
               fractionDigits: 1,
             ),
             buildField(
@@ -300,7 +275,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 values: TileMode.values,
                 isSelected: (e) => tileMode == e,
                 labelOf: (e) => e.name,
-                onChanged: onTileMode,
+                onChanged: (e) => onMark('tileMode ${e.name}', () => tileMode = e),
               ),
             ),
           ],
@@ -310,7 +285,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
               value: radiusX,
               min: 0,
               max: 12,
-              onChanged: onRadiusX,
+              onChanged: (v) => onMark('radiusX ${v.toStringAsFixed(1)}', () => radiusX = v),
               fractionDigits: 1,
             ),
             buildSlider(
@@ -318,10 +293,20 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
               value: radiusY,
               min: 0,
               max: 12,
-              onChanged: onRadiusY,
+              onChanged: (v) => onMark('radiusY ${v.toStringAsFixed(1)}', () => radiusY = v),
               fractionDigits: 1,
             ),
           ],
+          buildField(
+            label: 'child',
+            showTopGap: true,
+            child: buildChoiceChips(
+              values: _ChildKind.values,
+              isSelected: (e) => childKind == e,
+              labelOf: (e) => e.name,
+              onChanged: (e) => onMark('child ${e.name}', () => childKind = e),
+            ),
+          ),
         ],
       ),
     );
@@ -335,7 +320,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'enabled 应用滤镜', value: enabled, onChanged: onEnabled),
+          buildSwitch(title: 'enabled 应用滤镜', value: enabled, onChanged: (v) => onMark('enabled $v', () => enabled = v)),
           buildField(
             label: 'blendMode',
             showTopGap: true,
@@ -343,7 +328,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
               values: BlendMode.values,
               isSelected: (e) => blendMode == e,
               labelOf: (e) => e.name,
-              onChanged: onBlendMode,
+              onChanged: (e) => onMark('blendMode ${e.name}', () => blendMode = e),
             ),
           ),
         ],
@@ -356,7 +341,6 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,7 +369,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     required String Function(T value) labelOf,
     required ValueChanged<T> onChanged,
   }) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -423,7 +407,6 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     required ValueChanged<double> onChanged,
     int fractionDigits = 0,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return NSliderListTile(
       dense: true,
@@ -453,7 +436,6 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -470,48 +452,10 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     );
   }
 
-  void onFilterKind(_FilterKind value) {
-    filterKind = value;
-    setState(() {});
-  }
-
-  void onChildKind(_ChildKind value) {
-    childKind = value;
-    setState(() {});
-  }
-
-  void onSigmaX(double value) {
-    sigmaX = value;
-    setState(() {});
-  }
-
-  void onSigmaY(double value) {
-    sigmaY = value;
-    setState(() {});
-  }
-
-  void onTileMode(TileMode value) {
-    tileMode = value;
-    setState(() {});
-  }
-
-  void onRadiusX(double value) {
-    radiusX = value;
-    setState(() {});
-  }
-
-  void onRadiusY(double value) {
-    radiusY = value;
-    setState(() {});
-  }
-
-  void onEnabled(bool value) {
-    enabled = value;
-    setState(() {});
-  }
-
-  void onBlendMode(BlendMode value) {
-    blendMode = value;
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
+    DLog.d(event);
     setState(() {});
   }
 
@@ -525,6 +469,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     blendMode = BlendMode.srcOver;
     enabled = true;
     childKind = _ChildKind.overlay;
+    lastEvent = '—';
     setState(() {});
   }
 }

@@ -33,6 +33,7 @@ class LocalAuthDemo extends StatefulWidget {
 
 class _LocalAuthDemoState extends State<LocalAuthDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  late final theme = Theme.of(context);
 
   final scrollController = ScrollController();
   final reasonController = TextEditingController(text: '请验证身份以继续');
@@ -82,7 +83,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: scheme.surfaceContainerLowest,
       appBar: hideApp
@@ -101,7 +102,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
   }
 
   Widget buildBody() {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: LayoutBuilder(
@@ -131,22 +132,13 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
                           items: [
                             {
                               NLangEnum.en:
-                                  'Pin a live status preview. Original “开始” only checks device / biometrics capability.',
-                              NLangEnum.zh: '上方固定预览。原 Demo「开始」只检测设备与生物识别能力，不弹出认证。',
-                            },
-                            {
-                              NLangEnum.en:
-                                  'Tune AuthenticationOptions and localizedReason, then call authenticate or stopAuthentication.',
-                              NLangEnum.zh: '下方调节 AuthenticationOptions、localizedReason，再调用 authenticate / stopAuthentication。',
-                            },
-                            {
-                              NLangEnum.en: 'Simulator often throws PlatformException (otherOperatingSystem).',
-                              NLangEnum.zh: '模拟器常抛 PlatformException（otherOperatingSystem）。',
+                                  'Original “开始” only checks device / biometrics. Tune AuthenticationOptions and localizedReason, then authenticate or stopAuthentication. Simulator often throws PlatformException (otherOperatingSystem).',
+                              NLangEnum.zh:
+                                  '原 Demo「开始」只检测设备与生物识别能力。调节 AuthenticationOptions、localizedReason 后调用 authenticate / stopAuthentication。模拟器常抛 PlatformException（otherOperatingSystem）。',
                             },
                           ],
                         ),
                         buildAuthCard(),
-                        buildOptionsCard(),
                         buildMessagesCard(),
                       ],
                     ),
@@ -161,7 +153,6 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
   }
 
   Widget buildPreview(double previewHeight) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final types = availableBiometrics.isEmpty ? '—' : availableBiometrics.map((e) => e.name).join(', ');
     return DecoratedBox(
@@ -236,8 +227,8 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
   Widget buildAuthCard() {
     return NDecorationCard(
       icon: const Icon(Icons.fingerprint_rounded),
-      title: '认证文案',
-      subtitle: 'localizedReason',
+      title: '认证',
+      subtitle: 'localizedReason  AuthenticationOptions',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -249,26 +240,29 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
                 isDense: true,
                 border: OutlineInputBorder(),
               ),
-              onChanged: onLocalizedReason,
+              onChanged: (v) => onMark('localizedReason $v'),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildOptionsCard() {
-    return NDecorationCard(
-      icon: const Icon(Icons.tune_rounded),
-      title: '选项',
-      subtitle: 'AuthenticationOptions',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildSwitch(title: 'useErrorDialogs', value: useErrorDialogs, onChanged: onUseErrorDialogs),
-          buildSwitch(title: 'stickyAuth', value: stickyAuth, onChanged: onStickyAuth),
-          buildSwitch(title: 'sensitiveTransaction', value: sensitiveTransaction, onChanged: onSensitiveTransaction),
-          buildSwitch(title: 'biometricOnly', value: biometricOnly, onChanged: onBiometricOnly),
+          buildSwitch(
+            title: 'useErrorDialogs',
+            value: useErrorDialogs,
+            onChanged: (v) => onMark('useErrorDialogs $v', () => useErrorDialogs = v),
+          ),
+          buildSwitch(
+            title: 'stickyAuth',
+            value: stickyAuth,
+            onChanged: (v) => onMark('stickyAuth $v', () => stickyAuth = v),
+          ),
+          buildSwitch(
+            title: 'sensitiveTransaction',
+            value: sensitiveTransaction,
+            onChanged: (v) => onMark('sensitiveTransaction $v', () => sensitiveTransaction = v),
+          ),
+          buildSwitch(
+            title: 'biometricOnly',
+            value: biometricOnly,
+            onChanged: (v) => onMark('biometricOnly $v', () => biometricOnly = v),
+          ),
         ],
       ),
     );
@@ -282,7 +276,11 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildSwitch(title: 'authMessages 自定义', value: useCustomMessages, onChanged: onUseCustomMessages),
+          buildSwitch(
+            title: 'authMessages 自定义',
+            value: useCustomMessages,
+            onChanged: (v) => onMark('authMessages ${v ? 'custom' : 'default'}', () => useCustomMessages = v),
+          ),
           if (useCustomMessages) ...[
             buildField(
               label: 'cancelButton',
@@ -294,7 +292,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
                   hintText: '默',
                   border: OutlineInputBorder(),
                 ),
-                onChanged: onCancelButton,
+                onChanged: (v) => onMark('cancelButton $v'),
               ),
             ),
             buildField(
@@ -307,7 +305,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
                   hintText: '默',
                   border: OutlineInputBorder(),
                 ),
-                onChanged: onFallbackTitle,
+                onChanged: (v) => onMark('localizedFallbackTitle $v'),
               ),
             ),
             buildField(
@@ -320,7 +318,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
                   hintText: '默',
                   border: OutlineInputBorder(),
                 ),
-                onChanged: onSignInTitle,
+                onChanged: (v) => onMark('signInTitle $v'),
               ),
             ),
             buildField(
@@ -333,7 +331,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
                   hintText: '默',
                   border: OutlineInputBorder(),
                 ),
-                onChanged: onBiometricHint,
+                onChanged: (v) => onMark('biometricHint $v'),
               ),
             ),
           ],
@@ -387,7 +385,6 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     required Widget child,
     bool showTopGap = false,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -415,7 +412,6 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     return SwitchListTile(
       dense: true,
@@ -526,58 +522,9 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     }
   }
 
-  void onLocalizedReason(String value) {
-    lastEvent = 'localizedReason $value';
-    setState(() {});
-  }
-
-  void onUseErrorDialogs(bool value) {
-    useErrorDialogs = value;
-    lastEvent = 'useErrorDialogs $useErrorDialogs';
-    setState(() {});
-  }
-
-  void onStickyAuth(bool value) {
-    stickyAuth = value;
-    lastEvent = 'stickyAuth $stickyAuth';
-    setState(() {});
-  }
-
-  void onSensitiveTransaction(bool value) {
-    sensitiveTransaction = value;
-    lastEvent = 'sensitiveTransaction $sensitiveTransaction';
-    setState(() {});
-  }
-
-  void onBiometricOnly(bool value) {
-    biometricOnly = value;
-    lastEvent = 'biometricOnly $biometricOnly';
-    setState(() {});
-  }
-
-  void onUseCustomMessages(bool value) {
-    useCustomMessages = value;
-    lastEvent = 'authMessages ${useCustomMessages ? 'custom' : 'default'}';
-    setState(() {});
-  }
-
-  void onCancelButton(String value) {
-    lastEvent = 'cancelButton $value';
-    setState(() {});
-  }
-
-  void onFallbackTitle(String value) {
-    lastEvent = 'localizedFallbackTitle $value';
-    setState(() {});
-  }
-
-  void onSignInTitle(String value) {
-    lastEvent = 'signInTitle $value';
-    setState(() {});
-  }
-
-  void onBiometricHint(String value) {
-    lastEvent = 'biometricHint $value';
+  void onMark(String event, [VoidCallback? apply]) {
+    apply?.call();
+    lastEvent = event;
     setState(() {});
   }
 
@@ -585,7 +532,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     if (!mounted) {
       return;
     }
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = theme.colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
