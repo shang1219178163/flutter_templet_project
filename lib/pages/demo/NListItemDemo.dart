@@ -16,45 +16,33 @@ import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item
 import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
+import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
-/// accessory 图标预设；`system` 表示传 `null`（不显示）
-enum _IconKind {
-  system(label: 'system', icon: null, size: 0, color: null),
-  detail(
-    label: 'detail',
-    icon: CupertinoIcons.info_circle,
-    size: 22,
-    color: CupertinoColors.activeBlue,
-  );
-
-  const _IconKind({
-    required this.label,
-    required this.icon,
-    required this.size,
-    required this.color,
-  });
-  final String label;
-  final IconData? icon;
-  final double size;
-  final CupertinoDynamicColor? color;
-
-  Widget? widgetOf(BuildContext context) {
-    if (icon == null || color == null) {
-      return null;
-    }
-    return Icon(icon, size: size, color: color!.resolveFrom(context));
-  }
-}
-
 /// Gallery 行预设
 enum _GalleryKind {
-  plain(title: 'Title', subtitle: null, accessory: _IconKind.system),
-  withSubtitle(title: 'Title + Subtitle', subtitle: 'Subtitle', accessory: _IconKind.system),
-  withAccessory(title: 'Title + Accessory', subtitle: null, accessory: _IconKind.detail),
-  both(title: 'Title + Subtitle + Accessory', subtitle: 'Subtitle', accessory: _IconKind.detail);
+  plain(
+    title: 'Title',
+    subtitle: null,
+    accessory: null,
+  ),
+  withSubtitle(
+    title: 'Title + Subtitle',
+    subtitle: 'Subtitle',
+    accessory: null,
+  ),
+  withAccessory(
+    title: 'Title + Accessory',
+    subtitle: null,
+    accessory: Icon(Icons.info_outline),
+  ),
+  both(
+    title: 'Title + Subtitle + Accessory',
+    subtitle: 'Subtitle',
+    accessory: Icon(Icons.info_outline),
+  );
 
   const _GalleryKind({
     required this.title,
@@ -63,7 +51,7 @@ enum _GalleryKind {
   });
   final String title;
   final String? subtitle;
-  final _IconKind accessory;
+  final Widget? accessory;
 }
 
 class NListItemDemo extends StatefulWidget {
@@ -140,8 +128,7 @@ class _NListItemDemoState extends State<NListItemDemo> {
                           {
                             NLangEnum.en:
                                 'Gallery of NListItem variants. Adjust padding and spacing below. trailing null → default chevron.',
-                            NLangEnum.zh:
-                                'Gallery 展示 NListItem 变体。可调 padding、spacing。trailing 为 null 时用默认 chevron。',
+                            NLangEnum.zh: 'Gallery 展示 NListItem 变体。可调 padding、spacing。trailing 为 null 时用默认 chevron。',
                           },
                         ],
                       ),
@@ -203,7 +190,10 @@ class _NListItemDemoState extends State<NListItemDemo> {
               title: Text(kinds[i].title),
               subtitle: kinds[i].subtitle == null ? null : Text(kinds[i].subtitle!),
               leading: _leadingImage(i),
-              accessory: kinds[i].accessory.widgetOf(context),
+              accessory: IconTheme(
+                data: IconThemeData(color: theme.colorScheme.primary),
+                child: kinds[i].accessory ?? SizedBox(),
+              ),
               padding: padding,
               spacing: spacing,
               onTap: () => onMark('onTap ${kinds[i].title}'),
@@ -268,6 +258,7 @@ class _NListItemDemoState extends State<NListItemDemo> {
   Widget _leadingImage(int index) {
     return NCachedNetworkImage(
       imageUrl: _galleryUrls[index],
+      placeholderImage: AssetImage(Assets.imagesAvatarMale),
       width: 40,
       height: 40,
       fit: BoxFit.cover,
