@@ -15,5 +15,7 @@ enum MethodChannelRegistrar {
         BatteryChannel.shared.register(with: messenger)
         VolumeChannel.shared.register(with: messenger, window: window)
         RecognizeTextChannel.shared.register(with: messenger)
+        TranslationChannel.shared.register(with: messenger, window: window)
     }
 }
+
