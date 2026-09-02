@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 /// Builds the display for one segment item.
-typedef NBoxSegmentItemBuilder<T> = Widget Function(
+typedef NSegmentedButtonItemBuilder<T> = Widget Function(
   BuildContext context,
   T item,
   bool selected,
 );
 
 /// Sliding segmented control with content-adaptive item widths.
-class NBoxSegmentControl<T> extends StatefulWidget {
-  const NBoxSegmentControl({
+class NSegmentedButton<T> extends StatefulWidget {
+  const NSegmentedButton({
     super.key,
     required this.items,
     required this.itemBuilder,
@@ -24,7 +24,7 @@ class NBoxSegmentControl<T> extends StatefulWidget {
   final List<T> items;
 
   /// Builds the visible content for each [items] item.
-  final NBoxSegmentItemBuilder<T> itemBuilder;
+  final NSegmentedButtonItemBuilder<T> itemBuilder;
 
   /// Currently selected index.
   final int index;
@@ -36,15 +36,15 @@ class NBoxSegmentControl<T> extends StatefulWidget {
   final EdgeInsetsGeometry itemPadding;
 
   @override
-  State<NBoxSegmentControl<T>> createState() => _NBoxSegmentControlState<T>();
+  State<NSegmentedButton<T>> createState() => _NSegmentedButtonState<T>();
 }
 
-class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
+class _NSegmentedButtonState<T> extends State<NSegmentedButton<T>> {
   late List<GlobalKey> _itemKeys = List.generate(widget.items.length, (_) => GlobalKey());
   List<double> _widths = const [];
 
   @override
-  void didUpdateWidget(covariant NBoxSegmentControl<T> oldWidget) {
+  void didUpdateWidget(covariant NSegmentedButton<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.items.length != widget.items.length) {
       _itemKeys = List.generate(widget.items.length, (_) => GlobalKey());
@@ -142,7 +142,7 @@ class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
                   for (var i = 0; i < widget.items.length; i++)
                     KeyedSubtree(
                       key: _itemKeys[i],
-                      child: _NBoxSegmentControlItem(
+                      child: _NSegmentedButtonItem(
                         height: widget.height,
                         padding: widget.itemPadding,
                         selected: widget.index == i,
@@ -164,8 +164,8 @@ class _NBoxSegmentControlState<T> extends State<NBoxSegmentControl<T>> {
   }
 }
 
-class _NBoxSegmentControlItem extends StatelessWidget {
-  const _NBoxSegmentControlItem({
+class _NSegmentedButtonItem extends StatelessWidget {
+  const _NSegmentedButtonItem({
     required this.height,
     required this.padding,
     required this.selected,

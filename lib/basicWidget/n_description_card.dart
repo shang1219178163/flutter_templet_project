@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_lang_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_lang_segmented_button.dart';
 
-export 'n_lang_segment_control.dart' show NLangEnum, NLangSegmentControl;
+export 'n_lang_segmented_button.dart' show NLangEnum, NLangSegmentedButton;
 
 /// Top-of-page description card for demo pages.
 ///
@@ -83,7 +83,7 @@ class _NDescriptionCardState extends State<NDescriptionCard> {
           ],
         ),
       ),
-      trailing: NLangSegmentControl(
+      trailing: NLangSegmentedButton(
         value: _lang,
         onChanged: onChangedLang,
       ),

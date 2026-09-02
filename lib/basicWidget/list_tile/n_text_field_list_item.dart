@@ -142,7 +142,7 @@ class _NTextFieldListItemState extends State<NTextFieldListItem> {
                       return IconButton(
                         tooltip: '清除',
                         onPressed: _onClear,
-                        icon: const Icon(Icons.cancel),
+                        icon: const Icon(Icons.clear),
                       );
                     },
                   )
