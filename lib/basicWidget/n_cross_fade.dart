@@ -41,17 +41,12 @@ class NCrossFade extends StatefulWidget {
 }
 
 class _NCrossFadeState extends State<NCrossFade> {
-  late var isFirst = widget.isFirst;
+  late bool isFirst = widget.isFirst;
 
   @override
   void didUpdateWidget(covariant NCrossFade oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.firstChild != widget.firstChild ||
-        oldWidget.secondChild != widget.secondChild ||
-        oldWidget.alignment != widget.alignment ||
-        oldWidget.duration != widget.duration ||
-        oldWidget.duration != widget.duration ||
-        oldWidget.isFirst != widget.isFirst) {
+    if (widget.isFirst != oldWidget.isFirst) {
       isFirst = widget.isFirst;
     }
   }
@@ -59,6 +54,7 @@ class _NCrossFadeState extends State<NCrossFade> {
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
+      alignment: widget.alignment,
       duration: widget.duration,
       firstChild: widget.firstChild(onToggle),
       secondChild: widget.secondChild(onToggle),
@@ -67,9 +63,9 @@ class _NCrossFadeState extends State<NCrossFade> {
   }
 
   /// 展开收起
-  onToggle() {
+  void onToggle() {
     isFirst = !isFirst;
-    widget.onChanged?.call(isFirst);
     setState(() {});
+    widget.onChanged?.call(isFirst);
   }
 }
