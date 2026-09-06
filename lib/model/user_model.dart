@@ -6,32 +6,10 @@
 //  Copyright © 5/19/21 shang. All rights reserved.
 //
 
+import 'package:flutter_templet_project/enum/SportTypeEnum.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class UserModel with SelectableMixin {
-
-  UserModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    id = json['id'];
-    avatar = json['avatar'];
-    name = json['name'];
-    nickName = json['nickName'];
-    sex = json['sex'];
-    age = json['age'];
-    birthYear = json['birthYear'];
-    desc = json['desc'];
-
-    jobTitle = json['jobTitle'];
-    email = json['email'];
-    address = json['address'] != null ? AddressDetailModel.fromJson(json['address']) : null;
-    phone = json['phone'];
-    website = json['website'];
-    company = json['company'] != null ? Company.fromJson(json['company']) : null;
-    tag = json['tag'];
-
-    isSelected = json['isSelected'] ?? false;
-  }
   UserModel({
     this.id,
     this.avatar,
@@ -48,6 +26,7 @@ class UserModel with SelectableMixin {
     this.website,
     this.company,
     this.tag,
+    this.sportType,
   });
 
   String? id;
@@ -67,11 +46,36 @@ class UserModel with SelectableMixin {
   Company? company;
   String? tag;
 
+  String? sportType;
+
+  /// 运动类型
+  SportTypeEnum? get sportTypeEnum => SportTypeEnum.valueOf(sportType);
+
   @override
   String get selectableId => id.toString();
 
   @override
   String get selectableName => name ?? "";
+
+  UserModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    avatar = json['avatar'];
+    name = json['name'];
+    nickName = json['nickName'];
+    sex = json['sex'];
+    age = json['age'];
+    birthYear = json['birthYear'];
+    desc = json['desc'];
+    jobTitle = json['jobTitle'];
+    email = json['email'];
+    address = json['address'] != null ? AddressDetailModel.fromJson(json['address']) : null;
+    phone = json['phone'];
+    website = json['website'];
+    company = json['company'] != null ? Company.fromJson(json['company']) : null;
+    tag = json['tag'];
+    sportType = json['sportType'];
+    isSelected = json['isSelected'] ?? false;
+  }
 
   @override
   Map<String, dynamic> toJson() {
@@ -92,6 +96,7 @@ class UserModel with SelectableMixin {
     data['website'] = website;
     data['company'] = company?.toJson();
     data['tag'] = tag;
+    data['sportType'] = sportType;
 
     data['isSelected'] = isSelected;
     return data;
@@ -107,7 +112,6 @@ class UserModel with SelectableMixin {
 }
 
 class AddressDetailModel {
-
   AddressDetailModel({this.street, this.suite, this.city, this.zipcode, this.geo});
 
   AddressDetailModel.fromJson(Map<String, dynamic> json) {
@@ -137,7 +141,6 @@ class AddressDetailModel {
 }
 
 class Coordinate {
-
   Coordinate({this.lat, this.lng});
 
   Coordinate.fromJson(Map<String, dynamic> json) {
@@ -156,7 +159,6 @@ class Coordinate {
 }
 
 class Company {
-
   Company({this.name, this.catchPhrase, this.bs});
 
   Company.fromJson(Map<String, dynamic> json) {
