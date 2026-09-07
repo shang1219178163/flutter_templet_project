@@ -113,8 +113,7 @@ class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
               if (widget.itemWidths != null) {
                 return;
               }
-              final offsetX =
-                  _selectedIndex * (widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
+              final offsetX = _selectedIndex * (widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
               _scrollController.animateTo(offsetX, duration: Duration(seconds: 1), curve: Curves.ease);
             },
             child: Container(
@@ -142,16 +141,15 @@ class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
 
 /// 多行折叠菜单
 class FoldMenu extends StatefulWidget {
-  FoldMenu(
-      {Key? key,
-      required this.isVisible,
-      required this.children,
-      required this.onValueChanged,
-      this.itemWidth = 100,
-      this.foldCount = 0,
-      this.indicator})
-      : assert(children.length > foldCount, 'children 个数必须大于 foldCount'),
-        super(key: key);
+  FoldMenu({
+    super.key,
+    required this.isVisible,
+    required this.children,
+    required this.onValueChanged,
+    this.itemWidth = 100,
+    this.foldCount = 0,
+    this.indicator,
+  }) : assert(children.length > foldCount, 'children 个数必须大于 foldCount');
 
   final bool isVisible;
 
@@ -183,7 +181,6 @@ class _FoldMenuState extends State<FoldMenu> {
         widget.children.sublist(widget.children.length - 1 - widget.foldCount, widget.children.length - 1);
 
     return Container(
-      // color: Colors.green,
       child: Column(
         children: [
           if (topChildren.isNotEmpty)
@@ -213,14 +210,15 @@ class _FoldMenuState extends State<FoldMenu> {
 
   Widget buildListViewHorizontal({required Tuple2<List<String>, int> e, required int row}) {
     return NListViewSegmentControl(
-        items: e.item1,
-        itemWidth: widget.itemWidth,
-        selectedIndex: e.item2,
-        onValueChanged: (index) {
-          // DLog.d("${e.item2}, ${index}");
-          _indexs[row] = index;
-          // DLog.d("${row}, ${index}, ${_indexs}");
-          widget.onValueChanged(row, index, _indexs);
-        });
+      items: e.item1,
+      itemWidth: widget.itemWidth,
+      selectedIndex: e.item2,
+      onValueChanged: (index) {
+        // DLog.d("${e.item2}, ${index}");
+        _indexs[row] = index;
+        // DLog.d("${row}, ${index}, ${_indexs}");
+        widget.onValueChanged(row, index, _indexs);
+      },
+    );
   }
 }

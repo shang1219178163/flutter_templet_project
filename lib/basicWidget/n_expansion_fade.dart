@@ -29,8 +29,7 @@ class NExpansionFade extends StatefulWidget {
   final Widget Function(bool isExpanded, VoidCallback onToggle)? childBuilder;
 
   /// 展开状态
-  final Widget Function(bool isExpanded, VoidCallback onToggle)?
-      expandedBuilder;
+  final Widget Function(bool isExpanded, VoidCallback onToggle)? expandedBuilder;
 
   @override
   State<NExpansionFade> createState() => _NExpansionFadeState();
@@ -49,6 +48,19 @@ class _NExpansionFadeState extends State<NExpansionFade> {
   void initState() {
     super.initState();
     widget.controller?._attach(this);
+  }
+
+  @override
+  void didUpdateWidget(covariant NExpansionFade oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?._detach(this);
+      widget.controller?._attach(this);
+    }
+    // 仅当外部受控值变化时同步，避免父级重建重置内部折叠状态
+    if (widget.isExpanded != oldWidget.isExpanded) {
+      isExpanded = widget.isExpanded;
+    }
   }
 
   @override
@@ -71,8 +83,7 @@ class _NExpansionFadeState extends State<NExpansionFade> {
               size: 100.0,
             ),
           ),
-      crossFadeState:
-          !isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+      crossFadeState: !isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
     );
   }
 
@@ -85,16 +96,6 @@ class _NExpansionFadeState extends State<NExpansionFade> {
 class NExpansionFadeController {
   _NExpansionFadeState? _anchor;
 
-  bool get isExpanded {
-    assert(_anchor != null);
-    return _anchor!.isExpanded;
-  }
-
-  void onToggle() {
-    assert(_anchor != null);
-    _anchor?.onToggle();
-  }
-
   void _attach(_NExpansionFadeState anchor) {
     _anchor = anchor;
   }
@@ -103,5 +104,15 @@ class NExpansionFadeController {
     if (_anchor == anchor) {
       _anchor = null;
     }
+  }
+
+  bool get isExpanded {
+    assert(_anchor != null);
+    return _anchor!.isExpanded;
+  }
+
+  void onToggle() {
+    assert(_anchor != null);
+    _anchor?.onToggle();
   }
 }

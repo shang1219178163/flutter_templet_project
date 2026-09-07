@@ -26,7 +26,7 @@ class NSectionBox extends StatelessWidget {
   });
 
   final String title;
-  final Text? text;
+  final Widget? text;
   final TextStyle? style;
   final EdgeInsets padding;
   final Alignment alignment;

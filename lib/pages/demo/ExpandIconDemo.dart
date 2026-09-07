@@ -18,7 +18,6 @@ import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 class ExpandIconDemo extends StatefulWidget {
-
   const ExpandIconDemo({Key? key, this.title}) : super(key: key);
   final String? title;
 
@@ -55,6 +54,8 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   //   return Tuple2(List.generate(8, (index) => "item${i}_$index"), i);
   // }).toList();
 
+  final expansionController = NExpansionFadeController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +79,39 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           NSectionBox(
             title: "自定义 VisibleContainer",
             child: buildVisibleContainer(),
+          ),
+          NSectionBox(
+            title: "自定义 NExpansionFade",
+            text: FilledButton(
+              onPressed: expansionController.onToggle,
+              child: Text(["自定义 NExpansionFade", expansionController.isExpanded ? "收起" : "折叠"].join(" ")),
+            ),
+            child: NExpansionFade(
+              controller: expansionController,
+              isExpanded: false,
+              childBuilder: (isExpanded, onToggle) => Container(
+                height: 50,
+                width: double.infinity,
+                alignment: Alignment.topCenter,
+                child: FilledButton(
+                  onPressed: onToggle,
+                  child: Text(isExpanded ? "收起" : "折叠"),
+                ),
+              ),
+              expandedBuilder: (isExpanded, onToggle) => Container(
+                height: 200,
+                width: double.infinity,
+                alignment: Alignment.topCenter,
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                  border: Border.all(color: Colors.blue),
+                ),
+                child: FilledButton(
+                  onPressed: onToggle,
+                  child: Text(isExpanded ? "expanded收起" : "expanded折叠"),
+                ),
+              ),
+            ),
           ),
           NSectionBox(
             title: "自定义 FoldMenu - NExpansionFade",
