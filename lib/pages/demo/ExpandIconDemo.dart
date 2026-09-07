@@ -81,23 +81,18 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
             child: buildVisibleContainer(),
           ),
           NSectionBox(
-            title: "自定义 NExpansionFade",
-            text: FilledButton(
-              onPressed: expansionController.onToggle,
-              child: Text(["自定义 NExpansionFade", expansionController.isExpanded ? "收起" : "折叠"].join(" ")),
+            title: "NExpansionFade + Controller",
+            text: GestureDetector(
+              onTap: expansionController.onToggle,
+              child: Text([
+                "NExpansionFade + Controller",
+                (expansionController.isExpanded ?? false) ? "收起" : "折叠",
+              ].join(" ")),
             ),
             child: NExpansionFade(
               controller: expansionController,
               isExpanded: false,
-              childBuilder: (isExpanded, onToggle) => Container(
-                height: 50,
-                width: double.infinity,
-                alignment: Alignment.topCenter,
-                child: FilledButton(
-                  onPressed: onToggle,
-                  child: Text(isExpanded ? "收起" : "折叠"),
-                ),
-              ),
+              childBuilder: (isExpanded, onToggle) => Divider(color: Colors.transparent),
               expandedBuilder: (isExpanded, onToggle) => Container(
                 height: 200,
                 width: double.infinity,
@@ -108,7 +103,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                 ),
                 child: FilledButton(
                   onPressed: onToggle,
-                  child: Text(isExpanded ? "expanded收起" : "expanded折叠"),
+                  child: Text(isExpanded ? "expanded收起" : "expanded展开"),
                 ),
               ),
             ),
