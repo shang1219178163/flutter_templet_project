@@ -16,6 +16,7 @@ class NExpansionFade extends StatefulWidget {
     super.key,
     this.controller,
     this.isExpanded = false,
+    this.duration = const Duration(milliseconds: 350),
     required this.childBuilder,
     required this.expandedBuilder,
   });
@@ -24,6 +25,9 @@ class NExpansionFade extends StatefulWidget {
 
   /// 是否展开,默认false
   final bool isExpanded;
+
+  /// 切换动画时长
+  final Duration duration;
 
   /// 非展开状态
   final Widget Function(bool isExpanded, VoidCallback onToggle)? childBuilder;
@@ -66,7 +70,7 @@ class _NExpansionFadeState extends State<NExpansionFade> {
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
-      duration: const Duration(milliseconds: 350),
+      duration: widget.duration,
       firstChild: widget.childBuilder?.call(isExpanded, onToggle) ??
           InkWell(
             onTap: onToggle,
@@ -96,6 +100,13 @@ class _NExpansionFadeState extends State<NExpansionFade> {
 class NExpansionFadeController {
   _NExpansionFadeState? _anchor;
 
+  /// 是否已挂载到 [NExpansionFade]
+  bool get isAttached => _anchor != null;
+
+  bool? get isExpanded {
+    return _anchor?.isExpanded;
+  }
+
   void _attach(_NExpansionFadeState anchor) {
     _anchor = anchor;
   }
@@ -104,11 +115,6 @@ class NExpansionFadeController {
     if (_anchor == anchor) {
       _anchor = null;
     }
-  }
-
-  bool get isExpanded {
-    assert(_anchor != null);
-    return _anchor!.isExpanded;
   }
 
   void onToggle() {

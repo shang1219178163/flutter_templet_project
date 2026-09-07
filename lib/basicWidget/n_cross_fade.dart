@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 class NCrossFade extends StatefulWidget {
   const NCrossFade({
     super.key,
+    this.controller,
     required this.firstChild,
     required this.secondChild,
     this.alignment = Alignment.topCenter,
@@ -19,6 +20,8 @@ class NCrossFade extends StatefulWidget {
     this.duration = const Duration(milliseconds: 350),
     this.onChanged,
   });
+
+  final NCrossFadeController? controller;
 
   final Widget Function(VoidCallback onToggle) firstChild;
 
@@ -44,8 +47,24 @@ class _NCrossFadeState extends State<NCrossFade> {
   late bool isFirst = widget.isFirst;
 
   @override
+  void dispose() {
+    widget.controller?._detach(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller?._attach(this);
+  }
+
+  @override
   void didUpdateWidget(covariant NCrossFade oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?._detach(this);
+      widget.controller?._attach(this);
+    }
     if (widget.isFirst != oldWidget.isFirst) {
       isFirst = widget.isFirst;
     }
@@ -67,5 +86,31 @@ class _NCrossFadeState extends State<NCrossFade> {
     isFirst = !isFirst;
     setState(() {});
     widget.onChanged?.call(isFirst);
+  }
+}
+
+class NCrossFadeController {
+  _NCrossFadeState? _anchor;
+
+  /// 是否已挂载到 [NCrossFade]
+  bool get isAttached => _anchor != null;
+
+  bool? get isFirst {
+    return _anchor?.isFirst;
+  }
+
+  void _attach(_NCrossFadeState anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(_NCrossFadeState anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
+  }
+
+  void onToggle() {
+    assert(_anchor != null);
+    _anchor?.onToggle();
   }
 }
