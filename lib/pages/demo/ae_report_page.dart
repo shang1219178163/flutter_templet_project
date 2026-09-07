@@ -29,7 +29,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:get/get.dart';
 
@@ -132,16 +132,16 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bg,
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
         title: Text(title),
         titleTextStyle: TextStyle(
-          color: AppColor.font,
+          color: AppColors.font,
           fontWeight: FontWeight.w500,
         ),
-        iconTheme: const IconThemeData(color: AppColor.font, size: 20),
+        iconTheme: const IconThemeData(color: AppColors.font, size: 20),
         elevation: 0.0,
-        backgroundColor: AppColor.bg,
+        backgroundColor: AppColors.bg,
         actions: [
           IconButton(
             onPressed: () {
@@ -554,7 +554,6 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
 
 /// 不良事件详情
 class AdverseEventRecord {
-
   AdverseEventRecord.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     createTime = json['createTime'];
@@ -663,7 +662,6 @@ class AdverseEventRecord {
 
 /// 上传凭证
 class ProofDetailModel {
-
   ProofDetailModel.fromJson(Map<String, dynamic> json) {
     name = (json['name'] as String?);
     url = (json['url'] as String?);

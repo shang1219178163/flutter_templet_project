@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 ///选择盒子
 class NChoiceBox<T> extends StatefulWidget {
@@ -109,7 +109,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
       return SizedBox();
     }
 
-    final textColor = e.isSelected ? widget.itemSelectedColor : AppColor.font;
+    final textColor = e.isSelected ? widget.itemSelectedColor : AppColors.font;
 
     final bgColor = e.isSelected ? widget.itemSelectedColor.withValues(alpha: 0.08) : widget.itemColor;
 

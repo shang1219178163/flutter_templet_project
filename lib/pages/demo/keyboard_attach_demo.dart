@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:tuple/tuple.dart';
 
 class KeyboardAttachDemo extends StatefulWidget {
@@ -54,7 +54,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bg,
+      backgroundColor: AppColors.bg,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -135,7 +135,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
           fontSize: fontSize,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bg,
+        fillColor: AppColors.bg,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

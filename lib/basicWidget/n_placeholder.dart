@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 enum NPlaceholderType {
   none,
@@ -58,7 +58,7 @@ class NPlaceholder extends StatelessWidget {
                   Text(
                     message ?? "暂无数据",
                     style: TextStyle(
-                      color: AppColor.font999999,
+                      color: AppColors.font999999,
                       fontSize: 14.sp,
                     ),
                   )

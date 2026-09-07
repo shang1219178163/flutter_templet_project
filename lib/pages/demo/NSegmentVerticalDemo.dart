@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class SegmentVerticalDemo extends StatefulWidget {
@@ -107,7 +107,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
   }) {
     return Container(
       width: 98,
-      color: AppColor.bg,
+      color: AppColors.bg,
       child: MediaQuery.removePadding(
         removeTop: true,
         context: context,
@@ -145,13 +145,13 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
   }) {
     final model = list[index];
     var isSelected = model.selectableId == selectedModel?.selectableId;
-    var bgColor = isSelected ? AppColor.white : AppColor.bgF9F9F9;
+    var bgColor = isSelected ? AppColors.white : AppColors.bgF9F9F9;
     // bgColor = isSelected ? white : Colors.green;
 
     var name = model.selectableName;
 
     return ColoredBox(
-      color: AppColor.white,
+      color: AppColors.white,
       child: Container(
         width: double.infinity,
         height: 59,
@@ -175,7 +175,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                       name,
                       style: TextStyle(
                         fontSize: 14,
-                        color: isSelected ? context.themeData.colorScheme.primary : AppColor.font737373,
+                        color: isSelected ? context.themeData.colorScheme.primary : AppColors.font737373,
                         fontWeight: FontWeight.w500,
                       ),
                       maxLines: 1,
@@ -187,7 +187,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                   color: (!isSelected &&
                           !((selectedIndex - 1) >= 0 && index == selectedIndex - 1) &&
                           index != list.length - 1)
-                      ? AppColor.divider
+                      ? AppColors.divider
                       : Colors.transparent,
                 ),
               ],

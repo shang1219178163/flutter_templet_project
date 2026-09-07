@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/elevated_btn.dart';
 import 'package:flutter_templet_project/util/n_screen_manager.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 键盘辅助视图
 class NTextfieldBar extends StatefulWidget {
@@ -85,7 +85,7 @@ class _NTextfieldBarState extends State<NTextfieldBar> with KeyboardHeightChange
       decoration: BoxDecoration(
         color: Colors.white,
         // border: Border.all(color: Colors.blue),
-        border: Border(top: BorderSide(color: AppColor.divider, width: 0.5)),
+        border: Border(top: BorderSide(color: AppColors.divider, width: 0.5)),
       ),
       child: Row(
         children: [

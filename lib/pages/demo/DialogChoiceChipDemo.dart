@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:tuple/tuple.dart';
 
 class DialogChoiceChipDemo extends StatefulWidget {
@@ -158,13 +158,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                         side: BorderSide(color: Color(0xfff3f3f3)),
                         label: Text(e.name ?? "-"),
                         labelStyle: TextStyle(
-                          color: e.isSelected == true ? Colors.white : AppColor.font,
+                          color: e.isSelected == true ? Colors.white : AppColors.font,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: AppColor.bgF9F9F9,
+                        backgroundColor: AppColors.bgF9F9F9,
                         onSelected: (selected) {
                           for (final element in tags) {
                             if (element.data?.id == e.data?.id) {
@@ -255,7 +255,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                               TextSpan(
                                 text: (e.name ?? "-") * 5 + '一二三四五六七八九十'.substring(0, 3),
                                 style: TextStyle(
-                                  color: e.isSelected == true ? Colors.white : AppColor.font,
+                                  color: e.isSelected == true ? Colors.white : AppColors.font,
                                 ),
                               ),
                             ],
@@ -265,13 +265,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         labelStyle: TextStyle(
-                          color: e.isSelected == true ? Colors.white : AppColor.font,
+                          color: e.isSelected == true ? Colors.white : AppColors.font,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: AppColor.bgF9F9F9,
+                        backgroundColor: AppColors.bgF9F9F9,
                         onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
@@ -344,7 +344,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                               TextSpan(
                                 text: (e.name ?? "-") * 5 + '一二三四五六七八九十'.substring(0, 3),
                                 style: TextStyle(
-                                  color: e.isSelected == true ? Colors.white : AppColor.font,
+                                  color: e.isSelected == true ? Colors.white : AppColors.font,
                                 ),
                               ),
                             ],
@@ -354,13 +354,13 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         labelStyle: TextStyle(
-                          color: e.isSelected == true ? Colors.white : AppColor.font,
+                          color: e.isSelected == true ? Colors.white : AppColors.font,
                         ),
                         // padding: EdgeInsets.only(left: 15, right: 15),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: e.isSelected == true,
                         selectedColor: Theme.of(context).primaryColor,
-                        backgroundColor: AppColor.bgF9F9F9,
+                        backgroundColor: AppColors.bgF9F9F9,
                         onSelected: (selected) {
                           for (final element in tags) {
                             if (element.id == e.id) {
@@ -458,7 +458,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                                 //   shape: StadiumBorder(),
                                 // ),
                                 decoration: ShapeDecoration(
-                                  color: e.isSelected == true ? Theme.of(context).primaryColor : AppColor.bgF9F9F9,
+                                  color: e.isSelected == true ? Theme.of(context).primaryColor : AppColors.bgF9F9F9,
                                   shape: StadiumBorder(side: BorderSide(color: Color(0xfff3f3f3))),
                                 ),
                                 child: Text(
@@ -467,7 +467,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
                                   softWrap: true,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    color: e.isSelected == true ? Colors.white : AppColor.font,
+                                    color: e.isSelected == true ? Colors.white : AppColors.font,
                                   ),
                                 ),
                               ),
@@ -722,7 +722,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColor.font,
+              color: AppColors.font,
             ),
           ),
         ),

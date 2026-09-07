@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliding_segmented_control.
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class SegmentedControlDemo extends StatefulWidget {
   SegmentedControlDemo({Key? key, this.title}) : super(key: key);
@@ -619,7 +619,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: AppColor.font737373,
+              color: AppColors.font737373,
               // fontStyle: FontStyle.italic,
             ),
           ),
@@ -631,7 +631,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: AppColor.font737373,
+              color: AppColors.font737373,
               // fontStyle: FontStyle.italic,
             ),
           ),
@@ -643,7 +643,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: AppColor.font737373,
+              color: AppColors.font737373,
               // fontStyle: FontStyle.italic,
             ),
           ),

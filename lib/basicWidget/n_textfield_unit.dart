@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 带单位的输入框
 class NTextfieldUnit extends StatelessWidget {
@@ -38,7 +38,7 @@ class NTextfieldUnit extends StatelessWidget {
     this.showClear = true,
     this.onClear,
     this.readOnly = false,
-    this.readOnlyFillColor = AppColor.bgF3F3F3,
+    this.readOnlyFillColor = AppColors.bgF3F3F3,
     this.readOnlyBorderColor = const Color(0xFFE4E4E4),
     this.radius = 4,
     this.keyboardType,
@@ -142,7 +142,7 @@ class NTextfieldUnit extends StatelessWidget {
       maxLines: maxLines,
       onTap: onTap,
       borderWidth: 0.5,
-      fillColor: readOnly ? readOnlyFillColor : AppColor.white,
+      fillColor: readOnly ? readOnlyFillColor : AppColors.white,
       readOnly: readOnly,
       contentPadding: const EdgeInsets.only(
         left: 8,
@@ -153,13 +153,13 @@ class NTextfieldUnit extends StatelessWidget {
       style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: textColor ?? AppColor.font,
+        color: textColor ?? AppColors.font,
       ),
       hintText: hitText,
       hintStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: hintTextColor ?? AppColor.fontB3B3B3,
+        color: hintTextColor ?? AppColors.fontB3B3B3,
       ),
       suffixIconBuilder: (isFocus) {
         if (hideSuffix) {
@@ -193,7 +193,7 @@ class NTextfieldUnit extends StatelessWidget {
               unit ?? "",
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: AppColor.font737373,
+              color: AppColors.font737373,
             ),
           );
         }
@@ -276,7 +276,7 @@ class NTextfieldUnit extends StatelessWidget {
       children: [
         NText(
           name,
-          color: AppColor.font737373,
+          color: AppColors.font737373,
         ),
         Expanded(
           child: child,
@@ -294,13 +294,13 @@ class _NTextField extends StatefulWidget {
     this.controller,
     this.onTap,
     required this.onChanged,
-    this.style = const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColor.font),
+    this.style = const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.font),
     this.readOnly = false,
     this.hintText = "请输入",
-    this.hintStyle = const TextStyle(fontSize: 16, color: AppColor.fontB3B3B3),
+    this.hintStyle = const TextStyle(fontSize: 16, color: AppColors.fontB3B3B3),
     this.maxLines = 1,
     this.contentPadding,
-    this.fillColor = AppColor.bg,
+    this.fillColor = AppColors.bg,
     this.borderWidth = 1,
     this.suffixIconBuilder,
     this.suffixIconConstraints,
@@ -507,7 +507,7 @@ class _NTextFieldState extends State<_NTextField> {
       readOnly: widget.readOnly,
       minLines: widget.minLines,
       maxLines: widget.maxLines,
-      cursorColor: AppColor.primary,
+      cursorColor: AppColors.primary,
       focusNode: _focusNode,
       controller: controller,
       onTap: widget.onTap,
@@ -565,7 +565,7 @@ class _NTextFieldState extends State<_NTextField> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
       borderSide: BorderSide(
-        color: AppColor.primary, //边框颜色为白色
+        color: AppColors.primary, //边框颜色为白色
         width: borderWidth, //宽度为1
       ),
     );

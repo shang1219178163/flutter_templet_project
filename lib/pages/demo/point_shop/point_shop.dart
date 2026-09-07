@@ -16,7 +16,7 @@ import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_enter
 import 'package:flutter_templet_project/pages/demo/point_shop/widget/goods_gift_item.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/scrollable_positioned_list_ext/item_positions_listener_ext.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:provider/provider.dart';
@@ -151,7 +151,7 @@ class _PointShopState extends State<PointShop> with TickerProviderStateMixin {
       child: TabBar(
         controller: tabController!,
         labelColor: Colors.pink,
-        unselectedLabelColor: AppColor.font737373,
+        unselectedLabelColor: AppColors.font737373,
         tabs: categorys.map((e) => Tab(text: e.categoryName ?? "-")).toList(),
         // labelPadding: const EdgeInsets.symmetric(horizontal: 2),
         // indicatorPadding: const EdgeInsets.only(bottom: 8),

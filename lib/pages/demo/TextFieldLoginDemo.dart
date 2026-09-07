@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class TextFieldLoginDemo extends StatefulWidget {
@@ -141,7 +141,7 @@ class LoginInput extends StatefulWidget {
     this.isFocusClear = false,
     this.showEyeIcon = false,
     this.keyboardType,
-    this.fillColor = AppColor.bg,
+    this.fillColor = AppColors.bg,
     this.focusColor = Colors.white,
     this.radius = 30,
     this.inputFormatters,
@@ -277,7 +277,7 @@ class _LoginInputState extends State<LoginInput> {
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: IconButton(
-                  focusColor: AppColor.fontF9F9F9,
+                  focusColor: AppColors.fontF9F9F9,
                   icon: Image.asset(
                     isCloseEye ? 'assets/images/icon_eye_close.png' : 'assets/images/icon_eye_open.png',
                     width: 20,
@@ -305,7 +305,7 @@ class _LoginInputState extends State<LoginInput> {
       style: TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w400,
-        color: AppColor.font,
+        color: AppColors.font,
       ),
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
@@ -314,10 +314,10 @@ class _LoginInputState extends State<LoginInput> {
         // fillColor:  widget.focusColor,
         contentPadding: const EdgeInsets.only(left: 20, right: 20),
         border: InputBorder.none,
-        enabledBorder: buildBorder(color: AppColor.divider),
+        enabledBorder: buildBorder(color: AppColors.divider),
         focusedBorder: buildBorder(color: primaryColor),
         hintText: widget.hint,
-        hintStyle: TextStyle(fontSize: 16.sp, color: AppColor.fontF9F9F9),
+        hintStyle: TextStyle(fontSize: 16.sp, color: AppColors.fontF9F9F9),
         prefixIcon: IconButton(
           focusColor: primaryColor,
           icon: widget.image == null
@@ -342,7 +342,7 @@ class _LoginInputState extends State<LoginInput> {
         Radius.circular(raduis),
       ),
       borderSide: BorderSide(
-        color: color ?? AppColor.divider, //边线颜色为白色
+        color: color ?? AppColors.divider, //边线颜色为白色
         width: 1, //边线宽度为1
       ),
     );

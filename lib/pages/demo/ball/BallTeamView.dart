@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryContentView.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -108,7 +108,7 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
                         dividerColor: Colors.transparent,
                         indicatorColor: Colors.transparent,
                         indicator: const BoxDecoration(),
-                        labelColor: AppColor.error,
+                        labelColor: AppColors.error,
                         unselectedLabelColor: themeProvider.subtitleColor,
                         labelStyle: const TextStyle(fontSize: 13),
                         unselectedLabelStyle: const TextStyle(fontSize: 13),
@@ -121,8 +121,8 @@ class _BallTeamViewState extends State<BallTeamView> with TickerProviderStateMix
                               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
                               decoration: isSelected
                                   ? BoxDecoration(
-                                      color: AppColor.error.withValues(alpha: 0.1),
-                                      border: Border.all(color: AppColor.error.withValues(alpha: 0.5)),
+                                      color: AppColors.error.withValues(alpha: 0.1),
+                                      border: Border.all(color: AppColors.error.withValues(alpha: 0.5)),
                                       borderRadius: BorderRadius.circular(6))
                                   : BoxDecoration(
                                       border: Border.all(color: themeProvider.borderColor),

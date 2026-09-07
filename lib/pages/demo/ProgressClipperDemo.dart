@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/CircleSectorProgressIndicator.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class ProgressClipperDemo extends StatefulWidget {
   ProgressClipperDemo({Key? key, this.title}) : super(key: key);
@@ -150,8 +150,8 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
     required double percent,
     double size = 50,
     double strokeWidth = 4,
-    Color color = AppColor.error,
-    Color backgroundColor = AppColor.bg,
+    Color color = AppColors.error,
+    Color backgroundColor = AppColors.bg,
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),

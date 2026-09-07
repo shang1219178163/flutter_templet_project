@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// (不良)患者信息卡片
 class AePatientCard extends StatelessWidget {
@@ -83,7 +83,7 @@ class AePatientCard extends StatelessWidget {
                     spacing: 2,
                     icon: NText(
                       title,
-                      color: AppColor.font,
+                      color: AppColors.font,
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
                     ),
@@ -91,7 +91,7 @@ class AePatientCard extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 9),
                       child: NText(
                         remark,
-                        color: AppColor.fontB3B3B3,
+                        color: AppColors.fontB3B3B3,
                         fontSize: 12,
                       ),
                     ),

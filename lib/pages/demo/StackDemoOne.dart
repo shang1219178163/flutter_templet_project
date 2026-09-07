@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:tuple/tuple.dart';
 
 class StackDemoOne extends StatefulWidget {
@@ -31,7 +31,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bg,
+      backgroundColor: AppColors.bg,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -183,7 +183,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: AppColor.font777777,
+          unselectedLabelColor: AppColors.font777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,

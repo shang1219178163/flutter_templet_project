@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -94,7 +94,7 @@ class NFileUploadHandle {
         height: 36,
         decoration: BoxDecoration(
           // color: bgColor,
-          border: Border.all(color: AppColor.divider),
+          border: Border.all(color: AppColors.divider),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         child: NPair(
@@ -106,7 +106,7 @@ class NFileUploadHandle {
           child: const NText(
             "选择文件并上传",
             fontSize: 14,
-            color: AppColor.font5D6D7E,
+            color: AppColors.font5D6D7E,
           ),
         ),
       ),

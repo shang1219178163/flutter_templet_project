@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/list_tile/n_slider_list_item
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
 import 'package:get/get.dart';
 
@@ -144,12 +144,14 @@ class _TimelineStepState extends State<TimelineStep> {
                             {
                               NLangEnum.en:
                                   'Preview uses TimelineDemo listData. lineColor defaults to ColorScheme.outlineVariant and leftContent is true.',
-                              NLangEnum.zh: '预览使用 TimelineDemo 的 listData。lineColor 默认 ColorScheme.outlineVariant，leftContent 默认 true。',
+                              NLangEnum.zh:
+                                  '预览使用 TimelineDemo 的 listData。lineColor 默认 ColorScheme.outlineVariant，leftContent 默认 true。',
                             },
                             {
                               NLangEnum.en:
                                   'height is optional; when off the item height is computed from description/remark. Styles are null unless enabled.',
-                              NLangEnum.zh: 'height 可选；关闭时由描述/备注计算行高。titleStyle / subtitleStyle / descriptionStyle 未开启时为 null。',
+                              NLangEnum.zh:
+                                  'height 可选；关闭时由描述/备注计算行高。titleStyle / subtitleStyle / descriptionStyle 未开启时为 null。',
                             },
                             {
                               NLangEnum.en:
@@ -191,21 +193,21 @@ class _TimelineStepState extends State<TimelineStep> {
             width: double.infinity,
             child: ClipRect(
               child: Scrollbar(
+                controller: previewController,
+                child: SingleChildScrollView(
                   controller: previewController,
-                  child: SingleChildScrollView(
-                    controller: previewController,
-                    child: TimelineComponent(
-                      timelineList: listData,
-                      lineColor: lineColor,
-                      height: useHeight ? height : null,
-                      backgroundColor: backgroundColor,
-                      titleStyle: useTitleStyle ? TextStyle(fontSize: titleFontSize) : null,
-                      subtitleStyle: useSubtitleStyle ? TextStyle(fontSize: subtitleFontSize) : null,
-                      descriptionStyle: useDescriptionStyle ? TextStyle(fontSize: descriptionFontSize) : null,
-                      leftContent: leftContent ? true : null,
-                    ),
+                  child: TimelineComponent(
+                    timelineList: listData,
+                    lineColor: lineColor,
+                    height: useHeight ? height : null,
+                    backgroundColor: backgroundColor,
+                    titleStyle: useTitleStyle ? TextStyle(fontSize: titleFontSize) : null,
+                    subtitleStyle: useSubtitleStyle ? TextStyle(fontSize: subtitleFontSize) : null,
+                    descriptionStyle: useDescriptionStyle ? TextStyle(fontSize: descriptionFontSize) : null,
+                    leftContent: leftContent ? true : null,
                   ),
                 ),
+              ),
             ),
           ),
           Padding(
@@ -365,7 +367,7 @@ class _TimelineStepState extends State<TimelineStep> {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
+      children: AppColors.colorOptions.map((e) {
         final selected = value == e;
         return Material(
           color: Colors.transparent,

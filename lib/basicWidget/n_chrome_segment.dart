@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 typedef ChromeSegmentRecord = ({Widget title, int count});
 
@@ -175,7 +175,7 @@ class _NChromeSegmentState extends State<NChromeSegment> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: isSelected ? context.themeData.colorScheme.primary : AppColor.font737373,
+                    color: isSelected ? context.themeData.colorScheme.primary : AppColors.font737373,
                   ),
                 ),
               ),

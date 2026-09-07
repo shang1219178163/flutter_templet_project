@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/basicWidget/list_tile/n_switch_list_item
 import 'package:flutter_templet_project/basicWidget/n_decoration_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 /// 键盘类型，auto 表示交给构造函数推断
@@ -28,8 +28,10 @@ enum _KeyboardKind {
   none(label: 'none', keyboardType: TextInputType.none);
 
   const _KeyboardKind({required this.label, required this.keyboardType});
+
   /// Chip 文案
   final String label;
+
   /// 对应 keyboardType；auto 为 null
   final TextInputType? keyboardType;
 }
@@ -48,8 +50,10 @@ enum _ActionKind {
   newline(label: 'newline', textInputAction: TextInputAction.newline);
 
   const _ActionKind({required this.label, required this.textInputAction});
+
   /// Chip 文案
   final String label;
+
   /// 对应 textInputAction；nil 为 null
   final TextInputAction? textInputAction;
 }
@@ -61,12 +65,13 @@ enum _DirKind {
   rtl(label: 'rtl', direction: TextDirection.rtl);
 
   const _DirKind({required this.label, required this.direction});
+
   /// Chip 文案
   final String label;
+
   /// 对应 textDirection；nil 为 null
   final TextDirection? direction;
 }
-
 
 /// 指针样式
 enum _MouseKind {
@@ -78,8 +83,10 @@ enum _MouseKind {
   grab(label: 'grab', cursor: SystemMouseCursors.grab);
 
   const _MouseKind({required this.label, required this.cursor});
+
   /// Chip 文案
   final String label;
+
   /// 对应 mouseCursor；nil 为 null
   final MouseCursor? cursor;
 }
@@ -91,6 +98,7 @@ enum _ScalerKind {
   linear(label: 'linear');
 
   const _ScalerKind({required this.label});
+
   /// Chip 文案
   final String label;
 
@@ -109,8 +117,10 @@ enum _StrutKind {
   force(label: 'force', strutStyle: StrutStyle(forceStrutHeight: true));
 
   const _StrutKind({required this.label, required this.strutStyle});
+
   /// Chip 文案
   final String label;
+
   /// 对应 strutStyle；nil 为 null
   final StrutStyle? strutStyle;
 }
@@ -122,6 +132,7 @@ enum _FormatterKind {
   length(label: 'length');
 
   const _FormatterKind({required this.label});
+
   /// Chip 文案
   final String label;
 
@@ -142,8 +153,10 @@ enum _AutofillKind {
   telephone(label: 'telephone', hints: [AutofillHints.telephoneNumber]);
 
   const _AutofillKind({required this.label, required this.hints});
+
   /// Chip 文案
   final String label;
+
   /// 对应 autofillHints
   final Iterable<String> hints;
 }
@@ -155,8 +168,10 @@ enum _LocaleKind {
   zh(label: 'zh', locale: Locale('zh'));
 
   const _LocaleKind({required this.label, required this.locale});
+
   /// Chip 文案
   final String label;
+
   /// 对应 locale；nil 为 null
   final Locale? locale;
 }
@@ -185,130 +200,193 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
 
   /// 是否只读
   bool readOnly = false;
+
   /// 是否密文
   bool obscureText = false;
+
   /// 密文字符
   String obscuringCharacter = '•';
+
   /// 是否自动纠正
   bool autocorrect = true;
+
   /// 智能破折号
   SmartDashesType smartDashesType = SmartDashesType.enabled;
+
   /// 智能引号
   SmartQuotesType smartQuotesType = SmartQuotesType.enabled;
+
   /// 是否显示输入建议
   bool enableSuggestions = true;
+
   /// 字号
   double fontSize = 16;
+
   /// 文字颜色
   Color? styleColor;
+
   /// 字重
   FontWeight fontWeight = FontWeight.w400;
+
   /// 光标颜色
   Color cursorColor = Colors.blue;
+
   /// 背景光标颜色
   Color backgroundCursorColor = Colors.grey;
+
   /// 文字对齐
   TextAlign textAlign = TextAlign.start;
+
   /// 文字方向
   _DirKind dirKind = _DirKind.nil;
+
   /// 语言
   _LocaleKind localeKind = _LocaleKind.nil;
+
   /// 文字缩放
   _ScalerKind scalerKind = _ScalerKind.nil;
+
   /// 线性缩放系数
   double scalerFactor = 1.5;
+
   /// 最大行数
   double maxLines = 1;
+
   /// 最小行数，0 表示 null
   double minLines = 0;
+
   /// 是否撑满父布局
   bool expands = false;
+
   /// 是否强制换行
   bool forceLine = true;
+
   /// 是否传入 textHeightBehavior
   bool useTextHeightBehavior = false;
+
   /// 首行 ascent 是否应用行高
   bool applyHeightToFirstAscent = true;
+
   /// 末行 descent 是否应用行高
   bool applyHeightToLastDescent = true;
+
   /// 宽度计算基准
   TextWidthBasis textWidthBasis = TextWidthBasis.parent;
+
   /// 是否自动聚焦
   bool autofocus = false;
+
   /// 是否显示光标
   bool? showCursor;
+
   /// 是否显示选区手柄
   bool showSelectionHandles = false;
+
   /// 选区颜色
   Color? selectionColor;
+
   /// 键盘类型
   _KeyboardKind keyboardKind = _KeyboardKind.auto;
+
   /// 键盘动作
   _ActionKind actionKind = _ActionKind.nil;
+
   /// 大小写
   TextCapitalization textCapitalization = TextCapitalization.none;
+
   /// 输入格式化
   _FormatterKind formatterKind = _FormatterKind.nil;
+
   /// 指针样式
   _MouseKind mouseKind = _MouseKind.nil;
+
   /// 渲染层是否忽略指针
   bool rendererIgnoresPointer = false;
+
   /// 光标宽度
   double cursorWidth = 2;
+
   /// 光标高度，0 表示 null
   double cursorHeight = 0;
+
   /// 光标圆角，0 表示 null
   double cursorRadius = 0;
+
   /// 光标透明度动画
   bool cursorOpacityAnimates = false;
+
   /// 是否传入 cursorOffset
   bool useCursorOffset = false;
+
   /// 光标水平偏移
   double cursorOffsetDx = 0;
+
   /// 光标垂直偏移
   double cursorOffsetDy = 0;
+
   /// 光标画在文字上方
   bool paintCursorAboveText = false;
+
   /// 选区高度样式
   BoxHeightStyle selectionHeightStyle = BoxHeightStyle.tight;
+
   /// 选区宽度样式
   BoxWidthStyle selectionWidthStyle = BoxWidthStyle.tight;
+
   /// 滚动内边距
   double scrollPadding = 20;
+
   /// 键盘外观
   Brightness keyboardAppearance = Brightness.light;
+
   /// 拖动手势起点
   DragStartBehavior dragStartBehavior = DragStartBehavior.start;
+
   /// 是否可交互
   bool? enableInteractiveSelection;
+
   /// 是否传入 scrollController
   bool useScrollController = false;
+
   /// 滚动物理
   PhysicsKind physicsKind = PhysicsKind.platform;
+
   /// 自动纠正矩形颜色
   Color? autocorrectionTextRectColor;
+
   /// 自动填充
   _AutofillKind autofillKind = _AutofillKind.empty;
+
   /// 裁剪
   Clip clipBehavior = Clip.hardEdge;
+
   /// 是否传入 restorationId
   bool useRestorationId = false;
+
   /// 是否传入 scrollBehavior
   bool useScrollBehavior = false;
+
   /// 是否启用 Scribble
   bool scribbleEnabled = true;
+
   /// 是否允许 IME 个性化学习
   bool enableIMEPersonalizedLearning = true;
+
   /// 是否自定义上下文菜单
   bool useContextMenu = false;
+
   /// 是否自定义放大镜
   bool useMagnifier = false;
+
   /// 是否传入 undoController
   bool useUndoController = false;
+
   /// strut 预设
   _StrutKind strutKind = _StrutKind.nil;
+
   /// 是否自定义 groupId
   bool useCustomGroupId = false;
+
   /// 最近事件
   String lastEvent = '—';
 
@@ -376,7 +454,8 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                         {
                           NLangEnum.en:
                               'obscureText forces maxLines=1. expands requires maxLines and minLines to be null.',
-                          NLangEnum.zh: 'obscureText 为 true 时强制 maxLines=1；expands 为 true 时 maxLines/minLines 必须为 null。',
+                          NLangEnum.zh:
+                              'obscureText 为 true 时强制 maxLines=1；expands 为 true 时 maxLines/minLines 必须为 null。',
                         },
                       ],
                     ),
@@ -697,9 +776,9 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                 return Text(
                   v.toStringAsFixed(2),
                   style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
                 );
               },
             ),
@@ -745,14 +824,14 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
           NChoiceColorListItem(
             title: const Text('cursorColor'),
             value: cursorColor,
-            colors: AppColor.colorOptions.where((e) => e != null).toList(),
+            colors: AppColors.colorOptions.where((e) => e != null).toList(),
             onChanged: (v) => onMark('cursorColor $v', () => cursorColor = v ?? Colors.blue),
           ),
           const SizedBox(height: 8),
           NChoiceColorListItem(
             title: const Text('backgroundCursorColor'),
             value: backgroundCursorColor,
-            colors: AppColor.colorOptions.where((e) => e != null).toList(),
+            colors: AppColors.colorOptions.where((e) => e != null).toList(),
             onChanged: (v) => onMark('backgroundCursorColor $v', () => backgroundCursorColor = v ?? Colors.grey),
           ),
           const SizedBox(height: 8),
@@ -765,7 +844,8 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
           NChoiceColorListItem(
             title: const Text('autocorrectionTextRectColor'),
             value: autocorrectionTextRectColor,
-            onChanged: (v) => onMark('autocorrectionTextRectColor ${v ?? 'null'}', () => autocorrectionTextRectColor = v),
+            onChanged: (v) =>
+                onMark('autocorrectionTextRectColor ${v ?? 'null'}', () => autocorrectionTextRectColor = v),
           ),
           const SizedBox(height: 8),
           NChoiceChipListItem(
@@ -842,9 +922,9 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                 return Text(
                   v.toStringAsFixed(1),
                   style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
                 );
               },
             ),
@@ -861,9 +941,9 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
                 return Text(
                   v.toStringAsFixed(1),
                   style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontFamily: 'monospace',
-                ),
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontFamily: 'monospace',
+                  ),
                 );
               },
             ),
@@ -1034,9 +1114,6 @@ class _EditableTextDemoState extends State<EditableTextDemo> {
       ),
     );
   }
-
-
-
 
   Widget buildContextMenu(context, editableTextState) {
     return AdaptiveTextSelectionToolbar.editableText(

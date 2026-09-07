@@ -23,12 +23,11 @@ import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
 class TextFieldDemo extends StatefulWidget {
-
   const TextFieldDemo({Key? key, this.title}) : super(key: key);
   final String? title;
 
@@ -455,7 +454,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
-                    color: AppColor.font,
+                    color: AppColors.font,
                   ),
                 ),
               ),
@@ -635,7 +634,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
               DLog.d("化疗方案");
             },
             readOnly: true,
-            readOnlyFillColor: AppColor.white,
+            readOnlyFillColor: AppColors.white,
             onChanged: (value) {
               DLog.d("化疗方案：$value");
             },
@@ -669,7 +668,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
       borderSide: BorderSide(
-        color: color ?? AppColor.divider, //边框颜色为白色
+        color: color ?? AppColors.divider, //边框颜色为白色
         width: borderWidth, //宽度为1
       ),
     );

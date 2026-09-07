@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 mixin DialogMixin {
   /// 项目通用弹窗封装
@@ -299,8 +299,8 @@ class DeleteAlert with DialogMixin {
       title: title,
       message: message,
       radius: const Radius.circular(8),
-      confirmBgColor: AppColor.white,
-      cancelBgColor: AppColor.white,
+      confirmBgColor: AppColors.white,
+      cancelBgColor: AppColors.white,
       confirmTextStyle: TextStyle(
         color: Theme.of(context).colorScheme.primary,
       ),

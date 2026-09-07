@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 // buildBody2() {
 //   return NRequestListBox(
@@ -135,7 +135,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     return Container(
       decoration: widget.bodyDecoration ??
           BoxDecoration(
-            color: AppColor.bg,
+            color: AppColors.bg,
             // border: Border.all(color: Colors.blue),
             // borderRadius: BorderRadius.all(Radius.circular(0.w)),
           ),

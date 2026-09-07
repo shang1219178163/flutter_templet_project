@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// 呼吸动画
 class NAnimatedBreathing extends StatefulWidget {
   const NAnimatedBreathing({
     super.key,

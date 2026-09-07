@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 筛选
 class NChoiceExpansion<T> extends StatefulWidget {
@@ -161,9 +161,9 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
               horizontal: 10,
             ),
             decoration: BoxDecoration(
-              color: isSelected ? context.themeData.colorScheme.primary.withValues(alpha: 0.1) : AppColor.bg,
+              color: isSelected ? context.themeData.colorScheme.primary.withValues(alpha: 0.1) : AppColors.bg,
               borderRadius: const BorderRadius.all(Radius.circular(4)),
-              border: Border.all(width: 0.5, color: isSelected ? context.themeData.colorScheme.primary : AppColor.bg),
+              border: Border.all(width: 0.5, color: isSelected ? context.themeData.colorScheme.primary : AppColors.bg),
             ),
             child: NText(
               title,

@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_collection_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:tuple/tuple.dart';
 
 class PageViewDemoThree extends StatefulWidget {
@@ -139,7 +139,7 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
-                              color: AppColor.font,
+                              color: AppColors.font,
                             ),
                           ),
                         ),

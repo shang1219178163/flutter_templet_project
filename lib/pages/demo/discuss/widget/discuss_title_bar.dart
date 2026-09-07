@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -61,7 +61,7 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
   Widget build(BuildContext context) {
     super.build(context);
     final style = TextStyle(
-      color: widget.isHot ? AppColor.error : themeProvider.titleColor,
+      color: widget.isHot ? AppColors.error : themeProvider.titleColor,
       fontSize: 14.5,
       fontWeight: FontWeight.w500,
       fontFamily: "PingFang SC",
@@ -83,7 +83,7 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
                 margin: const EdgeInsets.only(right: 10),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
-                  color: AppColor.error,
+                  color: AppColors.error,
                 ),
               ),
             Expanded(

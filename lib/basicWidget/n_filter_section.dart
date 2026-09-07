@@ -10,7 +10,7 @@ import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class NFilterSection<T> extends StatefulWidget {
   const NFilterSection({
@@ -149,14 +149,14 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
           borderColor: color.withValues(alpha: 0.2),
           hide: disable,
         ),
-        collapsedTextColor: AppColor.font,
-        textColor: AppColor.font,
+        collapsedTextColor: AppColors.font,
+        textColor: AppColors.font,
         iconColor: color,
         collapsedIconColor: color,
         title: Text(
           title,
           style: TextStyle(
-            color: AppColor.font,
+            color: AppColors.font,
             fontSize: 15,
             fontWeight: FontWeight.w500,
           ),

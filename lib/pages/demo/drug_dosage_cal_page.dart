@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/medication_calculator.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 /// 药品计量推荐
@@ -184,7 +184,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: AppColor.font,
+                color: AppColors.font,
               ),
             ),
           ),
@@ -275,7 +275,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
               );
             },
             readOnly: true,
-            readOnlyFillColor: AppColor.white,
+            readOnlyFillColor: AppColors.white,
             onChanged: (value) {
               DLog.d("化疗方案：$value");
             },
@@ -289,7 +289,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
               DLog.d("药品名称");
             },
             readOnly: true,
-            readOnlyFillColor: AppColor.white,
+            readOnlyFillColor: AppColors.white,
             hideSuffix: true,
             onChanged: (value) {
               DLog.d("药品名称：$value");
@@ -332,7 +332,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
               );
             },
             readOnly: true,
-            readOnlyFillColor: AppColor.white,
+            readOnlyFillColor: AppColors.white,
             // hideSuffix: true,
             onChanged: (value) {
               DLog.d("用药方式：$value");
@@ -344,7 +344,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
             value:
                 drugPlanSelected?.strategy?.drugs.map((e) => e.remark ?? "").where((e) => e.isNotEmpty).join("、") ?? "",
             hitText: "",
-            textColor: AppColor.font737373,
+            textColor: AppColors.font737373,
             maxLines: 10,
             onChanged: (value) {
               DLog.d("剂量公式：$value");
@@ -364,7 +364,7 @@ class _DrugDosageCalPageState extends State<DrugDosageCalPage> with SafeSetState
                 value: "${dosage ?? ""}",
                 unit: "mg",
                 hitText: "",
-                textColor: AppColor.font737373,
+                textColor: AppColors.font737373,
                 readOnly: true,
                 onChanged: (value) {
                   DLog.d("推荐剂量：$value");

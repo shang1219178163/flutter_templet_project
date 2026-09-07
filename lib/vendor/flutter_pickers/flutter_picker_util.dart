@@ -5,12 +5,11 @@ import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 // 地址选择器模型
 class AddressPickerModel {
-
   AddressPickerModel.fromJson(Map<String, dynamic> json) {
     province = json['province'];
     provinceCode = json['provinceCode'];
@@ -219,7 +218,7 @@ class FlutterPickerUtil {
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
-        color: AppColor.white,
+        color: AppColors.white,
       ),
       itemOverlay: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,7 +250,7 @@ class FlutterPickerUtil {
 
   static Widget buildTextButton({
     required String title,
-    Color? textColor = AppColor.font737373,
+    Color? textColor = AppColors.font737373,
     VoidCallback? onPressed,
   }) {
     return InkWell(

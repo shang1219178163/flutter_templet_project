@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/tab/n_filled_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_outline_tabbar.dart';
 import 'package:flutter_templet_project/basicWidget/tab/n_tab_outline_item.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class CustomTabbarPage extends StatefulWidget {
@@ -143,7 +143,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
             ),
             Container(
               decoration: BoxDecoration(
-                color: AppColor.bgF7F7F7,
+                color: AppColors.bgF7F7F7,
               ),
               child: NSectionBox(
                 hide: true,
@@ -154,7 +154,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
                   items: items,
                   indexVN: indexVN,
                   // onChanged: (v) {},
-                  bgColor: AppColor.bgF7F7F7,
+                  bgColor: AppColors.bgF7F7F7,
                   selectedBgColor: Colors.white,
                 ),
               ),
@@ -292,7 +292,7 @@ class _CustomTabbarPageState extends State<CustomTabbarPage> with TickerProvider
               final hideSeperator = e == items.last;
               final i = items.indexOf(e);
               final isSelected = i == indexVN.value;
-              final foregroundColor = isSelected ? theme.colorScheme.primary : AppColor.font999999;
+              final foregroundColor = isSelected ? theme.colorScheme.primary : AppColors.font999999;
               final gradient = isSelected
                   ? LinearGradient(colors: [Colors.red, Colors.purple])
                   : LinearGradient(colors: [Colors.grey, Colors.grey]);

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 
 /// 日期起止选择器(截止到天)
@@ -63,7 +63,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
               ),
               child: NText(
                 startDate == null ? "开始时间" : (startDate ?? "").split(" ").firstOrNull ?? "",
-                color: startDate == null ? AppColor.fontB3B3B3 : AppColor.font737373,
+                color: startDate == null ? AppColors.fontB3B3B3 : AppColors.font737373,
                 fontSize: 14,
               ),
             ),
@@ -73,7 +73,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
           padding: EdgeInsets.symmetric(horizontal: 7),
           child: NText(
             "－",
-            color: AppColor.font999999,
+            color: AppColors.font999999,
             fontSize: 14,
           ),
         ),
@@ -91,7 +91,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
               ),
               child: NText(
                 endDate == null ? "结束时间" : (endDate ?? "").split(" ").firstOrNull ?? "",
-                color: endDate == null ? AppColor.fontB3B3B3 : AppColor.font737373,
+                color: endDate == null ? AppColors.fontB3B3B3 : AppColors.font737373,
                 fontSize: 14,
               ),
             ),

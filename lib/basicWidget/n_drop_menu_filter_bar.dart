@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 搜索框加 dropMenu
 class NDropMenuFilterBar<E> extends StatelessWidget {
@@ -99,14 +99,14 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(right: 12),
                 decoration: BoxDecoration(
-                  color: AppColor.white,
-                  border: Border.all(color: AppColor.divider),
+                  color: AppColors.white,
+                  border: Border.all(color: AppColors.divider),
                   borderRadius: BorderRadius.all(Radius.circular(radius)),
                 ),
                 // padding: EdgeInsets.only(left: 8, top: 4, bottom: 4),
                 child: NSearchTextField(
                   padding: const EdgeInsets.only(left: 4, top: 4, bottom: 4),
-                  backgroundColor: AppColor.white,
+                  backgroundColor: AppColors.white,
                   hidePrefixIcon: true,
                   autofocus: false,
                   placeholder: searchPlaceholder,
@@ -137,7 +137,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                         ),
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         minimumSize: const WidgetStatePropertyAll(Size(20, 18)),
-                        backgroundColor: WidgetStateProperty.all(AppColor.bg),
+                        backgroundColor: WidgetStateProperty.all(AppColors.bg),
                       ),
                       constraints: constraints,
                       builder: (controller, selectedItem) {
@@ -158,7 +158,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: AppColor.divider),
+                              border: Border.all(color: AppColors.divider),
                               borderRadius: BorderRadius.all(Radius.circular(radius)),
                             ),
                             child: Row(
@@ -184,7 +184,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                         );
                       },
                       itemBuilder: (e, isSelected) {
-                        final textColor = isSelected ? primary : AppColor.font;
+                        final textColor = isSelected ? primary : AppColors.font;
                         final iconColor = isSelected ? primary : Colors.transparent;
 
                         var name = getName(e) ?? "";
@@ -227,13 +227,13 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
     if (name?.isNotEmpty != true) {
       return const TextStyle(
         fontSize: 15,
-        color: AppColor.fontB3B3B3,
+        color: AppColors.fontB3B3B3,
         fontWeight: FontWeight.w400,
       );
     }
     return const TextStyle(
       fontSize: 15,
-      color: AppColor.font,
+      color: AppColors.font,
       fontWeight: FontWeight.w400,
     );
   }

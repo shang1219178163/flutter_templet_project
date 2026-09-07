@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreateTemplet.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class ApiCreatePage extends StatefulWidget {
@@ -179,7 +179,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bg,
+        fillColor: AppColors.bg,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

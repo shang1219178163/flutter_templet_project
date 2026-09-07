@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_description_card.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class ExtendedImageDemo extends StatefulWidget {
@@ -120,7 +120,8 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
                             {
                               NLangEnum.en:
                                   'Preview is the original ClipRRect + loadStateChanged card. Unfinished load shows a teal photo icon; completed uses ExtendedRawImage with BoxFit.fill.',
-                              NLangEnum.zh: '预览沿用原 buildCardItem：ClipRRect 圆角 8。未完成显示 photo 图标，完成后 ExtendedRawImage 且 BoxFit.fill。',
+                              NLangEnum.zh:
+                                  '预览沿用原 buildCardItem：ClipRRect 圆角 8。未完成显示 photo 图标，完成后 ExtendedRawImage 且 BoxFit.fill。',
                             },
                             {
                               NLangEnum.en:
@@ -203,58 +204,58 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     double? height,
   }) {
     return ExtendedImage.network(
-        url,
-        key: ValueKey('$urlIndex-$cache-$scale-$retries-$mode'),
-        width: width,
-        height: height,
-        fit: fit,
-        alignment: alignment,
-        repeat: repeat,
-        filterQuality: filterQuality,
-        clipBehavior: clipOf(),
-        shape: shapeOf(),
-        borderRadius: borderRadiusOf(),
-        border: useBorder ? Border.all(color: borderColor ?? Colors.red, width: borderWidth) : null,
-        color: color,
-        colorBlendMode: color != null ? colorBlendMode : null,
-        cache: cache,
-        enableLoadState: enableLoadState,
-        mode: mode,
-        clearMemoryCacheIfFailed: clearMemoryCacheIfFailed,
-        enableSlideOutPage: enableSlideOutPage,
-        handleLoadingProgress: handleLoadingProgress,
-        isAntiAlias: isAntiAlias,
-        scale: scale,
-        retries: retries.round(),
-        gaplessPlayback: gaplessPlayback,
-        matchTextDirection: matchTextDirection,
-        excludeFromSemantics: excludeFromSemantics,
-        semanticLabel: useSemanticLabel ? 'extended image' : null,
-        clearMemoryCacheWhenDispose: clearMemoryCacheWhenDispose,
-        layoutInsets: layoutInsetsOf(),
-        cacheRawData: mode == ExtendedImageMode.editor,
-        initGestureConfigHandler: mode == ExtendedImageMode.gesture ? (state) => GestureConfig() : null,
-        initEditorConfigHandler: mode == ExtendedImageMode.editor ? (state) => EditorConfig() : null,
-        onDoubleTap: mode == ExtendedImageMode.gesture ? onDoubleTap : null,
-        loadStateChanged: useLoadStateChanged
-            ? (state) {
-                if (state.extendedImageLoadState != LoadState.completed) {
-                  return Icon(
-                    Icons.photo,
-                    color: Colors.teal.shade100,
-                    size: 100,
-                  );
-                }
-                var widget = ExtendedRawImage(
-                  image: state.extendedImageInfo?.image,
-                  width: width,
-                  height: height,
-                  fit: fit,
+      url,
+      key: ValueKey('$urlIndex-$cache-$scale-$retries-$mode'),
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      filterQuality: filterQuality,
+      clipBehavior: clipOf(),
+      shape: shapeOf(),
+      borderRadius: borderRadiusOf(),
+      border: useBorder ? Border.all(color: borderColor ?? Colors.red, width: borderWidth) : null,
+      color: color,
+      colorBlendMode: color != null ? colorBlendMode : null,
+      cache: cache,
+      enableLoadState: enableLoadState,
+      mode: mode,
+      clearMemoryCacheIfFailed: clearMemoryCacheIfFailed,
+      enableSlideOutPage: enableSlideOutPage,
+      handleLoadingProgress: handleLoadingProgress,
+      isAntiAlias: isAntiAlias,
+      scale: scale,
+      retries: retries.round(),
+      gaplessPlayback: gaplessPlayback,
+      matchTextDirection: matchTextDirection,
+      excludeFromSemantics: excludeFromSemantics,
+      semanticLabel: useSemanticLabel ? 'extended image' : null,
+      clearMemoryCacheWhenDispose: clearMemoryCacheWhenDispose,
+      layoutInsets: layoutInsetsOf(),
+      cacheRawData: mode == ExtendedImageMode.editor,
+      initGestureConfigHandler: mode == ExtendedImageMode.gesture ? (state) => GestureConfig() : null,
+      initEditorConfigHandler: mode == ExtendedImageMode.editor ? (state) => EditorConfig() : null,
+      onDoubleTap: mode == ExtendedImageMode.gesture ? onDoubleTap : null,
+      loadStateChanged: useLoadStateChanged
+          ? (state) {
+              if (state.extendedImageLoadState != LoadState.completed) {
+                return Icon(
+                  Icons.photo,
+                  color: Colors.teal.shade100,
+                  size: 100,
                 );
-                DLog.d('Source Rect width ${widget.width} height : ${widget.height}');
-                return widget;
               }
-            : null,
+              var widget = ExtendedRawImage(
+                image: state.extendedImageInfo?.image,
+                width: width,
+                height: height,
+                fit: fit,
+              );
+              DLog.d('Source Rect width ${widget.width} height : ${widget.height}');
+              return widget;
+            }
+          : null,
     );
   }
 
@@ -655,7 +656,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: AppColor.colorOptions.map((e) {
+      children: AppColors.colorOptions.map((e) {
         final selected = value == e;
         return Material(
           color: Colors.transparent,

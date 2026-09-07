@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/audioplayers/audio_player_bar.dart';
 import 'package:get/get.dart';
 
@@ -55,7 +55,7 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgF9F9F9,
+      backgroundColor: AppColors.bgF9F9F9,
       appBar: AppBar(
         // backgroundColor: bgColorF9F9F9,
         title: Text(title ?? "通话记录"),
@@ -69,7 +69,7 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
       decoration: BoxDecoration(
-        color: AppColor.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -158,7 +158,7 @@ class MediaRecordCard extends StatelessWidget {
                     ),
                     child: NText(
                       timeLongDesc,
-                      color: AppColor.font5D6D7E,
+                      color: AppColors.font5D6D7E,
                       maxLines: 1,
                       fontSize: 14,
                     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class UploadFileDemo extends StatefulWidget {
   UploadFileDemo({Key? key, this.title}) : super(key: key);
@@ -26,7 +26,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
-          color: AppColor.font,
+          color: AppColors.font,
           // size: 20,
         ),
         elevation: 0,
@@ -35,7 +35,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
         titleTextStyle: const TextTheme(
           titleMedium: TextStyle(
             // headline6 is used for setting title's theme
-            color: AppColor.font,
+            color: AppColors.font,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -43,7 +43,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
         toolbarTextStyle: const TextTheme(
           titleMedium: TextStyle(
             // headline6 is used for setting title's theme
-            color: AppColor.font,
+            color: AppColors.font,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),

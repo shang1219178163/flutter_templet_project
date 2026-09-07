@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/NAppTheme.dart';
 import 'package:flutter_templet_project/util/theme/NDialogTheme.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class AppThemeService {
@@ -28,7 +28,7 @@ class AppThemeService {
   VoidCallback? onThemeChanged;
   static const _legacyThemeModeKey = "themeModel";
 
-  Color seedColor = AppColor.primary;
+  Color seedColor = AppColors.primary;
   Brightness brightness = Brightness.light;
   ThemeMode _themeMode = ThemeMode.system;
 
@@ -51,7 +51,7 @@ class AppThemeService {
     // light 预设 = 浅色图标（深色/品牌色顶栏）；dark 预设 = 深色图标（浅色顶栏）
     return (isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark).copyWith(
       statusBarColor: Colors.transparent,
-      systemNavigationBarColor: isDark ? AppColor.backgroundDark : AppColor.white,
+      systemNavigationBarColor: isDark ? AppColors.backgroundDark : AppColors.white,
       systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     );
   }
@@ -136,7 +136,7 @@ class AppThemeService {
     );
     // 暗色 surface 用中性灰 0xFF242424（R=G=B），避免旧值 0xFF242434 发紫。
     final isDark = brightness == Brightness.dark;
-    final surfaceBase = isDark ? AppColor.cardDark : AppColor.cardLight;
+    final surfaceBase = isDark ? AppColors.cardDark : AppColors.cardLight;
     final primaryContainer = Color.alphaBlend(
       seedColor.withValues(alpha: isDark ? 0.24 : 0.12),
       surfaceBase,
@@ -218,8 +218,8 @@ class AppThemeService {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      scaffoldBackgroundColor: isLight ? AppColor.backgroundLight : AppColor.backgroundDark,
-      cardColor: isLight ? AppColor.cardLight : AppColor.cardDark,
+      scaffoldBackgroundColor: isLight ? AppColors.backgroundLight : AppColors.backgroundDark,
+      cardColor: isLight ? AppColors.cardLight : AppColors.cardDark,
       // —— 组件 Theme（次级）：颜色尽量取自 colorScheme ——
       indicatorColor: onPrimary,
       dividerColor: colorScheme.outlineVariant,

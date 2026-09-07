@@ -13,7 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -103,7 +103,7 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
             dense: true,
             leading: Icon(
               isDir ? Icons.folder : Icons.insert_drive_file,
-              color: isDir ? AppColor.primary : null,
+              color: isDir ? AppColors.primary : null,
             ),
             title: Text(entity.path.split('/').last),
             subtitle: Row(

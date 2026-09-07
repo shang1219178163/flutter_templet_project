@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:path/path.dart';
 
 /// 音频播放 bar
@@ -145,9 +145,9 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: AppColor.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(29),
-        border: Border.all(width: 0.5, color: AppColor.divider),
+        border: Border.all(width: 0.5, color: AppColors.divider),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +166,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
             child: NText(
               _positionText ?? "",
               fontSize: 14,
-              color: AppColor.font737373,
+              color: AppColors.font737373,
             ),
           ),
           Expanded(
@@ -192,7 +192,7 @@ class _AudioPlayerBarState extends State<AudioPlayerBar> with WidgetsBindingObse
           NText(
             totalDesc,
             fontSize: 14,
-            color: AppColor.font737373,
+            color: AppColors.font737373,
           ),
         ],
       ),

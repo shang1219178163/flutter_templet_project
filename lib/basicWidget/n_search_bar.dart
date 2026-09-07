@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 带搜索框和取消按钮
 class NSearchBar extends StatelessWidget {
@@ -55,7 +55,7 @@ class NSearchBar extends StatelessWidget {
             child: const NText(
               '取消',
               fontSize: 15,
-              color: AppColor.font,
+              color: AppColors.font,
             ),
           ),
         ),

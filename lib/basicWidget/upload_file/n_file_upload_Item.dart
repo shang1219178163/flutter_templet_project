@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 typedef NFileUploadItemBuilder = Widget Function(
   NFileUploadModel model,
@@ -127,14 +127,14 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
           child: NText(
             fileNameNew,
             fontSize: 14,
-            color: AppColor.font737373,
+            color: AppColors.font737373,
             maxLines: 1,
           ),
         ),
         NText(
           ".$ext",
           fontSize: 14,
-          color: AppColor.font737373,
+          color: AppColors.font737373,
           maxLines: 1,
         ),
       ],
@@ -151,7 +151,7 @@ class NFileUploadItemState extends State<NFileUploadItem> with AutomaticKeepAliv
         right: 12,
       ),
       decoration: const BoxDecoration(
-        color: AppColor.bg,
+        color: AppColors.bg,
         // border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),

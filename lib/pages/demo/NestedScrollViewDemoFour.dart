@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/basicWidget/scroll/NCustomScrollBehavior
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 电商首页
 class NestedScrollViewDemoFour extends StatefulWidget {
@@ -214,7 +214,7 @@ class _NestedScrollViewDemoFourState extends State<NestedScrollViewDemoFour> wit
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       decoration: BoxDecoration(
-        color: AppColor.bg,
+        color: AppColors.bg,
         // border: Border.all(color: Colors.blue),
       ),
       child: Container(

@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart' as html_parser;
@@ -182,7 +182,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
           widget.title ?? value,
           style: TextStyle(
             fontSize: 18,
-            color: AppColor.font,
+            color: AppColors.font,
             fontWeight: FontWeight.w500,
           ),
           maxLines: 1,
@@ -199,7 +199,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
       child: ValueListenableBuilder<double>(
         valueListenable: progressVN,
         builder: (context, value, child) {
-          final indicatorColor = value >= 1.0 ? Colors.transparent : AppColor.primary;
+          final indicatorColor = value >= 1.0 ? Colors.transparent : AppColors.primary;
 
           return LinearProgressIndicator(
             value: value,
@@ -445,7 +445,6 @@ class AppWebViewPageController {
 
 /// 视频标签<Video>模型
 class VideoElementDetailModel {
-
   VideoElementDetailModel.fromJson(Map<String, dynamic> json) {
     src = json['src'];
     type = json['type'];

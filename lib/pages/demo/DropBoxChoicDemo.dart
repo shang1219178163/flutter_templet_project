@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class DropBoxChoicDemo extends StatefulWidget {
   DropBoxChoicDemo({Key? key, this.title}) : super(key: key);
@@ -126,7 +126,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
           Expanded(
             child: NSearchTextField(
               placeholder: "搜索",
-              backgroundColor: AppColor.white,
+              backgroundColor: AppColors.white,
               onChanged: (value) {
                 searchText = value;
               },
@@ -242,7 +242,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             child: Text(
               "入组时间",
               style: TextStyle(
-                color: AppColor.font,
+                color: AppColors.font,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),
@@ -452,14 +452,14 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                 isExpand: isExpand,
                 color: color,
               ),
-        collapsedTextColor: AppColor.font,
-        textColor: AppColor.font,
+        collapsedTextColor: AppColors.font,
+        textColor: AppColors.font,
         iconColor: color,
         collapsedIconColor: color,
         title: Text(
           title,
           style: TextStyle(
-            color: AppColor.font,
+            color: AppColors.font,
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),

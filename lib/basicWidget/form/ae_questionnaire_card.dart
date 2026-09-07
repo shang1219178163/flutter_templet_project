@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 不良事件问卷信息展示
 class AeQuestionnaireCard<T> extends StatelessWidget {
@@ -44,13 +44,13 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 4),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColor.error.withValues(alpha: 0.1),
+                color: AppColors.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: NText(
                 "注：AE&SAE表单仅支持PC端添加与填写。",
                 fontSize: 14,
-                color: AppColor.error,
+                color: AppColors.error,
                 maxLines: 1,
               ),
             ),
@@ -70,7 +70,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color: AppColor.white,
+          color: AppColors.white,
           border: Border.all(color: const Color(0xFFE6E6E6), width: 0.5),
           boxShadow: const [
             BoxShadow(
@@ -86,7 +86,7 @@ class AeQuestionnaireCard<T> extends StatelessWidget {
               child: NText(
                 e.title,
                 fontSize: 14,
-                color: AppColor.font,
+                color: AppColors.font,
                 maxLines: 1,
               ),
             ),

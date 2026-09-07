@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -101,9 +101,9 @@ class _NImagePreviewState extends State<NImagePreview> {
 
   late final barcodeScanner = BarcodeScanner();
 
-  Color get bgColor => widget.isBlackBackgroud ? AppColor.font181818 : Colors.white;
+  Color get bgColor => widget.isBlackBackgroud ? AppColors.font181818 : Colors.white;
 
-  Color get textColor => widget.isBlackBackgroud ? Colors.white : AppColor.font181818;
+  Color get textColor => widget.isBlackBackgroud ? Colors.white : AppColors.font181818;
 
   @override
   void dispose() {
@@ -157,7 +157,7 @@ class _NImagePreviewState extends State<NImagePreview> {
       body: Stack(
         children: [
           Container(
-            color: AppColor.font181818,
+            color: AppColors.font181818,
             child: GestureDetector(
               onTapUp: (v) async {
                 onBack();
@@ -323,7 +323,7 @@ class _NImagePreviewState extends State<NImagePreview> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: const BoxDecoration(
-                  color: AppColor.font181818,
+                  color: AppColors.font181818,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

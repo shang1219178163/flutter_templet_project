@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 ///选择盒子水平
 class NChoiceBoxHorizontal<T> extends StatefulWidget {
@@ -9,7 +9,7 @@ class NChoiceBoxHorizontal<T> extends StatefulWidget {
     required this.items,
     required this.onChanged,
     this.isSingle = false,
-    this.itemColor = AppColor.bg,
+    this.itemColor = AppColors.bg,
     this.itemSelectedColor = Colors.blue,
     this.spacing = 8,
     this.itemBuilder,
@@ -101,7 +101,7 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
         label: Text(
           e.title,
           style: TextStyle(
-            color: e.isSelected == true ? Colors.white : AppColor.font,
+            color: e.isSelected == true ? Colors.white : AppColors.font,
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),

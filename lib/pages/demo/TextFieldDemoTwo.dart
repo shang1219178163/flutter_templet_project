@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class TextFieldDemoTwo extends StatefulWidget {
@@ -112,7 +112,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
             ),
             Container(
               decoration: BoxDecoration(
-                color: AppColor.bg,
+                color: AppColors.bg,
               ),
               child: NSectionBox(
                 title: "填空组件封装 - 白底",

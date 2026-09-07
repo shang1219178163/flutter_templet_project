@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/file_picker_mixin.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 /// 上传文档组件(基于 file_picker)
@@ -199,7 +199,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox> with Fil
                 height: itemWidth,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: AppColor.bgF9F9F9,
+                  color: AppColors.bgF9F9F9,
                   borderRadius: BorderRadius.circular(radius),
                 ),
                 child: Image(

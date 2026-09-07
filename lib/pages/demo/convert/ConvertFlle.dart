@@ -29,7 +29,7 @@ import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dar
 import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/snack_util.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class ConvertFlle extends StatefulWidget {
@@ -343,7 +343,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                       if (files.isEmpty)
                         NText(
                           "拖拽文件",
-                          style: TextStyle(color: AppColor.font737373),
+                          style: TextStyle(color: AppColors.font737373),
                         ),
                     ],
                   ),

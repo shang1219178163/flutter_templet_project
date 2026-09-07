@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 enum IMTextfieldBarEvent {
   sound,
@@ -162,7 +162,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
     );
 
     return Container(
-      color: AppColor.bg,
+      color: AppColors.bg,
       // padding: EdgeInsets.all(8),
       child: StatefulBuilder(
         builder: (context, setState) {

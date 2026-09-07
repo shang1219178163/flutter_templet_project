@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
-class AppColor {
+class AppColors {
   /// 是否暗黑模式
   static bool get isDark => AppThemeService().isDark;
 

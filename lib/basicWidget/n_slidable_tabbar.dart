@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class NSlidableTabbar extends StatefulWidget {
   const NSlidableTabbar({
@@ -8,7 +8,7 @@ class NSlidableTabbar extends StatefulWidget {
     required this.onChanged,
     this.height = 36,
     this.backgroudColor = const Color(0xffF6F6F6),
-    this.color = AppColor.error,
+    this.color = AppColors.error,
     this.labelStyle,
     this.unselectedLabelStyle,
   });
@@ -54,7 +54,7 @@ class _NSlidableTabbarState extends State<NSlidableTabbar> with TickerProviderSt
         dividerHeight: 0,
         labelColor: widget.color,
         labelStyle: widget.labelStyle ?? TextStyle(fontSize: 12),
-        unselectedLabelStyle: widget.unselectedLabelStyle ?? TextStyle(fontSize: 12, color: AppColor.font333333),
+        unselectedLabelStyle: widget.unselectedLabelStyle ?? TextStyle(fontSize: 12, color: AppColors.font333333),
         tabAlignment: TabAlignment.fill,
         indicatorSize: TabBarIndicatorSize.tab,
         labelPadding: const EdgeInsets.symmetric(horizontal: 0),

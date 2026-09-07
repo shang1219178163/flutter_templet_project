@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 发语音: 声音录制页面
 class IMSoundRecordingPage extends StatelessWidget {
@@ -76,7 +76,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                   child: Text(
                     "松开 取消",
                     style: TextStyle(
-                      color: AppColor.font,
+                      color: AppColors.font,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
@@ -100,7 +100,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                   child: Text(
                     "松开 发送",
                     style: TextStyle(
-                      color: AppColor.fontB3B3B3,
+                      color: AppColors.fontB3B3B3,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),

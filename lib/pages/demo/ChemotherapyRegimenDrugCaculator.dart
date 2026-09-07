@@ -16,7 +16,7 @@ import 'package:flutter_templet_project/pages/demo/drug_dosage_cal_page.dart';
 import 'package:flutter_templet_project/pages/demo/medication_calculator.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 /// 化疗药品计算
@@ -140,7 +140,7 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
         final name = selectedItem?.name;
         final nameStyle = TextStyle(
           fontSize: 15,
-          color: AppColor.font,
+          color: AppColors.font,
           fontWeight: FontWeight.w400,
         );
         return InkWell(
@@ -159,7 +159,7 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
             ),
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(color: AppColor.divider),
+              border: Border.all(color: AppColors.divider),
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: Row(

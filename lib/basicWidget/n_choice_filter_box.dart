@@ -16,7 +16,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class NChoiceFilterBoxItemModel<T extends SelectableMixin> {
   NChoiceFilterBoxItemModel({
@@ -225,7 +225,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
     return NFilterDropBox(
       controller: filterController,
       sections: sections,
-      barrierColor: AppColor.bg000000.withValues(alpha: 0.52),
+      barrierColor: AppColors.bg000000.withValues(alpha: 0.52),
       onVisible: (visible) {
         widget.onClose?.call();
       },
@@ -269,7 +269,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerPr
             child: Text(
               "入组时间",
               style: TextStyle(
-                color: AppColor.font,
+                color: AppColors.font,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:lpinyin/lpinyin.dart';
 import 'package:provider/provider.dart';
@@ -108,7 +108,7 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
               susPosition: const Offset(0, 40),
               indexBarData: SuspensionUtil.getTagIndexList(models),
               indexBarOptions: IndexBarOptions(
-                textStyle: TextStyle(color: AppColor.error, fontSize: 12),
+                textStyle: TextStyle(color: AppColors.error, fontSize: 12),
               ),
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -155,7 +155,6 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
 }
 
 class AreaCodeEntity extends ISuspensionBean {
-
   AreaCodeEntity.fromJson(Map<String, dynamic> json) {
     englishName = json['english_name'];
     chineseName = json['chinese_name'];

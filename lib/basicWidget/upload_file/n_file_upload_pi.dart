@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_ha
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 文件上传样式示例
 class NFileUploadPI extends NFileUploadHandle {
@@ -55,7 +55,7 @@ class NFileUploadPI extends NFileUploadHandle {
                   if (canEdit && onDelete != null)
                     GestureDetector(
                       onTap: onDelete,
-                      child: Icon(Icons.delete, color: AppColor.error),
+                      child: Icon(Icons.delete, color: AppColors.error),
                     ),
                 ],
               ),
@@ -70,7 +70,7 @@ class NFileUploadPI extends NFileUploadHandle {
 
                 final desc = showPercent ? percent.toStringAsPercent(2) : "上传中";
 
-                final indicatorColor = percent < 1 ? AppColor.primary.withValues(alpha: 0.5) : Colors.transparent;
+                final indicatorColor = percent < 1 ? AppColors.primary.withValues(alpha: 0.5) : Colors.transparent;
 
                 // return Padding(
                 //   padding: const EdgeInsets.only(bottom: 8.0),
@@ -176,8 +176,8 @@ class NFileUploadPI extends NFileUploadHandle {
         width: double.infinity,
         height: 36,
         decoration: BoxDecoration(
-          color: AppColor.primary.withValues(alpha: 0.1),
-          border: Border.all(color: AppColor.primary),
+          color: AppColors.primary.withValues(alpha: 0.1),
+          border: Border.all(color: AppColors.primary),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         child: NPair(
@@ -185,12 +185,12 @@ class NFileUploadPI extends NFileUploadHandle {
             image: AssetImage(Assets.imagesIconUploadOne),
             width: 16,
             height: 16,
-            color: AppColor.primary,
+            color: AppColors.primary,
           ),
           child: NText(
             "选择文件并上传",
             fontSize: 14,
-            color: AppColor.primary,
+            color: AppColors.primary,
           ),
         ),
       ),

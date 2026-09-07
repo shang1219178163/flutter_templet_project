@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// AE 输入框组件
 class AeUploadDocumentItem extends StatelessWidget {
@@ -96,7 +96,7 @@ class AeUploadDocumentItem extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: const BoxDecoration(
-          color: AppColor.bgF9F9F9,
+          color: AppColors.bgF9F9F9,
           // borderRadius: BorderRadius.circular(radius),
         ),
         child: Image(

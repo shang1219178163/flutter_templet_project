@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/pages/demo/widget/im_conversation_cell.d
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 /// 会话列表
@@ -239,7 +239,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
         children: [
           SlidableAction(
             onPressed: (ctx) => onPin?.call(),
-            backgroundColor: AppColor.primary,
+            backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             icon: Icons.push_pin,
             label: isPinned ? "取消置顶" : '置顶',
@@ -247,7 +247,7 @@ class _ImConversationPageState extends State<ImConversationPage> with AssetResou
           ),
           SlidableAction(
             onPressed: (ctx) => onDelete?.call(),
-            backgroundColor: AppColor.error,
+            backgroundColor: AppColors.error,
             foregroundColor: Colors.white,
             icon: Icons.delete,
             label: '删除',

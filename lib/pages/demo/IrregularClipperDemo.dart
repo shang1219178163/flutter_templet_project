@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class IrregularClipperDemo extends StatefulWidget {
@@ -169,14 +169,14 @@ class _IrregularClipperDemoState extends State<IrregularClipperDemo> {
             children: [
               NText(
                 title,
-                color: AppColor.white,
+                color: AppColors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: 14,
                 maxLines: 1,
               ),
               NText(
                 subtitle,
-                color: AppColor.white,
+                color: AppColors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: 12,
                 maxLines: 1,

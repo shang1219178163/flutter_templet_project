@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -172,7 +172,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
               child: NText(
                 widget.title,
                 fontSize: 14,
-                color: AppColor.font737373,
+                color: AppColors.font737373,
               ),
             ),
         ...selectedModels.map((e) {
@@ -223,7 +223,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
                 child: NText(
                   widget.description,
                   fontSize: 12,
-                  color: AppColor.fontB3B3B3,
+                  color: AppColors.fontB3B3B3,
                 ),
               ),
         ),
@@ -239,7 +239,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
         height: 36,
         decoration: BoxDecoration(
           // color: bgColor,
-          border: Border.all(color: AppColor.divider),
+          border: Border.all(color: AppColors.divider),
           borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
         ),
         child: NPair(
@@ -251,7 +251,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           child: NText(
             "选择文件并上传",
             fontSize: 14,
-            color: AppColor.fontB3B3B3,
+            color: AppColors.fontB3B3B3,
           ),
         ),
       ),

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/apple_sigin_mixin.dart';
 import 'package:flutter_templet_project/vendor/fluwx/fluwx_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
@@ -71,7 +71,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 9, right: 9),
-                child: NText('第三方登录', fontSize: 14, color: AppColor.fontB3B3B3),
+                child: NText('第三方登录', fontSize: 14, color: AppColors.fontB3B3B3),
               ),
               const Expanded(
                 child: Divider(

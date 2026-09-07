@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// AE 输入框组件
 class AeInputItem extends StatelessWidget {
@@ -119,8 +119,8 @@ class AeInputItem extends StatelessWidget {
         offset: Offset(0, 5),
       )
     ];
-    final textColor = enable ? AppColor.font : (disableTextColor ?? AppColor.fontB3B3B3);
-    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgEDEDED;
+    final textColor = enable ? AppColors.font : (disableTextColor ?? AppColors.fontB3B3B3);
+    final bgColor = enable ? AppColors.white : disableBgColor ?? AppColors.bgEDEDED;
 
     final style = TextStyle(
       color: textColor,

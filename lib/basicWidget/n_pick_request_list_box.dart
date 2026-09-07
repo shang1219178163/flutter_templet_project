@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_easy_refresh_mixin.dart';
 import 'package:flutter_templet_project/basicWidget/refresh/n_refresh_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 基于接口的搜索选择列表(子类实现 PickerDrugBox)
 class NPickRequestListBox<E> extends StatefulWidget {
@@ -108,7 +108,7 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
             ),
             child: NSearchBar(
               placeholder: widget.placeholder,
-              backgroundColor: AppColor.bgF3F3F3,
+              backgroundColor: AppColors.bgF3F3F3,
               onChanged: (val) {
                 search = val;
                 refreshViewController.onRefresh();
@@ -143,7 +143,7 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
-            color: AppColor.font737373,
+            color: AppColors.font737373,
           ),
         ),
       ),
@@ -164,7 +164,7 @@ class NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
       },
       itemBuilder: (context, index, model) {
         final isSelected = widget.selected(widget.items, model);
-        final textColor = isSelected ? primary : AppColor.font;
+        final textColor = isSelected ? primary : AppColors.font;
         final color = isSelected ? primary : Colors.transparent;
 
         final name = widget.cbName(model);

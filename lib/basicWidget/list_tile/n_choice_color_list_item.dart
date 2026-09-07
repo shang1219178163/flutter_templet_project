@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 类似 [NColorChoice] 的颜色选择行：点标题折叠/展开，下方圆形色点。不支持 subtitle。
 class NChoiceColorListItem extends StatelessWidget {
@@ -15,7 +15,7 @@ class NChoiceColorListItem extends StatelessWidget {
     super.key,
     required this.value,
     required this.onChanged,
-    this.colors = AppColor.colorOptions,
+    this.colors = AppColors.colorOptions,
     this.title,
     this.secondary,
     this.dense = true,

@@ -21,7 +21,7 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 /// 嵌套滚动
@@ -67,7 +67,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
     var expandedHeight = 338.0 + 13;
 
     return Scaffold(
-      backgroundColor: AppColor.bg,
+      backgroundColor: AppColors.bg,
       body: buildNestedScrollViewPage(
         expandedHeight: expandedHeight,
         collapsedHeight: collapsedHeight,
@@ -109,7 +109,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
               snap: false,
               primary: true,
               backgroundColor: () {
-                final color = scrollProgress.value > 0.65 ? collapsedBackgroundColor : AppColor.bg;
+                final color = scrollProgress.value > 0.65 ? collapsedBackgroundColor : AppColors.bg;
                 return color;
               },
               title: ListenableBuilder(
@@ -215,7 +215,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
-                color: AppColor.white,
+                color: AppColors.white,
               ),
               maxLines: 1,
             ),
@@ -415,7 +415,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                   width: 4,
                   height: 17,
                   decoration: BoxDecoration(
-                    color: AppColor.primary,
+                    color: AppColors.primary,
                     borderRadius: const BorderRadius.all(Radius.circular(2)),
                   ),
                 ),
@@ -434,7 +434,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                 NText(
                   DateTime.now().toString().split(" ").first,
                   fontSize: 14,
-                  color: AppColor.font737373,
+                  color: AppColors.font737373,
                 ),
                 const SizedBox(
                   width: 6,
@@ -443,7 +443,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                   image: AssetImage(Assets.imagesIconArrowRight),
                   width: 14,
                   height: 14,
-                  color: AppColor.font737373,
+                  color: AppColors.font737373,
                 )
               ],
             ),
@@ -560,7 +560,7 @@ class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoH
                         NText(
                           subText,
                           fontSize: 12,
-                          color: AppColor.font737373,
+                          color: AppColors.font737373,
                         ),
                       ],
                     ),

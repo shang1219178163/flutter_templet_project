@@ -4,13 +4,12 @@ import 'package:flutter_templet_project/basicWidget/scroll/scroll_physics/end_bo
 import 'package:flutter_templet_project/model/category_item.dart';
 import 'package:flutter_templet_project/pages/demo/ball/BallCategoryProvider.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class BallCategoryContentView extends StatefulWidget {
-
   const BallCategoryContentView({super.key, required this.leftNavItems});
   final List<CategoryItem> leftNavItems;
 
@@ -168,7 +167,7 @@ class _BallCategoryContentViewState extends State<BallCategoryContentView> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13,
-                          color: isSelected ? AppColor.error : themeProvider.subtitleColor,
+                          color: isSelected ? AppColors.error : themeProvider.subtitleColor,
                         ),
                       ),
                     ),

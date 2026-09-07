@@ -14,12 +14,11 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RichTextDemo extends StatefulWidget {
-
   const RichTextDemo({Key? key, this.title}) : super(key: key);
   final String? title;
 
@@ -190,7 +189,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
       TextSpan(
         style: TextStyle(
           fontSize: 16,
-          color: AppColor.font,
+          color: AppColors.font,
           height: 1.6,
         ),
         children: RichTextExt.createTextSpansByRegExp(
@@ -356,7 +355,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
                 text: departmentDesc,
                 style: TextStyle(
                   fontSize: 14,
-                  color: AppColor.font737373,
+                  color: AppColors.font737373,
                   // height: 1.5,
                 ),
               ),

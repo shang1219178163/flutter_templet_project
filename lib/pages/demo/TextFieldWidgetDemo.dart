@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_text_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class TextFieldWidgetDemo extends StatefulWidget {
@@ -80,7 +80,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   child: buildNTextField(
                     hideSuffix: true,
                     decorationBuilder: (dt) {
-                      return dt.copyWith(fillColor: AppColor.bg);
+                      return dt.copyWith(fillColor: AppColors.bg);
                     },
                   ),
                 ),
@@ -164,7 +164,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   title: "NSearchBar ",
                   child: NSearchBar(
                     decoration: BoxDecoration(
-                      color: AppColor.bg,
+                      color: AppColors.bg,
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
                     onChanged: (value) {},

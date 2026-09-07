@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
@@ -27,7 +27,7 @@ class AeHorizalChooseMutilItem<T> extends StatelessWidget {
     this.enable = true,
     this.header,
     this.footer,
-    this.disableTextColor = AppColor.font,
+    this.disableTextColor = AppColors.font,
     this.disableBgColor,
   });
 
@@ -73,7 +73,7 @@ class AeHorizalChooseMutilItem<T> extends StatelessWidget {
   }
 
   Widget buildBody() {
-    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgEDEDED;
+    final bgColor = enable ? AppColors.white : disableBgColor ?? AppColors.bgEDEDED;
 
     return GestureDetector(
       onTap: onPicker,
@@ -102,8 +102,8 @@ class AeHorizalChooseMutilItem<T> extends StatelessWidget {
                 builder: (context, value, child) {
                   var name = value == null ? '请选择' : convertCb(value).join(" ");
                   final color = enable
-                      ? (value != null ? AppColor.font : AppColor.fontB3B3B3)
-                      : (disableTextColor ?? AppColor.fontB3B3B3);
+                      ? (value != null ? AppColors.font : AppColors.fontB3B3B3)
+                      : (disableTextColor ?? AppColors.fontB3B3B3);
                   if (value == null && !enable) {
                     name = "--";
                   }
@@ -121,7 +121,7 @@ class AeHorizalChooseMutilItem<T> extends StatelessWidget {
                 image: AssetImage(Assets.imagesIconArrowDown),
                 width: 12,
                 height: 12,
-                color: AppColor.fontB3B3B3,
+                color: AppColors.fontB3B3B3,
                 // color: primary,
               ),
           ],

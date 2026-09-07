@@ -28,7 +28,7 @@ import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
@@ -169,7 +169,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                   padding: const EdgeInsets.only(left: 16),
                   child: Icon(
                     Icons.notification_important_outlined,
-                    color: AppColor.primary,
+                    color: AppColors.primary,
                   ),
                 ),
               ),

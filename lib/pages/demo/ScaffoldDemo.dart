@@ -9,7 +9,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class ScaffoldDemo extends StatefulWidget {
   const ScaffoldDemo({
@@ -74,7 +74,7 @@ class _ScaffoldDemoState extends State<ScaffoldDemo> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldStateKey,
-      backgroundColor: AppColor.bg,
+      backgroundColor: AppColors.bg,
       resizeToAvoidBottomInset: true,
       primary: true,
       extendBody: false,

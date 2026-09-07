@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/theme/NAppTheme.dart';
 import 'package:flutter_templet_project/util/theme/NDialogTheme.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 /// Get.bottomSheet 封装类
@@ -49,7 +49,7 @@ class GetBottomSheet {
       clipBehavior: Clip.hardEdge,
       width: Get.width,
       decoration: const BoxDecoration(
-        color: AppColor.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
@@ -177,7 +177,7 @@ class GetDialog {
                     alignment: Alignment.center,
                     decoration: decoration ??
                         const BoxDecoration(
-                          color: AppColor.white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.all(Radius.circular(12)),
                         ),
                     child: child,
@@ -319,7 +319,7 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})> extends State
                       child: e.child,
                     ))
                 .toList(),
-            Container(height: 8, color: AppColor.bg),
+            Container(height: 8, color: AppColors.bg),
             buildActionCancel(
               onTap: onCancel ?? () => Navigator.of(context).maybePop(),
             ),
@@ -508,7 +508,7 @@ class NBottomInputBox extends StatelessWidget {
     final primary = Theme.of(context).primaryColor;
 
     return ColoredBox(
-      color: AppColor.white,
+      color: AppColors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -523,7 +523,7 @@ class NBottomInputBox extends StatelessWidget {
                       width: 40,
                       height: 3,
                       decoration: BoxDecoration(
-                        color: AppColor.divider,
+                        color: AppColors.divider,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -536,7 +536,7 @@ class NBottomInputBox extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  color: AppColor.font,
+                  color: AppColors.font,
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -552,7 +552,7 @@ class NBottomInputBox extends StatelessWidget {
                 NTextField(
                   controller: controller,
                   hintText: '请输入...',
-                  hintStyle: TextStyle(fontSize: 14, color: AppColor.font),
+                  hintStyle: TextStyle(fontSize: 14, color: AppColors.font),
                   minLines: 5,
                   maxLines: 10,
                   autofocus: true,

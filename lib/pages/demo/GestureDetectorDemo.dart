@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/mixin/sound_state_mixin.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class GestureDetectorDemo extends StatefulWidget {
@@ -88,7 +88,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         child: Text(
           "按住说话",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.font),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColors.font),
         ),
       ),
     );
@@ -164,7 +164,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                       child: Text(
                         "松开 取消",
                         style: TextStyle(
-                          color: AppColor.fontB3B3B3,
+                          color: AppColors.fontB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -188,7 +188,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                       child: Text(
                         "松开 发送",
                         style: TextStyle(
-                          color: AppColor.fontB3B3B3,
+                          color: AppColors.fontB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),

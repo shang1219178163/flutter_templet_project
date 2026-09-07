@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_search_theme.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 // ```
 // Expanded(
@@ -130,7 +130,7 @@ class NSearchTextField extends StatelessWidget {
         theme?.style ??
         TextStyle(
           fontSize: 15,
-          color: AppColor.font,
+          color: AppColors.font,
           fontWeight: FontWeight.w400,
         );
 
@@ -140,7 +140,7 @@ class NSearchTextField extends StatelessWidget {
         image: const AssetImage("assets/images/icon_search.png"),
         width: 16,
         height: 16,
-        color: AppColor.font,
+        color: AppColors.font,
       ),
     );
 
@@ -253,7 +253,7 @@ class NSearchBar extends StatelessWidget {
             child: const NText(
               '取消',
               fontSize: 15,
-              color: AppColor.font,
+              color: AppColors.font,
             ),
           ),
         ),

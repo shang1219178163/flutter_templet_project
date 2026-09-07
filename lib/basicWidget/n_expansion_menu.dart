@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_expansion/en_expansion_tile.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 业务折叠菜单
 class NExpansionMenu extends StatefulWidget {
@@ -74,8 +74,8 @@ class NExpansionMenuState extends State<NExpansionMenu> {
                 isExpand: widget.isExpand,
                 color: widget.color,
               ),
-        collapsedTextColor: AppColor.font,
-        textColor: AppColor.font,
+        collapsedTextColor: AppColors.font,
+        textColor: AppColors.font,
         iconColor: widget.color,
         collapsedIconColor: widget.color,
         title: Row(
@@ -85,7 +85,7 @@ class NExpansionMenuState extends State<NExpansionMenu> {
               child: Text(
                 widget.title,
                 style: const TextStyle(
-                  color: AppColor.font,
+                  color: AppColors.font,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),

@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
@@ -305,7 +305,7 @@ class _ImChatPageState extends State<ImChatPage>
     final name = model.nickName ?? "";
     final timeStr = model.timeDes ?? "";
 
-    final contentBgColor = isOwner ? context.themeData.colorScheme.primary : AppColor.bg;
+    final contentBgColor = isOwner ? context.themeData.colorScheme.primary : AppColors.bg;
     final contentFontColor = Colors.white;
 
     Widget buildAvatar({required String imgUrl, VoidCallback? onTap}) {
@@ -769,7 +769,7 @@ class _ImChatPageState extends State<ImChatPage>
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
-                          color: AppColor.font,
+                          color: AppColors.font,
                         ),
                       ),
                     ),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
@@ -104,7 +104,7 @@ class ImageService {
         AndroidUiSettings(
           toolbarTitle: '',
           toolbarColor: Colors.blue,
-          toolbarWidgetColor: AppColor.white,
+          toolbarWidgetColor: AppColors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
         ),

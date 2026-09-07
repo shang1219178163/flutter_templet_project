@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 // Padding(
 //   padding: EdgeInsets.all(16),
@@ -50,7 +50,7 @@ class NTextField extends StatefulWidget {
     this.autofocus = false,
     this.obscureText = false,
     this.contentPadding,
-    this.fillColor = AppColor.bg,
+    this.fillColor = AppColors.bg,
     this.focusColor = Colors.white,
     this.radius = 4,
     this.borderWidth = 1,
@@ -351,7 +351,7 @@ class _NTextFieldState extends State<NTextField> {
           const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: AppColor.font,
+            color: AppColors.font,
           ),
       inputFormatters: widget.inputFormatters ??
           [

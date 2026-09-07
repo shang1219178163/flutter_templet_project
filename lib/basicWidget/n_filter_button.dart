@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 筛选按钮
 class NFilterButton extends StatelessWidget {
@@ -19,7 +19,7 @@ class NFilterButton extends StatelessWidget {
     this.padding = const EdgeInsets.only(left: 10),
     this.title = "筛选",
     this.image = const AssetImage("assets/images/icon_filter.png"),
-    this.color = AppColor.font,
+    this.color = AppColors.font,
     this.onPressed,
   });
 

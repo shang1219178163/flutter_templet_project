@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/model/NewsDiscussRootModel.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/widget/discuss_like_btn.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +111,7 @@ class DiscussListItem extends StatelessWidget {
     const nameStyle = TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: AppColor.font999999,
+      color: AppColors.font999999,
     );
 
     final messageStyle = TextStyle(
@@ -121,7 +121,7 @@ class DiscussListItem extends StatelessWidget {
       color: themeProvider.titleColor,
     );
 
-    final linkStyle = messageStyle.copyWith(color: AppColor.font666666);
+    final linkStyle = messageStyle.copyWith(color: AppColors.font666666);
 
     Border? border = Border.all(color: Colors.blue, width: 0.5);
     border = null;
@@ -321,7 +321,7 @@ class DiscussListItem extends StatelessWidget {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "PingFang SC",
-                                        color: AppColor.font666666,
+                                        color: AppColors.font666666,
                                       ),
                                     ),
                                 ],
@@ -338,7 +338,7 @@ class DiscussListItem extends StatelessWidget {
                             // decoration: BoxDecoration(
                             //   border: Border.all(color: Colors.blue),
                             // ),
-                            child: const Icon(Icons.more_vert, size: 13, color: AppColor.font999999),
+                            child: const Icon(Icons.more_vert, size: 13, color: AppColors.font999999),
                           ),
                         ),
                       ],
@@ -472,7 +472,7 @@ class DiscussListItem extends StatelessWidget {
                           image: AssetImage(Assets.discussIcArrowRatings),
                           width: 4,
                           height: 8,
-                          color: AppColor.error,
+                          color: AppColors.error,
                         ),
                         // child: const Image.asset(
                         //   Assets.dataIcArrowRatings,
@@ -484,7 +484,7 @@ class DiscussListItem extends StatelessWidget {
                       child: Text(
                         "${model.replyCount}条回复",
                         style: const TextStyle(
-                          color: AppColor.error,
+                          color: AppColors.error,
                           fontSize: 11.5,
                           // fontWeight: FontWeight.w500,
                           // fontFamily: "PingFang SC",

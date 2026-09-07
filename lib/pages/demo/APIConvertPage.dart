@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 @Deprecated("已弃用,请使用 ConvertFlle.dart")
@@ -245,7 +245,7 @@ class TagGetApi extends BaseRequestAPI{
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bg,
+        fillColor: AppColors.bg,
         filled: true,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

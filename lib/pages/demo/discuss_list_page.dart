@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/pages/demo/discuss/widget/discuss_list_i
 import 'package:flutter_templet_project/pages/demo/discuss/widget/discuss_title_bar.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/widget/news_detail_bottom_bar.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class DiscussListPage extends StatefulWidget {
@@ -111,7 +111,7 @@ class _DiscussListPageState extends State<DiscussListPage>
                 child: DiscussTitleBar(
                   title: "热门评论 ${length}",
                   style: const TextStyle(
-                    color: AppColor.error,
+                    color: AppColors.error,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontFamily: "PingFang SC",

@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 弹窗自适应内容组件
 class NPopupAdaptiveContainer extends StatelessWidget {
@@ -42,8 +42,8 @@ class NPopupAdaptiveContainer extends StatelessWidget {
     final barrierColor = isDark ? Colors.black.withValues(alpha: 0.7) : Colors.black.withValues(alpha: 0.1);
     // final borderColor = isDark ? Colors.black : Colors.white;
 
-    final titleColor = AppColor.font;
-    final subtitleColor = AppColor.font333333;
+    final titleColor = AppColors.font;
+    final subtitleColor = AppColors.font333333;
 
     final topControlColorDefault = (isDark ? const Color(0xFFEEEEEE) : const Color(0xFFFFFFFF)).withValues(alpha: 0.3);
 

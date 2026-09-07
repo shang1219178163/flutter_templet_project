@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 进球闪烁动画
 class NEnterBallAnim extends StatelessWidget {
@@ -24,12 +24,12 @@ class NEnterBallAnim extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final fontColor = isDark ? AppColor.white : AppColor.font;
+    final fontColor = isDark ? AppColors.white : AppColors.font;
 
     return ValueListenableBuilder(
       valueListenable: valueListenable,
       builder: (context, value, _) {
-        final bgColorDefault = value ? AppColor.error : Colors.transparent;
+        final bgColorDefault = value ? AppColors.error : Colors.transparent;
         final bgColor = backgroundColorBuilder?.call(value) ?? bgColorDefault;
         final style = styleBuilder?.call(value) ??
             TextStyle(

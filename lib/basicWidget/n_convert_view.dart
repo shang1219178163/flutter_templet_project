@@ -11,7 +11,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 /// 字符串转文件
 class NConvertView extends StatefulWidget {
@@ -201,9 +201,9 @@ class NConvertViewState extends State<NConvertView> {
           fontSize: 14,
           fontWeight: FontWeight.w300,
         ),
-        fillColor: AppColor.bgEDEDED,
+        fillColor: AppColors.bgEDEDED,
         filled: true,
-        hoverColor: AppColor.bgEDEDED,
+        hoverColor: AppColors.bgEDEDED,
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,
         ),

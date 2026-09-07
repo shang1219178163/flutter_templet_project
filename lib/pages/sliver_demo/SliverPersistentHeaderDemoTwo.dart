@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/basicWidget/refresh/n_custom_scrollView.
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class SliverPersistentHeaderDemoTwo extends StatefulWidget {
@@ -41,7 +41,7 @@ class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDe
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgF9F9F9,
+      backgroundColor: AppColors.bgF9F9F9,
       appBar: AppBar(
         title: Text(widget.toString()),
       ),

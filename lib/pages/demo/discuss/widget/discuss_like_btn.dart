@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_scale_button.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -106,7 +106,7 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
       child: Text(
         likeNumberStr,
         style: TextStyle(
-          color: isLike ? AppColor.error : AppColor.font999999,
+          color: isLike ? AppColors.error : AppColors.font999999,
           fontSize: 13,
           fontWeight: FontWeight.w500,
           fontFamily: "PingFang SC",

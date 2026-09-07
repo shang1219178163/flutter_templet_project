@@ -11,10 +11,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/debounce_text_controller.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
 class StreamBuilderDemo extends StatefulWidget {
-
   const StreamBuilderDemo({Key? key, this.title}) : super(key: key);
   final String? title;
 
@@ -73,7 +72,7 @@ UI 事件：onPressed, TextField.onChanged → 都是 Stream。
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.bgF9F9F9,
+      backgroundColor: AppColors.bgF9F9F9,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),

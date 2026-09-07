@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:tuple/tuple.dart';
 
 /// 处方弹窗
@@ -142,7 +142,7 @@ class IMRecipleBottomSheet extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppColor.font,
+                        color: AppColors.font,
                       ),
                     ),
                   ),
@@ -161,7 +161,7 @@ class IMRecipleBottomSheet extends StatelessWidget {
     AssetImage? assetImage,
     double assetImageSize = 20,
     Widget? icon,
-    Color color = AppColor.white,
+    Color color = AppColors.white,
     Color borderColor = const Color(0xffE4E4E4),
     EdgeInsets? margin,
     EdgeInsets? padding,

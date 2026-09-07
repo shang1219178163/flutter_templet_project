@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_color.dart';
+import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 /// AE 多选组件
@@ -28,7 +28,7 @@ class AeChooseItem<T> extends StatelessWidget {
     this.enable = true,
     this.header,
     this.footer,
-    this.disableTextColor = AppColor.font,
+    this.disableTextColor = AppColors.font,
     this.disableBgColor,
   });
 
@@ -74,7 +74,7 @@ class AeChooseItem<T> extends StatelessWidget {
   }
 
   Widget buildBody(BuildContext context) {
-    final bgColor = enable ? AppColor.white : disableBgColor ?? AppColor.bgEDEDED;
+    final bgColor = enable ? AppColors.white : disableBgColor ?? AppColors.bgEDEDED;
 
     return GestureDetector(
       onTap: () => onPicker(context),
@@ -105,8 +105,8 @@ class AeChooseItem<T> extends StatelessWidget {
 
                   var name = value == null ? '请选择' : names;
                   final color = enable
-                      ? (value != null ? AppColor.font : AppColor.fontB3B3B3)
-                      : (disableTextColor ?? AppColor.fontB3B3B3);
+                      ? (value != null ? AppColors.font : AppColors.fontB3B3B3)
+                      : (disableTextColor ?? AppColors.fontB3B3B3);
                   if (value == null && !enable) {
                     name = "--";
                   }
@@ -124,7 +124,7 @@ class AeChooseItem<T> extends StatelessWidget {
                 image: AssetImage(Assets.imagesIconArrowDown),
                 width: 12,
                 height: 12,
-                color: AppColor.fontB3B3B3,
+                color: AppColors.fontB3B3B3,
                 // color: primary,
               ),
           ],
