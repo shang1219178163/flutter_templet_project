@@ -81,6 +81,9 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   bool get wantKeepAlive => true;
 
   @override
+  late RequestListCallback<T> onRequest = widget.onRequest;
+
+  @override
   void dispose() {
     widget.controller?.detach(this);
     super.dispose();
