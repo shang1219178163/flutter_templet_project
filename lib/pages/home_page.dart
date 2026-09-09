@@ -427,6 +427,8 @@ var specials = <Tuple2<String, String>>[
   Tuple2(AppRouter.systemIconsPage, "flutter 系统 Icons"),
   Tuple2(AppRouter.systemColorPage, "flutter 系统 颜色"),
   Tuple2(AppRouter.w3ThemeColorPage, "W3 主题色"),
+  Tuple2(AppRouter.classicColorPage, "经典色"),
+  Tuple2(AppRouter.contrastColorPage, "经典撞色"),
   Tuple2(AppRouter.systemCurvesPage, "flutter Curves动画效果"),
   Tuple2(AppRouter.providerRoute, "providerRoute"),
   Tuple2(AppRouter.stateManagerDemo, "状态管理"),

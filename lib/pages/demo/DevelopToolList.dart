@@ -20,6 +20,8 @@ class _DevelopToolListState extends State<DevelopToolList> {
   final items = <Tuple2<String, String>>[
     Tuple2("系统图标", AppRouter.systemIconsPage),
     Tuple2("系统颜色", AppRouter.systemColorPage),
+    Tuple2("经典色", AppRouter.classicColorPage),
+    Tuple2("经典撞色", AppRouter.contrastColorPage),
     Tuple2("字符串转换", AppRouter.stringTransformPage),
     Tuple2("json转model", AppRouter.jsonToModel),
   ];
