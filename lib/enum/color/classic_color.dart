@@ -146,7 +146,6 @@ enum ContrastColor with PairColorMixin {
   yingLunSaiCheLv_miBai(
       (label: '英伦赛车绿', color: Color(0xFF004225)), (label: '米白', color: Color(0xFFF7F3E9))), // A·H≈154°
   kaSiDunLv_jiSe((label: '卡斯顿绿', color: Color(0xFF005D3B)), (label: '肌色', color: Color(0xFFFCE2C4))), // A·H≈158°
-  boHeLv_nenShuiLv((label: '薄荷绿', color: Color(0xFF20BFA0)), (label: '嫩水绿', color: Color(0xFFC6DCB2))), // A·H≈168°
   moLv_liuJin((label: '墨绿', color: Color(0xFF004D40)), (label: '鎏金', color: Color(0xFFD4AF37))), // A·H≈170°
   diFuNiLan_naiYouBai((label: '蒂芙尼蓝', color: Color(0xFF09BBB5)), (label: '奶油白', color: Color(0xFFF3F9F0))), // A·H≈178°
   maErSiLv_liZhiBai((label: '马尔斯绿', color: Color(0xFF008C8C)), (label: '荔枝白', color: Color(0xFFF2EAE0))), // A·H≈180°
@@ -190,8 +189,6 @@ enum ContrastColor with PairColorMixin {
   Color get other => b.color;
 
   String get label => [a.label, b.label].join("·");
-
-  String get tabLabel => '${a.label}·${b.label}';
 
   String get hex => [color.hex, other.hex].join(" + ");
 }

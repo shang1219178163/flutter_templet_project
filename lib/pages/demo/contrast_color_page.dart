@@ -31,7 +31,7 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
   void initState() {
     super.initState();
     tabController = TabController(length: items.length, vsync: this);
-    tabs = items.map((e) => Tab(text: e.tabLabel)).toList();
+    tabs = items.map((e) => Tab(text: e.label)).toList();
     pages = items.map(_buildContrastPage).toList();
     tabBarView = TabBarView(
       controller: tabController,
@@ -96,19 +96,19 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
                 ),
           body: Column(
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
-              //   child: Text(
-              //     '世界上最经典的撞色',
-              //     textAlign: TextAlign.center,
-              //     style: TextStyle(
-              //       color: fg,
-              //       fontSize: 22,
-              //       fontWeight: FontWeight.w700,
-              //       letterSpacing: 1.2,
-              //     ),
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
+                child: Text(
+                  '世界上最经典的撞色',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: fg,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
               Expanded(child: child!),
             ],
           ),
