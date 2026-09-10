@@ -63,6 +63,22 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
                   foregroundColor: fg,
                   elevation: 0,
                   scrolledUnderElevation: 0,
+                  iconTheme: IconThemeData(color: fg),
+                  actionsIconTheme: IconThemeData(color: fg),
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back, color: fg),
+                    onPressed: () => Navigator.maybePop(context),
+                  ),
+                  actions: [
+                    IconButton(
+                      tooltip: '下一个',
+                      icon: Icon(Icons.arrow_forward, color: fg),
+                      onPressed: () {
+                        final next = (tabController.index + 1) % tabController.length;
+                        tabController.animateTo(next);
+                      },
+                    ),
+                  ],
                   title: Text(
                     widget.arguments?['title'] as String? ?? '世界上最经典的撞色',
                     style: TextStyle(color: fg, fontWeight: FontWeight.w600),
@@ -80,19 +96,19 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
                 ),
           body: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
-                child: Text(
-                  '世界上最经典的撞色',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: fg,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(28, 24, 28, 0),
+              //   child: Text(
+              //     '世界上最经典的撞色',
+              //     textAlign: TextAlign.center,
+              //     style: TextStyle(
+              //       color: fg,
+              //       fontSize: 22,
+              //       fontWeight: FontWeight.w700,
+              //       letterSpacing: 1.2,
+              //     ),
+              //   ),
+              // ),
               Expanded(child: child!),
             ],
           ),
