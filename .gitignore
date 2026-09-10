@@ -52,6 +52,8 @@ app.*.map.json
 
 # Blog / docs generated
 doc/
+# 博客快捷链接（指向 ~/Documents/doc，勿提交）
+.blogs
 
 # Graphify 生成产物
 graphify-out/
