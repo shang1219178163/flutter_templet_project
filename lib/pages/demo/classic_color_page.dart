@@ -26,10 +26,10 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
 
   ClassicColor selected = ClassicColor.values.first;
 
-  static const int crossAxisCount = 8;
+  static const int crossAxisCount = 6;
   static const double spacing = 8;
   static const double runSpacing = 8;
-  static const double radius = 8;
+  static const double radius = 999;
 
   @override
   void dispose() {
