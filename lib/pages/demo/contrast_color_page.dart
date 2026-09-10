@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/enum/color/classic_color.dart';
+import 'package:flutter_templet_project/mixin/pair_color_mixin.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -51,7 +52,7 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
       // TabBarView 固定复用，避免点击 Tab 时每帧重建子页导致闪烁
       child: tabBarView,
       builder: (context, child) {
-        final (bg, fg) = ContrastColor.lerpColors(tabController.animation!.value);
+        final (bg, fg) = PairColorMixin.lerpColors(ContrastColor.values, tabController.animation!.value);
 
         return Scaffold(
           backgroundColor: bg,
@@ -101,9 +102,6 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
   }
 
   Widget _buildContrastPage(ContrastColor item) {
-    final a = item.colorA;
-    final b = item.colorB;
-
     return SafeArea(
       top: false,
       child: Padding(
@@ -134,21 +132,21 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
                   children: [
                     Expanded(
                       child: _ContrastHalf(
-                        bg: a.color,
-                        fg: b.color,
-                        styleLabel: '(${item.style})',
-                        name: a.label,
-                        detail: a.detailLine,
-                        onTap: () => copy(a.detailLine),
+                        bg: item.a.color,
+                        fg: item.b.color,
+                        styleLabel: '(${item.label})',
+                        name: item.a.label,
+                        detail: item.a.color.detailLine,
+                        onTap: () => copy(item.a.color.detailLine),
                       ),
                     ),
                     Expanded(
                       child: _ContrastHalf(
-                        bg: b.color,
-                        fg: a.color,
-                        name: b.label.endsWith('色') ? b.label : '${b.label}色',
-                        detail: b.detailLine,
-                        onTap: () => copy(b.detailLine),
+                        bg: item.b.color,
+                        fg: item.a.color,
+                        name: item.b.label.endsWith('色') ? item.b.label : '${item.b.label}色',
+                        detail: item.b.color.detailLine,
+                        onTap: () => copy(item.b.color.detailLine),
                       ),
                     ),
                   ],
