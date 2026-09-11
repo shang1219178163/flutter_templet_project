@@ -1,20 +1,17 @@
-## flutter pub run flutter_launcher_icons
-# 请通过预览APP导出（取消勾选 Alpha 通道）,确保 logo.png 没有透明通道
-#flutter_launcher_icons:
-#  image_path: "assets/images/logo.png"
-#
-#  android: "launcher_icon"
-#  image_path_android: "assets/images/logo.png"
-#  min_sdk_android: 21 # android min sdk min:16, default 21
-#  adaptive_icon_background: "#FFFFFF"
-#  adaptive_icon_foreground: "assets/images/logo.png"
-#  # adaptive_icon_background: "assets/icon/background.png"
-#  # adaptive_icon_foreground: "assets/icon/foreground.png"
-#  # adaptive_icon_monochrome: "assets/icon/monochrome.png"
-#
-#  ios: true
-#  image_path_ios: "assets/images/logo.png"
-#  remove_alpha_channel_ios: true
-#  # image_path_ios_dark_transparent: "assets/icon/icon_dark.png"
-#  # image_path_ios_tinted_grayscale: "assets/icon/icon_tinted.png"
-#  # desaturate_tinted_to_grayscale_ios: true
+## dart run flutter_launcher_icons
+# 请通过预览APP导出（取消勾选 Alpha 通道）,确保 icon.png 没有透明通道
+flutter_launcher_icons:
+  image_path: "assets/images/icon.png"
+
+  android: true
+  # image_path_android: "assets/images/icon.png"
+  min_sdk_android: 34 # android min sdk min:16, default 21
+  # adaptive_icon_background: "#FFFFFF"
+  # adaptive_icon_foreground: "assets/images/icon.png"
+
+  ios: true
+  image_path_ios: "assets/images/icon.png"
+  remove_alpha_channel_ios: true
+  # image_path_ios_dark_transparent: "assets/icon/icon_dark.png"
+  # image_path_ios_tinted_grayscale: "assets/icon/icon_tinted.png"
+  # desaturate_tinted_to_grayscale_ios: true

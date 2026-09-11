@@ -20,7 +20,7 @@
         </intent>
     </queries>
    <application
-        android:label="flutter_templet_project"
+        android:label="Origin"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

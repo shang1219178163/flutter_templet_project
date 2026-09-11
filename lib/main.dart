@@ -223,7 +223,7 @@ class _MyAppState extends State<MyApp> {
     final app = GetMaterialApp(
       popGesture: true, //swipe back
       navigatorKey: AppService.navigatorKey,
-      title: 'Flutter Templet',
+      title: 'Origin',
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBinding(),
       // locale: const Locale('zh'),
