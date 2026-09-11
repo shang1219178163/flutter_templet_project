@@ -288,14 +288,19 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
               length: 200,
               indicatorLength: 40,
               // thickness: 20,
-              indicator: ShapeDecoration(
-                shape: const StadiumBorder(),
-                gradient: LinearGradient(
-                  colors: [Colors.red, Colors.blue],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
+              decorationBuilder: (isBg) {
+                if (isBg) {
+                  return null;
+                }
+                return ShapeDecoration(
+                  shape: const StadiumBorder(),
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                );
+              },
               child: ListView.builder(
                 controller: scrollController1,
                 scrollDirection: Axis.vertical,
@@ -317,22 +322,19 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                 length: 200,
                 indicatorLength: 40,
                 // thickness: 20,
-                indicator: ShapeDecoration(
-                  shape: const StadiumBorder(),
-                  gradient: LinearGradient(
-                    colors: [Colors.red, Colors.blue],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                // indicatorBg: ShapeDecoration(
-                //   shape: const StadiumBorder(),
-                //   gradient: LinearGradient(
-                //     colors: [Colors.purple, Colors.green],
-                //     begin: Alignment.centerLeft,
-                //     end: Alignment.centerRight,
-                //   ),
-                // ),
+                decorationBuilder: (isBg) {
+                  if (isBg) {
+                    return null;
+                  }
+                  return ShapeDecoration(
+                    shape: const StadiumBorder(),
+                    gradient: LinearGradient(
+                      colors: [Colors.red, Colors.blue],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  );
+                },
                 child: ListView.builder(
                   controller: scrollController2,
                   scrollDirection: Axis.horizontal,

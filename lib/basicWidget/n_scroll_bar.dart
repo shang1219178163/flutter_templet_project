@@ -4,13 +4,13 @@ class NScrollBar extends StatelessWidget {
   const NScrollBar({
     super.key,
     required this.controller,
-    this.scrollDirection = Axis.vertical,
+    this.scrollDirection = Axis.horizontal,
     this.scrollStopHide = false,
     this.length,
     this.indicatorLength = 46,
     this.thickness = 5,
-    this.indicator,
-    this.indicatorBg,
+    this.spacing = 0,
+    required this.decorationBuilder,
     required this.child,
   });
 
@@ -23,9 +23,9 @@ class NScrollBar extends StatelessWidget {
 
   /// 指示器长度
   final double indicatorLength;
+  final double spacing;
 
-  final Decoration? indicator;
-  final Decoration? indicatorBg;
+  final Decoration? Function(bool isBg) decorationBuilder;
 
   /// 线条粗细
   final double thickness;
@@ -40,13 +40,13 @@ class NScrollBar extends StatelessWidget {
     var bgColor = Colors.black.withValues(alpha: 0.12);
     // bgColor = Colors.green.withValues(alpha: 0.8);
 
-    final indicatorBgNew = indicatorBg ??
+    final bgDecoration = decorationBuilder(true) ??
         BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(thickness * 0.5),
         );
 
-    final indicatorNew = indicator ??
+    final fgDecoration = decorationBuilder(false) ??
         BoxDecoration(
           color: theme.tabBarTheme.indicatorColor ?? Colors.red,
           borderRadius: BorderRadius.circular(thickness * 0.5),
@@ -61,13 +61,13 @@ class NScrollBar extends StatelessWidget {
           children: [
             child,
             Positioned(
-              right: 0,
+              right: spacing,
               child: Stack(
                 children: [
                   Container(
                     width: thickness,
                     height: lengthNew,
-                    decoration: indicatorBgNew,
+                    decoration: bgDecoration,
                   ),
                   ListenableBuilder(
                     listenable: controller,
@@ -90,7 +90,7 @@ class NScrollBar extends StatelessWidget {
                         child: Container(
                           width: thickness,
                           height: indicatorLength,
-                          decoration: indicatorNew,
+                          decoration: fgDecoration,
                         ),
                       );
                     },
@@ -110,14 +110,14 @@ class NScrollBar extends StatelessWidget {
         children: [
           child,
           Positioned(
-            bottom: 0,
+            bottom: spacing,
             child: Stack(
               children: [
                 Container(
                   width: lengthNew,
                   height: thickness,
                   alignment: Alignment.center,
-                  decoration: indicatorBgNew,
+                  decoration: bgDecoration,
                 ),
                 ListenableBuilder(
                   listenable: controller,
@@ -146,7 +146,7 @@ class NScrollBar extends StatelessWidget {
                       child: Container(
                         width: indicatorLength,
                         height: thickness,
-                        decoration: indicatorNew,
+                        decoration: fgDecoration,
                         // child: Text(desc.toString()),
                       ),
                     );
