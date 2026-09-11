@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/indicator/n_indicator.dart';
+import 'package:flutter_templet_project/basicWidget/indicator/n_page_point_indicator.dart';
 
 class NCollectionView extends StatefulWidget {
   const NCollectionView({
@@ -129,9 +129,9 @@ class _NCollectionViewStateNew extends State<NCollectionView> with SingleTickerP
             bottom: widget.indicatorBottom,
             left: 0,
             right: 0,
-            child: NIndicator(
+            child: NPagePointIndicator(
               length: array.length,
-              indexListenable: indexVN,
+              listenable: indexVN,
               color: widget.indicatorColor,
               colorActive: widget.indicatorColorActive,
             ),
