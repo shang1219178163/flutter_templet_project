@@ -48,6 +48,7 @@ enum ClassicColor implements BaseColor {
 
   // ================= 蓝色系 (Hue 200° - 250°) =================
   tianQing('天青', Color(0xFFBFDEFF)), // H≈210° (极浅蓝)
+  bangDiLan('邦迪蓝', Color(0xFF0095B6)),
   haiLan('海蓝', Color(0xFF1E9BFF)), // H≈210° (明蓝)
   facebookLan('Facebook蓝', Color(0xFF1877F2)), // H≈220°
   qingShanLan('晴山蓝', Color(0xFF15336E)), // H≈220° (深蓝)
