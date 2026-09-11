@@ -31,6 +31,10 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
   static const double runSpacing = 8;
   static const double radius = 999;
 
+  late final themeData = Theme.of(context);
+  late final primary = themeData.colorScheme.primary;
+  late final isDark = themeData.brightness == Brightness.dark;
+
   @override
   void dispose() {
     scrollController.dispose();
@@ -122,20 +126,22 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
               runSpacing: runSpacing,
               children: items.map((e) {
                 final isSelected = selected == e;
+                final bgColor = isSelected ? themeData.colorScheme.onPrimary : e.color;
                 return GestureDetector(
                   onTap: () {
                     selected = e;
                     setState(() {});
                   },
-                  child: Container(
-                    width: itemSize,
-                    height: itemSize,
-                    decoration: BoxDecoration(
-                      color: e.color,
-                      borderRadius: BorderRadius.circular(radius),
-                      border: Border.all(
-                        color: isSelected ? Colors.white : Colors.black12,
-                        width: isSelected ? 2 : 1,
+                  child: CircleAvatar(
+                    backgroundColor: e.color,
+                    radius: itemSize * 0.5 + 2,
+                    child: CircleAvatar(
+                      backgroundColor: bgColor,
+                      radius: itemSize * 0.5,
+                      child: CircleAvatar(
+                        backgroundColor: e.color,
+                        radius: itemSize * 0.5 - 4,
+                        child: Icon(Icons.check, color: bgColor),
                       ),
                     ),
                   ),
