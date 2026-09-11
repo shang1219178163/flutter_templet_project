@@ -329,6 +329,7 @@ flutter:
     - assets/translations/
     - assets/data/
     - assets/images/
+    - assets/images/guide/
     - assets/images/curve/
     - assets/images/message/
     - assets/images/shop/

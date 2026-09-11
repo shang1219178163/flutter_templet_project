@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_guide_view.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
+import 'package:flutter_templet_project/util/dlog.dart';
+import 'package:flutter_templet_project/util/snack_util.dart';
 import 'package:get/get.dart';
 
 class NGuideViewDemo extends StatefulWidget {
@@ -72,5 +75,10 @@ class _NGuideViewDemoState extends State<NGuideViewDemo> {
         );
       },
     );
+  }
+
+  void guideHome() {
+    DLog.d("进入主页");
+    SnackUtil.show("进入主页");
   }
 }

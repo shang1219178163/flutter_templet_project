@@ -517,6 +517,7 @@ var customs = [
   Tuple2(AppRouter.neumorphismDemo, "拟物按钮"),
   Tuple2(AppRouter.horizontalCellDemo, "水平 cell 布局"),
   Tuple2(AppRouter.nListItemDemo, "nListItemDemo"),
+  Tuple2(AppRouter.nGuideViewDemo, "nGuideViewDemo"),
   Tuple2(AppRouter.listViewSeparatedDemo, "添加表头表尾"),
   Tuple2(AppRouter.listViewOneDemo, "跑马灯效果"),
   Tuple2(AppRouter.marqueeWidgetDemo, "跑马灯效果"),
