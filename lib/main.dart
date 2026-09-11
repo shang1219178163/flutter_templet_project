@@ -212,6 +212,9 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       SnackUtil.register = AppService.navigatorKey.currentContext;
+      if (SnackUtil.context == null) {
+        DLog.d("SnackUtil.context 注册失败");
+      }
     });
   }
 

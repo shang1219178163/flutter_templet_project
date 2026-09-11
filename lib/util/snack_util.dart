@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/util/app_service.dart';
 import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
 /// 全局 SnackBar 工具（通过注册的 Navigator context 展示，无需页面 BuildContext）
@@ -6,6 +7,7 @@ class SnackUtil {
   SnackUtil._();
 
   static BuildContext? _context;
+  static BuildContext? get context => _context;
 
   /// 注册全局 context，例如：
   /// `SnackUtil.register = AppService.navigatorKey.currentContext;`
@@ -14,7 +16,9 @@ class SnackUtil {
   }
 
   static ScaffoldMessengerState? get _currentState {
-    return _context == null ? null : ScaffoldMessenger.maybeOf(_context!);
+    final ctx = _context ?? AppService.navigatorKey.currentContext;
+    final state = ScaffoldMessenger.maybeOf(ctx!);
+    return state;
   }
 
   static final List<SnackBar> _snackBars = <SnackBar>[];
