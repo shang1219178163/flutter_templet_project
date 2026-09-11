@@ -204,6 +204,7 @@ import 'package:flutter_templet_project/pages/demo/NFingerViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFlexSeparatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NListItemDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NGuideViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
@@ -353,6 +354,8 @@ import 'package:flutter_templet_project/pages/demo/audio_visualizer_demo.dart';
 import 'package:flutter_templet_project/pages/demo/ball/GradientPlaygroundPage.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
+import 'package:flutter_templet_project/pages/demo/color/classic_color_page.dart';
+import 'package:flutter_templet_project/pages/demo/color/contrast_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/color_opacity_compare_demo.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/custom_tabbar_page.dart';
@@ -1406,6 +1409,10 @@ class AppRouterLazy {
       page: () => const NListItemDemo(),
     ),
     GetPage(
+      name: AppRouter.nGuideViewDemo,
+      page: () => const NGuideViewDemo(),
+    ),
+    GetPage(
       name: AppRouter.refreshIndicatorDemo,
       page: () => RefreshIndicatorDemo(),
     ),
@@ -2236,6 +2243,14 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.w3ThemeColorPage,
       page: () => W3ThemeColorPage(),
+    ),
+    GetPage(
+      name: AppRouter.classicColorPage,
+      page: () => ClassicColorPage(),
+    ),
+    GetPage(
+      name: AppRouter.contrastColorPage,
+      page: () => ContrastColorPage(),
     ),
     GetPage(
       name: AppRouter.rebuildChainPage,

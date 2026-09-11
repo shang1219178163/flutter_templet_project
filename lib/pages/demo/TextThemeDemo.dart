@@ -42,21 +42,21 @@ class _TextThemeDemoState extends State<TextThemeDemo> {
     final textTheme = themeData.textTheme;
 
     final items = [
-      (name: "displayLarge", value: textTheme.displayLarge),
-      (name: "displayMedium", value: textTheme.displayMedium),
-      (name: "displaySmall", value: textTheme.displaySmall),
+      // (name: "displayLarge", value: textTheme.displayLarge),
+      // (name: "displayMedium", value: textTheme.displayMedium),
+      // (name: "displaySmall", value: textTheme.displaySmall),
       (name: "headlineLarge", value: textTheme.headlineLarge),
       (name: "headlineMedium", value: textTheme.headlineMedium),
       (name: "headlineSmall", value: textTheme.headlineSmall),
       (name: "titleLarge", value: textTheme.titleLarge),
       (name: "titleMedium", value: textTheme.titleMedium),
       (name: "titleSmall", value: textTheme.titleSmall),
-      (name: "bodyLarge", value: textTheme.bodyLarge),
-      (name: "bodyMedium", value: textTheme.bodyMedium),
-      (name: "bodySmall", value: textTheme.bodySmall),
       (name: "labelLarge", value: textTheme.labelLarge),
       (name: "labelMedium", value: textTheme.labelMedium),
       (name: "labelSmall", value: textTheme.labelSmall),
+      (name: "bodyLarge", value: textTheme.bodyLarge),
+      (name: "bodyMedium", value: textTheme.bodyMedium),
+      (name: "bodySmall", value: textTheme.bodySmall),
     ];
 
     return Scrollbar(
@@ -70,7 +70,7 @@ class _TextThemeDemoState extends State<TextThemeDemo> {
               final desc = [
                 e.name,
                 e.value?.fontSize,
-                e.value?.fontWeight,
+                e.value?.fontWeight?.toString().split(".").last,
               ].join("_");
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -79,7 +79,10 @@ class _TextThemeDemoState extends State<TextThemeDemo> {
                   // border: Border.all(color: Colors.blue),
                   // borderRadius: BorderRadius.all(Radius.circular(0)),
                 ),
-                child: Text(desc),
+                child: Text(
+                  desc,
+                  style: e.value,
+                ),
               );
             }),
           ],

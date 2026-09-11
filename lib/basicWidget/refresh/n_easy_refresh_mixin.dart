@@ -79,7 +79,9 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
     controlFinishLoad: true,
   );
 
-  late RequestListCallback<T> onRequest;
+  /// 请求方式
+  late RequestListCallback<T> onRequest = throw UnimplementedError("onRequest");
+
   @override
   List<T> firstPageItems = [];
   @override
@@ -313,13 +315,18 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
     controlFinishLoad: true,
   );
 
-  late RequestModelCallback<T> onRequest;
+  /// 请求方式
+  late RequestModelCallback<T> onRequest = throw UnimplementedError("onRequest");
+
   @override
   T? item;
+
   @override
   var indicator = IndicatorResult.success;
+
   @override
   bool isLoading = false;
+
   @override
   bool isFirstLoad = true;
 

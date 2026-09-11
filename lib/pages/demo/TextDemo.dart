@@ -191,42 +191,13 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
         ),
         child: Column(
           children: [
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w100',
-              style: TextStyle(fontWeight: FontWeight.w100),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w200',
-              style: TextStyle(fontWeight: FontWeight.w200),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w300',
-              style: TextStyle(fontWeight: FontWeight.w300),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w400',
-              style: TextStyle(fontWeight: FontWeight.w400),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w500',
-              style: TextStyle(fontWeight: FontWeight.w500),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w600',
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w700',
-              style: TextStyle(fontWeight: FontWeight.w700),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w800',
-              style: TextStyle(fontWeight: FontWeight.w800),
-            ),
-            Text(
-              'AaBbCcDd 我是中文 123456 -- w900',
-              style: TextStyle(fontWeight: FontWeight.w900),
-            ),
+            ...FontWeight.values.map((e) {
+              final desc = "$e".split(".").last;
+              return Text(
+                'AaBbCcDd 我是中文 123456 -- $desc',
+                style: TextStyle(fontWeight: e),
+              );
+            }),
           ],
         ),
       ),

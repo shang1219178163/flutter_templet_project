@@ -78,6 +78,9 @@ class _NCustomScrollViewForModelState<T> extends State<NCustomScrollViewForModel
   bool get wantKeepAlive => true;
 
   @override
+  late RequestModelCallback<T> onRequest = widget.onRequest;
+
+  @override
   void dispose() {
     widget.controller?.detach(this);
     super.dispose();

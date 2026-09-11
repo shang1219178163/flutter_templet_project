@@ -8,12 +8,12 @@
 
 import 'package:flutter/material.dart';
 
-/// 指示器
-class NIndicator extends StatelessWidget {
-  const NIndicator({
+/// 圆形页码指示器
+class NPagePointIndicator extends StatelessWidget {
+  const NPagePointIndicator({
     super.key,
     required this.length,
-    required this.indexListenable,
+    required this.listenable,
     this.radius = 4,
     this.spacing = 8,
     this.color,
@@ -24,7 +24,7 @@ class NIndicator extends StatelessWidget {
   final int length;
 
   /// 索引监听
-  final ValueNotifier<int> indexListenable;
+  final ValueNotifier<int> listenable;
   final double radius;
   final double spacing;
   final Color? color;
@@ -40,7 +40,7 @@ class NIndicator extends StatelessWidget {
     final pointColorActive = colorActive ?? Color(0xff7C7C7C);
 
     return ValueListenableBuilder<int>(
-      valueListenable: indexListenable,
+      valueListenable: listenable,
       builder: (context, value, child) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,

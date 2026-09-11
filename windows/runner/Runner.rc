@@ -95,7 +95,7 @@ BEGIN
             VALUE "InternalName", "flutter_templet_project" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2021 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "flutter_templet_project.exe" "\0"
-            VALUE "ProductName", "flutter_templet_project" "\0"
+            VALUE "ProductName", "Origin" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -314,6 +314,7 @@ class AppRouter {
   static const String listTileDemo = '/listTileDemo';
   static const String listTilePage = '/listTilePage';
   static const String nListItemDemo = '/nListItemDemo';
+  static const String nGuideViewDemo = '/nGuideViewDemo';
   static const String refreshIndicatorDemo = '/refreshIndicatorDemo';
   static const String refreshIndicatorDemoOne = '/refreshIndicatorDemoOne';
   static const String tooltipDemo = '/tooltipDemo';
@@ -528,6 +529,8 @@ class AppRouter {
   static const String annotatedRegion = '/AnnotatedRegion';
   static const String shimmerDemo = '/shimmerDemo';
   static const String w3ThemeColorPage = '/w3ThemeColorPage';
+  static const String classicColorPage = '/classicColorPage';
+  static const String contrastColorPage = '/contrastColorPage';
   static const String rebuildChainPage = '/rebuildChainPage';
 
   static const String INITIAL = AppRouter.appTabPage;

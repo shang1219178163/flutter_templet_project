@@ -8,9 +8,10 @@
 
 import 'dart:developer' as developer;
 import 'dart:io' show Platform;
+
 import 'package:flutter/foundation.dart';
 
-/// DLog 日志打印
+/// DLog 日志打印 格式：[日期时间][日志类型][平台][类名.函数名 Line:行]: 日志内容
 class DLog {
   /// 是否启用日志打印
   static bool enableLog = true;

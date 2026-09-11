@@ -16,8 +16,12 @@ abstract class Codable {
   }
 }
 
-class XYZModel implements Codable {
+abstract mixin class CodableMixin<T, M> {
+  T fromJson(M json);
+  M toJson(T object);
+}
 
+class XYZModel implements Codable {
   XYZModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     name = json["name"];

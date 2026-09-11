@@ -212,6 +212,9 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       SnackUtil.register = AppService.navigatorKey.currentContext;
+      if (SnackUtil.context == null) {
+        DLog.d("SnackUtil.context 注册失败");
+      }
     });
   }
 
@@ -220,7 +223,7 @@ class _MyAppState extends State<MyApp> {
     final app = GetMaterialApp(
       popGesture: true, //swipe back
       navigatorKey: AppService.navigatorKey,
-      title: 'Flutter Templet',
+      title: 'Origin',
       debugShowCheckedModeBanner: false,
       initialBinding: InitialBinding(),
       // locale: const Locale('zh'),
