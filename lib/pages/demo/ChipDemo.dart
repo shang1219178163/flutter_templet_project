@@ -10,14 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_tag_box.dart';
-import 'package:flutter_templet_project/basicWidget/n_tag_box_new.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/cupertino_alert_dialog_mixin.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 class ChipDemo extends StatefulWidget {
-
   const ChipDemo({Key? key, this.title}) : super(key: key);
   final String? title;
 
@@ -28,7 +26,9 @@ class ChipDemo extends StatefulWidget {
 class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
   final tuples = List.generate(9, (i) => (i, "选择$i"));
 
-  final tuplesNew = List.generate(9, (i) => Tuple2(i, "选择$i"));
+  late final themeData = Theme.of(context);
+  late final primary = themeData.colorScheme.primary;
+  late final isDark = themeData.brightness == Brightness.dark;
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +215,6 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
             },
           ),
           buildTagManager(),
-          buildTagManagerNew(),
           NSectionBox(
             title: "ChoiceChip",
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -305,60 +304,45 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
   /// 标签管理器
   Widget buildTagManager() {
     return NSectionBox(
-      title: "NTagBox",
+      title: 'NTagBox',
       crossAxisAlignment: CrossAxisAlignment.start,
       child: StatefulBuilder(builder: (context, setState) {
         return NTagBox<(int, String)>(
-            keywords: "初步诊断",
-            items: tuples,
-            titleCb: (e) => e.$2,
-            onDelete: (e) {
-              tuples.remove(e);
-              setState(() {});
-            },
-            onAdd: () {
-              final id = IntExt.random(max: 100);
-              tuples.add((id, "选择$id"));
-              setState(() {});
-            },
-            onChanged: (items) {
-              final titles = items.map((e) => e.$2).toList();
-              debugPrint(titles.join(","));
-            });
-      }),
-    );
-  }
-
-  /// 标签管理器
-  Widget buildTagManagerNew() {
-    return NSectionBox(
-      title: "NTagBoxNew",
-      crossAxisAlignment: CrossAxisAlignment.start,
-      child: NTagBoxNew<(int, String)>(
-          keywords: "初步诊断",
+          keywords: '初步诊断',
           items: tuples,
           titleCb: (e) => e.$2,
-          canDelete: (e, onDelete) {
+          tagColor: primary,
+          tagAddColor: Colors.red,
+          canDelete: (e, confirmDelete) {
             final index = tuples.indexOf(e);
             if (index % 2 != 0) {
               presentAlert(
-                  titleStr: "提示",
-                  contentStr: "确定删除$e",
-                  onConfirm: () {
-                    onDelete(e);
-                  });
+                titleStr: '提示',
+                contentStr: '确定删除$e',
+                onConfirm: () {
+                  confirmDelete(e);
+                  setState(() {});
+                },
+              );
               return false;
             }
             return true;
           },
+          onDelete: (e) {
+            tuples.remove(e);
+            setState(() {});
+          },
           onAdd: () {
             final id = IntExt.random(max: 100);
-            tuples.add((id, "选择$id"));
+            tuples.add((id, '选择$id'));
+            setState(() {});
           },
           onChanged: (items) {
             final titles = items.map((e) => e.$2).toList();
-            debugPrint(titles.join(","));
-          }),
+            debugPrint(titles.join(','));
+          },
+        );
+      }),
     );
   }
 }
