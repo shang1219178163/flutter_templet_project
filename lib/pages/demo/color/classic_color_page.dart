@@ -47,7 +47,8 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
       appBar: hideApp
           ? null
           : AppBar(
-              title: Text(widget.arguments?['title'] as String? ?? '经典色'),
+              backgroundColor: selected.color,
+              title: Text('经典色'),
             ),
       body: Column(
         children: [
@@ -59,32 +60,21 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
   }
 
   Widget _buildHeader() {
-    final item = selected;
-    final fg = item.color.textColor();
+    final fg = selected.color.textColor();
     return Material(
-      color: item.color,
+      color: selected.color,
       child: InkWell(
-        onTap: () => copy(item.detailLine),
+        onTap: () => copy(selected.detailLine),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           child: Row(
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: item.color,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: fg.withValues(alpha: 0.35)),
-                ),
-              ),
-              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.label,
+                      selected.label,
                       style: TextStyle(
                         color: fg,
                         fontSize: 16,
@@ -93,7 +83,7 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      item.detailLine,
+                      selected.detailLine,
                       style: TextStyle(
                         color: fg.withValues(alpha: 0.9),
                         fontSize: 12,
