@@ -14,10 +14,8 @@ class NTabPageView extends StatefulWidget {
   const NTabPageView({
     super.key,
     required this.items,
-    this.labelColor,
-    this.labelStyle,
+    this.isReverse = false,
     this.pageController,
-    this.tabBgColor = Colors.white,
     this.tabController,
     this.initialIndex = 0,
     required this.onPageChanged,
@@ -27,14 +25,7 @@ class NTabPageView extends StatefulWidget {
 
   final List<Tuple2<String, Widget>> items;
 
-  /// tab背景颜色
-  final Color? tabBgColor;
-
-  /// 标题和指示器颜色
-  final Color? labelColor;
-
-  /// 字体样式
-  final TextStyle? labelStyle;
+  final bool isReverse;
 
   /// PageView 控制器
   final PageController? pageController;
@@ -49,7 +40,7 @@ class NTabPageView extends StatefulWidget {
   final ValueChanged<int> onPageChanged;
 
   /// 范围 false 时,锁定不在滚动
-  final bool Function(int)? canPageChanged;
+  final bool Function(int v)? canPageChanged;
 
   /// tab 位置底部 false 顶部, true 底部
   final bool isTabBottom;
@@ -60,8 +51,20 @@ class NTabPageView extends StatefulWidget {
 
 class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderStateMixin {
   late final tabController = widget.tabController ??
-      TabController(initialIndex: widget.initialIndex, length: widget.items.length, vsync: this);
+      TabController(
+        initialIndex: widget.initialIndex,
+        length: widget.items.length,
+        vsync: this,
+      );
   late final pageController = widget.pageController ?? PageController(initialPage: widget.initialIndex, keepPage: true);
+
+  late final theme = Theme.of(context);
+  late final colorScheme = theme.colorScheme;
+  late final onPrimary = colorScheme.onPrimary;
+  late final primary = colorScheme.primary;
+
+  Color get bgColor => widget.isReverse ? primary : onPrimary;
+  Color get textColor => !widget.isReverse ? primary : onPrimary;
 
   ///是否允许滚动
   bool get canScrollable {
@@ -85,12 +88,9 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
   @override
   void didUpdateWidget(covariant NTabPageView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.tabBgColor != oldWidget.tabBgColor ||
-        widget.labelColor != oldWidget.labelColor ||
-        widget.labelStyle != oldWidget.labelStyle ||
-        widget.isTabBottom != oldWidget.isTabBottom ||
+    if (widget.isTabBottom != oldWidget.isTabBottom ||
         widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
-      setState(() {});
+      // setState(() {});
     }
   }
 
@@ -110,30 +110,17 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
   }
 
   Widget buildTabBar() {
-    final textColor = widget.labelColor ?? Theme.of(context).colorScheme.primary;
-
-    final borderSide = BorderSide(
-      color: textColor,
-      width: 2.0,
-    );
-
-    var decorationTop = BoxDecoration(
-      border: Border(
-        top: borderSide,
-      ),
-    );
-
-    var decorationBom = BoxDecoration(
-      border: Border(
-        bottom: borderSide,
-      ),
-    );
+    final borderSide = BorderSide(color: textColor, width: 2.0);
+    var decorationTop = BoxDecoration(border: Border(top: borderSide));
+    var decorationBom = BoxDecoration(border: Border(bottom: borderSide));
 
     final tabBar = TabBar(
       controller: tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
+      dividerHeight: 0,
       labelColor: textColor,
-      labelStyle: widget.labelStyle,
+      unselectedLabelColor: textColor.withValues(alpha: 0.5),
+      indicatorColor: textColor,
       indicator: widget.isTabBottom ? decorationTop : decorationBom,
       onTap: (index) {
         pageController.jumpToPage(index);
@@ -147,12 +134,8 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
       );
     }
 
-    // if (widget.isReverse) {
-    //   return tabBar;
-    // }
-
     return Material(
-      color: widget.tabBgColor,
+      color: bgColor,
       child: tabBar,
     );
   }

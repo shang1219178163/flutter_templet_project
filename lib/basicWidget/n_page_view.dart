@@ -49,6 +49,9 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
   late final onPrimary = colorScheme.onPrimary;
   late final primary = colorScheme.primary;
 
+  Color get bgColor => widget.isReverse ? primary : onPrimary;
+  Color get textColor => !widget.isReverse ? primary : onPrimary;
+
   @override
   void initState() {
     super.initState();
@@ -112,19 +115,16 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     bool isBottom = false,
     bool isReverse = true,
   }) {
-    final bgColor = isReverse ? primary : onPrimary;
-    final labelColor = !isReverse ? primary : onPrimary;
-
     Widget tabBar = TabBar(
       controller: tabController,
       tabAlignment: widget.tabAlignment,
       isScrollable: isScrollable,
-      dividerHeight: 0, // 或 dividerHeight: 0
+      dividerHeight: 0,
       tabs: items.map((e) => Tab(text: e.$1)).toList(),
       // indicatorSize: TabBarIndicatorSize.label,
-      labelColor: labelColor,
-      unselectedLabelColor: labelColor.withValues(alpha: 0.5),
-      indicatorColor: labelColor,
+      labelColor: textColor,
+      unselectedLabelColor: textColor.withValues(alpha: 0.5),
+      indicatorColor: textColor,
       indicator: widget.indicator,
       // indicator: BoxDecoration(
       //   border: Border(
