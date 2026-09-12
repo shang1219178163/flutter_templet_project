@@ -77,7 +77,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       return SizedBox();
     }
     var children = [
-      buildBottomBar(
+      buildTabBar(
         items: widget.items,
         isScrollable: widget.isScrollable,
         isBottom: widget.isBottom,
@@ -106,7 +106,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     );
   }
 
-  Widget buildBottomBar({
+  Widget buildTabBar({
     required List<(String, Widget)> items,
     bool isScrollable = false,
     bool isBottom = false,
@@ -119,6 +119,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       controller: tabController,
       tabAlignment: widget.tabAlignment,
       isScrollable: isScrollable,
+      dividerHeight: 0, // 或 dividerHeight: 0
       tabs: items.map((e) => Tab(text: e.$1)).toList(),
       // indicatorSize: TabBarIndicatorSize.label,
       labelColor: labelColor,

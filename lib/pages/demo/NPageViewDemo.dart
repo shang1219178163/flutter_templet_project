@@ -34,6 +34,11 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
     Tuple2('滑动', onScrollable),
   ];
 
+  late final theme = Theme.of(context);
+  late final colorScheme = theme.colorScheme;
+  late final onPrimary = colorScheme.onPrimary;
+  late final primary = colorScheme.primary;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +66,8 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   }
 
   Widget buildBody() {
+    final labelColor = !isReverse ? primary : onPrimary;
+
     return Column(
       children: [
         Expanded(
@@ -69,6 +76,12 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
             isScrollable: isScrollable,
             isReverse: isReverse,
             isBottom: isBottom,
+            indicator: BoxDecoration(
+              border: Border(
+                top: !isBottom ? BorderSide.none : BorderSide(color: labelColor, width: 3.0),
+                bottom: isBottom ? BorderSide.none : BorderSide(color: labelColor, width: 3.0),
+              ),
+            ),
           ),
         ),
         Container(
