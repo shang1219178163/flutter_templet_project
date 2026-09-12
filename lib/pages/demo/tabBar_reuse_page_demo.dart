@@ -78,10 +78,9 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   Widget buildTabPageView() {
     return NTabPageView(
-      items: _items,
+      items: _items.map((e) => (e.item1, e.item2)).toList(),
       isReverse: isReverse,
-      isTabBottom: isBottom,
-      // labelColor: Colors.white,
+      isBottom: isBottom,
       // canPageChanged: (index) {
       //   return (index != 1);
       // },

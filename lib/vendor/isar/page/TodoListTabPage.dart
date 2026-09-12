@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoListPage.dart';
@@ -31,7 +31,7 @@ class _TodoListTabPageState extends State<TodoListTabPage> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: NPageView(
+      body: NTabPageView(
         items: items,
         onPageChanged: onPageChanged,
       ),

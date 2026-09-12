@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
@@ -71,7 +71,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
     return Column(
       children: [
         Expanded(
-          child: NPageView(
+          child: NTabPageView(
             items: items,
             isScrollable: isScrollable,
             isReverse: isReverse,
