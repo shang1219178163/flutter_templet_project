@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_tag_sort_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_tag_sort.dart';
 import 'package:flutter_templet_project/pages/demo/tag_sort/NewsCatalogModel.dart';
 import 'package:flutter_templet_project/pages/demo/tag_sort/news_home_provider.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
@@ -102,7 +102,7 @@ class _TagSortPageState extends State<TagSortPage> with TickerProviderStateMixin
   }
 
   Widget buildDragSortWrap() {
-    return NTagSortWidget<NewsCatalogModel>(
+    return NTagSort<NewsCatalogModel>(
       tags: [...newsProvider.mineCatalogs],
       others: [...newsProvider.otherCatalogs],
       onFinish: (tags, others) {

@@ -4,16 +4,16 @@
 //  Created by JsonToModel on 2025-12-02 10:40.
 //
 
-import 'package:flutter_templet_project/basicWidget/n_tag_sort_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_tag_sort.dart';
 // import 'package:flutter_templet_project/pages/demo/html_render/article_detail_model.dart';
 import 'package:flutter_templet_project/pages/demo/html_render/model/article_detail_model.dart';
+
 // import 'package:social_fe_app/widget/n_tag_sort_widget.dart';
 
 export 'article_detail_model.dart';
 
 /// 新闻分类
 class ArticleCatalogModel with NTagSortMixin {
-
   ArticleCatalogModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     names = json['names'];
