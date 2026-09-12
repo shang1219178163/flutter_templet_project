@@ -212,7 +212,6 @@ import 'package:flutter_templet_project/pages/demo/NSegmentVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NShimmerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTabBarPageDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NTabBarViewCustomDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTransformViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NWebViewDemo.dart';
@@ -1803,10 +1802,6 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.ntabBarPageDemo,
       page: () => NTabBarPageDemo(),
-    ),
-    GetPage(
-      name: AppRouter.nTabBarViewCustomDemo,
-      page: () => NTabBarViewCustomDemo(),
     ),
     GetPage(
       name: AppRouter.textFieldTabDemo,

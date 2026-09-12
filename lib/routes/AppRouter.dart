@@ -412,7 +412,6 @@ class AppRouter {
   static const String displayFeatureDemo = '/displayFeatureDemo';
   static const String preferredSizeDemo = '/preferredSizeDemo';
   static const String ntabBarPageDemo = '/ntabBarPageDemo';
-  static const String nTabBarViewCustomDemo = '/nTabBarViewCustomDemo';
   static const String textFieldTabDemo = '/textFieldTabDemo';
   static const String textPaintDemo = '/textPaintDemo';
   static const String segmentedPageViewDemo = '/segmentedPageViewDemo';
