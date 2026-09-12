@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/indicator/n_tab_indicator_fixed.dart';
 
 /// TabBar 设置颜色
 class NTabBarColoredBox extends StatelessWidget implements PreferredSizeWidget {

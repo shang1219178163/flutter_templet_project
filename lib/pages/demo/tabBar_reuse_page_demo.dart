@@ -78,7 +78,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   Widget buildTabPageView() {
     return NTabPageView(
-      items: _items.map((e) => (e.item1, e.item2)).toList(),
+      items: _items,
       isReverse: isReverse,
       isBottom: isBottom,
       // canPageChanged: (index) {
@@ -104,39 +104,41 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
     );
   }
 
-  final List<Tuple2<String, Widget>> _items = [
-    Tuple2(
-        '升级列表',
-        ListView.separated(
-          cacheExtent: 180,
-          itemCount: kUpdateAppList.length,
-          itemBuilder: (context, index) {
-            final data = kUpdateAppList[index];
-            if (index == 0) {
-              return AppUpdateCard(
-                data: data,
-                isExpand: true,
-                showExpand: false,
-              );
-            }
-            return AppUpdateCard(data: data);
-          },
-          separatorBuilder: (context, index) {
-            return Divider();
-          },
-        )),
-    Tuple2(
-        '升级列表(新)',
-        ListView.separated(
-          cacheExtent: 180,
-          itemCount: kUpdateAppList.length,
-          itemBuilder: (context, index) {
-            final data = kUpdateAppList[index];
-            return AppUpdateCard(data: data);
-          },
-          separatorBuilder: (context, index) {
-            return Divider();
-          },
-        )),
+  final List<(String, Widget)> _items = [
+    (
+      '升级列表',
+      ListView.separated(
+        cacheExtent: 180,
+        itemCount: kUpdateAppList.length,
+        itemBuilder: (context, index) {
+          final data = kUpdateAppList[index];
+          if (index == 0) {
+            return AppUpdateCard(
+              data: data,
+              isExpand: true,
+              showExpand: false,
+            );
+          }
+          return AppUpdateCard(data: data);
+        },
+        separatorBuilder: (context, index) {
+          return const Divider();
+        },
+      ),
+    ),
+    (
+      '升级列表(新)',
+      ListView.separated(
+        cacheExtent: 180,
+        itemCount: kUpdateAppList.length,
+        itemBuilder: (context, index) {
+          final data = kUpdateAppList[index];
+          return AppUpdateCard(data: data);
+        },
+        separatorBuilder: (context, index) {
+          return const Divider();
+        },
+      ),
+    ),
   ];
 }

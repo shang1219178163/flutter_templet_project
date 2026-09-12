@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/image/n_network_image.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_indicator_box.dart';
+import 'package:flutter_templet_project/basicWidget/indicator/n_tab_indicator_box.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 

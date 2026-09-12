@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_back_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_logo_card.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/indicator/n_tab_indicator_fixed.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/enum/goods_category_enum.dart';
 import 'package:flutter_templet_project/pages/demo/point_shop/model/PointGoodsRootModel.dart';
