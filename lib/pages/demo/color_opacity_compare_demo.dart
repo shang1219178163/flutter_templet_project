@@ -113,19 +113,14 @@ class _ColorOpacityCompareDemoState extends State<ColorOpacityCompareDemo> {
                 return InkWell(
                   onTap: () {
                     selectedColor.value = color;
-                    DLog.d(color.nameDes);
+                    DLog.d(color.hex);
                     setState(() {});
                   },
                   child: Container(
                     width: 40,
                     height: 40,
                     color: color,
-                    child: selectedColor.value == color
-                        ? const Icon(
-                            Icons.done,
-                            color: Colors.white,
-                          )
-                        : null,
+                    child: selectedColor.value == color ? const Icon(Icons.done, color: Colors.white) : null,
                   ),
                 );
               }).toList(),
@@ -141,7 +136,7 @@ class _ColorOpacityCompareDemoState extends State<ColorOpacityCompareDemo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '当前颜色：${color.nameDes}',
+          '当前颜色：${color.hex}',
           style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(height: 4),
@@ -229,7 +224,8 @@ class _ColorOpacityCompareDemoState extends State<ColorOpacityCompareDemo> {
           ),
           const SizedBox(height: 4),
           Text(
-            'opacity: ${opacityColor.argbInt.toRadixString(16).padLeft(8, '0')}  |  values: ${valuesColor.argbInt.toRadixString(16).padLeft(8, '0')}',
+            'opacity: a=${opacityColor.a.toStringAsFixed(2)} ${opacityColor.hex}'
+            '  |  values: a=${valuesColor.a.toStringAsFixed(2)} ${valuesColor.hex}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontFamily: 'monospace',
                   fontSize: 11,
@@ -291,8 +287,7 @@ class _CheckerboardPainter extends CustomPainter {
     final cellHeight = size.height / _cellCount;
     for (var row = 0; row < _cellCount; row++) {
       for (var col = 0; col < _cellCount; col++) {
-        final paint = Paint()
-          ..color = (row + col).isEven ? _lightColor : _darkColor;
+        final paint = Paint()..color = (row + col).isEven ? _lightColor : _darkColor;
         canvas.drawRect(
           Rect.fromLTWH(col * cellWidth, row * cellHeight, cellWidth, cellHeight),
           paint,

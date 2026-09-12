@@ -8,105 +8,95 @@
 
 import 'dart:math';
 
+import 'package:color_converter/color_converter.dart';
 import 'package:flutter/material.dart';
 
+/// [Color] 常用扩展：解析、格式化、亮度适配文字色等
 extension ColorExt on Color {
-  /// 颜色字典
-  static final colorsMap = <Color, String>{
-    Colors.white: "white",
-    Colors.black: "black",
-    Colors.pink: "pink",
-    Colors.purple: "purple",
-    Colors.deepPurple: "deepPurple",
-    Colors.indigo: "indigo",
-    Colors.blue: "blue",
-    Colors.lightBlue: "lightBlue",
-    Colors.cyan: "cyan",
-    Colors.teal: "teal",
-    Colors.green: "green",
-    Colors.lightGreen: "lightGreen",
-    Colors.lime: "lime",
-    Colors.yellow: "yellow",
-    Colors.amber: "amber",
-    Colors.orange: "orange",
-    Colors.deepOrange: "deepOrange",
-    Colors.brown: "brown",
-    Colors.grey: "grey",
-    Colors.blueGrey: "blueGrey",
-    Colors.redAccent: "redAccent",
-    Colors.pinkAccent: "pinkAccent",
-    Colors.purpleAccent: "purpleAccent",
-    Colors.deepPurpleAccent: "deepPurpleAccent",
-    Colors.indigoAccent: "indigoAccent",
-    Colors.blueAccent: "blueAccent",
-    Colors.lightBlueAccent: "lightBlueAccent",
-    Colors.cyanAccent: "cyanAccent",
-    Colors.tealAccent: "tealAccent",
-    Colors.greenAccent: "greenAccent",
-    Colors.lightGreenAccent: "lightGreenAccent",
-    Colors.limeAccent: "limeAccent",
-    Colors.yellowAccent: "yellowAccent",
-    Colors.amberAccent: "amberAccent",
-    Colors.orangeAccent: "orangeAccent",
-    Colors.deepOrangeAccent: "deepOrangeAccent",
-  };
+  /// 随机不透明色（`#RRGGBB`，alpha 固定为 `FF`）
+  static Color get random => Color(0xFF000000 | Random().nextInt(0x1000000));
 
-  ///随机颜色
-  static Color get random {
-    return Color.fromRGBO(
-      Random().nextInt(256),
-      Random().nextInt(256),
-      Random().nextInt(256),
-      1,
-    );
-  }
-
-  /// 十六进制转颜色
-  /// alpha, 透明度 [0.0,1.0]
+  /// 十六进制字符串转 [Color]
+  ///
+  /// 支持 `#RRGGBB` / `#AARRGGBB`，以及 `0x` 前缀；6 位时自动补 `FF` alpha。
+  /// [alpha] 最终透明度，范围 `[0.0, 1.0]`。
   static Color? fromHex(String? val, {double alpha = 1}) {
-    if (val == null || val.isEmpty == true) {
+    if (val == null || val.isEmpty) {
       return null;
     }
-    val = val.toUpperCase();
-    val = val.replaceAll("#", '');
-    val = val.replaceAll("0x", '');
-    final result = int.tryParse(val, radix: 16);
-    if (result == null) {
-      return null;
+    var hex = val.replaceAll(RegExp(r'#|0[xX]'), '');
+    if (hex.length == 6) {
+      hex = 'FF$hex';
     }
-    return Color(result).withValues(alpha: alpha);
+    final v = int.tryParse(hex, radix: 16);
+    return v == null ? null : Color(v).withValues(alpha: alpha);
   }
 
-  ///rgba 颜色字符串转 Color
+  /// CSS 风格颜色字符串转 [Color]
+  ///
+  /// 支持：
+  /// - `rgb(r,g,b)` / `rgba(r,g,b)`（不透明，alpha = 1）
+  /// - `rgba(r,g,b,a)` / `rgb(r,g,b,a)`（含透明通道）
   static Color? fromRGBA(String? val) {
-    if (val == null || val == "") {
+    final m = RegExp(
+      r'rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)',
+    ).firstMatch(val ?? '');
+    if (m == null) {
       return null;
     }
-    val = val.replaceAll(")", "");
-    val = val.replaceAll("rgba(", "");
-    var list = val.split(",");
-    if (list.length != 4) {
+
+    final r = int.tryParse(m.group(1) ?? '');
+    final g = int.tryParse(m.group(2) ?? '');
+    final b = int.tryParse(m.group(3) ?? '');
+    if (r == null || g == null || b == null) {
       return null;
     }
-    return Color.fromRGBO(
-      int.parse(list[0]),
-      int.parse(list[1]),
-      int.parse(list[2]),
-      double.parse(list[3]),
-    );
+
+    final a = double.tryParse(m.group(4) ?? '') ?? 1;
+    return Color.fromRGBO(r, g, b, a);
   }
 
-  /// 是否为纯黑色（包含透明度）
-  bool get isPureBlack {
-    return r == 0 && g == 0 && b == 0 && a == 0;
+  /// 是否为全透明黑（`r/g/b/a` 均为 0）
+  bool get isPureBlack => r == 0 && g == 0 && b == 0 && a == 0;
+
+  /// 是否为全透明白（`r/g/b == 1` 且 `a == 0`；组件值为 0.0–1.0）
+  bool get isPureWhite => r == 1 && g == 1 && b == 1 && a == 0;
+
+  /// 0–255 的 `(R, G, B)` 分量
+  (int, int, int) get rgb => ((r * 255).round(), (g * 255).round(), (b * 255).round());
+
+  /// `#RRGGBB`（大写，不含 alpha）
+  String get hex {
+    final (rr, gg, bb) = rgb;
+    return '#${rr.toRadixString(16).padLeft(2, '0')}'
+            '${gg.toRadixString(16).padLeft(2, '0')}'
+            '${bb.toRadixString(16).padLeft(2, '0')}'
+        .toUpperCase();
   }
 
-  /// 是否为纯白色
-  bool get isPureWhite {
-    return r == 255 && g == 255 && b == 255 && a == 0;
+  /// RGB 文本，如 `(255,128,0)`
+  String get rgbText {
+    final (rr, gg, bb) = rgb;
+    return '($rr,$gg,$bb)';
   }
 
-  /// 当前背景色上显示的文字颜色
+  /// CMYK 文本，如 `(0,50,100,0)`
+  String get cmykText {
+    final (rr, gg, bb) = rgb;
+    final cmyk = RGB(r: rr, g: gg, b: bb).toCmyk();
+    return '(${cmyk.c},${cmyk.m},${cmyk.y},${cmyk.k})';
+  }
+
+  /// 转为单色线性渐变（两端同色，便于接口统一传 [Gradient]）
+  Gradient? toGradient() => LinearGradient(colors: [this, this], stops: const [0.0, 1]);
+
+  /// 随机透明度（alpha ∈ [0.00, 0.99]）
+  Color randomOpacity() => withValues(alpha: Random().nextInt(100) / 100);
+
+  /// 根据当前背景亮度选择前景文字色
+  ///
+  /// 深色底用 [textColorDark]，浅色底用 [textColorLight]；
+  /// 并单独处理 [isPureWhite] / [isPureBlack] 边界。
   Color textColor({
     Color textColorLight = Colors.black,
     Color textColorDark = Colors.white,
@@ -119,39 +109,5 @@ extension ColorExt on Color {
       textColor = textColorLight;
     }
     return textColor;
-  }
-
-  // /// 颜色名称描述
-  // String get toRadixString {
-  //   final result = "#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
-  //   return result;
-  // }
-
-  /// ARGB 整型色值
-  int get argbInt {
-    return ((a * 255).round() << 24) |
-        ((r * 255).round() << 16) |
-        ((g * 255).round() << 8) |
-        (b * 255).round();
-  }
-
-  String toHex({String prefix = '#'}) {
-    final argb = argbInt;
-    return '$prefix${argb.toRadixString(16).padLeft(8, '0').toUpperCase()}';
-  }
-
-  ///转渐进色
-  Gradient? toGradient() => LinearGradient(colors: [this, this], stops: const [0.0, 1]);
-
-  Color randomOpacity() {
-    return withValues(alpha: Random().nextInt(100) / 100);
-  }
-
-  /// 颜色名称描述
-  String get nameDes {
-    if (colorsMap.keys.contains(this)) {
-      return colorsMap[this] ?? "";
-    }
-    return toString();
   }
 }

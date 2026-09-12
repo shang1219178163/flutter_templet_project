@@ -8,8 +8,8 @@ extension WebViewControllerExt on WebViewController {
     required Color textColor,
     required Color bgColor,
   }) async {
-    final textColorStr = textColor.toHex().replaceFirst("#ff", "#");
-    final bgColorStr = bgColor.toHex().replaceFirst("#ff", "#");
+    final textColorStr = textColor.hex;
+    final bgColorStr = bgColor.hex;
     return runJavaScript('''
     var style = document.createElement('style');
     style.innerHTML = 'body { background: $bgColorStr !important; color: $textColorStr !important; }';

@@ -96,7 +96,7 @@ class AppThemeService {
   }
 
   void _save() {
-    CacheService().setString(CacheKey.seedColor.name, seedColor.toHex());
+    CacheService().setString(CacheKey.seedColor.name, seedColor.hex);
     CacheService().setString(CacheKey.brightness.name, brightness.toString());
     CacheService().setString(CacheKey.themeMode.name, _themeMode.name);
   }

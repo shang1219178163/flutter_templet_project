@@ -187,9 +187,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                 return InkWell(
                   onTap: () {
                     selectedColor.value = e;
-                    DLog.d(
-                      e.nameDes,
-                    );
+                    DLog.d(e.hex);
                     setState(() {});
                   },
                   child: Container(

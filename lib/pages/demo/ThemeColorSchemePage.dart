@@ -159,8 +159,8 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
   }
 
   Widget buildColorItem(String name, Color bgColor, Color textColor) {
-    final bgColorHex = '#${bgColor.argbInt.toRadixString(16).padLeft(8, '0').toUpperCase()}';
-    final textColorHex = '#${textColor.argbInt.toRadixString(16).padLeft(8, '0').toUpperCase()}';
+    final bgColorHex = bgColor.hex;
+    final textColorHex = textColor.hex;
     final desc = [bgColorHex, textColorHex].join(", ");
 
     return Container(
@@ -251,7 +251,7 @@ class _ThemeColorSchemePageState extends State<ThemeColorSchemePage> with SeedCo
   }
 
   Widget buildItem({required Color color, required Color textColor}) {
-    final desc = color.toHex();
+    final desc = color.hex;
     return Container(
       margin: EdgeInsets.only(bottom: 8),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),

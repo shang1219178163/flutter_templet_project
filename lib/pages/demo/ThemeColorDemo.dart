@@ -308,7 +308,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
             // relativeLuminance.toStringAsFixed(2),
             // edgeLuminance.toStringAsFixed(2),
             e.item1,
-            e.item2.toHex(),
+            e.item2.hex,
           ].join("\n");
           //
           return Container(

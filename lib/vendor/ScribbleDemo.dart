@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:scribble/scribble.dart';
 
 class ScribbleDemo extends StatefulWidget {
@@ -200,7 +199,11 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     required Color color,
     required ScribbleState state,
   }) {
-    final isSelected = state is Drawing && state.selectedColor == color.argbInt;
+    final argb = ((color.a * 255).round() << 24) |
+        ((color.r * 255).round() << 16) |
+        ((color.g * 255).round() << 8) |
+        (color.b * 255).round();
+    final isSelected = state is Drawing && state.selectedColor == argb;
     return Padding(
       padding: const EdgeInsets.all(4),
       child: FloatingActionButton.small(

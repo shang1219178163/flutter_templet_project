@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/enum/color/classic_color.dart';
+import 'package:flutter_templet_project/enum/color/contrast_color.dart';
+import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/pair_color_mixin.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -152,8 +153,8 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
                         fg: item.b.color,
                         styleLabel: '(${item.label})',
                         name: item.a.label,
-                        detail: item.a.color.detailLine,
-                        onTap: () => copy(item.a.color.detailLine),
+                        detail: _detailOf(item.a.color),
+                        onTap: () => copy(_detailOf(item.a.color)),
                       ),
                     ),
                     Expanded(
@@ -161,8 +162,8 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
                         bg: item.b.color,
                         fg: item.a.color,
                         name: item.b.label.endsWith('色') ? item.b.label : '${item.b.label}色',
-                        detail: item.b.color.detailLine,
-                        onTap: () => copy(item.b.color.detailLine),
+                        detail: _detailOf(item.b.color),
+                        onTap: () => copy(_detailOf(item.b.color)),
                       ),
                     ),
                   ],
@@ -179,6 +180,8 @@ class _ContrastColorPageState extends State<ContrastColorPage> with SingleTicker
     await Clipboard.setData(ClipboardData(text: val));
     ToastUtil.show('已复制 $val');
   }
+
+  String _detailOf(Color c) => '${c.hex}  RGB${c.rgbText}  CMYK${c.cmykText}';
 }
 
 class _ContrastHalf extends StatelessWidget {
