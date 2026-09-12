@@ -61,6 +61,9 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
 
   Widget _buildHeader() {
     final fg = selected.color.textColor();
+
+    final colorHex = selected.color.hex;
+
     return Material(
       color: selected.color,
       child: InkWell(

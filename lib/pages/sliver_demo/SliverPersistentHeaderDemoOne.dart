@@ -77,7 +77,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   // 构建颜色列表item
   Widget buildColorItem(Color color, int index) {
     var text = colorString(color);
-    text = [color.argbInt.toRadixString(16)].join("/");
+    text = [color.hex.substring(1)].join("/");
     return Card(
       child: Container(
         alignment: Alignment.center,
@@ -102,7 +102,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   }
 
   // 颜色转换为文字
-  String colorString(Color color) => "#${color.argbInt.toRadixString(16).padLeft(8, '0').toUpperCase()}";
+  String colorString(Color color) => color.hex;
 
   Widget buildPersistentHeader(String title) {
     return NSliverPersistentHeaderBuilder(

@@ -183,7 +183,7 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
         final list = List.generate(20, (i) => i * 5).map((e) {
           var v = e / 100.0;
           final color = Colors.white.withValues(alpha: v);
-          return "${color.toHex()}, $v";
+          return "${color.hex}, $v";
         }).toList();
         return Wrap(
           // alignment: WrapAlignment.start,

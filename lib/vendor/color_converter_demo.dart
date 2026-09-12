@@ -64,14 +64,14 @@ class _ColorConverterDemoState extends State<ColorConverterDemo> {
   }
 
   test() {
-    final rgbColor = RGB(r: 234, g: 235, b: 120);
-    debugPrint(rgbColor.toString());
-    debugPrint(rgbColor.toHex().toString());
-    debugPrint(rgbColor.toCmyk().toString());
-    debugPrint(rgbColor.toHsb().toString());
-    debugPrint(rgbColor.toHsl().toString());
-    debugPrint(rgbColor.toLab().toString());
-    debugPrint(rgbColor.toXyz().toString());
-    debugPrint((rgbColor == CMYK(c: 0, m: 0, y: 49, k: 8)).toString());
+    final rgb = RGB(r: 234, g: 235, b: 120);
+    debugPrint(rgb.toString());
+    debugPrint(Color.fromRGBO(rgb.r, rgb.g, rgb.b, 1).hex);
+    debugPrint(rgb.toCmyk().toString());
+    debugPrint(rgb.toHsb().toString());
+    debugPrint(rgb.toHsl().toString());
+    debugPrint(rgb.toLab().toString());
+    debugPrint(rgb.toXyz().toString());
+    debugPrint((rgb == CMYK(c: 0, m: 0, y: 49, k: 8)).toString());
   }
 }
