@@ -40,7 +40,6 @@ class _OrderListTabPageState extends State<OrderListTabPage> {
             .toList(),
       ),
       body: NPageView(
-        needSafeArea: false,
         items: items,
         onPageChanged: _onPageChanged,
       ),

@@ -32,7 +32,6 @@ class _TodoListTabPageState extends State<TodoListTabPage> {
         title: Text(widget.title ?? "$widget"),
       ),
       body: NPageView(
-        needSafeArea: false,
         items: items,
         onPageChanged: onPageChanged,
       ),

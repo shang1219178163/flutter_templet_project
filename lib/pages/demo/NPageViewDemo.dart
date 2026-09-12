@@ -21,7 +21,7 @@ class NPageViewDemo extends StatefulWidget {
 class _NPageViewDemoState extends State<NPageViewDemo> {
   late var isTabBarVN = ValueNotifier(false);
 
-  bool isThemeBg = false;
+  bool isReverse = false;
 
   bool isScrollable = false;
 
@@ -67,14 +67,13 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
           child: NPageView(
             items: items,
             isScrollable: isScrollable,
-            isThemeBg: isThemeBg,
+            isReverse: isReverse,
             isBottom: isBottom,
-            needSafeArea: false,
           ),
         ),
         Container(
           height: MediaQuery.of(context).viewPadding.bottom,
-          color: isThemeBg && isBottom ? context.themeData.colorScheme.primary : null,
+          color: isReverse && isBottom ? context.themeData.colorScheme.primary : null,
         ),
       ],
     );
@@ -90,7 +89,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   }
 
   onThemeBg() {
-    isThemeBg = !isThemeBg;
+    isReverse = !isReverse;
     setState(() {});
   }
 

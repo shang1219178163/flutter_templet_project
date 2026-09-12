@@ -7,34 +7,29 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 
 /// 多页面左右滑动封装
 class NPageView extends StatefulWidget {
   const NPageView({
     super.key,
     required this.items,
-    this.needSafeArea = true,
-    this.isThemeBg = false,
+    this.indicator,
+    this.isReverse = false,
     this.isScrollable = false,
     this.isBottom = false,
     this.tabAlignment = TabAlignment.center,
-    this.tabBar,
     this.onPageChanged,
   });
 
   final List<(String, Widget)> items;
 
-  final bool needSafeArea;
+  final Decoration? indicator;
 
-  final bool isThemeBg;
+  final bool isReverse;
 
   final bool isScrollable;
 
   final bool isBottom;
-
-  /// 样式设置
-  final TabBar? tabBar;
 
   final TabAlignment tabAlignment;
 
@@ -45,15 +40,14 @@ class NPageView extends StatefulWidget {
 }
 
 class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
-  late TabController tabController = TabController(length: widget.items.length, vsync: this);
+  late var tabController = TabController(length: widget.items.length, vsync: this);
 
   late final pageController = PageController(initialPage: 0, keepPage: true);
 
   late final theme = Theme.of(context);
-
-  late final textColor = theme.colorScheme.onPrimary;
-
-  late final bgColor = theme.colorScheme.primary;
+  late final colorScheme = theme.colorScheme;
+  late final onPrimary = colorScheme.onPrimary;
+  late final primary = colorScheme.primary;
 
   @override
   void initState() {
@@ -75,7 +69,6 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     if (names != oldNames) {
       tabController = TabController(length: widget.items.length, vsync: this);
     }
-    setState(() {});
   }
 
   @override
@@ -88,7 +81,7 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
         items: widget.items,
         isScrollable: widget.isScrollable,
         isBottom: widget.isBottom,
-        isThemeBg: widget.isThemeBg,
+        isReverse: widget.isReverse,
       ),
       Expanded(
         child: PageView(
@@ -107,16 +100,9 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       children = children.reversed.toList();
     }
 
-    final child = Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: children,
-    );
-    if (!widget.needSafeArea) {
-      return child;
-    }
-
-    return SafeArea(
-      child: child,
     );
   }
 
@@ -124,9 +110,10 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     required List<(String, Widget)> items,
     bool isScrollable = false,
     bool isBottom = false,
-    bool isThemeBg = true,
+    bool isReverse = true,
   }) {
-    final labelColor = !isThemeBg ? textColor : bgColor;
+    final bgColor = isReverse ? primary : onPrimary;
+    final labelColor = !isReverse ? primary : onPrimary;
 
     Widget tabBar = TabBar(
       controller: tabController,
@@ -136,39 +123,28 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
       // indicatorSize: TabBarIndicatorSize.label,
       labelColor: labelColor,
       unselectedLabelColor: labelColor.withValues(alpha: 0.5),
-      indicator: BoxDecoration(
-        border: Border(
-          top: !isBottom
-              ? BorderSide.none
-              : BorderSide(
-                  color: labelColor,
-                  width: 3.0,
-                ),
-          bottom: isBottom
-              ? BorderSide.none
-              : BorderSide(
-                  color: labelColor,
-                  width: 3.0,
-                ),
-        ),
-      ),
+      indicatorColor: labelColor,
+      indicator: widget.indicator,
+      // indicator: BoxDecoration(
+      //   border: Border(
+      //     top: !isBottom ? BorderSide.none : BorderSide(color: labelColor, width: 3.0),
+      //     bottom: isBottom ? BorderSide.none : BorderSide(color: labelColor, width: 3.0),
+      //   ),
+      // ),
       onTap: (index) {
         pageController.jumpToPage(index);
         setState(() {});
         widget.onPageChanged?.call(index);
       },
-    )
-        // .cover(widget.tabBar)
-        ;
+    );
 
     if (widget.tabAlignment == TabAlignment.center) {
-      tabBar = Center(
-        child: tabBar,
-      );
+      tabBar = Center(child: tabBar);
     }
 
     return Material(
-      color: isThemeBg ? context.themeData.colorScheme.primary : null,
+      color: bgColor,
+      elevation: 0,
       child: tabBar,
     );
   }

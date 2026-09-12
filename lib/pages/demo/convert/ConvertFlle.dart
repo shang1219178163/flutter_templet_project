@@ -288,9 +288,8 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
               items: tabItems.map<(String, Widget)>((e) => (e.$1, e.$2)).toList(),
               isScrollable: true,
               tabAlignment: TabAlignment.start,
-              isThemeBg: false,
+              isReverse: false,
               isBottom: false,
-              needSafeArea: false,
             ),
     );
   }
