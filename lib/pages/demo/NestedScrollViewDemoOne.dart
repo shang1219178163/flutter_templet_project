@@ -9,7 +9,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/indicator/n_tab_indicator_fixed.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/AppRes.dart';
 import 'package:sliver_tools/sliver_tools.dart';
