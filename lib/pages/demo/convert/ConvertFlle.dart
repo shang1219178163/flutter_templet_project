@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_convert_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
-import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
@@ -284,13 +284,12 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       },
       end: canDrag.value == false || tabItems.isEmpty
           ? null
-          : NPageView(
+          : NTabPageView(
               items: tabItems.map<(String, Widget)>((e) => (e.$1, e.$2)).toList(),
               isScrollable: true,
               tabAlignment: TabAlignment.start,
-              isThemeBg: false,
+              isReverse: false,
               isBottom: false,
-              needSafeArea: false,
             ),
     );
   }

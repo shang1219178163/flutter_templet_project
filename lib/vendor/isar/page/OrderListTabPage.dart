@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/page/OrderListPage.dart';
@@ -39,8 +39,7 @@ class _OrderListTabPageState extends State<OrderListTabPage> {
                 ))
             .toList(),
       ),
-      body: NPageView(
-        needSafeArea: false,
+      body: NTabPageView(
         items: items,
         onPageChanged: _onPageChanged,
       ),

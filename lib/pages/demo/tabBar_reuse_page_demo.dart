@@ -26,33 +26,50 @@ class TabBarReusePageDemo extends StatefulWidget {
 class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
   bool isPageView = true;
 
-  bool isBom = false;
+  bool isReverse = false;
+
+  bool isBottom = false;
+
+  late final btns = <Tuple2<String, VoidCallback>>[
+    Tuple2('组件', onComp),
+    Tuple2('位置', onPosition),
+    Tuple2('颜色', onThemeBg),
+  ];
+
+  onComp() {
+    isPageView = !isPageView;
+    setState(() {});
+  }
+
+  onPosition() {
+    isBottom = !isBottom;
+    setState(() {});
+  }
+
+  onThemeBg() {
+    isReverse = !isReverse;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(isPageView ? "NTabPageView" : "NTabBarView"),
-        actions: [
-          TextButton(
-              onPressed: () {
-                isPageView = !isPageView;
-                setState(() {});
-              },
-              child: Icon(
-                Icons.change_circle_outlined,
-                color: Colors.white,
-              )),
-          TextButton(
-              onPressed: () {
-                isBom = !isBom;
-                setState(() {});
-              },
-              child: Text(
-                !isBom ? "底部" : "顶部",
-                style: TextStyle(color: Colors.white),
-              )),
-        ],
+        actions: btns
+            .map((e) => TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    minimumSize: Size(50, 18),
+                  ),
+                  onPressed: e.item2,
+                  child: Text(
+                    e.item1,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
         elevation: 0,
       ),
       body: isPageView ? buildTabPageView() : buildTabBarView(),
@@ -61,30 +78,30 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   Widget buildTabPageView() {
     return NTabPageView(
-        items: _items,
-        isTabBottom: isBom,
-        // labelColor: Colors.white,
-        // canPageChanged: (index) {
-        //   return (index != 1);
-        // },
-        onPageChanged: (index) {
-          DLog.d(index);
-        });
+      items: _items.map((e) => (e.item1, e.item2)).toList(),
+      isReverse: isReverse,
+      isBottom: isBottom,
+      // canPageChanged: (index) {
+      //   return (index != 1);
+      // },
+      onPageChanged: (index) {
+        DLog.d(index);
+      },
+    );
   }
 
   Widget buildTabBarView() {
     return NTabBarView(
-        items: _items,
-        isTabBottom: isBom,
-        labelColor: Colors.white,
-        tabBgColor: Colors.blue,
-
-        // canPageChanged: (index) {
-        //   return (index != 1);
-        // },
-        onPageChanged: (index) {
-          DLog.d(index);
-        });
+      items: _items,
+      isReverse: isReverse,
+      isTabBottom: isBottom,
+      // canPageChanged: (index) {
+      //   return (index != 1);
+      // },
+      onPageChanged: (index) {
+        DLog.d(index);
+      },
+    );
   }
 
   final List<Tuple2<String, Widget>> _items = [

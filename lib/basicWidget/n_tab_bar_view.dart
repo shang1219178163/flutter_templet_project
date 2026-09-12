@@ -13,11 +13,9 @@ import 'package:tuple/tuple.dart';
 class NTabBarView extends StatefulWidget {
   const NTabBarView({
     super.key,
-    this.isTabBottom = false,
     required this.items,
-    this.tabBgColor,
-    this.labelColor,
-    this.labelStyle,
+    this.isReverse = false,
+    this.isTabBottom = false,
     this.tabController,
     this.initialIndex = 0,
     required this.onPageChanged,
@@ -26,14 +24,7 @@ class NTabBarView extends StatefulWidget {
 
   final List<Tuple2<String, Widget>> items;
 
-  /// tab背景颜色
-  final Color? tabBgColor;
-
-  /// 标题和指示器颜色
-  final Color? labelColor;
-
-  /// 字体样式
-  final TextStyle? labelStyle;
+  final bool isReverse;
 
   /// Tab 控制器
   final TabController? tabController;
@@ -64,6 +55,14 @@ class NTabBarViewState extends State<NTabBarView> with SingleTickerProviderState
     return !disable;
   }
 
+  late final theme = Theme.of(context);
+  late final colorScheme = theme.colorScheme;
+  late final onPrimary = colorScheme.onPrimary;
+  late final primary = colorScheme.primary;
+
+  Color get bgColor => widget.isReverse ? primary : onPrimary;
+  Color get textColor => !widget.isReverse ? primary : onPrimary;
+
   @override
   void dispose() {
     tabController.dispose();
@@ -79,10 +78,7 @@ class NTabBarViewState extends State<NTabBarView> with SingleTickerProviderState
   @override
   void didUpdateWidget(covariant NTabBarView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.tabBgColor != oldWidget.tabBgColor ||
-        widget.labelColor != oldWidget.labelColor ||
-        widget.labelStyle != oldWidget.labelStyle ||
-        widget.isTabBottom != oldWidget.isTabBottom ||
+    if (widget.isTabBottom != oldWidget.isTabBottom ||
         widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
       setState(() {});
     }
@@ -104,30 +100,17 @@ class NTabBarViewState extends State<NTabBarView> with SingleTickerProviderState
   }
 
   Widget buildTabBar() {
-    final textColor = widget.labelColor ?? Theme.of(context).colorScheme.primary;
-
-    final borderSide = BorderSide(
-      color: textColor,
-      width: 2.0,
-    );
-
-    var decorationTop = BoxDecoration(
-      border: Border(
-        top: borderSide,
-      ),
-    );
-
-    var decorationBom = BoxDecoration(
-      border: Border(
-        bottom: borderSide,
-      ),
-    );
+    final borderSide = BorderSide(color: textColor, width: 2.0);
+    var decorationTop = BoxDecoration(border: Border(top: borderSide));
+    var decorationBom = BoxDecoration(border: Border(bottom: borderSide));
 
     final tabBar = TabBar(
       controller: tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
+      dividerHeight: 0,
       labelColor: textColor,
-      labelStyle: widget.labelStyle,
+      unselectedLabelColor: textColor.withValues(alpha: 0.5),
+      indicatorColor: textColor,
       indicator: widget.isTabBottom ? decorationTop : decorationBom,
       onTap: (index) {
         setState(() {});
@@ -141,7 +124,7 @@ class NTabBarViewState extends State<NTabBarView> with SingleTickerProviderState
     }
 
     return Material(
-      color: widget.tabBgColor,
+      color: bgColor,
       child: tabBar,
     );
   }

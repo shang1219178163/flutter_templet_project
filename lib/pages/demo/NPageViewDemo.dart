@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
-import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
@@ -21,7 +21,7 @@ class NPageViewDemo extends StatefulWidget {
 class _NPageViewDemoState extends State<NPageViewDemo> {
   late var isTabBarVN = ValueNotifier(false);
 
-  bool isThemeBg = false;
+  bool isReverse = false;
 
   bool isScrollable = false;
 
@@ -33,6 +33,11 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
     Tuple2('颜色', onThemeBg),
     Tuple2('滑动', onScrollable),
   ];
+
+  late final theme = Theme.of(context);
+  late final colorScheme = theme.colorScheme;
+  late final onPrimary = colorScheme.onPrimary;
+  late final primary = colorScheme.primary;
 
   @override
   Widget build(BuildContext context) {
@@ -61,20 +66,27 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   }
 
   Widget buildBody() {
+    final labelColor = !isReverse ? primary : onPrimary;
+
     return Column(
       children: [
         Expanded(
-          child: NPageView(
+          child: NTabPageView(
             items: items,
             isScrollable: isScrollable,
-            isThemeBg: isThemeBg,
+            isReverse: isReverse,
             isBottom: isBottom,
-            needSafeArea: false,
+            indicator: BoxDecoration(
+              border: Border(
+                top: !isBottom ? BorderSide.none : BorderSide(color: labelColor, width: 3.0),
+                bottom: isBottom ? BorderSide.none : BorderSide(color: labelColor, width: 3.0),
+              ),
+            ),
           ),
         ),
         Container(
           height: MediaQuery.of(context).viewPadding.bottom,
-          color: isThemeBg && isBottom ? context.themeData.colorScheme.primary : null,
+          color: isReverse && isBottom ? context.themeData.colorScheme.primary : null,
         ),
       ],
     );
@@ -90,7 +102,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   }
 
   onThemeBg() {
-    isThemeBg = !isThemeBg;
+    isReverse = !isReverse;
     setState(() {});
   }
 

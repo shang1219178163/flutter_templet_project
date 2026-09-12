@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentLisPage.dart';
@@ -31,7 +31,7 @@ class _StudentTabPageState extends State<StudentTabPage> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: NPageView(
+      body: NTabPageView(
         items: items,
         onPageChanged: onPageChanged,
       ),

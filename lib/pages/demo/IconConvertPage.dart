@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
@@ -45,7 +45,7 @@ class _IconConvertPageState extends State<IconConvertPage> {
                 ))
             .toList(),
       ),
-      body: NPageView(
+      body: NTabPageView(
         items: [
           (
             "全部",
