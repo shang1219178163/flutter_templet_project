@@ -483,7 +483,7 @@ class DiscussListItem extends StatelessWidget {
                       ),
                       child: Text(
                         "${model.replyCount}条回复",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: AppColors.error,
                           fontSize: 11.5,
                           // fontWeight: FontWeight.w500,

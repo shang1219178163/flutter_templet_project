@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 
 /// 列表没有更多数据占位图
-class ListFooterNoMorePlacehorlder extends StatelessWidget {
-  const ListFooterNoMorePlacehorlder({
+class NoMorePlacehorlder extends StatelessWidget {
+  const NoMorePlacehorlder({
     super.key,
     this.child,
   });

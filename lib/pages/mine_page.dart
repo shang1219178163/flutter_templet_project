@@ -55,12 +55,11 @@ class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white), //修改返回按钮颜色
         centerTitle: true,
-        title: Text('设置', style: TextStyle(color: Colors.white)),
+        title: Text('设置'),
         leading: Builder(builder: (context) {
           return IconButton(
-            icon: Icon(Icons.menu, color: Colors.white), //自定义图标
+            icon: Icon(Icons.menu), //自定义图标
             onPressed: () {
               // Scaffold.of(context).openDrawer();
               kScaffoldKey.currentState?.openDrawer();
@@ -70,14 +69,12 @@ class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
         actions: [
           IconButton(
             icon: Icon(Icons.change_circle_outlined),
-            color: Colors.white,
             onPressed: () {
               AppThemeService().toggleTheme();
             },
           ),
           IconButton(
             icon: Icon(Icons.settings),
-            color: Colors.white,
             onPressed: () {
               // AppRouter.push(context, AppRouter.settingsPage, args: "setting",);
               Get.toNamed(AppRouter.settingsPage, arguments: "setting");
@@ -91,7 +88,7 @@ class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
         children: <Widget>[
           buildTop(),
           buildMid(cardColor: cardColor),
-          SizedBox(height: 15),
+          SizedBox(height: 8),
           buildBom(cardColor: cardColor),
         ],
       ),

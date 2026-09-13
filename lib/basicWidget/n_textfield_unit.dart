@@ -12,9 +12,8 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_colors.dart';
 
-/// 带单位的输入框
+/// 带单位的输入框（颜色默认跟随 Theme ColorScheme）
 class NTextfieldUnit extends StatelessWidget {
   const NTextfieldUnit({
     super.key,
@@ -38,8 +37,8 @@ class NTextfieldUnit extends StatelessWidget {
     this.showClear = true,
     this.onClear,
     this.readOnly = false,
-    this.readOnlyFillColor = AppColors.bgF3F3F3,
-    this.readOnlyBorderColor = const Color(0xFFE4E4E4),
+    this.readOnlyFillColor,
+    this.readOnlyBorderColor,
     this.radius = 4,
     this.keyboardType,
     this.inputFormatters,
@@ -103,11 +102,11 @@ class NTextfieldUnit extends StatelessWidget {
   /// 是否仅读
   final bool readOnly;
 
-  /// 仅读背景色
+  /// 仅读背景色；null → colorScheme.surfaceContainerLow
   final Color? readOnlyFillColor;
 
-  /// 仅读边框线
-  final Color readOnlyBorderColor;
+  /// 仅读边框线；null → colorScheme.outlineVariant
+  final Color? readOnlyBorderColor;
 
   /// 圆角半径
   final double? radius;
@@ -120,6 +119,7 @@ class NTextfieldUnit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final borderRadius = BorderRadius.all(Radius.circular(radius ?? 4));
     var valueNew = ["null"].contains(value) ? "" : value;
 
@@ -129,8 +129,14 @@ class NTextfieldUnit extends StatelessWidget {
     }
 
     final controllerNew = controller ?? TextEditingController(text: valueNew);
-
     final hasFocusVN = ValueNotifier<bool>(false);
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final inputFill = dark ? cs.surfaceContainerLow : cs.surfaceContainer;
+    final card = dark ? cs.surfaceContainer : cs.surfaceContainerLow;
+    final fill = readOnly ? (readOnlyFillColor ?? card) : inputFill;
+    final textFg = textColor ?? cs.onSurface;
+    final hintFg = hintTextColor ?? cs.onSurfaceVariant;
+    final borderFg = readOnlyBorderColor ?? cs.outlineVariant;
 
     Widget child = _NTextField(
       enabled: enabled,
@@ -142,7 +148,7 @@ class NTextfieldUnit extends StatelessWidget {
       maxLines: maxLines,
       onTap: onTap,
       borderWidth: 0.5,
-      fillColor: readOnly ? readOnlyFillColor : AppColors.white,
+      fillColor: fill,
       readOnly: readOnly,
       contentPadding: const EdgeInsets.only(
         left: 8,
@@ -153,13 +159,13 @@ class NTextfieldUnit extends StatelessWidget {
       style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: textColor ?? AppColors.font,
+        color: textFg,
       ),
       hintText: hitText,
       hintStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: hintTextColor ?? AppColors.fontB3B3B3,
+        color: hintFg,
       ),
       suffixIconBuilder: (isFocus) {
         if (hideSuffix) {
@@ -169,10 +175,6 @@ class NTextfieldUnit extends StatelessWidget {
         Widget suffixDefault = Container(
           margin: const EdgeInsets.only(right: 5),
           alignment: Alignment.centerRight,
-          // decoration: BoxDecoration(
-          //   color: Colors.transparent,
-          //   border: Border.all(color: Colors.blue),
-          // ),
           child: Image(
             image: AssetImage(Assets.imagesIconArrowRight),
             width: 16,
@@ -185,15 +187,11 @@ class NTextfieldUnit extends StatelessWidget {
           suffixDefault = Container(
             margin: const EdgeInsets.only(right: 10),
             alignment: Alignment.centerRight,
-            // decoration: BoxDecoration(
-            //   color: Colors.transparent,
-            //   // border: Border.all(color: Colors.blue),
-            // ),
             child: NText(
               unit ?? "",
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              color: AppColors.font737373,
+              color: cs.onSurfaceVariant,
             ),
           );
         }
@@ -218,14 +216,10 @@ class NTextfieldUnit extends StatelessWidget {
                           },
                       child: Container(
                         padding: const EdgeInsets.only(top: 1, right: 8),
-                        // decoration: BoxDecoration(
-                        //   color: Colors.transparent,
-                        //   // border: Border.all(color: Colors.blue),
-                        // ),
                         child: Icon(
                           Icons.cancel,
                           size: clearWidth - 8,
-                          color: const Color(0xffB3B3B3),
+                          color: cs.onSurfaceVariant,
                         ),
                       ),
                     );
@@ -258,7 +252,7 @@ class NTextfieldUnit extends StatelessWidget {
     if (readOnly) {
       child = Container(
         decoration: BoxDecoration(
-          border: Border.all(color: readOnlyBorderColor, width: 0.5),
+          border: Border.all(color: borderFg, width: 0.5),
           borderRadius: borderRadius,
         ),
         child: ClipRRect(
@@ -276,7 +270,7 @@ class NTextfieldUnit extends StatelessWidget {
       children: [
         NText(
           name,
-          color: AppColors.font737373,
+          color: cs.onSurfaceVariant,
         ),
         Expanded(
           child: child,
@@ -294,13 +288,13 @@ class _NTextField extends StatefulWidget {
     this.controller,
     this.onTap,
     required this.onChanged,
-    this.style = const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.font),
+    this.style,
     this.readOnly = false,
     this.hintText = "请输入",
-    this.hintStyle = const TextStyle(fontSize: 16, color: AppColors.fontB3B3B3),
+    this.hintStyle,
     this.maxLines = 1,
     this.contentPadding,
-    this.fillColor = AppColors.bg,
+    this.fillColor,
     this.borderWidth = 1,
     this.suffixIconBuilder,
     this.suffixIconConstraints,
@@ -483,19 +477,16 @@ class _NTextFieldState extends State<_NTextField> {
 
   @override
   Widget build(BuildContext context) {
-    // textEditingController.text = widget.value ?? "";
-    // if (controller.text.contains("-")) {
-    //   DLog.d("__>> $this ${[controller.hashCode, controller.text]} ");
-    // }
-
+    final cs = Theme.of(context).colorScheme;
     final prefixIcon = widget.prefixIconBuilder?.call(hasFocusVN.value);
-
     final suffixIcon = widget.suffixIconBuilder?.call(hasFocusVN.value);
-
     final counter =
         widget.maxLength != null ? controller.buildInputDecorationCounter(maxLength: widget.maxLength!) : null;
-
     final obscureText = widget.obscureText ?? isCloseEye;
+    final style = widget.style ??
+        TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: cs.onSurface);
+    final hintStyle = widget.hintStyle ?? TextStyle(fontSize: 16, color: cs.onSurfaceVariant);
+
     return TextField(
       enabled: widget.enabled,
       contextMenuBuilder: widget.contextMenuBuilder ??
@@ -507,12 +498,10 @@ class _NTextFieldState extends State<_NTextField> {
       readOnly: widget.readOnly,
       minLines: widget.minLines,
       maxLines: widget.maxLines,
-      cursorColor: AppColors.primary,
       focusNode: _focusNode,
       controller: controller,
       onTap: widget.onTap,
       onTapOutside: widget.onTapOutside,
-      // onChanged: widget.onChanged,
       onChanged: widget.onChanged,
       onSubmitted: (val) {
         widget.onSubmitted?.call(val);
@@ -522,15 +511,17 @@ class _NTextFieldState extends State<_NTextField> {
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       autofocus: widget.autofocus,
-      style: widget.style,
+      style: style,
       inputFormatters: widget.inputFormatters ??
           [
             if (widget.maxLength != null) LengthLimitingTextInputFormatter(widget.maxLength!),
           ],
       decoration: InputDecoration(
         filled: true,
-        // fillColor: widget.focusColor,
-        fillColor: widget.fillColor,
+        fillColor: widget.fillColor ??
+            (Theme.of(context).brightness == Brightness.dark
+                ? cs.surfaceContainerLow
+                : cs.surfaceContainer),
         focusColor: widget.focusColor,
         contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         border: widget.border ?? InputBorder.none,
@@ -541,7 +532,7 @@ class _NTextFieldState extends State<_NTextField> {
             ? null
             : widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius, borderWidth: widget.borderWidth),
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle,
+        hintStyle: hintStyle,
         isCollapsed: widget.isCollapsed ?? false,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
@@ -554,19 +545,17 @@ class _NTextFieldState extends State<_NTextField> {
 
   InputBorder buildEnabledBorder({double radus = 4, double borderWidth = 1}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(radus), //边角
-      ),
-      borderSide: Divider.createBorderSide(context, width: 1.0),
+      borderRadius: BorderRadius.all(Radius.circular(radus)),
+      borderSide: Divider.createBorderSide(context, width: borderWidth),
     );
   }
 
   InputBorder buildFocusedBorder({double radus = 4, double borderWidth = 1}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
+      borderRadius: BorderRadius.all(Radius.circular(radus)),
       borderSide: BorderSide(
-        color: AppColors.primary, //边框颜色为白色
-        width: borderWidth, //宽度为1
+        color: Theme.of(context).colorScheme.primary,
+        width: borderWidth,
       ),
     );
   }

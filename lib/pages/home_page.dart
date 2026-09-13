@@ -42,6 +42,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   /// TabBarView 相邻页会同时挂到路由的 PrimaryScrollController，Scrollbar 会断言
   late final tabPrimaryControllers = List.generate(items.length, (_) => ScrollController());
 
+  late final themeData = Theme.of(context);
+  late final colorScheme = themeData.colorScheme;
+  late final primary = colorScheme.primary;
+  late final onPrimary = colorScheme.onPrimary;
+  late final isDark = themeData.brightness == Brightness.dark;
+
   @override
   void initState() {
     super.initState();
@@ -93,8 +99,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           controller: _tabController,
           isScrollable: true,
           tabs: items.map((e) => Tab(key: PageStorageKey<String>(e.item1), text: e.item1)).toList(),
-          // indicatorSize: TabBarIndicatorSize.label,
-          // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
+          labelColor: onPrimary,
+          unselectedLabelColor: onPrimary,
+          indicatorColor: onPrimary,
         ),
       ),
       body: TabBarView(

@@ -4,11 +4,10 @@
 //  Created by JsonToModel on 2025-12-02 10:40.
 //
 
-import 'package:flutter_templet_project/basicWidget/n_tag_sort_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_tag_sort.dart';
 
 /// 新闻分类
 class NewsCatalogModel with NTagSortMixin {
-
   NewsCatalogModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

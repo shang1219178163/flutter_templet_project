@@ -26,8 +26,8 @@ mixin NTagSortMixin on Object {
   }
 }
 
-class NTagSortWidget<T extends NTagSortMixin> extends StatefulWidget {
-  const NTagSortWidget({
+class NTagSort<T extends NTagSortMixin> extends StatefulWidget {
+  const NTagSort({
     super.key,
     this.showTab = false,
     required this.tags,
@@ -46,10 +46,10 @@ class NTagSortWidget<T extends NTagSortMixin> extends StatefulWidget {
   final void Function(T e)? onTap;
 
   @override
-  State<NTagSortWidget<T>> createState() => _NTagSortWidgetState<T>();
+  State<NTagSort<T>> createState() => _NTagSortState<T>();
 }
 
-class _NTagSortWidgetState<T extends NTagSortMixin> extends State<NTagSortWidget<T>> with TickerProviderStateMixin {
+class _NTagSortState<T extends NTagSortMixin> extends State<NTagSort<T>> with TickerProviderStateMixin {
   late List<T> tags = [...widget.tags];
   late List<T> others = [...widget.others];
 

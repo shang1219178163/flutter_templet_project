@@ -110,7 +110,7 @@ class _DiscussListPageState extends State<DiscussListPage>
                 height: 48,
                 child: DiscussTitleBar(
                   title: "热门评论 ${length}",
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.error,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

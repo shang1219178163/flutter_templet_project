@@ -81,7 +81,7 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
                 width: 2,
                 height: 18,
                 margin: const EdgeInsets.only(right: 10),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
                   color: AppColors.error,
                 ),
