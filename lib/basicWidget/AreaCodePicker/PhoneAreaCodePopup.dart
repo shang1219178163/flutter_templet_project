@@ -74,29 +74,25 @@ class _PhoneAreaCodePopupState extends State<PhoneAreaCodePopup> {
   Widget build(BuildContext context) {
     late final themeProvider = context.read<ThemeProvider>();
 
+    final themeData = Theme.of(context);
+    final colorScheme = themeData.colorScheme;
+    final primary = colorScheme.primary;
+    final onPrimary = colorScheme.onPrimary;
+    final isDark = themeData.brightness == Brightness.dark;
+    final inverseColor = isDark ? Colors.white : Colors.black;
     return Scaffold(
       // backgroundColor: themeProvider.color242434OrWhite,
       body: Column(
         children: [
-          Theme(
-            data: Theme.of(context).copyWith(
-              appBarTheme: AppBarTheme(
-                color: Colors.white,
-                titleTextStyle: TextStyle(color: Colors.black),
-                iconTheme: IconThemeData(color: Colors.black),
-                elevation: 0,
-                scrolledUnderElevation: 0,
-              ),
-            ),
-            child: AppBar(
-              // backgroundColor: Colors.transparent,
-              title: Text('选择国家或地区'),
+          SizedBox(
+            height: 56,
+            child: NavigationToolbar(
               leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.close),
-              ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.clear)),
+              middle: Text('选择国家或地区'),
             ),
           ),
           Divider(),
