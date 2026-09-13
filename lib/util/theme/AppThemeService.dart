@@ -137,6 +137,7 @@ class AppThemeService {
     // 暗色 surface 用中性灰 0xFF242424（R=G=B），避免旧值 0xFF242434 发紫。
     final isDark = brightness == Brightness.dark;
     final surfaceBase = isDark ? AppColors.cardDark : AppColors.cardLight;
+    final dividerColor = isDark ? AppColors.dividerDark : AppColors.dividerLight;
     final primaryContainer = Color.alphaBlend(
       seedColor.withValues(alpha: isDark ? 0.24 : 0.12),
       surfaceBase,
@@ -159,7 +160,7 @@ class AppThemeService {
         inversePrimary: seedColor,
         surface: surfaceBase,
         onSurface: Colors.white,
-        onSurfaceVariant: Colors.white.withValues(alpha: 0.6),
+        onSurfaceVariant: dividerColor,
         surfaceBright: const Color(0xFF2C2C2C),
         surfaceDim: const Color(0xFF1A1A1A),
         surfaceContainerLowest: const Color(0xFF1A1A1A),
@@ -189,7 +190,7 @@ class AppThemeService {
       inversePrimary: seedColor,
       surface: surfaceBase,
       onSurface: Colors.black,
-      onSurfaceVariant: Colors.black.withValues(alpha: 0.6),
+      onSurfaceVariant: dividerColor,
       surfaceBright: surfaceBase,
       surfaceDim: const Color(0xFFF6F6F6),
       surfaceContainerLowest: surfaceBase,
@@ -309,6 +310,8 @@ class AppThemeService {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           splashFactory: NoSplash.splashFactory,
+          foregroundColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primary),
         ).merge(buildButtonStyle()),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

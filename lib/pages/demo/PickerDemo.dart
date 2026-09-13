@@ -42,10 +42,10 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
 
   late final List<({String name, VoidCallback action})> items = [
     (name: "datePicker", action: onDate),
-    (name: "datePicker mixin封装", action: onDateMixin),
+    (name: "datePicker mixin", action: onDateMixin),
     (name: "Picker浅封装", action: onSelect),
     (name: "自定义", action: onCustom),
-    (name: "自定义 onPickerListView", action: onPickerListView),
+    (name: "onPickerListView", action: onPickerListView),
     (name: "单选滚动列表", action: onSingle),
     (name: "多选滚动列表", action: onMuti),
     (name: "多种类按钮", action: onPage),
@@ -103,14 +103,9 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         return OutlinedButton(
           onPressed: e.action,
           style: OutlinedButton.styleFrom(
-            side: BorderSide(width: 1.0, color: Colors.blue),
             padding: EdgeInsets.all(0),
           ),
-          child: Text('${e.name}_$i',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.black87,
-              )),
+          child: Text(e.name, style: TextStyle(fontSize: 12)),
         );
       }).toList(),
     );

@@ -50,16 +50,13 @@ class NPickOne<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = Color(0xFFF6F6F6);
-    final foregroundColor = Colors.white;
-
-    final textColor = Colors.black87;
-    final textColorCancel = Colors.red;
+    final themeData = Theme.of(context);
+    final colorScheme = themeData.colorScheme;
+    final primary = colorScheme.primary;
+    final onPrimary = colorScheme.onPrimary;
+    final isDark = themeData.brightness == Brightness.dark;
 
     return Container(
-      decoration: BoxDecoration(
-        color: backgroundColor,
-      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,10 +77,8 @@ class NPickOne<T> extends StatelessWidget {
                               onSelected(e);
                             },
                             height: itemHeight,
-                            foregroundColor: foregroundColor,
-                            textColor: textColor,
                           ),
-                          if (e != items.last) Divider(height: 0.5, color: backgroundColor),
+                          if (e != items.last) Divider(),
                         ],
                       );
                     }),
@@ -92,6 +87,7 @@ class NPickOne<T> extends StatelessWidget {
               ),
             ),
           ),
+          Divider(thickness: 8, color: colorScheme.surfaceDim),
           Padding(
             padding: EdgeInsets.only(top: 8),
             child: buildItem(
@@ -104,8 +100,7 @@ class NPickOne<T> extends StatelessWidget {
                 Navigator.pop(context);
               },
               height: itemHeight,
-              foregroundColor: foregroundColor,
-              textColor: textColorCancel,
+              textColor: colorScheme.error,
             ),
           ),
         ],
