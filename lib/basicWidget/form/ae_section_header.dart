@@ -64,7 +64,7 @@ class AeSectionHeader extends StatelessWidget {
               alignment: PlaceholderAlignment.middle,
             ),
           if (isRequired)
-            const TextSpan(
+            TextSpan(
               text: "*",
               style: TextStyle(
                 fontSize: 15,

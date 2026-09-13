@@ -18,12 +18,9 @@ import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_unit.dart';
-import 'package:flutter_templet_project/extension/extension_local.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
-import 'package:flutter_templet_project/util/Throttle.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
-import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
@@ -41,23 +38,17 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   late final _textController = TextEditingController(text: '测试');
   late final editingController = TextEditingController(text: '测试');
 
-  // 控制器
   final _unameController = TextEditingController();
   final _pwdController = TextEditingController();
 
-  // 焦点
   final focusNode1 = FocusNode();
   final focusNode2 = FocusNode();
 
   bool isEye = true;
-  bool isBtnEnabled = false;
-  bool showLoading = false;
-  final _unameExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //用户名正则
-  final _pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //密码正则
+  final _unameExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$');
+  final _pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$');
 
   final delayed = Debouncer(delay: Duration(milliseconds: 1000));
-
-  final throttle = Throttle();
 
   var tips = [
     "安卓手机普通键盘和安全键盘切换时焦点丢失?可以通过延迟 300ms 通过 focusNode 二次获取焦点解决.",
@@ -85,12 +76,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
               actions: [
                 GestureDetector(
                   onTap: onSheetTips,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    child: Icon(
-                      Icons.warning_amber,
-                      color: Colors.white,
-                    ),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: Icon(Icons.warning_amber),
                   ),
                 ),
               ],
@@ -101,40 +89,50 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   }
 
   Widget buildScaffoldBottomSheet() {
-    return Container(
-      padding: EdgeInsets.only(left: 12, right: 12),
-      decoration: BoxDecoration(
-        color: Colors.green,
-        border: Border.all(color: Colors.blue),
-      ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(right: 8),
-              child: TextField(
-                decoration: InputDecoration(
-                  isCollapsed: true,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+    return Material(
+      child: Container(
+        padding: const EdgeInsets.only(left: 12, right: 12),
+        decoration: BoxDecoration(
+          border: Border(top: Divider.createBorderSide(context)),
+        ),
+        child: SafeArea(
+          top: false,
+          child: Row(
+            children: <Widget>[
+              const Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    isCollapsed: true,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    hintText: '输入消息',
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {},
+                child: const Text('发送'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              // minimumSize: Size(50, 18),
-            ),
-            onPressed: () {},
-            child: Text('发送'),
-          ),
-        ],
+        ),
       ),
     );
   }
 
   Widget buildColumn() {
+    final theme = Theme.of(context);
+    final fill = theme.inputDecorationTheme.fillColor;
+    final cupertinoDecoration = BoxDecoration(
+      color: fill,
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      border: Border.all(color: theme.colorScheme.outline),
+    );
+
     return SafeArea(
       child: Scrollbar(
         child: SingleChildScrollView(
@@ -143,7 +141,6 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
               NSectionBox(
                 title: "NationalCode",
                 child: Container(
-                  decoration: BoxDecoration(),
                   margin: const EdgeInsets.only(left: 16, right: 16),
                   child: Row(
                     children: [
@@ -161,15 +158,17 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                         nameCb: (e) => e?.phoneCode != null ? "+${e?.phoneCode}" : "请选择",
                         padding: const EdgeInsets.only(left: 0, right: 0, top: 2),
                       ),
-                      Expanded(
+                      const Expanded(
                         child: TextField(
                           keyboardType: TextInputType.phone,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             isCollapsed: true,
                             contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                             hintText: '请输入手机号',
-                            hintStyle: TextStyle(color: Colors.black26),
                             border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            filled: false,
                           ),
                           maxLines: 1,
                         ),
@@ -184,30 +183,19 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                   controller: _textController,
                   placeholder: "请输入",
                   textAlign: TextAlign.center,
-                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  padding: const EdgeInsets.all(8),
                   suffixMode: OverlayVisibilityMode.editing,
-                  decoration: BoxDecoration(
-                    // color: CupertinoColors.tertiarySystemFill,
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                  ),
+                  decoration: cupertinoDecoration,
                 ),
               ),
               NSectionBox(
                 title: "CupertinoSearchTextField",
                 child: CupertinoSearchTextField(
-                  // prefixIcon: SizedBox(),
-                  // prefixInsets: EdgeInsets.zero,
-                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  padding: const EdgeInsets.all(8),
                   placeholder: "请输入",
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                  ),
+                  backgroundColor: fill,
                   onChanged: (value) {
-                    // debugPrint('onChanged: $value');
                     delayed(() => debugPrint('delayed: $value'));
-                    // _debounce(() => debugPrint( 'delayed: $value' ));
                   },
                   onSubmitted: (value) {
                     debugPrint('onSubmitted: $value');
@@ -215,11 +203,13 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                 ),
               ),
               NSectionBox(
-                title: "TextField",
-                child: buildTextField(
+                title: "TextField（默认 InputDecorationTheme）",
+                child: TextField(
                   controller: editingController,
                   keyboardType: TextInputType.number,
-                  labelText: 'Weight (KG)',
+                  decoration: const InputDecoration(
+                    labelText: 'Weight (KG)',
+                  ),
                 ),
               ),
               NSectionBox(
@@ -228,33 +218,27 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: buildTextFieldUnit(
-                          controller: editingController,
-                          readOnly: false,
-                          fillColorReadOnly: Colors.white,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(4),
-                            FilteringTextInputFormatter.digitsOnly,
-                          ]),
-                    ),
-                    SizedBox(
-                      width: 48,
-                    ),
-                    Expanded(
-                      child: buildTextFieldUnit(
-                        controller: editingController,
-                        readOnly: true,
-                        fillColorReadOnly: Colors.white,
+                      child: NOrderNumUnit(
+                        value: editingController.text,
+                        readOnly: false,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(4),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      width: 48,
-                    ),
+                    const SizedBox(width: 48),
                     Expanded(
-                      child: buildTextFieldUnit(
-                        controller: editingController,
+                      child: NOrderNumUnit(
+                        value: editingController.text,
                         readOnly: true,
-                        fillColorReadOnly: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 48),
+                    Expanded(
+                      child: NOrderNumUnit(
+                        value: editingController.text,
+                        readOnly: true,
                       ),
                     ),
                   ],
@@ -269,32 +253,25 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                       child: NOrderNumUnit(
                         value: '1111',
                         readOnly: false,
-                        fillColorReadOnly: Colors.white,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(4),
                           FilteringTextInputFormatter.digitsOnly,
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 48,
-                    ),
+                    const SizedBox(width: 48),
                     Expanded(
                       child: NOrderNumUnit(
                         value: '2222',
                         readOnly: true,
-                        fillColorReadOnly: Colors.white,
                         unit: " g ",
                       ),
                     ),
-                    SizedBox(
-                      width: 48,
-                    ),
+                    const SizedBox(width: 48),
                     Expanded(
                       child: NOrderNumUnit(
                         value: '3333',
                         readOnly: true,
-                        fillColorReadOnly: Colors.white,
                       ),
                     ),
                   ],
@@ -303,45 +280,31 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
               NSectionBox(
                 title: "TextFormField",
                 child: TextFormField(
-                  //用户名
                   controller: _unameController,
                   focusNode: focusNode1,
-                  //关联focusNode1
                   keyboardType: TextInputType.text,
-                  //键盘类型
                   maxLength: 12,
                   textInputAction: TextInputAction.next,
-                  //显示'下一步'
                   decoration: InputDecoration(
                     isCollapsed: true,
                     hintText: '请输入账号',
-                    // labelText: "账号",
                     contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                    prefixIcon: Icon(Icons.perm_identity),
-                    // border: OutlineInputBorder(
-                    //     borderRadius: BorderRadius.circular(4.0) //圆角大小
-                    // ),
+                    prefixIcon: const Icon(Icons.perm_identity),
                     suffixIcon: _unameController.text.isNotEmpty
                         ? IconButton(
-                            icon: Icon(Icons.cancel, color: Colors.grey, size: 18),
+                            icon: const Icon(Icons.cancel, size: 18),
                             onPressed: () {
                               _unameController.clear();
-                              //   _unameController.text = '';
-                              //   // checkLoginText();
                               setState(() {});
                             },
                           )
                         : null,
-                    border: buildFocusedBorder(),
-                    focusedBorder: buildFocusedBorder(color: context.themeData.colorScheme.primary),
-                    enabledBorder: buildFocusedBorder(),
                   ),
                   validator: (v) {
                     return !_unameExp.hasMatch(v!) ? '账号由6到12位数字与小写字母组成' : null;
                   },
                   onEditingComplete: () => FocusScope.of(context).requestFocus(focusNode2),
                   onChanged: (v) {
-                    // checkLoginText();
                     setState(() {});
                   },
                 ),
@@ -349,58 +312,38 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
               NSectionBox(
                 title: "TextFormField - pwd",
                 child: TextFormField(
-                  //密码
                   controller: _pwdController,
                   focusNode: focusNode2,
-                  //关联focusNode1
                   obscureText: isEye,
-                  //密码类型 内容用***显示
                   maxLength: 12,
                   textInputAction: TextInputAction.done,
-                  //显示'完成'
                   decoration: InputDecoration(
                     isCollapsed: true,
                     hintText: '请输入密码',
-                    // labelText: '密码',
                     contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    prefixIcon: Icon(Icons.lock),
-                    // border: OutlineInputBorder(
-                    //     borderRadius: BorderRadius.circular(40.0)
-                    // ),
+                    prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        size: 20,
-                      ),
+                      icon: const Icon(Icons.remove_red_eye, size: 20),
                       onPressed: () {
                         isEye = !isEye;
                         setState(() {});
                       },
                     ),
-                    border: buildFocusedBorder(),
-                    focusedBorder: buildFocusedBorder(color: context.themeData.colorScheme.primary),
-                    enabledBorder: buildFocusedBorder(),
                   ),
                   validator: (v) {
                     return !_pwdExp.hasMatch(v!) ? '密码由6到12位数字与小写字母组成' : null;
                   },
                   onChanged: (v) {
-                    // checkLoginText();
                     setState(() {});
                   },
                   onEditingComplete: () {
                     DLog.d("onEditingComplete");
-                  }, //'完成'回调
+                  },
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: NSectionBox(
-                  title: "buildUnit",
-                  child: buildUnit(),
-                ),
+              NSectionBox(
+                title: "buildUnit",
+                child: buildUnit(),
               ),
             ],
           ),
@@ -409,17 +352,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
     );
   }
 
-  void onChanged(val) {
-    final index = IntExt.random(min: 1000, max: 9999);
-    DLog.d("onChanged: $val, $index");
-  }
-
-  onPressed() {
-    throttle(() => debugPrint("${DateTime.now()}: onPressed"));
-  }
-
   void onSheetTips() {
-    // tips = kuanRong.split("\n");
     GetBottomSheet.showCustom(
       hideDragIndicator: false,
       addUnconstrainedBox: false,
@@ -430,77 +363,52 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
             top: 12,
             bottom: max(12, MediaQuery.of(context).padding.bottom) - 8,
           ),
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxHeight: 600,
             minHeight: 300,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  top: 12,
-                  left: 15,
-                  right: 15,
-                  bottom: 8,
-                ),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  // border: Border.all(color: Colors.blue),
-                ),
-                child: const NText(
+              const Padding(
+                padding: EdgeInsets.only(top: 12, left: 15, right: 15, bottom: 8),
+                child: NText(
                   "焦点问题",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.font,
                   ),
                 ),
               ),
               Flexible(
                 child: Scrollbar(
                   child: SingleChildScrollView(
-                    child: Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ...tips.map((e) {
-                            final i = tips.indexOf(e);
-                            final question = "${i + 1}.${e.split("?").firstOrNull ?? "-"}";
-                            final answer = e.split("?").lastOrNull ?? "-";
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...tips.map((e) {
+                          final i = tips.indexOf(e);
+                          final question = "${i + 1}.${e.split("?").firstOrNull ?? "-"}";
+                          final answer = e.split("?").lastOrNull ?? "-";
 
-                            return Container(
-                              padding: EdgeInsets.only(
-                                left: 15,
-                                right: 15,
-                              ),
-                              child: ListTile(
-                                dense: true,
-                                title: NText(question),
-                                subtitle: NText(answer),
-                              ),
-                            );
-                          }),
-                        ],
-                      ),
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: ListTile(
+                              dense: true,
+                              title: NText(question),
+                              subtitle: NText(answer),
+                            ),
+                          );
+                        }),
+                      ],
                     ),
                   ),
                 ),
               ),
               NFooterButtonBar(
-                // hideCancel: !readOnly,
                 boxShadow: const [],
-                // enable: enable,
-                padding: EdgeInsets.only(
-                  top: 12,
-                  left: 15,
-                  right: 15,
-                ),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
+                padding: const EdgeInsets.only(top: 12, left: 15, right: 15),
                 onCancel: () {
                   Navigator.of(context).pop();
                 },
@@ -515,162 +423,55 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
     );
   }
 
-  Widget buildTextField({
-    TextEditingController? controller,
-    TextInputType keyboardType = TextInputType.text,
-    bool readOnly = false,
-    String? labelText,
-    Color? fillColor,
-    Color borderColor = Colors.blue,
-    double borderRadius = 4,
-    bool isCollapsed = false,
-    EdgeInsetsGeometry? contentPadding,
-    List<TextInputFormatter>? inputFormatters,
-    Widget? suffixIcon,
-    BoxConstraints? suffixIconConstraints,
-  }) {
-    final border = OutlineInputBorder(
-      borderSide: BorderSide(color: borderColor),
-      borderRadius: BorderRadius.circular(borderRadius),
-    );
-
-    return TextField(
-      controller: controller,
-      keyboardType: keyboardType,
-      readOnly: readOnly,
-      textAlignVertical: TextAlignVertical.center,
-      inputFormatters: inputFormatters,
-      decoration: InputDecoration(
-        labelText: labelText,
-        filled: true,
-        fillColor: fillColor,
-        border: border,
-        enabledBorder: border,
-        focusedBorder: border,
-        isCollapsed: isCollapsed,
-        contentPadding: contentPadding,
-        suffixIcon: suffixIcon,
-        suffixIconConstraints: suffixIconConstraints,
-      ),
-    );
-  }
-
-  /// 高度 36
-  Widget buildTextFieldUnit({
-    TextEditingController? controller,
-    TextInputType keyboardType = TextInputType.number,
-    bool readOnly = true,
-    String? labelText,
-    Color? fillColor = Colors.black12,
-    Color? fillColorReadOnly = Colors.transparent,
-    List<TextInputFormatter>? inputFormatters,
-    Widget? suffixIcon,
-    String unit = "元",
-  }) {
-    final contentPadding = EdgeInsets.symmetric(
-      horizontal: 8,
-      vertical: 6,
-    );
-    return buildTextField(
-      controller: controller,
-      keyboardType: keyboardType,
-      readOnly: readOnly,
-      // labelText: 'Weight (KG)',
-      borderColor: Colors.transparent,
-      isCollapsed: true,
-      contentPadding: contentPadding,
-      fillColor: readOnly ? fillColorReadOnly : fillColor,
-      inputFormatters: inputFormatters,
-      suffixIconConstraints: BoxConstraints().loosen(),
-      suffixIcon: suffixIcon ??
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: contentPadding.left),
-                child: Text(
-                  "| $unit",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ],
-          ),
-    );
-  }
-
   Widget buildUnit() {
     final assetFileContent = assetFileModels.firstOrNull?.content ?? "";
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          NTextfieldUnit(
-            name: "输入模式：",
-            value: "175.0",
-            unit: "kg",
-            keyboardType: const TextInputType.numberWithOptions(decimal: true), // 显示数字键盘
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')), // 允许数字和小数点
-            ],
-            showClear: true,
-            debounceMilliseconds: 500,
-            onChanged: (value) async {
-              DLog.d("体 重：$value");
-            },
-          ),
-          NTextfieldUnit(
-            name: "选择模式：",
-            value: '',
-            hitText: "请选择",
-            onTap: () {
-              DLog.d("化疗方案");
-            },
-            readOnly: true,
-            readOnlyFillColor: AppColors.white,
-            onChanged: (value) {
-              DLog.d("化疗方案：$value");
-            },
-          ),
-          NTextfieldUnit(
-            name: "只读模式：",
-            value: assetFileContent,
-            hitText: "",
-            maxLines: 9,
-            onChanged: (value) {
-              DLog.d("剂量公式：$value");
-            },
-            hideSuffix: true,
-            readOnly: true,
-          ),
-        ]
-            .map((e) => Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: e,
-                ))
-            .toList(),
-      ),
-    );
-  }
-
-  InputBorder buildFocusedBorder({
-    double radus = 4,
-    double borderWidth = 1,
-    Color? color,
-  }) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
-      borderSide: BorderSide(
-        color: color ?? AppColors.divider, //边框颜色为白色
-        width: borderWidth, //宽度为1
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        NTextfieldUnit(
+          name: "输入模式：",
+          value: "175.0",
+          unit: "kg",
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
+          showClear: true,
+          debounceMilliseconds: 500,
+          onChanged: (value) async {
+            DLog.d("体 重：$value");
+          },
+        ),
+        NTextfieldUnit(
+          name: "选择模式：",
+          value: '',
+          hitText: "请选择",
+          onTap: () {
+            DLog.d("化疗方案");
+          },
+          readOnly: true,
+          onChanged: (value) {
+            DLog.d("化疗方案：$value");
+          },
+        ),
+        NTextfieldUnit(
+          name: "只读模式：",
+          value: assetFileContent,
+          hitText: "",
+          maxLines: 9,
+          onChanged: (value) {
+            DLog.d("剂量公式：$value");
+          },
+          hideSuffix: true,
+          readOnly: true,
+        ),
+      ]
+          .map((e) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: e,
+              ))
+          .toList(),
     );
   }
 }

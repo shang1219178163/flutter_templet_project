@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// 订单数量/金额等修改
+/// 订单数量/金额等修改（颜色默认跟随 Theme ColorScheme）
 class NOrderNumUnit extends StatefulWidget {
   NOrderNumUnit({
     super.key,
@@ -17,9 +17,9 @@ class NOrderNumUnit extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.readOnly = false,
     this.labelText,
-    this.fillColor = Colors.black12,
-    this.fillColorReadOnly = Colors.transparent,
-    this.borderColor = Colors.transparent,
+    this.fillColor,
+    this.fillColorReadOnly,
+    this.borderColor,
     this.borderRadius = 4,
     this.inputFormatters,
     this.suffixIcon,
@@ -27,40 +27,23 @@ class NOrderNumUnit extends StatefulWidget {
     this.unit = "元",
   });
 
-  /// 默认值
   final String value;
-
-  /// 键盘样式
   final TextInputType keyboardType;
-
-  /// 是否可编辑
   final bool readOnly;
-
-  /// 顶部提示词
   final String? labelText;
 
-  /// 填充背景
+  /// 可编辑填充；null → colorScheme.surfaceContainer
   final Color? fillColor;
 
-  /// 填充背景(不可编辑)
+  /// 只读填充；null → colorScheme.surfaceContainerLow
   final Color? fillColorReadOnly;
 
-  /// 边框色
-  final Color borderColor;
-
-  /// 圆角
+  /// 边框色；null → transparent
+  final Color? borderColor;
   final double borderRadius;
-
-  /// 规则
   final List<TextInputFormatter>? inputFormatters;
-
-  ///
   final Widget? suffixIcon;
-
-  ///
   final BoxConstraints? suffixIconConstraints;
-
-  /// 默认元
   final String unit;
 
   @override
@@ -72,15 +55,19 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final borderColor = widget.borderColor ?? Colors.transparent;
     final border = OutlineInputBorder(
-      borderSide: BorderSide(color: widget.borderColor),
+      borderSide: BorderSide(color: borderColor),
       borderRadius: BorderRadius.circular(widget.borderRadius),
     );
-
-    final contentPadding = EdgeInsets.symmetric(
-      horizontal: 8,
-      vertical: 6,
-    );
+    const contentPadding = EdgeInsets.symmetric(horizontal: 8, vertical: 6);
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final inputFill = dark ? cs.surfaceContainerLow : cs.surfaceContainer;
+    final card = dark ? cs.surfaceContainer : cs.surfaceContainerLow;
+    final fill = widget.readOnly
+        ? (widget.fillColorReadOnly ?? card)
+        : (widget.fillColor ?? inputFill);
 
     return TextField(
       controller: _controller,
@@ -91,26 +78,23 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
       decoration: InputDecoration(
         labelText: widget.labelText,
         filled: true,
-        fillColor: widget.readOnly ? widget.fillColorReadOnly : widget.fillColor,
+        fillColor: fill,
         border: border,
         enabledBorder: border,
         focusedBorder: border,
         isCollapsed: true,
         contentPadding: contentPadding,
-        suffixIconConstraints: BoxConstraints().loosen(),
+        suffixIconConstraints: const BoxConstraints().loosen(),
         suffixIcon: widget.suffixIcon ??
             Row(
               mainAxisSize: MainAxisSize.min,
-              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding: EdgeInsets.only(right: contentPadding.left),
                   child: Text(
                     "| ${widget.unit}",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black54,
-                    ),
+                    style: TextStyle(color: cs.onSurfaceVariant),
                   ),
                 ),
               ],

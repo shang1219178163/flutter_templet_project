@@ -88,7 +88,7 @@ class _MinePageState extends State<MinePage> with BottomSheetImageMixin {
         children: <Widget>[
           buildTop(),
           buildMid(cardColor: cardColor),
-          SizedBox(height: 15),
+          SizedBox(height: 8),
           buildBom(cardColor: cardColor),
         ],
       ),

@@ -1,136 +1,191 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/AppThemeService.dart';
 
+/// 应用色板：Light/Dark token。页面请用 [Theme.of] `colorScheme`。
+///
+/// [brightness] 由 [AppThemeService] 写入。
 class AppColors {
-  /// 是否暗黑模式
-  static bool get isDark => AppThemeService().isDark;
+  static Brightness brightness = Brightness.light;
 
-  /// 品牌主色
+  static bool get isDark => brightness == Brightness.dark;
+
+  // —— Brand ——
+
+  /// 品牌主色（seed 默认）
   static const Color primary = Colors.blueAccent;
 
-  /// 透明
+  // —— 基础 ——
+
   static const Color transparent = Colors.transparent;
-
-  /// 纯白
   static const Color white = Color(0xFFFFFFFF);
-
-  /// 纯黑
   static const Color black = Color(0xFF000000);
 
-  /// 页面底（浅色）#F6F6F6
-  static const Color backgroundLight = Color(0xFFF6F6F6);
+  // —— Surface（页面 / Scaffold）——
+  // Dark 对照 One Dark Modern colors: chrome / overlay / elevated
 
-  /// 页面底（深色）#181818
-  static const Color backgroundDark = Color(0xFF181818);
+  /// surface 浅色：页面底 #F6F6F6
+  static const Color surfaceLight = Color(0xFFF6F6F6);
 
-  /// 卡片底（浅色）纯白
-  static const Color cardLight = Color(0xFFFFFFFF);
+  /// surface 深色：chrome #21252B
+  static const Color surfaceDark = Color(0xFF21252B);
 
-  /// 卡片底（深色）#242434
-  static const Color cardDark = Color(0xFF242434);
+  /// surfaceBright 浅色：最亮表面（白卡）
+  static const Color surfaceBrightLight = Color(0xFFFFFFFF);
 
-  /// 主文字（浅色）纯黑
-  static const Color textLight = Color(0xFF000000);
+  /// surfaceBright 深色：elevated #2C313C
+  static const Color surfaceBrightDark = Color(0xFF2C313C);
 
-  /// 主文字（深色）纯白
-  static const Color textDark = Color(0xFFFFFFFF);
+  /// surfaceDim 浅色：最暗表面 #EEEEEE
+  static const Color surfaceDimLight = Color(0xFFEEEEEE);
 
-  /// 次要文字（浅色）60% 黑
-  static const Color textSecondaryLight = Color(0x99000000);
+  /// surfaceDim 深色：overlay #1D1F23
+  static const Color surfaceDimDark = Color(0xFF1D1F23);
 
-  /// 次要文字（深色）60% 白
-  static const Color textSecondaryDark = Color(0x99FFFFFF);
+  // —— Surface containers ——
+  // Light：Card→Low（白）；输入→Container
+  // Dark 单调：Lowest < Low(input) < Container(editor/Card) < High < Highest
 
-  /// 提示文字（浅色）30% 黑
-  static const Color textHintLight = Color(0x4c000000);
+  /// surfaceContainerLowest 浅色
+  static const Color surfaceContainerLowestLight = Color(0xFFFFFFFF);
 
-  /// 提示文字（深色）30% 白
-  static const Color textHintDark = Color(0x4cFFFFFF);
+  /// surfaceContainerLowest 深色：overlay #1D1F23
+  static const Color surfaceContainerLowestDark = Color(0xFF1D1F23);
 
-  /// 分割线（浅色）#E4E4E4
-  static const Color dividerLight = Color(0xFFE4E4E4);
+  /// surfaceContainerLow 浅色：Card
+  static const Color surfaceContainerLowLight = Color(0xFFFFFFFF);
 
-  /// 分割线（深色）6% 白
-  static const Color dividerDark = Color(0x0FFFFFFF);
+  /// surfaceContainerLow 深色：input #252931（低于 Container，输入井）
+  static const Color surfaceContainerLowDark = Color(0xFF252931);
 
-  /// 错误/危险
-  static const Color error = Color(0xFFD32F2F);
+  /// surfaceContainer 浅色：默认容器 / 输入底 #F5F5F5
+  static const Color surfaceContainerLight = Color(0xFFF5F5F5);
 
-  /// 反色, isDark ? Colors.white : Colors.black;
+  /// surfaceContainer 深色：editor #282C34（Card）
+  static const Color surfaceContainerDark = Color(0xFF282C34);
+
+  /// surfaceContainerHigh 浅色：Dialog / Chip #F0F0F0
+  static const Color surfaceContainerHighLight = Color(0xFFF0F0F0);
+
+  /// surfaceContainerHigh 深色：elevated #2C313C（Dialog / 选中底）
+  static const Color surfaceContainerHighDark = Color(0xFF2C313C);
+
+  /// surfaceContainerHighest 浅色 #EEEEEE
+  static const Color surfaceContainerHighestLight = Color(0xFFEEEEEE);
+
+  /// surfaceContainerHighest 深色：selectionInactive #323842
+  static const Color surfaceContainerHighestDark = Color(0xFF323842);
+
+  // —— On surface ——
+  // Dark：textBright / text / inactiveForeground / infoForeground
+
+  /// onSurface 浅色：主文字 #1A1A1A
+  static const Color onSurfaceLight = Color(0xFF1A1A1A);
+
+  /// onSurface 深色：textBright #D7DAE0
+  static const Color onSurfaceDark = Color(0xFFD7DAE0);
+
+  /// 正文（略软于 onSurface）
+  static const Color onSurfaceBodyLight = Color(0xFF313135);
+
+  /// 正文深色：text #ABB2BF
+  static const Color onSurfaceBodyDark = Color(0xFFABB2BF);
+
+  /// onSurfaceVariant 浅色：次要 #737373
+  static const Color onSurfaceVariantLight = Color(0xFF737373);
+
+  /// onSurfaceVariant 深色：inactiveForeground #8B919D
+  static const Color onSurfaceVariantDark = Color(0xFF8B919D);
+
+  /// info / Placeholder 浅色（略淡于 onSurfaceVariant）
+  static const Color infoLight = Color(0xFF8C8C8C);
+
+  /// info / Placeholder 深色：infoForeground #6F7784
+  static const Color infoDark = Color(0xFF6F7784);
+
+  // —— Outline ——
+  // Dark：Component.borderColor / separatorColor
+
+  /// outline 浅色：边框（与 divider 拉开）
+  static const Color outlineLight = Color(0xFFD0D0D0);
+
+  /// outline 深色：border #3E4452
+  static const Color outlineDark = Color(0xFF3E4452);
+
+  /// outlineVariant 浅色：分割线 #E4E4E4
+  static const Color outlineVariantLight = Color(0xFFE4E4E4);
+
+  /// outlineVariant 深色：separator #2E323A
+  static const Color outlineVariantDark = Color(0xFF2E323A);
+
+  // —— Brand / Focus（One Dark UI）——
+
+  /// 暗色默认强调（Button.default）#3A72D6
+  static const Color accentDark = Color(0xFF3A72D6);
+
+  /// 暗色焦点环 / Tab 下划线 #528BFF
+  static const Color focusDark = Color(0xFF528BFF);
+
+  // —— Error ——
+
+  /// error 浅色
+  static const Color errorLight = Color(0xFFD32F2F);
+
+  /// error 深色：Actions.Red #E06C75
+  static const Color errorDark = Color(0xFFE06C75);
+
+  // —— 当前模式 getters（对齐 ColorScheme 角色）——
+
+  static Color get surface => isDark ? surfaceDark : surfaceLight;
+  static Color get surfaceBright => isDark ? surfaceBrightDark : surfaceBrightLight;
+  static Color get surfaceDim => isDark ? surfaceDimDark : surfaceDimLight;
+
+  static Color get surfaceContainerLowest => isDark ? surfaceContainerLowestDark : surfaceContainerLowestLight;
+  static Color get surfaceContainerLow => isDark ? surfaceContainerLowDark : surfaceContainerLowLight;
+  static Color get surfaceContainer => isDark ? surfaceContainerDark : surfaceContainerLight;
+  static Color get surfaceContainerHigh => isDark ? surfaceContainerHighDark : surfaceContainerHighLight;
+  static Color get surfaceContainerHighest => isDark ? surfaceContainerHighestDark : surfaceContainerHighestLight;
+
+  static Color get onSurface => isDark ? onSurfaceDark : onSurfaceLight;
+  static Color get onSurfaceBody => isDark ? onSurfaceBodyDark : onSurfaceBodyLight;
+  static Color get onSurfaceVariant => isDark ? onSurfaceVariantDark : onSurfaceVariantLight;
+
+  /// Placeholder / infoForeground
+  static Color get info => isDark ? infoDark : infoLight;
+
+  static Color get outline => isDark ? outlineDark : outlineLight;
+  static Color get outlineVariant => isDark ? outlineVariantDark : outlineVariantLight;
+
+  static Color get error => isDark ? errorDark : errorLight;
+
   static Color get inverseColor => isDark ? Colors.white : Colors.black;
 
-  /// 当前页面底色
-  static Color get background => isDark ? backgroundDark : backgroundLight;
+  // —— 仍在用的旧名 ——
+  /// 浅色白卡 / 暗色 editor
+  static Color get card => isDark ? surfaceContainer : surfaceContainerLow;
+  static Color get divider => outlineVariant;
 
-  /// 当前卡片底色
-  static Color get card => isDark ? cardDark : cardLight;
+  // —— 历史硬编码色（业务遗留）——
 
-  /// 当前主文字色
-  static Color get text => isDark ? textDark : textLight;
-
-  /// 当前次要文字色
-  static Color get textSecondary => isDark ? textSecondaryDark : textSecondaryLight;
-
-  /// 当前提示文字色
-  static Color get textHint => isDark ? textHintDark : textHintLight;
-
-  /// 当前分割线色
-  static Color get divider => isDark ? dividerDark : dividerLight;
-
-  /// 默认字体色 #1A1A1A
   static const Color font = Color(0xFF1A1A1A);
-
-  /// 字体色 #181818
   static const Color font181818 = Color(0xff181818);
-
-  /// 字体色 #BCBFC2
   static const Color fontBCBFC2 = Color(0xffBCBFC2);
-
-  /// 字体色 #333333
   static const Color font333333 = Color(0xff333333);
-
-  /// 字体色 #5D6D7E
   static const Color font5D6D7E = Color(0xff5D6D7E);
-
-  /// 字体色 #666666
   static const Color font666666 = Color(0xff666666);
-
-  /// 字体色 #737373
   static const Color font737373 = Color(0xff737373);
-
-  /// 字体色 #777777
   static const Color font777777 = Color(0xff777777);
-
-  /// 字体色 #999999
   static const Color font999999 = Color(0xff999999);
-
-  /// 字体色 #B3B3B3
   static const Color fontB3B3B3 = Color(0xffB3B3B3);
-
-  /// 字体色 #F9F9F9
   static const Color fontF9F9F9 = Color(0xffF9F9F9);
 
-  /// 默认背景 #F3F3F3
   static const Color bg = Color(0xffF3F3F3);
-
-  /// 背景 #EDEDED
   static const Color bgEDEDED = Color(0xffEDEDED);
-
-  /// 背景 #F3F3F3
   static const Color bgF3F3F3 = Color(0xffF3F3F3);
-
-  /// 背景 #F7F7F7
   static const Color bgF7F7F7 = Color(0xFFF7F7F7);
-
-  /// 背景 #F9F9F9
   static const Color bgF9F9F9 = Color(0xffF9F9F9);
-
-  /// 背景纯黑
   static const Color bg000000 = Color(0xFF000000);
 
-  /// 阴影（3% 黑）
   static const Color shadow = Color(0x08000000);
 
   /// 效果展示页色点，null 表示主题默认
@@ -150,17 +205,4 @@ class AppColors {
     Colors.pink,
     Colors.deepPurple,
   ];
-
-// static const Color primary = Color(0xFF1565C0);
-// static const Color primaryLight = Color(0xFF1E88E5);
-// static const Color primaryDark = Color(0xFF0D47A1);
-// static const Color secondary = Color(0xFFFF6F00);
-// static const Color surface = Color(0xFFF5F5F5);
-// static const Color background = Color(0xFFFFFFFF);
-// static const Color textPrimary = Color(0xFF212121);
-// static const Color textSecondary = Color(0xFF757575);
-// static const Color textHint = Color(0xFFBDBDBD);
-// static const Color error = Color(0xFFD32F2F);
-// static const Color success = Color(0xFF2E7D32);
-// static const Color divider = Color(0xFFE4E4E4);
 }

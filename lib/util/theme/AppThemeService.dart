@@ -6,12 +6,14 @@
 //  Copyright © 7/14/21 shang. All rights reserved.
 //
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/button/AppButtonTheme.dart';
 import 'package:flutter_templet_project/basicWidget/n_seed_color_box.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
+import 'package:flutter_templet_project/extension/src/theme_mode_ext.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
 import 'package:flutter_templet_project/util/theme/NAppTheme.dart';
 import 'package:flutter_templet_project/util/theme/NDialogTheme.dart';
@@ -27,6 +29,22 @@ class AppThemeService {
 
   VoidCallback? onThemeChanged;
   static const _legacyThemeModeKey = "themeModel";
+  static const _noElevation = WidgetStatePropertyAll<double>(0);
+  static const _seedColors = <Color>[
+    AppColors.primary,
+    Colors.blue,
+    Colors.red,
+    Colors.green,
+    Colors.orange,
+    Colors.purple,
+    Colors.pink,
+    Colors.teal,
+    Colors.indigo,
+    Colors.cyan,
+    Colors.deepPurple,
+    Colors.lime,
+    Colors.amber,
+  ];
 
   Color seedColor = AppColors.primary;
   Brightness brightness = Brightness.light;
@@ -39,55 +57,48 @@ class AppThemeService {
     if (_themeMode == value) {
       return;
     }
-    _themeMode = value;
-    brightness = _brightnessOf(_themeMode);
-    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+    _bind(value);
     _syncToGet();
     Get.changeThemeMode(_themeMode);
     _save();
   }
 
   SystemUiOverlayStyle get overlayStyle {
-    // light 预设 = 浅色图标（深色/品牌色顶栏）；dark 预设 = 深色图标（浅色顶栏）
     return (isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark).copyWith(
       statusBarColor: Colors.transparent,
-      systemNavigationBarColor: isDark ? AppColors.backgroundDark : AppColors.white,
+      systemNavigationBarColor: isDark ? AppColors.surfaceDark : AppColors.white,
       systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     );
+  }
+
+  void _bind(ThemeMode mode) {
+    _themeMode = mode;
+    brightness = mode.brightness;
+    AppColors.brightness = brightness;
+    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
   }
 
   void _init() {
     final cacheColorStr = CacheService().getString(CacheKey.seedColor.name);
     if (cacheColorStr != null) {
-      seedColor = ColorExt.fromHex(cacheColorStr) ?? Colors.blue;
+      seedColor = ColorExt.fromHex(cacheColorStr) ?? AppColors.primary;
     }
-    _themeMode = _loadThemeMode();
-    brightness = _brightnessOf(_themeMode);
-    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+    _bind(_loadThemeMode());
     DLog.d([this, cacheColorStr, seedColor, brightness, themeMode].asMap());
-  }
-
-  Brightness _brightnessOf(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.light:
-        return Brightness.light;
-      case ThemeMode.dark:
-        return Brightness.dark;
-      case ThemeMode.system:
-        return WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    }
   }
 
   ThemeMode _loadThemeMode() {
     final modeName = CacheService().getString(CacheKey.themeMode.name);
-    final target = ThemeMode.values.where((e) => e.name == modeName).firstOrNull;
-    if (modeName != null && target != null) {
-      return target;
+    final byName = ThemeMode.values.where((e) => e.name == modeName).firstOrNull;
+    if (modeName != null && byName != null) {
+      return byName;
     }
+
     final oldIndex = CacheService().getInt(_legacyThemeModeKey);
     if (oldIndex != null && oldIndex >= 0 && oldIndex < ThemeMode.values.length) {
       return ThemeMode.values[oldIndex];
     }
+
     final cacheBrightness = CacheService().getString(CacheKey.brightness.name);
     if (cacheBrightness != null) {
       return cacheBrightness.contains("light") ? ThemeMode.light : ThemeMode.dark;
@@ -120,451 +131,344 @@ class AppThemeService {
   }
 
   ThemeData get lightTheme => buildTheme(Brightness.light);
-
   ThemeData get darkTheme => buildTheme(Brightness.dark);
 
-  /// Material 3 配色源：组件优先读 [ColorScheme]，再覆盖组件 Theme。
-  ///
-  /// - 以 [ColorScheme.fromSeed] 生成完整 M3 色板
-  /// - 强制品牌 [seedColor] 为 primary/secondary，避免 fromSeed 偏紫/暗色提亮
-  /// - [surfaceTint] 置透明，避免 Card/AppBar 等叠加色调
-  ColorScheme buildColorScheme(Brightness brightness) {
-    // 基于种子颜色和亮度生成配色方案
-    final baseScheme = ColorScheme.fromSeed(
-      seedColor: seedColor,
-      brightness: brightness,
-    );
-    // 暗色 surface 用中性灰 0xFF242424（R=G=B），避免旧值 0xFF242434 发紫。
-    final isDark = brightness == Brightness.dark;
-    final surfaceBase = isDark ? AppColors.cardDark : AppColors.cardLight;
-    final dividerColor = isDark ? AppColors.dividerDark : AppColors.dividerLight;
-    final primaryContainer = Color.alphaBlend(
-      seedColor.withValues(alpha: isDark ? 0.24 : 0.12),
-      surfaceBase,
-    );
-    if (isDark) {
-      // surface* 全部中性化：M3 BottomNavigationBar 默认用 surfaceContainer，fromSeed 蓝色会偏紫
-      return baseScheme.copyWith(
-        primary: seedColor,
-        onPrimary: Colors.white,
-        primaryContainer: primaryContainer,
-        onPrimaryContainer: Colors.white,
-        secondary: seedColor,
-        onSecondary: Colors.white,
-        secondaryContainer: seedColor.withValues(alpha: 0.2),
-        onSecondaryContainer: seedColor,
-        tertiary: seedColor,
-        onTertiary: Colors.white,
-        error: Colors.red,
-        onError: Colors.white,
-        inversePrimary: seedColor,
-        surface: surfaceBase,
-        onSurface: Colors.white,
-        onSurfaceVariant: dividerColor,
-        surfaceBright: const Color(0xFF2C2C2C),
-        surfaceDim: const Color(0xFF1A1A1A),
-        surfaceContainerLowest: const Color(0xFF1A1A1A),
-        surfaceContainerLow: surfaceBase,
-        surfaceContainer: surfaceBase,
-        surfaceContainerHigh: const Color(0xFF2C2C2C),
-        surfaceContainerHighest: const Color(0xFF333333),
-        outline: Colors.white.withValues(alpha: 0.12),
-        outlineVariant: Colors.white.withValues(alpha: 0.08),
-        surfaceTint: Colors.transparent,
-      );
+  /// 构建 light/dark Theme 时临时切换 [AppColors.brightness]，保证 getter 与目标模式一致。
+  T runWithBrightness<T>(Brightness target, T Function() fn) {
+    final prev = AppColors.brightness;
+    AppColors.brightness = target;
+    try {
+      return fn();
+    } finally {
+      AppColors.brightness = prev;
     }
+  }
 
-    return baseScheme.copyWith(
+  ColorScheme buildColorScheme([Brightness? target]) {
+    final b = target ?? brightness;
+    return runWithBrightness(b, () => _buildColorScheme(b));
+  }
+
+  ColorScheme _buildColorScheme(Brightness brightness) {
+    final dark = brightness == Brightness.dark;
+    final base = ColorScheme.fromSeed(seedColor: seedColor, brightness: brightness);
+    final card = dark ? AppColors.surfaceContainer : AppColors.surfaceContainerLow;
+    final onPrimary = seedColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+    final errorContainer = Color.alphaBlend(
+      AppColors.error.withValues(alpha: dark ? 0.28 : 0.12),
+      card,
+    );
+
+    return base.copyWith(
       primary: seedColor,
-      onPrimary: Colors.white,
-      primaryContainer: primaryContainer,
-      onPrimaryContainer: seedColor,
-      secondary: seedColor,
-      onSecondary: Colors.white,
-      secondaryContainer: seedColor.withValues(alpha: 0.2),
-      onSecondaryContainer: seedColor,
-      tertiary: seedColor,
-      onTertiary: Colors.white,
-      error: Colors.red,
+      onPrimary: onPrimary,
+      error: AppColors.error,
       onError: Colors.white,
+      errorContainer: errorContainer,
+      onErrorContainer: AppColors.onSurface,
       inversePrimary: seedColor,
-      surface: surfaceBase,
-      onSurface: Colors.black,
-      onSurfaceVariant: dividerColor,
-      surfaceBright: surfaceBase,
-      surfaceDim: const Color(0xFFF6F6F6),
-      surfaceContainerLowest: surfaceBase,
-      surfaceContainerLow: surfaceBase,
-      surfaceContainer: surfaceBase,
-      surfaceContainerHigh: const Color(0xFFF6F6F6),
-      surfaceContainerHighest: const Color(0xFFF7F7F7),
-      outline: const Color(0xFFE4E4E4),
-      outlineVariant: const Color(0xFFE4E4E4),
+      inverseSurface: AppColors.onSurface,
+      onInverseSurface: AppColors.surface,
+      surface: AppColors.surface,
+      surfaceBright: AppColors.surfaceBright,
+      surfaceDim: AppColors.surfaceDim,
+      surfaceContainerLowest: AppColors.surfaceContainerLowest,
+      surfaceContainerLow: AppColors.surfaceContainerLow,
+      surfaceContainer: AppColors.surfaceContainer,
+      surfaceContainerHigh: AppColors.surfaceContainerHigh,
+      surfaceContainerHighest: AppColors.surfaceContainerHighest,
+      onSurface: AppColors.onSurface,
+      onSurfaceVariant: AppColors.onSurfaceVariant,
+      outline: AppColors.outline,
+      outlineVariant: AppColors.outlineVariant,
       surfaceTint: Colors.transparent,
+      scrim: Colors.black.withValues(alpha: dark ? 0.6 : 0.32),
+      shadow: Colors.black,
     );
   }
 
-  /// 基于 [buildColorScheme] 构建主题；组件 Theme 仅做结构/交互次级覆盖。
-  ThemeData buildTheme(Brightness brightness) {
-    final colorScheme = buildColorScheme(brightness);
-    final isLight = brightness == Brightness.light;
-    final onPrimary = colorScheme.onPrimary;
+  ThemeData buildTheme(Brightness target) => runWithBrightness(target, () => _buildTheme(target));
+
+  CupertinoTextThemeData _cupertinoTextTheme(ColorScheme cs) {
+    const t = CupertinoTextThemeData();
+    final onSurface = cs.onSurface;
+    return CupertinoTextThemeData(
+      primaryColor: cs.primary,
+      textStyle: t.textStyle.copyWith(color: onSurface),
+      tabLabelTextStyle: t.tabLabelTextStyle.copyWith(color: cs.onSurfaceVariant),
+      navTitleTextStyle: t.navTitleTextStyle.copyWith(color: onSurface),
+      navLargeTitleTextStyle: t.navLargeTitleTextStyle.copyWith(color: onSurface),
+      pickerTextStyle: t.pickerTextStyle.copyWith(color: onSurface),
+      dateTimePickerTextStyle: t.dateTimePickerTextStyle.copyWith(color: onSurface),
+    );
+  }
+
+  OutlineInputBorder _inputBorder(Color color) => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(width: 1, color: color),
+      );
+
+  ButtonStyle _flatButton({
+    Color? foreground,
+    Color? background,
+    BorderSide? side,
+  }) {
+    return ButtonStyle(
+      elevation: _noElevation,
+      splashFactory: NoSplash.splashFactory,
+      foregroundColor: foreground == null ? null : WidgetStatePropertyAll(foreground),
+      backgroundColor: background == null ? null : WidgetStatePropertyAll(background),
+      side: side == null ? null : WidgetStatePropertyAll(side),
+    );
+  }
+
+  ThemeData _buildTheme(Brightness brightness) {
+    final cs = _buildColorScheme(brightness);
+    final dark = brightness == Brightness.dark;
+    final onPrimary = cs.onPrimary;
+    final card = dark ? cs.surfaceContainer : cs.surfaceContainerLow;
+    final inputFill = dark ? cs.surfaceContainerLow : cs.surfaceContainer;
+    final hint = TextStyle(fontSize: 14, color: AppColors.info);
 
     return ThemeData(
-      useMaterial3: true,
-      brightness: brightness,
-      colorScheme: colorScheme,
+      colorScheme: cs,
+      cupertinoOverrideTheme: CupertinoThemeData(
+        brightness: brightness,
+        primaryColor: cs.primary,
+        primaryContrastingColor: onPrimary,
+        scaffoldBackgroundColor: cs.surface,
+        barBackgroundColor: card,
+        applyThemeToAll: true,
+        textTheme: _cupertinoTextTheme(cs),
+      ),
       platform: TargetPlatform.iOS,
       splashFactory: NoSplash.splashFactory,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      scaffoldBackgroundColor: isLight ? AppColors.backgroundLight : AppColors.backgroundDark,
-      cardColor: isLight ? AppColors.cardLight : AppColors.cardDark,
-      // —— 组件 Theme（次级）：颜色尽量取自 colorScheme ——
-      indicatorColor: onPrimary,
-      dividerColor: colorScheme.outlineVariant,
-      dividerTheme: DividerThemeData(
-        color: colorScheme.outlineVariant,
-        space: 0.5,
-        thickness: 1,
-      ),
+      cardColor: card,
+      hintColor: AppColors.info,
+      dividerTheme: DividerThemeData(color: cs.outlineVariant, space: 0.5, thickness: 1),
       tabBarTheme: TabBarThemeData(
-        indicatorColor: onPrimary,
-        labelColor: onPrimary,
-        unselectedLabelColor: onPrimary.withValues(alpha: 0.7),
+        indicatorColor: cs.primary,
+        labelColor: cs.primary,
+        unselectedLabelColor: cs.onSurfaceVariant,
+        dividerColor: Colors.transparent,
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: colorScheme.primary,
+        backgroundColor: cs.primary,
         foregroundColor: onPrimary,
         surfaceTintColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
-          statusBarColor: Colors.transparent,
-        ),
-        titleTextStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-          color: onPrimary,
-        ),
-        toolbarTextStyle: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: onPrimary,
-        ),
-        iconTheme: IconThemeData(color: onPrimary, size: 24.0),
-        actionsIconTheme: IconThemeData(
-          color: onPrimary,
-          size: 24.0,
-          opacity: 0.8,
-        ),
+        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent),
+        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: onPrimary),
+        toolbarTextStyle: TextStyle(fontSize: 16, color: onPrimary),
+        iconTheme: IconThemeData(color: onPrimary, size: 24),
+        actionsIconTheme: IconThemeData(color: onPrimary, size: 24, opacity: 0.8),
       ),
-      badgeTheme: BadgeThemeData(
-        offset: const Offset(-1, -4),
+      badgeTheme: const BadgeThemeData(
+        offset: Offset(-1, -4),
         largeSize: 20,
         smallSize: 20,
-        backgroundColor: colorScheme.error,
-        textColor: colorScheme.onError,
-        textStyle: TextStyle(
-          fontWeight: isLight ? FontWeight.w500 : FontWeight.w600,
-          color: colorScheme.onError,
-          fontSize: 11,
-        ),
+        textStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 11),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
-        color: colorScheme.surface,
-        surfaceTintColor: Colors.transparent,
-        height: isLight ? null : 60,
-      ),
+      bottomAppBarTheme: const BottomAppBarTheme(surfaceTintColor: Colors.transparent),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: card,
         elevation: 0,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: colorScheme.primary,
-        unselectedItemColor: colorScheme.onSurfaceVariant,
+        selectedItemColor: cs.primary,
+        unselectedItemColor: cs.onSurfaceVariant,
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: card,
         surfaceTintColor: Colors.transparent,
         shadowColor: Colors.transparent,
         elevation: 0,
-        indicatorColor: colorScheme.primaryContainer,
+        indicatorColor: cs.primaryContainer,
+        labelTextStyle: WidgetStatePropertyExt.stateValue(
+          value: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
+          selected: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: cs.primary),
+        ),
+        iconTheme: WidgetStatePropertyExt.stateValue(
+          value: IconThemeData(size: 24, color: cs.onSurfaceVariant),
+          selected: IconThemeData(size: 24, color: cs.primary),
+        ),
       ),
-      canvasColor: colorScheme.surface,
       chipTheme: ChipThemeData(
         pressElevation: 0,
         elevation: 0,
         showCheckmark: false,
         side: BorderSide.none,
-        backgroundColor: colorScheme.surfaceContainerHighest,
-        selectedColor: colorScheme.secondaryContainer,
-        labelStyle: TextStyle(color: colorScheme.onSurface),
+        backgroundColor: cs.surfaceContainerHigh,
+        selectedColor: cs.secondaryContainer,
+        labelStyle: TextStyle(color: cs.onSurface),
+        secondaryLabelStyle: TextStyle(color: cs.onSurfaceVariant),
+        deleteIconColor: cs.onSurfaceVariant,
       ),
-      // 按钮色交给 colorScheme；仅关闭水波纹与 elevation
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-        ).merge(buildButtonStyle()),
-      ),
+      textButtonTheme: TextButtonThemeData(style: _flatButton(foreground: cs.primary)),
       outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-          foregroundColor: colorScheme.primary,
-          side: BorderSide(color: colorScheme.primary),
-        ).merge(buildButtonStyle()),
+        style: _flatButton(foreground: cs.primary, side: BorderSide(color: cs.primary)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-        ).merge(buildButtonStyle()),
+        style: _flatButton(foreground: onPrimary, background: cs.primary),
       ),
       filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-        ).merge(buildButtonStyle()),
+        style: _flatButton(foreground: onPrimary, background: cs.primary),
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         elevation: 0,
         focusElevation: 0,
         hoverElevation: 0,
         highlightElevation: 0,
-        shape: const CircleBorder(),
+        shape: CircleBorder(),
       ),
       textSelectionTheme: TextSelectionThemeData(
-        cursorColor: colorScheme.primary,
-        selectionColor: colorScheme.primary.withValues(alpha: 0.3),
-        selectionHandleColor: colorScheme.primary,
+        selectionColor: cs.primary.withValues(alpha: dark ? 0.35 : 0.3),
       ),
       dialogTheme: DialogTheme(
-        backgroundColor: colorScheme.surface,
+        backgroundColor: cs.surfaceContainerHigh,
         surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        alignment: Alignment.center,
-        titleTextStyle: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: isLight ? const Color(0xFF313135) : colorScheme.onSurface,
-        ),
-        contentTextStyle: TextStyle(
-          fontSize: 14,
-          color: isLight ? const Color(0xFF313135) : colorScheme.onSurface,
-        ),
-        iconColor: isLight ? const Color(0xFF313135) : colorScheme.onSurface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        titleTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: cs.onSurface),
+        contentTextStyle: TextStyle(fontSize: 14, color: cs.onSurfaceVariant),
+        iconColor: cs.onSurface,
         actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: isLight ? colorScheme.surface : const Color(0xFF212121),
+        backgroundColor: cs.surfaceContainerHigh,
+        modalBackgroundColor: cs.surfaceContainerHigh,
         surfaceTintColor: Colors.transparent,
         elevation: 8,
-        modalBackgroundColor: isLight ? colorScheme.surface : const Color(0xFF212121),
         modalElevation: 12,
-        shadowColor: Colors.black.withValues(alpha: isLight ? 0.2 : 0.7),
+        shadowColor: Colors.black.withValues(alpha: dark ? 0.7 : 0.2),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         ),
-        showDragHandle: false,
-        dragHandleColor: colorScheme.primary,
+        dragHandleColor: cs.onSurfaceVariant,
         dragHandleSize: const Size(40, 6),
-        clipBehavior: Clip.none,
-        constraints: const BoxConstraints(
-          minHeight: 100,
-          maxHeight: 400,
-          minWidth: double.infinity,
-        ),
       ),
-      sliderTheme: SliderThemeData(
-        activeTrackColor: colorScheme.primary,
-        thumbColor: colorScheme.primary,
-        overlayColor: Colors.grey,
-        overlayShape: SliderComponentShape.noOverlay,
-      ),
+      sliderTheme: SliderThemeData(overlayShape: SliderComponentShape.noOverlay),
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return colorScheme.onPrimary;
-          }
-          return colorScheme.outline;
-        }),
-        trackColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return colorScheme.primary;
-          }
-          return colorScheme.surfaceContainerHighest;
-        }),
-        trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
+        thumbColor: WidgetStatePropertyExt.stateValue(value: cs.onSurfaceVariant, selected: onPrimary),
+        trackColor: WidgetStatePropertyExt.stateValue(value: cs.surfaceContainerHigh, selected: cs.primary),
+        trackOutlineColor: WidgetStatePropertyAll(cs.outlineVariant),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colorScheme.surfaceContainerHighest,
-        focusColor: colorScheme.surfaceContainerHighest,
-        hoverColor: colorScheme.surfaceContainerHighest,
-        hintStyle: TextStyle(
-          fontSize: 14,
-          color: colorScheme.onSurface.withValues(alpha: 0.4),
-          fontWeight: FontWeight.w400,
-        ),
-        labelStyle: TextStyle(
-          fontSize: 14,
-          color: colorScheme.error.withValues(alpha: 0.9),
-          fontWeight: FontWeight.w400,
-        ),
-        prefixIconColor: const Color(0xFF7C7C85),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            width: 1,
-            color: colorScheme.outline.withValues(alpha: 0.1),
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            width: 1,
-            color: colorScheme.outline.withValues(alpha: 0.1),
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            width: 1,
-            color: colorScheme.primary.withValues(alpha: 0.4),
-          ),
-        ),
+        fillColor: inputFill,
+        focusColor: inputFill,
+        hoverColor: inputFill,
+        hintStyle: hint,
+        labelStyle: TextStyle(fontSize: 14, color: cs.onSurfaceVariant),
+        floatingLabelStyle: TextStyle(fontSize: 14, color: cs.primary),
+        prefixIconColor: AppColors.info,
+        suffixIconColor: AppColors.info,
+        border: _inputBorder(cs.outline),
+        enabledBorder: _inputBorder(cs.outline),
+        focusedBorder: _inputBorder(cs.primary),
+        disabledBorder: _inputBorder(cs.outlineVariant.withValues(alpha: 0.5)),
       ),
+      listTileTheme: ListTileThemeData(
+        iconColor: cs.onSurfaceVariant,
+        textColor: cs.onSurface,
+        subtitleTextStyle: TextStyle(fontSize: 14, color: cs.onSurfaceVariant),
+      ),
+      iconTheme: IconThemeData(color: cs.onSurfaceVariant),
+      primaryIconTheme: IconThemeData(color: onPrimary),
       extensions: [
-        if (isLight) ...?appThemeDataExtensions(),
+        ..._extensions(),
         AppButtonTheme(
-          bgColor: Colors.green,
-          bgColorDisabled: isLight ? Colors.black.withValues(alpha: 0.1) : const Color(0xFF1F1F1F),
-          fgColor: isLight ? Colors.white : const Color(0xFF0a3723),
-          fgColorDisabled: isLight ? Colors.grey : const Color(0xFF6c6c6c),
+          bgColor: cs.primary,
+          bgColorDisabled: cs.surfaceContainerHighest,
+          fgColor: onPrimary,
+          fgColorDisabled: cs.onSurfaceVariant,
+          outlinedColor: cs.primary,
+          outlinedColorDisabled: cs.onSurfaceVariant,
         ),
       ],
     );
   }
 
-  /// 初始化配置
-  Iterable<ThemeExtension<dynamic>>? appThemeDataExtensions() {
-    final appTheme = NAppTheme(
-      primary: const Color(0xFF00B451),
-      primary2: const Color(0xFF00B451).withValues(alpha: 0.8),
-      bgColor: const Color(0xFFF3F3F3),
-      fontColor: const Color(0xFF1A1A1A),
-      titleStyle: const TextStyle(
-        color: Color(0xFF1A1A1A),
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        decoration: TextDecoration.none,
-      ),
-      textStyle: const TextStyle(
-        color: Color(0xFF1A1A1A),
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        decoration: TextDecoration.none,
-      ),
-      cancelColor: const Color(0xFFE65F55),
-      lineColor: const Color(0xffE4E4E4),
-      borderColor: const Color(0xFFE5E5E5),
-      disabledColor: const Color(0xffB3B3B3),
-    );
+  List<ThemeExtension<dynamic>> _extensions() {
     return [
-      appTheme,
+      NAppTheme(
+        primary: seedColor,
+        primary2: seedColor.withValues(alpha: 0.8),
+        bgColor: AppColors.surface,
+        fontColor: AppColors.onSurface,
+        titleStyle: TextStyle(
+          color: AppColors.onSurface,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          decoration: TextDecoration.none,
+        ),
+        textStyle: TextStyle(
+          color: AppColors.onSurfaceBody,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          decoration: TextDecoration.none,
+        ),
+        cancelColor: AppColors.error,
+        lineColor: AppColors.outlineVariant,
+        borderColor: AppColors.outline,
+        disabledColor: AppColors.onSurfaceVariant,
+      ),
       NDialogTheme(
         width: 368,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         titleStyle: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w500,
-          color: appTheme.fontColor,
+          color: AppColors.onSurface,
           decoration: TextDecoration.none,
         ),
         textStyle: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
-          color: appTheme.fontColor,
+          color: AppColors.onSurfaceVariant,
           decoration: TextDecoration.none,
         ),
       ),
     ];
   }
 
-  /// 自定义行为
-  ButtonStyle buildButtonStyle() {
-    return ButtonStyle(elevation: WidgetStateProperty.resolveWith<double>((states) {
-      if (states.contains(WidgetState.pressed)) {
-        return 0; // 点击时阴影隐藏
-      }
-      return 0; // 正常时阴影隐藏
-    }));
-  }
-
-  /// 选择主题
   Future showSeedColorPicker({
     required BuildContext context,
     ValueChanged<Color>? onColorChanged,
     ValueChanged<Brightness>? onBrightnessChanged,
     bool dismiss = true,
   }) {
-    final colors = <Color>[
-      Colors.blue,
-      Colors.red,
-      Colors.green,
-      Colors.orange,
-      Colors.purple,
-      Colors.pink,
-      Colors.teal,
-      Colors.indigo,
-      Colors.cyan,
-      Colors.deepPurple,
-      Colors.lime,
-      Colors.amber,
-    ];
-    final primary = Theme.of(context).colorScheme.primary;
-    final currIndex = colors.indexOf(primary).clamp(0, colors.length - 1);
-    // DLog.d(currIndex);
+    void close() {
+      if (dismiss) {
+        Navigator.of(context).pop();
+      }
+    }
+
+    final index = _seedColors.indexWhere((c) => c == seedColor).clamp(0, _seedColors.length - 1);
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      constraints: BoxConstraints(
-        minHeight: 200,
-        maxHeight: 500,
+      constraints: const BoxConstraints(minHeight: 200, maxHeight: 500),
+      builder: (context) => SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+        child: NSeedColorBox(
+          items: _seedColors,
+          index: index,
+          brightness: brightness,
+          onColorChanged: (v) {
+            close();
+            onColorChanged?.call(v);
+            applySeedColor(v);
+          },
+          onBrightnessChanged: (v) {
+            close();
+            onBrightnessChanged?.call(v);
+            themeMode = v == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+          },
+        ),
       ),
-      builder: (context) {
-        return SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: Column(
-              children: [
-                NSeedColorBox(
-                  items: colors,
-                  index: currIndex,
-                  onColorChanged: (v) async {
-                    if (dismiss) {
-                      Navigator.of(context).pop();
-                    }
-                    onColorChanged?.call(v);
-                    applySeedColor(v);
-                  },
-                  brightness: brightness,
-                  onBrightnessChanged: (v) async {
-                    if (dismiss) {
-                      Navigator.of(context).pop();
-                    }
-                    onBrightnessChanged?.call(v);
-                    toggleTheme();
-                  },
-                ),
-                SizedBox(height: 20),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

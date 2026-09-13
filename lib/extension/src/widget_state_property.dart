@@ -1,14 +1,18 @@
 import 'package:flutter/widgets.dart';
 
 extension WidgetStatePropertyExt on WidgetStateProperty {
-  /// 可用值,不可用值
-  static WidgetStateProperty<T?>? stateValue<T>({
+  /// 按状态取值：selected > disabled > [value]
+  static WidgetStateProperty<T> stateValue<T>({
     required T value,
-    required T disabledValue,
+    T? selected,
+    T? disabled,
   }) {
     return WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.disabled)) {
-        return disabledValue;
+      if (selected != null && states.contains(WidgetState.selected)) {
+        return selected;
+      }
+      if (disabled != null && states.contains(WidgetState.disabled)) {
+        return disabled;
       }
       return value;
     });
