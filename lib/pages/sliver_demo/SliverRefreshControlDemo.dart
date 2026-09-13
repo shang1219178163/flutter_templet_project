@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/placehorlder/activity_indicator_placehorlder.dart';
-import 'package:flutter_templet_project/basicWidget/placehorlder/list_footer_no_more_placehorlder.dart';
+import 'package:flutter_templet_project/basicWidget/placehorlder/no_more_placehorlder.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/NLoadMoreControl.dart';
 import 'package:flutter_templet_project/basicWidget/refresh_control/NRefreshControl.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
@@ -115,7 +115,7 @@ class _SliverRefreshControlDemoState extends State<SliverRefreshControlDemo> {
           onLoad: onLoad,
           builder: (_, noMore, isLoading) {
             if (noMore) {
-              return const ListFooterNoMorePlacehorlder();
+              return const NoMorePlacehorlder();
             }
             return isLoading ? const ActivityIndicatorPlacehorlder() : const SizedBox.shrink();
           },
