@@ -42,7 +42,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
                     Row(
                       children: <Widget>[
                         Expanded(
-                          child: buildButton(Icon(
+                          child: buildButton(FaIcon(
                             FontAwesomeIcons.facebookF,
                             color: Color(0xFF4D70A6),
                           )),
@@ -51,7 +51,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
                           width: 60.w,
                         ),
                         Expanded(
-                          child: buildButton(Icon(
+                          child: buildButton(FaIcon(
                             FontAwesomeIcons.google,
                             color: Color(0xFF4D70A6),
                           )),

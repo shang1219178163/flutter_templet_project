@@ -27,7 +27,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
     Tuple3(
       1,
       true,
-      Icon(
+      FaIcon(
         FontAwesomeIcons.film,
         color: Color(0xFF4D70A6),
       ),
@@ -35,7 +35,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
     Tuple3(
       2,
       false,
-      Icon(
+      FaIcon(
         FontAwesomeIcons.database,
         color: Color(0xFF4D70A6),
       ),
@@ -115,7 +115,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
                     listTile(
                         "Transfer to Acidney D.",
                         "55.00 \$",
-                        Icon(
+                        FaIcon(
                           FontAwesomeIcons.rightLeft,
                           color: Color(0xFF4D70A6),
                         )),
@@ -178,7 +178,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
         Positioned(
           top: 30,
           left: 20,
-          child: Icon(
+          child: FaIcon(
             FontAwesomeIcons.apple,
             size: 40,
             color: Color(0xFF4D70A6).withValues(alpha: 0.5),
@@ -187,7 +187,7 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
         Positioned(
           bottom: 30,
           right: 20,
-          child: Icon(
+          child: FaIcon(
             FontAwesomeIcons.ccMastercard,
             size: 40,
             color: Color(0xFF4D70A6).withValues(alpha: 0.5),

@@ -179,6 +179,30 @@ class ZhCupertinoLocalizations implements CupertinoLocalizations {
   @override
   // TODO: implement clearButtonLabel
   String get clearButtonLabel => throw UnimplementedError();
+
+  @override
+  String get cancelButtonLabel => '取消';
+
+  @override
+  String get backButtonLabel => '返回';
+
+  @override
+  String get expansionTileExpandedHint => '点两下以收起';
+
+  @override
+  String get expansionTileCollapsedHint => '点两下以展开';
+
+  @override
+  String get expansionTileExpandedTapHint => '收起';
+
+  @override
+  String get expansionTileCollapsedTapHint => '展开查看更多';
+
+  @override
+  String get expandedHint => '已收起';
+
+  @override
+  String get collapsedHint => '已展开';
 }
 
 class MyLocalizationsDelegate

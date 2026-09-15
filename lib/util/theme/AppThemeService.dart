@@ -255,7 +255,7 @@ class AppThemeService {
         unselectedLabelColor: cs.onSurfaceVariant,
         dividerColor: Colors.transparent,
       ),
-      appBarTheme: AppBarTheme(
+      appBarTheme: AppBarThemeData(
         elevation: 0,
         scrolledUnderElevation: 0,
         backgroundColor: cs.primary,
@@ -273,7 +273,7 @@ class AppThemeService {
         smallSize: 20,
         textStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 11),
       ),
-      bottomAppBarTheme: const BottomAppBarTheme(surfaceTintColor: Colors.transparent),
+      bottomAppBarTheme: const BottomAppBarThemeData(surfaceTintColor: Colors.transparent),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: card,
         elevation: 0,
@@ -327,7 +327,7 @@ class AppThemeService {
       textSelectionTheme: TextSelectionThemeData(
         selectionColor: cs.primary.withValues(alpha: dark ? 0.35 : 0.3),
       ),
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: cs.surfaceContainerHigh,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -355,7 +355,7 @@ class AppThemeService {
         trackColor: WidgetStatePropertyExt.stateValue(value: cs.surfaceContainerHigh, selected: cs.primary),
         trackOutlineColor: WidgetStatePropertyAll(cs.outlineVariant),
       ),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: InputDecorationThemeData(
         filled: true,
         fillColor: inputFill,
         focusColor: inputFill,

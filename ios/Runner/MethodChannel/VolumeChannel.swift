@@ -19,8 +19,15 @@ final class VolumeChannel {
 
     private init() {}
 
+    private var resolvedWindow: UIWindow? {
+        window ?? UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }
+    }
+
     /// 注册 MethodChannel
-    func register(with messenger: FlutterBinaryMessenger, window: UIWindow?) {
+    func register(with messenger: FlutterBinaryMessenger, window: UIWindow? = nil) {
         self.window = window
         let channel = FlutterMethodChannel(name: Self.channelName, binaryMessenger: messenger)
         channel.setMethodCallHandler { [weak self] call, result in
@@ -44,7 +51,7 @@ final class VolumeChannel {
         DispatchQueue.main.async {
             if self.volumeView == nil {
                 self.volumeView = MPVolumeView(frame: CGRect(x: -1000, y: -1000, width: 0, height: 0))
-                if let window = self.window {
+                if let window = self.resolvedWindow {
                     window.addSubview(self.volumeView!)
                 }
             }

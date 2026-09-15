@@ -34,7 +34,7 @@ class NPinnedTabBarPage extends StatefulWidget {
   final List<({Tab tab, Widget child})> tabItems;
   final Color backgroudColor;
   final Color labelColor;
-  final TabBarTheme? tabBarTheme;
+  final TabBarThemeData? tabBarTheme;
 
   final TabAlignment tabAlignment;
   final bool isScrollable;
@@ -155,7 +155,7 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage> with SingleTicker
                     data: ThemeData(
                       splashColor: Colors.transparent, // 点击时的水波纹颜色设置为透明
                       highlightColor: Colors.transparent, // 点击时的背景高亮颜色设置为透明
-                      tabBarTheme: TabBarTheme(
+                      tabBarTheme: TabBarThemeData(
                         dividerColor: Colors.transparent,
                         labelColor: labelColor,
                         unselectedLabelColor: labelColor,

@@ -143,6 +143,12 @@ class AppCupertinoLocalizations extends CupertinoLocalizations {
   @override
   // TODO: implement clearButtonLabel
   String get clearButtonLabel => throw UnimplementedError();
+
+  @override
+  String get backButtonLabel => localizations.backButtonLabel;
+
+  @override
+  String get cancelButtonLabel => localizations.cancelButtonLabel;
 }
 
 class AppGlobalCupertinoLocalizationsDelegate

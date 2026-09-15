@@ -81,6 +81,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   bool get wantKeepAlive => true;
 
   @override
+  // ignore: overridden_fields
   late RequestListCallback<T> onRequest = widget.onRequest;
 
   @override
@@ -135,7 +136,10 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>>
   Widget build(BuildContext context) {
     super.build(context);
     if (items.isEmpty) {
-      return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
+      return GestureDetector(
+        onTap: onRefresh,
+        child: Center(child: widget.placeholder),
+      );
     }
 
     final itemCount = items.length + 2;

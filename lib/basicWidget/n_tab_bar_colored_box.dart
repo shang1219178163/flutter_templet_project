@@ -31,7 +31,7 @@ class NTabBarColoredBox extends StatelessWidget implements PreferredSizeWidget {
 
   final Color? labelColor;
   final Color? backgroudColor;
-  final TabBarTheme? tabBarTheme;
+  final TabBarThemeData? tabBarTheme;
 
   final PreferredSizeWidget child;
 
@@ -52,7 +52,7 @@ class NTabBarColoredBox extends StatelessWidget implements PreferredSizeWidget {
           splashColor: Colors.transparent, // 点击时的水波纹颜色设置为透明
           highlightColor: Colors.transparent, // 点击时的背景高亮颜色设置为透明
           tabBarTheme: tabBarTheme ??
-              TabBarTheme(
+              TabBarThemeData(
                 dividerColor: Colors.transparent,
                 labelColor: labelColor,
                 unselectedLabelColor: labelColor,

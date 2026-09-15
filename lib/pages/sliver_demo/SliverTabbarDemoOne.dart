@@ -205,7 +205,7 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
       child: Theme(
         data: ThemeData(
           tabBarTheme: tabBarTheme ??
-              TabBarTheme(
+              TabBarThemeData(
                 dividerColor: Colors.transparent,
                 labelColor: labelColor,
                 unselectedLabelColor: labelColor,
@@ -225,7 +225,7 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
 
   final Color? labelColor;
   final Color? backgroudColor;
-  final TabBarTheme? tabBarTheme;
+  final TabBarThemeData? tabBarTheme;
 
   final PreferredSizeWidget child;
 
