@@ -102,7 +102,7 @@ class NTextfieldUnit extends StatelessWidget {
   /// 是否仅读
   final bool readOnly;
 
-  /// 仅读背景色；null → colorScheme.surfaceContainerLow
+  /// 仅读背景色；null → colorScheme.surfaceContainer
   final Color? readOnlyFillColor;
 
   /// 仅读边框线；null → colorScheme.outlineVariant
@@ -130,10 +130,7 @@ class NTextfieldUnit extends StatelessWidget {
 
     final controllerNew = controller ?? TextEditingController(text: valueNew);
     final hasFocusVN = ValueNotifier<bool>(false);
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final inputFill = dark ? cs.surfaceContainerLow : cs.surfaceContainer;
-    final card = dark ? cs.surfaceContainer : cs.surfaceContainerLow;
-    final fill = readOnly ? (readOnlyFillColor ?? card) : inputFill;
+    final fill = readOnly ? (readOnlyFillColor ?? cs.surfaceContainer) : cs.surfaceContainerLow;
     final textFg = textColor ?? cs.onSurface;
     final hintFg = hintTextColor ?? cs.onSurfaceVariant;
     final borderFg = readOnlyBorderColor ?? cs.outlineVariant;
@@ -518,10 +515,7 @@ class _NTextFieldState extends State<_NTextField> {
           ],
       decoration: InputDecoration(
         filled: true,
-        fillColor: widget.fillColor ??
-            (Theme.of(context).brightness == Brightness.dark
-                ? cs.surfaceContainerLow
-                : cs.surfaceContainer),
+        fillColor: widget.fillColor ?? cs.surfaceContainerLow,
         focusColor: widget.focusColor,
         contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         border: widget.border ?? InputBorder.none,
