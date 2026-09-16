@@ -1203,10 +1203,10 @@ packages:
     dependency: "direct main"
     description:
       name: fluwx
-      sha256: ae870e8ac0aaf13bd4fb0833e077a6294055f528c24890efa578817e93fbe674
+      sha256: "4b526d281be8560a490bd1b945373a23ab2a12088c8fc5997ffb31cc6fb41082"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.7.7"
+    version: "6.0.2"
   font_awesome_flutter:
     dependency: "direct main"
     description:
@@ -2113,14 +2113,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.2"
-  qr_code_scanner:
-    dependency: "direct main"
-    description:
-      name: qr_code_scanner
-      sha256: f23b68d893505a424f0bd2e324ebea71ed88465d572d26bb8d2e78a4749591fd
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.1"
   qr_flutter:
     dependency: "direct main"
     description:

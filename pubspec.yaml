@@ -75,7 +75,6 @@ dependencies:
   #  flutter_hooks: ^
   #  flutter_linkify: ^
   qr_flutter: ^4.0.0
-  qr_code_scanner: ^1.0.1
   webview_flutter: ^4.7.0
   flutter_inappwebview: ^6.0.0
   carousel_slider: ^5.0.0
@@ -192,7 +191,7 @@ dependencies:
   pip: ^0.0.3
 
   #微信登录+支付+分享
-  fluwx: ^5.7.5
+  fluwx: ^6.0.2
   # 苹果登录
   sign_in_with_apple: ^7.0.1
 
