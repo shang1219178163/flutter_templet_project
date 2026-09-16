@@ -93,7 +93,6 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   bool get wantKeepAlive => true;
 
   @override
-  // ignore: overridden_fields
   late RequestListCallback<T> onRequest = widget.onRequest;
 
   @override
