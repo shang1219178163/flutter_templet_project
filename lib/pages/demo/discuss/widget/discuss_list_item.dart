@@ -18,10 +18,7 @@ import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/model/NewsDiscussRootModel.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/widget/discuss_like_btn.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_colors.dart';
-import 'package:flutter_templet_project/util/theme/theme_provider.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:provider/provider.dart';
 
 /// 讨论列表item
 class DiscussListItem extends StatelessWidget {
@@ -81,7 +78,7 @@ class DiscussListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final themeProvider = context.read<ThemeProvider>();
+    final cs = Theme.of(context).colorScheme;
 
     const nameLimit = 7;
 
@@ -108,20 +105,20 @@ class DiscussListItem extends StatelessWidget {
 
     var replyTimeStr = model.showTime ?? "";
 
-    const nameStyle = TextStyle(
+    final nameStyle = TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      color: AppColors.font999999,
+      color: cs.onSurfaceVariant,
     );
 
     final messageStyle = TextStyle(
       fontSize: 14.5,
       fontWeight: FontWeight.w400,
       fontFamily: "PingFang SC",
-      color: themeProvider.titleColor,
+      color: cs.onSurface,
     );
 
-    final linkStyle = messageStyle.copyWith(color: AppColors.font666666);
+    final linkStyle = messageStyle.copyWith(color: cs.onSurfaceVariant);
 
     Border? border = Border.all(color: Colors.blue, width: 0.5);
     border = null;
@@ -167,7 +164,7 @@ class DiscussListItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: themeProvider.color242434OrWhite,
+            color: cs.surfaceContainer,
             border: border,
             borderRadius: const BorderRadius.all(Radius.circular(0)),
           ),
@@ -207,7 +204,7 @@ class DiscussListItem extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 12.5,
                                       fontWeight: FontWeight.w400,
-                                      color: themeProvider.subtitleColor,
+                                      color: cs.onSurfaceVariant,
                                       // height: 1.0,
                                     ),
                                     maxLines: 1,
@@ -321,7 +318,7 @@ class DiscussListItem extends StatelessWidget {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "PingFang SC",
-                                        color: AppColors.font666666,
+                                        color: cs.onSurfaceVariant,
                                       ),
                                     ),
                                 ],
@@ -338,7 +335,7 @@ class DiscussListItem extends StatelessWidget {
                             // decoration: BoxDecoration(
                             //   border: Border.all(color: Colors.blue),
                             // ),
-                            child: const Icon(Icons.more_vert, size: 13, color: AppColors.font999999),
+                            child: Icon(Icons.more_vert, size: 13, color: cs.onSurfaceVariant),
                           ),
                         ),
                       ],
@@ -392,7 +389,7 @@ class DiscussListItem extends StatelessWidget {
     bool hasReplyTotal = true,
     String prefix = "",
   }) {
-    late final themeProvider = context.read<ThemeProvider>();
+    final cs = Theme.of(context).colorScheme;
 
     return Container(
       margin: margin,
@@ -411,13 +408,13 @@ class DiscussListItem extends StatelessWidget {
                 image: AssetImage(Assets.discussIcArrow),
                 width: 9,
                 height: 8,
-                color: themeProvider.color181829OrF6F6F6,
+                color: cs.surfaceContainerLow,
               ),
             ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: themeProvider.color181829OrF6F6F6,
+              color: cs.surfaceContainerLow,
               border: border,
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
@@ -472,7 +469,7 @@ class DiscussListItem extends StatelessWidget {
                           image: AssetImage(Assets.discussIcArrowRatings),
                           width: 4,
                           height: 8,
-                          color: AppColors.error,
+                          color: cs.primary,
                         ),
                         // child: const Image.asset(
                         //   Assets.dataIcArrowRatings,
@@ -484,7 +481,7 @@ class DiscussListItem extends StatelessWidget {
                       child: Text(
                         "${model.replyCount}条回复",
                         style: TextStyle(
-                          color: AppColors.error,
+                          color: cs.primary,
                           fontSize: 11.5,
                           // fontWeight: FontWeight.w500,
                           // fontFamily: "PingFang SC",

@@ -3,9 +3,6 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_scale_button.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_colors.dart';
-import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:provider/provider.dart';
 
 /// 点赞按钮
 class DiscussLikeBtn extends StatefulWidget {
@@ -38,10 +35,10 @@ class DiscussLikeBtn extends StatefulWidget {
 }
 
 class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
+  late final cs = Theme.of(context).colorScheme;
+
   int likeNumber = 0;
   bool like = false;
-
-  late final themeProvider = context.read<ThemeProvider>();
 
   @override
   void initState() {
@@ -91,9 +88,6 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
             child: Container(
               alignment: Alignment.topCenter,
               padding: const EdgeInsets.only(left: 2, top: 0, bottom: 0),
-              // decoration: BoxDecoration(
-              //   border: Border.all(color: Colors.blue),
-              // ),
               child: Image(
                 image: AssetImage(likeIcon),
                 width: 18,
@@ -106,7 +100,7 @@ class _DiscussLikeBtnState extends State<DiscussLikeBtn> {
       child: Text(
         likeNumberStr,
         style: TextStyle(
-          color: isLike ? AppColors.error : AppColors.font999999,
+          color: isLike ? cs.primary : cs.onSurfaceVariant,
           fontSize: 13,
           fontWeight: FontWeight.w500,
           fontFamily: "PingFang SC",

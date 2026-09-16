@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/theme/app_colors.dart';
-import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:provider/provider.dart';
 
 /// 评论筛选栏
 class DiscussTitleBar extends StatefulWidget {
@@ -26,14 +23,7 @@ class DiscussTitleBar extends StatefulWidget {
 
 class _DiscussTitleBarState extends State<DiscussTitleBar>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  late final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-  late final themeProvider = context.read<ThemeProvider>();
-
-  @override
-  void dispose() {
-    // tabController.dispose();
-    super.dispose();
-  }
+  late final cs = Theme.of(context).colorScheme;
 
   @override
   void initState() {
@@ -41,9 +31,7 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
     initData();
   }
 
-  initData() {
-    // DLog.d([hashCode, tabController.index]);
-  }
+  initData() {}
 
   @override
   void didUpdateWidget(covariant DiscussTitleBar oldWidget) {
@@ -60,8 +48,9 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final accent = cs.primary;
     final style = TextStyle(
-      color: widget.isHot ? AppColors.error : themeProvider.titleColor,
+      color: widget.isHot ? accent : cs.onSurface,
       fontSize: 14.5,
       fontWeight: FontWeight.w500,
       fontFamily: "PingFang SC",
@@ -69,7 +58,7 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: themeProvider.color242434OrWhite,
+        color: cs.surfaceContainer,
       ),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 4),
@@ -83,20 +72,13 @@ class _DiscussTitleBarState extends State<DiscussTitleBar>
                 margin: const EdgeInsets.only(right: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
-                  color: AppColors.error,
+                  color: accent,
                 ),
               ),
             Expanded(
-              child: Container(
-                // decoration: BoxDecoration(
-                //   color: Colors.transparent,
-                //   border: Border.all(color: Colors.blue),
-                //   borderRadius: BorderRadius.all(Radius.circular(0)),
-                // ),
-                child: Text(
-                  widget.title,
-                  style: widget.style ?? style,
-                ),
+              child: Text(
+                widget.title,
+                style: widget.style ?? style,
               ),
             ),
             if (widget.trailing != null) widget.trailing!,

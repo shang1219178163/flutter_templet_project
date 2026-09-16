@@ -23,7 +23,6 @@ import 'package:flutter_templet_project/pages/demo/discuss/widget/discuss_list_i
 import 'package:flutter_templet_project/pages/demo/discuss/widget/discuss_title_bar.dart';
 import 'package:flutter_templet_project/pages/demo/discuss/widget/news_detail_bottom_bar.dart';
 import 'package:flutter_templet_project/util/dlog.dart';
-import 'package:flutter_templet_project/util/theme/app_colors.dart';
 import 'package:get/get.dart';
 
 class DiscussListPage extends StatefulWidget {
@@ -48,9 +47,7 @@ class _DiscussListPageState extends State<DiscussListPage>
 
   late final tabController = TabController(length: discussProvider.tabItems.length, vsync: this);
 
-  late final theme = Theme.of(context);
-  late final colorScheme = theme.colorScheme;
-  late final isDark = theme.brightness == Brightness.dark;
+  late final cs = Theme.of(context).colorScheme;
 
   @override
   void dispose() {
@@ -67,6 +64,7 @@ class _DiscussListPageState extends State<DiscussListPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: cs.surface,
       appBar: AppBar(
         title: Text("$widget"),
       ),
@@ -93,7 +91,7 @@ class _DiscussListPageState extends State<DiscussListPage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildDiscussListItem(model: e, isHot: true),
-            Divider(),
+            Divider(height: 1, color: cs.outlineVariant),
           ],
         );
       },
@@ -110,8 +108,9 @@ class _DiscussListPageState extends State<DiscussListPage>
                 height: 48,
                 child: DiscussTitleBar(
                   title: "热门评论 ${length}",
+                  isHot: true,
                   style: TextStyle(
-                    color: AppColors.error,
+                    color: cs.primary,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontFamily: "PingFang SC",
@@ -123,10 +122,26 @@ class _DiscussListPageState extends State<DiscussListPage>
                       items: discussProvider.tabItems,
                       nameCb: (e) => e.desc,
                       controller: tabController,
+                      backgroundColor: cs.surfaceContainerLow,
+                      labelStyle: TextStyle(
+                        color: cs.onPrimary,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'PingFang SC',
+                      ),
+                      unselectedLabelStyle: TextStyle(
+                        color: cs.onSurfaceVariant,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'PingFang SC',
+                      ),
                       gradientCb: (e) => LinearGradient(
-                        colors: [colorScheme.primary, colorScheme.secondary],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                        colors: [
+                          cs.primary,
+                          cs.primary.withValues(alpha: 0.78),
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
                       ),
                       onChanged: (v) {
                         discussProvider.tabIndexVN.value = v;
