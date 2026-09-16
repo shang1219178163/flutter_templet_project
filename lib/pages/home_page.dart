@@ -565,7 +565,6 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(AppRouter.carouselSliderDemo, "carouselSliderDemo"),
   Tuple2(AppRouter.timelinesDemo, "timelinesDemo"),
   Tuple2(AppRouter.timelineDemo, "timelineDemo"),
-  Tuple2(AppRouter.qrCodeScannerDemo, "扫描二维码"),
   Tuple2(AppRouter.qrFlutterDemo, "生成二维码"),
   Tuple2(AppRouter.scribbleDemo, "scribble 画板"),
   Tuple2(AppRouter.aestheticDialogsDemo, "aestheticDialogs 对话框"),

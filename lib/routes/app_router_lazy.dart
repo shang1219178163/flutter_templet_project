@@ -433,7 +433,6 @@ import 'package:flutter_templet_project/vendor/isar/page/OrderListTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
 import 'package:flutter_templet_project/vendor/jpush/jpush_info_page.dart';
-import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
 import 'package:flutter_templet_project/vendor/table_calendar/table_calender_main.dart';
@@ -998,10 +997,6 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.navigationBarDemo,
       page: () => NavigationBarDemo(),
-    ),
-    GetPage(
-      name: AppRouter.qrCodeScannerDemo,
-      page: () => QrCodeScannerDemo(),
     ),
     GetPage(
       name: AppRouter.qrFlutterDemo,
