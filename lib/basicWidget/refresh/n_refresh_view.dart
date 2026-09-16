@@ -56,7 +56,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   bool get wantKeepAlive => true;
 
   @override
-  // ignore: overridden_fields
   late RequestModelCallback<T> onRequest = widget.onRequest;
 
   @override

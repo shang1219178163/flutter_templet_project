@@ -14,12 +14,13 @@ import 'package:flutter/material.dart';
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T data);
 
 /// 请求列表回调
-typedef RequestListCallback<T> = Future<List<T>> Function(
-  bool isRefresh,
-  int page,
-  int pageSize,
-  List<T> pres,
-);
+typedef RequestListCallback<T> =
+    Future<List<T>> Function(
+      bool isRefresh,
+      int page,
+      int pageSize,
+      List<T> pres,
+    );
 
 /// 请求模型回调
 typedef RequestModelCallback<T> = Future<T?> Function();
@@ -80,22 +81,30 @@ mixin NListRefreshMixin<T> implements NListRefreshable<T> {
   );
 
   /// 请求方式
-  late RequestListCallback<T> onRequest = throw UnimplementedError("onRequest");
+  RequestListCallback<T> get onRequest => throw UnimplementedError("onRequest");
+  set onRequest(RequestListCallback<T> v) => throw UnimplementedError("onRequest");
 
   @override
   List<T> firstPageItems = [];
+
   @override
   List<T> items = [];
-  @override
-  int page = 1;
+
   @override
   int pageInitial = 1;
+
+  @override
+  int page = 1;
+
   @override
   int pageSize = 20;
+
   @override
   IndicatorResult indicator = IndicatorResult.success;
+
   @override
   bool isFirstLoad = true;
+
   @override
   bool isLoading = false;
 
@@ -316,7 +325,8 @@ mixin NModelRefreshMixin<T> implements NModelRefreshable<T> {
   );
 
   /// 请求方式
-  late RequestModelCallback<T> onRequest = throw UnimplementedError("onRequest");
+  RequestModelCallback<T> get onRequest => throw UnimplementedError("onRequest");
+  set onRequest(RequestModelCallback<T> v) => throw UnimplementedError("onRequest");
 
   @override
   T? item;

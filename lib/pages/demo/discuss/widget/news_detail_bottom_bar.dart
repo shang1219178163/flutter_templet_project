@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/util/theme/theme_provider.dart';
-import 'package:provider/provider.dart';
 
 /// 资讯详情底部评论输入栏
 class NewsDetailBottomBar extends StatelessWidget {
@@ -16,21 +14,18 @@ class NewsDetailBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = context.watch<ThemeProvider>();
+    final cs = Theme.of(context).colorScheme;
     final bottomSafePadding = MediaQuery.of(context).padding.bottom;
-    final barBackgroundColor = themeProvider.isDark ? themeProvider.color242434OrWhite : Colors.white;
-    final fieldBackgroundColor = themeProvider.isDark ? Colors.white.withValues(alpha: 0.08) : const Color(0xFFF3F4F8);
 
     final countDesc = count > 99 ? "99+" : "$count";
     return Container(
       padding: EdgeInsets.fromLTRB(16, 8, 16, 8 + bottomSafePadding),
       decoration: BoxDecoration(
-        color: barBackgroundColor,
-        // border: Border.all(color: Colors.blue),
-        boxShadow: const [
+        color: cs.surfaceContainer,
+        boxShadow: [
           BoxShadow(
-            offset: Offset(0, -1),
-            color: Color(0x0D000000),
+            offset: const Offset(0, -1),
+            color: cs.shadow.withValues(alpha: 0.05),
           ),
         ],
       ),
@@ -43,7 +38,7 @@ class NewsDetailBottomBar extends StatelessWidget {
               child: Container(
                 height: 34,
                 decoration: BoxDecoration(
-                  color: fieldBackgroundColor,
+                  color: cs.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -61,7 +56,7 @@ class NewsDetailBottomBar extends StatelessWidget {
                         fontSize: 12,
                         height: 28 / 12,
                         letterSpacing: 1.2,
-                        color: themeProvider.placeholderColor,
+                        color: cs.onSurfaceVariant,
                         fontFamily: 'PingFang SC',
                       ),
                     ),
@@ -79,7 +74,7 @@ class NewsDetailBottomBar extends StatelessWidget {
               image: AssetImage(Assets.inputBarIcNotice),
               width: 28,
               height: 28,
-              color: themeProvider.titleColor,
+              color: cs.onSurface,
             ),
           ),
         ],

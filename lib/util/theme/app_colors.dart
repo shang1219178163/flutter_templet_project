@@ -43,8 +43,8 @@ class AppColors {
   static const Color surfaceDimDark = Color(0xFF1D1F23);
 
   // —— Surface containers ——
-  // Light：Card→Low（白）；输入→Container
-  // Dark 单调：Lowest < Low(input) < Container(editor/Card) < High < Highest
+  // One Dark: chrome < input < editor(card) < elevated
+  // ColorScheme：Low = input，Container = card（深浅模式同一角色）
 
   /// surfaceContainerLowest 浅色
   static const Color surfaceContainerLowestLight = Color(0xFFFFFFFF);
@@ -52,14 +52,14 @@ class AppColors {
   /// surfaceContainerLowest 深色：overlay #1D1F23
   static const Color surfaceContainerLowestDark = Color(0xFF1D1F23);
 
-  /// surfaceContainerLow 浅色：Card
-  static const Color surfaceContainerLowLight = Color(0xFFFFFFFF);
+  /// surfaceContainerLow 浅色：input
+  static const Color surfaceContainerLowLight = Color(0xFFF5F5F5);
 
-  /// surfaceContainerLow 深色：input #252931（低于 Container，输入井）
+  /// surfaceContainerLow 深色：input #252931
   static const Color surfaceContainerLowDark = Color(0xFF252931);
 
-  /// surfaceContainer 浅色：默认容器 / 输入底 #F5F5F5
-  static const Color surfaceContainerLight = Color(0xFFF5F5F5);
+  /// surfaceContainer 浅色：Card
+  static const Color surfaceContainerLight = Color(0xFFFFFFFF);
 
   /// surfaceContainer 深色：editor #282C34（Card）
   static const Color surfaceContainerDark = Color(0xFF282C34);
@@ -162,7 +162,7 @@ class AppColors {
 
   // —— 仍在用的旧名 ——
   /// 浅色白卡 / 暗色 editor
-  static Color get card => isDark ? surfaceContainer : surfaceContainerLow;
+  static Color get card => surfaceContainer;
   static Color get divider => outlineVariant;
 
   // —— 历史硬编码色（业务遗留）——

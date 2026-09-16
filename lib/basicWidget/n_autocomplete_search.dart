@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
-import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 
 /// 自动填充搜索框
 class NAutocompleteSearch<T extends Object> extends StatefulWidget {
@@ -32,10 +31,11 @@ class NAutocompleteSearch<T extends Object> extends StatefulWidget {
   State<NAutocompleteSearch<T>> createState() => _NAutocompleteSearchState<T>();
 }
 
-class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSearch<T>> with SafeSetStateMixin {
+class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSearch<T>> {
   var _textEditingValue = TextEditingValue();
   late final TextEditingController _fallbackController;
   late final FocusNode _focusNode;
+  var _fromTap = false;
 
   TextEditingController get _effectiveController => widget.controller ?? _fallbackController;
 
@@ -54,85 +54,74 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
   }
 
   @override
-  void didUpdateWidget(covariant NAutocompleteSearch<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return RawAutocomplete<T>(
       textEditingController: _effectiveController,
       focusNode: _focusNode,
       displayStringForOption: widget.displayStringForOption,
       fieldViewBuilder: widget.fieldViewBuilder ?? buildFieldView,
-      onSelected: widget.onSelected,
+      onSelected: (option) {
+        if (!_fromTap) widget.onSelected?.call(option);
+      },
       optionsBuilder: (textEditingValue) {
         _textEditingValue = textEditingValue;
-        final text = textEditingValue.text;
-        if (text.isEmpty) {
+        if (textEditingValue.text.isEmpty) {
           return Iterable<T>.empty();
         }
-
         return widget.optionsBuilder(textEditingValue);
-        // final result = packages.where((e) => (e.name ?? "").toLowerCase().contains(text.toLowerCase())).toList();
-        // return result;
       },
       optionsViewBuilder: (context, onSelected, options) {
         return NAutocompleteOptionsView<T>(
           displayStringForOption: widget.displayStringForOption,
-          onSelected: onSelected,
+          onSelected: (option) {
+            _fromTap = true;
+            widget.onSelected?.call(option);
+            onSelected(option);
+            _fromTap = false;
+          },
           options: options,
           maxHeight: 300,
           itemBuilder: (context, index) {
-            final option = options.elementAt(index);
-
-            final name = widget.displayStringForOption(option);
-            final query = _textEditingValue.text;
-
-            return widget.optionsItemBuilder?.call(context, index) ??
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      height: 50,
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 8),
-                                child: Icon(Icons.search, color: Colors.grey, size: 22),
-                              ),
-                              Expanded(
-                                child: Text.rich(
-                                  TextSpan(
-                                    children: RichTextExt.createTextSpans(
-                                      text: name,
-                                      textTaps: [query],
-                                      linkStyle: TextStyle(
-                                        color: context.themeData.colorScheme.primary,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+            if (widget.optionsItemBuilder != null) {
+              return widget.optionsItemBuilder!(context, index);
+            }
+            final name = widget.displayStringForOption(options.elementAt(index));
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: SizedBox(
+                    height: 34,
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 8),
+                          child: Icon(Icons.search, color: Colors.grey, size: 22),
+                        ),
+                        Expanded(
+                          child: Text.rich(
+                            TextSpan(
+                              children: RichTextExt.createTextSpans(
+                                text: name,
+                                textTaps: [_textEditingValue.text],
+                                linkStyle: TextStyle(
+                                  color: context.themeData.colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ],
-                          )
-                        ],
-                      ),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
-                    Divider(indent: 16),
-                  ],
-                );
+                  ),
+                ),
+                const Divider(indent: 16),
+              ],
+            );
           },
         );
       },
@@ -146,55 +135,36 @@ class _NAutocompleteSearchState<T extends Object> extends State<NAutocompleteSea
     VoidCallback onFieldSubmitted,
   ) {
     final border = UnderlineInputBorder(
-      borderSide: Divider.createBorderSide(context, width: 1.0), // 聚焦状态颜色
+      borderSide: Divider.createBorderSide(context, width: 1.0),
     );
 
     return TextField(
       textInputAction: TextInputAction.next,
-      // style: const TextStyle(color: Colors.white),
       controller: controller,
       focusNode: focusNode,
-      // onFieldSubmitted: (String value) {
-      //   debugPrint("Field: $value");
-      //   onFieldSubmitted();
-      // },
+      onSubmitted: (_) => onFieldSubmitted(),
       onChanged: widget.onChanged,
-      onEditingComplete: () {
-        debugPrint("onEditingComplete: ${controller.text}");
-        // final filters = Get.routeTree.routes.where((e) => e.name == textEditingController.text);
-        // if (filters.isNotEmpty) {
-        //   widget.onSelected(OptionModel(name: textEditingController.text));
-        // }
-      },
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(10),
         filled: false,
         border: border,
         enabledBorder: border,
         focusedBorder: border,
-        //设置输入文本框的提示文字
-        //输入框获取焦点时 并且没有输入文字时
         hintText: "请输入关键词",
-        //设置输入文本框的提示文字的样式
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: Colors.grey,
           textBaseline: TextBaseline.ideographic,
         ),
-        //输入文字前的小图标
-        prefixIcon: Icon(Icons.search),
-        //输入文字后面的小图标
+        prefixIcon: const Icon(Icons.search),
         suffixIcon: ValueListenableBuilder<TextEditingValue>(
           valueListenable: controller,
           builder: (context, textEditingValue, child) {
-            final value = textEditingValue.text;
-            if (value.isEmpty) {
-              return SizedBox();
+            if (textEditingValue.text.isEmpty) {
+              return const SizedBox();
             }
             return IconButton(
-              onPressed: () {
-                controller.clear();
-              },
-              icon: Icon(Icons.cancel, color: Colors.grey),
+              onPressed: controller.clear,
+              icon: const Icon(Icons.cancel, color: Colors.grey),
             );
           },
         ),

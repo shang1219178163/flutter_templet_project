@@ -152,11 +152,10 @@ class AppThemeService {
   ColorScheme _buildColorScheme(Brightness brightness) {
     final dark = brightness == Brightness.dark;
     final base = ColorScheme.fromSeed(seedColor: seedColor, brightness: brightness);
-    final card = dark ? AppColors.surfaceContainer : AppColors.surfaceContainerLow;
     final onPrimary = seedColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
     final errorContainer = Color.alphaBlend(
       AppColors.error.withValues(alpha: dark ? 0.28 : 0.12),
-      card,
+      AppColors.surfaceContainer,
     );
 
     return base.copyWith(
@@ -204,9 +203,9 @@ class AppThemeService {
   }
 
   OutlineInputBorder _inputBorder(Color color) => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(width: 1, color: color),
-      );
+    borderRadius: BorderRadius.circular(8),
+    borderSide: BorderSide(width: 1, color: color),
+  );
 
   ButtonStyle _flatButton({
     Color? foreground,
@@ -226,27 +225,27 @@ class AppThemeService {
     final cs = _buildColorScheme(brightness);
     final dark = brightness == Brightness.dark;
     final onPrimary = cs.onPrimary;
-    final card = dark ? cs.surfaceContainer : cs.surfaceContainerLow;
-    final inputFill = dark ? cs.surfaceContainerLow : cs.surfaceContainer;
     final hint = TextStyle(fontSize: 14, color: AppColors.info);
 
     return ThemeData(
-      colorScheme: cs,
-      cupertinoOverrideTheme: CupertinoThemeData(
-        brightness: brightness,
-        primaryColor: cs.primary,
-        primaryContrastingColor: onPrimary,
-        scaffoldBackgroundColor: cs.surface,
-        barBackgroundColor: card,
-        applyThemeToAll: true,
-        textTheme: _cupertinoTextTheme(cs),
-      ),
       platform: TargetPlatform.iOS,
       splashFactory: NoSplash.splashFactory,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      cardColor: card,
+      colorScheme: cs,
+      scaffoldBackgroundColor: cs.surface,
+      cardColor: cs.surfaceContainer,
+      canvasColor: cs.surface,
+      cupertinoOverrideTheme: CupertinoThemeData(
+        brightness: brightness,
+        primaryColor: cs.primary,
+        primaryContrastingColor: onPrimary,
+        scaffoldBackgroundColor: cs.surface,
+        barBackgroundColor: cs.surfaceContainer,
+        applyThemeToAll: true,
+        textTheme: _cupertinoTextTheme(cs),
+      ),
       hintColor: AppColors.info,
       dividerTheme: DividerThemeData(color: cs.outlineVariant, space: 0.5, thickness: 1),
       tabBarTheme: TabBarThemeData(
@@ -275,14 +274,14 @@ class AppThemeService {
       ),
       bottomAppBarTheme: const BottomAppBarThemeData(surfaceTintColor: Colors.transparent),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: card,
+        backgroundColor: cs.surfaceContainer,
         elevation: 0,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: cs.primary,
         unselectedItemColor: cs.onSurfaceVariant,
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: card,
+        backgroundColor: cs.surfaceContainer,
         surfaceTintColor: Colors.transparent,
         shadowColor: Colors.transparent,
         elevation: 0,
@@ -309,7 +308,10 @@ class AppThemeService {
       ),
       textButtonTheme: TextButtonThemeData(style: _flatButton(foreground: cs.primary)),
       outlinedButtonTheme: OutlinedButtonThemeData(
-        style: _flatButton(foreground: cs.primary, side: BorderSide(color: cs.primary)),
+        style: _flatButton(
+          foreground: cs.primary,
+          side: BorderSide(color: cs.primary),
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: _flatButton(foreground: onPrimary, background: cs.primary),
@@ -357,9 +359,9 @@ class AppThemeService {
       ),
       inputDecorationTheme: InputDecorationThemeData(
         filled: true,
-        fillColor: inputFill,
-        focusColor: inputFill,
-        hoverColor: inputFill,
+        fillColor: cs.surfaceContainerLow,
+        focusColor: cs.surfaceContainerLow,
+        hoverColor: cs.surfaceContainerLow,
         hintStyle: hint,
         labelStyle: TextStyle(fontSize: 14, color: cs.onSurfaceVariant),
         floatingLabelStyle: TextStyle(fontSize: 14, color: cs.primary),

@@ -32,10 +32,10 @@ class NOrderNumUnit extends StatefulWidget {
   final bool readOnly;
   final String? labelText;
 
-  /// 可编辑填充；null → colorScheme.surfaceContainer
+  /// 可编辑填充；null → colorScheme.surfaceContainerLow
   final Color? fillColor;
 
-  /// 只读填充；null → colorScheme.surfaceContainerLow
+  /// 只读填充；null → colorScheme.surfaceContainer
   final Color? fillColorReadOnly;
 
   /// 边框色；null → transparent
@@ -62,12 +62,9 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
       borderRadius: BorderRadius.circular(widget.borderRadius),
     );
     const contentPadding = EdgeInsets.symmetric(horizontal: 8, vertical: 6);
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final inputFill = dark ? cs.surfaceContainerLow : cs.surfaceContainer;
-    final card = dark ? cs.surfaceContainer : cs.surfaceContainerLow;
     final fill = widget.readOnly
-        ? (widget.fillColorReadOnly ?? card)
-        : (widget.fillColor ?? inputFill);
+        ? (widget.fillColorReadOnly ?? cs.surfaceContainer)
+        : (widget.fillColor ?? cs.surfaceContainerLow);
 
     return TextField(
       controller: _controller,
