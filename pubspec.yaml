@@ -102,7 +102,9 @@ dependencies:
   dio_cookie_manager: ^3.1.1
   dio_cache_interceptor: ^4.0.5
 
-  workmanager: ^0.10.10
+  # 0.10.x 会拉 workmanager_apple ≥0.9.6，引用 iOS 26 的 BGContinuedProcessingTask；
+  # 本机 Xcode 16.3 / iOS 18.4 SDK 编不过。0.9.2 + apple 0.9.5 仍有 UIScene。
+  workmanager: 0.9.2
 
   #  pull_to_refresh: ^1.6.5
   easy_refresh: ^3.3.1
@@ -294,6 +296,9 @@ dependency_overrides:
       url: git@github.com:fluttercandies/flutter_image_compress.git
       ref: b69a5cb932e9c577bf3d8cf912e38cbec8eeaced
       path: packages/flutter_image_compress_common
+
+  # 0.9.2 的约束是 ^0.9.4，今天会解析到 0.9.11（含 iOS 26 API）
+  workmanager_apple: 0.9.5
 
 # User:
 #   path: ../User
