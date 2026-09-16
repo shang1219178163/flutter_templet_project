@@ -162,6 +162,9 @@ Future<void> main() async {
 
 void setCustomErrorPage() {
   FlutterError.onError = (details) {
+    if (AppThemeService.ignoreFlutterError(details)) {
+      return;
+    }
     FlutterError.presentError(details);
     final errorDesc = "FlutterError.onError $details";
     CacheService().updateLogs(value: errorDesc, isClear: true);

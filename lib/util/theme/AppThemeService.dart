@@ -78,6 +78,14 @@ class AppThemeService {
     SystemChrome.setSystemUIOverlayStyle(overlayStyle);
   }
 
+  /// Flutter 3.44+ ListTile 会断言祖先 ColoredBox 挡住水波纹。
+  /// 本主题已全局 [NoSplash]，该 debug 断言对 UI 无实际影响。
+  static bool ignoreFlutterError(FlutterErrorDetails details) {
+    return details.exceptionAsString().contains(
+      'ListTile background color or ink splashes may be invisible',
+    );
+  }
+
   void _init() {
     final cacheColorStr = CacheService().getString(CacheKey.seedColor.name);
     if (cacheColorStr != null) {
@@ -376,6 +384,8 @@ class AppThemeService {
         iconColor: cs.onSurfaceVariant,
         textColor: cs.onSurface,
         subtitleTextStyle: TextStyle(fontSize: 14, color: cs.onSurfaceVariant),
+        tileColor: Colors.transparent,
+        selectedTileColor: Colors.transparent,
       ),
       iconTheme: IconThemeData(color: cs.onSurfaceVariant),
       primaryIconTheme: IconThemeData(color: onPrimary),

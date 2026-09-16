@@ -79,16 +79,13 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  onPressed: onDone,
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
+        actions: ['done']
+            .map(
+              (e) => TextButton(
+                onPressed: onDone,
+                child: Text(e, style: TextStyle(color: Colors.white)),
+              ),
+            )
             .toList(),
       ),
       body: buildRefresh(
@@ -101,18 +98,19 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
           _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
         },
         label: ValueListenableBuilder<double>(
-            valueListenable: offsetY,
-            builder: (context, value, child) {
-              if (value == 0) {
-                return Text("偏移量");
-              }
-              // return Text("datadata");
-              final maxScrollExtent = _scrollController.position.maxScrollExtent.toStringAsFixed(0);
-              debugPrint("maxScrollExtent: $maxScrollExtent");
-              return Container(
-                child: Text("${value.toStringAsFixed(0)}/$maxScrollExtent"),
-              );
-            }),
+          valueListenable: offsetY,
+          builder: (context, value, child) {
+            if (value == 0) {
+              return Text("偏移量");
+            }
+            // return Text("datadata");
+            final maxScrollExtent = _scrollController.position.maxScrollExtent.toStringAsFixed(0);
+            debugPrint("maxScrollExtent: $maxScrollExtent");
+            return Container(
+              child: Text("${value.toStringAsFixed(0)}/$maxScrollExtent"),
+            );
+          },
+        ),
       ),
     );
   }
@@ -187,9 +185,8 @@ class _ListViewOffsetPageState extends State<ListViewOffsetPage> with RouteAware
           return Dismissible(
             key: UniqueKey(),
             onDismissed: (direction) {
-              setState(() {
-                items.removeAt(index);
-              });
+              items.removeAt(index);
+              setState(() {});
 
               if (direction == DismissDirection.startToEnd) {
                 DLog.d("Add to favorite");

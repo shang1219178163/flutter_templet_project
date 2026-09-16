@@ -18,6 +18,7 @@ class ThemeProvider extends ChangeNotifier {
   void toggleTheme([ThemeMode? mode]) {
     themeMode = mode ?? (isDark ? ThemeMode.light : ThemeMode.dark);
   }
+
   bool get isDark => _theme.isDark;
   Color get primary => _theme.seedColor;
 
@@ -28,7 +29,7 @@ class ThemeProvider extends ChangeNotifier {
   Color get arrowColor => isDark ? Colors.white.withValues(alpha: 0.5) : const Color(0xFFA7A7AE);
   Color get lineColor => isDark ? Colors.white.withValues(alpha: 0.05) : const Color(0xFFDEDEDE);
   Color get borderColor => isDark ? Colors.white.withValues(alpha: 0.04) : Colors.transparent;
-  Color get color181829OrF6F6F6 => isDark ? const Color(0xFF181829) : const Color(0xFFF6F6F6);
+  // Color get color181829OrF6F6F6 => isDark ? const Color(0xFF181829) : const Color(0xFFF6F6F6);
   Color get color242434OrF6F6F6 => isDark ? const Color(0xFF242434) : const Color(0xFFF6F6F6);
   Color get color242434OrWhite => isDark ? const Color(0xFF242434) : Colors.white;
 }
