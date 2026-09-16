@@ -52,10 +52,8 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
 
   final auth = LocalAuthentication();
 
-  /// 失败时弹出系统错误对话框
-  bool useErrorDialogs = true;
-  /// 应用切后台后保持认证
-  bool stickyAuth = false;
+  /// 切后台后回到前台自动重试认证（原 stickyAuth）
+  bool persistAcrossBackgrounding = false;
   /// 敏感交易（平台可能加强校验）
   bool sensitiveTransaction = true;
   /// 仅生物识别，不用设备密码
@@ -135,9 +133,9 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
                           items: [
                             {
                               NLangEnum.en:
-                                  'Original “开始” only checks device / biometrics. Tune AuthenticationOptions and localizedReason, then authenticate or stopAuthentication. Simulator often throws PlatformException (otherOperatingSystem).',
+                                  'Original “开始” only checks device / biometrics. Tune authenticate parameters and localizedReason, then authenticate or stopAuthentication. Failures throw LocalAuthException (simulator often otherOperatingSystem).',
                               NLangEnum.zh:
-                                  '原 Demo「开始」只检测设备与生物识别能力。调节 AuthenticationOptions、localizedReason 后调用 authenticate / stopAuthentication。模拟器常抛 PlatformException（otherOperatingSystem）。',
+                                  '原 Demo「开始」只检测设备与生物识别能力。调节 authenticate 参数、localizedReason 后调用 authenticate / stopAuthentication。失败抛 LocalAuthException（模拟器常 otherOperatingSystem）。',
                             },
                           ],
                         ),
@@ -231,7 +229,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     return NDecorationCard(
       icon: const Icon(Icons.fingerprint_rounded),
       title: '认证',
-      subtitle: 'localizedReason  AuthenticationOptions',
+      subtitle: 'localizedReason  authenticate 参数',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -241,14 +239,12 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
             onChanged: (v) => onMark('localizedReason $v'),
           ),
           NSwitchListItem(
-            title: const Text('useErrorDialogs'),
-            value: useErrorDialogs,
-            onChanged: (v) => onMark('useErrorDialogs $v', () => useErrorDialogs = v),
-          ),
-          NSwitchListItem(
-            title: const Text('stickyAuth'),
-            value: stickyAuth,
-            onChanged: (v) => onMark('stickyAuth $v', () => stickyAuth = v),
+            title: const Text('persistAcrossBackgrounding'),
+            value: persistAcrossBackgrounding,
+            onChanged: (v) => onMark(
+              'persistAcrossBackgrounding $v',
+              () => persistAcrossBackgrounding = v,
+            ),
           ),
           NSwitchListItem(
             title: const Text('sensitiveTransaction'),
@@ -301,11 +297,11 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
               onChanged: (v) => onMark('signInTitle $v'),
             ),
             NTextFieldListItem(
-              title: const Text('AndroidAuthMessages.biometricHint'),
+              title: const Text('AndroidAuthMessages.signInHint'),
               showTopGap: true,
               controller: biometricHintController,
               hintText: '默',
-              onChanged: (v) => onMark('biometricHint $v'),
+              onChanged: (v) => onMark('signInHint $v'),
             ),
           ],
         ],
@@ -330,19 +326,10 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       AndroidAuthMessages(
         cancelButton: cancel,
         signInTitle: emptyToNull(signInTitleController.text),
-        biometricHint: emptyToNull(biometricHintController.text),
+        signInHint: emptyToNull(biometricHintController.text),
       ),
       const WindowsAuthMessages(),
     ];
-  }
-
-  AuthenticationOptions buildOptions() {
-    return AuthenticationOptions(
-      useErrorDialogs: useErrorDialogs,
-      stickyAuth: stickyAuth,
-      sensitiveTransaction: sensitiveTransaction,
-      biometricOnly: biometricOnly,
-    );
   }
 
   String? emptyToNull(String value) {
@@ -384,6 +371,10 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       lastEvent = 'availableBiometrics: ${types.map((e) => e.name).join(', ')}';
       DLog.d(lastEvent);
       SnackUtil.show(lastEvent);
+    } on LocalAuthException catch (e) {
+      lastEvent = 'onStart ${e.code.name} ${e.description}';
+      DLog.d(lastEvent);
+      SnackUtil.show(lastEvent);
     } on PlatformException catch (e) {
       lastEvent = 'onStart ${e.code} ${e.message}';
       DLog.d(lastEvent);
@@ -410,9 +401,15 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
       final ok = await auth.authenticate(
         localizedReason: reason,
         authMessages: buildAuthMessages(),
-        options: buildOptions(),
+        biometricOnly: biometricOnly,
+        sensitiveTransaction: sensitiveTransaction,
+        persistAcrossBackgrounding: persistAcrossBackgrounding,
       );
       lastEvent = 'authenticate $ok';
+      DLog.d(lastEvent);
+      SnackUtil.show(lastEvent);
+    } on LocalAuthException catch (e) {
+      lastEvent = 'authenticate ${e.code.name} ${e.description}';
       DLog.d(lastEvent);
       SnackUtil.show(lastEvent);
     } on PlatformException catch (e) {
@@ -433,6 +430,10 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     try {
       final ok = await auth.stopAuthentication();
       lastEvent = 'stopAuthentication $ok';
+      DLog.d(lastEvent);
+      SnackUtil.show(lastEvent);
+    } on LocalAuthException catch (e) {
+      lastEvent = 'stopAuthentication ${e.code.name} ${e.description}';
       DLog.d(lastEvent);
       SnackUtil.show(lastEvent);
     } on PlatformException catch (e) {
@@ -459,8 +460,7 @@ class _LocalAuthDemoState extends State<LocalAuthDemo> {
     fallbackController.clear();
     signInTitleController.clear();
     biometricHintController.clear();
-    useErrorDialogs = true;
-    stickyAuth = false;
+    persistAcrossBackgrounding = false;
     sensitiveTransaction = true;
     biometricOnly = false;
     useCustomMessages = false;

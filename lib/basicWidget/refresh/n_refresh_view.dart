@@ -56,6 +56,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
   bool get wantKeepAlive => true;
 
   @override
+  // ignore: overridden_fields
   late RequestModelCallback<T> onRequest = widget.onRequest;
 
   @override
@@ -89,7 +90,10 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     }
 
     if (item == null) {
-      return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
+      return GestureDetector(
+        onTap: onRefresh,
+        child: Center(child: widget.placeholder),
+      );
     }
 
     return EasyRefresh(

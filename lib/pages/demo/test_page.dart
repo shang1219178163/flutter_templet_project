@@ -66,9 +66,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
             buildWrap(),
             TeamNameMatchGradientWidget(
               logo: '',
-              name: "主队队名",
+              name: "主队队名2",
               awayLogo: '',
-              awayName: "客队队名",
+              awayName: "客队队名1",
               awayColor: Colors.green,
             ),
             SizedBox(height: 34),

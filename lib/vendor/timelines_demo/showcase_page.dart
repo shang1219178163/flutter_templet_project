@@ -122,7 +122,7 @@ class _ShowcaseCard extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
+                            FaIcon(
                               FontAwesomeIcons.dribbble,
                               semanticLabel: 'Original',
                               size: 10.0,

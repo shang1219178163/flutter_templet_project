@@ -200,7 +200,6 @@ class AppRouter {
   static const String steperConnectorDemo = '/steperConnectorDemo';
   static const String textViewDemo = '/textViewDemo';
   static const String navigationBarDemo = '/navigationBarDemo';
-  static const String qrCodeScannerDemo = '/qrCodeScannerDemo';
   static const String qrFlutterDemo = '/qrFlutterDemo';
   static const String scribbleDemo = '/scribbleDemo';
   static const String aestheticDialogsDemo = '/aestheticDialogsDemo';

@@ -159,7 +159,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
       height: 400,
       child: Theme(
         data: ThemeData(
-          appBarTheme: const AppBarTheme(
+          appBarTheme: const AppBarThemeData(
             backgroundColor: Colors.lightBlueAccent,
             elevation: 0,
             scrolledUnderElevation: 0,

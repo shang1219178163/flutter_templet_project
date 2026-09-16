@@ -15,6 +15,7 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
     this.url, {
     this.scale = 1.0,
     this.headers,
+    this.webHtmlElementStrategy = painting.WebHtmlElementStrategy.never,
   });
 
   @override
@@ -23,6 +24,8 @@ class CacheImageProvider extends painting.ImageProvider<painting.NetworkImage> i
   final double scale;
   @override
   final Map<String, String>? headers;
+  @override
+  final painting.WebHtmlElementStrategy webHtmlElementStrategy;
 
 // 🔑 核心改动：使用 f_limit 替换原有的并发控制
 // 限制最多10个并发图片加载，使用LIFO策略（最新请求优先）

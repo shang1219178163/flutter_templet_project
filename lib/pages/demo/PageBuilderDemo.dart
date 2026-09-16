@@ -12,11 +12,12 @@ import 'package:get/get.dart';
 enum _TransitionKind {
   openUpwards(label: 'OpenUpwards'),
   zoom(label: 'Zoom'),
-  cupertino(label: 'Cupertino'),
+  // cupertino(label: 'Cupertino'),
   fadeUpwards(label: 'FadeUpwards'),
   none(label: 'none'),
   predictiveBack(label: 'PredictiveBack'),
   ;
+
   const _TransitionKind({required this.label});
   final String label;
 }
@@ -26,6 +27,7 @@ enum _BarrierLabelKind {
   nil(label: 'null', value: null),
   dismiss(label: 'dismiss', value: 'dismiss'),
   ;
+
   const _BarrierLabelKind({required this.label, required this.value});
   final String label;
   final String? value;
@@ -48,34 +50,49 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
 
   /// 转场类型，原 Demo 第一项 OpenUpwardsPageTransitionsBuilder
   _TransitionKind transitionKind = _TransitionKind.openUpwards;
+
   /// Zoom 转场是否允许快照
   bool zoomAllowSnapshotting = true;
+
   /// Zoom 进入路由是否允许快照
   bool zoomAllowEnterRouteSnapshotting = true;
+
   /// Zoom 转场背景色
   Color? zoomBackgroundColor;
+
   /// 正向动画时长（毫秒）
   double durationMs = 300;
+
   /// 反向动画时长（毫秒）
   double reverseDurationMs = 300;
+
   /// 是否不透明
   bool opaque = true;
+
   /// 点击遮罩可关闭
   bool barrierDismissible = false;
+
   /// 遮罩颜色
   Color? barrierColor;
+
   /// 遮罩语义标签
   _BarrierLabelKind barrierLabelKind = _BarrierLabelKind.nil;
+
   /// 离开后是否保持状态
   bool maintainState = true;
+
   /// 是否全屏对话框
   bool fullscreenDialog = false;
+
   /// 是否允许快照
   bool allowSnapshotting = true;
+
   /// 是否请求焦点
   bool? requestFocus;
+
   /// 是否传入 RouteSettings
   bool useSettings = false;
+
   /// 最近事件
   String lastEvent = '—';
 
@@ -217,7 +234,8 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
             NSwitchListItem(
               title: const Text('Zoom.allowEnterRouteSnapshotting'),
               value: zoomAllowEnterRouteSnapshotting,
-              onChanged: (v) => onMark('Zoom.allowEnterRouteSnapshotting $v', () => zoomAllowEnterRouteSnapshotting = v),
+              onChanged: (v) =>
+                  onMark('Zoom.allowEnterRouteSnapshotting $v', () => zoomAllowEnterRouteSnapshotting = v),
             ),
             const SizedBox(height: 8),
             NChoiceColorListItem(
@@ -239,7 +257,11 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSwitchListItem(title: const Text('opaque'), value: opaque, onChanged: (v) => onMark('opaque $v', () => opaque = v)),
+          NSwitchListItem(
+            title: const Text('opaque'),
+            value: opaque,
+            onChanged: (v) => onMark('opaque $v', () => opaque = v),
+          ),
           NSwitchListItem(
             title: const Text('barrierDismissible'),
             value: barrierDismissible,
@@ -337,7 +359,11 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
             labelOf: (e) => e == null ? 'null' : '$e',
             onChanged: (e) => onMark('requestFocus $e', () => requestFocus = e),
           ),
-          NSwitchListItem(title: const Text('settings'), value: useSettings, onChanged: (v) => onMark('settings $v', () => useSettings = v)),
+          NSwitchListItem(
+            title: const Text('settings'),
+            value: useSettings,
+            onChanged: (v) => onMark('settings $v', () => useSettings = v),
+          ),
         ],
       ),
     );
@@ -358,16 +384,15 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     );
   }
 
-
   PageTransitionsBuilder? pageTransitionsBuilderOf() {
     return switch (transitionKind) {
       _TransitionKind.openUpwards => const OpenUpwardsPageTransitionsBuilder(),
       _TransitionKind.zoom => ZoomPageTransitionsBuilder(
-          allowSnapshotting: zoomAllowSnapshotting,
-          allowEnterRouteSnapshotting: zoomAllowEnterRouteSnapshotting,
-          backgroundColor: zoomBackgroundColor,
-        ),
-      _TransitionKind.cupertino => const CupertinoPageTransitionsBuilder(),
+        allowSnapshotting: zoomAllowSnapshotting,
+        allowEnterRouteSnapshotting: zoomAllowEnterRouteSnapshotting,
+        backgroundColor: zoomBackgroundColor,
+      ),
+      // _TransitionKind.cupertino => CupertinoPageTransitionsBuilder(),
       _TransitionKind.fadeUpwards => const FadeUpwardsPageTransitionsBuilder(),
       _TransitionKind.none => null,
       _TransitionKind.predictiveBack => const PredictiveBackPageTransitionsBuilder(),

@@ -136,7 +136,7 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> with Sing
                       data: ThemeData(
                         splashColor: Colors.transparent, // 点击时的水波纹颜色设置为透明
                         highlightColor: Colors.transparent, // 点击时的背景高亮颜色设置为透明
-                        tabBarTheme: TabBarTheme(
+                        tabBarTheme: TabBarThemeData(
                           dividerColor: Colors.transparent,
                           labelColor: labelColor,
                           unselectedLabelColor: labelColor,

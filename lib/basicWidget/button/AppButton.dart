@@ -62,6 +62,7 @@ class AppButton extends StatelessWidget {
           : ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(radius),
             ),
+      iconAlignment: iconAlignment,
     ).merge(style);
 
     Widget button = SizedBox();
@@ -92,7 +93,6 @@ class AppButton extends StatelessWidget {
             focusNode: focusNode,
             autofocus: autofocus,
             clipBehavior: clipBehavior,
-            iconAlignment: iconAlignment,
             child: child,
           );
         }
@@ -108,7 +108,6 @@ class AppButton extends StatelessWidget {
             focusNode: focusNode,
             autofocus: autofocus,
             clipBehavior: clipBehavior,
-            iconAlignment: iconAlignment,
             child: child,
           );
         }
@@ -124,7 +123,6 @@ class AppButton extends StatelessWidget {
             focusNode: focusNode,
             autofocus: autofocus,
             clipBehavior: clipBehavior,
-            iconAlignment: iconAlignment,
             child: child,
           );
         }

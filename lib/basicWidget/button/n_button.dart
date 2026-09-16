@@ -308,6 +308,7 @@ class NButton extends StatelessWidget {
         shape: WidgetStatePropertyAll(buttonShape),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         visualDensity: VisualDensity.compact,
+        iconAlignment: iconAlignment,
       ),
     );
   }
@@ -460,7 +461,6 @@ class NButton extends StatelessWidget {
         autofocus: autofocus,
         clipBehavior: clipBehavior,
         statesController: statesController,
-        iconAlignment: iconAlignment,
         child: content,
       );
     }
@@ -497,7 +497,6 @@ class NButton extends StatelessWidget {
         autofocus: autofocus,
         clipBehavior: clipBehavior ?? Clip.none,
         statesController: statesController,
-        iconAlignment: iconAlignment,
         child: content,
       );
     }
@@ -570,7 +569,6 @@ class NButton extends StatelessWidget {
         autofocus: autofocus,
         clipBehavior: clipBehavior,
         statesController: statesController,
-        iconAlignment: iconAlignment,
         child: content,
       );
     }
@@ -607,7 +605,6 @@ class NButton extends StatelessWidget {
         autofocus: autofocus,
         clipBehavior: clipBehavior,
         statesController: statesController,
-        iconAlignment: iconAlignment,
         child: content,
       );
     }

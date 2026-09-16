@@ -3,30 +3,6 @@
 
 analyzer:
   errors:
-    unused_local_variable: ignore
-    avoid_unnecessary_containers: ignore
-    unused_element: ignore
-    constant_identifier_names: ignore
-  exclude:
-    - "build/**"
-    - ".dart_tool/**"
-    - "ios/**"
-    - "android/**"
-    - "windows/**"
-    - "web/**"
-    - "assets/images/**"
-    - "**/graphify-out/**"
-    # 嵌套工程：macos/ 下误含完整 Flutter 工程（含 android/ios/windows/lib/pubspec.yaml）
-    - "macos/**"
-    - "apps/**"
-    - "packages/**"
-
-formatter:
-  # Dart 3.7+ 才读取此项；当前工程是 Dart 3.6，IDE 以 dart.lineLength 为准。
-  page_width: 120
-  trailing_commas: preserve # 保留你手动添加的尾随逗号
-
-  errors:
     deprecated_member_use: ignore
     undefined_identifier: error # 未知标识符（屏蔽 import 后应能高亮 DLog 等未定义符号）
     undefined_prefixed_name: error # 未知前缀名称
@@ -124,8 +100,6 @@ formatter:
     avoid_init_to_null: error #不要显式地将变量初始化为null。
     #如果一个变量的类型是非空的或者是final的，如果你在它被明确初始化之前尝试使用它，Dart会报告一个编译错误。
     # 如果变量是可空的，而不是const或final，那么它将隐式初始化为null。在Dart中没有“未初始化内存”的概念，也不需要显式地将变量初始化为null来“安全”。add = null是多余的，不需要的。
-    avoid_null_checks_in_equality_operators: error # 不要在自定义==操作符中检查null。
-    # 由于null是一个特殊值，任何类的实例(除了null)都不能与它等价。因此，检查另一个实例是否为空是多余的。
     avoid_renaming_method_parameters: error # 不要重命名被重写方法的参数。
     # 覆盖另一个方法但没有自己的文档注释的方法，将在dart doc生成文档时继承被覆盖方法的注释。如果继承的方法包含参数的名称(在方括号中)，那么dart doc不能正确地链接它。
     avoid_return_types_on_setters: error # 避免在setter上返回类型。
@@ -176,10 +150,27 @@ formatter:
     use_setters_to_change_properties: ignore
     # 给定一个泛型类型参数T，它有一个可空的界限(例如Object?的默认界限)，当使用类型为T?的变量时，很容易引入错误的空检查。
     # 具体来说，T?x;并且希望断言x已被设置为类型t的有效值。一个常见的错误是使用x!这几乎总是不正确的，因为如果T是可空类型，x可以有效地将null作为类型T的值。
+  exclude:
+    - "build/**"
+    - ".dart_tool/**"
+    - "ios/**"
+    - "android/**"
+    - "windows/**"
+    - "web/**"
+    - "assets/images/**"
+    - "**/graphify-out/**"
+    # 嵌套工程：macos/ 下误含完整 Flutter 工程（含 android/ios/windows/lib/pubspec.yaml）
+    - "macos/**"
+    - "apps/**"
+    - "packages/**"
+
+formatter:
+  # Dart 3.7+ 读取此项；当前工程是 Dart 3.11（Flutter 3.41）。
+  page_width: 120
+  trailing_commas: preserve # 保留你手动添加的尾随逗号
+
 linter:
   rules:
-    - always_use_package_imports: true
-    - directives_ordering: true
     - avoid_shadowing_type_parameters # 避免隐藏类型参数。
     - empty_catches # 避免catch代码块，是空的。
     - package_prefixed_library_names # 用包名和点分隔的路径前缀库名。
@@ -208,7 +199,6 @@ linter:
     - no_duplicate_case_values
     - test_types_in_equals
     - throw_in_finally
-    - unsafe_html
     #    - use_build_context_synchronously
     - valid_regexps
     - avoid_empty_else
@@ -225,11 +215,9 @@ linter:
     - unnecessary_overrides
     - unrelated_type_equality_checks
     - void_checks
-    - always_require_non_null_named_parameters
     - annotate_overrides
     - avoid_function_literals_in_foreach_calls
     - avoid_init_to_null
-    - avoid_null_checks_in_equality_operators
     - avoid_renaming_method_parameters
     - avoid_return_types_on_setters
     - avoid_returning_null_for_void
@@ -244,7 +232,6 @@ linter:
     - prefer_adjacent_string_concatenation
     - prefer_conditional_assignment
     - prefer_contains
-    - prefer_equal_for_default_values
     - prefer_final_fields
     - prefer_for_elements_to_map_fromIterable
     - prefer_function_declarations_over_variables
@@ -259,7 +246,7 @@ linter:
     - recursive_getters
     - slash_for_doc_comments
     - type_init_formals
-    - unnecessary_brace_in_string_interns
+    - unnecessary_brace_in_string_interps
     - unnecessary_const
     - unnecessary_getters_setters
     - unnecessary_new

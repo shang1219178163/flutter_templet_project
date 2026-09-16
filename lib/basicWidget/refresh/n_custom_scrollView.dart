@@ -93,6 +93,7 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   bool get wantKeepAlive => true;
 
   @override
+  // ignore: overridden_fields
   late RequestListCallback<T> onRequest = widget.onRequest;
 
   @override
@@ -147,7 +148,10 @@ class _NCustomScrollViewState<T> extends State<NCustomScrollView<T>>
   Widget build(BuildContext context) {
     super.build(context);
     if (items.isEmpty && !widget.onlyHeader) {
-      return GestureDetector(onTap: onRefresh, child: Center(child: widget.placeholder));
+      return GestureDetector(
+        onTap: onRefresh,
+        child: Center(child: widget.placeholder),
+      );
     }
 
     return EasyRefresh.builder(
