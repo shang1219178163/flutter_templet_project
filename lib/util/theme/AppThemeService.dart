@@ -215,20 +215,6 @@ class AppThemeService {
     borderSide: BorderSide(width: 1, color: color),
   );
 
-  ButtonStyle _flatButton({
-    Color? foreground,
-    Color? background,
-    BorderSide? side,
-  }) {
-    return ButtonStyle(
-      elevation: _noElevation,
-      splashFactory: NoSplash.splashFactory,
-      foregroundColor: foreground == null ? null : WidgetStatePropertyAll(foreground),
-      backgroundColor: background == null ? null : WidgetStatePropertyAll(background),
-      side: side == null ? null : WidgetStatePropertyAll(side),
-    );
-  }
-
   ThemeData _buildTheme(Brightness brightness) {
     final cs = _buildColorScheme(brightness);
     final dark = brightness == Brightness.dark;
@@ -313,19 +299,6 @@ class AppThemeService {
         labelStyle: TextStyle(color: cs.onSurface),
         secondaryLabelStyle: TextStyle(color: cs.onSurfaceVariant),
         deleteIconColor: cs.onSurfaceVariant,
-      ),
-      textButtonTheme: TextButtonThemeData(style: _flatButton(foreground: cs.primary)),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: _flatButton(
-          foreground: cs.primary,
-          side: BorderSide(color: cs.primary),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: _flatButton(foreground: onPrimary, background: cs.primary),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: _flatButton(foreground: onPrimary, background: cs.primary),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         elevation: 0,
