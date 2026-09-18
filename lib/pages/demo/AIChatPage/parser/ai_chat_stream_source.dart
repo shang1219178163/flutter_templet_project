@@ -82,8 +82,6 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
     }
 
     final parser = SseEventParser();
-    // 有状态 UTF-8 解码，避免多字节字符跨包被拆坏
-    const utf8Decoder = Utf8Decoder(allowMalformed: true);
     // idle → hasDelta（收到正文）→ done（收到 [DONE]）
     var progress = AiSseProgress.idle;
 
@@ -120,7 +118,8 @@ class DioSseAiChatStreamSource implements AiChatStreamSource {
         return;
       }
 
-      await for (final chunk in utf8Decoder.bind(body.stream)) {
+      // utf8.decoder 有状态，未完成的多字节序列会留到下一包再解
+      await for (final chunk in utf8.decoder.bind(body.stream)) {
         if (cancelToken?.isCancelled ?? false) {
           return;
         }
