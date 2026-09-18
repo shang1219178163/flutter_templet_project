@@ -1,6 +1,8 @@
 /// 轮播样式2
 /// http://101.200.241.211/repos/app_project/uplus/dev_doc/05-UI/%E4%B8%89%E7%BF%BC%E9%B8%9F/V3.2.3/%E9%A6%96%E9%A1%B5%E6%9C%80%E6%96%B0%E6%A0%87%E6%B3%A8-%E6%96%B0%E5%A2%9E%E8%A7%86%E9%A2%91%E6%A8%A1%E5%9D%97/%E9%A6%96%E9%A1%B5%E6%9C%80%E6%96%B0%E6%A0%87%E6%B3%A8/index.html#s4
 
+// ignore_for_file: unused_element_parameter
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/extension/extension_local.dart';
@@ -11,7 +13,6 @@ typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index
 typedef XHomeSwiperItemWidgetBuilder = Widget Function(int index);
 
 class XHorizontalScrollWidget extends StatelessWidget {
-
   XHorizontalScrollWidget({
     super.key,
     this.title,
@@ -77,29 +78,30 @@ class XHorizontalScrollWidget extends StatelessWidget {
 
   Widget buildBody(BuildContext context) {
     return Container(
-        width: width,
-        height: height,
-        padding: padding,
-        margin: margin,
-        decoration: BoxDecoration(
-          // color: Colors.green,
-          // border: Border.all(width: 3, color: Colors.red),
-          // borderRadius:const BorderRadius.all(Radius.circular(8)),
-          image: bg == null ? null : DecorationImage(image: bg!, fit: BoxFit.fill),
-          boxShadow: boxShadow,
-          //  boxShadow: [
-          //     BoxShadow(
-          //       color: Colors.grey.withValues(alpha: 0.5),
-          //       spreadRadius: 5,
-          //       blurRadius: 7,
-          //       offset: Offset(0, 3), // changes position of shadow
-          //     ),
-          //   ],
-        ),
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: items.map((e) => buildItem(context: context, e: e)).toList(),
-        ));
+      width: width,
+      height: height,
+      padding: padding,
+      margin: margin,
+      decoration: BoxDecoration(
+        // color: Colors.green,
+        // border: Border.all(width: 3, color: Colors.red),
+        // borderRadius:const BorderRadius.all(Radius.circular(8)),
+        image: bg == null ? null : DecorationImage(image: bg!, fit: BoxFit.fill),
+        boxShadow: boxShadow,
+        //  boxShadow: [
+        //     BoxShadow(
+        //       color: Colors.grey.withValues(alpha: 0.5),
+        //       spreadRadius: 5,
+        //       blurRadius: 7,
+        //       offset: Offset(0, 3), // changes position of shadow
+        //     ),
+        //   ],
+      ),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: items.map((e) => buildItem(context: context, e: e)).toList(),
+      ),
+    );
   }
 
   Widget buildItem({
@@ -302,7 +304,8 @@ class _SynHomeSwiperTitleWidget extends StatelessWidget {
     return _buildText(
       text: text,
       maxLines: text,
-      style: style ??
+      style:
+          style ??
           const TextStyle(
             fontSize: 12.0,
             fontWeight: FontWeight.w400,
