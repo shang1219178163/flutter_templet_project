@@ -135,6 +135,7 @@ class AppRouter {
   static const String progressHudDemo = '/ProgressHudDemo';
   static const String locationPopView = '/LocationPopView';
   static const String backdropFilterDemo = '/BackdropFilterDemo';
+  static const String backdropGroupDemo = '/BackdropGroupDemo';
   static const String richTextDemo = '/RichTextDemo';
   static const String numberFormatDemo = '/NumberFormatDemo';
   static const String dateTimeDemo = '/DateTimeDemo';

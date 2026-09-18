@@ -209,6 +209,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(AppRouter.builderDemo, "builderDemo"),
   Tuple2(AppRouter.badgeDemo, "badgeDemo"),
   Tuple2(AppRouter.backdropFilterDemo, "backdropFilterDemo"),
+  Tuple2(AppRouter.backdropGroupDemo, "backdropGroupDemo"),
   Tuple2(AppRouter.cupertinoTabScaffoldDemo, "CupertinoTabScaffoldDemo"),
   Tuple2(AppRouter.cupertinoFormDemo, "cupertinoFormDemo"),
   Tuple2(AppRouter.contextMenuActionDemo, "cupertinoFormDemo"),

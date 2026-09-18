@@ -42,6 +42,7 @@ import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompletePage.dart';
 import 'package:flutter_templet_project/pages/demo/AutofillGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BackdropFilterDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BackdropGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BackgroundTaskDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BadgeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BannerDemo.dart';
@@ -777,6 +778,10 @@ class AppRouterLazy {
     GetPage(
       name: AppRouter.backdropFilterDemo,
       page: () => BackdropFilterDemo(),
+    ),
+    GetPage(
+      name: AppRouter.backdropGroupDemo,
+      page: () => BackdropGroupDemo(),
     ),
     GetPage(
       name: AppRouter.richTextDemo,
