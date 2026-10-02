@@ -12,6 +12,7 @@
 #include <file_selector_windows/file_selector_windows.h>
 #include <flutter_debug_kit/flutter_debug_kit_plugin_c_api.h>
 #include <flutter_inappwebview_windows/flutter_inappwebview_windows_plugin_c_api.h>
+#include <flutter_sound/flutter_sound_plugin_c_api.h>
 #include <flutter_tts/flutter_tts_plugin.h>
 #include <isar_flutter_libs/isar_flutter_libs_plugin.h>
 #include <local_auth_windows/local_auth_plugin.h>
@@ -35,6 +36,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("FlutterDebugKitPluginCApi"));
   FlutterInappwebviewWindowsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterInappwebviewWindowsPluginCApi"));
+  FlutterSoundPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FlutterSoundPluginCApi"));
   FlutterTtsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterTtsPlugin"));
   IsarFlutterLibsPluginRegisterWithRegistrar(
