@@ -11,7 +11,7 @@ import 'dart:math';
 import 'package:color_converter/color_converter.dart';
 import 'package:flutter/material.dart';
 
-/// [Color] 常用扩展：解析、格式化、亮度适配文字色等
+/// [Color] 常用扩展：解析、格式化、亮度判断等
 extension ColorExt on Color {
   /// 随机不透明色（`#RRGGBB`，alpha 固定为 `FF`）
   static Color get random => Color(0xFF000000 | Random().nextInt(0x1000000));
@@ -93,21 +93,7 @@ extension ColorExt on Color {
   /// 随机透明度（alpha ∈ [0.00, 0.99]）
   Color randomOpacity() => withValues(alpha: Random().nextInt(100) / 100);
 
-  /// 根据当前背景亮度选择前景文字色
+  /// 判断当前背景亮度是否为深色
   ///
-  /// 深色底用 [textColorDark]，浅色底用 [textColorLight]；
-  /// 并单独处理 [isPureWhite] / [isPureBlack] 边界。
-  Color textColor({
-    Color textColorLight = Colors.black,
-    Color textColorDark = Colors.white,
-  }) {
-    var brightness = ThemeData.estimateBrightnessForColor(this);
-    var textColor = brightness == Brightness.dark ? textColorDark : textColorLight;
-    if (isPureWhite) {
-      textColor = textColorDark;
-    } else if (isPureBlack) {
-      textColor = textColorLight;
-    }
-    return textColor;
-  }
+  bool get isDark => ThemeData.estimateBrightnessForColor(this) == Brightness.dark;
 }

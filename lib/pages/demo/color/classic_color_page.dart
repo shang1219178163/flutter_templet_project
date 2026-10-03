@@ -60,7 +60,7 @@ class _ClassicColorPageState extends State<ClassicColorPage> {
   }
 
   Widget _buildHeader() {
-    final fg = selected.color.textColor();
+    final fg = selected.color.isDark ? Colors.white : Colors.black;
 
     final colorHex = selected.color.hex;
 

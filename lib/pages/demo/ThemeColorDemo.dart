@@ -298,8 +298,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
               .replaceAll('))', ')');
 
           var bgColor = e.item2;
-          Color textColor = Colors.green;
-          textColor = bgColor.textColor();
+          final textColor = bgColor.isDark ? Colors.white : Colors.black;
           // double relativeLuminance = bgColor.computeLuminance();
           // final edgeLuminance = (relativeLuminance + 0.05) * (relativeLuminance + 0.05);
           // textColor = edgeLuminance > 0.5 ? Colors.black : Colors.white;
